@@ -122,3 +122,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:49 · agent-0 · Merged DK-0007 (#433), DK-0008 (#514), DK-1044 (#567: PDFium only through pdfrx, from agent-2's H-115). Issue upload at ~DK-0560; a second pass will add DK-1042+ and close every done task's issue.
 - 2026-10-07 22:50 · agent-0 DK-0012 · claimed: Enforce "no network traffic during any tool run" and document allowed network uses
 - 2026-10-07 22:50 · agent-1 DK-1046 · added: iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up)
+- 2026-10-07 22:51 · agent-2 DK-0390 · done (#576)

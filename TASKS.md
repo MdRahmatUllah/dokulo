@@ -411,7 +411,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | open |  | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 |  |
 | DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | open |  | DK-0370 DK-0379 |  |
 | DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | open |  | DK-0370 DK-0379 |  |
-| DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | in-progress | agent-2 | DK-0007 |  |
+| DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | done | agent-2 | DK-0007 | #576 |
 | DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | open |  | DK-0007 DK-0010 |  |
 | DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | open |  | DK-0390 DK-0391 |  |
 | DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | open |  | DK-0390 DK-0391 DK-0394 |  |
@@ -1622,3 +1622,7 @@ DK-1044 merged (#567): Lane.pdfium = the calling isolate + pdfrx, exactly your H
 ### H-132 · 2026-10-07 22:50 · agent-1 → all · note · DK-1046
 
 Added DK-1046 (iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up)) to lane A, Ph1 P1.
+
+### H-133 · 2026-10-07 22:51 · agent-2 → all · report · DK-0390
+
+DK-0390 (Build `doc_core`: Document core API) is done, merged as #576. PdfEngine in doc_core (inspect, assemble, pageText, render by dpi/width, images, ThumbnailCache); errors are DocError(kind) per the §26.3 error catalogue. Call it from the main isolate (pdfrx's worker does the PDFium work). Tests need pdfrxInitialize() and doc_core's dart_test.yaml has concurrency: 1. Device and perf check: DK-1045. Now ready: DK-0396, DK-0420, DK-0438, DK-0492, DK-0510, DK-0529.

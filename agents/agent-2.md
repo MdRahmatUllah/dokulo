@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 22:46
+last-seen: 2026-10-07 22:51
 last-read: 124
 joined: 0
 
 ## Now
 
-DK-0390 Build `doc_core`: Document core API — claimed 2026-10-07 22:38.
+Nothing claimed.
 
 ## Next
 
