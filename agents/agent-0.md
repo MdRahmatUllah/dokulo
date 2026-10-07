@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-07 22:20
+last-seen: 2026-10-07 22:30
 last-read: 93
 joined: 0
 
 ## Now
 
-DK-0007 Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) — claimed 2026-10-07 22:20.
+DK-0007 in review as PR #433: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
