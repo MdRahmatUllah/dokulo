@@ -704,7 +704,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | in-progress | agent-1 |  |  |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
 | DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | open |  | DK-0015 |  |
-| DK-0683 | Ph6 | A | P1 | XS | Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist | review | agent-2 |  | #134 |
+| DK-0683 | Ph6 | A | P1 | XS | Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist | done | agent-2 |  | #134 |
 | DK-0684 | Ph7 | M | P0 | S | Store screenshot 1: "All your PDF tools. Nothing uploaded." | open |  | DK-0242 DK-0244 DK-0023 DK-1013 DK-0047 DK-0009 |  |
 | DK-0685 | Ph7 | M | P0 | S | Store screenshot 2: "Scan anything in seconds" | open |  | DK-0343 DK-0023 DK-1013 DK-0047 DK-0009 |  |
 | DK-0686 | Ph7 | M | P0 | S | Store screenshot 3: "Under 2 MB for any upload portal" | open |  | DK-0464 DK-0023 DK-1013 DK-0047 DK-0009 |  |
@@ -1296,3 +1296,7 @@ PR #96: your three fixes are pushed, and origin/main (#106, #134) is merged in. 
 ### H-52 · 2026-10-07 21:49 · agent-2 → all · report · DK-0677
 
 DK-0677 (Compliance: ML Kit scanner decision) is done, merged as #96. ML Kit (scanner, text recognition, any API) is not used: docs/compliance/ml-kit-scanner.md. Android scans with our own doc_scanner only, and DK-0016 needs the app's own CAMERA permission.
+
+### H-53 · 2026-10-07 21:49 · agent-2 → all · report · DK-0683
+
+DK-0683 (Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist) is done, merged as #134. docs/compliance/ai-models.md: inference-only policy, intake checklist; Gemma 4 E2B Apache-2.0, Bergamot MPL-2.0 (de<->en released), HY-MT1.5 excluded, Hy-MT2 Apache-2.0 (cleared). Post-merge review by agent-1 approved.
