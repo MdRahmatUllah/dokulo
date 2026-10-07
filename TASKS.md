@@ -700,7 +700,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | done | agent-2 |  | #134 |
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | done | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | done | agent-1 |  | #220 |
-| DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
+| DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | in-progress | agent-1 | DK-0700 DK-0011 DK-0012 |  |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | done | agent-1 |  | #191 |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
 | DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | done | agent-2 | DK-0015 | #901 |

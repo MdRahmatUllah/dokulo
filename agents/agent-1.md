@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 00:09
+last-seen: 2026-10-08 00:10
 last-read: 216
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0679 Compliance: Privacy policy & store labels — claimed 2026-10-08 00:10.
 
 ## Next
 
