@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 00:32
+last-seen: 2026-10-08 00:35
 last-read: 230
 joined: 0
 
 ## Now
 
-DK-0024 Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets — claimed 2026-10-08 00:29.
+DK-0024 in review as PR #1110: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
