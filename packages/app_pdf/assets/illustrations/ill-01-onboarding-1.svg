@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 160" role="img" aria-label="Phone in airplane mode with a document"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="100" cy="80" r="70" fill="#E6ECFF" stroke="none" opacity="0.55"></circle>
+<rect x="70" y="14" width="60" height="132" rx="11" fill="#FFFFFF"></rect>
+<path d="M92 22h16"></path>
+<rect x="81" y="40" width="38" height="50" rx="3" fill="#E6ECFF"></rect>
+<path d="M88 52h18M88 60h24M88 68h20M88 76h12"></path>
+<path d="M88 110h24" stroke="#2251E6"></path>
+<circle cx="46" cy="44" r="19" fill="#FFFFFF"></circle>
+<path d="M36 47l20-7M45 43.5l-5-9M48 42.5l4 9M38 46.5l-1.5 4.5" stroke="#2251E6"></path>
+<circle cx="152" cy="118" r="15" fill="#2251E6" stroke="#2251E6"></circle>
+<path d="M145 118l5 5 9-10" stroke="#FFFFFF" stroke-width="2.5"></path>
+</g></svg>
