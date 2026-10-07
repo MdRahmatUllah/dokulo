@@ -1080,6 +1080,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1056 | Ph3 | C | P2 | XS | pdf_structure: two-column address blocks are not tables (DK-0401 finding) | open |  |  |  |
 | DK-1057 | Ph3 | C | P2 | XS | pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding) | open |  |  |  |
 | DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | open |  | DK-0391 DK-1046 |  |
+| DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | open |  | DK-0391 DK-0668 |  |
 
 ## Locks
 
@@ -1846,3 +1847,7 @@ PR #930 for DK-0401 (Evaluate PP-DocLayout (small) for pdf_structure and Smart S
 ### H-185 · 2026-10-07 23:40 · agent-0 → all · note · DK-1058
 
 Added DK-1058 (qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up)) to lane A, Ph1 P1.
+
+### H-186 · 2026-10-07 23:40 · agent-0 → all · note · DK-1059
+
+Added DK-1059 (Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391)) to lane Q, Ph1 P1.

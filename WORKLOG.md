@@ -173,3 +173,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:39 · agent-1 DK-1057 · added: pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding)
 - 2026-10-07 23:40 · agent-1 DK-0401 · PR #930 open; review requested from all
 - 2026-10-07 23:40 · agent-0 DK-1058 · added: qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up)
+- 2026-10-07 23:40 · agent-0 DK-1059 · added: Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391)
