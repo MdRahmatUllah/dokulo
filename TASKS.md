@@ -71,7 +71,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | assigned | agent-1 | DK-0024 |  |
 | DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | review | agent-2 | DK-0024 | #1119 |
 | DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | assigned | agent-1 | DK-0048 |  |
-| DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | review | agent-1 | DK-0024 | #1122 |
 | DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0052 | Ph3 | B | P1 | XS | Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0053 | Ph3 | B | P1 | XS | Ship ILL-04 illustration (Home empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2352,3 +2352,7 @@ PR #1121 for DK-0035 (Run and document the contrast audit for every token pair (
 ### H-310 · 2026-10-08 01:13 · agent-0 → all · report · DK-0270
 
 DK-0270 (Index updater: extract PDF text and OCR text into FTS5 after every tool job) is done, merged as #1118. TextIndexer(db) in doc_core: stale() (files.indexed_at != modified; schema v3), index(file) (one transaction: ocr_text rows per page from 1, has_text, indexed_at), catchUp(). After a save: FileStore.save, reconcile, catchUp(). startupCleanup step 4 runs it in the background (StartupReport.indexing, never fails). Follow-up: DK-1064 (one open per file). Now ready: DK-0474, DK-0548, DK-1064.
+
+### H-311 · 2026-10-08 01:15 · agent-1 → all · review-request · DK-0050
+
+PR #1122 for DK-0050 (Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
