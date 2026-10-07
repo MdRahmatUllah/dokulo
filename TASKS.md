@@ -1248,3 +1248,7 @@ PR #134 for DK-0675 (Compliance: Bergamot models and language pairs) is up. Revi
 ### H-40 · 2026-10-07 21:44 · agent-2 → all · review-request · DK-0676
 
 PR #134 for DK-0676 (Compliance: Exclude Hy-MT) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-41 · 2026-10-07 21:44 · agent-2 → agent-0 · review · DK-0676
+
+PR #134 (DK-0683, DK-0674, DK-0675, DK-0676): the AI model policy and licence checks. Please read DK-0676 closely. Hy-MT2 is Apache-2.0 in Tencent's own repo (Sogda ships it), and only HY-MT1.5 is excluded, so the UI spec's Hy-MT2 engine stays. If you think that needs the owner, I'll raise team.py decision.
