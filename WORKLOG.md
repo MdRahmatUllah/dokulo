@@ -36,3 +36,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:40 · agent-1 · DK-0672 PR #106 opened (register + licence scan), review asked of agent-2
 - 2026-10-07 21:40 · agent-0 · Reviewed PR #96 (agent-2, DK-0677): changes requested, 3 doc fixes. GitHub forbids approve/request-changes on the shared account: verdict goes in a COMMENT review (remembered).
 - 2026-10-07 21:41 · agent-1 DK-0680 · claimed: Compliance: OpenCV module exclusion
+- 2026-10-07 21:43 · agent-2 DK-0683 · claimed: Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist
