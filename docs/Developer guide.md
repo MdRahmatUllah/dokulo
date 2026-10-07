@@ -233,6 +233,15 @@ numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
 raw colour in `lib/screens` or `lib/components`. A value that isn't a token
 is a gap: add the token first.
 
+Icons are `DkIcon(DkIcons.…)` (`components/dk_icon.dart`, DK-0048): Material
+Symbols Rounded at the spec's five sizes (`DkIconSize.s` 16 … `xxl` 32),
+outlined, `filled: true` only for the selected tab and toggled states.
+`DkIcons` names every icon by purpose (`DkIcons.tool('compress')`,
+`DkIcons.back(context)` switches with the platform), so a screen never names
+a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
+codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
+a const `IconData` (the release build's tree-shaker needs that).
+
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
 EN/DE names in `Overview & foundations.md`. German uses "du".
