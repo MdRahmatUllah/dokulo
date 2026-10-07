@@ -462,3 +462,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:32 · agent-1 DK-0028 · assigned to agent-1
 - 2026-10-08 00:35 · agent-1 DK-0024 · PR #1110 open; review requested from all
 - 2026-10-08 00:36 · agent-0 DK-1063 · added: Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392)
+- 2026-10-08 00:36 · agent-1 DK-0029 · assigned to agent-1

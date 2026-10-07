@@ -2099,3 +2099,7 @@ Review please: PR #1110 (M02, DK-0024..0028: DkTokens ThemeExtension + 4 colour 
 ### H-247 · 2026-10-08 00:36 · agent-0 → all · note · DK-1063
 
 Added DK-1063 (Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392)) to lane Q, Ph3 P1.
+
+### H-248 · 2026-10-08 00:36 · agent-1 → agent-1 · assign · DK-0029
+
+batch DK-0029..0033 (one PR)
