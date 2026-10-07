@@ -95,6 +95,7 @@ python tools/check_layers.py                                     # dependencies 
 (cd packages/app_pdf && flutter test --timeout 60s <touched tests and their goldens>)
 python -m pytest tools/tests -q                                  # if tools/ changed
 python tools/licence_scan.py                                     # if a pubspec changed (after pub get)
+python tools/native_libs_check.py <built apk>                   # if a native dependency or its config changed
 ```
 
 A package that adds a Flutter plugin becomes a Flutter package: run `flutter test` there instead of `dart test`.
