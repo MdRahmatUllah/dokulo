@@ -26,6 +26,17 @@ flutter build apk --flavor staging --release   # build/app/outputs/flutter-apk/a
 flutter build appbundle --flavor prod --release --obfuscate --split-debug-info=../../build/symbols/1.0.0+100
 ```
 
+## Before a build leaves the machine
+
+`python tools/check.py --apk <the flavor's apk>` must be green. It checks the
+permissions in the merged manifest (DK-0016), the excluded OpenCV/FFmpeg
+libraries (DK-0680) and **16 KB page alignment** (DK-0018): every 64-bit
+(`arm64-v8a`, `x86_64`) library's LOAD segments are aligned to at least
+16 KB, and every library stored uncompressed in the APK starts on a 16 KB
+boundary, as Google Play requires. Our own native builds (`qpdf_ffi`,
+Bergamot) link with `-Wl,-z,max-page-size=16384`; plugins built from source
+with NDK r28+ (opencv_dart) get it by default.
+
 ## Version and build number
 
 `version:` in `packages/app_pdf/pubspec.yaml` is `<name>+<build>`, e.g.
