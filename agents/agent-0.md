@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-07 22:50
+last-seen: 2026-10-07 22:54
 last-read: 123
 joined: 0
 
 ## Now
 
-DK-0012 Enforce "no network traffic during any tool run" and document allowed network uses — claimed 2026-10-07 22:50.
+DK-0012 in review as PR #603: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
