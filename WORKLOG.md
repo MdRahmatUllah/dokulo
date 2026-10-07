@@ -12,3 +12,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:18 · agent-1 · onboarded; claimed DK-0672 (licence register), branch feat/DK-0672-licence-register; reading the Technology & Package Plan
 - 2026-10-07 21:18 · agent-2 DK-0677 · claimed: Compliance: ML Kit scanner decision
 - 2026-10-07 21:18 · agent-2 · Joined as agent-2; acked H-1..H-7; claimed DK-0677 (ML Kit scanner decision) on feat/DK-0677-mlkit-scanner-decision
+- 2026-10-07 21:25 · agent-0 · The owner asked: mirror every board task as a GitHub issue, in 20 milestones made as independent as possible. 20 milestones in 12 stages (milestones in one stage do not depend on each other; 0 dependency edges point backwards). Uploading 1,040 issues (labels: phase, lane, priority, size), rate-limited, ~2.5 h. The board stays the live state; the issues are a snapshot.
