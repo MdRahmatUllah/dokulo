@@ -43,7 +43,6 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `llamadart_llama_cpp_flutter` | MIT | Yes | llama.cpp for iOS (SwiftPM) | Notice |
 | `flutter_onnxruntime` | MIT | Yes | OCR models, embeddings, TTS | Notice; ONNX Runtime notice (native table) |
 | `opencv_dart` | Apache-2.0 | Yes | Image filters, perspective, contours | Notice; exclude videoio/highgui/dnn/contrib (DK-0680) |
-| `google_mlkit_document_scanner` | MIT (plugin); ML Kit under Google's terms | Optional | Android scanner fast path, only if DK-0677 enables it | ML Kit terms and data-collection review; privacy policy |
 | `receive_sharing_intent` | Apache-2.0 | Yes | Share sheet / "Open with" input | Notice |
 | `flutter_riverpod` | MIT | Yes | State management | Notice |
 | `riverpod_annotation` | MIT | Yes | Riverpod codegen annotations | Notice |
@@ -117,9 +116,10 @@ restrictions, attribution; DK-0683's intake checklist).
 | Apryse (PDFTron) | Commercial | As above |
 | Nutrient (PSPDFKit) | Commercial | As above |
 | Foxit PDF SDK | Commercial | As above |
+| Google ML Kit (document scanner, text recognition, any ML Kit API) | Google proprietary terms | Closed source, delivered by Play services, sends usage metrics to Google ([decision](ml-kit-scanner.md), DK-0677) |
 | Hy-MT / HY-MT1.5 / Hy-MT2 | Tencent HY Community Licence | Territory excludes the EU, UK and South Korea (DK-0676) |
 | veraPDF | GPL / MPL dual | CI only, as a PDF/A validator; never shipped |
 
 The scan's deny patterns (`tools/licence_scan.py`, `DENIED`): `mupdf`,
 `ghostscript`, `bentopdf`, `syncfusion`, `apryse`, `pdftron`, `pspdfkit`,
-`nutrient`, `foxit`, `hy_mt`, `verapdf`.
+`nutrient`, `foxit`, `google_mlkit`, `hy_mt`, `verapdf`.
