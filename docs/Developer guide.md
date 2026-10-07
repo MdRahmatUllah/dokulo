@@ -53,8 +53,13 @@ Rules:
     second (a cancel must stop native work within 1 s).
   - Every native binding calls `assertWorkerIsolate()` before its first native
     call; in debug builds it fails on any isolate the pool did not start.
-- **Files are never written in place.** A job reads the input and writes a new
-  file; the user saves, shares or discards it.
+- **Files are never written in place.** `FileStore` (`doc_core`, DK-0006) owns
+  the moves. An incoming file is copied into the sandbox (`importIncoming`); a
+  job writes its output to `newTempFile`; `save` moves it into the user's
+  visible folder under a free name ("Scan (2).pdf"); `clearTemp` runs after a
+  save or share. `reconcile` syncs the index with the folder (pull-to-refresh
+  on Home and Files). The visible folder is iOS Documents (shown in the Files
+  app) or Android `Documents/Dokulo` (`fileStoreProvider`).
 - **No network during a tool run** (DK-0012). The only network uses are model
   downloads, Web page to PDF, and purchases.
 - A new dependency needs a licence-register line in the same PR
