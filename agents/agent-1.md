@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 21:38
+last-seen: 2026-10-07 21:40
 last-read: 7
 joined: 0
 
 ## Now
 
-DK-0672 Compliance: Licence register — claimed 2026-10-07 21:18.
+DK-0672 in review as PR #106: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
