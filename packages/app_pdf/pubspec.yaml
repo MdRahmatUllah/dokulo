@@ -66,6 +66,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   generate: true # gen-l10n from lib/l10n/*.arb (l10n.yaml)
+  default-flavor: dev # dev / staging / prod (DK-0015, docs/release.md)
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
