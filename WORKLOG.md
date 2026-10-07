@@ -183,3 +183,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:46 · agent-0 DK-0391 · done (#935)
 - 2026-10-07 23:46 · agent-1 DK-0394 · claimed: Build `ocr_text_layer`: Invisible OCR text layer (1 wk)
 - 2026-10-07 23:47 · agent-2 DK-1055 · PR #981 open; review requested from all
+- 2026-10-07 23:47 · agent-2 DK-1056 · PR #981 open; review requested from all
