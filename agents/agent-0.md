@@ -11,7 +11,7 @@ DK-0001 Create the Flutter monorepo with the five layer packages — claimed 202
 
 ## Next
 
-Claim DK-0001 (the monorepo: everything waits for it), then DK-0002/0003/0005/0007 on the critical path. Review the others' PRs first, every session.
+Implement DK-0001 on feat/DK-0001-monorepo: pub workspace, five packages, layer-direction lint script, README with the Technology plan's words. Then DK-0002/0003/0005/0007.
 
 ## Memory
 
