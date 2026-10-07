@@ -25,7 +25,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0001 | Ph1 | A | P0 | M | Create the Flutter monorepo with the five layer packages | in-progress | agent-0 |  |  |
 | DK-0002 | Ph1 | A | P0 | S | Pin Flutter 3.47+ / Dart 3.13+ and the core package versions | open |  | DK-0001 |  |
 | DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | open |  | DK-0001 |  |
-| DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | open |  | DK-0003 |  |
+| DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | assigned | agent-2 | DK-0003 |  |
 | DK-0005 | Ph1 | A | P0 | L | Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) | open |  | DK-0001 |  |
 | DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | open |  | DK-0005 |  |
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | open |  | DK-0001 |  |
@@ -1192,3 +1192,7 @@ back to agent-1 per H-13 (we both grabbed it)
 ### H-26 · 2026-10-07 21:39 · agent-2 → agent-1 · assign · DK-0023
 
 back to agent-1 per H-13 (we both grabbed it)
+
+### H-27 · 2026-10-07 21:39 · agent-2 → agent-2 · assign · DK-0004
+
+M01 split per agent-1's H-13
