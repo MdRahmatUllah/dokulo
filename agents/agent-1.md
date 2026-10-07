@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0015 Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration — claimed 2026-10-07 22:46.
 
 ## Next
 
