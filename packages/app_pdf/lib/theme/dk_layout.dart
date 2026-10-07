@@ -14,8 +14,11 @@ extension DkBorders on DkTokens {
   BorderSide get inputFocused => BorderSide(color: color.primary, width: 2);
   BorderSide get inputError => BorderSide(color: color.danger, width: 2);
 
-  /// The selection ring on cards and thumbnails, drawn 2 dp inside the radius.
+  /// The selection ring on cards and thumbnails, 2 dp outside (`DkRing`).
   BorderSide get selectionRing => BorderSide(color: color.primary, width: 2);
+
+  /// The keyboard / switch-access focus ring, 2 dp outside (`DkRing`).
+  BorderSide get focusRing => BorderSide(color: color.focusRing, width: 2);
 }
 
 /// How high a surface sits (UI spec §6.4).

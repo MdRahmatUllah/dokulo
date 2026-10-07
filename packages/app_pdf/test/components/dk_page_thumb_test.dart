@@ -1,4 +1,4 @@
-import 'package:app_pdf/catalogue/page_thumb_states.dart';
+import 'package:app_pdf/catalogue/page_states.dart';
 import 'package:app_pdf/components/dk_page_thumb.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -143,7 +143,7 @@ void main() {
         .widgetList<DecoratedBox>(find.byType(DecoratedBox))
         .map((d) => d.decoration)
         .whereType<BoxDecoration>();
-    final ring = DkTokens.light.selectionRing;
+    final ring = DkTokens.light.focusRing;
     bool hasRing() =>
         decorations().any((d) => d.border == Border.fromBorderSide(ring));
     expect(hasRing(), isFalse);

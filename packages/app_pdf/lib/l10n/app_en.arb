@@ -105,6 +105,10 @@
   "@common_add_files": {
     "description": "Copy deck (UI spec §27): common_add_files."
   },
+  "common_add_pages": "Add pages",
+  "@common_add_pages": {
+    "description": "The page tray's + tile and the scan review's back button (UI spec §11.5, §19.3 S2)."
+  },
   "common_browse": "Browse device",
   "@common_browse": {
     "description": "Copy deck (UI spec §27): common_browse."

@@ -4,10 +4,12 @@ import '../l10n/app_localizations.dart';
 import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
+import 'dk_ring.dart';
 
 /// A page as a thumbnail (UI spec §11.5; DK-0150): the page on
 /// `color.pageWhite` with a 1 dp outline, its number below. Selected: a 2 dp
-/// primary ring and a check circle; the same ring shows keyboard focus.
+/// primary ring and a check circle; [current] (the page shown in the editor,
+/// DkPageTray): the ring alone. The same ring shows keyboard focus.
 /// Loading ([page] null): a `color.surfaceSunken` block with the number.
 ///
 /// The parent sets the width (3 columns in DkPageGrid, 56 in DkPageTray);
@@ -21,6 +23,7 @@ class DkPageThumb extends StatefulWidget {
     required this.pageCount,
     this.page,
     this.selected = false,
+    this.current = false,
     this.quarterTurns = 0,
     this.aspectRatio = 3 / 4,
     this.showNumber = true,
@@ -33,6 +36,7 @@ class DkPageThumb extends StatefulWidget {
   final int pageCount;
   final Widget? page;
   final bool selected;
+  final bool current;
 
   /// A rotation the user made but hasn't saved yet; the content turns with it.
   final int quarterTurns;
@@ -87,15 +91,18 @@ class _DkPageThumbState extends State<DkPageThumb> {
         : _hovered
         ? t.state.hover
         : null;
-    // The ring sits 2 dp outside the page, as in the design export.
-    final gap = t.space.xxs;
-    final ringWidth = t.selectionRing.width;
+    final ring = widget.selected || widget.current
+        ? t.selectionRing
+        : _focused
+        ? t.focusRing
+        : null;
 
+    // Not a container: in DkPageTray the label joins the node that carries
+    // ReorderableListView's "Move left / right" actions.
     return Semantics(
-      container: true,
       button: widget.onTap != null,
       enabled: widget.onTap != null ? true : null,
-      selected: widget.selected,
+      selected: widget.selected || widget.current,
       label: AppLocalizations.of(context)
           .progress_page(widget.pageNumber, widget.pageCount),
       child: InkWell(
@@ -113,30 +120,20 @@ class _DkPageThumbState extends State<DkPageThumb> {
               Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  AspectRatio(aspectRatio: widget.aspectRatio, child: page),
+                  DkRing(
+                    side: ring,
+                    radius: t.radius.xs,
+                    child: AspectRatio(
+                      aspectRatio: widget.aspectRatio,
+                      child: page,
+                    ),
+                  ),
                   if (overlay != null)
                     Positioned.fill(
                       child: DecoratedBox(
                         decoration: BoxDecoration(
                           color: overlay,
                           borderRadius: radius,
-                        ),
-                      ),
-                    ),
-                  if (widget.selected || _focused)
-                    Positioned.fill(
-                      left: -gap - ringWidth,
-                      top: -gap - ringWidth,
-                      right: -gap - ringWidth,
-                      bottom: -gap - ringWidth,
-                      child: IgnorePointer(
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            border: Border.fromBorderSide(t.selectionRing),
-                            borderRadius: BorderRadius.circular(
-                              t.radius.xs + gap + ringWidth,
-                            ),
-                          ),
                         ),
                       ),
                     ),

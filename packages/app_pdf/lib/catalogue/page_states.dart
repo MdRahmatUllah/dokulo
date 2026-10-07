@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/dk_page_thumb.dart';
+import '../components/dk_page_tray.dart';
 import '../theme/dk_tokens.dart';
 
 /// A page as the design export draws it: a title bar and text lines, in a
@@ -97,6 +98,41 @@ class PageThumbStates extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// DkPageTray's states (DK-0152): six pages with page 2 current and the "+"
+/// tile, two of them still loading; then a read-only tray (no "+").
+class PageTrayStates extends StatelessWidget {
+  const PageTrayStates({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ColoredBox(
+      color: t.color.surface,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(height: t.space.s),
+          DkPageTray(
+            pageIds: const [1, 2, 3, 4, 5, 6],
+            pageBuilder: (_, i) => i < 4 ? const CataloguePage() : null,
+            current: 1,
+            onSelect: (_) {},
+            onReorder: (_, _) {},
+            onAdd: () {},
+          ),
+          SizedBox(height: t.space.l),
+          DkPageTray(
+            pageIds: const [1, 2, 3],
+            pageBuilder: (_, _) => const CataloguePage(),
+            current: 0,
+          ),
+          SizedBox(height: t.space.s),
+        ],
       ),
     );
   }
