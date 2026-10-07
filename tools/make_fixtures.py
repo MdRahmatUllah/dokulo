@@ -10,6 +10,7 @@ Steuer-ID 00 000 000 000, example.com addresses, 089 0000000.
 import io
 import random
 import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -25,6 +26,16 @@ IBAN = "DE00 0000 0000 0000 0000 00"
 STEUER_ID = "00 000 000 000"
 PASSWORD = "dokulo"  # the encrypted sample's user password; documented in the README
 W, H = A4
+
+
+def scan_font(size: int) -> ImageFont.FreeTypeFont:
+    """Roboto from the Flutter SDK (Apache-2.0; every dev machine has it) for the
+    scanned letters: Pillow's built-in font has no ß or umlauts (DK-1050)."""
+    flutter = shutil.which("flutter")
+    if not flutter:
+        raise SystemExit("make_fixtures: the scanned letters need Flutter's Roboto; put flutter on PATH")
+    sdk = Path(flutter).resolve().parent.parent
+    return ImageFont.truetype(str(sdk / "bin" / "cache" / "artifacts" / "material_fonts" / "roboto-regular.ttf"), size)
 
 
 def canvas(buffer: io.BytesIO, title: str, author: str = "Dokulo samples (fictional)") -> Canvas:
@@ -202,7 +213,7 @@ def scanned_page(sender: str, subject: str, page: int, pages: int, rng: random.R
     dpi = 110
     img = Image.new("L", (int(210 / 25.4 * dpi), int(297 / 25.4 * dpi)), 247)
     d = ImageDraw.Draw(img)
-    big, normal = ImageFont.load_default(size=30), ImageFont.load_default(size=17)
+    big, normal = scan_font(30), scan_font(17)
     m = 80
     if page == 1:
         d.rectangle((m, m, img.width - m, m + 70), fill=210)
