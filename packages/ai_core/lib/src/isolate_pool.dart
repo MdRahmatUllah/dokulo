@@ -63,14 +63,15 @@ class JobContext {
   /// A fresh directory for the job's scratch files. It is deleted when the job
   /// ends, however it ends; the job writes its output where its input says.
   final Directory tempDir;
-  final void Function(double) _report;
+  final void Function(Object) _report;
   bool _cancelled = false;
 
   /// Whether the job was cancelled; [checkCancelled] acts on it.
   bool get isCancelled => _cancelled;
 
-  /// Reports progress from 0 to 1.
-  void progress(double fraction) => _report(fraction.clamp(0.0, 1.0));
+  /// Reports progress: a fraction from 0 to 1, or a richer sendable value
+  /// (doc_tools sends its `JobProgress`).
+  void progress(Object update) => _report(update);
 
   /// Throws [JobCancelled] once the job is cancelled. Call it between chunks
   /// of native work, and keep a chunk well under a second: a cancel must stop
@@ -87,9 +88,9 @@ class Job<R> {
 
   final _Pending<R> _pending;
 
-  /// Progress from 0 to 1, as the job reports it. Listen right away: it is a
-  /// broadcast stream, so earlier events are not replayed.
-  Stream<double> get progress => _pending.progress.stream;
+  /// Progress as the job reports it ([JobContext.progress]). Listen right
+  /// away: it is a broadcast stream, so earlier events are not replayed.
+  Stream<Object> get progress => _pending.progress.stream;
 
   /// The job's result. It fails with [JobCancelled] or [JobFailed]; by the time
   /// it completes, the job's temp directory is gone.
@@ -274,7 +275,7 @@ class _Worker {
     final job = _jobs[id];
     if (job == null) return;
     if (kind == 'progress') {
-      job.progress.add(value! as double);
+      job.progress.add(value!);
       return;
     }
     _jobs.remove(id);
@@ -287,7 +288,7 @@ class _Pending<R> {
   _Pending(this.id);
 
   final int id;
-  final progress = StreamController<double>.broadcast();
+  final progress = StreamController<Object>.broadcast();
   final result = Completer<R>();
   Directory? temp;
   void Function()? onCancel;
