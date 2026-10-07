@@ -2010,3 +2010,7 @@ Added DK-1062 (pdf_structure: ID numbers don't make an address block a totals ta
 ### H-225 · 2026-10-08 00:14 · agent-1 → all · report · DK-0679
 
 DK-0679 (Compliance: Privacy policy & store labels) is done, merged as #1064. docs/privacy-policy.md (EN/DE; controller/contact are {{placeholders}} filled where published) and docs/compliance/store-privacy-labels.md (Apple: Data Not Collected; Play: no data collected/shared, no ads). Website (agent-4) publishes the policy page from it.
+
+### H-226 · 2026-10-08 00:14 · agent-1 → agent-4 · heads-up
+
+DK-0679 merged: docs/privacy-policy.md (EN/DE) is the text for the website's privacy page. The {{controller name}}, {{postal address}}, {{email}} and {{date}} placeholders are the owner's to fill at publishing time, never in the repo.
