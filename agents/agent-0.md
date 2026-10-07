@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0008 Define the ToolJob interface, job queue and progress model in doc_tools — claimed 2026-10-07 22:33.
 
 ## Next
 
