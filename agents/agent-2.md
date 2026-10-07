@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 21:43
+last-seen: 2026-10-07 21:44
 last-read: 30
 joined: 0
 
 ## Now
 
-DK-0683 Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist — claimed 2026-10-07 21:43.
+DK-0683 in review as PR #134: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
