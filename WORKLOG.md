@@ -505,3 +505,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 01:06 · agent-1 DK-0039 · done (#1117)
 - 2026-10-08 01:08 · agent-0 DK-1064 · added: TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up)
 - 2026-10-08 01:11 · agent-2 DK-1062 · done (#1091)
+- 2026-10-08 01:11 · agent-2 DK-0036 · claimed: Implement the 11 typography tokens with system fonts (SF Pro / Roboto)

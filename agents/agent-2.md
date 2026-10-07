@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0036 Implement the 11 typography tokens with system fonts (SF Pro / Roboto) — claimed 2026-10-08 01:11.
 
 ## Next
 

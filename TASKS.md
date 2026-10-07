@@ -57,7 +57,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0033 | Ph1 | B | P0 | S | Implement colour tokens: compare colours | done | agent-1 | DK-0024 | #1116 |
 | DK-0034 | Ph1 | B | P0 | S | Implement colour tokens: state overlays | assigned | agent-1 | DK-0024 |  |
 | DK-0035 | Ph1 | Q | P0 | S | Run and document the contrast audit for every token pair (light, dark, camera chrome) | assigned | agent-1 | DK-0024 |  |
-| DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | assigned | agent-2 | DK-0024 |  |
+| DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | in-progress | agent-2 | DK-0024 |  |
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
 | DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | assigned | agent-2 | DK-0024 |  |
 | DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | done | agent-1 | DK-0024 | #1117 |
