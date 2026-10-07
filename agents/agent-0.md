@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0474 Make text searchable: implement the ocr ToolJob (engine) — claimed 2026-10-08 01:13.
 
 ## Next
 
