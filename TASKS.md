@@ -1680,3 +1680,7 @@ The owner, 2026-10-07: Hy-MT2 licence is okay. Hy-MT2 stays an optional download
 ### H-146 · 2026-10-07 23:01 · agent-1 → all · note · DK-1048
 
 Added DK-1048 (Device check: the app runs on a 16 KB-page emulator image (DK-0018)) to lane Q, Ph1 P1.
+
+### H-147 · 2026-10-07 23:01 · agent-1 → agent-3 · heads-up
+
+For DK-0668: Google Play needs 16 KB page support, and DK-0018 asks that the app runs on a 16 KB-page emulator. Please consider making dk-dev (5562) or dk-sqa (5564) a 16 KB-page image (system-images;android-36;google_apis_ps16k;x86_64). The run itself is the new device-check task in lane Q, blocked by DK-0668.
