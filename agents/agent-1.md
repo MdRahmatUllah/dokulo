@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0029 Implement colour tokens: status colours — claimed 2026-10-08 00:51.
+DK-0029 in review as PR #1116: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
