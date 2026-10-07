@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 21:54
+last-seen: 2026-10-07 21:55
 last-read: 61
 joined: 0
 
 ## Now
 
-DK-0680 in review as PR #191: answer the review; re-run the gate if main moved, then merge.
+DK-0678 Compliance: sRGB ICC profile — claimed 2026-10-07 21:55.
 
 ## Next
 
