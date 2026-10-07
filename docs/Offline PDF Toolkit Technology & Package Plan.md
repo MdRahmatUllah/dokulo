@@ -42,7 +42,7 @@ Five layers, top to bottom; everything below the UI lives in shared packages so 
 
 ## Core packages and versions
 
-Versions marked ✓ were checked on pub.dev or the project page on 6 Oct 2026; the rest are well-established packages to pin at the latest stable when the repo is created.
+Versions marked ✓ were checked on pub.dev or the project page on 6 Oct 2026. The exact pinned versions (and the native libraries' tags and SHA-256) are in [`docs/versions.md`](versions.md) (DK-0002); that table wins over this one.
 
 | Package | Version | Licence | Used for | Notes |
 | --- | --- | --- | --- | --- |
@@ -55,8 +55,8 @@ Versions marked ✓ were checked on pub.dev or the project page on 6 Oct 2026; t
 | [google\_mlkit\_document\_scanner](https://pub.dev/documentation/google_mlkit_document_scanner/latest/) | 0.6.1 (checked 2026-10-07) | MIT (plugin) | **Not used** | Closed-source ML Kit with usage metrics; see [docs/compliance/ml-kit-scanner.md](compliance/ml-kit-scanner.md) |
 | [receive\_sharing\_intent](https://pub.dev/documentation/receive_sharing_intent/1.9.0/) | 1.9.0 ✓ | Apache-2.0 | Share sheet / "Open with" input | Includes iOS Share Extension support via SwiftPM |
 | flutter\_riverpod + riverpod\_generator | latest 3.x | MIT | State management | Same as Sogda |
-| drift + sqlite3\_flutter\_libs | latest 2.x | MIT | File index, recents, folders, OCR text index (FTS5) |  |
-| sqlcipher\_flutter\_libs | latest | BSD-style | Encrypted DB for locked folders | Alternative: encrypt files with `cryptography` and keep DB plain |
+| drift + sqlite3 | 2.35 / 3.x | MIT | File index, recents, folders, OCR text index (FTS5) | sqlite3 3.x builds SQLite through build hooks; `sqlite3_flutter_libs` is obsolete |
+| SQLCipher (sqlite3 hooks option) | — | BSD-style | Encrypted DB for locked folders | `sqlcipher_flutter_libs` is obsolete with sqlite3 3.x. Alternative: encrypt files with `cryptography` and keep DB plain |
 | cryptography | latest 2.x | Apache-2.0 | AES-GCM file encryption for locked folders | Uses platform crypto where available |
 | flutter\_secure\_storage | latest 9.x | BSD-3 | Store encryption keys in Keychain / Keystore |  |
 | local\_auth | latest 2.x | BSD-3 | Biometric unlock | Flutter team package |
@@ -291,7 +291,7 @@ Correctness of output files matters more than UI tests here: every tool gets a g
 - [x] Pick a redistributable sRGB ICC profile for PDF/A output: the ICC's `sRGB2014.icc` ([docs/compliance/srgb-icc-profile.md](compliance/srgb-icc-profile.md))
 - [ ] Decide: extend the plan to \~24–26 weeks, or move PDF/A, Smart Split, Web to PDF and the Files extension post-launch
 - [x] Check whether Sogda can keep Hy-MT given the EU/UK territory exclusion: Sogda ships Hy-MT2, which is Apache-2.0; the exclusion is HY-MT1.5's only ([docs/compliance/ai-models.md](compliance/ai-models.md))
-- [ ] Pin exact versions for the packages listed as "latest" when the repo is created
+- [x] Pin exact versions for the packages listed as "latest" when the repo is created: [`docs/versions.md`](versions.md)
 
 ## Sources
 

@@ -21,6 +21,7 @@ resolution: workspace
 
 environment:
   sdk: ^3.13.0
+  flutter: ">=3.47.0" # the minimum set by pdfrx 2.6 (DK-0002)
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,11 +37,11 @@ dependencies:
     path: ../doc_tools
   flutter_localizations:
     sdk: flutter
-  intl: any
-  flutter_riverpod: ^3.4.3
-  riverpod_annotation: ^4.0.7
-  go_router: ^18.0.1
-  path_provider: ^2.1.6
+  intl: 0.20.3
+  flutter_riverpod: 3.4.3
+  riverpod_annotation: 4.0.7
+  go_router: 18.0.1
+  path_provider: 2.1.6
   doc_core:
     path: ../doc_core
 
