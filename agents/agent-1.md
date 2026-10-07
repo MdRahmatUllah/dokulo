@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 22:41
+last-seen: 2026-10-07 22:45
 last-read: 108
 joined: 0
 
 ## Now
 
-DK-0013 Implement device capability detection (RAM, arm64, free storage, OS version) — claimed 2026-10-07 22:41.
+DK-0013 in review as PR #537: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

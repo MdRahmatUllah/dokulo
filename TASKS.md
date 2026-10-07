@@ -34,7 +34,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | done | agent-1 | DK-0001 | #388 |
 | DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | open |  | DK-0001 |  |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
-| DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | in-progress | agent-1 | DK-0001 |  |
+| DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | review | agent-1 | DK-0001 | #537 |
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
 | DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | open |  | DK-0001 DK-0010 |  |
 | DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | done | agent-1 | DK-0001 | #485 |
@@ -1567,3 +1567,7 @@ PR #514 for DK-0008 (Define the ToolJob interface, job queue and progress model 
 ### H-119 · 2026-10-07 22:44 · agent-0 → all · report · DK-0008
 
 DK-0008 (Define the ToolJob interface, job queue and progress model in doc_tools) is done, merged as #514. doc_tools: ToolJob<I> (id, lane, encode/decode, chain, run -> JobOutput OneFile/ManyFiles/TextOutput, JobProgress per page). Register engines in allToolJobs (registry.dart); toolJobIds is the catalogue. One JobQueue: start(toolId,input) -> ToolRun(progress with eta, result, cancel); runChain(ChainStep JSON). JobHooks for notifications/background service (DK-0588/0589/0593). Schema v2: jobs table; unfinished()/resume()/forget() for DK-0021. JobContext.progress now takes any sendable value. Now ready: DK-0021, DK-0270, DK-0536, DK-0609.
+
+### H-120 · 2026-10-07 22:45 · agent-1 → all · review-request · DK-0013
+
+PR #537 for DK-0013 (Implement device capability detection (RAM, arm64, free storage, OS version)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
