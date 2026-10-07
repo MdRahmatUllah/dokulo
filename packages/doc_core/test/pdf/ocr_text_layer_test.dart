@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:pdfrx_engine/pdfrx_engine.dart' show pdfrxInitialize;
 import 'package:test/test.dart';
@@ -80,4 +81,76 @@ void main() {
     expect(OcrTextLayer.encodable('Grüße, Straße'), 'Grüße, Straße');
     expect(OcrTextLayer.encodable('Москва €'), '?????? ?');
   });
+
+  group('over a real page, at every rotation', () {
+    final invoice =
+        '${Directory.current.path}/../../test/fixtures/Invoice INV-2026-014.pdf';
+
+    for (final turns in [0, 1, 2, 3]) {
+      test(
+        '$turns quarter turn(s): the words land where the OCR saw them',
+        () async {
+          final rotated = '${dir.path}/rotated.pdf';
+          await PdfEngine.assemble([
+            PageSource(invoice, 0, addQuarterTurns: turns),
+          ], rotated);
+          final overlay = await OcrTextLayer.writeOverlay(rotated, {
+            0: words,
+          }, '${dir.path}/layer.pdf');
+          final output = '${dir.path}/searchable.pdf';
+          final pool = IsolatePool(tempRoot: dir);
+          await pool.run(Lane.qpdf, _apply, (rotated, overlay, output)).result;
+
+          final shown = (await PdfEngine.inspect(output)).pages.single;
+          expect(shown.quarterTurns, turns);
+          final page = await PdfEngine.pageText(output, 0);
+          expect(
+            page.text,
+            contains('Invoice INV-2026-014'),
+          ); // the original stays
+          for (final w in words) {
+            final start = page.text.indexOf(w.text);
+            expect(start, isNot(-1), reason: w.text);
+            final mid = page.charBoxes[start + w.text.length ~/ 2];
+            final (x, y) = shownAt(
+              ((mid.left + mid.right) / 2, (mid.top + mid.bottom) / 2),
+              turns,
+              shown,
+            );
+            // The middle character's centre, as a fraction of the page shown.
+            expect(
+              x,
+              inInclusiveRange(w.box.left, w.box.left + w.box.width),
+              reason: '${w.text} x',
+            );
+            expect(
+              y,
+              inInclusiveRange(w.box.top, w.box.top + w.box.height),
+              reason: '${w.text} y',
+            );
+          }
+        },
+      );
+    }
+  });
+}
+
+List<String> _apply((String, String, String) files, JobContext context) =>
+    OcrTextLayer.apply(files.$1, files.$2, files.$3);
+
+/// A point in PDF space (unrotated, origin bottom-left) as a fraction of the
+/// page as shown (after [turns] clockwise quarter turns, origin top-left).
+(double, double) shownAt((double, double) point, int turns, PageInfo shown) {
+  final (x, y) = point;
+  // The unrotated page's size: a quarter turn swaps width and height.
+  final (w0, h0) = turns.isOdd
+      ? (shown.height, shown.width)
+      : (shown.width, shown.height);
+  final (dx, dy) = switch (turns) {
+    0 => (x, h0 - y),
+    1 => (y, x),
+    2 => (w0 - x, y),
+    _ => (h0 - y, w0 - x),
+  };
+  return (dx / shown.width, dy / shown.height);
 }

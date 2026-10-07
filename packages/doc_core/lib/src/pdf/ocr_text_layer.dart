@@ -3,7 +3,10 @@ import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart' as pw;
 
+import 'package:qpdf_ffi/qpdf_ffi.dart';
+
 import 'pdf_engine.dart';
+import 'qpdf_service.dart';
 
 /// A recognised word for the text layer: the text and its box on the page as
 /// displayed (after the page's rotation, within its crop box), normalised to
@@ -73,8 +76,9 @@ abstract final class OcrTextLayer {
   static String encodable(String text) =>
       String.fromCharCodes(text.runes.map((c) => c <= 0xFF ? c : 0x3F));
 
-  /// Writes the overlay for [input]'s pages to [overlayPath] and returns it,
-  /// for `Qpdf.overlay(input, overlayPath, output)` in a qpdf-lane job.
+  /// Writes the overlay for [input]'s pages to [overlayPath] and returns it;
+  /// [apply] then lays it over the pages. (Two steps: this one reads the page
+  /// sizes through PDFium, [apply] runs qpdf in a `Lane.qpdf` job.)
   static Future<String> writeOverlay(
     String input,
     Map<int, List<LayerWord>> words,
@@ -85,4 +89,11 @@ abstract final class OcrTextLayer {
     await File(overlayPath).writeAsBytes(await overlay(info.pages, words));
     return overlayPath;
   }
+
+  /// Lays [overlayPath] over [input]'s pages into [output] (page n on page
+  /// n): call it inside a `Lane.qpdf` job. qpdf places each overlay page
+  /// upright in its page's crop box, undoing /Rotate. A locked [input] fails
+  /// as [DocErrorKind.locked]: unlock first.
+  static List<String> apply(String input, String overlayPath, String output) =>
+      QpdfService.run(() => Qpdf.overlay(input, overlayPath, output));
 }
