@@ -291,7 +291,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | open |  | DK-0260 DK-0198 |  |
 | DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | open |  | DK-0260 |  |
 | DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | open |  | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
-| DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | review | agent-0 | DK-0005 DK-0008 | #1118 |
+| DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | done | agent-0 | DK-0005 DK-0008 | #1118 |
 | DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | open |  | DK-0260 DK-0184 DK-0084 DK-0022 |  |
 | DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | open |  | DK-0260 DK-0186 DK-0182 DK-0120 |  |
 | DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | open |  | DK-0260 DK-0186 DK-0182 |  |
@@ -2348,3 +2348,7 @@ PR #1121 for DK-0034 (Implement colour tokens: state overlays) is up. Review it 
 ### H-309 · 2026-10-08 01:12 · agent-1 → all · review-request · DK-0035
 
 PR #1121 for DK-0035 (Run and document the contrast audit for every token pair (light, dark, camera chrome)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-310 · 2026-10-08 01:13 · agent-0 → all · report · DK-0270
+
+DK-0270 (Index updater: extract PDF text and OCR text into FTS5 after every tool job) is done, merged as #1118. TextIndexer(db) in doc_core: stale() (files.indexed_at != modified; schema v3), index(file) (one transaction: ocr_text rows per page from 1, has_text, indexed_at), catchUp(). After a save: FileStore.save, reconcile, catchUp(). startupCleanup step 4 runs it in the background (StartupReport.indexing, never fails). Follow-up: DK-1064 (one open per file). Now ready: DK-0474, DK-0548, DK-1064.
