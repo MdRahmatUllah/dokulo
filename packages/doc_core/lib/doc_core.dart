@@ -6,6 +6,7 @@ export 'src/files/file_store.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/ocr_text_layer.dart';
 export 'src/pdf/pdf_structure.dart';
+export 'src/pdf/qpdf_service.dart';
 export 'src/pdf/thumbnail_cache.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.

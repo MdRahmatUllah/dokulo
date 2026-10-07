@@ -50,6 +50,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
+  qpdf_ffi: # integration_test/qpdf_test.dart only; lib/ never imports it
+    path: ../qpdf_ffi
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
