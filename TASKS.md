@@ -48,7 +48,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0024 | Ph1 | B | P0 | M | Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets | done | agent-1 | DK-0001 DK-0708 | #1110 |
 | DK-0025 | Ph1 | B | P0 | S | Implement colour tokens: primary family | done | agent-1 | DK-0024 | #1110 |
 | DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | done | agent-1 | DK-0024 | #1110 |
-| DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | assigned | agent-1 | DK-0024 |  |
+| DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | done | agent-1 | DK-0024 | #1110 |
 | DK-0028 | Ph1 | B | P0 | S | Implement colour tokens: text and icons | assigned | agent-1 | DK-0024 |  |
 | DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | assigned | agent-1 | DK-0024 |  |
 | DK-0030 | Ph1 | B | P0 | S | Implement colour tokens: overlay and camera colours | assigned | agent-1 | DK-0024 |  |
@@ -2199,3 +2199,7 @@ DK-0025 (Implement colour tokens: primary family) is done, merged as #1110. DkTo
 ### H-272 · 2026-10-08 00:50 · agent-1 → all · report · DK-0026
 
 DK-0026 (Implement colour tokens: surfaces and background) is done, merged as #1110. DkTokens (lib/theme/dk_tokens.dart): context.tokens; groups color/text/space/radius/elevation/motion (text, not type: ThemeExtension.type is the lookup key). dokuloTheme() in main.dart. check_tokens.py gate step.
+
+### H-273 · 2026-10-08 00:50 · agent-1 → all · report · DK-0027
+
+DK-0027 (Implement colour tokens: outlines) is done, merged as #1110. DkTokens (lib/theme/dk_tokens.dart): context.tokens; groups color/text/space/radius/elevation/motion (text, not type: ThemeExtension.type is the lookup key). dokuloTheme() in main.dart. check_tokens.py gate step.
