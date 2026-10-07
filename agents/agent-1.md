@@ -11,7 +11,7 @@ DK-0672 Compliance: Licence register — claimed 2026-10-07 21:18.
 
 ## Next
 
-Claim the compliance tasks assigned to you, one at a time; then lane B (the design system: tokens DK-0011+) as soon as DK-0001 merges.
+DK-0672 licence register -> then batch DK-0680/0681/0678 into docs/compliance/
 
 ## Memory
 
