@@ -47,8 +47,14 @@ def main() -> int:
     for name in wanted:
         light = svg("light", name)
         check_dark(name, light)
-        # The asset keeps the viewBox; the widget sets the size.
-        clean = re.sub(r'\s(width|height|style)="[^"]*"', "", light, count=3)
+        # The asset keeps the viewBox; the widget sets the size. Only the
+        # root's attributes: an inner <rect width=…> must stay.
+        clean = re.sub(
+            r"<svg[^>]*>",
+            lambda m: re.sub(r'\s(width|height|style)="[^"]*"', "", m.group(0)),
+            light,
+            count=1,
+        )
         (OUT / f"{name}.svg").write_text(clean + "\n", encoding="utf-8", newline="\n")
         print(f"{name}.svg")
     return 0
