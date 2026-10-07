@@ -10,7 +10,7 @@ from every SDK in it, declaring tracking, collected data and the reasons for
 | --- | --- | --- |
 | `NSPrivacyTracking` | false | Dokulo doesn't track; no ads, no analytics |
 | `NSPrivacyTrackingDomains` | none | |
-| `NSPrivacyCollectedDataTypes` | none yet | Must match the App Store labels: DK-0679 (blocked on the owner's DK-0700). The crash report the user sends by email (DK-0011) is decided there |
+| `NSPrivacyCollectedDataTypes` | none | Matches the App Store label "Data Not Collected" (DK-0679, `docs/compliance/store-privacy-labels.md`): the user-sent crash email is Apple's optional-disclosure exception |
 | File timestamp | C617.1, 3B52.1 | The file index and thumbnail cache read modification dates of files in the app's container, and of files the user opens from the picker or share sheet |
 | Disk space | E174.1, 85F4.1 | The free-storage check before a job writes (DK-0020) and Settings → Storage |
 | System boot time | 35F9.1 | Monotonic time for job progress and time left (the job queue's stopwatch) |

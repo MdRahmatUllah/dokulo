@@ -137,6 +137,21 @@ void main() {
       ]);
     });
 
+    test('ID numbers on the right keep an address block as text', () {
+      final blocks = layout([
+        ...place('Herrn', 50, 700),
+        ...place('Steuer-ID', 330, 700),
+        ...place('Max Mustermann', 50, 685),
+        ...place('00 000 000 000', 330, 685), // the fixtures' Steuer-ID
+        ...place('Musterstraße 12', 50, 670),
+        ...place('DE00 0000 0000 0000 0000 00', 330, 670),
+      ]);
+      expect(blocks.map((b) => b.kind), [
+        BlockKind.paragraph,
+        BlockKind.paragraph,
+      ]); // DK-1062
+    });
+
     test('running headers and footers go; one-off lines in the band stay', () {
       List<TextLine> page(int n) => PdfStructure.buildLines([
         ...place('Handbuch · Kapitel $n', 50, 800), // header, digits differ
