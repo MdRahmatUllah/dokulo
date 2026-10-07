@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-07 21:16
+last-seen: 2026-10-07 21:17
 last-read: 0
 joined: 0
 
 ## Now
 
-Not started. Assigned: DK-0001.
+DK-0001 Create the Flutter monorepo with the five layer packages — claimed 2026-10-07 21:17.
 
 ## Next
 

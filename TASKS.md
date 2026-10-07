@@ -22,7 +22,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 
 | Task | Ph | Lane | Pri | Size | Title | Status | Owner | Blocked by | PR |
 |---|---|---|---|---|---|---|---|---|---|
-| DK-0001 | Ph1 | A | P0 | M | Create the Flutter monorepo with the five layer packages | assigned | agent-0 |  |  |
+| DK-0001 | Ph1 | A | P0 | M | Create the Flutter monorepo with the five layer packages | in-progress | agent-0 |  |  |
 | DK-0002 | Ph1 | A | P0 | S | Pin Flutter 3.47+ / Dart 3.13+ and the core package versions | open |  | DK-0001 |  |
 | DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | open |  | DK-0001 |  |
 | DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | open |  | DK-0003 |  |
