@@ -503,3 +503,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 01:04 · agent-1 DK-0032 · done (#1116)
 - 2026-10-08 01:04 · agent-1 DK-0033 · done (#1116)
 - 2026-10-08 01:06 · agent-1 DK-0039 · done (#1117)
+- 2026-10-08 01:08 · agent-0 DK-1064 · added: TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up)
