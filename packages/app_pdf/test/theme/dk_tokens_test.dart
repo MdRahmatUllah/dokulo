@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +56,12 @@ class _Sample extends StatelessWidget {
       'compare.added': t.compare.added.background,
       'compare.removed': t.compare.removed.background,
       'compare.changed': t.compare.changed.background,
+      'inverseSurface': c.inverseSurface,
+      'onInverseSurface': c.onInverseSurface,
+      'inversePrimary': c.inversePrimary,
+      'state.hover': Color.alphaBlend(t.state.hover, c.surface),
+      'state.pressed': Color.alphaBlend(t.state.pressed, c.surface),
+      'state.selected': t.state.selected,
     };
     return Scaffold(
       body: Padding(
@@ -196,58 +204,24 @@ void main() {
     );
   });
 
-  group('contrast (WCAG 2.x; UI spec §4.5)', () {
+  group('contrast (WCAG 2.x; UI spec §4.5; the audit, DK-0035)', () {
     for (final tokens in [DkTokens.light, DkTokens.dark]) {
-      final c = tokens.color, k = tokens.compare;
-      final name = tokens.brightness.name;
-      // (foreground, background, minimum): 4.5:1 text, 3:1 icons and input borders.
-      final pairs = <String, (Color, Color, double)>{
-        'onPrimary/primary': (c.onPrimary, c.primary, 4.5),
-        'onPrimaryContainer/primaryContainer': (
-          c.onPrimaryContainer,
-          c.primaryContainer,
-          4.5,
-        ),
-        'primary/surface (links)': (c.primary, c.surface, 4.5),
-        for (final (bgName, bg) in [
-          ('background', c.background),
-          ('surface', c.surface),
-          ('surfaceRaised', c.surfaceRaised),
-          ('surfaceSunken', c.surfaceSunken),
-        ]) ...{
-          'textPrimary/$bgName': (c.textPrimary, bg, 4.5),
-          'textSecondary/$bgName': (c.textSecondary, bg, 4.5),
-          'iconPrimary/$bgName': (c.iconPrimary, bg, 3.0),
-          'iconSecondary/$bgName': (c.iconSecondary, bg, 3.0),
-        },
-        'outlineStrong/surface (input borders)': (
-          c.outlineStrong,
-          c.surface,
-          3.0,
-        ),
-        'outlineStrong/surfaceSunken': (c.outlineStrong, c.surfaceSunken, 3.0),
-        'pro/proContainer': (c.pro, c.proContainer, 4.5),
-        'success/successContainer': (c.success, c.successContainer, 4.5),
-        'warning/warningContainer': (c.warning, c.warningContainer, 4.5),
-        'danger/dangerContainer': (c.danger, c.dangerContainer, 4.5),
-        'danger/surface (error text)': (c.danger, c.surface, 4.5),
-        'success/surface (size saved)': (c.success, c.surface, 4.5),
-        'onCamera/cameraChrome over a white frame': (
-          c.onCamera,
-          Color.alphaBlend(c.cameraChrome, const Color(0xFFFFFFFF)),
-          4.5,
-        ),
-        'compare.added': (k.added.text, k.added.background, 4.5),
-        'compare.removed': (k.removed.text, k.removed.background, 4.5),
-        'compare.changed': (k.changed.text, k.changed.background, 4.5),
-      };
-      for (final MapEntry(key: pair, value: (fg, bg, minimum))
-          in pairs.entries) {
-        test('$name $pair', () {
+      for (final (pair, fg, bg, minimum) in auditPairs(tokens)) {
+        test('${tokens.brightness.name} $pair', () {
           expect(contrast(fg, bg), greaterThanOrEqualTo(minimum));
         });
       }
     }
+
+    test('docs/design/contrast-audit.md is current (DK_UPDATE_AUDIT=1 rewrites it)', () {
+      final file = File('../../docs/design/contrast-audit.md');
+      final table = auditTable();
+      if (Platform.environment['DK_UPDATE_AUDIT'] == '1') {
+        file.createSync(recursive: true);
+        file.writeAsStringSync(table);
+      }
+      expect(file.readAsStringSync().replaceAll('\r\n', '\n'), table);
+    });
   });
 
   test(
@@ -309,4 +283,131 @@ double contrast(Color a, Color b) {
   final (la, lb) = (a.computeLuminance(), b.computeLuminance());
   final (hi, lo) = la > lb ? (la, lb) : (lb, la);
   return (hi + 0.05) / (lo + 0.05);
+}
+
+/// Every text, icon and input-border pair the app uses, with its minimum:
+/// 4.5:1 text, 3:1 icons, input borders and large text (UI spec §4.5).
+List<(String, Color, Color, double)> auditPairs(DkTokens tokens) {
+  final c = tokens.color, k = tokens.compare;
+  const white = Color(0xFFFFFFFF);
+  return [
+    ('onPrimary on primary', c.onPrimary, c.primary, 4.5),
+    (
+      'onPrimaryContainer on primaryContainer',
+      c.onPrimaryContainer,
+      c.primaryContainer,
+      4.5,
+    ),
+    ('primary (links) on surface', c.primary, c.surface, 4.5),
+    for (final (bgName, bg) in [
+      ('background', c.background),
+      ('surface', c.surface),
+      ('surfaceRaised', c.surfaceRaised),
+      ('surfaceSunken', c.surfaceSunken),
+    ]) ...[
+      ('textPrimary on $bgName', c.textPrimary, bg, 4.5),
+      ('textSecondary on $bgName', c.textSecondary, bg, 4.5),
+      ('iconPrimary on $bgName', c.iconPrimary, bg, 3.0),
+      ('iconSecondary on $bgName', c.iconSecondary, bg, 3.0),
+    ],
+    (
+      'textPrimary on a pressed row',
+      c.textPrimary,
+      Color.alphaBlend(tokens.state.pressed, c.surface),
+      4.5,
+    ),
+    (
+      'textPrimary on a selected row',
+      c.textPrimary,
+      tokens.state.selected,
+      4.5,
+    ),
+    (
+      'outlineStrong (input border) on surface',
+      c.outlineStrong,
+      c.surface,
+      3.0,
+    ),
+    (
+      'outlineStrong (input border) on surfaceSunken',
+      c.outlineStrong,
+      c.surfaceSunken,
+      3.0,
+    ),
+    ('pro on proContainer', c.pro, c.proContainer, 4.5),
+    ('success on successContainer', c.success, c.successContainer, 4.5),
+    ('success (size saved) on surface', c.success, c.surface, 4.5),
+    ('warning on warningContainer', c.warning, c.warningContainer, 4.5),
+    ('danger on dangerContainer', c.danger, c.dangerContainer, 4.5),
+    ('danger (error text) on surface', c.danger, c.surface, 4.5),
+    (
+      'onCamera on cameraChrome over a white frame',
+      c.onCamera,
+      Color.alphaBlend(c.cameraChrome, white),
+      4.5,
+    ),
+    (
+      'onInverseSurface on inverseSurface (toast)',
+      c.onInverseSurface,
+      c.inverseSurface,
+      4.5,
+    ),
+    (
+      'inversePrimary (toast action) on inverseSurface',
+      c.inversePrimary,
+      c.inverseSurface,
+      4.5,
+    ),
+    (
+      'compare.added text on its background',
+      k.added.text,
+      k.added.background,
+      4.5,
+    ),
+    (
+      'compare.removed text on its background',
+      k.removed.text,
+      k.removed.background,
+      4.5,
+    ),
+    (
+      'compare.changed text on its background',
+      k.changed.text,
+      k.changed.background,
+      4.5,
+    ),
+  ];
+}
+
+/// The audit as Markdown: one row per pair, light and dark side by side.
+String auditTable() {
+  final light = auditPairs(DkTokens.light), dark = auditPairs(DkTokens.dark);
+  String hex(Color c) =>
+      '#${(c.toARGB32() & 0xFFFFFF).toRadixString(16).padLeft(6, '0').toUpperCase()}';
+  String cell(double r, Color f, Color b, double minimum) =>
+      '${r.toStringAsFixed(2)}:1 (${hex(f)} on ${hex(b)})${r >= minimum ? '' : ' **below**'}';
+  final rows = [
+    for (var i = 0; i < light.length; i++)
+      '| ${light[i].$1} | ${light[i].$4.toStringAsFixed(1)}:1 '
+          '| ${cell(contrast(light[i].$2, light[i].$3), light[i].$2, light[i].$3, light[i].$4)} '
+          '| ${cell(contrast(dark[i].$2, dark[i].$3), dark[i].$2, dark[i].$3, dark[i].$4)} |',
+  ];
+  return [
+    '# Contrast audit (DK-0035)',
+    '',
+    'Every text, icon and input-border colour pair in `DkTokens`, checked against',
+    'WCAG 2.x (UI spec §4.5): 4.5:1 for text, 3:1 for icons, input borders and',
+    'large text. Generated by `packages/app_pdf/test/theme/dk_tokens_test.dart`,',
+    'which also fails on any pair below its minimum; regenerate with',
+    '`DK_UPDATE_AUDIT=1 flutter test test/theme` in `packages/app_pdf`. A new',
+    'colour pair gets a row there before it is merged (the PR template asks).',
+    'Translucent colours are measured over what they sit on: the camera chrome',
+    'over a white frame (the worst case), the pressed overlay over `surface`.',
+    'Dividers (`outline`) are decorative and exempt.',
+    '',
+    '| Pair | Minimum | Light | Dark |',
+    '| --- | --- | --- | --- |',
+    ...rows,
+    '',
+  ].join('\n');
 }
