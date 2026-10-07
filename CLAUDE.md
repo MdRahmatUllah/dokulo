@@ -105,6 +105,7 @@ python tools/check_permissions.py [built apk]                    # only the Andr
 python tools/check_privacy_manifests.py                          # the iOS privacy manifest, and one per native iOS plugin
 (cd packages/<p> && flutter test --timeout 60s | dart test)      # every package with tests: flutter test in Flutter packages
 python -m pytest tools/tests -q
+python tools/check_pdfa.py                                       # PDF/A writer output validates in veraPDF (install: docs/compliance/pdfa.md)
 python tools/native_libs_check.py <built apk>                    # only with --apk: no FFmpeg/excluded OpenCV, 16 KB-aligned .so (Play)
 python tools/size_check.py <built apk>                           # only with --apk: per-ABI size budget, no bundled models but OCR
 ```

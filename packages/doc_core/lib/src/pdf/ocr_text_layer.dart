@@ -31,11 +31,15 @@ class LayerWord {
 abstract final class OcrTextLayer {
   /// The overlay PDF: one page per entry of [pages] (sizes as displayed),
   /// carrying the words of [words] (by 0-based page); pages without words are
-  /// empty.
+  /// empty. A page with an entry in [images] (RGBA, as [PdfEngine.render]
+  /// gives it after a BGRA→RGBA swap) gets that picture as its visible
+  /// content under the words: a rasterised page that stays searchable
+  /// (PDF/A, DK-0395).
   static Future<Uint8List> overlay(
     List<PageInfo> pages,
-    Map<int, List<LayerWord>> words,
-  ) {
+    Map<int, List<LayerWord>> words, {
+    Map<int, ({Uint8List rgba, int width, int height})> images = const {},
+  }) {
     final doc = pw.PdfDocument();
     final font = pw.PdfFont.helvetica(doc);
     final lineHeight = font.ascent - font.descent; // descent is negative
@@ -45,6 +49,16 @@ abstract final class OcrTextLayer {
         pageFormat: pw.PdfPageFormat(info.width, info.height),
       );
       final g = page.getGraphics();
+      if (images[index] case final image?) {
+        final picture = pw.PdfImage(
+          doc,
+          image: image.rgba,
+          width: image.width,
+          height: image.height,
+          alpha: false,
+        );
+        g.drawImage(picture, 0, 0, info.width, info.height);
+      }
       for (final word in words[index] ?? const <LayerWord>[]) {
         final text = encodable(word.text);
         if (text.trim().isEmpty) continue;
