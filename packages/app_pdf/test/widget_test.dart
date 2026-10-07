@@ -13,7 +13,7 @@ void main() {
     tester.platformDispatcher.localesTestValue = const [Locale('de', 'DE')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
     await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
-    expect(find.text('Alles bleibt auf diesem Handy'), findsOneWidget);
+    expect(find.text('Start'), findsOneWidget); // the Home tab
   });
 
   testWidgets('changing the language applies at once, without a restart', (
@@ -25,15 +25,15 @@ void main() {
     final language = ProviderScope.containerOf(
       tester.element(find.byType(DokuloApp)),
     ).read(appLanguageSettingProvider.notifier);
-    expect(find.text('Everything stays on this phone'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
 
     language.select(AppLanguage.deutsch);
     await tester.pump();
-    expect(find.text('Alles bleibt auf diesem Handy'), findsOneWidget);
+    expect(find.text('Start'), findsOneWidget); // the Home tab
 
     language.select(AppLanguage.system);
     await tester.pump();
-    expect(find.text('Everything stays on this phone'), findsOneWidget);
+    expect(find.text('Home'), findsOneWidget);
   });
 
   test('plurals and placeholders', () async {

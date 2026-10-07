@@ -88,26 +88,43 @@ Riverpod 3 with code generation, the same versions as Sogda:
 
 ## 3. Routing
 
-`go_router` with `StatefulShellRoute.indexedStack`, so each tab keeps its
-scroll position and stack (DK-0004). From the Frontend & UX plan, "Tab bar",
-and the UI spec §13:
+`go_router` 18 with `StatefulShellRoute.indexedStack`, so each tab keeps its
+scroll position and its pushed pages (DK-0004). The code is
+`app_pdf/lib/routes/routes.dart`: `Routes` holds every path, `buildRouter()`
+the tree, and `appRouterProvider` the app's router (kept alive). Build paths
+with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 
-| Route | Screen | Shell | Notes |
+| Route | Screen | Where | Notes |
 | --- | --- | --- | --- |
-| `/home` | H1 Home | tab 1 | |
+| `/home` | H1 Home | tab 1 | The start route |
 | `/tools` | T1 Tools | tab 2 | |
-| `/scan` | S1 Camera → S2 Review | full screen | Centre button; slides up 220 ms |
-| `/files` | F1 Files | tab 3 | F2 Locked folder is pushed behind biometrics |
-| `/me` | M1 Me | tab 4 | M2 Model manager, M3 Settings are pushed |
+| `/files` | F1 Files | tab 3 | |
+| `/files/locked` | F2 Locked folder | tab 3, pushed | Behind biometrics (its task adds the guard) |
+| `/me` | M1 Me | tab 4 | |
+| `/me/models` | M2 Model manager | tab 4, pushed | |
+| `/me/settings/:page` | M3 Settings | tab 4, pushed | `:page` is the settings group, e.g. `appearance` |
 | `/welcome` | Onboarding | full screen | Shown once |
+| `/scan` | S1 Camera | full screen | The raised Scan button pushes it |
+| `/scan/review` | S2 Review | full screen | |
+| `/tool/:toolId` | T2 Tool options | full screen | `:toolId` is the tool's id (`compress`, `merge`, …) |
+| `/tool/:toolId/result` | T3 Result | full screen | |
+| `/viewer/:fileId` | V1 Viewer | full screen | `?mode=edit` opens V2 Edit mode |
+| `/organize/:fileId` | P1 Organize pages | full screen | |
 
-Full-screen flows hide the tab bar: Scanner (S1, S2), Viewer (V1, V2), Organize
-pages (P1), the tool shell (T2, T3), onboarding and the signature pad. Sheets
-(X1 tool picker, X2 progress, X3 paywall, A1 AI panel) are not routes.
-
-DK-0004 adds the pushed routes (T2/T3 per tool, V1, P1, F2, M2, M3) and the
-deep links (share sheet, "Open with", shortcuts) to this table when it builds
-them.
+- **Full-screen routes** sit on the root navigator, above the shell: the tab
+  bar is hidden, and back returns to the tab they were pushed from. That covers
+  the scanner, viewer, organizer, tool shell and onboarding. The signature pad
+  is a full-screen route of V2 when its task adds it.
+- **Sheets aren't routes:** A1 AI panel, X1 Tool picker, X2 Progress / mini bar,
+  X3 Paywall.
+- **Deep links:** `dokulo://open/<route>` (Android intent filter, iOS
+  `CFBundleURLTypes`). For example, `adb -s emulator-5562 shell am start -a
+  android.intent.action.VIEW -d "dokulo://open/tool/compress"` or `xcrun simctl
+  openurl booted "dokulo://open/viewer/f42?mode=edit"`.
+  `test/routes/routes_test.dart` cold-starts the router at every route.
+- Tapping the current tab again returns that tab to its root.
+- Until a screen's task builds it, the route shows `PlaceholderScreen` with the
+  screen ID. The task replaces the builder in `routes.dart`.
 
 ## 4. Theming
 

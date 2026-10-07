@@ -54,5 +54,10 @@
   "settings_language_title": "Sprache",
   "settings_language_system": "System",
   "settings_language_english": "English",
-  "settings_language_deutsch": "Deutsch"
+  "settings_language_deutsch": "Deutsch",
+  "shell_tab_home": "Start",
+  "shell_tab_tools": "Werkzeuge",
+  "shell_tab_files": "Dateien",
+  "shell_tab_me": "Ich",
+  "shell_button_scan": "Scannen"
 }

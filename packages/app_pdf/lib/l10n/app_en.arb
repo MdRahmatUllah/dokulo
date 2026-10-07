@@ -283,5 +283,25 @@
   "settings_language_deutsch": "Deutsch",
   "@settings_language_deutsch": {
     "description": "Settings → Language (UI spec §25)."
+  },
+  "shell_tab_home": "Home",
+  "@shell_tab_home": {
+    "description": "Tab bar (UI spec §13.1)."
+  },
+  "shell_tab_tools": "Tools",
+  "@shell_tab_tools": {
+    "description": "Tab bar (UI spec §13.1)."
+  },
+  "shell_tab_files": "Files",
+  "@shell_tab_files": {
+    "description": "Tab bar (UI spec §13.1)."
+  },
+  "shell_tab_me": "Me",
+  "@shell_tab_me": {
+    "description": "Tab bar (UI spec §13.1)."
+  },
+  "shell_button_scan": "Scan",
+  "@shell_button_scan": {
+    "description": "Tab bar (UI spec §13.1)."
   }
 }
