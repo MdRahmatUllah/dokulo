@@ -281,7 +281,7 @@ Correctness of output files matters more than UI tests here: every tool gets a g
 | Scanner | Quad detection success on a photo set (backgrounds, lighting, angles) | Photo corpus |
 | AI | Summary and Q&A answers cite the right pages on a fixed question set; "not found" behaves correctly | Manual review checklist per release |
 | Performance | Merge 200 pages < 3 s, compress 50-page scan < 20 s, OCR page < 1.5 s on mid Android | Benchmarks on test devices |
-| Privacy | No network traffic during any tool run (except model downloads) | Proxy check in the local gate + airplane-mode manual test |
+| Privacy | No network traffic during any tool run (except model downloads) | Every job runs inside `offline()`, which blocks HTTP and sockets; the golden-PDF suite runs under it in the local gate; airplane-mode manual test per release ([network uses](compliance/network-uses.md)) |
 
 ## Open questions
 

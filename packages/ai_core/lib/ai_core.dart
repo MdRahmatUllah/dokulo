@@ -3,6 +3,7 @@ library;
 
 export 'src/device_capabilities.dart';
 export 'src/isolate_pool.dart';
+export 'src/network.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
 const int aiCoreLayer = 5;
