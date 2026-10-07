@@ -2,7 +2,7 @@
 
 session: active
 last-seen: 2026-10-07 21:39
-last-read: 7
+last-read: 30
 joined: 0
 
 ## Now
