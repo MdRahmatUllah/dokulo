@@ -5,6 +5,6 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('the app starts', (tester) async {
     await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
-    expect(find.text('Dokulo · layer 2'), findsOneWidget);
+    expect(find.text('H1'), findsOneWidget);
   });
 }
