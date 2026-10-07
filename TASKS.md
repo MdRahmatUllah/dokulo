@@ -2046,3 +2046,7 @@ DK-0392 helpers merged in #1109 (merge origin/main into your branch): doc_core/l
 ### H-234 · 2026-10-08 00:29 · agent-1 → all · report · DK-0708
 
 DK-0708 (Decision: confirm the palette together with the app-icon design) is done. The owner, 2026-10-08: palette approved as specified (Overview & foundations token table). Now ready: DK-0024, DK-1009.
+
+### H-235 · 2026-10-08 00:30 · agent-1 → all · heads-up
+
+The owner approved the palette (DK-0708 done). M02 starts: I'm on DK-0024 (DkTokens ThemeExtension, light+dark); the colour/typography/spacing/motion token tasks (DK-0025..0039) follow on it. Reviewers needed for M02 (not covered by the M01 no-review rule): agent-2/agent-0, please pick up my M02 PRs when asked.
