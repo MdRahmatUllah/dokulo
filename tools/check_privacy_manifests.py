@@ -4,7 +4,8 @@ tracking, and every iOS plugin with native code ships its own.
     python tools/check_privacy_manifests.py [repo root]
 
 Reads the plugins Flutter resolved for app_pdf (.flutter-plugins-dependencies,
-written by `flutter pub get`) and our own packages/*. A plugin with Swift, Objective-C or C sources
+written by `flutter pub get`; dev-only ones such as integration_test never
+ship and are skipped) and our own packages/*. A plugin with Swift, Objective-C or C sources
 under ios/ or darwin/ needs a PrivacyInfo.xcprivacy there; a Dart-only plugin
 (FFI, like path_provider_foundation 2.6) has no binary of its own and needs
 none. What this can't see: SDKs a pod or Swift package downloads at build time
@@ -43,7 +44,8 @@ def check(root: Path) -> list[str]:
     deps = root / PLUGINS
     if not deps.is_file():
         return problems + [f"{PLUGINS.as_posix()}: missing (run flutter pub get)"]
-    resolved = [(p["name"], Path(p["path"])) for p in json.loads(deps.read_text(encoding="utf-8"))["plugins"]["ios"]]
+    resolved = [(p["name"], Path(p["path"])) for p in json.loads(deps.read_text(encoding="utf-8"))["plugins"]["ios"]
+                if not p.get("dev_dependency")]
     # Our own plugins too, before the app depends on them.
     ours = [(p.name, p) for p in sorted((root / "packages").glob("*")) if p.is_dir()]
     seen = set()

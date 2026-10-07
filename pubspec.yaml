@@ -15,3 +15,4 @@ workspace:
   - packages/ai_core
   - packages/web_to_pdf
   - packages/vision_ocr
+  - packages/qpdf_ffi
