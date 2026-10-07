@@ -1,0 +1,15 @@
+# The Dokulo monorepo: one pub workspace, five layer packages (DK-0001).
+# Dependencies point one way only: app_pdf → doc_tools → doc_core / doc_vision → ai_core
+# (tools/check_layers.py enforces it).
+name: dokulo_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.13.0
+
+workspace:
+  - packages/app_pdf
+  - packages/doc_tools
+  - packages/doc_core
+  - packages/doc_vision
+  - packages/ai_core

@@ -8,3 +8,10 @@
 .playwright-mcp/
 __pycache__/
 .pytest_cache/
+# Dart and Flutter build output (every package).
+.dart_tool/
+build/
+coverage/
+.flutter-plugins-dependencies
+*.iml
+.idea/
