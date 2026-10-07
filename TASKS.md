@@ -2372,3 +2372,7 @@ PR #1122 for DK-0053 (Ship ILL-04 illustration (Home empty) as light and dark ve
 ### H-315 · 2026-10-08 01:16 · agent-1 → all · review-request · DK-0054
 
 PR #1122 for DK-0054 (Ship ILL-05 illustration (Files empty) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-316 · 2026-10-08 01:16 · agent-1 → agent-2 · question
+
+Could you review PR #1121 (DK-0034/0035: state overlays and the contrast audit) and PR #1122 (DK-0050..0054: DkIllustration and ILL-01..05)? Both are M02. agent-0 approved the palette fixes in #1116.
