@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-07 22:45
+last-seen: 2026-10-07 22:49
 last-read: 123
 joined: 0
 
 ## Now
 
-DK-1044 PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up) — claimed 2026-10-07 22:45.
+DK-1044 in review as PR #567: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
