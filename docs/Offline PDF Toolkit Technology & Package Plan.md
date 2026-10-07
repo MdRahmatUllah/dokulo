@@ -52,7 +52,7 @@ Versions marked ✓ were checked on pub.dev or the project page on 6 Oct 2026; t
 | [llamadart](https://pub.dev/packages/llamadart/versions/0.8.12) | 0.8.12+ ✓ | MIT | Gemma via llama.cpp (GGUF) | Same runtime as Sogda; add `llamadart_llama_cpp_flutter` ^0.0.8 for iOS SwiftPM |
 | [flutter\_onnxruntime](https://pub.dev/documentation/flutter_onnxruntime/latest/) | 1.8.4 ✓ (Sep 2026) | MIT | OCR models, embeddings, Supertonic TTS | ONNX Runtime 1.23; iOS min 16, Android 16 KB pages OK |
 | [opencv\_dart](https://pub.dev/documentation/opencv_dart/latest/) | 2.2.x ✓ | Apache-2.0 | Image filters, perspective, book split, contours | Uses Native Assets hooks; exclude unused modules (videoio, highgui, dnn, contrib) |
-| [google\_mlkit\_document\_scanner](https://pub.dev/documentation/google_mlkit_document_scanner/latest/) | 0.6.0 ✓ (Aug 2026) | MIT (plugin) | **Not used** | Closed-source ML Kit with usage metrics; see [docs/compliance/ml-kit-scanner.md](compliance/ml-kit-scanner.md) |
+| [google\_mlkit\_document\_scanner](https://pub.dev/documentation/google_mlkit_document_scanner/latest/) | 0.6.1 (checked 2026-10-07) | MIT (plugin) | **Not used** | Closed-source ML Kit with usage metrics; see [docs/compliance/ml-kit-scanner.md](compliance/ml-kit-scanner.md) |
 | [receive\_sharing\_intent](https://pub.dev/documentation/receive_sharing_intent/1.9.0/) | 1.9.0 ✓ | Apache-2.0 | Share sheet / "Open with" input | Includes iOS Share Extension support via SwiftPM |
 | flutter\_riverpod + riverpod\_generator | latest 3.x | MIT | State management | Same as Sogda |
 | drift + sqlite3\_flutter\_libs | latest 2.x | MIT | File index, recents, folders, OCR text index (FTS5) |  |
