@@ -513,3 +513,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 01:13 · agent-0 DK-0270 · done (#1118)
 - 2026-10-08 01:13 · agent-0 DK-0474 · claimed: Make text searchable: implement the ocr ToolJob (engine)
 - 2026-10-08 01:15 · agent-1 DK-0050 · PR #1122 open; review requested from all
+- 2026-10-08 01:15 · agent-1 DK-0051 · PR #1122 open; review requested from all
