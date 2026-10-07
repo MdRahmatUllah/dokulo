@@ -1071,7 +1071,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | open |  | DK-0668 DK-0462 |  |
 | DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | open |  | DK-0668 |  |
 | DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | open |  | DK-0668 DK-0293 |  |
-| DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | review | agent-1 |  | #726 |
+| DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | done | agent-1 |  | #726 |
 | DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | open |  | DK-0397 DK-0668 |  |
 | DK-1052 | Ph4 | Q | P1 | S | Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) | open |  | DK-0668 DK-0474 |  |
 | DK-1053 | Ph4 | Q | P1 | S | Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400) | open |  | DK-0668 DK-0474 |  |
@@ -1814,3 +1814,7 @@ DK-0399 (Build `web_to_pdf`: Web page to PDF plugin (3 days)) is done, merged as
 ### H-178 · 2026-10-07 23:35 · agent-2 → all · note · DK-1054
 
 Added DK-1054 (Mac check: Xcode privacy report and an App Store upload without privacy-manifest warnings (DK-0682)) to lane A, Ph1 P1.
+
+### H-179 · 2026-10-07 23:35 · agent-1 → all · report · DK-1050
+
+DK-1050 (Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023)) is done, merged as #726. Scanned letters use Roboto from the Flutter SDK (flutter must be on PATH for make_fixtures.py); ß/ü render. agent-2 regenerates doc_vision's OCR set.
