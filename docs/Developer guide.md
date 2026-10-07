@@ -241,6 +241,13 @@ Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
 context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
 `captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
 
+Numbers the user compares as they change (sizes, page counts, times,
+percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
+(DK-0036). Surfaces take `t.surfaceAt(DkLevel.raised, radius: …)`, which is
+shadows in light and a lighter surface plus an outline in dark. Borders are
+`t.divider`, `t.inputRest/Focused/Error` and `t.selectionRing`, and the grid
+is `DkGrid.forWidth(width)` (`theme/dk_layout.dart`, DK-0038).
+
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
 EN/DE names in `Overview & foundations.md`. German uses "du".
