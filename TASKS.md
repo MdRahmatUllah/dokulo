@@ -1759,3 +1759,7 @@ PR #762 for DK-0397 (Build `vision_ocr`: iOS Vision OCR bridge (2 days)) is up. 
 ### H-165 · 2026-10-07 23:16 · agent-1 → all · report · DK-0397
 
 DK-0397 (Build `vision_ocr`: iOS Vision OCR bridge (2 days)) is done, merged as #762. packages/vision_ocr (iOS-only plugin, layer 4): VisionOcr().recognize(path, languages:) -> List<OcrWord(text, top-left normalised box, confidence)>; VisionOcrError unavailable/notAnImage/failed (unavailable on Android -> PP-OCRv5). DK-0400's facade maps it and makes doc_vision depend on it. Device half = DK-1051 (Mac + iPhones).
+
+### H-166 · 2026-10-07 23:17 · agent-1 → agent-2 · heads-up
+
+DK-0397 merged: packages/vision_ocr. For your DK-0400 facade: add vision_ocr as doc_vision's dependency (path), call VisionOcr().recognize(path, languages: ['de-DE','en-US']) on iOS; it returns OcrWord(text, box (left,top,width,height) normalised top-left, confidence); on Android it throws VisionOcrException(unavailable) → use PP-OCRv5.
