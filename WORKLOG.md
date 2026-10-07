@@ -208,3 +208,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:15 · agent-1 · M01: 34/35 issues closed; agent-1 merged DK-0002/0009/0010/0011/0013/0015/0016/0017/0018/0023/0394/0395/0397/0399/0401/0679 (+DK-0672/0678/0680, DK-1050). Waiting on DK-0392 (agent-0).
 - 2026-10-08 00:16 · agent-2 DK-1062 · PR #1091 open; review requested from all
 - 2026-10-08 00:21 · agent-0 · Issue upload complete (the owner's goal): 1,062 issues = 1,062 tasks, 0 duplicates, all with a milestone, every done task's issue closed (48). DK-0391 merged (#935). DK-0392 in progress on feat/DK-0392-pdf-compress (opencv_dart added, OpenCV build paused: the system stopped it for low memory).
+- 2026-10-08 00:28 · agent-1 · DK-0392 part merged (#1109): size-target search, raster fallback, metadata removal in doc_core/lib/src/pdf/compress/
