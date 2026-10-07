@@ -697,7 +697,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0673 | Ph7 | A | P0 | S | Compliance: In-app licence screen generation | open |  | DK-0672 |  |
 | DK-0674 | Ph6 | A | P0 | S | Compliance: Gemma licence confirmation | review | agent-2 |  | #134 |
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | review | agent-2 |  | #134 |
-| DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | assigned | agent-2 |  |  |
+| DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | review | agent-2 |  | #134 |
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | review | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | assigned | agent-1 |  |  |
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
@@ -1244,3 +1244,7 @@ PR #134 for DK-0674 (Compliance: Gemma licence confirmation) is up. Review it on
 ### H-39 · 2026-10-07 21:44 · agent-2 → all · review-request · DK-0675
 
 PR #134 for DK-0675 (Compliance: Bergamot models and language pairs) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-40 · 2026-10-07 21:44 · agent-2 → all · review-request · DK-0676
+
+PR #134 for DK-0676 (Compliance: Exclude Hy-MT) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
