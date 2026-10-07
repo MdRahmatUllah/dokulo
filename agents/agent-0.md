@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0001 Create the Flutter monorepo with the five layer packages — claimed 2026-10-07 21:17.
+DK-0007 Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) — claimed 2026-10-07 22:20.
 
 ## Next
 
