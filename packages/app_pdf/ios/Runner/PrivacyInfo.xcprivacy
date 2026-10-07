@@ -4,7 +4,7 @@
   Dokulo's privacy manifest (DK-0682; docs/compliance/ios-privacy-manifest.md).
   No tracking, no tracking domains. Required-reason APIs: only those the app's
   own features use; each plugin ships its own manifest (tools/check_privacy_manifests.py).
-  Collected data types stay empty until DK-0679 settles the store labels.
+  Collected data types: none (DK-0679; docs/compliance/store-privacy-labels.md).
 -->
 <plist version="1.0">
 <dict>
