@@ -56,3 +56,22 @@ def test_scan(tmp_path: Path) -> None:
 def test_classify_prefers_the_licence_named_first(tmp_path: Path) -> None:
     (tmp_path / "LICENSE").write_text(MPL, encoding="utf-8")
     assert licence_scan.classify(tmp_path) == "MPL"
+
+
+def test_a_workspace_lock_still_needs_register_lines(tmp_path: Path) -> None:
+    """A pub workspace's root lock calls every package transitive; the members'
+    pubspec.yaml files say which ones are direct."""
+    root, cache = tmp_path / "repo", tmp_path / "cache"
+    (root / "docs" / "compliance").mkdir(parents=True)
+    (root / licence_scan.REGISTER).write_text("| `pdfrx` | MIT |\n", encoding="utf-8")
+    for name in ("pdfrx", "lints"):
+        (cache / "hosted" / "pub.dev" / f"{name}-1.0.0").mkdir(parents=True)
+        (cache / "hosted" / "pub.dev" / f"{name}-1.0.0" / "LICENSE").write_text(MIT, encoding="utf-8")
+    (root / "pubspec.lock").write_text(
+        "packages:\n" + package("pdfrx", "transitive") + package("lints", "transitive"), encoding="utf-8")
+    member = root / "packages" / "doc_core"
+    member.mkdir(parents=True)
+    (member / "pubspec.yaml").write_text(
+        "name: doc_core\ndependencies:\n  pdfrx: ^2.6.5\ndev_dependencies:\n  lints: ^6.0.0\n", encoding="utf-8")
+
+    assert licence_scan.scan(root, cache) == ["pubspec.lock: lints is a direct dependency with no register line"]

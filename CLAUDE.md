@@ -1,9 +1,9 @@
 # Dokulo — read this first
 
 Dokulo is an offline, iLovePDF-style PDF toolkit and scanner for iOS and
-Android (Flutter, EN/DE). **No app code exists yet**: `main` holds the plan,
-the design and the team tooling. The first implementation task (DK-0001)
-creates the Flutter monorepo.
+Android (Flutter, EN/DE). `main` holds the plan, the design, the team tooling
+and the Flutter monorepo: one pub workspace with the five layer packages in
+`packages/` (DK-0001; the root `README.md` describes them).
 
 **The team** (six Claude Code agents, one owner): `agent-0` (the lead: the
 critical path, assignments, reviews, merges, releases), `agent-1` and
@@ -15,12 +15,12 @@ critical path, assignments, reviews, merges, releases), `agent-1` and
 
 ## What this repo is
 
-- `docs/`: the specs. Product and feature list (`Offline PDF Toolkit (iLovePDF-style mobile app).md`), the technology and package plan (stack, licence rules, versions), the frontend & UX plan (screen IDs like H1, F1, V1, S1, A1, M1, X3; the error catalogue), `Overview & foundations.md` (brand voice, fixed EN/DE tool names, tokens), and `dokulo-ui-design-spec.md` (the full UI spec; its §-numbers are referenced from tasks and the design export). **Docs win over code:** when they disagree, fix one of them the same day.
+- `docs/`: the specs. `Developer guide.md` (structure, state, routing, theming, testing, the accessibility checklist, the definition of done), Product and feature list (`Offline PDF Toolkit (iLovePDF-style mobile app).md`), the technology and package plan (stack, licence rules, versions), the frontend & UX plan (screen IDs like H1, F1, V1, S1, A1, M1, X3; the error catalogue), `Overview & foundations.md` (brand voice, fixed EN/DE tool names, tokens), and `dokulo-ui-design-spec.md` (the full UI spec; its §-numbers are referenced from tasks and the design export). **Docs win over code:** when they disagree, fix one of them the same day.
 - `dokulo-design/`: a static HTML export of every screen state. Open `dokulo-design/index.html`. `light/`, `dark/` and `deutsch/` mirror the same folder and file names (`<screen>-<state>.html`), so one path shows a screen in each theme and language. Phone frames are 393×852, `-iphone-se` is 375×667, and tablets are in `24-tablet/`.
 - `dokulo-task-list.csv`: the plan, 1,031 tasks (DK-NNNN) with description, acceptance criteria, screen IDs, components, design reference and dependencies (`dokulo-task-dependencies.csv` is the edge list). These rows are the spec of every planned task.
 - `tools/team.py`: the team board (below). `developer-agents/`: the team's roles.
 
-## Planned architecture (the Technology & Package Plan; built by DK-0001+)
+## Architecture (the Technology & Package Plan; packages in `packages/`)
 
 Five layer packages in one monorepo; dependencies point one way only: `app_pdf → doc_tools → doc_core / doc_vision → ai_core`.
 
@@ -84,15 +84,21 @@ Board commands not used above: `assign`, `release`, `decision` (to the owner), `
 
 ## The basic check
 
-It is the only check a PR gets: CI is off until the owner decides on DK-0010. DK-0001 sets the monorepo's exact commands. Until it does, run these in every package you touched:
+It is the only check a PR gets: CI is off until the owner decides on DK-0010. From the repo root (one pub workspace, so one `flutter pub get` resolves every package):
 
 ```bash
-dart analyze --fatal-infos
-dart format --output=none --set-exit-if-changed .
-flutter test --timeout 60s <touched tests and their goldens>   # dart test for pure-Dart packages
+flutter pub get
+flutter analyze --fatal-infos                                    # the whole workspace
+dart format --output=none --set-exit-if-changed packages
+python tools/check_layers.py                                     # dependencies point one way only
+(cd packages/<package> && dart test)                             # each pure-Dart package you touched
+(cd packages/app_pdf && flutter test --timeout 60s <touched tests and their goldens>)
 python -m pytest tools/tests -q                                  # if tools/ changed
 python tools/licence_scan.py                                     # if a pubspec changed (after pub get)
+python tools/native_libs_check.py <built apk>                   # if a native dependency or its config changed
 ```
+
+A package that adds a Flutter plugin becomes a Flutter package: run `flutter test` there instead of `dart test`.
 
 `website/` has its own check: `npm run typecheck && npm run lint && npm run build`.
 

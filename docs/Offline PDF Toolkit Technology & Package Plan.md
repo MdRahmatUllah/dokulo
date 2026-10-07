@@ -33,7 +33,7 @@ Five layers, top to bottom; everything below the UI lives in shared packages so 
 | 1. App | `app_pdf` | Screens, tool grid, viewer, file manager, paywall, Riverpod providers | Flutter 3.47+, Dart 3.13+ |
 | 2. Tool jobs | `doc_tools` | One `ToolJob` per feature (merge, compress, redact…), progress stream, cancel, undo snapshot, workflow runner | Pure Dart, runs in worker isolates |
 | 3. Document core | `doc_core` | Open/save/render PDFs, page ops, text extraction, structure ops, image pipeline, OCR text layer writer | pdfrx / PDFium, qpdf (our FFI), Dart `pdf`, opencv\_dart |
-| 4. Vision & OCR | `doc_vision` | Scanner flows, edge detection, dewarp-light, OCR engines, layout, document-in-photo detection | VisionKit / Vision (iOS), ML Kit scanner (Android, optional), PP-OCRv5 on ONNX Runtime |
+| 4. Vision & OCR | `doc_vision` | Scanner flows, edge detection, dewarp-light, OCR engines, layout, document-in-photo detection | VisionKit / Vision (iOS), own CameraX + OpenCV scanner (Android), PP-OCRv5 on ONNX Runtime |
 | 5. On-device AI | `ai_core` (from Sogda) | Model manager, LLM arbiter, translation engines, embeddings, retrieval | llamadart (llama.cpp), Bergamot (FFI), ONNX Runtime |
 
 **Threading model:** PDFium is single-threaded, so pdfrx serialises all PDFium calls on one worker isolate. qpdf, OpenCV and ONNX jobs run on their own isolates. The UI isolate never touches native code directly.
@@ -52,7 +52,7 @@ Versions marked ✓ were checked on pub.dev or the project page on 6 Oct 2026; t
 | [llamadart](https://pub.dev/packages/llamadart/versions/0.8.12) | 0.8.12+ ✓ | MIT | Gemma via llama.cpp (GGUF) | Same runtime as Sogda; add `llamadart_llama_cpp_flutter` ^0.0.8 for iOS SwiftPM |
 | [flutter\_onnxruntime](https://pub.dev/documentation/flutter_onnxruntime/latest/) | 1.8.4 ✓ (Sep 2026) | MIT | OCR models, embeddings, Supertonic TTS | ONNX Runtime 1.23; iOS min 16, Android 16 KB pages OK |
 | [opencv\_dart](https://pub.dev/documentation/opencv_dart/latest/) | 2.2.x ✓ | Apache-2.0 | Image filters, perspective, book split, contours | Uses Native Assets hooks; exclude unused modules (videoio, highgui, dnn, contrib) |
-| [google\_mlkit\_document\_scanner](https://pub.dev/documentation/google_mlkit_document_scanner/latest/) | 0.6.0 ✓ (Aug 2026) | MIT (plugin) | Android scanner UI (optional) | ML Kit itself is free but closed-source and needs Google Play services; see Scanner section |
+| [google\_mlkit\_document\_scanner](https://pub.dev/documentation/google_mlkit_document_scanner/latest/) | 0.6.1 (checked 2026-10-07) | MIT (plugin) | **Not used** | Closed-source ML Kit with usage metrics; see [docs/compliance/ml-kit-scanner.md](compliance/ml-kit-scanner.md) |
 | [receive\_sharing\_intent](https://pub.dev/documentation/receive_sharing_intent/1.9.0/) | 1.9.0 ✓ | Apache-2.0 | Share sheet / "Open with" input | Includes iOS Share Extension support via SwiftPM |
 | flutter\_riverpod + riverpod\_generator | latest 3.x | MIT | State management | Same as Sogda |
 | drift + sqlite3\_flutter\_libs | latest 2.x | MIT | File index, recents, folders, OCR text index (FTS5) |  |
@@ -165,13 +165,13 @@ All 26 non-AI PDF tools sit on permissive engines; the real custom work is in co
 
 ## Feature mapping: scanner and app features
 
-On iOS the scanner uses Apple's built-in VisionKit and Vision (part of the OS, free, on-device). On Android we build our own scanner on CameraX + OpenCV, because Google's ML Kit scanner is closed-source and depends on Google Play services; it stays an optional fast path, not a dependency.
+On iOS the scanner uses Apple's built-in VisionKit and Vision (part of the OS, free, on-device). On Android we build our own scanner on CameraX + OpenCV, because Google's ML Kit scanner is closed-source, depends on Google Play services and sends usage metrics to Google; it is not used at all ([docs/compliance/ml-kit-scanner.md](compliance/ml-kit-scanner.md)).
 
 ### Scanner
 
 | Feature | iOS | Android | Shared custom work |
 | --- | --- | --- | --- |
-| Document scan (edge detection, auto-capture, perspective fix) | VisionKit `VNDocumentCameraViewController` via a small platform channel (or `VNDetectDocumentSegmentationRequest` on our own camera view for full UI control) | Own `doc_scanner`: `camera` package (CameraX) frames → OpenCV pipeline: downscale, Canny + morphology, `findContours`, `approxPolyDP` quad, scoring; ML Kit scanner only as an optional fast path when Play services exist | Quad tracker with stability check (auto-capture when quad is steady for \~0.5 s), manual corner editing, `warpPerspective` |
+| Document scan (edge detection, auto-capture, perspective fix) | VisionKit `VNDocumentCameraViewController` via a small platform channel (or `VNDetectDocumentSegmentationRequest` on our own camera view for full UI control) | Own `doc_scanner`: `camera` package (CameraX) frames → OpenCV pipeline: downscale, Canny + morphology, `findContours`, `approxPolyDP` quad, scoring | Quad tracker with stability check (auto-capture when quad is steady for \~0.5 s), manual corner editing, `warpPerspective` |
 | Multi-page batch scan | VisionKit multi-page session | Continuous capture mode in `doc_scanner` | Page tray UI, reorder/retake |
 | Filters & adjust | Core Image or OpenCV (same code on both) | OpenCV | B/W via adaptive threshold, greyscale, colour boost (CLAHE), **shadow removal** (background estimate by dilate + median blur, then divide), brightness/contrast |
 | ID card mode | Same capture flow | Same capture flow | Crop to ID-1 ratio (85.6 × 54 mm), place front and back at true size on one A4 page |
@@ -237,7 +237,7 @@ Fourteen components have no permissive, complete option, so we build them. Toget
 | `pdf_compress` | No permissive mobile compressor with size targets | Image inventory per page, downsample to 72/150/200 dpi, JPEG re-encode, replace image objects, qpdf structure pass, "under X MB" search (binary search over quality 40–85 and DPI), raster fallback for scans | PDFium, OpenCV, qpdf\_ffi | 1.5 wk |
 | `pdf_redact` | Commercial SDKs only; must be verifiably true redaction | Detectors (regex + checksums + optional Gemma), review UI with editable boxes, apply: rasterise affected pages at 200–300 dpi, burn boxes, rebuild page as image + invisible OCR text minus redacted words, strip metadata/XMP/annotations/attachments/JavaScript, full rewrite; automated check that no redacted string can be extracted | PDFium, OCR, OpenCV, Dart `pdf`, qpdf\_ffi | 2 wk |
 | `ocr_text_layer` | Needed by OCR PDF, redaction and PDF/A | Word boxes → PDF coordinates (rotation, CropBox), invisible text (render mode 3) with horizontal scaling to fit each word, overlay onto original | Dart `pdf`, qpdf\_ffi | 1 wk |
-| `pdfa_writer` | Ghostscript/veraPDF are AGPL/GPL | PDF/A-2b: remove encryption, JavaScript and embedded files; check every font is embedded (PDFium `FPDFFont_GetIsEmbedded`) and rasterise pages with non-embedded fonts; add sRGB OutputIntent (ICC profile with redistribution rights); write XMP (`pdfaid:part=2`, `conformance=B`) and document ID; validate with veraPDF in CI only | qpdf\_ffi, PDFium, Dart `pdf` | 2 wk |
+| `pdfa_writer` | Ghostscript/veraPDF are AGPL/GPL | PDF/A-2b: remove encryption, JavaScript and embedded files; check every font is embedded (PDFium `FPDFFont_GetIsEmbedded`) and rasterise pages with non-embedded fonts; add sRGB OutputIntent (the ICC's `sRGB2014.icc`, see docs/compliance/srgb-icc-profile.md); write XMP (`pdfaid:part=2`, `conformance=B`) and document ID; validate with veraPDF in CI only | qpdf\_ffi, PDFium, Dart `pdf` | 2 wk |
 | `pdf_structure` | No permissive mobile layout extractor | Reading order (column detection by x-clustering), headings by font size/weight, lists, simple tables (aligned columns), header/footer removal; optional PP-DocLayout regions | PDFium text + font info, OCR | 1.5 wk |
 | `doc_scanner` (Android) | ML Kit scanner is closed-source and needs Play services | Camera stream, quad detection, stability-based auto-capture, corner editor, perspective warp, filters incl. shadow removal, ID and book modes | `camera`, opencv\_dart | 2 wk |
 | `vision_ocr` (iOS channel) | Thin bridge to Apple Vision | Text recognition with word boxes, language hints (de, en), confidence | Apple Vision | 2 days |
@@ -287,8 +287,8 @@ Correctness of output files matters more than UI tests here: every tool gets a g
 
 - [x] Re-confirm the Gemma 4 E2B licence on the current model card: Apache-2.0 on 2026-10-07 ([docs/compliance/ai-models.md](compliance/ai-models.md)); check again at release (DK-0695)
 - [x] Confirm the licence of the Bergamot/Firefox translation models and available language pairs (DE↔EN, others): MPL-2.0, de↔en released, other pairs through English ([docs/compliance/ai-models.md](compliance/ai-models.md))
-- [ ] Decide whether the ML Kit scanner fast path is enabled at all on Android, after reading ML Kit's terms on data collection
-- [ ] Pick a redistributable sRGB ICC profile for PDF/A output
+- [x] Decide whether the ML Kit scanner fast path is enabled at all on Android, after reading ML Kit's terms on data collection: not enabled ([docs/compliance/ml-kit-scanner.md](compliance/ml-kit-scanner.md))
+- [x] Pick a redistributable sRGB ICC profile for PDF/A output: the ICC's `sRGB2014.icc` ([docs/compliance/srgb-icc-profile.md](compliance/srgb-icc-profile.md))
 - [ ] Decide: extend the plan to \~24–26 weeks, or move PDF/A, Smart Split, Web to PDF and the Files extension post-launch
 - [x] Check whether Sogda can keep Hy-MT given the EU/UK territory exclusion: Sogda ships Hy-MT2, which is Apache-2.0; the exclusion is HY-MT1.5's only ([docs/compliance/ai-models.md](compliance/ai-models.md))
 - [ ] Pin exact versions for the packages listed as "latest" when the repo is created

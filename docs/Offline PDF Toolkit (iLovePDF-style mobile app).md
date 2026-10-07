@@ -141,8 +141,8 @@ Flutter app on top of a shared `doc-core` package; every engine is permissively 
 | PDF engine | PDFium via FFI (or pdfrx) | BSD-3 / Apache-2.0 | Render, merge/split/rotate (import pages), text extraction, forms, save |
 | PDF structure | qpdf via FFI | Apache-2.0 | Encrypt/decrypt, repair, linearize, structural compression |
 | PDF creation | Dart `pdf` package | Apache-2.0 | New PDFs, page numbers, watermarks, invisible OCR text layer |
-| Scanning | ML Kit Document Scanner (Android), VisionKit (iOS) | Platform | Edge detection, auto-capture, cleanup |
-| OCR | ML Kit Text Recognition / Apple Vision | Platform | Searchable PDFs, redaction detection, Ask your PDF |
+| Scanning | Own CameraX + OpenCV scanner (Android), VisionKit (iOS) | Apache-2.0 (OpenCV) / Platform (VisionKit) | Edge detection, auto-capture, cleanup |
+| OCR | PP-OCRv5 on ONNX Runtime / Apple Vision | Apache-2.0 / MIT / Platform (Vision) | Searchable PDFs, redaction detection, Ask your PDF |
 | Image processing | Dart `image`; OpenCV via FFI only if needed | MIT / Apache-2.0 | Filters, compression, book mode split |
 | Translation | Sogda's on-device translation models | Per model | Translate PDF |
 | LLM | Gemma 4 E2B (optional download, reuse Sogda's model manager) | Gemma terms | Summarize, Ask, Smart Split |

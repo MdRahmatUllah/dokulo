@@ -1,0 +1,17 @@
+name: doc_tools
+description: "Tool jobs: one ToolJob per feature, progress stream, cancel, undo snapshot, workflow runner. Pure Dart, runs in worker isolates."
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  doc_core:
+    path: ../doc_core
+  doc_vision:
+    path: ../doc_vision
+
+dev_dependencies:
+  lints: ^6.0.0
+  test: ^1.26.0
