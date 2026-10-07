@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 23:07
+last-seen: 2026-10-07 23:08
 last-read: 154
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0398 Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) — claimed 2026-10-07 23:08.
 
 ## Next
 
