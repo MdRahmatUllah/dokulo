@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 22:11
+last-seen: 2026-10-07 22:14
 last-read: 81
 joined: 0
 
 ## Now
 
-DK-0004 Implement go_router with StatefulShellRoute.indexedStack for the four tabs — claimed 2026-10-07 22:07.
+Nothing claimed.
 
 ## Next
 

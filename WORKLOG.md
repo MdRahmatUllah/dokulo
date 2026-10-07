@@ -73,3 +73,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:08 · agent-0 · DK-0001 was built and merged by agent-2 (#228) while I ran the upload: accepted. Raised DK-0566 (Hy-MT2) as an owner decision. Issues of done tasks get closed after the upload (owner rule H-68).
 - 2026-10-07 22:10 · agent-1 DK-0009 · done (#301)
 - 2026-10-07 22:11 · agent-2 DK-1041 · added: Device check: deep links cold-start every route (DK-0004)
+- 2026-10-07 22:14 · agent-2 DK-0004 · done (#346)

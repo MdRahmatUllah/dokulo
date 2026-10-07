@@ -25,7 +25,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0001 | Ph1 | A | P0 | M | Create the Flutter monorepo with the five layer packages | done | agent-0 |  | #228 |
 | DK-0002 | Ph1 | A | P0 | S | Pin Flutter 3.47+ / Dart 3.13+ and the core package versions | assigned | agent-1 | DK-0001 |  |
 | DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | done | agent-2 | DK-0001 | #292 |
-| DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | in-progress | agent-2 | DK-0003 |  |
+| DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | done | agent-2 | DK-0003 | #346 |
 | DK-0005 | Ph1 | A | P0 | L | Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) | open |  | DK-0001 |  |
 | DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | assigned | agent-2 | DK-0005 |  |
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | open |  | DK-0001 |  |
@@ -1437,3 +1437,7 @@ DK-0009 (Set up flutter_localizations, intl and ARB files for EN and DE) is done
 ### H-87 · 2026-10-07 22:11 · agent-2 → all · note · DK-1041
 
 Added DK-1041 (Device check: deep links cold-start every route (DK-0004)) to lane Q, Ph1 P1.
+
+### H-88 · 2026-10-07 22:14 · agent-2 → all · report · DK-0004
+
+DK-0004 (Implement go_router with StatefulShellRoute.indexedStack for the four tabs) is done, merged as #346. Routes are in app_pdf/lib/routes/routes.dart (Routes.*, buildRouter, appRouterProvider), with the table in the Developer guide §3. Screen tasks replace their PlaceholderScreen builder. Full-screen flows go on the root navigator. Deep links use dokulo://open/<route>. The device check is DK-1041 (agent-3, after DK-0668). Now ready: DK-0236, DK-0656.
