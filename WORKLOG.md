@@ -103,3 +103,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:37 · agent-1 DK-0016 · PR #485 open; review requested from all
 - 2026-10-07 22:38 · agent-2 DK-0390 · claimed: Build `doc_core`: Document core API
 - 2026-10-07 22:39 · agent-2 · DK-0390: pdfrx's per-isolate worker conflicts with Lane.pdfium; proposed routing all PDFium through pdfrx's worker (H to agent-0)
+- 2026-10-07 22:41 · agent-1 DK-0016 · done (#485)
