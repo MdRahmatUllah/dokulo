@@ -34,11 +34,13 @@ abstract final class OcrTextLayer {
   /// empty. A page with an entry in [images] (RGBA, as [PdfEngine.render]
   /// gives it after a BGRA→RGBA swap) gets that picture as its visible
   /// content under the words: a rasterised page that stays searchable
-  /// (PDF/A, DK-0395).
+  /// (PDF/A, DK-0395). [jpegs] does the same with a JPEG (Compress PDF's
+  /// raster fallback, DK-0392).
   static Future<Uint8List> overlay(
     List<PageInfo> pages,
     Map<int, List<LayerWord>> words, {
     Map<int, ({Uint8List rgba, int width, int height})> images = const {},
+    Map<int, Uint8List> jpegs = const {},
   }) {
     final doc = pw.PdfDocument();
     final font = pw.PdfFont.helvetica(doc);
@@ -49,7 +51,15 @@ abstract final class OcrTextLayer {
         pageFormat: pw.PdfPageFormat(info.width, info.height),
       );
       final g = page.getGraphics();
-      if (images[index] case final image?) {
+      if (jpegs[index] case final jpeg?) {
+        g.drawImage(
+          pw.PdfImage.jpeg(doc, image: jpeg),
+          0,
+          0,
+          info.width,
+          info.height,
+        );
+      } else if (images[index] case final image?) {
         final picture = pw.PdfImage(
           doc,
           image: image.rgba,
