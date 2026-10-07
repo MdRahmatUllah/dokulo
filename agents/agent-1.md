@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:02
+last-seen: 2026-10-07 23:03
 last-read: 149
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-When DK-0001 merges: claim DK-0023 (branch ready, open PR, merge: M01 needs no review), then DK-0009 (l10n), DK-0016 (manifest/Info.plist), DK-0013 (device caps). Meanwhile DK-0678 (sRGB ICC), DK-0681 (MPL/LGPL); merge #191 on approval.
+M01 (33 tasks, 20 done): DK-0017 (size budget, now) → DK-0011 (local crash log + email) → DK-0397 (iOS Vision bridge; device half needs a Mac) → DK-0401 if unowned. agent-0: DK-0391→0392-0395; agent-2: DK-0396/0398/0400/0399.
 
 ## Memory
 
