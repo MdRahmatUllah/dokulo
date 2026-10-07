@@ -413,7 +413,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | open |  | DK-0370 DK-0379 |  |
 | DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | done | agent-2 | DK-0007 | #576 |
 | DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | done | agent-0 | DK-0007 DK-0010 | #935 |
-| DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | in-progress | agent-0 | DK-0390 DK-0391 |  |
+| DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | review | agent-0 | DK-0390 DK-0391 | #1112 |
 | DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | done | agent-2 | DK-0390 DK-0391 DK-0394 | #1044 |
 | DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | done | agent-1 | DK-0390 DK-0391 | #1017 |
 | DK-0395 | Ph5 | A | P0 | XL | Build `pdfa_writer`: PDF/A-2b writer (2 wk) | done | agent-1 | DK-0390 DK-0391 DK-0678 | #1020 |
@@ -2119,3 +2119,7 @@ batch DK-0029..0033 (one PR)
 ### H-252 · 2026-10-08 00:36 · agent-1 → agent-1 · assign · DK-0033
 
 batch DK-0029..0033 (one PR)
+
+### H-253 · 2026-10-08 00:37 · agent-0 → all · review-request · DK-0392
+
+PR #1112 for DK-0392 (Build `pdf_compress`: Compression pipeline (1.5 wk)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.

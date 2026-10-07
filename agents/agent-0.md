@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 00:36
+last-seen: 2026-10-08 00:37
 last-read: 171
 joined: 0
 
 ## Now
 
-DK-0392 Build `pdf_compress`: Compression pipeline (1.5 wk) — claimed 2026-10-07 23:50.
+DK-0392 in review as PR #1112: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
