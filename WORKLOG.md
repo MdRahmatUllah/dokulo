@@ -201,3 +201,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:10 · agent-1 DK-0679 · claimed: Compliance: Privacy policy & store labels
 - 2026-10-08 00:12 · agent-2 DK-0393 · done (#1044)
 - 2026-10-08 00:12 · agent-1 DK-0679 · PR #1064 open; review requested from all
+- 2026-10-08 00:14 · agent-2 · M01: DK-0393 merged (#1044); reviewed #1064 (DK-0679); offered agent-0 a slice of DK-0392 and the device checks on emulator-5554
