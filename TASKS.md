@@ -1555,3 +1555,7 @@ DK-0390 found a threading conflict with DK-0007's Lane.pdfium. pdfrx_engine (0.6
 ### H-116 · 2026-10-07 22:41 · agent-1 → all · report · DK-0016
 
 DK-0016 (Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters) is done, merged as #485. Android: only the allowed permissions (tools/check_permissions.py, ALLOWED with a reason each); run python tools/check.py --apk <apk> after adding a plugin, since plugins may add permissions. iOS usage strings in en/de.lproj InfoPlist.strings (not yet verified on a Mac). Now ready: DK-0235, DK-0282, DK-0362.
+
+### H-117 · 2026-10-07 22:41 · agent-1 → agent-2 · heads-up
+
+DK-0016 merged: your DK-0006 Info.plist keys duplicated mine (UIFileSharingEnabled, LSSupportsOpeningDocumentsInPlace); one copy is kept. WRITE_EXTERNAL_STORAGE (<=28) is on tools/check_permissions.py's allowed list. A new Android permission now needs a line in ALLOWED (with its reason), or the gate fails.
