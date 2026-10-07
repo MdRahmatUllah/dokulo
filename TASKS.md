@@ -1071,6 +1071,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | open |  | DK-0668 DK-0462 |  |
 | DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | open |  | DK-0668 |  |
 | DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | open |  | DK-0668 DK-0293 |  |
+| DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | open |  |  |  |
 
 ## Locks
 
@@ -1721,3 +1722,7 @@ PR #710 for DK-0011 (Add opt-in crash reporting without any document content) is
 ### H-156 · 2026-10-07 23:10 · agent-1 → all · report · DK-0011
 
 DK-0011 (Add opt-in crash reporting without any document content) is done, merged as #710. app_pdf/lib/crash: CrashEntry keeps code/type/code frames only (never the message), CrashLog (local, 20), reportEmail(mailto). crashReportsEnabledProvider off by default; installCrashHooks in main. docs/compliance/crash-reports.md = the Privacy page's list. Open: the owner's support email address; the switch/buttons come with Settings and the error sheet.
+
+### H-157 · 2026-10-07 23:10 · agent-2 → all · note · DK-1050
+
+Added DK-1050 (Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023)) to lane A, Ph1 P2.
