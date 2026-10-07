@@ -29,6 +29,31 @@ class _Sample extends StatelessWidget {
       'textDisabled': c.textDisabled,
       'iconPrimary': c.iconPrimary,
       'iconSecondary': c.iconSecondary,
+      'pro': c.pro,
+      'proContainer': c.proContainer,
+      'success': c.success,
+      'successContainer': c.successContainer,
+      'warning': c.warning,
+      'warningContainer': c.warningContainer,
+      'danger': c.danger,
+      'dangerContainer': c.dangerContainer,
+      'scrim': c.scrim,
+      'cameraChrome': c.cameraChrome,
+      'onCamera': c.onCamera,
+      'quadFill': c.quadFill,
+      'quadStroke': c.quadStroke,
+      'pageWhite': c.pageWhite,
+      'redactBox': c.redactBox,
+      'markup.yellow': t.markup.yellow,
+      'markup.green': t.markup.green,
+      'markup.blue': t.markup.blue,
+      'markup.pink': t.markup.pink,
+      'markup.red': t.markup.red,
+      'markup.black': t.markup.black,
+      'markup.ink': t.markup.ink,
+      'compare.added': t.compare.added.background,
+      'compare.removed': t.compare.removed.background,
+      'compare.changed': t.compare.changed.background,
     };
     return Scaffold(
       body: Padding(
@@ -170,4 +195,118 @@ void main() {
       DkTokens.dark.color.primary,
     );
   });
+
+  group('contrast (WCAG 2.x; UI spec §4.5)', () {
+    for (final tokens in [DkTokens.light, DkTokens.dark]) {
+      final c = tokens.color, k = tokens.compare;
+      final name = tokens.brightness.name;
+      // (foreground, background, minimum): 4.5:1 text, 3:1 icons and input borders.
+      final pairs = <String, (Color, Color, double)>{
+        'onPrimary/primary': (c.onPrimary, c.primary, 4.5),
+        'onPrimaryContainer/primaryContainer': (
+          c.onPrimaryContainer,
+          c.primaryContainer,
+          4.5,
+        ),
+        'primary/surface (links)': (c.primary, c.surface, 4.5),
+        for (final (bgName, bg) in [
+          ('background', c.background),
+          ('surface', c.surface),
+          ('surfaceRaised', c.surfaceRaised),
+          ('surfaceSunken', c.surfaceSunken),
+        ]) ...{
+          'textPrimary/$bgName': (c.textPrimary, bg, 4.5),
+          'textSecondary/$bgName': (c.textSecondary, bg, 4.5),
+          'iconPrimary/$bgName': (c.iconPrimary, bg, 3.0),
+          'iconSecondary/$bgName': (c.iconSecondary, bg, 3.0),
+        },
+        'outlineStrong/surface (input borders)': (
+          c.outlineStrong,
+          c.surface,
+          3.0,
+        ),
+        'outlineStrong/surfaceSunken': (c.outlineStrong, c.surfaceSunken, 3.0),
+        'pro/proContainer': (c.pro, c.proContainer, 4.5),
+        'success/successContainer': (c.success, c.successContainer, 4.5),
+        'warning/warningContainer': (c.warning, c.warningContainer, 4.5),
+        'danger/dangerContainer': (c.danger, c.dangerContainer, 4.5),
+        'danger/surface (error text)': (c.danger, c.surface, 4.5),
+        'success/surface (size saved)': (c.success, c.surface, 4.5),
+        'onCamera/cameraChrome over a white frame': (
+          c.onCamera,
+          Color.alphaBlend(c.cameraChrome, const Color(0xFFFFFFFF)),
+          4.5,
+        ),
+        'compare.added': (k.added.text, k.added.background, 4.5),
+        'compare.removed': (k.removed.text, k.removed.background, 4.5),
+        'compare.changed': (k.changed.text, k.changed.background, 4.5),
+      };
+      for (final MapEntry(key: pair, value: (fg, bg, minimum))
+          in pairs.entries) {
+        test('$name $pair', () {
+          expect(contrast(fg, bg), greaterThanOrEqualTo(minimum));
+        });
+      }
+    }
+  });
+
+  test(
+    'status, camera, document, markup and compare values (UI spec §4.1–§4.3)',
+    () {
+      final l = DkTokens.light, d = DkTokens.dark;
+      expect(
+        (l.color.pro, d.color.pro),
+        (const Color(0xFF8A5A0B), const Color(0xFFF2C266)),
+      );
+      expect(
+        (l.color.danger, d.color.dangerContainer),
+        (const Color(0xFFC8281E), const Color(0xFF3A1614)),
+      );
+      expect(
+        l.color.scrim,
+        const Color(0xFF14171C).withValues(alpha: 0x66 / 255),
+      ); // 40 %
+      expect(
+        d.color.scrim,
+        const Color(0xFF000000).withValues(alpha: 0x8C / 255),
+      ); // 55 %
+      expect(
+        (l.color.cameraChrome, d.color.cameraChrome),
+        (const Color(0x99000000), const Color(0x99000000)),
+      );
+      expect(
+        (l.color.quadFill, d.color.quadStroke),
+        (const Color(0x332251E6), const Color(0xFF8AA8FF)),
+      );
+      for (final t in [l, d]) {
+        expect(
+          (t.color.pageWhite, t.color.redactBox),
+          (const Color(0xFFFFFFFF), const Color(0xFF000000)),
+        );
+      }
+      expect(
+        l.markup.ink,
+        d.markup.ink,
+      ); // stored in the PDF: theme-independent
+      expect(
+        (l.markup.yellow, l.markup.red, l.markup.ink),
+        (
+          const Color(0xFFFFE066),
+          const Color(0xFFE5484D),
+          const Color(0xFF1A2B6D),
+        ),
+      );
+      expect(d.compare.changed, (
+        background: const Color(0xFF3A2410),
+        text: const Color(0xFFFDB022),
+      ));
+    },
+  );
+}
+
+/// WCAG 2.x contrast ratio.
+double contrast(Color a, Color b) {
+  final (la, lb) = (a.computeLuminance(), b.computeLuminance());
+  final (hi, lo) = la > lb ? (la, lb) : (lb, la);
+  return (hi + 0.05) / (lo + 0.05);
 }
