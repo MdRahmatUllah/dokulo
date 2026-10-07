@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0396 Build `pdf_structure`: Structure extraction (1.5 wk) — claimed 2026-10-07 22:57.
 
 ## Next
 
