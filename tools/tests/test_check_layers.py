@@ -31,5 +31,21 @@ def test_check(tmp_path: Path) -> None:
     ]
 
 
+def test_the_ui_never_imports_native_code(tmp_path: Path) -> None:
+    pubspec(tmp_path, "app_pdf", [])
+    lib = tmp_path / "packages" / "app_pdf" / "lib"
+    (lib / "screens").mkdir(parents=True)
+    (lib / "screens" / "viewer.dart").write_text(
+        "import 'package:pdfrx/pdfrx.dart';\nimport 'package:flutter/material.dart';\n", encoding="utf-8")
+    (lib / "screens" / "scan.dart").write_text("import 'package:opencv_dart/opencv.dart' as cv;\n", encoding="utf-8")
+    (lib / "bridge.dart").write_text('import "dart:ffi";\n', encoding="utf-8")
+
+    assert check_layers.check(tmp_path) == [
+        "packages/app_pdf/lib/bridge.dart: imports dart:ffi; the UI never touches native code (use a job or service)",
+        "packages/app_pdf/lib/screens/scan.dart: imports package:opencv_dart/; "
+        "the UI never touches native code (use a job or service)",
+    ]
+
+
 def test_the_repo_is_clean() -> None:
     assert check_layers.check(Path(__file__).resolve().parents[2]) == []
