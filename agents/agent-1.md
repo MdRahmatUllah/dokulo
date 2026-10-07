@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0017 App size budget: keep the base app small; everything optional is a download — claimed 2026-10-07 23:03.
 
 ## Next
 
