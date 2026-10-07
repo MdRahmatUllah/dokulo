@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0021 Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs — claimed 2026-10-07 22:52.
+Nothing claimed.
 
 ## Next
 
