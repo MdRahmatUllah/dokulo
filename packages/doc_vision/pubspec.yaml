@@ -9,7 +9,17 @@ environment:
 dependencies:
   ai_core:
     path: ../ai_core
+  flutter:
+    sdk: flutter
+  flutter_onnxruntime: 1.8.4
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  image: ^4.10.1
   lints: ^6.0.0
-  test: ^1.26.0
+
+flutter:
+  # PP-OCRv5 (DK-0398), fetched and hash-checked by tools/fetch_ocr_models.py.
+  assets:
+    - assets/ocr/
