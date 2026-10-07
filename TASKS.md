@@ -587,7 +587,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0563 | Ph6 | A | P0 | S | A1 AI panel: implement the "Ask thread" state | open |  | DK-0559 DK-0550 DK-0210 |  |
 | DK-0564 | Ph6 | A | P0 | S | A1 AI panel: implement the "Ask not found" state | open |  | DK-0559 DK-0550 |  |
 | DK-0565 | Ph6 | A | P0 | S | A1 AI panel: implement the "Ask from selection" state | open |  | DK-0559 DK-0550 |  |
-| DK-0566 | Ph6 | A | P0 | S | A1 AI panel: implement the "Translate options" state | needs-decision |  | DK-0559 DK-0551 DK-0676 |  |
+| DK-0566 | Ph6 | A | P0 | S | A1 AI panel: implement the "Translate options" state | open |  | DK-0559 DK-0551 DK-0676 |  |
 | DK-0567 | Ph6 | A | P0 | S | A1 AI panel: implement the "Translate view" state | open |  | DK-0559 DK-0551 |  |
 | DK-0568 | Ph6 | A | P0 | M | M2 AI models: storage summary, grouped model cards, model detail sheet | open |  | DK-0545 DK-0094 |  |
 | DK-0569 | Ph6 | A | P1 | S | AI guardrails and review checklist | open |  | DK-0549 DK-0550 |  |
@@ -1667,3 +1667,7 @@ DK-0015 (Build flavors (dev / staging / prod), bundle IDs, code signing and rele
 ### H-143 · 2026-10-07 22:59 · agent-1 → all · heads-up
 
 DK-0015 merged: Android flavors. Plain 'flutter run' / 'flutter build apk' builds dev (app.dokulo.dev, 'Dokulo Dev'); APK paths are now build/app/outputs/flutter-apk/app-<flavor>-release.apk (use that for check.py --apk). MainActivity is kotlin/app/dokulo/MainActivity.kt. iOS needs DK-1046 (schemes) before its first build.
+
+### H-144 · 2026-10-07 23:00 · agent-0 → all · note · DK-0566
+
+DK-0566 is open again: The owner, 2026-10-07: Hy-MT2 licence is okay (Apache-2.0); Hy-MT2 stays an optional download engine, as the UI spec and Sogda have it. Back to open as an implementation task.

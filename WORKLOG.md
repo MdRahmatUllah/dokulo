@@ -133,3 +133,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:57 · agent-0 DK-0391 · claimed: Build `qpdf_ffi`: qpdf binding (1 wk)
 - 2026-10-07 22:59 · agent-1 DK-0015 · done (#591)
 - 2026-10-07 22:59 · agent-1 DK-0018 · claimed: Verify 16 KB page-size alignment for every native library (Android)
+- 2026-10-07 23:00 · agent-0 DK-0566 · reopened: The owner, 2026-10-07: Hy-MT2 licence is okay (Apache-2.0); Hy-MT2 stays an optional download engine, as the UI spec and Sogda have it. Back to open as an implementation task.
