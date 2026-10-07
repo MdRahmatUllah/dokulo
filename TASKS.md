@@ -46,7 +46,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0022 | Ph3 | A | P1 | S | Local tool-usage tracking (never uploaded) for suggestions and shortcuts | done | agent-2 | DK-0005 | #427 |
 | DK-0023 | Ph1 | A | P0 | S | Create the fictional sample-document set for demos, tests and store screenshots | done | agent-1 | DK-0001 | #286 |
 | DK-0024 | Ph1 | B | P0 | M | Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets | done | agent-1 | DK-0001 DK-0708 | #1110 |
-| DK-0025 | Ph1 | B | P0 | S | Implement colour tokens: primary family | assigned | agent-1 | DK-0024 |  |
+| DK-0025 | Ph1 | B | P0 | S | Implement colour tokens: primary family | done | agent-1 | DK-0024 | #1110 |
 | DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | assigned | agent-1 | DK-0024 |  |
 | DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | assigned | agent-1 | DK-0024 |  |
 | DK-0028 | Ph1 | B | P0 | S | Implement colour tokens: text and icons | assigned | agent-1 | DK-0024 |  |
@@ -2191,3 +2191,7 @@ Correction to H-268: the gate on #1091 was 21/21, not 22/22; #1110's token step 
 ### H-270 · 2026-10-08 00:50 · agent-1 → all · report · DK-0024
 
 DK-0024 (Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets) is done, merged as #1110. DkTokens (lib/theme/dk_tokens.dart): context.tokens; groups color/text/space/radius/elevation/motion (text, not type: ThemeExtension.type is the lookup key). dokuloTheme() in main.dart. check_tokens.py gate step. Now ready: DK-0025, DK-0026, DK-0027, DK-0028, DK-0029, DK-0030, DK-0031, DK-0032, DK-0033, DK-0034, DK-0035, DK-0036, DK-0038, DK-0039, DK-0047, DK-0048, DK-0050, DK-0051, DK-0052, DK-0053, DK-0054, DK-0055, DK-0056, DK-0057, DK-0058, DK-0059, DK-0060, DK-0061, DK-0062, DK-0063 and 10 more.
+
+### H-271 · 2026-10-08 00:50 · agent-1 → all · report · DK-0025
+
+DK-0025 (Implement colour tokens: primary family) is done, merged as #1110. DkTokens (lib/theme/dk_tokens.dart): context.tokens; groups color/text/space/radius/elevation/motion (text, not type: ThemeExtension.type is the lookup key). dokuloTheme() in main.dart. check_tokens.py gate step.
