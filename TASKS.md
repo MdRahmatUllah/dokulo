@@ -53,7 +53,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | done | agent-1 | DK-0024 | #1116 |
 | DK-0030 | Ph1 | B | P0 | S | Implement colour tokens: overlay and camera colours | done | agent-1 | DK-0024 | #1116 |
 | DK-0031 | Ph1 | B | P0 | S | Implement colour tokens: document colours | done | agent-1 | DK-0024 | #1116 |
-| DK-0032 | Ph1 | B | P0 | S | Implement colour tokens: markup colours | assigned | agent-1 | DK-0024 |  |
+| DK-0032 | Ph1 | B | P0 | S | Implement colour tokens: markup colours | done | agent-1 | DK-0024 | #1116 |
 | DK-0033 | Ph1 | B | P0 | S | Implement colour tokens: compare colours | assigned | agent-1 | DK-0024 |  |
 | DK-0034 | Ph1 | B | P0 | S | Implement colour tokens: state overlays | assigned | agent-1 | DK-0024 |  |
 | DK-0035 | Ph1 | Q | P0 | S | Run and document the contrast audit for every token pair (light, dark, camera chrome) | assigned | agent-1 | DK-0024 |  |
@@ -2307,3 +2307,7 @@ DK-0030 (Implement colour tokens: overlay and camera colours) is done, merged as
 ### H-299 · 2026-10-08 01:04 · agent-1 → all · report · DK-0031
 
 DK-0031 (Implement colour tokens: document colours) is done, merged as #1116. Colour families on DkTokens; light success #117A4B and outlineStrong #828C9B/#666E7B for WCAG; the contrast test guards new pairs.
+
+### H-300 · 2026-10-08 01:04 · agent-1 → all · report · DK-0032
+
+DK-0032 (Implement colour tokens: markup colours) is done, merged as #1116. Colour families on DkTokens; light success #117A4B and outlineStrong #828C9B/#666E7B for WCAG; the contrast test guards new pairs.
