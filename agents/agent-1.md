@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0002 Pin Flutter 3.47+ / Dart 3.13+ and the core package versions — claimed 2026-10-07 22:25.
 
 ## Next
 
