@@ -37,6 +37,8 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `pdfrx` | MIT | Yes | Viewer, render, text, page assembly, save (bundles PDFium via `pdfium_flutter`, `pdfrx_engine`) | Notice |
 | `pdfium_flutter` | MIT | Yes | PDFium binaries for pdfrx | Notice; PDFium's own notice (native table) |
 | `pdfrx_engine` | MIT | Yes | pdfrx's engine layer | Notice |
+| `pdfium_dart` | MIT | Yes | PDFium FFI bindings (pdfrx's, and doc_core's raw calls) | Notice |
+| `ffi` | BSD-3 | Yes | Native memory for FFI calls | Notice |
 | `pdf` | Apache-2.0 | Yes | Create PDFs, overlays, OCR text layer (`pdf_crypto` not used) | Notice |
 | `printing` | Apache-2.0 | Yes | HTML → PDF (`Printing.convertHtml`) | Notice |
 | `llamadart` | MIT | Yes | Gemma via llama.cpp (GGUF) | Notice; llama.cpp notice (native table) |

@@ -3,6 +3,8 @@ library;
 
 export 'src/db/database.dart';
 export 'src/files/file_store.dart';
+export 'src/pdf/pdf_engine.dart';
+export 'src/pdf/thumbnail_cache.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
 const int docCoreLayer = 3;
