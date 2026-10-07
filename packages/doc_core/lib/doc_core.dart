@@ -5,6 +5,7 @@ export 'src/db/database.dart';
 export 'src/files/file_store.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/ocr_text_layer.dart';
+export 'src/pdf/pdf_compress.dart';
 export 'src/pdf/pdf_structure.dart';
 export 'src/pdf/pdfa_writer.dart';
 export 'src/pdf/srgb2014_icc.dart';
