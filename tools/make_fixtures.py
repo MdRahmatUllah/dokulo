@@ -18,6 +18,7 @@ from pypdf import PdfReader, PdfWriter
 from pypdf.generic import ArrayObject, BooleanObject, DecodedStreamObject, DictionaryObject, NameObject
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
+from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen.canvas import Canvas
 
 IBAN = "DE00 0000 0000 0000 0000 00"
@@ -231,7 +232,6 @@ def scanned_letters() -> bytes:
     for img in pages:
         jpg = io.BytesIO()
         img.save(jpg, "JPEG", quality=55)
-        from reportlab.lib.utils import ImageReader
         c.drawImage(ImageReader(io.BytesIO(jpg.getvalue())), 0, 0, W, H)
         c.showPage()
     c.save()
