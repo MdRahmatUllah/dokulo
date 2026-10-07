@@ -9,7 +9,11 @@ environment:
 dependencies:
   ai_core:
     path: ../ai_core
+  drift: ^2.35.0
+  sqlite3: ^3.6.0
 
 dev_dependencies:
+  build_runner: ^2.16.1
+  drift_dev: ^2.35.0
   lints: ^6.0.0
   test: ^1.26.0
