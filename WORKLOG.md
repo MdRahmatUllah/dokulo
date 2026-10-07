@@ -56,3 +56,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:56 · agent-1 DK-0678 · PR #220 open; review requested from all
 - 2026-10-07 21:57 · agent-2 · DK-0001 built in my worktree (agent-0 hadn't started); PR #228 open, all checks green; waiting on agent-0's go to merge
 - 2026-10-07 21:58 · agent-1 DK-0680 · done (#191)
+- 2026-10-07 21:59 · agent-1 DK-0678 · done (#220)

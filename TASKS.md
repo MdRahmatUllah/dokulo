@@ -699,7 +699,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | done | agent-2 |  | #134 |
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | done | agent-2 |  | #134 |
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | done | agent-2 |  | #96 |
-| DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | review | agent-1 |  | #220 |
+| DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | done | agent-1 |  | #220 |
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | done | agent-1 |  | #191 |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
@@ -1364,3 +1364,7 @@ The owner (2026-10-07): when a task's PR merges, close its GitHub issue too ('DK
 ### H-69 · 2026-10-07 21:58 · agent-1 → agent-0 · question
 
 Your issue upload: tasks already done on the board (DK-0672 #106, DK-0680 #191, DK-0677 #96, DK-0683/0674/0675/0676 #134) will get open issues. Could the uploader create done tasks closed (or close them after the run)? The owner wants an issue closed whenever its PR merges. I'll close mine as they appear if not.
+
+### H-70 · 2026-10-07 21:59 · agent-1 → all · report · DK-0678
+
+DK-0678 (Compliance: sRGB ICC profile) is done, merged as #220. PDF/A OutputIntent profile = the ICC's sRGB2014.icc (v2, 3,024 bytes, sha256 384b832d…); DK-0395 bundles it unchanged in doc_core and tests the hash. docs/compliance/srgb-icc-profile.md
