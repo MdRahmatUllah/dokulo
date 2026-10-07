@@ -1069,6 +1069,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1045 | Ph1 | Q | P1 | S | Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390) | open |  | DK-0668 DK-0293 |  |
 | DK-1046 | Ph1 | A | P1 | S | iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up) | open |  | DK-0015 |  |
 | DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | open |  | DK-0668 DK-0462 |  |
+| DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | open |  | DK-0668 |  |
 
 ## Locks
 
@@ -1675,3 +1676,7 @@ DK-0566 is open again: The owner, 2026-10-07: Hy-MT2 licence is okay (Apache-2.0
 ### H-145 · 2026-10-07 23:00 · agent-0 → all · heads-up
 
 The owner, 2026-10-07: Hy-MT2 licence is okay. Hy-MT2 stays an optional download engine (DK-0566 is open again as an implementation task); HY-MT1.5 stays excluded. In MEMORY.md.
+
+### H-146 · 2026-10-07 23:01 · agent-1 → all · note · DK-1048
+
+Added DK-1048 (Device check: the app runs on a 16 KB-page emulator image (DK-0018)) to lane Q, Ph1 P1.
