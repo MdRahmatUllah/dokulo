@@ -1,0 +1,115 @@
+# Dokulo — read this first
+
+Dokulo is an offline, iLovePDF-style PDF toolkit and scanner for iOS and
+Android (Flutter, EN/DE). **No app code exists yet**: `main` holds the plan,
+the design and the team tooling. The first implementation task (DK-0001)
+creates the Flutter monorepo.
+
+**The team** (six Claude Code agents, one owner): `agent-0` (the lead: the
+critical path, assignments, reviews, merges, releases), `agent-1` and
+`agent-2` (developers), `agent-3` (SQA), `agent-4` (the website, in
+`website/`) and `agent-5` (Marketing & Media). You are one of them.
+`developer-agents/README.md` is the full guide; your role is
+`developer-agents/agent-N/README.md`. The owner starts each session with
+`/agent N`, which runs the start ritual below.
+
+## What this repo is
+
+- `docs/`: the specs. Product and feature list (`Offline PDF Toolkit (iLovePDF-style mobile app).md`), the technology and package plan (stack, licence rules, versions), the frontend & UX plan (screen IDs like H1, F1, V1, S1, A1, M1, X3; the error catalogue), `Overview & foundations.md` (brand voice, fixed EN/DE tool names, tokens), and `dokulo-ui-design-spec.md` (the full UI spec; its §-numbers are referenced from tasks and the design export). **Docs win over code:** when they disagree, fix one of them the same day.
+- `dokulo-design/`: a static HTML export of every screen state. Open `dokulo-design/index.html`. `light/`, `dark/` and `deutsch/` mirror the same folder and file names (`<screen>-<state>.html`), so one path shows a screen in each theme and language. Phone frames are 393×852, `-iphone-se` is 375×667, and tablets are in `24-tablet/`.
+- `dokulo-task-list.csv`: the plan, 1,031 tasks (DK-NNNN) with description, acceptance criteria, screen IDs, components, design reference and dependencies (`dokulo-task-dependencies.csv` is the edge list). These rows are the spec of every planned task.
+- `tools/team.py`: the team board (below). `developer-agents/`: the team's roles.
+
+## Planned architecture (the Technology & Package Plan; built by DK-0001+)
+
+Five layer packages in one monorepo; dependencies point one way only: `app_pdf → doc_tools → doc_core / doc_vision → ai_core`.
+
+| Package | Role |
+|---|---|
+| `app_pdf` | Screens, tool grid, viewer, file manager, paywall, Riverpod providers |
+| `doc_tools` | One `ToolJob` per feature, progress stream, cancel, undo snapshot, workflow runner; pure Dart in worker isolates |
+| `doc_core` | Open/save/render PDFs, page ops, text extraction, image pipeline, OCR text layer (pdfrx/PDFium, our `qpdf_ffi`, Dart `pdf`, opencv_dart) |
+| `doc_vision` | Scanner flows, edge detection, OCR engines, layout, document-in-photo detection |
+| `ai_core` | Imported from Sogda: model manager, LLM arbiter (llama.cpp), translation, embeddings, retrieval |
+
+The rules every implementation task follows:
+
+- **Threading:** PDFium is single-threaded, so all PDFium calls are serialised on one worker isolate. qpdf, OpenCV and ONNX run on their own isolates. The UI isolate never calls native code.
+- **Offline:** no network traffic during any tool run. Optional models are on-demand downloads with hash checks, and the base app stays small.
+- **Licences:** permissive only in the app.
+  - GPL/AGPL (MuPDF, Ghostscript, …): never.
+  - MPL/LGPL: only unmodified and dynamically linked, and no LGPL on iOS.
+  - No commercial SDKs.
+  - Models need a written licence check.
+- **No training:** inference, prompting and RAG only.
+- **Versions:** Flutter 3.47+, Dart 3.13+, Riverpod 3 with codegen, go_router, drift with FTS5. EN and DE strings live in ARB files.
+
+## Everything lives in the project directory
+
+| What | Where |
+|---|---|
+| The code | `main`. You work only in your worktree `.worktrees/agent-N` (gitignored), never in the main checkout |
+| The board: tasks, handoffs, locks, plan, worklog | the `team` branch, checked out at `.team/` (gitignored on `main`, created on first use), changed only by `python tools/team.py` |
+| Your memory | `.team/agents/agent-N.md` (Now, Next, Memory): `team.py note`, `team.py next` |
+| The team's memory | `.team/MEMORY.md`, imported at the bottom of this file: `team.py remember` |
+| A task's spec | `python tools/team.py show DK-NNNN` (the CSV row, or `.team/tasks/DK-NNNN.md` for an added task) |
+
+Claude Code's auto-memory is off for this project (`.claude/settings.json`), so every memory goes through `team.py` into `.team/`.
+
+## Start every session like this
+
+1. `python tools/team.py agents`: who is active. Take an idle identity.
+2. Your worktree is `.worktrees/agent-N`. If it is missing, create it with `git worktree add --detach .worktrees/agent-N origin/main`. Run team.py from the worktree: `python tools/team.py join agent-N`.
+3. Read `.team/agents/agent-N.md` and `.team/PLAN.md`. The team memory is below.
+4. `python tools/team.py status`: act on your handoffs, then `team.py ack`.
+5. Reviews come first, then your open PRs, then your `Now`, then `team.py claim` the first ready task in your lane.
+
+While you work, run `team.py log -m "..."` at each real step and `team.py next -m` when your plan changes. To end a session: `team.py next`, `team.py note`, then `team.py leave -m "..."`.
+
+## One task, start to finish
+
+1. `team.py claim DK-NNNN`.
+2. In your worktree: `git fetch -q origin && git switch -c feat/DK-NNNN-<slug> origin/main`.
+3. Read the task with `team.py show DK-NNNN`, plus the docs and the artboards it names.
+4. Implement it. Add tests, and goldens for a screen or component.
+5. Run the basic check, then commit and push.
+6. Open the PR. Its first line is `**Agent-N**`, and its body names every task id.
+7. `team.py review DK-NNNN --pr P`.
+8. Another agent reviews. Fix everything in one push, until the review approves.
+9. `git merge origin/main` into the branch, and re-run the check.
+10. `gh pr merge P --squash --subject "<title> (#P)"`, then `git push origin --delete <branch>`.
+11. `team.py done DK-NNNN --pr P -m "what others should know"`, then the next task.
+
+Board commands not used above: `assign`, `release`, `decision` (to the owner), `reopen`, `add` (a bug or a follow-up, with `--blocks` to re-block a check), `msg`, `ack`, `lock`/`unlock`, `device` (the emulator lock), `log`, `next`, `note`, `remember`. Run `python tools/team.py <cmd> -h` for their options.
+
+## The basic check
+
+It is the only check a PR gets: CI is off until the owner decides on DK-0010. DK-0001 sets the monorepo's exact commands. Until it does, run these in every package you touched:
+
+```bash
+dart analyze --fatal-infos
+dart format --output=none --set-exit-if-changed .
+flutter test --timeout 60s <touched tests and their goldens>   # dart test for pure-Dart packages
+python -m pytest tools/tests -q                                  # if tools/ changed
+```
+
+`website/` has its own check: `npm run typecheck && npm run lint && npm run build`.
+
+`tools/tests/test_team.py` builds a throwaway `team` repo in `tmp_path` and calls the `cmd_*` functions directly. `cmd_done` and `cmd_status` take a `merged=` callable, so the tests never call `gh`.
+
+## Non-negotiables
+
+The owner's rules are in the memory below. In short:
+
+- commits use the owner's git identity;
+- every PR body starts with `**Agent-N**`;
+- an approving review comes before every merge;
+- ids come from tools, never from memory;
+- decisions go to the owner;
+- the repo is public;
+- never `taskkill /IM flutter_tester.exe`;
+- use only Dokulo's emulators: `5562` is shared under `team.py device`, and `5564` is agent-3's.
+
+## Team memory
+
+@.team/MEMORY.md

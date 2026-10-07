@@ -1,0 +1,10 @@
+# The board (the team branch, checked out here) and the agents' worktrees.
+.team/
+.worktrees/
+.dk-agent
+# Local tool folders: Claude Code's own worktrees and settings, the Playwright MCP's output.
+.claude/worktrees/
+.claude/settings.local.json
+.playwright-mcp/
+__pycache__/
+.pytest_cache/
