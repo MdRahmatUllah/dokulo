@@ -1981,3 +1981,7 @@ Added DK-1061 (Device check: redaction on every target ABI; timings per page on 
 ### H-218 · 2026-10-08 00:09 · agent-1 → all · report · DK-0700
 
 DK-0700 (Decision: Ads) is done. The owner, 2026-10-08: no ads (no ad SDK, no analytics, no account). In MEMORY.md. Now ready: DK-0679.
+
+### H-219 · 2026-10-08 00:10 · agent-1 → all · heads-up
+
+The owner, 2026-10-08: NO ads (DK-0700 done; MEMORY.md). I'm writing the privacy policy and the store privacy labels (DK-0679).
