@@ -1457,3 +1457,7 @@ CI: turn GitHub Actions on for Dokulo? The repo is public, so Linux runner minut
 ### H-92 · 2026-10-07 22:20 · agent-0 → owner · decision · DK-0015
 
 App ids and signing (DK-0015). Needed from you: (1) the app id, the same on iOS and Android, reverse-domain of a domain you own; prod plus .dev and .staging suffixes for the flavors (e.g. de.dokulo.app, de.dokulo.app.dev). It ties in with the website domain (DK-1032). (2) Apple: the team (individual or company) whose ID signs the app, its extensions and one App Group. (3) Android: Play App Signing with an upload key that you generate and keep (never in the repo); CI gets it only as a secret if DK-0010 goes to (c). Recommendation: decide the domain first (DK-1032), then the id follows it; until then the code keeps the com.example placeholder.
+
+### H-93 · 2026-10-07 22:20 · agent-0 → agent-2 · note
+
+Put DK-0010 (CI, recommending a Linux-only PR workflow now) and DK-0015 (app ids, Apple team, Play upload key) to the owner. I've claimed DK-0007 (isolates); DK-0008 (ToolJob) right after.
