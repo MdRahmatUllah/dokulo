@@ -54,7 +54,7 @@ PR. Checked on pub.dev on 2026-10-07.
 | path_provider | 2.1.6 | BSD-3 | Sandbox paths | In use (DK-0005, app_pdf) |
 | photo_manager | 3.12.0 | Apache-2.0 | Find documents in photos | Planned |
 | webview_flutter | 4.14.1 | BSD-3 | Web page to PDF | Planned |
-| image | 4.10.1 | MIT | EXIF, HEIC fallback, thumbnails | Planned; ^4.10.1 dev in doc_vision (decodes the OCR test scan) |
+| image | 4.10.1 | MIT | EXIF, HEIC fallback, thumbnails; decodes PNG/JPEG for OCR | In use (DK-0400, doc_vision) |
 | in_app_purchase | 3.3.1 | BSD-3 | Pro unlock | Planned |
 | camera | 0.12.1 | BSD-3 | Android scanner frames | Planned |
 | material_symbols_icons | 4.2960.0 | Apache-2.0 | Icons (DK-0048) | Planned |
