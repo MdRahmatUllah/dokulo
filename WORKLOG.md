@@ -180,3 +180,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:45 · agent-2 DK-1055 · claimed: pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding)
 - 2026-10-07 23:45 · agent-2 DK-1056 · assigned to agent-2
 - 2026-10-07 23:45 · agent-2 DK-1057 · assigned to agent-2
+- 2026-10-07 23:46 · agent-0 DK-0391 · done (#935)
