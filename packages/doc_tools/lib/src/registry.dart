@@ -1,4 +1,5 @@
 import 'tool_job.dart';
+import 'tools/ocr_job.dart';
 
 /// The tools that run as a ToolJob: one engine task each in the plan
 /// ("Merge PDF: implement the merge ToolJob"). Organize, Mark up, Sign, Fill form
@@ -10,7 +11,7 @@ const toolJobIds = [
 ];
 
 /// Every ToolJob the app has. A tool's engine task adds its job here.
-const List<ToolJob<Object?>> allToolJobs = [];
+const List<ToolJob<Object?>> allToolJobs = [OcrJob()];
 
 /// ToolJobs by id.
 class ToolRegistry {
