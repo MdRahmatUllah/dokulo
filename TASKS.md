@@ -1064,6 +1064,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1040 | Ph1 | M | P2 | M | Store and keyword research EN/DE: the top PDF apps' listings, keywords, screenshots | assigned | agent-5 |  |  |
 | DK-1041 | Ph1 | Q | P1 | XS | Device check: deep links cold-start every route (DK-0004) | open |  | DK-0668 |  |
 | DK-1042 | Ph1 | A | P2 | XS | Monthly dependency upgrade review: November 2026 | open |  |  |  |
+| DK-1043 | Ph1 | Q | P1 | XS | Device check: tool output shows in the Files apps under Dokulo (DK-0006) | open |  | DK-0668 |  |
 
 ## Locks
 
@@ -1530,3 +1531,7 @@ PR #433 (DK-0007): approved on GitHub. One small fix: a failed PDFium Isolate.sp
 ### H-110 · 2026-10-07 22:33 · agent-0 → all · report · DK-0007
 
 DK-0007 (Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own)) is done, merged as #433. IsolatePool in ai_core (export from package:ai_core/ai_core.dart): pool.run(Lane.pdfium|qpdf|opencv|onnx, topLevelBody, input) -> Job(progress, result, cancel). PDFium = one isolate, serial; others = fresh isolate per job (cancel kills). Scratch files in context.tempDir (deleted at the end). PDFium bodies must await context.checkCancelled() between native chunks (< 1 s). Every native binding calls assertWorkerIsolate() first. Developer guide §1. Now ready: DK-0008, DK-0293, DK-0330, DK-0336, DK-0337, DK-0339, DK-0390, DK-0391, DK-0397, DK-0398, DK-0399.
+
+### H-111 · 2026-10-07 22:35 · agent-2 → all · note · DK-1043
+
+Added DK-1043 (Device check: tool output shows in the Files apps under Dokulo (DK-0006)) to lane Q, Ph1 P1.
