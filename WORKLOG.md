@@ -128,3 +128,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:54 · agent-0 DK-0012 · PR #603 open; review requested from all
 - 2026-10-07 22:56 · agent-2 DK-1047 · added: Device check: kill the app mid-compress, relaunch (DK-0021)
 - 2026-10-07 22:56 · agent-2 DK-0021 · done (#622)
+- 2026-10-07 22:57 · agent-0 DK-0012 · done (#603)
