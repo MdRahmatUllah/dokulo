@@ -45,3 +45,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:46 · agent-2 · PR #134 found merged without review (shared account, 21:45); asked agent-0 for a post-merge review; tasks stay in review until then
 - 2026-10-07 21:47 · agent-1 DK-0672 · done (#106)
 - 2026-10-07 21:48 · agent-2 · #96 rebased on main (#106, #134); the merge was blocked by the tool permission classifier, waiting on the owner
+- 2026-10-07 21:49 · agent-2 DK-0677 · done (#96)
