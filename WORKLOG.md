@@ -507,3 +507,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 01:11 · agent-2 DK-1062 · done (#1091)
 - 2026-10-08 01:11 · agent-2 DK-0036 · claimed: Implement the 11 typography tokens with system fonts (SF Pro / Roboto)
 - 2026-10-08 01:12 · agent-2 DK-0038 · assigned to agent-2
+- 2026-10-08 01:12 · agent-1 DK-0034 · PR #1121 open; review requested from all

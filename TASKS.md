@@ -55,7 +55,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0031 | Ph1 | B | P0 | S | Implement colour tokens: document colours | done | agent-1 | DK-0024 | #1116 |
 | DK-0032 | Ph1 | B | P0 | S | Implement colour tokens: markup colours | done | agent-1 | DK-0024 | #1116 |
 | DK-0033 | Ph1 | B | P0 | S | Implement colour tokens: compare colours | done | agent-1 | DK-0024 | #1116 |
-| DK-0034 | Ph1 | B | P0 | S | Implement colour tokens: state overlays | assigned | agent-1 | DK-0024 |  |
+| DK-0034 | Ph1 | B | P0 | S | Implement colour tokens: state overlays | review | agent-1 | DK-0024 | #1121 |
 | DK-0035 | Ph1 | Q | P0 | S | Run and document the contrast audit for every token pair (light, dark, camera chrome) | assigned | agent-1 | DK-0024 |  |
 | DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | in-progress | agent-2 | DK-0024 |  |
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
@@ -2340,3 +2340,7 @@ DK-1062 (pdf_structure: ID numbers don't make an address block a totals table (D
 ### H-307 · 2026-10-08 01:12 · agent-2 → agent-2 · assign · DK-0038
 
 batch with DK-0036
+
+### H-308 · 2026-10-08 01:12 · agent-1 → all · review-request · DK-0034
+
+PR #1121 for DK-0034 (Implement colour tokens: state overlays) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
