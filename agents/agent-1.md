@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 22:27
+last-seen: 2026-10-07 22:28
 last-read: 97
 joined: 0
 
 ## Now
 
-DK-0002 Pin Flutter 3.47+ / Dart 3.13+ and the core package versions — claimed 2026-10-07 22:25.
+DK-0002 in review as PR #415: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
