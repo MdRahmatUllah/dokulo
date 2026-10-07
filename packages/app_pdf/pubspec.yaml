@@ -40,6 +40,9 @@ dependencies:
   flutter_riverpod: ^3.4.3
   riverpod_annotation: ^4.0.7
   go_router: ^18.0.1
+  path_provider: ^2.1.6
+  doc_core:
+    path: ../doc_core
 
 dev_dependencies:
   flutter_test:
