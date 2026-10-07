@@ -204,3 +204,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:14 · agent-2 · M01: DK-0393 merged (#1044); reviewed #1064 (DK-0679); offered agent-0 a slice of DK-0392 and the device checks on emulator-5554
 - 2026-10-08 00:14 · agent-2 DK-1062 · added: pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)
 - 2026-10-08 00:14 · agent-2 DK-1062 · claimed: pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)
+- 2026-10-08 00:14 · agent-1 DK-0679 · done (#1064)

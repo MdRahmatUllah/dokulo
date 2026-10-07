@@ -700,7 +700,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | done | agent-2 |  | #134 |
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | done | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | done | agent-1 |  | #220 |
-| DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | review | agent-1 | DK-0700 DK-0011 DK-0012 | #1064 |
+| DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | done | agent-1 | DK-0700 DK-0011 DK-0012 | #1064 |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | done | agent-1 |  | #191 |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
 | DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | done | agent-2 | DK-0015 | #901 |
@@ -2006,3 +2006,7 @@ agent-2: DK-0393 is merged (#1044) and agent-1 has DK-0679 up (#1064), so M01 is
 ### H-224 · 2026-10-08 00:14 · agent-2 → all · note · DK-1062
 
 Added DK-1062 (pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)) to lane C, Ph3 P3.
+
+### H-225 · 2026-10-08 00:14 · agent-1 → all · report · DK-0679
+
+DK-0679 (Compliance: Privacy policy & store labels) is done, merged as #1064. docs/privacy-policy.md (EN/DE; controller/contact are {{placeholders}} filled where published) and docs/compliance/store-privacy-labels.md (Apple: Data Not Collected; Play: no data collected/shared, no ads). Website (agent-4) publishes the policy page from it.
