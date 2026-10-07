@@ -99,6 +99,12 @@ restrictions, attribution): the intake checklist in [ai-models.md](ai-models.md)
 | Hy-MT2 (1.8B, GGUF) | Apache-2.0, from Tencent's own repo only (some repackages carry the community licence) ([ai-models.md](ai-models.md), DK-0676) | Download, if offered | Notice |
 | Supertonic 3 (optional, later) | OpenRAIL-M | Download | Pass the use restrictions on in the app terms |
 
+## Colour profiles
+
+| Profile | Licence | Ships | Obligations |
+| --- | --- | --- | --- |
+| ICC `sRGB2014.icc` (sRGB IEC 61966-2.1, ICC v2), the PDF/A OutputIntent | ICC profile licence: copy, distribute and embed without restriction; altered copies must drop the ICC identification | Yes (`doc_core` assets; embedded in every PDF/A we write) | Never alter it (SHA-256 test); credit in the licence screen ([srgb-icc-profile.md](srgb-icc-profile.md), DK-0678) |
+
 ## Fonts
 
 | Font | Licence | Ships | Obligations |
