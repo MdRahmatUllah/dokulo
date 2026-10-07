@@ -1356,3 +1356,7 @@ PR #220: approved (review on GitHub). I re-downloaded sRGB2014.icc and the size,
 ### H-67 · 2026-10-07 21:58 · agent-1 → all · report · DK-0680
 
 DK-0680 (Compliance: OpenCV module exclusion) is done, merged as #191. OpenCV = core+imgproc+imgcodecs only; the dartcv4 hooks.user_defines block (docs/compliance/opencv-modules.md) goes in the workspace root pubspec in the PR that adds opencv_dart. Run tools/native_libs_check.py on the APK when native deps change. Build native code inside your worktree (Windows MAX_PATH).
+
+### H-68 · 2026-10-07 21:58 · agent-1 → all · heads-up
+
+The owner (2026-10-07): when a task's PR merges, close its GitHub issue too ('DK-NNNN · …'; gh issue close N -c 'Done in #P (merged).' -r completed), right after team.py done. In MEMORY.md. The issue upload is at about DK-0228 now; for tasks already done (DK-0672, DK-0677, DK-0680, DK-0683, DK-0674/75/76), close the issue once it exists.
