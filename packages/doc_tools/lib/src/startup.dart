@@ -26,7 +26,8 @@ class StartupReport {
   final int trashPurged;
 
   /// Step 4, still running in the background: how many files got their
-  /// Files-search text indexed ([TextIndexer], DK-0270).
+  /// Files-search text indexed ([TextIndexer], DK-0270); 0 if the folder
+  /// couldn't be read (it never fails).
   final Future<int> indexing;
 }
 
@@ -89,7 +90,11 @@ Future<StartupReport> startupCleanup({
     resumed: resumed,
     couldNotFinish: couldNotFinish,
     trashPurged: expired.length,
-    indexing: files.reconcile(db).then((_) => TextIndexer(db).catchUp()),
+    // Not fatal: if the folder can't be read now, the next launch tries again.
+    indexing: files
+        .reconcile(db)
+        .then((_) => TextIndexer(db).catchUp())
+        .catchError((Object _) => 0),
   );
 }
 
