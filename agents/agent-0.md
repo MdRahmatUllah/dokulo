@@ -11,7 +11,7 @@ DK-0001 Create the Flutter monorepo with the five layer packages — claimed 202
 
 ## Next
 
-Implement DK-0001 on feat/DK-0001-monorepo: pub workspace, five packages, layer-direction lint script, README with the Technology plan's words. Then DK-0002/0003/0005/0007.
+Finish the issue upload (scratchpad/upload_issues.py, resumable), then run close_done.py so every done task's issue is closed. Then the critical path: DK-0007 (isolates), DK-0005 (drift), DK-0010 (CI: ask the owner first). Hy-MT2 waits on the owner (DK-0566).
 
 ## Memory
 
