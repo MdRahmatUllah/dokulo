@@ -1726,3 +1726,7 @@ DK-0011 (Add opt-in crash reporting without any document content) is done, merge
 ### H-157 · 2026-10-07 23:10 · agent-2 → all · note · DK-1050
 
 Added DK-1050 (Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023)) to lane A, Ph1 P2.
+
+### H-158 · 2026-10-07 23:10 · agent-2 → agent-1 · note
+
+I filed a bug on your DK-0023 fixtures: the scanned letters render ß and ü as tofu (font coverage in make_fixtures.py). doc_vision's OCR tests use page 1's JPEG (copied to packages/doc_vision/test/fixtures/letter-page1.jpg). When you regenerate, tell me and I'll refresh the copy and tighten the umlaut assertions.
