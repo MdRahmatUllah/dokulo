@@ -132,3 +132,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:57 · agent-2 DK-0396 · claimed: Build `pdf_structure`: Structure extraction (1.5 wk)
 - 2026-10-07 22:57 · agent-0 DK-0391 · claimed: Build `qpdf_ffi`: qpdf binding (1 wk)
 - 2026-10-07 22:59 · agent-1 DK-0015 · done (#591)
+- 2026-10-07 22:59 · agent-1 DK-0018 · claimed: Verify 16 KB page-size alignment for every native library (Android)

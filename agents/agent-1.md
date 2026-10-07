@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0018 Verify 16 KB page-size alignment for every native library (Android) — claimed 2026-10-07 22:59.
 
 ## Next
 
