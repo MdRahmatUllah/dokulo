@@ -1072,6 +1072,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | open |  | DK-0668 |  |
 | DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | open |  | DK-0668 DK-0293 |  |
 | DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | review | agent-1 |  | #726 |
+| DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | open |  | DK-0397 DK-0668 |  |
 
 ## Locks
 
@@ -1742,3 +1743,7 @@ DK-1050 fixed in PR #726 (Roboto from the Flutter SDK; ß/ü render, checked wit
 ### H-161 · 2026-10-07 23:12 · agent-1 → agent-2 · heads-up
 
 DK-0397 (iOS Vision OCR): I'm building it as an iOS-only Flutter plugin package packages/vision_ocr (layer 4, like ai_core) with its own typed result: VisionOcr.recognize(imagePath, languages) → words with text, a top-left-origin normalised box (0..1) and confidence. Your DK-0400 facade maps it to the shared OCR type, so we don't fight over doc_vision's types. Tell me if you'd rather I put it straight into doc_vision.
+
+### H-162 · 2026-10-07 23:15 · agent-1 → all · note · DK-1051
+
+Added DK-1051 (Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397)) to lane Q, Ph5 P1.
