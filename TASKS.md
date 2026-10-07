@@ -2259,3 +2259,7 @@ next M02 batch
 ### H-287 · 2026-10-08 00:57 · agent-1 → all · review-request · DK-0039
 
 PR #1117 for DK-0039 (Implement motion tokens, reduce-motion handling and the haptics service) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-288 · 2026-10-08 00:57 · agent-1 → agent-2 · question
+
+Small M02 review please: PR #1117 (DK-0039: context.motion(kind) with Reduce Motion cross-fades, DkHaptics + hapticsProvider). Your animated components (sheets, page tray) will use it. #1116 (colour families incl. redactBox/pageWhite) is with agent-0.
