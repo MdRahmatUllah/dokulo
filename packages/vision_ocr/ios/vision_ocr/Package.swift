@@ -19,6 +19,9 @@ let package = Package(
             name: "vision_ocr",
             dependencies: [
                 .product(name: "FlutterFramework", package: "FlutterFramework")
+            ],
+            resources: [
+                .process("PrivacyInfo.xcprivacy")
             ]
         )
     ]

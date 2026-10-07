@@ -93,6 +93,7 @@ python tools/check.py                    # add --apk <built.apk> when a native d
 It takes about 2–3 minutes (build_runner and analyze are most of it). It runs every step even after a failure, prints `PASS`/`FAIL` per step with the failing output, and exits 1 if anything failed. The steps:
 
 ```bash
+python tools/fetch_ocr_models.py                                 # the bundled PP-OCRv5 models, hash-checked (fetched once)
 flutter pub get                                                  # one pub workspace: resolves every package, regenerates l10n
 (cd packages/<p> && dart run build_runner build -d)              # each package that uses build_runner (*.g.dart are not committed)
 flutter analyze --fatal-infos                                    # the whole workspace
@@ -101,11 +102,14 @@ python tools/check_layers.py                                     # dependencies 
 python tools/licence_scan.py                                     # every pubspec.lock against the licence register
 python tools/check_l10n.py                                       # EN/DE keys match, no hard-coded strings in app_pdf
 python tools/check_permissions.py [built apk]                    # only the Android permissions DK-0016 lists
+python tools/check_privacy_manifests.py                          # the iOS privacy manifest, and one per native iOS plugin
 (cd packages/<p> && flutter test --timeout 60s | dart test)      # every package with tests: flutter test in Flutter packages
 python -m pytest tools/tests -q
 python tools/native_libs_check.py <built apk>                    # only with --apk: no FFmpeg/excluded OpenCV, 16 KB-aligned .so (Play)
 python tools/size_check.py <built apk>                           # only with --apk: per-ABI size budget, no bundled models but OCR
 ```
+
+doc_vision's OCR tests run the real models through Python onnxruntime (`pip install onnxruntime numpy`); without it they are skipped, not failed.
 
 While you iterate, run a single step by hand; the gate is for the end. When a new suite lands (golden PDFs, redaction security), add it as a step in `tools/check.py` in the same PR.
 

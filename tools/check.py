@@ -40,7 +40,9 @@ def uses(package: Path, dependency: str) -> bool:
 def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Path]]:
     """(name, command, working directory) for every step of the basic check."""
     py, flutter, dart = sys.executable, tool("flutter"), tool("dart")
-    out = [("pub get", [flutter, "pub", "get"], root)]
+    # The bundled OCR models (DK-0398): Flutter needs the asset files, the
+    # OCR tests the real models. Fetched once, hash-checked every run.
+    out = [("ocr models", [py, "tools/fetch_ocr_models.py"], root), ("pub get", [flutter, "pub", "get"], root)]
     out += [(f"build_runner {p.name}", [dart, "run", "build_runner", "build", "-d"], p)
             for p in packages(root) if uses(p, "build_runner")]
     out += [
@@ -50,6 +52,7 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         ("licences", [py, "tools/licence_scan.py"], root),
         ("l10n", [py, "tools/check_l10n.py"], root),
         ("permissions", [py, "tools/check_permissions.py"], root),
+        ("privacy manifests", [py, "tools/check_privacy_manifests.py"], root),
     ]
     for p in packages(root):
         if (p / "test").is_dir():

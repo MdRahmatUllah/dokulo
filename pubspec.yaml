@@ -13,5 +13,6 @@ workspace:
   - packages/doc_core
   - packages/doc_vision
   - packages/ai_core
+  - packages/web_to_pdf
   - packages/vision_ocr
   - packages/qpdf_ffi
