@@ -693,7 +693,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0669 | Ph1 | B | P1 | M | Usability test of Home, Scanner and the tool shell with 5 users before building further | open |  | DK-1012 |  |
 | DK-0670 | Ph7 | Q | P0 | M | Release regression checklist per phase build | open |  | DK-0668 DK-0015 |  |
 | DK-0671 | Ph7 | Q | P0 | M | Audit every screen against the 10 UX principles | open |  | DK-0665 |  |
-| DK-0672 | Ph1 | A | P0 | S | Compliance: Licence register | assigned | agent-1 |  |  |
+| DK-0672 | Ph1 | A | P0 | S | Compliance: Licence register | in-progress | agent-1 |  |  |
 | DK-0673 | Ph7 | A | P0 | S | Compliance: In-app licence screen generation | open |  | DK-0672 |  |
 | DK-0674 | Ph6 | A | P0 | S | Compliance: Gemma licence confirmation | assigned | agent-2 |  |  |
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | assigned | agent-2 |  |  |

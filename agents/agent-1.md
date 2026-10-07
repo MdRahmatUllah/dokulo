@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Not started. Assigned: DK-0672, DK-0680, DK-0681, DK-0678.
+DK-0672 Compliance: Licence register — claimed 2026-10-07 21:18.
 
 ## Next
 
