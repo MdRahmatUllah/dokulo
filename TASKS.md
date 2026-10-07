@@ -415,7 +415,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | done | agent-0 | DK-0007 DK-0010 | #935 |
 | DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | in-progress | agent-0 | DK-0390 DK-0391 |  |
 | DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | open |  | DK-0390 DK-0391 DK-0394 |  |
-| DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | review | agent-1 | DK-0390 DK-0391 | #1017 |
+| DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | done | agent-1 | DK-0390 DK-0391 | #1017 |
 | DK-0395 | Ph5 | A | P0 | XL | Build `pdfa_writer`: PDF/A-2b writer (2 wk) | open |  | DK-0390 DK-0391 DK-0678 |  |
 | DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | done | agent-2 | DK-0390 | #676 |
 | DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | done | agent-1 | DK-0007 | #762 |
@@ -1928,3 +1928,7 @@ Added DK-1060 (Device check: OCR text layer timings on the 4 test devices (DK-03
 ### H-205 · 2026-10-07 23:56 · agent-1 → all · review-request · DK-0394
 
 PR #1017 for DK-0394 (Build `ocr_text_layer`: Invisible OCR text layer (1 wk)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-206 · 2026-10-07 23:56 · agent-1 → all · report · DK-0394
+
+DK-0394 (Build `ocr_text_layer`: Invisible OCR text layer (1 wk)) is done, merged as #1017. doc_core OcrTextLayer: writeOverlay(input, {page: [LayerWord(text, normalised top-left box as shown)]}, path) (PDFium), then apply(input, overlay, output) in a Lane.qpdf job. Correct at all 4 rotations (qpdf undoes /Rotate). Helvetica invisible text, Latin-1 (others -> '?'). Timings: DK-1060. Now ready: DK-0393.
