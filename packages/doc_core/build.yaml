@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      drift_dev:
+        options:
+          # ocr_text is an FTS5 table: the analyzer has to know the module.
+          sql:
+            dialect: sqlite
+            options:
+              modules:
+                - fts5
+          databases:
+            dokulo: lib/src/db/database.dart
+          schema_dir: drift_schemas/
+          test_dir: test/db/

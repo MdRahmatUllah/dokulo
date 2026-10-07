@@ -39,16 +39,16 @@ PR. Checked on pub.dev on 2026-10-07.
 | flutter_onnxruntime | 1.8.4 | MIT | OCR models, embeddings, TTS (ONNX Runtime 1.23); 1.9.0 exists | Planned |
 | opencv_dart | 2.2.2 | Apache-2.0 | Image pipeline; modules core, imgproc, imgcodecs only ([opencv-modules.md](compliance/opencv-modules.md)) | Planned |
 | receive_sharing_intent | 1.9.0 | Apache-2.0 | Share sheet / "Open with" | Planned |
-| drift | 2.35.2 | MIT | File index, recents, folders, OCR text (FTS5) | Planned (DK-0005) |
-| drift_dev | ^2.35.1 (dev) | MIT | drift codegen | Planned (DK-0005) |
-| sqlite3 | 3.7.0 | MIT | SQLite with FTS5 via build hooks. `sqlite3_flutter_libs` and `sqlcipher_flutter_libs` are obsolete with sqlite3 3.x: not added | Planned (DK-0005) |
+| drift | 2.35.0 | MIT | File index, recents, folders, OCR text (FTS5) | In use (DK-0005, doc_core) |
+| drift_dev | ^2.35.0 (dev) | MIT | drift codegen | In use (DK-0005) |
+| sqlite3 | 3.6.0 | MIT | SQLite with FTS5 via build hooks. `sqlite3_flutter_libs` and `sqlcipher_flutter_libs` are obsolete with sqlite3 3.x: not added | In use (DK-0005, doc_core) |
 | cryptography | 2.9.0 | Apache-2.0 | AES-GCM for the locked folder | Planned |
 | flutter_secure_storage | 11.2.0 | BSD-3 | Keys in Keychain / Keystore (the plan said 9.x; 11 is current) | Planned |
 | local_auth | 3.0.2 | BSD-3 | Biometric unlock (the plan said 2.x; 3 is current) | Planned |
 | background_downloader | 9.6.4 | BSD-3 | Model downloads | Planned |
 | file_picker | 13.1.0 | MIT | Pick PDFs and images | Planned |
 | share_plus | 13.3.1 | BSD-3 | Share results | Planned |
-| path_provider | 2.1.6 | BSD-3 | Sandbox paths | Planned |
+| path_provider | 2.1.6 | BSD-3 | Sandbox paths | In use (DK-0005, app_pdf) |
 | photo_manager | 3.12.0 | Apache-2.0 | Find documents in photos | Planned |
 | webview_flutter | 4.14.1 | BSD-3 | Web page to PDF | Planned |
 | image | 4.10.1 | MIT | EXIF, HEIC fallback, thumbnails | Planned |
