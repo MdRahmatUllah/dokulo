@@ -1082,7 +1082,7 @@ The emulator lock is local, not here: `team.py device`.
 | Resource | Owner | Since | Why |
 |---|---|---|---|
 | pubspec |  |  |  |
-| db-schema | agent-0 | 2026-10-07 22:35 | DK-0008: jobs table (schema v2) |
+| db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |
 | ci-config |  |  |  |
