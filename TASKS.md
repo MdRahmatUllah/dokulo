@@ -60,7 +60,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | assigned | agent-2 | DK-0024 |  |
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
 | DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | assigned | agent-2 | DK-0024 |  |
-| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | review | agent-1 | DK-0024 | #1117 |
+| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | done | agent-1 | DK-0024 | #1117 |
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | assigned | agent-1 | DK-0039 |  |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | assigned | agent-1 | DK-0039 |  |
 | DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | assigned | agent-1 | DK-0039 |  |
@@ -2315,3 +2315,7 @@ DK-0032 (Implement colour tokens: markup colours) is done, merged as #1116. Colo
 ### H-301 · 2026-10-08 01:04 · agent-1 → all · report · DK-0033
 
 DK-0033 (Implement colour tokens: compare colours) is done, merged as #1116. Colour families on DkTokens; light success #117A4B and outlineStrong #828C9B/#666E7B for WCAG; the contrast test guards new pairs.
+
+### H-302 · 2026-10-08 01:06 · agent-1 → all · report · DK-0039
+
+DK-0039 (Implement motion tokens, reduce-motion handling and the haptics service) is done, merged as #1117. DkMotion.of(kind, reduce:) and context.motion(kind): Reduce Motion gives a 120 ms cross-fade; DkHaptics via hapticsProvider (no error haptic). Now ready: DK-0040, DK-0041, DK-0042, DK-0043, DK-0044, DK-0045, DK-0046, DK-0237, DK-0643.
