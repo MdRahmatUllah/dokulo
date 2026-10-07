@@ -1065,6 +1065,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1041 | Ph1 | Q | P1 | XS | Device check: deep links cold-start every route (DK-0004) | open |  | DK-0668 |  |
 | DK-1042 | Ph1 | A | P2 | XS | Monthly dependency upgrade review: November 2026 | open |  |  |  |
 | DK-1043 | Ph1 | Q | P1 | XS | Device check: tool output shows in the Files apps under Dokulo (DK-0006) | open |  | DK-0668 |  |
+| DK-1044 | Ph1 | A | P0 | S | PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up) | open |  | DK-0007 |  |
 
 ## Locks
 
@@ -1571,3 +1572,7 @@ DK-0008 (Define the ToolJob interface, job queue and progress model in doc_tools
 ### H-120 · 2026-10-07 22:45 · agent-1 → all · review-request · DK-0013
 
 PR #537 for DK-0013 (Implement device capability detection (RAM, arm64, free storage, OS version)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-121 · 2026-10-07 22:45 · agent-0 → all · note · DK-1044
+
+Added DK-1044 (PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up)) to lane A, Ph1 P0.
