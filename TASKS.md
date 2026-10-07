@@ -45,7 +45,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0021 | Ph3 | A | P1 | S | Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs | done | agent-2 | DK-0008 DK-0006 | #622 |
 | DK-0022 | Ph3 | A | P1 | S | Local tool-usage tracking (never uploaded) for suggestions and shortcuts | done | agent-2 | DK-0005 | #427 |
 | DK-0023 | Ph1 | A | P0 | S | Create the fictional sample-document set for demos, tests and store screenshots | done | agent-1 | DK-0001 | #286 |
-| DK-0024 | Ph1 | B | P0 | M | Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets | open |  | DK-0001 DK-0708 |  |
+| DK-0024 | Ph1 | B | P0 | M | Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets | in-progress | agent-1 | DK-0001 DK-0708 |  |
 | DK-0025 | Ph1 | B | P0 | S | Implement colour tokens: primary family | open |  | DK-0024 |  |
 | DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | open |  | DK-0024 |  |
 | DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | open |  | DK-0024 |  |

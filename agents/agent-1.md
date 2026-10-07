@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0024 Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets — claimed 2026-10-08 00:29.
 
 ## Next
 
