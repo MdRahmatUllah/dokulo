@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:35
+last-seen: 2026-10-07 23:36
 last-read: 177
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0401 Evaluate PP-DocLayout (small) for pdf_structure and Smart Split — claimed 2026-10-07 23:36.
 
 ## Next
 
