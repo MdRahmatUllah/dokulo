@@ -29,6 +29,16 @@ A) and tell the lead with `team.py msg agent-0`. The lead rebalances with
 goldens): claim the first, `assign` the others to yourself, list every id in
 the PR body, and `done` each after the merge.
 
+## The goal now (the owner, 2026-10-08): finish M01, M02 and M03
+
+Every open task in milestones M01 (Platform & engine), M02 (Design tokens,
+icons & brand) and M03 (Component library & patterns) is assigned:
+**agent-1** all of M02, then M03 Buttons and Inputs & controls; **agent-2** M03
+Bars, Sheets & overlays, Pages & thumbnails, Editor & AI; **agent-0** the rest
+of M01, M03 Tiles & cards, Badges & chips, Interaction patterns and the design
+QA frames. A task that waits on one in another milestone gets that one built
+first. Each owner's GitHub issues carry an `agent-N` label.
+
 ## The phases
 
 | Phase | Tasks | What it is |
