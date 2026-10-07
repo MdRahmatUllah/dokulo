@@ -15,5 +15,6 @@ dependencies:
     path: ../doc_vision
 
 dev_dependencies:
+  drift: 2.35.0
   lints: ^6.0.0
   test: ^1.26.0
