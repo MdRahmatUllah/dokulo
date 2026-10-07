@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0394 Build `ocr_text_layer`: Invisible OCR text layer (1 wk) — claimed 2026-10-07 23:46.
 
 ## Next
 
