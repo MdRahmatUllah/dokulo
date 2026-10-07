@@ -1,0 +1,161 @@
+# Dokulo — Developer guide
+
+The "Developer guide" tab of the UI/UX guide (`Overview & foundations.md` →
+How to use this guide). It says how the app is built: where code goes, how
+state, routes and theming work, how it is tested, and when a screen is done.
+**When code and this guide disagree, fix one of them the same day** (DK-0014).
+
+## 1. Project structure
+
+One repository, one pub workspace (root `pubspec.yaml`, one `pubspec.lock`),
+five layer packages in `packages/`. The root [README](../README.md) lists what
+each layer holds.
+
+```text
+pubspec.yaml            the workspace: its members, nothing else
+packages/
+  app_pdf/              layer 1: the Flutter app (android/, ios/, lib/, test/)
+    lib/
+      main.dart         runApp, nothing else
+      screens/          one folder per screen ID: screens/h1_home/, screens/t2_tool/, …
+      components/       the Dk* widgets (DkToolTile, DkFileCard, …), one file each
+      providers/        Riverpod providers that aren't private to one screen
+      routes/           the go_router config and route names
+      l10n/             app_en.arb, app_de.arb (DK-0009)
+    test/               mirrors lib/; goldens next to their tests in goldens/
+  doc_tools/            layer 2: one ToolJob per feature (pure Dart)
+  doc_core/             layer 3: PDFs: open, render, page ops, text, image pipeline
+  doc_vision/           layer 3: scanner, OCR engines, layout, photo finder
+  ai_core/              layer 4: models, LLM arbiter, translation, retrieval
+tools/                  team.py, check_layers.py, licence_scan.py, … (Python, stdlib only)
+docs/                   the specs; docs/compliance/ for licence and policy records
+```
+
+Rules:
+
+- **Dependencies point one way:** `app_pdf → doc_tools → doc_core / doc_vision → ai_core`.
+  `python tools/check_layers.py` fails on anything else.
+- **The UI isolate never calls native code.** PDFium calls go through the one
+  PDFium worker isolate; qpdf, OpenCV and ONNX run on their own isolates
+  (DK-0007). A screen talks to a provider, the provider to a `ToolJob` or a
+  `doc_core` service.
+- **Files are never written in place.** A job reads the input and writes a new
+  file; the user saves, shares or discards it.
+- **No network during a tool run** (DK-0012). The only network uses are model
+  downloads, Web page to PDF, and purchases.
+- A new dependency needs a licence-register line in the same PR
+  (`docs/compliance/licence-register.md`; `python tools/licence_scan.py`).
+
+## 2. State
+
+Riverpod 3 with code generation (`riverpod_annotation`, `riverpod_generator`),
+as in Sogda. DK-0003 sets the conventions in code; the rules:
+
+- Providers are generated (`@riverpod`), never hand-written `Provider(...)`.
+- `autoDispose` is the default; `keepAlive: true` only for app-wide state (the
+  file index, settings, the job queue, Pro status).
+- A screen's own providers live next to it in `screens/<id>/`; shared ones in
+  `providers/`.
+- Widgets read state with `ref.watch` in `build` and act with `ref.read` in
+  callbacks. No business logic in widgets.
+- Long work is a `ToolJob` (DK-0008) with a progress stream, cancel and an undo
+  snapshot; the UI shows it through the job-queue provider, never by awaiting a
+  `Future` in a widget.
+- **Never await a drift watch's `.first` in a provider**: it hangs tests. Map
+  the stream instead.
+
+## 3. Routing
+
+`go_router` with `StatefulShellRoute.indexedStack`, so each tab keeps its
+scroll position and stack (DK-0004). From the Frontend & UX plan, "Tab bar",
+and the UI spec §13:
+
+| Route | Screen | Shell | Notes |
+| --- | --- | --- | --- |
+| `/home` | H1 Home | tab 1 | |
+| `/tools` | T1 Tools | tab 2 | |
+| `/scan` | S1 Camera → S2 Review | full screen | Centre button; slides up 220 ms |
+| `/files` | F1 Files | tab 3 | F2 Locked folder is pushed behind biometrics |
+| `/me` | M1 Me | tab 4 | M2 Model manager, M3 Settings are pushed |
+| `/welcome` | Onboarding | full screen | Shown once |
+
+Full-screen flows hide the tab bar: Scanner (S1, S2), Viewer (V1, V2), Organize
+pages (P1), the tool shell (T2, T3), onboarding and the signature pad. Sheets
+(X1 tool picker, X2 progress, X3 paywall, A1 AI panel) are not routes.
+
+DK-0004 adds the pushed routes (T2/T3 per tool, V1, P1, F2, M2, M3) and the
+deep links (share sheet, "Open with", shortcuts) to this table when it builds
+them.
+
+## 4. Theming
+
+All colour, type, spacing, radius, elevation and motion values come from
+**`DkTokens`**, a `ThemeExtension` (DK-0024, after Sogda's `DpTokens`), with a
+Light and a Dark instance. The token names are those in
+`Overview & foundations.md` → Design tokens and the UI spec §4–§9.
+
+```dart
+final t = Theme.of(context).extension<DkTokens>()!;
+return Container(
+  padding: EdgeInsets.all(t.spaceM),   // never EdgeInsets.all(16)
+  decoration: BoxDecoration(
+    color: t.surfaceRaised,            // never Color(0xFF…)
+    borderRadius: BorderRadius.circular(t.radiusM),
+  ),
+  child: Text(label, style: t.typeLabelL),
+);
+```
+
+DK-0024 may add a shorthand (for example `context.tokens`); when it does,
+update this example the same day. No hex colours, raw font sizes or magic
+numbers in widgets. A value that isn't a token is a gap: add the token first.
+
+Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
+`screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
+EN/DE names in `Overview & foundations.md`. German uses "du".
+
+## 5. Testing
+
+| Kind | Where | What |
+| --- | --- | --- |
+| Unit | `packages/<p>/test/` | Logic, jobs, parsers. `dart test` in pure-Dart packages, `flutter test` in Flutter ones |
+| Golden PDFs | `doc_tools`, `doc_core` | Every tool runs over the sample corpus (DK-0023); the output opens in PDFium and passes `qpdf --check`. Redaction's security test blocks every release |
+| Widget + golden images | `app_pdf/test/` | Every screen and component: Light and Dark, EN and DE, phone (393 × 852) and iPhone SE (375 × 667), and 200 % text where the spec marks it (§28, §32) |
+| Integration | `app_pdf/integration_test/` | Flows on `emulator-5562`, held with `team.py device` and released at once |
+| Offline | per tool | A test proves the tool makes no network call |
+
+Practicalities (from MEMORY.md):
+
+- Wrap test batches in `timeout`. Never `taskkill /IM flutter_tester.exe`.
+- Widget-test keyboard insets are physical pixels (× `devicePixelRatio`).
+- After a `git stash` round trip, re-run code generation (l10n, build_runner)
+  before trusting goldens.
+- After `adb install`, check `dumpsys package <id> | grep lastUpdateTime`.
+
+## 6. Accessibility checklist
+
+From the UI spec §28. Every screen, every PR:
+
+- [ ] Contrast: 4.5:1 for text; 3:1 for large text, meaningful icons, input borders and focus rings. Checked in Light, Dark and on the camera chrome.
+- [ ] Never colour alone: Pro says "Pro", errors have an icon and text, selection has a check, compare and redaction categories have labels.
+- [ ] Touch targets ≥ 48 × 48 dp (crop handles: a 44+ invisible hit area plus the magnifier).
+- [ ] Works at 200 % text: no clipping, grids drop to 2 columns, buttons wrap (≤ 2 lines).
+- [ ] A visible 2 dp focus ring on every interactive element (keyboard, switch access).
+- [ ] Reduced motion: every signature motion has a cross-fade version; no flashing above 3 Hz; no capture flash.
+- [ ] Screen readers: every icon-only button has a label; complex screens (viewer, scanner, result) set the reading order; the scanner speaks its hints and "Page 3 captured".
+- [ ] Page numbers are text under thumbnails; error text sits next to its field.
+
+## 7. Definition of done (per screen)
+
+A screen or component is done when all of these hold. The same list is the PR
+template's checklist (`.github/pull_request_template.md`).
+
+- [ ] **Tokens only:** no hex colours, raw sizes or magic numbers.
+- [ ] **Light and Dark** both match the artboards (`dokulo-design/light/…`, `dark/…`).
+- [ ] **EN and DE:** every string from the ARB files; German checked for wrapping (`dokulo-design/deutsch/…`).
+- [ ] **200 % text** where the spec marks it, without clipping.
+- [ ] **Screen-reader labels** and reading order (checklist above).
+- [ ] **States:** empty, loading, error, success and Pro-gated, as the screen spec lists them.
+- [ ] **Tests:** widget tests and goldens for the states above; unit tests for the logic; golden PDFs for a tool.
+- [ ] **The basic check** passes (`CLAUDE.md`).
+- [ ] **Docs:** a behaviour change updates the spec in the same PR; a spec gap you filled is named in the PR.
