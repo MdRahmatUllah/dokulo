@@ -347,7 +347,25 @@ class DkElevation {
   );
 }
 
-/// Motion (UI spec §9). DK-0039 adds reduce-motion handling and haptics.
+/// The three kinds of movement (UI spec §9).
+enum DkMotionKind {
+  /// Press states, chip toggles, switch thumbs.
+  fast,
+
+  /// Sheets, pushes, tile reorder, expand/collapse.
+  standard,
+
+  /// Success tick, Scan button press, capture thumbnail fly-in.
+  emphasis,
+}
+
+/// A motion's timing: how long and how it eases. [crossFade] is true when
+/// Reduce Motion is on: the widget then fades instead of moving, scaling or
+/// sliding.
+typedef DkMotionSpec = ({Duration duration, Curve curve, bool crossFade});
+
+/// Motion (UI spec §9; DK-0039). Widgets ask [of] (or `context.motion(kind)`),
+/// never the raw durations, so Reduce Motion replaces every movement.
 @immutable
 class DkMotion {
   const DkMotion();
@@ -359,4 +377,46 @@ class DkMotion {
 
   /// "Ease-out with slight overshoot".
   final emphasisCurve = const Cubic(0.34, 1.3, 0.64, 1);
+
+  /// With Reduce Motion on, every movement becomes this cross-fade.
+  final reduced = const Duration(milliseconds: 120);
+  final reducedCurve = Curves.linear;
+
+  /// The scanner's capture flash (white, 80 ms, once per capture). At most
+  /// one flash per capture, and captures are seconds apart, so it never
+  /// flashes above 3 Hz; with Reduce Motion it is off ([flashAllowed]).
+  final captureFlash = const Duration(milliseconds: 80);
+
+  /// The timing for [kind], or the cross-fade when [reduce] is on.
+  DkMotionSpec of(DkMotionKind kind, {required bool reduce}) {
+    if (reduce) {
+      return (duration: reduced, curve: reducedCurve, crossFade: true);
+    }
+    return switch (kind) {
+      DkMotionKind.fast => (duration: fast, curve: fastCurve, crossFade: false),
+      DkMotionKind.standard => (
+        duration: standard,
+        curve: standardCurve,
+        crossFade: false,
+      ),
+      DkMotionKind.emphasis => (
+        duration: emphasis,
+        curve: emphasisCurve,
+        crossFade: false,
+      ),
+    };
+  }
+
+  /// Flashes (the capture flash) are off with Reduce Motion.
+  bool flashAllowed({required bool reduce}) => !reduce;
+}
+
+/// `context.reduceMotion` and `context.motion(kind)`: Reduce Motion is the
+/// platform's setting (iOS Reduce Motion, Android "Remove animations"), which
+/// Flutter reports as [MediaQueryData.disableAnimations].
+extension DkMotionContext on BuildContext {
+  bool get reduceMotion => MediaQuery.maybeDisableAnimationsOf(this) ?? false;
+
+  DkMotionSpec motion(DkMotionKind kind) =>
+      tokens.motion.of(kind, reduce: reduceMotion);
 }
