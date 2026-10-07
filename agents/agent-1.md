@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0394 Build `ocr_text_layer`: Invisible OCR text layer (1 wk) — claimed 2026-10-07 23:46.
+DK-0394 in review as PR #1017: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

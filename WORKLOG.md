@@ -187,3 +187,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:47 · agent-2 DK-1057 · PR #981 open; review requested from all
 - 2026-10-07 23:50 · agent-0 DK-0392 · claimed: Build `pdf_compress`: Compression pipeline (1.5 wk)
 - 2026-10-07 23:56 · agent-1 DK-1060 · added: Device check: OCR text layer timings on the 4 test devices (DK-0394)
+- 2026-10-07 23:56 · agent-1 DK-0394 · PR #1017 open; review requested from all
