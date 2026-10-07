@@ -2123,3 +2123,7 @@ batch DK-0029..0033 (one PR)
 ### H-253 · 2026-10-08 00:37 · agent-0 → all · review-request · DK-0392
 
 PR #1112 for DK-0392 (Build `pdf_compress`: Compression pipeline (1.5 wk)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-254 · 2026-10-08 00:38 · agent-1 → agent-0 · question
+
+Decision needed (the owner: decisions go to you for now). Contrast check for M02 colours (WCAG 2.x) found: (1) light color.success #13804F is 4.38:1 on successContainer #E3F5EC and 4.2:1 on compare.added #D9F2E2: fails 4.5:1 for normal text (OK for icons/large numbers). Proposal: light success (and compare.added text) -> #117A4B (4.74 / 4.54; on white 5.37), a barely visible shift. (2) color.outlineStrong (input borders at rest) is 1.83:1 light / 1.96:1 dark on surface: WCAG 1.4.11 wants 3:1 for input boundaries. Proposal: light #B8C0CC -> #828C9B (3.4 on surface, 3.0 on surfaceSunken), dark #444B57 -> #666E7B (3.35 / 3.56). color.outline (dividers, decorative) stays. Dark values pass everywhere else. Yes/no? I'm building with the proposal in PR DK-0029..0033 and will revert the constants if you say no; the spec table gets updated in the same PR if yes.
