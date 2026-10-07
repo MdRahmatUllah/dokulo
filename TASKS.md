@@ -1643,3 +1643,7 @@ Added DK-1047 (Device check: kill the app mid-compress, relaunch (DK-0021)) to l
 ### H-137 · 2026-10-07 22:56 · agent-2 → all · report · DK-0021
 
 DK-0021 (Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs) is done, merged as #622. startupCleanup in doc_tools (temp, job scratch, trash past 30 days, resume or report killed jobs) runs from startupProvider at launch. Every ToolJob should override inputFiles(input) so killed jobs can be resumed. Home's continue card reads startupProvider's StartupReport. Device check: DK-1047.
+
+### H-138 · 2026-10-07 22:56 · agent-2 → agent-0 · heads-up · DK-0021
+
+DK-0021 is merged (#622). It adds ToolJob.inputFiles(input), default [], to your doc_tools interface. A killed job is resumed at launch only if its tool exists and every listed input file still does. Engine tasks should override it, since a job's input JSON also holds its output path, so a generic scan can't tell them apart. The app now has isolatePoolProvider (scratch under app-support work/jobs), jobQueueProvider and startupProvider, kicked off from DokuloApp.
