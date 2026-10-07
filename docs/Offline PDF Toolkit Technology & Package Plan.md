@@ -101,7 +101,7 @@ pdfrx exposes the low-level PDFium bindings, so we call the C API for things its
 - **Crypto:** build with qpdf's built-in "native" crypto provider only, so no OpenSSL or GnuTLS is linked. Dependencies: zlib (zlib licence) and libjpeg-turbo (BSD-style / IJG).
 - **API surface:** wrap the `qpdfjob` JSON interface (`qpdfjob_run_from_json`) plus a few C-API calls for checks. One JSON job per operation keeps the binding to about 10 functions.
 - **Jobs we use:** encrypt (AES-256, R6), decrypt with password, repair (`--qdf` rewrite), compress structure (`--object-streams=generate`, `--compress-streams=y`, `--recompress-flate`), linearise, overlay/underlay pages (watermark from a generated PDF), split by ranges, `--check` for validation.
-- **Effort:** about 1 week including CI builds.
+- **Effort:** about 1 week including the native build scripts.
 
 ## Feature mapping: PDF tools
 
@@ -124,7 +124,7 @@ All 26 non-AI PDF tools sit on permissive engines; the real custom work is in co
 | Image to PDF | Decode, auto-orient by EXIF, fit to A4/Letter/original, embed as JPEG (no re-encode when already JPEG) | Dart `pdf`; platform image decoders (HEIC native on iOS, Android 9+); `image` for EXIF | Page-size and margin logic |
 | PDF to images | Render each page at 150/300 dpi, encode JPG/PNG | pdfrx `PdfPage.render`; `image` or `dart:ui` encoders | None |
 | Web/HTML to PDF | HTML file → PDF; URL → load in WebView → print to PDF | `printing` (Apache-2.0) `Printing.convertHtml` for HTML strings; WebView + platform print for URLs | Small `web_to_pdf` plugin: iOS `WKWebView.createPDF`, Android `PrintDocumentAdapter` to file (about 3 days) |
-| PDF to PDF/A | Convert to PDF/A-2b for archiving and authorities | qpdf + PDFium + Dart `pdf` | **Custom `pdfa_writer`** (see Custom libraries). veraPDF used only in CI for validation, never shipped |
+| PDF to PDF/A | Convert to PDF/A-2b for archiving and authorities | qpdf + PDFium + Dart `pdf` | **Custom `pdfa_writer`** (see Custom libraries). veraPDF used only in the local gate for validation, never shipped |
 | PDF to Markdown / text | Extract text in reading order with headings, lists and simple tables | PDFium text + font sizes; OCR for scanned pages | **Custom `pdf_structure`**: reading order, heading detection by font size/weight, list and table heuristics |
 
 ### Optimize
@@ -254,7 +254,7 @@ Fourteen components have no permissive, complete option, so we build them. Toget
 
 Every shipped component is permissive or file-level copyleft used unmodified; the one blocked model (HY-MT1.5) and all AGPL engines stay out. The register itself (every Dart package, native library, model and font, with its licence and obligations, plus the excluded list) lives in [`docs/compliance/licence-register.md`](compliance/licence-register.md).
 
-**Process:** `tools/licence_scan.py` checks every `pubspec.lock` against the register (part of the basic check; a required CI check once CI is on); the in-app licence screen is generated from `pubspec.lock` plus the register's native, model and font tables; any new dependency needs a line in the register before it's merged.
+**Process:** `tools/licence_scan.py` checks every `pubspec.lock` against the register (a step of the local gate `tools/check.py`; there is no CI/CD, DK-0010); the in-app licence screen is generated from `pubspec.lock` plus the register's native, model and font tables; any new dependency needs a line in the register before it's merged.
 
 ## Testing and device targets
 
@@ -273,15 +273,15 @@ Correctness of output files matters more than UI tests here: every tool gets a g
 
 | Suite | What it checks | Tooling |
 | --- | --- | --- |
-| Golden PDFs | A corpus of \~100 real-world PDFs (scans, forms, encrypted, broken, huge, PDF/A, non-Latin) run through every tool; output opens in PDFium and passes `qpdf --check` | Dart test + CI |
+| Golden PDFs | A corpus of \~100 real-world PDFs (scans, forms, encrypted, broken, huge, PDF/A, non-Latin) run through every tool; output opens in PDFium and passes `qpdf --check` | Dart test in the local gate |
 | Redaction security | After redaction, extracting text with PDFium and qpdf finds none of the redacted strings; metadata and annotations are empty; images contain black boxes at the right places | Automated, blocks release |
-| PDF/A | Output validates as PDF/A-2b | veraPDF in CI (not shipped) |
+| PDF/A | Output validates as PDF/A-2b | veraPDF in the local gate (not shipped) |
 | Compression | Size reduction and visual similarity (SSIM ≥ 0.9 on rendered pages at the "recommended" level) | OpenCV in tests |
 | OCR accuracy | Character error rate on a German/English scan set, Vision vs PP-OCRv5 | Small labelled set we create by hand |
 | Scanner | Quad detection success on a photo set (backgrounds, lighting, angles) | Photo corpus |
 | AI | Summary and Q&A answers cite the right pages on a fixed question set; "not found" behaves correctly | Manual review checklist per release |
 | Performance | Merge 200 pages < 3 s, compress 50-page scan < 20 s, OCR page < 1.5 s on mid Android | Benchmarks on test devices |
-| Privacy | No network traffic during any tool run (except model downloads) | Proxy check in CI + airplane-mode manual test |
+| Privacy | No network traffic during any tool run (except model downloads) | Proxy check in the local gate + airplane-mode manual test |
 
 ## Open questions
 

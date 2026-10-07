@@ -97,7 +97,7 @@ the modules we don't build use them. OpenCL is on: OpenCV loads the device's
 `python tools/native_libs_check.py <apk, aab or folder>` fails when the built
 app contains an FFmpeg library, an OpenCV videoio/highgui/dnn library, or a
 `libdartcv` that exports videoio, highgui or dnn functions. DK-0010 runs it on
-every release build; until CI is on, run it on the APK of any PR that touches
+every release build; `python tools/check.py --apk <apk>` runs it on the APK of any PR that touches
 the native build.
 
 **Probe build, 2026-10-07:** Flutter 3.47.5, `opencv_dart` 2.2.2 / `dartcv4`
