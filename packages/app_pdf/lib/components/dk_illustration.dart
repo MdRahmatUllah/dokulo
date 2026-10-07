@@ -35,7 +35,22 @@ enum DkIllustrations {
 
   /// ILL-10: a camera with a slash and a page (Camera permission denied; the
   /// scanner shows it inverted on black).
-  cameraDenied('ill-10-camera-denied', 120, 120);
+  cameraDenied('ill-10-camera-denied', 120, 120),
+
+  /// ILL-11: a page with a chip and a download arrow (AI model needed).
+  aiModelNeeded('ill-11-ai-model-needed', 120, 120),
+
+  /// ILL-12: a page, a speech bubble and a check magnifier (AI first-use notice).
+  aiFirstUse('ill-12-ai-first-use-notice', 120, 120),
+
+  /// ILL-13: a phone and a memory chip (Device not eligible for AI).
+  deviceNotEligible('ill-13-device-not-eligible', 120, 120),
+
+  /// ILL-14: a page with a torn corner (Damaged file).
+  damagedFile('ill-14-damaged-file', 120, 120),
+
+  /// ILL-15: a signature on a line with a pen (No signatures yet).
+  noSignatures('ill-15-no-signatures-yet', 120, 120);
 
   const DkIllustrations(this.file, this.width, this.height);
   final String file;
@@ -56,6 +71,7 @@ class DkIllustration extends StatelessWidget {
     super.key,
     this.scale = 1,
     this.semanticLabel,
+    this.colors,
   });
 
   final DkIllustrations illustration;
@@ -64,12 +80,16 @@ class DkIllustration extends StatelessWidget {
   final double scale;
   final String? semanticLabel;
 
+  /// Instead of the theme's colours: `DkColors.dark` on the camera's black
+  /// (ILL-10 when the camera is denied), whatever the app's theme.
+  final DkColors? colors;
+
   @override
   Widget build(BuildContext context) => SvgPicture.asset(
     illustration.asset,
     width: illustration.width * scale,
     height: illustration.height * scale,
-    colorMapper: DkIllustrationColors(context.tokens.color),
+    colorMapper: DkIllustrationColors(colors ?? context.tokens.color),
     semanticsLabel: semanticLabel,
     excludeFromSemantics: semanticLabel == null,
   );
