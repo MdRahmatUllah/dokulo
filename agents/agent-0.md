@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 00:44
+last-seen: 2026-10-08 00:49
 last-read: 171
 joined: 0
 
 ## Now
 
-DK-0462 Compress PDF: implement the compress ToolJob (engine) — claimed 2026-10-08 00:44.
+DK-0462 in review as PR #1115: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

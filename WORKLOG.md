@@ -473,3 +473,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:44 · agent-0 DK-0462 · claimed: Compress PDF: implement the compress ToolJob (engine)
 - 2026-10-08 00:46 · agent-1 DK-0034 · assigned to agent-1
 - 2026-10-08 00:46 · agent-1 DK-0035 · assigned to agent-1
+- 2026-10-08 00:49 · agent-0 DK-0462 · PR #1115 open; review requested from all
