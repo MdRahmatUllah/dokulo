@@ -14,7 +14,7 @@ Every feature runs on the phone using permissively licensed code or models we on
 | Weak copyleft (file-level) | MPL-2.0 (Bergamot), LGPL | Allowed only as unmodified, dynamically linked or separate files; publish any changes to those files. LGPL avoided on iOS (static linking problem) |
 | Strong copyleft | GPL, AGPL (MuPDF, PyMuPDF, Ghostscript, BentoPDF, veraPDF parts) | Never in the app. Build our own instead |
 | Commercial / community licence | Syncfusion, Apryse, Nutrient (PSPDFKit), Foxit | Not used; revenue caps and per-seat terms don't fit a solo app |
-| Model licences | Gemma terms, Tencent Hy-MT licence, OpenRAIL-M | Allowed after a written check per model (territory, use restrictions, attribution) |
+| Model licences | Apache-2.0 (Gemma 4, Hy-MT2, PP-OCRv5), MPL-2.0 (Bergamot), Tencent HY Community Licence (HY-MT1.5), OpenRAIL-M | Allowed after the written intake checklist per model (territory, use restrictions, attribution): [docs/compliance/ai-models.md](compliance/ai-models.md) |
 
 **Engineering rules**
 
@@ -194,13 +194,14 @@ On iOS the scanner uses Apple's built-in VisionKit and Vision (part of the OS, f
 
 ## On-device AI models
 
-Gemma 4 E2B and Bergamot cover all AI and translation features; PP-OCRv5 covers OCR on both platforms. **Hy-MT cannot be used in this app**: Tencent's licence excludes the EU, UK and South Korea, which are core markets (and the developer is in Germany).
+Gemma 4 E2B and Bergamot cover all AI and translation features; PP-OCRv5 covers OCR on both platforms. **HY-MT1.5 cannot be used in this app**: its Tencent HY Community Licence excludes the EU, UK and South Korea, which are core markets (and the developer is in Germany). **Hy-MT2 is Apache-2.0** with no territory clause (Tencent's own repo), as Sogda ships it; see [docs/compliance/ai-models.md](compliance/ai-models.md).
 
 | Model | Role in this app | Runtime | Size (approx.) | Licence | Decision |
 | --- | --- | --- | --- | --- | --- |
-| Gemma 4 E2B, GGUF Q4\_K\_M | Summarize, Ask your PDF, Smart Split decisions, high-quality translation | llamadart (llama.cpp) via Sogda's `LlmRuntimeArbiter` | \~1.3 GB disk, 2–3 GB RAM | Apache-2.0 (per Sogda model catalogue) | **Use**, optional download |
-| Bergamot (Firefox Translations) | Fast standard translation | Bergamot via FFI (as in Sogda) | \~17–35 MB per language direction | MPL-2.0 (engine and models per Sogda catalogue) | **Use**, default translation engine |
-| HY-MT1.5 / Hy-MT2 (Tencent) | Translation | llama.cpp | \~440 MB | [Tencent HY Community Licence](https://ollama.com/huihui_ai/hy-mt1.5-abliterated:7b/blobs/ebbd49dd8772): territory excludes EU, UK, South Korea | **Do not use.** Also re-check this for Sogda |
+| Gemma 4 E2B, GGUF Q4\_K\_M | Summarize, Ask your PDF, Smart Split decisions, high-quality translation | llamadart (llama.cpp) via Sogda's `LlmRuntimeArbiter` | \~1.3 GB disk, 2–3 GB RAM | Apache-2.0 (confirmed on the model card, 2026-10-07; [docs/compliance/ai-models.md](compliance/ai-models.md)) | **Use**, optional download |
+| Bergamot (Firefox Translations) | Fast standard translation | Bergamot via FFI (as in Sogda) | \~17–35 MB per language direction | MPL-2.0 (engine and models, confirmed 2026-10-07; de↔en released) | **Use**, default translation engine |
+| HY-MT1.5 (Tencent) | Translation | llama.cpp | \~440 MB | [Tencent HY Community Licence](https://huggingface.co/tencent/HY-MT1.5-1.8B/blob/main/License.txt): territory excludes EU, UK, South Korea | **Do not use** |
+| Hy-MT2 1.8B (Tencent), GGUF Q4\_K\_M | High-quality translation | llama.cpp (llamadart) | \~1.1 GB disk, 3.5 GiB device floor | [Apache-2.0](https://huggingface.co/tencent/Hy-MT2-1.8B-GGUF/blob/main/LICENSE.txt) | **Licence-cleared**, optional download (as in Sogda); offered per DK-0566 |
 | PP-OCRv5 mobile det + Latin rec + angle cls (ONNX) | OCR for scans, redaction on scans, photo detection | flutter\_onnxruntime | det \~4.8 MB, Latin rec \~8 MB, cls \~0.6 MB | Apache-2.0 ([ONNX export example](https://github.com/gitakoos/ocr-models)) | **Use** on Android and as the uniform engine; bundle det + Latin rec in the app |
 | PP-OCRv5 multilingual rec | Non-Latin scripts | flutter\_onnxruntime | \~16.5 MB | Apache-2.0 | Optional download |
 | Apple Vision text recognition | OCR on iOS (fast, accurate, handwriting) | OS API via platform channel | 0 (built in) | Apple platform | **Use** on iOS as default, PP-OCRv5 as fallback |
@@ -251,7 +252,7 @@ Fourteen components have no permissive, complete option, so we build them. Toget
 
 ## Licence register
 
-Every shipped component is permissive or file-level copyleft used unmodified; the one blocked model (Hy-MT) and all AGPL engines stay out. The register itself (every Dart package, native library, model and font, with its licence and obligations, plus the excluded list) lives in [`docs/compliance/licence-register.md`](compliance/licence-register.md).
+Every shipped component is permissive or file-level copyleft used unmodified; the one blocked model (HY-MT1.5) and all AGPL engines stay out. The register itself (every Dart package, native library, model and font, with its licence and obligations, plus the excluded list) lives in [`docs/compliance/licence-register.md`](compliance/licence-register.md).
 
 **Process:** `tools/licence_scan.py` checks every `pubspec.lock` against the register (part of the basic check; a required CI check once CI is on); the in-app licence screen is generated from `pubspec.lock` plus the register's native, model and font tables; any new dependency needs a line in the register before it's merged.
 
@@ -284,12 +285,12 @@ Correctness of output files matters more than UI tests here: every tool gets a g
 
 ## Open questions
 
-- [ ] Re-confirm the Gemma 4 E2B licence on the current model card before release
-- [ ] Confirm the licence of the Bergamot/Firefox translation models and available language pairs (DE↔EN, others)
+- [x] Re-confirm the Gemma 4 E2B licence on the current model card: Apache-2.0 on 2026-10-07 ([docs/compliance/ai-models.md](compliance/ai-models.md)); check again at release (DK-0695)
+- [x] Confirm the licence of the Bergamot/Firefox translation models and available language pairs (DE↔EN, others): MPL-2.0, de↔en released, other pairs through English ([docs/compliance/ai-models.md](compliance/ai-models.md))
 - [ ] Decide whether the ML Kit scanner fast path is enabled at all on Android, after reading ML Kit's terms on data collection
 - [ ] Pick a redistributable sRGB ICC profile for PDF/A output
 - [ ] Decide: extend the plan to \~24–26 weeks, or move PDF/A, Smart Split, Web to PDF and the Files extension post-launch
-- [ ] Check whether Sogda can keep Hy-MT given the EU/UK territory exclusion
+- [x] Check whether Sogda can keep Hy-MT given the EU/UK territory exclusion: Sogda ships Hy-MT2, which is Apache-2.0; the exclusion is HY-MT1.5's only ([docs/compliance/ai-models.md](compliance/ai-models.md))
 - [ ] Pin exact versions for the packages listed as "latest" when the repo is created
 
 ## Sources

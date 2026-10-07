@@ -15,7 +15,7 @@ from pathlib import Path
 
 REGISTER = Path("docs/compliance/licence-register.md")
 DENIED = ("mupdf", "ghostscript", "bentopdf", "syncfusion", "apryse", "pdftron",
-          "pspdfkit", "nutrient", "foxit", "google_mlkit", "hy_mt", "verapdf")
+          "pspdfkit", "nutrient", "foxit", "google_mlkit", "verapdf")
 # The earliest match in the text wins: a licence names itself before it quotes
 # others (MPL-2.0 mentions the GNU licences in its definitions).
 LICENCES = (

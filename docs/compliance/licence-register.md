@@ -88,14 +88,15 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 ## Models (bundled or downloaded)
 
 Every model needs a written licence check before it is added (territory, use
-restrictions, attribution; DK-0683's intake checklist).
+restrictions, attribution): the intake checklist in [ai-models.md](ai-models.md) (DK-0683).
 
 | Model | Licence | Ships | Obligations |
 | --- | --- | --- | --- |
 | PP-OCRv5 mobile det + Latin rec + angle cls (ONNX) | Apache-2.0 | Bundled | NOTICE file; state that the ONNX files are converted, not modified |
 | PP-OCRv5 multilingual rec | Apache-2.0 | Download | As above |
-| Gemma 4 E2B, GGUF Q4_K_M | Apache-2.0 (per Sogda's catalogue; re-confirm on the model card before release: DK-0674) | Download | Notice; follow any use policy on the model card |
-| Bergamot models (DE↔EN, …) | MPL-2.0 (per Sogda's catalogue; confirm per pair: DK-0675) | Download | Notice |
+| Gemma 4 E2B, GGUF Q4_K_M | Apache-2.0 (confirmed 2026-10-07, [ai-models.md](ai-models.md); re-confirm at release) | Download | Notice; follow Google's Gemma Prohibited Use Policy, linked from the app terms |
+| Bergamot models (DE↔EN, …) | MPL-2.0 ([ai-models.md](ai-models.md), DK-0675) | Download | Notice |
+| Hy-MT2 (1.8B, GGUF) | Apache-2.0, from Tencent's own repo only (some repackages carry the community licence) ([ai-models.md](ai-models.md), DK-0676) | Download, if offered | Notice |
 | Supertonic 3 (optional, later) | OpenRAIL-M | Download | Pass the use restrictions on in the app terms |
 
 ## Fonts
@@ -117,9 +118,9 @@ restrictions, attribution; DK-0683's intake checklist).
 | Nutrient (PSPDFKit) | Commercial | As above |
 | Foxit PDF SDK | Commercial | As above |
 | Google ML Kit (document scanner, text recognition, any ML Kit API) | Google proprietary terms | Closed source, delivered by Play services, sends usage metrics to Google ([decision](ml-kit-scanner.md), DK-0677) |
-| Hy-MT / HY-MT1.5 / Hy-MT2 | Tencent HY Community Licence | Territory excludes the EU, UK and South Korea (DK-0676) |
+| HY-MT1.5 / Hunyuan-MT 1.x | Tencent HY Community Licence | Territory excludes the EU, UK and South Korea (DK-0676; Hy-MT2 is Apache-2.0 and allowed, see Models) |
 | veraPDF | GPL / MPL dual | CI only, as a PDF/A validator; never shipped |
 
 The scan's deny patterns (`tools/licence_scan.py`, `DENIED`): `mupdf`,
 `ghostscript`, `bentopdf`, `syncfusion`, `apryse`, `pdftron`, `pspdfkit`,
-`nutrient`, `foxit`, `google_mlkit`, `hy_mt`, `verapdf`.
+`nutrient`, `foxit`, `google_mlkit`, `verapdf`. Models are not pub packages; the reviewer checks them against the Models table and [ai-models.md](ai-models.md).
