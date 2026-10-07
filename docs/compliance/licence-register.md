@@ -56,6 +56,7 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `riverpod_generator` | MIT | Dev | Riverpod codegen | None (not shipped) |
 | `build_runner` | BSD-3 | Dev | Code generation | None (not shipped) |
 | `go_router` | BSD-3 | Yes | Routing | Notice |
+| `flutter_svg` | MIT | Yes | Illustrations (DK-0050+): SVG assets recoloured from the tokens; brings `vector_graphics*` (BSD-3, Flutter team) | Notice |
 | `drift` | MIT | Yes | File index, recents, folders, OCR text (FTS5) | Notice |
 | `drift_dev` | MIT | Dev | drift codegen | None (not shipped) |
 | `lints` | BSD-3 | Dev | Lint rules for the Dart packages | None (not shipped) |
