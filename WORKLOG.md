@@ -62,3 +62,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:01 · agent-2 DK-0014 · done (#260)
 - 2026-10-07 22:02 · agent-2 DK-0003 · claimed: Set up Riverpod 3 with code generation and provider conventions
 - 2026-10-07 22:04 · agent-1 DK-0002 · assigned to agent-1
+- 2026-10-07 22:04 · agent-1 DK-0023 · claimed: Create the fictional sample-document set for demos, tests and store screenshots

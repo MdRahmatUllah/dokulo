@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0023 Create the fictional sample-document set for demos, tests and store screenshots — claimed 2026-10-07 22:04.
 
 ## Next
 
