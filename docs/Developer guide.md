@@ -132,6 +132,13 @@ Riverpod 3 with code generation, the same versions as Sogda:
   helpers in `test/db/dokulo/`: move `generated/*` into `test/db/generated/`
   and delete the rest (`database_test.dart` already checks that every version
   upgrades to the current one). Take the `db-schema` lock first.
+- **Files search's index** (DK-0270): `TextIndexer(db)` puts every page's text
+  (PDF text, OCR layers included) into `ocr_text` and sets `files.has_text`.
+  A file is stale while `files.indexed_at` isn't its `modified`; each file is
+  indexed in one transaction, so a kill leaves the old index and the next
+  `catchUp()` finishes it. After a save: `FileStore.save`, `reconcile`, then
+  `catchUp()`; `startupCleanup` runs both in the background
+  (`StartupReport.indexing`).
 - **Data from drift:** an async notifier (`AsyncNotifier` / `StreamNotifier`)
   that maps the drift watch stream. **Never await a watch's `.first`** in a
   provider: it hangs tests.
@@ -232,6 +239,15 @@ builds the MaterialApp themes. No hex colours, raw font sizes or magic
 numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
 raw colour in `lib/screens` or `lib/components`. A value that isn't a token
 is a gap: add the token first.
+
+Icons are `DkIcon(DkIcons.…)` (`components/dk_icon.dart`, DK-0048): Material
+Symbols Rounded at the spec's five sizes (`DkIconSize.s` 16 … `xxl` 32),
+outlined, `filled: true` only for the selected tab and toggled states.
+`DkIcons` names every icon by purpose (`DkIcons.tool('compress')`,
+`DkIcons.back(context)` switches with the platform), so a screen never names
+a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
+codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
+a const `IconData` (the release build's tree-shaker needs that).
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration

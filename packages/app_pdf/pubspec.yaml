@@ -47,7 +47,6 @@ dependencies:
   path_provider: 2.1.6
   doc_core:
     path: ../doc_core
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -79,6 +78,13 @@ flutter:
   uses-material-design: true
   assets:
     - assets/illustrations/ # DK-0050..0069, from the design export
+
+  # Material Symbols Rounded (DK-0048), fetched by tools/fetch_icon_font.py;
+  # the icon tree-shaker keeps only the glyphs DkIcons uses.
+  fonts:
+    - family: MaterialSymbolsRounded
+      fonts:
+        - asset: assets/fonts/MaterialSymbolsRounded.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

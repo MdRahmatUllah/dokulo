@@ -5,6 +5,7 @@ import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:drift/drift.dart' show Value;
+import 'package:pdfrx_engine/pdfrx_engine.dart' show pdfrxInitialize;
 import 'package:test/test.dart';
 
 /// Copies `src` to `out`; `src` is its input file.
@@ -46,6 +47,7 @@ class _Copy extends ToolJob<Map<String, Object?>> {
 }
 
 void main() {
+  setUpAll(pdfrxInitialize); // step 4 reads PDFs
   late Directory root;
   late DokuloDatabase db;
   late FileStore files;
@@ -80,14 +82,18 @@ void main() {
         ),
       );
 
-  Future<StartupReport> launch() => startupCleanup(
-    db: db,
-    files: files,
-    queue: queue,
-    tools: tools,
-    jobTempRoot: Directory('${root.path}/jobs'),
-    now: now,
-  );
+  Future<StartupReport> launch() async {
+    final report = await startupCleanup(
+      db: db,
+      files: files,
+      queue: queue,
+      tools: tools,
+      jobTempRoot: Directory('${root.path}/jobs'),
+      now: now,
+    );
+    await report.indexing; // step 4 runs on; let it end before the db closes
+    return report;
+  }
 
   test('killed mid-run: a clear state and no partial file; the job runs again', () async {
     final source = File('${root.path}/Rechnung.pdf')
