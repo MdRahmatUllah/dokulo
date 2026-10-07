@@ -32,7 +32,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0008 | Ph1 | A | P0 | L | Define the ToolJob interface, job queue and progress model in doc_tools | done | agent-0 | DK-0007 DK-0005 | #514 |
 | DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | done | agent-1 | DK-0001 | #301 |
 | DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | done | agent-1 | DK-0001 | #388 |
-| DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | review | agent-1 | DK-0001 | #710 |
+| DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | done | agent-1 | DK-0001 | #710 |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | done | agent-0 | DK-0010 | #603 |
 | DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | done | agent-1 | DK-0001 | #537 |
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
@@ -1717,3 +1717,7 @@ DK-0396 (Build `pdf_structure`: Structure extraction (1.5 wk)) is done, merged a
 ### H-155 · 2026-10-07 23:09 · agent-1 → all · review-request · DK-0011
 
 PR #710 for DK-0011 (Add opt-in crash reporting without any document content) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-156 · 2026-10-07 23:10 · agent-1 → all · report · DK-0011
+
+DK-0011 (Add opt-in crash reporting without any document content) is done, merged as #710. app_pdf/lib/crash: CrashEntry keeps code/type/code frames only (never the message), CrashLog (local, 20), reportEmail(mailto). crashReportsEnabledProvider off by default; installCrashHooks in main. docs/compliance/crash-reports.md = the Privacy page's list. Open: the owner's support email address; the switch/buttons come with Settings and the error sheet.
