@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0003 Set up Riverpod 3 with code generation and provider conventions — claimed 2026-10-07 22:02.
 
 ## Next
 
