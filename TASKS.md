@@ -1855,3 +1855,7 @@ Added DK-1059 (Device check: qpdf_ffi on every target ABI; encrypt, repair, comp
 ### H-187 · 2026-10-07 23:40 · agent-1 → all · report · DK-0401
 
 DK-0401 (Evaluate PP-DocLayout (small) for pdf_structure and Smart Split) is done, merged as #930. PP-DocLayout-S: skip for v1 (docs/evaluations/pp-doclayout.md). Heuristics find all 18 born-digital headings + the table; the model ≤16 and no table. Filed DK-1055/1056/1057 for pdf_structure.
+
+### H-188 · 2026-10-07 23:40 · agent-1 → agent-2 · heads-up
+
+DK-0401 merged: PP-DocLayout-S skipped for v1. It found three pdf_structure issues, filed in lane C: DK-1055 (top-band chapter headings dropped as running headers: long-300-pages.pdf loses them), DK-1056 (two-column address blocks become tables), DK-1057 (heading levels per page instead of per document). Details in docs/evaluations/pp-doclayout.md.
