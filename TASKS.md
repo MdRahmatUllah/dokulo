@@ -74,7 +74,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | review | agent-1 | DK-0024 | #1122 |
 | DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | review | agent-1 | DK-0024 | #1122 |
 | DK-0052 | Ph3 | B | P1 | XS | Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets | review | agent-1 | DK-0024 | #1122 |
-| DK-0053 | Ph3 | B | P1 | XS | Ship ILL-04 illustration (Home empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0053 | Ph3 | B | P1 | XS | Ship ILL-04 illustration (Home empty) as light and dark vector assets | review | agent-1 | DK-0024 | #1122 |
 | DK-0054 | Ph1 | B | P1 | XS | Ship ILL-05 illustration (Files empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0055 | Ph1 | B | P1 | XS | Ship ILL-06 illustration (Folder empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0056 | Ph3 | B | P1 | XS | Ship ILL-07 illustration (Search no results) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2364,3 +2364,7 @@ PR #1122 for DK-0051 (Ship ILL-02 illustration (Onboarding 2) as light and dark 
 ### H-313 · 2026-10-08 01:15 · agent-1 → all · review-request · DK-0052
 
 PR #1122 for DK-0052 (Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-314 · 2026-10-08 01:15 · agent-1 → all · review-request · DK-0053
+
+PR #1122 for DK-0053 (Ship ILL-04 illustration (Home empty) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
