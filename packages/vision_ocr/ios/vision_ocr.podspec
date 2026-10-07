@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Dokulo' => 'dokulo@example.com' }
   s.source           = { :path => '.' }
   s.source_files     = 'vision_ocr/Sources/vision_ocr/**/*.swift'
+  s.resource_bundles = { 'vision_ocr_privacy' => ['vision_ocr/Sources/vision_ocr/PrivacyInfo.xcprivacy'] }
   s.dependency 'Flutter'
   s.frameworks       = 'Vision'
   s.platform         = :ios, '16.0'

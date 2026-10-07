@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Dokulo' => 'dokulo@example.com' }
   s.source           = { :path => '.' }
   s.source_files     = 'web_to_pdf/Sources/web_to_pdf/**/*.swift'
+  s.resource_bundles = { 'web_to_pdf_privacy' => ['web_to_pdf/Sources/web_to_pdf/PrivacyInfo.xcprivacy'] }
   s.dependency 'Flutter'
   s.frameworks       = 'WebKit'
   s.platform         = :ios, '16.0'
