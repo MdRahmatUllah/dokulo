@@ -10,3 +10,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:18 · agent-1 DK-0672 · claimed: Compliance: Licence register
 - 2026-10-07 21:18 · agent-2 · session started
 - 2026-10-07 21:18 · agent-1 · onboarded; claimed DK-0672 (licence register), branch feat/DK-0672-licence-register; reading the Technology & Package Plan
+- 2026-10-07 21:18 · agent-2 DK-0677 · claimed: Compliance: ML Kit scanner decision

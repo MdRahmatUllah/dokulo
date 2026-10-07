@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Not started. Assigned: DK-0674, DK-0675, DK-0676, DK-0677, DK-0683.
+DK-0677 Compliance: ML Kit scanner decision — claimed 2026-10-07 21:18.
 
 ## Next
 

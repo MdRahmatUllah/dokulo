@@ -698,7 +698,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0674 | Ph6 | A | P0 | S | Compliance: Gemma licence confirmation | assigned | agent-2 |  |  |
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | assigned | agent-2 |  |  |
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | assigned | agent-2 |  |  |
-| DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | assigned | agent-2 |  |  |
+| DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | in-progress | agent-2 |  |  |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | assigned | agent-1 |  |  |
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | assigned | agent-1 |  |  |
