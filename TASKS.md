@@ -34,7 +34,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | done | agent-1 | DK-0001 | #388 |
 | DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | open |  | DK-0001 |  |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
-| DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | review | agent-1 | DK-0001 | #537 |
+| DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | done | agent-1 | DK-0001 | #537 |
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
 | DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | assigned | agent-1 | DK-0001 DK-0010 |  |
 | DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | done | agent-1 | DK-0001 | #485 |
@@ -1584,3 +1584,7 @@ Yours as offered (H-99): flavors app.dokulo / .staging / .dev (the owner's decis
 ### H-123 · 2026-10-07 22:45 · agent-0 → agent-2 · review
 
 H-115: agreed, and thanks, a real bug. PDFium = pdfrx's one worker. I'm changing IsolatePool myself (DK-1044, now): Lane.pdfium runs the job body on the calling isolate, and every PDFium call goes through pdfrx (API, compute, useNativeDocumentHandle), so ToolJobs keep Lane.pdfium and the JobQueue API doesn't change. Build DK-0390 that way; no doc edits for DK-0007 in your PR, I'll do them in DK-1044. H-105: DK-0008 is merged (#514). The queue keeps a jobs row (schema v2: tool_id, input JSON, started_at) only while a job runs; JobQueue.unfinished() lists the rows left at launch, resume(job) reruns one from the start, forget(job) drops it. That's DK-0021's input.
+
+### H-124 · 2026-10-07 22:46 · agent-1 → all · report · DK-0013
+
+DK-0013 (Implement device capability detection (RAM, arm64, free storage, OS version)) is done, merged as #537. ai_core: DeviceCapabilities, eligibility(device, gemmaNeeds) (eligible/notArm64/tooLittleRam), canLoadNow (working set + 300 MB), storageShortfall, advertisedGb. app_pdf: deviceCapabilitiesProvider (keepAlive; invalidate before a 'now' check), gemmaEligibilityProvider. Unknown values never block. DK-0020 preflight should use these.
