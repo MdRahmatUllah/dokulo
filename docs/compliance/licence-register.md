@@ -15,7 +15,7 @@ tables here.
 ## What the scan does
 
 `python tools/licence_scan.py` (part of the basic check whenever a `pubspec.yaml`
-or `pubspec.lock` changes; DK-0010 makes it a required CI check) reads every
+or `pubspec.lock` changes; a step of the local gate `tools/check.py`, DK-0010) reads every
 `pubspec.lock` in the repo and, for each package:
 
 1. **Fails** when its name matches a denied engine or SDK (the *Excluded* table).
@@ -133,7 +133,7 @@ restrictions, attribution): the intake checklist in [ai-models.md](ai-models.md)
 | Foxit PDF SDK | Commercial | As above |
 | Google ML Kit (document scanner, text recognition, any ML Kit API) | Google proprietary terms | Closed source, delivered by Play services, sends usage metrics to Google ([decision](ml-kit-scanner.md), DK-0677) |
 | HY-MT1.5 / Hunyuan-MT 1.x | Tencent HY Community Licence | Territory excludes the EU, UK and South Korea (DK-0676; Hy-MT2 is Apache-2.0 and allowed, see Models) |
-| veraPDF | GPL / MPL dual | CI only, as a PDF/A validator; never shipped |
+| veraPDF | GPL / MPL dual | Local test tool only, as a PDF/A validator; never shipped |
 
 The scan's deny patterns (`tools/licence_scan.py`, `DENIED`): `mupdf`,
 `ghostscript`, `bentopdf`, `syncfusion`, `apryse`, `pdftron`, `pspdfkit`,
