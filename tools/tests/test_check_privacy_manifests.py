@@ -31,6 +31,7 @@ def test_check(tmp_path: Path) -> None:
         plugin(cache, "good", {"ios/Classes/Good.swift": "", "ios/Resources/PrivacyInfo.xcprivacy": ""}),
         plugin(cache, "dart_only", {"lib/dart_only.dart": ""}),
         plugin(cache, "bad", {"darwin/bad/Sources/Bad.m": ""}),
+        {**plugin(cache, "dev_only", {"ios/Classes/Dev.m": ""}), "dev_dependency": True},  # never ships
     ]
     (repo / c.PLUGINS).write_text(json.dumps({"plugins": {"ios": plugins}}), encoding="utf-8")
     plugin(repo / "packages", "ours", {"ios/ours/Sources/ours/Ours.swift": ""})  # not resolved yet

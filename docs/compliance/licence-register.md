@@ -39,6 +39,11 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `pdfrx_engine` | MIT | Yes | pdfrx's engine layer | Notice |
 | `pdfium_dart` | MIT | Yes | PDFium FFI bindings (pdfrx's, and doc_core's raw calls) | Notice |
 | `ffi` | BSD-3 | Yes | Native memory for FFI calls | Notice |
+| `qpdf_ffi` | (ours) | Yes | qpdf binding (DK-0391); ships qpdf, zlib, libjpeg-turbo (native table) | Their notices |
+| `hooks` | BSD-3 | Dev | Build hooks (qpdf_ffi's native build) | None (runs at build time only) |
+| `code_assets` | BSD-3 | Dev | Native code assets from build hooks | None (runs at build time only) |
+| `native_toolchain_cmake` | Apache-2.0 | Dev | Runs CMake from a build hook | None (runs at build time only) |
+| `logging` | BSD-3 | Dev | Build-hook log output | None (runs at build time only) |
 | `pdf` | Apache-2.0 | Yes | Create PDFs, overlays, OCR text layer (`pdf_crypto` not used) | Notice |
 | `printing` | Apache-2.0 | Yes | HTML → PDF (`Printing.convertHtml`) | Notice |
 | `llamadart` | MIT | Yes | Gemma via llama.cpp (GGUF) | Notice; llama.cpp notice (native table) |
@@ -56,6 +61,7 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `lints` | BSD-3 | Dev | Lint rules for the Dart packages | None (not shipped) |
 | `flutter_lints` | BSD-3 | Dev | Lint rules for `app_pdf` | None (not shipped) |
 | `test` | BSD-3 | Dev | Unit tests in the Dart packages | None (not shipped) |
+| `integration_test` | BSD-3 (Flutter SDK) | Dev | Device tests in `app_pdf/integration_test/` | None (not shipped) |
 | `crypto` | BSD-3 | Dev | SHA-256 in tests (original files are never modified) | None (not shipped) |
 | `sqlite3` | MIT | Yes | SQLite with FTS5 via build hooks (3.x; SQLite itself is public domain). `sqlite3_flutter_libs` and `sqlcipher_flutter_libs` are obsolete with 3.x (their `+eol` releases do nothing): don't add them | Notice |
 | `cryptography` | Apache-2.0 | Yes | AES-GCM file encryption | Notice |
@@ -82,8 +88,8 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | --- | --- | --- | --- |
 | PDFium (chromium/7811 via pdfrx) | BSD-3 / Apache-2.0 | Yes | Notices in the licence screen |
 | qpdf 12.3.2 (our `qpdf_ffi`, native crypto only: no OpenSSL/GnuTLS) | Apache-2.0 | Yes | Notice + the NOTICE file's contents |
-| zlib | Zlib | Yes (via qpdf, OpenCV) | Notice |
-| libjpeg-turbo | BSD-3 + IJG | Yes (via qpdf, OpenCV) | Notices; the IJG credit "this software is based in part on the work of the Independent JPEG Group" |
+| zlib 1.3.2 (static in qpdf; OpenCV has its own) | Zlib | Yes (via qpdf, OpenCV) | Notice |
+| libjpeg-turbo 3.1.4.1 (static in qpdf; OpenCV has its own) | BSD-3 + IJG | Yes (via qpdf, OpenCV) | Notices; the IJG credit "this software is based in part on the work of the Independent JPEG Group" |
 | OpenCV 4.13 (via `opencv_dart` / `dartcv4`): core, imgproc, imgcodecs only | Apache-2.0 | Yes | Notice; every other module excluded, so no FFmpeg ([opencv-modules.md](opencv-modules.md), DK-0680) |
 | libpng (via OpenCV) | libpng licence (permissive) | Yes | Notice |
 | libwebp (via OpenCV) | BSD-3 | Yes | Notice |
