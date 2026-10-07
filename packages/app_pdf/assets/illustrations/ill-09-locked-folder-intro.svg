@@ -1,0 +1,9 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Folder with a lock and fingerprint"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<path d="M16 38a4 4 0 0 1 4-4h20l6 6h40a4 4 0 0 1 4 4v42a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4z" fill="#FFFFFF"></path>
+<rect x="38" y="58" width="26" height="22" rx="4" fill="#E6ECFF"></rect>
+<path d="M43 58v-6a8 8 0 0 1 16 0v6"></path>
+<path d="M51 66v6" stroke="#2251E6" stroke-width="3"></path>
+<circle cx="92" cy="86" r="18" fill="#FFFFFF"></circle>
+<path d="M84 90c0-8 4-12 8-12s8 4 8 10M88 94c0-6 2-10 4-10s4 3 4 8M92 96v-6" stroke="#2251E6"></path>
+</g></svg>
