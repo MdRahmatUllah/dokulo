@@ -60,7 +60,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | assigned | agent-2 | DK-0024 |  |
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
 | DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | assigned | agent-2 | DK-0024 |  |
-| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | assigned | agent-1 | DK-0024 |  |
+| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | in-progress | agent-1 | DK-0024 |  |
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | assigned | agent-1 | DK-0039 |  |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | assigned | agent-1 | DK-0039 |  |
 | DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | assigned | agent-1 | DK-0039 |  |
