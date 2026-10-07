@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0462 Compress PDF: implement the compress ToolJob (engine) — claimed 2026-10-08 00:44.
 
 ## Next
 
