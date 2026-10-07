@@ -24,7 +24,8 @@ packages/
       l10n/             app_en.arb, app_de.arb (DK-0009)
     test/               mirrors lib/; goldens next to their tests in goldens/
   doc_tools/            layer 2: one ToolJob per feature (pure Dart)
-  doc_core/             layer 3: PDFs: open, render, page ops, text, image pipeline
+  doc_core/             layer 3: PDFs: open, render, page ops, text, image pipeline;
+                        the database (lib/src/db/schema.drift, drift_schemas/)
   doc_vision/           layer 3: scanner, OCR engines, layout, photo finder
   ai_core/              layer 4: models, LLM arbiter, translation, retrieval
 tools/                  team.py, check_layers.py, licence_scan.py, … (Python, stdlib only)
@@ -71,6 +72,13 @@ Riverpod 3 with code generation, the same versions as Sogda:
   (`part '<file>.g.dart';`). The example is `lib/providers/theme_providers.dart`.
 - **One provider file per screen,** next to it: `screens/h1_home/home_providers.dart`.
   Providers that several screens share go in `lib/providers/<topic>_providers.dart`.
+- **The database** is `DokuloDatabase` in `doc_core` (DK-0005): the schema
+  is SQL in `lib/src/db/schema.drift`, opened on a background isolate in app
+  support through `appDatabaseProvider`. Tests use `DokuloDatabase.memory()`.
+  A schema change bumps `schemaVersion`, adds a migration step, and runs
+  `dart run drift_dev make-migrations` in `doc_core`, which writes
+  `drift_schemas/` and the test helpers. The migration test checks every
+  version upgrades to the current one.
 - **Data from drift:** an async notifier (`AsyncNotifier` / `StreamNotifier`)
   that maps the drift watch stream. **Never await a watch's `.first`** in a
   provider: it hangs tests.

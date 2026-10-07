@@ -42,7 +42,7 @@ flutter pub get                 # once, at the root: resolves every package
 cd packages/app_pdf && flutter run
 ```
 
-The basic check (the only check a PR gets until CI is on) is in
+The basic check (`python tools/check.py`, the only check a PR gets: there is no CI/CD) is in
 [`CLAUDE.md`](CLAUDE.md#the-basic-check).
 
 How the code is organised, state, routing, theming, testing, the

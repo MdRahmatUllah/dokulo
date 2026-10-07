@@ -1,0 +1,130 @@
+-- Dokulo's database (DK-0005): the file index and everything the app keeps
+-- about files and tools. Lives in app support, never in the user's folder.
+-- Bump DokuloDatabase.schemaVersion and add a migration step on any change.
+
+CREATE TABLE folders (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  parent_id INTEGER REFERENCES folders (id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  colour_tag TEXT
+);
+
+CREATE TABLE files (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  path TEXT NOT NULL UNIQUE,
+  name TEXT NOT NULL,
+  size INTEGER NOT NULL,
+  pages INTEGER NOT NULL DEFAULT 0,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL,
+  has_text BOOLEAN NOT NULL DEFAULT FALSE,
+  encrypted BOOLEAN NOT NULL DEFAULT FALSE,
+  folder_id INTEGER REFERENCES folders (id) ON DELETE SET NULL,
+  colour TEXT
+) AS FileEntry; -- not File: that's dart:io's
+
+-- Opening a file again replaces its row (INSERT OR REPLACE), so it moves to
+-- the top; the trigger keeps the newest 20.
+CREATE TABLE recents (
+  file_id INTEGER NOT NULL PRIMARY KEY REFERENCES files (id) ON DELETE CASCADE,
+  opened_at DATETIME NOT NULL
+);
+
+CREATE TRIGGER recents_keep_20 AFTER INSERT ON recents BEGIN
+  DELETE FROM recents WHERE file_id NOT IN
+    (SELECT file_id FROM recents ORDER BY opened_at DESC LIMIT 20);
+END;
+
+CREATE TABLE favourites (
+  file_id INTEGER NOT NULL PRIMARY KEY REFERENCES files (id) ON DELETE CASCADE,
+  added_at DATETIME NOT NULL
+);
+
+-- Undo snapshots of a file; the trigger keeps the newest 5 per file. The
+-- snapshot files themselves are deleted by whoever deletes the row (DK-0021).
+CREATE TABLE versions (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  file_id INTEGER NOT NULL REFERENCES files (id) ON DELETE CASCADE,
+  path TEXT NOT NULL,
+  created_at DATETIME NOT NULL
+);
+
+CREATE TRIGGER versions_keep_5 AFTER INSERT ON versions BEGIN
+  DELETE FROM versions WHERE file_id = new.file_id AND id NOT IN
+    (SELECT id FROM versions WHERE file_id = new.file_id
+     ORDER BY created_at DESC, id DESC LIMIT 5);
+END;
+
+-- Recently deleted: purged after the "Keep deleted files" setting (30 days).
+CREATE TABLE trash (
+  file_id INTEGER NOT NULL PRIMARY KEY REFERENCES files (id) ON DELETE CASCADE,
+  deleted_at DATETIME NOT NULL
+);
+
+-- Text of every page (PDF text or OCR), for Files search. unicode61 with
+-- remove_diacritics finds "Gebühr" for "gebuhr".
+CREATE VIRTUAL TABLE ocr_text USING fts5(
+  file_id UNINDEXED,
+  page UNINDEXED,
+  page_text,
+  tokenize = 'unicode61 remove_diacritics 2'
+);
+
+CREATE TABLE pinned_tools (
+  tool_id TEXT NOT NULL PRIMARY KEY,
+  position INTEGER NOT NULL
+);
+
+-- Local only, never uploaded (DK-0022).
+CREATE TABLE tool_usage (
+  tool_id TEXT NOT NULL PRIMARY KEY,
+  count INTEGER NOT NULL DEFAULT 0,
+  last_used DATETIME
+);
+
+-- The one free try of a Pro tool (UI spec §12.5).
+CREATE TABLE pro_trials (
+  tool_id TEXT NOT NULL PRIMARY KEY,
+  used_at DATETIME NOT NULL
+);
+
+-- A saved chain of tools; steps is JSON (tool ids and their options).
+CREATE TABLE workflows (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  steps TEXT NOT NULL,
+  created_at DATETIME NOT NULL
+);
+
+-- Metadata only: the images live in the encrypted store under image_ref.
+CREATE TABLE signatures (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  kind TEXT NOT NULL CHECK (kind IN ('signature', 'initials')),
+  image_ref TEXT NOT NULL,
+  created_at DATETIME NOT NULL
+);
+
+-- "Find documents in photos": a photo's score, so it isn't scored twice.
+CREATE TABLE photo_finder_cache (
+  asset_id TEXT NOT NULL PRIMARY KEY,
+  modified DATETIME NOT NULL,
+  score REAL NOT NULL,
+  is_document BOOLEAN NOT NULL
+);
+
+-- Files search: the matching file, page and a snippet with the hit in [ ].
+searchText: SELECT CAST(file_id AS INTEGER) AS file_id, CAST(page AS INTEGER) AS page,
+    snippet(ocr_text, 2, '[', ']', '…', 12) AS snippet
+  FROM ocr_text WHERE ocr_text MATCH :query ORDER BY rank;
+
+-- Tool usage (DK-0022), on this phone only. The job queue calls recordToolRun
+-- after each successful run; X1 "Suggested" reads mostUsedTools, the app-icon
+-- shortcut lastUsedTool.
+recordToolRun: INSERT INTO tool_usage (tool_id, count, last_used)
+  VALUES (:tool_id, 1, :at)
+  ON CONFLICT (tool_id) DO UPDATE SET count = count + 1, last_used = excluded.last_used;
+
+mostUsedTools: SELECT tool_id FROM tool_usage
+  ORDER BY count DESC, last_used DESC LIMIT :limit;
+
+lastUsedTool: SELECT tool_id FROM tool_usage ORDER BY last_used DESC LIMIT 1;
