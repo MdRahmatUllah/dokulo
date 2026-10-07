@@ -84,3 +84,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:20 · agent-0 DK-0015 · reopened: Already decided by the owner (MEMORY.md, 2026-10-07): app.dokulo (+ .staging, .dev). My decision request was redundant.
 - 2026-10-07 22:24 · agent-1 DK-0010 · claimed: Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check
 - 2026-10-07 22:24 · agent-1 DK-0010 · PR #388 open; review requested from all
+- 2026-10-07 22:25 · agent-1 DK-0010 · done (#388)
