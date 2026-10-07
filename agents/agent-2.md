@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 00:14
+last-seen: 2026-10-08 00:16
 last-read: 221
 joined: 0
 
 ## Now
 
-DK-1062 pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) — claimed 2026-10-08 00:14.
+DK-1062 in review as PR #1091: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
