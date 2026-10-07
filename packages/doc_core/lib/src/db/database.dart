@@ -31,12 +31,14 @@ class DokuloDatabase extends _$DokuloDatabase {
       File('${supportDirectory.path}${Platform.pathSeparator}dokulo.db');
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onUpgrade: stepByStep(
       from1To2: (m, schema) async => m.createTable(schema.jobs), // DK-0008
+      from2To3: (m, schema) async =>
+          m.addColumn(schema.files, schema.files.indexedAt), // DK-0270
     ),
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');

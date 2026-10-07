@@ -11,6 +11,7 @@ class StartupReport {
     required this.resumed,
     required this.couldNotFinish,
     required this.trashPurged,
+    required this.indexing,
   });
 
   /// Jobs killed with the app and started again ("continue").
@@ -23,6 +24,11 @@ class StartupReport {
 
   /// Files deleted from Recently deleted, past the retention.
   final int trashPurged;
+
+  /// Step 4, still running in the background: how many files got their
+  /// Files-search text indexed ([TextIndexer], DK-0270); 0 if the folder
+  /// couldn't be read (it never fails).
+  final Future<int> indexing;
 }
 
 /// Runs once at launch (DK-0021), before any new job:
@@ -34,6 +40,9 @@ class StartupReport {
 /// 2. Deletes files that sat in Recently deleted longer than [trashRetention].
 /// 3. Resumes each job the OS killed whose input files still exist; reports
 ///    the rest.
+/// 4. Brings the file index in line with the user folder and indexes the
+///    text of every file that isn't yet ([TextIndexer]), in the background:
+///    a file whose indexing a kill interrupted is finished here.
 Future<StartupReport> startupCleanup({
   required DokuloDatabase db,
   required FileStore files,
@@ -81,6 +90,11 @@ Future<StartupReport> startupCleanup({
     resumed: resumed,
     couldNotFinish: couldNotFinish,
     trashPurged: expired.length,
+    // Not fatal: if the folder can't be read now, the next launch tries again.
+    indexing: files
+        .reconcile(db)
+        .then((_) => TextIndexer(db).catchUp())
+        .catchError((Object _) => 0),
   );
 }
 

@@ -132,6 +132,13 @@ Riverpod 3 with code generation, the same versions as Sogda:
   helpers in `test/db/dokulo/`: move `generated/*` into `test/db/generated/`
   and delete the rest (`database_test.dart` already checks that every version
   upgrades to the current one). Take the `db-schema` lock first.
+- **Files search's index** (DK-0270): `TextIndexer(db)` puts every page's text
+  (PDF text, OCR layers included) into `ocr_text` and sets `files.has_text`.
+  A file is stale while `files.indexed_at` isn't its `modified`; each file is
+  indexed in one transaction, so a kill leaves the old index and the next
+  `catchUp()` finishes it. After a save: `FileStore.save`, `reconcile`, then
+  `catchUp()`; `startupCleanup` runs both in the background
+  (`StartupReport.indexing`).
 - **Data from drift:** an async notifier (`AsyncNotifier` / `StreamNotifier`)
   that maps the drift watch stream. **Never await a watch's `.first`** in a
   provider: it hangs tests.
@@ -232,6 +239,14 @@ builds the MaterialApp themes. No hex colours, raw font sizes or magic
 numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
 raw colour in `lib/screens` or `lib/components`. A value that isn't a token
 is a gap: add the token first.
+
+**Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
+/ standard / emphasis)`, never raw durations: it returns the spec's duration
+and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
+cross-fade (`crossFade: true`: fade instead of moving, scaling or sliding).
+Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
+context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
+`captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
 
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
