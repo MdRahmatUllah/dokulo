@@ -65,7 +65,8 @@ def classify(package_dir: Path) -> str | None:
     files = [f for f in package_dir.glob("*") if re.match(r"(?i)licen[cs]e", f.name)]
     if not files:
         return None
-    text = files[0].read_text(encoding="utf-8", errors="replace")
+    main_file = min(files, key=lambda f: (len(f.name), f.name))  # LICENSE before LICENSE-THIRD-PARTY
+    text = main_file.read_text(encoding="utf-8", errors="replace")
     found = [(m.start(), name) for name, pattern in LICENCES if (m := re.search(pattern, text, re.I))]
     return min(found)[1] if found else None
 
