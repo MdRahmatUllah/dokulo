@@ -48,21 +48,43 @@ Rules:
 
 ## 2. State
 
-Riverpod 3 with code generation (`riverpod_annotation`, `riverpod_generator`),
-as in Sogda. DK-0003 sets the conventions in code; the rules:
+Riverpod 3 with code generation, the same versions as Sogda:
+`flutter_riverpod` 3.4, `riverpod_annotation` and `riverpod_generator` 4.0,
+`build_runner` (DK-0003). Generated `*.g.dart` files are not committed: run
+`dart run build_runner build` in `packages/app_pdf` after `flutter pub get`
+(and again after a `git stash` round trip).
 
-- Providers are generated (`@riverpod`), never hand-written `Provider(...)`.
-- `autoDispose` is the default; `keepAlive: true` only for app-wide state (the
-  file index, settings, the job queue, Pro status).
-- A screen's own providers live next to it in `screens/<id>/`; shared ones in
-  `providers/`.
-- Widgets read state with `ref.watch` in `build` and act with `ref.read` in
-  callbacks. No business logic in widgets.
-- Long work is a `ToolJob` (DK-0008) with a progress stream, cancel and an undo
-  snapshot; the UI shows it through the job-queue provider, never by awaiting a
-  `Future` in a widget.
-- **Never await a drift watch's `.first` in a provider**: it hangs tests. Map
-  the stream instead.
+- **Generated, never hand-written.** `@riverpod` on a function or a class
+  (`part '<file>.g.dart';`). The example is `lib/providers/theme_providers.dart`.
+- **One provider file per screen,** next to it: `screens/h1_home/home_providers.dart`.
+  Providers that several screens share go in `lib/providers/<topic>_providers.dart`.
+- **Data from drift:** an async notifier (`AsyncNotifier` / `StreamNotifier`)
+  that maps the drift watch stream. **Never await a watch's `.first`** in a
+  provider: it hangs tests.
+- **Per-file state:** a family provider keyed by the file id
+  (`@riverpod Future<FileInfo> fileInfo(Ref ref, String fileId)`).
+- **`autoDispose` is the default.** `@Riverpod(keepAlive: true)` only for
+  long-lived services and what every frame reads: the job queue, the model
+  manager, the Pro entitlement, the theme mode. Name the reason in the doc
+  comment.
+- **Widgets** read with `ref.watch` in `build` and act through a notifier's
+  method with `ref.read(...notifier)` in callbacks. No business logic in widgets.
+- **Jobs:** a screen never awaits a job's `Future`. It watches the job-queue
+  provider (DK-0008), which exposes each `ToolJob`'s progress stream as state
+  (`queued → running(page, of) → done | failed | cancelled`). The progress
+  sheet, the mini bar and T3 all read the same provider.
+- **The UI never touches native code.** No file in `app_pdf/lib` imports
+  `dart:ffi`, `package:ffi` or a native binding (`opencv_dart`, `dartcv4`,
+  `flutter_onnxruntime`, `llamadart`, `qpdf_ffi`). `tools/check_layers.py`
+  fails the build on it. pdfrx's viewer widget is the one exception: it runs
+  PDFium on pdfrx's own worker isolate.
+- **Tests override providers** through `ProviderScope(overrides: [...])`:
+  `fooProvider.overrideWithValue(x)` for a plain value,
+  `fooProvider.overrideWith(...)` for a function provider, and
+  `fooProvider.overrideWithBuild((ref, notifier) => x)` for a notifier's
+  initial state. To drive a notifier mid-test, take the container with
+  `ProviderScope.containerOf(tester.element(...))`. See
+  `test/providers/theme_providers_test.dart`.
 
 ## 3. Routing
 
@@ -126,7 +148,8 @@ Text(formatBytes(size, l10n.localeName));     // "1.9 MB" / "1,9 MB" (l10n/forma
 - Sizes and dates go through `formatBytes` / `formatDate`, never string
   concatenation: the unit is joined with a narrow no-break space (U+202F).
 - The language follows the system unless Settings → Language overrides it
-  (`AppLanguageController`); a change rebuilds `MaterialApp` at once.
+  (`appLanguageSettingProvider`, `lib/providers/language_providers.dart`);
+  `MaterialApp` watches it, so a change applies to every screen at once.
 - `python tools/check_l10n.py` fails on a key missing in German, a placeholder
   mismatch, or a hard-coded string in `Text(...)` or a label-like argument.
   A deliberate literal (the brand name) carries `// l10n-ignore` on its line.

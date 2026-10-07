@@ -2,7 +2,9 @@ import 'package:app_pdf/l10n/app_language.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/l10n/formats.dart';
 import 'package:app_pdf/main.dart';
+import 'package:app_pdf/providers/language_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -10,7 +12,7 @@ void main() {
   testWidgets('the app follows the system language by default', (tester) async {
     tester.platformDispatcher.localesTestValue = const [Locale('de', 'DE')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
-    await tester.pumpWidget(DokuloApp());
+    await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
     expect(find.text('Alles bleibt auf diesem Handy'), findsOneWidget);
   });
 
@@ -19,15 +21,17 @@ void main() {
   ) async {
     tester.platformDispatcher.localesTestValue = const [Locale('en', 'US')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
-    final language = AppLanguageController();
-    await tester.pumpWidget(DokuloApp(language: language));
+    await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
+    final language = ProviderScope.containerOf(
+      tester.element(find.byType(DokuloApp)),
+    ).read(appLanguageSettingProvider.notifier);
     expect(find.text('Everything stays on this phone'), findsOneWidget);
 
-    language.value = AppLanguage.deutsch;
+    language.select(AppLanguage.deutsch);
     await tester.pump();
     expect(find.text('Alles bleibt auf diesem Handy'), findsOneWidget);
 
-    language.value = AppLanguage.system;
+    language.select(AppLanguage.system);
     await tester.pump();
     expect(find.text('Everything stays on this phone'), findsOneWidget);
   });

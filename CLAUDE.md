@@ -88,6 +88,7 @@ It is the only check a PR gets: CI is off until the owner decides on DK-0010. Fr
 
 ```bash
 flutter pub get
+(cd packages/app_pdf && dart run build_runner build)             # *.g.dart are not committed
 flutter analyze --fatal-infos                                    # the whole workspace
 dart format --output=none --set-exit-if-changed packages
 python tools/check_layers.py                                     # dependencies point one way only
