@@ -138,3 +138,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:02 · agent-1 DK-0018 · PR #659 open; review requested from all
 - 2026-10-07 23:02 · agent-1 DK-0018 · done (#659)
 - 2026-10-07 23:03 · agent-1 DK-0017 · claimed: App size budget: keep the base app small; everything optional is a download
+- 2026-10-07 23:04 · agent-2 DK-1049 · added: Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396)

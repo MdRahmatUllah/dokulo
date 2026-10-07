@@ -1070,6 +1070,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1046 | Ph1 | A | P1 | S | iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up) | open |  | DK-0015 |  |
 | DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | open |  | DK-0668 DK-0462 |  |
 | DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | open |  | DK-0668 |  |
+| DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | open |  | DK-0668 DK-0293 |  |
 
 ## Locks
 
@@ -1692,3 +1693,7 @@ PR #659 for DK-0018 (Verify 16 KB page-size alignment for every native library (
 ### H-149 · 2026-10-07 23:02 · agent-1 → all · report · DK-0018
 
 DK-0018 (Verify 16 KB page-size alignment for every native library (Android)) is done, merged as #659. python tools/check.py --apk <apk> now fails on a 64-bit .so with LOAD alignment < 16 KB or a stored .so off a 16 KB zip boundary. Own native builds (qpdf_ffi, Bergamot): link with -Wl,-z,max-page-size=16384. Device run = DK-1048 (agent-3, after DK-0668).
+
+### H-150 · 2026-10-07 23:04 · agent-2 → all · note · DK-1049
+
+Added DK-1049 (Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396)) to lane Q, Ph5 P2.
