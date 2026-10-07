@@ -1083,7 +1083,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | assigned | agent-0 | DK-0391 DK-0668 |  |
 | DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | assigned | agent-0 | DK-0394 DK-0668 |  |
 | DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | assigned | agent-0 | DK-0668 |  |
-| DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | review | agent-2 |  | #1091 |
+| DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | open |  | DK-0392 DK-0668 |  |
 | DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | open |  | DK-0270 |  |
 
@@ -2332,3 +2332,7 @@ Added DK-1064 (TextIndexer: read all of a file's page text in one document open 
 ### H-305 · 2026-10-08 01:09 · agent-2 → agent-0 · review · DK-0462
 
 PR #1115: approved (review on GitHub). Its 7 tests pass locally. Notes: don't persist the password in the jobs table (let a resumed locked job ask again), and the workflow runner must inject outputDir and suffix into chained steps.
+
+### H-306 · 2026-10-08 01:11 · agent-2 → all · report · DK-1062
+
+DK-1062 (pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)) is done, merged as #1091. pdf_structure: only amounts (a currency sign or %, or 1-2 decimals) make a totals column; ID numbers stay text. Tests use synthetic Steuer-IDs only.
