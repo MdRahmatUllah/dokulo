@@ -251,30 +251,9 @@ Fourteen components have no permissive, complete option, so we build them. Toget
 
 ## Licence register
 
-Every shipped component is permissive or file-level copyleft used unmodified; the one blocked model (Hy-MT) and all AGPL engines stay out.
+Every shipped component is permissive or file-level copyleft used unmodified; the one blocked model (Hy-MT) and all AGPL engines stay out. The register itself (every Dart package, native library, model and font, with its licence and obligations, plus the excluded list) lives in [`docs/compliance/licence-register.md`](compliance/licence-register.md).
 
-| Component | Licence | Ships in app | Obligations |
-| --- | --- | --- | --- |
-| PDFium | BSD-3 / Apache-2.0 | Yes | Notices in licence screen |
-| pdfrx, pdfium\_flutter, pdfrx\_engine | MIT | Yes | Notice |
-| qpdf 12.3.2 | Apache-2.0 | Yes | Notice + NOTICE file contents |
-| zlib, libjpeg-turbo | zlib / BSD-style + IJG | Yes (via qpdf, OpenCV) | Notices; IJG requires the "based on the work of the Independent JPEG Group" credit |
-| Dart `pdf` 3.13.1 | Apache-2.0 | Yes | Notice |
-| OpenCV (via opencv\_dart) | Apache-2.0 | Yes | Notice; exclude videoio/highgui so no FFmpeg is linked |
-| ONNX Runtime (via flutter\_onnxruntime) | MIT | Yes | Notice |
-| llama.cpp (via llamadart) | MIT | Yes | Notice |
-| Bergamot translator + models | MPL-2.0 | Yes (engine) / download (models) | Keep MPL files unmodified or publish changes to those files; notice |
-| PP-OCRv5 models | Apache-2.0 | Bundled / download | NOTICE file; state that ONNX files are converted, not modified |
-| Gemma 4 E2B | Apache-2.0 (per Sogda catalogue; re-confirm on the model card at release) | Download | Notice; follow any use policy on the model card |
-| Supertonic 3 (optional, later) | OpenRAIL-M | Download | Pass use restrictions on in the app terms |
-| Apple VisionKit / Vision | Apple platform | OS | None |
-| Google ML Kit document scanner (optional) | Google proprietary terms, free | Optional (Android fast path) | Review ML Kit terms and data-collection notes before enabling; disclose in privacy policy |
-| Hy-MT / HY-MT1.5 | Tencent HY Community Licence | **No** | Excluded: territory excludes EU, UK, South Korea |
-| MuPDF, PyMuPDF, Ghostscript, BentoPDF | AGPL | **No** | Excluded |
-| veraPDF | GPL / MPL dual | **No** (CI only) | Used only as a test tool |
-| Syncfusion, Apryse, Nutrient, Foxit SDKs | Commercial | **No** | Excluded |
-
-**Process:** run a licence scan in CI on every release (generate the in-app licence screen from `pubspec.lock` plus a hand-maintained list for native libs and models); any new dependency needs a licence line in this table before it's merged.
+**Process:** `tools/licence_scan.py` checks every `pubspec.lock` against the register (part of the basic check; a required CI check once CI is on); the in-app licence screen is generated from `pubspec.lock` plus the register's native, model and font tables; any new dependency needs a line in the register before it's merged.
 
 ## Testing and device targets
 
