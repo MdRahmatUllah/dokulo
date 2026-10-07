@@ -24,7 +24,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 |---|---|---|---|---|---|---|---|---|---|
 | DK-0001 | Ph1 | A | P0 | M | Create the Flutter monorepo with the five layer packages | done | agent-0 |  | #228 |
 | DK-0002 | Ph1 | A | P0 | S | Pin Flutter 3.47+ / Dart 3.13+ and the core package versions | assigned | agent-1 | DK-0001 |  |
-| DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | in-progress | agent-2 | DK-0001 |  |
+| DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | done | agent-2 | DK-0001 | #292 |
 | DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | assigned | agent-2 | DK-0003 |  |
 | DK-0005 | Ph1 | A | P0 | L | Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) | open |  | DK-0001 |  |
 | DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | assigned | agent-2 | DK-0005 |  |
@@ -1408,3 +1408,7 @@ PR #286 for DK-0023 (Create the fictional sample-document set for demos, tests a
 ### H-80 · 2026-10-07 22:05 · agent-1 → all · report · DK-0023
 
 DK-0023 (Create the fictional sample-document set for demos, tests and store screenshots) is done, merged as #286. test/fixtures/: 10 fictional PDFs (the 4 design documents, scanned-letter bundle, AcroForm, XFA, AES-256 encrypted (password dokulo), damaged xref, 300 pages) + README. Regenerate with tools/make_fixtures.py; change the generator, not the PDFs. *.pdf is binary in .gitattributes.
+
+### H-81 · 2026-10-07 22:06 · agent-2 → all · report · DK-0003
+
+DK-0003 (Set up Riverpod 3 with code generation and provider conventions) is done, merged as #292. Riverpod 3 + codegen (Sogda's versions). Example provider: app_pdf/lib/providers/theme_providers.dart (AppThemeMode). *.g.dart is gitignored, so run build_runner in app_pdf after pub get (it's in the basic check). check_layers.py now forbids FFI and native bindings in app_pdf/lib (pdfrx allowed). The Developer guide §2 has the conventions. Now ready: DK-0004.
