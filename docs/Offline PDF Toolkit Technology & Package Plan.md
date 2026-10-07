@@ -205,7 +205,7 @@ Gemma 4 E2B and Bergamot cover all AI and translation features; PP-OCRv5 covers 
 | PP-OCRv5 mobile det + Latin rec + angle cls (ONNX) | OCR for scans, redaction on scans, photo detection | flutter\_onnxruntime | det \~4.8 MB, Latin rec \~8 MB, cls \~0.6 MB | Apache-2.0 ([ONNX export example](https://github.com/gitakoos/ocr-models)) | **Use** on Android and as the uniform engine; bundle det + Latin rec in the app |
 | PP-OCRv5 multilingual rec | Non-Latin scripts | flutter\_onnxruntime | \~16.5 MB | Apache-2.0 | Optional download |
 | Apple Vision text recognition | OCR on iOS (fast, accurate, handwriting) | OS API via platform channel | 0 (built in) | Apple platform | **Use** on iOS as default, PP-OCRv5 as fallback |
-| PP-DocLayout (small) | Layout regions for PDF → Markdown and Smart Split | flutter\_onnxruntime | a few MB | Apache-2.0 | Evaluate in phase 5; heuristics first |
+| PP-DocLayout (small) | Layout regions for PDF → Markdown and Smart Split | flutter\_onnxruntime | a few MB | Apache-2.0 | **Skip for v1**: heuristics match it on born-digital PDFs and find tables it misses ([evaluation](evaluations/pp-doclayout.md), DK-0401) |
 | Embedding model | Semantic retrieval for Ask your PDF | ONNX | \~120 MB (e.g. multilingual-e5-small, MIT) | Check per model | **Not in v1**: BM25 keyword retrieval is enough for single documents |
 | Supertonic 3 (TTS) | Optional "Read aloud" | ONNX Runtime (as in Sogda) | per Sogda spec | OpenRAIL-M (use restrictions apply) | Optional later; stack already exists |
 | sherpa-onnx + Whisper/Parakeet (STT) | Optional voice notes on annotations | sherpa-onnx | 40–500 MB | Apache-2.0 (sherpa-onnx); per model | Later; shared with doc 06 dictation |
