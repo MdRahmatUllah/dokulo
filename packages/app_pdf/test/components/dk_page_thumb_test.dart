@@ -1,3 +1,4 @@
+import 'package:app_pdf/catalogue/page_thumb_states.dart';
 import 'package:app_pdf/components/dk_page_thumb.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -6,32 +7,6 @@ import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-/// A page as the design export draws it: a title bar and text lines. Not
-/// symmetric, so a rotation shows.
-class _Page extends StatelessWidget {
-  const _Page();
-
-  @override
-  Widget build(BuildContext context) => SizedBox(
-    width: 60,
-    height: 80,
-    child: Padding(
-      padding: const EdgeInsets.fromLTRB(8, 8, 8, 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(width: 26, height: 4, color: const Color(0xFF8E9AAD)),
-          const SizedBox(height: 6),
-          for (var i = 0; i < 9; i++) ...[
-            Container(height: 1.5, color: const Color(0xFFD3D8E0)),
-            const SizedBox(height: 3.5),
-          ],
-        ],
-      ),
-    ),
-  );
-}
 
 Widget app(
   Widget child, {
@@ -51,77 +26,6 @@ Widget app(
   ),
 );
 
-/// Every state, as in the grid (3 columns) and the tray (56 × 72).
-class _Gallery extends StatelessWidget {
-  const _Gallery();
-
-  @override
-  Widget build(BuildContext context) {
-    final t = context.tokens;
-    Widget cell(Widget thumb) => SizedBox(width: 96, child: thumb);
-    return ColoredBox(
-      color: t.color.background,
-      child: Padding(
-        padding: EdgeInsets.all(t.space.l),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Wrap(
-              spacing: t.space.m,
-              runSpacing: t.space.l,
-              children: [
-                cell(
-                  const DkPageThumb(
-                    pageNumber: 1,
-                    pageCount: 12,
-                    page: _Page(),
-                  ),
-                ),
-                cell(
-                  const DkPageThumb(
-                    pageNumber: 2,
-                    pageCount: 12,
-                    page: _Page(),
-                    selected: true,
-                  ),
-                ),
-                cell(const DkPageThumb(pageNumber: 3, pageCount: 12)),
-                cell(
-                  const DkPageThumb(
-                    pageNumber: 4,
-                    pageCount: 12,
-                    page: _Page(),
-                    quarterTurns: 1,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: t.space.l),
-            Row(
-              children: [
-                for (final (n, selected) in [(1, false), (2, true), (3, false)])
-                  Padding(
-                    padding: EdgeInsets.only(right: t.space.s),
-                    child: SizedBox(
-                      width: 56,
-                      child: DkPageThumb(
-                        pageNumber: n,
-                        pageCount: 12,
-                        page: const _Page(),
-                        selected: selected,
-                        aspectRatio: 56 / 72,
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 void main() {
   for (final (name, tokens) in [
     ('light', DkTokens.light),
@@ -135,10 +39,10 @@ void main() {
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
-          app(const _Gallery(), tokens: tokens, textScale: scale),
+          app(const PageThumbStates(), tokens: tokens, textScale: scale),
         );
         await expectLater(
-          find.byType(_Gallery),
+          find.byType(PageThumbStates),
           matchesGoldenFile(
             'goldens/page_thumb_${name}_${(scale * 100).round()}.png',
           ),
@@ -162,7 +66,7 @@ void main() {
             child: DkPageThumb(
               pageNumber: 3,
               pageCount: 12,
-              page: const _Page(),
+              page: const CataloguePage(),
               selected: true,
               onTap: () {},
             ),
@@ -202,7 +106,7 @@ void main() {
             child: DkPageThumb(
               pageNumber: 1,
               pageCount: 2,
-              page: const _Page(),
+              page: const CataloguePage(),
               aspectRatio: 56 / 72,
               onTap: () => taps++,
               onLongPress: () => presses++,
@@ -229,7 +133,7 @@ void main() {
           child: DkPageThumb(
             pageNumber: 1,
             pageCount: 2,
-            page: const _Page(),
+            page: const CataloguePage(),
             onTap: () {},
           ),
         ),
@@ -269,7 +173,11 @@ void main() {
         app(
           const SizedBox(
             width: 96,
-            child: DkPageThumb(pageNumber: 1, pageCount: 1, page: _Page()),
+            child: DkPageThumb(
+              pageNumber: 1,
+              pageCount: 1,
+              page: CataloguePage(),
+            ),
           ),
           tokens: tokens,
         ),

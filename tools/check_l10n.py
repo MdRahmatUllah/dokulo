@@ -44,6 +44,8 @@ def check_strings(root: Path) -> list[str]:
     for dart in sorted((root / LIB).rglob("*.dart")):
         if dart.name.startswith("app_localizations") or dart.name.endswith(".g.dart"):
             continue  # generated
+        if "catalogue" in dart.relative_to(root / LIB).parts:
+            continue  # the debug-only component catalogue: developer names, not UI
         for n, line in enumerate(dart.read_text(encoding="utf-8").splitlines(), 1):
             if "l10n-ignore" in line or line.lstrip().startswith("//"):
                 continue

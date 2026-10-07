@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../catalogue/catalogue.dart';
 import '../screens/placeholder_screen.dart';
 import 'app_shell.dart';
 
@@ -114,6 +116,19 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         '/organize/:fileId',
         (s) => PlaceholderScreen('P1', detail: s.pathParameters['fileId']!),
       ),
+      // The component catalogue: debug builds only (kDebugMode is a
+      // constant, so a release build doesn't contain it).
+      if (kDebugMode)
+        fullScreen(
+          '/dev/components',
+          (_) => const CatalogueScreen(),
+          routes: [
+            fullScreen(
+              ':name',
+              (s) => CatalogueEntryScreen(s.pathParameters['name']!),
+            ),
+          ],
+        ),
     ],
   );
 }
