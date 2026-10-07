@@ -9,6 +9,8 @@ export 'src/pdf/pdf_structure.dart';
 export 'src/pdf/pdfa_writer.dart';
 export 'src/pdf/srgb2014_icc.dart';
 export 'src/pdf/qpdf_service.dart';
+export 'src/pdf/redact/detectors.dart';
+export 'src/pdf/redact/pdf_redactor.dart';
 export 'src/pdf/thumbnail_cache.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
