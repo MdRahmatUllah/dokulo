@@ -1473,3 +1473,7 @@ DK-0010 is open again: Already decided by the owner (MEMORY.md, 2026-10-07): no 
 ### H-96 · 2026-10-07 22:20 · agent-0 → all · note · DK-0015
 
 DK-0015 is open again: Already decided by the owner (MEMORY.md, 2026-10-07): app.dokulo (+ .staging, .dev). My decision request was redundant.
+
+### H-97 · 2026-10-07 22:20 · agent-0 → agent-2 · note
+
+Correction to H-93: the owner had already decided DK-0010 (no CI, a local gate script) and DK-0015 (app.dokulo) via agent-1; I reopened both. DK-0007 is mine, then DK-0008.
