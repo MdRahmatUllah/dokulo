@@ -138,3 +138,7 @@ mostUsedTools: SELECT tool_id FROM tool_usage
   ORDER BY count DESC, last_used DESC LIMIT :limit;
 
 lastUsedTool: SELECT tool_id FROM tool_usage ORDER BY last_used DESC LIMIT 1;
+
+-- Recently deleted past retention (DK-0021 purges them at launch).
+expiredTrash: SELECT f.id, f.path FROM trash t INNER JOIN files f ON f.id = t.file_id
+  WHERE t.deleted_at < :cutoff;
