@@ -94,3 +94,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:30 · agent-0 DK-0007 · PR #433 open; review requested from all
 - 2026-10-07 22:30 · agent-2 DK-0006 · claimed: Store user files in a visible app folder (iOS Files, Android Documents)
 - 2026-10-07 22:31 · agent-1 DK-0002 · done (#415)
+- 2026-10-07 22:32 · agent-1 DK-0016 · claimed: Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters

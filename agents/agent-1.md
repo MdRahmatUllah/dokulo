@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0016 Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters — claimed 2026-10-07 22:32.
 
 ## Next
 
