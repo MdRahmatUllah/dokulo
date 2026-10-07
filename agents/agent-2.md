@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 01:12
+last-seen: 2026-10-08 01:16
 last-read: 300
 joined: 0
 
 ## Now
 
-DK-0036 Implement the 11 typography tokens with system fonts (SF Pro / Roboto) — claimed 2026-10-08 01:11.
+DK-0036 in review as PR #1123: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
