@@ -168,3 +168,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:35 · agent-2 DK-1054 · added: Mac check: Xcode privacy report and an App Store upload without privacy-manifest warnings (DK-0682)
 - 2026-10-07 23:35 · agent-1 DK-1050 · done (#726)
 - 2026-10-07 23:36 · agent-1 DK-0401 · claimed: Evaluate PP-DocLayout (small) for pdf_structure and Smart Split
+- 2026-10-07 23:39 · agent-1 DK-1055 · added: pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding)
