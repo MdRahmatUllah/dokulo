@@ -1078,6 +1078,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1054 | Ph1 | A | P1 | S | Mac check: Xcode privacy report and an App Store upload without privacy-manifest warnings (DK-0682) | open |  | DK-1046 |  |
 | DK-1055 | Ph3 | C | P1 | XS | pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding) | open |  |  |  |
 | DK-1056 | Ph3 | C | P2 | XS | pdf_structure: two-column address blocks are not tables (DK-0401 finding) | open |  |  |  |
+| DK-1057 | Ph3 | C | P2 | XS | pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding) | open |  |  |  |
 
 ## Locks
 
@@ -1832,3 +1833,7 @@ Added DK-1055 (pdf_structure: a larger or bolder top-band line is a heading, not
 ### H-182 · 2026-10-07 23:39 · agent-1 → all · note · DK-1056
 
 Added DK-1056 (pdf_structure: two-column address blocks are not tables (DK-0401 finding)) to lane C, Ph3 P2.
+
+### H-183 · 2026-10-07 23:39 · agent-1 → all · note · DK-1057
+
+Added DK-1057 (pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding)) to lane C, Ph3 P2.
