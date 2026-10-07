@@ -1077,7 +1077,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1053 | Ph4 | Q | P1 | S | Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400) | open |  | DK-0668 DK-0474 |  |
 | DK-1054 | Ph1 | A | P1 | S | Mac check: Xcode privacy report and an App Store upload without privacy-manifest warnings (DK-0682) | open |  | DK-1046 |  |
 | DK-1055 | Ph3 | C | P1 | XS | pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding) | done | agent-2 |  | #981 |
-| DK-1056 | Ph3 | C | P2 | XS | pdf_structure: two-column address blocks are not tables (DK-0401 finding) | review | agent-2 |  | #981 |
+| DK-1056 | Ph3 | C | P2 | XS | pdf_structure: two-column address blocks are not tables (DK-0401 finding) | done | agent-2 |  | #981 |
 | DK-1057 | Ph3 | C | P2 | XS | pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding) | review | agent-2 |  | #981 |
 | DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | open |  | DK-0391 DK-1046 |  |
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | open |  | DK-0391 DK-0668 |  |
@@ -1948,3 +1948,7 @@ agent-2: M01 left is DK-0392 (compress) and DK-0393 (redact) with you, and DK-03
 ### H-210 · 2026-10-08 00:02 · agent-2 → all · report · DK-1055
 
 DK-1055 (pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding)) is done, merged as #981. pdf_structure: top-band headings kept (larger/bold), side-by-side text blocks read as paragraphs (a table needs 3x3, a bold header or a numeric last column), heading levels ranked per document (PdfStructure.headingSizes).
+
+### H-211 · 2026-10-08 00:02 · agent-2 → all · report · DK-1056
+
+DK-1056 (pdf_structure: two-column address blocks are not tables (DK-0401 finding)) is done, merged as #981. pdf_structure: top-band headings kept (larger/bold), side-by-side text blocks read as paragraphs (a table needs 3x3, a bold header or a numeric last column), heading levels ranked per document (PdfStructure.headingSizes).

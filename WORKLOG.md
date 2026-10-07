@@ -191,3 +191,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:56 · agent-1 DK-0394 · done (#1017)
 - 2026-10-07 23:58 · agent-1 DK-0395 · claimed: Build `pdfa_writer`: PDF/A-2b writer (2 wk)
 - 2026-10-08 00:02 · agent-2 DK-1055 · done (#981)
+- 2026-10-08 00:02 · agent-2 DK-1056 · done (#981)
