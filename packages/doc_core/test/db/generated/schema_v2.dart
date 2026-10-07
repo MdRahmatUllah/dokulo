@@ -3159,8 +3159,256 @@ class PhotoFinderCacheCompanion extends UpdateCompanion<PhotoFinderCacheData> {
   }
 }
 
-class DatabaseAtV1 extends GeneratedDatabase {
-  DatabaseAtV1(QueryExecutor e) : super(e);
+class Jobs extends Table with TableInfo<Jobs, JobsData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  Jobs(this.attachedDatabase, [this._alias]);
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    $customConstraints: 'NOT NULL PRIMARY KEY AUTOINCREMENT',
+  );
+  late final GeneratedColumn<String> toolId = GeneratedColumn<String>(
+    'tool_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  late final GeneratedColumn<String> input = GeneratedColumn<String>(
+    'input',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  late final GeneratedColumn<int> startedAt = GeneratedColumn<int>(
+    'started_at',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    $customConstraints: 'NOT NULL',
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, toolId, input, startedAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'jobs';
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  JobsData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return JobsData(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      toolId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}tool_id'],
+      )!,
+      input: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}input'],
+      )!,
+      startedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}started_at'],
+      )!,
+    );
+  }
+
+  @override
+  Jobs createAlias(String alias) {
+    return Jobs(attachedDatabase, alias);
+  }
+
+  @override
+  bool get dontWriteConstraints => true;
+}
+
+class JobsData extends DataClass implements Insertable<JobsData> {
+  final int id;
+  final String toolId;
+  final String input;
+  final int startedAt;
+  const JobsData({
+    required this.id,
+    required this.toolId,
+    required this.input,
+    required this.startedAt,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['tool_id'] = Variable<String>(toolId);
+    map['input'] = Variable<String>(input);
+    map['started_at'] = Variable<int>(startedAt);
+    return map;
+  }
+
+  JobsCompanion toCompanion(bool nullToAbsent) {
+    return JobsCompanion(
+      id: Value(id),
+      toolId: Value(toolId),
+      input: Value(input),
+      startedAt: Value(startedAt),
+    );
+  }
+
+  factory JobsData.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return JobsData(
+      id: serializer.fromJson<int>(json['id']),
+      toolId: serializer.fromJson<String>(json['toolId']),
+      input: serializer.fromJson<String>(json['input']),
+      startedAt: serializer.fromJson<int>(json['startedAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'toolId': serializer.toJson<String>(toolId),
+      'input': serializer.toJson<String>(input),
+      'startedAt': serializer.toJson<int>(startedAt),
+    };
+  }
+
+  JobsData copyWith({int? id, String? toolId, String? input, int? startedAt}) =>
+      JobsData(
+        id: id ?? this.id,
+        toolId: toolId ?? this.toolId,
+        input: input ?? this.input,
+        startedAt: startedAt ?? this.startedAt,
+      );
+  JobsData copyWithCompanion(JobsCompanion data) {
+    return JobsData(
+      id: data.id.present ? data.id.value : this.id,
+      toolId: data.toolId.present ? data.toolId.value : this.toolId,
+      input: data.input.present ? data.input.value : this.input,
+      startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JobsData(')
+          ..write('id: $id, ')
+          ..write('toolId: $toolId, ')
+          ..write('input: $input, ')
+          ..write('startedAt: $startedAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, toolId, input, startedAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is JobsData &&
+          other.id == this.id &&
+          other.toolId == this.toolId &&
+          other.input == this.input &&
+          other.startedAt == this.startedAt);
+}
+
+class JobsCompanion extends UpdateCompanion<JobsData> {
+  final Value<int> id;
+  final Value<String> toolId;
+  final Value<String> input;
+  final Value<int> startedAt;
+  const JobsCompanion({
+    this.id = const Value.absent(),
+    this.toolId = const Value.absent(),
+    this.input = const Value.absent(),
+    this.startedAt = const Value.absent(),
+  });
+  JobsCompanion.insert({
+    this.id = const Value.absent(),
+    required String toolId,
+    required String input,
+    required int startedAt,
+  }) : toolId = Value(toolId),
+       input = Value(input),
+       startedAt = Value(startedAt);
+  static Insertable<JobsData> custom({
+    Expression<int>? id,
+    Expression<String>? toolId,
+    Expression<String>? input,
+    Expression<int>? startedAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (toolId != null) 'tool_id': toolId,
+      if (input != null) 'input': input,
+      if (startedAt != null) 'started_at': startedAt,
+    });
+  }
+
+  JobsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? toolId,
+    Value<String>? input,
+    Value<int>? startedAt,
+  }) {
+    return JobsCompanion(
+      id: id ?? this.id,
+      toolId: toolId ?? this.toolId,
+      input: input ?? this.input,
+      startedAt: startedAt ?? this.startedAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (toolId.present) {
+      map['tool_id'] = Variable<String>(toolId.value);
+    }
+    if (input.present) {
+      map['input'] = Variable<String>(input.value);
+    }
+    if (startedAt.present) {
+      map['started_at'] = Variable<int>(startedAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('JobsCompanion(')
+          ..write('id: $id, ')
+          ..write('toolId: $toolId, ')
+          ..write('input: $input, ')
+          ..write('startedAt: $startedAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class DatabaseAtV2 extends GeneratedDatabase {
+  DatabaseAtV2(QueryExecutor e) : super(e);
   late final Folders folders = Folders(this);
   late final Files files = Files(this);
   late final Recents recents = Recents(this);
@@ -3182,6 +3430,7 @@ class DatabaseAtV1 extends GeneratedDatabase {
   late final Workflows workflows = Workflows(this);
   late final Signatures signatures = Signatures(this);
   late final PhotoFinderCache photoFinderCache = PhotoFinderCache(this);
+  late final Jobs jobs = Jobs(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -3202,6 +3451,7 @@ class DatabaseAtV1 extends GeneratedDatabase {
     workflows,
     signatures,
     photoFinderCache,
+    jobs,
   ];
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
@@ -3263,5 +3513,5 @@ class DatabaseAtV1 extends GeneratedDatabase {
     ),
   ]);
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 }

@@ -53,6 +53,22 @@ Rules:
     second (a cancel must stop native work within 1 s).
   - Every native binding calls `assertWorkerIsolate()` before its first native
     call; in debug builds it fails on any isolate the pool did not start.
+- **A tool is a `ToolJob`** (`doc_tools`, DK-0008): a const class with an `id`
+  (as in `/tool/:toolId`), a `Lane`, `encode`/`decode` of its input as JSON,
+  `chain` (its input from the previous step's output, for workflows) and
+  `run(input, context)`, which reports a `JobProgress` at least once per page
+  and returns a `JobOutput`: `OneFile`, `ManyFiles` or `TextOutput`. Register it
+  in `allToolJobs` (`registry.dart`); the registry test checks it against the
+  catalogue `toolJobIds`.
+  - The app runs tools through the one `JobQueue`: `start(toolId, input)` gives
+    a `ToolRun` (`progress` with time left, `result`, `cancel()`), and
+    `runChain(steps, input)` runs JSON steps (`workflows.steps`). The queue
+    keeps a `jobs` row while a job runs, records tool usage after a success
+    (DK-0022), and calls `JobHooks` (`onStarted`, `onFinished`, `onFailed`) for
+    notifications and the background service.
+  - A `jobs` row found at launch is a job the OS killed: `unfinished()` lists
+    them; `resume()` runs one again from the start; `forget()` drops it (DK-0021).
+  - "Replace original" takes an `UndoSnapshot` first, so Undo can put it back.
 - **Files are never written in place.** A job reads the input and writes a new
   file; the user saves, shares or discards it.
 - **No network during a tool run** (DK-0012). The only network uses are model
@@ -77,8 +93,10 @@ Riverpod 3 with code generation, the same versions as Sogda:
   support through `appDatabaseProvider`. Tests use `DokuloDatabase.memory()`.
   A schema change bumps `schemaVersion`, adds a migration step, and runs
   `dart run drift_dev make-migrations` in `doc_core`, which writes
-  `drift_schemas/` and the test helpers. The migration test checks every
-  version upgrades to the current one.
+  `drift_schemas/`, `database.steps.dart` and the test helpers. It puts the
+  helpers in `test/db/dokulo/`: move `generated/*` into `test/db/generated/`
+  and delete the rest (`database_test.dart` already checks that every version
+  upgrades to the current one). Take the `db-schema` lock first.
 - **Data from drift:** an async notifier (`AsyncNotifier` / `StreamNotifier`)
   that maps the drift watch stream. **Never await a watch's `.first`** in a
   provider: it hangs tests.
