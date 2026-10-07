@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1044 PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up) — claimed 2026-10-07 22:45.
 
 ## Next
 

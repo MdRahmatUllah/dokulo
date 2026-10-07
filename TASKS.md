@@ -1065,7 +1065,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1041 | Ph1 | Q | P1 | XS | Device check: deep links cold-start every route (DK-0004) | open |  | DK-0668 |  |
 | DK-1042 | Ph1 | A | P2 | XS | Monthly dependency upgrade review: November 2026 | open |  |  |  |
 | DK-1043 | Ph1 | Q | P1 | XS | Device check: tool output shows in the Files apps under Dokulo (DK-0006) | open |  | DK-0668 |  |
-| DK-1044 | Ph1 | A | P0 | S | PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up) | open |  | DK-0007 |  |
+| DK-1044 | Ph1 | A | P0 | S | PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up) | in-progress | agent-0 | DK-0007 |  |
 
 ## Locks
 
