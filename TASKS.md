@@ -46,210 +46,210 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0022 | Ph3 | A | P1 | S | Local tool-usage tracking (never uploaded) for suggestions and shortcuts | done | agent-2 | DK-0005 | #427 |
 | DK-0023 | Ph1 | A | P0 | S | Create the fictional sample-document set for demos, tests and store screenshots | done | agent-1 | DK-0001 | #286 |
 | DK-0024 | Ph1 | B | P0 | M | Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets | in-progress | agent-1 | DK-0001 DK-0708 |  |
-| DK-0025 | Ph1 | B | P0 | S | Implement colour tokens: primary family | open |  | DK-0024 |  |
-| DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | open |  | DK-0024 |  |
-| DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | open |  | DK-0024 |  |
-| DK-0028 | Ph1 | B | P0 | S | Implement colour tokens: text and icons | open |  | DK-0024 |  |
-| DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | open |  | DK-0024 |  |
-| DK-0030 | Ph1 | B | P0 | S | Implement colour tokens: overlay and camera colours | open |  | DK-0024 |  |
-| DK-0031 | Ph1 | B | P0 | S | Implement colour tokens: document colours | open |  | DK-0024 |  |
-| DK-0032 | Ph1 | B | P0 | S | Implement colour tokens: markup colours | open |  | DK-0024 |  |
-| DK-0033 | Ph1 | B | P0 | S | Implement colour tokens: compare colours | open |  | DK-0024 |  |
-| DK-0034 | Ph1 | B | P0 | S | Implement colour tokens: state overlays | open |  | DK-0024 |  |
-| DK-0035 | Ph1 | Q | P0 | S | Run and document the contrast audit for every token pair (light, dark, camera chrome) | open |  | DK-0024 |  |
-| DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | open |  | DK-0024 |  |
-| DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | open |  | DK-0036 |  |
-| DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | open |  | DK-0024 |  |
-| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | open |  | DK-0024 |  |
-| DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | open |  | DK-0039 |  |
-| DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | open |  | DK-0039 |  |
-| DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | open |  | DK-0039 |  |
-| DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | open |  | DK-0039 |  |
-| DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | open |  | DK-0039 |  |
-| DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | open |  | DK-0039 |  |
-| DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | open |  | DK-0039 |  |
-| DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | open |  | DK-0024 |  |
-| DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | open |  | DK-0024 |  |
-| DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | open |  | DK-0048 |  |
-| DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0052 | Ph3 | B | P1 | XS | Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0053 | Ph3 | B | P1 | XS | Ship ILL-04 illustration (Home empty) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0054 | Ph1 | B | P1 | XS | Ship ILL-05 illustration (Files empty) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0055 | Ph1 | B | P1 | XS | Ship ILL-06 illustration (Folder empty) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0056 | Ph3 | B | P1 | XS | Ship ILL-07 illustration (Search no results) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0057 | Ph1 | B | P1 | XS | Ship ILL-08 illustration (Trash empty) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0058 | Ph3 | B | P1 | XS | Ship ILL-09 illustration (Locked folder intro) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0059 | Ph2 | B | P1 | XS | Ship ILL-10 illustration (Camera permission denied) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0060 | Ph3 | B | P1 | XS | Ship ILL-11 illustration (AI model needed) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0061 | Ph3 | B | P1 | XS | Ship ILL-12 illustration (AI first-use notice) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0062 | Ph3 | B | P1 | XS | Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0063 | Ph3 | B | P1 | XS | Ship ILL-14 illustration (Damaged file) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0064 | Ph3 | B | P1 | XS | Ship ILL-15 illustration (No signatures yet) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0065 | Ph3 | B | P1 | XS | Ship ILL-16 illustration (No workflows yet) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0066 | Ph3 | B | P1 | XS | Ship ILL-17 illustration (Find documents in photos intro) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0067 | Ph3 | B | P1 | XS | Ship ILL-18 illustration (Paywall header) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0068 | Ph3 | B | P1 | XS | Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0069 | Ph3 | B | P1 | XS | Ship ILL-20 illustration (Generic error) as light and dark vector assets | open |  | DK-0024 |  |
-| DK-0070 | Ph1 | B | P1 | S | Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space) | open |  | DK-0024 DK-1008 |  |
-| DK-0071 | Ph7 | B | P0 | S | Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed) | open |  | DK-0070 DK-1013 |  |
-| DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | open |  | DK-0070 |  |
-| DK-0073 | Ph1 | B | P1 | S | Native splash/launch screens matching the in-app launch screen | open |  | DK-0070 |  |
-| DK-0074 | Ph1 | B | P0 | M | Build DkButton with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | open |  | DK-0074 |  |
-| DK-0076 | Ph1 | B | P0 | S | Build DkIconButton with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0077 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkIconButton | open |  | DK-0076 |  |
-| DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0079 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkScanButton | open |  | DK-0078 |  |
-| DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | open |  | DK-0080 |  |
-| DK-0082 | Ph1 | B | P0 | S | Build DkToolTile with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
-| DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | open |  | DK-0082 |  |
-| DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
-| DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | open |  | DK-0084 |  |
-| DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
-| DK-0087 | Ph1 | B | P1 | S | Golden + accessibility tests for DkFileCard | open |  | DK-0086 |  |
-| DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0089 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkFolderCard | open |  | DK-0088 |  |
-| DK-0090 | Ph3 | B | P0 | M | Build DkResultCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0130 DK-0048 |  |
-| DK-0091 | Ph3 | B | P1 | S | Golden + accessibility tests for DkResultCard | open |  | DK-0090 |  |
-| DK-0092 | Ph2 | B | P0 | S | Build DkLevelCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0093 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkLevelCard | open |  | DK-0092 |  |
-| DK-0094 | Ph6 | B | P1 | M | Build DkModelCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
-| DK-0095 | Ph6 | B | P1 | S | Golden + accessibility tests for DkModelCard | open |  | DK-0094 |  |
-| DK-0096 | Ph1 | B | P0 | S | Build DkContinueCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
-| DK-0097 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkContinueCard | open |  | DK-0096 |  |
-| DK-0098 | Ph1 | B | P1 | XS | Build DkProCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0102 DK-0048 |  |
-| DK-0099 | Ph7 | B | P1 | XS | Golden + accessibility tests for DkProCard | open |  | DK-0098 |  |
-| DK-0100 | Ph1 | B | P0 | S | Build DkSettingsRow with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0101 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSettingsRow | open |  | DK-0100 |  |
-| DK-0102 | Ph1 | B | P0 | XS | Build DkProBadge with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0103 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkProBadge | open |  | DK-0102 |  |
-| DK-0104 | Ph1 | B | P0 | S | Build DkChip with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0105 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkChip | open |  | DK-0104 |  |
-| DK-0106 | Ph3 | B | P0 | XS | Build DkNextChip with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0107 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkNextChip | open |  | DK-0106 |  |
-| DK-0108 | Ph4 | B | P1 | XS | Build DkPageChip with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0109 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkPageChip | open |  | DK-0108 |  |
-| DK-0110 | Ph1 | B | P0 | XS | Build DkPrivacyLine with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | open |  | DK-0110 |  |
-| DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | open |  | DK-0112 |  |
-| DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | open |  | DK-0114 |  |
-| DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | open |  | DK-0116 |  |
-| DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | open |  | DK-0118 |  |
-| DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | open |  | DK-0120 |  |
-| DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 |  |
-| DK-0123 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkPasswordField | open |  | DK-0122 |  |
-| DK-0124 | Ph3 | B | P0 | S | Build DkRangeField with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 |  |
-| DK-0125 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkRangeField | open |  | DK-0124 |  |
-| DK-0126 | Ph1 | B | P0 | XS | Build DkSearchField with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0127 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSearchField | open |  | DK-0126 |  |
-| DK-0128 | Ph1 | B | P0 | XS | Build DkSwitch with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0129 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSwitch | open |  | DK-0128 |  |
-| DK-0130 | Ph1 | B | P0 | S | Build DkSegmented with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0131 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSegmented | open |  | DK-0130 |  |
-| DK-0132 | Ph3 | B | P0 | XS | Build DkSlider with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | open |  | DK-0132 |  |
-| DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | open |  | DK-0134 |  |
-| DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 |  |
-| DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | open |  | DK-0136 |  |
-| DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 |  |
-| DK-0139 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkOptionRow | open |  | DK-0138 |  |
-| DK-0140 | Ph3 | B | P0 | S | Build DkPositionPicker with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0141 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkPositionPicker | open |  | DK-0140 |  |
-| DK-0142 | Ph4 | B | P1 | S | Build DkColorRow with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0143 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkColorRow | open |  | DK-0142 |  |
-| DK-0144 | Ph1 | B | P0 | XS | Build DkCheckboxRow with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0145 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkCheckboxRow | open |  | DK-0144 |  |
-| DK-0146 | Ph1 | B | P0 | XS | Build DkRadioRow with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0147 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkRadioRow | open |  | DK-0146 |  |
-| DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | open |  | DK-0148 |  |
-| DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 |  |
-| DK-0151 | Ph1 | B | P1 | S | Golden + accessibility tests for DkPageThumb | open |  | DK-0150 |  |
-| DK-0152 | Ph2 | B | P0 | M | Build DkPageTray with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
-| DK-0153 | Ph2 | B | P1 | S | Golden + accessibility tests for DkPageTray | open |  | DK-0152 |  |
-| DK-0154 | Ph3 | B | P0 | L | Build DkPageGrid with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
-| DK-0155 | Ph3 | B | P1 | S | Golden + accessibility tests for DkPageGrid | open |  | DK-0154 |  |
-| DK-0156 | Ph2 | B | P0 | L | Build DkCropOverlay with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
-| DK-0157 | Ph2 | B | P1 | S | Golden + accessibility tests for DkCropOverlay | open |  | DK-0156 |  |
-| DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | open |  | DK-0158 |  |
-| DK-0160 | Ph4 | B | P1 | M | Build DkRedactionBox with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0161 | Ph4 | B | P1 | S | Golden + accessibility tests for DkRedactionBox | open |  | DK-0160 |  |
-| DK-0162 | Ph4 | B | P1 | S | Build DkSignatureStamp with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0163 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureStamp | open |  | DK-0162 |  |
-| DK-0164 | Ph1 | B | P0 | M | Build DkTopBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
-| DK-0165 | Ph1 | B | P1 | S | Golden + accessibility tests for DkTopBar | open |  | DK-0164 |  |
-| DK-0166 | Ph1 | B | P0 | S | Build DkTabBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
-| DK-0167 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTabBar | open |  | DK-0166 |  |
-| DK-0168 | Ph1 | B | P0 | S | Build DkNavRail with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
-| DK-0169 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkNavRail | open |  | DK-0168 |  |
-| DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
-| DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | open |  | DK-0170 |  |
-| DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
-| DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | open |  | DK-0172 |  |
-| DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 |  |
-| DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | open |  | DK-0174 |  |
-| DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
-| DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | open |  | DK-0176 |  |
-| DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
-| DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | open |  | DK-0178 |  |
-| DK-0180 | Ph2 | B | P0 | S | Build DkCameraTopBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
-| DK-0181 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCameraTopBar | open |  | DK-0180 |  |
-| DK-0182 | Ph1 | B | P0 | M | Build DkSheet with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0183 | Ph1 | B | P1 | S | Golden + accessibility tests for DkSheet | open |  | DK-0182 |  |
-| DK-0184 | Ph1 | B | P0 | S | Build DkActionSheet with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0182 DK-0048 |  |
-| DK-0185 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionSheet | open |  | DK-0184 |  |
-| DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
-| DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | open |  | DK-0186 |  |
-| DK-0188 | Ph1 | B | P0 | S | Build DkMenu with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | open |  | DK-0188 |  |
-| DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | open |  | DK-0190 |  |
-| DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
-| DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | open |  | DK-0192 |  |
-| DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 |  |
-| DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | open |  | DK-0194 |  |
-| DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
-| DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | open |  | DK-0196 |  |
-| DK-0198 | Ph1 | B | P0 | XS | Build DkSkeleton with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | open |  | DK-0198 |  |
-| DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0201 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkLoadingSpinner | open |  | DK-0200 |  |
-| DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
-| DK-0203 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkMarkupBar | open |  | DK-0202 |  |
-| DK-0204 | Ph4 | B | P1 | M | Build DkToolOptionsSheet with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0182 DK-0142 DK-0132 DK-0130 DK-0134 DK-0048 |  |
-| DK-0205 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolOptionsSheet | open |  | DK-0204 |  |
-| DK-0206 | Ph4 | B | P1 | L | Build DkSignaturePad with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0130 DK-0074 DK-0048 |  |
-| DK-0207 | Ph4 | B | P1 | S | Golden + accessibility tests for DkSignaturePad | open |  | DK-0206 |  |
-| DK-0208 | Ph4 | B | P1 | XS | Build DkSignatureCard with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0209 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureCard | open |  | DK-0208 |  |
-| DK-0210 | Ph6 | B | P1 | S | Build DkChatBubble with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
-| DK-0211 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkChatBubble | open |  | DK-0210 |  |
-| DK-0212 | Ph6 | B | P1 | XS | Build DkSuggestionChip with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0213 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkSuggestionChip | open |  | DK-0212 |  |
-| DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | open |  | DK-0214 |  |
-| DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | open |  | DK-0216 |  |
-| DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
-| DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | open |  | DK-0218 |  |
-| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
-| DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | open |  | DK-0220 |  |
-| DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | open |  | DK-0172 DK-0086 |  |
-| DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | open |  | DK-0154 DK-0190 |  |
-| DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | open |  | DK-0086 DK-0190 |  |
-| DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | open |  | DK-0186 |  |
-| DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | open |  | DK-0190 |  |
-| DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | open |  | DK-0170 DK-0182 |  |
-| DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | open |  | DK-0200 |  |
+| DK-0025 | Ph1 | B | P0 | S | Implement colour tokens: primary family | assigned | agent-1 | DK-0024 |  |
+| DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | assigned | agent-1 | DK-0024 |  |
+| DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | assigned | agent-1 | DK-0024 |  |
+| DK-0028 | Ph1 | B | P0 | S | Implement colour tokens: text and icons | assigned | agent-1 | DK-0024 |  |
+| DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | assigned | agent-1 | DK-0024 |  |
+| DK-0030 | Ph1 | B | P0 | S | Implement colour tokens: overlay and camera colours | assigned | agent-1 | DK-0024 |  |
+| DK-0031 | Ph1 | B | P0 | S | Implement colour tokens: document colours | assigned | agent-1 | DK-0024 |  |
+| DK-0032 | Ph1 | B | P0 | S | Implement colour tokens: markup colours | assigned | agent-1 | DK-0024 |  |
+| DK-0033 | Ph1 | B | P0 | S | Implement colour tokens: compare colours | assigned | agent-1 | DK-0024 |  |
+| DK-0034 | Ph1 | B | P0 | S | Implement colour tokens: state overlays | assigned | agent-1 | DK-0024 |  |
+| DK-0035 | Ph1 | Q | P0 | S | Run and document the contrast audit for every token pair (light, dark, camera chrome) | assigned | agent-1 | DK-0024 |  |
+| DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | assigned | agent-1 | DK-0024 |  |
+| DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
+| DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | assigned | agent-1 | DK-0024 |  |
+| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | assigned | agent-1 | DK-0024 |  |
+| DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | assigned | agent-1 | DK-0039 |  |
+| DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | assigned | agent-1 | DK-0039 |  |
+| DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | assigned | agent-1 | DK-0039 |  |
+| DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | assigned | agent-1 | DK-0039 |  |
+| DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | assigned | agent-1 | DK-0039 |  |
+| DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | assigned | agent-1 | DK-0039 |  |
+| DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | assigned | agent-1 | DK-0039 |  |
+| DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | assigned | agent-1 | DK-0024 |  |
+| DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | assigned | agent-1 | DK-0024 |  |
+| DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | assigned | agent-1 | DK-0048 |  |
+| DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0052 | Ph3 | B | P1 | XS | Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0053 | Ph3 | B | P1 | XS | Ship ILL-04 illustration (Home empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0054 | Ph1 | B | P1 | XS | Ship ILL-05 illustration (Files empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0055 | Ph1 | B | P1 | XS | Ship ILL-06 illustration (Folder empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0056 | Ph3 | B | P1 | XS | Ship ILL-07 illustration (Search no results) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0057 | Ph1 | B | P1 | XS | Ship ILL-08 illustration (Trash empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0058 | Ph3 | B | P1 | XS | Ship ILL-09 illustration (Locked folder intro) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0059 | Ph2 | B | P1 | XS | Ship ILL-10 illustration (Camera permission denied) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0060 | Ph3 | B | P1 | XS | Ship ILL-11 illustration (AI model needed) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0061 | Ph3 | B | P1 | XS | Ship ILL-12 illustration (AI first-use notice) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0062 | Ph3 | B | P1 | XS | Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0063 | Ph3 | B | P1 | XS | Ship ILL-14 illustration (Damaged file) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0064 | Ph3 | B | P1 | XS | Ship ILL-15 illustration (No signatures yet) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0065 | Ph3 | B | P1 | XS | Ship ILL-16 illustration (No workflows yet) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0066 | Ph3 | B | P1 | XS | Ship ILL-17 illustration (Find documents in photos intro) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0067 | Ph3 | B | P1 | XS | Ship ILL-18 illustration (Paywall header) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0068 | Ph3 | B | P1 | XS | Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0069 | Ph3 | B | P1 | XS | Ship ILL-20 illustration (Generic error) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0070 | Ph1 | B | P1 | S | Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space) | assigned | agent-1 | DK-0024 DK-1008 |  |
+| DK-0071 | Ph7 | B | P0 | S | Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed) | assigned | agent-1 | DK-0070 DK-1013 |  |
+| DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | assigned | agent-1 | DK-0070 |  |
+| DK-0073 | Ph1 | B | P1 | S | Native splash/launch screens matching the in-app launch screen | assigned | agent-1 | DK-0070 |  |
+| DK-0074 | Ph1 | B | P0 | M | Build DkButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | assigned | agent-1 | DK-0074 |  |
+| DK-0076 | Ph1 | B | P0 | S | Build DkIconButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0077 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkIconButton | assigned | agent-1 | DK-0076 |  |
+| DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0079 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkScanButton | assigned | agent-1 | DK-0078 |  |
+| DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | assigned | agent-1 | DK-0080 |  |
+| DK-0082 | Ph1 | B | P0 | S | Build DkToolTile with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
+| DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | assigned | agent-0 | DK-0082 |  |
+| DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
+| DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | assigned | agent-0 | DK-0084 |  |
+| DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
+| DK-0087 | Ph1 | B | P1 | S | Golden + accessibility tests for DkFileCard | assigned | agent-0 | DK-0086 |  |
+| DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0089 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkFolderCard | assigned | agent-0 | DK-0088 |  |
+| DK-0090 | Ph3 | B | P0 | M | Build DkResultCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0048 |  |
+| DK-0091 | Ph3 | B | P1 | S | Golden + accessibility tests for DkResultCard | assigned | agent-0 | DK-0090 |  |
+| DK-0092 | Ph2 | B | P0 | S | Build DkLevelCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0093 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkLevelCard | assigned | agent-0 | DK-0092 |  |
+| DK-0094 | Ph6 | B | P1 | M | Build DkModelCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0095 | Ph6 | B | P1 | S | Golden + accessibility tests for DkModelCard | assigned | agent-0 | DK-0094 |  |
+| DK-0096 | Ph1 | B | P0 | S | Build DkContinueCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0097 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkContinueCard | assigned | agent-0 | DK-0096 |  |
+| DK-0098 | Ph1 | B | P1 | XS | Build DkProCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0102 DK-0048 |  |
+| DK-0099 | Ph7 | B | P1 | XS | Golden + accessibility tests for DkProCard | assigned | agent-0 | DK-0098 |  |
+| DK-0100 | Ph1 | B | P0 | S | Build DkSettingsRow with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0101 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSettingsRow | assigned | agent-0 | DK-0100 |  |
+| DK-0102 | Ph1 | B | P0 | XS | Build DkProBadge with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0103 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkProBadge | assigned | agent-0 | DK-0102 |  |
+| DK-0104 | Ph1 | B | P0 | S | Build DkChip with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0105 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkChip | assigned | agent-0 | DK-0104 |  |
+| DK-0106 | Ph3 | B | P0 | XS | Build DkNextChip with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0107 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkNextChip | assigned | agent-0 | DK-0106 |  |
+| DK-0108 | Ph4 | B | P1 | XS | Build DkPageChip with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0109 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkPageChip | assigned | agent-0 | DK-0108 |  |
+| DK-0110 | Ph1 | B | P0 | XS | Build DkPrivacyLine with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | assigned | agent-0 | DK-0110 |  |
+| DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | assigned | agent-0 | DK-0112 |  |
+| DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | assigned | agent-0 | DK-0114 |  |
+| DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | assigned | agent-0 | DK-0116 |  |
+| DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-0 | DK-0118 |  |
+| DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | assigned | agent-1 | DK-0120 |  |
+| DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 |  |
+| DK-0123 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkPasswordField | assigned | agent-1 | DK-0122 |  |
+| DK-0124 | Ph3 | B | P0 | S | Build DkRangeField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 |  |
+| DK-0125 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkRangeField | assigned | agent-1 | DK-0124 |  |
+| DK-0126 | Ph1 | B | P0 | XS | Build DkSearchField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0127 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSearchField | assigned | agent-1 | DK-0126 |  |
+| DK-0128 | Ph1 | B | P0 | XS | Build DkSwitch with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0129 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSwitch | assigned | agent-1 | DK-0128 |  |
+| DK-0130 | Ph1 | B | P0 | S | Build DkSegmented with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0131 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSegmented | assigned | agent-1 | DK-0130 |  |
+| DK-0132 | Ph3 | B | P0 | XS | Build DkSlider with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | assigned | agent-1 | DK-0132 |  |
+| DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | assigned | agent-1 | DK-0134 |  |
+| DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 |  |
+| DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | assigned | agent-1 | DK-0136 |  |
+| DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 |  |
+| DK-0139 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkOptionRow | assigned | agent-1 | DK-0138 |  |
+| DK-0140 | Ph3 | B | P0 | S | Build DkPositionPicker with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0141 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkPositionPicker | assigned | agent-1 | DK-0140 |  |
+| DK-0142 | Ph4 | B | P1 | S | Build DkColorRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0143 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkColorRow | assigned | agent-1 | DK-0142 |  |
+| DK-0144 | Ph1 | B | P0 | XS | Build DkCheckboxRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0145 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkCheckboxRow | assigned | agent-1 | DK-0144 |  |
+| DK-0146 | Ph1 | B | P0 | XS | Build DkRadioRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0147 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkRadioRow | assigned | agent-1 | DK-0146 |  |
+| DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | assigned | agent-1 | DK-0148 |  |
+| DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 |  |
+| DK-0151 | Ph1 | B | P1 | S | Golden + accessibility tests for DkPageThumb | assigned | agent-2 | DK-0150 |  |
+| DK-0152 | Ph2 | B | P0 | M | Build DkPageTray with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
+| DK-0153 | Ph2 | B | P1 | S | Golden + accessibility tests for DkPageTray | assigned | agent-2 | DK-0152 |  |
+| DK-0154 | Ph3 | B | P0 | L | Build DkPageGrid with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
+| DK-0155 | Ph3 | B | P1 | S | Golden + accessibility tests for DkPageGrid | assigned | agent-2 | DK-0154 |  |
+| DK-0156 | Ph2 | B | P0 | L | Build DkCropOverlay with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0157 | Ph2 | B | P1 | S | Golden + accessibility tests for DkCropOverlay | assigned | agent-2 | DK-0156 |  |
+| DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | assigned | agent-2 | DK-0158 |  |
+| DK-0160 | Ph4 | B | P1 | M | Build DkRedactionBox with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0161 | Ph4 | B | P1 | S | Golden + accessibility tests for DkRedactionBox | assigned | agent-2 | DK-0160 |  |
+| DK-0162 | Ph4 | B | P1 | S | Build DkSignatureStamp with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0163 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureStamp | assigned | agent-2 | DK-0162 |  |
+| DK-0164 | Ph1 | B | P0 | M | Build DkTopBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0165 | Ph1 | B | P1 | S | Golden + accessibility tests for DkTopBar | assigned | agent-2 | DK-0164 |  |
+| DK-0166 | Ph1 | B | P0 | S | Build DkTabBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
+| DK-0167 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTabBar | assigned | agent-2 | DK-0166 |  |
+| DK-0168 | Ph1 | B | P0 | S | Build DkNavRail with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
+| DK-0169 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkNavRail | assigned | agent-2 | DK-0168 |  |
+| DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | assigned | agent-2 | DK-0170 |  |
+| DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | assigned | agent-2 | DK-0172 |  |
+| DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 |  |
+| DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | assigned | agent-2 | DK-0174 |  |
+| DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | assigned | agent-2 | DK-0176 |  |
+| DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | assigned | agent-2 | DK-0178 |  |
+| DK-0180 | Ph2 | B | P0 | S | Build DkCameraTopBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0181 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCameraTopBar | assigned | agent-2 | DK-0180 |  |
+| DK-0182 | Ph1 | B | P0 | M | Build DkSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0183 | Ph1 | B | P1 | S | Golden + accessibility tests for DkSheet | assigned | agent-2 | DK-0182 |  |
+| DK-0184 | Ph1 | B | P0 | S | Build DkActionSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0048 |  |
+| DK-0185 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionSheet | assigned | agent-2 | DK-0184 |  |
+| DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | assigned | agent-2 | DK-0186 |  |
+| DK-0188 | Ph1 | B | P0 | S | Build DkMenu with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | assigned | agent-2 | DK-0188 |  |
+| DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | assigned | agent-2 | DK-0190 |  |
+| DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | assigned | agent-2 | DK-0192 |  |
+| DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 |  |
+| DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | assigned | agent-2 | DK-0194 |  |
+| DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | assigned | agent-2 | DK-0196 |  |
+| DK-0198 | Ph1 | B | P0 | XS | Build DkSkeleton with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | assigned | agent-2 | DK-0198 |  |
+| DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0201 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkLoadingSpinner | assigned | agent-2 | DK-0200 |  |
+| DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0203 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkMarkupBar | assigned | agent-2 | DK-0202 |  |
+| DK-0204 | Ph4 | B | P1 | M | Build DkToolOptionsSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0142 DK-0132 DK-0130 DK-0134 DK-0048 |  |
+| DK-0205 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolOptionsSheet | assigned | agent-2 | DK-0204 |  |
+| DK-0206 | Ph4 | B | P1 | L | Build DkSignaturePad with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0074 DK-0048 |  |
+| DK-0207 | Ph4 | B | P1 | S | Golden + accessibility tests for DkSignaturePad | assigned | agent-2 | DK-0206 |  |
+| DK-0208 | Ph4 | B | P1 | XS | Build DkSignatureCard with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0209 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureCard | assigned | agent-2 | DK-0208 |  |
+| DK-0210 | Ph6 | B | P1 | S | Build DkChatBubble with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
+| DK-0211 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkChatBubble | assigned | agent-2 | DK-0210 |  |
+| DK-0212 | Ph6 | B | P1 | XS | Build DkSuggestionChip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0213 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkSuggestionChip | assigned | agent-2 | DK-0212 |  |
+| DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
+| DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
+| DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
+| DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
+| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
+| DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | assigned | agent-2 | DK-0220 |  |
+| DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-0 | DK-0172 DK-0086 |  |
+| DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | assigned | agent-0 | DK-0154 DK-0190 |  |
+| DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | assigned | agent-0 | DK-0086 DK-0190 |  |
+| DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | assigned | agent-0 | DK-0186 |  |
+| DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | assigned | agent-0 | DK-0190 |  |
+| DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | assigned | agent-0 | DK-0170 DK-0182 |  |
+| DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | assigned | agent-0 | DK-0200 |  |
 | DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | open |  | DK-0004 DK-0166 DK-0078 |  |
 | DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | open |  | DK-0229 DK-0188 DK-0078 |  |
 | DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | open |  | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
@@ -1003,32 +1003,32 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0979 | Ph7 | Q | P2 | XS | Visual QA: system-surfaces (system-surfaces) | open |  | DK-0072 DK-0587 DK-0588 DK-0589 DK-0590 DK-0591 DK-0592 DK-0593 |  |
 | DK-0980 | Ph7 | Q | P2 | XS | Visual QA: global-states (global-states) | open |  | DK-0601 DK-0602 DK-0603 DK-0604 DK-0605 DK-0606 DK-0607 DK-0608 |  |
 | DK-0981 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent (text-200-percent) | open |  | DK-0037 |  |
-| DK-0982 | Ph7 | Q | P2 | XS | Visual QA: foundations (foundations) | open |  | DK-0024 DK-0025 DK-0026 DK-0027 DK-0028 DK-0029 DK-0030 DK-0031 DK-0032 DK-0033 DK-0034 DK-0036 DK-0038 DK-0047 DK-0048 DK-1009 |  |
+| DK-0982 | Ph7 | Q | P2 | XS | Visual QA: foundations (foundations) | assigned | agent-0 | DK-0024 DK-0025 DK-0026 DK-0027 DK-0028 DK-0029 DK-0030 DK-0031 DK-0032 DK-0033 DK-0034 DK-0036 DK-0038 DK-0047 DK-0048 DK-1009 |  |
 | DK-0983 | Ph7 | Q | P2 | XS | Visual QA: components (components) | open |  | DK-0048 DK-0049 DK-0074 DK-0076 DK-0078 DK-0080 DK-0082 DK-0084 DK-0086 DK-0088 DK-0090 DK-0092 DK-0096 DK-0098 DK-0102 DK-0104 DK-0106 DK-0108 DK-0110 DK-0112 DK-0114 DK-0116 DK-0118 DK-0120 DK-0122 DK-0124 DK-0126 DK-0128 DK-0130 DK-0132 DK-0134 DK-0136 DK-0138 DK-0144 DK-0146 DK-0164 DK-0166 DK-0168 DK-0170 DK-0172 DK-0174 DK-0178 DK-0182 DK-0184 DK-0186 DK-0188 DK-0190 DK-0192 DK-0194 DK-0196 DK-0198 DK-0200 DK-0231 DK-1009 |  |
-| DK-0984 | Ph7 | Q | P2 | XS | Visual QA: components-part-2 (components-part-2) | open |  | DK-0094 DK-0100 DK-0140 DK-0142 DK-0148 DK-0150 DK-0152 DK-0154 DK-0156 DK-0158 DK-0160 DK-0162 DK-0176 DK-0180 DK-0202 DK-0204 DK-0206 DK-0208 DK-0210 DK-0212 DK-0214 DK-0216 DK-0218 DK-0220 |  |
-| DK-0985 | Ph7 | Q | P2 | XS | Visual QA: illustrations-overview (illustrations-overview) | open |  | DK-0050 DK-0051 DK-0052 DK-0053 DK-0054 DK-0055 DK-0056 DK-0057 DK-0058 DK-0059 DK-0060 DK-0061 DK-0062 DK-0063 DK-0064 DK-0065 DK-0066 DK-0067 DK-0068 DK-0069 |  |
-| DK-0986 | Ph7 | Q | P2 | XS | Visual QA: motion (motion) | open |  | DK-0039 DK-0040 DK-0041 DK-0042 DK-0043 DK-0044 DK-0045 DK-0046 |  |
+| DK-0984 | Ph7 | Q | P2 | XS | Visual QA: components-part-2 (components-part-2) | assigned | agent-0 | DK-0094 DK-0100 DK-0140 DK-0142 DK-0148 DK-0150 DK-0152 DK-0154 DK-0156 DK-0158 DK-0160 DK-0162 DK-0176 DK-0180 DK-0202 DK-0204 DK-0206 DK-0208 DK-0210 DK-0212 DK-0214 DK-0216 DK-0218 DK-0220 |  |
+| DK-0985 | Ph7 | Q | P2 | XS | Visual QA: illustrations-overview (illustrations-overview) | assigned | agent-0 | DK-0050 DK-0051 DK-0052 DK-0053 DK-0054 DK-0055 DK-0056 DK-0057 DK-0058 DK-0059 DK-0060 DK-0061 DK-0062 DK-0063 DK-0064 DK-0065 DK-0066 DK-0067 DK-0068 DK-0069 |  |
+| DK-0986 | Ph7 | Q | P2 | XS | Visual QA: motion (motion) | assigned | agent-0 | DK-0039 DK-0040 DK-0041 DK-0042 DK-0043 DK-0044 DK-0045 DK-0046 |  |
 | DK-0987 | Ph7 | Q | P2 | XS | Visual QA: app-icon-and-store-assets (app-icon-and-store-assets) | open |  | DK-0070 DK-0071 DK-0072 DK-0684 DK-0685 DK-0686 DK-0687 DK-0688 |  |
-| DK-0988 | Ph7 | Q | P2 | XS | Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check) | open |  | DK-0050 |  |
-| DK-0989 | Ph7 | Q | P2 | XS | Visual QA: ill-02-onboarding-2 (ILL-02 · Onboarding 2 — Clean page and a one-time tag) | open |  | DK-0051 |  |
-| DK-0990 | Ph7 | Q | P2 | XS | Visual QA: ill-03-onboarding-3 (ILL-03 · Onboarding 3 — Camera, folder, toolbox as card icons) | open |  | DK-0052 |  |
-| DK-0991 | Ph7 | Q | P2 | XS | Visual QA: ill-04-home-empty (ILL-04 · Home empty — Two pages with a soft scan frame) | open |  | DK-0053 |  |
-| DK-0992 | Ph7 | Q | P2 | XS | Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, page sliding in) | open |  | DK-0054 |  |
-| DK-0993 | Ph7 | Q | P2 | XS | Visual QA: ill-06-folder-empty (ILL-06 · Folder empty — Empty folder outline) | open |  | DK-0055 |  |
-| DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | open |  | DK-0056 |  |
-| DK-0995 | Ph7 | Q | P2 | XS | Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check) | open |  | DK-0057 |  |
-| DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | open |  | DK-0058 |  |
-| DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | open |  | DK-0059 |  |
-| DK-0998 | Ph7 | Q | P2 | XS | Visual QA: ill-11-ai-model-needed (ILL-11 · AI model needed — Page with a chip and download arrow) | open |  | DK-0060 |  |
-| DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | open |  | DK-0061 |  |
-| DK-1000 | Ph7 | Q | P2 | XS | Visual QA: ill-13-device-not-eligible (ILL-13 · Device not eligible — Phone with a memory chip, dashed) | open |  | DK-0062 |  |
-| DK-1001 | Ph7 | Q | P2 | XS | Visual QA: ill-14-damaged-file (ILL-14 · Damaged file — Page with a torn corner) | open |  | DK-0063 |  |
-| DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | open |  | DK-0064 |  |
-| DK-1003 | Ph7 | Q | P2 | XS | Visual QA: ill-16-no-workflows-yet (ILL-16 · No workflows yet — Three connected cards) | open |  | DK-0065 |  |
-| DK-1004 | Ph7 | Q | P2 | XS | Visual QA: ill-17-find-documents-in-photos (ILL-17 · Find documents in photos — Photo grid, two marked as documents) | open |  | DK-0066 |  |
-| DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | open |  | DK-0067 |  |
-| DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | open |  | DK-0068 |  |
-| DK-1007 | Ph7 | Q | P2 | XS | Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle) | open |  | DK-0069 |  |
+| DK-0988 | Ph7 | Q | P2 | XS | Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check) | assigned | agent-0 | DK-0050 |  |
+| DK-0989 | Ph7 | Q | P2 | XS | Visual QA: ill-02-onboarding-2 (ILL-02 · Onboarding 2 — Clean page and a one-time tag) | assigned | agent-0 | DK-0051 |  |
+| DK-0990 | Ph7 | Q | P2 | XS | Visual QA: ill-03-onboarding-3 (ILL-03 · Onboarding 3 — Camera, folder, toolbox as card icons) | assigned | agent-0 | DK-0052 |  |
+| DK-0991 | Ph7 | Q | P2 | XS | Visual QA: ill-04-home-empty (ILL-04 · Home empty — Two pages with a soft scan frame) | assigned | agent-0 | DK-0053 |  |
+| DK-0992 | Ph7 | Q | P2 | XS | Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, page sliding in) | assigned | agent-0 | DK-0054 |  |
+| DK-0993 | Ph7 | Q | P2 | XS | Visual QA: ill-06-folder-empty (ILL-06 · Folder empty — Empty folder outline) | assigned | agent-0 | DK-0055 |  |
+| DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | assigned | agent-0 | DK-0056 |  |
+| DK-0995 | Ph7 | Q | P2 | XS | Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check) | assigned | agent-0 | DK-0057 |  |
+| DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | assigned | agent-0 | DK-0058 |  |
+| DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | assigned | agent-0 | DK-0059 |  |
+| DK-0998 | Ph7 | Q | P2 | XS | Visual QA: ill-11-ai-model-needed (ILL-11 · AI model needed — Page with a chip and download arrow) | assigned | agent-0 | DK-0060 |  |
+| DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | assigned | agent-0 | DK-0061 |  |
+| DK-1000 | Ph7 | Q | P2 | XS | Visual QA: ill-13-device-not-eligible (ILL-13 · Device not eligible — Phone with a memory chip, dashed) | assigned | agent-0 | DK-0062 |  |
+| DK-1001 | Ph7 | Q | P2 | XS | Visual QA: ill-14-damaged-file (ILL-14 · Damaged file — Page with a torn corner) | assigned | agent-0 | DK-0063 |  |
+| DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | assigned | agent-0 | DK-0064 |  |
+| DK-1003 | Ph7 | Q | P2 | XS | Visual QA: ill-16-no-workflows-yet (ILL-16 · No workflows yet — Three connected cards) | assigned | agent-0 | DK-0065 |  |
+| DK-1004 | Ph7 | Q | P2 | XS | Visual QA: ill-17-find-documents-in-photos (ILL-17 · Find documents in photos — Photo grid, two marked as documents) | assigned | agent-0 | DK-0066 |  |
+| DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | assigned | agent-0 | DK-0067 |  |
+| DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | assigned | agent-0 | DK-0068 |  |
+| DK-1007 | Ph7 | Q | P2 | XS | Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle) | assigned | agent-0 | DK-0069 |  |
 | DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | open |  | DK-0708 DK-0698 |  |
 | DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | open |  | DK-0708 |  |
 | DK-1010 | Ph1 | A | P0 | L | Design: All phone frames from the inventory | open |  | DK-1009 |  |
@@ -1062,27 +1062,27 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1038 | Ph7 | W | P1 | S | Deploy the website to the owner's domain | open |  | DK-1032 DK-1034 DK-1035 |  |
 | DK-1039 | Ph1 | M | P1 | M | Marketing plan: positioning, audiences, channels, launch calendar (docs/marketing/plan.md) | assigned | agent-5 |  |  |
 | DK-1040 | Ph1 | M | P2 | M | Store and keyword research EN/DE: the top PDF apps' listings, keywords, screenshots | assigned | agent-5 |  |  |
-| DK-1041 | Ph1 | Q | P1 | XS | Device check: deep links cold-start every route (DK-0004) | open |  | DK-0668 |  |
-| DK-1042 | Ph1 | A | P2 | XS | Monthly dependency upgrade review: November 2026 | open |  |  |  |
-| DK-1043 | Ph1 | Q | P1 | XS | Device check: tool output shows in the Files apps under Dokulo (DK-0006) | open |  | DK-0668 |  |
+| DK-1041 | Ph1 | Q | P1 | XS | Device check: deep links cold-start every route (DK-0004) | assigned | agent-0 | DK-0668 |  |
+| DK-1042 | Ph1 | A | P2 | XS | Monthly dependency upgrade review: November 2026 | assigned | agent-0 |  |  |
+| DK-1043 | Ph1 | Q | P1 | XS | Device check: tool output shows in the Files apps under Dokulo (DK-0006) | assigned | agent-0 | DK-0668 |  |
 | DK-1044 | Ph1 | A | P0 | S | PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up) | done | agent-0 | DK-0007 | #567 |
-| DK-1045 | Ph1 | Q | P1 | S | Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390) | open |  | DK-0668 DK-0293 |  |
-| DK-1046 | Ph1 | A | P1 | S | iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up) | open |  | DK-0015 |  |
-| DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | open |  | DK-0668 DK-0462 |  |
-| DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | open |  | DK-0668 |  |
-| DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | open |  | DK-0668 DK-0293 |  |
+| DK-1045 | Ph1 | Q | P1 | S | Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390) | assigned | agent-0 | DK-0668 DK-0293 |  |
+| DK-1046 | Ph1 | A | P1 | S | iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up) | assigned | agent-0 | DK-0015 |  |
+| DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | assigned | agent-0 | DK-0668 DK-0462 |  |
+| DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | assigned | agent-0 | DK-0668 |  |
+| DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | assigned | agent-0 | DK-0668 DK-0293 |  |
 | DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | done | agent-1 |  | #726 |
-| DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | open |  | DK-0397 DK-0668 |  |
-| DK-1052 | Ph4 | Q | P1 | S | Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) | open |  | DK-0668 DK-0474 |  |
-| DK-1053 | Ph4 | Q | P1 | S | Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400) | open |  | DK-0668 DK-0474 |  |
-| DK-1054 | Ph1 | A | P1 | S | Mac check: Xcode privacy report and an App Store upload without privacy-manifest warnings (DK-0682) | open |  | DK-1046 |  |
+| DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | assigned | agent-0 | DK-0397 DK-0668 |  |
+| DK-1052 | Ph4 | Q | P1 | S | Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) | assigned | agent-0 | DK-0668 DK-0474 |  |
+| DK-1053 | Ph4 | Q | P1 | S | Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400) | assigned | agent-0 | DK-0668 DK-0474 |  |
+| DK-1054 | Ph1 | A | P1 | S | Mac check: Xcode privacy report and an App Store upload without privacy-manifest warnings (DK-0682) | assigned | agent-0 | DK-1046 |  |
 | DK-1055 | Ph3 | C | P1 | XS | pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding) | done | agent-2 |  | #981 |
 | DK-1056 | Ph3 | C | P2 | XS | pdf_structure: two-column address blocks are not tables (DK-0401 finding) | done | agent-2 |  | #981 |
 | DK-1057 | Ph3 | C | P2 | XS | pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding) | done | agent-2 |  | #981 |
-| DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | open |  | DK-0391 DK-1046 |  |
-| DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | open |  | DK-0391 DK-0668 |  |
-| DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | open |  | DK-0394 DK-0668 |  |
-| DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | open |  | DK-0668 |  |
+| DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | assigned | agent-0 | DK-0391 DK-1046 |  |
+| DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | assigned | agent-0 | DK-0391 DK-0668 |  |
+| DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | assigned | agent-0 | DK-0394 DK-0668 |  |
+| DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | assigned | agent-0 | DK-0668 |  |
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | review | agent-2 |  | #1091 |
 
 ## Locks
@@ -2050,3 +2050,15 @@ DK-0708 (Decision: confirm the palette together with the app-icon design) is don
 ### H-235 · 2026-10-08 00:30 · agent-1 → all · heads-up
 
 The owner approved the palette (DK-0708 done). M02 starts: I'm on DK-0024 (DkTokens ThemeExtension, light+dark); the colour/typography/spacing/motion token tasks (DK-0025..0039) follow on it. Reviewers needed for M02 (not covered by the M01 no-review rule): agent-2/agent-0, please pick up my M02 PRs when asked.
+
+### H-236 · 2026-10-08 00:30 · agent-0 → agent-1 · assign
+
+The owner's goal (2026-10-08): finish milestones M01, M02 and M03, split between agent-0, agent-1 and agent-2; a dependency in another milestone gets built first. Yours: 87 tasks (M02 49, M03 38), in this order where dependencies allow (team.py status lists the ready ones first): DK-0025 DK-0026 DK-0027 DK-0028 DK-0029 DK-0030 DK-0031 DK-0032 DK-0033 DK-0034 DK-0035 DK-0036 DK-0037 DK-0038 DK-0039 DK-0040 DK-0041 DK-0042 DK-0043 DK-0044 DK-0045 DK-0046 DK-0047 DK-0048 DK-0049 DK-0050 DK-0051 DK-0052 DK-0053 DK-0054 DK-0055 DK-0056 DK-0057 DK-0058 DK-0059 DK-0060 DK-0061 DK-0062 DK-0063 DK-0064 DK-0065 DK-0066 DK-0067 DK-0068 DK-0069 DK-0070 DK-0071 DK-0072 DK-0073 DK-0074 DK-0075 DK-0076 DK-0077 DK-0078 DK-0079 DK-0080 DK-0081 DK-0120 DK-0121 DK-0122 DK-0123 DK-0124 DK-0125 DK-0126 DK-0127 DK-0128 DK-0129 DK-0130 DK-0131 DK-0132 DK-0133 DK-0134 DK-0135 DK-0136 DK-0137 DK-0138 DK-0139 DK-0140 DK-0141 DK-0142 DK-0143 DK-0144 DK-0145 DK-0146 DK-0147 DK-0148 DK-0149. Batch 2-5 related tasks per PR as usual; close each task's GitHub issue when it merges.
+
+### H-237 · 2026-10-08 00:30 · agent-0 → agent-0 · assign
+
+The owner's goal (2026-10-08): finish milestones M01, M02 and M03, split between agent-0, agent-1 and agent-2; a dependency in another milestone gets built first. Yours: 85 tasks (M01 16, M03 69), in this order where dependencies allow (team.py status lists the ready ones first): DK-0082 DK-0083 DK-0084 DK-0085 DK-0086 DK-0087 DK-0088 DK-0089 DK-0090 DK-0091 DK-0092 DK-0093 DK-0094 DK-0095 DK-0096 DK-0097 DK-0098 DK-0099 DK-0100 DK-0101 DK-0102 DK-0103 DK-0104 DK-0105 DK-0106 DK-0107 DK-0108 DK-0109 DK-0110 DK-0111 DK-0112 DK-0113 DK-0114 DK-0115 DK-0116 DK-0117 DK-0118 DK-0119 DK-0222 DK-0223 DK-0224 DK-0225 DK-0226 DK-0227 DK-0228 DK-0982 DK-0984 DK-0985 DK-0986 DK-0988 DK-0989 DK-0990 DK-0991 DK-0992 DK-0993 DK-0994 DK-0995 DK-0996 DK-0997 DK-0998 DK-0999 DK-1000 DK-1001 DK-1002 DK-1003 DK-1004 DK-1005 DK-1006 DK-1007 DK-1041 DK-1042 DK-1043 DK-1045 DK-1046 DK-1047 DK-1048 DK-1049 DK-1051 DK-1052 DK-1053 DK-1054 DK-1058 DK-1059 DK-1060 DK-1061. Batch 2-5 related tasks per PR as usual; close each task's GitHub issue when it merges.
+
+### H-238 · 2026-10-08 00:30 · agent-0 → agent-2 · assign
+
+The owner's goal (2026-10-08): finish milestones M01, M02 and M03, split between agent-0, agent-1 and agent-2; a dependency in another milestone gets built first. Yours: 72 tasks (M03 72), in this order where dependencies allow (team.py status lists the ready ones first): DK-0150 DK-0151 DK-0152 DK-0153 DK-0154 DK-0155 DK-0156 DK-0157 DK-0158 DK-0159 DK-0160 DK-0161 DK-0162 DK-0163 DK-0164 DK-0165 DK-0166 DK-0167 DK-0168 DK-0169 DK-0170 DK-0171 DK-0172 DK-0173 DK-0174 DK-0175 DK-0176 DK-0177 DK-0178 DK-0179 DK-0180 DK-0181 DK-0182 DK-0183 DK-0184 DK-0185 DK-0186 DK-0187 DK-0188 DK-0189 DK-0190 DK-0191 DK-0192 DK-0193 DK-0194 DK-0195 DK-0196 DK-0197 DK-0198 DK-0199 DK-0200 DK-0201 DK-0202 DK-0203 DK-0204 DK-0205 DK-0206 DK-0207 DK-0208 DK-0209 DK-0210 DK-0211 DK-0212 DK-0213 DK-0214 DK-0215 DK-0216 DK-0217 DK-0218 DK-0219 DK-0220 DK-0221. Batch 2-5 related tasks per PR as usual; close each task's GitHub issue when it merges.
