@@ -7,6 +7,7 @@ environment:
   sdk: ^3.13.0
 
 dependencies:
+  pdf: 3.13.1 # the invisible OCR text layer (DK-0394)
   ai_core:
     path: ../ai_core
   drift: 2.35.0

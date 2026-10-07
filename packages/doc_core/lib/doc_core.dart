@@ -4,6 +4,7 @@ library;
 export 'src/db/database.dart';
 export 'src/files/file_store.dart';
 export 'src/pdf/pdf_engine.dart';
+export 'src/pdf/ocr_text_layer.dart';
 export 'src/pdf/pdf_structure.dart';
 export 'src/pdf/qpdf_service.dart';
 export 'src/pdf/thumbnail_cache.dart';
