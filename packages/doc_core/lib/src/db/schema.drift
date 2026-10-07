@@ -112,6 +112,16 @@ CREATE TABLE photo_finder_cache (
   is_document BOOLEAN NOT NULL
 );
 
+-- Jobs that are running (DK-0008). The job queue writes the row when a job
+-- starts and deletes it when the job ends, however it ends; a row found at
+-- launch is a job the OS killed, which DK-0021 resumes or reports.
+CREATE TABLE jobs (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  tool_id TEXT NOT NULL,
+  input TEXT NOT NULL, -- the ToolJob's input as JSON
+  started_at DATETIME NOT NULL
+) AS JobRow; -- not Job: that's ai_core's
+
 -- Files search: the matching file, page and a snippet with the hit in [ ].
 searchText: SELECT CAST(file_id AS INTEGER) AS file_id, CAST(page AS INTEGER) AS page,
     snippet(ocr_text, 2, '[', ']', '…', 12) AS snippet
