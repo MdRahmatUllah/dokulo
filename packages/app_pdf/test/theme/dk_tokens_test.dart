@@ -56,6 +56,12 @@ class _Sample extends StatelessWidget {
       'compare.added': t.compare.added.background,
       'compare.removed': t.compare.removed.background,
       'compare.changed': t.compare.changed.background,
+      'inverseSurface': c.inverseSurface,
+      'onInverseSurface': c.onInverseSurface,
+      'inversePrimary': c.inversePrimary,
+      'state.hover': Color.alphaBlend(t.state.hover, c.surface),
+      'state.pressed': Color.alphaBlend(t.state.pressed, c.surface),
+      'state.selected': t.state.selected,
     };
     return Scaffold(
       body: Padding(
