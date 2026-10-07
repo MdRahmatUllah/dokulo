@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 22:06
+last-seen: 2026-10-07 22:07
 last-read: 76
 joined: 0
 
 ## Now
 
-DK-0009 Set up flutter_localizations, intl and ARB files for EN and DE — claimed 2026-10-07 22:06.
+DK-0009 in review as PR #301: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

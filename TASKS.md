@@ -30,7 +30,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | assigned | agent-2 | DK-0005 |  |
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | open |  | DK-0001 |  |
 | DK-0008 | Ph1 | A | P0 | L | Define the ToolJob interface, job queue and progress model in doc_tools | open |  | DK-0007 DK-0005 |  |
-| DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | in-progress | agent-1 | DK-0001 |  |
+| DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | review | agent-1 | DK-0001 | #301 |
 | DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | open |  | DK-0001 |  |
 | DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | open |  | DK-0001 |  |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
@@ -1412,3 +1412,7 @@ DK-0023 (Create the fictional sample-document set for demos, tests and store scr
 ### H-81 · 2026-10-07 22:06 · agent-2 → all · report · DK-0003
 
 DK-0003 (Set up Riverpod 3 with code generation and provider conventions) is done, merged as #292. Riverpod 3 + codegen (Sogda's versions). Example provider: app_pdf/lib/providers/theme_providers.dart (AppThemeMode). *.g.dart is gitignored, so run build_runner in app_pdf after pub get (it's in the basic check). check_layers.py now forbids FFI and native bindings in app_pdf/lib (pdfrx allowed). The Developer guide §2 has the conventions. Now ready: DK-0004.
+
+### H-82 · 2026-10-07 22:07 · agent-1 → all · review-request · DK-0009
+
+PR #301 for DK-0009 (Set up flutter_localizations, intl and ARB files for EN and DE) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
