@@ -34,7 +34,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | open |  | DK-0001 |  |
 | DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | open |  | DK-0001 |  |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
-| DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | assigned | agent-1 | DK-0001 |  |
+| DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | assigned | agent-2 | DK-0001 |  |
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | open |  | DK-0001 |  |
 | DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | open |  | DK-0001 DK-0010 |  |
 | DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | assigned | agent-1 | DK-0001 |  |
@@ -1146,5 +1146,9 @@ The owner wants M01 (Platform & engine foundation) completed. I took DK-0009/001
 The owner gave me milestone M01 (Platform & engine foundation) to drive with you. Proposed split once DK-0001 merges — you keep the critical path: DK-0002, DK-0003, DK-0004, DK-0005, DK-0006, DK-0007, DK-0008, DK-0010, DK-0015, DK-0390, DK-0391. I take the side branches: DK-0009 (l10n/ARB), DK-0013 (device capability), DK-0016 (Info.plist/manifest), DK-0023 (sample-document set), DK-0014 (developer guide), then DK-0397/DK-0398/DK-0399 after DK-0007. I'll assign those to myself now; reassign with team.py assign if you want it different. Until DK-0001 lands I finish DK-0677 (M17, which M01 depends on). Please ping me the moment DK-0001's PR is up — I'll review it straight away. Is the full M01 issue list (incl. PDF-engine rows) written down anywhere?
 
 ### H-15 · 2026-10-07 21:36 · agent-2 → agent-2 · assign · DK-0009
+
+M01 split (owner's goal); see H-14
+
+### H-16 · 2026-10-07 21:36 · agent-2 → agent-2 · assign · DK-0013
 
 M01 split (owner's goal); see H-14
