@@ -71,8 +71,25 @@ def classify(package_dir: Path) -> str | None:
     return min(found)[1] if found else None
 
 
+def declared(root: Path) -> set[str]:
+    """Packages any pubspec.yaml lists under (dev_)dependencies. A pub workspace's
+    lock marks every package "transitive", so this is what makes one direct."""
+    names = set()
+    for pubspec in root.rglob("pubspec.yaml"):
+        if any(part.startswith(".") for part in pubspec.relative_to(root).parts):
+            continue
+        section = None
+        for line in pubspec.read_text(encoding="utf-8").splitlines():
+            if m := re.match(r"^(\w+):", line):
+                section = m[1]
+            elif section in ("dependencies", "dev_dependencies") and (m := re.match(r"^  (\w+):", line)):
+                names.add(m[1])
+    return names
+
+
 def scan(root: Path, cache: Path) -> list[str]:
     allowed = registered(root)
+    direct = declared(root)
     problems = []
     for lock in sorted(root.rglob("pubspec.lock")):
         if any(part.startswith(".") for part in lock.relative_to(root).parts):
@@ -85,7 +102,7 @@ def scan(root: Path, cache: Path) -> list[str]:
                 continue
             if p.get("source") in ("sdk", "path"):
                 continue
-            if p.get("dependency", "").startswith("direct") and name not in allowed:
+            if (p.get("dependency", "").startswith("direct") or name in direct) and name not in allowed:
                 problems.append(f"{where}: {name} is a direct dependency with no register line")
             if p.get("source") != "hosted":
                 continue  # git packages need their register line, checked above for direct ones

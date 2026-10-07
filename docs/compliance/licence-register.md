@@ -51,6 +51,9 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `go_router` | BSD-3 | Yes | Routing | Notice |
 | `drift` | MIT | Yes | File index, recents, folders, OCR text (FTS5) | Notice |
 | `drift_dev` | MIT | Dev | drift codegen | None (not shipped) |
+| `lints` | BSD-3 | Dev | Lint rules for the Dart packages | None (not shipped) |
+| `flutter_lints` | BSD-3 | Dev | Lint rules for `app_pdf` | None (not shipped) |
+| `test` | BSD-3 | Dev | Unit tests in the Dart packages | None (not shipped) |
 | `sqlite3` | MIT | Yes | SQLite with FTS5 via build hooks (3.x; SQLite itself is public domain). `sqlite3_flutter_libs` and `sqlcipher_flutter_libs` are obsolete with 3.x (their `+eol` releases do nothing): don't add them | Notice |
 | `cryptography` | Apache-2.0 | Yes | AES-GCM file encryption | Notice |
 | `flutter_secure_storage` | BSD-3 | Yes | Keys in Keychain / Keystore | Notice |
