@@ -132,6 +132,13 @@ Riverpod 3 with code generation, the same versions as Sogda:
   helpers in `test/db/dokulo/`: move `generated/*` into `test/db/generated/`
   and delete the rest (`database_test.dart` already checks that every version
   upgrades to the current one). Take the `db-schema` lock first.
+- **Files search's index** (DK-0270): `TextIndexer(db)` puts every page's text
+  (PDF text, OCR layers included) into `ocr_text` and sets `files.has_text`.
+  A file is stale while `files.indexed_at` isn't its `modified`; each file is
+  indexed in one transaction, so a kill leaves the old index and the next
+  `catchUp()` finishes it. After a save: `FileStore.save`, `reconcile`, then
+  `catchUp()`; `startupCleanup` runs both in the background
+  (`StartupReport.indexing`).
 - **Data from drift:** an async notifier (`AsyncNotifier` / `StreamNotifier`)
   that maps the drift watch stream. **Never await a watch's `.first`** in a
   provider: it hangs tests.

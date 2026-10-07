@@ -20,7 +20,9 @@ CREATE TABLE files (
   has_text BOOLEAN NOT NULL DEFAULT FALSE,
   encrypted BOOLEAN NOT NULL DEFAULT FALSE,
   folder_id INTEGER REFERENCES folders (id) ON DELETE SET NULL,
-  colour TEXT
+  colour TEXT,
+  -- The `modified` its text index reflects (DK-0270); NULL: not indexed yet.
+  indexed_at DATETIME
 ) AS FileEntry; -- not File: that's dart:io's
 
 -- Opening a file again replaces its row (INSERT OR REPLACE), so it moves to
