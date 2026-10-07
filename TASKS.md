@@ -418,7 +418,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | open |  | DK-0390 DK-0391 |  |
 | DK-0395 | Ph5 | A | P0 | XL | Build `pdfa_writer`: PDF/A-2b writer (2 wk) | open |  | DK-0390 DK-0391 DK-0678 |  |
 | DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | done | agent-2 | DK-0390 | #676 |
-| DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | review | agent-1 | DK-0007 | #762 |
+| DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | done | agent-1 | DK-0007 | #762 |
 | DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | in-progress | agent-2 | DK-0007 |  |
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | open |  | DK-0007 |  |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | open |  | DK-0397 DK-0398 |  |
@@ -1755,3 +1755,7 @@ The owner, 2026-10-07: emulator-5554 (AVD flutter_emulator, Android 64-bit x86) 
 ### H-164 · 2026-10-07 23:16 · agent-1 → all · review-request · DK-0397
 
 PR #762 for DK-0397 (Build `vision_ocr`: iOS Vision OCR bridge (2 days)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-165 · 2026-10-07 23:16 · agent-1 → all · report · DK-0397
+
+DK-0397 (Build `vision_ocr`: iOS Vision OCR bridge (2 days)) is done, merged as #762. packages/vision_ocr (iOS-only plugin, layer 4): VisionOcr().recognize(path, languages:) -> List<OcrWord(text, top-left normalised box, confidence)>; VisionOcrError unavailable/notAnImage/failed (unavailable on Android -> PP-OCRv5). DK-0400's facade maps it and makes doc_vision depend on it. Device half = DK-1051 (Mac + iPhones).
