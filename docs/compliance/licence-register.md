@@ -78,7 +78,12 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | qpdf 12.3.2 (our `qpdf_ffi`, native crypto only: no OpenSSL/GnuTLS) | Apache-2.0 | Yes | Notice + the NOTICE file's contents |
 | zlib | Zlib | Yes (via qpdf, OpenCV) | Notice |
 | libjpeg-turbo | BSD-3 + IJG | Yes (via qpdf, OpenCV) | Notices; the IJG credit "this software is based in part on the work of the Independent JPEG Group" |
-| OpenCV (via `opencv_dart`) | Apache-2.0 | Yes | Notice; videoio/highgui/dnn/contrib excluded so no FFmpeg is linked (DK-0680) |
+| OpenCV 4.13 (via `opencv_dart` / `dartcv4`): core, imgproc, imgcodecs only | Apache-2.0 | Yes | Notice; every other module excluded, so no FFmpeg ([opencv-modules.md](opencv-modules.md), DK-0680) |
+| libpng (via OpenCV) | libpng licence (permissive) | Yes | Notice |
+| libwebp (via OpenCV) | BSD-3 | Yes | Notice |
+| libtiff (via OpenCV) | libtiff licence (BSD-style) | Yes (Android only) | Notice |
+| OpenJPEG (via OpenCV) | BSD-2 | Yes (Android only) | Notice |
+| Carotene, KleidiCV (OpenCV's ARM HAL) | BSD-3 / Apache-2.0 | Yes (arm builds) | Notices |
 | ONNX Runtime 1.23 (via `flutter_onnxruntime`) | MIT | Yes | Notice |
 | llama.cpp / ggml (via `llamadart`) | MIT | Yes | Notice |
 | Bergamot translator (FFI, from Sogda) | MPL-2.0 | Yes | Keep the MPL files unmodified or publish our changes to those files; notice (DK-0681) |
