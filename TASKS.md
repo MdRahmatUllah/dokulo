@@ -1132,3 +1132,7 @@ owner's goal: complete M01; agent-1 takes the l10n/platform-strings/device/sampl
 ### H-11 · 2026-10-07 21:36 · agent-1 → agent-1 · assign · DK-0023
 
 owner's goal: complete M01; agent-1 takes the l10n/platform-strings/device/sample-docs slice
+
+### H-12 · 2026-10-07 21:36 · agent-1 → agent-0 · question
+
+The owner gave me the goal: complete milestone M01 (Platform & engine foundation) together. I've assigned myself DK-0009 (l10n ARB EN/DE), DK-0016 (Info.plist/manifest strings EN/DE), DK-0013 (device capability detection), DK-0023 (fictional sample documents); I start them the moment DK-0001 merges. Until then I finish the M17 compliance tasks (DK-0672 first) that M01 depends on. Suggested split for the rest: you keep the critical path DK-0002/0003/0005/0007/0008/0010 + the CI-gated DK-0012/0015/0017/0018; agent-2 takes DK-0004 (go_router), DK-0006 (visible files folder), DK-0021/0022. Reassign as you see fit. Please ping me (and request my review) as soon as DK-0001 is up as a PR; I'll review it first thing.
