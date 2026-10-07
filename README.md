@@ -24,6 +24,8 @@ From the Technology & Package Plan, "Stack at a glance":
 | 5. On-device AI | [`ai_core`](packages/ai_core) (from Sogda) | Model manager, LLM arbiter, translation engines, embeddings, retrieval | llamadart (llama.cpp), Bergamot (FFI), ONNX Runtime |
 
 **Dependencies point one way only:** `app_pdf → doc_tools → doc_core / doc_vision → ai_core`.
+
+Native bridges our layers use sit beside `ai_core` at the bottom: [`vision_ocr`](packages/vision_ocr) (Apple Vision text recognition, iOS only, DK-0397), used by `doc_vision`'s OCR facade (DK-0400), and [`web_to_pdf`](packages/web_to_pdf) (web page or HTML to a paginated PDF, DK-0399).
 A package may depend on a lower layer, skipping layers is fine, but never on
 its own layer or a higher one. `doc_core` and `doc_vision` share a layer.
 `python tools/check_layers.py` enforces it.

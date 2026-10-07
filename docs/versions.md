@@ -39,7 +39,7 @@ PR. Checked on pub.dev on 2026-10-07.
 | printing | 5.15.1 | Apache-2.0 | HTML → PDF | Planned |
 | llamadart | 0.8.12 | MIT | Gemma via llama.cpp; Sogda's runtime version (0.11.0 exists: upgrade together with Sogda) | Planned |
 | llamadart_llama_cpp_flutter | 0.0.8 | MIT | llama.cpp for iOS (SwiftPM); paired with llamadart 0.8.12 | Planned |
-| flutter_onnxruntime | 1.8.4 | MIT | OCR models, embeddings, TTS (ONNX Runtime 1.23); 1.9.0 exists | Planned |
+| flutter_onnxruntime | 1.8.4 | MIT | OCR models, embeddings, TTS (ONNX Runtime 1.23); 1.9.0 exists | In use (DK-0398, doc_vision) |
 | opencv_dart | 2.2.2 | Apache-2.0 | Image pipeline; modules core, imgproc, imgcodecs only ([opencv-modules.md](compliance/opencv-modules.md)) | Planned |
 | receive_sharing_intent | 1.9.0 | Apache-2.0 | Share sheet / "Open with" | Planned |
 | drift | 2.35.0 | MIT | File index, recents, folders, OCR text (FTS5) | In use (DK-0005, doc_core) |
@@ -54,7 +54,7 @@ PR. Checked on pub.dev on 2026-10-07.
 | path_provider | 2.1.6 | BSD-3 | Sandbox paths | In use (DK-0005, app_pdf) |
 | photo_manager | 3.12.0 | Apache-2.0 | Find documents in photos | Planned |
 | webview_flutter | 4.14.1 | BSD-3 | Web page to PDF | Planned |
-| image | 4.10.1 | MIT | EXIF, HEIC fallback, thumbnails | Planned |
+| image | 4.10.1 | MIT | EXIF, HEIC fallback, thumbnails; decodes PNG/JPEG for OCR | In use (DK-0400, doc_vision) |
 | in_app_purchase | 3.3.1 | BSD-3 | Pro unlock | Planned |
 | camera | 0.12.1 | BSD-3 | Android scanner frames | Planned |
 | material_symbols_icons | 4.2960.0 | Apache-2.0 | Icons (DK-0048) | Planned |

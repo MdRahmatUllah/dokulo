@@ -19,3 +19,5 @@ coverage/
 packages/app_pdf/lib/l10n/app_localizations*.dart
 # Generated code (build_runner): run it after pub get, never commit it.
 *.g.dart
+# PP-OCRv5 models: fetched and hash-checked by tools/fetch_ocr_models.py.
+packages/doc_vision/assets/ocr/

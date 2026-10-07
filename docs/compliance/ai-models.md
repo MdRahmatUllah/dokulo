@@ -103,6 +103,19 @@ is **licence-cleared**, not catalogued.
    (<https://github.com/gitakoos/ocr-models>) are Apache-2.0 too.
 2. Territory: none. 3. None. 4. NOTICE: "ONNX files converted from PaddleOCR,
    not modified".
+5–7. **Pinned (DK-0398):** the `v1` release assets of
+   `gitakoos/ocr-models`, fetched and checked by `tools/fetch_ocr_models.py`:
+
+   | File | Bytes | SHA-256 |
+   | --- | ---: | --- |
+   | `det.onnx` (PP-OCRv5 mobile detection) | 4,748,769 | `d7fe3ea74652890722c0f4d02458b7261d9f5ae6c92904d05707c9eb155c7924` |
+   | `cls.onnx` (PP-OCRv5 line-angle classifier) | 582,663 | `f4bb53707100c5f3d59ba834eb05bb400369f20aed35d4b26807b1bfadd2a70e` |
+   | `rec_latin.onnx` (`latin_PP-OCRv5_mobile_rec`) | 8,064,539 | `995b0f5f28d2073896a78c03b5b863eae6af3744bafa0245b8522beea6994927` |
+   | `ppocrv5_latin_dict.txt` (836 characters) | 2,616 | `ccbcc45730b3fbbd9050c5bc74db6a99067141ef1035e3d14889a84a6b9b1aff` |
+
+   The repo's NOTICE (format conversion only, weights unchanged) ships with
+   them in the licence screen.
+8. RAM and time per page: measured on the test devices (DK-1052).
 9. det about 4.8 MB, Latin rec about 8 MB, cls about 0.6 MB (bundled);
    multilingual rec about 16.5 MB (download), per the Technology plan.
 

@@ -1,0 +1,26 @@
+name: web_to_pdf
+description: "Web page or HTML to a paginated PDF for Dokulo (DK-0399): Android's print adapter, iOS's print renderer."
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: app.dokulo.web_to_pdf
+        pluginClass: WebToPdfPlugin
+      ios:
+        pluginClass: WebToPdfPlugin
