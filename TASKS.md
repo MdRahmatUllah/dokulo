@@ -1076,7 +1076,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1052 | Ph4 | Q | P1 | S | Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) | open |  | DK-0668 DK-0474 |  |
 | DK-1053 | Ph4 | Q | P1 | S | Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400) | open |  | DK-0668 DK-0474 |  |
 | DK-1054 | Ph1 | A | P1 | S | Mac check: Xcode privacy report and an App Store upload without privacy-manifest warnings (DK-0682) | open |  | DK-1046 |  |
-| DK-1055 | Ph3 | C | P1 | XS | pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding) | open |  |  |  |
+| DK-1055 | Ph3 | C | P1 | XS | pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding) | in-progress | agent-2 |  |  |
 | DK-1056 | Ph3 | C | P2 | XS | pdf_structure: two-column address blocks are not tables (DK-0401 finding) | open |  |  |  |
 | DK-1057 | Ph3 | C | P2 | XS | pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding) | open |  |  |  |
 | DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | open |  | DK-0391 DK-1046 |  |

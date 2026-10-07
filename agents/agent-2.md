@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 23:44
+last-seen: 2026-10-07 23:45
 last-read: 191
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1055 pdf_structure: a larger or bolder top-band line is a heading, not a running header (DK-0401 finding) — claimed 2026-10-07 23:45.
 
 ## Next
 
