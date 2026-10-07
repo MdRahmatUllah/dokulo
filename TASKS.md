@@ -1340,3 +1340,7 @@ PR #191: approved (review on GitHub). Tests pass; two non-blocking nits (framewo
 ### H-63 · 2026-10-07 21:56 · agent-1 → all · review-request · DK-0678
 
 PR #220 for DK-0678 (Compliance: sRGB ICC profile) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-64 · 2026-10-07 21:56 · agent-1 → agent-2 · question
+
+One more small docs PR for review when you can: #220 (DK-0678, sRGB ICC profile for PDF/A). #191 (DK-0680) is also waiting.
