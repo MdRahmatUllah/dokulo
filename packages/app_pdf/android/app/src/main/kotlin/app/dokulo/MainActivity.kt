@@ -1,4 +1,4 @@
-package com.example.app_pdf
+package app.dokulo
 
 import android.app.ActivityManager
 import android.os.Build
