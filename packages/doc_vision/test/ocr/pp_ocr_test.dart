@@ -113,8 +113,7 @@ void main() {
 
       final lines = await PpOcr(runner!, dictionary).recognize(raster);
       final texts = lines.map((l) => l.text).toList();
-      // ignore: avoid_print
-      print(lines.join('\n'));
+      printOnFailure(lines.join('\n'));
 
       expect(
         texts,

@@ -98,8 +98,7 @@ void main() {
           ),
         ),
       );
-      // ignore: avoid_print
-      print(
+      printOnFailure(
         'sharpness: sharp ${sharpness(sharp)}, blurred ${sharpness(blurred)}',
       );
       expect(sharpness(sharp), greaterThan(blurLimit));
@@ -175,8 +174,7 @@ void main() {
         final truth = File('$fixtures/$page.txt').readAsLinesSync().join(' ');
         final cer = characterErrorRate(truth, result.text);
         printOnFailure('CER $cer\n${result.text}');
-        // ignore: avoid_print
-        print(
+        printOnFailure(
           '$page: CER ${(cer * 100).toStringAsFixed(2)} %, mean confidence ${result.meanConfidence.toStringAsFixed(3)}',
         );
         expect(cer, lessThanOrEqualTo(limit));
