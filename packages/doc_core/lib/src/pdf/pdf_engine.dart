@@ -143,6 +143,23 @@ abstract final class PdfEngine {
     ));
   }
 
+  /// Whether the page shows text in a font that isn't embedded: PDF/A needs
+  /// every visible font embedded (DK-0395). Goes character by character, so
+  /// text in form XObjects (stamps, overlays) counts too; invisible text (an
+  /// OCR layer, rendering mode 3) doesn't.
+  static Future<bool> usesUnembeddedFonts(
+    String path,
+    int page, {
+    String? password,
+  }) async {
+    await _withDocument(path, password, (doc) async => _page(doc, page));
+    return PdfrxEntryFunctions.instance.compute(_unembeddedOnWorker, (
+      path,
+      password,
+      page,
+    ));
+  }
+
   /// Every character of a page with its box, baseline, font size (points)
   /// and boldness, for layout analysis
   /// ([PdfStructure]).
@@ -303,6 +320,30 @@ List<ImageObject> _imagesOnWorker((String, String?, int) message) =>
         );
       }
       return found;
+    });
+
+/// On pdfrx's worker: whether a visible character's font isn't embedded.
+bool _unembeddedOnWorker((String, String?, int) message) =>
+    _onPage(message, (pdfium, page, arena) {
+      final text = pdfium.FPDFText_LoadPage(page);
+      try {
+        final seen = <int>{};
+        for (var i = 0; i < pdfium.FPDFText_CountChars(text); i++) {
+          final obj = pdfium.FPDFText_GetTextObject(text, i);
+          if (obj == nullptr || !seen.add(obj.address)) continue;
+          if (pdfium.FPDFTextObj_GetTextRenderMode(obj) ==
+              fpdf.FPDF_TEXT_RENDERMODE.FPDF_TEXTRENDERMODE_INVISIBLE) {
+            continue;
+          }
+          final font = pdfium.FPDFTextObj_GetFont(obj);
+          if (font != nullptr && pdfium.FPDFFont_GetIsEmbedded(font) == 0) {
+            return true;
+          }
+        }
+        return false;
+      } finally {
+        pdfium.FPDFText_ClosePage(text);
+      }
     });
 
 /// On pdfrx's worker: every character with its box, font size and weight.

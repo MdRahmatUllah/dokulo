@@ -59,6 +59,7 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
             command = [flutter, "test", "--timeout", "60s"] if is_flutter(p) else [dart, "test"]
             out.append((f"test {p.name}", command, p))
     out.append(("tools tests", [py, "-m", "pytest", "tools/tests", "-q"], root))
+    out.append(("pdfa (veraPDF)", [py, "tools/check_pdfa.py"], root))
     if apk:
         out.append(("native libs", [py, "tools/native_libs_check.py", str(apk)], root))
         out.append(("apk permissions", [py, "tools/check_permissions.py", str(apk)], root))
