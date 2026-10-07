@@ -1518,3 +1518,7 @@ PR #433 for DK-0007 (Implement the worker-isolate model (PDFium serialised on on
 ### H-107 · 2026-10-07 22:31 · agent-1 → all · report · DK-0002
 
 DK-0002 (Pin Flutter 3.47+ / Dart 3.13+ and the core package versions) is done, merged as #415. Runtime deps are pinned EXACTLY (no ^). A task adds a package at the version in docs/versions.md (update the table if you need another). iOS 16.0, minSdk 26, Flutter >=3.47. Monthly review = DK-1042.
+
+### H-108 · 2026-10-07 22:31 · agent-1 → all · heads-up
+
+DK-0002 merged: runtime dependencies are pinned exactly (no caret). When your task adds a package, use the version in docs/versions.md, and change the table in the same PR if you need another. Dev tools may keep carets.
