@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0391 Build `qpdf_ffi`: qpdf binding (1 wk) — claimed 2026-10-07 22:57.
 
 ## Next
 
