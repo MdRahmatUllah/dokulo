@@ -61,6 +61,15 @@ Rules:
   - Every native binding of ours (qpdf, OpenCV, ONNX, llama.cpp) calls
     `assertWorkerIsolate()` before its first native call; in debug builds it
     fails on any isolate the pool did not start, the UI isolate included.
+  - **qpdf** (DK-0391): `qpdf_ffi` builds qpdf 12.3.2 with zlib and
+    libjpeg-turbo from source pinned by SHA-256 (`docs/versions.md`) in its
+    build hook; the first build takes several minutes per target, later ones
+    are cached. A tool calls it inside a `Lane.qpdf` job through `doc_core`:
+    `QpdfService.run(() => Qpdf.encrypt(…))`, which checks the isolate and
+    turns qpdf's errors into the catalogue's `DocError`s. `Qpdf.run(job)` takes
+    any job in qpdf's job JSON; `encrypt`, `decrypt`, `repair`,
+    `compressStructure`, `linearize`, `overlay`, `extract` and `check` cover
+    the tools.
 - **A tool is a `ToolJob`** (`doc_tools`, DK-0008): a const class with an `id`
   (as in `/tool/:toolId`), a `Lane`, `encode`/`decode` of its input as JSON,
   `chain` (its input from the previous step's output, for workflows) and

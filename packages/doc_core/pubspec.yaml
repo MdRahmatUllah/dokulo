@@ -7,12 +7,15 @@ environment:
   sdk: ^3.13.0
 
 dependencies:
+  pdf: 3.13.1 # the invisible OCR text layer (DK-0394)
   ai_core:
     path: ../ai_core
   drift: 2.35.0
   ffi: 2.2.0
   pdfium_dart: 0.3.1
   pdfrx_engine: 0.6.1
+  qpdf_ffi:
+    path: ../qpdf_ffi
   sqlite3: 3.6.0
 
 dev_dependencies:

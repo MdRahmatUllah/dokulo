@@ -21,9 +21,10 @@ which is compressed, is smaller than this number.
 | OpenCV: core, imgproc, imgcodecs (`libdartcv`) | | 10.5 MB | the DK-0680 probe build |
 | ONNX Runtime (`flutter_onnxruntime`) | | about 15–20 MB | estimate |
 | llama.cpp (`llamadart`) | | about 5–10 MB | estimate |
-| qpdf (`qpdf_ffi`), Bergamot engine | | about 5–8 MB | estimate |
+| qpdf (`qpdf_ffi`: qpdf + zlib + libjpeg-turbo, one library) | 4.3 MB | | measured, debug APK, 2026-10-07 (DK-0391) |
+| Bergamot engine | | about 2–4 MB | estimate |
 | PP-OCRv5 det + Latin rec + angle cls (bundled) | | 13.4 MB | Technology plan |
-| **Total** | **25.5 MB** | **about 80–90 MB** | |
+| **Total** | **29.8 MB** | **about 80–90 MB** | |
 
 The budget leaves little room on purpose: a new bundled library or asset has
 to argue for its place. When a task adds one, it updates this table in the
