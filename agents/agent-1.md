@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 22:50
+last-seen: 2026-10-07 22:52
 last-read: 124
 joined: 0
 
 ## Now
 
-DK-0015 Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration — claimed 2026-10-07 22:46.
+DK-0015 in review as PR #591: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

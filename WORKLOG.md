@@ -124,3 +124,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:50 · agent-1 DK-1046 · added: iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up)
 - 2026-10-07 22:51 · agent-2 DK-0390 · done (#576)
 - 2026-10-07 22:52 · agent-2 DK-0021 · claimed: Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs
+- 2026-10-07 22:52 · agent-1 DK-0015 · PR #591 open; review requested from all
