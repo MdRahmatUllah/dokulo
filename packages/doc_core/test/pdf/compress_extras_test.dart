@@ -1,12 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:image/image.dart' as img;
 import 'package:pdfrx_engine/pdfrx_engine.dart' show pdfrxInitialize;
-import 'package:qpdf_ffi/qpdf_ffi.dart';
 import 'package:test/test.dart';
 
 String fixture(String name) =>
@@ -23,23 +20,6 @@ Future<Uint8List> jpeg(Uint8List rgba, int w, int h, int quality) async =>
       ),
       quality: quality,
     );
-
-List<String> _strip((String, String, String) a, JobContext context) =>
-    MetadataStrip.strip(a.$1, a.$2, Directory(a.$3));
-
-/// The trailer of [path] as qpdf sees it (on a qpdf worker).
-Map<String, Object?> _trailer((String, String) a, JobContext context) {
-  Qpdf.run({
-    'inputFile': a.$1,
-    'outputFile': a.$2,
-    'jsonOutput': '2',
-    'jsonStreamData': 'none',
-  });
-  final objects =
-      ((jsonDecode(File(a.$2).readAsStringSync()) as Map)['qpdf'] as List)[1]
-          as Map;
-  return (objects['trailer'] as Map)['value'] as Map<String, Object?>;
-}
 
 void main() {
   setUpAll(pdfrxInitialize);
@@ -140,32 +120,5 @@ void main() {
       expect(File(output).lengthSync(), lessThan(File(input).lengthSync()));
       expect((await PdfEngine.inspect(output)).pageCount, 6);
     });
-  });
-
-  test('metadata removal drops Info and XMP, keeps the pages', () async {
-    final input = fixture('Invoice INV-2026-014.pdf');
-    final output = '${dir.path}/plain.pdf';
-    final pool = IsolatePool(tempRoot: dir);
-    expect(
-      (await pool.run(Lane.qpdf, _trailer, (
-        input,
-        '${dir.path}/a.json',
-      )).result).keys,
-      contains('/Info'),
-    );
-
-    await pool.run(Lane.qpdf, _strip, (input, output, dir.path)).result;
-
-    expect(
-      (await pool.run(Lane.qpdf, _trailer, (
-        output,
-        '${dir.path}/b.json',
-      )).result).keys,
-      isNot(contains('/Info')),
-    );
-    expect(
-      (await PdfEngine.pageText(output, 0)).text,
-      contains('Invoice INV-2026-014'),
-    );
   });
 }

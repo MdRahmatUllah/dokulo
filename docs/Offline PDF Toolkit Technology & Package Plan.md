@@ -131,7 +131,7 @@ All 26 non-AI PDF tools sit on permissive engines; the real custom work is in co
 
 | Feature | How it works | Engines / packages | Custom work |
 | --- | --- | --- | --- |
-| Compress PDF | Downsample and re-encode images, then compress structure; "under X MB" uses a search over quality and DPI | PDFium image objects (`FPDFImageObj_GetBitmap`, `FPDFImageObj_LoadJpegFileInline`); OpenCV resize; libjpeg-turbo via OpenCV; qpdf object streams + flate recompress | **Custom `pdf_compress`** pipeline and size-target loop |
+| Compress PDF | Downsample and re-encode images, then compress structure; "under X MB" uses a search over quality and DPI | PDFium image objects (`FPDFImageObj_GetBitmap`, `FPDFImageObj_LoadJpegFileInline`); Dart `image` resize and JPEG encode on a pool worker (DK-0392; no OpenCV needed); qpdf object streams + flate recompress | **Custom `pdf_compress`** pipeline and size-target loop |
 | Repair PDF | Rewrite through qpdf; if that fails, open in PDFium and save a clean copy | qpdf, PDFium | Fallback chain + user message |
 | OCR PDF | Render page → OCR → write invisible text layer aligned to word boxes → overlay on original page | pdfrx render; OCR engine (Vision section); Dart `pdf` text render mode 3; qpdf `--overlay` | **Custom `ocr_text_layer`**: box-to-PDF coordinate mapping, font metrics fitting |
 
@@ -234,7 +234,7 @@ Fourteen components have no permissive, complete option, so we build them. Toget
 | Library | Why we build it | Scope | Depends on | Effort |
 | --- | --- | --- | --- | --- |
 | `qpdf_ffi` | No Dart binding for qpdf exists | Native builds (Android ABIs, iOS XCFramework), JSON job API wrapper, error mapping | qpdf 12.3.2, zlib, libjpeg-turbo | 1 wk |
-| `pdf_compress` | No permissive mobile compressor with size targets | Image inventory per page, downsample to 72/150/200 dpi, JPEG re-encode, replace image objects, qpdf structure pass, "under X MB" search (binary search over quality 40–85 and DPI), raster fallback for scans | PDFium, OpenCV, qpdf\_ffi | 1.5 wk |
+| `pdf_compress` | No permissive mobile compressor with size targets | Image inventory per page, downsample to 72/150/200 dpi, JPEG re-encode, replace image objects, qpdf structure pass, "under X MB" search (binary search over quality 40–85 and DPI), raster fallback for scans | PDFium, Dart `image`, qpdf\_ffi | 1.5 wk |
 | `pdf_redact` | Commercial SDKs only; must be verifiably true redaction | Detectors (regex + checksums + optional Gemma), review UI with editable boxes, apply: rasterise affected pages at 200–300 dpi, burn boxes, rebuild page as image + invisible OCR text minus redacted words, strip metadata/XMP/annotations/attachments/JavaScript, full rewrite; automated check that no redacted string can be extracted | PDFium, OCR, OpenCV, Dart `pdf`, qpdf\_ffi | 2 wk |
 | `ocr_text_layer` | Needed by OCR PDF, redaction and PDF/A | Word boxes → PDF coordinates (rotation, CropBox), invisible text (render mode 3) with horizontal scaling to fit each word, overlay onto original | Dart `pdf`, qpdf\_ffi | 1 wk |
 | `pdfa_writer` | Ghostscript/veraPDF are AGPL/GPL | PDF/A-2b: remove encryption, JavaScript and embedded files; check every font is embedded (PDFium `FPDFFont_GetIsEmbedded`) and rasterise pages with non-embedded fonts; add sRGB OutputIntent (the ICC's `sRGB2014.icc`, see docs/compliance/srgb-icc-profile.md); write XMP (`pdfaid:part=2`, `conformance=B`) and document ID; validate with veraPDF in CI only | qpdf\_ffi, PDFium, Dart `pdf` | 2 wk |

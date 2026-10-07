@@ -49,7 +49,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
   }) => GoRoute(
     path: path,
     parentNavigatorKey: root,
-    builder: (context, state) => builder(state),
+    builder: (context, state) => _HomeUnderneath(child: builder(state)),
     routes: routes,
   );
 
@@ -124,4 +124,24 @@ GoRouter appRouter(Ref ref) {
   final router = buildRouter();
   ref.onDispose(router.dispose);
   return router;
+}
+
+/// Back from a full-screen page that a deep link opened (nothing beneath it)
+/// goes to Home instead of leaving the app; pushed from a tab, it pops as
+/// usual (DK-1041).
+class _HomeUnderneath extends StatelessWidget {
+  const _HomeUnderneath({required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final router = GoRouter.of(context);
+    return PopScope(
+      canPop: router.canPop(),
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) router.go(Routes.home);
+      },
+      child: child,
+    );
+  }
 }
