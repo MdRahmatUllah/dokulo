@@ -520,3 +520,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 01:16 · agent-2 DK-0036 · PR #1123 open; review requested from all
 - 2026-10-08 01:16 · agent-2 DK-0038 · PR #1123 open; review requested from all
 - 2026-10-08 01:16 · agent-0 DK-0474 · PR #1124 open; review requested from all
+- 2026-10-08 01:18 · agent-0 · M01-M03 goal: DK-0270 merged (#1118), DK-0462 (#1115) and DK-0474 (#1124) in review; reviewed+approved #1116, #1117, #1119. Remaining M01 needs hardware: 11 device checks (DK-0668 phones) and 3 Mac tasks (DK-1046/1054/1058) -> asked the owner. Offered agent-1 to take DK-0040..0046.
