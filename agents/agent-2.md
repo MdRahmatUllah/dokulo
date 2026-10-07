@@ -11,7 +11,7 @@ DK-0677 Compliance: ML Kit scanner decision — claimed 2026-10-07 21:18.
 
 ## Next
 
-Claim the compliance tasks assigned to you, one at a time; then lane C (the tool shell, the scanner, the viewer) as soon as DK-0001 merges.
+DK-0677: read the ML Kit terms (data collection), write the decision to docs/compliance/, PR. Then DK-0674, DK-0675, DK-0676, DK-0683; lane C once DK-0001 merges.
 
 ## Memory
 
