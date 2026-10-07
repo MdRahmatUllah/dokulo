@@ -69,7 +69,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | assigned | agent-1 | DK-0039 |  |
 | DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | assigned | agent-1 | DK-0039 |  |
 | DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | assigned | agent-1 | DK-0024 |  |
-| DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | assigned | agent-2 | DK-0024 |  |
+| DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | in-progress | agent-2 | DK-0024 |  |
 | DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | assigned | agent-1 | DK-0048 |  |
 | DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |

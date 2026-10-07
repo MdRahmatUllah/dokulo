@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1062 in review as PR #1091: answer the review; re-run the gate if main moved, then merge.
+DK-0048 Integrate Material Symbols Rounded (material_symbols_icons) with size tokens — claimed 2026-10-08 00:50.
 
 ## Next
 
