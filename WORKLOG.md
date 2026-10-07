@@ -99,3 +99,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:33 · agent-0 DK-0008 · claimed: Define the ToolJob interface, job queue and progress model in doc_tools
 - 2026-10-07 22:35 · agent-0 · locked db-schema: DK-0008: jobs table (schema v2)
 - 2026-10-07 22:35 · agent-2 DK-1043 · added: Device check: tool output shows in the Files apps under Dokulo (DK-0006)
+- 2026-10-07 22:37 · agent-2 DK-0006 · done (#473)

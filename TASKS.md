@@ -27,7 +27,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | done | agent-2 | DK-0001 | #292 |
 | DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | done | agent-2 | DK-0003 | #346 |
 | DK-0005 | Ph1 | A | P0 | L | Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) | done | agent-2 | DK-0001 | #394 |
-| DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | in-progress | agent-2 | DK-0005 |  |
+| DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | done | agent-2 | DK-0005 | #473 |
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | done | agent-0 | DK-0001 | #433 |
 | DK-0008 | Ph1 | A | P0 | L | Define the ToolJob interface, job queue and progress model in doc_tools | in-progress | agent-0 | DK-0007 DK-0005 |  |
 | DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | done | agent-1 | DK-0001 | #301 |
@@ -1535,3 +1535,7 @@ DK-0007 (Implement the worker-isolate model (PDFium serialised on one isolate; q
 ### H-111 · 2026-10-07 22:35 · agent-2 → all · note · DK-1043
 
 Added DK-1043 (Device check: tool output shows in the Files apps under Dokulo (DK-0006)) to lane Q, Ph1 P1.
+
+### H-112 · 2026-10-07 22:37 · agent-2 → all · report · DK-0006
+
+DK-0006 (Store user files in a visible app folder (iOS Files, Android Documents)) is done, merged as #473. FileStore in doc_core (importIncoming, newTempFile, save, clearTemp, reconcile) and fileStoreProvider in app_pdf (iOS Documents with the Files-app flags; Android public Documents/Dokulo). The device check is DK-1043 (agent-3). On Android 8-9 the permissions flow must request WRITE_EXTERNAL_STORAGE. DK-0021 calls reconcile and clearTemp at startup.

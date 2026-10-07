@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 22:35
+last-seen: 2026-10-07 22:37
 last-read: 102
 joined: 0
 
 ## Now
 
-DK-0006 Store user files in a visible app folder (iOS Files, Android Documents) — claimed 2026-10-07 22:30.
+Nothing claimed.
 
 ## Next
 
