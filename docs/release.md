@@ -33,7 +33,9 @@ permissions in the merged manifest (DK-0016), the excluded OpenCV/FFmpeg
 libraries (DK-0680) and **16 KB page alignment** (DK-0018): every 64-bit
 (`arm64-v8a`, `x86_64`) library's LOAD segments are aligned to at least
 16 KB, and every library stored uncompressed in the APK starts on a 16 KB
-boundary, as Google Play requires. Our own native builds (`qpdf_ffi`,
+boundary, as Google Play requires. It also checks the size budget
+([size-budget.md](size-budget.md)): each ABI's APK within budget, no bundled
+model but the OCR det/rec/cls. Our own native builds (`qpdf_ffi`,
 Bergamot) link with `-Wl,-z,max-page-size=16384`; plugins built from source
 with NDK r28+ (opencv_dart) get it by default.
 
