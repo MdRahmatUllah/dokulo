@@ -79,10 +79,15 @@ abstract final class PdfStructure {
       allChars.addAll(chars);
       linesByPage[page] = buildLines(chars);
     }
+    final body = bodySize(allChars);
     final kept = dropRunningLines(linesByPage, {
       for (final p in which) p: info.pages[p].height,
-    });
-    final body = bodySize(allChars);
+    }, bodySize: body);
+    // One ranking for the whole document, so § 1 on page 1 and § 4 on page 2
+    // get the same level (DK-1057).
+    final sizes = headingSizes([
+      for (final lines in kept.values) ...lines,
+    ], body);
     return [
       for (final page in which)
         ...blocks(
@@ -90,6 +95,7 @@ abstract final class PdfStructure {
           page: page,
           pageWidth: info.pages[page].width,
           bodySize: body,
+          headingSizes: sizes,
         ),
     ];
   }
@@ -175,8 +181,12 @@ abstract final class PdfStructure {
   /// digits aside, on at least half of the pages (and on two or more).
   static Map<int, List<TextLine>> dropRunningLines(
     Map<int, List<TextLine>> pages,
-    Map<int, double> heights,
-  ) {
+    Map<int, double> heights, {
+    double? bodySize,
+  }) {
+    // A line set larger than the body, or bold, is a heading even when it
+    // repeats ("Kapitel 1 · Abschnitt 2", DK-1055); page numbers still go.
+    bool heading(TextLine l) => bodySize != null && _isHeading(l, bodySize);
     String key(TextLine l) => l.text.replaceAll(RegExp(r'\d+'), '#');
     bool inBand(TextLine l, int page) =>
         l.baseline > heights[page]! * 0.88 ||
@@ -194,7 +204,8 @@ abstract final class PdfStructure {
         page: [
           for (final l in lines)
             if (!inBand(l, page) ||
-                !(_pageNumber.hasMatch(l.text.trim()) || running(key(l))))
+                !(_pageNumber.hasMatch(l.text.trim()) ||
+                    (running(key(l)) && !heading(l))))
               l,
         ],
     };
@@ -210,7 +221,9 @@ abstract final class PdfStructure {
     required int page,
     required double pageWidth,
     required double bodySize,
+    List<double>? headingSizes,
   }) {
+    final sizes = headingSizes ?? PdfStructure.headingSizes(lines, bodySize);
     final out = <Block>[];
     final flow = <TextLine>[];
     var i = 0;
@@ -229,15 +242,18 @@ abstract final class PdfStructure {
         for (final l in run)
           for (final s in l.segments) s.right - s.left,
       ]..sort();
-      if (run.length >= 6 && widths[widths.length ~/ 2] >= 0.3 * pageWidth) {
-        // Text columns: read each column top to bottom.
+      final textColumns =
+          run.length >= 6 && widths[widths.length ~/ 2] >= 0.3 * pageWidth;
+      if (textColumns || (run.length >= 2 && !_isTable(run))) {
+        // Text columns, or side-by-side blocks such as an address next to
+        // the invoice details (DK-1056): read each column top to bottom.
         for (var c = 0; c < count; c++) {
           flow.addAll([
             for (final l in run) TextLine([l.segments[c]], l.baseline),
           ]);
         }
       } else if (run.length >= 2) {
-        out.addAll(_flow(flow, page, bodySize));
+        out.addAll(_flow(flow, page, bodySize, sizes));
         flow.clear();
         final rows = [
           for (final l in run) [for (final s in l.segments) s.text],
@@ -254,17 +270,42 @@ abstract final class PdfStructure {
         flow.add(run.single);
       }
     }
-    out.addAll(_flow(flow, page, bodySize));
+    out.addAll(_flow(flow, page, bodySize, sizes));
     return out;
   }
 
+  /// Aligned segments are a table when there are three or more columns over
+  /// three or more rows, the first row is a bold header, or the last column
+  /// is mostly numbers (totals). Anything else side by side is text
+  /// (DK-1056).
+  static bool _isTable(List<TextLine> run) {
+    final columns = run.first.segments.length;
+    if (columns >= 3 && run.length >= 3) return true;
+    if (run.first.bold && !run.skip(1).every((l) => l.bold)) return true;
+    final last = [for (final l in run) l.segments.last.text];
+    bool numeric(String t) {
+      final visible = t.replaceAll(RegExp(r'\s'), '');
+      final digits = RegExp(r'[0-9.,€$£%+\-]').allMatches(visible).length;
+      return visible.isNotEmpty && digits * 2 >= visible.length;
+    }
+
+    return last.where(numeric).length * 2 > last.length;
+  }
+
+  /// The distinct heading sizes, largest first: level 1 is the first.
+  static List<double> headingSizes(List<TextLine> lines, double bodySize) => {
+    for (final l in lines)
+      if (_isHeading(l, bodySize)) (l.fontSize * 2).round() / 2,
+  }.toList()..sort((a, b) => b.compareTo(a));
+
   /// Headings, list items and paragraphs from single-column lines.
-  static List<Block> _flow(List<TextLine> lines, int page, double bodySize) {
+  static List<Block> _flow(
+    List<TextLine> lines,
+    int page,
+    double bodySize,
+    List<double> headingSizes,
+  ) {
     final out = <Block>[];
-    final headingSizes = {
-      for (final l in lines)
-        if (_isHeading(l, bodySize)) (l.fontSize * 2).round() / 2,
-    }.toList()..sort((a, b) => b.compareTo(a));
     TextLine? previous;
     for (final line in lines) {
       final text = line.text;
