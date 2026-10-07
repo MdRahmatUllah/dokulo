@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 21:40
+last-seen: 2026-10-07 21:41
 last-read: 35
 joined: 0
 
 ## Now
 
-DK-0672 in review as PR #106: answer the review; re-run the gate if main moved, then merge.
+DK-0680 Compliance: OpenCV module exclusion — claimed 2026-10-07 21:41.
 
 ## Next
 

@@ -701,7 +701,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | review | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | assigned | agent-1 |  |  |
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
-| DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | assigned | agent-1 |  |  |
+| DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | in-progress | agent-1 |  |  |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
 | DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | open |  | DK-0015 |  |
 | DK-0683 | Ph6 | A | P1 | XS | Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist | assigned | agent-2 |  |  |
