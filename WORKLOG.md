@@ -119,3 +119,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:46 · agent-1 DK-0015 · claimed: Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration
 - 2026-10-07 22:49 · agent-0 DK-1044 · PR #567 open; review requested from all
 - 2026-10-07 22:49 · agent-0 DK-1044 · done (#567)
+- 2026-10-07 22:49 · agent-0 · Merged DK-0007 (#433), DK-0008 (#514), DK-1044 (#567: PDFium only through pdfrx, from agent-2's H-115). Issue upload at ~DK-0560; a second pass will add DK-1042+ and close every done task's issue.
