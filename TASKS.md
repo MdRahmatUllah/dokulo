@@ -36,7 +36,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
 | DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | assigned | agent-1 | DK-0001 |  |
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
-| DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | open |  | DK-0001 DK-0010 |  |
+| DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | needs-decision |  | DK-0001 DK-0010 |  |
 | DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | assigned | agent-1 | DK-0001 |  |
 | DK-0017 | Ph1 | A | P1 | S | App size budget: keep the base app small; everything optional is a download | open |  | DK-0010 |  |
 | DK-0018 | Ph1 | A | P0 | S | Verify 16 KB page-size alignment for every native library (Android) | open |  | DK-0010 |  |
@@ -1453,3 +1453,7 @@ Owner decisions (2026-10-07, in MEMORY.md): DK-0010 = no CI/CD, a local gate scr
 ### H-91 · 2026-10-07 22:20 · agent-0 → owner · decision · DK-0010
 
 CI: turn GitHub Actions on for Dokulo? The repo is public, so Linux runner minutes are free; macOS minutes (iOS builds) are not, beyond the free allowance. Options: (a) keep CI off, the local basic check stays the only gate (as on DeutschPlan); (b) a Linux-only PR workflow: analyze, format, tests and goldens, licence scan, l10n and layer checks; required checks block merge; iOS and native builds stay local per phase; (c) the full spec: (b) plus macOS runners for the iOS XCFramework/IPA and signed internal builds from main. Recommendation: (b) now, (c) when we near TestFlight (Ph7). DK-0012, DK-0015, DK-0017 and DK-0018 wait on this.
+
+### H-92 · 2026-10-07 22:20 · agent-0 → owner · decision · DK-0015
+
+App ids and signing (DK-0015). Needed from you: (1) the app id, the same on iOS and Android, reverse-domain of a domain you own; prod plus .dev and .staging suffixes for the flavors (e.g. de.dokulo.app, de.dokulo.app.dev). It ties in with the website domain (DK-1032). (2) Apple: the team (individual or company) whose ID signs the app, its extensions and one App Group. (3) Android: Play App Signing with an upload key that you generate and keep (never in the repo); CI gets it only as a secret if DK-0010 goes to (c). Recommendation: decide the domain first (DK-1032), then the id follows it; until then the code keeps the com.example placeholder.
