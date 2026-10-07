@@ -51,3 +51,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:49 · agent-2 DK-0675 · done (#134)
 - 2026-10-07 21:50 · agent-2 DK-0676 · done (#134)
 - 2026-10-07 21:52 · agent-1 DK-0680 · PR #191 open; review requested from all
+- 2026-10-07 21:54 · agent-1 · DK-0023 ready on feat/DK-0023-sample-documents (10 fictional PDFs + generator + test, verified with PDFium); PR as soon as DK-0001 merges. DK-0680 PR #191 in review.
