@@ -153,6 +153,24 @@ Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
 EN/DE names in `Overview & foundations.md`. German uses "du".
 
+```dart
+final l10n = AppLocalizations.of(context);   // package:app_pdf/l10n/app_localizations.dart
+Text(l10n.meta_pages(12));                    // "12 pages" / "12 Seiten"
+Text(formatBytes(size, l10n.localeName));     // "1.9 MB" / "1,9 MB" (l10n/formats.dart)
+```
+
+- Add a string to `app_en.arb` (with an `@key` description and typed
+  placeholders) **and** to `app_de.arb` in the same change; `flutter pub get`
+  regenerates `AppLocalizations` (the generated files are gitignored).
+- Sizes and dates go through `formatBytes` / `formatDate`, never string
+  concatenation: the unit is joined with a narrow no-break space (U+202F).
+- The language follows the system unless Settings → Language overrides it
+  (`appLanguageSettingProvider`, `lib/providers/language_providers.dart`);
+  `MaterialApp` watches it, so a change applies to every screen at once.
+- `python tools/check_l10n.py` fails on a key missing in German, a placeholder
+  mismatch, or a hard-coded string in `Text(...)` or a label-like argument.
+  A deliberate literal (the brand name) carries `// l10n-ignore` on its line.
+
 ## 5. Testing
 
 | Kind | Where | What |

@@ -1,3 +1,4 @@
+import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,7 +7,13 @@ import 'package:go_router/go_router.dart';
 Future<GoRouter> pumpAt(WidgetTester tester, String location) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
-  await tester.pumpWidget(MaterialApp.router(routerConfig: router));
+  await tester.pumpWidget(
+    MaterialApp.router(
+      routerConfig: router,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+    ),
+  );
   await tester.pumpAndSettle();
   return router;
 }

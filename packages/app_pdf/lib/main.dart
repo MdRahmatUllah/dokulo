@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'l10n/app_localizations.dart';
+import 'providers/language_providers.dart';
 import 'providers/theme_providers.dart';
 import 'routes/routes.dart';
 
@@ -13,10 +16,18 @@ class DokuloApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp.router(
-    title: 'Dokulo',
+    title: 'Dokulo', // l10n-ignore: the brand name, the same in every language
     themeMode: ref.watch(appThemeModeProvider),
     theme: ThemeData(brightness: Brightness.light),
     darkTheme: ThemeData(brightness: Brightness.dark),
+    locale: ref.watch(appLanguageSettingProvider).locale,
+    supportedLocales: AppLocalizations.supportedLocales,
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
     routerConfig: ref.watch(appRouterProvider),
   );
 }
