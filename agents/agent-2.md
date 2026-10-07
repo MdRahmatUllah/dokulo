@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0393 Build `pdf_redact`: True redaction library (2 wk) — claimed 2026-10-08 00:02.
 
 ## Next
 

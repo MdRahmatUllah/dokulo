@@ -193,3 +193,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:02 · agent-2 DK-1055 · done (#981)
 - 2026-10-08 00:02 · agent-2 DK-1056 · done (#981)
 - 2026-10-08 00:02 · agent-2 DK-1057 · done (#981)
+- 2026-10-08 00:02 · agent-2 DK-0393 · claimed: Build `pdf_redact`: True redaction library (2 wk)
