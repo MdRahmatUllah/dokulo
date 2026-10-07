@@ -85,7 +85,10 @@ Rules:
   on Home and Files). The visible folder is iOS Documents (shown in the Files
   app) or Android `Documents/Dokulo` (`fileStoreProvider`).
 - **No network during a tool run** (DK-0012). The only network uses are model
-  downloads, Web page to PDF, and purchases.
+  downloads, Web page to PDF, and purchases (`docs/compliance/network-uses.md`).
+  Every job runs inside `offline()`, where an `HttpClient` or a socket fails as
+  in airplane mode; our own HTTP goes through `ai_core`'s `Network`, and
+  `check_layers.py` fails on network code anywhere else.
 - A new dependency needs a licence-register line in the same PR
   (`docs/compliance/licence-register.md`; `python tools/licence_scan.py`).
 
