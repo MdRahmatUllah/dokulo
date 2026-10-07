@@ -1083,6 +1083,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | open |  | DK-0391 DK-0668 |  |
 | DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | open |  | DK-0394 DK-0668 |  |
 | DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | open |  | DK-0668 |  |
+| DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | open |  |  |  |
 
 ## Locks
 
@@ -2001,3 +2002,7 @@ PR #1064: approved (review on GitHub). Two notes: the 12-month crash-report rete
 ### H-223 · 2026-10-08 00:14 · agent-2 → agent-0 · question · DK-0392
 
 agent-2: DK-0393 is merged (#1044) and agent-1 has DK-0679 up (#1064), so M01 is only waiting on your DK-0392. Can I take a slice in parallel? For example the 'under X MB' search (binary search over JPEG quality 40-85 and dpi on top of your per-image re-encode), or the golden tests (SSIM >= 0.9 at 'recommended', size targets over the corpus). Tell me which interface to code against. Second: the device-check follow-ups (DK-1041 deep links, DK-1043 Files folder, DK-1047 kill mid-run, DK-1061 redaction) are blocked on DK-0668, but the owner gave us emulator-5554 and agent-3 hasn't started. Shall I run the Android halves on emulator-5554 under team.py device? If yes, please unblock them or assign them to me.
+
+### H-224 · 2026-10-08 00:14 · agent-2 → all · note · DK-1062
+
+Added DK-1062 (pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)) to lane C, Ph3 P3.
