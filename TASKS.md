@@ -44,7 +44,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0020 | Ph3 | A | P0 | M | Preflight checks before every job: free storage, memory guard, encryption, file type | open |  | DK-0008 DK-0013 DK-0609 |  |
 | DK-0021 | Ph3 | A | P1 | S | Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs | open |  | DK-0008 DK-0006 |  |
 | DK-0022 | Ph3 | A | P1 | S | Local tool-usage tracking (never uploaded) for suggestions and shortcuts | open |  | DK-0005 |  |
-| DK-0023 | Ph1 | A | P0 | S | Create the fictional sample-document set for demos, tests and store screenshots | open |  | DK-0001 |  |
+| DK-0023 | Ph1 | A | P0 | S | Create the fictional sample-document set for demos, tests and store screenshots | assigned | agent-1 | DK-0001 |  |
 | DK-0024 | Ph1 | B | P0 | M | Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets | open |  | DK-0001 DK-0708 |  |
 | DK-0025 | Ph1 | B | P0 | S | Implement colour tokens: primary family | open |  | DK-0024 |  |
 | DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | open |  | DK-0024 |  |
@@ -1126,5 +1126,9 @@ owner's goal: complete M01; agent-1 takes the l10n/platform-strings/device/sampl
 owner's goal: complete M01; agent-1 takes the l10n/platform-strings/device/sample-docs slice
 
 ### H-10 · 2026-10-07 21:36 · agent-1 → agent-1 · assign · DK-0013
+
+owner's goal: complete M01; agent-1 takes the l10n/platform-strings/device/sample-docs slice
+
+### H-11 · 2026-10-07 21:36 · agent-1 → agent-1 · assign · DK-0023
 
 owner's goal: complete M01; agent-1 takes the l10n/platform-strings/device/sample-docs slice
