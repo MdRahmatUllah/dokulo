@@ -146,7 +146,7 @@ Colour is defined as tokens with a Light and a Dark value. Design every screen i
 | `color.surfaceRaised` | #FFFFFF | #1F232A | Sheets and menus above surface (dark mode needs the lift) |
 | `color.surfaceSunken` | #EEF1F5 | #12151A | PDF canvas behind pages, input fields, search field |
 | `color.outline` | #D9DEE6 | #2C313A | Card borders, dividers, thumbnail outlines |
-| `color.outlineStrong` | #B8C0CC | #444B57 | Input borders at rest, segmented control border |
+| `color.outlineStrong` | #828C9B | #666E7B | Input borders at rest, segmented control border |
 | `color.textPrimary` | #14171C | #EEF1F6 | Headings and body |
 | `color.textSecondary` | #5A6270 | #A6AEBB | Meta text, help text, captions |
 | `color.textDisabled` | #9AA1AD | #5F6672 | Disabled labels |
@@ -154,7 +154,7 @@ Colour is defined as tokens with a Light and a Dark value. Design every screen i
 | `color.iconSecondary` | #6B7380 | #9099A6 | Secondary icons, chevrons |
 | `color.pro` | #8A5A0B | #F2C266 | Pro badge text and icon |
 | `color.proContainer` | #FFF4DD | #3A2C10 | Pro badge background, Pro card tint |
-| `color.success` | #13804F | #5DD39E | Success icons, size-saved numbers |
+| `color.success` | #117A4B | #5DD39E | Success icons, size-saved numbers |
 | `color.successContainer` | #E3F5EC | #12301F | Success result card tint |
 | `color.warning` | #B54708 | #FDB022 | Partial success, low memory, storage warnings |
 | `color.warningContainer` | #FFF1E0 | #3A2410 | Warning banners |
@@ -185,7 +185,7 @@ Colour is defined as tokens with a Light and a Dark value. Design every screen i
 
 | Token | Light | Dark | Label always shown |
 | --- | --- | --- | --- |
-| `compare.added` | #D9F2E2 bg, #13804F text | #12301F bg, #5DD39E text | "Added" / "Hinzugefügt" + plus icon |
+| `compare.added` | #D9F2E2 bg, #117A4B text | #12301F bg, #5DD39E text | "Added" / "Hinzugefügt" + plus icon |
 | `compare.removed` | #FDECEA bg, #C8281E text, strikethrough | #3A1614 bg, #FF7A70 text | "Removed" / "Entfernt" + minus icon |
 | `compare.changed` | #FFF1E0 bg, #B54708 text | #3A2410 bg, #FDB022 text | "Changed" / "Geändert" + dot icon |
 

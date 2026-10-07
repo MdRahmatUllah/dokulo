@@ -110,7 +110,7 @@ All values live in one `DkTokens` theme extension (same architecture as Sogda's 
 | `textDisabled` | #9AA1AD | #5F6672 | Disabled labels |
 | `pro` | #8A5A0B | #F2C266 | Pro badge text and icon |
 | `proContainer` | #FFF4DD | #3A2C10 | Pro badge background |
-| `success` | #13804F | #5DD39E | Success ticks, size-saved numbers |
+| `success` | #117A4B | #5DD39E | Success ticks, size-saved numbers |
 | `warning` | #B54708 | #FDB022 | Partial success, low memory |
 | `danger` | #C8281E | #FF7A70 | Delete, destructive confirms, errors |
 | `redactBox` | #000000 | #000000 | Redaction boxes (always pure black) |
