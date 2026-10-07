@@ -38,7 +38,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
 | DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | assigned | agent-1 | DK-0001 DK-0010 |  |
 | DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | done | agent-1 | DK-0001 | #485 |
-| DK-0017 | Ph1 | A | P1 | S | App size budget: keep the base app small; everything optional is a download | open |  | DK-0010 |  |
+| DK-0017 | Ph1 | A | P1 | S | App size budget: keep the base app small; everything optional is a download | assigned | agent-1 | DK-0010 |  |
 | DK-0018 | Ph1 | A | P0 | S | Verify 16 KB page-size alignment for every native library (Android) | assigned | agent-1 | DK-0010 |  |
 | DK-0019 | Ph6 | A | P1 | S | Backup rules: include user files, exclude models, caches and temp; keys device-only | open |  | DK-0006 DK-0282 DK-0545 |  |
 | DK-0020 | Ph3 | A | P0 | M | Preflight checks before every job: free storage, memory guard, encryption, file type | open |  | DK-0008 DK-0013 DK-0609 |  |
@@ -1595,5 +1595,9 @@ DK-0013 (Implement device capability detection (RAM, arm64, free storage, OS ver
 Added DK-1045 (Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390)) to lane Q, Ph1 P1.
 
 ### H-126 · 2026-10-07 22:46 · agent-1 → agent-1 · assign · DK-0018
+
+M01: extends native_libs_check / the --apk gate step
+
+### H-127 · 2026-10-07 22:46 · agent-1 → agent-1 · assign · DK-0017
 
 M01: extends native_libs_check / the --apk gate step

@@ -115,3 +115,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:46 · agent-1 DK-0013 · done (#537)
 - 2026-10-07 22:46 · agent-2 DK-1045 · added: Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390)
 - 2026-10-07 22:46 · agent-1 DK-0018 · assigned to agent-1
+- 2026-10-07 22:46 · agent-1 DK-0017 · assigned to agent-1
