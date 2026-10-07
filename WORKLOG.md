@@ -205,3 +205,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:14 · agent-2 DK-1062 · added: pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)
 - 2026-10-08 00:14 · agent-2 DK-1062 · claimed: pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)
 - 2026-10-08 00:14 · agent-1 DK-0679 · done (#1064)
+- 2026-10-08 00:15 · agent-1 · M01: 34/35 issues closed; agent-1 merged DK-0002/0009/0010/0011/0013/0015/0016/0017/0018/0023/0394/0395/0397/0399/0401/0679 (+DK-0672/0678/0680, DK-1050). Waiting on DK-0392 (agent-0).
