@@ -240,6 +240,15 @@ numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
 raw colour in `lib/screens` or `lib/components`. A value that isn't a token
 is a gap: add the token first.
 
+Icons are `DkIcon(DkIcons.…)` (`components/dk_icon.dart`, DK-0048): Material
+Symbols Rounded at the spec's five sizes (`DkIconSize.s` 16 … `xxl` 32),
+outlined, `filled: true` only for the selected tab and toggled states.
+`DkIcons` names every icon by purpose (`DkIcons.tool('compress')`,
+`DkIcons.back(context)` switches with the platform), so a screen never names
+a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
+codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
+a const `IconData` (the release build's tree-shaker needs that).
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
