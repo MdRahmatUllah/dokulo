@@ -85,7 +85,12 @@ the exclusion is the rule, and the built app is checked (below).
 | Carotene / KleidiCV (ARM HAL) | BSD-3 / Apache-2.0 | arm builds |
 
 Excluded by the module list: FFmpeg (with highgui/videoio), protobuf (with
-dnn), quirc (with objdetect), FreeType and HarfBuzz (with freetype).
+dnn), quirc (with objdetect), FreeType and HarfBuzz (with freetype). The probe
+build's CMake cache confirms it: `WITH_FFMPEG=OFF`, and only
+`BUILD_opencv_core`, `_imgproc` and `_imgcodecs` are on. `WITH_PROTOBUF`,
+`WITH_QUIRC`, `WITH_FLATBUFFERS` and `WITH_VULKAN` stay on as flags, but only
+the modules we don't build use them. OpenCL is on: OpenCV loads the device's
+`libOpenCL.so` at run time if one exists, and nothing is bundled.
 
 ## Verified in the build
 
