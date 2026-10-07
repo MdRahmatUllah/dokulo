@@ -42,7 +42,7 @@ def check(target: Path) -> list[str]:
     files = native_files(target)
     reported = set()
     for name, data in sorted(files.items()):
-        lib = re.sub(r"(\.framework)/.*", r"", name)  # one report per framework folder
+        lib = re.sub(r"(\.framework)/.*", r"\1", name)  # one report per framework folder
         if DENIED_LIBS.search(lib) and lib not in reported:
             reported.add(lib)
             problems.append(f"{lib}: excluded library (FFmpeg or OpenCV videoio/highgui/dnn)")
