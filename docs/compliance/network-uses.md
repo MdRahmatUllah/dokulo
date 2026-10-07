@@ -6,7 +6,7 @@ three the Privacy page lists under "What uses the internet" (UI spec §23.3):
 | Use | Where | What it reaches | Rule |
 |---|---|---|---|
 | Model downloads | `ai_core` `Network.downloadModel` | the hosts of the model catalogue | https only; any other host is refused; the user starts it; the hash is checked after download |
-| Web page to PDF | the WebView of the `web` tool (`Network.webPage` checks the address) | the address the user typed | http or https only (`https://` is added when missing) |
+| Web page to PDF | the off-screen WebView of `packages/web_to_pdf` (DK-0399), started by the `web` tool after `Network.webPage` checks the address | the address the user typed | http or https only (`https://` is added when missing) |
 | Purchases | `in_app_purchase` (StoreKit 2, Play Billing) | the App Store or Google Play | only when the user buys or restores Pro |
 
 Nothing else: no analytics, no ads, no account, no crash upload (crash reports
