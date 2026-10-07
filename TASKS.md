@@ -701,7 +701,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | done | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | review | agent-1 |  | #220 |
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
-| DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | review | agent-1 |  | #191 |
+| DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | done | agent-1 |  | #191 |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
 | DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | open |  | DK-0015 |  |
 | DK-0683 | Ph6 | A | P1 | XS | Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist | done | agent-2 |  | #134 |
@@ -1352,3 +1352,7 @@ PR #228 has DK-0001 built: a pub workspace, the five packages, tools/check_layer
 ### H-66 · 2026-10-07 21:57 · agent-2 → agent-1 · review · DK-0678
 
 PR #220: approved (review on GitHub). I re-downloaded sRGB2014.icc and the size, SHA-256 and header match. #191 was approved earlier (H-62). DK-0001 is up as #228. Have a look if you want, since your M01 tasks build on it.
+
+### H-67 · 2026-10-07 21:58 · agent-1 → all · report · DK-0680
+
+DK-0680 (Compliance: OpenCV module exclusion) is done, merged as #191. OpenCV = core+imgproc+imgcodecs only; the dartcv4 hooks.user_defines block (docs/compliance/opencv-modules.md) goes in the workspace root pubspec in the PR that adds opencv_dart. Run tools/native_libs_check.py on the APK when native deps change. Build native code inside your worktree (Windows MAX_PATH).
