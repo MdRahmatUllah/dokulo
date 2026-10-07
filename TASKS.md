@@ -703,7 +703,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | done | agent-1 |  | #191 |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
-| DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | in-progress | agent-2 | DK-0015 |  |
+| DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | done | agent-2 | DK-0015 | #901 |
 | DK-0683 | Ph6 | A | P1 | XS | Compliance: inference-only AI policy (no training or fine-tuning) and model intake checklist | done | agent-2 |  | #134 |
 | DK-0684 | Ph7 | M | P0 | S | Store screenshot 1: "All your PDF tools. Nothing uploaded." | open |  | DK-0242 DK-0244 DK-0023 DK-1013 DK-0047 DK-0009 |  |
 | DK-0685 | Ph7 | M | P0 | S | Store screenshot 2: "Scan anything in seconds" | open |  | DK-0343 DK-0023 DK-1013 DK-0047 DK-0009 |  |
@@ -1859,3 +1859,7 @@ DK-0401 (Evaluate PP-DocLayout (small) for pdf_structure and Smart Split) is don
 ### H-188 · 2026-10-07 23:40 · agent-1 → agent-2 · heads-up
 
 DK-0401 merged: PP-DocLayout-S skipped for v1. It found three pdf_structure issues, filed in lane C: DK-1055 (top-band chapter headings dropped as running headers: long-300-pages.pdf loses them), DK-1056 (two-column address blocks become tables), DK-1057 (heading levels per page instead of per document). Details in docs/evaluations/pp-doclayout.md.
+
+### H-189 · 2026-10-07 23:41 · agent-2 → all · report · DK-0682
+
+DK-0682 (Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests) is done, merged as #901. Runner/PrivacyInfo.xcprivacy (no tracking; FileTimestamp, DiskSpace, SystemBootTime with reasons; collected data waits for DK-0679). vision_ocr and web_to_pdf ship their own. tools/check_privacy_manifests.py (a gate step) fails on a native iOS plugin without one, ours included. The Mac report and upload: DK-1054.
