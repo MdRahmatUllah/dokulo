@@ -104,6 +104,21 @@ void main() {
       final style = tester.widget<Text>(find.text('1.9 MB')).style!;
       expect(style.fontFeatures, [const FontFeature.tabularFigures()]);
       expect(style.fontSize, 18);
+
+      // A style's own features stay.
+      await tester.pumpWidget(
+        themed(
+          const DkNumberText(
+            '1/2',
+            style: TextStyle(fontFeatures: [FontFeature.fractions()]),
+          ),
+          DkTokens.light,
+        ),
+      );
+      expect(tester.widget<Text>(find.text('1/2')).style!.fontFeatures, [
+        const FontFeature.fractions(),
+        const FontFeature.tabularFigures(),
+      ]);
     });
   });
 

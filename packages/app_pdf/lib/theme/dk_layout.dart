@@ -19,7 +19,22 @@ extension DkBorders on DkTokens {
 }
 
 /// How high a surface sits (UI spec §6.4).
-enum DkLevel { flat, raised, floating, overlay }
+enum DkLevel {
+  /// On the page: a 1 dp outline, no shadow (thumbnails, list groups).
+  flat,
+
+  /// Lifted a little: a soft shadow in Light; `surfaceRaised` and an outline
+  /// in Dark (viewer pages, a dragged item).
+  raised,
+
+  /// Above the content: a shadow in both themes (menus, the mini job bar,
+  /// the magnifier, the markup bar).
+  floating,
+
+  /// Sheets and dialogs. [DkSurfaces.surfaceAt] draws the surface only: the
+  /// scrim behind it is the sheet's or the dialog's own (`color.scrim`).
+  overlay,
+}
 
 /// A surface at a [DkLevel] (UI spec §6.4; DK-0038). Light mode lifts with
 /// shadows; dark mode with a lighter surface and an outline, because shadows

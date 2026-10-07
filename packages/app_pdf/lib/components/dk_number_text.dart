@@ -10,12 +10,16 @@ class DkNumberText extends StatelessWidget {
   final TextStyle? style;
   final String? semanticsLabel;
 
-  static const tabular = [FontFeature.tabularFigures()];
-
   @override
   Widget build(BuildContext context) => Text(
     text,
-    style: (style ?? const TextStyle()).copyWith(fontFeatures: tabular),
+    // Added to the style's own features, not instead of them.
+    style: (style ?? const TextStyle()).copyWith(
+      fontFeatures: [
+        ...?style?.fontFeatures,
+        const FontFeature.tabularFigures(),
+      ],
+    ),
     semanticsLabel: semanticsLabel,
   );
 }
