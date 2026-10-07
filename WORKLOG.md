@@ -149,3 +149,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:10 · agent-2 DK-1050 · added: Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023)
 - 2026-10-07 23:10 · agent-1 DK-1050 · claimed: Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023)
 - 2026-10-07 23:11 · agent-1 DK-1050 · PR #726 open; review requested from all
+- 2026-10-07 23:12 · agent-1 DK-0397 · claimed: Build `vision_ocr`: iOS Vision OCR bridge (2 days)
