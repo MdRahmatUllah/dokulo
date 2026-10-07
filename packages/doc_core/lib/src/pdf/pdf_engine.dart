@@ -143,6 +143,22 @@ abstract final class PdfEngine {
     ));
   }
 
+  /// Every character of a page with its box, baseline, font size (points)
+  /// and boldness, for layout analysis
+  /// ([PdfStructure]).
+  static Future<List<StyledChar>> styledChars(
+    String path,
+    int page, {
+    String? password,
+  }) async {
+    await _withDocument(path, password, (doc) async => _page(doc, page));
+    return PdfrxEntryFunctions.instance.compute(_styledCharsOnWorker, (
+      path,
+      password,
+      page,
+    ));
+  }
+
   static Future<T> _withDocument<T>(
     String path,
     String? password,
@@ -219,7 +235,12 @@ abstract final class PdfEngine {
 }
 
 /// Runs on pdfrx's PDFium worker (via compute): raw PDFium calls.
-List<ImageObject> _imagesOnWorker((String, String?, int) message) {
+/// Runs [body] on one page of a document loaded by raw PDFium. Call it only
+/// on pdfrx's worker (via compute).
+T _onPage<T>(
+  (String, String?, int) message,
+  T Function(fpdf.PDFium pdfium, fpdf.FPDF_PAGE page, Arena arena) body,
+) {
   final (path, password, pageIndex) = message;
   final pdfium = fpdf.getPdfium();
   return using((arena) {
@@ -243,6 +264,17 @@ List<ImageObject> _imagesOnWorker((String, String?, int) message) {
     }
     final page = pdfium.FPDF_LoadPage(doc, pageIndex);
     try {
+      return body(pdfium, page, arena);
+    } finally {
+      pdfium.FPDF_ClosePage(page);
+      pdfium.FPDF_CloseDocument(doc);
+    }
+  });
+}
+
+/// On pdfrx's worker: the page's image objects.
+List<ImageObject> _imagesOnWorker((String, String?, int) message) =>
+    _onPage(message, (pdfium, page, arena) {
       final found = <ImageObject>[];
       final left = arena<Float>(),
           bottom = arena<Float>(),
@@ -271,11 +303,80 @@ List<ImageObject> _imagesOnWorker((String, String?, int) message) {
         );
       }
       return found;
-    } finally {
-      pdfium.FPDF_ClosePage(page);
-      pdfium.FPDF_CloseDocument(doc);
-    }
+    });
+
+/// On pdfrx's worker: every character with its box, font size and weight.
+/// Line breaks and other control characters are left out: lines come from
+/// the baselines. Spaces stay, PDFium's generated ones included: they mark
+/// the word gaps more reliably than tight glyph boxes.
+List<StyledChar> _styledCharsOnWorker((String, String?, int) message) =>
+    _onPage(message, (pdfium, page, arena) {
+      final text = pdfium.FPDFText_LoadPage(page);
+      try {
+        final l = arena<Double>(), r = arena<Double>();
+        final b = arena<Double>(), t = arena<Double>();
+        final x = arena<Double>(), y = arena<Double>();
+        final name = arena<Uint8>(128);
+        final flags = arena<Int>();
+        final chars = <StyledChar>[];
+        for (var i = 0; i < pdfium.FPDFText_CountChars(text); i++) {
+          final unicode = pdfium.FPDFText_GetUnicode(text, i);
+          if (unicode < 0x20) {
+            continue;
+          }
+          pdfium.FPDFText_GetCharBox(text, i, l, r, b, t);
+          pdfium.FPDFText_GetCharOrigin(text, i, x, y);
+          final length = pdfium.FPDFText_GetFontInfo(
+            text,
+            i,
+            name.cast(),
+            128,
+            flags,
+          );
+          final font = length > 1
+              ? String.fromCharCodes(name.asTypedList(length - 1))
+              : '';
+          final weight = pdfium.FPDFText_GetFontWeight(text, i);
+          chars.add(
+            StyledChar(
+              String.fromCharCode(unicode),
+              (left: l.value, top: t.value, right: r.value, bottom: b.value),
+              baseline: y.value,
+              fontSize: pdfium.FPDFText_GetFontSize(text, i),
+              // The weight when the font says; otherwise its name, or the
+              // ForceBold flag (bit 19).
+              bold:
+                  weight >= 600 ||
+                  font.toLowerCase().contains('bold') ||
+                  flags.value & 0x40000 != 0,
+            ),
+          );
+        }
+        return chars;
+      } finally {
+        pdfium.FPDFText_ClosePage(text);
+      }
+    });
+
+/// A character as PDFium places it.
+class StyledChar {
+  const StyledChar(
+    this.char,
+    this.box, {
+    required this.baseline,
+    required this.fontSize,
+    this.bold = false,
   });
+  final String char;
+
+  /// The glyph's tight box: tops and bottoms vary per glyph.
+  final Box box;
+
+  /// The text line's y (the character's origin): the same for every glyph
+  /// on a line.
+  final double baseline;
+  final double fontSize;
+  final bool bold;
 }
 
 /// A box in PDF points.
