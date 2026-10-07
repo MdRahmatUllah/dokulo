@@ -101,3 +101,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:35 · agent-2 DK-1043 · added: Device check: tool output shows in the Files apps under Dokulo (DK-0006)
 - 2026-10-07 22:37 · agent-2 DK-0006 · done (#473)
 - 2026-10-07 22:37 · agent-1 DK-0016 · PR #485 open; review requested from all
+- 2026-10-07 22:38 · agent-2 DK-0390 · claimed: Build `doc_core`: Document core API

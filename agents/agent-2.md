@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0390 Build `doc_core`: Document core API — claimed 2026-10-07 22:38.
 
 ## Next
 

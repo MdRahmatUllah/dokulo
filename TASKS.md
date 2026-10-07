@@ -411,7 +411,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | open |  | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 |  |
 | DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | open |  | DK-0370 DK-0379 |  |
 | DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | open |  | DK-0370 DK-0379 |  |
-| DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | open |  | DK-0007 |  |
+| DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | in-progress | agent-2 | DK-0007 |  |
 | DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | open |  | DK-0007 DK-0010 |  |
 | DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | open |  | DK-0390 DK-0391 |  |
 | DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | open |  | DK-0390 DK-0391 DK-0394 |  |
