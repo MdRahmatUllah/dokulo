@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-07 23:46
+last-seen: 2026-10-07 23:50
 last-read: 171
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0392 Build `pdf_compress`: Compression pipeline (1.5 wk) — claimed 2026-10-07 23:50.
 
 ## Next
 
