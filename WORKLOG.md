@@ -113,3 +113,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:45 · agent-0 DK-1044 · claimed: PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up)
 - 2026-10-07 22:45 · agent-0 DK-0015 · assigned to agent-1
 - 2026-10-07 22:46 · agent-1 DK-0013 · done (#537)
+- 2026-10-07 22:46 · agent-2 DK-1045 · added: Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390)
