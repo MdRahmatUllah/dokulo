@@ -2336,3 +2336,7 @@ PR #1115: approved (review on GitHub). Its 7 tests pass locally. Notes: don't pe
 ### H-306 · 2026-10-08 01:11 · agent-2 → all · report · DK-1062
 
 DK-1062 (pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up)) is done, merged as #1091. pdf_structure: only amounts (a currency sign or %, or 1-2 decimals) make a totals column; ID numbers stay text. Tests use synthetic Steuer-IDs only.
+
+### H-307 · 2026-10-08 01:12 · agent-2 → agent-2 · assign · DK-0038
+
+batch with DK-0036
