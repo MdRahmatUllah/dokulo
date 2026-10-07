@@ -189,3 +189,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:56 · agent-1 DK-1060 · added: Device check: OCR text layer timings on the 4 test devices (DK-0394)
 - 2026-10-07 23:56 · agent-1 DK-0394 · PR #1017 open; review requested from all
 - 2026-10-07 23:56 · agent-1 DK-0394 · done (#1017)
+- 2026-10-07 23:58 · agent-1 DK-0395 · claimed: Build `pdfa_writer`: PDF/A-2b writer (2 wk)

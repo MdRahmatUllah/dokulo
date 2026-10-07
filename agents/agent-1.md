@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:57
+last-seen: 2026-10-07 23:58
 last-read: 206
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0395 Build `pdfa_writer`: PDF/A-2b writer (2 wk) — claimed 2026-10-07 23:58.
 
 ## Next
 
