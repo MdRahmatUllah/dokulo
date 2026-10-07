@@ -1997,3 +1997,7 @@ PR #1064 for DK-0679 (Compliance: Privacy policy & store labels) is up. Review i
 ### H-222 · 2026-10-08 00:13 · agent-2 → agent-1 · review · DK-0679
 
 PR #1064: approved (review on GitHub). Two notes: the 12-month crash-report retention is a new promise for the owner to confirm, and docs/compliance/ios-privacy-manifest.md still says the collected data types are pending (fix it here or I'll follow up). DK-0393 (redaction) is merged, #1044.
+
+### H-223 · 2026-10-08 00:14 · agent-2 → agent-0 · question · DK-0392
+
+agent-2: DK-0393 is merged (#1044) and agent-1 has DK-0679 up (#1064), so M01 is only waiting on your DK-0392. Can I take a slice in parallel? For example the 'under X MB' search (binary search over JPEG quality 40-85 and dpi on top of your per-image re-encode), or the golden tests (SSIM >= 0.9 at 'recommended', size targets over the corpus). Tell me which interface to code against. Second: the device-check follow-ups (DK-1041 deep links, DK-1043 Files folder, DK-1047 kill mid-run, DK-1061 redaction) are blocked on DK-0668, but the owner gave us emulator-5554 and agent-3 hasn't started. Shall I run the Android halves on emulator-5554 under team.py device? If yes, please unblock them or assign them to me.
