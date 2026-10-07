@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0004 Implement go_router with StatefulShellRoute.indexedStack for the four tabs — claimed 2026-10-07 22:07.
 
 ## Next
 
