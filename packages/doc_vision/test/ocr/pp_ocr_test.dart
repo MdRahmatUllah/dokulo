@@ -100,7 +100,7 @@ void main() {
         return;
       }
       final decoded = img.decodeJpg(
-        File('test/fixtures/letter-page1.jpg').readAsBytesSync(),
+        File('test/fixtures/ocr/letter-de.jpg').readAsBytesSync(),
       )!;
       final grey = img.grayscale(decoded);
       final raster = Raster.fromGrey(

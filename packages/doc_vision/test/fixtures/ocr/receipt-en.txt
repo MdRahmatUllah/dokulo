@@ -1,0 +1,8 @@
+Corner Bakery Example Ltd
+12 Sample Road, London
+Receipt 2026-0314
+2 x Sourdough loaf 7.80
+1 x Oat flat white 3.40
+3 x Cinnamon bun 8.25
+Total 19.45
+Paid by card. Thank you for your visit!
