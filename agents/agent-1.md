@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1050 Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) — claimed 2026-10-07 23:10.
 
 ## Next
 

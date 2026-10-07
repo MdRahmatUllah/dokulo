@@ -1071,7 +1071,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | open |  | DK-0668 DK-0462 |  |
 | DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | open |  | DK-0668 |  |
 | DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | open |  | DK-0668 DK-0293 |  |
-| DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | open |  |  |  |
+| DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | in-progress | agent-1 |  |  |
 
 ## Locks
 
