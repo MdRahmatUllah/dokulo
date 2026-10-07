@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0010 Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check — claimed 2026-10-07 22:20.
 
 ## Next
 
