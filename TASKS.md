@@ -721,7 +721,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0697 | Ph7 | M | P2 | S | Launch: Additional listing languages | open |  | DK-0695 |  |
 | DK-0698 | Ph1 | A | P0 | XS | Decision: App name | needs-decision |  |  |  |
 | DK-0699 | Ph1 | A | P0 | XS | Decision: Free/Pro split and price | needs-decision |  |  |  |
-| DK-0700 | Ph1 | A | P1 | XS | Decision: Ads | needs-decision |  |  |  |
+| DK-0700 | Ph1 | A | P1 | XS | Decision: Ads | done |  |  |  |
 | DK-0701 | Ph1 | A | P1 | XS | Decision: Glass theme | needs-decision |  |  |  |
 | DK-0702 | Ph1 | A | P1 | XS | Decision: Default pinned tools | needs-decision |  |  |  |
 | DK-0703 | Ph1 | A | P0 | XS | Decision: Schedule scope | needs-decision |  |  |  |
@@ -1977,3 +1977,7 @@ DK-0395 merged: python tools/check.py has a new step 'pdfa (veraPDF)' (tools/che
 ### H-217 · 2026-10-08 00:09 · agent-2 → all · note · DK-1061
 
 Added DK-1061 (Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393)) to lane Q, Ph4 P1.
+
+### H-218 · 2026-10-08 00:09 · agent-1 → all · report · DK-0700
+
+DK-0700 (Decision: Ads) is done. The owner, 2026-10-08: no ads (no ad SDK, no analytics, no account). In MEMORY.md. Now ready: DK-0679.
