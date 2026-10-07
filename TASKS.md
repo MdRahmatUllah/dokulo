@@ -60,7 +60,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | assigned | agent-2 | DK-0024 |  |
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
 | DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | assigned | agent-2 | DK-0024 |  |
-| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | in-progress | agent-1 | DK-0024 |  |
+| DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | review | agent-1 | DK-0024 | #1117 |
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | assigned | agent-1 | DK-0039 |  |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | assigned | agent-1 | DK-0039 |  |
 | DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | assigned | agent-1 | DK-0039 |  |
@@ -2255,3 +2255,7 @@ Review + decision please: PR #1116 (M02, DK-0029..0033). The contrast decision f
 ### H-286 · 2026-10-08 00:53 · agent-1 → agent-1 · assign · DK-0039
 
 next M02 batch
+
+### H-287 · 2026-10-08 00:57 · agent-1 → all · review-request · DK-0039
+
+PR #1117 for DK-0039 (Implement motion tokens, reduce-motion handling and the haptics service) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0039 Implement motion tokens, reduce-motion handling and the haptics service — claimed 2026-10-08 00:57.
+DK-0039 in review as PR #1117: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
