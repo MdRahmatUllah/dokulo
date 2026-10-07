@@ -156,3 +156,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:19 · agent-2 DK-1052 · added: Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398)
 - 2026-10-07 23:20 · agent-1 · emulator-5554 probe (main @ b24340d): app.dokulo.dev starts; dokulo/device channel answers on Android 16 (2.0 GB RAM, x86_64+arm64 ABIs) -> Gemma tooLittleRam, as designed. DK-0013/DK-0015/DK-0016 verified on a runtime.
 - 2026-10-07 23:20 · agent-1 DK-0401 · assigned to agent-1
+- 2026-10-07 23:20 · agent-1 DK-0399 · claimed: Build `web_to_pdf`: Web page to PDF plugin (3 days)

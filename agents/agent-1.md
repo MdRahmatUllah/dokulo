@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0399 Build `web_to_pdf`: Web page to PDF plugin (3 days) — claimed 2026-10-07 23:20.
 
 ## Next
 
