@@ -11,7 +11,7 @@ DK-0391 Build `qpdf_ffi`: qpdf binding (1 wk) — claimed 2026-10-07 22:57.
 
 ## Next
 
-Finish the issue upload (scratchpad/upload_issues.py, resumable), then run close_done.py so every done task's issue is closed. Then the critical path: DK-0007 (isolates), DK-0005 (drift), DK-0010 (CI: ask the owner first). Hy-MT2 waits on the owner (DK-0566).
+DK-0391 qpdf_ffi (native, Android ABIs; iOS half needs a Mac), then DK-0392/0393/0394/0395. Issue upload: when the run ends, a second pass for DK-1042+ and close_done.py.
 
 ## Memory
 
