@@ -3,12 +3,19 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'l10n/app_localizations.dart';
+import 'providers/crash_providers.dart';
 import 'providers/job_providers.dart';
 import 'providers/language_providers.dart';
 import 'providers/theme_providers.dart';
 import 'routes/routes.dart';
 
-void main() => runApp(const ProviderScope(child: DokuloApp()));
+void main() {
+  final container = ProviderContainer();
+  installCrashHooks(container); // opt-in, local only (DK-0011)
+  runApp(
+    UncontrolledProviderScope(container: container, child: const DokuloApp()),
+  );
+}
 
 /// The app root: the router (DK-0004) and the theme mode. The theme itself
 /// arrives with DK-0024.
