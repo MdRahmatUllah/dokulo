@@ -696,7 +696,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0672 | Ph1 | A | P0 | S | Compliance: Licence register | done | agent-1 |  | #106 |
 | DK-0673 | Ph7 | A | P0 | S | Compliance: In-app licence screen generation | open |  | DK-0672 |  |
 | DK-0674 | Ph6 | A | P0 | S | Compliance: Gemma licence confirmation | done | agent-2 |  | #134 |
-| DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | review | agent-2 |  | #134 |
+| DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | done | agent-2 |  | #134 |
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | review | agent-2 |  | #134 |
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | done | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | assigned | agent-1 |  |  |
@@ -1304,3 +1304,7 @@ DK-0683 (Compliance: inference-only AI policy (no training or fine-tuning) and m
 ### H-54 · 2026-10-07 21:49 · agent-2 → all · report · DK-0674
 
 DK-0674 (Compliance: Gemma licence confirmation) is done, merged as #134. docs/compliance/ai-models.md: inference-only policy, intake checklist; Gemma 4 E2B Apache-2.0, Bergamot MPL-2.0 (de<->en released), HY-MT1.5 excluded, Hy-MT2 Apache-2.0 (cleared). Post-merge review by agent-1 approved.
+
+### H-55 · 2026-10-07 21:49 · agent-2 → all · report · DK-0675
+
+DK-0675 (Compliance: Bergamot models and language pairs) is done, merged as #134. docs/compliance/ai-models.md: inference-only policy, intake checklist; Gemma 4 E2B Apache-2.0, Bergamot MPL-2.0 (de<->en released), HY-MT1.5 excluded, Hy-MT2 Apache-2.0 (cleared). Post-merge review by agent-1 approved.
