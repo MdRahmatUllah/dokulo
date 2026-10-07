@@ -38,8 +38,9 @@ void main() {
     );
 
     test('German Steuer-ID only with a valid check digit', () {
-      expect(kinds('Steuer-ID: 86 095 742 719'), ['taxId✓:86 095 742 719']);
-      expect(kinds('Steuer-ID 47036892816.'), ['taxId✓:47036892816']);
+      // Synthetic sequences with a valid check digit, not real IDs.
+      expect(kinds('Steuer-ID: 11 234 567 890'), ['taxId✓:11 234 567 890']);
+      expect(kinds('Steuer-ID 22345678913.'), ['taxId✓:22345678913']);
       expect(kinds('Steuer-ID: 00 000 000 000'), isEmpty);
       expect(kinds('Rechnung 12345678901'), isEmpty); // fails the check
     });

@@ -142,7 +142,7 @@ void main() {
         ...place('Herrn', 50, 700),
         ...place('Steuer-ID', 330, 700),
         ...place('Max Mustermann', 50, 685),
-        ...place('86 095 742 719', 330, 685),
+        ...place('00 000 000 000', 330, 685), // the fixtures' Steuer-ID
         ...place('Musterstraße 12', 50, 670),
         ...place('DE00 0000 0000 0000 0000 00', 330, 670),
       ]);
