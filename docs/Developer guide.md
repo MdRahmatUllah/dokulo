@@ -36,23 +36,31 @@ Rules:
 
 - **Dependencies point one way:** `app_pdf → doc_tools → doc_core / doc_vision → ai_core`.
   `python tools/check_layers.py` fails on anything else.
-- **The UI isolate never calls native code.** PDFium calls go through the one
-  PDFium worker isolate; qpdf, OpenCV and ONNX run on their own isolates
-  (DK-0007). A screen talks to a provider, the provider to a `ToolJob` or a
-  `doc_core` service.
+- **The UI isolate never calls native code.** PDFium calls go through pdfrx,
+  which runs every one of them on its own worker isolate; qpdf, OpenCV and ONNX
+  run on their own isolates (DK-0007, DK-1044). A screen talks to a provider,
+  the provider to a `ToolJob` or a `doc_core` service.
   - The `IsolatePool` (`ai_core`, the bottom layer, so every layer can reach it)
-    runs it: `pool.run(Lane.pdfium, body, input)` gives a `Job` with
-    `progress`, `result` and `cancel()`. `Lane.pdfium` is one long-lived
-    isolate, one job at a time; `Lane.qpdf`, `Lane.opencv` and `Lane.onnx`
-    start a fresh isolate per job.
-  - A body is a top-level function `(input, JobContext context)`; its input and
-    result must be sendable. Scratch files go in `context.tempDir`, which is
-    deleted when the job ends; outputs go where the input says.
+    runs jobs: `pool.run(lane, body, input)` gives a `Job` with `progress`,
+    `result` and `cancel()`. `Lane.qpdf`, `Lane.opencv` and `Lane.onnx` start a
+    fresh isolate per job, so they run in parallel.
+  - **PDFium only through pdfrx.** pdfrx keeps one PDFium worker per Dart
+    isolate, and the viewer uses it from the UI isolate; a second one would be a
+    second thread in PDFium, which isn't thread-safe. So a `Lane.pdfium` job runs
+    on the calling isolate and reaches PDFium only through pdfrx: its API,
+    `PdfrxEntryFunctions.instance.compute`, or
+    `PdfDocument.useNativeDocumentHandle` for raw `FPDF_*` calls. No other
+    native call and no heavy Dart work belongs in a PDFium job.
+  - A body is a top-level function `(input, JobContext context)`; on a worker
+    lane its input and result must be sendable. Scratch files go in
+    `context.tempDir`, which is deleted when the job ends; outputs go where the
+    input says.
   - Cancelling kills a job on its own isolate at once. A PDFium job stops at its
-    next `await context.checkCancelled()`, so keep native chunks well under a
-    second (a cancel must stop native work within 1 s).
-  - Every native binding calls `assertWorkerIsolate()` before its first native
-    call; in debug builds it fails on any isolate the pool did not start.
+    next `await context.checkCancelled()`, so check between pages (a cancel must
+    stop the work within 1 s).
+  - Every native binding of ours (qpdf, OpenCV, ONNX, llama.cpp) calls
+    `assertWorkerIsolate()` before its first native call; in debug builds it
+    fails on any isolate the pool did not start, the UI isolate included.
 - **A tool is a `ToolJob`** (`doc_tools`, DK-0008): a const class with an `id`
   (as in `/tool/:toolId`), a `Lane`, `encode`/`decode` of its input as JSON,
   `chain` (its input from the previous step's output, for workflows) and

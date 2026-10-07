@@ -48,6 +48,15 @@ void _stubbornLoop(void _, JobContext context) {
 
 int _throws(void _, JobContext context) => throw StateError('broken PDF');
 
+String? _isolateName(void _, JobContext context) => Isolate.current.debugName;
+
+/// Stands in for a PDFium call: pdfrx runs it on its own worker isolate.
+Future<(int, int, int)> _viaPdfrxWorker(int ms, JobContext context) async {
+  final start = DateTime.now().microsecondsSinceEpoch;
+  await Isolate.run(() => _spin(ms));
+  return (1, start, DateTime.now().microsecondsSinceEpoch);
+}
+
 String _nativeCall(void _, JobContext context) {
   assertWorkerIsolate();
   return Isolate.current.debugName ?? '';
@@ -62,10 +71,7 @@ void main() {
     pool = IsolatePool(tempRoot: tempRoot);
   });
 
-  tearDown(() async {
-    await pool.close();
-    tempRoot.deleteSync(recursive: true);
-  });
+  tearDown(() => tempRoot.deleteSync(recursive: true));
 
   test('a job returns its result and reports progress', () async {
     final job = pool.run(Lane.qpdf, _square, 7);
@@ -79,18 +85,18 @@ void main() {
     );
   });
 
-  test('PDFium jobs share one isolate and run one at a time', () async {
-    final a = pool.run(Lane.pdfium, _stamp, 200);
-    final b = pool.run(Lane.pdfium, _stamp, 200);
-    final (callsA, _, endA) = await a.result;
-    final (callsB, startB, _) = await b.result;
-    expect(
-      {callsA, callsB},
-      {1, 2},
-      reason: 'the same isolate counted both calls',
-    );
-    expect(startB, greaterThanOrEqualTo(endA), reason: 'serialised');
-  });
+  test(
+    'PDFium jobs run on the calling isolate (pdfrx has the one PDFium worker)',
+    () async {
+      final before = _calls;
+      final (calls, _, _) = await pool.run(Lane.pdfium, _stamp, 10).result;
+      expect(calls, before + 1, reason: "this isolate's counter");
+      expect(
+        await pool.run(Lane.pdfium, _isolateName, null).result,
+        Isolate.current.debugName,
+      );
+    },
+  );
 
   test(
     'qpdf, OpenCV and ONNX jobs get isolates of their own and overlap',
@@ -122,7 +128,7 @@ void main() {
       expect(
         await pool.run(Lane.pdfium, _square, 3).result,
         9,
-        reason: 'the PDFium worker lives on',
+        reason: 'the PDFium lane keeps working',
       );
     },
   );
@@ -144,7 +150,7 @@ void main() {
     expect(tempRoot.listSync(), isEmpty);
   });
 
-  test('an error on the worker fails the job with its message', () async {
+  test('an error in a job fails it with its message', () async {
     final job = pool.run(Lane.pdfium, _throws, null);
     await expectLater(
       job.result,
@@ -159,7 +165,7 @@ void main() {
     expect(
       await pool.run(Lane.pdfium, _square, 4).result,
       16,
-      reason: 'one failure does not stop the worker',
+      reason: 'one failure does not stop the lane',
     );
   });
 
@@ -167,8 +173,9 @@ void main() {
     'native calls are allowed on workers and fail on any other isolate',
     () async {
       expect(
-        await pool.run(Lane.pdfium, _nativeCall, null).result,
-        'dk-pdfium',
+        pool.run(Lane.pdfium, _nativeCall, null).result,
+        throwsA(isA<JobFailed>()),
+        reason: 'PDFium jobs reach PDFium only through pdfrx',
       );
       expect(
         await pool.run(Lane.opencv, _nativeCall, null).result,
@@ -189,7 +196,7 @@ void main() {
     // a periodic timer, because Windows timers tick every ~15.6 ms. The device
     // check on a mid Android phone is SQA's.
     final jobs = [
-      pool.run(Lane.pdfium, _stamp, 600), // merge
+      pool.run(Lane.pdfium, _viaPdfrxWorker, 600), // merge
       pool.run(Lane.qpdf, _stamp, 600), // compress
       pool.run(Lane.onnx, _stamp, 600), // OCR
     ];

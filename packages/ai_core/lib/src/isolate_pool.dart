@@ -1,11 +1,16 @@
-/// The worker-isolate model (DK-0007; Technology plan, "Threading model").
+/// The worker-isolate model (DK-0007, DK-1044; Technology plan, "Threading
+/// model").
 ///
-/// PDFium is single-threaded, so every PDFium job runs on one long-lived
-/// worker isolate, one job at a time. qpdf, OpenCV and ONNX jobs each get a
-/// fresh isolate, so they run in parallel with each other and with PDFium.
-/// The UI isolate never calls native code: a native binding calls
-/// [assertWorkerIsolate] first, which fails in debug builds on any isolate
-/// this pool did not start.
+/// PDFium is single-threaded. pdfrx runs every PDFium call on its own worker
+/// isolate, one worker per Dart isolate, and the viewer uses pdfrx from the UI
+/// isolate. A second worker would be a second thread in PDFium, so a PDFium
+/// job runs on the calling isolate and reaches PDFium only through pdfrx (its
+/// API, `PdfrxEntryFunctions.instance.compute`, or
+/// `PdfDocument.useNativeDocumentHandle`), serialised with the viewer on
+/// pdfrx's one worker. qpdf, OpenCV and ONNX jobs each get a fresh isolate, so
+/// they run in parallel. Our own native bindings call [assertWorkerIsolate]
+/// first, which fails in debug builds on any isolate this pool did not start,
+/// so they never run on the UI isolate.
 ///
 /// It lives in `ai_core`, the bottom layer, because `doc_core`, `doc_vision`
 /// and `ai_core` itself all run native code, and the layer rule lets each of
@@ -18,7 +23,8 @@ import 'dart:isolate';
 
 /// Where a job runs.
 enum Lane {
-  /// The one PDFium isolate: its jobs run one after the other.
+  /// PDFium through pdfrx: the job runs on the calling isolate; pdfrx runs
+  /// every PDFium call on its one worker.
   pdfium,
 
   /// qpdf: a fresh isolate per job.
@@ -31,8 +37,8 @@ enum Lane {
   onnx,
 }
 
-/// A job's body. It runs on a worker isolate, so it must be a top-level or
-/// static function; its input and its result must be sendable between
+/// A job's body. On a worker isolate (every lane but [Lane.pdfium]), so it is
+/// a top-level or static function whose input and result are sendable between
 /// isolates (numbers, strings, lists, maps, records, typed data, …).
 typedef JobBody<A, R> = FutureOr<R> Function(A input, JobContext context);
 
@@ -101,14 +107,14 @@ class Job<R> {
   void cancel() => _pending.cancel();
 }
 
-/// Runs jobs on worker isolates. One pool per app.
+/// Runs jobs: PDFium jobs here, the others on worker isolates. One pool per
+/// app.
 class IsolatePool {
   /// [tempRoot] holds the jobs' temp directories (the system temp by default).
   IsolatePool({Directory? tempRoot})
     : _tempRoot = tempRoot ?? Directory.systemTemp;
 
   final Directory _tempRoot;
-  Future<_Worker>? _pdfium;
   var _nextId = 0;
 
   /// Starts [body] with [input] on [lane].
@@ -116,13 +122,6 @@ class IsolatePool {
     final pending = _Pending<R>(_nextId++);
     _start(lane, pending, _bind(body, input));
     return Job._(pending);
-  }
-
-  /// Stops the PDFium worker; its unfinished jobs fail.
-  Future<void> close() async {
-    final pdfium = _pdfium;
-    _pdfium = null;
-    (await pdfium)?.isolate.kill();
   }
 
   Future<void> _start(Lane lane, _Pending<Object?> pending, _Task task) async {
@@ -133,28 +132,16 @@ class IsolatePool {
         return;
       }
       pending.temp = temp;
-      final _Worker worker;
       if (lane == Lane.pdfium) {
-        worker = await (_pdfium ??= _Worker.spawn(
-          'pdfium',
-          onExit: () => _pdfium = null,
-        ));
+        await _runHere(pending, task);
       } else {
-        worker = await _Worker.spawn(lane.name, dedicated: true);
+        await _runOnWorker(lane.name, pending, task);
       }
-      if (pending.finished) {
-        if (worker.dedicated) worker.isolate.kill();
-        await temp.delete(recursive: true);
-        return;
-      }
-      worker.start(pending, task);
     } catch (e, s) {
       await pending.finish('failed', ('$e', '$s'));
     }
   }
 }
-
-// --- worker side -------------------------------------------------------------
 
 typedef _Task = FutureOr<Object?> Function(JobContext context);
 
@@ -164,11 +151,60 @@ typedef _Task = FutureOr<Object?> Function(JobContext context);
 _Task _bind<A, R>(JobBody<A, R> body, A input) =>
     (context) => body(input, context);
 
+/// A PDFium job: here, cancelled at its next [JobContext.checkCancelled].
+Future<void> _runHere(_Pending<Object?> job, _Task task) async {
+  final context = JobContext._(job.temp!, job.progress.add);
+  job.onCancel = () => context._cancelled = true;
+  try {
+    final result = await task(context);
+    await job.finish('done', result);
+  } on JobCancelled {
+    await job.finish('cancelled', null);
+  } catch (e, s) {
+    await job.finish('failed', ('$e', '$s'));
+  }
+}
+
+/// Any other job: on a fresh isolate, killed by a cancel.
+Future<void> _runOnWorker(
+  String name,
+  _Pending<Object?> job,
+  _Task task,
+) async {
+  final inbox = ReceivePort(); // the job's messages, then null when it exits
+  final isolate = await Isolate.spawn(
+    _workerMain,
+    (inbox.sendPort, task, job.temp!.path),
+    debugName: 'dk-$name',
+    onExit: inbox.sendPort,
+  );
+  job.onCancel = () {
+    job.killed = true;
+    isolate.kill(priority: Isolate.immediate);
+  };
+  if (job.finished) isolate.kill(); // cancelled while it spawned
+  await for (final message in inbox) {
+    switch (message) {
+      case ('progress', final Object update) when !job.finished:
+        job.progress.add(update);
+      case (final String kind, final Object? value) when kind != 'progress':
+        await job.finish(kind, value);
+      case null:
+        inbox.close();
+        await job.finish(job.killed ? 'cancelled' : 'failed', (
+          'worker isolate dk-$name exited',
+          '',
+        ));
+    }
+  }
+}
+
 bool _onWorker = false;
 
 /// Fails (in debug builds, where asserts run) unless this isolate is a worker
-/// of an [IsolatePool]. Every native binding calls it before its first native
-/// call, so native code never runs on the UI isolate.
+/// of an [IsolatePool]. Every native binding of ours (qpdf, OpenCV, ONNX,
+/// llama.cpp) calls it before its first native call, so native code never
+/// runs on the UI isolate. PDFium is reached only through pdfrx.
 void assertWorkerIsolate() {
   assert(
     _onWorker,
@@ -176,111 +212,19 @@ void assertWorkerIsolate() {
   );
 }
 
-void _workerMain(SendPort toMain) {
+Future<void> _workerMain((SendPort, _Task, String) start) async {
   _onWorker = true;
-  final inbox = ReceivePort();
-  toMain.send(inbox.sendPort);
-  final contexts = <int, JobContext>{};
-  var tail = Future<void>.value(); // jobs run one after the other
-  inbox.listen((message) {
-    switch (message) {
-      case ('start', final int id, final _Task task, final String tempPath):
-        final context = JobContext._(
-          Directory(tempPath),
-          (f) => toMain.send((id, 'progress', f)),
-        );
-        contexts[id] = context;
-        tail = tail.then((_) async {
-          try {
-            if (context._cancelled) throw const JobCancelled();
-            toMain.send((id, 'done', await task(context)));
-          } on JobCancelled {
-            toMain.send((id, 'cancelled', null));
-          } catch (e, s) {
-            toMain.send((id, 'failed', ('$e', '$s')));
-          } finally {
-            contexts.remove(id);
-          }
-        });
-      case ('cancel', final int id):
-        contexts[id]?._cancelled = true;
-    }
-  });
-}
-
-// --- main side ---------------------------------------------------------------
-
-class _Worker {
-  _Worker._(this.isolate, this.dedicated);
-
-  final Isolate isolate;
-  final bool dedicated;
-  late final SendPort _toWorker;
-  final _jobs = <int, _Pending<Object?>>{};
-
-  static Future<_Worker> spawn(
-    String name, {
-    bool dedicated = false,
-    void Function()? onExit,
-  }) async {
-    final inbox = ReceivePort();
-    final exit = ReceivePort();
-    final ready = Completer<SendPort>();
-    final isolate = await Isolate.spawn(
-      _workerMain,
-      inbox.sendPort,
-      debugName: 'dk-$name',
-      onExit: exit.sendPort,
-      errorsAreFatal: false,
-    );
-    final worker = _Worker._(isolate, dedicated);
-    inbox.listen(
-      (m) => m is SendPort
-          ? ready.complete(m)
-          : worker._handle(m as (int, String, Object?)),
-    );
-    exit.first.then((_) {
-      exit.close();
-      inbox.close();
-      onExit?.call();
-      for (final job in [...worker._jobs.values]) {
-        job.finish(job.killed ? 'cancelled' : 'failed', (
-          'worker isolate dk-$name exited',
-          '',
-        ));
-      }
-      worker._jobs.clear();
-    });
-    worker._toWorker = await ready.future;
-    return worker;
-  }
-
-  void start(_Pending<Object?> job, _Task task) {
-    _jobs[job.id] = job;
-    job.onCancel = () {
-      if (dedicated) {
-        job.killed = true;
-        isolate.kill(
-          priority: Isolate.immediate,
-        ); // the exit handler finishes it
-      } else {
-        _toWorker.send(('cancel', job.id));
-      }
-    };
-    _toWorker.send(('start', job.id, task, job.temp!.path));
-  }
-
-  void _handle((int, String, Object?) message) {
-    final (id, kind, value) = message;
-    final job = _jobs[id];
-    if (job == null) return;
-    if (kind == 'progress') {
-      job.progress.add(value!);
-      return;
-    }
-    _jobs.remove(id);
-    if (dedicated) isolate.kill();
-    job.finish(kind, value);
+  final (toMain, task, tempPath) = start;
+  final context = JobContext._(
+    Directory(tempPath),
+    (update) => toMain.send(('progress', update)),
+  );
+  try {
+    toMain.send(('done', await task(context)));
+  } on JobCancelled {
+    toMain.send(('cancelled', null));
+  } catch (e, s) {
+    toMain.send(('failed', ('$e', '$s')));
   }
 }
 
@@ -304,7 +248,7 @@ class _Pending<R> {
     if (onCancel != null) {
       onCancel!();
     } else {
-      // Not on a worker yet: finish now; IsolatePool._start sees it.
+      // Not started yet: finish now; IsolatePool._start sees it.
       finish('cancelled', null);
     }
   }
