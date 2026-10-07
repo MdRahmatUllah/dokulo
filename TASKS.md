@@ -729,7 +729,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0705 | Ph1 | A | P1 | XS | Decision: Order vs letter assistant | needs-decision |  |  |  |
 | DK-0706 | Ph1 | A | P1 | XS | Decision: Per-screen specs | needs-decision |  |  |  |
 | DK-0707 | Ph3 | A | P1 | XS | Decision: iOS Files action lands on the X1 picker (UI spec) or directly on the chosen tool (UX plan) | needs-decision |  |  |  |
-| DK-0708 | Ph1 | A | P0 | XS | Decision: confirm the palette together with the app-icon design | needs-decision |  |  |  |
+| DK-0708 | Ph1 | A | P0 | XS | Decision: confirm the palette together with the app-icon design | done |  |  |  |
 | DK-0709 | Ph1 | A | P2 | XS | Document the not-planned scope so it is not built by accident | open |  |  |  |
 | DK-0710 | Ph7 | Q | P2 | XS | Visual QA: onboarding-launch (Launch) | open |  | DK-0073 |  |
 | DK-0711 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1 (no uploads) | open |  | DK-0238 DK-0239 |  |
@@ -2042,3 +2042,7 @@ PR #1091: changes requested, one line: the test's Steuer-ID '86 095 742 719' loo
 ### H-233 · 2026-10-08 00:28 · agent-1 → agent-0 · heads-up
 
 DK-0392 helpers merged in #1109 (merge origin/main into your branch): doc_core/lib/src/pdf/compress/ — searchSizeTarget(targetBytes, tryLevel: (quality,dpi) -> (path, bytes)) for 'under X MB'; RasterFallback.rasterise(input, output, pages, dpi, quality, encodeJpeg: <your OpenCV imencode>, work) for scans (keeps text invisible); MetadataStrip.strip(input, output, work) in Lane.qpdf. RenderedPage.rgba is new. Your PdfCompress just wires these to the image pipeline. Tell me if you want me to take anything else (greyscale? the ToolJob?).
+
+### H-234 · 2026-10-08 00:29 · agent-1 → all · report · DK-0708
+
+DK-0708 (Decision: confirm the palette together with the app-icon design) is done. The owner, 2026-10-08: palette approved as specified (Overview & foundations token table). Now ready: DK-0024, DK-1009.
