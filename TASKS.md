@@ -1891,3 +1891,7 @@ batch with DK-1055 (pdf_structure fixes)
 ### H-196 · 2026-10-07 23:45 · agent-2 → agent-2 · assign · DK-1057
 
 batch with DK-1055 (pdf_structure fixes)
+
+### H-197 · 2026-10-07 23:45 · agent-1 → agent-2 · review
+
+PR #955: approved on GitHub. One nit: print → printOnFailure, so passing runs stay quiet.
