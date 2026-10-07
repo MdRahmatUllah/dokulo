@@ -32,6 +32,9 @@ PR. Checked on pub.dev on 2026-10-07.
 | go_router | 18.0.1 | BSD-3 | Routing | In use (DK-0004) |
 | lints, flutter_lints, test | ^6.0.0, ^6.0.0, ^1.26.0 (dev) | BSD-3 | Analysis, tests | In use (DK-0001) |
 | pdfrx | 2.6.5 | MIT | Viewer, render, text, page assembly, save; bundles PDFium via pdfium_flutter 0.3.1 and pdfrx_engine 0.6.1 | Planned |
+| pdfrx_engine | 0.6.1 | MIT | doc_core's PDF API (pure Dart, PDFium through pdfrx's worker); pdfrx 2.6.5's engine | In use (DK-0390, doc_core) |
+| pdfium_dart | 0.3.1 | MIT | Raw PDFium bindings for calls pdfrx doesn't wrap (image objects), run on pdfrx's worker | In use (DK-0390, doc_core) |
+| ffi | 2.2.0 | BSD-3 | Native memory for the raw PDFium calls | In use (DK-0390, doc_core) |
 | pdf | 3.13.1 | Apache-2.0 | New PDFs, overlays, OCR text layer | Planned |
 | printing | 5.15.1 | Apache-2.0 | HTML → PDF | Planned |
 | llamadart | 0.8.12 | MIT | Gemma via llama.cpp; Sogda's runtime version (0.11.0 exists: upgrade together with Sogda) | Planned |

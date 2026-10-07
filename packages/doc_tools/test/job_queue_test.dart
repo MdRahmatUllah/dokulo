@@ -128,7 +128,6 @@ void main() {
   });
 
   tearDown(() async {
-    await pool.close();
     await db.close();
     dir.deleteSync(recursive: true);
   });
