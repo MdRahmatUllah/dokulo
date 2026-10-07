@@ -1083,7 +1083,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | open |  | DK-0391 DK-0668 |  |
 | DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | open |  | DK-0394 DK-0668 |  |
 | DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | open |  | DK-0668 |  |
-| DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | open |  |  |  |
+| DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | in-progress | agent-2 |  |  |
 
 ## Locks
 

@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1062 pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) — claimed 2026-10-08 00:14.
 
 ## Next
 
