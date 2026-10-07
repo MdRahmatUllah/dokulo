@@ -83,7 +83,7 @@ final class TextOutput extends JobOutput {
   Map<String, Object?> toJson() => {'text': text};
 }
 
-/// What a running tool sees, on its worker isolate.
+/// What a running tool sees.
 class ToolJobContext {
   ToolJobContext(this._job);
 
@@ -100,10 +100,10 @@ class ToolJobContext {
   Future<void> checkCancelled() => _job.checkCancelled();
 }
 
-/// One tool's engine (T2 → X2 → T3): typed input in, [JobOutput] out, on a
-/// worker isolate of [lane]. A subclass is a const class with no state, so
-/// it can be sent to the worker. It never writes into the input file: the
-/// output is always a new file (Developer guide §1).
+/// One tool's engine (T2 → X2 → T3): typed input in, [JobOutput] out, on its
+/// [lane]. A subclass is a const class with no state, so it can be sent to a
+/// worker isolate. It never writes into the input file: the output is always
+/// a new file (Developer guide §1).
 abstract class ToolJob<I> {
   const ToolJob();
 
@@ -120,8 +120,9 @@ abstract class ToolJob<I> {
   /// step's output plus this step's saved options.
   I chain(JobOutput previous, Map<String, Object?> options);
 
-  /// Does the work. Runs on a worker isolate; reports [JobProgress] at least
-  /// once per page for a page-based tool.
+  /// Does the work: on a worker isolate, or for [Lane.pdfium] on the calling
+  /// isolate with every PDFium call through pdfrx. Reports [JobProgress] at
+  /// least once per page for a page-based tool.
   Future<JobOutput> run(I input, ToolJobContext context);
 }
 
