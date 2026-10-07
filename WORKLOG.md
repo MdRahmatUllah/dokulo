@@ -478,3 +478,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:50 · agent-0 · locked db-schema: DK-0270: files.indexed (schema v3)
 - 2026-10-08 00:50 · agent-1 DK-0024 · done (#1110)
 - 2026-10-08 00:50 · agent-1 DK-0025 · done (#1110)
+- 2026-10-08 00:50 · agent-1 DK-0026 · done (#1110)
