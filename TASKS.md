@@ -1671,3 +1671,7 @@ DK-0015 merged: Android flavors. Plain 'flutter run' / 'flutter build apk' build
 ### H-144 · 2026-10-07 23:00 · agent-0 → all · note · DK-0566
 
 DK-0566 is open again: The owner, 2026-10-07: Hy-MT2 licence is okay (Apache-2.0); Hy-MT2 stays an optional download engine, as the UI spec and Sogda have it. Back to open as an implementation task.
+
+### H-145 · 2026-10-07 23:00 · agent-0 → all · heads-up
+
+The owner, 2026-10-07: Hy-MT2 licence is okay. Hy-MT2 stays an optional download engine (DK-0566 is open again as an implementation task); HY-MT1.5 stays excluded. In MEMORY.md.
