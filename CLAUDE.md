@@ -84,23 +84,30 @@ Board commands not used above: `assign`, `release`, `decision` (to the owner), `
 
 ## The basic check
 
-It is the only check a PR gets: CI is off until the owner decides on DK-0010. From the repo root (one pub workspace, so one `flutter pub get` resolves every package):
+It is the only check a PR gets: **there is no CI/CD** (the owner, 2026-10-07; DK-0010). One command runs all of it from the repo root, before you push and again before you merge if `origin/main` moved:
 
 ```bash
-flutter pub get
-for p in doc_core app_pdf; do (cd packages/$p && dart run build_runner build); done   # *.g.dart are not committed
-flutter analyze --fatal-infos                                    # the whole workspace
-dart format --output=none --set-exit-if-changed packages
-python tools/check_layers.py                                     # dependencies point one way only
-(cd packages/<package> && dart test)                             # each pure-Dart package you touched
-(cd packages/app_pdf && flutter test --timeout 60s <touched tests and their goldens>)
-python -m pytest tools/tests -q                                  # if tools/ changed
-python tools/licence_scan.py                                     # if a pubspec changed (after pub get)
-python tools/native_libs_check.py <built apk>                   # if a native dependency or its config changed
-python tools/check_l10n.py                                       # EN/DE keys match, no hard-coded strings in app_pdf
+python tools/check.py                    # add --apk <built.apk> when a native dependency or its config changed
 ```
 
-A package that adds a Flutter plugin becomes a Flutter package: run `flutter test` there instead of `dart test`.
+It takes about 2–3 minutes (build_runner and analyze are most of it). It runs every step even after a failure, prints `PASS`/`FAIL` per step with the failing output, and exits 1 if anything failed. The steps:
+
+```bash
+flutter pub get                                                  # one pub workspace: resolves every package, regenerates l10n
+(cd packages/<p> && dart run build_runner build -d)              # each package that uses build_runner (*.g.dart are not committed)
+flutter analyze --fatal-infos                                    # the whole workspace
+dart format --output=none --set-exit-if-changed packages
+python tools/check_layers.py                                     # dependencies point one way only; no FFI in app_pdf
+python tools/licence_scan.py                                     # every pubspec.lock against the licence register
+python tools/check_l10n.py                                       # EN/DE keys match, no hard-coded strings in app_pdf
+(cd packages/<p> && flutter test --timeout 60s | dart test)      # every package with tests: flutter test in Flutter packages
+python -m pytest tools/tests -q
+python tools/native_libs_check.py <built apk>                    # only with --apk
+```
+
+While you iterate, run a single step by hand; the gate is for the end. When a new suite lands (golden PDFs, redaction security), add it as a step in `tools/check.py` in the same PR.
+
+A package that adds a Flutter plugin becomes a Flutter package; the gate then runs `flutter test` there instead of `dart test`.
 
 `website/` has its own check: `npm run typecheck && npm run lint && npm run build`.
 

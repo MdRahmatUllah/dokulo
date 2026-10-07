@@ -46,7 +46,7 @@ flowchart LR
 - **The emulators:** the developers share `emulator-5562` under
   `team.py device`; `emulator-5564` is agent-3's alone. DeutschPlan's
   emulators (5554, 5556, 5558) on the same machine are never touched.
-- **CI is off** until the owner decides (DK-0010); the basic check in
+- **There is no CI/CD** (the owner, 2026-10-07; DK-0010); the basic check in
   `CLAUDE.md` is the only check.
 
 ## Starting a session

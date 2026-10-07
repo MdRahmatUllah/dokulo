@@ -35,7 +35,7 @@ We credit it in the licence screen anyway (licence register → Colour profiles)
 - Write the OutputIntent as `/Type /OutputIntent /S /GTS_PDFA1
   /OutputConditionIdentifier (sRGB IEC61966-2.1) /Info (sRGB IEC61966-2.1)
   /DestOutputProfile <stream with /N 3>`.
-- veraPDF validates the output as PDF/A-2b in CI (never shipped).
+- veraPDF validates the output as PDF/A-2b in the local gate (a test tool, never shipped).
 
 ## Alternatives considered
 
