@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../components/dk_icon.dart';
 import '../l10n/app_localizations.dart';
 import 'routes.dart';
 
@@ -19,7 +20,7 @@ class AppShell extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         tooltip: l10n.shell_button_scan,
         onPressed: () => context.push(Routes.scan),
-        child: const Icon(Icons.document_scanner),
+        child: const DkIcon(DkIcons.scan),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: NavigationBar(
@@ -29,19 +30,23 @@ class AppShell extends StatelessWidget {
             shell.goBranch(i, initialLocation: i == shell.currentIndex),
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.home),
+            icon: const DkIcon(DkIcons.home),
+            selectedIcon: const DkIcon(DkIcons.home, filled: true),
             label: l10n.shell_tab_home,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.apps),
+            icon: const DkIcon(DkIcons.toolsTab),
+            selectedIcon: const DkIcon(DkIcons.toolsTab, filled: true),
             label: l10n.shell_tab_tools,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.folder),
+            icon: const DkIcon(DkIcons.files),
+            selectedIcon: const DkIcon(DkIcons.files, filled: true),
             label: l10n.shell_tab_files,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.person),
+            icon: const DkIcon(DkIcons.me),
+            selectedIcon: const DkIcon(DkIcons.me, filled: true),
             label: l10n.shell_tab_me,
           ),
         ],

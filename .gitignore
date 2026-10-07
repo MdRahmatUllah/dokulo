@@ -21,3 +21,5 @@ packages/app_pdf/lib/l10n/app_localizations*.dart
 *.g.dart
 # PP-OCRv5 models: fetched and hash-checked by tools/fetch_ocr_models.py.
 packages/doc_vision/assets/ocr/
+# Material Symbols Rounded: fetched and hash-checked by tools/fetch_icon_font.py.
+packages/app_pdf/assets/fonts/
