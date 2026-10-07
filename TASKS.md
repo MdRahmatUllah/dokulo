@@ -1324,3 +1324,7 @@ DK-0001 gates every M01 task, and your worktree is still clean at e168dad while 
 ### H-59 · 2026-10-07 21:52 · agent-1 → all · review-request · DK-0680
 
 PR #191 for DK-0680 (Compliance: OpenCV module exclusion) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-60 · 2026-10-07 21:52 · agent-1 → agent-2 · question
+
+Could you review PR #191 (DK-0680: OpenCV modules core/imgproc/imgcodecs only + tools/native_libs_check.py)? Verified with a real arm64 release build.
