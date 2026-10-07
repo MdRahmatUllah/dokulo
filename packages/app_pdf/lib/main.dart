@@ -8,6 +8,8 @@ import 'providers/job_providers.dart';
 import 'providers/language_providers.dart';
 import 'providers/theme_providers.dart';
 import 'routes/routes.dart';
+import 'theme/app_theme.dart';
+import 'theme/dk_tokens.dart';
 
 void main() {
   final container = ProviderContainer();
@@ -17,8 +19,8 @@ void main() {
   );
 }
 
-/// The app root: the router (DK-0004) and the theme mode. The theme itself
-/// arrives with DK-0024.
+/// The app root: the router (DK-0004), the theme mode and the design tokens
+/// (DK-0024).
 class DokuloApp extends ConsumerWidget {
   const DokuloApp({super.key});
 
@@ -31,8 +33,8 @@ class DokuloApp extends ConsumerWidget {
       title:
           'Dokulo', // l10n-ignore: the brand name, the same in every language
       themeMode: ref.watch(appThemeModeProvider),
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
+      theme: dokuloTheme(DkTokens.light),
+      darkTheme: dokuloTheme(DkTokens.dark),
       locale: ref.watch(appLanguageSettingProvider).locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: const [

@@ -213,20 +213,25 @@ Light and a Dark instance. The token names are those in
 `Overview & foundations.md` → Design tokens and the UI spec §4–§9.
 
 ```dart
-final t = Theme.of(context).extension<DkTokens>()!;
+final t = context.tokens;                 // package:app_pdf/theme/dk_tokens.dart
 return Container(
-  padding: EdgeInsets.all(t.spaceM),   // never EdgeInsets.all(16)
+  padding: EdgeInsets.all(t.space.m),     // never EdgeInsets.all(12)
   decoration: BoxDecoration(
-    color: t.surfaceRaised,            // never Color(0xFF…)
-    borderRadius: BorderRadius.circular(t.radiusM),
+    color: t.color.surfaceRaised,         // never Color(0xFF…)
+    borderRadius: BorderRadius.circular(t.radius.m),
+    boxShadow: t.elevation.raised,
   ),
-  child: Text(label, style: t.typeLabelL),
+  child: Text(label, style: t.text.labelL),  // the spec's type.labelL
 );
 ```
 
-DK-0024 may add a shorthand (for example `context.tokens`); when it does,
-update this example the same day. No hex colours, raw font sizes or magic
-numbers in widgets. A value that isn't a token is a gap: add the token first.
+Groups: `color`, `text` (the spec's `type.*`; not `type`, which
+`ThemeExtension` uses as its lookup key), `space`, `radius`, `elevation`,
+`motion`. `dokuloTheme(DkTokens.light / .dark)` in `lib/theme/app_theme.dart`
+builds the MaterialApp themes. No hex colours, raw font sizes or magic
+numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
+raw colour in `lib/screens` or `lib/components`. A value that isn't a token
+is a gap: add the token first.
 
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
