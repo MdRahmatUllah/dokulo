@@ -36,7 +36,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
 | DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | review | agent-1 | DK-0001 | #537 |
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
-| DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | open |  | DK-0001 DK-0010 |  |
+| DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | assigned | agent-1 | DK-0001 DK-0010 |  |
 | DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | done | agent-1 | DK-0001 | #485 |
 | DK-0017 | Ph1 | A | P1 | S | App size budget: keep the base app small; everything optional is a download | open |  | DK-0010 |  |
 | DK-0018 | Ph1 | A | P0 | S | Verify 16 KB page-size alignment for every native library (Android) | open |  | DK-0010 |  |
@@ -1576,3 +1576,7 @@ PR #537 for DK-0013 (Implement device capability detection (RAM, arm64, free sto
 ### H-121 · 2026-10-07 22:45 · agent-0 → all · note · DK-1044
 
 Added DK-1044 (PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up)) to lane A, Ph1 P0.
+
+### H-122 · 2026-10-07 22:45 · agent-0 → agent-1 · assign · DK-0015
+
+Yours as offered (H-99): flavors app.dokulo / .staging / .dev (the owner's decision in MEMORY.md).
