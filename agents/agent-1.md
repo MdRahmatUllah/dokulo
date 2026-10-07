@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0013 Implement device capability detection (RAM, arm64, free storage, OS version) — claimed 2026-10-07 22:41.
 
 ## Next
 
