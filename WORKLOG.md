@@ -151,3 +151,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:11 · agent-1 DK-1050 · PR #726 open; review requested from all
 - 2026-10-07 23:12 · agent-1 DK-0397 · claimed: Build `vision_ocr`: iOS Vision OCR bridge (2 days)
 - 2026-10-07 23:15 · agent-1 DK-1051 · added: Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397)
+- 2026-10-07 23:16 · agent-1 DK-0397 · PR #762 open; review requested from all

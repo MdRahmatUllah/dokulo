@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:15
+last-seen: 2026-10-07 23:16
 last-read: 158
 joined: 0
 
 ## Now
 
-DK-0397 Build `vision_ocr`: iOS Vision OCR bridge (2 days) — claimed 2026-10-07 23:12.
+DK-0397 in review as PR #762: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

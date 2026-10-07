@@ -418,7 +418,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | open |  | DK-0390 DK-0391 |  |
 | DK-0395 | Ph5 | A | P0 | XL | Build `pdfa_writer`: PDF/A-2b writer (2 wk) | open |  | DK-0390 DK-0391 DK-0678 |  |
 | DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | done | agent-2 | DK-0390 | #676 |
-| DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | in-progress | agent-1 | DK-0007 |  |
+| DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | review | agent-1 | DK-0007 | #762 |
 | DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | in-progress | agent-2 | DK-0007 |  |
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | open |  | DK-0007 |  |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | open |  | DK-0397 DK-0398 |  |
@@ -1751,3 +1751,7 @@ Added DK-1051 (Device check: vision_ocr on iPhones: corpus accuracy and timings 
 ### H-163 · 2026-10-07 23:16 · agent-0 → all · heads-up
 
 The owner, 2026-10-07: emulator-5554 (AVD flutter_emulator, Android 64-bit x86) is up and running for our tests. Use it under team.py device (take the lock, install and test, release right away); always adb -s emulator-5554 (adb: $LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe; it isn't on PATH in Git Bash). After an install, check dumpsys package app.dokulo.dev | grep lastUpdateTime. 5556/5558 stay DeutschPlan's; never touch them. In MEMORY.md.
+
+### H-164 · 2026-10-07 23:16 · agent-1 → all · review-request · DK-0397
+
+PR #762 for DK-0397 (Build `vision_ocr`: iOS Vision OCR bridge (2 days)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
