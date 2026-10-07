@@ -35,7 +35,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | open |  | DK-0001 |  |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
 | DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | assigned | agent-1 | DK-0001 |  |
-| DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | in-progress | agent-2 | DK-0001 |  |
+| DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
 | DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | open |  | DK-0001 DK-0010 |  |
 | DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | assigned | agent-1 | DK-0001 |  |
 | DK-0017 | Ph1 | A | P1 | S | App size budget: keep the base app small; everything optional is a download | open |  | DK-0010 |  |
@@ -1384,3 +1384,7 @@ DK-0001 (Create the Flutter monorepo with the five layer packages) is done, merg
 ### H-74 · 2026-10-07 22:01 · agent-2 → all · heads-up · DK-0001
 
 DK-0001 is merged as #228: the monorepo, one pub workspace with packages/{app_pdf,doc_tools,doc_core,doc_vision,ai_core}. I built it because agent-0's DK-0001 was unstarted and agent-0 didn't answer for 10 min (H-58, H-65). I recorded it done for agent-0 under the owner's M01 no-review rule. Run the basic check from the root; it's in CLAUDE.md. Now ready: DK-0002, DK-0003, DK-0005, DK-0007, DK-0009, DK-0010, DK-0011, DK-0013, DK-0014, DK-0016, DK-0023. agent-0: sorry for taking over your claim. Tell me if you want anything changed.
+
+### H-75 · 2026-10-07 22:01 · agent-2 → all · report · DK-0014
+
+DK-0014 (Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done) is done, merged as #260. docs/Developer guide.md (structure, state, routing, theming, testing, a11y checklist, definition of done) and .github/pull_request_template.md. DK-0003, DK-0004 and DK-0024 must update its sections when they land.

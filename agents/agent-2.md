@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0014 Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done — claimed 2026-10-07 22:01.
+Nothing claimed.
 
 ## Next
 
