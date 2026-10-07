@@ -47,5 +47,26 @@ def test_the_ui_never_imports_native_code(tmp_path: Path) -> None:
     ]
 
 
+def test_network_only_through_the_one_client(tmp_path: Path) -> None:
+    pubspec(tmp_path, "ai_core", [])
+    pubspec(tmp_path, "doc_core", ["ai_core"])
+    home = tmp_path / "packages" / "ai_core" / "lib" / "src"
+    home.mkdir(parents=True)
+    (home / "network.dart").write_text("final client = HttpClient();\n", encoding="utf-8")  # the one place: ok
+    lib = tmp_path / "packages" / "doc_core" / "lib"
+    lib.mkdir(parents=True)
+    (lib / "fetch.dart").write_text("Future<void> f() async => HttpClient().getUrl(uri);\n", encoding="utf-8")
+    (lib / "sock.dart").write_text("final s = Socket.connect(host, 80);\n", encoding="utf-8")
+    (lib / "pkg.dart").write_text("import 'package:http/http.dart' as http;\n", encoding="utf-8")
+    (lib / "fine.dart").write_text("late HttpClientResponse r; // only a type\n", encoding="utf-8")
+
+    where = "network access goes through packages/ai_core/lib/src/network.dart (DK-0012)"
+    assert check_layers.check(tmp_path) == [
+        f"packages/doc_core/lib/fetch.dart: HttpClient(: {where}",
+        f"packages/doc_core/lib/pkg.dart: import 'package:http/: {where}",
+        f"packages/doc_core/lib/sock.dart: Socket.connect(: {where}",
+    ]
+
+
 def test_the_repo_is_clean() -> None:
     assert check_layers.check(Path(__file__).resolve().parents[2]) == []

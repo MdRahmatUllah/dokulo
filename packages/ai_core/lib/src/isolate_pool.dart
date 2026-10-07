@@ -21,6 +21,8 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:isolate';
 
+import 'network.dart';
+
 /// Where a job runs.
 enum Lane {
   /// PDFium through pdfrx: the job runs on the calling isolate; pdfrx runs
@@ -156,7 +158,7 @@ Future<void> _runHere(_Pending<Object?> job, _Task task) async {
   final context = JobContext._(job.temp!, job.progress.add);
   job.onCancel = () => context._cancelled = true;
   try {
-    final result = await task(context);
+    final result = await offline(() => task(context));
     await job.finish('done', result);
   } on JobCancelled {
     await job.finish('cancelled', null);
@@ -220,7 +222,7 @@ Future<void> _workerMain((SendPort, _Task, String) start) async {
     (update) => toMain.send(('progress', update)),
   );
   try {
-    toMain.send(('done', await task(context)));
+    toMain.send(('done', await offline(() => task(context))));
   } on JobCancelled {
     toMain.send(('cancelled', null));
   } catch (e, s) {

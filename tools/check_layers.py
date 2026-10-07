@@ -7,8 +7,10 @@ A package may depend (dependencies or dev_dependencies) only on our packages of
 a strictly lower layer; doc_core and doc_vision share a layer, so neither may
 depend on the other. And the UI never touches native code (DK-0003): no file
 in app_pdf/lib imports FFI or a native binding; that work runs in the lower
-layers' worker isolates. Exit 1 on a violation or on a package missing from
-LAYERS.
+layers' worker isolates. And our code opens no network connection except
+through ai_core's Network (DK-0012): no HTTP client, socket or HTTP package
+anywhere else in packages/*/lib. Exit 1 on a violation or on a package missing
+from LAYERS.
 """
 
 import re
@@ -21,6 +23,13 @@ LAYERS = {"app_pdf": 1, "doc_tools": 2, "doc_core": 3, "doc_vision": 3, "ai_core
 NATIVE_IMPORTS = re.compile(
     r"""^\s*import\s+['"](dart:ffi|package:(ffi|opencv_dart|dartcv4|flutter_onnxruntime|llamadart|qpdf_ffi)/)""",
     re.M)
+
+# Network access outside NETWORK_HOME (DK-0012).
+NETWORK = re.compile(
+    r"""(\bHttpClient(?:\s*\(|\.new\b)|\b(?:Raw)?Socket\.(?:connect|startConnect)\s*\(|\bWebSocket\.connect\s*\("""
+    r"""|^\s*import\s+['"]package:(?:http|dio|web_socket_channel)/)""",
+    re.M)
+NETWORK_HOME = "packages/ai_core/lib/src/network.dart"
 
 
 def our_dependencies(pubspec: Path) -> set[str]:
@@ -49,6 +58,10 @@ def check(root: Path) -> list[str]:
         if m := NATIVE_IMPORTS.search(source.read_text(encoding="utf-8")):
             where = source.relative_to(root).as_posix()
             problems.append(f"{where}: imports {m[1]}; the UI never touches native code (use a job or service)")
+    for source in sorted((root / "packages").glob("*/lib/**/*.dart")):
+        where = source.relative_to(root).as_posix()
+        if where != NETWORK_HOME and (m := NETWORK.search(source.read_text(encoding="utf-8"))):
+            problems.append(f"{where}: {m[1].strip()}: network access goes through {NETWORK_HOME} (DK-0012)")
     return problems
 
 
