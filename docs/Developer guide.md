@@ -257,6 +257,23 @@ Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
 context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
 `captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
 
+**Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
+unless Settings → Appearance overrides it (`appThemeModeProvider`,
+`lib/providers/theme_providers.dart`); `MaterialApp` watches it, so a change
+applies to every screen at once. `dokuloTheme` also maps the tokens onto
+Material's `ColorScheme`, so stock Material widgets match. The dark-mode
+rules, for every screen and component:
+
+- Golden tests in both themes for every screen state.
+- Elevation in Dark is `surfaceRaised` plus an outline (`elevation.raised` has
+  no shadow there).
+- PDF pages stay white; only the viewer's night mode inverts them. Thumbnails
+  keep a 1 dp `color.outline` and wrap the page image in
+  `ColorFiltered(colorFilter: t.thumbnailFilter)` (92 % brightness in Dark).
+- `DkIllustration` and the camera chrome need nothing: the illustrations
+  recolour from the tokens, and the camera tokens are dark in both themes.
+- Toasts use `inverseSurface` / `onInverseSurface` / `inversePrimary`.
+
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
 EN/DE names in `Overview & foundations.md`. German uses "du".
