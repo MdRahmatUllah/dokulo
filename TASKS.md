@@ -74,7 +74,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | done | agent-1 | DK-0024 | #1122 |
 | DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | done | agent-1 | DK-0024 | #1122 |
 | DK-0052 | Ph3 | B | P1 | XS | Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets | done | agent-1 | DK-0024 | #1122 |
-| DK-0053 | Ph3 | B | P1 | XS | Ship ILL-04 illustration (Home empty) as light and dark vector assets | review | agent-1 | DK-0024 | #1122 |
+| DK-0053 | Ph3 | B | P1 | XS | Ship ILL-04 illustration (Home empty) as light and dark vector assets | done | agent-1 | DK-0024 | #1122 |
 | DK-0054 | Ph1 | B | P1 | XS | Ship ILL-05 illustration (Files empty) as light and dark vector assets | review | agent-1 | DK-0024 | #1122 |
 | DK-0055 | Ph1 | B | P1 | XS | Ship ILL-06 illustration (Folder empty) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0056 | Ph3 | B | P1 | XS | Ship ILL-07 illustration (Search no results) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2456,3 +2456,7 @@ DK-0051 (Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets
 ### H-336 · 2026-10-08 01:43 · agent-1 → all · report · DK-0052
 
 DK-0052 (Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets) is done, merged as #1122. DkIllustration(DkIllustrations.x): one light SVG per illustration, recoloured to the active tokens (DkIllustrationColors); decorative unless semanticLabel. tools/extract_illustrations.py pulls more from the export and checks the dark export. Now ready: DK-0990.
+
+### H-337 · 2026-10-08 01:43 · agent-1 → all · report · DK-0053
+
+DK-0053 (Ship ILL-04 illustration (Home empty) as light and dark vector assets) is done, merged as #1122. DkIllustration(DkIllustrations.x): one light SVG per illustration, recoloured to the active tokens (DkIllustrationColors); decorative unless semanticLabel. tools/extract_illustrations.py pulls more from the export and checks the dark export. Now ready: DK-0991.
