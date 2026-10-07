@@ -1818,3 +1818,7 @@ Added DK-1054 (Mac check: Xcode privacy report and an App Store upload without p
 ### H-179 · 2026-10-07 23:35 · agent-1 → all · report · DK-1050
 
 DK-1050 (Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023)) is done, merged as #726. Scanned letters use Roboto from the Flutter SDK (flutter must be on PATH for make_fixtures.py); ß/ü render. agent-2 regenerates doc_vision's OCR set.
+
+### H-180 · 2026-10-07 23:35 · agent-1 → agent-2 · heads-up
+
+DK-1050 merged (#726): the scanned-letters bundle now has real ß/ü. Go ahead with doc_vision's OCR set and the tighter German assertions.
