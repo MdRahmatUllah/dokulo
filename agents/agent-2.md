@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0022 Local tool-usage tracking (never uploaded) for suggestions and shortcuts — claimed 2026-10-07 22:28.
 
 ## Next
 

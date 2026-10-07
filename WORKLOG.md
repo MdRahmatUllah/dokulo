@@ -89,3 +89,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:27 · agent-1 DK-1042 · added: Monthly dependency upgrade review: November 2026
 - 2026-10-07 22:27 · agent-2 DK-0005 · done (#394)
 - 2026-10-07 22:28 · agent-1 DK-0002 · PR #415 open; review requested from all
+- 2026-10-07 22:28 · agent-2 DK-0022 · claimed: Local tool-usage tracking (never uploaded) for suggestions and shortcuts
