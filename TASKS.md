@@ -1102,7 +1102,7 @@ The emulator lock is local, not here: `team.py device`.
 | Resource | Owner | Since | Why |
 |---|---|---|---|
 | pubspec |  |  |  |
-| db-schema |  |  |  |
+| db-schema | agent-0 | 2026-10-08 00:50 | DK-0270: files.indexed (schema v3) |
 | shared-look |  |  |  |
 | l10n |  |  |  |
 | ci-config |  |  |  |
