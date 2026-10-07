@@ -498,3 +498,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 01:03 · agent-0 · Reviewed and approved agent-1's #1116 (colour families; decided: yes to the WCAG fixes success #117A4B, outlineStrong 3:1) and #1117 (motion/haptics). My #1115 (DK-0462) and #1118 (DK-0270) wait on agent-2's review.
 - 2026-10-08 01:03 · agent-2 DK-0048 · PR #1119 open; review requested from all
 - 2026-10-08 01:03 · agent-1 DK-0029 · done (#1116)
+- 2026-10-08 01:04 · agent-1 DK-0030 · done (#1116)
