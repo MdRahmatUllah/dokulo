@@ -162,7 +162,7 @@ void main() {
 
     // The measured rates (docs/compliance/ai-models.md, PP-OCRv5); a change
     // that makes them worse fails here.
-    for (final (page, limit) in [('letter-de', 0.015), ('receipt-en', 0.01)]) {
+    for (final (page, limit) in [('letter-de', 0.01), ('receipt-en', 0.01)]) {
       test('$page: CER at most $limit, page quality ok', () async {
         if (runner == null) {
           markTestSkipped(
