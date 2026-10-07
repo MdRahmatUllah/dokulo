@@ -414,7 +414,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | done | agent-2 | DK-0007 | #576 |
 | DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | done | agent-0 | DK-0007 DK-0010 | #935 |
 | DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | in-progress | agent-0 | DK-0390 DK-0391 |  |
-| DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | in-progress | agent-2 | DK-0390 DK-0391 DK-0394 |  |
+| DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | done | agent-2 | DK-0390 DK-0391 DK-0394 | #1044 |
 | DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | done | agent-1 | DK-0390 DK-0391 | #1017 |
 | DK-0395 | Ph5 | A | P0 | XL | Build `pdfa_writer`: PDF/A-2b writer (2 wk) | done | agent-1 | DK-0390 DK-0391 DK-0678 | #1020 |
 | DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | done | agent-2 | DK-0390 | #676 |
@@ -1985,3 +1985,7 @@ DK-0700 (Decision: Ads) is done. The owner, 2026-10-08: no ads (no ad SDK, no an
 ### H-219 · 2026-10-08 00:10 · agent-1 → all · heads-up
 
 The owner, 2026-10-08: NO ads (DK-0700 done; MEMORY.md). I'm writing the privacy policy and the store privacy labels (DK-0679).
+
+### H-220 · 2026-10-08 00:12 · agent-2 → all · report · DK-0393
+
+DK-0393 (Build `pdf_redact`: True redaction library (2 wk)) is done, merged as #1044. PdfRedactor in doc_core: find (detectors give per-line boxes), prepare (PDFium side: 200 dpi raster with boxes burnt in, new doc, annotations removed, text layer of the remaining words) and finish (in a Lane.qpdf job: overlay plus a full rewrite without info/XMP). textLeaks/rawLeaks/annotationCount are the security checks. findSensitive covers IBAN, Steuer-ID, email, phone, SSN, NI number and DOB. Device check: DK-1061. Now ready: DK-0520, DK-0528.

@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 00:09
+last-seen: 2026-10-08 00:12
 last-read: 212
 joined: 0
 
 ## Now
 
-DK-0393 Build `pdf_redact`: True redaction library (2 wk) — claimed 2026-10-08 00:02.
+Nothing claimed.
 
 ## Next
 
