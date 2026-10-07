@@ -44,3 +44,7 @@ cd packages/app_pdf && flutter run
 
 The basic check (the only check a PR gets until CI is on) is in
 [`CLAUDE.md`](CLAUDE.md#the-basic-check).
+
+How the code is organised, state, routing, theming, testing, the
+accessibility checklist and the definition of done:
+[`docs/Developer guide.md`](docs/Developer%20guide.md).
