@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0462 in review as PR #1115: answer the review; re-run the gate if main moved, then merge.
+DK-0270 Index updater: extract PDF text and OCR text into FTS5 after every tool job — claimed 2026-10-08 00:49.
 
 ## Next
 

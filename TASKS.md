@@ -291,7 +291,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | open |  | DK-0260 DK-0198 |  |
 | DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | open |  | DK-0260 |  |
 | DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | open |  | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
-| DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | open |  | DK-0005 DK-0008 |  |
+| DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | in-progress | agent-0 | DK-0005 DK-0008 |  |
 | DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | open |  | DK-0260 DK-0184 DK-0084 DK-0022 |  |
 | DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | open |  | DK-0260 DK-0186 DK-0182 DK-0120 |  |
 | DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | open |  | DK-0260 DK-0186 DK-0182 |  |

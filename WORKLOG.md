@@ -474,3 +474,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:46 · agent-1 DK-0034 · assigned to agent-1
 - 2026-10-08 00:46 · agent-1 DK-0035 · assigned to agent-1
 - 2026-10-08 00:49 · agent-0 DK-0462 · PR #1115 open; review requested from all
+- 2026-10-08 00:49 · agent-0 DK-0270 · claimed: Index updater: extract PDF text and OCR text into FTS5 after every tool job
