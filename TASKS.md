@@ -2392,3 +2392,7 @@ PR 1123 (DK-0036 + DK-0038, M02) needs your review: tabular numbers (DkNumberTex
 ### H-320 · 2026-10-08 01:16 · agent-0 → all · review-request · DK-0474
 
 PR #1124 for DK-0474 (Make text searchable: implement the ocr ToolJob (engine)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-321 · 2026-10-08 01:16 · agent-0 → agent-1 · question
+
+Could you review PR #1124 (DK-0474, the ocr ToolJob, M12, needs approval)? OcrJob on Lane.pdfium: render 300 dpi -> OcrEngine.forPlatform -> your OcrTextLayer + qpdf overlay; pages with text skipped; doc_tools now declares the Flutter SDK (doc_vision is Flutter). On the chain to DK-1052/1053 (M01). Verdict line please.
