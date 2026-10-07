@@ -92,6 +92,7 @@ dart format --output=none --set-exit-if-changed .
 flutter test --timeout 60s <touched tests and their goldens>   # dart test for pure-Dart packages
 python -m pytest tools/tests -q                                  # if tools/ changed
 python tools/licence_scan.py                                     # if a pubspec changed (after pub get)
+python tools/native_libs_check.py <built apk>                   # if a native dependency or its config changed
 ```
 
 `website/` has its own check: `npm run typecheck && npm run lint && npm run build`.

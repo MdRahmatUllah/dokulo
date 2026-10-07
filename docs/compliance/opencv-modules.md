@@ -100,6 +100,16 @@ app contains an FFmpeg library, an OpenCV videoio/highgui/dnn library, or a
 every release build; until CI is on, run it on the APK of any PR that touches
 the native build.
 
-A probe build (Flutter 3.47.5, `opencv_dart` 2.2.2, the configuration above,
-`flutter build apk --release --target-platform android-arm64`) passed the
-check. The results are in the PR for DK-0680.
+**Probe build, 2026-10-07:** Flutter 3.47.5, `opencv_dart` 2.2.2 / `dartcv4`
+2.2.2, the configuration above, a two-line app calling `cvtColor` and
+`imencode`, built with `flutter build apk --release --target-platform android-arm64`
+in about 4.5 minutes (OpenCV compiled from source). The APK's native libraries
+are `libapp.so`, `libflutter.so` and `libdartcv.so` (10.5 MB uncompressed;
+DK-0017's size budget should count it). `libdartcv.so` exports 551 `cv_*`
+functions, `cv_cvtColor` and `cv_imencode*` among them, and none from videoio,
+highgui or dnn. It contains no FFmpeg strings. `native_libs_check.py`: clean.
+
+**Windows path length:** the OpenCV source build fails with "Filename longer
+than 260 characters" when the app sits deep (the probe failed at a 112-character
+project path). It builds at `F:/appDevs/dokulo/.worktrees/agent-1/<52-char app
+path>`. Keep the monorepo's app package paths short (DK-0001).
