@@ -19,7 +19,13 @@ decision (2026-10-07): `app.dokulo`.
 `flutter run` or `flutter build apk` builds dev. Dart code that needs the flavor
 reads `appFlavor` (`package:flutter/services.dart`).
 
+The OCR models and the icon font are not in git. On a fresh clone, fetch them
+before the first build (the gate does it too): without the font, every icon
+draws as a box.
+
 ```bash
+python tools/fetch_ocr_models.py               # once per clone, hash-checked
+python tools/fetch_icon_font.py                # once per clone, hash-checked
 cd packages/app_pdf
 flutter run                                    # dev
 flutter build apk --flavor staging --release   # build/app/outputs/flutter-apk/app-staging-release.apk

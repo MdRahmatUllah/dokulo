@@ -77,7 +77,6 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `in_app_purchase` | BSD-3 | Yes | One-time Pro unlock | Notice |
 | `flutter_localizations` | BSD-3 (Flutter SDK) | Yes | EN/DE | Notice (from the SDK) |
 | `intl` | BSD-3 | Yes | EN/DE formatting, ARB | Notice |
-| `material_symbols_icons` | Apache-2.0 | Yes | Material Symbols Rounded (DK-0048) | Notice |
 | `phone_numbers_parser` | MIT | Yes | Phone detection in redaction | Notice |
 | `diff_match_patch` | Apache-2.0 | Yes, if Compare uses it | Text diff in Compare PDF | Notice |
 | `camera` | BSD-3 | Yes | Android scanner frames (CameraX) | Notice |
@@ -126,7 +125,7 @@ restrictions, attribution): the intake checklist in [ai-models.md](ai-models.md)
 
 | Font | Licence | Ships | Obligations |
 | --- | --- | --- | --- |
-| Material Symbols Rounded | Apache-2.0 | Yes | Notice |
+| Material Symbols Rounded (from material_symbols_icons 4.2960.0's archive, `tools/fetch_icon_font.py`; tree-shaken to the used glyphs) | Apache-2.0 | Yes | Notice |
 | Caveat, Dancing Script, Homemade Apple (signature styles) | SIL OFL 1.1 (re-confirm per family when added) | Yes | OFL text in the licence screen; never sell the fonts on their own |
 
 ## Excluded (the scan fails on these names)
