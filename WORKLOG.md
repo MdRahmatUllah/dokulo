@@ -58,3 +58,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:58 · agent-1 DK-0680 · done (#191)
 - 2026-10-07 21:59 · agent-1 DK-0678 · done (#220)
 - 2026-10-07 22:01 · agent-2 DK-0001 · done (#228)
+- 2026-10-07 22:01 · agent-2 DK-0014 · claimed: Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done
