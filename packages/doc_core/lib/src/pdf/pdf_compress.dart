@@ -9,31 +9,32 @@ import 'package:pdfium_dart/pdfium_dart.dart' as fpdf;
 import 'package:pdfrx_engine/pdfrx_engine.dart';
 import 'package:qpdf_ffi/qpdf_ffi.dart';
 
+import 'compress/raster_fallback.dart';
+import 'compress/size_target.dart';
 import 'pdf_engine.dart';
 import 'qpdf_service.dart';
 
-/// Compress PDF's three levels (T2 options): image resolution and JPEG
-/// quality.
-enum CompressLevel {
-  low(dpi: 200, quality: 85),
-  recommended(dpi: 150, quality: 70),
-  strong(dpi: 72, quality: 50);
+/// Compress PDF's three presets (T2 options).
+enum CompressPreset {
+  low((quality: 85, dpi: 200)),
+  recommended((quality: 70, dpi: 150)),
+  strong((quality: 50, dpi: 72));
 
-  const CompressLevel({required this.dpi, required this.quality});
+  const CompressPreset(this.level);
 
-  final int dpi;
-  final int quality;
+  /// Its JPEG quality and image resolution.
+  final CompressLevel level;
 }
 
 class CompressOptions {
   const CompressOptions({
-    this.level = CompressLevel.recommended,
+    this.preset = CompressPreset.recommended,
     this.greyscale = false,
     this.removeMetadata = false,
     this.targetBytes,
   });
 
-  final CompressLevel level;
+  final CompressPreset preset;
 
   /// Images in shades of grey (text and drawings keep their colour).
   final bool greyscale;
@@ -41,8 +42,8 @@ class CompressOptions {
   /// Drops the document info (title, author, producer) and the XMP metadata.
   final bool removeMetadata;
 
-  /// "Under X MB": the best quality that fits, lowering the resolution
-  /// below [level]'s only if it has to.
+  /// "Under X MB": the best quality that fits, at a resolution no sharper
+  /// than [preset]'s ([searchSizeTarget]).
   final int? targetBytes;
 }
 
@@ -51,18 +52,19 @@ class CompressResult {
     required this.bytesBefore,
     required this.bytesAfter,
     required this.imagesRecompressed,
-    required this.dpi,
-    required this.quality,
+    required this.level,
     required this.targetMet,
   });
 
   final int bytesBefore;
   final int bytesAfter;
+
+  /// Images re-encoded in place; pages rasterised by the fallback aren't
+  /// counted.
   final int imagesRecompressed;
 
-  /// The resolution and quality the output was made with.
-  final int dpi;
-  final int quality;
+  /// The quality and resolution the output was made with.
+  final CompressLevel level;
 
   /// False only when [CompressOptions.targetBytes] couldn't be reached: the
   /// output is then the smallest Dokulo can make.
@@ -70,10 +72,10 @@ class CompressResult {
 }
 
 /// Compress PDF's pipeline (DK-0392): every image above the target
-/// resolution is downsampled and re-encoded as JPEG in its own image object,
-/// so the page looks the same; then qpdf compresses the structure. Scan pages
-/// whose images can't be decoded directly are rendered instead (raster
-/// fallback).
+/// resolution is resized and re-encoded as JPEG in its own image object, so
+/// the page looks the same; scan pages whose images can't be re-encoded that
+/// way are rendered whole ([RasterFallback], their OCR text kept); then qpdf
+/// compresses the structure. A size target goes through [searchSizeTarget].
 ///
 /// Call it from a `Lane.pdfium` job: PDFium runs on pdfrx's worker, the
 /// image work and qpdf on the [pool]'s workers, never on the calling
@@ -82,10 +84,6 @@ class PdfCompress {
   PdfCompress(this.pool);
 
   final IsolatePool pool;
-
-  /// The lowest resolutions tried for a size target, after the level's own.
-  static const _fallbackDpis = [120, 96, 72];
-  static const _minQuality = 40, _maxQuality = 85;
 
   Future<CompressResult> compress(
     String input,
@@ -101,53 +99,41 @@ class PdfCompress {
       'dk_compress_',
     );
     try {
+      Future<_Pass> pass(CompressLevel level) => _pass(
+        input,
+        '${work.path}/out_${level.dpi}_${level.quality}.pdf',
+        options,
+        level,
+        password,
+        work,
+        onPage,
+        isCancelled,
+      );
       final target = options.targetBytes;
       if (target == null) {
-        final pass = await _pass(
-          input,
-          '${work.path}/out.pdf',
-          options,
-          options.level.dpi,
-          options.level.quality,
-          password,
-          onPage,
-          isCancelled,
-        );
-        return await _finish(pass, before, output, targetMet: true);
+        final made = await pass(options.preset.level);
+        return await _finish(made, before, output, targetMet: true);
       }
-      // ponytail: each probe is a full pass; sample a few pages first if the
-      // device timings show it's slow.
-      _Pass? best, smallest;
-      for (final dpi in [
-        options.level.dpi,
-        ..._fallbackDpis.where((d) => d < options.level.dpi),
-      ]) {
-        var lo = _minQuality, hi = _maxQuality;
-        while (lo <= hi) {
-          final quality = (lo + hi) ~/ 2;
-          final pass = await _pass(
-            input,
-            '${work.path}/probe_${dpi}_$quality.pdf',
-            options,
-            dpi,
-            quality,
-            password,
-            onPage,
-            isCancelled,
-          );
-          if (smallest == null || pass.bytes < smallest.bytes) smallest = pass;
-          if (pass.bytes <= target) {
-            if (best == null || quality > best.quality) best = pass;
-            lo = quality + 1;
-          } else {
-            hi = quality - 1;
-          }
-        }
-        if (best != null) {
-          return await _finish(best, before, output, targetMet: true);
-        }
-      }
-      return await _finish(smallest!, before, output, targetMet: false);
+      // ponytail: each try is a full pass; sample a few pages first if the
+      // device timings (DK-1063) show it's slow.
+      final passes = <CompressLevel, _Pass>{};
+      final search = await searchSizeTarget(
+        targetBytes: target,
+        tryLevel: (level) async {
+          final made = passes[level] = await pass(level);
+          return (path: made.path, bytes: made.bytes);
+        },
+        dpis: [
+          for (final dpi in const [200, 150, 100, 72])
+            if (dpi <= options.preset.level.dpi) dpi,
+        ],
+      );
+      return await _finish(
+        passes[search.level]!,
+        before,
+        output,
+        targetMet: search.fits,
+      );
     } finally {
       await work.delete(recursive: true);
     }
@@ -173,20 +159,20 @@ class PdfCompress {
       bytesBefore: before,
       bytesAfter: pass.bytes,
       imagesRecompressed: pass.images,
-      dpi: pass.dpi,
-      quality: pass.quality,
+      level: pass.level,
       targetMet: targetMet,
     );
   }
 
-  /// One pass at [dpi] and [quality]: images, then qpdf's structure pass.
+  /// One pass at [level]: images in place, the raster fallback, then qpdf's
+  /// structure pass.
   Future<_Pass> _pass(
     String input,
     String output,
     CompressOptions options,
-    int dpi,
-    int quality,
+    CompressLevel level,
     String? password,
+    Directory work,
     void Function(int, int)? onPage,
     bool Function()? isCancelled,
   ) async {
@@ -195,20 +181,22 @@ class PdfCompress {
       () => compute(_openOnWorker, (input, password)),
     );
     var images = 0;
-    final imaged = '$output.images.pdf';
+    final rasterise = <int>[];
+    var imaged = '$output.images.pdf';
     try {
       for (var page = 0; page < pages; page++) {
         if (isCancelled?.call() ?? false) {
           throw const DocError(DocErrorKind.cancelled);
         }
-        final raws = await _call(
-          () => compute(_extractOnWorker, (handle, page, dpi)),
+        final (raws, scanLeftOver) = await _call(
+          () => compute(_extractOnWorker, (handle, page, level.dpi)),
         );
+        if (scanLeftOver) rasterise.add(page);
         if (raws.isNotEmpty) {
           final jpegs = await _job(
             pool.run(Lane.opencv, _encode, (
               raws,
-              quality,
+              level.quality,
               options.greyscale,
             )).result,
           );
@@ -227,6 +215,26 @@ class PdfCompress {
     } finally {
       await compute(_closeOnWorker, handle);
     }
+    if (rasterise.isNotEmpty) {
+      final rastered = '$output.raster.pdf';
+      await RasterFallback.rasterise(
+        imaged,
+        rastered,
+        rasterise,
+        dpi: level.dpi,
+        quality: level.quality,
+        encodeJpeg: (rgba, width, height, quality) => _job(
+          pool.run(Lane.opencv, _encodeRgba, (
+            rgba,
+            width,
+            height,
+            quality,
+          )).result,
+        ),
+        work: work,
+      );
+      imaged = rastered;
+    }
     await _job(
       pool.run(Lane.qpdf, _structure, (
         imaged,
@@ -234,7 +242,7 @@ class PdfCompress {
         options.removeMetadata,
       )).result,
     );
-    return _Pass(output, await File(output).length(), images, dpi, quality);
+    return _Pass(output, await File(output).length(), images, level);
   }
 
   static Future<T> _call<T>(Future<T> Function() pdfium) async {
@@ -264,10 +272,11 @@ class PdfCompress {
 }
 
 class _Pass {
-  _Pass(this.path, this.bytes, this.images, this.dpi, this.quality);
+  _Pass(this.path, this.bytes, this.images, this.level);
 
   final String path;
-  final int bytes, images, dpi, quality;
+  final int bytes, images;
+  final CompressLevel level;
 }
 
 /// An image object's pixels, as the encoder gets them.
@@ -344,6 +353,21 @@ Uint8List _expandGrey(Uint8List grey) {
   return out;
 }
 
+/// The raster fallback's encoder: RGBA pixels as a JPEG.
+Uint8List _encodeRgba((Uint8List, int, int, int) job, JobContext context) {
+  final (rgba, width, height, quality) = job;
+  return img.encodeJpg(
+    img.Image.fromBytes(
+      width: width,
+      height: height,
+      bytes: rgba.buffer,
+      numChannels: 4,
+      order: img.ChannelOrder.rgba,
+    ),
+    quality: quality,
+  );
+}
+
 /// Compresses the structure; drops the metadata if asked.
 void _structure((String, String, bool) job, JobContext context) {
   final (input, output, removeMetadata) = job;
@@ -414,19 +438,25 @@ T _withPage<T>(
   }
 }
 
-/// The page's images worth recompressing, with their pixels at [dpi] at most.
-List<_Raw> _extractOnWorker((int, int, int) message) {
+/// The page's images worth recompressing, with their pixels at [dpi] at most,
+/// and whether the page is a scan with an image left over that only the raster
+/// fallback can shrink.
+(List<_Raw>, bool) _extractOnWorker((int, int, int) message) {
   final (handle, pageIndex, dpi) = message;
   return _withPage(handle, pageIndex, (pdfium, doc, page) {
     final found = <_Raw>[];
     final count = pdfium.FPDFPage_CountObjects(page);
+    // Visible text: an OCR layer (render mode 3, invisible) doesn't count.
     var hasText = false;
     for (var i = 0; i < count; i++) {
-      if (pdfium.FPDFPageObj_GetType(pdfium.FPDFPage_GetObject(page, i)) ==
-          fpdf.FPDF_PAGEOBJ_TEXT) {
+      final obj = pdfium.FPDFPage_GetObject(page, i);
+      if (pdfium.FPDFPageObj_GetType(obj) == fpdf.FPDF_PAGEOBJ_TEXT &&
+          pdfium.FPDFTextObj_GetTextRenderMode(obj) !=
+              fpdf.FPDF_TEXT_RENDERMODE.FPDF_TEXTRENDERMODE_INVISIBLE) {
         hasText = true;
       }
     }
+    var leftOver = false;
     final pageArea =
         pdfium.FPDF_GetPageWidthF(page) * pdfium.FPDF_GetPageHeightF(page);
     using((arena) {
@@ -460,22 +490,19 @@ List<_Raw> _extractOnWorker((int, int, int) message) {
         if (format == fpdf.FPDFBitmap_BGRA ||
             format == fpdf.FPDFBitmap_BGRA_Premul ||
             format == 0) {
-          // Transparency or an undecodable image: keep it, unless the page is
-          // a scan (no text, the image covers it): then render it (raster
-          // fallback).
+          // Transparency or an undecodable image: kept here; on a scan page
+          // (no visible text, the image covers it) the raster fallback
+          // renders the whole page instead.
           if (bitmap != nullptr) pdfium.FPDFBitmap_Destroy(bitmap);
-          bitmap = nullptr;
           final covers = widthPt * (t.value - b.value) >= 0.9 * pageArea;
-          if (hasText || !covers) continue;
-          bitmap = pdfium.FPDFImageObj_GetRenderedBitmap(doc, page, obj);
-          if (bitmap == nullptr) continue;
-          format = pdfium.FPDFBitmap_GetFormat(bitmap);
+          if (!hasText && covers) leftOver = true;
+          continue;
         }
         try {
           final channels = switch (format) {
             fpdf.FPDFBitmap_Gray => 1,
             fpdf.FPDFBitmap_BGR => 3,
-            _ => 4, // BGRx, or BGRA from the rendered fallback (opaque: a scan)
+            _ => 4, // BGRx
           };
           final w = pdfium.FPDFBitmap_GetWidth(bitmap),
               h = pdfium.FPDFBitmap_GetHeight(bitmap);
@@ -501,7 +528,7 @@ List<_Raw> _extractOnWorker((int, int, int) message) {
         }
       }
     });
-    return found;
+    return (found, leftOver);
   });
 }
 

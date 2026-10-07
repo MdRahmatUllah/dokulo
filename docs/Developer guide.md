@@ -71,12 +71,15 @@ Rules:
     `compressStructure`, `linearize`, `overlay`, `extract` and `check` cover
     the tools.
   - **Compress PDF** (DK-0392): `PdfCompress(pool).compress(input, output,
-    CompressOptions(level:, greyscale:, removeMetadata:, targetBytes:))`, from
-    a `Lane.pdfium` job. Images above the level's resolution are resized and
+    CompressOptions(preset:, greyscale:, removeMetadata:, targetBytes:))`, from
+    a `Lane.pdfium` job. Images above the preset's resolution are resized and
     re-encoded (Dart `image`, on a pool worker) into their own image objects;
-    images already below it, transparent ones and 1-bit ones stay as they
-    are; qpdf then compresses the structure. `targetBytes` searches quality
-    85…40, then lower resolutions, and says when it can't get there.
+    images already below it, transparent ones and 1-bit ones stay as they are;
+    scan pages with an image that can't be re-encoded go through
+    `RasterFallback` (rendered whole, OCR text kept). qpdf then compresses the
+    structure, and drops the Info and XMP metadata if asked. `targetBytes` runs
+    `searchSizeTarget` (quality 85…40 per resolution, sharpest first) and says
+    when it can't get there.
 - **A tool is a `ToolJob`** (`doc_tools`, DK-0008): a const class with an `id`
   (as in `/tool/:toolId`), a `Lane`, `encode`/`decode` of its input as JSON,
   `chain` (its input from the previous step's output, for workflows) and

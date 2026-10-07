@@ -51,13 +51,13 @@ void main() {
     final result = await compressor.compress(
       scan,
       outFile('a.pdf'),
-      const CompressOptions(level: CompressLevel.strong),
+      const CompressOptions(preset: CompressPreset.strong),
       onPage: (done, total) => pages.add(done),
     );
     expect(result.imagesRecompressed, 6, reason: 'one scanned image per page');
     expect(result.bytesAfter, lessThan(result.bytesBefore));
     expect(result.bytesAfter, File(outFile('a.pdf')).lengthSync());
-    expect((result.dpi, result.quality), (72, 50));
+    expect(result.level, (quality: 50, dpi: 72));
     expect((await PdfEngine.inspect(outFile('a.pdf'))).pageCount, 6);
     expect(pages, [1, 2, 3, 4, 5, 6], reason: 'progress per page');
     expect(
@@ -83,12 +83,12 @@ void main() {
     final low = await compressor.compress(
       scan,
       outFile('low.pdf'),
-      const CompressOptions(level: CompressLevel.low),
+      const CompressOptions(preset: CompressPreset.low),
     );
     final strong = await compressor.compress(
       scan,
       outFile('strong.pdf'),
-      const CompressOptions(level: CompressLevel.strong),
+      const CompressOptions(preset: CompressPreset.strong),
     );
     expect(strong.bytesAfter, lessThan(low.bytesAfter));
   });
@@ -136,18 +136,18 @@ void main() {
     final low = await compressor.compress(
       scan,
       outFile('l.pdf'),
-      const CompressOptions(level: CompressLevel.low),
+      const CompressOptions(preset: CompressPreset.low),
     );
     final strong = await compressor.compress(
       scan,
       outFile('s.pdf'),
-      const CompressOptions(level: CompressLevel.strong),
+      const CompressOptions(preset: CompressPreset.strong),
     );
     final target = (low.bytesAfter + strong.bytesAfter) ~/ 2;
     final result = await compressor.compress(
       scan,
       outFile('t.pdf'),
-      CompressOptions(level: CompressLevel.low, targetBytes: target),
+      CompressOptions(preset: CompressPreset.low, targetBytes: target),
     );
     expect(result.targetMet, isTrue);
     expect(result.bytesAfter, lessThanOrEqualTo(target));
@@ -161,7 +161,7 @@ void main() {
       const CompressOptions(targetBytes: 1000),
     );
     expect(result.targetMet, isFalse);
-    expect((result.dpi, result.quality), (72, 40));
+    expect(result.level, (quality: 40, dpi: 72));
     expect(File(outFile('tiny.pdf')).existsSync(), isTrue);
   });
 

@@ -6,7 +6,6 @@ export 'src/files/file_store.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/compress/raster_fallback.dart';
 export 'src/pdf/compress/size_target.dart';
-export 'src/pdf/compress/strip_metadata.dart';
 export 'src/pdf/ocr_text_layer.dart';
 export 'src/pdf/pdf_compress.dart';
 export 'src/pdf/pdf_structure.dart';
