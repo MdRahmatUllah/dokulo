@@ -1,0 +1,106 @@
+%PDF-1.3
+%‚„œ”
+1 0 obj
+<<
+/PageMode /UseNone
+/Pages 2 0 R
+/Type /Catalog
+/AcroForm <<
+/Fields [ ]
+/XFA 8 0 R
+>>
+/NeedsRendering true
+>>
+endobj
+2 0 obj
+<<
+/Count 1
+/Kids [ 3 0 R ]
+/Type /Pages
+>>
+endobj
+3 0 obj
+<<
+/Contents 4 0 R
+/MediaBox [ 0 0 595.2756 841.8898 ]
+/Parent 2 0 R
+/Resources <<
+/Font 5 0 R
+/ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>>
+/Rotate 0
+/Trans <<
+>>
+/Type /Page
+>>
+endobj
+4 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ]
+/Length 259
+>>
+stream
+GasI`4`A1k&Dd-sD[[A$F(ko]+Gs-TTnA+1/697p6Yn!m2"]Za[4&8deOc[fqmnjUhA<"p4(,5]\0OlOh1/*t6Efm[#<t0or(.V^S1YD;>YV8V8kd6iRZ@!rlB&]fCkU1R)jO;gkT0<5YKi<6cG*o/h#b9tJk`1>NdX;[)iqJi$r&]BKpN#6>7gV#8D/aCO*ZcT@CbFYIi$N"U9$90LPUqT6Yelh>6O8.&b`+\Uj.HMP"<V;k+1,AqnFl\!h,iiqu~>
+endstream
+endobj
+5 0 obj
+<<
+/F1 6 0 R
+>>
+endobj
+6 0 obj
+<<
+/BaseFont /Helvetica
+/Encoding /WinAnsiEncoding
+/Name /F1
+/Subtype /Type1
+/Type /Font
+>>
+endobj
+7 0 obj
+<<
+/Author (Dokulo\040samples\040\050fictional\051)
+/CreationDate (D\07220000101000000\05300\04700\047)
+/Creator (Dokulo\040tools\057make\137fixtures\056py)
+/Keywords ()
+/ModDate (D\07220000101000000\05300\04700\047)
+/Producer (ReportLab\040PDF\040Library\040\055\040www\056reportlab\056com)
+/Subject (unspecified)
+/Title (XFA\040form\040\050sample\051)
+/Trapped /False
+>>
+endobj
+8 0 obj
+<<
+/Length 264
+>>
+stream
+<?xml version="1.0" encoding="UTF-8"?>
+<xdp:xdp xmlns:xdp="http://ns.adobe.com/xdp/">
+<template xmlns="http://www.xfa.org/schema/xfa-template/3.3/">
+<subform name="form1" layout="tb"><field name="Name"><ui><textEdit/></ui></field></subform>
+</template>
+</xdp:xdp>
+
+endstream
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000015 00000 n 
+0000000143 00000 n 
+0000000202 00000 n 
+0000000401 00000 n 
+0000000751 00000 n 
+0000000782 00000 n 
+0000000889 00000 n 
+0000001277 00000 n 
+trailer
+<<
+/Size 9
+/Root 1 0 R
+/Info 7 0 R
+>>
+startxref
+1592
+%%EOF

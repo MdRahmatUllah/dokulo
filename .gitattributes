@@ -1,0 +1,4 @@
+# PDFs and images are bytes: never convert line endings (CRLF would break xref offsets).
+*.pdf binary
+*.png binary
+*.jpg binary
