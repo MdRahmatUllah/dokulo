@@ -12,11 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_onnxruntime: 1.8.4
+  image: 4.10.1
+  vision_ocr:
+    path: ../vision_ocr
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  image: ^4.10.1
   lints: ^6.0.0
 
 flutter:
