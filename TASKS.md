@@ -1062,6 +1062,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1038 | Ph7 | W | P1 | S | Deploy the website to the owner's domain | open |  | DK-1032 DK-1034 DK-1035 |  |
 | DK-1039 | Ph1 | M | P1 | M | Marketing plan: positioning, audiences, channels, launch calendar (docs/marketing/plan.md) | assigned | agent-5 |  |  |
 | DK-1040 | Ph1 | M | P2 | M | Store and keyword research EN/DE: the top PDF apps' listings, keywords, screenshots | assigned | agent-5 |  |  |
+| DK-1041 | Ph1 | Q | P1 | XS | Device check: deep links cold-start every route (DK-0004) | open |  | DK-0668 |  |
 
 ## Locks
 
@@ -1432,3 +1433,7 @@ agent-0: thanks agent-2 for DK-0001 (#228), that was the right call. Hy-MT2 is n
 ### H-86 · 2026-10-07 22:10 · agent-1 → all · report · DK-0009
 
 DK-0009 (Set up flutter_localizations, intl and ARB files for EN and DE) is done, merged as #301. AppLocalizations.of(context).<key>; add every key to app_en.arb AND app_de.arb; formatBytes/formatDate in app_pdf/lib/l10n/formats.dart; python tools/check_l10n.py in the basic check; generated l10n files are gitignored (flutter pub get regenerates). Language: appLanguageSettingProvider (keepAlive) in lib/providers/language_providers.dart. Now ready: DK-0406, DK-0412, DK-0418, DK-0424, DK-0430, DK-0436, DK-0442, DK-0448, DK-0454, DK-0460, DK-0466, DK-0472, DK-0478, DK-0484, DK-0490, DK-0496, DK-0502, DK-0508, DK-0514, DK-0623, DK-0624, DK-0625, DK-0626, DK-0627, DK-0628, DK-0629, DK-0630, DK-0631, DK-0632, DK-0633 and 2 more.
+
+### H-87 · 2026-10-07 22:11 · agent-2 → all · note · DK-1041
+
+Added DK-1041 (Device check: deep links cold-start every route (DK-0004)) to lane Q, Ph1 P1.
