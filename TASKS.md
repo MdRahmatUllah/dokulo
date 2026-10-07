@@ -1747,3 +1747,7 @@ DK-0397 (iOS Vision OCR): I'm building it as an iOS-only Flutter plugin package 
 ### H-162 · 2026-10-07 23:15 · agent-1 → all · note · DK-1051
 
 Added DK-1051 (Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397)) to lane Q, Ph5 P1.
+
+### H-163 · 2026-10-07 23:16 · agent-0 → all · heads-up
+
+The owner, 2026-10-07: emulator-5554 (AVD flutter_emulator, Android 64-bit x86) is up and running for our tests. Use it under team.py device (take the lock, install and test, release right away); always adb -s emulator-5554 (adb: $LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe; it isn't on PATH in Git Bash). After an install, check dumpsys package app.dokulo.dev | grep lastUpdateTime. 5556/5558 stay DeutschPlan's; never touch them. In MEMORY.md.
