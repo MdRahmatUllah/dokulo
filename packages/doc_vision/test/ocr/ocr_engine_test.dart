@@ -98,8 +98,7 @@ void main() {
           ),
         ),
       );
-      // ignore: avoid_print
-      print(
+      printOnFailure(
         'sharpness: sharp ${sharpness(sharp)}, blurred ${sharpness(blurred)}',
       );
       expect(sharpness(sharp), greaterThan(blurLimit));
@@ -162,7 +161,7 @@ void main() {
 
     // The measured rates (docs/compliance/ai-models.md, PP-OCRv5); a change
     // that makes them worse fails here.
-    for (final (page, limit) in [('letter-de', 0.015), ('receipt-en', 0.01)]) {
+    for (final (page, limit) in [('letter-de', 0.01), ('receipt-en', 0.01)]) {
       test('$page: CER at most $limit, page quality ok', () async {
         if (runner == null) {
           markTestSkipped(
@@ -175,8 +174,7 @@ void main() {
         final truth = File('$fixtures/$page.txt').readAsLinesSync().join(' ');
         final cer = characterErrorRate(truth, result.text);
         printOnFailure('CER $cer\n${result.text}');
-        // ignore: avoid_print
-        print(
+        printOnFailure(
           '$page: CER ${(cer * 100).toStringAsFixed(2)} %, mean confidence ${result.meanConfidence.toStringAsFixed(3)}',
         );
         expect(cer, lessThanOrEqualTo(limit));

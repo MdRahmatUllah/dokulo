@@ -124,12 +124,12 @@ void main() {
           'service@example.com.',
           'Zahlungen bitte auf IBAN DE00 0000 0000 0000 0000 00.',
           'Seite 1 von 2',
+          'Herrn Max Mustermann',
+          'Musterstraße 12',
+          '80331 München',
+          'Mit freundlichen Grüßen',
         ]),
       );
-      // At this scan's 110 dpi "Herrn" reads as "Herrm" (rn/m); the name is
-      // right. ß and ü are not checked: the fixture renders them as boxes
-      // (DK-1050).
-      expect(texts.any((t) => t.endsWith('Max Mustermann')), isTrue);
       expect(
         texts.indexOf('Stadtwerke Musterstadt'),
         lessThan(texts.indexOf('Jahresabrechnung Strom 2025')),
