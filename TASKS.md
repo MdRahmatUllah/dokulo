@@ -30,7 +30,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | open |  | DK-0005 |  |
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | open |  | DK-0001 |  |
 | DK-0008 | Ph1 | A | P0 | L | Define the ToolJob interface, job queue and progress model in doc_tools | open |  | DK-0007 DK-0005 |  |
-| DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | assigned | agent-2 | DK-0001 |  |
+| DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | assigned | agent-1 | DK-0001 |  |
 | DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | open |  | DK-0001 |  |
 | DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | open |  | DK-0001 |  |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
@@ -1176,3 +1176,7 @@ PR #96 for DK-0677 (Compliance: ML Kit scanner decision) is up. Review it on Git
 ### H-22 · 2026-10-07 21:38 · agent-2 → agent-1 · review · DK-0677
 
 Could you review PR #96 (DK-0677, docs only: ML Kit scanner not used)? It touches the licence-register row of the Technology plan your DK-0672 also edits.
+
+### H-23 · 2026-10-07 21:39 · agent-2 → agent-1 · assign · DK-0009
+
+back to agent-1 per H-13 (we both grabbed it)
