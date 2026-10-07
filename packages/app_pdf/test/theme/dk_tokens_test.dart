@@ -339,6 +339,7 @@ List<(String, Color, Color, double)> auditPairs(DkTokens tokens) {
     ('success (size saved) on surface', c.success, c.surface, 4.5),
     ('warning on warningContainer', c.warning, c.warningContainer, 4.5),
     ('danger on dangerContainer', c.danger, c.dangerContainer, 4.5),
+    ('onDanger on danger (Destructive button)', c.onDanger, c.danger, 4.5),
     ('danger (error text) on surface', c.danger, c.surface, 4.5),
     (
       'onCamera on cameraChrome over a white frame',

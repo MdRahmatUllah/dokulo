@@ -40,6 +40,7 @@ Dividers (`outline`) are decorative and exempt.
 | success (size saved) on surface | 4.5:1 | 5.37:1 (#117A4B on #FFFFFF) | 9.26:1 (#5DD39E on #181B21) |
 | warning on warningContainer | 4.5:1 | 4.89:1 (#B54708 on #FFF1E0) | 7.92:1 (#FDB022 on #3A2410) |
 | danger on dangerContainer | 4.5:1 | 4.86:1 (#C8281E on #FDECEA) | 6.34:1 (#FF7A70 on #3A1614) |
+| onDanger on danger (Destructive button) | 4.5:1 | 5.56:1 (#FFFFFF on #C8281E) | 7.07:1 (#14171C on #FF7A70) |
 | danger (error text) on surface | 4.5:1 | 5.56:1 (#C8281E on #FFFFFF) | 6.79:1 (#FF7A70 on #181B21) |
 | onCamera on cameraChrome over a white frame | 4.5:1 | 5.74:1 (#FFFFFF on #666666) | 5.74:1 (#FFFFFF on #666666) |
 | onInverseSurface on inverseSurface (toast) | 4.5:1 | 17.96:1 (#FFFFFF on #14171C) | 15.87:1 (#14171C on #EEF1F6) |

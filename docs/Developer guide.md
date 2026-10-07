@@ -191,6 +191,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/tool/:toolId/result` | T3 Result | full screen | |
 | `/viewer/:fileId` | V1 Viewer | full screen | `?mode=edit` opens V2 Edit mode |
 | `/organize/:fileId` | P1 Organize pages | full screen | |
+| `/dev/catalogue` | Component catalogue | full screen | Debug builds only: every component, variant and state, Light or Dark |
 
 - **Full-screen routes** sit on the root navigator, above the shell: the tab
   bar is hidden, and back returns to the tab they were pushed from. That covers

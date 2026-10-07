@@ -149,6 +149,7 @@ class DkColors {
     required this.warning,
     required this.warningContainer,
     required this.danger,
+    required this.onDanger,
     required this.dangerContainer,
     required this.scrim,
     required this.cameraChrome,
@@ -189,6 +190,7 @@ class DkColors {
     warning: Color(0xFFB54708),
     warningContainer: Color(0xFFFFF1E0),
     danger: Color(0xFFC8281E),
+    onDanger: Color(0xFFFFFFFF),
     dangerContainer: Color(0xFFFDECEA),
     scrim: Color(0x6614171C),
     cameraChrome: Color(0x99000000),
@@ -227,6 +229,7 @@ class DkColors {
     warning: Color(0xFFFDB022),
     warningContainer: Color(0xFF3A2410),
     danger: Color(0xFFFF7A70),
+    onDanger: Color(0xFF14171C),
     dangerContainer: Color(0xFF3A1614),
     scrim: Color(0x8C000000),
     cameraChrome: Color(0x99000000),
@@ -317,6 +320,10 @@ class DkColors {
   /// Delete, destructive buttons, error text.
   final Color danger;
 
+  /// Text and icons on a [danger] fill (the Destructive button). Dark in
+  /// Dark, like [onPrimary]: white on the light red would be 2.5:1.
+  final Color onDanger;
+
   /// Error banners, the destructive confirm's icon background.
   final Color dangerContainer;
 
@@ -380,6 +387,7 @@ class DkColors {
       warning: c(warning, o.warning),
       warningContainer: c(warningContainer, o.warningContainer),
       danger: c(danger, o.danger),
+      onDanger: c(onDanger, o.onDanger),
       dangerContainer: c(dangerContainer, o.dangerContainer),
       scrim: c(scrim, o.scrim),
       cameraChrome: c(cameraChrome, o.cameraChrome),
