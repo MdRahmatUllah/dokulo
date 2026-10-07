@@ -457,3 +457,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:30 · agent-0 DK-1061 · assigned to agent-0 (M01-M03 goal)
 - 2026-10-08 00:31 · agent-0 · Owner's goal: finish M01-M03. Assigned all 244 open tasks (agent-1 87, agent-2 72, agent-0 85); PLAN.md updated; labelling the issues agent-N.
 - 2026-10-08 00:32 · agent-1 DK-0025 · assigned to agent-1
+- 2026-10-08 00:32 · agent-1 DK-0026 · assigned to agent-1
