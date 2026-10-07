@@ -240,6 +240,14 @@ numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
 raw colour in `lib/screens` or `lib/components`. A value that isn't a token
 is a gap: add the token first.
 
+**Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
+/ standard / emphasis)`, never raw durations: it returns the spec's duration
+and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
+cross-fade (`crossFade: true`: fade instead of moving, scaling or sliding).
+Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
+context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
+`captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
+
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
 EN/DE names in `Overview & foundations.md`. German uses "du".

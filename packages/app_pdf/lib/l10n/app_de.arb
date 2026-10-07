@@ -59,5 +59,12 @@
   "shell_tab_tools": "Werkzeuge",
   "shell_tab_files": "Dateien",
   "shell_tab_me": "Ich",
-  "shell_button_scan": "Scannen"
+  "shell_button_scan": "Scannen",
+  "markup_yellow": "Gelb",
+  "markup_green": "Grün",
+  "markup_blue": "Blau",
+  "markup_pink": "Pink",
+  "markup_red": "Rot",
+  "markup_black": "Schwarz",
+  "markup_ink": "Blaue Tinte"
 }

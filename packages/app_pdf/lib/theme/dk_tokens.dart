@@ -21,6 +21,8 @@ class DkTokens extends ThemeExtension<DkTokens> {
   const DkTokens({
     required this.brightness,
     required this.color,
+    required this.markup,
+    required this.compare,
     required this.text,
     required this.space,
     required this.radius,
@@ -31,6 +33,8 @@ class DkTokens extends ThemeExtension<DkTokens> {
   static final light = DkTokens(
     brightness: Brightness.light,
     color: DkColors.light,
+    markup: const DkMarkup(),
+    compare: DkCompare.light,
     text: DkType.of(DkColors.light.textPrimary),
     space: const DkSpace(),
     radius: const DkRadius(),
@@ -41,6 +45,8 @@ class DkTokens extends ThemeExtension<DkTokens> {
   static final dark = DkTokens(
     brightness: Brightness.dark,
     color: DkColors.dark,
+    markup: const DkMarkup(),
+    compare: DkCompare.dark,
     text: DkType.of(DkColors.dark.textPrimary),
     space: const DkSpace(),
     radius: const DkRadius(),
@@ -50,6 +56,8 @@ class DkTokens extends ThemeExtension<DkTokens> {
 
   final Brightness brightness;
   final DkColors color;
+  final DkMarkup markup;
+  final DkCompare compare;
 
   /// Text styles. (Not `type`: ThemeExtension.type is the key Theme looks it up by.)
   final DkType text;
@@ -62,6 +70,8 @@ class DkTokens extends ThemeExtension<DkTokens> {
   DkTokens copyWith({
     Brightness? brightness,
     DkColors? color,
+    DkMarkup? markup,
+    DkCompare? compare,
     DkType? text,
     DkSpace? space,
     DkRadius? radius,
@@ -70,6 +80,8 @@ class DkTokens extends ThemeExtension<DkTokens> {
   }) => DkTokens(
     brightness: brightness ?? this.brightness,
     color: color ?? this.color,
+    markup: markup ?? this.markup,
+    compare: compare ?? this.compare,
     text: text ?? this.text,
     space: space ?? this.space,
     radius: radius ?? this.radius,
@@ -85,6 +97,8 @@ class DkTokens extends ThemeExtension<DkTokens> {
     return DkTokens(
       brightness: t < 0.5 ? brightness : other.brightness,
       color: color.lerp(other.color, t),
+      markup: markup,
+      compare: compare.lerp(other.compare, t),
       text: text.lerp(other.text, t),
       space: space,
       radius: radius,
@@ -99,9 +113,8 @@ extension DkTokensContext on BuildContext {
   DkTokens get tokens => Theme.of(this).extension<DkTokens>()!;
 }
 
-/// Colours (UI spec §4.1). This batch carries the primary family, surfaces
-/// and background, outlines, and text and icons (DK-0025–DK-0028); the status,
-/// camera, document, markup and compare families follow (DK-0029–DK-0034).
+/// Colours (UI spec §4.1): every token has a Light and a Dark value; the
+/// markup and compare colours are their own groups ([DkMarkup], [DkCompare]).
 @immutable
 class DkColors {
   const DkColors({
@@ -122,6 +135,21 @@ class DkColors {
     required this.textDisabled,
     required this.iconPrimary,
     required this.iconSecondary,
+    required this.pro,
+    required this.proContainer,
+    required this.success,
+    required this.successContainer,
+    required this.warning,
+    required this.warningContainer,
+    required this.danger,
+    required this.dangerContainer,
+    required this.scrim,
+    required this.cameraChrome,
+    required this.onCamera,
+    required this.quadFill,
+    required this.quadStroke,
+    required this.pageWhite,
+    required this.redactBox,
   });
 
   // ponytail: the raw values live here and only here; tools/check_tokens.py
@@ -138,12 +166,27 @@ class DkColors {
     surfaceRaised: Color(0xFFFFFFFF),
     surfaceSunken: Color(0xFFEEF1F5),
     outline: Color(0xFFD9DEE6),
-    outlineStrong: Color(0xFFB8C0CC),
+    outlineStrong: Color(0xFF828C9B),
     textPrimary: Color(0xFF14171C),
     textSecondary: Color(0xFF5A6270),
     textDisabled: Color(0xFF9AA1AD),
     iconPrimary: Color(0xFF2E3440),
     iconSecondary: Color(0xFF6B7380),
+    pro: Color(0xFF8A5A0B),
+    proContainer: Color(0xFFFFF4DD),
+    success: Color(0xFF117A4B),
+    successContainer: Color(0xFFE3F5EC),
+    warning: Color(0xFFB54708),
+    warningContainer: Color(0xFFFFF1E0),
+    danger: Color(0xFFC8281E),
+    dangerContainer: Color(0xFFFDECEA),
+    scrim: Color(0x6614171C),
+    cameraChrome: Color(0x99000000),
+    onCamera: Color(0xFFFFFFFF),
+    quadFill: Color(0x332251E6),
+    quadStroke: Color(0xFF2251E6),
+    pageWhite: Color(0xFFFFFFFF),
+    redactBox: Color(0xFF000000),
   );
 
   static const dark = DkColors(
@@ -158,31 +201,131 @@ class DkColors {
     surfaceRaised: Color(0xFF1F232A),
     surfaceSunken: Color(0xFF12151A),
     outline: Color(0xFF2C313A),
-    outlineStrong: Color(0xFF444B57),
+    outlineStrong: Color(0xFF666E7B),
     textPrimary: Color(0xFFEEF1F6),
     textSecondary: Color(0xFFA6AEBB),
     textDisabled: Color(0xFF5F6672),
     iconPrimary: Color(0xFFDDE2EA),
     iconSecondary: Color(0xFF9099A6),
+    pro: Color(0xFFF2C266),
+    proContainer: Color(0xFF3A2C10),
+    success: Color(0xFF5DD39E),
+    successContainer: Color(0xFF12301F),
+    warning: Color(0xFFFDB022),
+    warningContainer: Color(0xFF3A2410),
+    danger: Color(0xFFFF7A70),
+    dangerContainer: Color(0xFF3A1614),
+    scrim: Color(0x8C000000),
+    cameraChrome: Color(0x99000000),
+    onCamera: Color(0xFFFFFFFF),
+    quadFill: Color(0x338AA8FF),
+    quadStroke: Color(0xFF8AA8FF),
+    pageWhite: Color(0xFFFFFFFF),
+    redactBox: Color(0xFF000000),
   );
 
   // Primary family (DK-0025).
-  final Color primary,
-      onPrimary,
-      primaryPressed,
-      primaryContainer,
-      onPrimaryContainer,
-      focusRing;
+  /// Primary buttons, active tab, links, selection rings, progress.
+  final Color primary;
+
+  /// Text and icons on [primary].
+  final Color onPrimary;
+
+  /// Pressed state of [primary].
+  final Color primaryPressed;
+
+  /// Selected chips, tile icon backgrounds, info banners, page chips.
+  final Color primaryContainer;
+
+  /// Text and icons on [primaryContainer].
+  final Color onPrimaryContainer;
+
+  /// The 2 dp keyboard/switch-access focus ring, 2 dp offset.
+  final Color focusRing;
+
   // Surfaces and background (DK-0026).
-  final Color background, surface, surfaceRaised, surfaceSunken;
+  /// Screen background.
+  final Color background;
+
+  /// Cards, sheets, bars, dialogs.
+  final Color surface;
+
+  /// Sheets and menus above [surface] (dark mode needs the lift).
+  final Color surfaceRaised;
+
+  /// The PDF canvas behind pages, input fields, the search field.
+  final Color surfaceSunken;
+
   // Outlines (DK-0027).
-  final Color outline, outlineStrong;
+  /// Card borders, dividers, thumbnail outlines.
+  final Color outline;
+
+  /// Input borders at rest, the segmented control's border (3:1 on surfaces, WCAG 1.4.11).
+  final Color outlineStrong;
+
   // Text and icons (DK-0028).
-  final Color textPrimary,
-      textSecondary,
-      textDisabled,
-      iconPrimary,
-      iconSecondary;
+  /// Headings and body text.
+  final Color textPrimary;
+
+  /// Meta text, help text, captions.
+  final Color textSecondary;
+
+  /// Disabled labels.
+  final Color textDisabled;
+
+  /// Default icons.
+  final Color iconPrimary;
+
+  /// Secondary icons, chevrons.
+  final Color iconSecondary;
+
+  // Status (DK-0029).
+  /// Pro badge text and icon.
+  final Color pro;
+
+  /// Pro badge background, the Pro card's tint.
+  final Color proContainer;
+
+  /// Success ticks and icons, size-saved numbers.
+  final Color success;
+
+  /// The success result card's tint.
+  final Color successContainer;
+
+  /// Partial success, low memory, storage warnings.
+  final Color warning;
+
+  /// Warning banners.
+  final Color warningContainer;
+
+  /// Delete, destructive buttons, error text.
+  final Color danger;
+
+  /// Error banners, the destructive confirm's icon background.
+  final Color dangerContainer;
+
+  // Overlay and camera (DK-0030).
+  /// Behind sheets and dialogs (#14171C at 40 % / #000000 at 55 %).
+  final Color scrim;
+
+  /// Scanner bars over the camera image (#000000 at 60 %, both themes).
+  final Color cameraChrome;
+
+  /// Text and icons over the camera image.
+  final Color onCamera;
+
+  /// The detected document area in the camera ([quadStroke] at 20 %).
+  final Color quadFill;
+
+  /// The detected document edge, 2 dp.
+  final Color quadStroke;
+
+  // Document (DK-0031).
+  /// PDF page background: pages stay white in dark mode unless the viewer's night mode is on.
+  final Color pageWhite;
+
+  /// Redaction boxes: always pure black, in every theme.
+  final Color redactBox;
 
   DkColors lerp(DkColors o, double t) {
     Color c(Color a, Color b) => Color.lerp(a, b, t)!;
@@ -204,6 +347,98 @@ class DkColors {
       textDisabled: c(textDisabled, o.textDisabled),
       iconPrimary: c(iconPrimary, o.iconPrimary),
       iconSecondary: c(iconSecondary, o.iconSecondary),
+      pro: c(pro, o.pro),
+      proContainer: c(proContainer, o.proContainer),
+      success: c(success, o.success),
+      successContainer: c(successContainer, o.successContainer),
+      warning: c(warning, o.warning),
+      warningContainer: c(warningContainer, o.warningContainer),
+      danger: c(danger, o.danger),
+      dangerContainer: c(dangerContainer, o.dangerContainer),
+      scrim: c(scrim, o.scrim),
+      cameraChrome: c(cameraChrome, o.cameraChrome),
+      onCamera: c(onCamera, o.onCamera),
+      quadFill: c(quadFill, o.quadFill),
+      quadStroke: c(quadStroke, o.quadStroke),
+      pageWhite: c(pageWhite, o.pageWhite),
+      redactBox: c(redactBox, o.redactBox),
+    );
+  }
+}
+
+/// Markup colours (UI spec §4.2; DK-0032): stored inside the PDF, so the same
+/// in both themes. Their user-facing names are ARB strings (`markup_yellow`
+/// … `markup_ink`: Yellow / Gelb, …).
+@immutable
+class DkMarkup {
+  const DkMarkup();
+
+  /// Highlighter: Yellow / Gelb.
+  final yellow = const Color(0xFFFFE066);
+
+  /// Highlighter: Green / Grün.
+  final green = const Color(0xFFA8E6A1);
+
+  /// Highlighter: Blue / Blau.
+  final blue = const Color(0xFFA7D3FF);
+
+  /// Highlighter: Pink / Pink.
+  final pink = const Color(0xFFFFB3D1);
+
+  /// Pen: Red / Rot.
+  final red = const Color(0xFFE5484D);
+
+  /// Pen: Black / Schwarz.
+  final black = const Color(0xFF111111);
+
+  /// Signature: Blue ink / Blaue Tinte.
+  final ink = const Color(0xFF1A2B6D);
+}
+
+/// One Compare PDFs highlight: its background and its text colour. The label
+/// ("Added" / "Hinzugefügt", …) and the icon are always shown with it, so
+/// colour is never the only cue.
+typedef DkHighlight = ({Color background, Color text});
+
+/// Compare colours (UI spec §4.3; DK-0033).
+@immutable
+class DkCompare {
+  const DkCompare({
+    required this.added,
+    required this.removed,
+    required this.changed,
+  });
+
+  static const light = DkCompare(
+    added: (background: Color(0xFFD9F2E2), text: Color(0xFF117A4B)),
+    removed: (background: Color(0xFFFDECEA), text: Color(0xFFC8281E)),
+    changed: (background: Color(0xFFFFF1E0), text: Color(0xFFB54708)),
+  );
+
+  static const dark = DkCompare(
+    added: (background: Color(0xFF12301F), text: Color(0xFF5DD39E)),
+    removed: (background: Color(0xFF3A1614), text: Color(0xFFFF7A70)),
+    changed: (background: Color(0xFF3A2410), text: Color(0xFFFDB022)),
+  );
+
+  /// Added text, with a plus icon.
+  final DkHighlight added;
+
+  /// Removed text, struck through, with a minus icon.
+  final DkHighlight removed;
+
+  /// Changed text, with a dot icon.
+  final DkHighlight changed;
+
+  DkCompare lerp(DkCompare o, double t) {
+    DkHighlight h(DkHighlight a, DkHighlight b) => (
+      background: Color.lerp(a.background, b.background, t)!,
+      text: Color.lerp(a.text, b.text, t)!,
+    );
+    return DkCompare(
+      added: h(added, o.added),
+      removed: h(removed, o.removed),
+      changed: h(changed, o.changed),
     );
   }
 }
@@ -347,7 +582,25 @@ class DkElevation {
   );
 }
 
-/// Motion (UI spec §9). DK-0039 adds reduce-motion handling and haptics.
+/// The three kinds of movement (UI spec §9).
+enum DkMotionKind {
+  /// Press states, chip toggles, switch thumbs.
+  fast,
+
+  /// Sheets, pushes, tile reorder, expand/collapse.
+  standard,
+
+  /// Success tick, Scan button press, capture thumbnail fly-in.
+  emphasis,
+}
+
+/// A motion's timing: how long and how it eases. [crossFade] is true when
+/// Reduce Motion is on: the widget then fades instead of moving, scaling or
+/// sliding.
+typedef DkMotionSpec = ({Duration duration, Curve curve, bool crossFade});
+
+/// Motion (UI spec §9; DK-0039). Widgets ask [of] (or `context.motion(kind)`),
+/// never the raw durations, so Reduce Motion replaces every movement.
 @immutable
 class DkMotion {
   const DkMotion();
@@ -359,4 +612,46 @@ class DkMotion {
 
   /// "Ease-out with slight overshoot".
   final emphasisCurve = const Cubic(0.34, 1.3, 0.64, 1);
+
+  /// With Reduce Motion on, every movement becomes this cross-fade.
+  final reduced = const Duration(milliseconds: 120);
+  final reducedCurve = Curves.linear;
+
+  /// The scanner's capture flash (white, 80 ms, once per capture). At most
+  /// one flash per capture, and captures are seconds apart, so it never
+  /// flashes above 3 Hz; with Reduce Motion it is off ([flashAllowed]).
+  final captureFlash = const Duration(milliseconds: 80);
+
+  /// The timing for [kind], or the cross-fade when [reduce] is on.
+  DkMotionSpec of(DkMotionKind kind, {required bool reduce}) {
+    if (reduce) {
+      return (duration: reduced, curve: reducedCurve, crossFade: true);
+    }
+    return switch (kind) {
+      DkMotionKind.fast => (duration: fast, curve: fastCurve, crossFade: false),
+      DkMotionKind.standard => (
+        duration: standard,
+        curve: standardCurve,
+        crossFade: false,
+      ),
+      DkMotionKind.emphasis => (
+        duration: emphasis,
+        curve: emphasisCurve,
+        crossFade: false,
+      ),
+    };
+  }
+
+  /// Flashes (the capture flash) are off with Reduce Motion.
+  bool flashAllowed({required bool reduce}) => !reduce;
+}
+
+/// `context.reduceMotion` and `context.motion(kind)`: Reduce Motion is the
+/// platform's setting (iOS Reduce Motion, Android "Remove animations"), which
+/// Flutter reports as [MediaQueryData.disableAnimations].
+extension DkMotionContext on BuildContext {
+  bool get reduceMotion => MediaQuery.maybeDisableAnimationsOf(this) ?? false;
+
+  DkMotionSpec motion(DkMotionKind kind) =>
+      tokens.motion.of(kind, reduce: reduceMotion);
 }

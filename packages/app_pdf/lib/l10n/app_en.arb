@@ -303,5 +303,33 @@
   "shell_button_scan": "Scan",
   "@shell_button_scan": {
     "description": "Tab bar (UI spec §13.1)."
+  },
+  "markup_yellow": "Yellow",
+  "@markup_yellow": {
+    "description": "Markup colour name (UI spec §4.2, DK-0032): the yellow highlighter."
+  },
+  "markup_green": "Green",
+  "@markup_green": {
+    "description": "Markup colour name (UI spec §4.2, DK-0032): the green highlighter."
+  },
+  "markup_blue": "Blue",
+  "@markup_blue": {
+    "description": "Markup colour name (UI spec §4.2, DK-0032): the blue highlighter."
+  },
+  "markup_pink": "Pink",
+  "@markup_pink": {
+    "description": "Markup colour name (UI spec §4.2, DK-0032): the pink highlighter."
+  },
+  "markup_red": "Red",
+  "@markup_red": {
+    "description": "Markup colour name (UI spec §4.2, DK-0032): the red pen."
+  },
+  "markup_black": "Black",
+  "@markup_black": {
+    "description": "Markup colour name (UI spec §4.2, DK-0032): the black pen."
+  },
+  "markup_ink": "Blue ink",
+  "@markup_ink": {
+    "description": "Markup colour name (UI spec §4.2, DK-0032): the ink signature ink."
   }
 }
