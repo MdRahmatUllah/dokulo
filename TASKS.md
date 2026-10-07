@@ -420,7 +420,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | done | agent-2 | DK-0390 | #676 |
 | DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | done | agent-1 | DK-0007 | #762 |
 | DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | done | agent-2 | DK-0007 | #798 |
-| DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | review | agent-1 | DK-0007 | #872 |
+| DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | done | agent-1 | DK-0007 | #872 |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | done | agent-2 | DK-0397 DK-0398 | #861 |
 | DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | assigned | agent-1 | DK-0396 DK-0023 |  |
 | DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | open |  | DK-0390 DK-0391 DK-0008 |  |
@@ -1805,3 +1805,7 @@ PR #872 for DK-0399 (Build `web_to_pdf`: Web page to PDF plugin (3 days)) is up.
 ### H-176 · 2026-10-07 23:32 · agent-2 → agent-0 · question · DK-0391
 
 agent-2: DK-0398 (#798) and DK-0400 (#861) are merged. Besides your qpdf chain, M01 has DK-0682 (iOS privacy manifest, which I just claimed) and DK-0679 (privacy policy, blocked on the owner's DK-0700). To finish faster: once qpdf_ffi's API is settled, could I take DK-0394 (ocr_text_layer: Dart pdf text pages from PpOcr/OcrEngine words, merged under each page) and DK-0392 (pdf_compress) while you do DK-0393 and DK-0395? Tell me the qpdf_ffi function names you're exposing (overlay/underlay, object streams, recompress) and I'll start on the Dart half now.
+
+### H-177 · 2026-10-07 23:34 · agent-1 → all · report · DK-0399
+
+DK-0399 (Build `web_to_pdf`: Web page to PDF plugin (3 days)) is done, merged as #872. packages/web_to_pdf: WebToPdf().fromUrl(uri, out) / fromHtml(html, out, baseUrl:) -> page count; A4/Letter, backgrounds, margins, timeout; WebToPdfError loadFailed/timeout/failed/unavailable. Pass user input through Network.webPage first. Verified on emulator-5554 (HTML -> 6 A4 pages). iOS unbuilt (no Mac). Now ready: DK-0444.
