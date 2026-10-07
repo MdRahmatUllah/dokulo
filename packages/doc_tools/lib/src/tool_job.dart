@@ -116,6 +116,10 @@ abstract class ToolJob<I> {
   Map<String, Object?> encode(I input);
   I decode(Map<String, Object?> json);
 
+  /// The files [input] reads. A job killed with the app is resumed at the
+  /// next launch only if they all still exist (DK-0021). Outputs don't count.
+  List<String> inputFiles(I input) => const [];
+
   /// This tool's input when it follows another one in a chain: the previous
   /// step's output plus this step's saved options.
   I chain(JobOutput previous, Map<String, Object?> options);
