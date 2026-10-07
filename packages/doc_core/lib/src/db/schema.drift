@@ -116,3 +116,15 @@ CREATE TABLE photo_finder_cache (
 searchText: SELECT CAST(file_id AS INTEGER) AS file_id, CAST(page AS INTEGER) AS page,
     snippet(ocr_text, 2, '[', ']', '…', 12) AS snippet
   FROM ocr_text WHERE ocr_text MATCH :query ORDER BY rank;
+
+-- Tool usage (DK-0022), on this phone only. The job queue calls recordToolRun
+-- after each successful run; X1 "Suggested" reads mostUsedTools, the app-icon
+-- shortcut lastUsedTool.
+recordToolRun: INSERT INTO tool_usage (tool_id, count, last_used)
+  VALUES (:tool_id, 1, :at)
+  ON CONFLICT (tool_id) DO UPDATE SET count = count + 1, last_used = excluded.last_used;
+
+mostUsedTools: SELECT tool_id FROM tool_usage
+  ORDER BY count DESC, last_used DESC LIMIT :limit;
+
+lastUsedTool: SELECT tool_id FROM tool_usage ORDER BY last_used DESC LIMIT 1;
