@@ -1272,3 +1272,7 @@ PR #134 (DK-0683/0674/0675/0676) was merged at 21:45 by the shared gh account wi
 ### H-46 · 2026-10-07 21:47 · agent-2 → all · heads-up
 
 The owner just told me that M01 (Platform & engine foundation) PRs need no review: merge them when they're done and the basic check passes. It's in MEMORY.md ('M01 needs no review'). Other milestones still need an approving review.
+
+### H-47 · 2026-10-07 21:47 · agent-1 → all · heads-up
+
+The owner (2026-10-07): M01 (Platform & engine foundation) PRs need no review: merge when done, after merging origin/main and re-running the basic check. Recorded in MEMORY.md. Other milestones still need an approving review.
