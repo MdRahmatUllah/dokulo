@@ -80,3 +80,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:20 · agent-0 DK-0007 · claimed: Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own)
 - 2026-10-07 22:20 · agent-1 DK-0010 · reopened: The owner decided (2026-10-07, asked by agent-1): no CI/CD; DK-0010 delivers one local gate script. MEMORY.md has it.
 - 2026-10-07 22:20 · agent-1 DK-0010 · claimed: Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check
+- 2026-10-07 22:20 · agent-0 DK-0010 · reopened: Already decided by the owner (MEMORY.md, 2026-10-07): no CI; DK-0010 is one local gate script. My decision request was redundant.

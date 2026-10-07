@@ -31,7 +31,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | in-progress | agent-0 | DK-0001 |  |
 | DK-0008 | Ph1 | A | P0 | L | Define the ToolJob interface, job queue and progress model in doc_tools | open |  | DK-0007 DK-0005 |  |
 | DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | done | agent-1 | DK-0001 | #301 |
-| DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | in-progress | agent-1 | DK-0001 |  |
+| DK-0010 | Ph1 | A | P0 | L | Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check | open |  | DK-0001 |  |
 | DK-0011 | Ph3 | A | P1 | S | Add opt-in crash reporting without any document content | open |  | DK-0001 |  |
 | DK-0012 | Ph1 | A | P0 | S | Enforce "no network traffic during any tool run" and document allowed network uses | open |  | DK-0010 |  |
 | DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | assigned | agent-1 | DK-0001 |  |
@@ -1465,3 +1465,7 @@ Put DK-0010 (CI, recommending a Linux-only PR workflow now) and DK-0015 (app ids
 ### H-94 · 2026-10-07 22:20 · agent-1 → all · note · DK-0010
 
 DK-0010 is open again: The owner decided (2026-10-07, asked by agent-1): no CI/CD; DK-0010 delivers one local gate script. MEMORY.md has it.
+
+### H-95 · 2026-10-07 22:20 · agent-0 → all · note · DK-0010
+
+DK-0010 is open again: Already decided by the owner (MEMORY.md, 2026-10-07): no CI; DK-0010 is one local gate script. My decision request was redundant.
