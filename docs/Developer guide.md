@@ -70,6 +70,16 @@ Rules:
     any job in qpdf's job JSON; `encrypt`, `decrypt`, `repair`,
     `compressStructure`, `linearize`, `overlay`, `extract` and `check` cover
     the tools.
+  - **Compress PDF** (DK-0392): `PdfCompress(pool).compress(input, output,
+    CompressOptions(preset:, greyscale:, removeMetadata:, targetBytes:))`, from
+    a `Lane.pdfium` job. Images above the preset's resolution are resized and
+    re-encoded (Dart `image`, on a pool worker) into their own image objects;
+    images already below it, transparent ones and 1-bit ones stay as they are;
+    scan pages with an image that can't be re-encoded go through
+    `RasterFallback` (rendered whole, OCR text kept). qpdf then compresses the
+    structure, and drops the Info and XMP metadata if asked. `targetBytes` runs
+    `searchSizeTarget` (quality 85…40 per resolution, sharpest first) and says
+    when it can't get there.
 - **A tool is a `ToolJob`** (`doc_tools`, DK-0008): a const class with an `id`
   (as in `/tool/:toolId`), a `Lane`, `encode`/`decode` of its input as JSON,
   `chain` (its input from the previous step's output, for workflows) and
@@ -186,6 +196,11 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
   android.intent.action.VIEW -d "dokulo://open/tool/compress"` or `xcrun simctl
   openurl booted "dokulo://open/viewer/f42?mode=edit"`.
   `test/routes/routes_test.dart` cold-starts the router at every route.
+  On a device, `python tools/deeplinks_check.py` fires every route from a
+  cold start (all 15 passed on emulator-5554, 2026-10-08, DK-1041).
+- **Back from a deep-linked full-screen page goes to Home** (nothing is
+  beneath it, so leaving the app would be the surprise); pushed from a tab,
+  it returns to that tab.
 - Tapping the current tab again returns that tab to its root.
 - Until a screen's task builds it, the route shows `PlaceholderScreen` with the
   screen ID. The task replaces the builder in `routes.dart`.

@@ -15,7 +15,7 @@ out. Checked against `opencv_dart` 2.2.2 with `dartcv4` 2.2.2 (what pub resolves
 | Perspective fix | `getPerspectiveTransform`, `warpPerspective` | imgproc |
 | Filters: B/W, greyscale, colour boost, shadow removal | `adaptiveThreshold`, `cvtColor`, `createCLAHE`, `dilate`, `medianBlur`, `divide` | imgproc, core |
 | Book mode spine | `HoughLinesP`, `reduce` (projection profile) | imgproc, core |
-| Compress PDF, thumbnails | `resize`, `imencode`/`imdecode` (JPEG via libjpeg-turbo, PNG) | imgproc, imgcodecs |
+| Thumbnails | `resize`, `imencode`/`imdecode` (JPEG via libjpeg-turbo, PNG) | imgproc, imgcodecs |
 | Smart Split pHash | `resize` to 32×32, `dct`, compare the 8×8 low band (own code, a few lines) | imgproc, core |
 | Compare PDF visual mode | `absdiff`, `threshold` | core, imgproc |
 | Compression test (SSIM ≥ 0.9) | SSIM from `GaussianBlur` and `multiply` (test code, a few lines) | imgproc, core |
