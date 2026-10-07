@@ -42,7 +42,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0018 | Ph1 | A | P0 | S | Verify 16 KB page-size alignment for every native library (Android) | assigned | agent-1 | DK-0010 |  |
 | DK-0019 | Ph6 | A | P1 | S | Backup rules: include user files, exclude models, caches and temp; keys device-only | open |  | DK-0006 DK-0282 DK-0545 |  |
 | DK-0020 | Ph3 | A | P0 | M | Preflight checks before every job: free storage, memory guard, encryption, file type | open |  | DK-0008 DK-0013 DK-0609 |  |
-| DK-0021 | Ph3 | A | P1 | S | Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs | assigned | agent-2 | DK-0008 DK-0006 |  |
+| DK-0021 | Ph3 | A | P1 | S | Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs | in-progress | agent-2 | DK-0008 DK-0006 |  |
 | DK-0022 | Ph3 | A | P1 | S | Local tool-usage tracking (never uploaded) for suggestions and shortcuts | done | agent-2 | DK-0005 | #427 |
 | DK-0023 | Ph1 | A | P0 | S | Create the fictional sample-document set for demos, tests and store screenshots | done | agent-1 | DK-0001 | #286 |
 | DK-0024 | Ph1 | B | P0 | M | Create the DkTokens ThemeExtension (Sogda DpTokens architecture) with light and dark sets | open |  | DK-0001 DK-0708 |  |

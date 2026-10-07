@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 22:51
+last-seen: 2026-10-07 22:52
 last-read: 124
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0021 Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs — claimed 2026-10-07 22:52.
 
 ## Next
 
