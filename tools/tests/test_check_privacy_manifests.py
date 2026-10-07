@@ -33,10 +33,12 @@ def test_check(tmp_path: Path) -> None:
         plugin(cache, "bad", {"darwin/bad/Sources/Bad.m": ""}),
     ]
     (repo / c.PLUGINS).write_text(json.dumps({"plugins": {"ios": plugins}}), encoding="utf-8")
+    plugin(repo / "packages", "ours", {"ios/ours/Sources/ours/Ours.swift": ""})  # not resolved yet
 
     assert c.check(repo) == [
         "packages/app_pdf/ios/Runner/PrivacyInfo.xcprivacy: NSPrivacyAccessedAPICategoryFileTimestamp without a reason",
         "bad: native iOS code in darwin/ but no PrivacyInfo.xcprivacy",
+        "ours: native iOS code in ios/ but no PrivacyInfo.xcprivacy",
     ]
 
     manifest(repo / c.APP_MANIFEST, NSPrivacyTracking=True)

@@ -21,12 +21,13 @@ group will (1C8F.1); their targets add their own manifests when they exist.
 ## The SDKs
 
 `tools/check_privacy_manifests.py` (a gate step) fails if an iOS plugin with
-native code ships no manifest:
+native code ships no manifest (resolved for the app, and our own `packages/*`):
 
 | Plugin | Native code | Manifest |
 | --- | --- | --- |
 | `flutter_onnxruntime` | Swift | Ships its own |
 | `vision_ocr` (ours) | Swift | Added (no required-reason APIs), in Package.swift and the podspec |
+| `web_to_pdf` (ours) | Swift | Added (no required-reason APIs), in Package.swift and the podspec |
 | `path_provider_foundation` 2.6 | None (Dart FFI) | Not needed |
 
 Not visible from Windows: the ONNX Runtime binary the plugin's pod or Swift

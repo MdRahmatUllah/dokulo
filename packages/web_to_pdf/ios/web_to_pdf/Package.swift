@@ -19,6 +19,9 @@ let package = Package(
             name: "web_to_pdf",
             dependencies: [
                 .product(name: "FlutterFramework", package: "FlutterFramework")
+            ],
+            resources: [
+                .process("PrivacyInfo.xcprivacy")
             ]
         )
     ]
