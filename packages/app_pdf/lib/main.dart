@@ -1,7 +1,9 @@
-import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'l10n/app_localizations.dart';
+import 'providers/language_providers.dart';
 import 'providers/theme_providers.dart';
 
 void main() => runApp(const ProviderScope(child: DokuloApp()));
@@ -12,12 +14,27 @@ class DokuloApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => MaterialApp(
-    title: 'Dokulo',
+    title: 'Dokulo', // l10n-ignore: the brand name, the same in every language
     themeMode: ref.watch(appThemeModeProvider),
     theme: ThemeData(brightness: Brightness.light),
     darkTheme: ThemeData(brightness: Brightness.dark),
-    home: const Scaffold(
-      body: Center(child: Text('Dokulo · layer $docToolsLayer')),
-    ),
+    locale: ref.watch(appLanguageSettingProvider).locale,
+    supportedLocales: AppLocalizations.supportedLocales,
+    localizationsDelegates: const [
+      AppLocalizations.delegate,
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ],
+    home: const _Placeholder(),
+  );
+}
+
+class _Placeholder extends StatelessWidget {
+  const _Placeholder();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    body: Center(child: Text(AppLocalizations.of(context).privacy_line_home)),
   );
 }

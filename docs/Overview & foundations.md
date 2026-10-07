@@ -52,7 +52,7 @@ Dokulo sounds like a calm, competent colleague: short sentences, plain words, ex
 | No exclamation marks | "Saved" | "Saved!" |
 | Errors say what and what next | "This PDF is locked. Enter the password." | "Error 0x12" alone |
 | Address the user as "you"; German uses "du" | "Your file" / "Deine Datei" | "The user's file" / "Ihre Datei" |
-| Units with a thin space, locale formats | "1,9 MB" (DE), "1.9 MB" (EN) | Hard-coded decimals |
+| Units with a thin space (U+202F, narrow no-break), locale formats: `formatBytes`, `formatDate` in `app_pdf/lib/l10n/formats.dart` | "1,9 MB" (DE), "1.9 MB" (EN); "7. Okt. 2026" (DE), "7 Oct 2026" (EN) | Hard-coded decimals |
 | Pro is named once, calmly | "Pro" badge | "PREMIUM ⭐", countdowns |
 
 ### Fixed tool names (EN / DE)

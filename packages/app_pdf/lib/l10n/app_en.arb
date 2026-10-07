@@ -1,0 +1,287 @@
+{
+  "@@locale": "en",
+  "common_cancel": "Cancel",
+  "@common_cancel": {
+    "description": "Copy deck (UI spec §27): common_cancel."
+  },
+  "common_done": "Done",
+  "@common_done": {
+    "description": "Copy deck (UI spec §27): common_done."
+  },
+  "common_save": "Save",
+  "@common_save": {
+    "description": "Copy deck (UI spec §27): common_save."
+  },
+  "common_save_copy": "Save as copy",
+  "@common_save_copy": {
+    "description": "Copy deck (UI spec §27): common_save_copy."
+  },
+  "common_replace_original": "Replace original",
+  "@common_replace_original": {
+    "description": "Copy deck (UI spec §27): common_replace_original."
+  },
+  "common_save_to": "Save to…",
+  "@common_save_to": {
+    "description": "Copy deck (UI spec §27): common_save_to."
+  },
+  "common_share": "Share",
+  "@common_share": {
+    "description": "Copy deck (UI spec §27): common_share."
+  },
+  "common_open": "Open",
+  "@common_open": {
+    "description": "Copy deck (UI spec §27): common_open."
+  },
+  "common_undo": "Undo",
+  "@common_undo": {
+    "description": "Copy deck (UI spec §27): common_undo."
+  },
+  "common_delete": "Delete",
+  "@common_delete": {
+    "description": "Copy deck (UI spec §27): common_delete."
+  },
+  "common_delete_forever": "Delete for good",
+  "@common_delete_forever": {
+    "description": "Copy deck (UI spec §27): common_delete_forever."
+  },
+  "common_restore": "Restore",
+  "@common_restore": {
+    "description": "Copy deck (UI spec §27): common_restore."
+  },
+  "common_rename": "Rename",
+  "@common_rename": {
+    "description": "Copy deck (UI spec §27): common_rename."
+  },
+  "common_duplicate": "Duplicate",
+  "@common_duplicate": {
+    "description": "Copy deck (UI spec §27): common_duplicate."
+  },
+  "common_move": "Move",
+  "@common_move": {
+    "description": "Copy deck (UI spec §27): common_move."
+  },
+  "common_info": "Info",
+  "@common_info": {
+    "description": "Copy deck (UI spec §27): common_info."
+  },
+  "common_next": "Next",
+  "@common_next": {
+    "description": "Copy deck (UI spec §27): common_next."
+  },
+  "common_skip": "Skip",
+  "@common_skip": {
+    "description": "Copy deck (UI spec §27): common_skip."
+  },
+  "common_continue": "Continue",
+  "@common_continue": {
+    "description": "Copy deck (UI spec §27): common_continue."
+  },
+  "common_try_again": "Try again",
+  "@common_try_again": {
+    "description": "Copy deck (UI spec §27): common_try_again."
+  },
+  "common_open_settings": "Open settings",
+  "@common_open_settings": {
+    "description": "Copy deck (UI spec §27): common_open_settings."
+  },
+  "common_not_now": "Not now",
+  "@common_not_now": {
+    "description": "Copy deck (UI spec §27): common_not_now."
+  },
+  "common_select_all": "Select all",
+  "@common_select_all": {
+    "description": "Copy deck (UI spec §27): common_select_all."
+  },
+  "common_selected": "{n} selected",
+  "@common_selected": {
+    "description": "Copy deck (UI spec §27): common_selected.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "common_add_files": "Add files",
+  "@common_add_files": {
+    "description": "Copy deck (UI spec §27): common_add_files."
+  },
+  "common_browse": "Browse device",
+  "@common_browse": {
+    "description": "Copy deck (UI spec §27): common_browse."
+  },
+  "common_more_options": "More options",
+  "@common_more_options": {
+    "description": "Copy deck (UI spec §27): common_more_options."
+  },
+  "common_apply_all": "Apply to all pages",
+  "@common_apply_all": {
+    "description": "Copy deck (UI spec §27): common_apply_all."
+  },
+  "common_use_default": "Use as default",
+  "@common_use_default": {
+    "description": "Copy deck (UI spec §27): common_use_default."
+  },
+  "common_download": "Download",
+  "@common_download": {
+    "description": "Copy deck (UI spec §27): common_download."
+  },
+  "common_pause": "Pause",
+  "@common_pause": {
+    "description": "Copy deck (UI spec §27): common_pause."
+  },
+  "common_keep_working": "Keep working",
+  "@common_keep_working": {
+    "description": "Copy deck (UI spec §27): common_keep_working."
+  },
+  "privacy_line_tool": "Processed on this phone",
+  "@privacy_line_tool": {
+    "description": "Copy deck (UI spec §27): privacy_line_tool."
+  },
+  "privacy_line_home": "Everything stays on this phone",
+  "@privacy_line_home": {
+    "description": "Copy deck (UI spec §27): privacy_line_home."
+  },
+  "pro_badge": "Pro",
+  "@pro_badge": {
+    "description": "Copy deck (UI spec §27): pro_badge."
+  },
+  "pro_free_try": "Free try · Pro unlocks unlimited use",
+  "@pro_free_try": {
+    "description": "Copy deck (UI spec §27): pro_free_try."
+  },
+  "meta_pages": "{n, plural, one{1 page} other{{n} pages}}",
+  "@meta_pages": {
+    "description": "Copy deck (UI spec §27): meta_pages.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "meta_files": "{n, plural, one{1 file} other{{n} files}}",
+  "@meta_files": {
+    "description": "Copy deck (UI spec §27): meta_files.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "meta_today": "Today {time}",
+  "@meta_today": {
+    "description": "Copy deck (UI spec §27): meta_today.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "meta_yesterday": "Yesterday {time}",
+  "@meta_yesterday": {
+    "description": "Copy deck (UI spec §27): meta_yesterday.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "toast_saved": "Saved",
+  "@toast_saved": {
+    "description": "Copy deck (UI spec §27): toast_saved."
+  },
+  "toast_saved_to": "Saved to {folder}",
+  "@toast_saved_to": {
+    "description": "Copy deck (UI spec §27): toast_saved_to.",
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "toast_moved_trash": "Moved to Recently deleted",
+  "@toast_moved_trash": {
+    "description": "Copy deck (UI spec §27): toast_moved_trash."
+  },
+  "toast_moved": "Moved to {folder}",
+  "@toast_moved": {
+    "description": "Copy deck (UI spec §27): toast_moved.",
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "toast_copied": "Copied",
+  "@toast_copied": {
+    "description": "Copy deck (UI spec §27): toast_copied."
+  },
+  "toast_page_deleted": "Page deleted",
+  "@toast_page_deleted": {
+    "description": "Copy deck (UI spec §27): toast_page_deleted."
+  },
+  "toast_replaced": "Replaced",
+  "@toast_replaced": {
+    "description": "Copy deck (UI spec §27): toast_replaced."
+  },
+  "progress_page": "Page {i} of {n}",
+  "@progress_page": {
+    "description": "Copy deck (UI spec §27): progress_page.",
+    "placeholders": {
+      "i": {
+        "type": "int"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "progress_time_left": "about {t} left",
+  "@progress_time_left": {
+    "description": "Copy deck (UI spec §27): progress_time_left.",
+    "placeholders": {
+      "t": {
+        "type": "String"
+      }
+    }
+  },
+  "size_change": "{before} → {after} (−{p} %)",
+  "@size_change": {
+    "description": "Copy deck (UI spec §27): size_change.",
+    "placeholders": {
+      "after": {
+        "type": "String"
+      },
+      "before": {
+        "type": "String"
+      },
+      "p": {
+        "type": "int"
+      }
+    }
+  },
+  "job_running_many": "{n} jobs running",
+  "@job_running_many": {
+    "description": "Copy deck (UI spec §27): job_running_many.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "settings_language_title": "Language",
+  "@settings_language_title": {
+    "description": "Settings → Language (UI spec §25)."
+  },
+  "settings_language_system": "System",
+  "@settings_language_system": {
+    "description": "Settings → Language (UI spec §25)."
+  },
+  "settings_language_english": "English",
+  "@settings_language_english": {
+    "description": "Settings → Language (UI spec §25)."
+  },
+  "settings_language_deutsch": "Deutsch",
+  "@settings_language_deutsch": {
+    "description": "Settings → Language (UI spec §25)."
+  }
+}

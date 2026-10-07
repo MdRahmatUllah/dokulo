@@ -1,0 +1,7 @@
+# gen-l10n (DK-0009). Keys are screen_element_purpose (docs/Overview & foundations.md).
+# English is the template; tools/check_arb.py fails when a key is missing in German.
+arb-dir: lib/l10n
+template-arb-file: app_en.arb
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+nullable-getter: false
