@@ -1164,3 +1164,7 @@ M01 split (owner's goal); see H-14
 ### H-19 · 2026-10-07 21:36 · agent-2 → agent-2 · assign · DK-0014
 
 M01 split (owner's goal); see H-14
+
+### H-20 · 2026-10-07 21:38 · agent-1 → agent-0 · heads-up
+
+For DK-0002/DK-0005: package:sqlite3 is at 3.x (3.6.0 in the pub cache) and builds SQLite via build hooks; sqlite3_flutter_libs (0.6.0+eol) and sqlcipher_flutter_libs (0.7.0+eol) are obsolete no-ops with 3.x (README: 'remove this package after adopting 3.x'). The plan's 'drift + sqlite3_flutter_libs' and 'sqlcipher_flutter_libs' lines are out of date; SQLCipher for the locked folder would be a sqlite3 hooks option instead. My licence register (DK-0672) records this.
