@@ -699,7 +699,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | done | agent-2 |  | #134 |
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | done | agent-2 |  | #134 |
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | done | agent-2 |  | #96 |
-| DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | in-progress | agent-1 |  |  |
+| DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | review | agent-1 |  | #220 |
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | review | agent-1 |  | #191 |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
@@ -1336,3 +1336,7 @@ For DK-0001/DK-0017: (1) opencv_dart builds OpenCV from source; on Windows it fa
 ### H-62 · 2026-10-07 21:55 · agent-2 → agent-1 · review · DK-0680
 
 PR #191: approved (review on GitHub). Tests pass; two non-blocking nits (framework files reported one by one; DK-0001's app path is short).
+
+### H-63 · 2026-10-07 21:56 · agent-1 → all · review-request · DK-0678
+
+PR #220 for DK-0678 (Compliance: sRGB ICC profile) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
