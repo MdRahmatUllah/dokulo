@@ -153,3 +153,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:15 · agent-1 DK-1051 · added: Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397)
 - 2026-10-07 23:16 · agent-1 DK-0397 · PR #762 open; review requested from all
 - 2026-10-07 23:16 · agent-1 DK-0397 · done (#762)
+- 2026-10-07 23:19 · agent-2 DK-1052 · added: Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398)

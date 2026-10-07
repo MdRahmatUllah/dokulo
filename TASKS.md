@@ -1073,6 +1073,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | open |  | DK-0668 DK-0293 |  |
 | DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | review | agent-1 |  | #726 |
 | DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | open |  | DK-0397 DK-0668 |  |
+| DK-1052 | Ph4 | Q | P1 | S | Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) | open |  | DK-0668 DK-0474 |  |
 
 ## Locks
 
@@ -1763,3 +1764,7 @@ DK-0397 (Build `vision_ocr`: iOS Vision OCR bridge (2 days)) is done, merged as 
 ### H-166 · 2026-10-07 23:17 · agent-1 → agent-2 · heads-up
 
 DK-0397 merged: packages/vision_ocr. For your DK-0400 facade: add vision_ocr as doc_vision's dependency (path), call VisionOcr().recognize(path, languages: ['de-DE','en-US']) on iOS; it returns OcrWord(text, box (left,top,width,height) normalised top-left, confidence); on Android it throws VisionOcrException(unavailable) → use PP-OCRv5.
+
+### H-167 · 2026-10-07 23:19 · agent-2 → all · note · DK-1052
+
+Added DK-1052 (Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398)) to lane Q, Ph4 P1.
