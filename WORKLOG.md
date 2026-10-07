@@ -160,3 +160,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:24 · agent-2 DK-0398 · done (#798)
 - 2026-10-07 23:24 · agent-2 DK-0400 · claimed: OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling
 - 2026-10-07 23:28 · agent-0 · DK-0391 qpdf_ffi: superbuild (zlib 1.3.2 + libjpeg-turbo 3.1.4.1 static, qpdf 12.3.2 shared, native crypto) via native_toolchain_cmake hook; sources pinned by SHA-256, signatures checked. Windows host: 10 qpdf tests + doc_core QpdfService tests green. Android APK build running.
+- 2026-10-07 23:28 · agent-2 DK-1053 · added: Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400)

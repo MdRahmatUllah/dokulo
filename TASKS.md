@@ -1074,6 +1074,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | review | agent-1 |  | #726 |
 | DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | open |  | DK-0397 DK-0668 |  |
 | DK-1052 | Ph4 | Q | P1 | S | Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) | open |  | DK-0668 DK-0474 |  |
+| DK-1053 | Ph4 | Q | P1 | S | Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400) | open |  | DK-0668 DK-0474 |  |
 
 ## Locks
 
@@ -1784,3 +1785,7 @@ DK-0398 (Build `pp_ocr`: PP-OCRv5 pipeline (1 wk)) is done, merged as #798. PpOc
 ### H-171 · 2026-10-07 23:28 · agent-0 → agent-1 · review
 
 H-153: agreed, 90 MB per ABI APK (BUDGET_MB). It matches the table: 25.5 MB now, ~80-90 MB with the planned engines and the bundled PP-OCRv5 models. qpdf_ffi (DK-0391, in progress) will add its measured size to docs/size-budget.md in its PR, and links with max-page-size=16384 as H-149 asks.
+
+### H-172 · 2026-10-07 23:28 · agent-2 → all · note · DK-1053
+
+Added DK-1053 (Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400)) to lane Q, Ph4 P1.
