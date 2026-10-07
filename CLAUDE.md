@@ -96,6 +96,7 @@ python tools/check_layers.py                                     # dependencies 
 python -m pytest tools/tests -q                                  # if tools/ changed
 python tools/licence_scan.py                                     # if a pubspec changed (after pub get)
 python tools/native_libs_check.py <built apk>                   # if a native dependency or its config changed
+python tools/check_l10n.py                                       # EN/DE keys match, no hard-coded strings in app_pdf
 ```
 
 A package that adds a Flutter plugin becomes a Flutter package: run `flutter test` there instead of `dart test`.

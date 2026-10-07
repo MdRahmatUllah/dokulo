@@ -15,3 +15,5 @@ coverage/
 .flutter-plugins-dependencies
 *.iml
 .idea/
+# gen-l10n output (DK-0009): `flutter pub get` regenerates it from the ARB files.
+packages/app_pdf/lib/l10n/app_localizations*.dart
