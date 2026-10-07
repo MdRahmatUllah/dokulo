@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0029 Implement colour tokens: status colours — claimed 2026-10-08 00:51.
 
 ## Next
 

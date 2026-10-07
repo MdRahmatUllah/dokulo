@@ -50,7 +50,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | done | agent-1 | DK-0024 | #1110 |
 | DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | done | agent-1 | DK-0024 | #1110 |
 | DK-0028 | Ph1 | B | P0 | S | Implement colour tokens: text and icons | done | agent-1 | DK-0024 | #1110 |
-| DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | assigned | agent-1 | DK-0024 |  |
+| DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | in-progress | agent-1 | DK-0024 |  |
 | DK-0030 | Ph1 | B | P0 | S | Implement colour tokens: overlay and camera colours | assigned | agent-1 | DK-0024 |  |
 | DK-0031 | Ph1 | B | P0 | S | Implement colour tokens: document colours | assigned | agent-1 | DK-0024 |  |
 | DK-0032 | Ph1 | B | P0 | S | Implement colour tokens: markup colours | assigned | agent-1 | DK-0024 |  |
