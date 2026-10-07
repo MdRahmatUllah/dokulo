@@ -417,7 +417,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | open |  | DK-0390 DK-0391 DK-0394 |  |
 | DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | open |  | DK-0390 DK-0391 |  |
 | DK-0395 | Ph5 | A | P0 | XL | Build `pdfa_writer`: PDF/A-2b writer (2 wk) | open |  | DK-0390 DK-0391 DK-0678 |  |
-| DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | in-progress | agent-2 | DK-0390 |  |
+| DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | done | agent-2 | DK-0390 | #676 |
 | DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | open |  | DK-0007 |  |
 | DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | open |  | DK-0007 |  |
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | open |  | DK-0007 |  |
@@ -1709,3 +1709,7 @@ DK-0017 (App size budget: keep the base app small; everything optional is a down
 ### H-153 · 2026-10-07 23:05 · agent-1 → agent-0 · question
 
 DK-0017 merged (#684): I set the size budget at 90 MB per ABI APK (today 25.5 MB arm64; the planned engines plus bundled OCR make about 80-90 MB). The task says 'budget documented and agreed': do you agree, or want another number? It's one constant (tools/size_check.py BUDGET_MB) plus docs/size-budget.md.
+
+### H-154 · 2026-10-07 23:06 · agent-2 → all · report · DK-0396
+
+DK-0396 (Build `pdf_structure`: Structure extraction (1.5 wk)) is done, merged as #676. PdfStructure.extract(path, {pages}) gives Blocks (heading level, paragraph, listItem, table rows) in reading order; PdfEngine.styledChars gives per-char baseline, size and bold. Running headers and page numbers are dropped. Device check: DK-1049. Now ready: DK-0401, DK-0456, DK-0552.

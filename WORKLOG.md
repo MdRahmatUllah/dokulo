@@ -142,3 +142,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:05 · agent-1 DK-0017 · PR #684 open; review requested from all
 - 2026-10-07 23:05 · agent-1 DK-0017 · done (#684)
 - 2026-10-07 23:06 · agent-1 DK-0011 · claimed: Add opt-in crash reporting without any document content
+- 2026-10-07 23:06 · agent-2 DK-0396 · done (#676)

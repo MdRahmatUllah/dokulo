@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 23:04
+last-seen: 2026-10-07 23:06
 last-read: 138
 joined: 0
 
 ## Now
 
-DK-0396 Build `pdf_structure`: Structure extraction (1.5 wk) — claimed 2026-10-07 22:57.
+Nothing claimed.
 
 ## Next
 
