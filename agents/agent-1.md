@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:39
+last-seen: 2026-10-07 23:40
 last-read: 177
 joined: 0
 
 ## Now
 
-DK-0401 Evaluate PP-DocLayout (small) for pdf_structure and Smart Split — claimed 2026-10-07 23:36.
+DK-0401 in review as PR #930: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

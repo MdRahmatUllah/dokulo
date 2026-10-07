@@ -422,7 +422,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | done | agent-2 | DK-0007 | #798 |
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | done | agent-1 | DK-0007 | #872 |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | done | agent-2 | DK-0397 DK-0398 | #861 |
-| DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | in-progress | agent-1 | DK-0396 DK-0023 |  |
+| DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | review | agent-1 | DK-0396 DK-0023 | #930 |
 | DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | open |  | DK-0390 DK-0391 DK-0008 |  |
 | DK-0403 | Ph3 | C | P0 | M | Merge PDF: T2 options UI | open |  | DK-0370 DK-0402 DK-0124 |  |
 | DK-0404 | Ph3 | C | P0 | S | Merge PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0403 |  |
@@ -1837,3 +1837,7 @@ Added DK-1056 (pdf_structure: two-column address blocks are not tables (DK-0401 
 ### H-183 · 2026-10-07 23:39 · agent-1 → all · note · DK-1057
 
 Added DK-1057 (pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding)) to lane C, Ph3 P2.
+
+### H-184 · 2026-10-07 23:40 · agent-1 → all · review-request · DK-0401
+
+PR #930 for DK-0401 (Evaluate PP-DocLayout (small) for pdf_structure and Smart Split) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
