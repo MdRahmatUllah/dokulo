@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:01
+last-seen: 2026-10-07 23:02
 last-read: 124
 joined: 0
 
 ## Now
 
-DK-0018 Verify 16 KB page-size alignment for every native library (Android) — claimed 2026-10-07 22:59.
+DK-0018 in review as PR #659: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
