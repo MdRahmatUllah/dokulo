@@ -104,6 +104,7 @@ python tools/check_permissions.py [built apk]                    # only the Andr
 (cd packages/<p> && flutter test --timeout 60s | dart test)      # every package with tests: flutter test in Flutter packages
 python -m pytest tools/tests -q
 python tools/native_libs_check.py <built apk>                    # only with --apk: no FFmpeg/excluded OpenCV, 16 KB-aligned .so (Play)
+python tools/size_check.py <built apk>                           # only with --apk: per-ABI size budget, no bundled models but OCR
 ```
 
 While you iterate, run a single step by hand; the gate is for the end. When a new suite lands (golden PDFs, redaction security), add it as a step in `tools/check.py` in the same PR.

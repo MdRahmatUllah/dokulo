@@ -59,6 +59,7 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
     if apk:
         out.append(("native libs", [py, "tools/native_libs_check.py", str(apk)], root))
         out.append(("apk permissions", [py, "tools/check_permissions.py", str(apk)], root))
+        out.append(("size budget", [py, "tools/size_check.py", str(apk)], root))
     return out
 
 
