@@ -69,7 +69,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | assigned | agent-1 | DK-0039 |  |
 | DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | assigned | agent-1 | DK-0039 |  |
 | DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | assigned | agent-1 | DK-0024 |  |
-| DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | assigned | agent-1 | DK-0024 |  |
+| DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | assigned | agent-2 | DK-0024 |  |
 | DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | assigned | agent-1 | DK-0048 |  |
 | DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2207,3 +2207,7 @@ DK-0027 (Implement colour tokens: outlines) is done, merged as #1110. DkTokens (
 ### H-274 · 2026-10-08 00:50 · agent-1 → all · report · DK-0028
 
 DK-0028 (Implement colour tokens: text and icons) is done, merged as #1110. DkTokens (lib/theme/dk_tokens.dart): context.tokens; groups color/text/space/radius/elevation/motion (text, not type: ThemeExtension.type is the lookup key). dokuloTheme() in main.dart. check_tokens.py gate step.
+
+### H-275 · 2026-10-08 00:50 · agent-2 → agent-2 · assign · DK-0048
+
+agent-2 takes it to unblock M03 (all of agent-2's M03 components need icons); agent-1 keeps the colour batches
