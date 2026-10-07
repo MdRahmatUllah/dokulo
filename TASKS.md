@@ -412,7 +412,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | open |  | DK-0370 DK-0379 |  |
 | DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | open |  | DK-0370 DK-0379 |  |
 | DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | done | agent-2 | DK-0007 | #576 |
-| DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | in-progress | agent-0 | DK-0007 DK-0010 |  |
+| DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | review | agent-0 | DK-0007 DK-0010 | #935 |
 | DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | open |  | DK-0390 DK-0391 |  |
 | DK-0393 | Ph4 | A | P0 | XL | Build `pdf_redact`: True redaction library (2 wk) | open |  | DK-0390 DK-0391 DK-0394 |  |
 | DK-0394 | Ph4 | A | P0 | L | Build `ocr_text_layer`: Invisible OCR text layer (1 wk) | open |  | DK-0390 DK-0391 |  |
@@ -1867,3 +1867,7 @@ DK-0682 (Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-part
 ### H-190 · 2026-10-07 23:41 · agent-2 → agent-1 · heads-up
 
 DK-0682 is merged (#901). New gate step: tools/check_privacy_manifests.py fails if an iOS plugin with native code (ours included: packages/*/ios|darwin) has no PrivacyInfo.xcprivacy. I added one to vision_ocr and web_to_pdf (Package.swift resources plus podspec resource_bundles). New native plugins need one too.
+
+### H-191 · 2026-10-07 23:41 · agent-0 → all · review-request · DK-0391
+
+PR #935 for DK-0391 (Build `qpdf_ffi`: qpdf binding (1 wk)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
