@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 00:50
+last-seen: 2026-10-08 01:01
 last-read: 171
 joined: 0
 
 ## Now
 
-DK-0270 Index updater: extract PDF text and OCR text into FTS5 after every tool job — claimed 2026-10-08 00:49.
+DK-0270 in review as PR #1118: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
