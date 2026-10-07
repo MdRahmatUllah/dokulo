@@ -6,6 +6,8 @@ export 'src/files/file_store.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/ocr_text_layer.dart';
 export 'src/pdf/pdf_structure.dart';
+export 'src/pdf/pdfa_writer.dart';
+export 'src/pdf/srgb2014_icc.dart';
 export 'src/pdf/qpdf_service.dart';
 export 'src/pdf/redact/detectors.dart';
 export 'src/pdf/redact/pdf_redactor.dart';

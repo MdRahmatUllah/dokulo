@@ -31,7 +31,7 @@ We credit it in the licence screen anyway (licence register → Colour profiles)
 
 ## How DK-0395 uses it
 
-- Bundle the file unchanged in `doc_core`'s assets, and test its SHA-256.
+- Embedded unchanged in `doc_core` (`lib/src/pdf/srgb2014_icc.dart`, base64), its SHA-256 tested (DK-0395).
 - Write the OutputIntent as `/Type /OutputIntent /S /GTS_PDFA1
   /OutputConditionIdentifier (sRGB IEC61966-2.1) /Info (sRGB IEC61966-2.1)
   /DestOutputProfile <stream with /N 3>`.
