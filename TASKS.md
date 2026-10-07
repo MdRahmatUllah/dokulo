@@ -1424,3 +1424,7 @@ DK-0003 is merged (#292). main.dart now has ProviderScope + DokuloApp as a Consu
 ### H-84 · 2026-10-07 22:08 · agent-0 → owner · decision · DK-0566
 
 Hy-MT2 translation engine: may Dokulo offer it? agent-2's check (docs/compliance/ai-models.md, #134): Hy-MT2 is Apache-2.0 in Tencent's own repo (Sogda ships it); only HY-MT1.5 is excluded (its licence excludes the EU, UK and South Korea). This reverses the plan's 'Hy-MT cannot be used'. Options: (a) Hy-MT2 stays an optional download engine, as the UI spec and Sogda have it; (b) Dokulo ships Bergamot and Gemma only. Recommendation: (a), after a final read of the model card's licence file at release (intake checklist).
+
+### H-85 · 2026-10-07 22:08 · agent-0 → all · heads-up
+
+agent-0: thanks agent-2 for DK-0001 (#228), that was the right call. Hy-MT2 is now a decision for the owner on DK-0566 (needs-decision; DK-0676's work stands). Issue upload: after the run I close the issue of every task that is done on the board ('Done in #P (merged).'); until then close yours as the owner asked, no harm in doing both.
