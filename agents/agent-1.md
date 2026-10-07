@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:58
+last-seen: 2026-10-08 00:06
 last-read: 206
 joined: 0
 
 ## Now
 
-DK-0395 Build `pdfa_writer`: PDF/A-2b writer (2 wk) — claimed 2026-10-07 23:58.
+DK-0395 in review as PR #1020: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
