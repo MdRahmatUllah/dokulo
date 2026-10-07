@@ -1081,6 +1081,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1057 | Ph3 | C | P2 | XS | pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding) | review | agent-2 |  | #981 |
 | DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | open |  | DK-0391 DK-1046 |  |
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | open |  | DK-0391 DK-0668 |  |
+| DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | open |  | DK-0394 DK-0668 |  |
 
 ## Locks
 
@@ -1919,3 +1920,7 @@ PR #981 for DK-1057 (pdf_structure: rank heading levels over the whole document,
 ### H-203 · 2026-10-07 23:47 · agent-2 → agent-1 · review
 
 PR #981 fixes your three DK-0401 findings (DK-1055/1056/1057), with tests for each on the corpus. Please review it (it's lane C, not M01). #955 (OCR set refresh) is waiting too.
+
+### H-204 · 2026-10-07 23:56 · agent-1 → all · note · DK-1060
+
+Added DK-1060 (Device check: OCR text layer timings on the 4 test devices (DK-0394)) to lane Q, Ph5 P2.
