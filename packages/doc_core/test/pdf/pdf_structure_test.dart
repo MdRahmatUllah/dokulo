@@ -124,6 +124,19 @@ void main() {
       expect(blocks.last.rows.last, ['Total', '1,165.01']);
     });
 
+    test('two text blocks side by side read one after the other', () {
+      final blocks = layout([
+        ...place('Bill to:', 50, 700),
+        ...place('Invoice 14', 330, 700),
+        ...place('Max Mustermann', 50, 685),
+        ...place('Date: 7 Oct', 330, 685),
+      ]);
+      expect(blocks.map((b) => (b.kind, b.text)), [
+        (BlockKind.paragraph, 'Bill to: Max Mustermann'),
+        (BlockKind.paragraph, 'Invoice 14 Date: 7 Oct'),
+      ]);
+    });
+
     test('running headers and footers go; one-off lines in the band stay', () {
       List<TextLine> page(int n) => PdfStructure.buildLines([
         ...place('Handbuch · Kapitel $n', 50, 800), // header, digits differ
@@ -189,20 +202,66 @@ void main() {
     });
 
     test(
-      'long document: the running header and page numbers are dropped',
+      'long document: page numbers dropped, chapter headings kept',
       () async {
         final blocks = await PdfStructure.extract(
           fixture('long-300-pages.pdf'),
           pages: [0, 1, 2],
         );
         expect(blocks.where((b) => b.text.startsWith('Seite ')), isEmpty);
+        // Larger than the body: headings, though they repeat in the top band
+        // (DK-1055).
         expect(
-          blocks.where((b) => b.text.startsWith('Kapitel 1 · Abschnitt')),
-          isEmpty,
+          [
+            for (final b in blocks)
+              if (b.kind == BlockKind.heading) b.text,
+          ],
+          [
+            'Kapitel 1 · Abschnitt 1',
+            'Kapitel 1 · Abschnitt 2',
+            'Kapitel 1 · Abschnitt 3',
+          ],
         );
-        expect(blocks.any((b) => b.text.contains('Abschnitt002')), isTrue);
+        expect(blocks.any((b) => b.text.contains('Abschnitt002.')), isTrue);
       },
     );
+
+    test('heading levels are ranked over the whole document', () async {
+      final blocks = await PdfStructure.extract(
+        fixture('Mietvertrag Musterstraße 12.pdf'),
+      );
+      final sections = blocks.where(
+        (b) => b.kind == BlockKind.heading && b.text.startsWith('§'),
+      );
+      expect(sections.map((b) => b.page).toSet(), {0, 1, 2});
+      expect(sections.map((b) => b.level).toSet(), {2}); // DK-1057
+      expect(blocks.first.level, 1);
+    });
+
+    test('side-by-side address blocks are paragraphs, not tables', () async {
+      final invoice = await PdfStructure.extract(
+        fixture('Invoice INV-2026-014.pdf'),
+      );
+      final address = invoice.firstWhere((b) => b.text.startsWith('Bill to:'));
+      expect(address.kind, BlockKind.paragraph); // DK-1056
+      expect(
+        address.text,
+        'Bill to: Max Mustermann Musterstraße 12 80331 München',
+      );
+      expect(
+        invoice.firstWhere((b) => b.text.startsWith('Invoice INV')).kind,
+        BlockKind.paragraph,
+      );
+      final assessment = await PdfStructure.extract(
+        fixture('Finanzamt München – Bescheid 2025.pdf'),
+      );
+      expect(
+        assessment.where(
+          (b) => b.kind == BlockKind.table && b.text.contains('Herrn'),
+        ),
+        isEmpty,
+      );
+    });
 
     test('every other corpus file yields blocks without failing', () async {
       for (final name in [
