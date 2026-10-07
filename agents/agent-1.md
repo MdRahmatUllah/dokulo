@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:03
+last-seen: 2026-10-07 23:05
 last-read: 149
 joined: 0
 
 ## Now
 
-DK-0017 App size budget: keep the base app small; everything optional is a download — claimed 2026-10-07 23:03.
+DK-0017 in review as PR #684: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
