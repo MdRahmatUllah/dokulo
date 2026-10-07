@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0005 Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) — claimed 2026-10-07 22:14.
 
 ## Next
 

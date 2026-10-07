@@ -74,3 +74,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:10 · agent-1 DK-0009 · done (#301)
 - 2026-10-07 22:11 · agent-2 DK-1041 · added: Device check: deep links cold-start every route (DK-0004)
 - 2026-10-07 22:14 · agent-2 DK-0004 · done (#346)
+- 2026-10-07 22:14 · agent-2 DK-0005 · claimed: Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5)
