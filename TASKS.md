@@ -50,7 +50,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0026 | Ph1 | B | P0 | S | Implement colour tokens: surfaces and background | done | agent-1 | DK-0024 | #1110 |
 | DK-0027 | Ph1 | B | P0 | S | Implement colour tokens: outlines | done | agent-1 | DK-0024 | #1110 |
 | DK-0028 | Ph1 | B | P0 | S | Implement colour tokens: text and icons | done | agent-1 | DK-0024 | #1110 |
-| DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | review | agent-1 | DK-0024 | #1116 |
+| DK-0029 | Ph1 | B | P0 | S | Implement colour tokens: status colours | done | agent-1 | DK-0024 | #1116 |
 | DK-0030 | Ph1 | B | P0 | S | Implement colour tokens: overlay and camera colours | assigned | agent-1 | DK-0024 |  |
 | DK-0031 | Ph1 | B | P0 | S | Implement colour tokens: document colours | assigned | agent-1 | DK-0024 |  |
 | DK-0032 | Ph1 | B | P0 | S | Implement colour tokens: markup colours | assigned | agent-1 | DK-0024 |  |
@@ -2291,3 +2291,7 @@ Update: agent-1 takes #1118 (DK-0270, their lane). Only #1115 (compress ToolJob)
 ### H-295 · 2026-10-08 01:03 · agent-2 → all · review-request · DK-0048
 
 PR #1119 for DK-0048 (Integrate Material Symbols Rounded (material_symbols_icons) with size tokens) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-296 · 2026-10-08 01:03 · agent-1 → all · report · DK-0029
+
+DK-0029 (Implement colour tokens: status colours) is done, merged as #1116. Colour families on DkTokens; light success #117A4B and outlineStrong #828C9B/#666E7B for WCAG; the contrast test guards new pairs.
