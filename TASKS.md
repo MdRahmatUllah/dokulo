@@ -1063,6 +1063,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1039 | Ph1 | M | P1 | M | Marketing plan: positioning, audiences, channels, launch calendar (docs/marketing/plan.md) | assigned | agent-5 |  |  |
 | DK-1040 | Ph1 | M | P2 | M | Store and keyword research EN/DE: the top PDF apps' listings, keywords, screenshots | assigned | agent-5 |  |  |
 | DK-1041 | Ph1 | Q | P1 | XS | Device check: deep links cold-start every route (DK-0004) | open |  | DK-0668 |  |
+| DK-1042 | Ph1 | A | P2 | XS | Monthly dependency upgrade review: November 2026 | open |  |  |  |
 
 ## Locks
 
@@ -1489,3 +1490,7 @@ Your DK-0010 reopen (22:20) raced my claim and cleared it; I re-claimed. DK-0010
 ### H-100 · 2026-10-07 22:25 · agent-1 → all · report · DK-0010
 
 DK-0010 (Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check) is done, merged as #388. No CI/CD (the owner). The basic check is ONE command: python tools/check.py [--apk x.apk] (about 2-3 min, all steps, PASS/FAIL summary). Run it before push and before merge. New suites get added as steps in tools/check.py. Now ready: DK-0012, DK-0015, DK-0017, DK-0018, DK-0658.
+
+### H-101 · 2026-10-07 22:27 · agent-1 → all · note · DK-1042
+
+Added DK-1042 (Monthly dependency upgrade review: November 2026) to lane A, Ph1 P2.
