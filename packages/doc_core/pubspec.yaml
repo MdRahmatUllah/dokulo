@@ -19,6 +19,7 @@ dependencies:
   sqlite3: 3.6.0
 
 dev_dependencies:
+  image: ^4.10.1 # a pure-Dart JPEG encoder for the raster-fallback tests (the app uses OpenCV's)
   build_runner: ^2.16.1
   crypto: ^3.0.6
   drift_dev: ^2.35.0
