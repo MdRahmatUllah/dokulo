@@ -34,7 +34,11 @@ PR. Checked on pub.dev on 2026-10-07.
 | pdfrx | 2.6.5 | MIT | Viewer, render, text, page assembly, save; bundles PDFium via pdfium_flutter 0.3.1 and pdfrx_engine 0.6.1 | Planned |
 | pdfrx_engine | 0.6.1 | MIT | doc_core's PDF API (pure Dart, PDFium through pdfrx's worker); pdfrx 2.6.5's engine | In use (DK-0390, doc_core) |
 | pdfium_dart | 0.3.1 | MIT | Raw PDFium bindings for calls pdfrx doesn't wrap (image objects), run on pdfrx's worker | In use (DK-0390, doc_core) |
-| ffi | 2.2.0 | BSD-3 | Native memory for the raw PDFium calls | In use (DK-0390, doc_core) |
+| ffi | 2.2.0 | BSD-3 | Native memory for the raw PDFium calls and qpdf_ffi | In use (DK-0390 doc_core, DK-0391 qpdf_ffi) |
+| hooks | 2.2.0 | BSD-3 | Build hooks (qpdf_ffi's native build) | In use (DK-0391, qpdf_ffi) |
+| code_assets | 2.1.0 | BSD-3 | Native code assets from build hooks | In use (DK-0391, qpdf_ffi) |
+| native_toolchain_cmake | 0.3.2 | Apache-2.0 | Runs CMake from a build hook (as dartcv4 does) | In use (DK-0391, qpdf_ffi) |
+| logging | 1.3.0 | BSD-3 | Build-hook log output | In use (DK-0391, qpdf_ffi) |
 | pdf | 3.13.1 | Apache-2.0 | New PDFs, overlays, OCR text layer | Planned |
 | printing | 5.15.1 | Apache-2.0 | HTML → PDF | Planned |
 | llamadart | 0.8.12 | MIT | Gemma via llama.cpp; Sogda's runtime version (0.11.0 exists: upgrade together with Sogda) | Planned |
@@ -66,7 +70,9 @@ PR. Checked on pub.dev on 2026-10-07.
 
 | Library | Tag | SHA-256 of the source archive | How it is built |
 | --- | --- | --- | --- |
-| qpdf | `v12.3.2` | `6cba2f9f2cd887d905faeb99e0e51a307b217920d1bbf3e9cfbb2e8178a2deda` (`qpdf-12.3.2.tar.gz`; matches qpdf's signed `qpdf-12.3.2.sha256`) | Our `qpdf_ffi`, native crypto only |
+| qpdf | `v12.3.2` | `6cba2f9f2cd887d905faeb99e0e51a307b217920d1bbf3e9cfbb2e8178a2deda` (`qpdf-12.3.2.tar.gz`; matches qpdf's signed `qpdf-12.3.2.sha256`) | From source by `qpdf_ffi`'s build hook (`packages/qpdf_ffi/src/CMakeLists.txt`), shared, native crypto only |
+| zlib (for qpdf) | `v1.3.2` | `bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16` (`zlib-1.3.2.tar.gz`; signature checked: Mark Adler, `5ED4 6A67 21D3 6558 7791 E2AA 783F CD8E 58BC AFBA`) | Static, into qpdf |
+| libjpeg-turbo (for qpdf) | `3.1.4.1` | `ecae8008e2cc9ade2f2c1bb9d5e6d4fb73e7c433866a056bd82980741571a022` (`libjpeg-turbo-3.1.4.1.tar.gz`; signature checked: the project's official-binaries key, `0338 C8D8 D9FD A62C F9C4 21BD 7EC2 DBB6 F4DB F434`) | Static, no SIMD, into qpdf |
 | OpenCV | `4.13.0` | `1d40ca017ea51c533cf9fd5cbde5b5fe7ae248291ddf2af99d4c17cf8e13017d` (GitHub's `4.13.0.tar.gz`) | Built from source by dartcv4 2.2.2 |
 | PDFium | `chromium/7811` | pinned by pdfium_flutter 0.3.1 | Prebuilt by pdfrx |
 | ONNX Runtime | 1.23 | pinned by flutter_onnxruntime 1.8.4 | Prebuilt by the plugin |

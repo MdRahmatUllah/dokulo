@@ -14,3 +14,4 @@ workspace:
   - packages/doc_vision
   - packages/ai_core
   - packages/vision_ocr
+  - packages/qpdf_ffi

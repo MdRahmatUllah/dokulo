@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 
 # vision_ocr (DK-0397) is a native bridge doc_vision uses, beside ai_core.
-LAYERS = {"app_pdf": 1, "doc_tools": 2, "doc_core": 3, "doc_vision": 3, "ai_core": 4, "vision_ocr": 4}
+LAYERS = {"app_pdf": 1, "doc_tools": 2, "doc_core": 3, "doc_vision": 3, "ai_core": 4, "vision_ocr": 4, "qpdf_ffi": 4}
 # Imports app_pdf/lib must not use. pdfrx is allowed: its viewer widget runs
 # PDFium on pdfrx's own worker isolate.
 NATIVE_IMPORTS = re.compile(
