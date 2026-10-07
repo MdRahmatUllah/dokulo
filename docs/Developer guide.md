@@ -249,6 +249,15 @@ a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
 
+**The component catalogue (DK-0150).** Every `Dk` component shows each
+variant and state in Light and Dark at `/dev/components` (debug builds only;
+`dokulo://open/dev/components` on the emulator). A component task adds a
+states widget to `lib/catalogue/` and one `CatalogueEntry` to
+`lib/catalogue/catalogue.dart`, and its golden test renders that same widget,
+so the catalogue shows exactly what is tested. `test/flutter_test_config.dart`
+loads the icon font for every test, so goldens show the glyphs; text stays in
+the test font.
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
