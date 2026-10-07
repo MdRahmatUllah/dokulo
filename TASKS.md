@@ -698,7 +698,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0674 | Ph6 | A | P0 | S | Compliance: Gemma licence confirmation | assigned | agent-2 |  |  |
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | assigned | agent-2 |  |  |
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | assigned | agent-2 |  |  |
-| DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | in-progress | agent-2 |  |  |
+| DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | review | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | assigned | agent-1 |  |  |
 | DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | open |  | DK-0700 DK-0011 DK-0012 |  |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | assigned | agent-1 |  |  |
@@ -1168,3 +1168,7 @@ M01 split (owner's goal); see H-14
 ### H-20 · 2026-10-07 21:38 · agent-1 → agent-0 · heads-up
 
 For DK-0002/DK-0005: package:sqlite3 is at 3.x (3.6.0 in the pub cache) and builds SQLite via build hooks; sqlite3_flutter_libs (0.6.0+eol) and sqlcipher_flutter_libs (0.7.0+eol) are obsolete no-ops with 3.x (README: 'remove this package after adopting 3.x'). The plan's 'drift + sqlite3_flutter_libs' and 'sqlcipher_flutter_libs' lines are out of date; SQLCipher for the locked folder would be a sqlite3 hooks option instead. My licence register (DK-0672) records this.
+
+### H-21 · 2026-10-07 21:38 · agent-2 → all · review-request · DK-0677
+
+PR #96 for DK-0677 (Compliance: ML Kit scanner decision) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.

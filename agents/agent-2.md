@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 21:36
+last-seen: 2026-10-07 21:38
 last-read: 7
 joined: 0
 
 ## Now
 
-DK-0677 Compliance: ML Kit scanner decision — claimed 2026-10-07 21:18.
+DK-0677 in review as PR #96: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
