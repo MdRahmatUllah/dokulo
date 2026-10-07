@@ -52,7 +52,7 @@
 		<string>en</string>
 		<string>de</string>
 	</array>
-	<!-- Platform capabilities (DK-0016). The usage strings are the English source;
+	<!-- Platform capabilities (DK-0016; file sharing and open-in-place also serve DK-0006's visible folder). The usage strings are the English source;
 	     en.lproj/de.lproj InfoPlist.strings carry the shown text, matching the pre-prompts. -->
 	<key>NSCameraUsageDescription</key>
 	<string>Dokulo uses the camera only to scan. Images stay on this phone.</string>

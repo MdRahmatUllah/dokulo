@@ -25,6 +25,7 @@ ALLOWED = {
     "android.permission.FOREGROUND_SERVICE_DATA_SYNC",
     "android.permission.USE_BIOMETRIC",                    # locked folder, app lock
     "android.permission.INTERNET",                         # model downloads, Web to PDF, purchases
+    "android.permission.WRITE_EXTERNAL_STORAGE",           # Documents/Dokulo on Android 8-9 (maxSdkVersion 28, DK-0006)
 }
 # androidx adds <package>.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION, a signature permission of the app itself.
 OWN = re.compile(r"\.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION$")
