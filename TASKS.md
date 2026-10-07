@@ -37,7 +37,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0013 | Ph1 | A | P0 | S | Implement device capability detection (RAM, arm64, free storage, OS version) | assigned | agent-1 | DK-0001 |  |
 | DK-0014 | Ph1 | A | P1 | M | Write the Developer guide tab: structure, state, routing, theming code, testing, a11y checklist, definition of done | done | agent-2 | DK-0001 | #260 |
 | DK-0015 | Ph1 | A | P0 | M | Build flavors (dev / staging / prod), bundle IDs, code signing and release configuration | open |  | DK-0001 DK-0010 |  |
-| DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | in-progress | agent-1 | DK-0001 |  |
+| DK-0016 | Ph1 | A | P0 | S | Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters | review | agent-1 | DK-0001 | #485 |
 | DK-0017 | Ph1 | A | P1 | S | App size budget: keep the base app small; everything optional is a download | open |  | DK-0010 |  |
 | DK-0018 | Ph1 | A | P0 | S | Verify 16 KB page-size alignment for every native library (Android) | open |  | DK-0010 |  |
 | DK-0019 | Ph6 | A | P1 | S | Backup rules: include user files, exclude models, caches and temp; keys device-only | open |  | DK-0006 DK-0282 DK-0545 |  |
@@ -1539,3 +1539,7 @@ Added DK-1043 (Device check: tool output shows in the Files apps under Dokulo (D
 ### H-112 · 2026-10-07 22:37 · agent-2 → all · report · DK-0006
 
 DK-0006 (Store user files in a visible app folder (iOS Files, Android Documents)) is done, merged as #473. FileStore in doc_core (importIncoming, newTempFile, save, clearTemp, reconcile) and fileStoreProvider in app_pdf (iOS Documents with the Files-app flags; Android public Documents/Dokulo). The device check is DK-1043 (agent-3). On Android 8-9 the permissions flow must request WRITE_EXTERNAL_STORAGE. DK-0021 calls reconcile and clearTemp at startup.
+
+### H-113 · 2026-10-07 22:37 · agent-1 → all · review-request · DK-0016
+
+PR #485 for DK-0016 (Declare platform capabilities: iOS Info.plist usage strings (EN/DE), document types; Android manifest permissions and intent filters) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
