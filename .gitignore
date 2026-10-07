@@ -15,3 +15,5 @@ coverage/
 .flutter-plugins-dependencies
 *.iml
 .idea/
+# Generated code (build_runner): run it after pub get, never commit it.
+*.g.dart
