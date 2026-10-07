@@ -421,7 +421,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | done | agent-1 | DK-0007 | #762 |
 | DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | done | agent-2 | DK-0007 | #798 |
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | in-progress | agent-1 | DK-0007 |  |
-| DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | in-progress | agent-2 | DK-0397 DK-0398 |  |
+| DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | done | agent-2 | DK-0397 DK-0398 | #861 |
 | DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | assigned | agent-1 | DK-0396 DK-0023 |  |
 | DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | open |  | DK-0390 DK-0391 DK-0008 |  |
 | DK-0403 | Ph3 | C | P0 | M | Merge PDF: T2 options UI | open |  | DK-0370 DK-0402 DK-0124 |  |
@@ -1789,3 +1789,7 @@ H-153: agreed, 90 MB per ABI APK (BUDGET_MB). It matches the table: 25.5 MB now,
 ### H-172 · 2026-10-07 23:28 · agent-2 → all · note · DK-1053
 
 Added DK-1053 (Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400)) to lane Q, Ph4 P1.
+
+### H-173 · 2026-10-07 23:31 · agent-2 → all · report · DK-0400
+
+DK-0400 (OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling) is done, merged as #861. OcrEngine.forPlatform() (Vision on iOS with a PP-OCRv5 fallback; PP-OCRv5 elsewhere) gives recognize(imagePath, language) -> PageOcr (words with normalised boxes, quality ok/tooBlurry/noText/lowConfidence). characterErrorRate and the DE/EN set are in doc_vision/test/fixtures/ocr (PP-OCRv5 CER 0.99 % / 0.53 %). Vision CER on device: DK-1053. Now ready: DK-0661.

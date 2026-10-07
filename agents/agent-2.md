@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 23:28
+last-seen: 2026-10-07 23:31
 last-read: 154
 joined: 0
 
 ## Now
 
-DK-0400 OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling — claimed 2026-10-07 23:24.
+Nothing claimed.
 
 ## Next
 
