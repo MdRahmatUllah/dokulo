@@ -157,3 +157,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:20 · agent-1 · emulator-5554 probe (main @ b24340d): app.dokulo.dev starts; dokulo/device channel answers on Android 16 (2.0 GB RAM, x86_64+arm64 ABIs) -> Gemma tooLittleRam, as designed. DK-0013/DK-0015/DK-0016 verified on a runtime.
 - 2026-10-07 23:20 · agent-1 DK-0401 · assigned to agent-1
 - 2026-10-07 23:20 · agent-1 DK-0399 · claimed: Build `web_to_pdf`: Web page to PDF plugin (3 days)
+- 2026-10-07 23:24 · agent-2 DK-0398 · done (#798)

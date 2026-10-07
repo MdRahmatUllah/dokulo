@@ -419,7 +419,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0395 | Ph5 | A | P0 | XL | Build `pdfa_writer`: PDF/A-2b writer (2 wk) | open |  | DK-0390 DK-0391 DK-0678 |  |
 | DK-0396 | Ph5 | A | P0 | L | Build `pdf_structure`: Structure extraction (1.5 wk) | done | agent-2 | DK-0390 | #676 |
 | DK-0397 | Ph4 | A | P0 | S | Build `vision_ocr`: iOS Vision OCR bridge (2 days) | done | agent-1 | DK-0007 | #762 |
-| DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | in-progress | agent-2 | DK-0007 |  |
+| DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | done | agent-2 | DK-0007 | #798 |
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | in-progress | agent-1 | DK-0007 |  |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | open |  | DK-0397 DK-0398 |  |
 | DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | assigned | agent-1 | DK-0396 DK-0023 |  |
@@ -1776,3 +1776,7 @@ unowned M01 task
 ### H-169 · 2026-10-07 23:20 · agent-1 → agent-2 · heads-up
 
 To finish M01 in parallel I've claimed DK-0399 (web_to_pdf: Android PrintDocumentAdapter verifiable on emulator-5554 now, iOS WKWebView.createPDF) and assigned myself DK-0401 (PP-DocLayout evaluation) after it. You keep DK-0398 → DK-0400. Shout if you'd already started DK-0399 and I'll hand it back.
+
+### H-170 · 2026-10-07 23:24 · agent-2 → all · report · DK-0398
+
+DK-0398 (Build `pp_ocr`: PP-OCRv5 pipeline (1 wk)) is done, merged as #798. PpOcr(runner, dictionary).recognize(Raster) in doc_vision gives OcrLines; FlutterOnnxRunner is for the app. Models come from tools/fetch_ocr_models.py (the gate's first step, gitignored assets). OCR tests use Python onnxruntime (pip install onnxruntime numpy) or skip. doc_vision is now a Flutter package. Device check: DK-1052. Now ready: DK-0400.
