@@ -469,6 +469,16 @@ class RenderedPage {
   });
   final int width, height;
   final Uint8List bgra;
+
+  /// The same pixels as RGBA, as image encoders and the `pdf` package want them.
+  Uint8List get rgba {
+    final out = Uint8List.fromList(bgra);
+    for (var i = 0; i < out.length; i += 4) {
+      out[i] = bgra[i + 2];
+      out[i + 2] = bgra[i];
+    }
+    return out;
+  }
 }
 
 class ImageObject {

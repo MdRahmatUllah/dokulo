@@ -51,11 +51,7 @@ abstract final class PdfaWriter {
         dpi: rasterDpi,
         password: password,
       );
-      images[i] = (
-        rgba: _bgraToRgba(shot.bgra),
-        width: shot.width,
-        height: shot.height,
-      );
+      images[i] = (rgba: shot.rgba, width: shot.width, height: shot.height);
       words[i] = wordsOf(
         await PdfEngine.pageText(input, p, password: password),
         info.pages[p],
@@ -309,12 +305,3 @@ abstract final class PdfaWriter {
 /// A PDF string from qpdf's JSON ("u:text"); null for anything else.
 String? _text(Object? v) =>
     v is String && v.startsWith('u:') && v.length > 2 ? v.substring(2) : null;
-
-Uint8List _bgraToRgba(Uint8List bgra) {
-  final rgba = Uint8List.fromList(bgra);
-  for (var i = 0; i < rgba.length; i += 4) {
-    rgba[i] = bgra[i + 2];
-    rgba[i + 2] = bgra[i];
-  }
-  return rgba;
-}
