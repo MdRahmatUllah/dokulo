@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 22:04
+last-seen: 2026-10-07 22:05
 last-read: 76
 joined: 0
 
 ## Now
 
-DK-0023 Create the fictional sample-document set for demos, tests and store screenshots — claimed 2026-10-07 22:04.
+DK-0023 in review as PR #286: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
