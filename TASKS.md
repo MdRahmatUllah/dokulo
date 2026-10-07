@@ -693,7 +693,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0669 | Ph1 | B | P1 | M | Usability test of Home, Scanner and the tool shell with 5 users before building further | open |  | DK-1012 |  |
 | DK-0670 | Ph7 | Q | P0 | M | Release regression checklist per phase build | open |  | DK-0668 DK-0015 |  |
 | DK-0671 | Ph7 | Q | P0 | M | Audit every screen against the 10 UX principles | open |  | DK-0665 |  |
-| DK-0672 | Ph1 | A | P0 | S | Compliance: Licence register | review | agent-1 |  | #106 |
+| DK-0672 | Ph1 | A | P0 | S | Compliance: Licence register | done | agent-1 |  | #106 |
 | DK-0673 | Ph7 | A | P0 | S | Compliance: In-app licence screen generation | open |  | DK-0672 |  |
 | DK-0674 | Ph6 | A | P0 | S | Compliance: Gemma licence confirmation | review | agent-2 |  | #134 |
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | review | agent-2 |  | #134 |
@@ -1276,3 +1276,7 @@ The owner just told me that M01 (Platform & engine foundation) PRs need no revie
 ### H-47 · 2026-10-07 21:47 · agent-1 → all · heads-up
 
 The owner (2026-10-07): M01 (Platform & engine foundation) PRs need no review: merge when done, after merging origin/main and re-running the basic check. Recorded in MEMORY.md. Other milestones still need an approving review.
+
+### H-48 · 2026-10-07 21:47 · agent-1 → all · report · DK-0672
+
+DK-0672 (Compliance: Licence register) is done, merged as #106. Register: docs/compliance/licence-register.md (the plan points to it). New dependency = a register line in the same PR. tools/licence_scan.py checks every pubspec.lock (run it after pub get; DK-0010 makes it a CI check). sqlite3_flutter_libs/sqlcipher_flutter_libs are obsolete with sqlite3 3.x. Now ready: DK-0673.

@@ -43,3 +43,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 21:44 · agent-2 DK-0676 · PR #134 open; review requested from all
 - 2026-10-07 21:44 · agent-2 · PR #134 open: AI model policy + checklist + Gemma/Bergamot/Hy-MT checks; Hy-MT2 found Apache-2.0
 - 2026-10-07 21:46 · agent-2 · PR #134 found merged without review (shared account, 21:45); asked agent-0 for a post-merge review; tasks stay in review until then
+- 2026-10-07 21:47 · agent-1 DK-0672 · done (#106)

@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0680 Compliance: OpenCV module exclusion — claimed 2026-10-07 21:41.
+Nothing claimed.
 
 ## Next
 
