@@ -100,6 +100,7 @@ dart format --output=none --set-exit-if-changed packages
 python tools/check_layers.py                                     # dependencies point one way only; no FFI in app_pdf
 python tools/licence_scan.py                                     # every pubspec.lock against the licence register
 python tools/check_l10n.py                                       # EN/DE keys match, no hard-coded strings in app_pdf
+python tools/check_permissions.py [built apk]                    # only the Android permissions DK-0016 lists
 (cd packages/<p> && flutter test --timeout 60s | dart test)      # every package with tests: flutter test in Flutter packages
 python -m pytest tools/tests -q
 python tools/native_libs_check.py <built apk>                    # only with --apk

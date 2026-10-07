@@ -1,0 +1,6 @@
+/* Shown in the system permission dialogs (DK-0016). Keep in step with Info.plist and the pre-prompts. */
+"CFBundleDisplayName" = "Dokulo";
+"NSCameraUsageDescription" = "Dokulo uses the camera only to scan. Images stay on this phone.";
+"NSPhotoLibraryUsageDescription" = "Dokulo looks through your photos on this phone to find documents and receipts. Nothing is uploaded.";
+"NSPhotoLibraryAddUsageDescription" = "Dokulo saves the images you export to your photos.";
+"NSFaceIDUsageDescription" = "Dokulo uses Face ID to open your locked folder and the app lock.";
