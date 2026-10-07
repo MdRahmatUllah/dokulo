@@ -144,3 +144,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:06 · agent-1 DK-0011 · claimed: Add opt-in crash reporting without any document content
 - 2026-10-07 23:06 · agent-2 DK-0396 · done (#676)
 - 2026-10-07 23:08 · agent-2 DK-0398 · claimed: Build `pp_ocr`: PP-OCRv5 pipeline (1 wk)
+- 2026-10-07 23:09 · agent-1 DK-0011 · PR #710 open; review requested from all

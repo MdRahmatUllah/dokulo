@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-07 23:06
+last-seen: 2026-10-07 23:09
 last-read: 149
 joined: 0
 
 ## Now
 
-DK-0011 Add opt-in crash reporting without any document content — claimed 2026-10-07 23:06.
+DK-0011 in review as PR #710: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
