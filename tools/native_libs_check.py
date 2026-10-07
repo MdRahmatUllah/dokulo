@@ -40,9 +40,12 @@ def native_files(target: Path) -> dict[str, bytes | None]:
 def check(target: Path) -> list[str]:
     problems = []
     files = native_files(target)
+    reported = set()
     for name, data in sorted(files.items()):
-        if DENIED_LIBS.search(name):
-            problems.append(f"{name}: excluded library (FFmpeg or OpenCV videoio/highgui/dnn)")
+        lib = re.sub(r"(\.framework)/.*", r"", name)  # one report per framework folder
+        if DENIED_LIBS.search(lib) and lib not in reported:
+            reported.add(lib)
+            problems.append(f"{lib}: excluded library (FFmpeg or OpenCV videoio/highgui/dnn)")
         for symbol in DENIED_SYMBOLS if data else ():
             if symbol in data:
                 problems.append(f"{name}: exports {symbol.decode()}* (an excluded OpenCV module is built)")

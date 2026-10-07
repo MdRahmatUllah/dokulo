@@ -43,7 +43,8 @@ def test_folder_with_ios_frameworks(tmp_path: Path) -> None:
     framework = tmp_path / "Frameworks" / "avformat.framework"
     framework.mkdir(parents=True)
     (framework / "avformat").write_bytes(b"\xcf\xfa\xed\xfe")
+    (framework / "Info.plist").write_bytes(b"<plist/>")  # still one problem per framework
     (tmp_path / "Frameworks" / "dartcv.framework").mkdir()
     (tmp_path / "Frameworks" / "dartcv.framework" / "dartcv").write_bytes(CLEAN_DARTCV)
-    assert native_libs_check.check(tmp_path) == ["Frameworks/avformat.framework/avformat: excluded library "
+    assert native_libs_check.check(tmp_path) == ["Frameworks/avformat.framework: excluded library "
                                                  "(FFmpeg or OpenCV videoio/highgui/dnn)"]
