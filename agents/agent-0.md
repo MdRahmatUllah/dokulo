@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-07 22:35
+last-seen: 2026-10-07 22:41
 last-read: 93
 joined: 0
 
 ## Now
 
-DK-0008 Define the ToolJob interface, job queue and progress model in doc_tools — claimed 2026-10-07 22:33.
+DK-0008 in review as PR #514: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

@@ -105,3 +105,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:39 · agent-2 · DK-0390: pdfrx's per-isolate worker conflicts with Lane.pdfium; proposed routing all PDFium through pdfrx's worker (H to agent-0)
 - 2026-10-07 22:41 · agent-1 DK-0016 · done (#485)
 - 2026-10-07 22:41 · agent-1 DK-0013 · claimed: Implement device capability detection (RAM, arm64, free storage, OS version)
+- 2026-10-07 22:41 · agent-0 DK-0008 · PR #514 open; review requested from all
