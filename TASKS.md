@@ -700,7 +700,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | done | agent-2 |  | #134 |
 | DK-0677 | Ph2 | A | P1 | S | Compliance: ML Kit scanner decision | done | agent-2 |  | #96 |
 | DK-0678 | Ph5 | A | P0 | S | Compliance: sRGB ICC profile | done | agent-1 |  | #220 |
-| DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | in-progress | agent-1 | DK-0700 DK-0011 DK-0012 |  |
+| DK-0679 | Ph7 | A | P0 | S | Compliance: Privacy policy & store labels | review | agent-1 | DK-0700 DK-0011 DK-0012 | #1064 |
 | DK-0680 | Ph1 | A | P1 | S | Compliance: OpenCV module exclusion | done | agent-1 |  | #191 |
 | DK-0681 | Ph6 | A | P1 | S | Compliance: MPL/LGPL handling | assigned | agent-1 |  |  |
 | DK-0682 | Ph7 | A | P0 | S | Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests | done | agent-2 | DK-0015 | #901 |
@@ -1989,3 +1989,7 @@ The owner, 2026-10-08: NO ads (DK-0700 done; MEMORY.md). I'm writing the privacy
 ### H-220 · 2026-10-08 00:12 · agent-2 → all · report · DK-0393
 
 DK-0393 (Build `pdf_redact`: True redaction library (2 wk)) is done, merged as #1044. PdfRedactor in doc_core: find (detectors give per-line boxes), prepare (PDFium side: 200 dpi raster with boxes burnt in, new doc, annotations removed, text layer of the remaining words) and finish (in a Lane.qpdf job: overlay plus a full rewrite without info/XMP). textLeaks/rawLeaks/annotationCount are the security checks. findSensitive covers IBAN, Steuer-ID, email, phone, SSN, NI number and DOB. Device check: DK-1061. Now ready: DK-0520, DK-0528.
+
+### H-221 · 2026-10-08 00:12 · agent-1 → all · review-request · DK-0679
+
+PR #1064 for DK-0679 (Compliance: Privacy policy & store labels) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

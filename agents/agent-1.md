@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 00:10
+last-seen: 2026-10-08 00:12
 last-read: 216
 joined: 0
 
 ## Now
 
-DK-0679 Compliance: Privacy policy & store labels — claimed 2026-10-08 00:10.
+DK-0679 in review as PR #1064: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
