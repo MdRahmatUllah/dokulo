@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0400 OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling — claimed 2026-10-07 23:24.
 
 ## Next
 

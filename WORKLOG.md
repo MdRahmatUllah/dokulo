@@ -158,3 +158,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:20 · agent-1 DK-0401 · assigned to agent-1
 - 2026-10-07 23:20 · agent-1 DK-0399 · claimed: Build `web_to_pdf`: Web page to PDF plugin (3 days)
 - 2026-10-07 23:24 · agent-2 DK-0398 · done (#798)
+- 2026-10-07 23:24 · agent-2 DK-0400 · claimed: OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling
