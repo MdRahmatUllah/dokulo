@@ -35,6 +35,8 @@ dependencies:
 
   doc_tools:
     path: ../doc_tools
+  ai_core:
+    path: ../ai_core
   flutter_localizations:
     sdk: flutter
   intl: 0.20.3

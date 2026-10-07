@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 
+import 'database.steps.dart';
+
 part 'database.g.dart';
 
 /// Dokulo's database (DK-0005); the schema is `schema.drift`.
@@ -29,10 +31,13 @@ class DokuloDatabase extends _$DokuloDatabase {
       File('${supportDirectory.path}${Platform.pathSeparator}dokulo.db');
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
+    onUpgrade: stepByStep(
+      from1To2: (m, schema) async => m.createTable(schema.jobs), // DK-0008
+    ),
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
     },

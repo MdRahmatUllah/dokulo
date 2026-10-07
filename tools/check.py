@@ -49,6 +49,7 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         ("layers", [py, "tools/check_layers.py"], root),
         ("licences", [py, "tools/licence_scan.py"], root),
         ("l10n", [py, "tools/check_l10n.py"], root),
+        ("permissions", [py, "tools/check_permissions.py"], root),
     ]
     for p in packages(root):
         if (p / "test").is_dir():
@@ -57,6 +58,7 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
     out.append(("tools tests", [py, "-m", "pytest", "tools/tests", "-q"], root))
     if apk:
         out.append(("native libs", [py, "tools/native_libs_check.py", str(apk)], root))
+        out.append(("apk permissions", [py, "tools/check_permissions.py", str(apk)], root))
     return out
 
 
