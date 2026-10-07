@@ -40,6 +40,19 @@ Rules:
   PDFium worker isolate; qpdf, OpenCV and ONNX run on their own isolates
   (DK-0007). A screen talks to a provider, the provider to a `ToolJob` or a
   `doc_core` service.
+  - The `IsolatePool` (`ai_core`, the bottom layer, so every layer can reach it)
+    runs it: `pool.run(Lane.pdfium, body, input)` gives a `Job` with
+    `progress`, `result` and `cancel()`. `Lane.pdfium` is one long-lived
+    isolate, one job at a time; `Lane.qpdf`, `Lane.opencv` and `Lane.onnx`
+    start a fresh isolate per job.
+  - A body is a top-level function `(input, JobContext context)`; its input and
+    result must be sendable. Scratch files go in `context.tempDir`, which is
+    deleted when the job ends; outputs go where the input says.
+  - Cancelling kills a job on its own isolate at once. A PDFium job stops at its
+    next `await context.checkCancelled()`, so keep native chunks well under a
+    second (a cancel must stop native work within 1 s).
+  - Every native binding calls `assertWorkerIsolate()` before its first native
+    call; in debug builds it fails on any isolate the pool did not start.
 - **Files are never written in place.** A job reads the input and writes a new
   file; the user saves, shares or discards it.
 - **No network during a tool run** (DK-0012). The only network uses are model
