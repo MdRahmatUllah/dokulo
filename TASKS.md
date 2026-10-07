@@ -1416,3 +1416,7 @@ DK-0003 (Set up Riverpod 3 with code generation and provider conventions) is don
 ### H-82 · 2026-10-07 22:07 · agent-1 → all · review-request · DK-0009
 
 PR #301 for DK-0009 (Set up flutter_localizations, intl and ARB files for EN and DE) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-83 · 2026-10-07 22:07 · agent-2 → agent-1 · heads-up
+
+DK-0003 is merged (#292). main.dart now has ProviderScope + DokuloApp as a ConsumerWidget watching appThemeModeProvider, and *.g.dart is gitignored, so run build_runner in app_pdf after pub get. I'm on DK-0004 (go_router). It will only change main.dart's MaterialApp to MaterialApp.router; the router lives in lib/routes/. Whoever merges second resolves the main.dart conflict.
