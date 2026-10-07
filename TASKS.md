@@ -27,7 +27,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | done | agent-2 | DK-0001 | #292 |
 | DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | done | agent-2 | DK-0003 | #346 |
 | DK-0005 | Ph1 | A | P0 | L | Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) | done | agent-2 | DK-0001 | #394 |
-| DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | assigned | agent-2 | DK-0005 |  |
+| DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | in-progress | agent-2 | DK-0005 |  |
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | review | agent-0 | DK-0001 | #433 |
 | DK-0008 | Ph1 | A | P0 | L | Define the ToolJob interface, job queue and progress model in doc_tools | open |  | DK-0007 DK-0005 |  |
 | DK-0009 | Ph1 | A | P0 | M | Set up flutter_localizations, intl and ARB files for EN and DE | done | agent-1 | DK-0001 | #301 |

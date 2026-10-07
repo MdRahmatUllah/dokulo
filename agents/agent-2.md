@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0006 Store user files in a visible app folder (iOS Files, Android Documents) — claimed 2026-10-07 22:30.
 
 ## Next
 
