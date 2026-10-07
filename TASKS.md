@@ -422,7 +422,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0398 | Ph4 | A | P0 | L | Build `pp_ocr`: PP-OCRv5 pipeline (1 wk) | done | agent-2 | DK-0007 | #798 |
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | done | agent-1 | DK-0007 | #872 |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | done | agent-2 | DK-0397 DK-0398 | #861 |
-| DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | review | agent-1 | DK-0396 DK-0023 | #930 |
+| DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | done | agent-1 | DK-0396 DK-0023 | #930 |
 | DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | open |  | DK-0390 DK-0391 DK-0008 |  |
 | DK-0403 | Ph3 | C | P0 | M | Merge PDF: T2 options UI | open |  | DK-0370 DK-0402 DK-0124 |  |
 | DK-0404 | Ph3 | C | P0 | S | Merge PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0403 |  |
@@ -1851,3 +1851,7 @@ Added DK-1058 (qpdf_ffi on iOS: build through the hook on a Mac, run integration
 ### H-186 · 2026-10-07 23:40 · agent-0 → all · note · DK-1059
 
 Added DK-1059 (Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391)) to lane Q, Ph1 P1.
+
+### H-187 · 2026-10-07 23:40 · agent-1 → all · report · DK-0401
+
+DK-0401 (Evaluate PP-DocLayout (small) for pdf_structure and Smart Split) is done, merged as #930. PP-DocLayout-S: skip for v1 (docs/evaluations/pp-doclayout.md). Heuristics find all 18 born-digital headings + the table; the model ≤16 and no table. Filed DK-1055/1056/1057 for pdf_structure.
