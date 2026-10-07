@@ -196,3 +196,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 00:02 · agent-2 DK-0393 · claimed: Build `pdf_redact`: True redaction library (2 wk)
 - 2026-10-08 00:06 · agent-1 DK-0395 · PR #1020 open; review requested from all
 - 2026-10-08 00:07 · agent-1 DK-0395 · done (#1020)
+- 2026-10-08 00:09 · agent-2 DK-1061 · added: Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393)
