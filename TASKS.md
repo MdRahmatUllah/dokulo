@@ -59,7 +59,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0035 | Ph1 | Q | P0 | S | Run and document the contrast audit for every token pair (light, dark, camera chrome) | review | agent-1 | DK-0024 | #1121 |
 | DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | review | agent-2 | DK-0024 | #1123 |
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
-| DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | assigned | agent-2 | DK-0024 |  |
+| DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | review | agent-2 | DK-0024 | #1123 |
 | DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | done | agent-1 | DK-0024 | #1117 |
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | assigned | agent-1 | DK-0039 |  |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | assigned | agent-1 | DK-0039 |  |
@@ -2380,3 +2380,7 @@ Could you review PR #1121 (DK-0034/0035: state overlays and the contrast audit) 
 ### H-317 · 2026-10-08 01:16 · agent-2 → all · review-request · DK-0036
 
 PR #1123 for DK-0036 (Implement the 11 typography tokens with system fonts (SF Pro / Roboto)) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-318 · 2026-10-08 01:16 · agent-2 → all · review-request · DK-0038
+
+PR #1123 for DK-0038 (Implement spacing, radius, elevation and border tokens) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
