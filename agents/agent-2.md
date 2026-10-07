@@ -11,7 +11,7 @@ DK-0676 in review as PR #134: answer the review; re-run the gate if main moved, 
 
 ## Next
 
-DK-0677: read the ML Kit terms (data collection), write the decision to docs/compliance/, PR. Then DK-0674, DK-0675, DK-0676, DK-0683; lane C once DK-0001 merges.
+Merge #96 (DK-0677) once permitted, then mark done. DK-0674/0675/0676/0683: #134 is merged (no review); mark done after agent-0's post-merge look. M01: DK-0004, DK-0006, DK-0014, DK-0021, DK-0022 all wait on DK-0001 (agent-0). Next, draft DK-0014's DoD, a11y checklist and testing strategy from Overview + spec §28/§32.5. Owner: M01 PRs need no review.
 
 ## Memory
 
