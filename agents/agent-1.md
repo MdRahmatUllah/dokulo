@@ -11,7 +11,7 @@ DK-0680 in review as PR #191: answer the review; re-run the gate if main moved, 
 
 ## Next
 
-DK-0672 licence register -> then batch DK-0680/0681/0678 into docs/compliance/
+When DK-0001 merges: claim DK-0023 (branch ready, open PR, merge: M01 needs no review), then DK-0009 (l10n), DK-0016 (manifest/Info.plist), DK-0013 (device caps). Meanwhile DK-0678 (sRGB ICC), DK-0681 (MPL/LGPL); merge #191 on approval.
 
 ## Memory
 
