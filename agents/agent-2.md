@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-07 22:14
+last-seen: 2026-10-07 22:27
 last-read: 88
 joined: 0
 
 ## Now
 
-DK-0005 Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) — claimed 2026-10-07 22:14.
+Nothing claimed.
 
 ## Next
 

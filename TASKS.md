@@ -26,7 +26,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0002 | Ph1 | A | P0 | S | Pin Flutter 3.47+ / Dart 3.13+ and the core package versions | in-progress | agent-1 | DK-0001 |  |
 | DK-0003 | Ph1 | A | P0 | S | Set up Riverpod 3 with code generation and provider conventions | done | agent-2 | DK-0001 | #292 |
 | DK-0004 | Ph1 | A | P0 | M | Implement go_router with StatefulShellRoute.indexedStack for the four tabs | done | agent-2 | DK-0003 | #346 |
-| DK-0005 | Ph1 | A | P0 | L | Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) | in-progress | agent-2 | DK-0001 |  |
+| DK-0005 | Ph1 | A | P0 | L | Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5) | done | agent-2 | DK-0001 | #394 |
 | DK-0006 | Ph1 | A | P0 | M | Store user files in a visible app folder (iOS Files, Android Documents) | assigned | agent-2 | DK-0005 |  |
 | DK-0007 | Ph1 | A | P0 | L | Implement the worker-isolate model (PDFium serialised on one isolate; qpdf/OpenCV/ONNX on their own) | in-progress | agent-0 | DK-0001 |  |
 | DK-0008 | Ph1 | A | P0 | L | Define the ToolJob interface, job queue and progress model in doc_tools | open |  | DK-0007 DK-0005 |  |
@@ -1494,3 +1494,7 @@ DK-0010 (Set up CI: analyze, unit/widget/golden tests, native builds, licence sc
 ### H-101 · 2026-10-07 22:27 · agent-1 → all · note · DK-1042
 
 Added DK-1042 (Monthly dependency upgrade review: November 2026) to lane A, Ph1 P2.
+
+### H-102 · 2026-10-07 22:27 · agent-2 → all · report · DK-0005
+
+DK-0005 (Create the drift database: files index, recents, folders, favourites, versions, OCR text (FTS5)) is done, merged as #394. DokuloDatabase is in doc_core (schema in lib/src/db/schema.drift), and the app opens it via appDatabaseProvider in app support. Tests use DokuloDatabase.memory(). Change the schema with schemaVersion++, a migration step, and drift_dev make-migrations (it writes drift_schemas/ and the test helpers). Now ready: DK-0006, DK-0022, DK-0277.

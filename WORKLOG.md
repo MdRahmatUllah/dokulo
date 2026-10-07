@@ -87,3 +87,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:25 · agent-1 DK-0010 · done (#388)
 - 2026-10-07 22:25 · agent-1 DK-0002 · claimed: Pin Flutter 3.47+ / Dart 3.13+ and the core package versions
 - 2026-10-07 22:27 · agent-1 DK-1042 · added: Monthly dependency upgrade review: November 2026
+- 2026-10-07 22:27 · agent-2 DK-0005 · done (#394)
