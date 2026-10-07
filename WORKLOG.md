@@ -163,3 +163,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 23:28 · agent-2 DK-1053 · added: Device check: Apple Vision CER on the OCR test set; blur report on a real blurry photo (DK-0400)
 - 2026-10-07 23:31 · agent-2 DK-0400 · done (#861)
 - 2026-10-07 23:32 · agent-1 DK-0399 · PR #872 open; review requested from all
+- 2026-10-07 23:32 · agent-2 DK-0682 · claimed: Compliance: iOS privacy manifest (PrivacyInfo.xcprivacy) and third-party SDK manifests
