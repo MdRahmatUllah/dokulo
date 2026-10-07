@@ -114,6 +114,17 @@ void main() {
     );
   });
 
+  testWidgets('back from a deep-linked full-screen page goes Home', (
+    tester,
+  ) async {
+    await pumpAt(tester, Routes.tool('compress')); // a cold-start deep link
+    expect(title(tester), 'T2 compress');
+    await tester.binding.handlePopRoute(); // the system back button
+    await tester.pumpAndSettle();
+    expect(title(tester), 'H1');
+    expect(tabBarShown(tester), isTrue);
+  });
+
   testWidgets('the Scan button opens the scanner above the tabs', (
     tester,
   ) async {

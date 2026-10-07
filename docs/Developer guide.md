@@ -196,6 +196,11 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
   android.intent.action.VIEW -d "dokulo://open/tool/compress"` or `xcrun simctl
   openurl booted "dokulo://open/viewer/f42?mode=edit"`.
   `test/routes/routes_test.dart` cold-starts the router at every route.
+  On a device, `python tools/deeplinks_check.py` fires every route from a
+  cold start (all 15 passed on emulator-5554, 2026-10-08, DK-1041).
+- **Back from a deep-linked full-screen page goes to Home** (nothing is
+  beneath it, so leaving the app would be the surprise); pushed from a tab,
+  it returns to that tab.
 - Tapping the current tab again returns that tab to its root.
 - Until a screen's task builds it, the route shows `PlaceholderScreen` with the
   screen ID. The task replaces the builder in `routes.dart`.
