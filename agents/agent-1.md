@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0010 Set up CI: analyze, unit/widget/golden tests, native builds, licence scan, privacy network check — claimed 2026-10-07 22:24.
+DK-0010 in review as PR #388: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
