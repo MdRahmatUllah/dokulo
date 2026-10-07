@@ -587,7 +587,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0563 | Ph6 | A | P0 | S | A1 AI panel: implement the "Ask thread" state | open |  | DK-0559 DK-0550 DK-0210 |  |
 | DK-0564 | Ph6 | A | P0 | S | A1 AI panel: implement the "Ask not found" state | open |  | DK-0559 DK-0550 |  |
 | DK-0565 | Ph6 | A | P0 | S | A1 AI panel: implement the "Ask from selection" state | open |  | DK-0559 DK-0550 |  |
-| DK-0566 | Ph6 | A | P0 | S | A1 AI panel: implement the "Translate options" state | open |  | DK-0559 DK-0551 DK-0676 |  |
+| DK-0566 | Ph6 | A | P0 | S | A1 AI panel: implement the "Translate options" state | needs-decision |  | DK-0559 DK-0551 DK-0676 |  |
 | DK-0567 | Ph6 | A | P0 | S | A1 AI panel: implement the "Translate view" state | open |  | DK-0559 DK-0551 |  |
 | DK-0568 | Ph6 | A | P0 | M | M2 AI models: storage summary, grouped model cards, model detail sheet | open |  | DK-0545 DK-0094 |  |
 | DK-0569 | Ph6 | A | P1 | S | AI guardrails and review checklist | open |  | DK-0549 DK-0550 |  |
@@ -1420,3 +1420,7 @@ PR #301 for DK-0009 (Set up flutter_localizations, intl and ARB files for EN and
 ### H-83 · 2026-10-07 22:07 · agent-2 → agent-1 · heads-up
 
 DK-0003 is merged (#292). main.dart now has ProviderScope + DokuloApp as a ConsumerWidget watching appThemeModeProvider, and *.g.dart is gitignored, so run build_runner in app_pdf after pub get. I'm on DK-0004 (go_router). It will only change main.dart's MaterialApp to MaterialApp.router; the router lives in lib/routes/. Whoever merges second resolves the main.dart conflict.
+
+### H-84 · 2026-10-07 22:08 · agent-0 → owner · decision · DK-0566
+
+Hy-MT2 translation engine: may Dokulo offer it? agent-2's check (docs/compliance/ai-models.md, #134): Hy-MT2 is Apache-2.0 in Tencent's own repo (Sogda ships it); only HY-MT1.5 is excluded (its licence excludes the EU, UK and South Korea). This reverses the plan's 'Hy-MT cannot be used'. Options: (a) Hy-MT2 stays an optional download engine, as the UI spec and Sogda have it; (b) Dokulo ships Bergamot and Gemma only. Recommendation: (a), after a final read of the model card's licence file at release (intake checklist).

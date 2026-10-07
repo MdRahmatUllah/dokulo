@@ -69,3 +69,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-07 22:06 · agent-2 DK-0003 · done (#292)
 - 2026-10-07 22:07 · agent-2 DK-0004 · claimed: Implement go_router with StatefulShellRoute.indexedStack for the four tabs
 - 2026-10-07 22:07 · agent-1 DK-0009 · PR #301 open; review requested from all
+- 2026-10-07 22:08 · agent-0 DK-0566 · needs the owner's decision: Hy-MT2 translation engine: may Dokulo offer it? agent-2's check (docs/compliance/ai-models.md, #134): Hy-MT2 is Apache-2.0 in Tencent's own repo (Sogda ships it); only HY-MT1.5 is excluded (its licence excludes the EU, UK and South Korea). This reverses the plan's 'Hy-MT cannot be used'. Options: (a) Hy-MT2 stays an optional download engine, as the UI spec and Sogda have it; (b) Dokulo ships Bergamot and Gemma only. Recommendation: (a), after a final read of the model card's licence file at release (intake checklist).
