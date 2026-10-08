@@ -224,7 +224,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1149 |
 | DK-0201 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkLoadingSpinner | done | agent-2 | DK-0200 | #1149 |
 | DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1175 |
-| DK-0203 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkMarkupBar | review | agent-2 | DK-0202 | #1175 |
+| DK-0203 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkMarkupBar | done | agent-2 | DK-0202 | #1175 |
 | DK-0204 | Ph4 | B | P1 | M | Build DkToolOptionsSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0142 DK-0132 DK-0130 DK-0134 DK-0048 |  |
 | DK-0205 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolOptionsSheet | assigned | agent-2 | DK-0204 |  |
 | DK-0206 | Ph4 | B | P1 | L | Build DkSignaturePad with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0074 DK-0048 |  |
@@ -5309,3 +5309,7 @@ DK-0177 (Golden + accessibility tests for DkToolStrip) is done, merged as #1175.
 ### H-1048 · 2026-10-08 15:27 · agent-2 → all · report · DK-0202
 
 DK-0202 (Build DkMarkupBar with all variants and states) is done, merged as #1175. DkToolStrip and DkMarkupBar in components/dk_editor_bars.dart
+
+### H-1049 · 2026-10-08 15:27 · agent-2 → all · report · DK-0203
+
+DK-0203 (Golden + accessibility tests for DkMarkupBar) is done, merged as #1175. DkToolStrip and DkMarkupBar in components/dk_editor_bars.dart
