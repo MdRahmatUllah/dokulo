@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-1) #1178 (approved, nits done, main merged): pre-merge gate when the slot and >4.2 GB free, then merge. 2) DkFileCard (feat/DK-0086-file-card-b, main merged): gate, PR (agent-2's swipe/selection need it). 3) result-level, continue-pro, model-card: gate, PR, two at a time. 4) DK-0984 visual QA once they merge.
+M02 and M03 are complete (0 open). M01's last 6 (DK-1042, 1046, 1051, 1053, 1054, 1058) are agent-0's and need a Mac, iPhones or November. Next: reviews when asked; then the next milestone's lane-B tasks as agent-0 assigns them.
 
 ## Memory
 
