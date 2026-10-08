@@ -418,3 +418,186 @@ class _DkPasswordFieldState extends State<DkPasswordField> {
     );
   }
 }
+
+/// Page ranges (DK-0124): a [DkTextField] in `type.mono` with the example
+/// placeholder "1–3, 5, 8–end" and a trailing "Pick pages" button that opens
+/// the thumbnail picker ([onPick]). Parsing and the "Page 40 doesn't exist"
+/// error are the tool's.
+class DkRangeField extends StatelessWidget {
+  const DkRangeField({
+    super.key,
+    this.label,
+    this.controller,
+    this.error,
+    this.helper,
+    this.onChanged,
+    required this.onPick,
+    this.enabled = true,
+  });
+
+  final String? label;
+  final TextEditingController? controller;
+  final String? error;
+  final String? helper;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback onPick;
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return DkTextField(
+      label: label,
+      controller: controller,
+      error: error,
+      helper: helper,
+      onChanged: onChanged,
+      enabled: enabled,
+      hint: l.field_range_hint,
+      style: context.tokens.text.mono,
+      keyboardType: TextInputType.text,
+      trailing: DkFieldButton(
+        icon: DkIcons.gridView,
+        label: l.field_range_pick,
+        onTap: onPick,
+      ),
+    );
+  }
+}
+
+/// A search box (DK-0126; UI spec §11.4): a 40 dp `color.surfaceSunken` box
+/// (`radius.s`), the `search` icon (20) first, the placeholder in
+/// `type.bodyL` ("Search tools"), the clear × while there is text, and an
+/// optional [filter] button at the end. The row is 48 tall: the box sits in
+/// its middle and the buttons take the full 48 to touch (the 4 dp above and
+/// below the box count), as DkSegmented's segments do.
+class DkSearchField extends StatefulWidget {
+  const DkSearchField({
+    super.key,
+    required this.hint,
+    this.controller,
+    this.onChanged,
+    this.onSubmitted,
+    this.focusNode,
+    this.autofocus = false,
+    this.filter,
+  });
+
+  final String hint;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
+  final FocusNode? focusNode;
+  final bool autofocus;
+
+  /// A trailing filter button (a [DkFieldButton]).
+  final Widget? filter;
+
+  @override
+  State<DkSearchField> createState() => _DkSearchFieldState();
+}
+
+class _DkSearchFieldState extends State<DkSearchField> {
+  TextEditingController? _own;
+  TextEditingController get _text =>
+      widget.controller ?? (_own ??= TextEditingController());
+
+  @override
+  void initState() {
+    super.initState();
+    _text.addListener(_changed);
+  }
+
+  @override
+  void didUpdateWidget(DkSearchField old) {
+    super.didUpdateWidget(old);
+    if (old.controller != widget.controller) {
+      (old.controller ?? _own)?.removeListener(_changed);
+      _text.addListener(_changed);
+    }
+  }
+
+  @override
+  void dispose() {
+    _text.removeListener(_changed);
+    _own?.dispose();
+    super.dispose();
+  }
+
+  void _changed() => setState(() {});
+
+  void _clear() {
+    _text.clear();
+    widget.onChanged?.call('');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final c = t.color;
+    final l = AppLocalizations.of(context);
+    final style = t.text.bodyL.copyWith(color: c.textPrimary);
+    final line =
+        MediaQuery.textScalerOf(context).scale(style.fontSize!) * style.height!;
+    return SizedBox(
+      height: 48,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            top: 4,
+            bottom: 4,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: c.surfaceSunken,
+                borderRadius: BorderRadius.circular(t.radius.s),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: t.space.m, right: t.space.s),
+                child: DkIcon(
+                  DkIcons.search,
+                  size: DkIconSize.m,
+                  color: c.iconSecondary,
+                ),
+              ),
+              Expanded(
+                child: TextField(
+                  controller: _text,
+                  focusNode: widget.focusNode,
+                  autofocus: widget.autofocus,
+                  onChanged: widget.onChanged,
+                  onSubmitted: widget.onSubmitted,
+                  textInputAction: TextInputAction.search,
+                  style: style,
+                  cursorColor: c.primary,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    border: InputBorder.none,
+                    hintText: widget.hint,
+                    hintStyle: style.copyWith(color: c.textSecondary),
+                    // The text is a 48 dp target too: the row's full height.
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: ((48 - line) / 2).clamp(0, 24),
+                    ),
+                  ),
+                ),
+              ),
+              if (_text.text.isNotEmpty)
+                DkFieldButton(
+                  icon: DkIcons.close,
+                  label: l.common_clear,
+                  onTap: _clear,
+                ),
+              ?widget.filter,
+              if (_text.text.isEmpty && widget.filter == null)
+                SizedBox(width: t.space.m),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

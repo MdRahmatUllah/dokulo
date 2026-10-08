@@ -187,6 +187,10 @@
   "common_remove": "Entfernen",
   "form_previous_field": "Vorheriges Feld",
   "form_next_field": "Nächstes Feld",
+  "field_range_pick": "Seiten wählen",
+  "field_range_hint": "1–3, 5, 8–Ende",
+  "common_decrease": "Verringern",
+  "common_increase": "Erhöhen",
   "model_not_available": "Auf diesem Handy nicht verfügbar",
   "model_pause_progress": "Pausieren, {percent} %"
 }

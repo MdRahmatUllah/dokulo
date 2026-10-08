@@ -7,6 +7,7 @@ import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_page_thumb.dart';
+import 'motion/dk_reorder_motion.dart';
 import 'dk_ring.dart';
 
 /// The page strip of the scan review and the editors (UI spec §11.5;
@@ -89,7 +90,13 @@ class DkPageTray extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               padding: padding,
               itemCount: pageIds.length,
-              itemBuilder: (context, i) => cell(i),
+              // A 300 ms press lifts a page (§12.2), not the platform's 500.
+              buildDefaultDragHandles: false,
+              itemBuilder: (context, i) => DkReorderStartListener(
+                key: ValueKey(pageIds[i]),
+                index: i,
+                child: cell(i),
+              ),
               footer: add,
               onReorderItem: onReorder!,
               // A lifted page grows 2 % (UI spec §4.4), no Material shadow.
