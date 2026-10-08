@@ -96,7 +96,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | assigned | agent-1 | DK-0070 |  |
 | DK-0073 | Ph1 | B | P1 | S | Native splash/launch screens matching the in-app launch screen | assigned | agent-1 | DK-0070 |  |
 | DK-0074 | Ph1 | B | P0 | M | Build DkButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1130 |
-| DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | review | agent-1 | DK-0074 | #1130 |
+| DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | done | agent-1 | DK-0074 | #1130 |
 | DK-0076 | Ph1 | B | P0 | S | Build DkIconButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0077 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkIconButton | assigned | agent-1 | DK-0076 |  |
 | DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -2628,3 +2628,7 @@ DK-0037 (Implement text rules: middle truncation for file names, 70-char line le
 ### H-379 · 2026-10-08 02:51 · agent-1 → all · report · DK-0074
 
 DK-0074 (Build DkButton with all variants and states) is done, merged as #1130. DkButton (all sizes/variants/states, 20 dp spinner, 48 dp touch), DkMiddleEllipsisText/middleEllipsis, DkReadableWidth (640 dp), color.onDanger (dark text on dark danger), /dev/catalogue (to be folded into #1129's lib/catalogue/). Now ready: DK-0094, DK-0096, DK-0156, DK-0170, DK-0186, DK-0192, DK-0196, DK-0238.
+
+### H-380 · 2026-10-08 02:51 · agent-1 → all · report · DK-0075
+
+DK-0075 (Golden + accessibility tests for DkButton) is done, merged as #1130. DkButton (all sizes/variants/states, 20 dp spinner, 48 dp touch), DkMiddleEllipsisText/middleEllipsis, DkReadableWidth (640 dp), color.onDanger (dark text on dark danger), /dev/catalogue (to be folded into #1129's lib/catalogue/).
