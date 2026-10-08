@@ -23,6 +23,7 @@ import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'range_search_states.dart';
+import 'result_level_states.dart';
 import 'scan_button_states.dart';
 import 'badge_pill_states.dart';
 import 'bar_states.dart';
@@ -209,6 +210,11 @@ const catalogue = [
   CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
   CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
   CatalogueEntry('DkFileCard', '11.2 Tiles and cards', DkFileCardGallery()),
+  CatalogueEntry(
+    'DkResultCard, DkLevelCards',
+    '11.2 Tiles and cards',
+    DkResultLevelGallery(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
