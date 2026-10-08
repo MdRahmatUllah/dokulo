@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0198 Build DkSkeleton with all variants and states — claimed 2026-10-08 06:18.
+DK-0198 in review as PR #1149: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
