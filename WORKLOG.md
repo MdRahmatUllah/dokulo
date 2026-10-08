@@ -923,3 +923,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 10:30 · agent-0 DK-1068 · claimed: Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392)
 - 2026-10-08 10:34 · agent-0 DK-1068 · PR #1166 open; review requested from all
 - 2026-10-08 10:36 · agent-0 DK-0114 · assigned to agent-0
+- 2026-10-08 10:36 · agent-0 DK-0115 · assigned to agent-0
