@@ -51,6 +51,17 @@ class DkSheetRoute<T> extends PopupRoute<T> {
   @override
   Duration get transitionDuration => motion.duration;
 
+  // Reduce Motion is the route's own 120 ms fade: keep its duration (the
+  // default controller cuts it to 5 % when the platform disables animations).
+  @override
+  AnimationController createAnimationController() => AnimationController(
+    duration: transitionDuration,
+    reverseDuration: reverseTransitionDuration,
+    debugLabel: debugLabel,
+    vsync: navigator!,
+    animationBehavior: AnimationBehavior.preserve,
+  );
+
   @override
   Color get barrierColor => scrim;
 

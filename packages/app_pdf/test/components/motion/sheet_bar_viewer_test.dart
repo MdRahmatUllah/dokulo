@@ -86,6 +86,31 @@ void main() {
       expect(fade.opacity.value, 1);
     });
 
+    testWidgets('the platform setting: still a 120 ms fade, not cut to 5 %', (
+      tester,
+    ) async {
+      // As on a device: the accessibility flag, which also scales Flutter's
+      // own animations, not only the MediaQuery.
+      tester.platformDispatcher.accessibilityFeaturesTestValue =
+          const FakeAccessibilityFeatures(disableAnimations: true);
+      addTearDown(
+        tester.platformDispatcher.clearAccessibilityFeaturesTestValue,
+      );
+      await open(tester, reduce: true); // what the app's MediaQuery then says
+      await tester.pump(ms * 60);
+      final fade = tester.widget<FadeTransition>(
+        find
+            .ancestor(
+              of: find.byKey(sheetKey),
+              matching: find.byType(FadeTransition),
+            )
+            .first,
+      );
+      expect(fade.opacity.value, closeTo(0.5, 0.1));
+      await tester.pump(ms * 70);
+      expect(fade.opacity.value, 1);
+    });
+
     testWidgets('detent changes take 220 ms; a jump with Reduce Motion', (
       tester,
     ) async {
