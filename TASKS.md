@@ -1006,7 +1006,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0982 | Ph7 | Q | P2 | XS | Visual QA: foundations (foundations) | assigned | agent-1 | DK-0024 DK-0025 DK-0026 DK-0027 DK-0028 DK-0029 DK-0030 DK-0031 DK-0032 DK-0033 DK-0034 DK-0036 DK-0038 DK-0047 DK-0048 DK-1009 |  |
 | DK-0983 | Ph7 | Q | P2 | XS | Visual QA: components (components) | open |  | DK-0048 DK-0049 DK-0074 DK-0076 DK-0078 DK-0080 DK-0082 DK-0084 DK-0086 DK-0088 DK-0090 DK-0092 DK-0096 DK-0098 DK-0102 DK-0104 DK-0106 DK-0108 DK-0110 DK-0112 DK-0114 DK-0116 DK-0118 DK-0120 DK-0122 DK-0124 DK-0126 DK-0128 DK-0130 DK-0132 DK-0134 DK-0136 DK-0138 DK-0144 DK-0146 DK-0164 DK-0166 DK-0168 DK-0170 DK-0172 DK-0174 DK-0178 DK-0182 DK-0184 DK-0186 DK-0188 DK-0190 DK-0192 DK-0194 DK-0196 DK-0198 DK-0200 DK-0231 DK-1009 |  |
 | DK-0984 | Ph7 | Q | P2 | XS | Visual QA: components-part-2 (components-part-2) | assigned | agent-0 | DK-0094 DK-0100 DK-0140 DK-0142 DK-0148 DK-0150 DK-0152 DK-0154 DK-0156 DK-0158 DK-0160 DK-0162 DK-0176 DK-0180 DK-0202 DK-0204 DK-0206 DK-0208 DK-0210 DK-0212 DK-0214 DK-0216 DK-0218 DK-0220 |  |
-| DK-0985 | Ph7 | Q | P2 | XS | Visual QA: illustrations-overview (illustrations-overview) | review | agent-1 | DK-0050 DK-0051 DK-0052 DK-0053 DK-0054 DK-0055 DK-0056 DK-0057 DK-0058 DK-0059 DK-0060 DK-0061 DK-0062 DK-0063 DK-0064 DK-0065 DK-0066 DK-0067 DK-0068 DK-0069 | #1145 |
+| DK-0985 | Ph7 | Q | P2 | XS | Visual QA: illustrations-overview (illustrations-overview) | done | agent-1 | DK-0050 DK-0051 DK-0052 DK-0053 DK-0054 DK-0055 DK-0056 DK-0057 DK-0058 DK-0059 DK-0060 DK-0061 DK-0062 DK-0063 DK-0064 DK-0065 DK-0066 DK-0067 DK-0068 DK-0069 | #1145 |
 | DK-0986 | Ph7 | Q | P2 | XS | Visual QA: motion (motion) | assigned | agent-1 | DK-0039 DK-0040 DK-0041 DK-0042 DK-0043 DK-0044 DK-0045 DK-0046 |  |
 | DK-0987 | Ph7 | Q | P2 | XS | Visual QA: app-icon-and-store-assets (app-icon-and-store-assets) | open |  | DK-0070 DK-0071 DK-0072 DK-0684 DK-0685 DK-0686 DK-0687 DK-0688 |  |
 | DK-0988 | Ph7 | Q | P2 | XS | Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check) | review | agent-1 | DK-0050 | #1145 |
@@ -3576,3 +3576,7 @@ agent-0 idle since 01:18; agent-1 takes it: a design parity test (tokens vs the 
 ### H-616 · 2026-10-08 05:37 · agent-1 → agent-1 · assign · DK-0986
 
 agent-0 idle since 01:18; agent-1 takes it: a design parity test (tokens vs the export's CSS), on feat/DK-0982-foundations-qa.
+
+### H-617 · 2026-10-08 05:41 · agent-1 → all · report · DK-0985
+
+DK-0985 (Visual QA: illustrations-overview (illustrations-overview)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
