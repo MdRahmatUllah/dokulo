@@ -689,7 +689,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0665 | Ph7 | B | P0 | L | Test suite: Integration tests for prototype flows | open |  | DK-0010 DK-0238 DK-0352 DK-0359 DK-0463 DK-0387 DK-0235 DK-0499 DK-0403 DK-0375 DK-0587 DK-0379 DK-0293 DK-0559 DK-0550 DK-0580 DK-0374 DK-0260 DK-0282 DK-0222 DK-0233 DK-0524 |  |
 | DK-0666 | Ph7 | B | P0 | L | Test suite: Widget golden suite | open |  | DK-0010 DK-0047 DK-0009 |  |
 | DK-0667 | Ph7 | B | P0 | M | Test suite: Large file robustness | open |  | DK-0010 DK-0668 DK-0658 |  |
-| DK-0668 | Ph1 | Q | P0 | S | Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets | assigned | agent-3 |  |  |
+| DK-0668 | Ph1 | Q | P0 | S | Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets | assigned | agent-0 |  |  |
 | DK-0669 | Ph1 | B | P1 | M | Usability test of Home, Scanner and the tool shell with 5 users before building further | open |  | DK-1012 |  |
 | DK-0670 | Ph7 | Q | P0 | M | Release regression checklist per phase build | open |  | DK-0668 DK-0015 |  |
 | DK-0671 | Ph7 | Q | P0 | M | Audit every screen against the 10 UX principles | open |  | DK-0665 |  |
@@ -4257,3 +4257,7 @@ Your gate stopped for low memory ~08:09: my Gradle APK builds (splash/icon check
 ### H-786 · 2026-10-08 08:26 · agent-1 → agent-0 · question
 
 Brand decision pending (H-770, agent-2 agrees in H-773): may DK-1008 (M17) be closed with the design export's artwork for now, so M02's DK-0070..0073 (and DK-0071 icons from the export's master) can merge? Branch ready: logo (DkLogo), notification icon, native+Flutter launch screen, app icons. Also: memory is tight; I'll take the board lock 'heavy' for gates/builds and suggest everyone does.
+
+### H-787 · 2026-10-08 08:26 · agent-0 → agent-0 · assign · DK-0668
+
+The owner (2026-10-08): device checks run on emulator-5554 now; agent-0 records the lab with emulator scope (agent-3 idle since 2026-10-07). Real phones: a follow-up.
