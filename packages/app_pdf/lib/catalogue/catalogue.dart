@@ -33,6 +33,7 @@ import 'crop_states.dart';
 import 'detection_states.dart';
 import 'progress_states.dart';
 import 'sign_states.dart';
+import 'chat_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -202,6 +203,8 @@ const catalogue = [
     SignatureCardStates(),
   ),
   CatalogueEntry('DkSplitMarker', '11.8 Editor and AI', SplitStates()),
+  CatalogueEntry('DkChatBubble', '11.8 Editor and AI', ChatStates()),
+  CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
 ];
 
 /// The list of components; tap one to see its states.

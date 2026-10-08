@@ -230,5 +230,8 @@
   "sign_card_label": "Gespeicherte Unterschrift",
   "sign_card_delete": "Unterschrift löschen",
   "split_add": "Hier teilen",
-  "split_remove": "Hier nicht teilen"
+  "split_remove": "Hier nicht teilen",
+  "compare_added": "Hinzugefügt",
+  "compare_removed": "Entfernt",
+  "compare_changed": "Geändert"
 }
