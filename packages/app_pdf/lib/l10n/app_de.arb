@@ -233,5 +233,6 @@
   "split_remove": "Hier nicht teilen",
   "compare_added": "Hinzugefügt",
   "compare_removed": "Entfernt",
-  "compare_changed": "Geändert"
+  "compare_changed": "Geändert",
+  "common_select": "Auswählen"
 }

@@ -1027,5 +1027,9 @@
   "compare_changed": "Changed",
   "@compare_changed": {
     "description": "Compare PDFs: the change tag."
+  },
+  "common_select": "Select",
+  "@common_select": {
+    "description": "Selection mode (UI spec §12.1): the screen-reader action that does what a long press does, and the Select button in a section header."
   }
 }
