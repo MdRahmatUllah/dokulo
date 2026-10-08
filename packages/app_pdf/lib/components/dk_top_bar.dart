@@ -4,7 +4,7 @@ import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_icon_button.dart';
-import 'dk_tappable.dart';
+import 'dk_text_action.dart';
 
 /// What sits at the left of a [DkTopBar].
 enum DkTopBarLeading { none, back, close }
@@ -115,7 +115,7 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
           );
 
     final Widget? leading = editing
-        ? _TextAction(
+        ? DkTextAction(
             label:
                 widget.cancelLabel ??
                 AppLocalizations.of(context).common_cancel,
@@ -135,7 +135,7 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
             ),
           };
     final Widget trailing = editing
-        ? _TextAction(
+        ? DkTextAction(
             label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
             onTap: widget.onDone!,
             bold: true,
@@ -238,57 +238,6 @@ class _Actions extends StatelessWidget {
         ),
     ],
   );
-}
-
-/// Cancel or Done in the editing bar: `labelL` in `color.primary`, Done
-/// bold (UI spec §11.6), with a 48 dp target.
-class _TextAction extends StatelessWidget {
-  const _TextAction({
-    required this.label,
-    required this.onTap,
-    this.bold = false,
-  });
-
-  final String label;
-  final VoidCallback onTap;
-  final bool bold;
-
-  @override
-  Widget build(BuildContext context) {
-    final t = context.tokens;
-    return Semantics(
-      button: true,
-      child: DkTappable(
-        onTap: onTap,
-        radius: t.radius.s,
-        builder: (context, pressed) => Container(
-          constraints: const BoxConstraints(
-            minWidth: kMinInteractiveDimension,
-            minHeight: kMinInteractiveDimension,
-          ),
-          padding: EdgeInsets.symmetric(horizontal: t.space.m),
-          decoration: BoxDecoration(
-            color: pressed ? t.state.pressed : null,
-            borderRadius: BorderRadius.circular(t.radius.s),
-          ),
-          // Centred, but only as wide as the label: the title needs the rest.
-          child: Align(
-            widthFactor: 1,
-            heightFactor: 1,
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: t.text.labelL.copyWith(
-                color: t.color.primary,
-                fontWeight: bold ? FontWeight.w700 : null,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 /// The collapsing top bar of a tab root (UI spec §11.6, large; DK-0164): a

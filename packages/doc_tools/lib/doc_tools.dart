@@ -5,6 +5,7 @@ export 'src/job_queue.dart';
 export 'src/registry.dart';
 export 'src/startup.dart';
 export 'src/tool_job.dart';
+export 'src/tools/compress_job.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
 const int docToolsLayer = 2;

@@ -21,7 +21,9 @@ abstract final class DkToastDuration {
 /// - they float above the Scaffold's `bottomNavigationBar`. Put the tab bar,
 ///   DkActionBar and DkMiniJobBar there and a toast never covers them;
 /// - with a screen reader on, a toast with an action doesn't time out, so
-///   the action stays reachable (Flutter's SnackBar rule).
+///   the action stays reachable; otherwise every toast goes after
+///   [duration] (Flutter keeps any SnackBar with an action, so `persist` is
+///   set here).
 ///
 /// Returns when it is gone; `SnackBarClosedReason.action` means the action
 /// ran.
@@ -43,6 +45,7 @@ Future<SnackBarClosedReason> showDkToast(
         SnackBar(
           content: Text(message),
           duration: duration,
+          persist: action != null && MediaQuery.accessibleNavigationOf(context),
           width: wide ? 560 : null,
           padding: EdgeInsets.only(
             left: t.space.l,
