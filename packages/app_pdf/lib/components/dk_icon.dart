@@ -139,6 +139,10 @@ abstract final class DkIcons {
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
+  static const arrowForward = IconData(
+    0xe5c8,
+    fontFamily: _font,
+  ) /* arrow_forward */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;

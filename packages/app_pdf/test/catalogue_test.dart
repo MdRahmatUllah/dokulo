@@ -4,6 +4,7 @@ import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -13,11 +14,14 @@ void main() {
     final router = buildRouter(initialLocation: '/dev/catalogue');
     addTearDown(router.dispose);
     await tester.pumpWidget(
-      MaterialApp.router(
-        routerConfig: router,
-        theme: dokuloTheme(DkTokens.light),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
+      // Some components read providers (DkChip plays the haptic).
+      ProviderScope(
+        child: MaterialApp.router(
+          routerConfig: router,
+          theme: dokuloTheme(DkTokens.light),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+        ),
       ),
     );
     await tester.pumpAndSettle();
