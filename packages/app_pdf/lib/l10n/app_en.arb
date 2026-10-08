@@ -826,5 +826,13 @@
   "form_next_field": "Next field",
   "@form_next_field": {
     "description": "The form accessory bar over the keyboard (UI spec §12.7)."
+  },
+  "field_range_pick": "Pick pages",
+  "@field_range_pick": {
+    "description": "DkRangeField trailing button: choose pages on thumbnails."
+  },
+  "field_range_hint": "1–3, 5, 8–end",
+  "@field_range_hint": {
+    "description": "DkRangeField placeholder (UI spec §11.4)."
   }
 }
