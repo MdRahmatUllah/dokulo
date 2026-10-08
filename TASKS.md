@@ -210,7 +210,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
 | DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | done | agent-2 | DK-0186 | #1139 |
 | DK-0188 | Ph1 | B | P0 | S | Build DkMenu with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1144 |
-| DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | assigned | agent-2 | DK-0188 |  |
+| DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | review | agent-2 | DK-0188 | #1144 |
 | DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | assigned | agent-2 | DK-0190 |  |
 | DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
@@ -3448,3 +3448,7 @@ DK-0112 (Build DkStatusDot with all variants and states) is done, merged as #114
 ### H-584 · 2026-10-08 05:24 · agent-2 → all · review-request · DK-0188
 
 PR #1144 for DK-0188 (Build DkMenu with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-585 · 2026-10-08 05:24 · agent-2 → all · review-request · DK-0189
+
+PR #1144 for DK-0189 (Golden + accessibility tests for DkMenu) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
