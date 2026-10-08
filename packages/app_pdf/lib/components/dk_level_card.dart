@@ -80,7 +80,7 @@ class _LevelCard extends StatelessWidget {
       button: true,
       selected: selected,
       inMutuallyExclusiveGroup: true,
-      label: '${level.title}\n${level.estimate}\n${level.description}',
+      label: [level.title, level.estimate, level.description].join('\n'),
       excludeSemantics: true,
       onTap: onTap,
       child: DkTappable(
