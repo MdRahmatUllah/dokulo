@@ -67,12 +67,13 @@ void main() {
   }
 
   testWidgets('each tool shows what it has', (tester) async {
-    for (final (kind, sliders, stepper, segmented, colours) in [
-      (DkMarkupKind.pen, 1, false, false, true),
-      (DkMarkupKind.highlighter, 2, false, false, true),
-      (DkMarkupKind.text, 0, true, false, true),
-      (DkMarkupKind.shape, 1, false, true, true),
-      (DkMarkupKind.eraser, 0, false, true, false),
+    for (final (kind, sliders, stepper, segmented, colours, preview) in [
+      (DkMarkupKind.pen, 1, false, false, true, true),
+      // Colour and opacity only (UI spec §17.2).
+      (DkMarkupKind.highlighter, 1, false, false, true, false),
+      (DkMarkupKind.text, 0, true, false, true, false),
+      (DkMarkupKind.shape, 1, false, true, true, true),
+      (DkMarkupKind.eraser, 0, false, true, false, false),
     ]) {
       await tester.pumpWidget(app(sheet(kind, [])));
       expect(find.byType(DkSlider), findsNWidgets(sliders), reason: '$kind');
@@ -85,7 +86,8 @@ void main() {
       expect(find.byType(DkColorRow), colours ? findsOne : findsNothing);
       expect(
         find.byType(DkStrokePreview),
-        sliders > 0 ? findsOne : findsNothing,
+        preview ? findsOne : findsNothing,
+        reason: '$kind',
       );
     }
   });
@@ -117,9 +119,38 @@ void main() {
 
   testWidgets('German labels', (tester) async {
     await tester.pumpWidget(
-      app(sheet(DkMarkupKind.highlighter, []), locale: const Locale('de')),
+      app(sheet(DkMarkupKind.pen, []), locale: const Locale('de')),
     );
     expect(find.text('Stärke'), findsOne);
+    await tester.pumpWidget(
+      app(sheet(DkMarkupKind.highlighter, []), locale: const Locale('de')),
+    );
     expect(find.text('Deckkraft'), findsOne);
+  });
+
+  testWidgets('the highlighter: its four colours, no custom, 30–60 % '
+      '(UI spec §17.2; DK-0984 QA)', (tester) async {
+    await tester.pumpWidget(app(sheet(DkMarkupKind.highlighter, [])));
+    final row = tester.widget<DkColorRow>(find.byType(DkColorRow));
+    expect(row.swatches, hasLength(4));
+    expect(row.custom, isFalse);
+    final opacity = tester.widgetList<DkSlider>(find.byType(DkSlider)).last;
+    expect((opacity.min, opacity.max), (0.3, 0.6));
+  });
+
+  testWidgets('the pen: black, blue ink, red and custom, 1–8 pt; text '
+      '8–24 pt (UI spec §17.2; DK-0984 QA)', (tester) async {
+    await tester.pumpWidget(app(sheet(DkMarkupKind.pen, [])));
+    final row = tester.widget<DkColorRow>(find.byType(DkColorRow));
+    expect(row.swatches.map((s) => s.color), [
+      const DkMarkup().black,
+      const DkMarkup().ink,
+      const DkMarkup().red,
+    ]);
+    expect(row.custom, isTrue);
+    expect(tester.widget<DkSlider>(find.byType(DkSlider)).max, 8);
+    await tester.pumpWidget(app(sheet(DkMarkupKind.text, [])));
+    final stepper = tester.widget<DkStepper>(find.byType(DkStepper));
+    expect((stepper.min, stepper.max), (8, 24));
   });
 }

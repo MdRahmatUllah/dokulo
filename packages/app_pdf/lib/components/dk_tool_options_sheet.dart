@@ -35,7 +35,7 @@ class DkToolOptions {
   /// The stroke, in points (1–12).
   final double thickness;
 
-  /// The highlighter's, 10–100 %.
+  /// The highlighter's, 30–60 % (UI spec §17.2).
   final double opacity;
 
   /// Text, in points.
@@ -88,12 +88,9 @@ class DkToolOptionsSheet extends StatelessWidget {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final o = options;
-    final stroke = switch (kind) {
-      DkMarkupKind.pen ||
-      DkMarkupKind.highlighter ||
-      DkMarkupKind.shape => true,
-      _ => false,
-    };
+    // Thickness and its preview: the pen and shapes. The highlighter has
+    // colour and opacity only (UI spec §17.2): it follows the text's lines.
+    final stroke = kind == DkMarkupKind.pen || kind == DkMarkupKind.shape;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
@@ -101,7 +98,23 @@ class DkToolOptionsSheet extends StatelessWidget {
       children: [
         if (kind != DkMarkupKind.eraser)
           DkColorRow(
-            swatches: markupSwatches(t, l),
+            // UI spec §17.2: the highlighter has its four colours and no
+            // custom; the pen black, blue ink and red, plus custom.
+            swatches: switch (kind) {
+              DkMarkupKind.highlighter => [
+                (color: t.markup.yellow, name: l.colour_yellow),
+                (color: t.markup.green, name: l.colour_green),
+                (color: t.markup.blue, name: l.colour_blue),
+                (color: t.markup.pink, name: l.colour_pink),
+              ],
+              DkMarkupKind.pen => [
+                (color: t.markup.black, name: l.colour_black),
+                (color: t.markup.ink, name: l.markup_ink),
+                (color: t.markup.red, name: l.colour_red),
+              ],
+              _ => markupSwatches(t, l),
+            },
+            custom: kind != DkMarkupKind.highlighter,
             selected: o.color,
             onChanged: (c) => onChanged(o.copyWith(color: c)),
           ),
@@ -110,8 +123,9 @@ class DkToolOptionsSheet extends StatelessWidget {
             title: l.options_thickness,
             value: o.thickness,
             min: 1,
-            max: 12,
-            divisions: 11,
+            // The pen 1–8 pt (UI spec §17.2); shapes 1–12.
+            max: kind == DkMarkupKind.pen ? 8 : 12,
+            divisions: kind == DkMarkupKind.pen ? 7 : 11,
             format: (v) => l.options_points(v.round()),
             onChanged: (v) => onChanged(o.copyWith(thickness: v)),
           ),
@@ -119,7 +133,7 @@ class DkToolOptionsSheet extends StatelessWidget {
             child: DkStrokePreview(
               color: o.color,
               thickness: o.thickness,
-              opacity: kind == DkMarkupKind.highlighter ? o.opacity : 1,
+              opacity: 1,
             ),
           ),
         ],
@@ -127,9 +141,9 @@ class DkToolOptionsSheet extends StatelessWidget {
           DkSlider(
             title: l.options_opacity,
             value: o.opacity,
-            min: 0.1,
-            max: 1,
-            divisions: 9,
+            min: 0.3,
+            max: 0.6,
+            divisions: 3,
             format: (v) => '${(v * 100).round()} %',
             onChanged: (v) => onChanged(o.copyWith(opacity: v)),
           ),
@@ -145,8 +159,8 @@ class DkToolOptionsSheet extends StatelessWidget {
               DkStepper(
                 label: l.options_font_size,
                 value: o.fontSize,
-                min: 6,
-                max: 72,
+                min: 8, // 8–24 pt (UI spec §17.2)
+                max: 24,
                 onChanged: (v) => onChanged(o.copyWith(fontSize: v)),
               ),
             ],

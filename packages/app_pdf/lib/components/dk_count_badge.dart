@@ -12,9 +12,18 @@ import 'motion/dk_capture_motion.dart';
 /// The text is `color.onPrimary` as in the export: the spec's "white" would
 /// be 2.3:1 on Dark's light primary.
 class DkCountBadge extends StatelessWidget {
-  const DkCountBadge(this.count, {super.key, this.semanticsLabel});
+  const DkCountBadge(
+    this.count, {
+    super.key,
+    this.semanticsLabel,
+    this.muted = false,
+  });
 
   final int count;
+
+  /// `color.iconSecondary` instead of primary: the count of an unchecked
+  /// DkCheckboxRow (the export's `.cb` on `--ic2`).
+  final bool muted;
 
   /// What a screen reader says ("3 pages"); the number alone without it.
   final String? semanticsLabel;
@@ -28,7 +37,7 @@ class DkCountBadge extends StatelessWidget {
         constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
         padding: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
-          color: t.color.primary,
+          color: muted ? t.color.iconSecondary : t.color.primary,
           borderRadius: BorderRadius.circular(t.radius.pill),
         ),
         // Centred, but only as big as the number (and the minimums).

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme/dk_tokens.dart';
-import 'dk_number_text.dart';
+import 'dk_count_badge.dart';
 import 'dk_tappable.dart';
 
 /// A checkbox row (DK-0144; UI spec §11.4): a 24 dp checkbox, the [label] in
@@ -74,21 +74,8 @@ class DkCheckboxRow extends StatelessWidget {
                 ),
                 SizedBox(width: t.space.s),
                 Expanded(child: Text(label, style: t.text.bodyL)),
-                if (count != null)
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: t.space.s,
-                      vertical: t.space.xxs,
-                    ),
-                    decoration: BoxDecoration(
-                      color: c.primary,
-                      borderRadius: BorderRadius.circular(t.radius.pill),
-                    ),
-                    child: DkNumberText(
-                      '$count',
-                      style: t.text.labelM.copyWith(color: c.onPrimary),
-                    ),
-                  ),
+                // Primary when checked, muted when not (the export's `.cb`).
+                if (count != null) DkCountBadge(count!, muted: !value),
                 SizedBox(width: t.space.s),
               ],
             ),
