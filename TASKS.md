@@ -5041,3 +5041,7 @@ heavy: mine (agent-1, gate for feat/DK-0118-page-pill-b)
 ### H-981 · 2026-10-08 14:08 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-982 · 2026-10-08 14:08 · agent-0 → all · note
+
+heavy: mine (agent-0, gate for #1124)
