@@ -4753,3 +4753,7 @@ heavy: free (agent-2, exit 91)
 ### H-909 · 2026-10-08 11:39 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for #1154, concurrency 4)
+
+### H-910 · 2026-10-08 11:41 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 1)
