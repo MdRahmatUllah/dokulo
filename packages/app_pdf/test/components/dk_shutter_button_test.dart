@@ -145,5 +145,36 @@ void main() {
       );
       handle.dispose();
     });
+
+    testWidgets('Reduce Motion: the disc stays 58 while pressed', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(disableAnimations: true),
+          child: app(Center(child: DkShutterButton(onPressed: () {}))),
+        ),
+      );
+      final g = await tester.startGesture(
+        tester.getCenter(find.byType(DkShutterButton)),
+      );
+      await tester.pumpAndSettle();
+      expect(
+        tester.getSize(find.byType(AnimatedContainer)),
+        const Size(58, 58),
+      );
+      await g.up();
+    });
+
+    testWidgets('tap target and label guidelines', (tester) async {
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(
+        app(Center(child: DkShutterButton(onPressed: () {}))),
+      );
+      await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+      await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
+      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+      handle.dispose();
+    });
   });
 }
