@@ -119,10 +119,6 @@ abstract final class DkIcons {
 
   // Actions.
   static const close = IconData(0xe5cd, fontFamily: _font) /* close */;
-  static const expandLess = IconData(
-    0xe5ce,
-    fontFamily: _font,
-  ) /* expand_less */;
   static const search = IconData(0xef7a, fontFamily: _font) /* search */;
   static const delete = IconData(0xe92e, fontFamily: _font) /* delete */;
   static const rename = IconData(
