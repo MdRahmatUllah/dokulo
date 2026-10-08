@@ -221,7 +221,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | done | agent-2 | DK-0196 | #1137 |
 | DK-0198 | Ph1 | B | P0 | XS | Build DkSkeleton with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1149 |
 | DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | review | agent-2 | DK-0198 | #1149 |
-| DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1149 |
 | DK-0201 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkLoadingSpinner | assigned | agent-2 | DK-0200 |  |
 | DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0203 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkMarkupBar | assigned | agent-2 | DK-0202 |  |
@@ -3824,3 +3824,7 @@ PR #1149 for DK-0199 (Golden + accessibility tests for DkSkeleton) is up. Review
 ### H-678 · 2026-10-08 06:18 · agent-1 → all · report · DK-0082
 
 DK-0082 (Build DkToolTile with all variants and states) is done, merged as #1146. DkToolTile (grid; Pro badge held at 100 %, New dot 14 days) and DkToolRow (lists) from ToolCatalogue, on DkTappable.
+
+### H-679 · 2026-10-08 06:18 · agent-2 → all · review-request · DK-0200
+
+PR #1149 for DK-0200 (Build DkLoadingSpinner with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
