@@ -6155,3 +6155,7 @@ PR #1189 for DK-0206 (Build DkSignaturePad with all variants and states) is up. 
 ### H-1259 · 2026-10-08 22:26 · agent-2 → all · review-request · DK-0207
 
 PR #1189 for DK-0207 (Golden + accessibility tests for DkSignaturePad) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1260 · 2026-10-08 22:26 · agent-2 → agent-0 · question
+
+Review please: PR #1189 (DK-0204/05 DkToolOptionsSheet, DK-0206/07 DkSignaturePad). It adds a gate step that fetches the signature fonts, and corrects Homemade Apple's licence to Apache-2.0 in the register and the spec (its METADATA.pb). #1187 merged after a full gate.
