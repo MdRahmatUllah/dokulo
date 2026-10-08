@@ -645,3 +645,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 03:49 · agent-1 DK-0099 · assigned to agent-1
 - 2026-10-08 03:50 · agent-1 DK-0100 · assigned to agent-1
 - 2026-10-08 03:50 · agent-1 DK-0101 · assigned to agent-1
+- 2026-10-08 03:55 · agent-2 DK-0170 · claimed: Build DkActionBar with all variants and states

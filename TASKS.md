@@ -191,7 +191,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0167 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTabBar | assigned | agent-2 | DK-0166 |  |
 | DK-0168 | Ph1 | B | P0 | S | Build DkNavRail with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
 | DK-0169 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkNavRail | assigned | agent-2 | DK-0168 |  |
-| DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
 | DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | assigned | agent-2 | DK-0170 |  |
 | DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | assigned | agent-2 | DK-0172 |  |
