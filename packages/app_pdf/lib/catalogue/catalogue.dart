@@ -11,6 +11,7 @@ import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
 import 'page_states.dart';
+import 'tool_tile_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
@@ -81,6 +82,11 @@ const catalogue = [
     'DkPrivacyLine, DkStatusDot',
     '11.3 Badges, chips, indicators',
     DkPrivacyStatusGallery(),
+  ),
+  CatalogueEntry(
+    'DkToolTile, DkToolRow',
+    '11.2 Tiles and cards',
+    DkToolTileGallery(),
   ),
 ];
 
