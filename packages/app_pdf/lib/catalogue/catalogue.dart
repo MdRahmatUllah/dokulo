@@ -5,6 +5,7 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
+import 'choice_row_states.dart';
 import 'icon_button_states.dart';
 import 'next_page_chip_states.dart';
 import 'overlay_states.dart';
@@ -82,6 +83,11 @@ const catalogue = [
     'DkPrivacyLine, DkStatusDot',
     '11.3 Badges, chips, indicators',
     DkPrivacyStatusGallery(),
+  ),
+  CatalogueEntry(
+    'DkRadioRow, DkCheckboxRow',
+    '11.4 Inputs and controls',
+    DkChoiceRowsGallery(),
   ),
   CatalogueEntry('DkTopBar', '11.6 Bars', TopBarStates()),
 ];
