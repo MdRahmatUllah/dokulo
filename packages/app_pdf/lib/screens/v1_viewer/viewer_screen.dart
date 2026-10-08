@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/dk_loading_spinner.dart';
 import '../../components/dk_pdf_canvas.dart';
+import '../../l10n/app_localizations.dart';
 import '../../theme/dk_tokens.dart';
 import 'viewer_providers.dart';
 
@@ -22,8 +23,21 @@ class ViewerScreen extends ConsumerWidget {
       backgroundColor: context.tokens.color.surfaceSunken,
       body: switch (file) {
         AsyncData(:final value) => DkPdfCanvas(path: value.path),
-        // ponytail: the loading skeleton and the "can't be opened" state are
-        // V1's own state tasks; until then a spinner for both.
+        // The file's row is gone (deleted, or a stale link).
+        AsyncError() => Center(
+          child: Padding(
+            padding: EdgeInsets.all(context.tokens.space.xl),
+            child: Text(
+              AppLocalizations.of(context).viewer_file_missing,
+              style: context.tokens.text.bodyM.copyWith(
+                color: context.tokens.color.textSecondary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        // ponytail: the loading skeleton and the damaged/locked states are
+        // V1's own state tasks; until then a spinner.
         _ => const Center(child: DkLoadingSpinner()),
       },
     );

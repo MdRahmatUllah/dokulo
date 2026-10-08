@@ -13,10 +13,13 @@ import 'theme/app_theme.dart';
 import 'theme/dk_tokens.dart';
 
 Future<void> main() async {
-  // PDFium (pdfrx) for the viewer and doc_core's PDF engine (DK-0293).
-  await pdfrxFlutterInitialize();
+  WidgetsFlutterBinding.ensureInitialized();
   final container = ProviderContainer();
   installCrashHooks(container); // opt-in, local only (DK-0011)
+  // PDFium (pdfrx) for the viewer and doc_core's PDF engine (DK-0293).
+  // ponytail: awaited before runApp; move it off the cold-start path if the
+  // launch budget (DK-1067) says so.
+  await pdfrxFlutterInitialize();
   runApp(
     UncontrolledProviderScope(container: container, child: const DokuloApp()),
   );

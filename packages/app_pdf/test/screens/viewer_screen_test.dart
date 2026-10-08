@@ -82,6 +82,22 @@ void main() {
     expect(scaffold.backgroundColor, DkTokens.light.color.surfaceSunken);
   });
 
+  testWidgets('V1 says so when the file is gone, instead of spinning', (
+    tester,
+  ) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(const ViewerScreen(fileId: 404)),
+      ),
+    );
+    await settle(tester, rounds: 5);
+    expect(find.text("This file isn't in Dokulo any more."), findsOneWidget);
+    expect(find.byType(PdfViewer), findsNothing);
+  });
+
   testWidgets(
     'the canvas opens at fit width; a double tap fits again after zooming; page jump',
     (tester) async {
