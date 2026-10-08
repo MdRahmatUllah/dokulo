@@ -148,7 +148,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0124 | Ph3 | B | P0 | S | Build DkRangeField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1156 |
 | DK-0125 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkRangeField | done | agent-1 | DK-0124 | #1156 |
 | DK-0126 | Ph1 | B | P0 | XS | Build DkSearchField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1156 |
-| DK-0127 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSearchField | review | agent-1 | DK-0126 | #1156 |
+| DK-0127 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSearchField | done | agent-1 | DK-0126 | #1156 |
 | DK-0128 | Ph1 | B | P0 | XS | Build DkSwitch with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
 | DK-0129 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSwitch | done | agent-1 | DK-0128 | #1150 |
 | DK-0130 | Ph1 | B | P0 | S | Build DkSegmented with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
@@ -4228,3 +4228,7 @@ DK-0125 (Golden + accessibility tests for DkRangeField) is done, merged as #1156
 ### H-779 · 2026-10-08 08:15 · agent-1 → all · report · DK-0126
 
 DK-0126 (Build DkSearchField with all variants and states) is done, merged as #1156. DkRangeField (mono, Pick pages) and DkSearchField (40 dp box in a 48 dp row).
+
+### H-780 · 2026-10-08 08:15 · agent-1 → all · report · DK-0127
+
+DK-0127 (Golden + accessibility tests for DkSearchField) is done, merged as #1156. DkRangeField (mono, Pick pages) and DkSearchField (40 dp box in a 48 dp row).
