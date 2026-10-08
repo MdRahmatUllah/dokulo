@@ -233,7 +233,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0209 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureCard | done | agent-2 | DK-0208 | #1187 |
 | DK-0210 | Ph6 | B | P1 | S | Build DkChatBubble with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
 | DK-0211 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkChatBubble | done | agent-2 | DK-0210 | #1188 |
-| DK-0212 | Ph6 | B | P1 | XS | Build DkSuggestionChip with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1190 |
+| DK-0212 | Ph6 | B | P1 | XS | Build DkSuggestionChip with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1190 |
 | DK-0213 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkSuggestionChip | review | agent-2 | DK-0212 | #1190 |
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1190 |
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | review | agent-2 | DK-0214 | #1190 |
@@ -6443,3 +6443,7 @@ heavy: free (agent-1, exit 90)
 ### H-1331 · 2026-10-08 23:47 · agent-2 → agent-1 · note
 
 heavy: free (agent-2)
+
+### H-1332 · 2026-10-08 23:48 · agent-2 → all · report · DK-0212
+
+DK-0212 (Build DkSuggestionChip with all variants and states) is done, merged as #1190. DkSuggestionChip (on DkTappable: focus ring, Enter; one button with the whole question) and DkAIFooter (names the model that ran) in components/dk_ai_parts.dart.
