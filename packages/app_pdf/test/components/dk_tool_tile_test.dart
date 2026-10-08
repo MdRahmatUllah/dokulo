@@ -111,10 +111,42 @@ void main() {
           ),
         ),
       );
+      final handle = tester.ensureSemantics();
       await tester.pumpWidget(tile(DateTime(2026, 10, 14)));
       expect(find.byType(DkStatusDot), findsOneWidget);
+      expect(find.bySemanticsLabel('Merge PDF, New'), findsOneWidget);
+      handle.dispose();
       await tester.pumpWidget(tile(DateTime(2026, 10, 16)));
       expect(find.byType(DkStatusDot), findsNothing);
+    });
+
+    testWidgets('at 200 % in German, a Pro badge stays inside its tile', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        app(
+          Row(
+            children: [
+              for (final id in ['compress', 'redact', 'merge'])
+                // The grid's narrowest cell.
+                SizedBox(
+                  width: 76,
+                  child: DkToolTile(toolId: id, onTap: () {}),
+                ),
+            ],
+          ),
+          scale: 2,
+          locale: const Locale('de'),
+        ),
+      );
+      final tile = tester.getRect(
+        find.ancestor(
+          of: find.byType(DkProBadge),
+          matching: find.byType(DkToolTile),
+        ),
+      );
+      final badge = tester.getRect(find.byType(DkProBadge));
+      expect(tile.intersect(badge), badge);
     });
 
     testWidgets('tap, long press and the keyboard', (tester) async {

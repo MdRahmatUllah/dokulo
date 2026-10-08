@@ -17,7 +17,7 @@ const _newFor = Duration(days: 14);
 /// name below in `type.labelM` (two lines at most). A Pro tool has the small
 /// DkProBadge on the square's top-right corner, and is never greyed out. A
 /// tool added less than 14 days ago ([addedOn]) has the 8 dp "new" dot.
-/// Screen readers hear "Compress PDF" or "Black out, Pro".
+/// Screen readers hear "Compress PDF", "Black out, Pro" or "Smart split, New".
 class DkToolTile extends StatelessWidget {
   const DkToolTile({
     super.key,
@@ -57,7 +57,11 @@ class DkToolTile extends StatelessWidget {
     final shape = BorderRadius.circular(t.radius.m);
     return Semantics(
       button: true,
-      label: tool.isPro ? '$name, ${l.pro_badge}' : name,
+      label: [
+        name,
+        if (tool.isPro) l.pro_badge,
+        if (isNew) l.status_new,
+      ].join(', '),
       excludeSemantics: true,
       onTap: onTap,
       onLongPress: onLongPress,
@@ -98,11 +102,7 @@ class DkToolTile extends StatelessWidget {
                     ),
                   ),
                   if (tool.isPro)
-                    const Positioned(
-                      top: -4,
-                      right: -4,
-                      child: DkProBadge(small: true),
-                    ),
+                    const Positioned(top: -4, right: -4, child: _CornerBadge()),
                   if (isNew)
                     const Positioned(
                       top: -2,
@@ -201,7 +201,7 @@ class DkToolRow extends StatelessWidget {
                   ],
                 ),
               ),
-              if (tool.isPro) const DkProBadge(),
+              if (tool.isPro) const _CornerBadge(small: false),
               DkIcon(DkIcons.chevronRight, color: c.iconSecondary),
             ],
           ),
@@ -209,4 +209,19 @@ class DkToolRow extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The Pro badge with its text held: a corner mark that grew with the text
+/// would cover the next tile at 200 % (§28), so the tile's small one stays
+/// at 100 % (as iOS badges do) and the row's at 130 %; the names still scale.
+class _CornerBadge extends StatelessWidget {
+  const _CornerBadge({this.small = true});
+
+  final bool small;
+
+  @override
+  Widget build(BuildContext context) => MediaQuery.withClampedTextScaling(
+    maxScaleFactor: small ? 1 : 1.3,
+    child: DkProBadge(small: small),
+  );
 }
