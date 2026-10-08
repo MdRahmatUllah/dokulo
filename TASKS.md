@@ -161,7 +161,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | assigned | agent-1 | DK-0136 |  |
 | DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 | #1152 |
 | DK-0139 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkOptionRow | review | agent-1 | DK-0138 | #1152 |
-| DK-0140 | Ph3 | B | P0 | S | Build DkPositionPicker with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0140 | Ph3 | B | P0 | S | Build DkPositionPicker with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1152 |
 | DK-0141 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkPositionPicker | assigned | agent-1 | DK-0140 |  |
 | DK-0142 | Ph4 | B | P1 | S | Build DkColorRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0143 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkColorRow | assigned | agent-1 | DK-0142 |  |
@@ -3940,3 +3940,7 @@ PR #1152 for DK-0138 (Build DkOptionRow with all variants and states) is up. Rev
 ### H-707 · 2026-10-08 06:48 · agent-1 → all · review-request · DK-0139
 
 PR #1152 for DK-0139 (Golden + accessibility tests for DkOptionRow) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-708 · 2026-10-08 06:48 · agent-1 → all · review-request · DK-0140
+
+PR #1152 for DK-0140 (Build DkPositionPicker with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

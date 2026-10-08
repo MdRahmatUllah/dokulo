@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0139 in review as PR #1152: answer the review; re-run the gate if main moved, then merge.
+DK-0140 in review as PR #1152: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
