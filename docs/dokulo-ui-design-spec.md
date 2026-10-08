@@ -466,6 +466,7 @@ Every component below must exist in the Figma library with all listed variants a
 | Primary | `color.primary` | `color.onPrimary` | none |
 | Secondary | transparent | `color.primary` | 1 dp `color.outlineStrong` |
 | Tertiary (text) | transparent | `color.primary` | none |
+| Tonal | `color.primaryContainer` | `color.onPrimaryContainer` | none |
 | Destructive | `color.danger` | `color.onDanger` | none |
 | Destructive secondary | transparent | `color.danger` | 1 dp `color.danger` |
 | On camera | #FFFFFF @ 16 % | `color.onCamera` | none |
@@ -607,11 +608,11 @@ Height 56 (single line) / 72 (with description). Leading 24 icon (optional), tit
 | `DkSegmented` | 2–4 segments; height 36; `radius.s`; container `color.surfaceSunken`; selected segment `color.surface` with `elevation.raised`, text `type.labelM` |
 | `DkSlider` | Track 4 dp (`color.outline`; active `color.primary`), thumb 20 white with `elevation.raised`; value label right of the title ("30 %") |
 | `DkStepper` | − value + (for start number, N pages); buttons 36, value `type.titleS` tabular |
-| `DkDropdown` | Looks like a `DkTextField` with trailing chevron; opens a menu (phones: sheet with options for > 5 items) |
+| `DkDropdown` | Looks like a `DkTextField` with trailing chevron; opens a menu (phones: sheet with options for > 5 items); an option may end in a trailing item, e.g. a language's download size ("18 MB") |
 | `DkOptionRow` | Container for a control: title `type.titleS`, help `type.bodyM` `color.textSecondary` (max 2 lines), control right (switch) or below (segmented, slider, chips, fields); vertical padding 12; dividers between rows |
 | `DkPositionPicker` | 120 × 160 page diagram (`color.pageWhite`, outline) with 6 targets (top/bottom × left/centre/right) as 28 circles; selected filled `color.primary`; plus "Centre" for watermark |
 | `DkColorRow` | Swatches 32 circles with 2 dp outline; selected: 3 dp `color.primary` ring + check; last item "Custom" opens a simple hue/brightness picker |
-| `DkCheckboxRow` | 24 checkbox + label `type.bodyL` + optional count badge right ("3") |
+| `DkCheckboxRow` | 24 checkbox + label `type.bodyL` + optional count badge right ("3"; `DkCountBadge`, muted `color.iconSecondary` while unchecked) |
 | `DkRadioRow` | 24 radio + label + optional description |
 | `DkPinPad` | 6 dot indicators (12 dp) + 3×4 keypad (keys 72 circles, `type.titleL`), biometric key bottom-left, delete bottom-right |
 
@@ -1008,7 +1009,7 @@ Confirm empty: icon dialog (danger), "Delete {n} files for good?", "This can't b
 | Screen | Spec |
 | --- | --- |
 | Signatures sheet (medium) | Title "Your signatures"; grid of `DkSignatureCard` (2 columns); "Add signature" card (dashed); toggles below: "Add date next to signature" · "Initials on every page"; empty: ILL-15 "No signatures yet" + "Add signature" |
-| Signature pad | `DkSignaturePad` full-screen landscape. Draw tab: canvas. Type tab: text field + 3 handwriting-style font previews to choose (fonts: e.g. "Caveat", "Dancing Script", "Homemade Apple" – all OFL); Image tab: "Choose photo" button → crops to the signature, removes white background |
+| Signature pad | `DkSignaturePad` full-screen landscape. Draw tab: canvas. Type tab: text field + 3 handwriting-style font previews to choose (fonts: "Caveat" and "Dancing Script", SIL OFL 1.1, and "Homemade Apple", Apache-2.0; fetched by `tools/fetch_signature_fonts.py`); Image tab: "Choose photo" button → crops to the signature, removes white background |
 | Placement | Stamp appears centred on the visible page at 40 % page width, selected; drag/resize; tap outside deselects; "Sign" chips on pages with signature fields ("Sign here" pill on the field) |
 | Date stamp | Date in locale format `type.bodyM` size relative to the signature height, right of it, grouped with it |
 

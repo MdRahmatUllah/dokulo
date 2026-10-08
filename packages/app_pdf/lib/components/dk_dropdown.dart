@@ -18,6 +18,7 @@ class DkDropdown<T> extends StatefulWidget {
     required this.onChanged,
     this.label,
     this.error,
+    this.optionTrailing,
   });
 
   /// The values and their labels, in order.
@@ -26,6 +27,11 @@ class DkDropdown<T> extends StatefulWidget {
   final ValueChanged<T>? onChanged;
   final String? label;
   final String? error;
+
+  /// Something at an option's end, with what a screen reader says for it:
+  /// a language's download size ("18 MB" with a download icon), as in the
+  /// export's language menu.
+  final DkOptionTrailing? Function(T value)? optionTrailing;
 
   /// More than this many options open a sheet instead of a menu.
   static const menuLimit = 5;
@@ -61,6 +67,7 @@ class _DkDropdownState<T> extends State<DkDropdown<T>> {
               _OptionTile(
                 label: label,
                 selected: v == widget.value,
+                trailing: widget.optionTrailing?.call(v),
                 onTap: () => Navigator.of(context).pop(v),
               ),
           ],
@@ -147,6 +154,7 @@ class _DkDropdownState<T> extends State<DkDropdown<T>> {
                     _OptionTile(
                       label: label,
                       selected: v == widget.value,
+                      trailing: widget.optionTrailing?.call(v),
                       // The menu is as wide as the field.
                       minWidth: field.maxWidth,
                       onTap: () {
@@ -183,17 +191,24 @@ class _DkDropdownState<T> extends State<DkDropdown<T>> {
   }
 }
 
-/// One option in the menu or sheet: the label, and a check when selected.
+/// What a [DkDropdown] option shows at its end, and its words for screen
+/// readers (the option's node says them after its label).
+typedef DkOptionTrailing = ({Widget widget, String semanticsLabel});
+
+/// One option in the menu or sheet: the label, its [trailing], and a check
+/// when selected.
 class _OptionTile extends StatelessWidget {
   const _OptionTile({
     required this.label,
     required this.selected,
     required this.onTap,
+    this.trailing,
     this.minWidth = 160,
   });
 
   final String label;
   final bool selected;
+  final DkOptionTrailing? trailing;
   final VoidCallback onTap;
   final double minWidth;
 
@@ -205,7 +220,7 @@ class _OptionTile extends StatelessWidget {
       button: true,
       selected: selected,
       inMutuallyExclusiveGroup: true,
-      label: label,
+      label: [label, ?trailing?.semanticsLabel].join(', '),
       excludeSemantics: true,
       onTap: onTap,
       child: DkTappable(
@@ -225,6 +240,7 @@ class _OptionTile extends StatelessWidget {
                   ),
                 ),
               ),
+              if (trailing case final end?) end.widget,
               if (selected)
                 DkIcon(DkIcons.check, size: DkIconSize.m, color: c.primary),
             ],

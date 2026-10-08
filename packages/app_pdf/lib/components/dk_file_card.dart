@@ -1,6 +1,7 @@
 import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_layout.dart';
@@ -58,6 +59,7 @@ class DkFileCard extends StatefulWidget {
     this.encrypted = false,
     this.progress,
     this.showPressed = false,
+    this.semanticsActions,
   });
 
   final String name;
@@ -88,6 +90,9 @@ class DkFileCard extends StatefulWidget {
 
   /// Draw the pressed state without a finger: catalogue and goldens only.
   final bool showPressed;
+
+  /// Screen-reader actions on the card's node (selection mode's "Select").
+  final Map<CustomSemanticsAction, VoidCallback>? semanticsActions;
 
   @override
   State<DkFileCard> createState() => _DkFileCardState();
@@ -313,6 +318,7 @@ class _DkFileCardState extends State<DkFileCard> {
       container: true,
       button: true,
       selected: w.selected,
+      customSemanticsActions: w.semanticsActions,
       label: [
         w.name,
         w.meta,

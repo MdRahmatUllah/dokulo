@@ -119,6 +119,7 @@ abstract final class DkIcons {
 
   // Actions.
   static const close = IconData(0xe5cd, fontFamily: _font) /* close */;
+  static const open = IconData(0xe89e, fontFamily: _font) /* open_in_new */;
   static const search = IconData(0xef7a, fontFamily: _font) /* search */;
   static const previousField = IconData(
     0xe316,
@@ -179,6 +180,7 @@ abstract final class DkIcons {
   static const scanBook = IconData(0xea19, fontFamily: _font) /* menu_book */;
   static const scanBatch = IconData(0xe43c, fontFamily: _font) /* burst_mode */;
   static const cut = IconData(0xe14e, fontFamily: _font) /* content_cut */;
+  static const forum = IconData(0xe8af, fontFamily: _font) /* forum */;
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
   static const chevronRight = IconData(
     0xe5cc,
@@ -208,6 +210,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* photo_library */;
   static const retake = IconData(0xf053, fontFamily: _font) /* restart_alt */;
+  static const camera = IconData(0xe412, fontFamily: _font) /* photo_camera */;
   static const filters = IconData(0xe429, fontFamily: _font) /* tune */;
 
   // Viewer and editor.
