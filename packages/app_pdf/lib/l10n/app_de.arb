@@ -151,5 +151,6 @@
   "sign_card_label": "Gespeicherte Unterschrift",
   "sign_card_delete": "Unterschrift löschen",
   "split_add": "Hier teilen",
-  "split_remove": "Hier nicht teilen"
+  "split_remove": "Hier nicht teilen",
+  "ai_footer": "Auf diesem Handy · {model} · KI kann Fehler machen"
 }

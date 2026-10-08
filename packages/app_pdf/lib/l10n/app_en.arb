@@ -681,5 +681,14 @@
   "split_remove": "Don't split here",
   "@split_remove": {
     "description": "Smart Split: a cut between two pages, tap to remove it."
+  },
+  "ai_footer": "On this phone · {model} · AI can make mistakes",
+  "@ai_footer": {
+    "description": "DkAIFooter under AI answers (UI spec §11.8); model is the model's name, e.g. Gemma 4 E2B.",
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
   }
 }
