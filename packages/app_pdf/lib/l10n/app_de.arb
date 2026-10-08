@@ -136,5 +136,11 @@
   "tools_category_edit": "Bearbeiten",
   "tools_category_security": "Sicherheit",
   "tools_category_ai": "KI",
-  "tools_category_automation": "Automatisierung"
+  "tools_category_automation": "Automatisierung",
+  "scan_mode_document": "Dokument",
+  "scan_mode_idcard": "Ausweis",
+  "scan_mode_book": "Buch",
+  "scan_mode_batch": "Stapelverarbeitung",
+  "scan_mode_import": "Fotos importieren",
+  "shell_button_scan_hint": "Scanmodus wählen"
 }

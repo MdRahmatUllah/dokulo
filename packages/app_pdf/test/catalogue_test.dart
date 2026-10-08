@@ -25,6 +25,12 @@ void main() {
     // the page transition instead.
     const transition = Duration(seconds: 1);
     for (final entry in catalogue) {
+      // The list is longer than the screen: scroll the entry into view.
+      await tester.scrollUntilVisible(
+        find.text(entry.name),
+        200,
+        scrollable: find.byType(Scrollable).first,
+      );
       await tester.tap(find.text(entry.name));
       await tester.pump(transition);
       // Light, then Dark; both are built (a tall entry's Dark half is below

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../components/dk_icon.dart';
+import '../components/dk_scan_button.dart';
 import '../l10n/app_localizations.dart';
 import 'routes.dart';
 
@@ -17,10 +18,11 @@ class AppShell extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
       body: shell,
-      floatingActionButton: FloatingActionButton(
-        tooltip: l10n.shell_button_scan,
+      floatingActionButton: DkScanButton(
+        // The stand-in bar has no slot for the label; DkTabBar will.
+        showLabel: false,
         onPressed: () => context.push(Routes.scan),
-        child: const DkIcon(DkIcons.scan),
+        onMode: (mode) => context.push(Routes.scanIn(mode)),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: NavigationBar(
