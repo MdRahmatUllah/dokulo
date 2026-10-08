@@ -102,7 +102,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1135 |
 | DK-0079 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkScanButton | done | agent-1 | DK-0078 | #1135 |
 | DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1147 |
-| DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | review | agent-1 | DK-0080 | #1147 |
+| DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | done | agent-1 | DK-0080 | #1147 |
 | DK-0082 | Ph1 | B | P0 | S | Build DkToolTile with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 | #1146 |
 | DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | done | agent-1 | DK-0082 | #1146 |
 | DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 | #1146 |
@@ -3852,3 +3852,7 @@ DK-0085 (Golden + accessibility tests for DkToolRow) is done, merged as #1146. D
 ### H-685 · 2026-10-08 06:21 · agent-1 → all · report · DK-0080
 
 DK-0080 (Build DkShutterButton with all variants and states) is done, merged as #1147. DkShutterButton: 72 ring, 58->52 disc, countdown arc (motion.autoCapture 0.5 s), on DkTappable; the scanner screen must announce auto-capture.
+
+### H-686 · 2026-10-08 06:21 · agent-1 → all · report · DK-0081
+
+DK-0081 (Golden + accessibility tests for DkShutterButton) is done, merged as #1147. DkShutterButton: 72 ring, 58->52 disc, countdown arc (motion.autoCapture 0.5 s), on DkTappable; the scanner screen must announce auto-capture.
