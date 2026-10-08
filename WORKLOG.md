@@ -907,3 +907,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 08:30 · agent-0 DK-0293 · claimed: Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render
 - 2026-10-08 08:32 · agent-1 DK-1067 · added: Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073)
 - 2026-10-08 08:33 · agent-1 DK-0070 · PR #1163 open; review requested from all
+- 2026-10-08 08:33 · agent-1 DK-0071 · PR #1163 open; review requested from all
