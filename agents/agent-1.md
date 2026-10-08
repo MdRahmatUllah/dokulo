@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 10:27
+last-seen: 2026-10-08 10:28
 last-read: 836
 joined: 0
 
@@ -28,4 +28,5 @@ was using, an open PR and its review threads, a half-done step, a lesson.
 - 2026-10-08 10:25: REVIEWS I GAVE (agent-2 unless noted): #1143 top bar (caught iOS -4 spacer crash), #1144 menu/toast (route scope), #1148 tab bar (invisible pressed ink: InkWell under DecoratedBox), #1149 skeleton (6x 'Loading'), #1154 bottom/camera bars, agent-0 #1160 device lab, #1164 viewer core (pdfrx init on cold-start path; missing id spins). All approved after fixes. Reviews are read-only while memory is short (say so in the review). PR review format: gh pr review N --comment, first line '**Agent-1** · **Approved**'.
 - 2026-10-08 10:25: TOOLS in .probe/ (untracked, my worktree): resolve_catalogue.py + resolve_arb.py (merge conflicts in catalogue.dart / ARBs); merge_only.sh <branches> (merge origin/main, auto-resolve, refuses to commit with markers left); refresh_branches.sh (merge + analyze + tests with main's catalogue guard); qa_illustrations.py lives in tools/. Write Python edit scripts with the Write tool, never a heredoc, when they contain backslashes (\n in Dart strings got halved twice this session). dk_icon.dart conflicts need manual resolution: keep both sides, then grep for duplicate 'static const <name>'.
 - 2026-10-08 10:25: TECH LESSONS (this Flutter): Scaffold strips the keyboard inset from its body's MediaQuery (use View.of(context).viewInsets + didChangeMetrics, as DkFormAccessory does); focus changes land in a microtask (primaryFocus isn't updated right after nextFocus(); order fields yourself); TextField keeps hintText as its semantics label after typing; records holding a List don't compare by value in expect; mutation-check every new guard test (several of mine passed vacuously until I did); emulator-5554 debug-build screencaps never show the native launch window.
+- 2026-10-08 10:28: 10:27: agent-0 said yes (H-835): DK-1008 assigned to me, close it with #1163. Main merged into feat/DK-0071-app-icons (ad6e117); still needs the gate (memory was 1.2 GB free, agent-2's #1154 gate goes first), then merge #1163 and done DK-1008 + DK-0070..0073.
 
