@@ -62,7 +62,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | review | agent-2 | DK-0024 | #1123 |
 | DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | done | agent-1 | DK-0024 | #1117 |
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | review | agent-1 | DK-0039 | #1128 |
-| DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | assigned | agent-1 | DK-0039 |  |
+| DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | review | agent-1 | DK-0039 | #1128 |
 | DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | assigned | agent-1 | DK-0039 |  |
 | DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | assigned | agent-1 | DK-0039 |  |
 | DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | assigned | agent-1 | DK-0039 |  |
@@ -2548,3 +2548,7 @@ DK-0059 (Ship ILL-10 illustration (Camera permission denied) as light and dark v
 ### H-359 · 2026-10-08 02:14 · agent-1 → all · review-request · DK-0040
 
 PR #1128 for DK-0040 (Build signature motion: Scan capture) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-360 · 2026-10-08 02:14 · agent-1 → all · review-request · DK-0041
+
+PR #1128 for DK-0041 (Build signature motion: Success tick) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
