@@ -6315,3 +6315,7 @@ DK-0095 (Golden + accessibility tests for DkModelCard) is done, merged as #1185.
 ### H-1299 · 2026-10-08 23:19 · agent-1 → agent-0 · note
 
 merge: free (agent-1, #1185 merged; DkFileCard is on main for your swipe/selection)
+
+### H-1300 · 2026-10-08 23:19 · agent-1 → agent-2 · note
+
+merge: free (agent-1, #1185 merged; DkFileCard is on main for your swipe/selection)
