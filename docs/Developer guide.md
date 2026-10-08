@@ -19,6 +19,7 @@ packages/
       main.dart         runApp, nothing else
       screens/          one folder per screen ID: screens/h1_home/, screens/t2_tool/, …
       components/       the Dk* widgets (DkToolTile, DkFileCard, …), one file each
+      patterns/         the interaction patterns of UI spec §12 (confirmations, undo, …)
       providers/        Riverpod providers that aren't private to one screen
       routes/           the go_router config and route names
       l10n/             app_en.arb, app_de.arb (DK-0009)
@@ -294,6 +295,21 @@ percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
 shadows in light and a lighter surface plus an outline in dark. Borders are
 `t.divider`, `t.inputRest/Focused/Error` and `t.selectionRing`, and the grid
 is `DkGrid.forWidth(width)` (`theme/dk_layout.dart`, DK-0038).
+
+**Ask or undo (UI spec §12.4, §12.6; `lib/patterns/`).** Only what can't be
+undone asks first: `confirmDk(context, DkConfirmation.x)` with its EN/DE copy
+(delete forever, empty trash, apply redaction, replace original, discard a
+scan or edits, cancel a job running > 30 s, remove a saved signature). Every
+other change happens at once and offers Undo: `showDkUndo(context, DkUndo.x,
+message, onUndo: …)` (4 s; Replace original 10 s), where `onUndo` restores
+the exact state before (order, folder, pages). Don't call `showDkConfirm` for
+anything else.
+
+**The keyboard (UI spec §12.7).** DkSheet and DkActionBar ride the keyboard
+by themselves. A form screen wraps its Scaffold body in
+`DkFormAccessory(child: …)`: while the keyboard is open, Previous field ·
+Next field · Done sit on top of it (they move the focus without closing the
+keyboard).
 
 **Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
 unless Settings → Appearance overrides it (`appThemeModeProvider`,
