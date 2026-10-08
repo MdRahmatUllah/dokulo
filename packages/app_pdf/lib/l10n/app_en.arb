@@ -962,5 +962,17 @@
         "type": "int"
       }
     }
+  },
+  "crop_auto": "Auto",
+  "@crop_auto": {
+    "description": "DkCropOverlay: back to the detected edges (UI spec §11.5, §19.3 crop mode)."
+  },
+  "crop_full_page": "Full page",
+  "@crop_full_page": {
+    "description": "DkCropOverlay: the whole photo, no crop."
+  },
+  "crop_reset": "Reset",
+  "@crop_reset": {
+    "description": "DkCropOverlay: undo this crop's changes."
   }
 }
