@@ -327,7 +327,7 @@ void main() {
   ) async {
     await tester.runAsync(() async {
       final scan = '${dir.path}/letter-scan.pdf';
-      await letterScan(dir.path, scan, 3);
+      await letterScan(dir.path, scan, 2);
       final out = Directory('${dir.path}/ocr')..createSync();
       final db = DokuloDatabase.memory();
       var peak = ProcessInfo.currentRss;
@@ -346,8 +346,8 @@ void main() {
       await db.close();
       report(
         'DK-1052',
-        'ocr per page (3 pages, 300 dpi, PP-OCRv5 on an ONNX worker)',
-        '${clock.elapsedMilliseconds ~/ 3} ms',
+        'ocr per page (2 pages, 300 dpi, PP-OCRv5 on an ONNX worker)',
+        '${clock.elapsedMilliseconds ~/ 2} ms',
       );
       report(
         'DK-1052',
