@@ -98,22 +98,26 @@ class _ActionsBar extends StatelessWidget {
         color: translucent ? c.surface.withValues(alpha: 0.94) : c.surface,
         border: Border(top: t.divider),
       ),
-      // Labels follow the text size up to 125 %, like the tab bar's.
-      child: MediaQuery.withClampedTextScaling(
-        maxScaleFactor: 1.25,
-        child: SafeArea(
-          top: false,
-          child: SizedBox(
-            height: 64,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: t.space.s),
-              child: Row(
-                children: [
-                  for (final a in actions)
-                    Expanded(
-                      child: _BarButton(action: a, bold: bold),
-                    ),
-                ],
+      // The buttons' ink paints here, above the bar's surface.
+      child: Material(
+        type: MaterialType.transparency,
+        // Labels follow the text size up to 125 %, like the tab bar's.
+        child: MediaQuery.withClampedTextScaling(
+          maxScaleFactor: 1.25,
+          child: SafeArea(
+            top: false,
+            child: SizedBox(
+              height: 64,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: t.space.s),
+                child: Row(
+                  children: [
+                    for (final a in actions)
+                      Expanded(
+                        child: _BarButton(action: a, bold: bold),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -163,7 +167,7 @@ class _BarButtonState extends State<_BarButton> {
         radius: t.radius.m,
         child: InkWell(
           onTap: a.onPressed,
-          onFocusChange: (v) => setState(() => _focused = v),
+          onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
           borderRadius: BorderRadius.circular(t.radius.m),
           overlayColor: WidgetStatePropertyAll(t.state.pressed),
           splashFactory: NoSplash.splashFactory,

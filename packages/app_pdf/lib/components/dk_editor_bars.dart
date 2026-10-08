@@ -50,42 +50,46 @@ class DkToolStrip extends StatelessWidget {
         color: t.color.surface,
         border: Border(top: t.divider),
       ),
-      child: SafeArea(
-        top: false,
-        child: SizedBox(
-          height: 64,
-          child: Row(
-            children: [
-              Expanded(
-                child: MediaQuery.withClampedTextScaling(
-                  maxScaleFactor: 1.25,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.symmetric(horizontal: t.space.xs),
-                    children: [
-                      for (final (i, tool) in tools.indexed)
-                        _StripButton(
-                          tool: tool,
-                          selected: i == selected,
-                          onTap: () => onSelect(i),
-                        ),
-                    ],
+      // The tools' ink paints here, above the strip's surface.
+      child: Material(
+        type: MaterialType.transparency,
+        child: SafeArea(
+          top: false,
+          child: SizedBox(
+            height: 64,
+            child: Row(
+              children: [
+                Expanded(
+                  child: MediaQuery.withClampedTextScaling(
+                    maxScaleFactor: 1.25,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      padding: EdgeInsets.symmetric(horizontal: t.space.xs),
+                      children: [
+                        for (final (i, tool) in tools.indexed)
+                          _StripButton(
+                            tool: tool,
+                            selected: i == selected,
+                            onTap: () => onSelect(i),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Container(width: 1, height: 32, color: t.color.outline),
-              DkIconButton(
-                icon: DkIcons.undo,
-                tooltip: l.common_undo,
-                onPressed: onUndo,
-              ),
-              DkIconButton(
-                icon: DkIcons.redo,
-                tooltip: l.common_redo,
-                onPressed: onRedo,
-              ),
-              SizedBox(width: t.space.xs),
-            ],
+                Container(width: 1, height: 32, color: t.color.outline),
+                DkIconButton(
+                  icon: DkIcons.undo,
+                  tooltip: l.common_undo,
+                  onPressed: onUndo,
+                ),
+                DkIconButton(
+                  icon: DkIcons.redo,
+                  tooltip: l.common_redo,
+                  onPressed: onRedo,
+                ),
+                SizedBox(width: t.space.xs),
+              ],
+            ),
           ),
         ),
       ),
@@ -128,7 +132,7 @@ class _StripButtonState extends State<_StripButton> {
         radius: t.radius.m,
         child: InkWell(
           onTap: widget.onTap,
-          onFocusChange: (v) => setState(() => _focused = v),
+          onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
           borderRadius: BorderRadius.circular(t.radius.m),
           overlayColor: WidgetStatePropertyAll(t.state.pressed),
           splashFactory: NoSplash.splashFactory,
@@ -319,7 +323,7 @@ class _PillButtonState extends State<_PillButton> {
         radius: t.radius.l,
         child: InkWell(
           onTap: widget.onTap,
-          onFocusChange: (v) => setState(() => _focused = v),
+          onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
           overlayColor: WidgetStatePropertyAll(t.state.pressed),
           splashFactory: NoSplash.splashFactory,
           child: ConstrainedBox(

@@ -45,42 +45,46 @@ class DkCameraTopBar extends StatelessWidget {
     final l = AppLocalizations.of(context);
     return ColoredBox(
       color: t.color.cameraChrome,
-      child: SafeArea(
-        bottom: false,
-        child: SizedBox(
-          height: 56,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: t.space.xs),
-            child: Row(
-              children: [
-                DkIconButton(
-                  icon: DkIcons.close,
-                  tooltip: l.camera_close,
-                  onPressed: onClose,
-                  variant: DkIconButtonVariant.onCameraPlain,
-                ),
-                const Spacer(),
-                _FlashButton(
-                  flash: flash,
-                  onPressed: () => onFlash(
-                    DkFlash.values[(flash.index + 1) % DkFlash.values.length],
+      // The buttons' ink paints here, above the chrome.
+      child: Material(
+        type: MaterialType.transparency,
+        child: SafeArea(
+          bottom: false,
+          child: SizedBox(
+            height: 56,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: t.space.xs),
+              child: Row(
+                children: [
+                  DkIconButton(
+                    icon: DkIcons.close,
+                    tooltip: l.camera_close,
+                    onPressed: onClose,
+                    variant: DkIconButtonVariant.onCameraPlain,
                   ),
-                ),
-                _AutoPill(on: autoCapture, onChanged: onAutoCapture),
-                DkIconButton(
-                  icon: DkIcons.gridOverlay,
-                  tooltip: l.camera_grid,
-                  selected: grid,
-                  onPressed: () => onGrid(!grid),
-                  variant: DkIconButtonVariant.onCameraPlain,
-                ),
-                DkIconButton(
-                  icon: DkIcons.filters,
-                  tooltip: l.camera_settings,
-                  onPressed: onSettings,
-                  variant: DkIconButtonVariant.onCameraPlain,
-                ),
-              ],
+                  const Spacer(),
+                  _FlashButton(
+                    flash: flash,
+                    onPressed: () => onFlash(
+                      DkFlash.values[(flash.index + 1) % DkFlash.values.length],
+                    ),
+                  ),
+                  _AutoPill(on: autoCapture, onChanged: onAutoCapture),
+                  DkIconButton(
+                    icon: DkIcons.gridOverlay,
+                    tooltip: l.camera_grid,
+                    selected: grid,
+                    onPressed: () => onGrid(!grid),
+                    variant: DkIconButtonVariant.onCameraPlain,
+                  ),
+                  DkIconButton(
+                    icon: DkIcons.filters,
+                    tooltip: l.camera_settings,
+                    onPressed: onSettings,
+                    variant: DkIconButtonVariant.onCameraPlain,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -123,7 +127,7 @@ class _FlashButtonState extends State<_FlashButton> {
         radius: t.radius.m,
         child: InkWell(
           onTap: widget.onPressed,
-          onFocusChange: (v) => setState(() => _focused = v),
+          onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
           borderRadius: BorderRadius.circular(t.radius.m),
           overlayColor: WidgetStatePropertyAll(ink.withValues(alpha: 0.16)),
           splashFactory: NoSplash.splashFactory,
@@ -186,7 +190,7 @@ class _AutoPillState extends State<_AutoPill> {
       onTap: () => widget.onChanged(!widget.on),
       child: InkWell(
         onTap: () => widget.onChanged(!widget.on),
-        onFocusChange: (v) => setState(() => _focused = v),
+        onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
         borderRadius: radius,
         overlayColor: const WidgetStatePropertyAll(Colors.transparent),
         splashFactory: NoSplash.splashFactory,

@@ -159,4 +159,23 @@ void main() {
     expectPressableButtons(tester);
     handle.dispose();
   });
+
+  testWidgets('the ink paints above the bar, not on the Scaffold under it', (
+    tester,
+  ) async {
+    await tester.pumpWidget(app(const EditorBarStates()));
+    final inks = find.byType(InkWell).evaluate().toList();
+    expect(inks, isNotEmpty);
+    for (final ink in inks) {
+      final below = tester.widget<Material>(
+        find
+            .ancestor(
+              of: find.byWidget(ink.widget),
+              matching: find.byType(Material),
+            )
+            .first,
+      );
+      expect(below.type, isNot(MaterialType.canvas), reason: 'the Scaffold');
+    }
+  });
 }
