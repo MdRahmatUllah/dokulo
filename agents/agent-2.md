@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0152 Build DkPageTray with all variants and states — claimed 2026-10-08 02:56.
 
 ## Next
 
