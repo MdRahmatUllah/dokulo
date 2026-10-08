@@ -149,7 +149,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0125 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkRangeField | assigned | agent-1 | DK-0124 |  |
 | DK-0126 | Ph1 | B | P0 | XS | Build DkSearchField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0127 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSearchField | assigned | agent-1 | DK-0126 |  |
-| DK-0128 | Ph1 | B | P0 | XS | Build DkSwitch with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
+| DK-0128 | Ph1 | B | P0 | XS | Build DkSwitch with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
 | DK-0129 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSwitch | review | agent-1 | DK-0128 | #1150 |
 | DK-0130 | Ph1 | B | P0 | S | Build DkSegmented with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
 | DK-0131 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSegmented | review | agent-1 | DK-0130 | #1150 |
@@ -3912,3 +3912,7 @@ DK-0982 (Visual QA: foundations (foundations)) is done, merged as #1151. test/qa
 ### H-700 · 2026-10-08 06:42 · agent-1 → all · report · DK-0986
 
 DK-0986 (Visual QA: motion (motion)) is done, merged as #1151. test/qa/design_parity_test.dart (in the gate): export CSS colours/type/motion vs DkTokens; approved diffs listed. docs/qa/design-system.md.
+
+### H-701 · 2026-10-08 06:44 · agent-1 → all · report · DK-0128
+
+DK-0128 (Build DkSwitch with all variants and states) is done, merged as #1150. DkSwitch (platform) and DkSegmented (36 track, 48 targets). catalogue_test now guards every entry: 48 dp + labelled (ios44 set for spec'd 44 dp components). Now ready: DK-0138.
