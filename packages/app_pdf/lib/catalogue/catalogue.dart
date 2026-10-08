@@ -33,6 +33,8 @@ const catalogue = [
   CatalogueEntry('DkScanButton', '11.1 Buttons', DkScanButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
+  CatalogueEntry('DkPageGrid', '11.5 Pages and thumbnails', PageGridStates()),
+  CatalogueEntry('DkMagnifier', '11.5 Pages and thumbnails', MagnifierStates()),
 ];
 
 /// The list of components; tap one to see its states.

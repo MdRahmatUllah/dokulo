@@ -1,0 +1,9 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Photo grid with two documents marked"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<rect x="22" y="22" width="22" height="22" rx="3" fill="#FFFFFF"></rect><rect x="49" y="22" width="22" height="22" rx="3" fill="#E6ECFF"></rect><rect x="76" y="22" width="22" height="22" rx="3" fill="#FFFFFF"></rect>
+<rect x="22" y="49" width="22" height="22" rx="3" fill="#FFFFFF"></rect><rect x="49" y="49" width="22" height="22" rx="3" fill="#FFFFFF"></rect><rect x="76" y="49" width="22" height="22" rx="3" fill="#E6ECFF"></rect>
+<rect x="22" y="76" width="22" height="22" rx="3" fill="#FFFFFF"></rect><rect x="49" y="76" width="22" height="22" rx="3" fill="#FFFFFF"></rect><rect x="76" y="76" width="22" height="22" rx="3" fill="#FFFFFF"></rect>
+<path d="M54 30h12M54 35h9M81 57h12M81 62h9"></path>
+<path d="M27 38l5-5 4 4 4-6M54 92l5-6 4 3 5-5" stroke-width="1.5"></path>
+<circle cx="70" cy="23" r="5" fill="#2251E6" stroke="#2251E6"></circle><circle cx="97" cy="50" r="5" fill="#2251E6" stroke="#2251E6"></circle>
+</g></svg>

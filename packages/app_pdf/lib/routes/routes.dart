@@ -5,6 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
+import '../components/motion/dk_transition_motion.dart';
 import '../screens/placeholder_screen.dart';
 import 'app_shell.dart';
 
@@ -115,11 +116,19 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
         ],
       ),
-      fullScreen(
-        '/viewer/:fileId',
-        (s) => PlaceholderScreen(
-          s.uri.queryParameters['mode'] == 'edit' ? 'V2' : 'V1',
-          detail: s.pathParameters['fileId']!,
+      GoRoute(
+        path: '/viewer/:fileId',
+        parentNavigatorKey: root,
+        // The file's thumbnail expands into the first page (DK-0046).
+        pageBuilder: (context, s) => dkViewerPage(
+          context,
+          key: s.pageKey,
+          child: _HomeUnderneath(
+            child: PlaceholderScreen(
+              s.uri.queryParameters['mode'] == 'edit' ? 'V2' : 'V1',
+              detail: s.pathParameters['fileId']!,
+            ),
+          ),
         ),
       ),
       fullScreen(

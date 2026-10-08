@@ -1,0 +1,8 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Dokulo symbol with a Pro ribbon"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<path d="M42 22h26l14 14v50a4 4 0 0 1-4 4H42a4 4 0 0 1-4-4V26a4 4 0 0 1 4-4z" fill="#FFFFFF" stroke="#2251E6" stroke-width="3"></path>
+<path d="M68 22v10a4 4 0 0 0 4 4h10" stroke="#2251E6" stroke-width="3"></path>
+<path d="M48 76l12-10 12 10v6H48z" fill="#2251E6" stroke="#2251E6"></path>
+<path d="M64 92h36l-6 7 6 7H64z" fill="#FFF4DD" stroke="#8A5A0B"></path>
+<path d="M72 99h20" stroke="#8A5A0B"></path>
+</g></svg>
