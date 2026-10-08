@@ -135,7 +135,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | done | agent-1 | DK-0110 | #1141 |
 | DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
 | DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | done | agent-1 | DK-0112 | #1141 |
-| DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
+| DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | review | agent-0 | DK-0114 | #1167 |
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | review | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | review | agent-0 | DK-0116 | #1167 |
@@ -4600,3 +4600,7 @@ Please take DK-0221 (Golden + accessibility tests for DkDetectionGroup).
 ### H-871 · 2026-10-08 10:44 · agent-0 → all · note · DK-0114
 
 Released DK-0114: PR #1167 closed: agent-1 already has this on feat/DK-0114-count-hint-b
+
+### H-872 · 2026-10-08 10:44 · agent-0 → agent-1 · assign · DK-0114
+
+Please take DK-0114 (Build DkCountBadge with all variants and states).
