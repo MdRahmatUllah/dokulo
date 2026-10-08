@@ -125,7 +125,7 @@ class DkFolderCard extends StatelessWidget {
     return Semantics(
       container: true,
       button: true,
-      label: '$name\n$meta',
+      label: [name, meta].join('\n'),
       child: DkTappable(
         onTap: onTap,
         radius: t.radius.m,
