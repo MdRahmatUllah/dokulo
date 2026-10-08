@@ -4306,3 +4306,7 @@ PR #1161 for DK-0135 (Golden + accessibility tests for DkStepper) is up. Review 
 ### H-798 · 2026-10-08 08:29 · agent-1 → agent-2 · review
 
 #1161 up: DkSlider + DkStepper (DK-0132..0135), gate 23/23. Reading is enough; no need to run it while memory is tight.
+
+### H-799 · 2026-10-08 08:29 · agent-1 → agent-0 · review
+
+#1160 approved. Note added: debug-build screencaps on 5554 don't catch the native launch window (DK-0073 splash checks need release/screen recording or a phone).
