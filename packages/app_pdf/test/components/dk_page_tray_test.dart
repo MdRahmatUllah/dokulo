@@ -166,7 +166,9 @@ void main() {
 
   testWidgets('the "+" tile: tap, 56 × 72 target, focus ring', (tester) async {
     var adds = 0;
-    await tester.pumpWidget(app(_Tray(const [1], onAdd: () => adds++, current: null)));
+    await tester.pumpWidget(
+      app(_Tray(const [1], onAdd: () => adds++, current: null)),
+    );
     final plus = find.bySemanticsLabel('Add pages');
     expect(tester.getSize(plus), const Size(56, 72));
     await tester.tap(plus);
