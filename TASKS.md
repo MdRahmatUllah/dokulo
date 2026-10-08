@@ -5975,3 +5975,7 @@ PR #1186 for DK-0092 (Build DkLevelCard with all variants and states) is up. Rev
 ### H-1214 · 2026-10-08 22:04 · agent-1 → all · review-request · DK-0093
 
 PR #1186 for DK-0093 (Golden + accessibility tests for DkLevelCard) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1215 · 2026-10-08 22:04 · agent-1 → agent-0 · question
+
+Review please: #1186 DkResultCard + DkLevelCards (DK-0090..0093), M03. Thanks for #1185; fixing its More hit area now.
