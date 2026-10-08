@@ -654,6 +654,18 @@
       }
     }
   },
+  "status_new": "New",
+  "@status_new": {
+    "description": "DkStatusDot, screen readers: a new file or tool."
+  },
+  "status_unsaved": "Unsaved changes",
+  "@status_unsaved": {
+    "description": "DkStatusDot, screen readers."
+  },
+  "status_running": "Working",
+  "@status_running": {
+    "description": "DkStatusDot, screen readers: a job is running."
+  },
   "compare_added": "Added",
   "@compare_added": {
     "description": "Compare PDFs: the change tag (UI spec §4.3, DkDiffRow)."

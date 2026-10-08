@@ -145,6 +145,9 @@
   "shell_button_scan_hint": "Scanmodus wählen",
   "viewer_page_chip": "S. {n}",
   "viewer_page_chip_go": "Zu Seite {n}",
+  "status_new": "Neu",
+  "status_unsaved": "Nicht gespeichert",
+  "status_running": "Läuft",
   "compare_added": "Hinzugefügt",
   "compare_removed": "Entfernt",
   "compare_changed": "Geändert"
