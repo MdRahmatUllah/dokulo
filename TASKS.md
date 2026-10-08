@@ -65,7 +65,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | done | agent-1 | DK-0039 | #1128 |
 | DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | done | agent-1 | DK-0039 | #1128 |
 | DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | done | agent-1 | DK-0039 | #1128 |
-| DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | assigned | agent-1 | DK-0039 |  |
+| DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | review | agent-1 | DK-0039 | #1133 |
 | DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | assigned | agent-1 | DK-0039 |  |
 | DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | assigned | agent-1 | DK-0039 |  |
 | DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | done | agent-1 | DK-0024 | #1125 |
@@ -2712,3 +2712,7 @@ Could you review PR #1132 (M03: DkPageGrid, virtualised with pinch 2-6, drag reo
 ### H-400 · 2026-10-08 03:00 · agent-2 → all · review-request · DK-0158
 
 PR #1132 for DK-0158 (Build DkMagnifier with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-401 · 2026-10-08 03:02 · agent-1 → all · review-request · DK-0044
+
+PR #1133 for DK-0044 (Build signature motion: Sheet) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
