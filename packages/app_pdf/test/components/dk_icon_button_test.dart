@@ -4,6 +4,7 @@ import 'package:app_pdf/catalogue/icon_button_states.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(Widget child, {DkTokens? tokens, double scale = 1}) => MaterialApp(
@@ -36,7 +37,7 @@ void main() {
     for (final scale in [1.0, 2.0]) {
       final name = '${theme}_${(scale * 100).round()}';
       testWidgets('golden: $name', (tester) async {
-        tester.view.physicalSize = const Size(240, 200);
+        tester.view.physicalSize = const Size(300, 200);
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
@@ -208,5 +209,39 @@ void main() {
     await tester.pump(const Duration(milliseconds: 100));
     expect(find.text('Pin'), findsOneWidget, reason: 'the tooltip');
     await tester.pumpAndSettle(const Duration(seconds: 2));
+  });
+
+  testWidgets('keyboard: focus shows the 2 dp ring, Enter presses', (
+    tester,
+  ) async {
+    var taps = 0;
+    await tester.pumpWidget(
+      app(
+        Center(
+          child: DkIconButton(
+            icon: DkIcons.pin,
+            tooltip: 'Pin',
+            onPressed: () => taps++,
+          ),
+        ),
+      ),
+    );
+    FocusManager.instance.highlightStrategy =
+        FocusHighlightStrategy.alwaysTraditional;
+    addTearDown(
+      () => FocusManager.instance.highlightStrategy =
+          FocusHighlightStrategy.automatic,
+    );
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    final ring = find.byWidgetPredicate(
+      (w) =>
+          w is DecoratedBox &&
+          (w.decoration as BoxDecoration).border ==
+              Border.all(color: DkTokens.light.color.focusRing, width: 2),
+    );
+    expect(ring, findsOneWidget);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    expect(taps, 1);
   });
 }
