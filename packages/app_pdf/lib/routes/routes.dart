@@ -28,6 +28,9 @@ abstract final class Routes {
   static String viewer(String fileId, {bool edit = false}) =>
       '/viewer/$fileId${edit ? '?mode=edit' : ''}';
   static String organize(String fileId) => '/organize/$fileId'; // P1
+
+  /// The component catalogue (`lib/catalogue/`): debug builds only.
+  static const catalogue = '/dev/catalogue';
 }
 
 GoRoute _screen(String path, String id, {List<RouteBase> routes = const []}) =>
@@ -120,7 +123,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       // constant, so a release build doesn't contain it).
       if (kDebugMode)
         fullScreen(
-          '/dev/components',
+          Routes.catalogue,
           (_) => const CatalogueScreen(),
           routes: [
             fullScreen(

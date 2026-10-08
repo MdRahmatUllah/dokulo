@@ -53,7 +53,10 @@ void main() {
         [s.surface, s.onSurface, s.onSurfaceVariant],
         [c.surface, c.textPrimary, c.textSecondary],
       );
-      expect([s.error, s.errorContainer], [c.danger, c.dangerContainer]);
+      expect(
+        [s.error, s.onError, s.errorContainer],
+        [c.danger, c.onDanger, c.dangerContainer],
+      );
       expect([s.outline, s.outlineVariant], [c.outlineStrong, c.outline]);
       expect(
         [s.inverseSurface, s.onInverseSurface, s.inversePrimary],
