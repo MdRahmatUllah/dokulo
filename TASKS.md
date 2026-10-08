@@ -6573,3 +6573,7 @@ PR #1193 for DK-0984 (Visual QA: components-part-2 (components-part-2)) is up. R
 ### H-1363 · 2026-10-09 00:39 · agent-2 → all · note · DK-1073
 
 Added DK-1073 (Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984)) to lane C, Ph7 P2.
+
+### H-1364 · 2026-10-09 00:40 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 90)
