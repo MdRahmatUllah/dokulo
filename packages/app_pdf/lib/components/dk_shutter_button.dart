@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
+import 'dk_tappable.dart';
 
 /// The scanner's shutter (DK-0080; UI spec §11.1): a 72 dp white ring
 /// (4 dp) around a 58 dp white disc, which shrinks to 52 while pressed.
@@ -11,7 +12,7 @@ import '../theme/dk_tokens.dart';
 /// ring while the page holds still (`motion.autoCapture`, 0.5 s). Drive it
 /// from the same animation that fires the capture, so they end together.
 /// `onPressed: null` (no camera permission) draws it at 40 %.
-class DkShutterButton extends StatefulWidget {
+class DkShutterButton extends StatelessWidget {
   const DkShutterButton({
     super.key,
     required this.onPressed,
@@ -31,59 +32,36 @@ class DkShutterButton extends StatefulWidget {
   static const outer = 72.0, ring = 4.0, disc = 58.0, discPressed = 52.0;
 
   @override
-  State<DkShutterButton> createState() => _DkShutterButtonState();
-}
-
-class _DkShutterButtonState extends State<DkShutterButton> {
-  var _down = false;
-  var _keyFocus = false;
-
-  bool get _enabled => widget.onPressed != null;
-  bool get _pressed => _down || widget.showPressed;
-
-  void _press(bool down) {
-    if (_down != down) setState(() => _down = down);
-  }
-
-  @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final c = t.color;
     final m = context.motion(DkMotionKind.fast);
-    final disc = _pressed && !m.crossFade
-        ? DkShutterButton.discPressed
-        : DkShutterButton.disc;
+    final enabled = onPressed != null;
     return Semantics(
       button: true,
-      enabled: _enabled,
+      enabled: enabled,
       label: AppLocalizations.of(context).scanner_button_shutter,
       excludeSemantics: true,
-      onTap: widget.onPressed,
-      child: FocusableActionDetector(
-        enabled: _enabled,
-        onShowFocusHighlight: (v) => setState(() => _keyFocus = v),
-        actions: {
-          ActivateIntent: CallbackAction<ActivateIntent>(
-            onInvoke: (_) => widget.onPressed?.call(),
-          ),
-        },
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTapDown: _enabled ? (_) => _press(true) : null,
-          onTapUp: _enabled ? (_) => _press(false) : null,
-          onTapCancel: () => _press(false),
-          onTap: widget.onPressed,
-          child: Opacity(
-            opacity: _enabled ? 1 : t.state.disabledOpacity,
+      onTap: onPressed,
+      child: DkTappable(
+        onTap: onPressed,
+        radius: outer / 2, // a circle: the focus ring follows it
+        showPressed: showPressed,
+        showFocused: showFocused,
+        builder: (context, pressed) {
+          final disc = pressed && !m.crossFade
+              ? DkShutterButton.discPressed
+              : DkShutterButton.disc;
+          return Opacity(
+            opacity: enabled ? 1 : t.state.disabledOpacity,
             child: CustomPaint(
               painter: _RingPainter(
                 ring: c.onCamera,
                 arc: c.quadStroke,
-                progress: widget.countdown.clamp(0.0, 1.0),
-                focus: _keyFocus || widget.showFocused ? c.focusRing : null,
+                progress: countdown.clamp(0.0, 1.0),
               ),
               child: SizedBox.square(
-                dimension: DkShutterButton.outer,
+                dimension: outer,
                 child: Center(
                   child: AnimatedContainer(
                     duration: m.duration,
@@ -98,24 +76,18 @@ class _DkShutterButtonState extends State<DkShutterButton> {
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
 }
 
 class _RingPainter extends CustomPainter {
-  _RingPainter({
-    required this.ring,
-    required this.arc,
-    required this.progress,
-    required this.focus,
-  });
+  _RingPainter({required this.ring, required this.arc, required this.progress});
 
   final Color ring, arc;
   final double progress;
-  final Color? focus;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -135,23 +107,9 @@ class _RingPainter extends CustomPainter {
         pen..color = arc,
       );
     }
-    if (focus != null) {
-      // 2 dp, 2 dp outside the ring.
-      canvas.drawCircle(
-        centre,
-        size.width / 2 + 3,
-        Paint()
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2
-          ..color = focus!,
-      );
-    }
   }
 
   @override
   bool shouldRepaint(_RingPainter old) =>
-      old.progress != progress ||
-      old.ring != ring ||
-      old.arc != arc ||
-      old.focus != focus;
+      old.progress != progress || old.ring != ring || old.arc != arc;
 }
