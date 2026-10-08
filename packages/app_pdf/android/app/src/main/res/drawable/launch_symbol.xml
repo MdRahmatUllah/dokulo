@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The Dokulo symbol, 72 dp, in color.primary (DK-0073; the same paths as
+     assets/brand/dokulo_symbol.svg). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <path
+        android:strokeColor="@color/dk_symbol"
+        android:strokeWidth="4"
+        android:strokeLineJoin="round"
+        android:pathData="M18,8h20l12,12v32a4,4 0,0 1,-4 4H18a4,4 0,0 1,-4 -4V12a4,4 0,0 1,4 -4z" />
+    <path
+        android:strokeColor="@color/dk_symbol"
+        android:strokeWidth="4"
+        android:strokeLineJoin="round"
+        android:pathData="M38,8v8a4,4 0,0 0,4 4h8" />
+    <path
+        android:fillColor="@color/dk_symbol"
+        android:pathData="M23,45l9,-8 9,8v5H23z" />
+</vector>
