@@ -6,19 +6,29 @@ import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
 import 'choice_row_states.dart';
+import 'color_pin_states.dart';
+import 'dropdown_states.dart';
 import 'icon_button_states.dart';
+import 'logo_states.dart';
 import 'next_page_chip_states.dart';
+import 'option_row_states.dart';
 import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
+import 'page_pill_states.dart';
 import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
+import 'range_search_states.dart';
 import 'scan_button_states.dart';
+import 'badge_pill_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
+import 'slider_stepper_states.dart';
 import 'switch_segmented_states.dart';
+import 'text_field_states.dart';
 import 'tool_tile_states.dart';
+import 'crop_states.dart';
 import 'chat_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -40,6 +50,7 @@ class CatalogueEntry {
 }
 
 const catalogue = [
+  CatalogueEntry('DkLogo', '3 Brand', LogoStates()),
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
@@ -66,6 +77,11 @@ const catalogue = [
     'DkNextChip, DkPageChip',
     '11.3 Badges, chips, indicators',
     DkNextPageChipGallery(),
+  ),
+  CatalogueEntry(
+    'DkCountBadge, DkHintPill',
+    '11.3 Badges, chips, indicators',
+    DkBadgePillGallery(),
   ),
   CatalogueEntry('DkActionBar', '11.6 Bars', ActionBarStates()),
   CatalogueEntry(
@@ -111,6 +127,52 @@ const catalogue = [
     '11.4 Inputs and controls',
     DkSwitchSegmentedGallery(),
   ),
+  CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
+  CatalogueEntry(
+    'DkOptionRow, DkPositionPicker',
+    '11.4 Inputs and controls',
+    DkOptionRowGallery(),
+  ),
+  CatalogueEntry(
+    'DkSkeleton · DkLoadingSpinner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    LoadingStates(),
+  ),
+  CatalogueEntry(
+    'DkTextField, DkPasswordField',
+    '11.4 Inputs and controls',
+    DkTextFieldGallery(),
+  ),
+  CatalogueEntry(
+    'DkRangeField, DkSearchField',
+    '11.4 Inputs and controls',
+    DkRangeSearchGallery(),
+  ),
+  CatalogueEntry(
+    'DkSlider, DkStepper',
+    '11.4 Inputs and controls',
+    DkSliderStepperGallery(),
+  ),
+  CatalogueEntry(
+    'DkSelectionBar · DkViewerBar · DkCameraTopBar',
+    '11.6 Bars',
+    BottomBarStates(),
+  ),
+  CatalogueEntry('DkMiniJobBar', '11.6 Bars', MiniJobBarStates()),
+  CatalogueEntry('DkColorRow', '11.4 Inputs and controls', DkColorRowGallery()),
+  CatalogueEntry('DkPinPad', '11.4 Inputs and controls', DkPinPadGallery()),
+  CatalogueEntry(
+    'DkToolStrip · DkMarkupBar',
+    '11.6 Bars · 11.8 Editor',
+    EditorBarStates(),
+  ),
+  CatalogueEntry(
+    'DkPagePill',
+    '11.3 Badges, chips, indicators',
+    DkPagePillGallery(),
+  ),
+  CatalogueEntry('DkDropdown', '11.4 Inputs and controls', DkDropdownGallery()),
+  CatalogueEntry('DkCropOverlay', '11.5 Pages and thumbnails', CropStates()),
   CatalogueEntry('DkChatBubble', '11.8 Editor and AI', ChatStates()),
   CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
 ];
