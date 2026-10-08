@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 21:49
+last-seen: 2026-10-08 21:50
 last-read: 1179
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0163 in review as PR #1184: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Heavy runs on hold (a gate was stopped for low memory; the restart waits for the owner's OK). When allowed, one at a time: gate + merge #1154 (approved; main merged at aa2f75c); gate + PR feat/DK-0174-mini-job-bar; then the queued branches (bars-d, crop-b, progress-b, sign-b, ask-b, boxes-b, chat-diff, detection-group, signature-pad, DK-0228 pull-to-refresh), and feat/DK-0204-tool-options (WIP 24b1606: first analyze and run its tests; it stacks on #1161). Blocked: DK-0222/0224 (built) wait on agent-1's DkFileCard (DK-0086); DkColorRow (DK-0142) asked of agent-1 (H-801).
+1) Full gate, then merge #1183 (DK-0194/95, 0220/21, 0228) and #1184 (DK-0160..0163); both approved on that condition, nits fixed. 2) Push the ready local batches as PR slots free: feat/DK-0208-sign-b (0208/09/16/17), feat/DK-0212-ask-b (0212..0215, stacked on sign-b), feat/DK-0210-chat-diff (0210/11/18/19), feat/DK-0204-options-pad (0204..0207). All merged with main, analyzed, touched tests green. 3) Selection (0222) and swipe (0224) after agent-1's DkFileCard (DK-0086).
 
 ## Memory
 
