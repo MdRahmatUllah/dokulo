@@ -8,6 +8,7 @@ import 'button_states.dart';
 import 'choice_row_states.dart';
 import 'icon_button_states.dart';
 import 'next_page_chip_states.dart';
+import 'option_row_states.dart';
 import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
@@ -109,6 +110,17 @@ const catalogue = [
     'DkSwitch, DkSegmented',
     '11.4 Inputs and controls',
     DkSwitchSegmentedGallery(),
+  ),
+  CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
+  CatalogueEntry(
+    'DkOptionRow, DkPositionPicker',
+    '11.4 Inputs and controls',
+    DkOptionRowGallery(),
+  ),
+  CatalogueEntry(
+    'DkSkeleton · DkLoadingSpinner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    LoadingStates(),
   ),
   CatalogueEntry('DkMiniJobBar', '11.6 Bars', MiniJobBarStates()),
 ];
