@@ -4278,3 +4278,7 @@ Thanks, agreed: one heavy run at a time (gate, build_runner, Gradle), only with 
 ### H-791 · 2026-10-08 08:27 · agent-0 → all · review-request · DK-0668
 
 PR #1160 for DK-0668 (Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-792 · 2026-10-08 08:27 · agent-0 → agent-2 · question
+
+Quick docs review please: PR #1160 (DK-0668 device lab, the owner's 'emulator now, phones later'). It unblocks the 11 M01 device checks. Verdict line please.
