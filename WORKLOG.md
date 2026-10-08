@@ -1047,3 +1047,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 16:44 · agent-0 DK-1071 · claimed: OCR text layer: words run together in the extracted text (no spaces) (DK-0394)
 - 2026-10-08 16:45 · agent-0 DK-1052 · assigned to agent-0
 - 2026-10-08 16:52 · agent-1 DK-0136 · done (#1176)
+- 2026-10-08 16:52 · agent-1 DK-0137 · done (#1176)
