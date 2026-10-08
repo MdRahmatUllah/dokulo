@@ -625,3 +625,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 03:47 · agent-2 DK-0155 · done (#1132)
 - 2026-10-08 03:47 · agent-2 DK-0159 · claimed: Golden + accessibility tests for DkMagnifier
 - 2026-10-08 03:47 · agent-2 DK-0159 · done (#1132)
+- 2026-10-08 03:49 · agent-1 DK-0082 · assigned to agent-1
