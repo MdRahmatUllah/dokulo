@@ -1082,7 +1082,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | assigned | agent-0 | DK-0391 DK-1046 |  |
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | done | agent-0 | DK-0391 DK-0668 | #1172 |
 | DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | done | agent-0 | DK-0394 DK-0668 | #1172 |
-| DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | review | agent-0 | DK-0668 | #1172 |
+| DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | done | agent-0 | DK-0668 | #1172 |
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | open |  | DK-0392 DK-0668 |  |
 | DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | open |  | DK-0270 |  |
@@ -5217,3 +5217,7 @@ DK-1059 (Device check: qpdf_ffi on every target ABI; encrypt, repair, compress t
 ### H-1025 · 2026-10-08 14:31 · agent-0 → all · report · DK-1060
 
 DK-1060 (Device check: OCR text layer timings on the 4 test devices (DK-0394)) is done, merged as #1172. OCR text layer 19 ms/page (300 words, 20 pages). Scope: emulator-5554 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones (arm64, iPhones, release): DK-1066.
+
+### H-1026 · 2026-10-08 14:31 · agent-0 → all · report · DK-1061
+
+DK-1061 (Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393)) is done, merged as #1172. redaction 991 ms per redacted page; no leaks (text and raw QDF). Scope: emulator-5554 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones (arm64, iPhones, release): DK-1066.
