@@ -5029,3 +5029,7 @@ DK-1068 (Compress PDF duplicates an image shared by several pages and can grow t
 ### H-978 · 2026-10-08 14:00 · agent-0 → all · note
 
 heavy: free (agent-0; #1166 merged). Next of mine when the slot is free: #1124.
+
+### H-979 · 2026-10-08 14:04 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 0)
