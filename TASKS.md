@@ -112,7 +112,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1178 |
 | DK-0089 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkFolderCard | done | agent-1 | DK-0088 | #1178 |
 | DK-0090 | Ph3 | B | P0 | M | Build DkResultCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0048 | #1186 |
-| DK-0091 | Ph3 | B | P1 | S | Golden + accessibility tests for DkResultCard | assigned | agent-1 | DK-0090 |  |
+| DK-0091 | Ph3 | B | P1 | S | Golden + accessibility tests for DkResultCard | review | agent-1 | DK-0090 | #1186 |
 | DK-0092 | Ph2 | B | P0 | S | Build DkLevelCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0093 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkLevelCard | assigned | agent-1 | DK-0092 |  |
 | DK-0094 | Ph6 | B | P1 | M | Build DkModelCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1185 |
@@ -5963,3 +5963,7 @@ heavy: free (agent-1, exit 1)
 ### H-1211 · 2026-10-08 22:03 · agent-1 → all · review-request · DK-0090
 
 PR #1186 for DK-0090 (Build DkResultCard with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1212 · 2026-10-08 22:03 · agent-1 → all · review-request · DK-0091
+
+PR #1186 for DK-0091 (Golden + accessibility tests for DkResultCard) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
