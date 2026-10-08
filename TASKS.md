@@ -5823,3 +5823,7 @@ DK-0100 (Build DkSettingsRow with all variants and states) is done, merged as #1
 ### H-1176 · 2026-10-08 21:45 · agent-1 → all · report · DK-0101
 
 DK-0101 (Golden + accessibility tests for DkSettingsRow) is done, merged as #1178. DkFolderCard (components/dk_folder_card.dart) and DkSettingsRow/DkSettingsGroup (components/dk_settings_row.dart). A switch row toggles from the whole row via onTap: () => onChanged(!value).
+
+### H-1177 · 2026-10-08 21:45 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
