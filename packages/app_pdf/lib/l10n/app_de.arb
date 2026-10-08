@@ -226,5 +226,9 @@
   "redact_box_label": "Schwärzungsfeld: {category}",
   "redact_box_remove": "Feld entfernen",
   "sign_stamp_label": "Unterschrift",
-  "sign_stamp_remove": "Unterschrift entfernen"
+  "sign_stamp_remove": "Unterschrift entfernen",
+  "sign_card_label": "Gespeicherte Unterschrift",
+  "sign_card_delete": "Unterschrift löschen",
+  "split_add": "Hier teilen",
+  "split_remove": "Hier nicht teilen"
 }

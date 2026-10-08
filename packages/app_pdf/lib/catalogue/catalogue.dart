@@ -32,6 +32,7 @@ import 'tool_tile_states.dart';
 import 'crop_states.dart';
 import 'detection_states.dart';
 import 'progress_states.dart';
+import 'sign_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -195,6 +196,12 @@ const catalogue = [
     '11.5 Pages and thumbnails',
     BoxStates(),
   ),
+  CatalogueEntry(
+    'DkSignatureCard',
+    '11.8 Editor and AI',
+    SignatureCardStates(),
+  ),
+  CatalogueEntry('DkSplitMarker', '11.8 Editor and AI', SplitStates()),
 ];
 
 /// The list of components; tap one to see its states.
