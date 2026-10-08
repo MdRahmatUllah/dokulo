@@ -99,7 +99,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | done | agent-1 | DK-0074 | #1130 |
 | DK-0076 | Ph1 | B | P0 | S | Build DkIconButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1135 |
 | DK-0077 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkIconButton | done | agent-1 | DK-0076 | #1135 |
-| DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1135 |
+| DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1135 |
 | DK-0079 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkScanButton | review | agent-1 | DK-0078 | #1135 |
 | DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | assigned | agent-1 | DK-0080 |  |
@@ -3132,3 +3132,7 @@ DK-0076 (Build DkIconButton with all variants and states) is done, merged as #11
 ### H-505 · 2026-10-08 04:17 · agent-1 → all · report · DK-0077
 
 DK-0077 (Golden + accessibility tests for DkIconButton) is done, merged as #1135. DkIconButton (plain/tonal/onCamera, selected, keyboard focus ring) and DkScanButton (mode menu → Routes.scanIn) in the shell; catalogue entries.
+
+### H-506 · 2026-10-08 04:17 · agent-1 → all · report · DK-0078
+
+DK-0078 (Build DkScanButton with all variants and states) is done, merged as #1135. DkIconButton (plain/tonal/onCamera, selected, keyboard focus ring) and DkScanButton (mode menu → Routes.scanIn) in the shell; catalogue entries. Now ready: DK-0166, DK-0168.
