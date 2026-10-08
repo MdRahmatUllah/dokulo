@@ -134,7 +134,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0110 | Ph1 | B | P0 | XS | Build DkPrivacyLine with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
 | DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | review | agent-1 | DK-0110 | #1141 |
 | DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
-| DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | assigned | agent-1 | DK-0112 |  |
+| DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | review | agent-1 | DK-0112 | #1141 |
 | DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | assigned | agent-1 | DK-0114 |  |
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -3224,3 +3224,7 @@ PR #1141 for DK-0111 (Golden + accessibility tests for DkPrivacyLine) is up. Rev
 ### H-528 · 2026-10-08 04:39 · agent-1 → all · review-request · DK-0112
 
 PR #1141 for DK-0112 (Build DkStatusDot with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-529 · 2026-10-08 04:39 · agent-1 → all · review-request · DK-0113
+
+PR #1141 for DK-0113 (Golden + accessibility tests for DkStatusDot) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
