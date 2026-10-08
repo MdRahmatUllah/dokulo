@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1072 Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) — claimed 2026-10-09 00:37.
+DK-1072 in review as PR #1193: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
