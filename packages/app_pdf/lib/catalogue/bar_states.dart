@@ -4,6 +4,7 @@ import '../components/dk_icon.dart';
 import '../components/dk_scan_button.dart';
 import '../components/dk_tab_bar.dart';
 import '../components/dk_top_bar.dart';
+import '../routes/app_shell.dart';
 import '../theme/dk_tokens.dart';
 
 void _none() {}
@@ -67,13 +68,6 @@ class TopBarStates extends StatelessWidget {
 class TabBarStates extends StatelessWidget {
   const TabBarStates({super.key});
 
-  static const items = [
-    DkTabItem(icon: DkIcons.home, label: 'Home'),
-    DkTabItem(icon: DkIcons.toolsTab, label: 'Tools'),
-    DkTabItem(icon: DkIcons.files, label: 'Files'),
-    DkTabItem(icon: DkIcons.me, label: 'Me'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
@@ -90,7 +84,7 @@ class TabBarStates extends StatelessWidget {
             ),
             floatingActionButtonLocation: DkTabBar.scanLocation,
             bottomNavigationBar: DkTabBar(
-              items: items,
+              items: shellTabs(context),
               currentIndex: 2,
               onSelect: (_) {},
             ),
@@ -101,7 +95,7 @@ class TabBarStates extends StatelessWidget {
           child: Row(
             children: [
               DkNavRail(
-                items: items,
+                items: shellTabs(context),
                 currentIndex: 0,
                 onSelect: (_) {},
                 onScan: _none,

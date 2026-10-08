@@ -8,6 +8,17 @@ import '../l10n/app_localizations.dart';
 import '../theme/dk_layout.dart';
 import 'routes.dart';
 
+/// Home, Tools, Files and Me, in the user's language.
+List<DkTabItem> shellTabs(BuildContext context) {
+  final l10n = AppLocalizations.of(context);
+  return [
+    DkTabItem(icon: DkIcons.home, label: l10n.shell_tab_home),
+    DkTabItem(icon: DkIcons.toolsTab, label: l10n.shell_tab_tools),
+    DkTabItem(icon: DkIcons.files, label: l10n.shell_tab_files),
+    DkTabItem(icon: DkIcons.me, label: l10n.shell_tab_me),
+  ];
+}
+
 /// The four tabs and Scan (UI spec §13.1): DkTabBar with the raised
 /// DkScanButton on phones and small tablets, DkNavRail from 840 dp.
 class AppShell extends StatelessWidget {
@@ -17,13 +28,7 @@ class AppShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final items = [
-      DkTabItem(icon: DkIcons.home, label: l10n.shell_tab_home),
-      DkTabItem(icon: DkIcons.toolsTab, label: l10n.shell_tab_tools),
-      DkTabItem(icon: DkIcons.files, label: l10n.shell_tab_files),
-      DkTabItem(icon: DkIcons.me, label: l10n.shell_tab_me),
-    ];
+    final items = shellTabs(context);
     // Tapping the current tab again returns it to its root.
     void select(int i) =>
         shell.goBranch(i, initialLocation: i == shell.currentIndex);

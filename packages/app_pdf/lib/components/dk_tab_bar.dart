@@ -307,13 +307,17 @@ class _DestinationState extends State<_Destination> {
                     )
                   else
                     icon,
-                  Text(
-                    widget.item.label,
-                    style: t.text.labelM.copyWith(
-                      color: on ? c.primary : c.textSecondary,
+                  // A long label ("Werkzeuge" at large text) shrinks to fit
+                  // its cell rather than losing letters.
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      widget.item.label,
+                      style: t.text.labelM.copyWith(
+                        color: on ? c.primary : c.textSecondary,
+                      ),
+                      maxLines: 1,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

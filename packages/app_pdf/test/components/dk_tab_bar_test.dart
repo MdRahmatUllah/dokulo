@@ -1,5 +1,6 @@
 import 'package:app_pdf/catalogue/bar_states.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
+import 'package:app_pdf/components/dk_icon.dart';
 import 'package:app_pdf/components/dk_tab_bar.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -28,6 +29,14 @@ Widget app(
   ),
 );
 
+/// The shell's tabs, in English.
+const items = [
+  DkTabItem(icon: DkIcons.home, label: 'Home'),
+  DkTabItem(icon: DkIcons.toolsTab, label: 'Tools'),
+  DkTabItem(icon: DkIcons.files, label: 'Files'),
+  DkTabItem(icon: DkIcons.me, label: 'Me'),
+];
+
 void phone(WidgetTester tester, [Size size = const Size(393, 852)]) {
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
@@ -42,7 +51,7 @@ Widget bar({int current = 2, ValueChanged<int>? onSelect}) => Scaffold(
   ),
   floatingActionButtonLocation: DkTabBar.scanLocation,
   bottomNavigationBar: DkTabBar(
-    items: TabBarStates.items,
+    items: items,
     currentIndex: current,
     onSelect: onSelect ?? (_) {},
   ),
@@ -53,24 +62,23 @@ void main() {
     ('light', DkTokens.light),
     ('dark', DkTokens.dark),
   ]) {
-    for (final scale in [1.0, 2.0]) {
-      testWidgets('tab bar and rail, $name, ${(scale * 100).round()} %', (
-        tester,
-      ) async {
+    for (final (lang, scale) in [('en', 1.0), ('en', 2.0), ('de', 2.0)]) {
+      final file = 'tab_bar_${name}_${lang}_${(scale * 100).round()}';
+      testWidgets('tab bar and rail: $file', (tester) async {
         phone(tester, const Size(393, 700));
         await tester.pumpWidget(
           app(
             const Scaffold(body: TabBarStates()),
             tokens: tokens,
             textScale: scale,
+            locale: Locale(lang),
           ),
         );
         await tester.pumpAndSettle();
+        expect(tester.takeException(), isNull);
         await expectLater(
           find.byType(TabBarStates),
-          matchesGoldenFile(
-            'goldens/tab_bar_${name}_${(scale * 100).round()}.png',
-          ),
+          matchesGoldenFile('goldens/$file.png'),
         );
       });
     }
@@ -107,6 +115,8 @@ void main() {
       tester.getSemantics(find.bySemanticsLabel('Tools')),
       isSemantics(label: 'Tools', isSelected: false, isButton: true),
     );
+    await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+    await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
     handle.dispose();
   });
 
@@ -119,7 +129,7 @@ void main() {
           body: Row(
             children: [
               DkNavRail(
-                items: TabBarStates.items,
+                items: items,
                 currentIndex: 0,
                 onSelect: (_) {},
                 onScan: () => scans++,
