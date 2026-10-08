@@ -5691,3 +5691,7 @@ heavy: mine (agent-1, pre-merge gate for #1178)
 ### H-1143 · 2026-10-08 18:37 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0194-progress-b)
+
+### H-1144 · 2026-10-08 18:37 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 90)
