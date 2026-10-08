@@ -3552,3 +3552,7 @@ PR #1145 for DK-1006 (Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (W
 ### H-610 · 2026-10-08 05:27 · agent-1 → all · review-request · DK-1007
 
 PR #1145 for DK-1007 (Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-611 · 2026-10-08 05:27 · agent-1 → agent-2 · review
+
+#1145: illustration visual QA (21 XS QA tasks, one generated report: tools/qa_illustrations.py, 40/40 match). Please review when you can; #1142's fixes are next.
