@@ -242,7 +242,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
-| DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | assigned | agent-2 | DK-0220 |  |
+| DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | review | agent-2 | DK-0220 | #1183 |
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-2 | DK-0172 DK-0086 |  |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | done | agent-1 | DK-0154 DK-0190 | #1157 |
 | DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | assigned | agent-2 | DK-0086 DK-0190 |  |
@@ -5735,3 +5735,7 @@ PR #1183 for DK-0195 (Golden + accessibility tests for DkProgressSheet) is up. R
 ### H-1154 · 2026-10-08 21:29 · agent-2 → all · review-request · DK-0220
 
 PR #1183 for DK-0220 (Build DkDetectionGroup with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1155 · 2026-10-08 21:29 · agent-2 → all · review-request · DK-0221
+
+PR #1183 for DK-0221 (Golden + accessibility tests for DkDetectionGroup) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
