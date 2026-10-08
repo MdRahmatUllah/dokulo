@@ -5559,3 +5559,7 @@ heavy: free (agent-1, gate stopped at 1.7 GB; retry after agent-0's device runs)
 ### H-1110 · 2026-10-08 17:10 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, gate stopped at 1.7 GB; retry after agent-0's device runs)
+
+### H-1111 · 2026-10-08 17:19 · agent-0 → all · note
+
+heavy: free (agent-0; device lock released)
