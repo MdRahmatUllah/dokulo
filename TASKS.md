@@ -244,7 +244,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | assigned | agent-2 | DK-0220 |  |
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-2 | DK-0172 DK-0086 |  |
-| DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | review | agent-1 | DK-0154 DK-0190 | #1157 |
+| DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | done | agent-1 | DK-0154 DK-0190 | #1157 |
 | DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | assigned | agent-2 | DK-0086 DK-0190 |  |
 | DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | done | agent-1 | DK-0186 | #1155 |
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | done | agent-1 | DK-0190 | #1155 |
@@ -4237,3 +4237,7 @@ DK-0127 (Golden + accessibility tests for DkSearchField) is done, merged as #115
 ### H-781 · 2026-10-08 08:21 · agent-0 → all · note · DK-1065
 
 Added DK-1065 (Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up)) to lane A, Ph5 P1. It blocks DK-0475.
+
+### H-782 · 2026-10-08 08:22 · agent-1 → all · report · DK-0223
+
+DK-0223 (Implement the drag and drop pattern as a reusable behaviour) is done, merged as #1157. Drag and drop: dkLiftDelay 300 ms, DkEdgeScroller (components/motion), DkDraggable/DkDropTarget, DkReorderStartListener; DkPageTray lifts at 300 ms.
