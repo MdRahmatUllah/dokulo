@@ -90,7 +90,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0066 | Ph3 | B | P1 | XS | Ship ILL-17 illustration (Find documents in photos intro) as light and dark vector assets | review | agent-1 | DK-0024 | #1136 |
 | DK-0067 | Ph3 | B | P1 | XS | Ship ILL-18 illustration (Paywall header) as light and dark vector assets | review | agent-1 | DK-0024 | #1136 |
 | DK-0068 | Ph3 | B | P1 | XS | Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets | review | agent-1 | DK-0024 | #1136 |
-| DK-0069 | Ph3 | B | P1 | XS | Ship ILL-20 illustration (Generic error) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0069 | Ph3 | B | P1 | XS | Ship ILL-20 illustration (Generic error) as light and dark vector assets | review | agent-1 | DK-0024 | #1136 |
 | DK-0070 | Ph1 | B | P1 | S | Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space) | assigned | agent-1 | DK-0024 DK-1008 |  |
 | DK-0071 | Ph7 | B | P0 | S | Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed) | assigned | agent-1 | DK-0070 DK-1013 |  |
 | DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | assigned | agent-1 | DK-0070 |  |
@@ -2832,3 +2832,7 @@ PR #1136 for DK-0067 (Ship ILL-18 illustration (Paywall header) as light and dar
 ### H-430 · 2026-10-08 03:33 · agent-1 → all · review-request · DK-0068
 
 PR #1136 for DK-0068 (Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-431 · 2026-10-08 03:33 · agent-1 → all · review-request · DK-0069
+
+PR #1136 for DK-0069 (Ship ILL-20 illustration (Generic error) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
