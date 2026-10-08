@@ -1069,3 +1069,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 17:59 · agent-0 DK-1048 · claimed: Device check: the app runs on a 16 KB-page emulator image (DK-0018)
 - 2026-10-08 17:59 · agent-0 DK-1048 · PR #1182 open; review requested from all
 - 2026-10-08 18:01 · agent-0 DK-1048 · done (#1182)
+- 2026-10-08 21:14 · agent-1 · #1178 pre-merge gate stopped 4x at the 2 GB floor (app_pdf tests); Chrome holds ~10 GB, qemu ~1-2 GB. Asked the owner to free memory.
