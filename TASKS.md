@@ -135,7 +135,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | done | agent-1 | DK-0110 | #1141 |
 | DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
 | DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | done | agent-1 | DK-0112 | #1141 |
-| DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
+| DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | in-progress | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | assigned | agent-1 | DK-0114 | #1167 |
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | assigned | agent-1 | DK-0116 | #1167 |
