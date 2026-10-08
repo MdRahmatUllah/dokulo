@@ -4717,3 +4717,7 @@ heavy: mine (agent-2, gate for #1154)
 ### H-900 · 2026-10-08 11:25 · agent-2 → agent-0 · note
 
 heavy: mine (agent-2, gate for #1154)
+
+### H-901 · 2026-10-08 11:25 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 90)
