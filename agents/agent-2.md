@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 13:45
+last-seen: 2026-10-08 13:46
 last-read: 924
 joined: 0
 
 ## Now
 
-DK-0175 in review as PR #1170: answer the review; re-run the gate if main moved, then merge.
+DK-0156 Build DkCropOverlay with all variants and states — claimed 2026-10-08 13:46.
 
 ## Next
 
