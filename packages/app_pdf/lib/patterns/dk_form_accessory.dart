@@ -81,7 +81,7 @@ class DkFormAccessoryBar extends StatelessWidget {
             DkIconButton(
               icon: DkIcons.previousField,
               tooltip: l.form_previous_field,
-              onPressed: scope.previousFocus,
+              onPressed: () => _toField(scope, forward: false),
             ),
             // Next field gives way at large text; Done keeps its width.
             Expanded(
@@ -89,7 +89,7 @@ class DkFormAccessoryBar extends StatelessWidget {
                 alignment: AlignmentDirectional.centerStart,
                 child: DkTextAction(
                   label: l.form_next_field,
-                  onTap: scope.nextFocus,
+                  onTap: () => _toField(scope, forward: true),
                 ),
               ),
             ),
@@ -104,4 +104,22 @@ class DkFormAccessoryBar extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Moves the focus to the next (or previous) text field in reading order,
+/// past checkboxes, buttons and the × in a field, which would close the
+/// keyboard. Stays put at the first or last field.
+void _toField(FocusScopeNode scope, {required bool forward}) {
+  final current = FocusManager.instance.primaryFocus;
+  bool isField(FocusNode n) =>
+      n.context?.findAncestorWidgetOfExactType<EditableText>() != null;
+  final fields = scope.traversalDescendants.where(isField).toList()
+    ..sort((a, b) {
+      final dy = a.rect.top.compareTo(b.rect.top);
+      return dy != 0 ? dy : a.rect.left.compareTo(b.rect.left);
+    });
+  final i = current == null ? -1 : fields.indexOf(current);
+  if (i < 0) return;
+  final j = forward ? i + 1 : i - 1;
+  if (j >= 0 && j < fields.length) fields[j].requestFocus();
 }

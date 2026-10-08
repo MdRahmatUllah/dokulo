@@ -76,4 +76,40 @@ void main() {
     await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
     handle.dispose();
   });
+
+  testWidgets('Next and Previous field skip a checkbox and a button', (
+    tester,
+  ) async {
+    keyboard(tester, open: true);
+    var on = false;
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: dokuloTheme(DkTokens.light),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: Scaffold(
+          body: DkFormAccessory(
+            child: StatefulBuilder(
+              builder: (context, set) => Column(
+                children: [
+                  TextField(focusNode: fields[0]),
+                  Checkbox(value: on, onChanged: (v) => set(() => on = v!)),
+                  TextButton(onPressed: () {}, child: const Text('Paste')),
+                  TextField(focusNode: fields[1]),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+    fields[0].requestFocus();
+    await tester.pump();
+    await tester.tap(find.text('Next field'));
+    await tester.pump();
+    expect(fields[1].hasFocus, isTrue);
+    await tester.tap(find.byTooltip('Previous field'));
+    await tester.pump();
+    expect(fields[0].hasFocus, isTrue);
+  });
 }
