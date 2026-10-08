@@ -92,6 +92,9 @@ def run(plan: list[tuple[str, list[str], Path]]) -> int:
 
 
 def main() -> int:
+    # A failing step's output (ß, –, emoji from test names) must print on a
+    # Windows console (cp1252) instead of crashing the gate.
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apk", type=Path, help="also check a built APK's native libraries")
     args = parser.parse_args()

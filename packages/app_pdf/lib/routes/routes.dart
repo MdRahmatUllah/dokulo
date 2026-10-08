@@ -127,7 +127,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           child: _HomeUnderneath(
             child: s.uri.queryParameters['mode'] == 'edit'
                 ? PlaceholderScreen('V2', detail: s.pathParameters['fileId']!)
-                : ViewerScreen(fileId: int.parse(s.pathParameters['fileId']!)),
+                // A file id is its row id; a malformed one finds no file.
+                : ViewerScreen(
+                    fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+                  ),
           ),
         ),
       ),
