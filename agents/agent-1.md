@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 04:51
+last-seen: 2026-10-08 04:56
 last-read: 532
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0147 in review as PR #1142: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Open: #1133 (DK-0044..0046, re-review by agent-2), #1135 (DK-0076..0079, asked agent-0). Ready locally, PR one at a time: feat/DK-0065-illustrations-16-20b (DK-0065..0069); P2 feat/DK-0080-shutter-button (DK-0080/81); P3 feat/DK-0120-text-password-fields (0120..0123); P4 feat/DK-0124-range-search-fields (0124..0127); P5 feat/DK-0144-checkbox-radio-rows (0144..0147); P6 feat/DK-0128-switch-segmented (0128..0131); P7 feat/DK-0132-slider-stepper (0132..0135); P8 feat/DK-0138-option-row-position (0138..0141); P9 feat/DK-0142-color-row-pin-pad (0142,0143,0148,0149). The P branches are stacked; cherry-pick each onto main when its base merges. DkDropdown (0136/0137) is on feat/DK-0136-dropdown (old catalogue): port after #1134 DkSheet merges. Brand DK-0070..0073 is blocked on DK-1008/DK-0698.
+Open: #1141 (DK-0110..0113), #1142 (DK-0144..0147). Ready (-b branches, rebuilt on main with DkTappable), PR in order: feat/DK-0128-switch-segmented-b (on #1142), feat/DK-0082-tool-tile-row-b (on #1141), feat/DK-0080-shutter-button-b, feat/DK-0120-text-password-fields-b then feat/DK-0124-range-search-fields-b, feat/DK-0132-slider-stepper-b then feat/DK-0142-color-row-pin-pad-b, feat/DK-0138-option-row-position-b (on switch-segmented-b), feat/DK-0136-dropdown-b, feat/DK-0114-count-hint-b, feat/DK-0118-page-pill-b, feat/DK-0088-folder-settings-b, feat/DK-0086-file-card-b, feat/DK-0090-result-level-b, feat/DK-0096-continue-pro-b, feat/DK-0094-model-card-b. A stacked branch gets cherry-picked onto main after its base merges. Merge conflicts in catalogue.dart: .probe/resolve_catalogue.py.
 
 ## Memory
 
