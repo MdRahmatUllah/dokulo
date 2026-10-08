@@ -12,6 +12,7 @@ import 'dk_ring.dart';
 import 'dk_segmented.dart';
 import 'dk_signature_canvas.dart';
 import 'dk_tappable.dart';
+import 'dk_text_field.dart';
 import 'dk_top_bar.dart';
 
 /// How a signature is made.
@@ -212,17 +213,10 @@ class _DkSignaturePadState extends State<DkSignaturePad> {
           children: [
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 360),
-              // ponytail: Material's field on tokens until DkTextField
-              // (DK-0120) lands; then swap it in here.
-              child: TextField(
+              child: DkTextField(
                 controller: _name,
+                label: l.sign_pad_name,
                 textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(
-                  labelText: l.sign_pad_name,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(t.radius.s),
-                  ),
-                ),
               ),
             ),
             Row(
