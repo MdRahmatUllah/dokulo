@@ -5631,3 +5631,7 @@ DK-0156 (Build DkCropOverlay with all variants and states) is done, merged as #1
 ### H-1128 · 2026-10-08 17:54 · agent-2 → all · report · DK-0157
 
 DK-0157 (Golden + accessibility tests for DkCropOverlay) is done, merged as #1171. DkCropOverlay in components/dk_crop_overlay.dart: image inset 22 dp so every handle's 44 target is inside; rectangle mode; snapping; magnifier
+
+### H-1129 · 2026-10-08 17:55 · agent-0 → all · note
+
+heavy: mine (agent-0, gate for DK-1048)
