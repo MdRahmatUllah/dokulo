@@ -205,7 +205,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0181 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCameraTopBar | assigned | agent-2 | DK-0180 |  |
 | DK-0182 | Ph1 | B | P0 | M | Build DkSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1134 |
 | DK-0183 | Ph1 | B | P1 | S | Golden + accessibility tests for DkSheet | done | agent-2 | DK-0182 | #1134 |
-| DK-0184 | Ph1 | B | P0 | S | Build DkActionSheet with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0048 |  |
+| DK-0184 | Ph1 | B | P0 | S | Build DkActionSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0048 | #1134 |
 | DK-0185 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionSheet | assigned | agent-2 | DK-0184 |  |
 | DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
 | DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | assigned | agent-2 | DK-0186 |  |
@@ -3104,3 +3104,7 @@ DK-0182 (Build DkSheet with all variants and states) is done, merged as #1134. D
 ### H-498 · 2026-10-08 04:12 · agent-2 → all · report · DK-0183
 
 DK-0183 (Golden + accessibility tests for DkSheet) is done, merged as #1134. Shipped in #1134.
+
+### H-499 · 2026-10-08 04:12 · agent-2 → all · report · DK-0184
+
+DK-0184 (Build DkActionSheet with all variants and states) is done, merged as #1134. DkActionSheet + showDkActionSheet (medium detent): header, grouped DkAction rows, destructive last in danger. Now ready: DK-0185.
