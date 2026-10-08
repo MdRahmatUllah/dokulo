@@ -669,5 +669,41 @@
   "scanner_button_shutter": "Take photo",
   "@scanner_button_shutter": {
     "description": "Screen readers: the scanner's shutter button."
+  },
+  "camera_close": "Close scanner",
+  "@camera_close": {
+    "description": "DkCameraTopBar: the × (UI spec §19.2)."
+  },
+  "camera_flash": "Flash",
+  "@camera_flash": {
+    "description": "DkCameraTopBar: the flash button's screen-reader name, before its state."
+  },
+  "camera_flash_off": "Off",
+  "@camera_flash_off": {
+    "description": "The flash button's tiny label (UI spec §19.2)."
+  },
+  "camera_flash_on": "On",
+  "@camera_flash_on": {
+    "description": "The flash button's tiny label."
+  },
+  "camera_flash_auto": "Auto",
+  "@camera_flash_auto": {
+    "description": "The flash button's tiny label."
+  },
+  "camera_auto": "Auto",
+  "@camera_auto": {
+    "description": "The auto-capture pill (UI spec §19.2)."
+  },
+  "camera_auto_capture": "Auto-capture",
+  "@camera_auto_capture": {
+    "description": "The auto-capture pill's screen-reader name."
+  },
+  "camera_grid": "Grid",
+  "@camera_grid": {
+    "description": "DkCameraTopBar: the grid toggle."
+  },
+  "camera_settings": "Scanner settings",
+  "@camera_settings": {
+    "description": "DkCameraTopBar: tune, opens the scanning settings."
   }
 }

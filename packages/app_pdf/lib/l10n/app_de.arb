@@ -148,5 +148,14 @@
   "status_new": "Neu",
   "status_unsaved": "Nicht gespeichert",
   "status_running": "Läuft",
-  "scanner_button_shutter": "Foto aufnehmen"
+  "scanner_button_shutter": "Foto aufnehmen",
+  "camera_close": "Scanner schließen",
+  "camera_flash": "Blitz",
+  "camera_flash_off": "Aus",
+  "camera_flash_on": "An",
+  "camera_flash_auto": "Auto",
+  "camera_auto": "Auto",
+  "camera_auto_capture": "Automatisch auslösen",
+  "camera_grid": "Raster",
+  "camera_settings": "Scanner-Einstellungen"
 }

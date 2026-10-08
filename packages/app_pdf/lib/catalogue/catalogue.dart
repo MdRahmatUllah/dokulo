@@ -105,6 +105,11 @@ const catalogue = [
   ),
   CatalogueEntry('DkShutterButton', '11.1 Buttons', DkShutterButtonGallery()),
   CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
+  CatalogueEntry(
+    'DkSelectionBar · DkViewerBar · DkCameraTopBar',
+    '11.6 Bars',
+    BottomBarStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
