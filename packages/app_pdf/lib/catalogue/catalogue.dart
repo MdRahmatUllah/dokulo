@@ -15,10 +15,13 @@ import 'dialog_states.dart';
 import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
+import 'range_search_states.dart';
 import 'scan_button_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
+import 'slider_stepper_states.dart';
 import 'switch_segmented_states.dart';
+import 'text_field_states.dart';
 import 'tool_tile_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -121,6 +124,26 @@ const catalogue = [
     'DkSkeleton · DkLoadingSpinner',
     '11.7 Sheets, dialogs, menus, toasts',
     LoadingStates(),
+  ),
+  CatalogueEntry(
+    'DkTextField, DkPasswordField',
+    '11.4 Inputs and controls',
+    DkTextFieldGallery(),
+  ),
+  CatalogueEntry(
+    'DkRangeField, DkSearchField',
+    '11.4 Inputs and controls',
+    DkRangeSearchGallery(),
+  ),
+  CatalogueEntry(
+    'DkSlider, DkStepper',
+    '11.4 Inputs and controls',
+    DkSliderStepperGallery(),
+  ),
+  CatalogueEntry(
+    'DkSelectionBar · DkViewerBar · DkCameraTopBar',
+    '11.6 Bars',
+    BottomBarStates(),
   ),
   CatalogueEntry('DkMiniJobBar', '11.6 Bars', MiniJobBarStates()),
 ];

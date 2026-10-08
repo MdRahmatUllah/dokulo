@@ -120,7 +120,15 @@ abstract final class DkIcons {
   // Actions.
   static const close = IconData(0xe5cd, fontFamily: _font) /* close */;
   static const search = IconData(0xef7a, fontFamily: _font) /* search */;
+  static const previousField = IconData(
+    0xe316,
+    fontFamily: _font,
+  ) /* keyboard_arrow_up */;
   static const delete = IconData(0xe92e, fontFamily: _font) /* delete */;
+  static const deleteForever = IconData(
+    0xe92b,
+    fontFamily: _font,
+  ) /* delete_forever */;
   static const rename = IconData(
     0xe9a2,
     fontFamily: _font,
@@ -138,6 +146,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const remove = IconData(0xe15b, fontFamily: _font) /* remove */;
   static const arrowForward = IconData(
     0xe5c8,
     fontFamily: _font,
@@ -201,6 +210,15 @@ abstract final class DkIcons {
   static const shape = IconData(0xe602, fontFamily: _font) /* shapes */;
   static const note = IconData(0xf1fc, fontFamily: _font) /* sticky_note_2 */;
   static const pan = IconData(0xe925, fontFamily: _font) /* pan_tool */;
+  static const copy = IconData(0xe14d, fontFamily: _font) /* content_copy */;
+  static const underline = IconData(
+    0xe249,
+    fontFamily: _font,
+  ) /* format_underlined */;
+  static const strike = IconData(
+    0xe257,
+    fontFamily: _font,
+  ) /* strikethrough_s */;
   static const colour = IconData(0xe40a, fontFamily: _font) /* palette */;
   static const reveal = IconData(0xe8f4, fontFamily: _font) /* visibility */;
   static const conceal = IconData(

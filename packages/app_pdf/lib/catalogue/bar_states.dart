@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/dk_bottom_bars.dart';
+import '../components/dk_camera_top_bar.dart';
 import '../components/dk_icon.dart';
 import '../components/dk_scan_button.dart';
 import '../components/dk_tab_bar.dart';
@@ -103,6 +105,99 @@ class TabBarStates extends StatelessWidget {
               Expanded(child: ColoredBox(color: t.color.background)),
             ],
           ),
+        ),
+      ],
+    );
+  }
+}
+
+/// DkSelectionBar (DK-0172) under its header (DkTopBar.editing), Delete in
+/// danger; DkViewerBar (DK-0178) over a page; DkCameraTopBar (DK-0180) over
+/// the camera, flash Auto and auto-capture on.
+class BottomBarStates extends StatelessWidget {
+  const BottomBarStates({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return Column(
+      spacing: t.space.l,
+      children: [
+        const DkTopBar.editing(
+          title: '3 selected',
+          onCancel: _none,
+          onDone: _none,
+          doneLabel: 'Select all',
+        ),
+        const DkSelectionBar(
+          actions: [
+            DkBarAction(icon: DkIcons.move, label: 'Move', onPressed: _none),
+            DkBarAction(
+              icon: DkIcons.duplicate,
+              label: 'Copy',
+              onPressed: _none,
+            ),
+            DkBarAction(icon: DkIcons.info, label: 'Info', onPressed: null),
+            DkBarAction(
+              icon: DkIcons.delete,
+              label: 'Delete',
+              onPressed: _none,
+              destructive: true,
+            ),
+          ],
+        ),
+        // The page under the viewer bar shows through, blurred.
+        Stack(
+          children: [
+            Positioned.fill(child: ColoredBox(color: t.color.pageWhite)),
+            Positioned(
+              left: 40,
+              top: 20,
+              child: Container(width: 200, height: 12, color: t.color.primary),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 24),
+              child: DkViewerBar(
+                actions: [
+                  const DkBarAction(
+                    icon: DkIcons.pen,
+                    label: 'Edit',
+                    onPressed: _none,
+                  ),
+                  DkBarAction(
+                    icon: DkIcons.tool('sign'),
+                    label: 'Sign',
+                    onPressed: _none,
+                  ),
+                  DkBarAction(
+                    icon: DkIcons.tool('summarize'),
+                    label: 'AI',
+                    onPressed: _none,
+                  ),
+                  const DkBarAction(
+                    icon: DkIcons.toolsTab,
+                    label: 'Tools',
+                    onPressed: _none,
+                  ),
+                  DkBarAction(
+                    icon: DkIcons.share(context),
+                    label: 'Share',
+                    onPressed: _none,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        DkCameraTopBar(
+          onClose: _none,
+          flash: DkFlash.auto,
+          onFlash: (_) {},
+          autoCapture: true,
+          onAutoCapture: (_) {},
+          grid: false,
+          onGrid: (_) {},
+          onSettings: _none,
         ),
       ],
     );
