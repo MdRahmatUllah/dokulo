@@ -210,4 +210,122 @@ void main() {
       expect(find.byType(DkPageThumb).evaluate().length, lessThan(40));
     },
   );
+
+  // agent-1's repros from the #1132 review.
+  testWidgets('dragging back in front of the lifted page still drops', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(393, 852);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final moves = <(int, int)>[];
+    await tester.pumpWidget(
+      app(
+        DkPageGrid(
+          pageIds: List.generate(9, (i) => i),
+          pageBuilder: (_, _) => const CataloguePage(),
+          onReorder: (from, to) => moves.add((from, to)),
+        ),
+      ),
+    );
+    final thumbs = find.byType(DkPageThumb);
+    final five = tester.getCenter(thumbs.at(4));
+    final drag = await tester.startGesture(five);
+    await tester.pump(const Duration(milliseconds: 400));
+    // Into page 5's own left half: the slot is before the lifted page.
+    for (var i = 0; i < 4; i++) {
+      await drag.moveBy(const Offset(-8, 0));
+      await tester.pump();
+    }
+    // Then to page 1's left half.
+    final one = tester.getRect(thumbs.at(0));
+    for (var i = 1; i <= 10; i++) {
+      await drag.moveTo(
+        Offset.lerp(
+          five - const Offset(32, 0),
+          one.centerLeft + const Offset(10, 0),
+          i / 10,
+        )!,
+      );
+      await tester.pump();
+    }
+    await drag.up();
+    await tester.pump();
+    expect(moves, [(4, 0)]);
+  });
+
+  testWidgets('auto-scroll past the lifted page; release drops and stops '
+      'the scrolling', (tester) async {
+    tester.view.physicalSize = const Size(393, 852);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final moves = <(int, int)>[];
+    final scroll = ScrollController();
+    addTearDown(scroll.dispose);
+    await tester.pumpWidget(
+      app(
+        DkPageGrid(
+          pageIds: List.generate(300, (i) => i),
+          pageBuilder: (_, _) => const CataloguePage(),
+          controller: scroll,
+          onReorder: (from, to) => moves.add((from, to)),
+        ),
+      ),
+    );
+    final drag = await tester.startGesture(
+      tester.getCenter(find.byType(DkPageThumb).at(1)),
+    );
+    await tester.pump(const Duration(milliseconds: 400));
+    // Hold at the bottom edge for 2 s: the lifted cell scrolls far away.
+    final bottom = tester.getBottomLeft(find.byType(DkPageGrid));
+    await drag.moveTo(Offset(196, bottom.dy - 20));
+    for (var i = 0; i < 125; i++) {
+      await tester.pump(const Duration(milliseconds: 16));
+    }
+    expect(scroll.offset, greaterThan(500));
+    await drag.moveTo(const Offset(196, 400));
+    await tester.pump();
+    await drag.up();
+    await tester.pump();
+    expect(moves, hasLength(1));
+    expect(moves.single.$1, 1);
+    final after = scroll.offset;
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(scroll.offset, after, reason: 'no scrolling after release');
+  });
+
+  testWidgets('on an SE width, at most 5 columns: cells stay 48 dp', (
+    tester,
+  ) async {
+    tester.view.physicalSize = const Size(375, 667);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final columns = <int>[];
+    await tester.pumpWidget(
+      app(
+        DkPageGrid(
+          pageIds: List.generate(30, (i) => i),
+          pageBuilder: (_, _) => const CataloguePage(),
+          onColumnsChanged: columns.add,
+        ),
+      ),
+    );
+    const centre = Offset(187, 300);
+    final a = await tester.startGesture(centre - const Offset(100, 0));
+    final b = await tester.startGesture(centre + const Offset(100, 0));
+    for (var i = 1; i <= 10; i++) {
+      final d = 200 - 170 * i / 10;
+      await a.moveTo(centre - Offset(d / 2, 0));
+      await b.moveTo(centre + Offset(d / 2, 0));
+      await tester.pump();
+    }
+    await a.up();
+    await b.up();
+    await tester.pump();
+    expect(columns.last, 5);
+    expect(
+      tester.getSize(find.byType(DkPageThumb).first).width,
+      greaterThanOrEqualTo(48),
+    );
+  });
 }

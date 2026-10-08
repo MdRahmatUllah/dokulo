@@ -44,6 +44,8 @@ class DkPageGrid extends StatefulWidget {
   final ValueChanged<int>? onLongPress;
 
   /// The page at `from` moves to index `to` (its place after the move).
+  /// The caller plays the landing haptic (`hapticsProvider.dropped()`) and
+  /// any settle animation (§9's 220 ms, `DkSlot`).
   final void Function(int from, int to)? onReorder;
   final int initialColumns;
   final ValueChanged<int>? onColumnsChanged;
@@ -73,6 +75,9 @@ class _DkPageGridState extends State<DkPageGrid> {
   bool _atRowEnd = false;
   Offset? _finger;
   Timer? _edgeScroll;
+
+  /// The last finger down, and the one carrying the lifted page.
+  int? _lastDown, _dragPointer;
   late _Metrics _m;
 
   @override
@@ -83,13 +88,27 @@ class _DkPageGridState extends State<DkPageGrid> {
   }
 
   void _setColumns(int columns) {
-    final c = columns.clamp(DkPageGrid.minColumns, DkPageGrid.maxColumns);
+    // No more columns than keep a cell 48 dp wide (6 on an SE is 47).
+    final fit = ((_m.width - 2 * _m.padding + _m.gutter) / (48 + _m.gutter))
+        .floor();
+    final most = math.max(
+      DkPageGrid.minColumns,
+      math.min(DkPageGrid.maxColumns, fit),
+    );
+    final c = math.min(math.max(columns, DkPageGrid.minColumns), most);
     if (c == _columns) return;
     setState(() => _columns = c);
     widget.onColumnsChanged?.call(c);
   }
 
   void _pointer(PointerEvent e) {
+    if (e is PointerDownEvent) _lastDown = e.pointer;
+    if (_dragging != null && e.pointer == _dragPointer) {
+      // The grid, not the lifted cell, follows the drag: GridView disposes
+      // a cell (and its Draggable) once auto-scroll takes it out of view.
+      if (e is PointerMoveEvent) _dragUpdate(e.position);
+      if (e is PointerUpEvent || e is PointerCancelEvent) _dragEnd();
+    }
     if (e is PointerDownEvent || e is PointerMoveEvent) {
       _pointers[e.pointer] = e.localPosition;
     } else {
@@ -172,6 +191,7 @@ class _DkPageGridState extends State<DkPageGrid> {
     _edgeScroll?.cancel();
     _edgeScroll = null;
     final from = _dragging, slot = _insertAt;
+    _dragPointer = null;
     setState(() => _dragging = _insertAt = null);
     if (from == null || slot == null) return;
     final to = slot > from ? slot - 1 : slot;
@@ -222,10 +242,12 @@ class _DkPageGridState extends State<DkPageGrid> {
   Widget _cell(BuildContext context, int i) {
     final t = context.tokens;
     final count = widget.pageIds.length;
-    Widget thumb({bool interactive = true}) => DkPageThumb(
+    final page = widget.pageBuilder(context, i);
+    Widget thumb({bool interactive = true, bool lifted = false}) => DkPageThumb(
       pageNumber: i + 1,
       pageCount: count,
-      page: widget.pageBuilder(context, i),
+      page: page,
+      lifted: lifted,
       selected: widget.selected.contains(i),
       onTap: interactive && widget.onTap != null
           ? () => widget.onTap!(i)
@@ -258,23 +280,22 @@ class _DkPageGridState extends State<DkPageGrid> {
           data: i,
           delay: const Duration(milliseconds: 300),
           onDragStarted: () {
+            _dragPointer = _lastDown;
             setState(() => _dragging = i);
             widget.onLongPress?.call(i);
           },
-          onDragUpdate: (d) => _dragUpdate(d.globalPosition),
           // The lifted page floats just above the finger, so neither the
           // finger nor the page hides the insertion line under it.
           dragAnchorStrategy: (_, _, _) =>
               Offset(_m.cell.width / 2, _m.cell.height + t.space.s),
-          onDragEnd: (_) => _dragEnd(),
-          // The lifted page grows 2 % (UI spec §4.4).
+          // The lifted page grows 2 % and takes `raised` (UI spec §4.4).
           feedback: Material(
             type: MaterialType.transparency,
             child: Transform.scale(
               scale: t.state.draggedScale,
               child: SizedBox(
                 width: _m.cell.width,
-                child: thumb(interactive: false),
+                child: thumb(interactive: false, lifted: true),
               ),
             ),
           ),
@@ -290,22 +311,26 @@ class _DkPageGridState extends State<DkPageGrid> {
       final at = _insertAt;
       final before = at == i && !_atRowEnd;
       final after = at == i + 1 && (i == count - 1 || _atRowEnd);
-      if (_dragging != null && (before || after)) {
+      final line = _dragging != null && (before || after);
+      // Always a Stack, the line or not: swapping the cell's root widget
+      // would dispose the Draggable in the middle of its drag.
+      {
         cell = Stack(
           clipBehavior: Clip.none,
           children: [
             cell,
             // The I-beam (#1128), centred in the gutter.
-            Positioned(
-              top: 0,
-              left: before ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
-              right: after ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
-              child: IgnorePointer(
-                child: DkInsertionLine(
-                  length: _m.cell.width / _Metrics.pageAspect,
+            if (line)
+              Positioned(
+                top: 0,
+                left: before ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
+                right: after ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
+                child: IgnorePointer(
+                  child: DkInsertionLine(
+                    length: _m.cell.width / _Metrics.pageAspect,
+                  ),
                 ),
               ),
-            ),
           ],
         );
       }

@@ -24,6 +24,7 @@ class DkPageThumb extends StatefulWidget {
     this.page,
     this.selected = false,
     this.current = false,
+    this.lifted = false,
     this.quarterTurns = 0,
     this.aspectRatio = 3 / 4,
     this.showNumber = true,
@@ -37,6 +38,9 @@ class DkPageThumb extends StatefulWidget {
   final Widget? page;
   final bool selected;
   final bool current;
+
+  /// Being dragged: `elevation.raised` instead of flat (UI spec §4.4).
+  final bool lifted;
 
   /// A rotation the user made but hasn't saved yet; the content turns with it.
   final int quarterTurns;
@@ -73,7 +77,10 @@ class _DkPageThumbState extends State<DkPageThumb> {
             colorFilter: t.thumbnailFilter,
             child: DecoratedBox(
               decoration: t
-                  .surfaceAt(DkLevel.flat, radius: radius)
+                  .surfaceAt(
+                    widget.lifted ? DkLevel.raised : DkLevel.flat,
+                    radius: radius,
+                  )
                   .copyWith(color: c.pageWhite),
               child: ClipRRect(
                 borderRadius: radius,
