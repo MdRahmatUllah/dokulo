@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0164 Build DkTopBar with all variants and states — claimed 2026-10-08 04:58.
+DK-0164 in review as PR #1143: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
