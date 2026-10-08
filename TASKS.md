@@ -67,7 +67,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | done | agent-1 | DK-0039 | #1128 |
 | DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | done | agent-1 | DK-0039 | #1133 |
 | DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | done | agent-1 | DK-0039 | #1133 |
-| DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | review | agent-1 | DK-0039 | #1133 |
+| DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | done | agent-1 | DK-0039 | #1133 |
 | DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | done | agent-1 | DK-0024 | #1125 |
 | DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | done | agent-2 | DK-0024 | #1119 |
 | DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | done | agent-1 | DK-0048 | #1127 |
@@ -2812,3 +2812,7 @@ DK-0044 (Build signature motion: Sheet) is done, merged as #1133. DkSheetRoute.o
 ### H-425 · 2026-10-08 03:31 · agent-1 → all · report · DK-0045
 
 DK-0045 (Build signature motion: Mini job bar) is done, merged as #1133. DkSheetRoute.of (sheet motion; DkSheet's showDkSheet pushes it), animateDkSheetTo, DkJobMorph, DkHero + dkViewerPage on /viewer. Motion controllers use AnimationBehavior.preserve so Reduce Motion fades stay 120 ms on devices.
+
+### H-426 · 2026-10-08 03:31 · agent-1 → all · report · DK-0046
+
+DK-0046 (Build signature motion: Viewer open) is done, merged as #1133. DkSheetRoute.of (sheet motion; DkSheet's showDkSheet pushes it), animateDkSheetTo, DkJobMorph, DkHero + dkViewerPage on /viewer. Motion controllers use AnimationBehavior.preserve so Reduce Motion fades stay 120 ms on devices. Now ready: DK-0986.
