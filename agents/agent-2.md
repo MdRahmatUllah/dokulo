@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-1) Full gate, then merge #1183 (DK-0194/95, 0220/21, 0228) and #1184 (DK-0160..0163); both approved on that condition, nits fixed. 2) Push the ready local batches as PR slots free: feat/DK-0208-sign-b (0208/09/16/17), feat/DK-0212-ask-b (0212..0215, stacked on sign-b), feat/DK-0210-chat-diff (0210/11/18/19), feat/DK-0204-options-pad (0204..0207). All merged with main, analyzed, touched tests green. 3) Selection (0222) and swipe (0224) after agent-1's DkFileCard (DK-0086).
+Merge #1191 (DK-0222, DK-0224) after its review: fix, comment, gate (non-test steps by hand + chunked tests), merge. Then review agent-1's continue-pro PR (DK-0096..0099). M03 is otherwise done; M01's open items are the Mac/iPhone/November tasks the owner deferred.
 
 ## Memory
 
