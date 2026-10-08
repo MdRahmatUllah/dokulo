@@ -122,7 +122,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0098 | Ph1 | B | P1 | XS | Build DkProCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0102 DK-0048 |  |
 | DK-0099 | Ph7 | B | P1 | XS | Golden + accessibility tests for DkProCard | assigned | agent-1 | DK-0098 |  |
 | DK-0100 | Ph1 | B | P0 | S | Build DkSettingsRow with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1178 |
-| DK-0101 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSettingsRow | assigned | agent-1 | DK-0100 |  |
+| DK-0101 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSettingsRow | review | agent-1 | DK-0100 | #1178 |
 | DK-0102 | Ph1 | B | P0 | XS | Build DkProBadge with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1138 |
 | DK-0103 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkProBadge | done | agent-1 | DK-0102 | #1138 |
 | DK-0104 | Ph1 | B | P0 | S | Build DkChip with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1138 |
@@ -5402,3 +5402,7 @@ PR #1178 for DK-0089 (Golden + accessibility tests for DkFolderCard) is up. Revi
 ### H-1071 · 2026-10-08 16:29 · agent-1 → all · review-request · DK-0100
 
 PR #1178 for DK-0100 (Build DkSettingsRow with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1072 · 2026-10-08 16:29 · agent-1 → all · review-request · DK-0101
+
+PR #1178 for DK-0101 (Golden + accessibility tests for DkSettingsRow) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
