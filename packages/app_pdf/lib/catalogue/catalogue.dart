@@ -39,6 +39,7 @@ import 'sign_states.dart';
 import 'chat_states.dart';
 import 'signature_pad_states.dart';
 import 'tool_options_states.dart';
+import 'ai_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -222,6 +223,11 @@ const catalogue = [
     'DkToolOptionsSheet',
     '11.8 Editor and AI',
     ToolOptionsStates(),
+  ),
+  CatalogueEntry(
+    'DkSuggestionChip · DkAIFooter',
+    '11.8 Editor and AI',
+    AskStates(),
   ),
 ];
 

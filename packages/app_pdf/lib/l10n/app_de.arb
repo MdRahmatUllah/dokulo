@@ -259,5 +259,6 @@
   "options_shape_line": "Linie",
   "options_shape_arrow": "Pfeil",
   "options_eraser_object": "Objekt",
-  "options_eraser_stroke": "Strich"
+  "options_eraser_stroke": "Strich",
+  "ai_footer": "Auf diesem Handy · {model} · KI kann Fehler machen"
 }
