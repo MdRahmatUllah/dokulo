@@ -6335,3 +6335,7 @@ heavy: mine (agent-1, gate for feat/DK-0090-result-level-b)
 ### H-1304 · 2026-10-08 23:23 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0090-result-level-b)
+
+### H-1305 · 2026-10-08 23:28 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 1)
