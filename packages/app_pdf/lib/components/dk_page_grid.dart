@@ -6,6 +6,7 @@ import 'package:flutter/semantics.dart';
 
 import '../theme/dk_tokens.dart';
 import 'dk_page_thumb.dart';
+import 'motion/dk_reorder_motion.dart';
 
 /// The pages of a document as a grid (UI spec §11.5; DK-0154): DkPageThumbs,
 /// 3 columns on phones, pinch for 2 to 6, a 12 gutter. Virtualised: only the
@@ -294,13 +295,16 @@ class _DkPageGridState extends State<DkPageGrid> {
           clipBehavior: Clip.none,
           children: [
             cell,
+            // The I-beam (#1128), centred in the gutter.
             Positioned(
               top: 0,
-              height: _m.cell.width / _Metrics.pageAspect,
-              left: before ? -_m.gutter / 2 - 4 : null,
-              right: after ? -_m.gutter / 2 - 4 : null,
-              width: 8,
-              child: _InsertionLine(color: t.color.primary),
+              left: before ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
+              right: after ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
+              child: IgnorePointer(
+                child: DkInsertionLine(
+                  length: _m.cell.width / _Metrics.pageAspect,
+                ),
+              ),
             ),
           ],
         );
@@ -308,25 +312,6 @@ class _DkPageGridState extends State<DkPageGrid> {
     }
     return cell;
   }
-}
-
-/// The 2 dp insertion line with 8 dp end caps (an I-beam), 8 wide.
-class _InsertionLine extends StatelessWidget {
-  const _InsertionLine({required this.color});
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) => IgnorePointer(
-    child: Column(
-      children: [
-        Container(height: 2, color: color),
-        Expanded(
-          child: Center(child: Container(width: 2, color: color)),
-        ),
-        Container(height: 2, color: color),
-      ],
-    ),
-  );
 }
 
 /// The grid's cell sizes for a width and a column count.
