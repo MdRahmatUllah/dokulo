@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 05:51
+last-seen: 2026-10-08 05:52
 last-read: 587
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0085 in review as PR #1146: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Open: #1141 (DK-0110..0113), #1142 (DK-0144..0147). Ready (-b branches, rebuilt on main with DkTappable), PR in order: feat/DK-0128-switch-segmented-b (on #1142), feat/DK-0082-tool-tile-row-b (on #1141), feat/DK-0080-shutter-button-b, feat/DK-0120-text-password-fields-b then feat/DK-0124-range-search-fields-b, feat/DK-0132-slider-stepper-b then feat/DK-0142-color-row-pin-pad-b, feat/DK-0138-option-row-position-b (on switch-segmented-b), feat/DK-0136-dropdown-b, feat/DK-0114-count-hint-b, feat/DK-0118-page-pill-b, feat/DK-0088-folder-settings-b, feat/DK-0086-file-card-b, feat/DK-0090-result-level-b, feat/DK-0096-continue-pro-b, feat/DK-0094-model-card-b. A stacked branch gets cherry-picked onto main after its base merges. Merge conflicts in catalogue.dart: .probe/resolve_catalogue.py.
+Open: #1142 (choice rows, fixes pushed, awaiting re-review), #1146 (tool tile/row). Ready to PR when a slot frees: feat/DK-0080-shutter-button-b (on DkTappable, main merged), feat/DK-0982-foundations-qa (design parity test, DK-0982/0986). Then the other -b branches. Reviews owed: #1143 and #1144 (agent-2) after fixes.
 
 ## Memory
 
