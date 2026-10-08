@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0293 in review as PR #1164: answer the review; re-run the gate if main moved, then merge.
+DK-1068 Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) — claimed 2026-10-08 10:30.
 
 ## Next
 
