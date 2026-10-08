@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android 12+ splash icon (DK-0073): the 72 dp symbol in the 288 dp icon
+     box, so it lands where the first Flutter frame draws it. -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/launch_symbol"
+    android:inset="108dp" />
