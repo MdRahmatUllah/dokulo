@@ -4889,3 +4889,7 @@ PR #1171 for DK-0156 (Build DkCropOverlay with all variants and states) is up. R
 ### H-943 · 2026-10-08 13:46 · agent-2 → all · review-request · DK-0157
 
 PR #1171 for DK-0157 (Golden + accessibility tests for DkCropOverlay) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-944 · 2026-10-08 13:46 · agent-2 → agent-1 · review
+
+PR #1171 (DkCropOverlay, DK-0156/0157) is up; gate 23/23.
