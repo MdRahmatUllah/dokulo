@@ -39,19 +39,25 @@ void main() {
       ('light', DkTokens.light),
       ('dark', DkTokens.dark),
     ]) {
-      for (final scale in [1.0, 2.0]) {
-        testWidgets('$what, $name, ${(scale * 100).round()} %', (tester) async {
+      for (final (lang, scale) in [('en', 1.0), ('en', 2.0), ('de', 2.0)]) {
+        final file = '${what}_${name}_${lang}_${(scale * 100).round()}';
+        testWidgets('golden: $file', (tester) async {
           tester.view.physicalSize = Size(393, scale == 1 ? 520 : 1000);
           tester.view.devicePixelRatio = 1;
           addTearDown(tester.view.reset);
           await tester.pumpWidget(
-            app(gallery, tokens: tokens, textScale: scale, reduceMotion: true),
+            app(
+              gallery,
+              tokens: tokens,
+              textScale: scale,
+              reduceMotion: true,
+              locale: Locale(lang),
+            ),
           );
+          expect(tester.takeException(), isNull);
           await expectLater(
             find.byWidget(gallery),
-            matchesGoldenFile(
-              'goldens/${what}_${name}_${(scale * 100).round()}.png',
-            ),
+            matchesGoldenFile('goldens/$file.png'),
           );
         });
       }
@@ -138,6 +144,7 @@ void main() {
 
   testWidgets('diff rows: the tag in EN and DE, removed struck through, a '
       'tap jumps', (tester) async {
+    final handle = tester.ensureSemantics();
     for (final (locale, tag) in [
       (const Locale('en'), 'Removed'),
       (const Locale('de'), 'Entfernt'),
@@ -165,6 +172,13 @@ void main() {
         tester.getSize(find.byType(DkDiffRow)).height,
         greaterThanOrEqualTo(56),
       );
+      // One button for screen readers, and it can be pressed.
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('$tag: A parking space.')),
+        isSemantics(isButton: true, hasTapAction: true),
+      );
     }
+    await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+    handle.dispose();
   });
 }

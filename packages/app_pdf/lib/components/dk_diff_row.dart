@@ -43,6 +43,46 @@ class DkDiffRow extends StatelessWidget {
       ),
       DkChange.changed => (t.compare.changed, DkIcons.dot, l.compare_changed),
     };
+    final tag = Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: t.space.s,
+        vertical: t.space.xxs,
+      ),
+      decoration: BoxDecoration(
+        color: colours.background,
+        borderRadius: BorderRadius.circular(t.radius.pill),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: t.space.xxs,
+        children: [
+          // Filled: the changed dot is a solid dot.
+          DkIcon(icon, size: DkIconSize.s, color: colours.text, filled: true),
+          Flexible(
+            child: Text(
+              label,
+              style: t.text.caption.copyWith(
+                color: colours.text,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    final text = Text(
+      excerpt,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: t.text.bodyM.copyWith(
+        color: t.color.textPrimary,
+        decoration: change == DkChange.removed
+            ? TextDecoration.lineThrough
+            : null,
+      ),
+    );
+    final chip = DkPageChip(page: page, onTap: onTap);
+    final wide = MediaQuery.textScalerOf(context).scale(1) <= 1.3;
     return DkTappable(
       onTap: onTap,
       radius: t.radius.m,
@@ -57,56 +97,32 @@ class DkDiffRow extends StatelessWidget {
             vertical: t.space.s,
           ),
           color: pressed ? t.state.pressed : null,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: t.space.m,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: t.space.s,
-                  vertical: t.space.xxs,
-                ),
-                decoration: BoxDecoration(
-                  color: colours.background,
-                  borderRadius: BorderRadius.circular(t.radius.pill),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: t.space.xxs,
+          child: wide
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: t.space.m,
                   children: [
-                    // Filled: the changed dot is a solid dot.
-                    DkIcon(
-                      icon,
-                      size: DkIconSize.s,
-                      color: colours.text,
-                      filled: true,
+                    tag,
+                    Expanded(child: text),
+                    chip,
+                  ],
+                )
+              // At large text the tag and the page chip share a line and
+              // the excerpt goes below, so nothing runs off the row.
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: t.space.xs,
+                  children: [
+                    Row(
+                      spacing: t.space.m,
+                      children: [
+                        Flexible(child: tag),
+                        chip,
+                      ],
                     ),
-                    Text(
-                      label,
-                      style: t.text.caption.copyWith(
-                        color: colours.text,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    text,
                   ],
                 ),
-              ),
-              Expanded(
-                child: Text(
-                  excerpt,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: t.text.bodyM.copyWith(
-                    color: t.color.textPrimary,
-                    decoration: change == DkChange.removed
-                        ? TextDecoration.lineThrough
-                        : null,
-                  ),
-                ),
-              ),
-              DkPageChip(page: page, onTap: onTap),
-            ],
-          ),
         ),
       ),
     );
