@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/dk_icon.dart';
 import '../components/dk_next_chip.dart';
 import '../components/dk_page_chip.dart';
 import '../theme/dk_tokens.dart';
@@ -22,6 +23,11 @@ class DkNextPageChipGallery extends StatelessWidget {
       DkNextChip(toolId: 'compress', onTap: tap),
       DkNextChip(toolId: 'pagenum', onTap: tap),
       DkNextChip(toolId: 'protect', onTap: tap),
+      DkNextChip.custom(
+        icon: DkIcons.tool('workflows'),
+        label: 'Save as workflow',
+        onTap: tap,
+      ),
       DkPageChip(page: 3, onTap: tap),
       DkPageChip(page: 12, onTap: tap),
     ]);
