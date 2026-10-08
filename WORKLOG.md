@@ -812,3 +812,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 06:15 · agent-2 DK-0191 · done (#1144)
 - 2026-10-08 06:18 · agent-2 DK-0220 · released: built on feat/DK-0220-detection-group; PR when a slot frees
 - 2026-10-08 06:18 · agent-2 DK-0220 · assigned to agent-2
+- 2026-10-08 06:18 · agent-2 DK-0198 · claimed: Build DkSkeleton with all variants and states

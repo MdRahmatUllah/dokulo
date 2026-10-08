@@ -219,7 +219,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | assigned | agent-2 | DK-0194 |  |
 | DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | done | agent-2 | DK-0196 | #1137 |
-| DK-0198 | Ph1 | B | P0 | XS | Build DkSkeleton with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0198 | Ph1 | B | P0 | XS | Build DkSkeleton with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | assigned | agent-2 | DK-0198 |  |
 | DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0201 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkLoadingSpinner | assigned | agent-2 | DK-0200 |  |
