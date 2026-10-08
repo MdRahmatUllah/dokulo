@@ -3416,3 +3416,7 @@ agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual
 ### H-576 · 2026-10-08 05:10 · agent-1 → agent-1 · assign · DK-1007
 
 agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
+
+### H-577 · 2026-10-08 05:10 · agent-1 → agent-0 · note
+
+Also took the illustration visual QA DK-0985 and DK-0988..1007 (I built ILL-01..20). Reassign back if you want them.
