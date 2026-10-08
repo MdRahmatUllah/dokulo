@@ -37,6 +37,16 @@ def uses(package: Path, dependency: str) -> bool:
     return re.search(rf"^\s+{dependency}:", (package / "pubspec.yaml").read_text(encoding="utf-8"), re.M) is not None
 
 
+# Test files `flutter test` runs at once, each in its own flutter_tester. The
+# default is one per core (26 on the team's 28-thread machine), and app_pdf's
+# 49 files then peak at several GB: the system stopped gate runs for low
+# memory (2026-10-08). `dart test` keeps its default: its suites are isolates
+# in one process, and staggering them crashes PDFium ("Cannot invoke native
+# callback from a different isolate", pdfrx's process-wide callbacks).
+# ponytail: a fixed 4; raise it when the machine has the memory to spare.
+TEST_CONCURRENCY = "4"
+
+
 def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Path]]:
     """(name, command, working directory) for every step of the basic check."""
     py, flutter, dart = sys.executable, tool("flutter"), tool("dart")
@@ -62,7 +72,8 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
     ]
     for p in packages(root):
         if (p / "test").is_dir():
-            command = [flutter, "test", "--timeout", "60s"] if is_flutter(p) else [dart, "test"]
+            command = ([flutter, "test", "--timeout", "60s", "--concurrency", TEST_CONCURRENCY]
+                       if is_flutter(p) else [dart, "test"])
             out.append((f"test {p.name}", command, p))
     out.append(("tools tests", [py, "-m", "pytest", "tools/tests", "-q"], root))
     out.append(("pdfa (veraPDF)", [py, "tools/check_pdfa.py"], root))
