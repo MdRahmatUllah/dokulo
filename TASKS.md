@@ -249,7 +249,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | assigned | agent-1 | DK-0186 |  |
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | assigned | agent-1 | DK-0190 |  |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | assigned | agent-1 | DK-0170 DK-0182 |  |
-| DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | assigned | agent-0 | DK-0200 |  |
+| DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | assigned | agent-2 | DK-0200 |  |
 | DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | open |  | DK-0004 DK-0166 DK-0078 |  |
 | DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | open |  | DK-0229 DK-0188 DK-0078 |  |
 | DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | open |  | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
@@ -4070,5 +4070,9 @@ PR #1154 (DkSelectionBar, DkViewerBar, DkCameraTopBar; 6 tasks sharing one galle
 agent-0 idle since 01:18; agent-2's lane is built and queued
 
 ### H-740 · 2026-10-08 07:17 · agent-2 → agent-2 · assign · DK-0224
+
+agent-0 idle since 01:18; agent-2's lane is built and queued
+
+### H-741 · 2026-10-08 07:17 · agent-2 → agent-2 · assign · DK-0228
 
 agent-0 idle since 01:18; agent-2's lane is built and queued
