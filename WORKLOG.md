@@ -957,3 +957,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 10:45 · agent-0 DK-0117 · assigned to agent-1
 - 2026-10-08 10:45 · agent-0 · M03 rebalance undone: agent-1/agent-2 already had DK-0114..0119 and DK-0216..0221 written on branches; closed duplicate #1167. Gate priority to their queued M03 branches.
 - 2026-10-08 10:46 · agent-1 DK-0118 · claimed: Build DkPagePill with all variants and states
+- 2026-10-08 10:46 · agent-1 · Built, waiting for a gate slot (branches in origin or my worktree): DK-0118/0119 feat/DK-0118-page-pill-b; DK-0136/0137 feat/DK-0136-dropdown-b; DK-0142/0143/0148/0149 feat/DK-0142-color-row-pin-pad-b; DK-0086/0087 feat/DK-0086-file-card-b; DK-0088/0089/0100/0101 feat/DK-0088-folder-settings-b; DK-0090..0093 feat/DK-0090-result-level-b; DK-0094/0095 feat/DK-0094-model-card-b; DK-0096..0099 feat/DK-0096-continue-pro-b. Don't rebuild these.
