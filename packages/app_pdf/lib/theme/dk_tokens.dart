@@ -716,6 +716,10 @@ class DkMotion {
   final reduced = const Duration(milliseconds: 120);
   final reducedCurve = Curves.linear;
 
+  /// The scanner's auto-capture: the page must hold still this long; the
+  /// shutter's ring fills over it (UI spec §11.1, DkShutterButton).
+  final autoCapture = const Duration(milliseconds: 500);
+
   /// The scanner's capture flash (white, 80 ms, once per capture). At most
   /// one flash per capture, and captures are seconds apart, so it never
   /// flashes above 3 Hz; with Reduce Motion it is off ([flashAllowed]).
