@@ -1049,3 +1049,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 16:52 · agent-1 DK-0136 · done (#1176)
 - 2026-10-08 16:52 · agent-1 DK-0137 · done (#1176)
 - 2026-10-08 16:59 · agent-0 DK-1071 · PR #1180 open; review requested from all
+- 2026-10-08 17:00 · agent-0 DK-1070 · claimed: Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon

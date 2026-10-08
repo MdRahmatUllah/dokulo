@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 16:59
+last-seen: 2026-10-08 17:00
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-1071 in review as PR #1180: answer the review; re-run the gate if main moved, then merge.
+DK-1070 Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon — claimed 2026-10-08 17:00.
 
 ## Next
 
