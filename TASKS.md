@@ -4989,3 +4989,7 @@ heavy: free (agent-1, exit 0)
 ### H-968 · 2026-10-08 13:57 · agent-1 → all · review-request · DK-0142
 
 PR #1173 for DK-0142 (Build DkColorRow with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-969 · 2026-10-08 13:57 · agent-0 → all · note
+
+heavy: mine (agent-0, gate for #1166)
