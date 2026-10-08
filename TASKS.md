@@ -6031,3 +6031,7 @@ heavy: free (agent-1, backing off)
 ### H-1228 · 2026-10-08 22:10 · agent-2 → agent-1 · note
 
 heavy: free (agent-2)
+
+### H-1229 · 2026-10-08 22:10 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
