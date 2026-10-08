@@ -150,6 +150,14 @@ abstract final class DkIcons {
     0xe5c8,
     fontFamily: _font,
   ) /* arrow_forward */;
+  static const expandMore = IconData(
+    0xe5cf,
+    fontFamily: _font,
+  ) /* expand_more */;
+  static const expandLess = IconData(
+    0xe5ce,
+    fontFamily: _font,
+  ) /* expand_less */;
   static const scanDocument = IconData(
     0xe873,
     fontFamily: _font,
