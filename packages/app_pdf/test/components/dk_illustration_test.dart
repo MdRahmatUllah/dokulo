@@ -2,6 +2,7 @@ import 'package:app_pdf/components/dk_illustration.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget gallery(DkTokens tokens, List<DkIllustrations> batch) => MaterialApp(
@@ -52,6 +53,28 @@ void main() {
     expect(
       light.substitute(null, 'rect', 'fill', const Color(0xFFFFFFFF)),
       DkTokens.light.color.surface,
+    );
+  });
+
+  testWidgets('colors: the dark palette on the camera, in a Light app', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: dokuloTheme(DkTokens.light),
+        home: const DkIllustration(
+          DkIllustrations.cameraDenied,
+          colors: DkColors.dark,
+        ),
+      ),
+    );
+    final mapper = tester
+        .widget<SvgPicture>(find.byType(SvgPicture))
+        .bytesLoader;
+    expect(mapper, isA<SvgAssetLoader>());
+    expect(
+      (mapper as SvgAssetLoader).colorMapper,
+      const DkIllustrationColors(DkColors.dark),
     );
   });
 

@@ -26,7 +26,13 @@ class DkCaptureFlash extends StatefulWidget {
 
 class _DkCaptureFlashState extends State<DkCaptureFlash>
     with SingleTickerProviderStateMixin {
-  late final _flash = AnimationController(vsync: this, value: 1);
+  // preserve: Reduce Motion is handled here (the 120 ms cross-fade); the
+  // default would also cut the duration to 5 % when the platform asks.
+  late final _flash = AnimationController(
+    vsync: this,
+    value: 1,
+    animationBehavior: AnimationBehavior.preserve,
+  );
 
   @override
   void didUpdateWidget(DkCaptureFlash old) {
@@ -127,7 +133,10 @@ class _Flight extends StatefulWidget {
 }
 
 class _FlightState extends State<_Flight> with SingleTickerProviderStateMixin {
-  late final AnimationController _run = AnimationController(vsync: this);
+  late final AnimationController _run = AnimationController(
+    vsync: this,
+    animationBehavior: AnimationBehavior.preserve,
+  );
   late Animation<double> _t;
   late bool _reduce;
 
@@ -196,7 +205,11 @@ class DkPop extends StatefulWidget {
 }
 
 class _DkPopState extends State<DkPop> with SingleTickerProviderStateMixin {
-  late final _pop = AnimationController(vsync: this, value: 1);
+  late final _pop = AnimationController(
+    vsync: this,
+    value: 1,
+    animationBehavior: AnimationBehavior.preserve,
+  );
   Animation<double> _scale = const AlwaysStoppedAnimation(1);
   var _reduce = false;
 
