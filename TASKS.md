@@ -95,7 +95,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0071 | Ph7 | B | P0 | S | Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed) | assigned | agent-1 | DK-0070 DK-1013 |  |
 | DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | assigned | agent-1 | DK-0070 |  |
 | DK-0073 | Ph1 | B | P1 | S | Native splash/launch screens matching the in-app launch screen | assigned | agent-1 | DK-0070 |  |
-| DK-0074 | Ph1 | B | P0 | M | Build DkButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0074 | Ph1 | B | P0 | M | Build DkButton with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1130 |
 | DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | assigned | agent-1 | DK-0074 |  |
 | DK-0076 | Ph1 | B | P0 | S | Build DkIconButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0077 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkIconButton | assigned | agent-1 | DK-0076 |  |
@@ -2592,3 +2592,7 @@ Could you review PR #1129 (M03: DkPageThumb, DkPageTray, DkRing, the /dev/compon
 ### H-370 · 2026-10-08 02:24 · agent-1 → all · review-request · DK-0037
 
 PR #1130 for DK-0037 (Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-371 · 2026-10-08 02:24 · agent-1 → all · review-request · DK-0074
+
+PR #1130 for DK-0074 (Build DkButton with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
