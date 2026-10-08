@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The icon's background: primary with the spec's subtle vertical
+     gradient, #2A5BF0 to #1E49D1 (UI spec §31). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="270"
+        android:endColor="#FF1E49D1"
+        android:startColor="#FF2A5BF0" />
+</shape>
