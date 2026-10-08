@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0153 Golden + accessibility tests for DkPageTray — claimed 2026-10-08 02:56.
+Nothing claimed.
 
 ## Next
 
