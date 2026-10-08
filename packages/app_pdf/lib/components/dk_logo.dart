@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../theme/dk_tokens.dart';
 
@@ -41,13 +40,11 @@ class DkLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final ink = color ?? t.color.primary;
-    Widget symbol(double s) => SvgPicture.asset(
-      s <= 24
-          ? 'assets/brand/dokulo_symbol_small.svg'
-          : 'assets/brand/dokulo_symbol.svg',
-      width: s,
-      height: s,
-      colorFilter: ColorFilter.mode(ink, BlendMode.srcIn),
+    // Painted, not an SVG asset: an asset decodes after the first frame, and
+    // the launch screen's first frame must already show it (DK-0073).
+    Widget symbol(double s) => CustomPaint(
+      size: Size.square(s),
+      painter: DkSymbolPainter(ink, small: s <= 24),
     );
     // The export's wordmark: 650 weight, −1 % tracking.
     Text wordmark(double fontSize) => Text(
@@ -86,3 +83,58 @@ class DkLogo extends StatelessWidget {
 }
 
 enum _Kind { symbol, wordmark, lockup }
+
+/// The Dokulo symbol on a 64 unit grid (docs/design/brand/dokulo_symbol.svg):
+/// the page with its folded corner, stroked 4, and the house, filled. The
+/// [small] cut (24 dp and below) strokes 6 and leaves out the fold line.
+class DkSymbolPainter extends CustomPainter {
+  const DkSymbolPainter(this.color, {this.small = false});
+
+  final Color color;
+  final bool small;
+
+  static final _page = Path()
+    ..moveTo(18, 8)
+    ..lineTo(38, 8)
+    ..lineTo(50, 20)
+    ..lineTo(50, 52)
+    ..arcToPoint(const Offset(46, 56), radius: const Radius.circular(4))
+    ..lineTo(18, 56)
+    ..arcToPoint(const Offset(14, 52), radius: const Radius.circular(4))
+    ..lineTo(14, 12)
+    ..arcToPoint(const Offset(18, 8), radius: const Radius.circular(4))
+    ..close();
+  static final _fold = Path()
+    ..moveTo(38, 8)
+    ..lineTo(38, 16)
+    ..arcToPoint(
+      const Offset(42, 20),
+      radius: const Radius.circular(4),
+      clockwise: false,
+    )
+    ..lineTo(50, 20);
+  static final _house = Path()
+    ..moveTo(23, 45)
+    ..lineTo(32, 37)
+    ..lineTo(41, 45)
+    ..lineTo(41, 50)
+    ..lineTo(23, 50)
+    ..close();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.scale(size.width / 64, size.height / 64);
+    final stroke = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = small ? 6 : 4
+      ..strokeJoin = StrokeJoin.round;
+    canvas.drawPath(_page, stroke);
+    if (!small) canvas.drawPath(_fold, stroke);
+    canvas.drawPath(_house, Paint()..color = color);
+  }
+
+  @override
+  bool shouldRepaint(DkSymbolPainter old) =>
+      old.color != color || old.small != small;
+}

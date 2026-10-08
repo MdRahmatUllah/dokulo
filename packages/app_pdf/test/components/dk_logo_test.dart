@@ -3,7 +3,6 @@ import 'package:app_pdf/components/dk_logo.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(Widget child, {DkTokens? tokens, double scale = 1}) => MaterialApp(
@@ -53,15 +52,29 @@ void main() {
     expect(DkLogo.clearSpace(64), 12);
   });
 
+  DkSymbolPainter painter(WidgetTester tester) =>
+      tester
+              .widget<CustomPaint>(
+                find.descendant(
+                  of: find.byType(DkLogo),
+                  matching: find.byType(CustomPaint),
+                ),
+              )
+              .painter!
+          as DkSymbolPainter;
+
   testWidgets('24 dp and below use the small cut', (tester) async {
-    String asset(WidgetTester tester) =>
-        (tester.widget<SvgPicture>(find.byType(SvgPicture)).bytesLoader
-                as SvgAssetLoader)
-            .assetName;
     await tester.pumpWidget(app(const DkLogo.symbol(size: 24)));
-    expect(asset(tester), 'assets/brand/dokulo_symbol_small.svg');
+    expect(painter(tester).small, isTrue);
     await tester.pumpWidget(app(const DkLogo.symbol(size: 56)));
-    expect(asset(tester), 'assets/brand/dokulo_symbol.svg');
+    expect(painter(tester).small, isFalse);
+  });
+
+  testWidgets('painted: the first frame already has it (no asset to load)', (
+    tester,
+  ) async {
+    await tester.pumpWidget(app(const DkLogo.symbol()));
+    expect(painter(tester).color, DkTokens.light.color.primary);
   });
 
   testWidgets('one image node "Dokulo"; the wordmark ignores text size', (
@@ -81,9 +94,6 @@ void main() {
 
   testWidgets('a colour makes it monochrome', (tester) async {
     await tester.pumpWidget(app(const DkLogo.symbol(color: Color(0xFFFFFFFF))));
-    expect(
-      tester.widget<SvgPicture>(find.byType(SvgPicture)).colorFilter,
-      const ColorFilter.mode(Color(0xFFFFFFFF), BlendMode.srcIn),
-    );
+    expect(painter(tester).color, const Color(0xFFFFFFFF));
   });
 }
