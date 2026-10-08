@@ -1,0 +1,388 @@
+import 'package:flutter/material.dart';
+
+import '../l10n/app_localizations.dart';
+import '../theme/dk_tokens.dart';
+import 'dk_button.dart';
+import 'dk_icon.dart';
+import 'dk_icon_button.dart';
+
+/// What sits at the left of a [DkTopBar].
+enum DkTopBarLeading { none, back, close }
+
+/// One action of a top bar: an icon button with its tooltip.
+class DkTopBarAction {
+  const DkTopBarAction({
+    required this.icon,
+    required this.tooltip,
+    required this.onPressed,
+  });
+
+  final IconData icon;
+  final String tooltip;
+  final VoidCallback? onPressed;
+}
+
+/// The small top bar (UI spec §11.6; DK-0164): 56 tall below the status
+/// bar, `color.surface`; back or close on the left; the title in `titleM`,
+/// centred on iOS and left-aligned on Android; up to two actions and an
+/// overflow on the right. A hairline appears at the bottom once content
+/// scrolls under it.
+///
+/// [DkTopBar.editing] is V2's bar: Cancel, the title centred, Done.
+/// [DkLargeTopBar] is the collapsing tab-root bar.
+class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
+  const DkTopBar({
+    super.key,
+    this.title,
+    this.leading = DkTopBarLeading.back,
+    this.onLeading,
+    this.actions = const [],
+    this.onOverflow,
+  }) : onCancel = null,
+       onDone = null,
+       cancelLabel = null,
+       doneLabel = null;
+
+  /// Editing (V2): Cancel (tertiary) on the left, the title centred, Done
+  /// (primary text, bold) on the right.
+  const DkTopBar.editing({
+    super.key,
+    required this.title,
+    required VoidCallback this.onCancel,
+    required VoidCallback this.onDone,
+    this.cancelLabel,
+    this.doneLabel,
+  }) : leading = DkTopBarLeading.none,
+       onLeading = null,
+       actions = const [],
+       onOverflow = null;
+
+  final String? title;
+  final DkTopBarLeading leading;
+
+  /// Back or close; `Navigator.maybePop` when null.
+  final VoidCallback? onLeading;
+
+  /// Two at most; the rest go in the overflow menu.
+  final List<DkTopBarAction> actions;
+
+  /// Opens the overflow menu, anchored to the given context (DkMenu).
+  final void Function(BuildContext anchor)? onOverflow;
+
+  final VoidCallback? onCancel, onDone;
+
+  /// Cancel and Done, when a screen says something more specific.
+  final String? cancelLabel, doneLabel;
+
+  static const height = 56.0;
+
+  @override
+  Size get preferredSize => const Size.fromHeight(height);
+
+  @override
+  State<DkTopBar> createState() => _DkTopBarState();
+}
+
+class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l10n = MaterialLocalizations.of(context);
+    final ios = switch (Theme.of(context).platform) {
+      TargetPlatform.iOS || TargetPlatform.macOS => true,
+      _ => false,
+    };
+    final editing = widget.onDone != null;
+    final centred = ios || editing;
+    final title = widget.title == null
+        ? null
+        : Semantics(
+            header: true,
+            child: Text(
+              widget.title!,
+              style: t.text.titleM.copyWith(color: t.color.textPrimary),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: centred ? TextAlign.center : TextAlign.start,
+            ),
+          );
+
+    final Widget? leading = editing
+        ? DkButton(
+            label:
+                widget.cancelLabel ??
+                AppLocalizations.of(context).common_cancel,
+            onPressed: widget.onCancel,
+            variant: DkButtonVariant.tertiary,
+            size: DkButtonSize.compact,
+          )
+        : switch (widget.leading) {
+            DkTopBarLeading.none => null,
+            DkTopBarLeading.back => DkIconButton(
+              icon: DkIcons.back(context),
+              tooltip: l10n.backButtonTooltip,
+              onPressed: widget.onLeading ?? () => Navigator.maybePop(context),
+            ),
+            DkTopBarLeading.close => DkIconButton(
+              icon: DkIcons.close,
+              tooltip: l10n.closeButtonTooltip,
+              onPressed: widget.onLeading ?? () => Navigator.maybePop(context),
+            ),
+          };
+    final trailing = editing
+        ? [
+            DkButton(
+              label:
+                  widget.doneLabel ?? AppLocalizations.of(context).common_done,
+              onPressed: widget.onDone,
+              variant: DkButtonVariant.tertiary,
+              size: DkButtonSize.compact,
+            ),
+          ]
+        : [
+            for (final a in widget.actions)
+              DkIconButton(
+                icon: a.icon,
+                tooltip: a.tooltip,
+                onPressed: a.onPressed,
+              ),
+            if (widget.onOverflow != null)
+              Builder(
+                builder: (anchor) => DkIconButton(
+                  icon: DkIcons.overflow(context),
+                  tooltip: l10n.moreButtonTooltip,
+                  onPressed: () => widget.onOverflow!(anchor),
+                ),
+              ),
+          ];
+
+    // Scaffold gives the bar its height plus the status bar's: pad for it.
+    return _BarSurface(
+      hairline: scrolledUnder,
+      child: SafeArea(
+        bottom: false,
+        child: SizedBox(
+          height: DkTopBar.height,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: t.space.xs),
+            child: NavigationToolbar(
+              leading: leading,
+              middle: title,
+              trailing: Row(mainAxisSize: MainAxisSize.min, children: trailing),
+              centerMiddle: centred,
+              middleSpacing: centred ? t.space.l : t.space.xs,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The collapsing top bar of a tab root (UI spec §11.6, large; DK-0164): a
+/// pinned sliver, 112 tall when expanded with the title in `titleL` at the
+/// bottom left, collapsing into the small bar (56, `titleM`) as the content
+/// scrolls. The actions stay at the top right. Use it as the first sliver
+/// of a CustomScrollView.
+class DkLargeTopBar extends StatelessWidget {
+  const DkLargeTopBar({
+    super.key,
+    required this.title,
+    this.actions = const [],
+    this.onOverflow,
+  });
+
+  final String title;
+  final List<DkTopBarAction> actions;
+  final void Function(BuildContext anchor)? onOverflow;
+
+  static const expanded = 112.0;
+
+  @override
+  Widget build(BuildContext context) {
+    final top = MediaQuery.paddingOf(context).top;
+    return SliverPersistentHeader(
+      pinned: true,
+      delegate: _LargeBar(
+        title: title,
+        actions: actions,
+        onOverflow: onOverflow,
+        top: top,
+        tokens: context.tokens,
+      ),
+    );
+  }
+}
+
+class _LargeBar extends SliverPersistentHeaderDelegate {
+  _LargeBar({
+    required this.title,
+    required this.actions,
+    required this.onOverflow,
+    required this.top,
+    required this.tokens,
+  });
+
+  final String title;
+  final List<DkTopBarAction> actions;
+  final void Function(BuildContext anchor)? onOverflow;
+  final double top;
+  final DkTokens tokens;
+
+  @override
+  double get maxExtent => top + DkLargeTopBar.expanded;
+
+  @override
+  double get minExtent => top + DkTopBar.height;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlaps) {
+    final t = context.tokens;
+    final range = maxExtent - minExtent;
+    // 0 expanded … 1 collapsed.
+    final k = (shrinkOffset / range).clamp(0.0, 1.0);
+    final l10n = MaterialLocalizations.of(context);
+    return _BarSurface(
+      hairline: k >= 1,
+      child: Padding(
+        padding: EdgeInsets.only(top: top),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            // The big title, bottom left, fading out as the bar collapses.
+            Positioned(
+              left: t.space.l,
+              right: t.space.l,
+              bottom: t.space.s,
+              child: Opacity(
+                opacity: 1 - k,
+                child: ExcludeSemantics(
+                  excluding: k > 0.5,
+                  child: Semantics(
+                    header: true,
+                    child: Text(
+                      title,
+                      style: t.text.titleL.copyWith(color: t.color.textPrimary),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // The small title, in the 56 bar, fading in.
+            Positioned(
+              left: t.space.l,
+              right: 120,
+              top: 0,
+              height: DkTopBar.height,
+              child: Opacity(
+                opacity: k,
+                child: ExcludeSemantics(
+                  excluding: k <= 0.5,
+                  child: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Semantics(
+                      header: true,
+                      child: Text(
+                        title,
+                        style: t.text.titleM.copyWith(
+                          color: t.color.textPrimary,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            // Actions: always top right.
+            Positioned(
+              right: t.space.xs,
+              top: (DkTopBar.height - 48) / 2,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final a in actions)
+                    DkIconButton(
+                      icon: a.icon,
+                      tooltip: a.tooltip,
+                      onPressed: a.onPressed,
+                    ),
+                  if (onOverflow != null)
+                    Builder(
+                      builder: (anchor) => DkIconButton(
+                        icon: DkIcons.overflow(context),
+                        tooltip: l10n.moreButtonTooltip,
+                        onPressed: () => onOverflow!(anchor),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  bool shouldRebuild(_LargeBar old) =>
+      old.title != title ||
+      old.actions != actions ||
+      old.top != top ||
+      old.tokens != tokens;
+}
+
+/// The bar's `surface`, with a 1 dp `outline` hairline at the bottom when
+/// content is under it.
+class _BarSurface extends StatelessWidget {
+  const _BarSurface({required this.hairline, required this.child});
+  final bool hairline;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: t.color.surface,
+        border: Border(
+          bottom: BorderSide(
+            color: hairline ? t.color.outline : t.color.surface,
+          ),
+        ),
+      ),
+      child: Material(type: MaterialType.transparency, child: child),
+    );
+  }
+}
+
+/// Like AppBar: listens to the Scaffold's scroll notifications and knows
+/// when content has scrolled under the bar.
+mixin _ScrolledUnder<W extends StatefulWidget> on State<W> {
+  ScrollNotificationObserverState? _observer;
+  bool scrolledUnder = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _observer?.removeListener(_onScroll);
+    _observer = ScrollNotificationObserver.maybeOf(context);
+    _observer?.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _observer?.removeListener(_onScroll);
+    super.dispose();
+  }
+
+  void _onScroll(ScrollNotification n) {
+    if (n is! ScrollUpdateNotification || n.depth != 0) return;
+    if (n.metrics.axis != Axis.vertical) return;
+    final under = n.metrics.extentBefore > 0;
+    if (under != scrolledUnder) setState(() => scrolledUnder = under);
+  }
+}
