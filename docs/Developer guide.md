@@ -19,11 +19,12 @@ packages/
       main.dart         runApp, nothing else
       screens/          one folder per screen ID: screens/h1_home/, screens/t2_tool/, …
       components/       the Dk* widgets (DkToolTile, DkFileCard, …), one file each
+      patterns/         the interaction patterns of UI spec §12 (confirmations, undo, …)
       providers/        Riverpod providers that aren't private to one screen
       routes/           the go_router config and route names
       l10n/             app_en.arb, app_de.arb (DK-0009)
     test/               mirrors lib/; goldens next to their tests in goldens/
-  doc_tools/            layer 2: one ToolJob per feature (pure Dart)
+  doc_tools/            layer 2: one ToolJob per feature, work on worker isolates
   doc_core/             layer 3: PDFs: open, render, page ops, text, image pipeline;
                         the database (lib/src/db/schema.drift, drift_schemas/)
   doc_vision/           layer 3: scanner, OCR engines, layout, photo finder
@@ -177,7 +178,8 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 
 | Route | Screen | Where | Notes |
 | --- | --- | --- | --- |
-| `/home` | H1 Home | tab 1 | The start route |
+| `/launch` | Launch | full screen | The app's first frame: the native splash again (symbol 72 on `color.background`, DK-0073), then Home |
+| `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
 | `/files/locked` | F2 Locked folder | tab 3, pushed | Behind biometrics (its task adds the guard) |
@@ -288,12 +290,36 @@ Motion variant built in:
 | Mini job bar (DK-0045) | `DkJobMorph(collapsed:, sheet:, bar:)` |
 | Viewer open (DK-0046) | `DkHero(tag: 'file-$id')` on the thumbnail and the viewer's first page; the viewer route uses `dkViewerPage` |
 
+**Drag and drop (UI spec §12.2; `lib/patterns/dk_drag.dart`).** A 300 ms
+press lifts (`dkLiftDelay`, not the platform's 500 ms) and a list or grid
+scrolls while the finger is within 48 dp of its edge (`DkEdgeScroller`).
+Files onto folders: `DkDraggable` and `DkDropTarget` (the haptics are
+built in; a move offers Undo). A `ReorderableListView` takes
+`buildDefaultDragHandles: false`, `DkReorderStartListener` around each
+item and `proxyDecorator: dkReorderProxy`. DkPageGrid and DkPageTray use
+them already.
+
 Numbers the user compares as they change (sizes, page counts, times,
 percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
 (DK-0036). Surfaces take `t.surfaceAt(DkLevel.raised, radius: …)`, which is
 shadows in light and a lighter surface plus an outline in dark. Borders are
 `t.divider`, `t.inputRest/Focused/Error` and `t.selectionRing`, and the grid
 is `DkGrid.forWidth(width)` (`theme/dk_layout.dart`, DK-0038).
+
+**Ask or undo (UI spec §12.4, §12.6; `lib/patterns/`).** Only what can't be
+undone asks first: `confirmDk(context, DkConfirmation.x)` with its EN/DE copy
+(delete forever, empty trash, apply redaction, replace original, discard a
+scan or edits, cancel a job running > 30 s, remove a saved signature). Every
+other change happens at once and offers Undo: `showDkUndo(context, DkUndo.x,
+message, onUndo: …)` (4 s; Replace original 10 s), where `onUndo` restores
+the exact state before (order, folder, pages). Don't call `showDkConfirm` for
+anything else.
+
+**The keyboard (UI spec §12.7).** DkSheet and DkActionBar ride the keyboard
+by themselves. A form screen wraps its Scaffold body in
+`DkFormAccessory(child: …)`: while the keyboard is open, Previous field ·
+Next field · Done sit on top of it (they move the focus without closing the
+keyboard).
 
 **Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
 unless Settings → Appearance overrides it (`appThemeModeProvider`,

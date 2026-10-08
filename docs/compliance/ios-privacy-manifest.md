@@ -29,6 +29,7 @@ native code ships no manifest (resolved for the app, and our own `packages/*`):
 | `vision_ocr` (ours) | Swift | Added (no required-reason APIs), in Package.swift and the podspec |
 | `web_to_pdf` (ours) | Swift | Added (no required-reason APIs), in Package.swift and the podspec |
 | `path_provider_foundation` 2.6 | None (Dart FFI) | Not needed |
+| `pdfium_flutter` 0.3.1 (pdfrx's PDFium, DK-0293) | Swift that only registers the plugin (no channels, no required-reason APIs) | Not needed: listed in `NO_MANIFEST_NEEDED` with that reason; PDFium itself is a native asset, so the Xcode privacy report (DK-1054) checks it |
 
 Not visible from Windows: the ONNX Runtime binary the plugin's pod or Swift
 package downloads, Flutter.framework (Flutter ships its manifest), and the

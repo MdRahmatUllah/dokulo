@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../components/dk_action_sheet.dart';
 import '../components/dk_icon.dart';
+import '../components/dk_loading_spinner.dart';
 import '../components/dk_menu.dart';
 import '../components/dk_page_thumb.dart';
 import '../components/dk_sheet.dart';
+import '../components/dk_skeleton.dart';
 import '../components/dk_toast.dart';
 import '../theme/dk_tokens.dart';
 import 'page_states.dart';
@@ -286,6 +288,57 @@ class ToastStates extends StatelessWidget {
               style: t.text.caption.copyWith(color: t.color.textSecondary),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// DkSkeleton (DK-0198): the four presets; DkLoadingSpinner (DK-0200): both
+/// sizes, in primary and on a filled button's colour.
+class LoadingStates extends StatelessWidget {
+  const LoadingStates({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ColoredBox(
+      color: t.color.surface,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: t.space.l),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            DkSkeleton.fileRows(count: 2),
+            const DkSkeleton.modelCard(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: t.space.l),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Expanded(child: DkSkeleton.gridCard()),
+                  SizedBox(width: t.space.m),
+                  const Expanded(child: DkSkeleton.page()),
+                  SizedBox(width: t.space.m),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        const DkLoadingSpinner(),
+                        SizedBox(height: t.space.l),
+                        const DkLoadingSpinner(size: DkSpinnerSize.large),
+                        SizedBox(height: t.space.l),
+                        Container(
+                          padding: EdgeInsets.all(t.space.s),
+                          color: t.color.primary,
+                          child: DkLoadingSpinner(color: t.color.onPrimary),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -66,6 +66,19 @@ void main() {
       },
     );
 
+    test('a dictionary read with a trailing newline still decodes spaces '
+        '(DK-1071)', () {
+      // 'a\nb\n'.split('\n') is [a, b, ''], as loadAssets reads the asset:
+      // the '' must not take the space's class.
+      final ocr = PpOcr(_NoModels(), 'a\nb\n'.split('\n'));
+      final steps = [1, 3, 2]; // a, space, b
+      final probs = Float32List(steps.length * 4);
+      for (final (t, c) in steps.indexed) {
+        probs[t * 4 + c] = 0.9;
+      }
+      expect(ocr.decodeCtc(probs, steps.length, 4, 0).$1, 'a b');
+    });
+
     test('BGRA and grey become BGR', () {
       final fromBgra = Raster.fromBgra(
         1,
