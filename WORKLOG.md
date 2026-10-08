@@ -554,3 +554,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 02:23 · agent-2 · Merged #1123 (DK-0036/0038). Opened #1129 (DK-0150..0153). Built locally, stacked: DK-0154/0155 grid, DK-0158/0159 magnifier, DK-0160..0163 boxes. Next blocked on agent-1's DkButton/DkIconButton/DkScanButton (bars).
 - 2026-10-08 02:24 · agent-1 DK-0037 · PR #1130 open; review requested from all
 - 2026-10-08 02:24 · agent-1 DK-0074 · PR #1130 open; review requested from all
+- 2026-10-08 02:24 · agent-1 DK-0075 · PR #1130 open; review requested from all
