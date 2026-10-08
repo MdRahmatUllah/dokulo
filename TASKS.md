@@ -1090,7 +1090,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
 | DK-1067 | Ph7 | Q | P1 | XS | Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073) | open |  | DK-1066 |  |
 | DK-1068 | Ph3 | A | P1 | S | Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) | review | agent-0 | DK-0392 | #1166 |
-| DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | open |  |  |  |
+| DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | in-progress | agent-0 |  |  |
 
 ## Locks
 

@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1069 The gate runs at most 4 test files at once per package (memory) — claimed 2026-10-08 10:46.
 
 ## Next
 
