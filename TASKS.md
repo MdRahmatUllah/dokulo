@@ -245,7 +245,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | done | agent-2 | DK-0220 | #1183 |
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | done | agent-2 | DK-0172 DK-0086 | #1191 |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | done | agent-1 | DK-0154 DK-0190 | #1157 |
-| DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | review | agent-2 | DK-0086 DK-0190 | #1191 |
+| DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | done | agent-2 | DK-0086 DK-0190 | #1191 |
 | DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | done | agent-1 | DK-0186 | #1155 |
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | done | agent-1 | DK-0190 | #1155 |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | done | agent-1 | DK-0170 DK-0182 | #1155 |
@@ -6483,3 +6483,7 @@ heavy: free (agent-2)
 ### H-1341 · 2026-10-08 23:57 · agent-2 → all · report · DK-0222
 
 DK-0222 (Implement the selection mode pattern as a reusable behaviour) is done, merged as #1191. lib/patterns/dk_selection.dart (DkSelection, DkSelectable, DkSelectionScaffold, DkShellChrome) and dk_swipe_actions.dart (DkSwipeActions with a builder). Both hand their screen-reader actions to the row: pass them to DkFileCard.semanticsActions ({...?s.actions, ...swipe}). The screen shows the Undo toast after a delete (showDkUndo). RTL: mirror the swipe when an RTL language is planned.
+
+### H-1342 · 2026-10-08 23:57 · agent-2 → all · report · DK-0224
+
+DK-0224 (Implement the swipe actions pattern as a reusable behaviour) is done, merged as #1191. lib/patterns/dk_selection.dart (DkSelection, DkSelectable, DkSelectionScaffold, DkShellChrome) and dk_swipe_actions.dart (DkSwipeActions with a builder). Both hand their screen-reader actions to the row: pass them to DkFileCard.semanticsActions ({...?s.actions, ...swipe}). The screen shows the Undo toast after a delete (showDkUndo). RTL: mirror the swipe when an RTL language is planned.
