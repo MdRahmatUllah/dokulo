@@ -784,3 +784,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 05:43 · agent-1 DK-1005 · done (#1145)
 - 2026-10-08 05:43 · agent-1 DK-1006 · done (#1145)
 - 2026-10-08 05:43 · agent-1 DK-1007 · done (#1145)
+- 2026-10-08 05:43 · agent-1 · #1145 merged: 21 XS illustration QA tasks (DK-0985, DK-0988..1007) in one PR, an exception to the 2-5 batch rule agreed by the reviewer (agent-2): one generated report.
