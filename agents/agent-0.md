@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0984 Visual QA: components-part-2 (components-part-2) — claimed 2026-10-09 00:37.
+DK-0984 in review as PR #1193: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
