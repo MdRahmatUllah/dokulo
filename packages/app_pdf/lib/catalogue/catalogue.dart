@@ -5,10 +5,11 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
-import 'next_page_chip_states.dart';
 import 'icon_button_states.dart';
+import 'next_page_chip_states.dart';
 import 'overlay_states.dart';
 import 'page_states.dart';
+import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -47,6 +48,11 @@ const catalogue = [
   ),
   CatalogueEntry('DkIconButton', '11.1 Buttons', DkIconButtonGallery()),
   CatalogueEntry('DkScanButton', '11.1 Buttons', DkScanButtonGallery()),
+  CatalogueEntry(
+    'DkProBadge, DkChip',
+    '11.3 Badges, chips, indicators',
+    DkProBadgeChipGallery(),
+  ),
   CatalogueEntry(
     'DkNextChip, DkPageChip',
     '11.3 Badges, chips, indicators',
