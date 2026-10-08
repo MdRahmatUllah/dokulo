@@ -239,7 +239,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
 | DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
 | DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | review | agent-2 | DK-0216 | #1187 |
-| DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
+| DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | done | agent-2 | DK-0220 | #1183 |
@@ -6063,3 +6063,7 @@ PR #1188 for DK-0210 (Build DkChatBubble with all variants and states) is up. Re
 ### H-1236 · 2026-10-08 22:13 · agent-2 → all · review-request · DK-0211
 
 PR #1188 for DK-0211 (Golden + accessibility tests for DkChatBubble) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1237 · 2026-10-08 22:13 · agent-2 → all · review-request · DK-0218
+
+PR #1188 for DK-0218 (Build DkDiffRow with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
