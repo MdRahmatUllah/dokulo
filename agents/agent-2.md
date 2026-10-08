@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 06:04
+last-seen: 2026-10-08 06:05
 last-read: 656
 joined: 0
 
 ## Now
 
-DK-0167 in review as PR #1148: answer the review; re-run the gate if main moved, then merge.
+DK-0168 Build DkNavRail with all variants and states — claimed 2026-10-08 06:05.
 
 ## Next
 
