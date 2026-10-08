@@ -64,9 +64,9 @@ class DkFolderCard extends StatelessWidget {
             onTap: onMore,
             child: DkTappable(
               onTap: onMore,
-              radius: 22,
+              radius: 24,
               builder: (context, pressed) => SizedBox.square(
-                dimension: 44,
+                dimension: 48,
                 child: Center(
                   child: DkIcon(
                     DkIcons.overflow(context),
