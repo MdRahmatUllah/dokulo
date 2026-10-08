@@ -142,6 +142,11 @@ const catalogue = [
     '11.4 Inputs and controls',
     DkSliderStepperGallery(),
   ),
+  CatalogueEntry(
+    'DkSelectionBar · DkViewerBar · DkCameraTopBar',
+    '11.6 Bars',
+    BottomBarStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
