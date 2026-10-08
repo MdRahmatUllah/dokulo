@@ -1,5 +1,5 @@
 name: doc_tools
-description: "Tool jobs: one ToolJob per feature, progress stream, cancel, undo snapshot, workflow runner. Pure Dart, runs in worker isolates."
+description: "Tool jobs: one ToolJob per feature, progress stream, cancel, undo snapshot, workflow runner; the work runs on worker isolates (pdfrx's for PDFium)."
 publish_to: none
 resolution: workspace
 
@@ -7,12 +7,16 @@ environment:
   sdk: ^3.13.0
 
 dependencies:
+  # doc_vision (OCR) is a Flutter package, so this is one too: `flutter test`.
+  flutter:
+    sdk: flutter
   ai_core:
     path: ../ai_core
   doc_core:
     path: ../doc_core
   doc_vision:
     path: ../doc_vision
+  image: 4.10.1
 
 dev_dependencies:
   pdfrx_engine: 0.6.1
