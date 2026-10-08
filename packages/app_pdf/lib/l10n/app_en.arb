@@ -659,5 +659,13 @@
   "field_password_strong": "Strong",
   "@field_password_strong": {
     "description": "Password strength meter (UI spec §11.4)."
+  },
+  "field_range_pick": "Pick pages",
+  "@field_range_pick": {
+    "description": "DkRangeField trailing button: choose pages on thumbnails."
+  },
+  "field_range_hint": "1–3, 5, 8–end",
+  "@field_range_hint": {
+    "description": "DkRangeField placeholder (UI spec §11.4)."
   }
 }

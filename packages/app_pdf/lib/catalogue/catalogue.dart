@@ -9,6 +9,7 @@ import 'icon_button_states.dart';
 import 'overlay_states.dart';
 import 'page_states.dart';
 import 'pro_chip_states.dart';
+import 'range_search_states.dart';
 import 'scan_button_states.dart';
 import 'text_field_states.dart';
 
@@ -57,6 +58,11 @@ const catalogue = [
     'DkTextField, DkPasswordField',
     '11.4 Inputs and controls',
     DkTextFieldGallery(),
+  ),
+  CatalogueEntry(
+    'DkRangeField, DkSearchField',
+    '11.4 Inputs and controls',
+    DkRangeSearchGallery(),
   ),
 ];
 

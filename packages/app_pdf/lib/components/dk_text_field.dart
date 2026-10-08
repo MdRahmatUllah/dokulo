@@ -401,3 +401,99 @@ class _DkPasswordFieldState extends State<DkPasswordField> {
     );
   }
 }
+
+/// Page ranges (DK-0124): a [DkTextField] in `type.mono` with the example
+/// placeholder "1–3, 5, 8–end" and a trailing "Pick pages" button that opens
+/// the thumbnail picker ([onPick]). Parsing and the "Page 40 doesn't exist"
+/// error are the tool's.
+class DkRangeField extends StatelessWidget {
+  const DkRangeField({
+    super.key,
+    this.label,
+    this.controller,
+    this.error,
+    this.helper,
+    this.onChanged,
+    required this.onPick,
+    this.enabled = true,
+  });
+
+  final String? label;
+  final TextEditingController? controller;
+  final String? error;
+  final String? helper;
+  final ValueChanged<String>? onChanged;
+  final VoidCallback onPick;
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
+    return DkTextField(
+      label: label,
+      controller: controller,
+      error: error,
+      helper: helper,
+      onChanged: onChanged,
+      enabled: enabled,
+      hint: l.field_range_hint,
+      style: context.tokens.text.mono,
+      keyboardType: TextInputType.text,
+      trailing: DkFieldButton(
+        icon: DkIcons.gridView,
+        label: l.field_range_pick,
+        onTap: onPick,
+      ),
+    );
+  }
+}
+
+/// A search box (DK-0126): 40 dp, `color.surfaceSunken`, the `search` icon
+/// (20) first, the placeholder in `type.bodyL` ("Search tools"), the clear ×
+/// while there is text, and an optional [filter] button at the end.
+class DkSearchField extends StatelessWidget {
+  const DkSearchField({
+    super.key,
+    required this.hint,
+    this.controller,
+    this.onChanged,
+    this.onSubmitted,
+    this.focusNode,
+    this.autofocus = false,
+    this.filter,
+  });
+
+  final String hint;
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
+  final FocusNode? focusNode;
+  final bool autofocus;
+
+  /// A trailing filter button (a [DkFieldButton]).
+  final Widget? filter;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return DkTextField(
+      hint: hint,
+      controller: controller,
+      onChanged: onChanged,
+      onSubmitted: onSubmitted,
+      focusNode: focusNode,
+      autofocus: autofocus,
+      height: 40,
+      textInputAction: TextInputAction.search,
+      leading: Padding(
+        padding: EdgeInsets.only(left: t.space.m, right: t.space.s),
+        child: DkIcon(
+          DkIcons.search,
+          size: DkIconSize.m,
+          color: t.color.iconSecondary,
+        ),
+      ),
+      trailing: filter,
+    );
+  }
+}
