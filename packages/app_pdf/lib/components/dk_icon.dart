@@ -155,6 +155,10 @@ abstract final class DkIcons {
   static const faceId = IconData(0xf008, fontFamily: _font) /* face */;
   static const palette = IconData(0xe40a, fontFamily: _font) /* palette */;
   static const remove = IconData(0xe15b, fontFamily: _font) /* remove */;
+  static const dot = IconData(
+    0xe061,
+    fontFamily: _font,
+  ) /* fiber_manual_record */;
   static const arrowForward = IconData(
     0xe5c8,
     fontFamily: _font,
