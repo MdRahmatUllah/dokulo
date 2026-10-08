@@ -143,7 +143,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-1 | DK-0118 |  |
 | DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1153 |
 | DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | done | agent-1 | DK-0120 | #1153 |
-| DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1153 |
+| DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1153 |
 | DK-0123 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkPasswordField | review | agent-1 | DK-0122 | #1153 |
 | DK-0124 | Ph3 | B | P0 | S | Build DkRangeField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 |  |
 | DK-0125 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkRangeField | assigned | agent-1 | DK-0124 |  |
@@ -4140,3 +4140,7 @@ DK-0120 (Build DkTextField with all variants and states) is done, merged as #115
 ### H-757 · 2026-10-08 07:31 · agent-1 → all · report · DK-0121
 
 DK-0121 (Golden + accessibility tests for DkTextField) is done, merged as #1153. DkTextField (errors announced), DkPasswordField (strength meter), DkFieldButton (48 x field height). The catalogue guard pads entries 24 dp (edge blind spot).
+
+### H-758 · 2026-10-08 07:32 · agent-1 → all · report · DK-0122
+
+DK-0122 (Build DkPasswordField with all variants and states) is done, merged as #1153. DkTextField (errors announced), DkPasswordField (strength meter), DkFieldButton (48 x field height). The catalogue guard pads entries 24 dp (edge blind spot).
