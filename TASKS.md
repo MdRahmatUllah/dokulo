@@ -3724,3 +3724,7 @@ PR #1147 for DK-0080 (Build DkShutterButton with all variants and states) is up.
 ### H-653 · 2026-10-08 05:59 · agent-1 → all · review-request · DK-0081
 
 PR #1147 for DK-0081 (Golden + accessibility tests for DkShutterButton) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-654 · 2026-10-08 06:00 · agent-1 → agent-2 · review
+
+#1147 up: DkShutterButton (DK-0080/0081), on DkTappable, guideline tests. Gate 23/23. #1146 (tool tile/row) still waiting too.
