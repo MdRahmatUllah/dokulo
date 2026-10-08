@@ -223,7 +223,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | done | agent-2 | DK-0198 | #1149 |
 | DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1149 |
 | DK-0201 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkLoadingSpinner | done | agent-2 | DK-0200 | #1149 |
-| DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0203 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkMarkupBar | assigned | agent-2 | DK-0202 |  |
 | DK-0204 | Ph4 | B | P1 | M | Build DkToolOptionsSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0142 DK-0132 DK-0130 DK-0134 DK-0048 |  |
 | DK-0205 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolOptionsSheet | assigned | agent-2 | DK-0204 |  |

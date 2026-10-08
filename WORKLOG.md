@@ -1012,3 +1012,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 14:20 · agent-2 DK-0176 · claimed: Build DkToolStrip with all variants and states
 - 2026-10-08 14:20 · agent-2 DK-0176 · PR #1175 open; review requested from all
 - 2026-10-08 14:20 · agent-2 DK-0177 · PR #1175 open; review requested from all
+- 2026-10-08 14:20 · agent-2 DK-0202 · claimed: Build DkMarkupBar with all variants and states

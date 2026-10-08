@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0177 in review as PR #1175: answer the review; re-run the gate if main moved, then merge.
+DK-0202 Build DkMarkupBar with all variants and states — claimed 2026-10-08 14:20.
 
 ## Next
 
