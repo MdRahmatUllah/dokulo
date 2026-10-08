@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 
+import '../components/dk_icon.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
-import 'dk_icon.dart';
 
 /// Swipe actions on a Files row (DK-0224; UI spec §12.3): swiping [child]
 /// left reveals Share (`color.primary`) and Delete (`color.danger`), each

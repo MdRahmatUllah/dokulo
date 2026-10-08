@@ -1,6 +1,6 @@
 import 'package:app_pdf/components/dk_bottom_bars.dart';
 import 'package:app_pdf/components/dk_icon.dart';
-import 'package:app_pdf/components/dk_selection.dart';
+import 'package:app_pdf/patterns/dk_selection.dart';
 import 'package:app_pdf/components/dk_tappable.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';

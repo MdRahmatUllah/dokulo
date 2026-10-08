@@ -3,9 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import '../components/dk_icon.dart';
 import '../components/dk_scan_button.dart';
-import '../components/dk_selection.dart';
 import '../components/dk_tab_bar.dart';
 import '../l10n/app_localizations.dart';
+import '../patterns/dk_selection.dart';
 import '../theme/dk_layout.dart';
 import 'routes.dart';
 

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../components/dk_bottom_bars.dart';
+import '../components/dk_top_bar.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/haptics.dart';
-import 'dk_bottom_bars.dart';
-import 'dk_top_bar.dart';
 
 /// Which items are selected, and whether selection mode is on (DK-0222; UI
 /// spec §12.1). The mode starts with a first item and ends with Cancel,

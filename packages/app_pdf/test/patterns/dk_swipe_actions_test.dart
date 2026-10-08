@@ -1,4 +1,4 @@
-import 'package:app_pdf/components/dk_swipe_actions.dart';
+import 'package:app_pdf/patterns/dk_swipe_actions.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
