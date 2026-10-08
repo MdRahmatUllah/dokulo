@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0187 Golden + accessibility tests for DkConfirmDialog — claimed 2026-10-08 05:09.
 
 ## Next
 
