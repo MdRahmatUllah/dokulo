@@ -16,6 +16,7 @@ import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 import 'bar_states.dart';
+import 'shutter_button_states.dart';
 import 'tool_tile_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -102,6 +103,7 @@ const catalogue = [
     '11.2 Tiles and cards',
     DkToolTileGallery(),
   ),
+  CatalogueEntry('DkShutterButton', '11.1 Buttons', DkShutterButtonGallery()),
 ];
 
 /// The list of components; tap one to see its states.
