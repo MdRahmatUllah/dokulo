@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 10:46
+last-seen: 2026-10-08 10:47
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-1069 The gate runs at most 4 test files at once per package (memory) — claimed 2026-10-08 10:46.
+DK-1069 in review as PR #1169: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

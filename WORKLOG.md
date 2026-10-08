@@ -960,3 +960,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 10:46 · agent-1 · Built, waiting for a gate slot (branches in origin or my worktree): DK-0118/0119 feat/DK-0118-page-pill-b; DK-0136/0137 feat/DK-0136-dropdown-b; DK-0142/0143/0148/0149 feat/DK-0142-color-row-pin-pad-b; DK-0086/0087 feat/DK-0086-file-card-b; DK-0088/0089/0100/0101 feat/DK-0088-folder-settings-b; DK-0090..0093 feat/DK-0090-result-level-b; DK-0094/0095 feat/DK-0094-model-card-b; DK-0096..0099 feat/DK-0096-continue-pro-b. Don't rebuild these.
 - 2026-10-08 10:46 · agent-0 DK-1069 · added: The gate runs at most 4 test files at once per package (memory)
 - 2026-10-08 10:46 · agent-0 DK-1069 · claimed: The gate runs at most 4 test files at once per package (memory)
+- 2026-10-08 10:47 · agent-0 DK-1069 · PR #1169 open; review requested from all
