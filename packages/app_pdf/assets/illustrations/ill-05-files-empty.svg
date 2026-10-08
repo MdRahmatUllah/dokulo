@@ -1,0 +1,8 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Open folder with a page sliding in"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<path d="M22 40a4 4 0 0 1 4-4h20l6 6h42a4 4 0 0 1 4 4v42a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4z" fill="#FFFFFF"></path>
+<rect x="46" y="22" width="34" height="44" rx="3" fill="#FFFFFF" transform="rotate(10 63 44)"></rect>
+<path d="M52 36h18M51 44h20M50 52h14" transform="rotate(10 63 44)"></path>
+<path d="M18 58h84l-8 34H26z" fill="#E6ECFF"></path>
+<path d="M44 74h32" stroke="#2251E6"></path>
+</g></svg>

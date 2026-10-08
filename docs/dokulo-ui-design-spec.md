@@ -226,7 +226,7 @@ System fonts: **SF Pro** (iOS) and **Roboto** (Android). No custom text font in 
 | `type.labelL` | 15 / 20 | Semibold 600 | 0 | Buttons |
 | `type.labelM` | 13 / 18 | Semibold 600 | 0.1 | Chips, tab labels, badges, segmented controls |
 | `type.caption` | 12 / 16 | Regular 400 | 0.1 | Meta lines, legal, privacy line, page numbers under thumbnails |
-| `type.mono` | 13 / 18 | Regular 400 (SF Mono / Roboto Mono) | 0 | Page range inputs, error codes |
+| `type.mono` | 13 / 18 | Regular 400 (system mono: Menlo on iOS, the platform `monospace` on Android) | 0 | Page range inputs, error codes |
 | `type.numberXL` | 32 / 38 | Bold 700, tabular | −0.3 | Result headline numbers ("1.9 MB") |
 
 **Rules**
@@ -1225,6 +1225,7 @@ Each tool fills the shell from section 20. Format per tool: identity, input, opt
 
 ### 21.4 Organize pages · `grid_view` · Free
 
+- **Description:** Reorder, rotate, delete and add pages in one view. / Ordne, drehe, lösche und füge Seiten in einer Ansicht hinzu.
 - Opens P1 directly (section 18). Result toast instead of T3.
 
 ### 21.5 Rotate PDF · `rotate_right` · Free
@@ -1307,44 +1308,54 @@ Each tool fills the shell from section 20. Format per tool: identity, input, opt
 
 ### 21.15 Add page numbers · `format_list_numbered` · Free
 
+- **Description:** Number the pages, in the position and format you choose. / Nummeriere die Seiten, an der Stelle und im Format deiner Wahl.
 - **Options:** Position · `DkPositionPicker` (bottom centre); Format · segmented "1" · "1 of N" · "Page 1 of N" (DE: "1" · "1 von N" · "Seite 1 von N") ("1"); Start at · stepper (1); Skip first page · switch · off; Size · segmented S · M · L (M = 10 pt). **Live preview:** two page thumbnails 120 tall showing the number.
 - **Button:** "Add numbers to 12 pages" / "Seitenzahlen zu 12 Seiten hinzufügen". **Result:** "Numbers added to 12 pages".
 
 ### 21.16 Add watermark · `branding_watermark` · Free
 
+- **Description:** Put text or an image across your pages, like “Draft” or “Copy”. / Setze Text oder ein Bild auf deine Seiten, etwa „Entwurf“ oder „Kopie“.
 - **Options:** Type · segmented Text · Image (Text); Text field with preset chips: Copy · Confidential · Draft · Kopie · Entwurf · Vertraulich (shown by locale; "Copy"/"Kopie" default); Image: picker; Opacity · slider 10–100 % (30 %); Angle · segmented 0° · 45° · −45° (45°); Size · slider; Layout · segmented Centre · Tiled (Centre); Behind content · switch · off; Pages · All / Choose.
 - **Live preview:** first page 200 tall.
 - **Button:** "Add watermark". **Result:** "Watermark added to 12 pages" with Before/After toggle.
 
 ### 21.17 Crop pages · `crop` · Free
 
+- **Description:** Trim the margins of one page or of all pages. / Schneide die Ränder einer Seite oder aller Seiten zu.
 - **Options:** large page preview with `DkCropOverlay` (rectangle, no perspective); buttons Auto margins · Reset; Apply to · segmented This page · All pages (All); page stepper below the preview to check other pages.
 - **Button:** "Crop 12 pages". **Result:** "Cropped 12 pages" with Before/After.
 
 ### 21.18 Mark up · `edit` · Free
 
+- **Description:** Highlight, underline, draw and add notes on a PDF. / Markiere, unterstreiche, zeichne und füge Notizen in einer PDF hinzu.
 - Opens the file in V2 edit mode with the Highlighter selected. Saved as a new version; toast instead of T3.
 
 ### 21.19 Fill form · `assignment` · Pro
 
+- **Description:** Fill in PDF forms, and lock the values if you want. / Fülle PDF-Formulare aus und fixiere die Werte, wenn du möchtest.
 - Opens V2 with form filling active and "Highlight fields" on. Extra on Done: dialog "Lock form values?" with switch "Flatten form (fields can't be edited later)" default off; buttons Save.
 - **No fields:** dialog "This PDF has no fillable fields.", "Use Mark up to add text anywhere.", Cancel / Mark up. **XFA:** "This form type can't be filled on phones."
 
 ### 21.20 Sign PDF · `signature` · Free
 
+- **Description:** Add your signature, initials or a stamp to a PDF. / Füge deine Unterschrift, Initialen oder einen Stempel in eine PDF ein.
 - Opens V2 with the signatures sheet (section 17.3). Result toast "Signed on page 3 · Undo".
 
 ### 21.21 Add password · `lock` · Free
 
+- **Description:** Lock a PDF with a password and choose what others may do with it. / Sperre eine PDF mit einem Passwort und lege fest, was andere damit dürfen.
 - **Options:** Password · `DkPasswordField` with strength meter; Confirm password · `DkPasswordField`; More options: Allow printing · on; Allow copying text · on; Allow editing · off. Always-visible `DkBanner` warning: "If you forget this password, the file can't be opened." / "Wenn du dieses Passwort vergisst, lässt sich die Datei nicht mehr öffnen."
 - **Button:** "Add password". **Result:** "Protected with AES-256" + lock icon. Suffix: protected / geschützt.
 - **Errors:** "The passwords don't match." / "Die Passwörter stimmen nicht überein."
 
 ### 21.22 Remove password · `lock_open` · Free
 
+- **Description:** Remove the password from a PDF you can open. / Entferne das Passwort aus einer PDF, die du öffnen kannst.
 - **Options:** Password field. **Button:** "Remove password". **Result:** "Password removed". **Errors:** "That password doesn't open this file."; not encrypted → "This file has no password."
 
 ### 21.23 Black out (redact) · `visibility_off` · Pro
+
+- **Description:** Remove names, numbers and other details for good, not just cover them. / Entferne Namen, Nummern und andere Angaben dauerhaft, statt sie nur abzudecken.
 
 Dedicated screen (replaces T2 options):
 
@@ -1363,6 +1374,7 @@ Masking in lists: show found values partially masked ("DE89 •••• ••�
 
 ### 21.24 Compare PDFs · `compare` · Pro
 
+- **Description:** See what changed between two versions of a PDF. / Sieh, was sich zwischen zwei Versionen einer PDF geändert hat.
 - **Input:** 2 PDFs labelled "Older version" / "Ältere Version" and "Newer version" / "Neuere Version" with a swap button between them.
 - **Options:** Mode · segmented Text · Visual (Text).
 - **Button:** "Compare".
@@ -1371,12 +1383,14 @@ Masking in lists: show found values partially masked ("DE89 •••• ••�
 
 ### 21.25 Extract images & text · `unarchive` · Free
 
+- **Description:** Save the images and the text in a PDF as separate files. / Speichere die Bilder und den Text einer PDF als einzelne Dateien.
 - **Options:** Extract · segmented Images · Text · Both (Images); Minimum image size · segmented Any · Over 100 px · Over 500 px (Over 100 px).
 - **Button:** "Extract". **Result:** "18 images · 4,800 words": grid of found images (3 columns) with multi-select + "Save selected" and "Save all"; text in a preview card with Copy.
 - **None found:** "No images found in this PDF."
 
 ### 21.26 Batch · `dynamic_feed` · Free
 
+- **Description:** Run one tool on many files at once. / Wende ein Werkzeug auf viele Dateien auf einmal an.
 - **Step 1:** choose a tool (sheet of batch-capable tools: Compress, Add watermark, Add password, Make text searchable, Add page numbers, Convert to PDF/A, Image to PDF, PDF to images).
 - **Step 2:** choose files (multi-select picker, folders allowed).
 - **Step 3:** that tool's options (shared for all files).
@@ -1385,19 +1399,26 @@ Masking in lists: show found values partially masked ("DE89 •••• ••�
 
 ### 21.27 Workflows · `account_tree` · Pro
 
+- **Description:** Chain tools into steps you can run again with one tap. / Verkette Werkzeuge zu Abläufen, die du mit einem Tipp wiederholst.
 - **List (Me → Workflows):** cards with name, step icons in a row connected by arrows, "Run" button; templates section: "Scan → Text → Compress", "Merge → Page numbers → Password".
 - **Builder:** top bar "New workflow" + Save; name field; vertical list of step cards (tool icon, tool name, one-line option summary "Recommended · under 2 MB"), connected by a 2 dp line; drag to reorder; tap to edit options (opens that tool's options in a sheet); "Add step" dashed card; validation message if a step can't follow the previous ("Remove password can't run after Add password").
 - **Run:** pick files → progress per step ("Step 2 of 3 · Compress") → result of the last step.
 
 ### 21.28 Summarize · `summarize` · Pro
 
+- **Description:** Get a short summary of a PDF, made on your phone. / Lass dir eine PDF kurz zusammenfassen, direkt auf deinem Handy.
+
 Opens the file picker (if needed) → V1 with the AI panel on the Summary tab (section 22).
 
 ### 21.29 Ask this PDF · `forum` · Pro
 
+- **Description:** Ask questions about a PDF and get answers with the page they come from. / Stell Fragen zu einer PDF und bekomme Antworten mit der Seite, aus der sie stammen.
+
 Same, Ask tab.
 
 ### 21.30 Translate PDF · `translate` · Pro
+
+- **Description:** Translate a PDF on your phone, without uploading it. / Übersetze eine PDF auf deinem Handy, ohne sie hochzuladen.
 
 Same, Translate tab.
 

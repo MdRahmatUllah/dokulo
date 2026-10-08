@@ -1,0 +1,7 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Two pages in a scan frame"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<rect x="34" y="26" width="40" height="54" rx="3" fill="#FFFFFF" transform="rotate(-8 54 53)"></rect>
+<rect x="44" y="34" width="40" height="54" rx="3" fill="#FFFFFF"></rect>
+<path d="M51 46h22M51 54h26M51 62h20M51 70h14"></path>
+<path d="M36 26v-8h8M92 26v-8h-8M36 96v8h8M92 96v8h-8" stroke="#2251E6" stroke-width="2.5"></path>
+</g></svg>

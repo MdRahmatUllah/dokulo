@@ -250,6 +250,13 @@ a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
 
+Everything about a tool comes from **`ToolCatalogue.of(id)`**
+(`lib/tools/tool_catalogue.dart`, DK-0049): its icon (from `DkIcons.tools`),
+its fixed EN/DE name, its one-line description (UI spec §21), its tier and its
+Tools-tab section. The grid, the T2 header, the X1 picker, search, About this
+tool and the notifications all read it, so they never disagree. A new tool is
+a new entry there, an icon in `DkIcons.tools` and two ARB strings each.
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
@@ -257,6 +264,30 @@ cross-fade (`crossFade: true`: fade instead of moving, scaling or sliding).
 Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
 context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
 `captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
+
+Numbers the user compares as they change (sizes, page counts, times,
+percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
+(DK-0036). Surfaces take `t.surfaceAt(DkLevel.raised, radius: …)`, which is
+shadows in light and a lighter surface plus an outline in dark. Borders are
+`t.divider`, `t.inputRest/Focused/Error` and `t.selectionRing`, and the grid
+is `DkGrid.forWidth(width)` (`theme/dk_layout.dart`, DK-0038).
+
+**Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
+unless Settings → Appearance overrides it (`appThemeModeProvider`,
+`lib/providers/theme_providers.dart`); `MaterialApp` watches it, so a change
+applies to every screen at once. `dokuloTheme` also maps the tokens onto
+Material's `ColorScheme`, so stock Material widgets match. The dark-mode
+rules, for every screen and component:
+
+- Golden tests in both themes for every screen state.
+- Elevation in Dark is `surfaceRaised` plus an outline (`elevation.raised` has
+  no shadow there).
+- PDF pages stay white; only the viewer's night mode inverts them. Thumbnails
+  keep a 1 dp `color.outline` and wrap the page image in
+  `ColorFiltered(colorFilter: t.thumbnailFilter)` (92 % brightness in Dark).
+- `DkIllustration` and the camera chrome need nothing: the illustrations
+  recolour from the tokens, and the camera tokens are dark in both themes.
+- Toasts use `inverseSurface` / `onInverseSurface` / `inversePrimary`.
 
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed
