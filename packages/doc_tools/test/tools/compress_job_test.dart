@@ -103,6 +103,11 @@ void main() {
       final json = job.encode(input([scan], preset: CompressPreset.strong));
       expect(job.encode(job.decode(json)), json);
       expect(job.inputFiles(job.decode(json)), [scan]);
+      expect(
+        job.encode(input([scan], password: 'geheim')),
+        isNot(contains('password')),
+        reason: 'never stored in the jobs table',
+      );
     },
   );
 
