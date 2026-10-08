@@ -57,6 +57,9 @@ class CompressResult {
   });
 
   final int bytesBefore;
+
+  /// Never more than [bytesBefore]; equal when the input was kept as it is
+  /// (the "already small" edge state, UI spec §21.12).
   final int bytesAfter;
 
   /// Images re-encoded in place; pages rasterised by the fallback aren't
@@ -76,6 +79,11 @@ class CompressResult {
 /// the page looks the same; scan pages whose images can't be re-encoded that
 /// way are rendered whole ([RasterFallback], their OCR text kept); then qpdf
 /// compresses the structure. A size target goes through [searchSizeTarget].
+///
+/// An image drawn on several pages is encoded once, and replaced only when
+/// its copies (PDFium gives each image object its own) are smaller than the
+/// one shared original. The output is never bigger than the input: when
+/// nothing paid off it is the structure pass alone, or the input (DK-1068).
 ///
 /// Call it from a `Lane.pdfium` job: PDFium runs on pdfrx's worker, the
 /// image work and qpdf on the [pool]'s workers, never on the calling
@@ -112,7 +120,8 @@ class PdfCompress {
       final target = options.targetBytes;
       if (target == null) {
         final made = await pass(options.preset.level);
-        return await _finish(made, before, output, targetMet: true);
+        final kept = await _noBigger(made, input, before, options, password);
+        return await _finish(kept, before, output, targetMet: true);
       }
       // ponytail: each try is a full pass; sample a few pages first if the
       // device timings (DK-1063) show it's slow.
@@ -128,15 +137,48 @@ class PdfCompress {
             if (dpi <= options.preset.level.dpi) dpi,
         ],
       );
-      return await _finish(
+      final kept = await _noBigger(
         passes[search.level]!,
+        input,
+        before,
+        options,
+        password,
+      );
+      return await _finish(
+        kept,
         before,
         output,
-        targetMet: search.fits,
+        targetMet: kept.bytes <= target,
       );
     } finally {
       await work.delete(recursive: true);
     }
+  }
+
+  /// [made], or when it isn't smaller than the input: qpdf's structure pass
+  /// on the input (it drops the metadata if asked), or the input itself.
+  Future<_Pass> _noBigger(
+    _Pass made,
+    String input,
+    int before,
+    CompressOptions options,
+    String? password,
+  ) async {
+    if (made.bytes < before) return made;
+    final lean = '${made.path}.structure.pdf';
+    await _job(
+      pool.run(Lane.qpdf, _structure, (
+        input,
+        lean,
+        options.removeMetadata,
+        password,
+      )).result,
+    );
+    final bytes = await File(lean).length();
+    if (bytes < before || options.removeMetadata) {
+      return _Pass(lean, bytes, 0, made.level);
+    }
+    return _Pass(input, before, 0, made.level);
   }
 
   Future<CompressResult> _finish(
@@ -184,27 +226,48 @@ class PdfCompress {
     final rasterise = <int>[];
     var imaged = '$output.images.pdf';
     try {
+      // How often each image is drawn, and each image's JPEG once made
+      // (null: keep the original).
+      final uses = await _call(
+        () => compute(_imageUsesOnWorker, (handle, pages)),
+      );
+      final encoded = <String, Uint8List?>{};
       for (var page = 0; page < pages; page++) {
         if (isCancelled?.call() ?? false) {
           throw const DocError(DocErrorKind.cancelled);
         }
-        final (raws, scanLeftOver) = await _call(
-          () => compute(_extractOnWorker, (handle, page, level.dpi)),
+        final (raws, seen, scanLeftOver) = await _call(
+          () => compute(_extractOnWorker, (
+            handle,
+            page,
+            level.dpi,
+            encoded.keys.toSet(),
+          )),
         );
         if (scanLeftOver) rasterise.add(page);
         if (raws.isNotEmpty) {
           final jpegs = await _job(
             pool.run(Lane.opencv, _encode, (
               raws,
+              {for (final raw in raws) raw.key: uses[raw.key] ?? 1},
               level.quality,
               options.greyscale,
             )).result,
           );
-          final keep = [for (final j in jpegs) ?j];
-          if (keep.isNotEmpty) {
-            await _call(() => compute(_replaceOnWorker, (handle, page, keep)));
-            images += keep.length;
+          for (var i = 0; i < raws.length; i++) {
+            encoded[raws[i].key] = jpegs[i];
           }
+        }
+        final keep = [
+          for (final (index, key) in [
+            for (final raw in raws) (raw.index, raw.key),
+            ...seen,
+          ])
+            if (encoded[key] case final jpeg?) (index, jpeg),
+        ];
+        if (keep.isNotEmpty) {
+          await _call(() => compute(_replaceOnWorker, (handle, page, keep)));
+          images += keep.length;
         }
         onPage?.call(page + 1, pages);
       }
@@ -240,6 +303,7 @@ class PdfCompress {
         imaged,
         output,
         options.removeMetadata,
+        null, // PDFium saved it without encryption
       )).result,
     );
     return _Pass(output, await File(output).length(), images, level);
@@ -290,6 +354,7 @@ class _Raw {
     this.targetWidth,
     this.targetHeight,
     this.encodedSize,
+    this.key,
   );
 
   /// Its index among the page's objects.
@@ -303,17 +368,20 @@ class _Raw {
 
   /// The size of the image's stream in the file now.
   final int encodedSize;
+
+  /// The same for every object that draws this image ([_imageKey]).
+  final String key;
 }
 
 // --- on a pool worker -------------------------------------------------------
 
-/// Resizes and encodes each image; null where the JPEG isn't at least 10 %
-/// smaller than what the file holds now.
-List<(int, Uint8List)?> _encode(
-  (List<_Raw>, int, bool) job,
+/// Resizes and encodes each image; null where its JPEGs, one per use, aren't
+/// at least 10 % smaller than what the file holds now.
+List<Uint8List?> _encode(
+  (List<_Raw>, Map<String, int>, int, bool) job,
   JobContext context,
 ) {
-  final (raws, quality, makeGrey) = job;
+  final (raws, uses, quality, makeGrey) = job;
   return [
     for (final raw in raws)
       () {
@@ -340,7 +408,9 @@ List<(int, Uint8List)?> _encode(
         }
         if (makeGrey && !grey) image = img.grayscale(image);
         final jpeg = img.encodeJpg(image, quality: quality);
-        return jpeg.length < raw.encodedSize * 0.9 ? (raw.index, jpeg) : null;
+        return jpeg.length * uses[raw.key]! < raw.encodedSize * 0.9
+            ? jpeg
+            : null;
       }(),
   ];
 }
@@ -369,11 +439,12 @@ Uint8List _encodeRgba((Uint8List, int, int, int) job, JobContext context) {
 }
 
 /// Compresses the structure; drops the metadata if asked.
-void _structure((String, String, bool) job, JobContext context) {
-  final (input, output, removeMetadata) = job;
+void _structure((String, String, bool, String?) job, JobContext context) {
+  final (input, output, removeMetadata, password) = job;
   QpdfService.run(
     () => Qpdf.run({
       'inputFile': input,
+      'password': ?password,
       'outputFile': output,
       'objectStreams': 'generate',
       'compressStreams': 'y',
@@ -438,13 +509,53 @@ T _withPage<T>(
   }
 }
 
-/// The page's images worth recompressing, with their pixels at [dpi] at most,
-/// and whether the page is a scan with an image left over that only the raster
-/// fallback can shrink.
-(List<_Raw>, bool) _extractOnWorker((int, int, int) message) {
-  final (handle, pageIndex, dpi) = message;
+/// An image's identity: its stream's length and FNV-1a hash, the same in
+/// every object that draws it.
+String _imageKey(fpdf.PDFium pdfium, fpdf.FPDF_PAGEOBJECT obj, int size) {
+  final data = malloc<Uint8>(size);
+  try {
+    pdfium.FPDFImageObj_GetImageDataRaw(obj, data.cast(), size);
+    var hash = 0xcbf29ce484222325;
+    for (final byte in data.asTypedList(size)) {
+      hash = (hash ^ byte) * 0x100000001b3;
+    }
+    return '$size:$hash';
+  } finally {
+    malloc.free(data);
+  }
+}
+
+/// How many image objects draw each image, in the whole document.
+Map<String, int> _imageUsesOnWorker((int, int) message) {
+  final (handle, pages) = message;
+  final uses = <String, int>{};
+  for (var p = 0; p < pages; p++) {
+    _withPage(handle, p, (pdfium, doc, page) {
+      for (var i = 0; i < pdfium.FPDFPage_CountObjects(page); i++) {
+        final obj = pdfium.FPDFPage_GetObject(page, i);
+        if (pdfium.FPDFPageObj_GetType(obj) != fpdf.FPDF_PAGEOBJ_IMAGE) {
+          continue;
+        }
+        final size = pdfium.FPDFImageObj_GetImageDataRaw(obj, nullptr, 0);
+        final key = _imageKey(pdfium, obj, size);
+        uses[key] = (uses[key] ?? 0) + 1;
+      }
+    });
+  }
+  return uses;
+}
+
+/// The page's images worth recompressing, with their pixels at [dpi] at most;
+/// the (index, key) of those in [decided] (encoded on an earlier page, not
+/// decoded again); and whether the page is a scan with an image left over that
+/// only the raster fallback can shrink.
+(List<_Raw>, List<(int, String)>, bool) _extractOnWorker(
+  (int, int, int, Set<String>) message,
+) {
+  final (handle, pageIndex, dpi, decided) = message;
   return _withPage(handle, pageIndex, (pdfium, doc, page) {
     final found = <_Raw>[];
+    final seen = <(int, String)>[];
     final count = pdfium.FPDFPage_CountObjects(page);
     // Visible text: an OCR layer (render mode 3, invisible) doesn't count.
     var hasText = false;
@@ -480,6 +591,11 @@ T _withPage<T>(
           nullptr,
           0,
         );
+        final key = _imageKey(pdfium, obj, encodedSize);
+        if (decided.contains(key)) {
+          seen.add((i, key));
+          continue;
+        }
         pdfium.FPDFPageObj_GetBounds(obj, l, b, r, t);
         final widthPt = r.value - l.value;
 
@@ -522,13 +638,13 @@ T _withPage<T>(
           // At most [dpi] where the image sits on the page (points are 1/72 in).
           final tw = (widthPt * dpi / 72).round().clamp(1, w);
           final th = (h * tw / w).round().clamp(1, h);
-          found.add(_Raw(i, w, h, channels, pixels, tw, th, encodedSize));
+          found.add(_Raw(i, w, h, channels, pixels, tw, th, encodedSize, key));
         } finally {
           pdfium.FPDFBitmap_Destroy(bitmap);
         }
       }
     });
-    return (found, leftOver);
+    return (found, seen, leftOver);
   });
 }
 
