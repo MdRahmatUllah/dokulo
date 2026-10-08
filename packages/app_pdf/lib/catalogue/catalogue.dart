@@ -7,6 +7,7 @@ import '../routes/routes.dart';
 import 'button_states.dart';
 import 'choice_row_states.dart';
 import 'icon_button_states.dart';
+import 'logo_states.dart';
 import 'next_page_chip_states.dart';
 import 'option_row_states.dart';
 import 'overlay_states.dart';
@@ -17,6 +18,7 @@ import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'range_search_states.dart';
 import 'scan_button_states.dart';
+import 'badge_pill_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'slider_stepper_states.dart';
@@ -43,6 +45,7 @@ class CatalogueEntry {
 }
 
 const catalogue = [
+  CatalogueEntry('DkLogo', '3 Brand', LogoStates()),
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
@@ -69,6 +72,11 @@ const catalogue = [
     'DkNextChip, DkPageChip',
     '11.3 Badges, chips, indicators',
     DkNextPageChipGallery(),
+  ),
+  CatalogueEntry(
+    'DkCountBadge, DkHintPill',
+    '11.3 Badges, chips, indicators',
+    DkBadgePillGallery(),
   ),
   CatalogueEntry('DkActionBar', '11.6 Bars', ActionBarStates()),
   CatalogueEntry(
@@ -145,6 +153,7 @@ const catalogue = [
     '11.6 Bars',
     BottomBarStates(),
   ),
+  CatalogueEntry('DkMiniJobBar', '11.6 Bars', MiniJobBarStates()),
 ];
 
 /// The list of components; tap one to see its states.
