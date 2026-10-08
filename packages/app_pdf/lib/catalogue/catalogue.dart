@@ -15,6 +15,7 @@ import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
+import 'signature_pad_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'switch_segmented_states.dart';
@@ -110,6 +111,7 @@ const catalogue = [
     '11.4 Inputs and controls',
     DkSwitchSegmentedGallery(),
   ),
+  CatalogueEntry('DkSignaturePad', '11.8 Editor and AI', SignaturePadStates()),
 ];
 
 /// The list of components; tap one to see its states.

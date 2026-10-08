@@ -154,5 +154,11 @@
   "sign_pad_draw": "Zeichnen",
   "sign_pad_type": "Tippen",
   "sign_pad_image": "Bild",
-  "sign_pad_clear": "Löschen"
+  "sign_pad_clear": "Löschen",
+  "sign_pad_ink": "Tinte",
+  "sign_pad_name": "Dein Name",
+  "sign_pad_style": "Schriftstil {n}",
+  "sign_pad_image_body": "Fotografiere deine Unterschrift auf weißem Papier oder wähle ein Foto. Dokulo schneidet sie zu und entfernt den Hintergrund.",
+  "sign_pad_take_photo": "Foto aufnehmen",
+  "sign_pad_choose_photo": "Foto auswählen"
 }

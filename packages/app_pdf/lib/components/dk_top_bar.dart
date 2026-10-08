@@ -41,21 +41,24 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
   }) : onCancel = null,
        onDone = null,
        cancelLabel = null,
-       doneLabel = null;
+       doneLabel = null,
+       _editing = false;
 
   /// Editing (V2): Cancel (tertiary) on the left, the title centred, Done
-  /// (primary text, bold) on the right.
+  /// (primary text, bold) on the right. A null [onDone] shows Done
+  /// disabled: nothing to save yet.
   const DkTopBar.editing({
     super.key,
     required this.title,
     required VoidCallback this.onCancel,
-    required VoidCallback this.onDone,
+    required this.onDone,
     this.cancelLabel,
     this.doneLabel,
   }) : leading = DkTopBarLeading.none,
        onLeading = null,
        actions = const [],
-       onOverflow = null;
+       onOverflow = null,
+       _editing = true;
 
   final String? title;
   final DkTopBarLeading leading;
@@ -70,6 +73,7 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
   final void Function(BuildContext anchor)? onOverflow;
 
   final VoidCallback? onCancel, onDone;
+  final bool _editing;
 
   /// Cancel and Done, when a screen says something more specific.
   final String? cancelLabel, doneLabel;
@@ -99,7 +103,7 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l10n = MaterialLocalizations.of(context);
-    final editing = widget.onDone != null;
+    final editing = widget._editing;
     final centred = _isIos(context) || editing;
     final title = widget.title == null
         ? null
@@ -137,7 +141,7 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
     final Widget trailing = editing
         ? _TextAction(
             label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
-            onTap: widget.onDone!,
+            onTap: widget.onDone,
             bold: true,
           )
         : _Actions(actions: widget.actions, onOverflow: widget.onOverflow);
@@ -250,7 +254,9 @@ class _TextAction extends StatelessWidget {
   });
 
   final String label;
-  final VoidCallback onTap;
+
+  /// Null: disabled.
+  final VoidCallback? onTap;
   final bool bold;
 
   @override
@@ -258,6 +264,7 @@ class _TextAction extends StatelessWidget {
     final t = context.tokens;
     return Semantics(
       button: true,
+      enabled: onTap != null,
       child: DkTappable(
         onTap: onTap,
         radius: t.radius.s,
@@ -280,7 +287,7 @@ class _TextAction extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: t.text.labelL.copyWith(
-                color: t.color.primary,
+                color: onTap == null ? t.color.textDisabled : t.color.primary,
                 fontWeight: bold ? FontWeight.w700 : null,
               ),
             ),

@@ -366,4 +366,33 @@ void main() {
     expect(tester.takeException(), isNull);
     expect(tester.getCenter(find.text('Files').last).dx, closeTo(393 / 2, 1));
   });
+
+  testWidgets('editing with nothing to save: Done is off', (tester) async {
+    phone(tester);
+    final handle = tester.ensureSemantics();
+    var cancelled = 0;
+    await tester.pumpWidget(
+      app(
+        Scaffold(
+          appBar: DkTopBar.editing(
+            title: 'Edit',
+            onCancel: () => cancelled++,
+            onDone: null,
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('Done'));
+    expect(
+      tester.widget<Text>(find.text('Done')).style!.color,
+      DkTokens.light.color.textDisabled,
+    );
+    expect(
+      tester.getSemantics(find.text('Done')),
+      isSemantics(isButton: true, hasEnabledState: true, isEnabled: false),
+    );
+    await tester.tap(find.text('Cancel'));
+    expect(cancelled, 1);
+    handle.dispose();
+  });
 }

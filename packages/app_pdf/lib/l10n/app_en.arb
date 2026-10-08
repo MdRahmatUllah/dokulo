@@ -693,5 +693,34 @@
   "sign_pad_clear": "Clear",
   "@sign_pad_clear": {
     "description": "DkSignaturePad: clears the drawing."
+  },
+  "sign_pad_ink": "Ink",
+  "@sign_pad_ink": {
+    "description": "DkSignaturePad: the label before the ink swatches (Black, Blue ink)."
+  },
+  "sign_pad_name": "Your name",
+  "@sign_pad_name": {
+    "description": "DkSignaturePad, Type tab: the text field's label."
+  },
+  "sign_pad_style": "Handwriting style {n}",
+  "@sign_pad_style": {
+    "description": "DkSignaturePad, Type tab, screen readers: one of the three font previews.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sign_pad_image_body": "Take or choose a photo of your signature on white paper. Dokulo crops it and removes the background.",
+  "@sign_pad_image_body": {
+    "description": "DkSignaturePad, Image tab."
+  },
+  "sign_pad_take_photo": "Take photo",
+  "@sign_pad_take_photo": {
+    "description": "DkSignaturePad, Image tab: opens the camera."
+  },
+  "sign_pad_choose_photo": "Choose photo",
+  "@sign_pad_choose_photo": {
+    "description": "DkSignaturePad, Image tab: opens the photo library."
   }
 }
