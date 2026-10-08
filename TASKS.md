@@ -83,7 +83,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0059 | Ph2 | B | P1 | XS | Ship ILL-10 illustration (Camera permission denied) as light and dark vector assets | done | agent-1 | DK-0024 | #1126 |
 | DK-0060 | Ph3 | B | P1 | XS | Ship ILL-11 illustration (AI model needed) as light and dark vector assets | review | agent-1 | DK-0024 | #1131 |
 | DK-0061 | Ph3 | B | P1 | XS | Ship ILL-12 illustration (AI first-use notice) as light and dark vector assets | review | agent-1 | DK-0024 | #1131 |
-| DK-0062 | Ph3 | B | P1 | XS | Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0062 | Ph3 | B | P1 | XS | Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets | review | agent-1 | DK-0024 | #1131 |
 | DK-0063 | Ph3 | B | P1 | XS | Ship ILL-14 illustration (Damaged file) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0064 | Ph3 | B | P1 | XS | Ship ILL-15 illustration (No signatures yet) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0065 | Ph3 | B | P1 | XS | Ship ILL-16 illustration (No workflows yet) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2640,3 +2640,7 @@ PR #1131 for DK-0060 (Ship ILL-11 illustration (AI model needed) as light and da
 ### H-382 · 2026-10-08 02:54 · agent-1 → all · review-request · DK-0061
 
 PR #1131 for DK-0061 (Ship ILL-12 illustration (AI first-use notice) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-383 · 2026-10-08 02:54 · agent-1 → all · review-request · DK-0062
+
+PR #1131 for DK-0062 (Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
