@@ -127,8 +127,8 @@ restrictions, attribution): the intake checklist in [ai-models.md](ai-models.md)
 | Font | Licence | Ships | Obligations |
 | --- | --- | --- | --- |
 | Material Symbols Rounded (from material_symbols_icons 4.2960.0's archive, `tools/fetch_icon_font.py`; tree-shaken to the used glyphs) | Apache-2.0 | Yes | Notice |
-| Caveat, Dancing Script (signature styles; google/fonts at 5e8a3ba, `tools/fetch_signature_fonts.py`, unmodified) | SIL OFL 1.1 (confirmed from each family's OFL.txt; Dancing Script reserves its name, so it is never modified) | Yes | OFL text in the licence screen; never sell the fonts on their own |
-| Homemade Apple (signature style; google/fonts `apache/homemadeapple` at 5e8a3ba, unmodified) | Apache-2.0 (confirmed from its METADATA.pb; the spec had said OFL) | Yes | Notice in the licence screen |
+| Caveat, Dancing Script (signature styles; google/fonts at 5e8a3ba, `tools/fetch_signature_fonts.py`, unmodified) | SIL OFL 1.1 (confirmed from each family's OFL.txt; Dancing Script reserves its name, so it is never modified) | Yes | OFL text in the licence screen (`Caveat-OFL.txt`, `DancingScript-OFL.txt`, fetched with the fonts); never sell the fonts on their own |
+| Homemade Apple (signature style; google/fonts `apache/homemadeapple` at 5e8a3ba, unmodified) | Apache-2.0 (confirmed from its METADATA.pb; the spec had said OFL) | Yes | Notice in the licence screen (`HomemadeApple-LICENSE.txt`, fetched with the font) |
 
 ## Excluded (the scan fails on these names)
 

@@ -28,10 +28,11 @@ def test_fetch(tmp_path: Path, monkeypatch) -> None:
 
     (tmp_path / f.FOLDER / "a.ttf").write_bytes(b"other")
     assert f.fetch(tmp_path, lambda url: b"tampered") == [
-        "a.ttf: size or SHA-256 doesn't match the pinned font"]
+        "a.ttf: size or SHA-256 doesn't match the pinned file"]
 
 
 def test_pinned_to_a_commit() -> None:
     assert len(f.COMMIT) == 40 and f.COMMIT in f.BASE
     assert {name for _, name, _, _ in f.FONTS} == {
-        "Caveat.ttf", "DancingScript.ttf", "HomemadeApple.ttf"}
+        "Caveat.ttf", "DancingScript.ttf", "HomemadeApple.ttf",
+        "Caveat-OFL.txt", "DancingScript-OFL.txt", "HomemadeApple-LICENSE.txt"}
