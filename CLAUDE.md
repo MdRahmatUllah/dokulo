@@ -94,6 +94,7 @@ It takes about 2–3 minutes (build_runner and analyze are most of it). It runs 
 
 ```bash
 python tools/fetch_ocr_models.py                                 # the bundled PP-OCRv5 models, hash-checked (fetched once)
+python tools/fetch_icon_font.py                                  # Material Symbols Rounded, hash-checked (fetched once)
 flutter pub get                                                  # one pub workspace: resolves every package, regenerates l10n
 (cd packages/<p> && dart run build_runner build -d)              # each package that uses build_runner (*.g.dart are not committed)
 flutter analyze --fatal-infos                                    # the whole workspace

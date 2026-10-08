@@ -240,6 +240,15 @@ numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
 raw colour in `lib/screens` or `lib/components`. A value that isn't a token
 is a gap: add the token first.
 
+Icons are `DkIcon(DkIcons.…)` (`components/dk_icon.dart`, DK-0048): Material
+Symbols Rounded at the spec's five sizes (`DkIconSize.s` 16 … `xxl` 32),
+outlined, `filled: true` only for the selected tab and toggled states.
+`DkIcons` names every icon by purpose (`DkIcons.tool('compress')`,
+`DkIcons.back(context)` switches with the platform), so a screen never names
+a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
+codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
+a const `IconData` (the release build's tree-shaker needs that).
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
@@ -258,6 +267,23 @@ Motion variant built in:
 | Success tick (DK-0041) | `DkSuccessTick()` and `DkCountUp(from:, to:, format:)` on result cards |
 | Tile reorder (DK-0042) | `DkLift(lifted:)` on the picked tile, `DkSlot(rect:)` for every other tile in the `Stack` |
 | Page drop (DK-0043) | `DkInsertionLine(length:)` where the page will land; `DkSlot` settles it |
+
+**Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
+unless Settings → Appearance overrides it (`appThemeModeProvider`,
+`lib/providers/theme_providers.dart`); `MaterialApp` watches it, so a change
+applies to every screen at once. `dokuloTheme` also maps the tokens onto
+Material's `ColorScheme`, so stock Material widgets match. The dark-mode
+rules, for every screen and component:
+
+- Golden tests in both themes for every screen state.
+- Elevation in Dark is `surfaceRaised` plus an outline (`elevation.raised` has
+  no shadow there).
+- PDF pages stay white; only the viewer's night mode inverts them. Thumbnails
+  keep a 1 dp `color.outline` and wrap the page image in
+  `ColorFiltered(colorFilter: t.thumbnailFilter)` (92 % brightness in Dark).
+- `DkIllustration` and the camera chrome need nothing: the illustrations
+  recolour from the tokens, and the camera tokens are dark in both themes.
+- Toasts use `inverseSurface` / `onInverseSurface` / `inversePrimary`.
 
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed

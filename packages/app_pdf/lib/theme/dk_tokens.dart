@@ -23,6 +23,7 @@ class DkTokens extends ThemeExtension<DkTokens> {
     required this.color,
     required this.markup,
     required this.compare,
+    required this.state,
     required this.text,
     required this.space,
     required this.radius,
@@ -35,6 +36,7 @@ class DkTokens extends ThemeExtension<DkTokens> {
     color: DkColors.light,
     markup: const DkMarkup(),
     compare: DkCompare.light,
+    state: DkStates.of(DkColors.light),
     text: DkType.of(DkColors.light.textPrimary),
     space: const DkSpace(),
     radius: const DkRadius(),
@@ -47,6 +49,7 @@ class DkTokens extends ThemeExtension<DkTokens> {
     color: DkColors.dark,
     markup: const DkMarkup(),
     compare: DkCompare.dark,
+    state: DkStates.of(DkColors.dark),
     text: DkType.of(DkColors.dark.textPrimary),
     space: const DkSpace(),
     radius: const DkRadius(),
@@ -58,6 +61,7 @@ class DkTokens extends ThemeExtension<DkTokens> {
   final DkColors color;
   final DkMarkup markup;
   final DkCompare compare;
+  final DkStates state;
 
   /// Text styles. (Not `type`: ThemeExtension.type is the key Theme looks it up by.)
   final DkType text;
@@ -66,12 +70,27 @@ class DkTokens extends ThemeExtension<DkTokens> {
   final DkElevation elevation;
   final DkMotion motion;
 
+  /// Page thumbnails stay white with a 1 dp `color.outline`; in Dark they are
+  /// dimmed to 92 % so they don't glare (UI spec §29.4; DK-0047). Wrap the
+  /// thumbnail's image in `ColorFiltered(colorFilter: t.thumbnailFilter)`.
+  /// The viewer shows pages unfiltered (only its night mode inverts them).
+  ColorFilter get thumbnailFilter {
+    final b = brightness == Brightness.dark ? 0.92 : 1.0;
+    return ColorFilter.matrix([
+      b, 0, 0, 0, 0, //
+      0, b, 0, 0, 0, //
+      0, 0, b, 0, 0, //
+      0, 0, 0, 1, 0, //
+    ]);
+  }
+
   @override
   DkTokens copyWith({
     Brightness? brightness,
     DkColors? color,
     DkMarkup? markup,
     DkCompare? compare,
+    DkStates? state,
     DkType? text,
     DkSpace? space,
     DkRadius? radius,
@@ -82,6 +101,7 @@ class DkTokens extends ThemeExtension<DkTokens> {
     color: color ?? this.color,
     markup: markup ?? this.markup,
     compare: compare ?? this.compare,
+    state: state ?? this.state,
     text: text ?? this.text,
     space: space ?? this.space,
     radius: radius ?? this.radius,
@@ -99,6 +119,7 @@ class DkTokens extends ThemeExtension<DkTokens> {
       color: color.lerp(other.color, t),
       markup: markup,
       compare: compare.lerp(other.compare, t),
+      state: state.lerp(other.state, t),
       text: text.lerp(other.text, t),
       space: space,
       radius: radius,
@@ -148,6 +169,9 @@ class DkColors {
     required this.onCamera,
     required this.quadFill,
     required this.quadStroke,
+    required this.inverseSurface,
+    required this.onInverseSurface,
+    required this.inversePrimary,
     required this.pageWhite,
     required this.redactBox,
   });
@@ -185,6 +209,9 @@ class DkColors {
     onCamera: Color(0xFFFFFFFF),
     quadFill: Color(0x332251E6),
     quadStroke: Color(0xFF2251E6),
+    inverseSurface: Color(0xFF14171C),
+    onInverseSurface: Color(0xFFFFFFFF),
+    inversePrimary: Color(0xFF8AA8FF),
     pageWhite: Color(0xFFFFFFFF),
     redactBox: Color(0xFF000000),
   );
@@ -220,6 +247,9 @@ class DkColors {
     onCamera: Color(0xFFFFFFFF),
     quadFill: Color(0x338AA8FF),
     quadStroke: Color(0xFF8AA8FF),
+    inverseSurface: Color(0xFFEEF1F6),
+    onInverseSurface: Color(0xFF14171C),
+    inversePrimary: Color(0xFF2251E6),
     pageWhite: Color(0xFFFFFFFF),
     redactBox: Color(0xFF000000),
   );
@@ -320,6 +350,16 @@ class DkColors {
   /// The detected document edge, 2 dp.
   final Color quadStroke;
 
+  // Inverse, for toasts (DK-0035; from the design export, added to UI spec §4.1).
+  /// The toast's background.
+  final Color inverseSurface;
+
+  /// Text and icons on [inverseSurface].
+  final Color onInverseSurface;
+
+  /// The toast's action ("Undo") on [inverseSurface].
+  final Color inversePrimary;
+
   // Document (DK-0031).
   /// PDF page background: pages stay white in dark mode unless the viewer's night mode is on.
   final Color pageWhite;
@@ -360,6 +400,9 @@ class DkColors {
       onCamera: c(onCamera, o.onCamera),
       quadFill: c(quadFill, o.quadFill),
       quadStroke: c(quadStroke, o.quadStroke),
+      inverseSurface: c(inverseSurface, o.inverseSurface),
+      onInverseSurface: c(onInverseSurface, o.onInverseSurface),
+      inversePrimary: c(inversePrimary, o.inversePrimary),
       pageWhite: c(pageWhite, o.pageWhite),
       redactBox: c(redactBox, o.redactBox),
     );
@@ -441,6 +484,43 @@ class DkCompare {
       changed: h(changed, o.changed),
     );
   }
+}
+
+/// Interaction states on any surface (UI spec §4.4; DK-0034).
+@immutable
+class DkStates {
+  const DkStates({
+    required this.hover,
+    required this.pressed,
+    required this.selected,
+  });
+
+  factory DkStates.of(DkColors c) => DkStates(
+    hover: c.textPrimary.withValues(alpha: 0.04),
+    pressed: c.textPrimary.withValues(alpha: 0.08),
+    selected: c.primaryContainer,
+  );
+
+  /// Overlay while a pointer hovers (tablets): [DkColors.textPrimary] at 4 %.
+  final Color hover;
+
+  /// Overlay while pressed: [DkColors.textPrimary] at 8 %.
+  final Color pressed;
+
+  /// The fill of a selected list row: [DkColors.primaryContainer].
+  final Color selected;
+
+  /// A dragged item scales up 2 % and takes `elevation.floating`.
+  final double draggedScale = 1.02;
+
+  /// A disabled element is drawn at 40 % opacity as a whole.
+  final double disabledOpacity = 0.4;
+
+  DkStates lerp(DkStates o, double t) => DkStates(
+    hover: Color.lerp(hover, o.hover, t)!,
+    pressed: Color.lerp(pressed, o.pressed, t)!,
+    selected: Color.lerp(selected, o.selected, t)!,
+  );
 }
 
 /// Text styles (UI spec §5): system fonts (SF Pro / Roboto), the spec's size,

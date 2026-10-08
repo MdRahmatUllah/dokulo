@@ -1,5 +1,7 @@
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
+import 'package:app_pdf/theme/app_theme.dart';
+import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +12,7 @@ Future<GoRouter> pumpAt(WidgetTester tester, String location) async {
   await tester.pumpWidget(
     MaterialApp.router(
       routerConfig: router,
+      theme: dokuloTheme(DkTokens.light), // components read the tokens
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     ),
