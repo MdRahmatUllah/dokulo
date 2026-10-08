@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../components/dk_action_sheet.dart';
+import '../components/dk_icon.dart';
+import '../components/dk_page_thumb.dart';
 import '../components/dk_sheet.dart';
 import '../theme/dk_tokens.dart';
+import 'page_states.dart';
 
 /// Sample content: a few lines of body text.
 class _Lines extends StatelessWidget {
@@ -96,4 +100,69 @@ class SheetStates extends StatelessWidget {
   }
 
   static void _none() {}
+}
+
+/// DkActionSheet (DK-0184): a file's actions, as F1's action sheet in the
+/// design export: tools, file actions, and Delete last in danger.
+class ActionSheetStates extends StatelessWidget {
+  const ActionSheetStates({super.key});
+
+  static void _none() {}
+
+  static final groups = [
+    [
+      DkAction(
+        icon: DkIcons.tool('compress'),
+        label: 'Compress PDF',
+        onTap: _none,
+        tool: true,
+      ),
+      DkAction(
+        icon: DkIcons.tool('sign'),
+        label: 'Sign PDF',
+        onTap: _none,
+        tool: true,
+      ),
+    ],
+    [
+      const DkAction(icon: DkIcons.rename, label: 'Rename', onTap: _none),
+      // Listed early on purpose: the sheet moves it to the end.
+      const DkAction(
+        icon: DkIcons.delete,
+        label: 'Delete',
+        onTap: _none,
+        destructive: true,
+      ),
+      const DkAction(icon: DkIcons.move, label: 'Move', onTap: _none),
+      const DkAction(icon: DkIcons.info, label: 'Info', onTap: _none),
+    ],
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ColoredBox(
+      color: t.color.scrim,
+      child: Padding(
+        padding: EdgeInsets.only(top: t.space.xxl),
+        child: DkSheet(
+          body: DkActionSheet(
+            closeOnTap: false,
+            header: DkActionSheetHeader(
+              thumbnail: const DkPageThumb(
+                pageNumber: 1,
+                pageCount: 12,
+                page: CataloguePage(),
+                showNumber: false,
+                aspectRatio: 40 / 52,
+              ),
+              name: 'Mietvertrag Musterstraße 12.pdf',
+              meta: '2.4 MB · 12 pages · Today 14:32',
+            ),
+            groups: groups,
+          ),
+        ),
+      ),
+    );
+  }
 }

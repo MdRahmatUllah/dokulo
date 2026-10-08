@@ -32,6 +32,11 @@ const catalogue = [
     '11.7 Sheets, dialogs, menus, toasts',
     SheetStates(),
   ),
+  CatalogueEntry(
+    'DkActionSheet',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ActionSheetStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
