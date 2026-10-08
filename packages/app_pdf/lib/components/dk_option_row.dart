@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
+import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_tappable.dart';
@@ -47,7 +48,7 @@ class DkOptionRow extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: t.space.m),
       decoration: BoxDecoration(
-        border: last ? null : Border(bottom: BorderSide(color: c.outline)),
+        border: last ? null : Border(bottom: t.divider),
       ),
       child: controlBelow || control == null
           ? Column(
@@ -106,8 +107,12 @@ class _DkMoreOptionsState extends State<DkMoreOptions> {
           child: DkTappable(
             onTap: () => setState(() => _open = !_open),
             radius: t.radius.s,
-            builder: (context, pressed) => ConstrainedBox(
+            builder: (context, pressed) => Container(
               constraints: const BoxConstraints(minHeight: 48),
+              decoration: BoxDecoration(
+                color: pressed ? t.state.pressed : null,
+                borderRadius: BorderRadius.circular(t.radius.s),
+              ),
               child: Row(
                 children: [
                   Expanded(

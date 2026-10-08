@@ -64,7 +64,8 @@ class DkPositionPicker extends StatelessWidget {
     ];
     // Three columns of 48 dp targets don't fit on a 120 dp page: the
     // targets reach 12 dp past its sides, so the picker is 144 wide. The
-    // circles stay where the page puts them: 4 dp in, 38 dp apart.
+    // circles stay where the page puts them (4 dp in, 38 dp apart), each
+    // kept inside its own target.
     const target = 48.0, ring = 36.0, side = 12.0;
     return SizedBox(
       width: 120 + 2 * side,
@@ -104,12 +105,14 @@ class DkPositionPicker extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       Positioned(
-                        // The circle's centre on the page, in this cell.
+                        // Where the page puts the circle, kept inside its own
+                        // target (the outer columns move 4 dp inwards).
                         left:
-                            side +
-                            t.space.xs +
-                            p.cell.$1 * 38 -
-                            p.cell.$1 * target,
+                            (side +
+                                    t.space.xs +
+                                    p.cell.$1 * 38 -
+                                    p.cell.$1 * target)
+                                .clamp(0, target - ring),
                         top: [
                           t.space.xs,
                           80 - ring / 2 - 56,
