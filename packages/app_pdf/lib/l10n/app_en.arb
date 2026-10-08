@@ -636,6 +636,40 @@
   "@shell_button_scan_hint": {
     "description": "Screen readers: what a long press on the Scan button does."
   },
+  "viewer_page_chip": "p. {n}",
+  "@viewer_page_chip": {
+    "description": "DkPageChip: a page reference in AI answers (UI spec §11.3).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "viewer_page_chip_go": "Go to page {n}",
+  "@viewer_page_chip_go": {
+    "description": "DkPageChip, screen readers: what a tap does.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "status_new": "New",
+  "@status_new": {
+    "description": "DkStatusDot, screen readers: a new file or tool."
+  },
+  "status_unsaved": "Unsaved changes",
+  "@status_unsaved": {
+    "description": "DkStatusDot, screen readers."
+  },
+  "status_running": "Working",
+  "@status_running": {
+    "description": "DkStatusDot, screen readers: a job is running."
+  },
+  "scanner_button_shutter": "Take photo",
+  "@scanner_button_shutter": {
+    "description": "Screen readers: the scanner's shutter button."
+  },
   "viewer_page_pill": "Page {i} of {n}",
   "@viewer_page_pill": {
     "description": "DkPagePill, screen readers (the pill shows \"3 / 12\").",
