@@ -7,6 +7,7 @@ import '../routes/routes.dart';
 import 'button_states.dart';
 import 'choice_row_states.dart';
 import 'icon_button_states.dart';
+import 'logo_states.dart';
 import 'next_page_chip_states.dart';
 import 'option_row_states.dart';
 import 'overlay_states.dart';
@@ -44,6 +45,7 @@ class CatalogueEntry {
 }
 
 const catalogue = [
+  CatalogueEntry('DkLogo', '3 Brand', LogoStates()),
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
@@ -140,6 +142,11 @@ const catalogue = [
     'DkSlider, DkStepper',
     '11.4 Inputs and controls',
     DkSliderStepperGallery(),
+  ),
+  CatalogueEntry(
+    'DkSelectionBar · DkViewerBar · DkCameraTopBar',
+    '11.6 Bars',
+    BottomBarStates(),
   ),
   CatalogueEntry(
     'DkPagePill',
