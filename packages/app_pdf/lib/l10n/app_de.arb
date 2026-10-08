@@ -157,5 +157,11 @@
   "camera_auto": "Auto",
   "camera_auto_capture": "Automatisch auslösen",
   "camera_grid": "Raster",
-  "camera_settings": "Scanner-Einstellungen"
+  "camera_settings": "Scanner-Einstellungen",
+  "markup_copy": "Kopieren",
+  "markup_highlight": "Hervorheben",
+  "markup_underline": "Unterstreichen",
+  "markup_strike": "Durchstreichen",
+  "markup_ask": "KI fragen",
+  "common_redo": "Wiederholen"
 }

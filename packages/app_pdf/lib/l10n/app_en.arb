@@ -705,5 +705,29 @@
   "camera_settings": "Scanner settings",
   "@camera_settings": {
     "description": "DkCameraTopBar: tune, opens the scanning settings."
+  },
+  "markup_copy": "Copy",
+  "@markup_copy": {
+    "description": "DkMarkupBar (UI spec §11.8)."
+  },
+  "markup_highlight": "Highlight",
+  "@markup_highlight": {
+    "description": "DkMarkupBar: highlight the selected text."
+  },
+  "markup_underline": "Underline",
+  "@markup_underline": {
+    "description": "DkMarkupBar: icon only; the screen-reader label."
+  },
+  "markup_strike": "Strike",
+  "@markup_strike": {
+    "description": "DkMarkupBar: icon only; the screen-reader label."
+  },
+  "markup_ask": "Ask AI",
+  "@markup_ask": {
+    "description": "DkMarkupBar: ask about the selection (UI spec §11.8; §32.4 flow 4)."
+  },
+  "common_redo": "Redo",
+  "@common_redo": {
+    "description": "DkToolStrip and editors: redo (UI spec §11.6)."
   }
 }

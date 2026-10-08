@@ -110,6 +110,11 @@ const catalogue = [
     '11.6 Bars',
     BottomBarStates(),
   ),
+  CatalogueEntry(
+    'DkToolStrip · DkMarkupBar',
+    '11.6 Bars · 11.8 Editor',
+    EditorBarStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
