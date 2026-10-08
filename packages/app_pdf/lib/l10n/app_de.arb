@@ -147,5 +147,10 @@
   "viewer_page_chip_go": "Zu Seite {n}",
   "status_new": "Neu",
   "status_unsaved": "Nicht gespeichert",
-  "status_running": "Läuft"
+  "status_running": "Läuft",
+  "sign_card_label": "Gespeicherte Unterschrift",
+  "sign_card_delete": "Unterschrift löschen",
+  "ai_footer": "Auf diesem Handy · {model} · KI kann Fehler machen",
+  "split_add": "Hier teilen",
+  "split_remove": "Hier nicht teilen"
 }

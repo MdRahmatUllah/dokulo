@@ -665,5 +665,30 @@
   "status_running": "Working",
   "@status_running": {
     "description": "DkStatusDot, screen readers: a job is running."
+  },
+  "sign_card_label": "Saved signature",
+  "@sign_card_label": {
+    "description": "Screen-reader label of a DkSignatureCard (UI spec §11.8)."
+  },
+  "sign_card_delete": "Delete signature",
+  "@sign_card_delete": {
+    "description": "DkSignatureCard's long-press action (UI spec §11.8)."
+  },
+  "ai_footer": "On this phone · {model} · AI can make mistakes",
+  "@ai_footer": {
+    "description": "DkAIFooter under AI answers (UI spec §11.8); model is the model's name, e.g. Gemma 4 E2B.",
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
+  "split_add": "Split here",
+  "@split_add": {
+    "description": "Smart Split: the gap between two pages, with no cut yet (UI spec §11.8, §21)."
+  },
+  "split_remove": "Don't split here",
+  "@split_remove": {
+    "description": "Smart Split: a cut between two pages, tap to remove it."
   }
 }

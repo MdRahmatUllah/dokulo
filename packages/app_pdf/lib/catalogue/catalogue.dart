@@ -14,6 +14,7 @@ import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
+import 'ai_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -82,6 +83,17 @@ const catalogue = [
     '11.3 Badges, chips, indicators',
     DkPrivacyStatusGallery(),
   ),
+  CatalogueEntry(
+    'DkSignatureCard',
+    '11.8 Editor and AI',
+    SignatureCardStates(),
+  ),
+  CatalogueEntry(
+    'DkSuggestionChip · DkAIFooter',
+    '11.8 Editor and AI',
+    AskStates(),
+  ),
+  CatalogueEntry('DkSplitMarker', '11.8 Editor and AI', SplitStates()),
 ];
 
 /// The list of components; tap one to see its states.
