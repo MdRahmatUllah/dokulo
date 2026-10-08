@@ -11,6 +11,7 @@ import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
 import 'page_states.dart';
+import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 
@@ -75,6 +76,11 @@ const catalogue = [
     'DkBanner',
     '11.7 Sheets, dialogs, menus, toasts',
     BannerStates(),
+  ),
+  CatalogueEntry(
+    'DkPrivacyLine, DkStatusDot',
+    '11.3 Badges, chips, indicators',
+    DkPrivacyStatusGallery(),
   ),
 ];
 
