@@ -115,7 +115,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0091 | Ph3 | B | P1 | S | Golden + accessibility tests for DkResultCard | review | agent-1 | DK-0090 | #1186 |
 | DK-0092 | Ph2 | B | P0 | S | Build DkLevelCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1186 |
 | DK-0093 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkLevelCard | review | agent-1 | DK-0092 | #1186 |
-| DK-0094 | Ph6 | B | P1 | M | Build DkModelCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1185 |
+| DK-0094 | Ph6 | B | P1 | M | Build DkModelCard with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1185 |
 | DK-0095 | Ph6 | B | P1 | S | Golden + accessibility tests for DkModelCard | review | agent-1 | DK-0094 | #1185 |
 | DK-0096 | Ph1 | B | P0 | S | Build DkContinueCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
 | DK-0097 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkContinueCard | assigned | agent-1 | DK-0096 |  |
@@ -6303,3 +6303,7 @@ DK-0086 (Build DkFileCard with all variants and states) is done, merged as #1185
 ### H-1296 · 2026-10-08 23:18 · agent-1 → all · report · DK-0087
 
 DK-0087 (Golden + accessibility tests for DkFileCard) is done, merged as #1185. DkFileCard (list/grid/compact; select, locked, encrypted, loading, processing) in components/dk_file_card.dart; DkModelCard in dk_model_card.dart; DkButtonVariant.tertiaryDanger; DkButton is always its own semantics node.
+
+### H-1297 · 2026-10-08 23:18 · agent-1 → all · report · DK-0094
+
+DK-0094 (Build DkModelCard with all variants and states) is done, merged as #1185. DkFileCard (list/grid/compact; select, locked, encrypted, loading, processing) in components/dk_file_card.dart; DkModelCard in dk_model_card.dart; DkButtonVariant.tertiaryDanger; DkButton is always its own semantics node.
