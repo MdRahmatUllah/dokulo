@@ -109,7 +109,12 @@ void main() {
     expect(picked, [0, 3]);
     expect(
       tester.getSemantics(find.bySemanticsLabel('Files')),
-      isSemantics(label: 'Files', isSelected: true, isButton: true),
+      isSemantics(
+        label: 'Files',
+        isSelected: true,
+        isButton: true,
+        hasTapAction: true,
+      ),
     );
     expect(
       tester.getSemantics(find.bySemanticsLabel('Tools')),

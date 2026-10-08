@@ -273,7 +273,9 @@ class _DestinationState extends State<_Destination> {
       button: true,
       selected: on,
       label: widget.item.label,
+      // The children are excluded, the tap with them: give it back.
       excludeSemantics: true,
+      onTap: widget.onTap,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.m,
