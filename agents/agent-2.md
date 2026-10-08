@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0196 Build DkEmptyState with all variants and states — claimed 2026-10-08 03:55.
+DK-0196 in review as PR #1137: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
