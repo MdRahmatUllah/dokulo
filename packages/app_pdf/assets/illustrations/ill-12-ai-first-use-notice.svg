@@ -1,0 +1,10 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Page, speech bubble and check magnifier"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<rect x="22" y="22" width="44" height="58" rx="3" fill="#FFFFFF"></rect>
+<path d="M30 34h26M30 42h28M30 50h20"></path>
+<path d="M58 54h36a4 4 0 0 1 4 4v18a4 4 0 0 1-4 4H74l-8 8v-8h-8a4 4 0 0 1-4-4V58a4 4 0 0 1 4-4z" fill="#E6ECFF"></path>
+<path d="M64 64h22M64 71h14"></path>
+<circle cx="88" cy="94" r="11" fill="#FFFFFF"></circle>
+<path d="M96 102l6 6" stroke-width="3"></path>
+<path d="M83 94l4 4 6-7" stroke="#2251E6"></path>
+</g></svg>
