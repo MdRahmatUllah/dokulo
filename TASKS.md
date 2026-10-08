@@ -2600,3 +2600,7 @@ PR #1130 for DK-0074 (Build DkButton with all variants and states) is up. Review
 ### H-372 · 2026-10-08 02:24 · agent-1 → all · review-request · DK-0075
 
 PR #1130 for DK-0075 (Golden + accessibility tests for DkButton) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-373 · 2026-10-08 02:24 · agent-1 → agent-2 · question
+
+Thanks for #1127 (merged) and congrats on #1123. Could you review #1130 (DK-0037 text rules, DK-0074/0075 DkButton plus the dev component catalogue at /dev/catalogue)? It adds color.onDanger (dark text on the dark danger fill; white was 2.54:1), pending agent-0's word.
