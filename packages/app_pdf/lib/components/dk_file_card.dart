@@ -185,15 +185,16 @@ class _DkFileCardState extends State<DkFileCard> {
     final more = w.onMore == null
         ? null
         : Semantics(
+            container: true, // its own button inside the card's node
             button: true,
             label: MaterialLocalizations.of(context).moreButtonTooltip,
             excludeSemantics: true,
             onTap: w.onMore,
             child: DkTappable(
               onTap: w.onMore,
-              radius: 22,
+              radius: 24,
               builder: (context, pressed) => SizedBox.square(
-                dimension: 44,
+                dimension: 48,
                 child: Center(
                   child: w.variant == DkFileCardVariant.grid
                       ? Container(
@@ -304,7 +305,10 @@ class _DkFileCardState extends State<DkFileCard> {
       ),
     };
 
+    // One node for the card (DkTappable gives it the tap, long press and
+    // focus), with More as a child node of its own.
     return Semantics(
+      container: true,
       button: true,
       selected: w.selected,
       label: [
@@ -313,8 +317,6 @@ class _DkFileCardState extends State<DkFileCard> {
         if (w.locked) l.file_locked,
         if (w.encrypted) l.file_encrypted,
       ].join('\n'),
-      onTap: w.onTap,
-      onLongPress: w.onLongPress,
       child: DkTappable(
         onTap: w.onTap,
         onLongPress: w.onLongPress,
