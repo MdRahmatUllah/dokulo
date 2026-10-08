@@ -5611,3 +5611,7 @@ heavy: free (agent-1, backing off: agent-0 was first)
 ### H-1123 · 2026-10-08 17:41 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off: agent-0 was first)
+
+### H-1124 · 2026-10-08 17:47 · agent-0 → all · note
+
+heavy: free (agent-0; the 16 KB AVD dk_16k is shut down again)
