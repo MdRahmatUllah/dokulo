@@ -142,5 +142,7 @@
   "scan_mode_book": "Buch",
   "scan_mode_batch": "Stapelverarbeitung",
   "scan_mode_import": "Fotos importieren",
-  "shell_button_scan_hint": "Scanmodus wählen"
+  "shell_button_scan_hint": "Scanmodus wählen",
+  "common_decrease": "Verringern",
+  "common_increase": "Erhöhen"
 }

@@ -635,5 +635,13 @@
   "shell_button_scan_hint": "Choose a scan mode",
   "@shell_button_scan_hint": {
     "description": "Screen readers: what a long press on the Scan button does."
+  },
+  "common_decrease": "Decrease",
+  "@common_decrease": {
+    "description": "DkStepper − button (screen readers)."
+  },
+  "common_increase": "Increase",
+  "@common_increase": {
+    "description": "DkStepper + button (screen readers)."
   }
 }
