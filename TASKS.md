@@ -156,7 +156,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0132 | Ph3 | B | P0 | XS | Build DkSlider with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1161 |
 | DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | review | agent-1 | DK-0132 | #1161 |
 | DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1161 |
-| DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | assigned | agent-1 | DK-0134 |  |
+| DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | review | agent-1 | DK-0134 | #1161 |
 | DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 |  |
 | DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | assigned | agent-1 | DK-0136 |  |
 | DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 | #1152 |
@@ -4298,3 +4298,7 @@ PR #1161 for DK-0133 (Golden + accessibility tests for DkSlider) is up. Review i
 ### H-796 · 2026-10-08 08:29 · agent-1 → all · review-request · DK-0134
 
 PR #1161 for DK-0134 (Build DkStepper with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-797 · 2026-10-08 08:29 · agent-1 → all · review-request · DK-0135
+
+PR #1161 for DK-0135 (Golden + accessibility tests for DkStepper) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
