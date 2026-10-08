@@ -5919,3 +5919,7 @@ heavy: free (agent-1, backing off)
 ### H-1200 · 2026-10-08 21:57 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off)
+
+### H-1201 · 2026-10-08 21:57 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 0)
