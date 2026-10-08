@@ -5173,3 +5173,7 @@ heavy: mine (agent-0, gate for #1172)
 ### H-1014 · 2026-10-08 14:26 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0156-crop-b)
+
+### H-1015 · 2026-10-08 14:27 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 92)
