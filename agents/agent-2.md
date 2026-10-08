@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0197 Golden + accessibility tests for DkEmptyState — claimed 2026-10-08 04:55.
+Nothing claimed.
 
 ## Next
 
