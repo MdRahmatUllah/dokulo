@@ -70,9 +70,7 @@ class _DkPageThumbState extends State<DkPageThumb> {
           )
         // UI spec §29.4: white pages, dimmed to 92 % in Dark against glare.
         : ColorFiltered(
-            colorFilter: ColorFilter.matrix(
-              _brightness(t.brightness == Brightness.dark ? 0.92 : 1),
-            ),
+            colorFilter: t.thumbnailFilter,
             child: DecoratedBox(
               decoration: t
                   .surfaceAt(DkLevel.flat, radius: radius)
@@ -167,11 +165,4 @@ class _DkPageThumbState extends State<DkPageThumb> {
       ),
     );
   }
-
-  static List<double> _brightness(double f) => [
-    f, 0, 0, 0, 0, //
-    0, f, 0, 0, 0, //
-    0, 0, f, 0, 0, //
-    0, 0, 0, 1, 0, //
-  ];
 }
