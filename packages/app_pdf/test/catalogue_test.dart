@@ -31,4 +31,19 @@ void main() {
       await tester.pumpAndSettle();
     }
   });
+
+  testWidgets('an unknown component says so', (tester) async {
+    final router = buildRouter(initialLocation: '/dev/components/DkNope');
+    addTearDown(router.dispose);
+    await tester.pumpWidget(
+      MaterialApp.router(
+        routerConfig: router,
+        theme: dokuloTheme(DkTokens.light),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('No component called "DkNope"'), findsOneWidget);
+  });
 }

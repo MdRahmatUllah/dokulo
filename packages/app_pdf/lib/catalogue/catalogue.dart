@@ -55,7 +55,13 @@ class CatalogueEntryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entry = catalogue.firstWhere((e) => e.name == name);
+    final entry = catalogue.where((e) => e.name == name).firstOrNull;
+    if (entry == null) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(child: Text('No component called "$name"')),
+      );
+    }
     return Scaffold(
       appBar: AppBar(title: Text(entry.name)),
       body: ListView(
