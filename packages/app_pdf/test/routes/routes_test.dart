@@ -3,6 +3,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
+import 'package:app_pdf/components/dk_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +27,7 @@ String title(WidgetTester tester) =>
     (tester.widget<AppBar>(find.byType(AppBar).last).title! as Text).data!;
 
 bool tabBarShown(WidgetTester tester) =>
-    find.byType(NavigationBar).evaluate().isNotEmpty;
+    find.byType(DkTabBar).evaluate().isNotEmpty;
 
 void main() {
   // Every route from a cold start (what a deep link does): the screen, and
@@ -112,10 +113,7 @@ void main() {
     router.pop();
     await tester.pumpAndSettle();
     expect(title(tester), 'T1');
-    expect(
-      tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
-      1,
-    );
+    expect(tester.widget<DkTabBar>(find.byType(DkTabBar)).currentIndex, 1);
   });
 
   testWidgets('back from a deep-linked full-screen page goes Home', (

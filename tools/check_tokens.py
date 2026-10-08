@@ -1,10 +1,11 @@
-"""Token check (DK-0024): screens and components read design tokens
+"""Token check (DK-0024): screens, components and patterns read design tokens
 (`context.tokens`), never raw colour values.
 
     python tools/check_tokens.py [repo root]
 
 Fails on `Color(0x…)`, `Color.fromARGB`/`fromRGBO` or a `Colors.<name>` other
-than `Colors.transparent` in packages/app_pdf/lib/screens and lib/components.
+than `Colors.transparent` in packages/app_pdf/lib/screens, lib/components and
+lib/patterns.
 The values themselves live in lib/theme/dk_tokens.dart.
 """
 
@@ -12,7 +13,11 @@ import re
 import sys
 from pathlib import Path
 
-DIRS = ("packages/app_pdf/lib/screens", "packages/app_pdf/lib/components")
+DIRS = (
+    "packages/app_pdf/lib/screens",
+    "packages/app_pdf/lib/components",
+    "packages/app_pdf/lib/patterns",
+)
 RAW = re.compile(r"\bColor\(0x|\bColor\.from(ARGB|RGBO)\(|\bColors\.(?!transparent\b)\w+")
 
 

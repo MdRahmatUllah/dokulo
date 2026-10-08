@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
@@ -88,6 +89,16 @@ class _DkTextFieldState extends State<DkTextField> {
     if (old.controller != widget.controller) {
       (old.controller ?? _own)?.removeListener(_changed);
       _text.addListener(_changed);
+    }
+    // A new error is said at once (after Save, say), not only when the
+    // field next gets focus.
+    final error = widget.error;
+    if (error != null && error != old.error) {
+      SemanticsService.sendAnnouncement(
+        View.of(context),
+        error,
+        Directionality.of(context),
+      );
     }
   }
 
@@ -186,7 +197,9 @@ class _DkTextFieldState extends State<DkTextField> {
             // The field says its label and error itself; the buttons in
             // it stay their own nodes.
             child: Semantics(
-              label: [?widget.label, ?error].join('\n'),
+              label: widget.label == null && error == null
+                  ? null
+                  : [?widget.label, ?error].join('\n'),
               child: field,
             ),
           ),
@@ -223,7 +236,7 @@ class _DkTextFieldState extends State<DkTextField> {
 }
 
 /// A small icon button inside a field (×, reveal, pick pages, filter):
-/// 20 dp icon, 44 × the field's height to touch, with its label for screen
+/// 20 dp icon, 48 × the field's [height] to touch, with its label for screen
 /// readers.
 class DkFieldButton extends StatelessWidget {
   const DkFieldButton({
@@ -231,11 +244,15 @@ class DkFieldButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
+    this.height = 48,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onTap;
+
+  /// The field's height (48; 40 in a search bar).
+  final double height;
 
   @override
   Widget build(BuildContext context) => Semantics(
@@ -247,8 +264,8 @@ class DkFieldButton extends StatelessWidget {
       onTap: onTap,
       radius: context.tokens.radius.s,
       builder: (context, pressed) => SizedBox(
-        width: 44,
-        height: 40,
+        width: 48,
+        height: height,
         child: Center(
           child: DkIcon(
             icon,
@@ -448,10 +465,13 @@ class DkRangeField extends StatelessWidget {
   }
 }
 
-/// A search box (DK-0126): 40 dp, `color.surfaceSunken`, the `search` icon
-/// (20) first, the placeholder in `type.bodyL` ("Search tools"), the clear ×
-/// while there is text, and an optional [filter] button at the end.
-class DkSearchField extends StatelessWidget {
+/// A search box (DK-0126; UI spec §11.4): a 40 dp `color.surfaceSunken` box
+/// (`radius.s`), the `search` icon (20) first, the placeholder in
+/// `type.bodyL` ("Search tools"), the clear × while there is text, and an
+/// optional [filter] button at the end. The row is 48 tall: the box sits in
+/// its middle and the buttons take the full 48 to touch (the 4 dp above and
+/// below the box count), as DkSegmented's segments do.
+class DkSearchField extends StatefulWidget {
   const DkSearchField({
     super.key,
     required this.hint,
@@ -474,26 +494,105 @@ class DkSearchField extends StatelessWidget {
   final Widget? filter;
 
   @override
+  State<DkSearchField> createState() => _DkSearchFieldState();
+}
+
+class _DkSearchFieldState extends State<DkSearchField> {
+  TextEditingController? _own;
+  TextEditingController get _text =>
+      widget.controller ?? (_own ??= TextEditingController());
+
+  @override
+  void initState() {
+    super.initState();
+    _text.addListener(_changed);
+  }
+
+  @override
+  void didUpdateWidget(DkSearchField old) {
+    super.didUpdateWidget(old);
+    if (old.controller != widget.controller) {
+      (old.controller ?? _own)?.removeListener(_changed);
+      _text.addListener(_changed);
+    }
+  }
+
+  @override
+  void dispose() {
+    _text.removeListener(_changed);
+    _own?.dispose();
+    super.dispose();
+  }
+
+  void _changed() => setState(() {});
+
+  void _clear() {
+    _text.clear();
+    widget.onChanged?.call('');
+  }
+
+  @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    return DkTextField(
-      hint: hint,
-      controller: controller,
-      onChanged: onChanged,
-      onSubmitted: onSubmitted,
-      focusNode: focusNode,
-      autofocus: autofocus,
-      height: 40,
-      textInputAction: TextInputAction.search,
-      leading: Padding(
-        padding: EdgeInsets.only(left: t.space.m, right: t.space.s),
-        child: DkIcon(
-          DkIcons.search,
-          size: DkIconSize.m,
-          color: t.color.iconSecondary,
-        ),
+    final c = t.color;
+    final l = AppLocalizations.of(context);
+    final style = t.text.bodyL.copyWith(color: c.textPrimary);
+    return SizedBox(
+      height: 48,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            top: 4,
+            bottom: 4,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: c.surfaceSunken,
+                borderRadius: BorderRadius.circular(t.radius.s),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: t.space.m, right: t.space.s),
+                child: DkIcon(
+                  DkIcons.search,
+                  size: DkIconSize.m,
+                  color: c.iconSecondary,
+                ),
+              ),
+              Expanded(
+                child: TextField(
+                  controller: _text,
+                  focusNode: widget.focusNode,
+                  autofocus: widget.autofocus,
+                  onChanged: widget.onChanged,
+                  onSubmitted: widget.onSubmitted,
+                  textInputAction: TextInputAction.search,
+                  style: style,
+                  cursorColor: c.primary,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    border: InputBorder.none,
+                    hintText: widget.hint,
+                    hintStyle: style.copyWith(color: c.textSecondary),
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                ),
+              ),
+              if (_text.text.isNotEmpty)
+                DkFieldButton(
+                  icon: DkIcons.close,
+                  label: l.common_clear,
+                  onTap: _clear,
+                ),
+              ?widget.filter,
+              if (_text.text.isEmpty && widget.filter == null)
+                SizedBox(width: t.space.m),
+            ],
+          ),
+        ],
       ),
-      trailing: filter,
     );
   }
 }
