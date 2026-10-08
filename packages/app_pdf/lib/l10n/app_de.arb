@@ -156,6 +156,7 @@
   "status_unsaved": "Nicht gespeichert",
   "status_running": "Läuft",
   "scanner_button_shutter": "Foto aufnehmen",
+  "common_refresh": "Aktualisieren",
   "common_loading": "Wird geladen",
   "common_clear": "Leeren",
   "field_password_show": "Passwort anzeigen",
@@ -222,6 +223,10 @@
   "crop_auto": "Auto",
   "crop_full_page": "Ganze Seite",
   "crop_reset": "Zurücksetzen",
+  "redact_box_label": "Schwärzungsfeld: {category}",
+  "redact_box_remove": "Feld entfernen",
+  "sign_stamp_label": "Unterschrift",
+  "sign_stamp_remove": "Unterschrift entfernen",
   "compare_added": "Hinzugefügt",
   "compare_removed": "Entfernt",
   "compare_changed": "Geändert"

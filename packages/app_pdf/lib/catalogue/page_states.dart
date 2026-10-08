@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../components/dk_magnifier.dart';
+import '../components/dk_redaction_box.dart';
+import '../components/dk_signature_stamp.dart';
 import '../components/dk_page_grid.dart';
 import '../components/dk_page_thumb.dart';
 import '../components/dk_page_tray.dart';
@@ -217,6 +219,107 @@ class MagnifierStates extends StatelessWidget {
               DkMagnifier(finger: f),
             ],
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A signature as a scribble in blue ink (the catalogue has no real one).
+class CatalogueSignature extends StatelessWidget {
+  const CatalogueSignature({super.key});
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    size: const Size(168, 64),
+    painter: _Scribble(context.tokens.markup.ink),
+  );
+}
+
+class _Scribble extends CustomPainter {
+  const _Scribble(this.color);
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final path = Path()
+      ..moveTo(8, 44)
+      ..cubicTo(20, 4, 30, 4, 34, 46)
+      ..cubicTo(40, 20, 52, 20, 56, 44)
+      ..cubicTo(64, 30, 72, 30, 78, 42)
+      ..quadraticBezierTo(96, 24, 110, 40)
+      ..quadraticBezierTo(130, 54, 160, 30);
+    canvas.drawPath(
+      path,
+      Paint()
+        ..color = color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.5
+        ..strokeCap = StrokeCap.round,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_Scribble old) => old.color != color;
+}
+
+/// DkRedactionBox (DK-0160) and DkSignatureStamp (DK-0162) on a page:
+/// boxes being edited (one selected) and one applied; a placed signature,
+/// selected and not. Live: drag and resize the selected ones.
+class BoxStates extends StatefulWidget {
+  const BoxStates({super.key});
+
+  @override
+  State<BoxStates> createState() => _BoxStatesState();
+}
+
+class _BoxStatesState extends State<BoxStates> {
+  var iban = const Rect.fromLTWH(40, 76, 150, 16);
+  var signature = const Rect.fromLTWH(40, 200, 126, 48);
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ColoredBox(
+      color: t.color.surfaceSunken,
+      child: Padding(
+        padding: EdgeInsets.all(t.space.l),
+        child: SizedBox(
+          height: 300,
+          child: ColoredBox(
+            color: t.color.pageWhite,
+            child: Stack(
+              children: [
+                const DkRedactionBox(
+                  rect: Rect.fromLTWH(40, 36, 90, 16),
+                  category: 'Name',
+                ),
+                DkRedactionBox(
+                  rect: iban,
+                  category: 'IBAN',
+                  selected: true,
+                  onChanged: (r) => setState(() => iban = r),
+                  onDelete: () {},
+                ),
+                const DkRedactionBox(
+                  rect: Rect.fromLTWH(40, 120, 110, 16),
+                  category: 'Email',
+                  applied: true,
+                ),
+                DkSignatureStamp(
+                  rect: signature,
+                  signature: const CatalogueSignature(),
+                  selected: true,
+                  onChanged: (r) => setState(() => signature = r),
+                  onDelete: () {},
+                ),
+                const DkSignatureStamp(
+                  rect: Rect.fromLTWH(210, 200, 105, 40),
+                  signature: CatalogueSignature(),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
