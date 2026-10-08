@@ -23,3 +23,6 @@ packages/app_pdf/lib/l10n/app_localizations*.dart
 packages/doc_vision/assets/ocr/
 # Material Symbols Rounded: fetched and hash-checked by tools/fetch_icon_font.py.
 packages/app_pdf/assets/fonts/
+
+# Golden-test failure images (flutter test writes them next to the goldens)
+**/test/**/failures/
