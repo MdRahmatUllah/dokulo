@@ -13,6 +13,10 @@ enum DkButtonVariant {
   secondary,
   tertiary,
 
+  /// `color.primaryContainer` with `color.onPrimaryContainer`: the file
+  /// action sheet's Open and Share (UI spec §16.3; the export's `.ton2`).
+  tonal,
+
   /// Tertiary in `color.danger` (the export's `.ter.cdg`): Delete in a card.
   tertiaryDanger,
   destructive,
@@ -135,6 +139,7 @@ class _DkButtonState extends State<DkButton> {
         c.outlineStrong,
       ),
       DkButtonVariant.tertiary => (Colors.transparent, c.primary, null),
+      DkButtonVariant.tonal => (c.primaryContainer, c.onPrimaryContainer, null),
       DkButtonVariant.tertiaryDanger => (Colors.transparent, c.danger, null),
       DkButtonVariant.destructive => (c.danger, c.onDanger, null),
       DkButtonVariant.destructiveSecondary => (

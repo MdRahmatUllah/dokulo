@@ -46,5 +46,36 @@ Approved:
   export the face.
 - The action sheet's Open · Share row is the screen's (`DkActionSheet.top`),
   and the selection bar's actions are each screen's; the catalogue shows other
-  examples.
+  examples. The row's tonal buttons are DkButton's `tonal` (D8).
+
+Fixed (DK-1073, agent-2's second pass):
+
+- D7. DkPositionPicker's watermark-only centre target is a 2 dp dashed
+  `color.outlineStrong` circle until it's chosen, as the export's
+  `2px dashed var(--ols)`; it was solid. `DkDashedBorder` takes a width.
+- D8. DkButton has a `tonal` variant (`color.primaryContainer`,
+  `color.onPrimaryContainer`): the file action sheet's Open and Share are "two
+  large tonal buttons" (§16.3, the export's `.btn.ton2`), and §11.1's variant
+  table had none. `DkIcons.open` is `open_in_new`. The button golden now shows
+  every variant (it had been cropped after the third).
+- D9. A QA board in the gate, `packages/app_pdf/test/qa/components_part2_test.dart`:
+  the frame's components built from the real ones with its data, in its three
+  columns at 1440 wide. Side by side: the frame,
+  [light](components-part-2/design-light.png) and
+  [dark](components-part-2/design-dark.png), and the board,
+  [light](../../packages/app_pdf/test/qa/goldens/components_part2_light.png) and
+  [dark](../../packages/app_pdf/test/qa/goldens/components_part2_dark.png).
+  Text is the test font (Ahem): type is DK-0982's parity test, and the
+  components' own strings are checked as text.
+
+Also approved (the spec decides; the export is a sketch there):
+
+- DkPositionPicker's page is `color.pageWhite` in Dark too (§11.4); the frame
+  draws it in the surface colour.
+- DkEmptyState is a centred column (§11.7); the frame sets the illustration
+  to the left.
+- DkCropOverlay has four edge handles (§11.5); the frame draws only the top
+  one.
+- DkSettingsGroup is an inset `color.surface` card without an outline
+  (§11.2); the frame's 1 dp outline only shows on its white panel.
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
+import 'dk_box_frame.dart';
 import 'dk_tappable.dart';
 
 /// Where on the page (page numbers, watermark): DkPositionPicker's targets.
@@ -123,29 +124,46 @@ class DkPositionPicker extends StatelessWidget {
                         child: DkTappable(
                           onTap: onChanged == null ? null : () => onChanged!(p),
                           radius: ring / 2,
-                          builder: (context, pressed) => Center(
-                            child: Container(
-                              width: 28,
-                              height: 28,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: p == selected
-                                    ? c.primary
-                                    : pressed
-                                    ? Color.alphaBlend(
-                                        t.state.pressed,
-                                        c.pageWhite,
+                          builder: (context, pressed) {
+                            // The watermark-only centre is dashed until it's
+                            // chosen, as in the design export.
+                            final dashed =
+                                p == DkPagePosition.centre && p != selected;
+                            return Center(
+                              child: CustomPaint(
+                                foregroundPainter: dashed
+                                    ? DkDashedBorder(
+                                        c.outlineStrong,
+                                        radius: BorderRadius.circular(14),
+                                        width: 2,
                                       )
-                                    : c.pageWhite,
-                                border: Border.all(
-                                  color: p == selected
-                                      ? c.primary
-                                      : c.outlineStrong,
-                                  width: 2,
+                                    : null,
+                                child: Container(
+                                  width: 28,
+                                  height: 28,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: p == selected
+                                        ? c.primary
+                                        : pressed
+                                        ? Color.alphaBlend(
+                                            t.state.pressed,
+                                            c.pageWhite,
+                                          )
+                                        : c.pageWhite,
+                                    border: dashed
+                                        ? null
+                                        : Border.all(
+                                            color: p == selected
+                                                ? c.primary
+                                                : c.outlineStrong,
+                                            width: 2,
+                                          ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         ),
                       ),
                     ],
