@@ -8,6 +8,7 @@ import 'button_states.dart';
 import 'choice_row_states.dart';
 import 'icon_button_states.dart';
 import 'next_page_chip_states.dart';
+import 'option_row_states.dart';
 import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
@@ -18,6 +19,7 @@ import 'scan_button_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'switch_segmented_states.dart';
+import 'text_field_states.dart';
 import 'tool_tile_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -111,6 +113,21 @@ const catalogue = [
     DkSwitchSegmentedGallery(),
   ),
   CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
+  CatalogueEntry(
+    'DkOptionRow, DkPositionPicker',
+    '11.4 Inputs and controls',
+    DkOptionRowGallery(),
+  ),
+  CatalogueEntry(
+    'DkSkeleton · DkLoadingSpinner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    LoadingStates(),
+  ),
+  CatalogueEntry(
+    'DkTextField, DkPasswordField',
+    '11.4 Inputs and controls',
+    DkTextFieldGallery(),
+  ),
   CatalogueEntry(
     'DkSelectionBar · DkViewerBar · DkCameraTopBar',
     '11.6 Bars',
