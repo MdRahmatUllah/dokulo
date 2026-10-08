@@ -31,7 +31,7 @@ Five layers, top to bottom; everything below the UI lives in shared packages so 
 | Layer | Our package | Contents | Built on |
 | --- | --- | --- | --- |
 | 1. App | `app_pdf` | Screens, tool grid, viewer, file manager, paywall, Riverpod providers | Flutter 3.47+, Dart 3.13+ |
-| 2. Tool jobs | `doc_tools` | One `ToolJob` per feature (merge, compress, redact…), progress stream, cancel, undo snapshot, workflow runner | Pure Dart, runs in worker isolates |
+| 2. Tool jobs | `doc_tools` | One `ToolJob` per feature (merge, compress, redact…), progress stream, cancel, undo snapshot, workflow runner | Dart on worker isolates (a Flutter package: doc_vision's OCR needs the SDK) |
 | 3. Document core | `doc_core` | Open/save/render PDFs, page ops, text extraction, structure ops, image pipeline, OCR text layer writer | pdfrx / PDFium, qpdf (our FFI), Dart `pdf`, opencv\_dart |
 | 4. Vision & OCR | `doc_vision` | Scanner flows, edge detection, dewarp-light, OCR engines, layout, document-in-photo detection | VisionKit / Vision (iOS), own CameraX + OpenCV scanner (Android), PP-OCRv5 on ONNX Runtime |
 | 5. On-device AI | `ai_core` (from Sogda) | Model manager, LLM arbiter, translation engines, embeddings, retrieval | llamadart (llama.cpp), Bergamot (FFI), ONNX Runtime |

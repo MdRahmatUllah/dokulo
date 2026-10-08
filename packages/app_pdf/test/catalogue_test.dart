@@ -53,6 +53,7 @@ void main() {
   // 48 dp and labelled. A component the spec makes smaller keeps iOS's 44.
   const ios44 = {
     'DkMenu', // §11.7: 44 dp rows
+    'DkNextChip, DkPageChip', // §11.3: the page chip's target is 44
     'DkToolStrip · DkMarkupBar', // §11.8: the markup pill is 44 tall
     'DkChatBubble', // §11.3: DkPageChip's 44 target
     'DkDetectionGroup', // §11.3: DkPageChip's 44 target
@@ -60,7 +61,9 @@ void main() {
   };
   for (final entry in catalogue) {
     testWidgets('${entry.name}: tap targets and labels', (tester) async {
-      tester.view.physicalSize = const Size(393, 4000);
+      // 24 dp around the phone-wide entry: the guideline skips a target
+      // that touches the screen's edge.
+      tester.view.physicalSize = const Size(393 + 48, 4000);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
       final handle = tester.ensureSemantics();
@@ -70,7 +73,12 @@ void main() {
             theme: dokuloTheme(DkTokens.light),
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            home: Scaffold(body: SingleChildScrollView(child: entry.states)),
+            home: Scaffold(
+              body: SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
+                child: entry.states,
+              ),
+            ),
           ),
         ),
       );

@@ -13,6 +13,10 @@ enum DkIconButtonVariant {
 
   /// On a 40 dp black circle at 35 %, white icon: over the camera preview.
   onCamera,
+
+  /// A white icon without a circle: on the camera chrome (DkCameraTopBar;
+  /// the export's `.ib.cm`).
+  onCameraPlain,
 }
 
 /// An icon-only button (DK-0076; UI spec §11.1): a 24 dp icon in a 44 dp
@@ -65,11 +69,11 @@ class _DkIconButtonState extends State<DkIconButton> {
     final selected = widget.selected ?? false;
     final m = context.motion(DkMotionKind.fast);
     final (double? circle, Color? fill, Color ink) = switch (widget.variant) {
-      _ when selected && widget.variant != DkIconButtonVariant.onCamera => (
-        36,
-        c.primaryContainer,
-        c.onPrimaryContainer,
-      ),
+      _
+          when selected &&
+              widget.variant != DkIconButtonVariant.onCamera &&
+              widget.variant != DkIconButtonVariant.onCameraPlain =>
+        (36, c.primaryContainer, c.onPrimaryContainer),
       DkIconButtonVariant.plain => (null, null, c.iconPrimary),
       DkIconButtonVariant.tonal => (
         36,
@@ -81,8 +85,11 @@ class _DkIconButtonState extends State<DkIconButton> {
         c.cameraChrome.withValues(alpha: 0.35),
         c.onCamera,
       ),
+      DkIconButtonVariant.onCameraPlain => (null, null, c.onCamera),
     };
-    final overlay = widget.variant == DkIconButtonVariant.onCamera
+    final overlay =
+        widget.variant == DkIconButtonVariant.onCamera ||
+            widget.variant == DkIconButtonVariant.onCameraPlain
         ? c.onCamera.withValues(alpha: 0.16)
         : t.state.pressed;
     final background = fill == null
