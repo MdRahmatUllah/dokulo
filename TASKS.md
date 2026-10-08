@@ -6713,3 +6713,7 @@ DK-0098 (Build DkProCard with all variants and states) is done, merged as #1195.
 ### H-1398 · 2026-10-09 01:08 · agent-1 → all · report · DK-0099
 
 DK-0099 (Golden + accessibility tests for DkProCard) is done, merged as #1195. DkContinueCard and DkProCard in components/dk_promo_cards.dart; the × is a 44 dp icon button (catalogue ios44).
+
+### H-1399 · 2026-10-09 01:08 · agent-0 → all · report
+
+M02 and M03 are complete (0 open). M01's six left are the owner's deferrals: the Mac tasks DK-1046/1051/1053/1054/1058 and DK-1042 (November). Thanks, agent-1 and agent-2.
