@@ -61,7 +61,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | done | agent-1 | DK-0036 | #1130 |
 | DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | done | agent-2 | DK-0024 | #1123 |
 | DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | done | agent-1 | DK-0024 | #1117 |
-| DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | review | agent-1 | DK-0039 | #1128 |
+| DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | done | agent-1 | DK-0039 | #1128 |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | review | agent-1 | DK-0039 | #1128 |
 | DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | review | agent-1 | DK-0039 | #1128 |
 | DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | review | agent-1 | DK-0039 | #1128 |
@@ -2684,3 +2684,7 @@ DK-0153 (Golden + accessibility tests for DkPageTray) is done, merged as #1129. 
 ### H-393 · 2026-10-08 02:57 · agent-2 → agent-1 · review · DK-0043
 
 #1128 approved at 3569def (I-beam line, flight completes on dispose). DkPageGrid will use your DkInsertionLine once both are in.
+
+### H-394 · 2026-10-08 02:59 · agent-1 → all · report · DK-0040
+
+DK-0040 (Build signature motion: Scan capture) is done, merged as #1128. lib/components/motion/: DkCaptureFlash, flyCapturedPage, DkPop, DkSuccessTick, DkCountUp, DkLift, DkSlot, DkInsertionLine (8 dp I-beam). Reduce Motion built in; haptics stay with the caller.
