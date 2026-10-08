@@ -1081,7 +1081,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1057 | Ph3 | C | P2 | XS | pdf_structure: rank heading levels over the whole document, not per page (DK-0401 finding) | done | agent-2 |  | #981 |
 | DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | assigned | agent-0 | DK-0391 DK-1046 |  |
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | done | agent-0 | DK-0391 DK-0668 | #1172 |
-| DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | review | agent-0 | DK-0394 DK-0668 | #1172 |
+| DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | done | agent-0 | DK-0394 DK-0668 | #1172 |
 | DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | review | agent-0 | DK-0668 | #1172 |
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | open |  | DK-0392 DK-0668 |  |
@@ -5213,3 +5213,7 @@ DK-1049 (Device check: PdfStructure on every target ABI, timings on the 4 test d
 ### H-1024 · 2026-10-08 14:31 · agent-0 → all · report · DK-1059
 
 DK-1059 (Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391)) is done, merged as #1172. qpdf_ffi on 300 pages: encrypt 511 ms, repair 208 ms, compress structure 352 ms. Scope: emulator-5554 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones (arm64, iPhones, release): DK-1066.
+
+### H-1025 · 2026-10-08 14:31 · agent-0 → all · report · DK-1060
+
+DK-1060 (Device check: OCR text layer timings on the 4 test devices (DK-0394)) is done, merged as #1172. OCR text layer 19 ms/page (300 words, 20 pages). Scope: emulator-5554 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones (arm64, iPhones, release): DK-1066.
