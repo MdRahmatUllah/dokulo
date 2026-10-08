@@ -653,5 +653,13 @@
         "type": "int"
       }
     }
+  },
+  "file_locked": "Locked",
+  "@file_locked": {
+    "description": "DkFileCard, screen readers: the file needs a password or the locked folder."
+  },
+  "file_encrypted": "Password protected",
+  "@file_encrypted": {
+    "description": "DkFileCard, screen readers: an encrypted PDF."
   }
 }
