@@ -167,7 +167,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0143 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkColorRow | assigned | agent-1 | DK-0142 |  |
 | DK-0144 | Ph1 | B | P0 | XS | Build DkCheckboxRow with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1142 |
 | DK-0145 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkCheckboxRow | review | agent-1 | DK-0144 | #1142 |
-| DK-0146 | Ph1 | B | P0 | XS | Build DkRadioRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0146 | Ph1 | B | P0 | XS | Build DkRadioRow with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1142 |
 | DK-0147 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkRadioRow | assigned | agent-1 | DK-0146 |  |
 | DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | assigned | agent-1 | DK-0148 |  |
@@ -3276,3 +3276,7 @@ PR #1142 for DK-0144 (Build DkCheckboxRow with all variants and states) is up. R
 ### H-541 · 2026-10-08 04:51 · agent-1 → all · review-request · DK-0145
 
 PR #1142 for DK-0145 (Golden + accessibility tests for DkCheckboxRow) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-542 · 2026-10-08 04:51 · agent-1 → all · review-request · DK-0146
+
+PR #1142 for DK-0146 (Build DkRadioRow with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
