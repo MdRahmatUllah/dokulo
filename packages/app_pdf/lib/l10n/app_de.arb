@@ -148,6 +148,7 @@
   "status_new": "Neu",
   "status_unsaved": "Nicht gespeichert",
   "status_running": "Läuft",
+  "scanner_button_shutter": "Foto aufnehmen",
   "compare_added": "Hinzugefügt",
   "compare_removed": "Entfernt",
   "compare_changed": "Geändert"
