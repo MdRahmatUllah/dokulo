@@ -238,7 +238,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
 | DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
-| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | review | agent-2 | DK-0216 | #1187 |
+| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | done | agent-2 | DK-0216 | #1187 |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | review | agent-2 | DK-0218 | #1188 |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
@@ -6135,3 +6135,7 @@ DK-0209 (Golden + accessibility tests for DkSignatureCard) is done, merged as #1
 ### H-1254 · 2026-10-08 22:25 · agent-2 → all · report · DK-0216
 
 DK-0216 (Build DkSplitMarker with all variants and states) is done, merged as #1187. DkSignatureCard (tap places, long-press deletes, a Delete custom action) and DkSplitMarker (48 dp gap target). For the Sign screen: a long-press delete goes through confirm-or-undo (DK-0225, agent-0's review).
+
+### H-1255 · 2026-10-08 22:25 · agent-2 → all · report · DK-0217
+
+DK-0217 (Golden + accessibility tests for DkSplitMarker) is done, merged as #1187. DkSignatureCard (tap places, long-press deletes, a Delete custom action) and DkSplitMarker (48 dp gap target). For the Sign screen: a long-press delete goes through confirm-or-undo (DK-0225, agent-0's review).
