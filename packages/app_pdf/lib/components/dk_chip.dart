@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../theme/dk_tokens.dart';
 import '../theme/haptics.dart';
 import 'dk_icon.dart';
+import 'dk_tappable.dart';
 
 /// A filter chip (several can be on) or a choice chip (one of a group).
 enum DkChipKind { filter, choice }
@@ -14,7 +15,9 @@ enum DkChipKind { filter, choice }
 ///   text.
 /// - Choice: on fills `color.primary` with `onPrimary` text.
 ///
-/// Selecting plays the selection haptic. 48 dp to touch.
+/// Selecting plays the selection haptic. 48 dp to touch; pressed shows the
+/// overlay; the keyboard reaches it (the 2 dp focus ring, Enter or Space).
+/// In a choice group the selected chip stays on: tapping it does nothing.
 class DkChip extends ConsumerWidget {
   const DkChip({
     super.key,
@@ -22,12 +25,17 @@ class DkChip extends ConsumerWidget {
     required this.selected,
     required this.onSelected,
     this.kind = DkChipKind.filter,
+    this.showPressed = false,
+    this.showFocused = false,
   });
 
   final String label;
   final bool selected;
   final ValueChanged<bool>? onSelected;
   final DkChipKind kind;
+
+  /// Draw these states without a finger or keyboard: catalogue and goldens.
+  final bool showPressed, showFocused;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,6 +47,8 @@ class DkChip extends ConsumerWidget {
         : filter
         ? (c.primaryContainer, c.onPrimaryContainer)
         : (c.primary, c.onPrimary);
+    // A choice group keeps one chip on: tapping the selected one does nothing.
+    final enabled = onSelected != null && !(selected && !filter);
     void tap() {
       if (!selected) ref.read(hapticsProvider).selected();
       onSelected!(!selected);
@@ -51,22 +61,26 @@ class DkChip extends ConsumerWidget {
       enabled: onSelected != null,
       label: label,
       excludeSemantics: true,
-      onTap: onSelected == null ? null : tap,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onSelected == null ? null : tap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 48),
-          child: Center(
-            widthFactor: 1,
-            heightFactor: 1,
-            child: Opacity(
-              opacity: onSelected == null ? t.state.disabledOpacity : 1,
-              child: Container(
+      onTap: enabled ? tap : null,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 48),
+        child: Center(
+          widthFactor: 1,
+          heightFactor: 1,
+          child: Opacity(
+            opacity: onSelected == null ? t.state.disabledOpacity : 1,
+            child: DkTappable(
+              onTap: enabled ? tap : null,
+              radius: t.radius.pill,
+              showPressed: showPressed,
+              showFocused: showFocused,
+              builder: (context, pressed) => Container(
                 constraints: const BoxConstraints(minHeight: 32),
                 padding: EdgeInsets.symmetric(horizontal: t.space.m),
                 decoration: BoxDecoration(
-                  color: fill,
+                  color: pressed
+                      ? Color.alphaBlend(t.state.pressed, fill ?? c.surface)
+                      : fill,
                   borderRadius: BorderRadius.circular(t.radius.pill),
                   border: fill == null
                       ? Border.all(color: c.outlineStrong)

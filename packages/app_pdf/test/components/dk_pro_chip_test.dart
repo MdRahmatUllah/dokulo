@@ -1,11 +1,14 @@
 import 'package:app_pdf/catalogue/pro_chip_states.dart';
 import 'package:app_pdf/components/dk_chip.dart';
 import 'package:app_pdf/components/dk_pro_badge.dart';
+import 'package:app_pdf/components/dk_ring.dart';
+import 'package:app_pdf/theme/dk_layout.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/theme/haptics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -191,5 +194,49 @@ void main() {
       expect(played, isEmpty);
       handle.dispose();
     });
+  });
+
+  testWidgets('DkChip: the keyboard reaches it (ring, Enter); a selected '
+      'choice chip stays on', (tester) async {
+    var on = false;
+    var choiceTaps = 0;
+    await tester.pumpWidget(
+      app(
+        Column(
+          children: [
+            StatefulBuilder(
+              builder: (context, set) => DkChip(
+                label: 'Scans',
+                selected: on,
+                onSelected: (v) => set(() => on = v),
+              ),
+            ),
+            DkChip(
+              label: 'All',
+              selected: true,
+              onSelected: (_) => choiceTaps++,
+              kind: DkChipKind.choice,
+            ),
+          ],
+        ),
+      ),
+    );
+    FocusManager.instance.highlightStrategy =
+        FocusHighlightStrategy.alwaysTraditional;
+    addTearDown(
+      () => FocusManager.instance.highlightStrategy =
+          FocusHighlightStrategy.automatic,
+    );
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    final ring = find.byWidgetPredicate(
+      (w) => w is DkRing && w.side == DkTokens.light.focusRing,
+    );
+    expect(ring, findsOneWidget);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pump();
+    expect(on, isTrue);
+    await tester.tap(find.text('All'));
+    expect(choiceTaps, 0);
   });
 }

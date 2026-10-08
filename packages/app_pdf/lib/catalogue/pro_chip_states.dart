@@ -28,6 +28,18 @@ class DkProBadgeChipGallery extends StatelessWidget {
           DkChip(label: 'Scans', selected: false, onSelected: any),
           DkChip(label: 'PDFs', selected: true, onSelected: any),
           const DkChip(label: 'Images', selected: false, onSelected: null),
+          DkChip(
+            label: 'Pressed',
+            selected: false,
+            onSelected: any,
+            showPressed: true,
+          ),
+          DkChip(
+            label: 'Focused',
+            selected: false,
+            onSelected: any,
+            showFocused: true,
+          ),
         ]),
         _wrap(context, [
           DkChip(
