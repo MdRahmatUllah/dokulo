@@ -1174,3 +1174,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 01:19 · agent-2 DK-1074 · claimed: DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098)
 - 2026-10-09 01:28 · agent-2 DK-1074 · PR #1198 open; review requested from all
 - 2026-10-09 01:30 · agent-1 · DK-1046 prep as draft #1199 (iOS flavors), for the Mac session
+- 2026-10-09 01:31 · agent-2 DK-1074 · done (#1198)
