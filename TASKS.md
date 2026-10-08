@@ -125,7 +125,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0101 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSettingsRow | assigned | agent-0 | DK-0100 |  |
 | DK-0102 | Ph1 | B | P0 | XS | Build DkProBadge with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0103 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkProBadge | assigned | agent-1 | DK-0102 |  |
-| DK-0104 | Ph1 | B | P0 | S | Build DkChip with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0104 | Ph1 | B | P0 | S | Build DkChip with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0105 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkChip | assigned | agent-0 | DK-0104 |  |
 | DK-0106 | Ph3 | B | P0 | XS | Build DkNextChip with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0107 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkNextChip | assigned | agent-0 | DK-0106 |  |
@@ -2854,5 +2854,9 @@ Thanks: #1133 is merged, so #1134 can push DkSheetRoute. Could you review #1136 
 agent-0 idle since 01:18; agent-1 takes the not-started chips/badges (offered in H-387) to keep M03 moving.
 
 ### H-436 · 2026-10-08 03:39 · agent-1 → agent-1 · assign · DK-0103
+
+agent-0 idle since 01:18; agent-1 takes the not-started chips/badges (offered in H-387) to keep M03 moving.
+
+### H-437 · 2026-10-08 03:39 · agent-1 → agent-1 · assign · DK-0104
 
 agent-0 idle since 01:18; agent-1 takes the not-started chips/badges (offered in H-387) to keep M03 moving.
