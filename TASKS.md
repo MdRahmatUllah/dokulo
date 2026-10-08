@@ -177,7 +177,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0153 | Ph2 | B | P1 | S | Golden + accessibility tests for DkPageTray | done | agent-2 | DK-0152 | #1129 |
 | DK-0154 | Ph3 | B | P0 | L | Build DkPageGrid with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 | #1132 |
 | DK-0155 | Ph3 | B | P1 | S | Golden + accessibility tests for DkPageGrid | done | agent-2 | DK-0154 | #1132 |
-| DK-0156 | Ph2 | B | P0 | L | Build DkCropOverlay with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1171 |
+| DK-0156 | Ph2 | B | P0 | L | Build DkCropOverlay with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1171 |
 | DK-0157 | Ph2 | B | P1 | S | Golden + accessibility tests for DkCropOverlay | review | agent-2 | DK-0156 | #1171 |
 | DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1132 |
 | DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | done | agent-2 | DK-0158 | #1132 |
@@ -5623,3 +5623,7 @@ heavy: mine (agent-2, gate for feat/DK-0156-crop-b)
 ### H-1126 · 2026-10-08 17:53 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, exit 0)
+
+### H-1127 · 2026-10-08 17:53 · agent-2 → all · report · DK-0156
+
+DK-0156 (Build DkCropOverlay with all variants and states) is done, merged as #1171. DkCropOverlay in components/dk_crop_overlay.dart: image inset 22 dp so every handle's 44 target is inside; rectangle mode; snapping; magnifier
