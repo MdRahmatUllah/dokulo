@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
+import 'dk_tappable.dart';
 
 /// The PIN pad (DK-0148; UI spec §11.4): six 12 dp dots for the digits
 /// entered, a 3 × 4 keypad of 72 dp circles in `type.titleL`, the
@@ -115,18 +116,29 @@ class _DkPinPadState extends State<DkPinPad>
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Container(
-          width: 72,
-          height: 72,
-          margin: EdgeInsets.all(t.space.s),
-          decoration: plain
-              ? null
-              : BoxDecoration(shape: BoxShape.circle, color: c.surfaceSunken),
-          alignment: Alignment.center,
-          child: child,
+      child: Padding(
+        padding: EdgeInsets.all(t.space.s),
+        child: DkTappable(
+          onTap: onTap,
+          radius: 36, // a circle: the focus ring follows it
+          builder: (context, pressed) => Container(
+            width: 72,
+            height: 72,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: switch ((plain, pressed)) {
+                (true, false) => null,
+                (true, true) => t.state.pressed,
+                (false, false) => c.surfaceSunken,
+                (false, true) => Color.alphaBlend(
+                  t.state.pressed,
+                  c.surfaceSunken,
+                ),
+              },
+            ),
+            alignment: Alignment.center,
+            child: child,
+          ),
         ),
       ),
     );
