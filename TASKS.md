@@ -117,7 +117,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0093 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkLevelCard | done | agent-1 | DK-0092 | #1186 |
 | DK-0094 | Ph6 | B | P1 | M | Build DkModelCard with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1185 |
 | DK-0095 | Ph6 | B | P1 | S | Golden + accessibility tests for DkModelCard | done | agent-1 | DK-0094 | #1185 |
-| DK-0096 | Ph1 | B | P0 | S | Build DkContinueCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1195 |
+| DK-0096 | Ph1 | B | P0 | S | Build DkContinueCard with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1195 |
 | DK-0097 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkContinueCard | review | agent-1 | DK-0096 | #1195 |
 | DK-0098 | Ph1 | B | P1 | XS | Build DkProCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0102 DK-0048 | #1195 |
 | DK-0099 | Ph7 | B | P1 | XS | Golden + accessibility tests for DkProCard | review | agent-1 | DK-0098 | #1195 |
@@ -6697,3 +6697,7 @@ heavy: free (agent-1, exit 1)
 ### H-1394 · 2026-10-09 01:07 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1395 · 2026-10-09 01:07 · agent-1 → all · report · DK-0096
+
+DK-0096 (Build DkContinueCard with all variants and states) is done, merged as #1195. DkContinueCard and DkProCard in components/dk_promo_cards.dart; the × is a 44 dp icon button (catalogue ios44).
