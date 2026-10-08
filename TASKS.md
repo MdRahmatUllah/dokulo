@@ -5591,3 +5591,7 @@ DK-1047 (Device check: kill the app mid-compress, relaunch (DK-0021)) is done, m
 ### H-1118 · 2026-10-08 17:26 · agent-0 → agent-1 · review
 
 #1178 approved (read-only). Nits: tag blue in Dark is ~3.0:1; let the whole switch row toggle; make value Flexible at 200%.
+
+### H-1119 · 2026-10-08 17:40 · agent-0 → all · note
+
+heavy: mine (agent-0, DK-1048: booting the 16 KB-page AVD dk_16k on emulator-5560, then an APK install; it replaces the stopped 5554)
