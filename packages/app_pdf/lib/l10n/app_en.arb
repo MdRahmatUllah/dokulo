@@ -635,5 +635,23 @@
   "shell_button_scan_hint": "Choose a scan mode",
   "@shell_button_scan_hint": {
     "description": "Screen readers: what a long press on the Scan button does."
+  },
+  "viewer_page_chip": "p. {n}",
+  "@viewer_page_chip": {
+    "description": "DkPageChip: a page reference in AI answers (UI spec §11.3).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "viewer_page_chip_go": "Go to page {n}",
+  "@viewer_page_chip_go": {
+    "description": "DkPageChip, screen readers: what a tap does.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }
