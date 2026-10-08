@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/dk_tokens.dart';
 import 'dk_radio_row.dart';
+import 'dk_tappable.dart';
 
 /// One choice of 2–4 (DK-0130; UI spec §11.4): 36 dp tall on a
 /// `color.surfaceSunken` track (`radius.s`); the selected segment is
@@ -64,16 +65,18 @@ class DkSegmented<T> extends StatelessWidget {
                   onTap: onChanged == null ? null : () => onChanged!(value),
                   excludeSemantics: true,
                   label: label,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
+                  child: DkTappable(
                     onTap: onChanged == null ? null : () => onChanged!(value),
-                    child: AnimatedContainer(
+                    radius: t.radius.s - t.space.xxs,
+                    builder: (context, pressed) => AnimatedContainer(
                       duration: m.duration,
                       curve: m.curve,
                       constraints: const BoxConstraints(minHeight: 32),
                       padding: EdgeInsets.symmetric(horizontal: t.space.s),
                       decoration: BoxDecoration(
-                        color: value == selected ? c.surface : null,
+                        color: value == selected
+                            ? c.surface
+                            : (pressed ? t.state.pressed : null),
                         borderRadius: BorderRadius.circular(
                           t.radius.s - t.space.xxs,
                         ),
