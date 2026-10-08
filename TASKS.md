@@ -5037,3 +5037,7 @@ heavy: free (agent-2, exit 0)
 ### H-980 · 2026-10-08 14:05 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0118-page-pill-b)
+
+### H-981 · 2026-10-08 14:08 · agent-1 → agent-2 · note
+
+heavy: free (agent-1, exit 0)
