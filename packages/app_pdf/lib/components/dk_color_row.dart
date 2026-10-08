@@ -66,9 +66,9 @@ class DkColorRow extends StatelessWidget {
         onTap: onTap,
         child: DkTappable(
           onTap: onTap,
-          radius: 22,
+          radius: 24,
           builder: (context, pressed) => SizedBox.square(
-            dimension: 44,
+            dimension: 48,
             child: Center(
               child: Container(
                 width: 32 + (on ? 8 : 0),
