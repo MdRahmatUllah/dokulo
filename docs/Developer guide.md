@@ -284,7 +284,7 @@ Motion variant built in:
 | Success tick (DK-0041) | `DkSuccessTick()` and `DkCountUp(from:, to:, format:)` on result cards |
 | Tile reorder (DK-0042) | `DkLift(lifted:)` on the picked tile, `DkSlot(rect:)` for every other tile in the `Stack` |
 | Page drop (DK-0043) | `DkInsertionLine(length:)` where the page will land; `DkSlot` settles it |
-| Sheet (DK-0044) | `showDkSheet(context, builder:)`; detents with `animateDkSheetTo(context, controller, size)` |
+| Sheet (DK-0044) | `DkSheetRoute.of(context, builder:)` (DkSheet's `showDkSheet` pushes it); detents with `animateDkSheetTo(context, controller, size)` |
 | Mini job bar (DK-0045) | `DkJobMorph(collapsed:, sheet:, bar:)` |
 | Viewer open (DK-0046) | `DkHero(tag: 'file-$id')` on the thumbnail and the viewer's first page; the viewer route uses `dkViewerPage` |
 

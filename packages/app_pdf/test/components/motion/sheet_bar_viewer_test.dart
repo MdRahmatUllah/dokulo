@@ -29,10 +29,12 @@ void main() {
           home: Builder(
             builder: (context) => Scaffold(
               body: TextButton(
-                onPressed: () => showDkSheet<void>(
-                  context,
-                  builder: (_) =>
-                      const SizedBox(key: sheetKey, width: 400, height: 300),
+                onPressed: () => Navigator.of(context).push(
+                  DkSheetRoute<void>.of(
+                    context,
+                    builder: (_) =>
+                        const SizedBox(key: sheetKey, width: 400, height: 300),
+                  ),
                 ),
                 child: const Text('open'),
               ),

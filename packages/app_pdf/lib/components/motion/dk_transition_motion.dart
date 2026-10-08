@@ -3,31 +3,18 @@ import 'package:go_router/go_router.dart';
 
 import '../../theme/dk_tokens.dart';
 
-/// Sheet (UI spec §9; DK-0044): shows [builder]'s sheet from the bottom. It
+/// Sheet (UI spec §9; DK-0044): the route a sheet opens in. The sheet
 /// slides up in `motion.standard` while the `color.scrim` fades in, in
 /// `motion.fast`; a tap on the scrim or back closes it. With Reduce Motion
-/// the sheet fades in where it ends (120 ms). The sheet's own look and
-/// drag handle are DkSheet's; this is the motion.
-Future<T?> showDkSheet<T>(
-  BuildContext context, {
-  required WidgetBuilder builder,
-  bool dismissible = true,
-}) {
-  final t = context.tokens;
-  return Navigator.of(context).push(
-    _DkSheetRoute<T>(
-      builder: builder,
-      motion: context.motion(DkMotionKind.standard),
-      scrimIn: t.motion.fast,
-      scrim: t.color.scrim,
-      dismissible: dismissible,
-      label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-    ),
-  );
-}
-
-class _DkSheetRoute<T> extends PopupRoute<T> {
-  _DkSheetRoute({
+/// the sheet fades in where it ends (120 ms). DkSheet's `showDkSheet` pushes
+/// it; the sheet's look, handle and detents are DkSheet's, this is the
+/// motion.
+///
+/// ```dart
+/// Navigator.of(context).push(DkSheetRoute.of(context, builder: (_) => sheet));
+/// ```
+class DkSheetRoute<T> extends PopupRoute<T> {
+  DkSheetRoute({
     required this.builder,
     required this.motion,
     required this.scrimIn,
@@ -35,6 +22,24 @@ class _DkSheetRoute<T> extends PopupRoute<T> {
     required this.dismissible,
     required this.label,
   });
+
+  /// The route with the timings and colours of [context]'s theme, and its
+  /// Reduce Motion setting.
+  factory DkSheetRoute.of(
+    BuildContext context, {
+    required WidgetBuilder builder,
+    bool dismissible = true,
+  }) {
+    final t = context.tokens;
+    return DkSheetRoute(
+      builder: builder,
+      motion: context.motion(DkMotionKind.standard),
+      scrimIn: t.motion.fast,
+      scrim: t.color.scrim,
+      dismissible: dismissible,
+      label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    );
+  }
 
   final WidgetBuilder builder;
   final DkMotionSpec motion;
