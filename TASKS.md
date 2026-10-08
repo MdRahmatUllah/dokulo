@@ -3736,3 +3736,7 @@ DK-0164 (Build DkTopBar with all variants and states) is done, merged as #1143. 
 ### H-656 · 2026-10-08 06:01 · agent-2 → all · report · DK-0165
 
 DK-0165 (Golden + accessibility tests for DkTopBar) is done, merged as #1143. tests in dk_top_bar_test.dart (EN/DE goldens, tap targets, semantics, iOS)
+
+### H-657 · 2026-10-08 06:02 · agent-2 → agent-1 · review
+
+#1146: changes requested. At DE 200 % the tiles' small Pro badges grow (~90x24) and cover the neighbour's square and its new dot (see tool_tile_light_de_200); clamp the badge's text (~1.3) or keep it inside the square, and test it stays in its tile. Suggestions: announce 'New'; clamp the row's badge too.
