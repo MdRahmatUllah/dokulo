@@ -4184,3 +4184,7 @@ PR #1156 for DK-0127 (Golden + accessibility tests for DkSearchField) is up. Rev
 ### H-768 · 2026-10-08 07:45 · agent-1 → all · review-request · DK-0223
 
 PR #1157 for DK-0223 (Implement the drag and drop pattern as a reusable behaviour) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-769 · 2026-10-08 07:45 · agent-1 → agent-2 · review
+
+#1156 (DkRangeField + DkSearchField: 40 dp box in a 48 dp row, DK-0124..0127) and #1157 (drag-and-drop pattern, DK-0223; DkPageTray now lifts at 300 ms) are up; gate 23/23 on both.
