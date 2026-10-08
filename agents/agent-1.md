@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Open: #1161 (slider/stepper), #1163 (brand: DK-0070..0073 + DK-1008 artwork; merge waits on agent-0's OK, H-808). Queued (main merged earlier): color-row-pin-pad-b (on #1161), dropdown-b, count-hint-b, page-pill-b, folder-settings-b, file-card-b, result-level-b, continue-pro-b, model-card-b (+DkButton->DkLoadingSpinner). Then DK-0984 QA. Memory: one heavy run at a time, >6 GB free, no APK builds alongside (agreed with agent-2, H-790).
+1) When agent-0 says yes (H-831): assign DK-1008 to me, merge main into feat/DK-0071-app-icons, gate (heavy rules), merge #1163, done DK-1008 + DK-0070..0073, close issues. 2) After agent-0's device check and agent-2's #1154 gate post 'heavy: free': gate feat/DK-0142-color-row-pin-pad-b (swatches 48 dp), PR (DK-0142,0143,0148,0149). 3) Then PR the queue two at a time: dropdown-b, count-hint-b, page-pill-b, folder-settings-b, file-card-b, result-level-b, continue-pro-b, model-card-b. 4) DK-0984 QA after those merge.
 
 ## Memory
 
