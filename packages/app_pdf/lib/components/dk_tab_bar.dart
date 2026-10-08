@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
-import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
-import 'dk_ring.dart';
+import 'dk_tappable.dart';
 
 /// One destination of [DkTabBar] and [DkNavRail].
 class DkTabItem {
@@ -182,18 +181,11 @@ class DkNavRail extends StatelessWidget {
   }
 }
 
-class _RailScan extends StatefulWidget {
+class _RailScan extends StatelessWidget {
   const _RailScan({required this.label, required this.onTap, this.onLongPress});
   final String label;
   final VoidCallback onTap;
   final VoidCallback? onLongPress;
-
-  @override
-  State<_RailScan> createState() => _RailScanState();
-}
-
-class _RailScanState extends State<_RailScan> {
-  bool _focused = false;
 
   @override
   Widget build(BuildContext context) {
@@ -202,36 +194,24 @@ class _RailScanState extends State<_RailScan> {
     final radius = BorderRadius.circular(t.radius.l);
     return Semantics(
       button: true,
-      label: widget.label,
-      child: DkRing(
-        side: _focused ? t.focusRing : null,
+      label: label,
+      excludeSemantics: true,
+      onTap: onTap,
+      onLongPress: onLongPress,
+      // DkTappable: the ring for the keyboard only, Enter and Space.
+      child: DkTappable(
+        onTap: onTap,
+        onLongPress: onLongPress,
         radius: t.radius.l,
-        // The floating shadow outside, the primary fill and ink inside.
-        child: DecoratedBox(
+        builder: (context, pressed) => Container(
+          width: 56,
+          height: 56,
           decoration: BoxDecoration(
+            color: pressed ? c.primaryPressed : c.primary,
             borderRadius: radius,
             boxShadow: t.elevation.floating,
           ),
-          child: Material(
-            color: c.primary,
-            borderRadius: radius,
-            child: InkWell(
-              onTap: widget.onTap,
-              onLongPress: widget.onLongPress,
-              onFocusChange: (v) => setState(() => _focused = v),
-              borderRadius: radius,
-              overlayColor: WidgetStatePropertyAll(t.state.pressed),
-              splashFactory: NoSplash.splashFactory,
-              child: SizedBox.square(
-                dimension: 56,
-                child: DkIcon(
-                  DkIcons.scan,
-                  size: DkIconSize.xl,
-                  color: c.onPrimary,
-                ),
-              ),
-            ),
-          ),
+          child: DkIcon(DkIcons.scan, size: DkIconSize.xl, color: c.onPrimary),
         ),
       ),
     );
@@ -240,7 +220,7 @@ class _RailScanState extends State<_RailScan> {
 
 /// A tab or rail destination: the icon (on a pill in the rail) over the
 /// label; a 48 dp target at least; selected for screen readers.
-class _Destination extends StatefulWidget {
+class _Destination extends StatelessWidget {
   const _Destination({
     required this.item,
     required this.selected,
@@ -254,76 +234,63 @@ class _Destination extends StatefulWidget {
   final bool pill;
 
   @override
-  State<_Destination> createState() => _DestinationState();
-}
-
-class _DestinationState extends State<_Destination> {
-  bool _focused = false;
-
-  @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final c = t.color;
-    final on = widget.selected;
+    final on = selected;
     final iconColor = on
-        ? (widget.pill ? c.onPrimaryContainer : c.primary)
+        ? (pill ? c.onPrimaryContainer : c.primary)
         : c.iconSecondary;
-    final icon = DkIcon(widget.item.icon, filled: on, color: iconColor);
+    final icon = DkIcon(item.icon, filled: on, color: iconColor);
     return Semantics(
       button: true,
       selected: on,
-      label: widget.item.label,
+      label: item.label,
       // The children are excluded, the tap with them: give it back.
       excludeSemantics: true,
-      onTap: widget.onTap,
-      child: DkRing(
-        side: _focused ? t.focusRing : null,
+      onTap: onTap,
+      // DkTappable draws the pressed fill itself: an InkWell's ink would
+      // paint on the Scaffold's Material, under the bar's surface.
+      child: DkTappable(
+        onTap: onTap,
         radius: t.radius.m,
-        child: InkWell(
-          onTap: widget.onTap,
-          onFocusChange: (v) => setState(() => _focused = v),
-          borderRadius: BorderRadius.circular(t.radius.m),
-          overlayColor: WidgetStatePropertyAll(t.state.pressed),
-          splashFactory: NoSplash.splashFactory,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: 48,
-              minWidth: widget.pill ? 64 : 48,
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: t.space.xs),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: widget.pill ? t.space.xs : t.space.xxs,
-                children: [
-                  if (widget.pill)
-                    Container(
-                      width: 56,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: on ? c.primaryContainer : null,
-                        borderRadius: BorderRadius.circular(t.radius.l),
-                      ),
-                      child: icon,
-                    )
-                  else
-                    icon,
-                  // A long label ("Werkzeuge" at large text) shrinks to fit
-                  // its cell rather than losing letters.
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      widget.item.label,
-                      style: t.text.labelM.copyWith(
-                        color: on ? c.primary : c.textSecondary,
-                      ),
-                      maxLines: 1,
-                    ),
+        builder: (context, pressed) => Container(
+          constraints: BoxConstraints(minHeight: 48, minWidth: pill ? 64 : 48),
+          padding: EdgeInsets.symmetric(vertical: t.space.xs),
+          decoration: BoxDecoration(
+            color: pressed ? t.state.pressed : null,
+            borderRadius: BorderRadius.circular(t.radius.m),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: pill ? t.space.xs : t.space.xxs,
+            children: [
+              if (pill)
+                Container(
+                  width: 56,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: on ? c.primaryContainer : null,
+                    borderRadius: BorderRadius.circular(t.radius.l),
                   ),
-                ],
+                  child: icon,
+                )
+              else
+                icon,
+              // A long label ("Werkzeuge" at large text) shrinks to fit
+              // its cell rather than losing letters.
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  item.label,
+                  style: t.text.labelM.copyWith(
+                    color: on ? c.primary : c.textSecondary,
+                  ),
+                  maxLines: 1,
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

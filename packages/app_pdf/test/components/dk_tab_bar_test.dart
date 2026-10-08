@@ -2,6 +2,7 @@ import 'package:app_pdf/catalogue/bar_states.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/components/dk_icon.dart';
 import 'package:app_pdf/components/dk_tab_bar.dart';
+import 'package:app_pdf/components/dk_tappable.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -153,11 +154,41 @@ void main() {
           .getSize(
             find.ancestor(
               of: find.text('Files'),
-              matching: find.byType(InkWell),
+              matching: find.byType(DkTappable),
             ),
           )
           .height,
       greaterThanOrEqualTo(48),
     );
+  });
+
+  testWidgets('a pressed tab shows the pressed fill over the bar', (
+    tester,
+  ) async {
+    phone(tester);
+    await tester.pumpWidget(app(bar()));
+    await tester.pumpAndSettle();
+    Color? fill() =>
+        (tester
+                    .widget<Container>(
+                      find
+                          .ancestor(
+                            of: find.text('Tools'),
+                            matching: find.byType(Container),
+                          )
+                          .first,
+                    )
+                    .decoration
+                as BoxDecoration?)
+            ?.color;
+    expect(fill(), isNull);
+    final gesture = await tester.startGesture(
+      tester.getCenter(find.text('Tools')),
+    );
+    await tester.pump();
+    expect(fill(), DkTokens.light.state.pressed);
+    await gesture.up();
+    await tester.pump();
+    expect(fill(), isNull);
   });
 }
