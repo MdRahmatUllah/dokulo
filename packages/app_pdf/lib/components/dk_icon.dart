@@ -146,6 +146,10 @@ abstract final class DkIcons {
   static const faceId = IconData(0xf008, fontFamily: _font) /* face */;
   static const palette = IconData(0xe40a, fontFamily: _font) /* palette */;
   static const remove = IconData(0xe15b, fontFamily: _font) /* remove */;
+  static const arrowForward = IconData(
+    0xe5c8,
+    fontFamily: _font,
+  ) /* arrow_forward */;
   static const scanDocument = IconData(
     0xe873,
     fontFamily: _font,
@@ -154,10 +158,10 @@ abstract final class DkIcons {
   static const scanBook = IconData(0xea19, fontFamily: _font) /* menu_book */;
   static const scanBatch = IconData(0xe43c, fontFamily: _font) /* burst_mode */;
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
-  static const arrowForward = IconData(
-    0xe5c8,
+  static const chevronRight = IconData(
+    0xe5cc,
     fontFamily: _font,
-  ) /* arrow_forward */;
+  ) /* chevron_right */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
