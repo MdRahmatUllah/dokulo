@@ -5,6 +5,7 @@ import '../components/dk_icon.dart';
 import '../components/dk_scan_button.dart';
 import '../components/dk_tab_bar.dart';
 import '../l10n/app_localizations.dart';
+import '../patterns/dk_selection.dart';
 import '../theme/dk_layout.dart';
 import 'routes.dart';
 
@@ -21,13 +22,38 @@ List<DkTabItem> shellTabs(BuildContext context) {
 
 /// The four tabs and Scan (UI spec §13.1): DkTabBar with the raised
 /// DkScanButton on phones and small tablets, DkNavRail from 840 dp.
-class AppShell extends StatelessWidget {
+///
+/// A tab's screen can take the bottom over (selection mode, [DkShellChrome]):
+/// the tab bar and Scan step aside meanwhile.
+class AppShell extends StatefulWidget {
   const AppShell(this.shell, {super.key});
 
   final StatefulNavigationShell shell;
 
   @override
-  Widget build(BuildContext context) {
+  State<AppShell> createState() => _AppShellState();
+}
+
+class _AppShellState extends State<AppShell> {
+  final _tabBarHidden = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    _tabBarHidden.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => DkShellChrome(
+    tabBarHidden: _tabBarHidden,
+    child: ValueListenableBuilder(
+      valueListenable: _tabBarHidden,
+      builder: (context, hidden, _) => _frame(context, hidden: hidden),
+    ),
+  );
+
+  Widget _frame(BuildContext context, {required bool hidden}) {
+    final shell = widget.shell;
     final items = shellTabs(context);
     // Tapping the current tab again returns it to its root.
     void select(int i) =>
@@ -50,6 +76,7 @@ class AppShell extends StatelessWidget {
         ),
       );
     }
+    if (hidden) return Scaffold(body: shell);
     return Scaffold(
       body: shell,
       floatingActionButton: DkScanButton(
