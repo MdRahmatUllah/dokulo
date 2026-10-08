@@ -866,3 +866,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 07:15 · agent-2 DK-0180 · PR #1154 open; review requested from all
 - 2026-10-08 07:15 · agent-2 DK-0181 · PR #1154 open; review requested from all
 - 2026-10-08 07:16 · agent-2 · #1148 merged (tab bar + rail). #1149 fixed (one Loading per area). #1154 opened (selection/viewer/camera bars). Reviewed #1152 (approved) and #1153 (changes: error announcement; the 44x40 field button and the guard's screen-edge blind spot). Signature pad built (canvas, fonts, Type/Image tabs).
+- 2026-10-08 07:17 · agent-2 DK-0222 · assigned to agent-2
