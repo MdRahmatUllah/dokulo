@@ -1,0 +1,142 @@
+"""Visual QA of the illustrations (DK-0985, DK-0988..DK-1007).
+
+    python tools/qa_illustrations.py [--out docs/qa/illustrations]
+
+1. Screenshots every design frame dokulo-design/{light,dark}/00-design-system/
+   illustrations/ill-NN-*.html with headless Chrome (the frame sits 32 px in,
+   so the frame is cropped out of a fixed 800 px wide window).
+2. Renders every DkIllustration at the same size, transparent, through
+   packages/app_pdf/test/qa/illustration_qa_test.dart (DK_QA_OUT).
+3. Puts the app render on the design page's own background and writes
+   <out>/ill-NN-...-<theme>.png: design | app | difference, and README.md with
+   the share of pixels where any channel differs by more than 32 (of 255).
+
+Anti-aliasing differs between Chrome's and Flutter's SVG renderers, so a
+fraction of a percent always differs along edges; a shape, colour or layout
+mistake shows as several percent.
+"""
+
+import argparse
+import os
+import re
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+from PIL import Image, ImageChops, ImageDraw
+
+ROOT = Path(__file__).resolve().parents[1]
+DESIGN = ROOT / "dokulo-design"
+CHROME = [
+    Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
+    Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
+    Path("/usr/bin/google-chrome"),
+    Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"),
+]
+PAD = 32  # the export's body padding around the frame
+WINDOW = 800  # wider than Chrome's minimum window
+LIMIT = 2.0  # % of pixels allowed to differ (edges and anti-aliasing)
+
+
+def chrome() -> Path:
+    for c in CHROME:
+        if c.exists():
+            return c
+    raise SystemExit("no Chrome or Edge found for the design screenshots")
+
+
+def frame_size(html: Path) -> tuple[int, int]:
+    m = re.search(r'class="ill-art[^"]*" style="width: (\d+)px; height: (\d+)px', html.read_text(encoding="utf-8"))
+    return int(m.group(1)), int(m.group(2))
+
+
+def shoot(html: Path, size: tuple[int, int], png: Path) -> Image.Image:
+    w, h = size
+    raw = png.with_suffix(".raw.png")
+    subprocess.run([str(chrome()), "--headless=new", "--disable-gpu", "--hide-scrollbars",
+                    "--force-device-scale-factor=1",
+                    f"--window-size={WINDOW},{h + 2 * PAD}", f"--screenshot={raw}",
+                    html.resolve().as_uri()], check=True, capture_output=True)
+    img = Image.open(raw).convert("RGB")
+    raw.unlink()
+    # The frame is centred in the viewport; its top is PAD. (A narrow window
+    # is widened by Chrome but the screenshot is cut to the asked width.)
+    left = (WINDOW - w) // 2
+    return img.crop((left, PAD, left + w, PAD + h))
+
+
+def compare(design: Image.Image, app: Image.Image) -> tuple[Image.Image, float]:
+    bg = design.getpixel((design.width // 2, 1))  # the page behind the art
+    under = Image.new("RGBA", app.size, bg + (255,))
+    app_rgb = Image.alpha_composite(under, app.convert("RGBA")).convert("RGB")
+    diff = ImageChops.difference(design, app_rgb)
+    # Any channel, not luminance: blue weighs only 0.114 there.
+    r, g, b = diff.split()
+    mask = ImageChops.lighter(ImageChops.lighter(r, g), b).point(lambda v: 255 if v > 32 else 0)
+    share = 100 * mask.histogram()[255] / (mask.width * mask.height)
+    heat = Image.composite(Image.new("RGB", diff.size, (220, 38, 38)), design.point(lambda v: v // 3), mask)
+    sheet = Image.new("RGB", (design.width * 3 + 16, design.height + 20), (255, 255, 255))
+    for i, (img, label) in enumerate([(design, "design"), (app_rgb, "app"), (heat, "difference")]):
+        sheet.paste(img, (i * (design.width + 8), 20))
+        ImageDraw.Draw(sheet).text((i * (design.width + 8) + 4, 4), label, fill=(0, 0, 0))
+    return sheet, share
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default="docs/qa/illustrations")
+    out = ROOT / ap.parse_args().out
+    tmp = out / "_app"
+    shutil.rmtree(tmp, ignore_errors=True)
+    env = dict(os.environ, DK_QA_OUT=str(tmp))
+    flutter = shutil.which("flutter") or "flutter"
+    subprocess.run([flutter, "test", "--timeout", "120s", "test/qa/illustration_qa_test.dart"],
+                   cwd=ROOT / "packages" / "app_pdf", env=env, check=True, shell=sys.platform == "win32")
+    rows = []
+    for html in sorted((DESIGN / "light" / "00-design-system" / "illustrations").glob("ill-*.html")):
+        for theme in ("light", "dark"):
+            page = DESIGN / theme / "00-design-system" / "illustrations" / html.name
+            design = shoot(page, frame_size(page), out / "x.png")
+            app = Image.open(tmp / "app" / f"{html.stem}-{theme}.png")
+            sheet, share = compare(design, app)
+            sheet.save(out / f"{html.stem}-{theme}.png")
+            rows.append((html.stem, theme, share))
+    shutil.rmtree(tmp, ignore_errors=True)
+    lines = [
+        "# Illustrations: visual QA (DK-0985, DK-0988..DK-1007)",
+        "",
+        "Generated by `python tools/qa_illustrations.py`. Each image is the design",
+        "frame (headless Chrome), the app's `DkIllustration` at the same size, and",
+        "the pixels where any channel differs by more than 32 of 255 in red. Edges",
+        f"always differ a little (two SVG renderers); more than {LIMIT} % would be a",
+        "real deviation.",
+        "",
+        "The frames' checklist, for the illustrations:",
+        "",
+        "- **Layout, shapes, icons:** the pixel comparison below.",
+        "- **Colour tokens:** one asset per illustration, drawn in the light palette;",
+        "  `DkIllustrationColors` swaps its colours for `primary`, `iconPrimary`,",
+        "  `primaryContainer` and `surface` while it is parsed, so Dark is the same",
+        "  file in the dark tokens. Only the paywall's amber is fixed, as in the design.",
+        "- **Copy, typography, badges, safe areas:** none; the illustrations carry no",
+        "  text and are decorative (excluded from semantics unless given a label).",
+        "- **illustrations-overview (DK-0985):** a design-system page that lays the 20",
+        "  frames out in a grid; the app has no such screen. Its content is the 20",
+        "  frames below.",
+        "",
+        "| Illustration | Theme | Pixels differing | Result |",
+        "| --- | --- | --- | --- |",
+    ]
+    failed = 0
+    for name, theme, share in rows:
+        ok = share <= LIMIT
+        failed += not ok
+        lines.append(f"| [{name}]({name}-{theme}.png) | {theme} | {share:.2f} % | {'match' if ok else 'DEVIATION'} |")
+    (out / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
+    print(f"{len(rows)} compared, {failed} deviation(s); report: {out / 'README.md'}")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
