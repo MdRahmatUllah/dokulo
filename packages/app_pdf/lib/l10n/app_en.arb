@@ -611,5 +611,29 @@
   "tools_category_automation": "Automation",
   "@tools_category_automation": {
     "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "scan_mode_document": "Document",
+  "@scan_mode_document": {
+    "description": "Scan mode (DkScanButton menu, S1 mode switcher)."
+  },
+  "scan_mode_idcard": "ID card",
+  "@scan_mode_idcard": {
+    "description": "Scan mode: both sides of an ID card."
+  },
+  "scan_mode_book": "Book",
+  "@scan_mode_book": {
+    "description": "Scan mode: a book spread."
+  },
+  "scan_mode_batch": "Batch",
+  "@scan_mode_batch": {
+    "description": "Scan mode: many pages with auto-capture."
+  },
+  "scan_mode_import": "Import photos",
+  "@scan_mode_import": {
+    "description": "Scan menu: photos from the gallery instead of the camera."
+  },
+  "shell_button_scan_hint": "Choose a scan mode",
+  "@shell_button_scan_hint": {
+    "description": "Screen readers: what a long press on the Scan button does."
   }
 }

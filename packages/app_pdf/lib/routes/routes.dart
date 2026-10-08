@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../catalogue/catalogue.dart';
+import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/placeholder_screen.dart';
 import 'app_shell.dart';
@@ -22,6 +23,9 @@ abstract final class Routes {
   static const models = '/me/models'; // M2
   static String settings(String page) => '/me/settings/$page'; // M3
   static const scan = '/scan'; // S1
+
+  /// S1 in a mode from the Scan button's menu.
+  static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
   static String tool(String toolId) => '/tool/$toolId'; // T2
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
@@ -96,7 +100,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
       fullScreen(
         Routes.scan,
-        (_) => const PlaceholderScreen('S1'),
+        (s) => PlaceholderScreen(
+          'S1',
+          detail: s.uri.queryParameters['mode'] ?? '',
+        ),
         routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
       ),
       fullScreen(
