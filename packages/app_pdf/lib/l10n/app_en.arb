@@ -1000,6 +1000,22 @@
   "@sign_stamp_remove": {
     "description": "The delete × of a DkSignatureStamp (UI spec §11.5; the design export's label)."
   },
+  "sign_card_label": "Saved signature",
+  "@sign_card_label": {
+    "description": "Screen-reader label of a DkSignatureCard (UI spec §11.8)."
+  },
+  "sign_card_delete": "Delete signature",
+  "@sign_card_delete": {
+    "description": "DkSignatureCard's long-press action (UI spec §11.8)."
+  },
+  "split_add": "Split here",
+  "@split_add": {
+    "description": "Smart Split: the gap between two pages, with no cut yet (UI spec §11.8, §21)."
+  },
+  "split_remove": "Don't split here",
+  "@split_remove": {
+    "description": "Smart Split: a cut between two pages, tap to remove it."
+  },
   "compare_added": "Added",
   "@compare_added": {
     "description": "Compare PDFs: the change tag (UI spec §4.3, DkDiffRow)."

@@ -32,6 +32,7 @@ import 'tool_tile_states.dart';
 import 'crop_states.dart';
 import 'detection_states.dart';
 import 'progress_states.dart';
+import 'sign_states.dart';
 import 'chat_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -196,6 +197,12 @@ const catalogue = [
     '11.5 Pages and thumbnails',
     BoxStates(),
   ),
+  CatalogueEntry(
+    'DkSignatureCard',
+    '11.8 Editor and AI',
+    SignatureCardStates(),
+  ),
+  CatalogueEntry('DkSplitMarker', '11.8 Editor and AI', SplitStates()),
   CatalogueEntry('DkChatBubble', '11.8 Editor and AI', ChatStates()),
   CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
 ];
