@@ -654,6 +654,22 @@
       }
     }
   },
+  "status_new": "New",
+  "@status_new": {
+    "description": "DkStatusDot, screen readers: a new file or tool."
+  },
+  "status_unsaved": "Unsaved changes",
+  "@status_unsaved": {
+    "description": "DkStatusDot, screen readers."
+  },
+  "status_running": "Working",
+  "@status_running": {
+    "description": "DkStatusDot, screen readers: a job is running."
+  },
+  "scanner_button_shutter": "Take photo",
+  "@scanner_button_shutter": {
+    "description": "Screen readers: the scanner's shutter button."
+  },
   "model_not_available": "Not available on this phone",
   "@model_not_available": {
     "description": "DkModelCard: the phone can't run this model (memory, chip)."
