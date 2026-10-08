@@ -110,6 +110,7 @@ const catalogue = [
     '11.4 Inputs and controls',
     DkSwitchSegmentedGallery(),
   ),
+  CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
 ];
 
 /// The list of components; tap one to see its states.

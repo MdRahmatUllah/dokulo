@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../components/dk_icon.dart';
+import '../components/dk_scan_button.dart';
+import '../components/dk_tab_bar.dart';
 import '../components/dk_top_bar.dart';
+import '../routes/app_shell.dart';
 import '../theme/dk_tokens.dart';
 
 void _none() {}
@@ -56,6 +59,52 @@ class TopBarStates extends StatelessWidget {
           const _LargeBarDemo(collapsed: true),
         ],
       ),
+    );
+  }
+}
+
+/// DkTabBar (DK-0166) with the raised Scan button, Files selected; then
+/// DkNavRail (DK-0168) for tablets, Home selected.
+class TabBarStates extends StatelessWidget {
+  const TabBarStates({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return Column(
+      spacing: t.space.l,
+      children: [
+        SizedBox(
+          height: 200,
+          child: Scaffold(
+            floatingActionButton: DkScanButton(
+              showLabel: false,
+              onPressed: _none,
+              onMode: (_) {},
+            ),
+            floatingActionButtonLocation: DkTabBar.scanLocation,
+            bottomNavigationBar: DkTabBar(
+              items: shellTabs(context),
+              currentIndex: 2,
+              onSelect: (_) {},
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 420,
+          child: Row(
+            children: [
+              DkNavRail(
+                items: shellTabs(context),
+                currentIndex: 0,
+                onSelect: (_) {},
+                onScan: _none,
+              ),
+              Expanded(child: ColoredBox(color: t.color.background)),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
