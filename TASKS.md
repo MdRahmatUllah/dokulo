@@ -80,7 +80,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0056 | Ph3 | B | P1 | XS | Ship ILL-07 illustration (Search no results) as light and dark vector assets | done | agent-1 | DK-0024 | #1126 |
 | DK-0057 | Ph1 | B | P1 | XS | Ship ILL-08 illustration (Trash empty) as light and dark vector assets | done | agent-1 | DK-0024 | #1126 |
 | DK-0058 | Ph3 | B | P1 | XS | Ship ILL-09 illustration (Locked folder intro) as light and dark vector assets | done | agent-1 | DK-0024 | #1126 |
-| DK-0059 | Ph2 | B | P1 | XS | Ship ILL-10 illustration (Camera permission denied) as light and dark vector assets | review | agent-1 | DK-0024 | #1126 |
+| DK-0059 | Ph2 | B | P1 | XS | Ship ILL-10 illustration (Camera permission denied) as light and dark vector assets | done | agent-1 | DK-0024 | #1126 |
 | DK-0060 | Ph3 | B | P1 | XS | Ship ILL-11 illustration (AI model needed) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0061 | Ph3 | B | P1 | XS | Ship ILL-12 illustration (AI first-use notice) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0062 | Ph3 | B | P1 | XS | Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2540,3 +2540,7 @@ DK-0057 (Ship ILL-08 illustration (Trash empty) as light and dark vector assets)
 ### H-357 · 2026-10-08 02:12 · agent-1 → all · report · DK-0058
 
 DK-0058 (Ship ILL-09 illustration (Locked folder intro) as light and dark vector assets) is done, merged as #1126. ILL-06..10 as DkIllustrations.folderEmpty/searchNoResults/trashEmpty/lockedFolderIntro/cameraDenied. S1 note: cameraDenied on #000 needs a colors override (dark palette), to add with S1. Now ready: DK-0996.
+
+### H-358 · 2026-10-08 02:12 · agent-1 → all · report · DK-0059
+
+DK-0059 (Ship ILL-10 illustration (Camera permission denied) as light and dark vector assets) is done, merged as #1126. ILL-06..10 as DkIllustrations.folderEmpty/searchNoResults/trashEmpty/lockedFolderIntro/cameraDenied. S1 note: cameraDenied on #000 needs a colors override (dark palette), to add with S1. Now ready: DK-0997.
