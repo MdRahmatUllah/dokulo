@@ -59,9 +59,8 @@ class CompressInput {
     'greyscale': greyscale,
     'removeMetadata': removeMetadata,
     'targetBytes': ?targetBytes,
-    // ponytail: a password in the jobs table is plain text in app support;
-    // encrypt it with the locked-folder key if DK-0282 lands first.
-    'password': ?password,
+    // No password: it would sit in the jobs table in plain text. A resumed
+    // job on a locked file fails as `locked`, and T2 asks again.
   };
 }
 
@@ -90,6 +89,8 @@ class CompressJob extends ToolJob<CompressInput> {
   @override
   List<String> inputFiles(CompressInput input) => input.files;
 
+  /// [options] are the step's saved options plus `outputDir` and `suffix`,
+  /// which the workflow runner (DK-0536) adds per run.
   @override
   CompressInput chain(JobOutput previous, Map<String, Object?> options) =>
       CompressInput.fromJson({

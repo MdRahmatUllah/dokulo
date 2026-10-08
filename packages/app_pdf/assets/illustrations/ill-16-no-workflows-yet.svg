@@ -1,0 +1,9 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Three connected cards"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<rect x="14" y="26" width="30" height="22" rx="4" fill="#FFFFFF"></rect>
+<rect x="76" y="26" width="30" height="22" rx="4" fill="#FFFFFF"></rect>
+<rect x="45" y="74" width="30" height="22" rx="4" fill="#E6ECFF"></rect>
+<path d="M44 37h32M29 48v12a4 4 0 0 0 4 4h12a4 4 0 0 1 4 4v6M91 48v12a4 4 0 0 1-4 4H75a4 4 0 0 0-4 4v6"></path>
+<circle cx="60" cy="37" r="3" fill="#2251E6" stroke="#2251E6"></circle>
+<path d="M22 37h14M84 37h14M53 85h14" stroke="#2251E6"></path>
+</g></svg>

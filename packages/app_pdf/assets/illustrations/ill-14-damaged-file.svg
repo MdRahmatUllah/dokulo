@@ -1,0 +1,7 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Page with a torn corner"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<path d="M30 20h30l6 6-6 6 8 4-4 8 10 4v42a3 3 0 0 1-3 3H30a3 3 0 0 1-3-3V23a3 3 0 0 1 3-3z" fill="#FFFFFF"></path>
+<path d="M36 52h28M36 60h30M36 68h22M36 76h26"></path>
+<path d="M70 16l14 2-2 10 10 4-4 10-12-4 4-8-8-4z" fill="#E6ECFF"></path>
+<path d="M86 50l6 4M90 44l8 0" stroke="#2251E6"></path>
+</g></svg>

@@ -19,6 +19,7 @@ packages/
       main.dart         runApp, nothing else
       screens/          one folder per screen ID: screens/h1_home/, screens/t2_tool/, …
       components/       the Dk* widgets (DkToolTile, DkFileCard, …), one file each
+      patterns/         the interaction patterns of UI spec §12 (confirmations, undo, …)
       providers/        Riverpod providers that aren't private to one screen
       routes/           the go_router config and route names
       l10n/             app_en.arb, app_de.arb (DK-0009)
@@ -132,6 +133,13 @@ Riverpod 3 with code generation, the same versions as Sogda:
   helpers in `test/db/dokulo/`: move `generated/*` into `test/db/generated/`
   and delete the rest (`database_test.dart` already checks that every version
   upgrades to the current one). Take the `db-schema` lock first.
+- **Files search's index** (DK-0270): `TextIndexer(db)` puts every page's text
+  (PDF text, OCR layers included) into `ocr_text` and sets `files.has_text`.
+  A file is stale while `files.indexed_at` isn't its `modified`; each file is
+  indexed in one transaction, so a kill leaves the old index and the next
+  `catchUp()` finishes it. After a save: `FileStore.save`, `reconcile`, then
+  `catchUp()`; `startupCleanup` runs both in the background
+  (`StartupReport.indexing`).
 - **Data from drift:** an async notifier (`AsyncNotifier` / `StreamNotifier`)
   that maps the drift watch stream. **Never await a watch's `.first`** in a
   provider: it hangs tests.
@@ -184,6 +192,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/tool/:toolId/result` | T3 Result | full screen | |
 | `/viewer/:fileId` | V1 Viewer | full screen | `?mode=edit` opens V2 Edit mode |
 | `/organize/:fileId` | P1 Organize pages | full screen | |
+| `/dev/catalogue` | Component catalogue | full screen | Debug builds only: a list of components; each opens its variants and states in Light and Dark (`lib/catalogue/`) |
 
 - **Full-screen routes** sit on the root navigator, above the shell: the tab
   bar is hidden, and back returns to the tab they were pushed from. That covers
@@ -213,20 +222,111 @@ Light and a Dark instance. The token names are those in
 `Overview & foundations.md` → Design tokens and the UI spec §4–§9.
 
 ```dart
-final t = Theme.of(context).extension<DkTokens>()!;
+final t = context.tokens;                 // package:app_pdf/theme/dk_tokens.dart
 return Container(
-  padding: EdgeInsets.all(t.spaceM),   // never EdgeInsets.all(16)
+  padding: EdgeInsets.all(t.space.m),     // never EdgeInsets.all(12)
   decoration: BoxDecoration(
-    color: t.surfaceRaised,            // never Color(0xFF…)
-    borderRadius: BorderRadius.circular(t.radiusM),
+    color: t.color.surfaceRaised,         // never Color(0xFF…)
+    borderRadius: BorderRadius.circular(t.radius.m),
+    boxShadow: t.elevation.raised,
   ),
-  child: Text(label, style: t.typeLabelL),
+  child: Text(label, style: t.text.labelL),  // the spec's type.labelL
 );
 ```
 
-DK-0024 may add a shorthand (for example `context.tokens`); when it does,
-update this example the same day. No hex colours, raw font sizes or magic
-numbers in widgets. A value that isn't a token is a gap: add the token first.
+Groups: `color`, `text` (the spec's `type.*`; not `type`, which
+`ThemeExtension` uses as its lookup key), `space`, `radius`, `elevation`,
+`motion`. `dokuloTheme(DkTokens.light / .dark)` in `lib/theme/app_theme.dart`
+builds the MaterialApp themes. No hex colours, raw font sizes or magic
+numbers in widgets; `python tools/check_tokens.py` (a gate step) fails on a
+raw colour in `lib/screens` or `lib/components`. A value that isn't a token
+is a gap: add the token first.
+
+Icons are `DkIcon(DkIcons.…)` (`components/dk_icon.dart`, DK-0048): Material
+Symbols Rounded at the spec's five sizes (`DkIconSize.s` 16 … `xxl` 32),
+outlined, `filled: true` only for the selected tab and toggled states.
+`DkIcons` names every icon by purpose (`DkIcons.tool('compress')`,
+`DkIcons.back(context)` switches with the platform), so a screen never names
+a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
+codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
+a const `IconData` (the release build's tree-shaker needs that).
+
+**The component catalogue (DK-0150).** Every `Dk` component shows each
+variant and state in Light and Dark at `/dev/catalogue` (debug builds only;
+`dokulo://open/dev/catalogue` on the emulator). A component task adds a
+states widget to `lib/catalogue/` and one `CatalogueEntry` to
+`lib/catalogue/catalogue.dart`, and its golden test renders that same widget,
+so the catalogue shows exactly what is tested. `test/flutter_test_config.dart`
+loads the icon font for every test, so goldens show the glyphs; text stays in
+the test font.
+
+Everything about a tool comes from **`ToolCatalogue.of(id)`**
+(`lib/tools/tool_catalogue.dart`, DK-0049): its icon (from `DkIcons.tools`),
+its fixed EN/DE name, its one-line description (UI spec §21), its tier and its
+Tools-tab section. The grid, the T2 header, the X1 picker, search, About this
+tool and the notifications all read it, so they never disagree. A new tool is
+a new entry there, an icon in `DkIcons.tools` and two ARB strings each.
+
+**Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
+/ standard / emphasis)`, never raw durations: it returns the spec's duration
+and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
+cross-fade (`crossFade: true`: fade instead of moving, scaling or sliding).
+Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
+context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
+`captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
+
+The signature motions (UI spec §9) are ready-made in
+`lib/components/motion/`; use them, don't rebuild them. Each has its Reduce
+Motion variant built in:
+
+| Motion | Use |
+|---|---|
+| Scan capture (DK-0040) | `DkCaptureFlash(captures:)` over the viewfinder, `flyCapturedPage(context, page:, from:, to:)`, then `DkPop(value: count)` on the badge |
+| Success tick (DK-0041) | `DkSuccessTick()` and `DkCountUp(from:, to:, format:)` on result cards |
+| Tile reorder (DK-0042) | `DkLift(lifted:)` on the picked tile, `DkSlot(rect:)` for every other tile in the `Stack` |
+| Page drop (DK-0043) | `DkInsertionLine(length:)` where the page will land; `DkSlot` settles it |
+| Sheet (DK-0044) | `DkSheetRoute.of(context, builder:)` (DkSheet's `showDkSheet` pushes it); detents with `animateDkSheetTo(context, controller, size)` |
+| Mini job bar (DK-0045) | `DkJobMorph(collapsed:, sheet:, bar:)` |
+| Viewer open (DK-0046) | `DkHero(tag: 'file-$id')` on the thumbnail and the viewer's first page; the viewer route uses `dkViewerPage` |
+
+Numbers the user compares as they change (sizes, page counts, times,
+percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
+(DK-0036). Surfaces take `t.surfaceAt(DkLevel.raised, radius: …)`, which is
+shadows in light and a lighter surface plus an outline in dark. Borders are
+`t.divider`, `t.inputRest/Focused/Error` and `t.selectionRing`, and the grid
+is `DkGrid.forWidth(width)` (`theme/dk_layout.dart`, DK-0038).
+
+**Ask or undo (UI spec §12.4, §12.6; `lib/patterns/`).** Only what can't be
+undone asks first: `confirmDk(context, DkConfirmation.x)` with its EN/DE copy
+(delete forever, empty trash, apply redaction, replace original, discard a
+scan or edits, cancel a job running > 30 s, remove a saved signature). Every
+other change happens at once and offers Undo: `showDkUndo(context, DkUndo.x,
+message, onUndo: …)` (4 s; Replace original 10 s), where `onUndo` restores
+the exact state before (order, folder, pages). Don't call `showDkConfirm` for
+anything else.
+
+**The keyboard (UI spec §12.7).** DkSheet and DkActionBar ride the keyboard
+by themselves. A form screen wraps its Scaffold body in
+`DkFormAccessory(child: …)`: while the keyboard is open, Previous field ·
+Next field · Done sit on top of it (they move the focus without closing the
+keyboard).
+
+**Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
+unless Settings → Appearance overrides it (`appThemeModeProvider`,
+`lib/providers/theme_providers.dart`); `MaterialApp` watches it, so a change
+applies to every screen at once. `dokuloTheme` also maps the tokens onto
+Material's `ColorScheme`, so stock Material widgets match. The dark-mode
+rules, for every screen and component:
+
+- Golden tests in both themes for every screen state.
+- Elevation in Dark is `surfaceRaised` plus an outline (`elevation.raised` has
+  no shadow there).
+- PDF pages stay white; only the viewer's night mode inverts them. Thumbnails
+  keep a 1 dp `color.outline` and wrap the page image in
+  `ColorFiltered(colorFilter: t.thumbnailFilter)` (92 % brightness in Dark).
+- `DkIllustration` and the camera chrome need nothing: the illustrations
+  recolour from the tokens, and the camera tokens are dark in both themes.
+- Toasts use `inverseSurface` / `onInverseSurface` / `inversePrimary`.
 
 Strings come from the ARB files (`l10n/app_en.arb`, `app_de.arb`), with keys
 `screen_element_purpose` (e.g. `compress_button_run`). Tool names are the fixed

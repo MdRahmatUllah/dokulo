@@ -276,20 +276,25 @@ abstract final class PdfStructure {
 
   /// Aligned segments are a table when there are three or more columns over
   /// three or more rows, the first row is a bold header, or the last column
-  /// is mostly numbers (totals). Anything else side by side is text
+  /// is mostly amounts (totals). Anything else side by side is text
   /// (DK-1056).
   static bool _isTable(List<TextLine> run) {
     final columns = run.first.segments.length;
     if (columns >= 3 && run.length >= 3) return true;
     if (run.first.bold && !run.skip(1).every((l) => l.bold)) return true;
     final last = [for (final l in run) l.segments.last.text];
-    bool numeric(String t) {
-      final visible = t.replaceAll(RegExp(r'\s'), '');
-      final digits = RegExp(r'[0-9.,€$£%+\-]').allMatches(visible).length;
-      return visible.isNotEmpty && digits * 2 >= visible.length;
+    // An amount: a number with a currency sign or %, or with one or two
+    // decimals ("1,424.00"). Not a long digit group such as a Steuer-ID or
+    // an IBAN, which sit in address blocks (DK-1062).
+    bool amount(String t) {
+      final v = t.trim();
+      if (RegExp(r'[€$£%]').hasMatch(v) && RegExp(r'\d').hasMatch(v)) {
+        return true;
+      }
+      return RegExp(r'^[-+]?\d{1,3}(?:[.,]\d{3})*[.,]\d{1,2}$').hasMatch(v);
     }
 
-    return last.where(numeric).length * 2 > last.length;
+    return last.where(amount).length * 2 > last.length;
   }
 
   /// The distinct heading sizes, largest first: level 1 is the first.

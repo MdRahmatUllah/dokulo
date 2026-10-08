@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../components/dk_icon.dart';
+import '../components/dk_scan_button.dart';
+import '../components/dk_tab_bar.dart';
 import '../l10n/app_localizations.dart';
+import '../theme/dk_layout.dart';
 import 'routes.dart';
 
-/// The four tabs plus the raised Scan button (UI spec §13.1). A stand-in for
-/// the designed tab bar, which its component task builds.
+/// Home, Tools, Files and Me, in the user's language.
+List<DkTabItem> shellTabs(BuildContext context) {
+  final l10n = AppLocalizations.of(context);
+  return [
+    DkTabItem(icon: DkIcons.home, label: l10n.shell_tab_home),
+    DkTabItem(icon: DkIcons.toolsTab, label: l10n.shell_tab_tools),
+    DkTabItem(icon: DkIcons.files, label: l10n.shell_tab_files),
+    DkTabItem(icon: DkIcons.me, label: l10n.shell_tab_me),
+  ];
+}
+
+/// The four tabs and Scan (UI spec §13.1): DkTabBar with the raised
+/// DkScanButton on phones and small tablets, DkNavRail from 840 dp.
 class AppShell extends StatelessWidget {
   const AppShell(this.shell, {super.key});
 
@@ -13,38 +28,41 @@ class AppShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final items = shellTabs(context);
+    // Tapping the current tab again returns it to its root.
+    void select(int i) =>
+        shell.goBranch(i, initialLocation: i == shell.currentIndex);
+    void scan() => context.push(Routes.scan);
+
+    if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) ==
+        DkGrid.largeTablet) {
+      return Scaffold(
+        body: Row(
+          children: [
+            DkNavRail(
+              items: items,
+              currentIndex: shell.currentIndex,
+              onSelect: select,
+              onScan: scan,
+            ),
+            Expanded(child: shell),
+          ],
+        ),
+      );
+    }
     return Scaffold(
       body: shell,
-      floatingActionButton: FloatingActionButton(
-        tooltip: l10n.shell_button_scan,
-        onPressed: () => context.push(Routes.scan),
-        child: const Icon(Icons.document_scanner),
+      floatingActionButton: DkScanButton(
+        // DkTabBar shows "Scan" in its gap, in line with the other labels.
+        showLabel: false,
+        onPressed: scan,
+        onMode: (mode) => context.push(Routes.scanIn(mode)),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: shell.currentIndex,
-        // Tapping the current tab again returns it to its root.
-        onDestinationSelected: (i) =>
-            shell.goBranch(i, initialLocation: i == shell.currentIndex),
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.home),
-            label: l10n.shell_tab_home,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.apps),
-            label: l10n.shell_tab_tools,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.folder),
-            label: l10n.shell_tab_files,
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.person),
-            label: l10n.shell_tab_me,
-          ),
-        ],
+      floatingActionButtonLocation: DkTabBar.scanLocation,
+      bottomNavigationBar: DkTabBar(
+        items: items,
+        currentIndex: shell.currentIndex,
+        onSelect: select,
       ),
     );
   }

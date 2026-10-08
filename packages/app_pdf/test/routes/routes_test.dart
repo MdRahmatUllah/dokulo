@@ -1,5 +1,9 @@
+import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
+import 'package:app_pdf/theme/app_theme.dart';
+import 'package:app_pdf/theme/dk_tokens.dart';
+import 'package:app_pdf/components/dk_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +14,7 @@ Future<GoRouter> pumpAt(WidgetTester tester, String location) async {
   await tester.pumpWidget(
     MaterialApp.router(
       routerConfig: router,
+      theme: dokuloTheme(DkTokens.light), // components read the tokens
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     ),
@@ -22,7 +27,7 @@ String title(WidgetTester tester) =>
     (tester.widget<AppBar>(find.byType(AppBar).last).title! as Text).data!;
 
 bool tabBarShown(WidgetTester tester) =>
-    find.byType(NavigationBar).evaluate().isNotEmpty;
+    find.byType(DkTabBar).evaluate().isNotEmpty;
 
 void main() {
   // Every route from a cold start (what a deep link does): the screen, and
@@ -108,10 +113,7 @@ void main() {
     router.pop();
     await tester.pumpAndSettle();
     expect(title(tester), 'T1');
-    expect(
-      tester.widget<NavigationBar>(find.byType(NavigationBar)).selectedIndex,
-      1,
-    );
+    expect(tester.widget<DkTabBar>(find.byType(DkTabBar)).currentIndex, 1);
   });
 
   testWidgets('back from a deep-linked full-screen page goes Home', (
@@ -129,9 +131,21 @@ void main() {
     tester,
   ) async {
     await pumpAt(tester, Routes.files);
-    await tester.tap(find.byTooltip('Scan'));
+    await tester.tap(find.bySemanticsLabel('Scan'));
     await tester.pumpAndSettle();
     expect(title(tester), 'S1');
     expect(tabBarShown(tester), isFalse);
+  });
+
+  testWidgets('a long press on Scan picks a mode for the scanner', (
+    tester,
+  ) async {
+    await pumpAt(tester, Routes.home);
+    await tester.longPress(find.bySemanticsLabel('Scan'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('ID card'));
+    await tester.pumpAndSettle();
+    expect(title(tester), 'S1 idCard');
+    expect(Routes.scanIn(DkScanMode.book), '/scan?mode=book');
   });
 }

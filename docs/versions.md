@@ -30,6 +30,7 @@ PR. Checked on pub.dev on 2026-10-07.
 | riverpod_generator | ^4.0.9 (dev) | MIT | Riverpod codegen | In use (DK-0003) |
 | build_runner | ^2.16.1 (dev) | BSD-3 | Code generation | In use (DK-0003) |
 | go_router | 18.0.1 | BSD-3 | Routing | In use (DK-0004) |
+| flutter_svg | 2.3.0 | MIT | Illustrations, recoloured from the tokens | In use (DK-0050) |
 | lints, flutter_lints, test | ^6.0.0, ^6.0.0, ^1.26.0 (dev) | BSD-3 | Analysis, tests | In use (DK-0001) |
 | pdfrx | 2.6.5 | MIT | Viewer, render, text, page assembly, save; bundles PDFium via pdfium_flutter 0.3.1 and pdfrx_engine 0.6.1 | Planned |
 | pdfrx_engine | 0.6.1 | MIT | doc_core's PDF API (pure Dart, PDFium through pdfrx's worker); pdfrx 2.6.5's engine | In use (DK-0390, doc_core) |
@@ -61,7 +62,7 @@ PR. Checked on pub.dev on 2026-10-07.
 | image | 4.10.1 | MIT | EXIF, HEIC fallback, thumbnails; decodes PNG/JPEG for OCR; Compress PDF's resize and JPEG encode | In use (DK-0400 doc_vision, DK-0392 doc_core) |
 | in_app_purchase | 3.3.1 | BSD-3 | Pro unlock | Planned |
 | camera | 0.12.1 | BSD-3 | Android scanner frames | Planned |
-| material_symbols_icons | 4.2960.0 | Apache-2.0 | Icons (DK-0048) | Planned |
+| material_symbols_icons | — | Apache-2.0 | **Not a dependency** (DK-0048): it bundles three icon fonts (34 MB) the tree-shaker can't reduce while nothing references them. Its 4.2960.0 archive is only the source of the Material Symbols Rounded font, fetched by `tools/fetch_icon_font.py` (SHA-256 pinned) and declared in app_pdf's pubspec; release builds tree-shake it to the glyphs `DkIcons` uses (15 MB → 20 KB) | Font only |
 | phone_numbers_parser | 9.0.28 | MIT | Redaction: phone numbers | Planned |
 | diff_match_patch | 0.4.1 | Apache-2.0 | Compare PDF text diff | Planned |
 | google_mlkit_document_scanner | — | — | **Not used** ([ml-kit-scanner.md](compliance/ml-kit-scanner.md)) | Excluded |
