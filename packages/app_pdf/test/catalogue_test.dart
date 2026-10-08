@@ -49,6 +49,49 @@ void main() {
     }
   });
 
+  // Every component's targets, for the "Golden + accessibility tests" tasks:
+  // 48 dp and labelled. A component the spec makes smaller keeps iOS's 44.
+  const ios44 = {
+    'DkMenu', // §11.7: 44 dp rows
+    'DkNextChip, DkPageChip', // §11.3: the page chip's target is 44
+  };
+  for (final entry in catalogue) {
+    testWidgets('${entry.name}: tap targets and labels', (tester) async {
+      // 24 dp around the phone-wide entry: the guideline skips a target
+      // that touches the screen's edge.
+      tester.view.physicalSize = const Size(393 + 48, 4000);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(
+        ProviderScope(
+          child: MaterialApp(
+            theme: dokuloTheme(DkTokens.light),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Scaffold(
+              body: SingleChildScrollView(
+                padding: const EdgeInsets.all(24),
+                child: entry.states,
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump(const Duration(seconds: 1));
+      await expectLater(
+        tester,
+        meetsGuideline(
+          ios44.contains(entry.name)
+              ? iOSTapTargetGuideline
+              : androidTapTargetGuideline,
+        ),
+      );
+      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+      handle.dispose();
+    });
+  }
+
   testWidgets('an unknown component says so', (tester) async {
     final router = buildRouter(initialLocation: '/dev/catalogue/DkNope');
     addTearDown(router.dispose);
