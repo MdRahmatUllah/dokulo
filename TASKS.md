@@ -1027,7 +1027,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1003 | Ph7 | Q | P2 | XS | Visual QA: ill-16-no-workflows-yet (ILL-16 · No workflows yet — Three connected cards) | done | agent-1 | DK-0065 | #1145 |
 | DK-1004 | Ph7 | Q | P2 | XS | Visual QA: ill-17-find-documents-in-photos (ILL-17 · Find documents in photos — Photo grid, two marked as documents) | done | agent-1 | DK-0066 | #1145 |
 | DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | done | agent-1 | DK-0067 | #1145 |
-| DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | review | agent-1 | DK-0068 | #1145 |
+| DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | done | agent-1 | DK-0068 | #1145 |
 | DK-1007 | Ph7 | Q | P2 | XS | Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle) | review | agent-1 | DK-0069 | #1145 |
 | DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | open |  | DK-0708 DK-0698 |  |
 | DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | open |  | DK-0708 |  |
@@ -3652,3 +3652,7 @@ DK-1004 (Visual QA: ill-17-find-documents-in-photos (ILL-17 · Find documents in
 ### H-635 · 2026-10-08 05:43 · agent-1 → all · report · DK-1005
 
 DK-1005 (Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
+
+### H-636 · 2026-10-08 05:43 · agent-1 → all · report · DK-1006
+
+DK-1006 (Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
