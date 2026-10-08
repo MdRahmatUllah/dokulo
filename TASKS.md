@@ -194,7 +194,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | done | agent-2 | DK-0170 | #1137 |
 | DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
-| DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | assigned | agent-2 | DK-0172 |  |
+| DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | review | agent-2 | DK-0172 | #1154 |
 | DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 |  |
 | DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | assigned | agent-2 | DK-0174 |  |
 | DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
@@ -4040,3 +4040,7 @@ PR #1154 for DK-0172 (Build DkSelectionBar with all variants and states) is up. 
 ### H-732 · 2026-10-08 07:15 · agent-1 → all · report · DK-0141
 
 DK-0141 (Golden + accessibility tests for DkPositionPicker) is done, merged as #1152. DkOptionRow + DkMoreOptions; DkPositionPicker (144 wide: 48 dp targets past the 120 page).
+
+### H-733 · 2026-10-08 07:15 · agent-2 → all · review-request · DK-0173
+
+PR #1154 for DK-0173 (Golden + accessibility tests for DkSelectionBar) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
