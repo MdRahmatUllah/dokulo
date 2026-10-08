@@ -5,6 +5,7 @@ import '../components/dk_button.dart';
 import '../components/dk_empty_state.dart';
 import '../components/dk_icon.dart';
 import '../components/dk_illustration.dart';
+import '../components/dk_mini_job_bar.dart';
 import '../theme/dk_tokens.dart';
 
 void _none() {}
@@ -98,4 +99,54 @@ class EmptyStateStates extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// DkMiniJobBar (DK-0174) over the page: one job at 45 %, pressed, focused,
+/// and three jobs running.
+class MiniJobBarStates extends StatelessWidget {
+  const MiniJobBarStates({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final compress = DkIcons.tool('compress');
+    return ColoredBox(
+      color: t.color.background,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: t.space.l),
+        child: Column(
+          spacing: t.space.l,
+          children: [
+            DkMiniJobBar(
+              icon: compress,
+              label: 'Compressing · 18 of 40',
+              progress: 0.45,
+              onTap: _none,
+            ),
+            DkMiniJobBar(
+              icon: compress,
+              label: 'Compressing · 18 of 40',
+              progress: 0.45,
+              onTap: _none,
+              showPressed: true,
+            ),
+            DkMiniJobBar(
+              icon: compress,
+              label: 'Compressing · 18 of 40',
+              progress: 0.45,
+              onTap: _none,
+              showFocused: true,
+            ),
+            DkMiniJobBar(
+              icon: compress,
+              label: 'Compressing · 18 of 40',
+              progress: 0.7,
+              jobs: 3,
+              onTap: _none,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
