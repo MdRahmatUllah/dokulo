@@ -79,6 +79,22 @@ void main() {
     await tester.tap(find.text('Auto'));
     await tester.pumpAndSettle();
     expect(find.byType(DkSheet), findsNothing);
+    // The menu is as wide as the field.
+    expect(
+      tester
+          .getSize(
+            find
+                .ancestor(
+                  of: find.text('English'),
+                  matching: find.byType(Container),
+                )
+                .first,
+          )
+          .width,
+      greaterThanOrEqualTo(
+        tester.getSize(find.byType(DkDropdown<String>)).width,
+      ),
+    );
     await tester.tap(find.text('English'));
     await tester.pumpAndSettle();
     expect(picked, 'en');
@@ -119,7 +135,8 @@ void main() {
       ),
     );
     final node = tester.getSemantics(find.byType(GestureDetector).first);
-    expect(node.label, 'Language\nGerman\nDownload German first.');
+    expect(node.label, 'Language\nDownload German first.');
+    expect(node.value, 'German');
     expect(node.flagsCollection.isButton, isTrue);
     handle.dispose();
   });

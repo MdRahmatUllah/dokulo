@@ -76,10 +76,15 @@ class _DkDropdownState<T> extends State<DkDropdown<T>> {
     final c = t.color;
     final error = widget.error;
     final enabled = widget.onChanged != null;
+    assert(
+      widget.options.any((o) => o.$1 == widget.value),
+      'DkDropdown: value is not among the options',
+    );
     final box = Semantics(
       button: true,
       enabled: enabled,
-      label: [?widget.label, _shown, ?error].join('\n'),
+      label: [?widget.label, ?error].join('\n'),
+      value: _shown,
       excludeSemantics: true,
       onTap: enabled ? _open : null,
       child: DkTappable(
@@ -131,23 +136,27 @@ class _DkDropdownState<T> extends State<DkDropdown<T>> {
             SizedBox(height: t.space.xs),
           ],
           if (widget.options.length <= DkDropdown.menuLimit)
-            MenuAnchor(
-              controller: _menu,
-              style: MenuStyle(
-                backgroundColor: WidgetStatePropertyAll(c.surfaceRaised),
+            LayoutBuilder(
+              builder: (context, field) => MenuAnchor(
+                controller: _menu,
+                style: MenuStyle(
+                  backgroundColor: WidgetStatePropertyAll(c.surfaceRaised),
+                ),
+                menuChildren: [
+                  for (final (v, label) in widget.options)
+                    _OptionTile(
+                      label: label,
+                      selected: v == widget.value,
+                      // The menu is as wide as the field.
+                      minWidth: field.maxWidth,
+                      onTap: () {
+                        _menu.close();
+                        _pick(v);
+                      },
+                    ),
+                ],
+                child: box,
               ),
-              menuChildren: [
-                for (final (v, label) in widget.options)
-                  _OptionTile(
-                    label: label,
-                    selected: v == widget.value,
-                    onTap: () {
-                      _menu.close();
-                      _pick(v);
-                    },
-                  ),
-              ],
-              child: box,
             )
           else
             box,
@@ -180,11 +189,13 @@ class _OptionTile extends StatelessWidget {
     required this.label,
     required this.selected,
     required this.onTap,
+    this.minWidth = 160,
   });
 
   final String label;
   final bool selected;
   final VoidCallback onTap;
+  final double minWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +212,7 @@ class _OptionTile extends StatelessWidget {
         onTap: onTap,
         radius: 0,
         builder: (context, pressed) => Container(
-          constraints: const BoxConstraints(minHeight: 48, minWidth: 160),
+          constraints: BoxConstraints(minHeight: 48, minWidth: minWidth),
           color: pressed ? t.state.pressed : null,
           padding: EdgeInsets.symmetric(horizontal: t.space.l),
           child: Row(
