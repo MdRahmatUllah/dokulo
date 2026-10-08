@@ -1,8 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:image/image.dart' as img;
+import 'package:pdf/pdf.dart' as pdf;
+import 'package:pdf/widgets.dart' as pw;
 import 'package:pdfrx_engine/pdfrx_engine.dart' show pdfrxInitialize;
 import 'package:qpdf_ffi/qpdf_ffi.dart';
 import 'package:test/test.dart';
@@ -30,6 +34,18 @@ int qpdfInWorker((String, String) job, JobContext context) => QpdfService.run(
     'objectStreams': 'disable',
   }).length,
 );
+
+int structureInWorker((String, String) job, JobContext context) =>
+    QpdfService.run(
+      () => Qpdf.run({
+        'inputFile': job.$1,
+        'outputFile': job.$2,
+        'objectStreams': 'generate',
+        'compressStreams': 'y',
+        'recompressFlate': '',
+        'compressionLevel': '9',
+      }).length,
+    );
 
 void main() {
   setUpAll(pdfrxInitialize);
@@ -180,6 +196,71 @@ void main() {
       ),
     );
     expect(File(outFile('c.pdf')).existsSync(), isFalse);
+  });
+
+  test(
+    'an image shared by 8 pages is never copied per page (DK-1068)',
+    () async {
+      // One noisy 150 dpi grey scan, written once and drawn on every page.
+      final scan = img.Image(width: 1240, height: 1754, numChannels: 1);
+      final random = Random(7);
+      for (final px in scan) {
+        px.r = 200 + random.nextInt(55);
+      }
+      final doc = pw.Document();
+      final image = pw.MemoryImage(img.encodeJpg(scan, quality: 85));
+      for (var p = 0; p < 8; p++) {
+        doc.addPage(
+          pw.Page(
+            pageFormat: pdf.PdfPageFormat.a4,
+            margin: pw.EdgeInsets.zero,
+            build: (_) => pw.Image(image, fit: pw.BoxFit.fill),
+          ),
+        );
+      }
+      final shared = outFile('shared.pdf');
+      await File(shared).writeAsBytes(await doc.save());
+
+      for (final preset in CompressPreset.values) {
+        final path = outFile('s_${preset.name}.pdf');
+        final result = await compressor.compress(
+          shared,
+          path,
+          CompressOptions(preset: preset),
+        );
+        expect(
+          result.bytesAfter,
+          lessThanOrEqualTo(result.bytesBefore),
+          reason: preset.name,
+        );
+        expect(result.bytesAfter, File(path).lengthSync());
+        expect((await PdfEngine.inspect(path)).pageCount, 8);
+        await pool.run(Lane.qpdf, qpdfInWorker, (path, '$path.qdf')).result;
+        final images = '/Subtype /Image'
+            .allMatches(File('$path.qdf').readAsStringSync(encoding: latin1))
+            .length;
+        // Either one shared image kept, or 8 copies that together are smaller.
+        expect(
+          images == 1 || result.imagesRecompressed == 8,
+          isTrue,
+          reason: '${preset.name}: $images images',
+        );
+      }
+    },
+  );
+
+  test("a file that can't get smaller is kept as it is (DK-1068)", () async {
+    final invoice = fixture('Invoice INV-2026-014.pdf');
+    final small = outFile('small.pdf');
+    // qpdf's own structure pass first: nothing left for Compress to win.
+    await pool.run(Lane.qpdf, structureInWorker, (invoice, small)).result;
+    final result = await compressor.compress(
+      small,
+      outFile('k.pdf'),
+      const CompressOptions(),
+    );
+    expect(result.bytesAfter, lessThanOrEqualTo(result.bytesBefore));
+    expect(File(outFile('k.pdf')).lengthSync(), result.bytesAfter);
   });
 
   test('a PDF without images stays valid and unchanged in look', () async {
