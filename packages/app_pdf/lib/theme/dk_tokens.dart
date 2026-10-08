@@ -70,6 +70,20 @@ class DkTokens extends ThemeExtension<DkTokens> {
   final DkElevation elevation;
   final DkMotion motion;
 
+  /// Page thumbnails stay white with a 1 dp `color.outline`; in Dark they are
+  /// dimmed to 92 % so they don't glare (UI spec §29.4; DK-0047). Wrap the
+  /// thumbnail's image in `ColorFiltered(colorFilter: t.thumbnailFilter)`.
+  /// The viewer shows pages unfiltered (only its night mode inverts them).
+  ColorFilter get thumbnailFilter {
+    final b = brightness == Brightness.dark ? 0.92 : 1.0;
+    return ColorFilter.matrix([
+      b, 0, 0, 0, 0, //
+      0, b, 0, 0, 0, //
+      0, 0, b, 0, 0, //
+      0, 0, 0, 1, 0, //
+    ]);
+  }
+
   @override
   DkTokens copyWith({
     Brightness? brightness,
