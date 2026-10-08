@@ -249,6 +249,13 @@ a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
 
+Everything about a tool comes from **`ToolCatalogue.of(id)`**
+(`lib/tools/tool_catalogue.dart`, DK-0049): its icon (from `DkIcons.tools`),
+its fixed EN/DE name, its one-line description (UI spec §21), its tier and its
+Tools-tab section. The grid, the T2 header, the X1 picker, search, About this
+tool and the notifications all read it, so they never disagree. A new tool is
+a new entry there, an icon in `DkIcons.tools` and two ARB strings each.
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
@@ -267,6 +274,13 @@ Motion variant built in:
 | Success tick (DK-0041) | `DkSuccessTick()` and `DkCountUp(from:, to:, format:)` on result cards |
 | Tile reorder (DK-0042) | `DkLift(lifted:)` on the picked tile, `DkSlot(rect:)` for every other tile in the `Stack` |
 | Page drop (DK-0043) | `DkInsertionLine(length:)` where the page will land; `DkSlot` settles it |
+
+Numbers the user compares as they change (sizes, page counts, times,
+percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
+(DK-0036). Surfaces take `t.surfaceAt(DkLevel.raised, radius: …)`, which is
+shadows in light and a lighter surface plus an outline in dark. Borders are
+`t.divider`, `t.inputRest/Focused/Error` and `t.selectionRing`, and the grid
+is `DkGrid.forWidth(width)` (`theme/dk_layout.dart`, DK-0038).
 
 **Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
 unless Settings → Appearance overrides it (`appThemeModeProvider`,

@@ -562,8 +562,19 @@ class DkType {
       labelL: s(15, 20, FontWeight.w600, 0),
       labelM: s(13, 18, FontWeight.w600, 0.1),
       caption: s(12, 16, FontWeight.w400, 0.1),
-      mono: s(13, 18, FontWeight.w400, 0).copyWith(fontFamily: 'monospace'),
-      numberXL: s(32, 38, FontWeight.w700, -0.3),
+      // The platform's mono: Android's "monospace"; iOS has no font by that
+      // name, so it falls back to Menlo (SF Mono isn't open to apps).
+      mono: s(13, 18, FontWeight.w400, 0).copyWith(
+        fontFamily: 'monospace',
+        fontFamilyFallback: const ['Menlo', 'Courier New'],
+      ),
+      // Result numbers ("1.9 MB") don't jiggle as they change (DK-0036).
+      numberXL: s(
+        32,
+        38,
+        FontWeight.w700,
+        -0.3,
+      ).copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
     );
   }
 
