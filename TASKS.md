@@ -1093,7 +1093,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | done | agent-0 |  | #1169 |
 | DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | done | agent-0 |  | #1180 |
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
-| DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | open |  |  |  |
+| DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | in-progress | agent-0 |  |  |
 
 ## Locks
 
