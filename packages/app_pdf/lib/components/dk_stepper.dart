@@ -45,7 +45,8 @@ class DkStepper extends StatelessWidget {
       onTap: tap,
       child: DkTappable(
         onTap: tap,
-        radius: 24,
+        // The ring follows the 48 dp target, rounded like the button.
+        radius: t.radius.s + 6,
         builder: (context, pressed) => SizedBox.square(
           dimension: 48,
           child: Center(
@@ -54,8 +55,10 @@ class DkStepper extends StatelessWidget {
               child: Container(
                 width: 36,
                 height: 36,
+                // A rounded square, as the export's `.stp button` (radius 8).
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  color: pressed ? t.state.pressed : null,
+                  borderRadius: BorderRadius.circular(t.radius.s),
                   border: Border.all(color: c.outlineStrong),
                 ),
                 alignment: Alignment.center,
