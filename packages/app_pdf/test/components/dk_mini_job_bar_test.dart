@@ -5,6 +5,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(
@@ -110,6 +111,11 @@ void main() {
     await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
     await tester.tap(find.byType(DkMiniJobBar));
     expect(taps, 1);
+    // The keyboard: Tab to it, Enter opens the sheet too.
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pump();
+    expect(taps, 2);
     handle.dispose();
   });
 
