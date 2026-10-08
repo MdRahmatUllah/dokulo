@@ -22,6 +22,7 @@ Future<bool> showDkConfirm(
   required String title,
   required String action,
   String? body,
+  String? cancel,
   bool destructive = false,
   IconData? icon,
 }) async {
@@ -32,6 +33,7 @@ Future<bool> showDkConfirm(
         title: title,
         body: body,
         action: action,
+        cancel: cancel,
         destructive: destructive,
         icon: icon,
         onCancel: () => Navigator.pop(context, false),
@@ -55,6 +57,7 @@ class DkConfirmDialog extends StatelessWidget {
     required this.onCancel,
     required this.onAction,
     this.body,
+    this.cancel,
     this.destructive = false,
     this.icon,
   });
@@ -64,6 +67,9 @@ class DkConfirmDialog extends StatelessWidget {
 
   /// Verb + object: "Delete for good", never "OK".
   final String action;
+
+  /// The way out when Cancel doesn't say it ("Keep editing"); Cancel if null.
+  final String? cancel;
   final bool destructive;
   final IconData? icon;
   final VoidCallback onCancel, onAction;
@@ -72,7 +78,7 @@ class DkConfirmDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final c = t.color;
-    final cancel = AppLocalizations.of(context).common_cancel;
+    final cancel = this.cancel ?? AppLocalizations.of(context).common_cancel;
     final width = math.min(320.0, MediaQuery.sizeOf(context).width - 48);
     final inner = width - 2 * t.space.xl;
     // A regular DkButton is its label plus 2 × 20, and at least 96 wide.
