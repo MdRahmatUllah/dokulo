@@ -16,6 +16,7 @@ import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 import 'bar_states.dart';
+import 'tool_tile_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -95,6 +96,11 @@ const catalogue = [
     'DkToast',
     '11.7 Sheets, dialogs, menus, toasts',
     ToastStates(),
+  ),
+  CatalogueEntry(
+    'DkToolTile, DkToolRow',
+    '11.2 Tiles and cards',
+    DkToolTileGallery(),
   ),
 ];
 
