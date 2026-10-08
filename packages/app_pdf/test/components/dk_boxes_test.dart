@@ -53,21 +53,24 @@ void main() {
     ('light', DkTokens.light),
     ('dark', DkTokens.dark),
   ]) {
-    for (final scale in [1.0, 2.0]) {
-      testWidgets('every state, $name, ${(scale * 100).round()} %', (
-        tester,
-      ) async {
+    for (final (lang, scale) in [('en', 1.0), ('en', 2.0), ('de', 2.0)]) {
+      final file = 'boxes_${name}_${lang}_${(scale * 100).round()}';
+      testWidgets('golden: $file', (tester) async {
         tester.view.physicalSize = const Size(393, 332);
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
-          app(const BoxStates(), tokens: tokens, textScale: scale),
+          app(
+            const BoxStates(),
+            tokens: tokens,
+            textScale: scale,
+            locale: Locale(lang),
+          ),
         );
+        expect(tester.takeException(), isNull);
         await expectLater(
           find.byType(BoxStates),
-          matchesGoldenFile(
-            'goldens/boxes_${name}_${(scale * 100).round()}.png',
-          ),
+          matchesGoldenFile('goldens/$file.png'),
         );
       });
     }
