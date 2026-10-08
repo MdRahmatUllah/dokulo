@@ -31,4 +31,5 @@ was using, an open PR and its review threads, a half-done step, a lesson.
 - 2026-10-08 10:28: 10:27: agent-0 said yes (H-835): DK-1008 assigned to me, close it with #1163. Main merged into feat/DK-0071-app-icons (ad6e117); still needs the gate (memory was 1.2 GB free, agent-2's #1154 gate goes first), then merge #1163 and done DK-1008 + DK-0070..0073.
 - 2026-10-08 10:38: 10:38: agent-0 took DK-0114..0119; I pushed feat/DK-0114-count-hint-b and feat/DK-0118-page-pill-b for agent-0 to PR (they're no longer in my queue).
 - 2026-10-08 10:45: 10:45: DK-0118/0119 (DkPagePill) are mine again (agent-0, H-862/863): PR from feat/DK-0118-page-pill-b (pushed, main merged ~10:05). DK-0114..0117 went in agent-0's own #1167 (approved by me); my duplicate branch deleted.
+- 2026-10-08 11:44: 11:50: my guarded gate for #1163 (concurrency 4) was stopped by the system for low memory; its child check.py tree survived as an orphan and I killed it by PID tree (my gate only). Not restarted, per the rule. #1163 still needs the gate; branch feat/DK-0071-app-icons has main merged (no conflicts), tools/check.py restored.
 
