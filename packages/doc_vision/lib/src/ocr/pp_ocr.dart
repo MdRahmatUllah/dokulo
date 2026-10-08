@@ -87,8 +87,11 @@ abstract interface class OnnxRunner {
 /// (flutter_onnxruntime in the app, on the ONNX lane).
 class PpOcr {
   PpOcr(this.runner, List<String> dictionary)
-    // Class 0 is the CTC blank, 1..n the dictionary, n+1 the space.
-    : _classes = ['', ...dictionary, ' '];
+    // Class 0 is the CTC blank, 1..n the dictionary, n+1 the space. Empty
+    // lines are dropped: the asset ends with a newline, and the trailing ''
+    // that split('\n') leaves took the space's class, so on the device no
+    // word had a space (DK-1071).
+    : _classes = ['', ...dictionary.where((c) => c.isNotEmpty), ' '];
 
   final OnnxRunner runner;
   final List<String> _classes;

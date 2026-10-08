@@ -27,7 +27,7 @@ Five layer packages in one monorepo; dependencies point one way only: `app_pdf â
 | Package | Role |
 |---|---|
 | `app_pdf` | Screens, tool grid, viewer, file manager, paywall, Riverpod providers |
-| `doc_tools` | One `ToolJob` per feature, progress stream, cancel, undo snapshot, workflow runner; pure Dart in worker isolates |
+| `doc_tools` | One `ToolJob` per feature, progress stream, cancel, undo snapshot, workflow runner; the work on worker isolates |
 | `doc_core` | Open/save/render PDFs, page ops, text extraction, image pipeline, OCR text layer (pdfrx/PDFium, our `qpdf_ffi`, Dart `pdf`, opencv_dart) |
 | `doc_vision` | Scanner flows, edge detection, OCR engines, layout, document-in-photo detection |
 | `ai_core` | Imported from Sogda: model manager, LLM arbiter (llama.cpp), translation, embeddings, retrieval |
@@ -105,7 +105,7 @@ python tools/check_l10n.py                                       # EN/DE keys ma
 python tools/check_permissions.py [built apk]                    # only the Android permissions DK-0016 lists
 python tools/check_tokens.py                                     # no raw colours in screens/components: DkTokens only
 python tools/check_privacy_manifests.py                          # the iOS privacy manifest, and one per native iOS plugin
-(cd packages/<p> && flutter test --timeout 60s | dart test)      # every package with tests: flutter test in Flutter packages
+(cd packages/<p> && flutter test --timeout 60s --concurrency 4 | dart test)  # every package with tests; 4 flutter_testers at once (memory)
 python -m pytest tools/tests -q
 python tools/check_pdfa.py                                       # PDF/A writer output validates in veraPDF (install: docs/compliance/pdfa.md)
 python tools/native_libs_check.py <built apk>                    # only with --apk: no FFmpeg/excluded OpenCV, 16 KB-aligned .so (Play)

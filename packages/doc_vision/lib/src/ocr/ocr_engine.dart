@@ -41,6 +41,17 @@ class PageOcr {
       : words.map((w) => w.confidence).reduce((a, b) => a + b) / words.length;
 }
 
+/// What an OCR engine on a worker isolate needs from the main isolate, the
+/// only one where the app's bundled assets load (rootBundle): the dictionary,
+/// and the models copied out to files.
+class OcrAssets {
+  const OcrAssets(this.dictionary, this.models);
+  final List<String> dictionary;
+
+  /// Model file paths by name (`det`, `cls`, `rec`).
+  final Map<String, String> models;
+}
+
 /// One OCR interface over Apple Vision and PP-OCRv5 (DK-0400).
 abstract interface class OcrEngine {
   String get name;
@@ -51,15 +62,59 @@ abstract interface class OcrEngine {
     OcrLanguage language = OcrLanguage.auto,
   });
 
+  /// The words of [raster] (a rendered page): no file round trip, except
+  /// where the engine needs one (Vision), written in [scratch].
+  Future<PageOcr> recognizeRaster(
+    Raster raster, {
+    OcrLanguage language = OcrLanguage.auto,
+    required Directory scratch,
+  });
+
+  /// Frees the engine's native sessions.
+  Future<void> close();
+
+  /// Loads [OcrAssets] on the main isolate: the dictionary, and the models
+  /// copied once into the app's cache.
+  static Future<OcrAssets> loadAssets() async {
+    const base = 'packages/doc_vision/assets/ocr';
+    final dir = Directory('${Directory.systemTemp.path}/dokulo_ocr');
+    await dir.create(recursive: true);
+    final models = <String, String>{};
+    for (final MapEntry(key: name, value: file)
+        in FlutterOnnxRunner.files.entries) {
+      final target = File('${dir.path}/$file');
+      if (!await target.exists()) {
+        final data = await rootBundle.load('$base/$file');
+        // Written aside and renamed, so a present file is always complete.
+        final part = File('${target.path}.part');
+        await part.writeAsBytes(
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+          flush: true,
+        );
+        await part.rename(target.path);
+      }
+      models[name] = target.path;
+    }
+    final dictionary = (await rootBundle.loadString(
+      '$base/ppocrv5_latin_dict.txt',
+    )).split('\n');
+    return OcrAssets(dictionary, models);
+  }
+
   /// Apple Vision on iOS (falling back to PP-OCRv5 where Vision isn't
   /// available), PP-OCRv5 everywhere else.
-  static Future<OcrEngine> forPlatform() async {
+  ///
+  /// Give [assets] on a worker isolate (from [loadAssets] on the main one);
+  /// without them it loads the bundled assets, which works on the main
+  /// isolate only.
+  static Future<OcrEngine> forPlatform({OcrAssets? assets}) async {
     final ppocr = PpOcrEngine(
       PpOcr(
-        FlutterOnnxRunner(),
-        (await rootBundle.loadString(
-          'packages/doc_vision/assets/ocr/ppocrv5_latin_dict.txt',
-        )).split('\n'),
+        FlutterOnnxRunner(models: assets?.models),
+        assets?.dictionary ??
+            (await rootBundle.loadString(
+              'packages/doc_vision/assets/ocr/ppocrv5_latin_dict.txt',
+            )).split('\n'),
       ),
     );
     return Platform.isIOS ? VisionEngine(fallback: ppocr) : ppocr;
@@ -127,8 +182,21 @@ class PpOcrEngine implements OcrEngine {
   Future<PageOcr> recognize(
     String imagePath, {
     OcrLanguage language = OcrLanguage.auto,
-  }) async {
-    final raster = decodeRaster(await File(imagePath).readAsBytes());
+  }) async => _read(decodeRaster(await File(imagePath).readAsBytes()));
+
+  @override
+  Future<PageOcr> recognizeRaster(
+    Raster raster, {
+    OcrLanguage language = OcrLanguage.auto,
+    required Directory scratch,
+  }) => _read(raster);
+
+  @override
+  Future<void> close() async {
+    if (ocr.runner case final FlutterOnnxRunner runner) await runner.close();
+  }
+
+  Future<PageOcr> _read(Raster raster) async {
     final lines = await ocr.recognize(raster);
     final words = [
       for (final line in lines) ...wordsOf(line, raster.width, raster.height),
@@ -218,6 +286,32 @@ class VisionEngine implements OcrEngine {
     final raster = decodeRaster(await File(imagePath).readAsBytes());
     return PageOcr(name, words, judge(words, sharpness(raster)));
   }
+
+  /// Vision reads files: the raster goes to [scratch] as a PNG first.
+  @override
+  Future<PageOcr> recognizeRaster(
+    Raster raster, {
+    OcrLanguage language = OcrLanguage.auto,
+    required Directory scratch,
+  }) async {
+    final rgb = img.Image.fromBytes(
+      width: raster.width,
+      height: raster.height,
+      bytes: raster.bgr.buffer,
+      numChannels: 3,
+      order: img.ChannelOrder.bgr,
+    );
+    final path = '${scratch.path}/vision_page.png';
+    await File(path).writeAsBytes(img.encodePng(rgb));
+    try {
+      return await recognize(path, language: language);
+    } finally {
+      await File(path).delete();
+    }
+  }
+
+  @override
+  Future<void> close() => fallback.close();
 }
 
 /// The OCR failures the error catalogue knows (UI spec §26.3: damaged file).

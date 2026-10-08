@@ -47,3 +47,12 @@ class DkRing extends StatelessWidget {
     );
   }
 }
+
+/// Whether a focus change should show the ring: only while the keyboard
+/// drives focus (Tab, a switch), not when a route restores focus or a
+/// finger taps. DkTappable gets this from FocusableActionDetector.
+// ponytail: read once per focus change; a later switch to the keyboard
+// shows the ring on the next focus move, which is when it matters.
+bool keyboardFocus(bool focused) =>
+    focused &&
+    FocusManager.instance.highlightMode == FocusHighlightMode.traditional;

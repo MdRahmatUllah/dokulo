@@ -1,0 +1,5 @@
+# One suite at a time: each suite runs in its own isolate, and each isolate
+# that uses pdfrx gets its own PDFium worker. Two of them in one process call
+# PDFium (not thread-safe) at once and hang or crash. The app has one: the
+# main isolate's (see PdfEngine).
+concurrency: 1

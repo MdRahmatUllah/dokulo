@@ -198,15 +198,18 @@ abstract final class Qpdf {
   });
 
   /// Puts the pages of [stamp] over (or under) the pages of [input]: page n on
-  /// page n, or with [repeat] = "1" the first stamp page on every page.
+  /// page n, or with [repeat] = "1" the first stamp page on every page. A
+  /// locked [input] needs its [password]; the output keeps its encryption.
   static List<String> overlay(
     String input,
     String stamp,
     String output, {
     bool underlay = false,
     String? repeat,
+    String? password,
   }) => run({
     'inputFile': input,
+    'password': ?password,
     'outputFile': output,
     underlay ? 'underlay' : 'overlay': [
       {'file': stamp, 'repeat': ?repeat},

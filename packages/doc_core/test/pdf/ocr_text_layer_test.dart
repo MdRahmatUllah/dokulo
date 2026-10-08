@@ -71,6 +71,32 @@ void main() {
     }
   });
 
+  test(
+    'words on a line keep their spaces when the text is read (DK-1071)',
+    () async {
+      // Laid out the way the OCR facade's wordsOf does: each word its share of
+      // the line by characters, a one-character gap between them.
+      const line = 'Herrn Max Mustermann';
+      const perChar = 0.4 / line.length;
+      var offset = 0;
+      final onLine = [
+        for (final part in line.split(' '))
+          () {
+            final start = line.indexOf(part, offset);
+            offset = start + part.length;
+            return LayerWord(part, (
+              left: 0.1 + start * perChar,
+              top: 0.3,
+              width: part.length * perChar,
+              height: 0.02,
+            ));
+          }(),
+      ];
+      final path = await write([a4], {0: onLine});
+      expect((await PdfEngine.pageText(path, 0)).text, contains(line));
+    },
+  );
+
   test('the text is invisible: the page renders blank', () async {
     final path = await write([a4], {0: words});
     final image = await PdfEngine.render(path, 0, dpi: 72);
