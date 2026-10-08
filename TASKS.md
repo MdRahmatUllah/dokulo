@@ -1018,7 +1018,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | review | agent-1 | DK-0056 | #1145 |
 | DK-0995 | Ph7 | Q | P2 | XS | Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check) | review | agent-1 | DK-0057 | #1145 |
 | DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | review | agent-1 | DK-0058 | #1145 |
-| DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | assigned | agent-1 | DK-0059 |  |
+| DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | review | agent-1 | DK-0059 | #1145 |
 | DK-0998 | Ph7 | Q | P2 | XS | Visual QA: ill-11-ai-model-needed (ILL-11 · AI model needed — Page with a chip and download arrow) | assigned | agent-1 | DK-0060 |  |
 | DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | assigned | agent-1 | DK-0061 |  |
 | DK-1000 | Ph7 | Q | P2 | XS | Visual QA: ill-13-device-not-eligible (ILL-13 · Device not eligible — Phone with a memory chip, dashed) | assigned | agent-1 | DK-0062 |  |
@@ -3508,3 +3508,7 @@ PR #1145 for DK-0995 (Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — E
 ### H-599 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-0996
 
 PR #1145 for DK-0996 (Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-600 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-0997
+
+PR #1145 for DK-0997 (Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
