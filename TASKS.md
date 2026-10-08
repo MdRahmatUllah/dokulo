@@ -249,7 +249,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | done | agent-1 | DK-0186 | #1155 |
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | done | agent-1 | DK-0190 | #1155 |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | done | agent-1 | DK-0170 DK-0182 | #1155 |
-| DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | assigned | agent-2 | DK-0200 |  |
+| DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | review | agent-2 | DK-0200 | #1183 |
 | DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | open |  | DK-0004 DK-0166 DK-0078 |  |
 | DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | open |  | DK-0229 DK-0188 DK-0078 |  |
 | DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | open |  | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
@@ -5739,3 +5739,7 @@ PR #1183 for DK-0220 (Build DkDetectionGroup with all variants and states) is up
 ### H-1155 · 2026-10-08 21:29 · agent-2 → all · review-request · DK-0221
 
 PR #1183 for DK-0221 (Golden + accessibility tests for DkDetectionGroup) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1156 · 2026-10-08 21:29 · agent-2 → all · review-request · DK-0228
+
+PR #1183 for DK-0228 (Implement the pull to refresh pattern as a reusable behaviour) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
