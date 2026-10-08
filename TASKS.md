@@ -125,7 +125,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0101 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSettingsRow | assigned | agent-1 | DK-0100 |  |
 | DK-0102 | Ph1 | B | P0 | XS | Build DkProBadge with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1138 |
 | DK-0103 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkProBadge | done | agent-1 | DK-0102 | #1138 |
-| DK-0104 | Ph1 | B | P0 | S | Build DkChip with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1138 |
+| DK-0104 | Ph1 | B | P0 | S | Build DkChip with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1138 |
 | DK-0105 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkChip | review | agent-1 | DK-0104 | #1138 |
 | DK-0106 | Ph3 | B | P0 | XS | Build DkNextChip with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1140 |
 | DK-0107 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkNextChip | review | agent-1 | DK-0106 | #1140 |
@@ -3200,3 +3200,7 @@ DK-0102 (Build DkProBadge with all variants and states) is done, merged as #1138
 ### H-522 · 2026-10-08 04:36 · agent-1 → all · report · DK-0103
 
 DK-0103 (Golden + accessibility tests for DkProBadge) is done, merged as #1138. DkProBadge (20/16 dp, the word Pro always), DkChip (filter/choice, haptic, pressed, keyboard) on the shared DkTappable (components/dk_tappable.dart: focus ring, Enter/Space, pressed).
+
+### H-523 · 2026-10-08 04:36 · agent-1 → all · report · DK-0104
+
+DK-0104 (Build DkChip with all variants and states) is done, merged as #1138. DkProBadge (20/16 dp, the word Pro always), DkChip (filter/choice, haptic, pressed, keyboard) on the shared DkTappable (components/dk_tappable.dart: focus ring, Enter/Space, pressed).
