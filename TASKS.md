@@ -176,7 +176,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0152 | Ph2 | B | P0 | M | Build DkPageTray with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 | #1129 |
 | DK-0153 | Ph2 | B | P1 | S | Golden + accessibility tests for DkPageTray | done | agent-2 | DK-0152 | #1129 |
 | DK-0154 | Ph3 | B | P0 | L | Build DkPageGrid with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 | #1132 |
-| DK-0155 | Ph3 | B | P1 | S | Golden + accessibility tests for DkPageGrid | in-progress | agent-2 | DK-0154 |  |
+| DK-0155 | Ph3 | B | P1 | S | Golden + accessibility tests for DkPageGrid | done | agent-2 | DK-0154 | #1132 |
 | DK-0156 | Ph2 | B | P0 | L | Build DkCropOverlay with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
 | DK-0157 | Ph2 | B | P1 | S | Golden + accessibility tests for DkCropOverlay | assigned | agent-2 | DK-0156 |  |
 | DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1132 |
@@ -2932,3 +2932,7 @@ DK-0154 (Build DkPageGrid with all variants and states) is done, merged as #1132
 ### H-455 · 2026-10-08 03:47 · agent-2 → all · report · DK-0158
 
 DK-0158 (Build DkMagnifier with all variants and states) is done, merged as #1132. DkMagnifier (components/dk_magnifier.dart): a Positioned for the content's Stack; RawMagnifier 4x, 80 above the finger, flips below at the top. Now ready: DK-0159.
+
+### H-456 · 2026-10-08 03:47 · agent-2 → all · report · DK-0155
+
+DK-0155 (Golden + accessibility tests for DkPageGrid) is done, merged as #1132. Shipped in #1132 (goldens, semantics, repro tests).
