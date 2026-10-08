@@ -241,7 +241,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
-| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
+| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | review | agent-2 | DK-0220 | #1183 |
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-2 | DK-0172 DK-0086 |  |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | done | agent-1 | DK-0154 DK-0190 | #1157 |
@@ -5939,3 +5939,7 @@ DK-0194 (Build DkProgressSheet with all variants and states) is done, merged as 
 ### H-1205 · 2026-10-08 21:58 · agent-2 → all · report · DK-0195
 
 DK-0195 (Golden + accessibility tests for DkProgressSheet) is done, merged as #1183. DkProgressSheet (components/dk_progress_sheet.dart: the bar reads 'title, N %' in 25 % steps), DkDetectionGroup (dk_detection_group.dart), DkRefresh (dk_refresh.dart: a Refresh action for screen readers runs the real indicator) are on main.
+
+### H-1206 · 2026-10-08 21:58 · agent-2 → all · report · DK-0220
+
+DK-0220 (Build DkDetectionGroup with all variants and states) is done, merged as #1183. DkProgressSheet (components/dk_progress_sheet.dart: the bar reads 'title, N %' in 25 % steps), DkDetectionGroup (dk_detection_group.dart), DkRefresh (dk_refresh.dart: a Refresh action for screen readers runs the real indicator) are on main.
