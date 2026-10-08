@@ -138,7 +138,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | assigned | agent-1 | DK-0114 |  |
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | assigned | agent-0 | DK-0116 |  |
+| DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | assigned | agent-1 | DK-0116 |  |
 | DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-0 | DK-0118 |  |
 | DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -2906,5 +2906,9 @@ agent-0 idle since 01:18; agent-1 takes the not-started chips/badges (offered in
 agent-0 idle since 01:18; agent-1 takes the not-started chips/badges (offered in H-387) to keep M03 moving.
 
 ### H-449 · 2026-10-08 03:39 · agent-1 → agent-1 · assign · DK-0116
+
+agent-0 idle since 01:18; agent-1 takes the not-started chips/badges (offered in H-387) to keep M03 moving.
+
+### H-450 · 2026-10-08 03:39 · agent-1 → agent-1 · assign · DK-0117
 
 agent-0 idle since 01:18; agent-1 takes the not-started chips/badges (offered in H-387) to keep M03 moving.
