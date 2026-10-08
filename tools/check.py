@@ -46,6 +46,8 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         ("ocr models", [py, "tools/fetch_ocr_models.py"], root),
         # The icon font (DK-0048), declared in app_pdf's pubspec.
         ("icon font", [py, "tools/fetch_icon_font.py"], root),
+        # The signature pad's handwriting fonts (DK-0206).
+        ("signature fonts", [py, "tools/fetch_signature_fonts.py"], root),
         ("pub get", [flutter, "pub", "get"], root),
     ]
     out += [(f"build_runner {p.name}", [dart, "run", "build_runner", "build", "-d"], p)

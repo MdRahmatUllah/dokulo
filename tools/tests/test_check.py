@@ -28,7 +28,7 @@ def test_steps_pick_the_right_test_runner(tmp_path: Path) -> None:
     (tmp_path / "packages" / "core" / "test").mkdir()
 
     plan = {name: command for name, command, _ in check.steps(tmp_path, apk=Path("x.apk"))}
-    assert list(plan)[:3] == ["ocr models", "icon font", "pub get"]
+    assert list(plan)[:4] == ["ocr models", "icon font", "signature fonts", "pub get"]
     assert "build_runner app" in plan and "build_runner core" not in plan
     assert plan["test app"][1:] == ["test", "--timeout", "60s"] and "flutter" in plan["test app"][0]
     assert plan["test core"][1:] == ["test"] and "dart" in plan["test core"][0]
