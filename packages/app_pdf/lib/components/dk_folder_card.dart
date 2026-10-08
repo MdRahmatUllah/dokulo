@@ -57,6 +57,7 @@ class DkFolderCard extends StatelessWidget {
     final more = onMore == null
         ? null
         : Semantics(
+            container: true, // its own button inside the card's node
             button: true,
             label: MaterialLocalizations.of(context).moreButtonTooltip,
             excludeSemantics: true,
@@ -119,10 +120,12 @@ class DkFolderCard extends StatelessWidget {
             ),
           );
 
+    // One node for the card (DkTappable gives it the tap and focus), with
+    // More as a child node of its own.
     return Semantics(
+      container: true,
       button: true,
       label: '$name\n$meta',
-      onTap: onTap,
       child: DkTappable(
         onTap: onTap,
         radius: t.radius.m,
