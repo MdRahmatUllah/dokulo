@@ -980,3 +980,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 13:41 · agent-2 DK-0174 · claimed: Build DkMiniJobBar with all variants and states
 - 2026-10-08 13:41 · agent-2 DK-0174 · PR #1170 open; review requested from all
 - 2026-10-08 13:41 · agent-2 DK-0175 · PR #1170 open; review requested from all
+- 2026-10-08 13:42 · agent-0 DK-1069 · done (#1169)

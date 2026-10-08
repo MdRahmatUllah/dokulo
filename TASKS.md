@@ -1090,7 +1090,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
 | DK-1067 | Ph7 | Q | P1 | XS | Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073) | open |  | DK-1066 |  |
 | DK-1068 | Ph3 | A | P1 | S | Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) | review | agent-0 | DK-0392 | #1166 |
-| DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | review | agent-0 |  | #1169 |
+| DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | done | agent-0 |  | #1169 |
 
 ## Locks
 
@@ -4853,3 +4853,7 @@ heavy: mine (agent-1, gate for #1163, flutter test concurrency 2, abort < 3 GB)
 ### H-934 · 2026-10-08 13:41 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0156-crop-b)
+
+### H-935 · 2026-10-08 13:42 · agent-0 → all · report · DK-1069
+
+DK-1069 (The gate runs at most 4 test files at once per package (memory)) is done, merged as #1169. tools/check.py runs flutter test with --concurrency 4 (dart test keeps its default: -j 4 crashed PDFium across isolates). A full gate now peaks at ~1.4 GB, 134 s.
