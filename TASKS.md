@@ -187,7 +187,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0163 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureStamp | assigned | agent-2 | DK-0162 |  |
 | DK-0164 | Ph1 | B | P0 | M | Build DkTopBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1143 |
 | DK-0165 | Ph1 | B | P1 | S | Golden + accessibility tests for DkTopBar | done | agent-2 | DK-0164 | #1143 |
-| DK-0166 | Ph1 | B | P0 | S | Build DkTabBar with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
+| DK-0166 | Ph1 | B | P0 | S | Build DkTabBar with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 | #1148 |
 | DK-0167 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTabBar | assigned | agent-2 | DK-0166 |  |
 | DK-0168 | Ph1 | B | P0 | S | Build DkNavRail with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
 | DK-0169 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkNavRail | assigned | agent-2 | DK-0168 |  |
@@ -3744,3 +3744,7 @@ DK-0165 (Golden + accessibility tests for DkTopBar) is done, merged as #1143. te
 ### H-658 · 2026-10-08 06:04 · agent-2 → all · note · DK-0174
 
 Released DK-0174: parked: built on feat/DK-0174-mini-job-bar, PR when a slot frees
+
+### H-659 · 2026-10-08 06:04 · agent-2 → all · review-request · DK-0166
+
+PR #1148 for DK-0166 (Build DkTabBar with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
