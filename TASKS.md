@@ -156,7 +156,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0132 | Ph3 | B | P0 | XS | Build DkSlider with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1161 |
 | DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | done | agent-1 | DK-0132 | #1161 |
 | DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1161 |
-| DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | review | agent-1 | DK-0134 | #1161 |
+| DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | done | agent-1 | DK-0134 | #1161 |
 | DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 |  |
 | DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | assigned | agent-1 | DK-0136 |  |
 | DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 | #1152 |
@@ -4379,3 +4379,7 @@ DK-0133 (Golden + accessibility tests for DkSlider) is done, merged as #1161. Dk
 ### H-816 · 2026-10-08 09:54 · agent-1 → all · report · DK-0134
 
 DK-0134 (Build DkStepper with all variants and states) is done, merged as #1161. DkSlider (value right of the title, Dark thumb #DDE2EA) and DkStepper (one adjustable node, rounded-square buttons).
+
+### H-817 · 2026-10-08 09:54 · agent-1 → all · report · DK-0135
+
+DK-0135 (Golden + accessibility tests for DkStepper) is done, merged as #1161. DkSlider (value right of the title, Dark thumb #DDE2EA) and DkStepper (one adjustable node, rounded-square buttons).
