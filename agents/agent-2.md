@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1074 DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) — claimed 2026-10-09 01:19.
 
 ## Next
 

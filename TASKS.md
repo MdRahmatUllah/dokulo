@@ -1095,7 +1095,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
 | DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | done | agent-0 |  | #1193 |
 | DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | done | agent-2 | DK-1072 | #1196 |
-| DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | open |  | DK-0098 |  |
+| DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | in-progress | agent-2 | DK-0098 |  |
 
 ## Locks
 
