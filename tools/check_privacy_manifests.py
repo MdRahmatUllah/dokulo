@@ -19,6 +19,13 @@ import sys
 from pathlib import Path
 
 APP_MANIFEST = Path("packages/app_pdf/ios/Runner/PrivacyInfo.xcprivacy")
+# Third-party plugins whose native code can't need a manifest, each with why
+# (docs/compliance/ios-privacy-manifest.md). The Mac's Xcode privacy report
+# (DK-1054) confirms them.
+NO_MANIFEST_NEEDED = {
+    "pdfium_flutter": "registration-only Swift (registers nothing, calls no required-reason API); "
+                      "the PDFium binary is a native asset the Xcode report covers",
+}
 PLUGINS = Path("packages/app_pdf/.flutter-plugins-dependencies")
 NATIVE = {".swift", ".m", ".mm", ".c", ".cc", ".cpp"}
 
@@ -53,6 +60,8 @@ def check(root: Path) -> list[str]:
         if path.resolve() in seen:
             continue
         seen.add(path.resolve())
+        if name in NO_MANIFEST_NEEDED:
+            continue
         for folder in native_dirs(path):
             if not any(folder.rglob("PrivacyInfo.xcprivacy")):
                 problems.append(f"{name}: native iOS code in {folder.name}/ but no PrivacyInfo.xcprivacy")
