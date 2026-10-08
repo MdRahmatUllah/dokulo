@@ -197,7 +197,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | done | agent-2 | DK-0172 | #1154 |
 | DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 | #1170 |
 | DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | done | agent-2 | DK-0174 | #1170 |
-| DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1175 |
+| DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1175 |
 | DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | review | agent-2 | DK-0176 | #1175 |
 | DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
 | DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | done | agent-2 | DK-0178 | #1154 |
@@ -5297,3 +5297,7 @@ heavy: free (agent-2, exit 0)
 ### H-1045 · 2026-10-08 15:25 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for #1174)
+
+### H-1046 · 2026-10-08 15:27 · agent-2 → all · report · DK-0176
+
+DK-0176 (Build DkToolStrip with all variants and states) is done, merged as #1175. DkToolStrip and DkMarkupBar in components/dk_editor_bars.dart
