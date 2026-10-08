@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/dk_magnifier.dart';
+import '../components/dk_page_grid.dart';
 import '../components/dk_page_thumb.dart';
 import '../components/dk_page_tray.dart';
 import '../theme/dk_tokens.dart';
@@ -133,6 +135,89 @@ class PageTrayStates extends StatelessWidget {
           ),
           SizedBox(height: t.space.s),
         ],
+      ),
+    );
+  }
+}
+
+/// DkPageGrid (DK-0154): 9 pages, 3 columns, pages 2 and 5 selected, page 7
+/// still loading. Live: tap selects, long-press and drag reorders, pinch
+/// changes the columns.
+class PageGridStates extends StatefulWidget {
+  const PageGridStates({super.key, this.pageCount = 9});
+  final int pageCount;
+
+  @override
+  State<PageGridStates> createState() => _PageGridStatesState();
+}
+
+class _PageGridStatesState extends State<PageGridStates> {
+  late final ids = [for (var i = 1; i <= widget.pageCount; i++) i];
+  final selected = {1, 4};
+
+  @override
+  Widget build(BuildContext context) => ColoredBox(
+    color: context.tokens.color.background,
+    child: SizedBox(
+      height: 560,
+      child: DkPageGrid(
+        pageIds: ids,
+        pageBuilder: (_, i) => ids[i] == 7 ? null : const CataloguePage(),
+        selected: selected,
+        onTap: (i) => setState(
+          () => selected.contains(i) ? selected.remove(i) : selected.add(i),
+        ),
+        onReorder: (from, to) =>
+            setState(() => ids.insert(to, ids.removeAt(from))),
+      ),
+    ),
+  );
+}
+
+/// DkMagnifier (DK-0158): over a page, with the finger on the title bar
+/// (the loupe above it) and near the top edge (flipped below). The finger is
+/// marked with a small ring.
+class MagnifierStates extends StatelessWidget {
+  const MagnifierStates({super.key});
+
+  static const fingers = [Offset(80, 230), Offset(250, 40)];
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ColoredBox(
+      color: t.color.surfaceSunken,
+      child: SizedBox(
+        height: 320,
+        child: Stack(
+          children: [
+            Positioned(
+              left: t.space.l,
+              top: t.space.l,
+              width: 300,
+              height: 288,
+              child: ColoredBox(
+                color: t.color.pageWhite,
+                child: const FittedBox(child: CataloguePage()),
+              ),
+            ),
+            for (final f in fingers) ...[
+              Positioned(
+                left: f.dx - 6,
+                top: f.dy - 6,
+                child: Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: t.color.danger),
+                  ),
+                ),
+              ),
+              DkMagnifier(finger: f),
+            ],
+          ],
+        ),
       ),
     );
   }
