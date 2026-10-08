@@ -45,6 +45,35 @@ ThemeData dokuloTheme(DkTokens tokens) {
       surfaceTint:
           Colors.transparent, // Dark lifts with surfaceRaised, not tint
     ),
+    // Stock Material buttons (a SnackBar's action, dialog buttons) take
+    // `labelL`, like DkButton.
+    textTheme: TextTheme(labelLarge: tokens.text.labelL),
+    // Stock text buttons (a toast's action) show the 2 dp focus ring when
+    // the keyboard focuses them, like every Dk control.
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        side: WidgetStateProperty.resolveWith(
+          (s) => s.contains(WidgetState.focused)
+              ? BorderSide(color: c.focusRing, width: 2)
+              : null,
+        ),
+      ),
+    ),
+    // DkToast (DK-0190): a floating SnackBar in the inverse colours.
+    snackBarTheme: SnackBarThemeData(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: c.inverseSurface,
+      contentTextStyle: tokens.text.bodyM.copyWith(color: c.onInverseSurface),
+      actionTextColor: c.inversePrimary,
+      elevation: 0,
+      insetPadding: EdgeInsets.symmetric(
+        horizontal: tokens.space.l,
+        vertical: tokens.space.s,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(tokens.radius.m),
+      ),
+    ),
     extensions: [tokens],
   );
 }

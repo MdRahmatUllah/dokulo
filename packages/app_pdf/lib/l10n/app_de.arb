@@ -148,6 +148,7 @@
   "status_new": "Neu",
   "status_unsaved": "Nicht gespeichert",
   "status_running": "Läuft",
+  "scanner_button_shutter": "Foto aufnehmen",
   "sign_card_label": "Gespeicherte Unterschrift",
   "sign_card_delete": "Unterschrift löschen",
   "split_add": "Hier teilen",
