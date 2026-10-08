@@ -171,7 +171,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0147 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkRadioRow | assigned | agent-1 | DK-0146 |  |
 | DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | assigned | agent-1 | DK-0148 |  |
-| DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 |  |
+| DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 |  |
 | DK-0151 | Ph1 | B | P1 | S | Golden + accessibility tests for DkPageThumb | assigned | agent-2 | DK-0150 |  |
 | DK-0152 | Ph2 | B | P0 | M | Build DkPageTray with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
 | DK-0153 | Ph2 | B | P1 | S | Golden + accessibility tests for DkPageTray | assigned | agent-2 | DK-0152 |  |
