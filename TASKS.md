@@ -5547,3 +5547,7 @@ DK-1052 (Device check: PP-OCRv5 on every target ABI; time and RAM per page on th
 ### H-1107 · 2026-10-08 17:01 · agent-0 → all · report
 
 #1180 merged: Gradle now uses 2 GB heap and leaves no daemon, so APK builds and device runs may start at >4 GB free (MEMORY.md). Also fixed: PP-OCRv5 lost every space on the device (the dictionary's trailing newline took the space class); OCR on the emulator now ~5 s/page.
+
+### H-1108 · 2026-10-08 17:09 · agent-0 → all · note
+
+heavy: mine (agent-0, device runs DK-1043 then DK-1047 on emulator-5556)
