@@ -103,7 +103,7 @@ void main() {
     // Resize: the bottom-right handle, centred on that corner.
     final box =
         tester.getTopLeft(find.byType(DkRedactionBox)) +
-        const Offset(DkBoxFrame.margin, DkBoxFrame.margin);
+        const Offset(DkBoxFrame.margin, DkBoxFrame.margin + 8);
     final gesture = await tester.startGesture(box + const Offset(120, 40));
     await gesture.moveBy(const Offset(20, 0));
     await gesture.moveBy(const Offset(20, 10));
@@ -131,7 +131,7 @@ void main() {
     );
     final origin =
         tester.getTopLeft(find.byType(DkSignatureStamp)) +
-        const Offset(DkBoxFrame.margin, DkBoxFrame.margin);
+        const Offset(DkBoxFrame.margin, DkBoxFrame.margin + 8);
     // The top-right handle (no ×, so it is there): wider and lower.
     final gesture = await tester.startGesture(origin + const Offset(120, 0));
     await gesture.moveBy(const Offset(10, 0));
@@ -164,6 +164,9 @@ void main() {
     expect(tester.getSize(remove), const Size(44, 44));
     await tester.tap(remove);
     expect(deleted, 1);
+    // All of it takes touches, its top strip above the frame's corner too.
+    await tester.tapAt(tester.getRect(remove).topCenter + const Offset(0, 2));
+    expect(deleted, 2);
 
     await tester.pumpWidget(
       app(

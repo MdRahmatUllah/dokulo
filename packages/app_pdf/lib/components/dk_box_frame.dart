@@ -10,6 +10,9 @@ import 'dk_ring.dart';
 /// A box on a page that moves, resizes by its corners and can be deleted:
 /// the frame of DkRedactionBox and DkSignatureStamp (UI spec §11.5). A
 /// [Positioned]: put it in the page's [Stack], with [rect] in its coordinates.
+/// Flutter hit-tests only inside that Stack, so the screen keeps a box
+/// [margin] in from the page's edges (30 at the top, for the ×), or the
+/// handles there stop taking touches (the crop overlay's trap).
 ///
 /// Selected, it shows square corner handles (9 dp, `color.surface` with a
 /// 2 dp primary border, a 44 dp target each) and, with [onDelete], the delete
@@ -103,6 +106,9 @@ class _DkBoxFrameState extends State<DkBoxFrame> {
     final t = context.tokens;
     const m = DkBoxFrame.margin;
     final r = widget.rect;
+    // The × sits 8 above the corner's target: the frame grows by that at
+    // the top, so all of the ×'s target is inside it.
+    final lift = t.space.s;
     final editable = widget.selected && widget.onChanged != null;
     final deletable = widget.selected && widget.onDelete != null;
     final corners = [
@@ -114,7 +120,7 @@ class _DkBoxFrameState extends State<DkBoxFrame> {
 
     Widget handle(int i) => Positioned(
       left: corners[i].dx,
-      top: corners[i].dy,
+      top: corners[i].dy + lift,
       width: 2 * m,
       height: 2 * m,
       // Handles are for fingers; screen readers move boxes in the list.
@@ -138,13 +144,18 @@ class _DkBoxFrameState extends State<DkBoxFrame> {
     );
 
     return Positioned.fromRect(
-      rect: r.inflate(m),
+      rect: Rect.fromLTRB(
+        r.left - m,
+        r.top - m - lift,
+        r.right + m,
+        r.bottom + m,
+      ),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
           Positioned(
             left: m,
-            top: m,
+            top: m + lift,
             width: r.width,
             height: r.height,
             child: Semantics(
@@ -180,7 +191,7 @@ class _DkBoxFrameState extends State<DkBoxFrame> {
             Positioned(
               // Centred 8 above the top-right corner, as in the export.
               left: r.width,
-              top: -t.space.s,
+              top: 0,
               width: 2 * m,
               height: 2 * m,
               child: Semantics(
