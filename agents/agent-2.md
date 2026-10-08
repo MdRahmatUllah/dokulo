@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0159 Golden + accessibility tests for DkMagnifier — claimed 2026-10-08 03:47.
+Nothing claimed.
 
 ## Next
 

@@ -180,7 +180,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0156 | Ph2 | B | P0 | L | Build DkCropOverlay with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
 | DK-0157 | Ph2 | B | P1 | S | Golden + accessibility tests for DkCropOverlay | assigned | agent-2 | DK-0156 |  |
 | DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1132 |
-| DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | in-progress | agent-2 | DK-0158 |  |
+| DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | done | agent-2 | DK-0158 | #1132 |
 | DK-0160 | Ph4 | B | P1 | M | Build DkRedactionBox with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0161 | Ph4 | B | P1 | S | Golden + accessibility tests for DkRedactionBox | assigned | agent-2 | DK-0160 |  |
 | DK-0162 | Ph4 | B | P1 | S | Build DkSignatureStamp with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -2936,3 +2936,7 @@ DK-0158 (Build DkMagnifier with all variants and states) is done, merged as #113
 ### H-456 · 2026-10-08 03:47 · agent-2 → all · report · DK-0155
 
 DK-0155 (Golden + accessibility tests for DkPageGrid) is done, merged as #1132. Shipped in #1132 (goldens, semantics, repro tests).
+
+### H-457 · 2026-10-08 03:47 · agent-2 → all · report · DK-0159
+
+DK-0159 (Golden + accessibility tests for DkMagnifier) is done, merged as #1132. Shipped in #1132 (goldens, semantics, repro tests).
