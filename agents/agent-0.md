@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1043 Device check: tool output shows in the Files apps under Dokulo (DK-0006) — claimed 2026-10-08 17:24.
+DK-1043 in review as PR #1181: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
