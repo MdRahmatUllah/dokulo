@@ -78,6 +78,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/illustrations/ # DK-0050..0069, from the design export
+    - assets/brand/ # DK-0070: the Dokulo symbol, from the design export (DK-1008)
 
   # Material Symbols Rounded (DK-0048), fetched by tools/fetch_icon_font.py;
   # the icon tree-shaker keeps only the glyphs DkIcons uses.
