@@ -178,21 +178,22 @@ class _DkCropOverlayState extends State<DkCropOverlay> {
                       ),
                     ),
                   ),
-                  for (var i = 0; i < 4; i++)
-                    _Handle(
-                      at: q[i],
-                      hidden: dragged == i,
-                      shape: const Size(24, 24),
-                      onStart: () => _begin(i),
-                      onUpdate: _update,
-                      onEnd: _end,
-                    ),
+                  // Corners after edges: where targets overlap, a corner wins.
                   for (var e = 0; e < 4; e++)
                     _Handle(
                       at: Offset.lerp(q[e], q[(e + 1) % 4], 0.5)!,
                       hidden: false,
                       shape: e.isEven ? const Size(24, 8) : const Size(8, 24),
                       onStart: () => _begin(4 + e),
+                      onUpdate: _update,
+                      onEnd: _end,
+                    ),
+                  for (var i = 0; i < 4; i++)
+                    _Handle(
+                      at: q[i],
+                      hidden: dragged == i,
+                      shape: const Size(24, 24),
+                      onStart: () => _begin(i),
                       onUpdate: _update,
                       onEnd: _end,
                     ),
