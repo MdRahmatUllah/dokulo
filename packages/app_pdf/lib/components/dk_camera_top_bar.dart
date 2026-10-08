@@ -116,6 +116,8 @@ class _FlashButtonState extends State<_FlashButton> {
       button: true,
       label: '${l.camera_flash}: $state',
       excludeSemantics: true,
+      // The children are excluded, the tap with them: give it back.
+      onTap: widget.onPressed,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.m,
@@ -180,6 +182,8 @@ class _AutoPillState extends State<_AutoPill> {
       toggled: widget.on,
       label: l.camera_auto_capture,
       excludeSemantics: true,
+      // The children are excluded, the tap with them: give it back.
+      onTap: () => widget.onChanged(!widget.on),
       child: InkWell(
         onTap: () => widget.onChanged(!widget.on),
         onFocusChange: (v) => setState(() => _focused = v),

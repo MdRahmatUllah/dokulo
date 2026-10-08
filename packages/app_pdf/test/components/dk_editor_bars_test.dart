@@ -6,6 +6,8 @@ import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'a11y.dart';
+
 Widget app(
   Widget home, {
   DkTokens? tokens,
@@ -29,21 +31,24 @@ void main() {
     ('light', DkTokens.light),
     ('dark', DkTokens.dark),
   ]) {
-    for (final scale in [1.0, 2.0]) {
-      testWidgets('strip and markup bar, $name, ${(scale * 100).round()} %', (
-        tester,
-      ) async {
+    for (final (lang, scale) in [('en', 1.0), ('en', 2.0), ('de', 2.0)]) {
+      final file = 'editor_bars_${name}_${lang}_${(scale * 100).round()}';
+      testWidgets('golden: $file', (tester) async {
         tester.view.physicalSize = const Size(393, 320);
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
-          app(const EditorBarStates(), tokens: tokens, textScale: scale),
+          app(
+            const EditorBarStates(),
+            tokens: tokens,
+            textScale: scale,
+            locale: Locale(lang),
+          ),
         );
+        expect(tester.takeException(), isNull);
         await expectLater(
           find.byType(EditorBarStates),
-          matchesGoldenFile(
-            'goldens/editor_bars_${name}_${(scale * 100).round()}.png',
-          ),
+          matchesGoldenFile('goldens/$file.png'),
         );
       });
     }
@@ -144,5 +149,14 @@ void main() {
       );
       expect(find.text('Copy').evaluate().isNotEmpty, labels, reason: '$width');
     }
+  });
+
+  testWidgets('every enabled button can be pressed with a screen reader', (
+    tester,
+  ) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(app(const EditorBarStates()));
+    expectPressableButtons(tester);
+    handle.dispose();
   });
 }

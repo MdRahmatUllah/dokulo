@@ -121,6 +121,8 @@ class _StripButtonState extends State<_StripButton> {
       selected: on,
       label: widget.tool.label,
       excludeSemantics: true,
+      // The children are excluded, the tap with them: give it back.
+      onTap: widget.onTap,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.m,
@@ -310,6 +312,8 @@ class _PillButtonState extends State<_PillButton> {
       button: true,
       label: widget.label,
       excludeSemantics: true,
+      // The children are excluded, the tap with them: give it back.
+      onTap: widget.onTap,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.l,

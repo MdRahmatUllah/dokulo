@@ -156,6 +156,8 @@ class _BarButtonState extends State<_BarButton> {
       enabled: enabled,
       label: a.label,
       excludeSemantics: true,
+      // The children are excluded, the tap with them: give it back.
+      onTap: a.onPressed,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.m,
@@ -172,14 +174,18 @@ class _BarButtonState extends State<_BarButton> {
               spacing: t.space.xxs,
               children: [
                 DkIcon(a.icon, color: a.destructive ? c.danger : c.iconPrimary),
-                Text(
-                  a.label,
-                  style: t.text.caption.copyWith(
-                    color: ink,
-                    fontWeight: widget.bold ? FontWeight.w600 : null,
+                // A long label ("Seitenübersicht" at large text) shrinks to
+                // fit its cell rather than losing letters.
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    a.label,
+                    style: t.text.caption.copyWith(
+                      color: ink,
+                      fontWeight: widget.bold ? FontWeight.w600 : null,
+                    ),
+                    maxLines: 1,
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
