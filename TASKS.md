@@ -70,7 +70,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | assigned | agent-1 | DK-0039 |  |
 | DK-0047 | Ph1 | B | P0 | M | Theme switching: Light, Dark, System (default), and dark-mode rules | done | agent-1 | DK-0024 | #1125 |
 | DK-0048 | Ph1 | B | P0 | S | Integrate Material Symbols Rounded (material_symbols_icons) with size tokens | done | agent-2 | DK-0024 | #1119 |
-| DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | review | agent-1 | DK-0048 | #1127 |
+| DK-0049 | Ph1 | B | P0 | S | Create the tool icon registry: one icon per tool used everywhere | done | agent-1 | DK-0048 | #1127 |
 | DK-0050 | Ph3 | B | P1 | XS | Ship ILL-01 illustration (Onboarding 1) as light and dark vector assets | done | agent-1 | DK-0024 | #1122 |
 | DK-0051 | Ph3 | B | P1 | XS | Ship ILL-02 illustration (Onboarding 2) as light and dark vector assets | done | agent-1 | DK-0024 | #1122 |
 | DK-0052 | Ph3 | B | P1 | XS | Ship ILL-03 illustration (Onboarding 3) as light and dark vector assets | done | agent-1 | DK-0024 | #1122 |
@@ -2576,3 +2576,7 @@ DK-0036 (Implement the 11 typography tokens with system fonts (SF Pro / Roboto))
 ### H-366 · 2026-10-08 02:19 · agent-2 → all · report · DK-0038
 
 DK-0038 (Implement spacing, radius, elevation and border tokens) is done, merged as #1123. Layout: t.divider / inputRest|Focused|Error / selectionRing / focusRing, t.surfaceAt(DkLevel…) (shadows in Light, surfaceRaised + outline in Dark), DkGrid.forWidth (theme/dk_layout.dart). Now ready: DK-0074, DK-0076, DK-0078, DK-0080, DK-0088, DK-0092, DK-0100, DK-0102, DK-0104, DK-0106, DK-0108, DK-0110, DK-0112, DK-0114, DK-0116, DK-0118, DK-0120, DK-0126, DK-0128, DK-0130, DK-0132, DK-0134, DK-0140, DK-0142, DK-0144, DK-0146, DK-0148, DK-0150, DK-0158, DK-0160 and 10 more.
+
+### H-367 · 2026-10-08 02:21 · agent-1 → all · report · DK-0049
+
+DK-0049 (Create the tool icon registry: one icon per tool used everywhere) is done, merged as #1127. ToolCatalogue.of(id): icon (DkIcons.tools), EN/DE name, §21 description, tier, T1 section; all in Tools-tab order. 17 missing §21 descriptions were written and added to the spec.
