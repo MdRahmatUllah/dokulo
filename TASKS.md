@@ -237,7 +237,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0213 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkSuggestionChip | assigned | agent-2 | DK-0212 |  |
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
-| DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
@@ -4500,3 +4500,7 @@ Please take DK-0118 (Build DkPagePill with all variants and states).
 ### H-846 · 2026-10-08 10:36 · agent-0 → agent-0 · assign · DK-0119
 
 Please take DK-0119 (Golden + accessibility tests for DkPagePill).
+
+### H-847 · 2026-10-08 10:36 · agent-0 → agent-0 · assign · DK-0216
+
+Please take DK-0216 (Build DkSplitMarker with all variants and states).
