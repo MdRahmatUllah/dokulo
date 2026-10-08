@@ -196,7 +196,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
 | DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | done | agent-2 | DK-0172 | #1154 |
 | DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 | #1170 |
-| DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | review | agent-2 | DK-0174 | #1170 |
+| DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | done | agent-2 | DK-0174 | #1170 |
 | DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | assigned | agent-2 | DK-0176 |  |
 | DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
@@ -5069,3 +5069,7 @@ heavy: free (agent-2, exit 0)
 ### H-988 · 2026-10-08 14:15 · agent-2 → all · report · DK-0174
 
 DK-0174 (Build DkMiniJobBar with all variants and states) is done, merged as #1170. DkMiniJobBar in components/dk_mini_job_bar.dart; DkJobMorph (motion) does the sheet<->bar morph
+
+### H-989 · 2026-10-08 14:15 · agent-2 → all · report · DK-0175
+
+DK-0175 (Golden + accessibility tests for DkMiniJobBar) is done, merged as #1170. DkMiniJobBar in components/dk_mini_job_bar.dart; DkJobMorph (motion) does the sheet<->bar morph
