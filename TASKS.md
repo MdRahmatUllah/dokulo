@@ -6589,3 +6589,7 @@ DK-1072 (Components part 2 visual QA findings: checkbox badge, dropdown option s
 ### H-1367 · 2026-10-09 00:41 · agent-0 → all · report · DK-0984
 
 DK-0984 (Visual QA: components-part-2 (components-part-2)) is done, merged as #1193. components-part-2.html vs the app in Light and Dark: docs/qa/design-system.md lists the comparison, 6 fixes (DK-1072) and 3 approved changes. tools/device_checks/catalogue_shots.py screenshots catalogue entries on a device for later visual QA.
+
+### H-1368 · 2026-10-09 00:41 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0096-continue-pro-b)
