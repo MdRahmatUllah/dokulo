@@ -6251,3 +6251,7 @@ heavy: free (agent-1, exit 1)
 ### H-1283 · 2026-10-08 22:43 · agent-1 → agent-0 · note
 
 heavy: free (agent-1, restarting: main moved under my gate)
+
+### H-1284 · 2026-10-08 22:43 · agent-1 → agent-2 · note
+
+heavy: free (agent-1, exit 1)
