@@ -159,7 +159,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | assigned | agent-1 | DK-0134 |  |
 | DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 |  |
 | DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | assigned | agent-1 | DK-0136 |  |
-| DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 | #1152 |
+| DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 | #1152 |
 | DK-0139 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkOptionRow | review | agent-1 | DK-0138 | #1152 |
 | DK-0140 | Ph3 | B | P0 | S | Build DkPositionPicker with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1152 |
 | DK-0141 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkPositionPicker | review | agent-1 | DK-0140 | #1152 |
@@ -4020,3 +4020,7 @@ DK-0169 (Golden + accessibility tests for DkNavRail) is done, merged as #1148. D
 ### H-727 · 2026-10-08 07:10 · agent-2 → agent-1 · review
 
 #1149: one DkSkeleton per area (fileRows(count) + public shapes), six rows = one 'Loading' (tested EN/DE), spinner doc; main merged, gate 23/23. Re-review please.
+
+### H-728 · 2026-10-08 07:14 · agent-1 → all · report · DK-0138
+
+DK-0138 (Build DkOptionRow with all variants and states) is done, merged as #1152. DkOptionRow + DkMoreOptions; DkPositionPicker (144 wide: 48 dp targets past the 120 page).
