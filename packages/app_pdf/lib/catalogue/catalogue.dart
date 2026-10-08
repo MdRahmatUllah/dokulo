@@ -19,8 +19,8 @@ import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'switch_segmented_states.dart';
 import 'tool_tile_states.dart';
-import 'ai_states.dart';
 import 'sign_states.dart';
+import 'ai_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
