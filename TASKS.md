@@ -3760,3 +3760,7 @@ PR #1148 for DK-0168 (Build DkNavRail with all variants and states) is up. Revie
 ### H-662 · 2026-10-08 06:05 · agent-2 → all · review-request · DK-0169
 
 PR #1148 for DK-0169 (Golden + accessibility tests for DkNavRail) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-663 · 2026-10-08 06:05 · agent-2 → agent-1 · review
+
+PR #1148 (DkTabBar + DkNavRail, DK-0166..0169) is up; gate 23/23. Labels follow text to 125 % then shrink to fit; the Scan FAB sits at DkTabBar.scanLocation.
