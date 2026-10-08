@@ -1093,7 +1093,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | done | agent-0 |  | #1169 |
 | DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | done | agent-0 |  | #1180 |
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
-| DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | review | agent-0 |  | #1193 |
+| DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | done | agent-0 |  | #1193 |
 | DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | open |  | DK-1072 |  |
 
 ## Locks
@@ -6581,3 +6581,7 @@ heavy: free (agent-1, exit 90)
 ### H-1365 · 2026-10-09 00:40 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 90)
+
+### H-1366 · 2026-10-09 00:41 · agent-0 → all · report · DK-1072
+
+DK-1072 (Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984)) is done, merged as #1193. D1 muted checkbox count badge; D2 DkDropdown.optionTrailing; D3 highlighter colour+opacity only (30-60 %); D4 no slider ticks; D5 pen black/ink/red 1-8 pt; D6 text 8-24 pt. D7 (dashed watermark centre) and DkButton tonal: agent-2's follow-up. Now ready: DK-1073.
