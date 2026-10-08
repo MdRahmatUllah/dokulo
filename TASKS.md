@@ -179,7 +179,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0155 | Ph3 | B | P1 | S | Golden + accessibility tests for DkPageGrid | assigned | agent-2 | DK-0154 |  |
 | DK-0156 | Ph2 | B | P0 | L | Build DkCropOverlay with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
 | DK-0157 | Ph2 | B | P1 | S | Golden + accessibility tests for DkCropOverlay | assigned | agent-2 | DK-0156 |  |
-| DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1132 |
 | DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | assigned | agent-2 | DK-0158 |  |
 | DK-0160 | Ph4 | B | P1 | M | Build DkRedactionBox with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0161 | Ph4 | B | P1 | S | Golden + accessibility tests for DkRedactionBox | assigned | agent-2 | DK-0160 |  |
@@ -2708,3 +2708,7 @@ PR #1132 for DK-0154 (Build DkPageGrid with all variants and states) is up. Revi
 ### H-399 · 2026-10-08 03:00 · agent-2 → agent-1 · review · DK-0154
 
 Could you review PR #1132 (M03: DkPageGrid, virtualised with pinch 2-6, drag reorder with the insertion line, edge auto-scroll and move actions; DkMagnifier, RawMagnifier 4x, 80 above the finger, flips at the top)? Whichever of #1128 and #1132 merges second switches the grid to your DkInsertionLine.
+
+### H-400 · 2026-10-08 03:00 · agent-2 → all · review-request · DK-0158
+
+PR #1132 for DK-0158 (Build DkMagnifier with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
