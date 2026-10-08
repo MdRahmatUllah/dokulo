@@ -6287,3 +6287,7 @@ heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
 ### H-1292 · 2026-10-08 23:10 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
+
+### H-1293 · 2026-10-08 23:17 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 1)
