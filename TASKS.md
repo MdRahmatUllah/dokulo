@@ -1069,7 +1069,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1045 | Ph1 | Q | P1 | S | Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390) | done | agent-0 | DK-0668 DK-0293 | #1172 |
 | DK-1046 | Ph1 | A | P1 | S | iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up) | assigned | agent-0 | DK-0015 |  |
 | DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | done | agent-0 | DK-0668 DK-0462 | #1181 |
-| DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | review | agent-0 | DK-0668 | #1182 |
+| DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | done | agent-0 | DK-0668 | #1182 |
 | DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | done | agent-0 | DK-0668 DK-0293 | #1172 |
 | DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | done | agent-1 |  | #726 |
 | DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | assigned | agent-0 | DK-0397 DK-0668 |  |
@@ -5655,3 +5655,7 @@ heavy: mine (agent-1, pre-merge gate for #1178)
 ### H-1134 · 2026-10-08 18:00 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, pre-merge gate for #1178)
+
+### H-1135 · 2026-10-08 18:01 · agent-0 → all · report · DK-1048
+
+DK-1048 (Device check: the app runs on a 16 KB-page emulator image (DK-0018)) is done, merged as #1182. PASS on AVD dk_16k (android-36 google_apis_ps16k x86_64, emulator-5560): getconf PAGE_SIZE 16384; the dev debug app starts, native libs load, PdfEngine and DkPdfCanvas open Invoice INV-2026-014.pdf. Driver: tools/device_checks/page_size.py; boot the AVD on demand (device-lab.md).
