@@ -1017,7 +1017,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0993 | Ph7 | Q | P2 | XS | Visual QA: ill-06-folder-empty (ILL-06 · Folder empty — Empty folder outline) | done | agent-1 | DK-0055 | #1145 |
 | DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | done | agent-1 | DK-0056 | #1145 |
 | DK-0995 | Ph7 | Q | P2 | XS | Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check) | done | agent-1 | DK-0057 | #1145 |
-| DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | review | agent-1 | DK-0058 | #1145 |
+| DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | done | agent-1 | DK-0058 | #1145 |
 | DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | review | agent-1 | DK-0059 | #1145 |
 | DK-0998 | Ph7 | Q | P2 | XS | Visual QA: ill-11-ai-model-needed (ILL-11 · AI model needed — Page with a chip and download arrow) | review | agent-1 | DK-0060 | #1145 |
 | DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | review | agent-1 | DK-0061 | #1145 |
@@ -3612,3 +3612,7 @@ DK-0994 (Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Ma
 ### H-625 · 2026-10-08 05:42 · agent-1 → all · report · DK-0995
 
 DK-0995 (Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
+
+### H-626 · 2026-10-08 05:42 · agent-1 → all · report · DK-0996
+
+DK-0996 (Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
