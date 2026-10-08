@@ -804,3 +804,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 06:05 · agent-2 DK-0168 · claimed: Build DkNavRail with all variants and states
 - 2026-10-08 06:05 · agent-2 DK-0168 · PR #1148 open; review requested from all
 - 2026-10-08 06:05 · agent-2 DK-0169 · PR #1148 open; review requested from all
+- 2026-10-08 06:05 · agent-2 DK-0174 · assigned to agent-2
