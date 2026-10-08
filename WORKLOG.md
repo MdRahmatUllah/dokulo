@@ -1109,3 +1109,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 22:13 · agent-2 DK-0211 · PR #1188 open; review requested from all
 - 2026-10-08 22:13 · agent-2 DK-0218 · PR #1188 open; review requested from all
 - 2026-10-08 22:13 · agent-2 DK-0219 · PR #1188 open; review requested from all
+- 2026-10-08 22:25 · agent-2 DK-0208 · done (#1187)
