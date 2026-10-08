@@ -1013,7 +1013,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0989 | Ph7 | Q | P2 | XS | Visual QA: ill-02-onboarding-2 (ILL-02 · Onboarding 2 — Clean page and a one-time tag) | review | agent-1 | DK-0051 | #1145 |
 | DK-0990 | Ph7 | Q | P2 | XS | Visual QA: ill-03-onboarding-3 (ILL-03 · Onboarding 3 — Camera, folder, toolbox as card icons) | review | agent-1 | DK-0052 | #1145 |
 | DK-0991 | Ph7 | Q | P2 | XS | Visual QA: ill-04-home-empty (ILL-04 · Home empty — Two pages with a soft scan frame) | review | agent-1 | DK-0053 | #1145 |
-| DK-0992 | Ph7 | Q | P2 | XS | Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, page sliding in) | assigned | agent-1 | DK-0054 |  |
+| DK-0992 | Ph7 | Q | P2 | XS | Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, page sliding in) | review | agent-1 | DK-0054 | #1145 |
 | DK-0993 | Ph7 | Q | P2 | XS | Visual QA: ill-06-folder-empty (ILL-06 · Folder empty — Empty folder outline) | assigned | agent-1 | DK-0055 |  |
 | DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | assigned | agent-1 | DK-0056 |  |
 | DK-0995 | Ph7 | Q | P2 | XS | Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check) | assigned | agent-1 | DK-0057 |  |
@@ -3488,3 +3488,7 @@ PR #1145 for DK-0990 (Visual QA: ill-03-onboarding-3 (ILL-03 · Onboarding 3 —
 ### H-594 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-0991
 
 PR #1145 for DK-0991 (Visual QA: ill-04-home-empty (ILL-04 · Home empty — Two pages with a soft scan frame)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-595 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-0992
+
+PR #1145 for DK-0992 (Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, page sliding in)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
