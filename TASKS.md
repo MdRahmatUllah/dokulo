@@ -170,7 +170,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0146 | Ph1 | B | P0 | XS | Build DkRadioRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1142 |
 | DK-0147 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkRadioRow | done | agent-1 | DK-0146 | #1142 |
 | DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1173 |
-| DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | assigned | agent-1 | DK-0148 |  |
+| DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | review | agent-1 | DK-0148 | #1173 |
 | DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 | #1129 |
 | DK-0151 | Ph1 | B | P1 | S | Golden + accessibility tests for DkPageThumb | done | agent-2 | DK-0150 | #1129 |
 | DK-0152 | Ph2 | B | P0 | M | Build DkPageTray with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 | #1129 |
@@ -5009,3 +5009,7 @@ heavy: free (agent-2, exit 92)
 ### H-973 · 2026-10-08 13:57 · agent-1 → all · review-request · DK-0148
 
 PR #1173 for DK-0148 (Build DkPinPad with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-974 · 2026-10-08 13:57 · agent-1 → all · review-request · DK-0149
+
+PR #1173 for DK-0149 (Golden + accessibility tests for DkPinPad) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
