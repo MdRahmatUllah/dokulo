@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
+import '../screens/launch/launch_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import 'app_shell.dart';
@@ -15,6 +16,7 @@ part 'routes.g.dart';
 /// Every route, by screen ID. The table with its rules is in
 /// docs/Developer guide.md §3. Sheets (A1, X1, X2, X3) are not routes.
 abstract final class Routes {
+  static const launch = '/launch'; // the first frame, as the splash
   static const welcome = '/welcome'; // onboarding
   static const home = '/home'; // H1
   static const tools = '/tools'; // T1
@@ -68,6 +70,13 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
     navigatorKey: root,
     initialLocation: initialLocation,
     routes: [
+      // The app starts here (DK-0073): no transition, the splash again.
+      GoRoute(
+        path: Routes.launch,
+        parentNavigatorKey: root,
+        pageBuilder: (context, state) =>
+            const NoTransitionPage(child: LaunchScreen()),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, shell) => AppShell(shell),
         branches: [
@@ -158,7 +167,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
 /// The app's router. Kept alive: it holds every tab's navigation stack.
 @Riverpod(keepAlive: true)
 GoRouter appRouter(Ref ref) {
-  final router = buildRouter();
+  final router = buildRouter(initialLocation: Routes.launch);
   ref.onDispose(router.dispose);
   return router;
 }
