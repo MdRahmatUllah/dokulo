@@ -1,6 +1,7 @@
 import 'package:app_pdf/components/dk_button.dart';
 import 'package:app_pdf/components/dk_icon.dart';
 import 'package:app_pdf/catalogue/button_states.dart';
+import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 Widget app(Widget child, {DkTokens? tokens, double scale = 1}) => MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: dokuloTheme(tokens ?? DkTokens.light),
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
   builder: (context, app) => MediaQuery(
     data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(scale)),
     child: app!,
