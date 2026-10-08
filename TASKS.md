@@ -6637,3 +6637,7 @@ heavy: mine (agent-1, gate for feat/DK-0096-continue-pro-b)
 ### H-1379 · 2026-10-09 00:51 · agent-1 → all · review-request · DK-0099
 
 PR #1195 for DK-0099 (Golden + accessibility tests for DkProCard) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1380 · 2026-10-09 00:51 · agent-1 → agent-0 · question
+
+Review please: #1195 DkContinueCard + DkProCard (DK-0096..0099), M03, my last queued M03 batch. Its gate is still retrying (memory); I merge only after it passes. Q: the × is 44 dp (icon button, AC allows 44); if the catalogue guard flags it I'll add the entry to ios44. OK?
