@@ -953,3 +953,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 10:44 · agent-0 DK-0115 · assigned to agent-1
 - 2026-10-08 10:44 · agent-0 DK-0116 · released: PR #1167 closed: agent-1 already has this on feat/DK-0114-count-hint-b
 - 2026-10-08 10:44 · agent-0 DK-0116 · assigned to agent-1
+- 2026-10-08 10:44 · agent-0 DK-0117 · released: PR #1167 closed: agent-1 already has this on feat/DK-0114-count-hint-b

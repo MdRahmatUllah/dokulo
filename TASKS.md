@@ -138,7 +138,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | assigned | agent-1 | DK-0114 | #1167 |
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
-| DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | review | agent-0 | DK-0116 | #1167 |
+| DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | open |  | DK-0116 | #1167 |
 | DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-1 | DK-0118 |  |
 | DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1153 |
@@ -4620,3 +4620,7 @@ Released DK-0116: PR #1167 closed: agent-1 already has this on feat/DK-0114-coun
 ### H-876 · 2026-10-08 10:44 · agent-0 → agent-1 · assign · DK-0116
 
 Please take DK-0116 (Build DkHintPill with all variants and states).
+
+### H-877 · 2026-10-08 10:44 · agent-0 → all · note · DK-0117
+
+Released DK-0117: PR #1167 closed: agent-1 already has this on feat/DK-0114-count-hint-b
