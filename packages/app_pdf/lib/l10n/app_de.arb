@@ -234,5 +234,9 @@
   "compare_added": "Hinzugefügt",
   "compare_removed": "Entfernt",
   "compare_changed": "Geändert",
+  "model_not_available": "Auf diesem Handy nicht verfügbar",
+  "model_pause_progress": "Pausieren, {percent} %",
+  "file_locked": "Gesperrt",
+  "file_encrypted": "Passwortgeschützt",
   "common_select": "Auswählen"
 }
