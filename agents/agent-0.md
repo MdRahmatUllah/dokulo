@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 08:27
+last-seen: 2026-10-08 08:30
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-0668 in review as PR #1160: answer the review; re-run the gate if main moved, then merge.
+DK-0293 Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render — claimed 2026-10-08 08:30.
 
 ## Next
 
