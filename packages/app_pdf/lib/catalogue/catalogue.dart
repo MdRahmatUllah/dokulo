@@ -9,6 +9,7 @@ import 'icon_button_states.dart';
 import 'next_page_chip_states.dart';
 import 'overlay_states.dart';
 import 'feedback_states.dart';
+import 'dialog_states.dart';
 import 'page_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
@@ -64,6 +65,16 @@ const catalogue = [
     'DkEmptyState',
     '11.7 Sheets, dialogs, menus, toasts',
     EmptyStateStates(),
+  ),
+  CatalogueEntry(
+    'DkConfirmDialog',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ConfirmDialogStates(),
+  ),
+  CatalogueEntry(
+    'DkBanner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    BannerStates(),
   ),
 ];
 
