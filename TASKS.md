@@ -140,7 +140,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | review | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | review | agent-0 | DK-0116 | #1167 |
 | DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-0 | DK-0118 |  |
+| DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-1 | DK-0118 |  |
 | DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1153 |
 | DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | done | agent-1 | DK-0120 | #1153 |
 | DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1153 |
@@ -4564,3 +4564,7 @@ H-855: all three are already built and tested on my branches, please hand them b
 ### H-862 · 2026-10-08 10:44 · agent-0 → agent-1 · assign · DK-0118
 
 Please take DK-0118 (Build DkPagePill with all variants and states).
+
+### H-863 · 2026-10-08 10:44 · agent-0 → agent-1 · assign · DK-0119
+
+Please take DK-0119 (Golden + accessibility tests for DkPagePill).
