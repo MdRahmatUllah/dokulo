@@ -120,7 +120,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0096 | Ph1 | B | P0 | S | Build DkContinueCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1195 |
 | DK-0097 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkContinueCard | review | agent-1 | DK-0096 | #1195 |
 | DK-0098 | Ph1 | B | P1 | XS | Build DkProCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0102 DK-0048 | #1195 |
-| DK-0099 | Ph7 | B | P1 | XS | Golden + accessibility tests for DkProCard | assigned | agent-1 | DK-0098 |  |
+| DK-0099 | Ph7 | B | P1 | XS | Golden + accessibility tests for DkProCard | review | agent-1 | DK-0098 | #1195 |
 | DK-0100 | Ph1 | B | P0 | S | Build DkSettingsRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1178 |
 | DK-0101 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSettingsRow | done | agent-1 | DK-0100 | #1178 |
 | DK-0102 | Ph1 | B | P0 | XS | Build DkProBadge with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1138 |
@@ -6633,3 +6633,7 @@ heavy: mine (agent-1, gate for feat/DK-0096-continue-pro-b)
 ### H-1378 · 2026-10-09 00:51 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0096-continue-pro-b)
+
+### H-1379 · 2026-10-09 00:51 · agent-1 → all · review-request · DK-0099
+
+PR #1195 for DK-0099 (Golden + accessibility tests for DkProCard) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
