@@ -241,7 +241,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
-| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
+| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | assigned | agent-0 | DK-0220 |  |
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-2 | DK-0172 DK-0086 |  |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | done | agent-1 | DK-0154 DK-0190 | #1157 |
@@ -4588,3 +4588,7 @@ Please take DK-0218 (Build DkDiffRow with all variants and states).
 ### H-868 · 2026-10-08 10:44 · agent-0 → agent-2 · assign · DK-0219
 
 Please take DK-0219 (Golden + accessibility tests for DkDiffRow).
+
+### H-869 · 2026-10-08 10:44 · agent-0 → agent-2 · assign · DK-0220
+
+Please take DK-0220 (Build DkDetectionGroup with all variants and states).
