@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
+import 'dk_tappable.dart';
 
 /// A question to start with on Ask's empty state (UI spec §11.8; DK-0212):
 /// a full-width outline chip, the `forum` 16 icon, `bodyM`, two lines at
@@ -16,46 +17,40 @@ class DkSuggestionChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    final radius = BorderRadius.circular(t.radius.m);
+    final c = t.color;
+    // One button with the whole question, even when it shows two lines.
     return Semantics(
       button: true,
-      child: Material(
-        type: MaterialType.transparency,
-        shape: RoundedRectangleBorder(
-          borderRadius: radius,
-          side: BorderSide(color: t.color.outlineStrong),
-        ),
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: radius,
-          overlayColor: WidgetStatePropertyAll(t.state.pressed),
-          splashFactory: NoSplash.splashFactory,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 48),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: t.space.m,
-                vertical: t.space.s,
+      label: text,
+      excludeSemantics: true,
+      onTap: onTap,
+      child: DkTappable(
+        onTap: onTap,
+        radius: t.radius.m,
+        builder: (context, pressed) => Container(
+          constraints: const BoxConstraints(minHeight: 48),
+          padding: EdgeInsets.symmetric(
+            horizontal: t.space.m,
+            vertical: t.space.s,
+          ),
+          decoration: BoxDecoration(
+            color: pressed ? t.state.pressed : null,
+            borderRadius: BorderRadius.circular(t.radius.m),
+            border: Border.all(color: c.outlineStrong),
+          ),
+          child: Row(
+            spacing: t.space.s,
+            children: [
+              DkIcon(DkIcons.forum, size: DkIconSize.s, color: c.iconSecondary),
+              Expanded(
+                child: Text(
+                  text,
+                  style: t.text.bodyM.copyWith(color: c.textPrimary),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-              child: Row(
-                spacing: t.space.s,
-                children: [
-                  DkIcon(
-                    DkIcons.forum,
-                    size: DkIconSize.s,
-                    color: t.color.iconSecondary,
-                  ),
-                  Expanded(
-                    child: Text(
-                      text,
-                      style: t.text.bodyM.copyWith(color: t.color.textPrimary),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            ],
           ),
         ),
       ),
