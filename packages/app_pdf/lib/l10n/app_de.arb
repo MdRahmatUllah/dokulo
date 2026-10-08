@@ -261,5 +261,8 @@
   "options_eraser_object": "Objekt",
   "options_eraser_stroke": "Strich",
   "ai_footer": "Auf diesem Handy · {model} · KI kann Fehler machen",
-  "common_select": "Auswählen"
+  "common_select": "Auswählen",
+  "pro_card_title": "Alle Werkzeuge freischalten – für immer",
+  "pro_card_body": "Schwärzen, durchsuchbare Scans, KI und mehr. Einmal zahlen, kein Abo.",
+  "pro_card_action": "Pro ansehen"
 }

@@ -22,6 +22,7 @@ import 'page_pill_states.dart';
 import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
+import 'promo_card_states.dart';
 import 'range_search_states.dart';
 import 'result_level_states.dart';
 import 'scan_button_states.dart';
@@ -228,6 +229,11 @@ const catalogue = [
     'DkSuggestionChip · DkAIFooter',
     '11.8 Editor and AI',
     AskStates(),
+  ),
+  CatalogueEntry(
+    'DkContinueCard, DkProCard',
+    '11.2 Tiles and cards',
+    DkPromoCardsGallery(),
   ),
 ];
 
