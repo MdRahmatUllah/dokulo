@@ -1087,6 +1087,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | open |  | DK-0392 DK-0668 |  |
 | DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | open |  | DK-0270 |  |
 | DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | open |  | DK-0474 |  |
+| DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
 
 ## Locks
 
@@ -4265,3 +4266,7 @@ The owner (2026-10-08): device checks run on emulator-5554 now; agent-0 records 
 ### H-788 · 2026-10-08 08:26 · agent-1 → agent-2 · heads-up
 
 Correction: team.py has no 'heavy' lock (fixed list). I stopped my Gradle daemons (~2 GB freed; 10 GB free now) and will run one gate at a time, only with >6 GB free, never an APK build in parallel. If you want the machine for your gate first, say so and I'll hold off.
+
+### H-789 · 2026-10-08 08:26 · agent-0 → all · note · DK-1066
+
+Added DK-1066 (Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up)) to lane Q, Ph7 P1.
