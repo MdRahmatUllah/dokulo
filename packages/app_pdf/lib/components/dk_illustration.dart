@@ -50,7 +50,23 @@ enum DkIllustrations {
   damagedFile('ill-14-damaged-file', 120, 120),
 
   /// ILL-15: a signature on a line with a pen (No signatures yet).
-  noSignatures('ill-15-no-signatures-yet', 120, 120);
+  noSignatures('ill-15-no-signatures-yet', 120, 120),
+
+  /// ILL-16: three connected cards (No workflows yet).
+  noWorkflows('ill-16-no-workflows-yet', 120, 120),
+
+  /// ILL-17: a photo grid with two documents marked (Find documents in photos).
+  findInPhotos('ill-17-find-documents-in-photos', 120, 120),
+
+  /// ILL-18: the Dokulo symbol with a Pro ribbon (Paywall header; its amber is
+  /// the same in both themes).
+  paywallHeader('ill-18-paywall-header', 120, 120),
+
+  /// ILL-19: a globe with a cloud-off sign (Offline, Web page to PDF).
+  offline('ill-19-offline-web-to-pdf', 120, 120),
+
+  /// ILL-20: a page with a warning triangle (Generic error).
+  genericError('ill-20-generic-error', 120, 120);
 
   const DkIllustrations(this.file, this.width, this.height);
   final String file;
