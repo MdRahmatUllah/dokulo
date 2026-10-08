@@ -78,15 +78,17 @@ class DkActionSheetHeader extends StatelessWidget {
   }
 }
 
-/// Opens a [DkActionSheet] (UI spec §11.7; DK-0184). A row closes the sheet,
-/// then runs its action.
+/// Opens a [DkActionSheet] (UI spec §11.7; DK-0184), at the medium detent
+/// (§16.3). A row closes the sheet, then runs its action.
 Future<void> showDkActionSheet(
   BuildContext context, {
   DkActionSheetHeader? header,
   Widget? top,
   required List<List<DkAction>> groups,
+  DkSheetDetent detent = DkSheetDetent.medium,
 }) => showDkSheet<void>(
   context,
+  detent: detent,
   body: DkActionSheet(header: header, top: top, groups: groups),
 );
 

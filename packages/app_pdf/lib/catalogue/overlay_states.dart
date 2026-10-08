@@ -94,6 +94,27 @@ class SheetStates extends StatelessWidget {
             onClose: _none,
             actions: FilledButton(onPressed: _none, child: Text('Apply')),
           ),
+          SizedBox(height: t.space.xl),
+          // No title: the × alone, no empty heading.
+          const DkSheet(
+            body: _Lines(),
+            onClose: _none,
+            actions: FilledButton(onPressed: _none, child: Text('Apply')),
+          ),
+          SizedBox(height: t.space.xl),
+          // The tablet dialog: every corner rounded, no handle.
+          Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 560),
+              child: const DkSheet(
+                title: 'Sort by',
+                body: _Lines(),
+                onClose: _none,
+                inDialog: true,
+              ),
+            ),
+          ),
+          SizedBox(height: t.space.xl),
         ],
       ),
     );

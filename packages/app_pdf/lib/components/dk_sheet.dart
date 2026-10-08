@@ -104,20 +104,26 @@ Future<T?> showDkSheet<T>(
         ),
         child: switch (detent) {
           DkSheetDetent.small => sheet(context),
-          DkSheetDetent.medium ||
-          DkSheetDetent.large => DraggableScrollableSheet(
-            expand: false,
-            initialChildSize: detent == DkSheetDetent.medium ? 0.5 : 0.92,
-            minChildSize: confirmDismiss == null
+          DkSheetDetent.medium || DkSheetDetent.large => () {
+            final min = confirmDismiss == null
                 ? 0.25
-                : (detent == DkSheetDetent.medium ? 0.5 : 0.92),
-            maxChildSize: 0.92,
-            snap: true,
-            snapSizes: const [0.5],
-            shouldCloseOnMinExtent: confirmDismiss == null,
-            builder: (context, controller) =>
-                sheet(context, controller: controller),
-          ),
+                : (detent == DkSheetDetent.medium ? 0.5 : 0.92);
+            return DraggableScrollableSheet(
+              expand: false,
+              initialChildSize: detent == DkSheetDetent.medium ? 0.5 : 0.92,
+              minChildSize: min,
+              maxChildSize: 0.92,
+              // Snap sizes must lie strictly between min and max: with a
+              // confirmation a large sheet can't move at all.
+              snap: min < 0.92,
+              snapSizes: [if (min < 0.5) 0.5],
+              // §9: detent changes take `motion.standard`.
+              snapAnimationDuration: motion.duration,
+              shouldCloseOnMinExtent: confirmDismiss == null,
+              builder: (context, controller) =>
+                  sheet(context, controller: controller),
+            );
+          }(),
         },
       ),
     ),
@@ -191,15 +197,18 @@ class DkSheet extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Expanded(
-                child: Semantics(
-                  header: true,
-                  child: Text(
-                    title ?? '',
-                    style: t.text.titleM.copyWith(color: t.color.textPrimary),
+              if (title == null)
+                const Spacer()
+              else
+                Expanded(
+                  child: Semantics(
+                    header: true,
+                    child: Text(
+                      title!,
+                      style: t.text.titleM.copyWith(color: t.color.textPrimary),
+                    ),
                   ),
                 ),
-              ),
               if (onClose != null)
                 IconButton(
                   onPressed: onClose,

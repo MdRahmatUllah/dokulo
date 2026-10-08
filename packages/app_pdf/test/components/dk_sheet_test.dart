@@ -44,12 +44,12 @@ void main() {
       testWidgets('the sheet, $name, ${(scale * 100).round()} %', (
         tester,
       ) async {
-        phone(tester, Size(393, scale == 1 ? 520 : 900));
+        phone(tester, Size(393, scale == 1 ? 1100 : 2050));
         await tester.pumpWidget(
           app(const SheetStates(), tokens: tokens, textScale: scale),
         );
         await expectLater(
-          find.byType(DkSheet),
+          find.byType(SheetStates),
           matchesGoldenFile(
             'goldens/sheet_${name}_${(scale * 100).round()}.png',
           ),
@@ -221,5 +221,46 @@ void main() {
     final rect = tester.getRect(find.byType(DkSheet));
     expect(rect.width, lessThanOrEqualTo(560));
     expect(rect.center.dx, closeTo(512, 1));
+  });
+
+  testWidgets('large with a confirmation opens (no snap sizes outside '
+      'min..max) and stays put', (tester) async {
+    phone(tester);
+    await tester.pumpWidget(
+      app(
+        opener(
+          (c) => showDkSheet<void>(
+            c,
+            title: 'Save',
+            detent: DkSheetDetent.large,
+            body: const Text('body'),
+            confirmDismiss: () async => false,
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(tester.getSize(find.byType(DkSheet)).height, closeTo(852 * 0.92, 1));
+  });
+
+  testWidgets('no title: no empty heading for screen readers', (tester) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(
+      app(
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: DkSheet(body: const Text('body'), onClose: () {}),
+        ),
+      ),
+    );
+    expect(
+      find.byWidgetPredicate(
+        (w) => w is Semantics && (w.properties.header ?? false),
+      ),
+      findsNothing,
+    );
+    handle.dispose();
   });
 }
