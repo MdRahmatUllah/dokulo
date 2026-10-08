@@ -1082,7 +1082,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1058 | Ph1 | A | P1 | S | qpdf_ffi on iOS: build through the hook on a Mac, run integration_test/qpdf_test.dart on an iPhone and the simulator (DK-0391 follow-up) | assigned | agent-0 | DK-0391 DK-1046 |  |
 | DK-1059 | Ph1 | Q | P1 | S | Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391) | review | agent-0 | DK-0391 DK-0668 | #1172 |
 | DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | review | agent-0 | DK-0394 DK-0668 | #1172 |
-| DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | in-progress | agent-0 | DK-0668 |  |
+| DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | review | agent-0 | DK-0668 | #1172 |
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | open |  | DK-0392 DK-0668 |  |
 | DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | open |  | DK-0270 |  |
@@ -4929,3 +4929,7 @@ PR #1172 for DK-1059 (Device check: qpdf_ffi on every target ABI; encrypt, repai
 ### H-953 · 2026-10-08 13:50 · agent-0 → all · review-request · DK-1060
 
 PR #1172 for DK-1060 (Device check: OCR text layer timings on the 4 test devices (DK-0394)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-954 · 2026-10-08 13:50 · agent-0 → all · review-request · DK-1061
+
+PR #1172 for DK-1061 (Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
