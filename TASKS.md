@@ -5061,3 +5061,7 @@ PR #1174 for DK-0119 (Golden + accessibility tests for DkPagePill) is up. Review
 ### H-986 · 2026-10-08 14:11 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0174-mini-job-bar)
+
+### H-987 · 2026-10-08 14:14 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 0)
