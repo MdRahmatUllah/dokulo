@@ -24,7 +24,9 @@ class DkSplitMarker extends StatelessWidget {
     return Semantics(
       button: onRemove != null,
       label: [AppLocalizations.of(context).split_remove, ?reason].join(', '),
+      // The children are excluded, the tap with them: give it back.
       excludeSemantics: true,
+      onTap: onRemove,
       child: InkWell(
         onTap: onRemove,
         overlayColor: WidgetStatePropertyAll(t.state.pressed),

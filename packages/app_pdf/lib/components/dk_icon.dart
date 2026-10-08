@@ -138,7 +138,6 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
-<<<<<<< HEAD
   static const arrowForward = IconData(
     0xe5c8,
     fontFamily: _font,
@@ -150,13 +149,7 @@ abstract final class DkIcons {
   static const scanIdCard = IconData(0xea67, fontFamily: _font) /* badge */;
   static const scanBook = IconData(0xea19, fontFamily: _font) /* menu_book */;
   static const scanBatch = IconData(0xe43c, fontFamily: _font) /* burst_mode */;
-=======
   static const cut = IconData(0xe14e, fontFamily: _font) /* content_cut */;
-<<<<<<< HEAD
-  static const forum = IconData(0xe8af, fontFamily: _font) /* forum */;
->>>>>>> 9aee401 (wip: signature card, suggestion chip, AI footer, split marker)
-=======
->>>>>>> 6cf8373 (feat(ui): DkSignatureCard and DkSplitMarker (DK-0208, DK-0209, DK-0216, DK-0217))
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;

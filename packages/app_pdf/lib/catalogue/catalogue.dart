@@ -14,7 +14,6 @@ import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
-import 'ai_states.dart';
 import 'sign_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -88,11 +87,6 @@ const catalogue = [
     'DkSignatureCard',
     '11.8 Editor and AI',
     SignatureCardStates(),
-  ),
-  CatalogueEntry(
-    'DkSuggestionChip · DkAIFooter',
-    '11.8 Editor and AI',
-    AskStates(),
   ),
   CatalogueEntry('DkSplitMarker', '11.8 Editor and AI', SplitStates()),
 ];

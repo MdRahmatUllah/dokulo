@@ -36,19 +36,24 @@ void main() {
       ('light', DkTokens.light),
       ('dark', DkTokens.dark),
     ]) {
-      for (final scale in [1.0, 2.0]) {
-        testWidgets('$what, $name, ${(scale * 100).round()} %', (tester) async {
+      for (final (lang, scale) in [('en', 1.0), ('en', 2.0), ('de', 2.0)]) {
+        final file = '${what}_${name}_${lang}_${(scale * 100).round()}';
+        testWidgets('golden: $file', (tester) async {
           tester.view.physicalSize = Size(393, scale == 1 ? 400 : 700);
           tester.view.devicePixelRatio = 1;
           addTearDown(tester.view.reset);
           await tester.pumpWidget(
-            app(gallery, tokens: tokens, textScale: scale),
+            app(
+              gallery,
+              tokens: tokens,
+              textScale: scale,
+              locale: Locale(lang),
+            ),
           );
+          expect(tester.takeException(), isNull);
           await expectLater(
             find.byWidget(gallery),
-            matchesGoldenFile(
-              'goldens/${what}_${name}_${(scale * 100).round()}.png',
-            ),
+            matchesGoldenFile('goldens/$file.png'),
           );
         });
       }
@@ -102,11 +107,17 @@ void main() {
     await tester.tap(find.byType(DkSplitMarker));
     await tester.tap(find.byType(DkSplitGap));
     expect(done, ['remove', 'split']);
+    // Both can be pressed with a screen reader.
     expect(
-      find.bySemanticsLabel("Don't split here, New letterhead"),
-      findsOneWidget,
+      tester.getSemantics(
+        find.bySemanticsLabel("Don't split here, New letterhead"),
+      ),
+      isSemantics(isButton: true, hasTapAction: true),
     );
-    expect(find.bySemanticsLabel('Split here'), findsOneWidget);
+    expect(
+      tester.getSemantics(find.bySemanticsLabel('Split here')),
+      isSemantics(isButton: true, hasTapAction: true),
+    );
     handle.dispose();
   });
 }
