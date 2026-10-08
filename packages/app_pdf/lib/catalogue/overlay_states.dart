@@ -309,8 +309,7 @@ class LoadingStates extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const DkSkeleton.fileRow(),
-            const DkSkeleton.fileRow(),
+            DkSkeleton.fileRows(count: 2),
             const DkSkeleton.modelCard(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: t.space.l),

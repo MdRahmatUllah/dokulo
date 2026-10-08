@@ -8,25 +8,31 @@ import '../theme/dk_tokens.dart';
 /// back in 1.2 s); still with Reduce Motion. Screen readers hear "Loading"
 /// once for the whole skeleton.
 ///
-/// The presets are the app's loading shapes: [DkSkeleton.fileRow] (F1, six
-/// of them), [DkSkeleton.gridCard], [DkSkeleton.page] and
-/// [DkSkeleton.modelCard] (M2). [DkSkeleton.new] wraps any layout of
-/// [DkSkeletonBlock]s.
+/// One DkSkeleton per loading area: its label is read once, so a screen
+/// wraps the whole area, not each row. The presets are the app's loading
+/// shapes: [DkSkeleton.fileRows] (F1: six rows), [DkSkeleton.gridCard],
+/// [DkSkeleton.page] and [DkSkeleton.modelCard] (M2). [DkSkeleton.new]
+/// wraps any layout of [DkSkeletonBlock]s and the shapes
+/// ([DkSkeletonFileRow], [DkSkeletonGridCard], [DkSkeletonModelCard]), e.g.
+/// a grid of cards.
 class DkSkeleton extends StatefulWidget {
   const DkSkeleton({super.key, required this.child});
 
-  /// A file row: a 40 × 52 thumbnail, the name and the meta line.
-  const DkSkeleton.fileRow({super.key}) : child = const _FileRow();
+  /// F1 while files load: [count] file rows (six), read as one "Loading".
+  DkSkeleton.fileRows({super.key, int count = 6})
+    : child = Column(
+        children: [for (var i = 0; i < count; i++) const DkSkeletonFileRow()],
+      );
 
   /// A file or folder card in the grid: the 3 : 4 thumbnail and two lines.
-  const DkSkeleton.gridCard({super.key}) : child = const _GridCard();
+  const DkSkeleton.gridCard({super.key}) : child = const DkSkeletonGridCard();
 
   /// A page in the viewer or a grid: a 3 : 4 block.
   const DkSkeleton.page({super.key})
     : child = const AspectRatio(aspectRatio: 3 / 4, child: DkSkeletonBlock());
 
   /// An AI model card: a 40 icon, the name, the size, the button.
-  const DkSkeleton.modelCard({super.key}) : child = const _ModelCard();
+  const DkSkeleton.modelCard({super.key}) : child = const DkSkeletonModelCard();
 
   final Widget child;
 
@@ -128,8 +134,9 @@ class _Lines extends StatelessWidget {
   }
 }
 
-class _FileRow extends StatelessWidget {
-  const _FileRow();
+/// A file row's shape: a 40 × 52 thumbnail, the name and the meta line.
+class DkSkeletonFileRow extends StatelessWidget {
+  const DkSkeletonFileRow({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -147,8 +154,9 @@ class _FileRow extends StatelessWidget {
   }
 }
 
-class _GridCard extends StatelessWidget {
-  const _GridCard();
+/// A grid card's shape: the 3 : 4 thumbnail and two lines.
+class DkSkeletonGridCard extends StatelessWidget {
+  const DkSkeletonGridCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -165,8 +173,9 @@ class _GridCard extends StatelessWidget {
   }
 }
 
-class _ModelCard extends StatelessWidget {
-  const _ModelCard();
+/// An AI model card's shape: a 40 icon, the name, the size, the button.
+class DkSkeletonModelCard extends StatelessWidget {
+  const DkSkeletonModelCard({super.key});
 
   @override
   Widget build(BuildContext context) {

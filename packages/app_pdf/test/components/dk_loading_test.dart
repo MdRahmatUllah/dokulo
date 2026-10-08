@@ -62,16 +62,14 @@ void main() {
   testWidgets('the pulse: 1 → 0.55 → 1 in 1.2 s; still with Reduce Motion', (
     tester,
   ) async {
-    await tester.pumpWidget(app(const DkSkeleton.fileRow()));
+    await tester.pumpWidget(app(DkSkeleton.fileRows()));
     expect(opacityOf(tester), 1);
     await tester.pump(const Duration(milliseconds: 600));
     expect(opacityOf(tester), closeTo(0.55, 0.01));
     await tester.pump(const Duration(milliseconds: 600));
     expect(opacityOf(tester), closeTo(1, 0.01));
 
-    await tester.pumpWidget(
-      app(const DkSkeleton.fileRow(), reduceMotion: true),
-    );
+    await tester.pumpWidget(app(DkSkeleton.fileRows(), reduceMotion: true));
     await tester.pump(const Duration(milliseconds: 300));
     final still = opacityOf(tester);
     await tester.pump(const Duration(milliseconds: 300));
@@ -133,6 +131,10 @@ void main() {
       await tester.pumpWidget(
         app(const DkSkeleton.modelCard(), locale: locale),
       );
+      expect(find.bySemanticsLabel(label), findsOneWidget);
+      // F1's six rows: one "Loading", not six.
+      await tester.pumpWidget(app(DkSkeleton.fileRows(), locale: locale));
+      expect(find.byType(DkSkeletonFileRow), findsNWidgets(6));
       expect(find.bySemanticsLabel(label), findsOneWidget);
       await tester.pumpWidget(app(const DkLoadingSpinner(), locale: locale));
       expect(find.bySemanticsLabel(label), findsOneWidget);

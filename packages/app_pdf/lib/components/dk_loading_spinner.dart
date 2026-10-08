@@ -17,6 +17,9 @@ enum DkSpinnerSize {
 /// DK-0200): iOS's petals, Android's ring. Only inside buttons and for
 /// waits under 2 s in sheets; longer work shows progress (DkProgressSheet).
 /// [color] for a spinner on a filled button (its text colour).
+///
+/// Its "Loading" is not a container: inside a button it joins the button's
+/// label ("Save, Loading"), which is what a screen reader should hear.
 class DkLoadingSpinner extends StatelessWidget {
   const DkLoadingSpinner({
     super.key,
