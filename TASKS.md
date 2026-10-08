@@ -59,7 +59,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0035 | Ph1 | Q | P0 | S | Run and document the contrast audit for every token pair (light, dark, camera chrome) | done | agent-1 | DK-0024 | #1121 |
 | DK-0036 | Ph1 | B | P0 | S | Implement the 11 typography tokens with system fonts (SF Pro / Roboto) | done | agent-2 | DK-0024 | #1123 |
 | DK-0037 | Ph1 | B | P0 | S | Implement text rules: middle truncation for file names, 70-char line length, German wrapping, 200 % scaling | assigned | agent-1 | DK-0036 |  |
-| DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | review | agent-2 | DK-0024 | #1123 |
+| DK-0038 | Ph1 | B | P0 | S | Implement spacing, radius, elevation and border tokens | done | agent-2 | DK-0024 | #1123 |
 | DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | done | agent-1 | DK-0024 | #1117 |
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | review | agent-1 | DK-0039 | #1128 |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | review | agent-1 | DK-0039 | #1128 |
@@ -2572,3 +2572,7 @@ Could you review #1128 (DK-0040..0043: scan capture, success tick, tile reorder,
 ### H-365 · 2026-10-08 02:19 · agent-2 → all · report · DK-0036
 
 DK-0036 (Implement the 11 typography tokens with system fonts (SF Pro / Roboto)) is done, merged as #1123. Type: t.text.* (11 styles); numberXL and DkNumberText use tabular figures; mono is the platform monospace (Menlo fallback). Now ready: DK-0037, DK-0640.
+
+### H-366 · 2026-10-08 02:19 · agent-2 → all · report · DK-0038
+
+DK-0038 (Implement spacing, radius, elevation and border tokens) is done, merged as #1123. Layout: t.divider / inputRest|Focused|Error / selectionRing / focusRing, t.surfaceAt(DkLevel…) (shadows in Light, surfaceRaised + outline in Dark), DkGrid.forWidth (theme/dk_layout.dart). Now ready: DK-0074, DK-0076, DK-0078, DK-0080, DK-0088, DK-0092, DK-0100, DK-0102, DK-0104, DK-0106, DK-0108, DK-0110, DK-0112, DK-0114, DK-0116, DK-0118, DK-0120, DK-0126, DK-0128, DK-0130, DK-0132, DK-0134, DK-0140, DK-0142, DK-0144, DK-0146, DK-0148, DK-0150, DK-0158, DK-0160 and 10 more.
