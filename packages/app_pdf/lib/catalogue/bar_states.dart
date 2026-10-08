@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../components/dk_bottom_bars.dart';
 import '../components/dk_camera_top_bar.dart';
-import '../components/dk_editor_bars.dart';
 import '../components/dk_icon.dart';
 import '../components/dk_scan_button.dart';
 import '../components/dk_tab_bar.dart';
@@ -199,58 +198,6 @@ class BottomBarStates extends StatelessWidget {
           grid: false,
           onGrid: (_) {},
           onSettings: _none,
-        ),
-      ],
-    );
-  }
-}
-
-/// DkToolStrip (DK-0176), Pen selected, nothing to redo; DkMarkupBar
-/// (DK-0202) over a selection, and below one at the top.
-class EditorBarStates extends StatelessWidget {
-  const EditorBarStates({super.key});
-
-  static const tools = [
-    DkStripTool(icon: DkIcons.pan, label: 'Pan'),
-    DkStripTool(icon: DkIcons.pen, label: 'Pen'),
-    DkStripTool(icon: DkIcons.highlighter, label: 'Highlighter'),
-    DkStripTool(icon: DkIcons.textBox, label: 'Text'),
-    DkStripTool(icon: DkIcons.shape, label: 'Shapes'),
-    DkStripTool(icon: DkIcons.note, label: 'Note'),
-    DkStripTool(icon: DkIcons.eraser, label: 'Eraser'),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    final t = context.tokens;
-    const top = Rect.fromLTWH(60, 12, 160, 18);
-    const middle = Rect.fromLTWH(120, 150, 200, 18);
-    return Column(
-      spacing: t.space.l,
-      children: [
-        DkToolStrip(
-          tools: tools,
-          selected: 1,
-          onSelect: (_) {},
-          onUndo: _none,
-          onRedo: null,
-        ),
-        SizedBox(
-          height: 220,
-          child: Stack(
-            children: [
-              Positioned.fill(child: ColoredBox(color: t.color.pageWhite)),
-              for (final r in [top, middle])
-                Positioned.fromRect(
-                  rect: r,
-                  child: ColoredBox(
-                    color: t.color.primary.withValues(alpha: 0.25),
-                  ),
-                ),
-              DkMarkupBar.over(selection: middle, onAction: (_) {}),
-              DkMarkupBar.over(selection: top, onAction: (_) {}),
-            ],
-          ),
         ),
       ],
     );
