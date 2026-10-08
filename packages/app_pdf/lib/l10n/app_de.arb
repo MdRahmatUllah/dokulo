@@ -218,5 +218,8 @@
   "colour_brightness": "Helligkeit",
   "pin_delete_digit": "Ziffer löschen",
   "pin_biometric": "Fingerabdruck oder Gesicht verwenden",
-  "viewer_page_pill": "Seite {i} von {n}"
+  "viewer_page_pill": "Seite {i} von {n}",
+  "crop_auto": "Auto",
+  "crop_full_page": "Ganze Seite",
+  "crop_reset": "Zurücksetzen"
 }
