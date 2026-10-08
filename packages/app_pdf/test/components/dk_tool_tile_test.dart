@@ -6,6 +6,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(
@@ -116,7 +117,7 @@ void main() {
       expect(find.byType(DkStatusDot), findsNothing);
     });
 
-    testWidgets('tap and long press', (tester) async {
+    testWidgets('tap, long press and the keyboard', (tester) async {
       var taps = 0, menus = 0;
       await tester.pumpWidget(
         app(
@@ -132,6 +133,9 @@ void main() {
       await tester.tap(find.byType(DkToolTile));
       await tester.longPress(find.byType(DkToolTile));
       expect((taps, menus), (1, 1));
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      expect(taps, 2);
     });
   });
 

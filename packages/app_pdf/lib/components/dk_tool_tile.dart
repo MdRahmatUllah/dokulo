@@ -18,7 +18,7 @@ const _newFor = Duration(days: 14);
 /// DkProBadge on the square's top-right corner, and is never greyed out. A
 /// tool added less than 14 days ago ([addedOn]) has the 8 dp "new" dot.
 /// Screen readers hear "Compress PDF" or "Black out, Pro".
-class DkToolTile extends StatefulWidget {
+class DkToolTile extends StatelessWidget {
   const DkToolTile({
     super.key,
     required this.toolId,
@@ -45,103 +45,81 @@ class DkToolTile extends StatefulWidget {
   final bool showPressed;
 
   @override
-  State<DkToolTile> createState() => _DkToolTileState();
-}
-
-class _DkToolTileState extends State<DkToolTile> {
-  var _down = false, _focused = false;
-
-  @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final c = t.color;
     final l = AppLocalizations.of(context);
-    final tool = ToolCatalogue.of(widget.toolId);
+    final tool = ToolCatalogue.of(toolId);
     final name = tool.name(l);
-    final added = widget.addedOn;
+    final added = addedOn;
     final isNew =
-        added != null &&
-        (widget.now ?? DateTime.now()).difference(added) < _newFor;
-    final pressed = _down || widget.showPressed;
+        added != null && (now ?? DateTime.now()).difference(added) < _newFor;
     final shape = BorderRadius.circular(t.radius.m);
     return Semantics(
       button: true,
       label: tool.isPro ? '$name, ${l.pro_badge}' : name,
       excludeSemantics: true,
-      onTap: widget.onTap,
-      onLongPress: widget.onLongPress,
-      child: FocusableActionDetector(
-        onShowFocusHighlight: (v) => setState(() => _focused = v),
-        actions: {
-          ActivateIntent: CallbackAction<ActivateIntent>(
-            onInvoke: (_) => widget.onTap(),
+      onTap: onTap,
+      onLongPress: onLongPress,
+      child: DkTappable(
+        onTap: onTap,
+        onLongPress: onLongPress,
+        radius: t.radius.m,
+        showPressed: showPressed,
+        builder: (context, pressed) => Container(
+          constraints: const BoxConstraints(minWidth: 76, minHeight: 96),
+          decoration: BoxDecoration(
+            color: pressed ? t.state.pressed : null,
+            borderRadius: shape,
           ),
-        },
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTapDown: (_) => setState(() => _down = true),
-          onTapUp: (_) => setState(() => _down = false),
-          onTapCancel: () => setState(() => _down = false),
-          onTap: widget.onTap,
-          onLongPress: widget.onLongPress,
-          child: Container(
-            constraints: const BoxConstraints(minWidth: 76, minHeight: 96),
-            decoration: BoxDecoration(
-              color: pressed ? t.state.pressed : null,
-              borderRadius: shape,
-              border: _focused
-                  ? Border.all(color: c.focusRing, width: 2)
-                  : null,
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: t.space.xs,
-              vertical: t.space.s,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Container(
-                      width: 48,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: c.primaryContainer,
-                        borderRadius: shape,
-                      ),
-                      child: Center(
-                        child: DkIcon(
-                          tool.icon,
-                          size: DkIconSize.xl,
-                          color: c.onPrimaryContainer,
-                        ),
+          padding: EdgeInsets.symmetric(
+            horizontal: t.space.xs,
+            vertical: t.space.s,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: c.primaryContainer,
+                      borderRadius: shape,
+                    ),
+                    child: Center(
+                      child: DkIcon(
+                        tool.icon,
+                        size: DkIconSize.xl,
+                        color: c.onPrimaryContainer,
                       ),
                     ),
-                    if (tool.isPro)
-                      const Positioned(
-                        top: -4,
-                        right: -4,
-                        child: DkProBadge(small: true),
-                      ),
-                    if (isNew)
-                      const Positioned(
-                        top: -2,
-                        left: -2,
-                        child: DkStatusDot(DkStatus.fresh),
-                      ),
-                  ],
-                ),
-                SizedBox(height: t.space.xs),
-                Text(
-                  name,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: t.text.labelM.copyWith(color: c.textPrimary),
-                ),
-              ],
-            ),
+                  ),
+                  if (tool.isPro)
+                    const Positioned(
+                      top: -4,
+                      right: -4,
+                      child: DkProBadge(small: true),
+                    ),
+                  if (isNew)
+                    const Positioned(
+                      top: -2,
+                      left: -2,
+                      child: DkStatusDot(DkStatus.fresh),
+                    ),
+                ],
+              ),
+              SizedBox(height: t.space.xs),
+              Text(
+                name,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: t.text.labelM.copyWith(color: c.textPrimary),
+              ),
+            ],
           ),
         ),
       ),
