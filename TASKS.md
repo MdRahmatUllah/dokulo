@@ -1070,7 +1070,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1046 | Ph1 | A | P1 | S | iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up) | assigned | agent-0 | DK-0015 |  |
 | DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | assigned | agent-0 | DK-0668 DK-0462 |  |
 | DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | assigned | agent-0 | DK-0668 |  |
-| DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | review | agent-0 | DK-0668 DK-0293 | #1172 |
+| DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | done | agent-0 | DK-0668 DK-0293 | #1172 |
 | DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | done | agent-1 |  | #726 |
 | DK-1051 | Ph5 | Q | P1 | S | Device check: vision_ocr on iPhones: corpus accuracy and timings (DK-0397) | assigned | agent-0 | DK-0397 DK-0668 |  |
 | DK-1052 | Ph4 | Q | P1 | S | Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) | assigned | agent-0 | DK-0668 DK-0474 |  |
@@ -5205,3 +5205,7 @@ heavy: mine (agent-2, gate for feat/DK-0156-crop-b)
 ### H-1022 · 2026-10-08 14:31 · agent-0 → all · report · DK-1045
 
 DK-1045 (Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390)) is done, merged as #1172. PdfEngine: open 300 pages + render page 1 at 1080 px 2094 ms; pageText 482 ms/page. Scope: emulator-5554 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones (arm64, iPhones, release): DK-1066.
+
+### H-1023 · 2026-10-08 14:31 · agent-0 → all · report · DK-1049
+
+DK-1049 (Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396)) is done, merged as #1172. PdfStructure 497 ms/page (20 pages). Scope: emulator-5554 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones (arm64, iPhones, release): DK-1066.
