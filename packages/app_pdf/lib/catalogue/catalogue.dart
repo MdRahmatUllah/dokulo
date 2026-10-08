@@ -5,6 +5,7 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
+import 'dialog_states.dart';
 import 'page_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -29,6 +30,16 @@ const catalogue = [
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
+  CatalogueEntry(
+    'DkConfirmDialog',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ConfirmDialogStates(),
+  ),
+  CatalogueEntry(
+    'DkBanner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    BannerStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
