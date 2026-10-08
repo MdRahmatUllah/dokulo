@@ -1,3 +1,4 @@
+import 'package:app_pdf/components/dk_file_card.dart';
 import 'package:app_pdf/patterns/dk_swipe_actions.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -24,12 +25,13 @@ Widget app({bool reduce = false, Locale locale = const Locale('en')}) =>
             DkSwipeActions(
               onShare: () => done.add('share'),
               onDelete: () => done.add('delete'),
-              child: const SizedBox(
-                height: 72,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text('Invoice.pdf'),
-                ),
+              // The real row: the actions go on DkFileCard's own node.
+              builder: (context, actions) => DkFileCard(
+                name: 'Invoice.pdf',
+                meta: '2 pages',
+                thumbnail: const SizedBox(),
+                onTap: () {},
+                semanticsActions: actions,
               ),
             ),
           ],
@@ -40,9 +42,10 @@ Widget app({bool reduce = false, Locale locale = const Locale('en')}) =>
 /// How far the row has moved left.
 double moved(WidgetTester tester) => -tester
     .widget<Transform>(
+      // The swipe's own translate, not the card's press transform inside.
       find
-          .ancestor(
-            of: find.text('Invoice.pdf'),
+          .descendant(
+            of: find.byType(DkSwipeActions),
             matching: find.byType(Transform),
           )
           .first,
@@ -101,7 +104,8 @@ void main() {
     ]) {
       done.clear();
       await tester.pumpWidget(app(locale: locale));
-      final node = tester.getSemantics(find.byType(DkSwipeActions));
+      // On the card's node, the one screen readers focus.
+      final node = tester.getSemantics(find.text('Invoice.pdf'));
       final owner = tester.binding.renderViews.first.owner!.semanticsOwner!;
       for (final label in [share, delete]) {
         final action = node

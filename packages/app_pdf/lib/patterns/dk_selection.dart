@@ -46,14 +46,17 @@ class DkSelection<T> extends ChangeNotifier {
 }
 
 /// What [DkSelectable.builder] gets: whether selection mode is on, whether
-/// this item is selected, and what a tap and a long press do now. The item
-/// (DkFileCard, a page thumbnail) draws its check and tint from the first
-/// two and hands the callbacks to its own tappable.
+/// this item is selected, what a tap and a long press do now, and the
+/// screen-reader actions. The item (DkFileCard, a page thumbnail) draws its
+/// check and tint from the first two, hands the callbacks to its own
+/// tappable, and puts `selected` (while selecting) and [actions] on its own
+/// semantics node, so they are on the node screen readers focus.
 typedef DkSelectState = ({
   bool selecting,
   bool selected,
   VoidCallback onTap,
   VoidCallback onLongPress,
+  Map<CustomSemanticsAction, VoidCallback>? actions,
 });
 
 /// One item that takes part in selection mode: a long press starts it with
@@ -94,18 +97,15 @@ class DkSelectable<T> extends ConsumerWidget {
       builder: (context, _) {
         final selecting = selection.active;
         final selected = selection.isSelected(item);
-        return Semantics(
-          selected: selecting ? selected : null,
-          customSemanticsActions: selecting
+        return builder(context, (
+          selecting: selecting,
+          selected: selected,
+          onTap: selecting ? toggle : onOpen,
+          onLongPress: selecting ? toggle : start,
+          actions: selecting
               ? null
               : {CustomSemanticsAction(label: l.common_select): start},
-          child: builder(context, (
-            selecting: selecting,
-            selected: selected,
-            onTap: selecting ? toggle : onOpen,
-            onLongPress: selecting ? toggle : start,
-          )),
-        );
+        ));
       },
     );
   }

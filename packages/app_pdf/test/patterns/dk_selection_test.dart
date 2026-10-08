@@ -1,9 +1,9 @@
 import 'package:app_pdf/components/dk_bottom_bars.dart';
+import 'package:app_pdf/components/dk_file_card.dart';
 import 'package:app_pdf/components/dk_icon.dart';
-import 'package:app_pdf/patterns/dk_selection.dart';
-import 'package:app_pdf/components/dk_tappable.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
+import 'package:app_pdf/patterns/dk_selection.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/theme/haptics.dart';
@@ -33,20 +33,15 @@ Widget screen(DkSelection<String> selection, {ValueNotifier<bool>? shell}) {
             selection: selection,
             item: f,
             onOpen: () => opened.add(f),
-            builder: (context, s) => DkTappable(
+            // The real row: DkFileCard draws the circle and tint.
+            builder: (context, s) => DkFileCard(
+              name: f,
+              meta: '2 pages',
+              thumbnail: const SizedBox(),
+              selected: s.selecting ? s.selected : null,
               onTap: s.onTap,
               onLongPress: s.onLongPress,
-              radius: 0,
-              builder: (context, pressed) => SizedBox(
-                height: 72,
-                child: Row(
-                  children: [
-                    if (s.selecting)
-                      Icon(s.selected ? Icons.check_circle : Icons.circle),
-                    Text(f),
-                  ],
-                ),
-              ),
+              semanticsActions: s.actions,
             ),
           ),
       ],
