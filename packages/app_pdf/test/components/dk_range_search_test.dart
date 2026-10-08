@@ -1,3 +1,4 @@
+import 'package:app_pdf/components/dk_icon.dart';
 import 'package:app_pdf/components/dk_text_field.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/catalogue/range_search_states.dart';
@@ -72,18 +73,49 @@ void main() {
       expect(picked, 1);
     });
 
-    testWidgets('search: 40 tall with the search icon and clear', (
+    testWidgets('search: a 40 dp box in a 48 dp row; clear; 48 dp targets', (
       tester,
     ) async {
-      await tester.pumpWidget(app(const DkSearchField(hint: 'Search tools')));
-      expect(tester.getSize(find.byType(TextField)).height, 40);
+      final handle = tester.ensureSemantics();
+      await tester.pumpWidget(
+        app(
+          Padding(
+            // Away from the edges, so the guideline measures the ×.
+            padding: const EdgeInsets.all(24),
+            child: DkSearchField(
+              hint: 'Search tools',
+              filter: DkFieldButton(
+                icon: DkIcons.filters,
+                label: 'Filter',
+                onTap: () {},
+              ),
+            ),
+          ),
+        ),
+      );
+      expect(tester.getSize(find.byType(DkSearchField)).height, 48);
+      final box = find.descendant(
+        of: find.byType(DkSearchField),
+        matching: find.byType(DecoratedBox),
+      );
+      expect(tester.getSize(box.first).height, 40);
       expect(
         tester.widget<TextField>(find.byType(TextField)).textInputAction,
         TextInputAction.search,
       );
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
       await tester.enterText(find.byType(TextField), 'comp');
       await tester.pump();
-      expect(find.bySemanticsLabel('Clear'), findsOneWidget);
+      expect(
+        tester.getSize(find.bySemanticsLabel('Clear')),
+        const Size(48, 48),
+      );
+      await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+      await tester.tap(find.bySemanticsLabel('Clear'));
+      await tester.pump();
+      expect(find.text('comp'), findsNothing);
+      handle.dispose();
     });
   });
 }

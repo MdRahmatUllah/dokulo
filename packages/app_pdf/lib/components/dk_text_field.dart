@@ -537,6 +537,8 @@ class _DkSearchFieldState extends State<DkSearchField> {
     final c = t.color;
     final l = AppLocalizations.of(context);
     final style = t.text.bodyL.copyWith(color: c.textPrimary);
+    final line =
+        MediaQuery.textScalerOf(context).scale(style.fontSize!) * style.height!;
     return SizedBox(
       height: 48,
       child: Stack(
@@ -576,7 +578,10 @@ class _DkSearchFieldState extends State<DkSearchField> {
                     border: InputBorder.none,
                     hintText: widget.hint,
                     hintStyle: style.copyWith(color: c.textSecondary),
-                    contentPadding: EdgeInsets.zero,
+                    // The text is a 48 dp target too: the row's full height.
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: ((48 - line) / 2).clamp(0, 24),
+                    ),
                   ),
                 ),
               ),
