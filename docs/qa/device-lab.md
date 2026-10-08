@@ -12,12 +12,17 @@ connected (DK-1066).
 | Device | OS | ABI | RAM | Screen | Page size | Use |
 | --- | --- | --- | --- | --- | --- | --- |
 | `emulator-5554`, AVD `flutter_emulator` (`sdk_gphone64_x86_64`) | Android 16 (API 36), patch 2025-04-05 | x86_64; arm64-v8a apps run through translation | 2 GB | 1080 × 1920, 420 dpi | 4 KB | Every Android device check, x86_64 scope. Close to the low-end target in memory |
+| `emulator-5556`, AVD `flutter_emulator_2` (`sdk_gphone64_x86_64`), added by the owner 2026-10-08 | Android 16 (API 36) | x86_64 | 2 GB | 1080 × 1920, 420 dpi | 4 KB | A second Dokulo device, under the same `team.py device` lock |
 
 - Hold it with `python tools/team.py device` while you install or drive it,
   release it right after; always name it: `adb -s emulator-5554`
   (`$LOCALAPPDATA/Android/Sdk/platform-tools/adb.exe` in Git Bash).
 - After an install, check `dumpsys package app.dokulo.dev | grep lastUpdateTime`.
-- DeutschPlan's `emulator-5556` and `-5558` are not ours.
+- `emulator-5558` is DeutschPlan's, not ours.
+- A guest has 2 GB: keep a check's app under ~800 MB, and run it only with
+  more than 6 GB free on the host. On 2026-10-08 the OCR check hung 5554
+  with the host near 2 GB free (cold boot:
+  `emulator -avd flutter_emulator -port 5554 -no-snapshot-load`, the owner's OK).
 - The planned AVDs `dk-dev` (5562) and `dk-sqa` (5564) aren't created: one
   emulator is what this machine's memory allows next to both teams' builds.
   Create them only when the owner says memory is free.

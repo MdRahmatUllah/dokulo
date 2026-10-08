@@ -116,6 +116,12 @@ is **licence-cleared**, not catalogued.
    The repo's NOTICE (format conversion only, weights unchanged) ships with
    them in the licence screen.
 8. RAM and time per page: measured on the test devices (DK-1052).
+   emulator-5556 (Android 16, x86_64, 2 GB, dev debug, 2026-10-08), Make
+   text searchable on a 150 dpi letter scan, pages rendered at 300 dpi:
+   about 5 s per page; the app grows about 450 MB while the three sessions
+   and one page are loaded (peak RSS about 890 MB). Every character was
+   read; 7 of 9 lines exactly, 2 lost one space. arm64 phones and the
+   1.5 s target of a mid Android: DK-1066.
 9. det about 4.8 MB, Latin rec about 8 MB, cls about 0.6 MB (bundled);
    multilingual rec about 16.5 MB (download), per the Technology plan.
 
