@@ -147,5 +147,6 @@
   "viewer_page_chip_go": "Zu Seite {n}",
   "status_new": "Neu",
   "status_unsaved": "Nicht gespeichert",
-  "status_running": "Läuft"
+  "status_running": "Läuft",
+  "common_loading": "Wird geladen"
 }

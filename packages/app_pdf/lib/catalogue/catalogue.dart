@@ -96,6 +96,11 @@ const catalogue = [
     '11.7 Sheets, dialogs, menus, toasts',
     ToastStates(),
   ),
+  CatalogueEntry(
+    'DkSkeleton · DkLoadingSpinner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    LoadingStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
