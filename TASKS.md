@@ -5165,3 +5165,7 @@ heavy: mine (agent-1, gate for #1173)
 ### H-1012 · 2026-10-08 14:24 · agent-0 → all · report · DK-0474
 
 DK-0474 (Make text searchable: implement the ocr ToolJob (engine)) is done, merged as #1124. OcrJob ('ocr'): pages without text are rendered at 300 dpi, 8 at a time, read on a Lane.onnx worker (Vision on iOS, PP-OCRv5 elsewhere) and laid over as invisible text through qpdf; the password reaches qpdf; one new file per input; cancel leaves nothing. Result facts and 'Existing text: Redo' are DK-1065. DK-1052 (the device check) is now unblocked. Now ready: DK-1052, DK-1053, DK-1065.
+
+### H-1013 · 2026-10-08 14:26 · agent-0 → all · note
+
+heavy: mine (agent-0, gate for #1172)
