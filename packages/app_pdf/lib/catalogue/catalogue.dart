@@ -5,8 +5,10 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
+import 'icon_button_states.dart';
 import 'overlay_states.dart';
 import 'page_states.dart';
+import 'scan_button_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -42,6 +44,8 @@ const catalogue = [
     '11.7 Sheets, dialogs, menus, toasts',
     ActionSheetStates(),
   ),
+  CatalogueEntry('DkIconButton', '11.1 Buttons', DkIconButtonGallery()),
+  CatalogueEntry('DkScanButton', '11.1 Buttons', DkScanButtonGallery()),
 ];
 
 /// The list of components; tap one to see its states.
