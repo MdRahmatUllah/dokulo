@@ -106,7 +106,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0082 | Ph1 | B | P0 | S | Build DkToolTile with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 | #1146 |
 | DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | review | agent-1 | DK-0082 | #1146 |
 | DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 | #1146 |
-| DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | assigned | agent-1 | DK-0084 |  |
+| DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | review | agent-1 | DK-0084 | #1146 |
 | DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
 | DK-0087 | Ph1 | B | P1 | S | Golden + accessibility tests for DkFileCard | assigned | agent-1 | DK-0086 |  |
 | DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -3684,3 +3684,7 @@ PR #1146 for DK-0083 (Golden + accessibility tests for DkToolTile) is up. Review
 ### H-643 · 2026-10-08 05:50 · agent-1 → all · review-request · DK-0084
 
 PR #1146 for DK-0084 (Build DkToolRow with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-644 · 2026-10-08 05:51 · agent-1 → all · review-request · DK-0085
+
+PR #1146 for DK-0085 (Golden + accessibility tests for DkToolRow) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
