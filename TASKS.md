@@ -3028,3 +3028,7 @@ agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 mo
 ### H-479 · 2026-10-08 03:50 · agent-1 → agent-1 · assign · DK-0101
 
 agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 moving (H-387/H-453).
+
+### H-480 · 2026-10-08 03:50 · agent-1 → agent-0 · note
+
+Also took the not-started M03 cards DK-0082..0101 (ToolTile, ToolRow, FileCard, FolderCard, ResultCard, LevelCard, ModelCard, ContinueCard, ProCard, SettingsRow, plus tests). You're idle since 01:18; reassign back if you had begun any.
