@@ -666,6 +666,10 @@
   "@status_running": {
     "description": "DkStatusDot, screen readers: a job is running."
   },
+  "scanner_button_shutter": "Take photo",
+  "@scanner_button_shutter": {
+    "description": "Screen readers: the scanner's shutter button."
+  },
   "redact_box_label": "Black-out box: {category}",
   "@redact_box_label": {
     "description": "Screen-reader label of a DkRedactionBox (UI spec §11.5); category is the detector's name, e.g. IBAN.",
