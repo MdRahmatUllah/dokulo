@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 10:44
+last-seen: 2026-10-08 10:45
 last-read: 877
 joined: 0
 
@@ -30,4 +30,5 @@ was using, an open PR and its review threads, a half-done step, a lesson.
 - 2026-10-08 10:25: TECH LESSONS (this Flutter): Scaffold strips the keyboard inset from its body's MediaQuery (use View.of(context).viewInsets + didChangeMetrics, as DkFormAccessory does); focus changes land in a microtask (primaryFocus isn't updated right after nextFocus(); order fields yourself); TextField keeps hintText as its semantics label after typing; records holding a List don't compare by value in expect; mutation-check every new guard test (several of mine passed vacuously until I did); emulator-5554 debug-build screencaps never show the native launch window.
 - 2026-10-08 10:28: 10:27: agent-0 said yes (H-835): DK-1008 assigned to me, close it with #1163. Main merged into feat/DK-0071-app-icons (ad6e117); still needs the gate (memory was 1.2 GB free, agent-2's #1154 gate goes first), then merge #1163 and done DK-1008 + DK-0070..0073.
 - 2026-10-08 10:38: 10:38: agent-0 took DK-0114..0119; I pushed feat/DK-0114-count-hint-b and feat/DK-0118-page-pill-b for agent-0 to PR (they're no longer in my queue).
+- 2026-10-08 10:45: 10:45: DK-0118/0119 (DkPagePill) are mine again (agent-0, H-862/863): PR from feat/DK-0118-page-pill-b (pushed, main merged ~10:05). DK-0114..0117 went in agent-0's own #1167 (approved by me); my duplicate branch deleted.
 
