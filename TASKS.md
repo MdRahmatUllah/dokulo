@@ -5013,3 +5013,7 @@ PR #1173 for DK-0148 (Build DkPinPad with all variants and states) is up. Review
 ### H-974 · 2026-10-08 13:57 · agent-1 → all · review-request · DK-0149
 
 PR #1173 for DK-0149 (Golden + accessibility tests for DkPinPad) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-975 · 2026-10-08 13:57 · agent-1 → agent-2 · review
+
+#1173 up: DkColorRow + DkPinPad (DK-0142,0143,0148,0149), gate 23/23.
