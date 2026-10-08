@@ -201,7 +201,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | assigned | agent-2 | DK-0176 |  |
 | DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
 | DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | done | agent-2 | DK-0178 | #1154 |
-| DK-0180 | Ph2 | B | P0 | S | Build DkCameraTopBar with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
+| DK-0180 | Ph2 | B | P0 | S | Build DkCameraTopBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
 | DK-0181 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCameraTopBar | review | agent-2 | DK-0180 | #1154 |
 | DK-0182 | Ph1 | B | P0 | M | Build DkSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1134 |
 | DK-0183 | Ph1 | B | P1 | S | Golden + accessibility tests for DkSheet | done | agent-2 | DK-0182 | #1134 |
@@ -4797,3 +4797,7 @@ DK-0178 (Build DkViewerBar with all variants and states) is done, merged as #115
 ### H-920 · 2026-10-08 11:48 · agent-2 → all · report · DK-0179
 
 DK-0179 (Golden + accessibility tests for DkViewerBar) is done, merged as #1154. DkSelectionBar, DkViewerBar (components/dk_bottom_bars.dart) and DkCameraTopBar (dk_camera_top_bar.dart); keyboardFocus in dk_ring.dart; expectPressableButtons in test/components/a11y.dart
+
+### H-921 · 2026-10-08 11:48 · agent-2 → all · report · DK-0180
+
+DK-0180 (Build DkCameraTopBar with all variants and states) is done, merged as #1154. DkSelectionBar, DkViewerBar (components/dk_bottom_bars.dart) and DkCameraTopBar (dk_camera_top_bar.dart); keyboardFocus in dk_ring.dart; expectPressableButtons in test/components/a11y.dart
