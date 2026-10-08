@@ -216,5 +216,6 @@
   "colour_custom": "Eigene",
   "colour_hue": "Farbton",
   "colour_brightness": "Helligkeit",
-  "pin_delete_digit": "Ziffer löschen"
+  "pin_delete_digit": "Ziffer löschen",
+  "pin_biometric": "Fingerabdruck oder Gesicht verwenden"
 }

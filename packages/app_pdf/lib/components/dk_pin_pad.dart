@@ -32,7 +32,8 @@ class DkPinPad extends StatefulWidget {
   final VoidCallback? onBiometric;
   final IconData biometricIcon;
 
-  /// "Use Face ID" / "Use fingerprint": the platform's word.
+  /// "Use Face ID" / "Use fingerprint": the platform's word; without it, the
+  /// copy deck's "Use fingerprint or face", so the key is never nameless.
   final String? biometricLabel;
 
   /// Shown under the dots ("Wrong PIN. 2 tries left.").
@@ -219,7 +220,7 @@ class _DkPinPadState extends State<DkPinPad>
               if (widget.onBiometric != null)
                 key(
                   plain: true,
-                  label: widget.biometricLabel ?? '',
+                  label: widget.biometricLabel ?? l.pin_biometric,
                   onTap: widget.onBiometric,
                   child: DkIcon(
                     widget.biometricIcon,

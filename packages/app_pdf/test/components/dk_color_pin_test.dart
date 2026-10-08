@@ -173,6 +173,21 @@ void main() {
       expect(key.constraints, BoxConstraints.tight(const Size(72, 72)));
     });
 
+    testWidgets('the biometric key is named even without a label', (
+      tester,
+    ) async {
+      var asked = 0;
+      await tester.pumpWidget(
+        app(
+          Center(
+            child: DkPinPad(onComplete: (_) {}, onBiometric: () => asked++),
+          ),
+        ),
+      );
+      await tester.tap(find.bySemanticsLabel('Use fingerprint or face'));
+      expect(asked, 1);
+    });
+
     testWidgets('a hardware keyboard types and deletes', (tester) async {
       String? pin;
       await tester.pumpWidget(

@@ -946,5 +946,9 @@
   "pin_delete_digit": "Delete digit",
   "@pin_delete_digit": {
     "description": "DkPinPad delete key (export: locked-folder-applock)."
+  },
+  "pin_biometric": "Use fingerprint or face",
+  "@pin_biometric": {
+    "description": "DkPinPad's biometric key when the screen gives no platform word (screen readers)."
   }
 }
