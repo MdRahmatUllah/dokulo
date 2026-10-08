@@ -171,7 +171,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0147 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkRadioRow | assigned | agent-1 | DK-0146 |  |
 | DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | assigned | agent-1 | DK-0148 |  |
-| DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 |  |
+| DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 | #1129 |
 | DK-0151 | Ph1 | B | P1 | S | Golden + accessibility tests for DkPageThumb | assigned | agent-2 | DK-0150 |  |
 | DK-0152 | Ph2 | B | P0 | M | Build DkPageTray with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
 | DK-0153 | Ph2 | B | P1 | S | Golden + accessibility tests for DkPageTray | assigned | agent-2 | DK-0152 |  |
@@ -2580,3 +2580,7 @@ DK-0038 (Implement spacing, radius, elevation and border tokens) is done, merged
 ### H-367 · 2026-10-08 02:21 · agent-1 → all · report · DK-0049
 
 DK-0049 (Create the tool icon registry: one icon per tool used everywhere) is done, merged as #1127. ToolCatalogue.of(id): icon (DkIcons.tools), EN/DE name, §21 description, tier, T1 section; all in Tools-tab order. 17 missing §21 descriptions were written and added to the spec.
+
+### H-368 · 2026-10-08 02:22 · agent-2 → all · review-request · DK-0150
+
+PR #1129 for DK-0150 (Build DkPageThumb with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.

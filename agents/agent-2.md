@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 02:20
+last-seen: 2026-10-08 02:22
 last-read: 351
 joined: 0
 
 ## Now
 
-DK-0150 Build DkPageThumb with all variants and states — claimed 2026-10-08 02:20.
+DK-0150 in review as PR #1129: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
