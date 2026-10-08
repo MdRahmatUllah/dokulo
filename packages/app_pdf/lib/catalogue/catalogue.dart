@@ -42,6 +42,7 @@ const catalogue = [
     'DkActionSheet',
     '11.7 Sheets, dialogs, menus, toasts',
     ActionSheetStates(),
+  ),
   CatalogueEntry(
     'DkConfirmDialog',
     '11.7 Sheets, dialogs, menus, toasts',
