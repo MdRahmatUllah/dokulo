@@ -190,5 +190,15 @@
   "field_range_pick": "Seiten wählen",
   "field_range_hint": "1–3, 5, 8–Ende",
   "common_decrease": "Verringern",
-  "common_increase": "Erhöhen"
+  "common_increase": "Erhöhen",
+  "options_thickness": "Stärke",
+  "options_points": "{n} pt",
+  "options_opacity": "Deckkraft",
+  "options_font_size": "Schriftgröße",
+  "options_shape_rectangle": "Rechteck",
+  "options_shape_ellipse": "Ellipse",
+  "options_shape_line": "Linie",
+  "options_shape_arrow": "Pfeil",
+  "options_eraser_object": "Objekt",
+  "options_eraser_stroke": "Strich"
 }

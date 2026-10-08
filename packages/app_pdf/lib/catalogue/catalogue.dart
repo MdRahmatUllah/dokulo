@@ -17,6 +17,7 @@ import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'range_search_states.dart';
 import 'scan_button_states.dart';
+import 'tool_options_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'slider_stepper_states.dart';
@@ -139,6 +140,11 @@ const catalogue = [
     'DkSlider, DkStepper',
     '11.4 Inputs and controls',
     DkSliderStepperGallery(),
+  ),
+  CatalogueEntry(
+    'DkToolOptionsSheet',
+    '11.8 Editor and AI',
+    ToolOptionsStates(),
   ),
 ];
 

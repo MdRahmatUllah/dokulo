@@ -842,5 +842,50 @@
   "common_increase": "Increase",
   "@common_increase": {
     "description": "DkStepper + button (screen readers)."
+  },
+  "options_thickness": "Thickness",
+  "@options_thickness": {
+    "description": "DkToolOptionsSheet: the stroke width slider."
+  },
+  "options_points": "{n} pt",
+  "@options_points": {
+    "description": "DkToolOptionsSheet: the thickness value.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "options_opacity": "Opacity",
+  "@options_opacity": {
+    "description": "DkToolOptionsSheet: the highlighter's opacity slider."
+  },
+  "options_font_size": "Font size",
+  "@options_font_size": {
+    "description": "DkToolOptionsSheet: the text tool's size stepper."
+  },
+  "options_shape_rectangle": "Rectangle",
+  "@options_shape_rectangle": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_shape_ellipse": "Ellipse",
+  "@options_shape_ellipse": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_shape_line": "Line",
+  "@options_shape_line": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_shape_arrow": "Arrow",
+  "@options_shape_arrow": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_eraser_object": "Object",
+  "@options_eraser_object": {
+    "description": "DkToolOptionsSheet, eraser: removes a whole annotation."
+  },
+  "options_eraser_stroke": "Stroke",
+  "@options_eraser_stroke": {
+    "description": "DkToolOptionsSheet, eraser: removes the stroke under the finger."
   }
 }
