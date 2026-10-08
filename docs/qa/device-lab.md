@@ -47,3 +47,15 @@ In its `team.py done` message (and the PR, if it changes code): the device,
 OS and ABI, the build (`dev` debug or `prod` release), what passed, the
 numbers measured, and what the emulator couldn't cover, as a follow-up task
 under DK-1066 when it needs a real phone.
+
+## The device checks in the repo
+
+| Check | Test | Run it |
+| --- | --- | --- |
+| Engine timings (DK-1045, 1049, 1052, 1059–1061, 1063) | `packages/app_pdf/integration_test/device_checks_test.dart` | `flutter test integration_test/device_checks_test.dart -d emulator-5556 --flavor dev` in `packages/app_pdf` |
+| Files app visibility (DK-1043) | `integration_test/files_visibility_test.dart` | `python tools/device_checks/files_visibility.py emulator-5556 shot.png`: it saves a screenshot of the Files app at Documents/Dokulo |
+| Killed mid-Compress (DK-1047) | `integration_test/kill_recovery_test.dart` | `python tools/device_checks/kill_recovery.py emulator-5556`: three launches, force-stopped twice |
+
+On Windows, run adb from Git Bash with `MSYS_NO_PATHCONV=1`, or `/sdcard/...`
+becomes a Windows path; and never pass `|` in flutter's `--name` (flutter.bat
+hands it to cmd): use a character class.
