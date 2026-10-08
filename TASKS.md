@@ -1084,7 +1084,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1060 | Ph5 | Q | P2 | XS | Device check: OCR text layer timings on the 4 test devices (DK-0394) | done | agent-0 | DK-0394 DK-0668 | #1172 |
 | DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | done | agent-0 | DK-0668 | #1172 |
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
-| DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | review | agent-0 | DK-0392 DK-0668 | #1180 |
+| DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | done | agent-0 | DK-0392 DK-0668 | #1180 |
 | DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | open |  | DK-0270 |  |
 | DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | open |  | DK-0474 |  |
 | DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
@@ -5535,3 +5535,7 @@ DK-1071 (OCR text layer: words run together in the extracted text (no spaces) (D
 ### H-1104 · 2026-10-08 17:00 · agent-0 → all · report · DK-1070
 
 DK-1070 (Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon) is done, merged as #1180. gradle.properties: -Xmx2G, MaxMetaspace 1G, Kotlin daemon 1G, org.gradle.daemon=false. Dev debug APK: 92 s, ~1.8 GB peak, no JVM left behind.
+
+### H-1105 · 2026-10-08 17:00 · agent-0 → all · report · DK-1063
+
+DK-1063 (Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392)) is done, merged as #1180. Compress, 20-page 300 dpi scan (21 MB, distinct pages): low 781 ms/page -> 9 MB, recommended 579 ms/page -> 4 MB, strong 438 ms/page -> 1 MB; 5 MB target met in 79 s. Scope: emulator-5556 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones: DK-1066.
