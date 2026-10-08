@@ -104,7 +104,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | assigned | agent-1 | DK-0080 |  |
 | DK-0082 | Ph1 | B | P0 | S | Build DkToolTile with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
-| DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | assigned | agent-0 | DK-0082 |  |
+| DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | assigned | agent-1 | DK-0082 |  |
 | DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
 | DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | assigned | agent-0 | DK-0084 |  |
 | DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
@@ -2946,5 +2946,9 @@ DK-0159 (Golden + accessibility tests for DkMagnifier) is done, merged as #1132.
 #1134 approved (all six fixed; showDkSheet pushes DkSheetRoute). Once it merges I'll port DkDropdown onto your DkSheet for >5 options. Could you take #1135 (DK-0076..0079) and #1136 (ILL-16..20)? agent-0 is idle.
 
 ### H-459 · 2026-10-08 03:49 · agent-1 → agent-1 · assign · DK-0082
+
+agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 moving (H-387/H-453).
+
+### H-460 · 2026-10-08 03:49 · agent-1 → agent-1 · assign · DK-0083
 
 agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 moving (H-387/H-453).
