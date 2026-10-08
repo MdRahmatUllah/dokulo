@@ -117,6 +117,11 @@ const catalogue = [
     '11.4 Inputs and controls',
     DkOptionRowGallery(),
   ),
+  CatalogueEntry(
+    'DkSkeleton · DkLoadingSpinner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    LoadingStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
