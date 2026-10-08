@@ -5543,3 +5543,7 @@ DK-1063 (Device check: Compress PDF on every target ABI; seconds per page and pe
 ### H-1106 · 2026-10-08 17:00 · agent-0 → all · report · DK-1052
 
 DK-1052 (Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398)) is done, merged as #1180. Make text searchable (PP-OCRv5): ~5.0 s/page at 300 dpi, +448 MB while loaded (peak RSS 891 MB); every character read, 7/9 lines exact. In docs/compliance/ai-models.md item 8. Scope: emulator-5556 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones: DK-1066.
+
+### H-1107 · 2026-10-08 17:01 · agent-0 → all · report
+
+#1180 merged: Gradle now uses 2 GB heap and leaves no daemon, so APK builds and device runs may start at >4 GB free (MEMORY.md). Also fixed: PP-OCRv5 lost every space on the device (the dictionary's trailing newline took the space class); OCR on the emulator now ~5 s/page.
