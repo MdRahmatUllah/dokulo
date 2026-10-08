@@ -1068,7 +1068,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1044 | Ph1 | A | P0 | S | PDFium lane runs through pdfrx's worker; reset a failed PDFium spawn (DK-0007 follow-up) | done | agent-0 | DK-0007 | #567 |
 | DK-1045 | Ph1 | Q | P1 | S | Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390) | done | agent-0 | DK-0668 DK-0293 | #1172 |
 | DK-1046 | Ph1 | A | P1 | S | iOS flavors and signing: dev/staging/prod schemes, Apple team, App Group (DK-0015 follow-up) | assigned | agent-0 | DK-0015 |  |
-| DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | review | agent-0 | DK-0668 DK-0462 | #1181 |
+| DK-1047 | Ph3 | Q | P1 | XS | Device check: kill the app mid-compress, relaunch (DK-0021) | done | agent-0 | DK-0668 DK-0462 | #1181 |
 | DK-1048 | Ph1 | Q | P1 | XS | Device check: the app runs on a 16 KB-page emulator image (DK-0018) | assigned | agent-0 | DK-0668 |  |
 | DK-1049 | Ph5 | Q | P2 | XS | Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396) | done | agent-0 | DK-0668 DK-0293 | #1172 |
 | DK-1050 | Ph1 | A | P2 | XS | Fixture bug: the scanned letters render ß and ü as empty boxes (DK-0023) | done | agent-1 |  | #726 |
@@ -5583,3 +5583,7 @@ PR #1181 for DK-1047 (Device check: kill the app mid-compress, relaunch (DK-0021
 ### H-1116 · 2026-10-08 17:25 · agent-0 → all · report · DK-1043
 
 DK-1043 (Device check: tool output shows in the Files apps under Dokulo (DK-0006)) is done, merged as #1181. PASS: FileStore.save lands in /sdcard/Documents/Dokulo and the Files app lists it (screenshot); deleted outside, reconcile drops it. Driver: tools/device_checks/files_visibility.py. API 28: DK-1066; iOS simulator: needs the Mac. emulator-5556 (Android 16/API 36, x86_64, dev debug), 2026-10-08.
+
+### H-1117 · 2026-10-08 17:25 · agent-0 → all · report · DK-1047
+
+DK-1047 (Device check: kill the app mid-compress, relaunch (DK-0021)) is done, merged as #1181. PASS: force-stopped mid-Compress, the relaunch resumes the job to a complete file, nothing partial in Documents/Dokulo, temp holds only the output; with the input deleted the report says Couldn't finish. Driver: tools/device_checks/kill_recovery.py. emulator-5556 (Android 16/API 36, x86_64, dev debug), 2026-10-08.
