@@ -188,4 +188,27 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('English'), findsOneWidget, reason: 'the menu is open');
   });
+
+  testWidgets('an option can end in a download size, and says it '
+      "(the export's language menu; DK-0984 QA)", (tester) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(
+      app(
+        DkDropdown<String>(
+          label: 'Language',
+          options: languages,
+          value: 'auto',
+          onChanged: (_) {},
+          optionTrailing: (v) => v == 'en'
+              ? (widget: const Text('18 MB'), semanticsLabel: '18 MB download')
+              : null,
+        ),
+      ),
+    );
+    await tester.tap(find.text('Auto'));
+    await tester.pumpAndSettle();
+    expect(find.text('18 MB'), findsOneWidget);
+    expect(find.bySemanticsLabel('English, 18 MB download'), findsOneWidget);
+    handle.dispose();
+  });
 }

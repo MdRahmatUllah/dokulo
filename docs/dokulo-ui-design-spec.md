@@ -607,11 +607,11 @@ Height 56 (single line) / 72 (with description). Leading 24 icon (optional), tit
 | `DkSegmented` | 2–4 segments; height 36; `radius.s`; container `color.surfaceSunken`; selected segment `color.surface` with `elevation.raised`, text `type.labelM` |
 | `DkSlider` | Track 4 dp (`color.outline`; active `color.primary`), thumb 20 white with `elevation.raised`; value label right of the title ("30 %") |
 | `DkStepper` | − value + (for start number, N pages); buttons 36, value `type.titleS` tabular |
-| `DkDropdown` | Looks like a `DkTextField` with trailing chevron; opens a menu (phones: sheet with options for > 5 items) |
+| `DkDropdown` | Looks like a `DkTextField` with trailing chevron; opens a menu (phones: sheet with options for > 5 items); an option may end in a trailing item, e.g. a language's download size ("18 MB") |
 | `DkOptionRow` | Container for a control: title `type.titleS`, help `type.bodyM` `color.textSecondary` (max 2 lines), control right (switch) or below (segmented, slider, chips, fields); vertical padding 12; dividers between rows |
 | `DkPositionPicker` | 120 × 160 page diagram (`color.pageWhite`, outline) with 6 targets (top/bottom × left/centre/right) as 28 circles; selected filled `color.primary`; plus "Centre" for watermark |
 | `DkColorRow` | Swatches 32 circles with 2 dp outline; selected: 3 dp `color.primary` ring + check; last item "Custom" opens a simple hue/brightness picker |
-| `DkCheckboxRow` | 24 checkbox + label `type.bodyL` + optional count badge right ("3") |
+| `DkCheckboxRow` | 24 checkbox + label `type.bodyL` + optional count badge right ("3"; `DkCountBadge`, muted `color.iconSecondary` while unchecked) |
 | `DkRadioRow` | 24 radio + label + optional description |
 | `DkPinPad` | 6 dot indicators (12 dp) + 3×4 keypad (keys 72 circles, `type.titleL`), biometric key bottom-left, delete bottom-right |
 

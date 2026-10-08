@@ -61,6 +61,8 @@ class DkSlider extends StatelessWidget {
               pressedElevation: 4,
             ),
             trackShape: const RoundedRectSliderTrackShape(),
+            // A plain track, as the export draws it: steps snap, unmarked.
+            tickMarkShape: SliderTickMarkShape.noTickMark,
             showValueIndicator: ShowValueIndicator.never,
           ),
           child: Slider(

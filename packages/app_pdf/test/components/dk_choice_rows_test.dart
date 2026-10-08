@@ -1,4 +1,5 @@
 import 'package:app_pdf/catalogue/choice_row_states.dart';
+import 'package:app_pdf/components/dk_count_badge.dart';
 import 'package:app_pdf/components/dk_checkbox_row.dart';
 import 'package:app_pdf/components/dk_radio_row.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
@@ -100,10 +101,19 @@ void main() {
         ),
       ),
     );
+    // Unchecked: the count badge is muted (the export's `.cb` on `--ic2`).
+    expect(
+      tester.widget<DkCountBadge>(find.byType(DkCountBadge)).muted,
+      isTrue,
+    );
     await tester.tap(find.text('IBAN'));
     await tester.pump();
     expect(on, isTrue);
     expect(find.text('3'), findsOneWidget);
+    expect(
+      tester.widget<DkCountBadge>(find.byType(DkCountBadge)).muted,
+      isFalse,
+    );
     expect(
       tester.getSize(find.byType(DkCheckboxRow).first).height,
       greaterThanOrEqualTo(48),

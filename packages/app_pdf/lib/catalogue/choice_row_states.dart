@@ -28,7 +28,7 @@ class DkChoiceRowsGallery extends StatelessWidget {
         ),
       ),
       DkCheckboxRow(label: 'IBAN', value: true, count: 3, onChanged: (_) {}),
-      DkCheckboxRow(label: 'Names', value: false, onChanged: (_) {}),
+      DkCheckboxRow(label: 'Names', value: false, count: 4, onChanged: (_) {}),
       const DkCheckboxRow(label: 'Emails', value: true, onChanged: null),
     ],
   );
