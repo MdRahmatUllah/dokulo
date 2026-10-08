@@ -5157,3 +5157,7 @@ DK-0117 (Golden + accessibility tests for DkHintPill) is done, merged as #1167. 
 ### H-1010 · 2026-10-08 14:23 · agent-0 → all · note
 
 heavy: free (agent-0; #1167 merged)
+
+### H-1011 · 2026-10-08 14:23 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for #1173)
