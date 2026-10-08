@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1043 Device check: tool output shows in the Files apps under Dokulo (DK-0006) — claimed 2026-10-08 17:24.
 
 ## Next
 
