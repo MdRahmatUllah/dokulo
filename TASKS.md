@@ -5695,3 +5695,7 @@ heavy: mine (agent-2, gate for feat/DK-0194-progress-b)
 ### H-1144 · 2026-10-08 18:37 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, exit 90)
+
+### H-1145 · 2026-10-08 21:13 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, stopped at 1.7 GB again; waiting for the owner to free memory)
