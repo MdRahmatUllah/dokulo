@@ -112,6 +112,92 @@ class DkSheetRoute<T> extends PopupRoute<T> {
   }
 }
 
+/// Dialogs (DkConfirmDialog; the tablet's DkSheet): the route a centred
+/// dialog opens in. It fades in and grows from 96 % in `motion.standard`
+/// (the export's `dk-dlg`), over the `color.scrim`; with Reduce Motion it
+/// only fades, in 120 ms. A tap on the scrim, back or Esc closes it.
+///
+/// ```dart
+/// Navigator.of(context).push(DkDialogRoute.of(context, builder: (_) => dialog));
+/// ```
+class DkDialogRoute<T> extends PopupRoute<T> {
+  DkDialogRoute({
+    required this.builder,
+    required this.motion,
+    required this.scrim,
+    required this.label,
+    this.dismissible = true,
+  });
+
+  /// The route with [context]'s theme timings, scrim and Reduce Motion.
+  factory DkDialogRoute.of(
+    BuildContext context, {
+    required WidgetBuilder builder,
+    bool dismissible = true,
+  }) => DkDialogRoute(
+    builder: builder,
+    motion: context.motion(DkMotionKind.standard),
+    scrim: context.tokens.color.scrim,
+    label: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    dismissible: dismissible,
+  );
+
+  final WidgetBuilder builder;
+  final DkMotionSpec motion;
+  final Color scrim;
+  final String label;
+  final bool dismissible;
+
+  @override
+  Duration get transitionDuration => motion.duration;
+
+  // Keep the Reduce Motion fade's 120 ms (the default controller cuts it to
+  // 5 % when the platform disables animations), as DkSheetRoute does.
+  @override
+  AnimationController createAnimationController() => AnimationController(
+    duration: transitionDuration,
+    reverseDuration: reverseTransitionDuration,
+    debugLabel: debugLabel,
+    vsync: navigator!,
+    animationBehavior: AnimationBehavior.preserve,
+  );
+
+  @override
+  Color get barrierColor => scrim;
+
+  @override
+  bool get barrierDismissible => dismissible;
+
+  @override
+  String get barrierLabel => label;
+
+  @override
+  Widget buildPage(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) => Builder(builder: builder);
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    final curved = CurvedAnimation(parent: animation, curve: motion.curve);
+    return FadeTransition(
+      opacity: curved,
+      child: motion.crossFade
+          ? child
+          : ScaleTransition(
+              scale: Tween(begin: 0.96, end: 1.0).animate(curved),
+              child: child,
+            ),
+    );
+  }
+}
+
 /// Sheet detents (DK-0044): moves a `DraggableScrollableSheet` to [size]
 /// (a fraction of the screen) in `motion.standard`. With Reduce Motion it
 /// jumps there.
