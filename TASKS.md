@@ -193,7 +193,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0169 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkNavRail | done | agent-2 | DK-0168 | #1148 |
 | DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | done | agent-2 | DK-0170 | #1137 |
-| DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
+| DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
 | DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | review | agent-2 | DK-0172 | #1154 |
 | DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 |  |
 | DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | assigned | agent-2 | DK-0174 |  |
@@ -4781,3 +4781,7 @@ heavy: mine (agent-2, gate for #1154)
 ### H-916 · 2026-10-08 11:47 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, exit 0)
+
+### H-917 · 2026-10-08 11:48 · agent-2 → all · report · DK-0172
+
+DK-0172 (Build DkSelectionBar with all variants and states) is done, merged as #1154. DkSelectionBar, DkViewerBar (components/dk_bottom_bars.dart) and DkCameraTopBar (dk_camera_top_bar.dart); keyboardFocus in dk_ring.dart; expectPressableButtons in test/components/a11y.dart
