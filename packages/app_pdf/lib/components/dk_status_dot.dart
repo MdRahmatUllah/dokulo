@@ -37,9 +37,9 @@ class _DkStatusDotState extends State<DkStatusDot>
   void _sync() {
     final pulse = widget.status == DkStatus.running && !context.reduceMotion;
     if (pulse && !_pulse.isAnimating) {
-      // About one breath a second: in and out over two standard motions.
+      // About one breath a second: 500 ms in, 500 ms out.
       _pulse
-        ..duration = context.tokens.motion.standard * 2
+        ..duration = const Duration(milliseconds: 500)
         ..repeat(reverse: true);
     } else if (!pulse) {
       _pulse.value = 1;
@@ -61,6 +61,8 @@ class _DkStatusDotState extends State<DkStatusDot>
       DkStatus.unsaved => (t.color.warning, l.status_unsaved),
       DkStatus.running => (t.color.primary, l.status_running),
     };
+    // Not a container: the label merges into the row or card it sits in
+    // ("Scan 12 · Unsaved"), so the dot is never a stop of its own.
     return Semantics(
       label: label,
       child: FadeTransition(

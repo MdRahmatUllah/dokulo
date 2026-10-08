@@ -123,14 +123,14 @@ void main() {
         ),
         const Size(8, 8),
       );
-      await tester.pump(const Duration(milliseconds: 440));
+      await tester.pump(const Duration(milliseconds: 500));
       expect(opacity(), closeTo(0.35, 0.05));
       expect(find.bySemanticsLabel('Working'), findsOneWidget);
 
       await tester.pumpWidget(
         app(const Center(child: DkStatusDot(DkStatus.running)), reduce: true),
       );
-      await tester.pump(const Duration(milliseconds: 440));
+      await tester.pump(const Duration(milliseconds: 500));
       expect(opacity(), 1);
       expect(tester.hasRunningAnimations, isFalse);
     });
