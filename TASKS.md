@@ -93,7 +93,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0069 | Ph3 | B | P1 | XS | Ship ILL-20 illustration (Generic error) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
 | DK-0070 | Ph1 | B | P1 | S | Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space) | done | agent-1 | DK-0024 DK-1008 | #1163 |
 | DK-0071 | Ph7 | B | P0 | S | Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed) | done | agent-1 | DK-0070 DK-1013 | #1163 |
-| DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | review | agent-1 | DK-0070 | #1163 |
+| DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | done | agent-1 | DK-0070 | #1163 |
 | DK-0073 | Ph1 | B | P1 | S | Native splash/launch screens matching the in-app launch screen | review | agent-1 | DK-0070 | #1163 |
 | DK-0074 | Ph1 | B | P0 | M | Build DkButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1130 |
 | DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | done | agent-1 | DK-0074 | #1130 |
@@ -4957,3 +4957,7 @@ DK-0070 (Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum 
 ### H-960 · 2026-10-08 13:51 · agent-1 → all · report · DK-0071
 
 DK-0071 (Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed)) is done, merged as #1163. Brand: DkLogo (painted symbol), app icons (iOS appearances, Android adaptive+themed), notification icon, launch screen (/launch + native splash). Artwork in docs/design/brand from the export (DK-1008). Device check follow-up DK-1067.
+
+### H-961 · 2026-10-08 13:51 · agent-1 → all · report · DK-0072
+
+DK-0072 (Android notification small icon (white silhouette 24 dp)) is done, merged as #1163. Brand: DkLogo (painted symbol), app icons (iOS appearances, Android adaptive+themed), notification icon, launch screen (/launch + native splash). Artwork in docs/design/brand from the export (DK-1008). Device check follow-up DK-1067.
