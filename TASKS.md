@@ -157,7 +157,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | done | agent-1 | DK-0132 | #1161 |
 | DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1161 |
 | DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | done | agent-1 | DK-0134 | #1161 |
-| DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 |  |
+| DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 | #1176 |
 | DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | assigned | agent-1 | DK-0136 |  |
 | DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 | #1152 |
 | DK-0139 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkOptionRow | done | agent-1 | DK-0138 | #1152 |
@@ -5365,3 +5365,7 @@ heavy: mine (agent-1, gate for feat/DK-0136-dropdown-b)
 ### H-1062 · 2026-10-08 16:08 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0136-dropdown-b)
+
+### H-1063 · 2026-10-08 16:15 · agent-1 → all · review-request · DK-0136
+
+PR #1176 for DK-0136 (Build DkDropdown with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
