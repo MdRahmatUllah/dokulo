@@ -278,7 +278,7 @@ System fonts: **SF Pro** (iOS) and **Roboto** (Android). No custom text font in 
 | `elevation.flat` | No shadow, 1 dp `color.outline` border | Same border |
 | `elevation.raised` | Shadow 0 / 2 / 8, #14171C @ 8 % | No shadow; surface `color.surfaceRaised` + 1 dp outline |
 | `elevation.floating` | Shadow 0 / 6 / 16, #14171C @ 14 % | Shadow 0 / 6 / 16, #000 @ 40 % + `color.surfaceRaised` |
-| `elevation.overlay` (sheets, dialogs) | Shadow 0 / −2 / 24, #14171C @ 12 % | `color.surfaceRaised`, no shadow, scrim behind |
+| `elevation.overlay` (sheets, dialogs) | Shadow 0 / −2 / 24, #14171C @ 12 % | `color.surfaceRaised`, no shadow, 1 dp `color.outline`, scrim behind |
 
 ### 6.5 Borders and dividers
 

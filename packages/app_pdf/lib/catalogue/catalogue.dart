@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
+import 'overlay_states.dart';
 import 'page_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/components`): every
@@ -26,6 +27,11 @@ class CatalogueEntry {
 const catalogue = [
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
+  CatalogueEntry(
+    'DkSheet',
+    '11.7 Sheets, dialogs, menus, toasts',
+    SheetStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
