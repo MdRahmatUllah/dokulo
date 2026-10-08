@@ -109,7 +109,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | done | agent-1 | DK-0084 | #1146 |
 | DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
 | DK-0087 | Ph1 | B | P1 | S | Golden + accessibility tests for DkFileCard | assigned | agent-1 | DK-0086 |  |
-| DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1178 |
+| DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1178 |
 | DK-0089 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkFolderCard | review | agent-1 | DK-0088 | #1178 |
 | DK-0090 | Ph3 | B | P0 | M | Build DkResultCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0048 |  |
 | DK-0091 | Ph3 | B | P1 | S | Golden + accessibility tests for DkResultCard | assigned | agent-1 | DK-0090 |  |
@@ -5807,3 +5807,7 @@ heavy: free (agent-1, exit 1)
 ### H-1172 · 2026-10-08 21:44 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1173 · 2026-10-08 21:44 · agent-1 → all · report · DK-0088
+
+DK-0088 (Build DkFolderCard with all variants and states) is done, merged as #1178. DkFolderCard (components/dk_folder_card.dart) and DkSettingsRow/DkSettingsGroup (components/dk_settings_row.dart). A switch row toggles from the whole row via onTap: () => onChanged(!value).
