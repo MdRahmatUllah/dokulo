@@ -1,59 +1,8 @@
-// The component catalogue is a developer page (debug builds only), so its
-// labels are English-only on purpose: l10n-ignore throughout.
 import 'package:flutter/material.dart';
 
 import '../components/dk_button.dart';
 import '../components/dk_icon.dart';
-import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
-
-/// Every component in every variant and state, in Light or Dark (DK-0074 and
-/// each component task after it): `/dev/catalogue`, debug builds only. A new
-/// component adds its section to [catalogueSections].
-class CatalogueScreen extends StatefulWidget {
-  const CatalogueScreen({super.key});
-
-  @override
-  State<CatalogueScreen> createState() => _CatalogueScreenState();
-}
-
-class _CatalogueScreenState extends State<CatalogueScreen> {
-  var _dark = false;
-
-  @override
-  Widget build(BuildContext context) => Theme(
-    data: dokuloTheme(_dark ? DkTokens.dark : DkTokens.light),
-    child: Builder(
-      builder: (context) {
-        final t = context.tokens;
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Components'), // l10n-ignore
-            actions: [
-              Switch(value: _dark, onChanged: (v) => setState(() => _dark = v)),
-            ],
-          ),
-          body: ListView(
-            padding: EdgeInsets.all(t.space.l),
-            children: [
-              for (final (name, section) in catalogueSections) ...[
-                Text(name, style: t.text.titleM),
-                SizedBox(height: t.space.m),
-                section(context),
-                SizedBox(height: t.space.xxl),
-              ],
-            ],
-          ),
-        );
-      },
-    ),
-  );
-}
-
-/// The catalogue's sections: a component's name and its gallery.
-final catalogueSections = <(String, WidgetBuilder)>[
-  ('DkButton', (_) => const DkButtonGallery()),
-];
 
 /// DkButton: every variant in every state, then the sizes (UI spec §11.1).
 /// The goldens draw this same gallery.

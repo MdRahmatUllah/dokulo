@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../screens/catalogue_screen.dart';
+import '../catalogue/catalogue.dart';
 import '../screens/placeholder_screen.dart';
 import 'app_shell.dart';
 
@@ -29,7 +29,7 @@ abstract final class Routes {
       '/viewer/$fileId${edit ? '?mode=edit' : ''}';
   static String organize(String fileId) => '/organize/$fileId'; // P1
 
-  /// The component catalogue: debug builds only.
+  /// The component catalogue (`lib/catalogue/`): debug builds only.
   static const catalogue = '/dev/catalogue';
 }
 
@@ -93,8 +93,6 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
-      if (kDebugMode)
-        fullScreen(Routes.catalogue, (_) => const CatalogueScreen()),
       fullScreen(
         Routes.scan,
         (_) => const PlaceholderScreen('S1'),
@@ -121,6 +119,19 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         '/organize/:fileId',
         (s) => PlaceholderScreen('P1', detail: s.pathParameters['fileId']!),
       ),
+      // The component catalogue: debug builds only (kDebugMode is a
+      // constant, so a release build doesn't contain it).
+      if (kDebugMode)
+        fullScreen(
+          Routes.catalogue,
+          (_) => const CatalogueScreen(),
+          routes: [
+            fullScreen(
+              ':name',
+              (s) => CatalogueEntryScreen(s.pathParameters['name']!),
+            ),
+          ],
+        ),
     ],
   );
 }

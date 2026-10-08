@@ -200,7 +200,7 @@ Colour is defined as tokens with a Light and a Dark value. Design every screen i
 | Hover (tablets with pointer) | `color.textPrimary` @ 4 % |
 | Pressed | `color.textPrimary` @ 8 % |
 | Selected (list rows) | `color.primaryContainer` fill |
-| Dragged item | `raised` elevation + 2 % scale up |
+| Dragged item | `raised` elevation + 2 % scale up (pages in DkPageTray and DkPageGrid; tool tiles lift 1.04, §9 Tile reorder) |
 | Disabled | 40 % opacity of the whole element |
 
 ### 4.5 Contrast requirements

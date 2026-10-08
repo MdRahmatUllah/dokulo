@@ -191,7 +191,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/tool/:toolId/result` | T3 Result | full screen | |
 | `/viewer/:fileId` | V1 Viewer | full screen | `?mode=edit` opens V2 Edit mode |
 | `/organize/:fileId` | P1 Organize pages | full screen | |
-| `/dev/catalogue` | Component catalogue | full screen | Debug builds only: every component, variant and state, Light or Dark |
+| `/dev/catalogue` | Component catalogue | full screen | Debug builds only: a list of components; each opens its variants and states in Light and Dark (`lib/catalogue/`) |
 
 - **Full-screen routes** sit on the root navigator, above the shell: the tab
   bar is hidden, and back returns to the tab they were pushed from. That covers
@@ -249,6 +249,15 @@ outlined, `filled: true` only for the selected tab and toggled states.
 a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
+
+**The component catalogue (DK-0150).** Every `Dk` component shows each
+variant and state in Light and Dark at `/dev/catalogue` (debug builds only;
+`dokulo://open/dev/catalogue` on the emulator). A component task adds a
+states widget to `lib/catalogue/` and one `CatalogueEntry` to
+`lib/catalogue/catalogue.dart`, and its golden test renders that same widget,
+so the catalogue shows exactly what is tested. `test/flutter_test_config.dart`
+loads the icon font for every test, so goldens show the glyphs; text stays in
+the test font.
 
 Everything about a tool comes from **`ToolCatalogue.of(id)`**
 (`lib/tools/tool_catalogue.dart`, DK-0049): its icon (from `DkIcons.tools`),

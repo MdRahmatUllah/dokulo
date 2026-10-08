@@ -1,6 +1,6 @@
 import 'package:app_pdf/components/dk_button.dart';
 import 'package:app_pdf/components/dk_icon.dart';
-import 'package:app_pdf/screens/catalogue_screen.dart';
+import 'package:app_pdf/catalogue/button_states.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
