@@ -7,6 +7,7 @@ import '../routes/routes.dart';
 import 'button_states.dart';
 import 'choice_row_states.dart';
 import 'color_pin_states.dart';
+import 'dropdown_states.dart';
 import 'icon_button_states.dart';
 import 'logo_states.dart';
 import 'next_page_chip_states.dart';
@@ -169,6 +170,7 @@ const catalogue = [
     '11.3 Badges, chips, indicators',
     DkPagePillGallery(),
   ),
+  CatalogueEntry('DkDropdown', '11.4 Inputs and controls', DkDropdownGallery()),
   CatalogueEntry('DkCropOverlay', '11.5 Pages and thumbnails', CropStates()),
 ];
 
