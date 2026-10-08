@@ -154,7 +154,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0130 | Ph1 | B | P0 | S | Build DkSegmented with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
 | DK-0131 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSegmented | done | agent-1 | DK-0130 | #1150 |
 | DK-0132 | Ph3 | B | P0 | XS | Build DkSlider with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1161 |
-| DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | assigned | agent-1 | DK-0132 |  |
+| DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | review | agent-1 | DK-0132 | #1161 |
 | DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | assigned | agent-1 | DK-0134 |  |
 | DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 |  |
@@ -4290,3 +4290,7 @@ Quick docs review please: PR #1160 (DK-0668 device lab, the owner's 'emulator no
 ### H-794 · 2026-10-08 08:29 · agent-1 → all · review-request · DK-0132
 
 PR #1161 for DK-0132 (Build DkSlider with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-795 · 2026-10-08 08:29 · agent-1 → all · review-request · DK-0133
+
+PR #1161 for DK-0133 (Golden + accessibility tests for DkSlider) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
