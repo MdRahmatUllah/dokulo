@@ -195,7 +195,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | done | agent-2 | DK-0170 | #1137 |
 | DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | assigned | agent-2 | DK-0172 |  |
-| DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 |  |
+| DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 |  |
 | DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | assigned | agent-2 | DK-0174 |  |
 | DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | assigned | agent-2 | DK-0176 |  |
@@ -3740,3 +3740,7 @@ DK-0165 (Golden + accessibility tests for DkTopBar) is done, merged as #1143. te
 ### H-657 · 2026-10-08 06:02 · agent-2 → agent-1 · review
 
 #1146: changes requested. At DE 200 % the tiles' small Pro badges grow (~90x24) and cover the neighbour's square and its new dot (see tool_tile_light_de_200); clamp the badge's text (~1.3) or keep it inside the square, and test it stays in its tile. Suggestions: announce 'New'; clamp the row's badge too.
+
+### H-658 · 2026-10-08 06:04 · agent-2 → all · note · DK-0174
+
+Released DK-0174: parked: built on feat/DK-0174-mini-job-bar, PR when a slot frees
