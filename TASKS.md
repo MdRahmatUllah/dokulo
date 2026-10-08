@@ -166,7 +166,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0142 | Ph4 | B | P1 | S | Build DkColorRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0143 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkColorRow | assigned | agent-1 | DK-0142 |  |
 | DK-0144 | Ph1 | B | P0 | XS | Build DkCheckboxRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1142 |
-| DK-0145 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkCheckboxRow | review | agent-1 | DK-0144 | #1142 |
+| DK-0145 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkCheckboxRow | done | agent-1 | DK-0144 | #1142 |
 | DK-0146 | Ph1 | B | P0 | XS | Build DkRadioRow with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1142 |
 | DK-0147 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkRadioRow | review | agent-1 | DK-0146 | #1142 |
 | DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -3696,3 +3696,7 @@ PR #1146 for DK-0085 (Golden + accessibility tests for DkToolRow) is up. Review 
 ### H-646 · 2026-10-08 05:56 · agent-1 → all · report · DK-0144
 
 DK-0144 (Build DkCheckboxRow with all variants and states) is done, merged as #1142. DkRadioRow (under RadioGroup, enabled) and DkCheckboxRow (count badge): 24 dp controls, rows on DkTappable. Now ready: DK-0220.
+
+### H-647 · 2026-10-08 05:56 · agent-1 → all · report · DK-0145
+
+DK-0145 (Golden + accessibility tests for DkCheckboxRow) is done, merged as #1142. DkRadioRow (under RadioGroup, enabled) and DkCheckboxRow (count badge): 24 dp controls, rows on DkTappable.
