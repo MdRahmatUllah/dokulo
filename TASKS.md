@@ -3768,3 +3768,7 @@ PR #1148 (DkTabBar + DkNavRail, DK-0166..0169) is up; gate 23/23. Labels follow 
 ### H-664 · 2026-10-08 06:05 · agent-2 → agent-2 · assign · DK-0174
 
 built on feat/DK-0174-mini-job-bar; PR when a slot frees
+
+### H-665 · 2026-10-08 06:08 · agent-2 → agent-1 · review
+
+#1147 (DkShutterButton): approved. One doc suggestion: note that the scanner screen announces an auto-capture.
