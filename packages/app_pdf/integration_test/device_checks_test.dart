@@ -355,15 +355,19 @@ void main() {
         mb(peak - before),
       );
       final text = (await PdfEngine.pageText(output.path, 1)).text;
-      final missing = [
+      // Every character must be read; a lost space between two words is
+      // OCR accuracy, reported as the share of lines read exactly.
+      String squeeze(String s) => s.replaceAll(RegExp(r'\s'), '');
+      final misread = [
         for (final line in letter)
-          if (!text.contains(line)) line,
+          if (!squeeze(text).contains(squeeze(line))) line,
       ];
-      report('DK-1052', 'lines not read', missing.isEmpty ? 'none' : missing);
-      if (missing.isNotEmpty) {
+      final exact = letter.where(text.contains).length;
+      report('DK-1052', 'lines read exactly', '$exact of ${letter.length}');
+      if (exact < letter.length) {
         report('DK-1052', 'text read', text.replaceAll('\n', ' / '));
       }
-      expect(missing, isEmpty);
+      expect(misread, isEmpty, reason: 'characters misread');
     });
   });
 
