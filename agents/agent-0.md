@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 10:30
+last-seen: 2026-10-08 10:34
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-1068 Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) — claimed 2026-10-08 10:30.
+DK-1068 in review as PR #1166: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
