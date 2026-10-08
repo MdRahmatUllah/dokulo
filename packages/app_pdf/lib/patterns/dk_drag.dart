@@ -1,10 +1,10 @@
-import 'dart:async';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/motion/dk_reorder_motion.dart';
+
+export '../components/motion/dk_reorder_motion.dart'
+    show DkEdgeScroller, DkReorderStartListener, dkLiftDelay, dkReorderProxy;
 import '../theme/dk_tokens.dart';
 import '../theme/haptics.dart';
 
@@ -16,59 +16,6 @@ import '../theme/haptics.dart';
 // folders offers Undo (`showDkUndo(context, DkUndo.move, …)`). Screen
 // readers move items with actions instead: "Move left / right" in a
 // reorderable list, the Move command in a file's menu.
-
-/// How long a press lifts an item (§12.2), not the platform's 500 ms.
-const dkLiftDelay = Duration(milliseconds: 300);
-
-/// Keeps a scrollable moving while a dragging finger is within [edge] of
-/// its leading or trailing side (§12.2). Feed it every drag update; stop it
-/// when the drag ends.
-class DkEdgeScroller {
-  DkEdgeScroller(this.controller, {this.axis = Axis.vertical, this.onScroll});
-
-  final ScrollController controller;
-  final Axis axis;
-
-  /// After every step: the finger stayed still but what's under it moved.
-  final VoidCallback? onScroll;
-
-  static const edge = 48.0;
-
-  /// Pixels per frame.
-  static const step = 6.0;
-
-  Timer? _timer;
-
-  bool get scrolling => _timer != null;
-
-  /// [local] is the finger in the scrollable's own box, of [size].
-  void update(Offset local, Size size) {
-    final at = axis == Axis.vertical ? local.dy : local.dx;
-    final length = axis == Axis.vertical ? size.height : size.width;
-    final delta = at < edge
-        ? -step
-        : at > length - edge
-        ? step
-        : 0.0;
-    if (delta == 0) return stop();
-    _timer ??= Timer.periodic(const Duration(milliseconds: 16), (_) {
-      if (!controller.hasClients) return;
-      final p = controller.position;
-      final next = (p.pixels + delta).clamp(
-        p.minScrollExtent,
-        p.maxScrollExtent,
-      );
-      if (next == p.pixels) return;
-      controller.jumpTo(next);
-      onScroll?.call();
-    });
-  }
-
-  void stop() {
-    _timer?.cancel();
-    _timer = null;
-  }
-}
 
 /// An item that a long-press (300 ms) lifts and the finger carries: a file
 /// to drop on a folder (§12.2). It plays the selection haptic as it lifts;
@@ -146,27 +93,3 @@ class DkDropTarget<T extends Object> extends ConsumerWidget {
     builder: (context, hovering, _) => builder(context, hovering.isNotEmpty),
   );
 }
-
-/// For a `ReorderableListView` (merge cards, workflow steps, the page tray)
-/// with `buildDefaultDragHandles: false`: wrap each item so a 300 ms press
-/// lifts it (§12.2) instead of the platform's 500 ms.
-class DkReorderStartListener extends ReorderableDragStartListener {
-  const DkReorderStartListener({
-    super.key,
-    required super.child,
-    required super.index,
-    super.enabled,
-  });
-
-  @override
-  MultiDragGestureRecognizer createRecognizer() =>
-      DelayedMultiDragGestureRecognizer(delay: dkLiftDelay, debugOwner: this);
-}
-
-/// A `ReorderableListView.proxyDecorator`: the lifted item grows to 1.04
-/// with the floating shadow (DkLift), on a Material for its ink.
-Widget dkReorderProxy(Widget child, int index, Animation<double> animation) =>
-    Material(
-      type: MaterialType.transparency,
-      child: DkLift(lifted: true, child: child),
-    );

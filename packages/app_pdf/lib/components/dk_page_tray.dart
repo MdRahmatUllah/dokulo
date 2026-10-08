@@ -3,11 +3,11 @@ import 'dart:ui' show lerpDouble;
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
-import '../patterns/dk_drag.dart';
 import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_page_thumb.dart';
+import 'motion/dk_reorder_motion.dart';
 import 'dk_ring.dart';
 
 /// The page strip of the scan review and the editors (UI spec §11.5;

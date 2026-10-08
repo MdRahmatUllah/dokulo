@@ -5,7 +5,6 @@ import 'package:flutter/semantics.dart';
 
 import '../theme/dk_tokens.dart';
 import 'dk_page_thumb.dart';
-import '../patterns/dk_drag.dart';
 import 'motion/dk_reorder_motion.dart';
 
 /// The pages of a document as a grid (UI spec §11.5; DK-0154): DkPageThumbs,
