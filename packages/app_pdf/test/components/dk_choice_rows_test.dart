@@ -5,6 +5,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(Widget child, {DkTokens? tokens, double scale = 1}) => MaterialApp(
@@ -29,7 +30,7 @@ void main() {
     for (final scale in [1.0, 2.0]) {
       final name = '${theme}_${(scale * 100).round()}';
       testWidgets('golden: $name', (tester) async {
-        tester.view.physicalSize = Size(393, scale > 1 ? 700 : 420);
+        tester.view.physicalSize = Size(393, scale > 1 ? 780 : 470);
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
@@ -111,4 +112,47 @@ void main() {
     await tester.pump();
     expect(tester.widget<Checkbox>(find.byType(Checkbox).last).value, isFalse);
   });
+
+  testWidgets(
+    'keyboard: Tab focuses the row, Space toggles; disabled skipped',
+    (tester) async {
+      var on = false;
+      int? picked;
+      await tester.pumpWidget(
+        app(
+          Column(
+            children: [
+              StatefulBuilder(
+                builder: (context, set) => DkCheckboxRow(
+                  label: 'IBAN',
+                  value: on,
+                  onChanged: (v) => set(() => on = v),
+                ),
+              ),
+              RadioGroup<int>(
+                groupValue: 0,
+                onChanged: (v) => picked = v,
+                child: const Column(
+                  children: [
+                    DkRadioRow(value: 1, label: 'Off', enabled: false),
+                    DkRadioRow(value: 2, label: 'Back only'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(LogicalKeyboardKey.space);
+      await tester.pump();
+      expect(on, isTrue);
+      // The checkbox itself takes no focus, and the disabled row is skipped.
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(LogicalKeyboardKey.space);
+      expect(picked, 2);
+      await tester.tap(find.text('Off'));
+      expect(picked, 2);
+    },
+  );
 }

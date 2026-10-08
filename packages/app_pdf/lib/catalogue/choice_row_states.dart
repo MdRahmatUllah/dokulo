@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../components/dk_checkbox_row.dart';
 import '../components/dk_radio_row.dart';
 
-/// DkRadioRow (with and without a description) and DkCheckboxRow (on with a
-/// count, off, disabled).
+/// DkRadioRow (with and without a description, disabled) and DkCheckboxRow
+/// (on with a count, off, disabled).
 class DkChoiceRowsGallery extends StatelessWidget {
   const DkChoiceRowsGallery({super.key});
 
@@ -23,6 +23,7 @@ class DkChoiceRowsGallery extends StatelessWidget {
               description: 'Front and back of each page',
             ),
             DkRadioRow(value: 1, label: 'Front only'),
+            DkRadioRow(value: 2, label: 'Back only', enabled: false),
           ],
         ),
       ),
