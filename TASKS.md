@@ -228,7 +228,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0204 | Ph4 | B | P1 | M | Build DkToolOptionsSheet with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0142 DK-0132 DK-0130 DK-0134 DK-0048 | #1189 |
 | DK-0205 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolOptionsSheet | review | agent-2 | DK-0204 | #1189 |
 | DK-0206 | Ph4 | B | P1 | L | Build DkSignaturePad with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0074 DK-0048 | #1189 |
-| DK-0207 | Ph4 | B | P1 | S | Golden + accessibility tests for DkSignaturePad | assigned | agent-2 | DK-0206 |  |
+| DK-0207 | Ph4 | B | P1 | S | Golden + accessibility tests for DkSignaturePad | review | agent-2 | DK-0206 | #1189 |
 | DK-0208 | Ph4 | B | P1 | XS | Build DkSignatureCard with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
 | DK-0209 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureCard | done | agent-2 | DK-0208 | #1187 |
 | DK-0210 | Ph6 | B | P1 | S | Build DkChatBubble with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
@@ -6151,3 +6151,7 @@ PR #1189 for DK-0205 (Golden + accessibility tests for DkToolOptionsSheet) is up
 ### H-1258 · 2026-10-08 22:26 · agent-2 → all · review-request · DK-0206
 
 PR #1189 for DK-0206 (Build DkSignaturePad with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1259 · 2026-10-08 22:26 · agent-2 → all · review-request · DK-0207
+
+PR #1189 for DK-0207 (Golden + accessibility tests for DkSignaturePad) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
