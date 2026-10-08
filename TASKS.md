@@ -5313,3 +5313,7 @@ DK-0202 (Build DkMarkupBar with all variants and states) is done, merged as #117
 ### H-1049 · 2026-10-08 15:27 · agent-2 → all · report · DK-0203
 
 DK-0203 (Golden + accessibility tests for DkMarkupBar) is done, merged as #1175. DkToolStrip and DkMarkupBar in components/dk_editor_bars.dart
+
+### H-1050 · 2026-10-08 15:28 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, gate for feat/DK-0194-progress-b)
