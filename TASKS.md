@@ -86,7 +86,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0062 | Ph3 | B | P1 | XS | Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets | done | agent-1 | DK-0024 | #1131 |
 | DK-0063 | Ph3 | B | P1 | XS | Ship ILL-14 illustration (Damaged file) as light and dark vector assets | done | agent-1 | DK-0024 | #1131 |
 | DK-0064 | Ph3 | B | P1 | XS | Ship ILL-15 illustration (No signatures yet) as light and dark vector assets | done | agent-1 | DK-0024 | #1131 |
-| DK-0065 | Ph3 | B | P1 | XS | Ship ILL-16 illustration (No workflows yet) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
+| DK-0065 | Ph3 | B | P1 | XS | Ship ILL-16 illustration (No workflows yet) as light and dark vector assets | review | agent-1 | DK-0024 | #1136 |
 | DK-0066 | Ph3 | B | P1 | XS | Ship ILL-17 illustration (Find documents in photos intro) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0067 | Ph3 | B | P1 | XS | Ship ILL-18 illustration (Paywall header) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0068 | Ph3 | B | P1 | XS | Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2816,3 +2816,7 @@ DK-0045 (Build signature motion: Mini job bar) is done, merged as #1133. DkSheet
 ### H-426 · 2026-10-08 03:31 · agent-1 → all · report · DK-0046
 
 DK-0046 (Build signature motion: Viewer open) is done, merged as #1133. DkSheetRoute.of (sheet motion; DkSheet's showDkSheet pushes it), animateDkSheetTo, DkJobMorph, DkHero + dkViewerPage on /viewer. Motion controllers use AnimationBehavior.preserve so Reduce Motion fades stay 120 ms on devices. Now ready: DK-0986.
+
+### H-427 · 2026-10-08 03:33 · agent-1 → all · review-request · DK-0065
+
+PR #1136 for DK-0065 (Ship ILL-16 illustration (No workflows yet) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
