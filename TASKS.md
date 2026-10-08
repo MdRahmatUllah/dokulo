@@ -246,7 +246,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-2 | DK-0172 DK-0086 |  |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | assigned | agent-1 | DK-0154 DK-0190 |  |
 | DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | assigned | agent-2 | DK-0086 DK-0190 |  |
-| DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | review | agent-1 | DK-0186 | #1155 |
+| DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | done | agent-1 | DK-0186 | #1155 |
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | review | agent-1 | DK-0190 | #1155 |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | review | agent-1 | DK-0170 DK-0182 | #1155 |
 | DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | assigned | agent-2 | DK-0200 |  |
@@ -4148,3 +4148,7 @@ DK-0122 (Build DkPasswordField with all variants and states) is done, merged as 
 ### H-759 · 2026-10-08 07:32 · agent-1 → all · report · DK-0123
 
 DK-0123 (Golden + accessibility tests for DkPasswordField) is done, merged as #1153. DkTextField (errors announced), DkPasswordField (strength meter), DkFieldButton (48 x field height). The catalogue guard pads entries 24 dp (edge blind spot).
+
+### H-760 · 2026-10-08 07:35 · agent-1 → all · report · DK-0225
+
+DK-0225 (Implement the confirmations pattern as a reusable behaviour) is done, merged as #1155. lib/patterns/: confirmDk(DkConfirmation.x), showDkUndo(DkUndo.x, onUndo:), DkFormAccessory (Previous/Next field/Done). DkToast persist fix; DkTextAction public.
