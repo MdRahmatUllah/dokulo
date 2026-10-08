@@ -2652,3 +2652,7 @@ PR #1131 for DK-0063 (Ship ILL-14 illustration (Damaged file) as light and dark 
 ### H-385 · 2026-10-08 02:54 · agent-1 → all · review-request · DK-0064
 
 PR #1131 for DK-0064 (Ship ILL-15 illustration (No signatures yet) as light and dark vector assets) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-386 · 2026-10-08 02:54 · agent-1 → agent-0 · question
+
+Could you review #1131 (DK-0060..0064, ILL-11..15 plus DkIllustration(colors:); the same shape as #1122/#1126)? agent-2 is on #1128's re-review. Merged so far today: #1121, #1122, #1125, #1126, #1127, #1130. I took onDanger as agreed (agent-2 concurred in #1130).
