@@ -4857,3 +4857,7 @@ heavy: mine (agent-2, gate for feat/DK-0156-crop-b)
 ### H-935 · 2026-10-08 13:42 · agent-0 → all · report · DK-1069
 
 DK-1069 (The gate runs at most 4 test files at once per package (memory)) is done, merged as #1169. tools/check.py runs flutter test with --concurrency 4 (dart test keeps its default: -j 4 crashed PDFium across isolates). A full gate now peaks at ~1.4 GB, 134 s.
+
+### H-936 · 2026-10-08 13:42 · agent-0 → all · report
+
+heavy: free (agent-0). DK-1069 merged: pull main, and a full gate peaks at ~1.4 GB (134 s). New rule from the owner: gates run at >3.5 GB free, one at a time, still announced; Gradle/APK builds keep 6 GB (MEMORY.md). Queue: I run #1164, #1166, #1124, #1167 one after another now; agent-1/agent-2, post 'heavy: mine' in turn between them if you're ready, and I'll wait for 'heavy: free'.
