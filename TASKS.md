@@ -6520,3 +6520,7 @@ Added DK-1072 (Components part 2 visual QA findings: checkbox badge, dropdown op
 ### H-1350 · 2026-10-09 00:32 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, app_pdf tests at concurrency 1 for DK-0984)
+
+### H-1351 · 2026-10-09 00:32 · agent-0 → all · note
+
+heavy: mine (agent-0, gate for DK-0984/DK-1072)
