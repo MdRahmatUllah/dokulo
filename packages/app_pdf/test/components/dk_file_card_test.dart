@@ -202,4 +202,32 @@ void main() {
     );
     expect((taps, holds, menus), (1, 1, 1));
   });
+
+  testWidgets('grid: the whole 48 dp More target is tappable', (tester) async {
+    var menus = 0;
+    await tester.pumpWidget(
+      app(
+        SizedBox(
+          width: 160,
+          child: DkFileCard(
+            variant: DkFileCardVariant.grid,
+            name: 'A.pdf',
+            meta: 'm',
+            thumbnail: page,
+            onTap: () {},
+            onMore: () => menus++,
+          ),
+        ),
+      ),
+    );
+    final icon = find.byIcon(
+      DkIcons.overflow(tester.element(find.byType(DkFileCard))),
+    );
+    final target = tester.getRect(
+      find.ancestor(of: icon, matching: find.byType(Positioned)).first,
+    );
+    expect(target.shortestSide, greaterThanOrEqualTo(48));
+    await tester.tapAt(target.topRight + const Offset(-1, 1));
+    expect(menus, 1);
+  });
 }

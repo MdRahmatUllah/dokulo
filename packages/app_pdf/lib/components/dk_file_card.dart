@@ -224,7 +224,9 @@ class _DkFileCardState extends State<DkFileCard> {
         thumb,
         if (check != null) Positioned(top: 4, left: 4, child: check),
         if (more != null && w.variant == DkFileCardVariant.grid)
-          Positioned(top: -4, right: -4, child: more),
+          // Inside the Stack: Flutter hit-tests only within its bounds, so
+          // the whole 48 dp target stays tappable.
+          Positioned(top: 0, right: 0, child: more),
       ],
     );
 
