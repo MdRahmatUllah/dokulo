@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 13:49
+last-seen: 2026-10-08 13:50
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-1045 Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390) — claimed 2026-10-08 13:49.
+DK-1045 in review as PR #1172: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
