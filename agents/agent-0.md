@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 10:36
+last-seen: 2026-10-08 10:42
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-1068 in review as PR #1166: answer the review; re-run the gate if main moved, then merge.
+DK-0114 Build DkCountBadge with all variants and states — claimed 2026-10-08 10:42.
 
 ## Next
 
