@@ -146,6 +146,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const remove = IconData(0xe15b, fontFamily: _font) /* remove */;
   static const arrowForward = IconData(
     0xe5c8,
     fontFamily: _font,
