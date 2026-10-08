@@ -30,7 +30,9 @@ Fixed (DK-1072):
   screen readers (`optionTrailing`): the export's language menu shows "French
   · 18 MB" to download.
 - D3. The highlighter offers its four colours (yellow, green, blue, pink), no
-  custom, opacity 30–60 % (UI spec §17.2); it had the pen's palette and 10–100 %.
+  custom, and opacity 30–60 %, with no thickness or stroke preview (UI spec
+  §17.2: it follows the text's lines); it had the pen's palette, a thickness
+  and 10–100 %.
 - D4. DkSlider draws no tick marks; the export's track is plain.
 - D5. The pen offers black, blue ink, red and custom, 1–8 pt (§17.2).
 - D6. Text sizes run 8–24 pt (§17.2); the stepper allowed 6–72.

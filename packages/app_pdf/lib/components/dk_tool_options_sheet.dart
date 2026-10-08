@@ -88,12 +88,9 @@ class DkToolOptionsSheet extends StatelessWidget {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final o = options;
-    final stroke = switch (kind) {
-      DkMarkupKind.pen ||
-      DkMarkupKind.highlighter ||
-      DkMarkupKind.shape => true,
-      _ => false,
-    };
+    // Thickness and its preview: the pen and shapes. The highlighter has
+    // colour and opacity only (UI spec §17.2): it follows the text's lines.
+    final stroke = kind == DkMarkupKind.pen || kind == DkMarkupKind.shape;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
@@ -104,7 +101,12 @@ class DkToolOptionsSheet extends StatelessWidget {
             // UI spec §17.2: the highlighter has its four colours and no
             // custom; the pen black, blue ink and red, plus custom.
             swatches: switch (kind) {
-              DkMarkupKind.highlighter => markupSwatches(t, l).take(4).toList(),
+              DkMarkupKind.highlighter => [
+                (color: t.markup.yellow, name: l.colour_yellow),
+                (color: t.markup.green, name: l.colour_green),
+                (color: t.markup.blue, name: l.colour_blue),
+                (color: t.markup.pink, name: l.colour_pink),
+              ],
               DkMarkupKind.pen => [
                 (color: t.markup.black, name: l.colour_black),
                 (color: t.markup.ink, name: l.markup_ink),
@@ -121,7 +123,7 @@ class DkToolOptionsSheet extends StatelessWidget {
             title: l.options_thickness,
             value: o.thickness,
             min: 1,
-            // The pen 1–8 pt (UI spec §17.2); shapes and the highlighter 1–12.
+            // The pen 1–8 pt (UI spec §17.2); shapes 1–12.
             max: kind == DkMarkupKind.pen ? 8 : 12,
             divisions: kind == DkMarkupKind.pen ? 7 : 11,
             format: (v) => l.options_points(v.round()),
@@ -131,7 +133,7 @@ class DkToolOptionsSheet extends StatelessWidget {
             child: DkStrokePreview(
               color: o.color,
               thickness: o.thickness,
-              opacity: kind == DkMarkupKind.highlighter ? o.opacity : 1,
+              opacity: 1,
             ),
           ),
         ],
