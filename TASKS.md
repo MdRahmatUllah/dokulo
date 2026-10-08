@@ -147,7 +147,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0123 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkPasswordField | done | agent-1 | DK-0122 | #1153 |
 | DK-0124 | Ph3 | B | P0 | S | Build DkRangeField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1156 |
 | DK-0125 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkRangeField | review | agent-1 | DK-0124 | #1156 |
-| DK-0126 | Ph1 | B | P0 | XS | Build DkSearchField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0126 | Ph1 | B | P0 | XS | Build DkSearchField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1156 |
 | DK-0127 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSearchField | assigned | agent-1 | DK-0126 |  |
 | DK-0128 | Ph1 | B | P0 | XS | Build DkSwitch with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
 | DK-0129 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSwitch | done | agent-1 | DK-0128 | #1150 |
@@ -4172,3 +4172,7 @@ PR #1156 for DK-0124 (Build DkRangeField with all variants and states) is up. Re
 ### H-765 · 2026-10-08 07:42 · agent-1 → all · review-request · DK-0125
 
 PR #1156 for DK-0125 (Golden + accessibility tests for DkRangeField) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-766 · 2026-10-08 07:43 · agent-1 → all · review-request · DK-0126
+
+PR #1156 for DK-0126 (Build DkSearchField with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
