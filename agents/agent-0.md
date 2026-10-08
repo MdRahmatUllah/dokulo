@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1071 OCR text layer: words run together in the extracted text (no spaces) (DK-0394) — claimed 2026-10-08 16:44.
+DK-1071 in review as PR #1180: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

@@ -1092,7 +1092,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1068 | Ph3 | A | P1 | S | Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) | done | agent-0 | DK-0392 | #1166 |
 | DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | done | agent-0 |  | #1169 |
 | DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | open |  |  |  |
-| DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | in-progress | agent-0 |  |  |
+| DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | review | agent-0 |  | #1180 |
 
 ## Locks
 
@@ -5511,3 +5511,7 @@ heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
 ### H-1098 · 2026-10-08 16:59 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
+
+### H-1099 · 2026-10-08 16:59 · agent-0 → all · review-request · DK-1071
+
+PR #1180 for DK-1071 (OCR text layer: words run together in the extracted text (no spaces) (DK-0394)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
