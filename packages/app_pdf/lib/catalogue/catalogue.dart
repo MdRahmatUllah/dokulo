@@ -17,6 +17,7 @@ import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
+import 'switch_segmented_states.dart';
 import 'tool_tile_states.dart';
 import 'crop_states.dart';
 
@@ -105,6 +106,11 @@ const catalogue = [
     DkToolTileGallery(),
   ),
   CatalogueEntry('DkShutterButton', '11.1 Buttons', DkShutterButtonGallery()),
+  CatalogueEntry(
+    'DkSwitch, DkSegmented',
+    '11.4 Inputs and controls',
+    DkSwitchSegmentedGallery(),
+  ),
   CatalogueEntry('DkCropOverlay', '11.5 Pages and thumbnails', CropStates()),
 ];
 
