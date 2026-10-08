@@ -717,10 +717,6 @@ class DkMotion {
   /// A picked-up tile or page.
   final liftScale = 1.04;
 
-  /// Page drop: one pulse of the insertion line (1 → 35 % → 1 opacity),
-  /// about 1 Hz.
-  final insertionPulse = const Duration(milliseconds: 900);
-
   /// The timing for [kind], or the cross-fade when [reduce] is on.
   DkMotionSpec of(DkMotionKind kind, {required bool reduce}) {
     if (reduce) {

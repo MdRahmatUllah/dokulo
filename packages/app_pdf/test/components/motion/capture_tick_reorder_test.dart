@@ -95,6 +95,18 @@ void main() {
       expect(find.byKey(const ValueKey('page')), findsNothing);
     });
 
+    testWidgets('the scanner closes mid-flight: the future still completes', (
+      tester,
+    ) async {
+      final (_, landed) = await fly(tester);
+      var done = false;
+      landed.then((_) => done = true);
+      await tester.pump(ms * 150);
+      await tester.pumpWidget(const SizedBox()); // the overlay is gone
+      await tester.pump();
+      expect(done, isTrue);
+    });
+
     testWidgets('Reduce Motion: it fades where it is, in 120 ms', (
       tester,
     ) async {
@@ -309,30 +321,22 @@ void main() {
       await tester.pump(ms * 60);
     });
 
-    testWidgets('the insertion line pulses, and is steady with Reduce Motion', (
+    testWidgets('the insertion line: an 8 dp wide I-beam, steady', (
       tester,
     ) async {
-      double opacity() => tester
-          .widget<FadeTransition>(
-            find.descendant(
-              of: find.byType(DkInsertionLine),
-              matching: find.byType(FadeTransition),
-            ),
-          )
-          .opacity
-          .value;
-      await tester.pumpWidget(host(const DkInsertionLine(length: 80)));
-      expect(opacity(), 1);
-      await tester.pump(ms * 450);
-      expect(opacity(), closeTo(0.35, 0.01));
-      await tester.pump(ms * 450);
-      expect(opacity(), closeTo(1, 0.01));
-
       await tester.pumpWidget(
-        host(const DkInsertionLine(length: 80), reduce: true),
+        host(const Center(child: DkInsertionLine(length: 80))),
       );
-      await tester.pump(ms * 450);
-      expect(opacity(), 1);
+      expect(tester.getSize(find.byType(DkInsertionLine)), const Size(8, 80));
+      expect(tester.hasRunningAnimations, isFalse, reason: 'no pulse');
+      await tester.pumpWidget(
+        host(
+          const Center(
+            child: DkInsertionLine(length: 60, axis: Axis.horizontal),
+          ),
+        ),
+      );
+      expect(tester.getSize(find.byType(DkInsertionLine)), const Size(60, 8));
     });
   });
 

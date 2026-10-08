@@ -98,6 +98,11 @@ Future<void> flyCapturedPage(
           ..dispose();
         landed.complete();
       },
+      // The overlay went away mid-flight (the scanner closed): don't leave
+      // the caller waiting.
+      onGone: () {
+        if (!landed.isCompleted) landed.complete();
+      },
     ),
   );
   overlay.insert(entry);
@@ -110,11 +115,12 @@ class _Flight extends StatefulWidget {
     required this.from,
     required this.to,
     required this.onDone,
+    required this.onGone,
   });
 
   final Widget page;
   final Rect from, to;
-  final VoidCallback onDone;
+  final VoidCallback onDone, onGone;
 
   @override
   State<_Flight> createState() => _FlightState();
@@ -149,6 +155,7 @@ class _FlightState extends State<_Flight> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
+    if (!_run.isCompleted) widget.onGone();
     _run.dispose();
     super.dispose();
   }

@@ -90,10 +90,11 @@ class _DkSlotState extends State<DkSlot> with SingleTickerProviderStateMixin {
   }
 }
 
-/// Page drop (DK-0043): where a dragged page will land, between two
-/// thumbnails: a 2 dp `color.primary` line with round end caps, pulsing
-/// (1 → 35 % → 1, about 1 Hz) while it waits. Steady with Reduce Motion.
-class DkInsertionLine extends StatefulWidget {
+/// Page drop (DK-0043; UI spec §11.5): where a dragged page will land,
+/// between two thumbnails: a 2 dp `color.primary` line with 8 dp end caps
+/// across it (an I-beam). It doesn't move on its own; the drop settles with
+/// [DkSlot].
+class DkInsertionLine extends StatelessWidget {
   const DkInsertionLine({
     super.key,
     required this.length,
@@ -105,49 +106,16 @@ class DkInsertionLine extends StatefulWidget {
   /// Vertical between thumbnails in a row; horizontal between rows.
   final Axis axis;
 
-  @override
-  State<DkInsertionLine> createState() => _DkInsertionLineState();
-}
-
-class _DkInsertionLineState extends State<DkInsertionLine>
-    with SingleTickerProviderStateMixin {
-  late final _pulse = AnimationController(vsync: this, value: 1);
+  /// The end caps' width across the line.
+  static const cap = 8.0;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (context.reduceMotion) {
-      _pulse.value = 1;
-    } else if (!_pulse.isAnimating) {
-      _pulse
-        ..duration = context.tokens.motion.insertionPulse ~/ 2
-        ..repeat(reverse: true);
-    }
-  }
-
-  @override
-  void dispose() {
-    _pulse.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const cap = 8.0; // the end caps (UI spec §11.5, DkPageGrid)
-    final vertical = widget.axis == Axis.vertical;
-    return ExcludeSemantics(
-      child: FadeTransition(
-        opacity: Tween(
-          begin: 0.35,
-          end: 1.0,
-        ).animate(CurvedAnimation(parent: _pulse, curve: Curves.easeInOut)),
-        child: CustomPaint(
-          size: vertical ? Size(cap, widget.length) : Size(widget.length, cap),
-          painter: _LinePainter(context.tokens.color.primary, widget.axis),
-        ),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ExcludeSemantics(
+    child: CustomPaint(
+      size: axis == Axis.vertical ? Size(cap, length) : Size(length, cap),
+      painter: _LinePainter(context.tokens.color.primary, axis),
+    ),
+  );
 }
 
 class _LinePainter extends CustomPainter {
@@ -158,17 +126,17 @@ class _LinePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 2;
-    final r = (axis == Axis.vertical ? size.width : size.height) / 2;
-    final (a, b) = axis == Axis.vertical
-        ? (Offset(r, r), Offset(r, size.height - r))
-        : (Offset(r, r), Offset(size.width - r, r));
+    final paint = Paint()..color = color;
+    const w = 2.0, cap = DkInsertionLine.cap;
+    final vertical = axis == Axis.vertical;
+    final length = vertical ? size.height : size.width;
+    Rect r(double along, double across, double l, double a) => vertical
+        ? Rect.fromLTWH(across, along, a, l)
+        : Rect.fromLTWH(along, across, l, a);
     canvas
-      ..drawLine(a, b, paint)
-      ..drawCircle(a, r, paint)
-      ..drawCircle(b, r, paint);
+      ..drawRect(r(0, (cap - w) / 2, length, w), paint) // the line
+      ..drawRect(r(0, 0, w, cap), paint) // the caps
+      ..drawRect(r(length - w, 0, w, cap), paint);
   }
 
   @override
