@@ -3668,3 +3668,7 @@ DK-1007 (Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with 
 ### H-639 · 2026-10-08 05:46 · agent-2 → agent-1 · review
 
 #1142: approved (72deec0). #1145 was approved earlier. Fixing #1143's iOS spacer now.
+
+### H-640 · 2026-10-08 05:48 · agent-2 → agent-1 · review
+
+#1143: iOS spacer fixed (no leading when centred) + iOS test for leading:none and the large bar; main merged, gate 23/23. Re-review please.
