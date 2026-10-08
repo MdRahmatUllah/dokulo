@@ -1028,6 +1028,125 @@
   "@compare_changed": {
     "description": "Compare PDFs: the change tag."
   },
+  "model_not_available": "Not available on this phone",
+  "@model_not_available": {
+    "description": "DkModelCard: the phone can't run this model (memory, chip)."
+  },
+  "model_pause_progress": "Pause, {percent} %",
+  "@model_pause_progress": {
+    "description": "DkModelCard, screen readers: the pause button with the download's progress.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "file_locked": "Locked",
+  "@file_locked": {
+    "description": "DkFileCard, screen readers: the file needs a password or the locked folder."
+  },
+  "file_encrypted": "Password protected",
+  "@file_encrypted": {
+    "description": "DkFileCard, screen readers: an encrypted PDF."
+  },
+  "sign_pad_hint": "Sign on the line",
+  "@sign_pad_hint": {
+    "description": "DkSignaturePad (UI spec §11.8): the hint under the baseline, until something is drawn."
+  },
+  "sign_pad_title": "Add signature",
+  "@sign_pad_title": {
+    "description": "DkSignaturePad: the top bar's title."
+  },
+  "sign_pad_draw": "Draw",
+  "@sign_pad_draw": {
+    "description": "DkSignaturePad: the segmented tab to draw a signature."
+  },
+  "sign_pad_type": "Type",
+  "@sign_pad_type": {
+    "description": "DkSignaturePad: the segmented tab to type a signature."
+  },
+  "sign_pad_image": "Image",
+  "@sign_pad_image": {
+    "description": "DkSignaturePad: the segmented tab to use a photo of a signature."
+  },
+  "sign_pad_clear": "Clear",
+  "@sign_pad_clear": {
+    "description": "DkSignaturePad: clears the drawing."
+  },
+  "sign_pad_ink": "Ink",
+  "@sign_pad_ink": {
+    "description": "DkSignaturePad: the label before the ink swatches (Black, Blue ink)."
+  },
+  "sign_pad_name": "Your name",
+  "@sign_pad_name": {
+    "description": "DkSignaturePad, Type tab: the text field's label."
+  },
+  "sign_pad_style": "Handwriting style {n}",
+  "@sign_pad_style": {
+    "description": "DkSignaturePad, Type tab, screen readers: one of the three font previews.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sign_pad_image_body": "Take or choose a photo of your signature on white paper. Dokulo crops it and removes the background.",
+  "@sign_pad_image_body": {
+    "description": "DkSignaturePad, Image tab."
+  },
+  "sign_pad_take_photo": "Take photo",
+  "@sign_pad_take_photo": {
+    "description": "DkSignaturePad, Image tab: opens the camera."
+  },
+  "sign_pad_choose_photo": "Choose photo",
+  "@sign_pad_choose_photo": {
+    "description": "DkSignaturePad, Image tab: opens the photo library."
+  },
+  "options_thickness": "Thickness",
+  "@options_thickness": {
+    "description": "DkToolOptionsSheet: the stroke width slider."
+  },
+  "options_points": "{n} pt",
+  "@options_points": {
+    "description": "DkToolOptionsSheet: the thickness value.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "options_opacity": "Opacity",
+  "@options_opacity": {
+    "description": "DkToolOptionsSheet: the highlighter's opacity slider."
+  },
+  "options_font_size": "Font size",
+  "@options_font_size": {
+    "description": "DkToolOptionsSheet: the text tool's size stepper."
+  },
+  "options_shape_rectangle": "Rectangle",
+  "@options_shape_rectangle": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_shape_ellipse": "Ellipse",
+  "@options_shape_ellipse": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_shape_line": "Line",
+  "@options_shape_line": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_shape_arrow": "Arrow",
+  "@options_shape_arrow": {
+    "description": "DkToolOptionsSheet, shape tool."
+  },
+  "options_eraser_object": "Object",
+  "@options_eraser_object": {
+    "description": "DkToolOptionsSheet, eraser: removes a whole annotation."
+  },
+  "options_eraser_stroke": "Stroke",
+  "@options_eraser_stroke": {
+    "description": "DkToolOptionsSheet, eraser: removes the stroke under the finger."
+  },
   "ai_footer": "On this phone · {model} · AI can make mistakes",
   "@ai_footer": {
     "description": "DkAIFooter under AI answers (UI spec §11.8); model is the model's name, e.g. Gemma 4 E2B.",

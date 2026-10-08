@@ -146,6 +146,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const lock = IconData(0xe899, fontFamily: _font) /* lock */;
   static const backspace = IconData(0xe14a, fontFamily: _font) /* backspace */;
   static const fingerprint = IconData(
     0xe90d,
@@ -208,6 +209,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* photo_library */;
   static const retake = IconData(0xf053, fontFamily: _font) /* restart_alt */;
+  static const camera = IconData(0xe412, fontFamily: _font) /* photo_camera */;
   static const filters = IconData(0xe429, fontFamily: _font) /* tune */;
 
   // Viewer and editor.

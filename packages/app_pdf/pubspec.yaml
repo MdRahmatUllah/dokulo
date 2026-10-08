@@ -89,6 +89,17 @@ flutter:
     - family: MaterialSymbolsRounded
       fonts:
         - asset: assets/fonts/MaterialSymbolsRounded.ttf
+    # The signature pad's Type styles (DK-0206), fetched by
+    # tools/fetch_signature_fonts.py, unmodified.
+    - family: Caveat
+      fonts:
+        - asset: assets/fonts/Caveat.ttf
+    - family: DancingScript
+      fonts:
+        - asset: assets/fonts/DancingScript.ttf
+    - family: HomemadeApple
+      fonts:
+        - asset: assets/fonts/HomemadeApple.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

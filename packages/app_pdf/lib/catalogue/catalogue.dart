@@ -8,9 +8,11 @@ import 'button_states.dart';
 import 'choice_row_states.dart';
 import 'color_pin_states.dart';
 import 'dropdown_states.dart';
+import 'file_card_states.dart';
 import 'folder_settings_states.dart';
 import 'icon_button_states.dart';
 import 'logo_states.dart';
+import 'model_card_states.dart';
 import 'next_page_chip_states.dart';
 import 'option_row_states.dart';
 import 'overlay_states.dart';
@@ -21,6 +23,7 @@ import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'range_search_states.dart';
+import 'result_level_states.dart';
 import 'scan_button_states.dart';
 import 'badge_pill_states.dart';
 import 'bar_states.dart';
@@ -34,6 +37,8 @@ import 'detection_states.dart';
 import 'progress_states.dart';
 import 'sign_states.dart';
 import 'chat_states.dart';
+import 'signature_pad_states.dart';
+import 'tool_options_states.dart';
 import 'ai_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -206,6 +211,19 @@ const catalogue = [
   CatalogueEntry('DkSplitMarker', '11.8 Editor and AI', SplitStates()),
   CatalogueEntry('DkChatBubble', '11.8 Editor and AI', ChatStates()),
   CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
+  CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
+  CatalogueEntry('DkFileCard', '11.2 Tiles and cards', DkFileCardGallery()),
+  CatalogueEntry(
+    'DkResultCard, DkLevelCards',
+    '11.2 Tiles and cards',
+    DkResultLevelGallery(),
+  ),
+  CatalogueEntry('DkSignaturePad', '11.8 Editor and AI', SignaturePadStates()),
+  CatalogueEntry(
+    'DkToolOptionsSheet',
+    '11.8 Editor and AI',
+    ToolOptionsStates(),
+  ),
   CatalogueEntry(
     'DkSuggestionChip · DkAIFooter',
     '11.8 Editor and AI',
