@@ -90,6 +90,7 @@ const catalogue = [
     DkChoiceRowsGallery(),
   ),
   CatalogueEntry('DkTopBar', '11.6 Bars', TopBarStates()),
+  CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
 ];
 
 /// The list of components; tap one to see its states.
