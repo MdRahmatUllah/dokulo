@@ -191,7 +191,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/tool/:toolId/result` | T3 Result | full screen | |
 | `/viewer/:fileId` | V1 Viewer | full screen | `?mode=edit` opens V2 Edit mode |
 | `/organize/:fileId` | P1 Organize pages | full screen | |
-| `/dev/catalogue` | Component catalogue | full screen | Debug builds only: every component, variant and state, Light or Dark |
+| `/dev/catalogue` | Component catalogue | full screen | Debug builds only: a list of components; each opens its variants and states in Light and Dark (`lib/catalogue/`) |
 
 - **Full-screen routes** sit on the root navigator, above the shell: the tab
   bar is hidden, and back returns to the tab they were pushed from. That covers
@@ -250,6 +250,15 @@ a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
 
+**The component catalogue (DK-0150).** Every `Dk` component shows each
+variant and state in Light and Dark at `/dev/catalogue` (debug builds only;
+`dokulo://open/dev/catalogue` on the emulator). A component task adds a
+states widget to `lib/catalogue/` and one `CatalogueEntry` to
+`lib/catalogue/catalogue.dart`, and its golden test renders that same widget,
+so the catalogue shows exactly what is tested. `test/flutter_test_config.dart`
+loads the icon font for every test, so goldens show the glyphs; text stays in
+the test font.
+
 Everything about a tool comes from **`ToolCatalogue.of(id)`**
 (`lib/tools/tool_catalogue.dart`, DK-0049): its icon (from `DkIcons.tools`),
 its fixed EN/DE name, its one-line description (UI spec §21), its tier and its
@@ -264,6 +273,17 @@ cross-fade (`crossFade: true`: fade instead of moving, scaling or sliding).
 Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
 context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
 `captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
+
+The signature motions (UI spec §9) are ready-made in
+`lib/components/motion/`; use them, don't rebuild them. Each has its Reduce
+Motion variant built in:
+
+| Motion | Use |
+|---|---|
+| Scan capture (DK-0040) | `DkCaptureFlash(captures:)` over the viewfinder, `flyCapturedPage(context, page:, from:, to:)`, then `DkPop(value: count)` on the badge |
+| Success tick (DK-0041) | `DkSuccessTick()` and `DkCountUp(from:, to:, format:)` on result cards |
+| Tile reorder (DK-0042) | `DkLift(lifted:)` on the picked tile, `DkSlot(rect:)` for every other tile in the `Stack` |
+| Page drop (DK-0043) | `DkInsertionLine(length:)` where the page will land; `DkSlot` settles it |
 
 Numbers the user compares as they change (sizes, page counts, times,
 percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures

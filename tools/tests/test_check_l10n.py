@@ -36,3 +36,10 @@ def test_problems(tmp_path: Path) -> None:
     ]
     assert [p.split(": ", 1)[1] for p in check_l10n.check_strings(root)] == [
         "hard-coded string 'Save'", 'hard-coded string "Delete"', 'hard-coded string "$n pages"']
+
+
+def test_catalogue_is_skipped(tmp_path: Path) -> None:
+    root = repo(tmp_path, {}, {}, "")
+    (root / check_l10n.LIB / "catalogue").mkdir()
+    (root / check_l10n.LIB / "catalogue" / "catalogue.dart").write_text("Text('DkPageThumb')", encoding="utf-8")
+    assert check_l10n.check_strings(root) == []

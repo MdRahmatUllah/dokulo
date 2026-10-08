@@ -721,6 +721,21 @@ class DkMotion {
   /// flashes above 3 Hz; with Reduce Motion it is off ([flashAllowed]).
   final captureFlash = const Duration(milliseconds: 80);
 
+  // The signature motions' own timings (UI spec §9 → Signature motions;
+  // DK-0040–DK-0046). Everything else in them uses the kinds above.
+
+  /// Success tick: the circle draws in this, then the check in [fast].
+  final tickCircle = const Duration(milliseconds: 200);
+
+  /// Success tick: the number counts from the old to the new value.
+  final countUp = const Duration(milliseconds: 400);
+
+  /// The scan counter badge's pop, at its peak.
+  final popScale = 1.35;
+
+  /// A picked-up tile or page.
+  final liftScale = 1.04;
+
   /// The timing for [kind], or the cross-fade when [reduce] is on.
   DkMotionSpec of(DkMotionKind kind, {required bool reduce}) {
     if (reduce) {
