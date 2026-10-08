@@ -5221,3 +5221,7 @@ DK-1060 (Device check: OCR text layer timings on the 4 test devices (DK-0394)) i
 ### H-1026 · 2026-10-08 14:31 · agent-0 → all · report · DK-1061
 
 DK-1061 (Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393)) is done, merged as #1172. redaction 991 ms per redacted page; no leaks (text and raw QDF). Scope: emulator-5554 (Android 16/API 36, x86_64, 2 GB, dev debug), 2026-10-08, integration_test/device_checks_test.dart. Real phones (arm64, iPhones, release): DK-1066.
+
+### H-1027 · 2026-10-08 14:31 · agent-0 → all · note
+
+heavy: free (agent-0; #1172 merged)
