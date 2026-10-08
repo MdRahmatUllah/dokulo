@@ -14,6 +14,7 @@ class DkAction {
     required this.onTap,
     this.destructive = false,
     this.tool = false,
+    this.checked = false,
     this.trailing,
   });
 
@@ -29,6 +30,9 @@ class DkAction {
   /// A tool ("Compress PDF"): its icon sits in a 32 tonal square, as in the
   /// Tools tab.
   final bool tool;
+
+  /// A chosen option (a menu's sort order): a check at the end.
+  final bool checked;
 
   /// A Pro badge or a chevron.
   final Widget? trailing;
@@ -132,23 +136,35 @@ class DkActionSheet extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: t.space.xs),
               child: Divider(height: 1, thickness: 1, color: t.divider.color),
             ),
-          for (final action in group) _ActionRow(action, close: closeOnTap),
+          for (final action in group) DkActionRow(action, close: closeOnTap),
         ],
       ],
     );
   }
 }
 
-class _ActionRow extends StatefulWidget {
-  const _ActionRow(this.action, {required this.close});
+/// A row of [DkActionSheet] and DkMenu: icon 20 + `bodyL`, at least
+/// [minHeight] tall (48 in a sheet, 44 in a menu). Tapping it closes the
+/// sheet or menu ([close]), then runs the action.
+class DkActionRow extends StatefulWidget {
+  const DkActionRow(
+    this.action, {
+    super.key,
+    this.close = true,
+    this.minHeight = 48,
+    this.padding = EdgeInsets.zero,
+  });
+
   final DkAction action;
   final bool close;
+  final double minHeight;
+  final EdgeInsetsGeometry padding;
 
   @override
-  State<_ActionRow> createState() => _ActionRowState();
+  State<DkActionRow> createState() => _DkActionRowState();
 }
 
-class _ActionRowState extends State<_ActionRow> {
+class _DkActionRowState extends State<DkActionRow> {
   bool _focused = false;
 
   @override
@@ -168,6 +184,7 @@ class _ActionRowState extends State<_ActionRow> {
     // InkWell gives the tap; screen readers also need to hear "button".
     return Semantics(
       button: true,
+      selected: a.checked,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: 0,
@@ -186,31 +203,40 @@ class _ActionRowState extends State<_ActionRow> {
           ),
           splashFactory: NoSplash.splashFactory,
           child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 48),
-            child: Row(
-              children: [
-                if (a.tool)
-                  Container(
-                    width: 32,
-                    height: 32,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: t.color.primaryContainer,
-                      borderRadius: BorderRadius.circular(t.radius.s),
+            constraints: BoxConstraints(minHeight: widget.minHeight),
+            child: Padding(
+              padding: widget.padding,
+              child: Row(
+                children: [
+                  if (a.tool)
+                    Container(
+                      width: 32,
+                      height: 32,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: t.color.primaryContainer,
+                        borderRadius: BorderRadius.circular(t.radius.s),
+                      ),
+                      child: icon,
+                    )
+                  else
+                    icon,
+                  SizedBox(width: t.space.m),
+                  Expanded(
+                    child: Text(
+                      a.label,
+                      style: t.text.bodyL.copyWith(color: ink),
                     ),
-                    child: icon,
-                  )
-                else
-                  icon,
-                SizedBox(width: t.space.m),
-                Expanded(
-                  child: Text(
-                    a.label,
-                    style: t.text.bodyL.copyWith(color: ink),
                   ),
-                ),
-                ?a.trailing,
-              ],
+                  ?a.trailing,
+                  if (a.checked)
+                    DkIcon(
+                      DkIcons.check,
+                      size: DkIconSize.m,
+                      color: t.color.primary,
+                    ),
+                ],
+              ),
             ),
           ),
         ),

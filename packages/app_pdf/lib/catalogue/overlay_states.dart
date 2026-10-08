@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../components/dk_action_sheet.dart';
 import '../components/dk_icon.dart';
+import '../components/dk_menu.dart';
 import '../components/dk_page_thumb.dart';
 import '../components/dk_sheet.dart';
 import '../theme/dk_tokens.dart';
@@ -182,6 +183,55 @@ class ActionSheetStates extends StatelessWidget {
             ),
             groups: groups,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+/// DkMenu (DK-0188): a sort menu with the chosen order checked, then file
+/// actions with Delete in danger; and an overflow button that opens it.
+class MenuStates extends StatelessWidget {
+  const MenuStates({super.key});
+
+  static void _none() {}
+
+  static const groups = [
+    [
+      DkAction(icon: DkIcons.sort, label: 'Name', onTap: _none, checked: true),
+      DkAction(icon: DkIcons.sort, label: 'Date', onTap: _none),
+    ],
+    [
+      DkAction(icon: DkIcons.rename, label: 'Rename', onTap: _none),
+      DkAction(
+        icon: DkIcons.delete,
+        label: 'Delete',
+        onTap: _none,
+        destructive: true,
+      ),
+    ],
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ColoredBox(
+      color: t.color.background,
+      child: Padding(
+        padding: EdgeInsets.all(t.space.l),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const DkMenu(groups: groups, closeOnTap: false),
+            const Spacer(),
+            Builder(
+              builder: (context) => IconButton(
+                tooltip: 'Open the menu',
+                onPressed: () => showDkMenu(context, groups: groups),
+                icon: DkIcon(DkIcons.overflow(context)),
+              ),
+            ),
+          ],
         ),
       ),
     );
