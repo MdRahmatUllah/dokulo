@@ -214,7 +214,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | assigned | agent-2 | DK-0190 |  |
 | DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
-| DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | assigned | agent-2 | DK-0192 |  |
+| DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | in-progress | agent-2 | DK-0192 |  |
 | DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 |  |
 | DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | assigned | agent-2 | DK-0194 |  |
 | DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |

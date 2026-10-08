@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0193 Golden + accessibility tests for DkBanner — claimed 2026-10-08 05:09.
 
 ## Next
 
