@@ -989,3 +989,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 13:50 · agent-0 DK-1045 · PR #1172 open; review requested from all
 - 2026-10-08 13:50 · agent-0 DK-1049 · claimed: Device check: PdfStructure on every target ABI, timings on the 4 test devices (DK-0396)
 - 2026-10-08 13:50 · agent-0 DK-1049 · PR #1172 open; review requested from all
+- 2026-10-08 13:50 · agent-0 DK-1059 · claimed: Device check: qpdf_ffi on every target ABI; encrypt, repair, compress timings on the 4 test devices (DK-0391)
