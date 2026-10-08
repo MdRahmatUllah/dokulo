@@ -24,20 +24,21 @@ enum DkPagePosition {
     bottomRight => l.position_bottom_right,
   };
 
-  /// Where its target sits on the 120 × 160 page.
-  Alignment get alignment => switch (this) {
-    topLeft => const Alignment(-1, -1),
-    topCentre => const Alignment(0, -1),
-    topRight => const Alignment(1, -1),
-    centre => Alignment.center,
-    bottomLeft => const Alignment(-1, 1),
-    bottomCentre => const Alignment(0, 1),
-    bottomRight => const Alignment(1, 1),
+  /// Its column (left, centre, right) and row (top, centre, bottom).
+  (int, int) get cell => switch (this) {
+    topLeft => (0, 0),
+    topCentre => (1, 0),
+    topRight => (2, 0),
+    centre => (1, 1),
+    bottomLeft => (0, 2),
+    bottomCentre => (1, 2),
+    bottomRight => (2, 2),
   };
 }
 
 /// A page diagram to choose a position (DK-0140; UI spec §11.4): 120 × 160 on
-/// `color.pageWhite` with its outline, six 28 dp targets (top and bottom ×
+/// `color.pageWhite` with its outline (in a 144 wide box: the 48 dp targets
+/// reach past its sides), six 28 dp circles (top and bottom ×
 /// left, centre, right), the selected one filled `color.primary`; [withCentre]
 /// adds the centre (watermark). Each target is announced ("Bottom centre").
 class DkPositionPicker extends StatelessWidget {
@@ -61,20 +62,34 @@ class DkPositionPicker extends StatelessWidget {
       for (final p in DkPagePosition.values)
         if (p != DkPagePosition.centre || withCentre) p,
     ];
-    return Container(
-      width: 120,
+    // Three columns of 48 dp targets don't fit on a 120 dp page: the
+    // targets reach 12 dp past its sides, so the picker is 144 wide. The
+    // circles stay where the page puts them: 4 dp in, 38 dp apart.
+    const target = 48.0, ring = 36.0, side = 12.0;
+    return SizedBox(
+      width: 120 + 2 * side,
       height: 160,
-      padding: EdgeInsets.all(t.space.xs),
-      decoration: BoxDecoration(
-        color: c.pageWhite,
-        borderRadius: BorderRadius.circular(t.radius.xs),
-        border: Border.all(color: c.outline),
-      ),
       child: Stack(
         children: [
+          Positioned(
+            left: side,
+            width: 120,
+            top: 0,
+            bottom: 0,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: c.pageWhite,
+                borderRadius: BorderRadius.circular(t.radius.xs),
+                border: Border.all(color: c.outline),
+              ),
+            ),
+          ),
           for (final p in targets)
-            Align(
-              alignment: p.alignment,
+            Positioned(
+              left: p.cell.$1 * target,
+              top: [0.0, 56.0, 112.0][p.cell.$2],
+              width: target,
+              height: target,
               child: Semantics(
                 button: true,
                 inMutuallyExclusiveGroup: true,
@@ -82,26 +97,55 @@ class DkPositionPicker extends StatelessWidget {
                 label: p.label(l),
                 excludeSemantics: true,
                 onTap: onChanged == null ? null : () => onChanged!(p),
-                child: DkTappable(
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
                   onTap: onChanged == null ? null : () => onChanged!(p),
-                  radius: 18,
-                  builder: (context, pressed) => SizedBox.square(
-                    // 36 to touch: six fit on the small page.
-                    dimension: 36,
-                    child: Center(
-                      child: Container(
-                        width: 28,
-                        height: 28,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: p == selected ? c.primary : c.pageWhite,
-                          border: Border.all(
-                            color: p == selected ? c.primary : c.outlineStrong,
-                            width: 2,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Positioned(
+                        // The circle's centre on the page, in this cell.
+                        left:
+                            side +
+                            t.space.xs +
+                            p.cell.$1 * 38 -
+                            p.cell.$1 * target,
+                        top: [
+                          t.space.xs,
+                          80 - ring / 2 - 56,
+                          160 - t.space.xs - ring - 112,
+                        ][p.cell.$2],
+                        width: ring,
+                        height: ring,
+                        child: DkTappable(
+                          onTap: onChanged == null ? null : () => onChanged!(p),
+                          radius: ring / 2,
+                          builder: (context, pressed) => Center(
+                            child: Container(
+                              width: 28,
+                              height: 28,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: p == selected
+                                    ? c.primary
+                                    : pressed
+                                    ? Color.alphaBlend(
+                                        t.state.pressed,
+                                        c.pageWhite,
+                                      )
+                                    : c.pageWhite,
+                                border: Border.all(
+                                  color: p == selected
+                                      ? c.primary
+                                      : c.outlineStrong,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ),

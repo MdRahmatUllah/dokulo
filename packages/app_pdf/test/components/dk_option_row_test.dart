@@ -111,8 +111,9 @@ void main() {
   });
 
   group('DkPositionPicker (DK-0140)', () {
-    testWidgets('120 × 160, six 28 dp targets, each announced; centre on '
-        'request', (tester) async {
+    testWidgets('a 120 × 160 page, six 28 dp circles in 48 dp targets, each '
+        'announced; centre on request', (tester) async {
+      final handle = tester.ensureSemantics();
       DkPagePosition? picked;
       await tester.pumpWidget(
         app(
@@ -126,10 +127,13 @@ void main() {
           locale: const Locale('de'),
         ),
       );
+      // The targets reach 12 dp past the page's sides.
       expect(
         tester.getSize(find.byType(DkPositionPicker)),
-        const Size(120, 160),
+        const Size(144, 160),
       );
+      await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
       for (final label in [
         'Oben links',
         'Oben Mitte',
@@ -156,6 +160,7 @@ void main() {
         (dot.decoration! as BoxDecoration).color,
         DkTokens.light.color.primary,
       );
+      handle.dispose();
     });
   });
 }
