@@ -4,6 +4,7 @@ import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
 import '../tools/tool_catalogue.dart';
 import 'dk_icon.dart';
+import 'dk_tappable.dart';
 
 /// "What next" on a result screen (DK-0106; UI spec §11.3): a 36 dp chip on
 /// `color.surface` with a 1 dp `color.outline`, the tool's icon (18), its
@@ -25,19 +26,21 @@ class DkNextChip extends StatelessWidget {
       label: name,
       excludeSemantics: true,
       onTap: onTap,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 48),
-          child: Center(
-            widthFactor: 1,
-            heightFactor: 1,
-            child: Container(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 48),
+        child: Center(
+          widthFactor: 1,
+          heightFactor: 1,
+          child: DkTappable(
+            onTap: onTap,
+            radius: t.radius.pill,
+            builder: (context, pressed) => Container(
               constraints: const BoxConstraints(minHeight: 36),
               padding: EdgeInsets.symmetric(horizontal: t.space.m),
               decoration: BoxDecoration(
-                color: c.surface,
+                color: pressed
+                    ? Color.alphaBlend(t.state.pressed, c.surface)
+                    : c.surface,
                 borderRadius: BorderRadius.circular(t.radius.pill),
                 border: Border.all(color: c.outline),
               ),

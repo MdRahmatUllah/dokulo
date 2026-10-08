@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
+import 'dk_tappable.dart';
 
 /// A page reference in an AI answer (DK-0108; UI spec §11.3): "p. 3" /
 /// "S. 3" in `type.labelM` on a 22 dp `color.primaryContainer` pill; 44 dp
@@ -22,19 +23,24 @@ class DkPageChip extends StatelessWidget {
       label: l.viewer_page_chip_go(page),
       excludeSemantics: true,
       onTap: onTap,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 44, minWidth: 44),
-          child: Center(
-            widthFactor: 1,
-            heightFactor: 1,
-            child: Container(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 44, minWidth: 44),
+        child: Center(
+          widthFactor: 1,
+          heightFactor: 1,
+          child: DkTappable(
+            onTap: onTap,
+            radius: t.radius.pill,
+            builder: (context, pressed) => Container(
               constraints: const BoxConstraints(minHeight: 22),
               padding: EdgeInsets.symmetric(horizontal: t.space.s),
               decoration: BoxDecoration(
-                color: t.color.primaryContainer,
+                color: pressed
+                    ? Color.alphaBlend(
+                        t.state.pressed,
+                        t.color.primaryContainer,
+                      )
+                    : t.color.primaryContainer,
                 borderRadius: BorderRadius.circular(t.radius.pill),
               ),
               // Centred in the minimum height, without filling the parent.

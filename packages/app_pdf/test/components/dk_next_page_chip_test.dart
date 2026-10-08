@@ -1,11 +1,14 @@
 import 'package:app_pdf/catalogue/next_page_chip_states.dart';
 import 'package:app_pdf/components/dk_next_chip.dart';
 import 'package:app_pdf/components/dk_page_chip.dart';
+import 'package:app_pdf/components/dk_ring.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
+import 'package:app_pdf/theme/dk_layout.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/theme/haptics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -123,5 +126,39 @@ void main() {
         handle.dispose();
       },
     );
+  });
+
+  testWidgets('the keyboard reaches both chips: the ring and Enter', (
+    tester,
+  ) async {
+    var next = 0, page = 0;
+    await tester.pumpWidget(
+      app(
+        Column(
+          children: [
+            DkNextChip(toolId: 'compress', onTap: () => next++),
+            DkPageChip(page: 3, onTap: () => page++),
+          ],
+        ),
+      ),
+    );
+    FocusManager.instance.highlightStrategy =
+        FocusHighlightStrategy.alwaysTraditional;
+    addTearDown(
+      () => FocusManager.instance.highlightStrategy =
+          FocusHighlightStrategy.automatic,
+    );
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.pump();
+    expect(
+      find.byWidgetPredicate(
+        (w) => w is DkRing && w.side == DkTokens.light.focusRing,
+      ),
+      findsOneWidget,
+    );
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    expect((next, page), (1, 1));
   });
 }
