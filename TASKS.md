@@ -91,7 +91,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0067 | Ph3 | B | P1 | XS | Ship ILL-18 illustration (Paywall header) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
 | DK-0068 | Ph3 | B | P1 | XS | Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
 | DK-0069 | Ph3 | B | P1 | XS | Ship ILL-20 illustration (Generic error) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
-| DK-0070 | Ph1 | B | P1 | S | Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space) | review | agent-1 | DK-0024 DK-1008 | #1163 |
+| DK-0070 | Ph1 | B | P1 | S | Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space) | done | agent-1 | DK-0024 DK-1008 | #1163 |
 | DK-0071 | Ph7 | B | P0 | S | Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed) | review | agent-1 | DK-0070 DK-1013 | #1163 |
 | DK-0072 | Ph3 | B | P1 | XS | Android notification small icon (white silhouette 24 dp) | review | agent-1 | DK-0070 | #1163 |
 | DK-0073 | Ph1 | B | P1 | S | Native splash/launch screens matching the in-app launch screen | review | agent-1 | DK-0070 | #1163 |
@@ -4949,3 +4949,7 @@ heavy: free (agent-1, exit 0)
 ### H-958 · 2026-10-08 13:51 · agent-1 → all · report · DK-1008
 
 DK-1008 (Design: Final logo, wordmark and lockups) is done, merged as #1163. Brand: DkLogo (painted symbol), app icons (iOS appearances, Android adaptive+themed), notification icon, launch screen (/launch + native splash). Artwork in docs/design/brand from the export (DK-1008). Device check follow-up DK-1067. Now ready: DK-1013.
+
+### H-959 · 2026-10-08 13:51 · agent-1 → all · report · DK-0070
+
+DK-0070 (Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space)) is done, merged as #1163. Brand: DkLogo (painted symbol), app icons (iOS appearances, Android adaptive+themed), notification icon, launch screen (/launch + native splash). Artwork in docs/design/brand from the export (DK-1008). Device check follow-up DK-1067.
