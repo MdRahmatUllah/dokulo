@@ -1,4 +1,8 @@
 import 'package:app_pdf/components/dk_scan_button.dart';
+import 'package:app_pdf/providers/database_providers.dart';
+import 'package:doc_core/doc_core.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -45,7 +49,6 @@ void main() {
     Routes.scanReview: ('S2', false),
     '/tool/compress': ('T2 compress', false),
     '/tool/compress/result': ('T3 compress', false),
-    '/viewer/f42': ('V1 f42', false),
     '/viewer/f42?mode=edit': ('V2 f42', false),
     '/organize/f42': ('P1 f42', false),
   };
@@ -57,6 +60,32 @@ void main() {
       expect(tabBarShown(tester), tabs);
     });
   }
+
+  testWidgets('cold start at /viewer/42 shows the V1 viewer, no tab bar', (
+    tester,
+  ) async {
+    // V1 reads the file index: the app's ProviderScope, an empty database.
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final router = buildRouter(initialLocation: Routes.viewer('42'));
+    addTearDown(router.dispose);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: MaterialApp.router(
+          routerConfig: router,
+          theme: dokuloTheme(DkTokens.light),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+        ),
+      ),
+    );
+    await tester.pump(
+      const Duration(milliseconds: 500),
+    ); // a spinner never settles
+    expect(tester.widget<ViewerScreen>(find.byType(ViewerScreen)).fileId, 42);
+    expect(tabBarShown(tester), false);
+  });
 
   test('the path builders match the route table', () {
     expect(Routes.settings('appearance'), '/me/settings/appearance');

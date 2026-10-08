@@ -178,7 +178,8 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 
 | Route | Screen | Where | Notes |
 | --- | --- | --- | --- |
-| `/home` | H1 Home | tab 1 | The start route |
+| `/launch` | Launch | full screen | The app's first frame: the native splash again (symbol 72 on `color.background`, DK-0073), then Home |
+| `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
 | `/files/locked` | F2 Locked folder | tab 3, pushed | Behind biometrics (its task adds the guard) |
@@ -288,6 +289,15 @@ Motion variant built in:
 | Sheet (DK-0044) | `DkSheetRoute.of(context, builder:)` (DkSheet's `showDkSheet` pushes it); detents with `animateDkSheetTo(context, controller, size)` |
 | Mini job bar (DK-0045) | `DkJobMorph(collapsed:, sheet:, bar:)` |
 | Viewer open (DK-0046) | `DkHero(tag: 'file-$id')` on the thumbnail and the viewer's first page; the viewer route uses `dkViewerPage` |
+
+**Drag and drop (UI spec §12.2; `lib/patterns/dk_drag.dart`).** A 300 ms
+press lifts (`dkLiftDelay`, not the platform's 500 ms) and a list or grid
+scrolls while the finger is within 48 dp of its edge (`DkEdgeScroller`).
+Files onto folders: `DkDraggable` and `DkDropTarget` (the haptics are
+built in; a move offers Undo). A `ReorderableListView` takes
+`buildDefaultDragHandles: false`, `DkReorderStartListener` around each
+item and `proxyDecorator: dkReorderProxy`. DkPageGrid and DkPageTray use
+them already.
 
 Numbers the user compares as they change (sizes, page counts, times,
 percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
