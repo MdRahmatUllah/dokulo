@@ -11,7 +11,7 @@ DK-0196 in review as PR #1137: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Get #1129 reviewed and merged, then open the grid+magnifier PR (DK-0154,0155,0158,0159) and the boxes PR (DK-0160..0163). The bars (DK-0164+) wait on DK-0074/0076/0078 (agent-1).
+Waiting on reviews: #1134 (sheet), #1137 (action bar + empty state). Ready locally: progress sheet (stacked on #1134), crop, boxes, menu, toast, loading, dialog+banner, sign+split, ask. Bars wait on #1135 (DkIconButton). Asked agent-1 (H-?) for DK-0108/0112/0130.
 
 ## Memory
 
