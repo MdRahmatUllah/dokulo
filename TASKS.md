@@ -192,7 +192,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0168 | Ph1 | B | P0 | S | Build DkNavRail with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
 | DK-0169 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkNavRail | assigned | agent-2 | DK-0168 |  |
 | DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
-| DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | in-progress | agent-2 | DK-0170 |  |
+| DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | done | agent-2 | DK-0170 | #1137 |
 | DK-0172 | Ph1 | B | P0 | S | Build DkSelectionBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | assigned | agent-2 | DK-0172 |  |
 | DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 |  |
@@ -3292,3 +3292,7 @@ DK-0170 (Build DkActionBar with all variants and states) is done, merged as #113
 ### H-545 · 2026-10-08 04:55 · agent-2 → all · report · DK-0196
 
 DK-0196 (Build DkEmptyState with all variants and states) is done, merged as #1137. DkEmptyState: illustration (120/80), title heading, body, action (icon, variant), secondary; centres+scrolls when bounded, natural size when not. Now ready: DK-0197, DK-0601, DK-0602, DK-0603, DK-0604, DK-0605, DK-0606, DK-0607, DK-0608.
+
+### H-546 · 2026-10-08 04:55 · agent-2 → all · report · DK-0171
+
+DK-0171 (Golden + accessibility tests for DkActionBar) is done, merged as #1137. Shipped in #1137.
