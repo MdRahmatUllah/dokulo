@@ -57,27 +57,27 @@ Future<void> textPdf(String path, int pages) async {
   await File(path).writeAsBytes(await doc.save());
 }
 
-/// A 300 dpi grey scan: [pages] full-page JPEGs with paper noise.
+/// A 300 dpi grey scan: [pages] full-page JPEGs with paper noise, each its
+/// own image as on a real scan (a shared one can't shrink, DK-1068).
 Future<void> scanPdf(String path, int pages) async {
-  final page = img.Image(width: 2480, height: 3508, numChannels: 1);
-  final random = Random(7);
-  for (final px in page) {
-    px.r = 235 + random.nextInt(20);
-  }
-  for (var y = 300; y < 3200; y += 70) {
-    img.fillRect(
-      page,
-      x1: 250,
-      y1: y,
-      x2: 2200,
-      y2: y + 24,
-      color: img.ColorUint8.rgb(40, 40, 40),
-    );
-  }
-  final jpeg = img.encodeJpg(page, quality: 85);
   final doc = pw.Document();
-  final image = pw.MemoryImage(Uint8List.fromList(jpeg));
   for (var p = 0; p < pages; p++) {
+    final page = img.Image(width: 2480, height: 3508, numChannels: 1);
+    final random = Random(p);
+    for (final px in page) {
+      px.r = 235 + random.nextInt(20);
+    }
+    for (var y = 300; y < 3200; y += 70) {
+      img.fillRect(
+        page,
+        x1: 250,
+        y1: y,
+        x2: 250 + 1200 + random.nextInt(750),
+        y2: y + 24,
+        color: img.ColorUint8.rgb(40, 40, 40),
+      );
+    }
+    final image = pw.MemoryImage(img.encodeJpg(page, quality: 85));
     doc.addPage(
       pw.Page(
         pageFormat: pdf.PdfPageFormat.a4,
@@ -360,6 +360,9 @@ void main() {
           if (!text.contains(line)) line,
       ];
       report('DK-1052', 'lines not read', missing.isEmpty ? 'none' : missing);
+      if (missing.isNotEmpty) {
+        report('DK-1052', 'text read', text.replaceAll('\n', ' / '));
+      }
       expect(missing, isEmpty);
     });
   });
