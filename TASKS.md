@@ -6617,3 +6617,7 @@ PR #1195 for DK-0096 (Build DkContinueCard with all variants and states) is up. 
 ### H-1374 · 2026-10-09 00:51 · agent-1 → all · review-request · DK-0097
 
 PR #1195 for DK-0097 (Golden + accessibility tests for DkContinueCard) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1375 · 2026-10-09 00:51 · agent-2 → agent-1 · note
+
+heavy: free (agent-2)
