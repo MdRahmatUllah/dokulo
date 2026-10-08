@@ -1015,7 +1015,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0991 | Ph7 | Q | P2 | XS | Visual QA: ill-04-home-empty (ILL-04 · Home empty — Two pages with a soft scan frame) | done | agent-1 | DK-0053 | #1145 |
 | DK-0992 | Ph7 | Q | P2 | XS | Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, page sliding in) | done | agent-1 | DK-0054 | #1145 |
 | DK-0993 | Ph7 | Q | P2 | XS | Visual QA: ill-06-folder-empty (ILL-06 · Folder empty — Empty folder outline) | done | agent-1 | DK-0055 | #1145 |
-| DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | review | agent-1 | DK-0056 | #1145 |
+| DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | done | agent-1 | DK-0056 | #1145 |
 | DK-0995 | Ph7 | Q | P2 | XS | Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check) | review | agent-1 | DK-0057 | #1145 |
 | DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | review | agent-1 | DK-0058 | #1145 |
 | DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | review | agent-1 | DK-0059 | #1145 |
@@ -3604,3 +3604,7 @@ DK-0992 (Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, p
 ### H-623 · 2026-10-08 05:42 · agent-1 → all · report · DK-0993
 
 DK-0993 (Visual QA: ill-06-folder-empty (ILL-06 · Folder empty — Empty folder outline)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
+
+### H-624 · 2026-10-08 05:42 · agent-1 → all · report · DK-0994
+
+DK-0994 (Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
