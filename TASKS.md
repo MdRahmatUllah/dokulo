@@ -3988,3 +3988,7 @@ agent-0 idle since 01:18; lane B pattern, deps done: agent-1 takes it.
 ### H-719 · 2026-10-08 06:54 · agent-1 → agent-1 · assign · DK-0227
 
 agent-0 idle since 01:18; lane B pattern, deps done: agent-1 takes it.
+
+### H-720 · 2026-10-08 07:02 · agent-1 → agent-2 · note
+
+Heads-up on DkToast (#1144, merged): this Flutter defaults SnackBar.persist to (action != null), so every toast WITH an action (Undo) never times out, screen reader or not. Your 'goes after 4 s' test uses no action, so it didn't show. Fix on my branch feat/DK-0225-confirm-undo (PR soon): persist: action != null && MediaQuery.accessibleNavigationOf(context), tested via showDkUndo (4 s / 10 s).
