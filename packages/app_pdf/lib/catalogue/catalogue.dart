@@ -6,30 +6,31 @@ import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
 import 'choice_row_states.dart';
+import 'color_pin_states.dart';
+import 'dropdown_states.dart';
+import 'folder_settings_states.dart';
 import 'icon_button_states.dart';
+import 'logo_states.dart';
 import 'next_page_chip_states.dart';
+import 'option_row_states.dart';
 import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
+import 'page_pill_states.dart';
 import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
+import 'range_search_states.dart';
 import 'scan_button_states.dart';
+import 'badge_pill_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
-import 'switch_segmented_states.dart';
-import 'tool_tile_states.dart';
-import 'detection_states.dart';
-import 'color_pin_states.dart';
-import 'dropdown_states.dart';
-import 'logo_states.dart';
-import 'option_row_states.dart';
-import 'page_pill_states.dart';
-import 'range_search_states.dart';
-import 'badge_pill_states.dart';
 import 'slider_stepper_states.dart';
+import 'switch_segmented_states.dart';
 import 'text_field_states.dart';
+import 'tool_tile_states.dart';
 import 'crop_states.dart';
+import 'detection_states.dart';
 import 'progress_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -51,6 +52,7 @@ class CatalogueEntry {
 }
 
 const catalogue = [
+  CatalogueEntry('DkLogo', '3 Brand', LogoStates()),
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
@@ -77,6 +79,11 @@ const catalogue = [
     'DkNextChip, DkPageChip',
     '11.3 Badges, chips, indicators',
     DkNextPageChipGallery(),
+  ),
+  CatalogueEntry(
+    'DkCountBadge, DkHintPill',
+    '11.3 Badges, chips, indicators',
+    DkBadgePillGallery(),
   ),
   CatalogueEntry('DkActionBar', '11.6 Bars', ActionBarStates()),
   CatalogueEntry(
@@ -121,17 +128,6 @@ const catalogue = [
     'DkSwitch, DkSegmented',
     '11.4 Inputs and controls',
     DkSwitchSegmentedGallery(),
-  ),
-  CatalogueEntry(
-    'DkDetectionGroup',
-    '11.8 Editor and AI',
-    DetectionGroupStates(),
-  ),
-  CatalogueEntry('DkLogo', '3 Brand', LogoStates()),
-  CatalogueEntry(
-    'DkCountBadge, DkHintPill',
-    '11.3 Badges, chips, indicators',
-    DkBadgePillGallery(),
   ),
   CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
   CatalogueEntry(
@@ -179,6 +175,16 @@ const catalogue = [
   ),
   CatalogueEntry('DkDropdown', '11.4 Inputs and controls', DkDropdownGallery()),
   CatalogueEntry('DkCropOverlay', '11.5 Pages and thumbnails', CropStates()),
+  CatalogueEntry(
+    'DkFolderCard, DkSettingsRow',
+    '11.2 Tiles and cards',
+    DkFolderSettingsGallery(),
+  ),
+  CatalogueEntry(
+    'DkDetectionGroup',
+    '11.8 Editor and AI',
+    DetectionGroupStates(),
+  ),
   CatalogueEntry(
     'DkProgressSheet',
     '11.7 Sheets, dialogs, menus, toasts',
