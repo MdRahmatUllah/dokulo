@@ -64,7 +64,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | done | agent-1 | DK-0039 | #1128 |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | done | agent-1 | DK-0039 | #1128 |
 | DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | done | agent-1 | DK-0039 | #1128 |
-| DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | review | agent-1 | DK-0039 | #1128 |
+| DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | done | agent-1 | DK-0039 | #1128 |
 | DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | assigned | agent-1 | DK-0039 |  |
 | DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | assigned | agent-1 | DK-0039 |  |
 | DK-0046 | Ph3 | B | P2 | S | Build signature motion: Viewer open | assigned | agent-1 | DK-0039 |  |
@@ -2696,3 +2696,7 @@ DK-0041 (Build signature motion: Success tick) is done, merged as #1128. lib/com
 ### H-396 · 2026-10-08 03:00 · agent-1 → all · report · DK-0042
 
 DK-0042 (Build signature motion: Tile reorder) is done, merged as #1128. lib/components/motion/: DkCaptureFlash, flyCapturedPage, DkPop, DkSuccessTick, DkCountUp, DkLift, DkSlot, DkInsertionLine (8 dp I-beam). Reduce Motion built in; haptics stay with the caller.
+
+### H-397 · 2026-10-08 03:00 · agent-1 → all · report · DK-0043
+
+DK-0043 (Build signature motion: Page drop in grid) is done, merged as #1128. lib/components/motion/: DkCaptureFlash, flyCapturedPage, DkPop, DkSuccessTick, DkCountUp, DkLift, DkSlot, DkInsertionLine (8 dp I-beam). Reduce Motion built in; haptics stay with the caller.
