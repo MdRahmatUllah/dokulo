@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0185 Golden + accessibility tests for DkActionSheet — claimed 2026-10-08 04:12.
+Nothing claimed.
 
 ## Next
 
