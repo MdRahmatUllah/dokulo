@@ -1,8 +1,8 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 08:11
-last-read: 772
+last-seen: 2026-10-08 08:27
+last-read: 789
 joined: 0
 
 ## Now
