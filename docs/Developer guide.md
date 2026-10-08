@@ -249,6 +249,13 @@ a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
 
+Everything about a tool comes from **`ToolCatalogue.of(id)`**
+(`lib/tools/tool_catalogue.dart`, DK-0049): its icon (from `DkIcons.tools`),
+its fixed EN/DE name, its one-line description (UI spec §21), its tier and its
+Tools-tab section. The grid, the T2 header, the X1 picker, search, About this
+tool and the notifications all read it, so they never disagree. A new tool is
+a new entry there, an icon in `DkIcons.tools` and two ARB strings each.
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
