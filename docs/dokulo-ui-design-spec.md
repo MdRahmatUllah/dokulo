@@ -225,7 +225,7 @@ System fonts: **SF Pro** (iOS) and **Roboto** (Android). No custom text font in 
 | `type.labelL` | 15 / 20 | Semibold 600 | 0 | Buttons |
 | `type.labelM` | 13 / 18 | Semibold 600 | 0.1 | Chips, tab labels, badges, segmented controls |
 | `type.caption` | 12 / 16 | Regular 400 | 0.1 | Meta lines, legal, privacy line, page numbers under thumbnails |
-| `type.mono` | 13 / 18 | Regular 400 (SF Mono / Roboto Mono) | 0 | Page range inputs, error codes |
+| `type.mono` | 13 / 18 | Regular 400 (system mono: Menlo on iOS, the platform `monospace` on Android) | 0 | Page range inputs, error codes |
 | `type.numberXL` | 32 / 38 | Bold 700, tabular | −0.3 | Result headline numbers ("1.9 MB") |
 
 **Rules**
