@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The icon's foreground: the symbol, 54 of the 108 dp, inside the 66 dp
+     safe zone so every mask (circle, squircle) keeps it whole. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.84375"
+        android:scaleY="0.84375"
+        android:translateX="27"
+        android:translateY="27">
+        <path
+            android:strokeColor="#FFFFFFFF"
+            android:strokeWidth="4"
+            android:strokeLineJoin="round"
+            android:pathData="M18,8h20l12,12v32a4,4 0,0 1,-4 4H18a4,4 0,0 1,-4 -4V12a4,4 0,0 1,4 -4z" />
+        <path
+            android:strokeColor="#FFFFFFFF"
+            android:strokeWidth="4"
+            android:strokeLineJoin="round"
+            android:pathData="M38,8v8a4,4 0,0 0,4 4h8" />
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M23,45l9,-8 9,8v5H23z" />
+    </group>
+</vector>

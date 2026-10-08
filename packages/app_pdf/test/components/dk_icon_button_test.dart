@@ -37,7 +37,7 @@ void main() {
     for (final scale in [1.0, 2.0]) {
       final name = '${theme}_${(scale * 100).round()}';
       testWidgets('golden: $name', (tester) async {
-        tester.view.physicalSize = const Size(300, 200);
+        tester.view.physicalSize = const Size(300, 260);
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(

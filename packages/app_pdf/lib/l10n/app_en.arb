@@ -843,6 +843,70 @@
   "@common_increase": {
     "description": "DkStepper + button (screen readers)."
   },
+  "camera_close": "Close scanner",
+  "@camera_close": {
+    "description": "DkCameraTopBar: the × (UI spec §19.2)."
+  },
+  "camera_flash": "Flash",
+  "@camera_flash": {
+    "description": "DkCameraTopBar: the flash button's screen-reader name, before its state."
+  },
+  "camera_flash_off": "Off",
+  "@camera_flash_off": {
+    "description": "The flash button's tiny label (UI spec §19.2)."
+  },
+  "camera_flash_on": "On",
+  "@camera_flash_on": {
+    "description": "The flash button's tiny label."
+  },
+  "camera_flash_auto": "Auto",
+  "@camera_flash_auto": {
+    "description": "The flash button's tiny label."
+  },
+  "camera_auto": "Auto",
+  "@camera_auto": {
+    "description": "The auto-capture pill (UI spec §19.2)."
+  },
+  "camera_auto_capture": "Auto-capture",
+  "@camera_auto_capture": {
+    "description": "The auto-capture pill's screen-reader name."
+  },
+  "camera_grid": "Grid",
+  "@camera_grid": {
+    "description": "DkCameraTopBar: the grid toggle."
+  },
+  "camera_settings": "Scanner settings",
+  "@camera_settings": {
+    "description": "DkCameraTopBar: tune, opens the scanning settings."
+  },
+  "markup_copy": "Copy",
+  "@markup_copy": {
+    "description": "DkMarkupBar (UI spec §11.8)."
+  },
+  "markup_highlight": "Highlight",
+  "@markup_highlight": {
+    "description": "DkMarkupBar: highlight the selected text."
+  },
+  "markup_underline": "Underline",
+  "@markup_underline": {
+    "description": "DkMarkupBar: icon only; the screen-reader label."
+  },
+  "markup_strike": "Strike",
+  "@markup_strike": {
+    "description": "DkMarkupBar: icon only; the screen-reader label."
+  },
+  "markup_ask": "Ask AI",
+  "@markup_ask": {
+    "description": "DkMarkupBar: ask about the selection (UI spec §11.8; §32.4 flow 4)."
+  },
+  "common_redo": "Redo",
+  "@common_redo": {
+    "description": "DkToolStrip and editors: redo (UI spec §11.6)."
+  },
+  "viewer_file_missing": "This file isn't in Dokulo any more.",
+  "@viewer_file_missing": {
+    "description": "V1 when the file's row is gone (deleted, or a stale link). A spec gap filled in DK-0293."
+  },
   "pro_card_title": "Unlock every tool, for good",
   "@pro_card_title": {
     "description": "DkProCard title (UI spec §11.2, §23)."
