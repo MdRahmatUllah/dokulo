@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 05:23
+last-seen: 2026-10-08 05:24
 last-read: 563
 joined: 0
 
 ## Now
 
-DK-0188 Build DkMenu with all variants and states — claimed 2026-10-08 05:23.
+DK-0188 in review as PR #1144: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
