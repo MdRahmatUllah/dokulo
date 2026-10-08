@@ -154,6 +154,10 @@ abstract final class DkIcons {
   static const scanBook = IconData(0xea19, fontFamily: _font) /* menu_book */;
   static const scanBatch = IconData(0xe43c, fontFamily: _font) /* burst_mode */;
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
+  static const chevronRight = IconData(
+    0xe5cc,
+    fontFamily: _font,
+  ) /* chevron_right */;
   static const expandMore = IconData(
     0xe5cf,
     fontFamily: _font,
