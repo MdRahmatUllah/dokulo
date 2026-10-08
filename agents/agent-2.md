@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0984 Visual QA: components-part-2 (components-part-2) — claimed 2026-10-09 00:20.
+Nothing claimed.
 
 ## Next
 
