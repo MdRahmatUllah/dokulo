@@ -297,4 +297,30 @@ void main() {
     );
     expect(tester.getSize(find.byType(DkButton)).height, greaterThan(52));
   });
+
+  testWidgets('its own semantics node inside a parent with text', (
+    tester,
+  ) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(
+      app(
+        Semantics(
+          container: true,
+          child: Column(
+            children: [
+              const Text('Purchase didn’t complete.'),
+              DkButton(label: 'Try again', onPressed: () {}),
+            ],
+          ),
+        ),
+      ),
+    );
+    expect(find.bySemanticsLabel('Try again'), findsOneWidget);
+    expect(
+      tester.getSemantics(find.byType(DkButton)).label,
+      'Try again',
+      reason: 'not merged with the text',
+    );
+    handle.dispose();
+  });
 }

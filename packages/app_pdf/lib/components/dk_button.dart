@@ -237,7 +237,10 @@ class _DkButtonState extends State<DkButton> {
       );
     }
 
+    // Its own node, always: inside a parent with text (a banner) it must not
+    // merge into one "text + action" button.
     return Semantics(
+      container: true,
       button: true,
       enabled: _enabled,
       label: widget.label,
