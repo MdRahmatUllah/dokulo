@@ -45,6 +45,7 @@ dependencies:
   go_router: 18.0.1
   flutter_svg: 2.3.0
   path_provider: 2.1.6
+  pdfrx: 2.6.5 # the viewer (DK-0293); PDFium through pdfrx's worker
   doc_core:
     path: ../doc_core
 dev_dependencies:
@@ -54,6 +55,9 @@ dev_dependencies:
     sdk: flutter
   qpdf_ffi: # integration_test/qpdf_test.dart only; lib/ never imports it
     path: ../qpdf_ffi
+  # integration_test/device_checks_test.dart makes its documents on the device
+  pdf: 3.13.1
+  image: 4.10.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
