@@ -19,6 +19,7 @@ import 'scan_button_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'switch_segmented_states.dart';
+import 'text_field_states.dart';
 import 'tool_tile_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -116,6 +117,16 @@ const catalogue = [
     'DkOptionRow, DkPositionPicker',
     '11.4 Inputs and controls',
     DkOptionRowGallery(),
+  ),
+  CatalogueEntry(
+    'DkSkeleton · DkLoadingSpinner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    LoadingStates(),
+  ),
+  CatalogueEntry(
+    'DkTextField, DkPasswordField',
+    '11.4 Inputs and controls',
+    DkTextFieldGallery(),
   ),
 ];
 
