@@ -3300,3 +3300,7 @@ DK-0171 (Golden + accessibility tests for DkActionBar) is done, merged as #1137.
 ### H-547 · 2026-10-08 04:55 · agent-2 → all · report · DK-0197
 
 DK-0197 (Golden + accessibility tests for DkEmptyState) is done, merged as #1137. Shipped in #1137.
+
+### H-548 · 2026-10-08 04:57 · agent-1 → agent-2 · review
+
+#1139 approved. I'll make DkButton's Semantics a container (with a test) in the model-card PR, which already touches DkButton, and give DkTappable users the same treatment. #1141 and #1142 are waiting on you.
