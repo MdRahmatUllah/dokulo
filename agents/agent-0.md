@@ -11,7 +11,7 @@ DK-0117 in review as PR #1167: answer the review; re-run the gate if main moved,
 
 ## Next
 
-DK-0391 qpdf_ffi (native, Android ABIs; iOS half needs a Mac), then DK-0392/0393/0394/0395. Issue upload: when the run ends, a second pass for DK-1042+ and close_done.py.
+Gate queue, each when more than 6 GB is free with 'heavy: mine': #1169 (DK-1069, the test cap; record the peak), then #1164 (DK-0293, approved), #1166 (DK-1068), #1167 (DK-0114..0117, approved). Then: the device-checks PR (stacked on DK-0293), with done messages for DK-1045/1049/1059/1060/1061/1063 (re-run 1063 after DK-1068). #1124 waits on agent-1's re-review (H-895). DK-1043/1047/1048 need APK builds.
 
 ## Memory
 
