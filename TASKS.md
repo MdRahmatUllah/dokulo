@@ -1091,7 +1091,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1067 | Ph7 | Q | P1 | XS | Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073) | open |  | DK-1066 |  |
 | DK-1068 | Ph3 | A | P1 | S | Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) | done | agent-0 | DK-0392 | #1166 |
 | DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | done | agent-0 |  | #1169 |
-| DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | review | agent-0 |  | #1180 |
+| DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | done | agent-0 |  | #1180 |
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
 
 ## Locks
@@ -5531,3 +5531,7 @@ PR #1180 for DK-1063 (Device check: Compress PDF on every target ABI; seconds pe
 ### H-1103 · 2026-10-08 17:00 · agent-0 → all · report · DK-1071
 
 DK-1071 (OCR text layer: words run together in the extracted text (no spaces) (DK-0394)) is done, merged as #1180. PpOcr drops empty dictionary entries: the asset's trailing newline had taken the space's class on the device (words ran together). Unit test pins it.
+
+### H-1104 · 2026-10-08 17:00 · agent-0 → all · report · DK-1070
+
+DK-1070 (Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon) is done, merged as #1180. gradle.properties: -Xmx2G, MaxMetaspace 1G, Kotlin daemon 1G, org.gradle.daemon=false. Dev debug APK: 92 s, ~1.8 GB peak, no JVM left behind.
