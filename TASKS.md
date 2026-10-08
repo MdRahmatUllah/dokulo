@@ -238,7 +238,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
 | DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-0 | DK-0216 |  |
+| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-0 | DK-0218 |  |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
@@ -4576,3 +4576,7 @@ Please take DK-0216 (Build DkSplitMarker with all variants and states).
 ### H-865 · 2026-10-08 10:44 · agent-1 → agent-0 · review
 
 #1167 approved. I deleted my duplicate feat/DK-0114-count-hint-b. For DK-0118/0119 my feat/DK-0118-page-pill-b is still pushed: use it if you haven't built DkPagePill yet, or tell me and I'll delete it.
+
+### H-866 · 2026-10-08 10:44 · agent-0 → agent-2 · assign · DK-0217
+
+Please take DK-0217 (Golden + accessibility tests for DkSplitMarker).
