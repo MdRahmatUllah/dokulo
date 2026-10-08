@@ -74,23 +74,31 @@ class _MenuRoute extends PopupRoute<void> {
     final roomBelow = screen.height - padding.bottom - anchor.bottom - gap;
     final roomAbove = anchor.top - padding.top - gap;
     final below = roomBelow >= math.min(roomAbove, 320);
-    return CustomSingleChildLayout(
-      delegate: _MenuPosition(anchor, right: right, below: below, gap: gap),
-      child: ScaleTransition(
-        scale: grow
-            ? Tween(
-                begin: 0.9,
-                end: 1.0,
-              ).animate(CurvedAnimation(parent: animation, curve: curve))
-            : const AlwaysStoppedAnimation(1),
-        alignment: Alignment(right ? 1 : -1, below ? -1 : 1),
-        child: FadeTransition(
-          opacity: animation,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: math.max(below ? roomBelow : roomAbove, 120),
+    // Screen readers say "Menu" when it opens and keep focus inside it, as
+    // with Flutter's popup menus.
+    return Semantics(
+      scopesRoute: true,
+      namesRoute: true,
+      explicitChildNodes: true,
+      label: MaterialLocalizations.of(context).popupMenuLabel,
+      child: CustomSingleChildLayout(
+        delegate: _MenuPosition(anchor, right: right, below: below, gap: gap),
+        child: ScaleTransition(
+          scale: grow
+              ? Tween(
+                  begin: 0.9,
+                  end: 1.0,
+                ).animate(CurvedAnimation(parent: animation, curve: curve))
+              : const AlwaysStoppedAnimation(1),
+          alignment: Alignment(right ? 1 : -1, below ? -1 : 1),
+          child: FadeTransition(
+            opacity: animation,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: math.max(below ? roomBelow : roomAbove, 120),
+              ),
+              child: DkMenu(groups: groups),
             ),
-            child: DkMenu(groups: groups),
           ),
         ),
       ),

@@ -184,7 +184,9 @@ class _DkActionRowState extends State<DkActionRow> {
     // InkWell gives the tap; screen readers also need to hear "button".
     return Semantics(
       button: true,
-      selected: a.checked,
+      // A chosen sort order reads as "checked", as Material's
+      // CheckedPopupMenuItem does; other rows have no checked state.
+      checked: a.checked ? true : null,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: 0,

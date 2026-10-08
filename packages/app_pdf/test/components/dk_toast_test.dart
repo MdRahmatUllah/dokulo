@@ -90,6 +90,7 @@ void main() {
   testWidgets('48 tall, inverse colours, the action in inversePrimary; above '
       'the mini job bar', (tester) async {
     phone(tester);
+    final handle = tester.ensureSemantics();
     await tester.pumpWidget(app(screen(action: 'Undo')));
     await tester.tap(find.text('show'));
     await tester.pumpAndSettle();
@@ -111,6 +112,8 @@ void main() {
     final style = DefaultTextStyle.of(tester.element(find.text('Undo'))).style
         .merge(action.style);
     expect(style.color, DkTokens.light.color.inversePrimary);
+    await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+    handle.dispose();
   });
 
   testWidgets('it goes after 4 s; toasts queue', (tester) async {

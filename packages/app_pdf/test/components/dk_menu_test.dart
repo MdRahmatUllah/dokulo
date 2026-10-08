@@ -74,7 +74,7 @@ void main() {
     }
   }
 
-  testWidgets('232 wide at least; 44 rows; the chosen option is selected', (
+  testWidgets('232 wide at least; 44 rows; the chosen option is checked', (
     tester,
   ) async {
     final handle = tester.ensureSemantics();
@@ -88,7 +88,12 @@ void main() {
     expect(tester.getSize(row).height, 44);
     expect(
       tester.getSemantics(find.text('Name')),
-      isSemantics(label: 'Name', isButton: true, isSelected: true),
+      isSemantics(
+        label: 'Name',
+        isButton: true,
+        hasCheckedState: true,
+        isChecked: true,
+      ),
     );
     handle.dispose();
   });
@@ -96,6 +101,7 @@ void main() {
   testWidgets('opens under a top-right button, right-aligned; a row closes '
       'it and runs', (tester) async {
     phone(tester);
+    final handle = tester.ensureSemantics();
     final done = <String>[];
     await tester.pumpWidget(app(anchorAt(Alignment.topRight, done)));
     await tester.tap(find.text('more'));
@@ -104,6 +110,20 @@ void main() {
     final menu = tester.getRect(find.byType(DkMenu));
     expect(menu.top, greaterThan(button.bottom));
     expect(menu.right, lessThanOrEqualTo(393 - 8));
+    // Screen readers say "Menu" and stay inside it.
+    expect(
+      find.semantics.byPredicate((n) {
+        final d = n.getSemanticsData();
+        return d.flagsCollection.scopesRoute &&
+            d.flagsCollection.namesRoute &&
+            d.label == 'Popup menu';
+      }),
+      findsOne,
+    );
+    // The spec makes menu rows 44 (§11.7): iOS's minimum, not Android's 48.
+    await expectLater(tester, meetsGuideline(iOSTapTargetGuideline));
+    await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+    handle.dispose();
     await tester.tap(find.text('Rename'));
     await tester.pumpAndSettle();
     expect(done, ['rename']);

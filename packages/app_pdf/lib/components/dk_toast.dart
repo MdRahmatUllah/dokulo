@@ -13,7 +13,7 @@ abstract final class DkToastDuration {
 
 /// Shows a toast (UI spec §11.7; DK-0190): [message] in `bodyM` on the
 /// inverse surface (dark on Light, light on Dark), at most 560 wide and
-/// 48 tall, with an optional [action] in `labelL` and `inversePrimary`.
+/// at least 48 tall (a long message wraps at large text), with an optional [action] in `labelL` and `inversePrimary`.
 ///
 /// It is a floating SnackBar (the look comes from `dokuloTheme`), so:
 /// - toasts queue: the next one waits for the current one;
