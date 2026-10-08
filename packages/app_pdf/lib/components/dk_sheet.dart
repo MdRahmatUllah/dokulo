@@ -63,41 +63,29 @@ Future<T?> showDkSheet<T>(
   );
 
   if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) != DkGrid.phone) {
-    return showGeneralDialog<T>(
-      context: context,
-      barrierColor: t.color.scrim,
-      barrierDismissible: true,
-      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      transitionDuration: motion.duration,
-      pageBuilder: (context, _, _) => guarded(
+    // The same fade and grow as DkConfirmDialog (DkDialogRoute keeps the
+    // 120 ms fade under Reduce Motion).
+    return Navigator.of(context).push<T>(
+      DkDialogRoute<T>.of(
         context,
-        SafeArea(
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.all(t.space.xl),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 560),
-                child: Material(
-                  type: MaterialType.transparency,
-                  child: sheet(context, inDialog: true),
+        builder: (context) => guarded(
+          context,
+          SafeArea(
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.all(t.space.xl),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 560),
+                  child: Material(
+                    type: MaterialType.transparency,
+                    child: sheet(context, inDialog: true),
+                  ),
                 ),
               ),
             ),
           ),
         ),
       ),
-      transitionBuilder: (context, animation, _, child) {
-        final curved = CurvedAnimation(parent: animation, curve: motion.curve);
-        return FadeTransition(
-          opacity: curved,
-          child: motion.crossFade
-              ? child
-              : ScaleTransition(
-                  scale: Tween(begin: 0.96, end: 1.0).animate(curved),
-                  child: child,
-                ),
-        );
-      },
     );
   }
 

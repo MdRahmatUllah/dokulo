@@ -143,6 +143,12 @@
   "scan_mode_batch": "Stapelverarbeitung",
   "scan_mode_import": "Fotos importieren",
   "shell_button_scan_hint": "Scanmodus wählen",
+  "viewer_page_chip": "S. {n}",
+  "viewer_page_chip_go": "Zu Seite {n}",
+  "status_new": "Neu",
+  "status_unsaved": "Nicht gespeichert",
+  "status_running": "Läuft",
+  "scanner_button_shutter": "Foto aufnehmen",
   "common_decrease": "Verringern",
   "common_increase": "Erhöhen"
 }
