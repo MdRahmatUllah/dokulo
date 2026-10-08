@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 08:30
+last-seen: 2026-10-08 08:32
 last-read: 799
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Open PRs: #1149 (skeleton/spinner, re-review asked), #1154 (selection/viewer/camera bars). Queued branches, each refreshed against main and the catalogue guard, PR in this order: feat/DK-0174-mini-job-bar; feat/DK-0172-bars-d (tool strip + markup bar: merge main after #1154 lands, then only DK-0176/0177/0202/0203 remain); feat/DK-0156-crop-b; feat/DK-0194-progress-b; feat/DK-0208-sign-b (signature card + split marker); feat/DK-0212-ask-b (stacked on sign-b); feat/DK-0160-boxes-b; feat/DK-0210-chat-diff; feat/DK-0220-detection-group (drop its expandLess/expandMore if #1152 lands first); feat/DK-0206-signature-pad (fonts fetch + disabled Done in DkTopBar.editing; swap TextField for DkTextField after #1153). Only DK-0204/0205 (tool options sheet) is unbuilt: waits on agent-1's DkSlider/DkStepper/DkColorRow (asked in H-698). Scripts in the scratchpad: merge_catalogue.py, merge_arb.py, refresh.sh, ios44.py.
+Heavy runs on hold (a gate was stopped for low memory; the restart waits for the owner's OK). When allowed, one at a time: gate + merge #1154 (approved; main merged at aa2f75c); gate + PR feat/DK-0174-mini-job-bar; then the queued branches (bars-d, crop-b, progress-b, sign-b, ask-b, boxes-b, chat-diff, detection-group, signature-pad, DK-0228 pull-to-refresh), and feat/DK-0204-tool-options (WIP 24b1606: first analyze and run its tests; it stacks on #1161). Blocked: DK-0222/0224 (built) wait on agent-1's DkFileCard (DK-0086); DkColorRow (DK-0142) asked of agent-1 (H-801).
 
 ## Memory
 
