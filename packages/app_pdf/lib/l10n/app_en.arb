@@ -653,5 +653,17 @@
         "type": "int"
       }
     }
+  },
+  "compare_added": "Added",
+  "@compare_added": {
+    "description": "Compare PDFs: the change tag (UI spec §4.3, DkDiffRow)."
+  },
+  "compare_removed": "Removed",
+  "@compare_removed": {
+    "description": "Compare PDFs: the change tag."
+  },
+  "compare_changed": "Changed",
+  "@compare_changed": {
+    "description": "Compare PDFs: the change tag."
   }
 }

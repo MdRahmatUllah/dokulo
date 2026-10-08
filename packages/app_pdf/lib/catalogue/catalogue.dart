@@ -5,6 +5,7 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
+import 'chat_states.dart';
 import 'icon_button_states.dart';
 import 'next_page_chip_states.dart';
 import 'overlay_states.dart';
@@ -65,6 +66,8 @@ const catalogue = [
     '11.7 Sheets, dialogs, menus, toasts',
     EmptyStateStates(),
   ),
+  CatalogueEntry('DkChatBubble', '11.8 Editor and AI', ChatStates()),
+  CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
 ];
 
 /// The list of components; tap one to see its states.
