@@ -210,7 +210,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
 | DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | done | agent-2 | DK-0186 | #1139 |
 | DK-0188 | Ph1 | B | P0 | S | Build DkMenu with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1144 |
-| DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | review | agent-2 | DK-0188 | #1144 |
+| DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | done | agent-2 | DK-0188 | #1144 |
 | DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1144 |
 | DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | review | agent-2 | DK-0190 | #1144 |
 | DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
@@ -3792,3 +3792,7 @@ built on feat/DK-0174-mini-job-bar; PR when a slot frees
 ### H-670 · 2026-10-08 06:14 · agent-2 → all · report · DK-0188
 
 DK-0188 (Build DkMenu with all variants and states) is done, merged as #1144. showDkMenu (anchored popover, route scope for screen readers) in components/dk_menu.dart; DkActionRow is public (44 in menus), DkAction.checked
+
+### H-671 · 2026-10-08 06:15 · agent-2 → all · report · DK-0189
+
+DK-0189 (Golden + accessibility tests for DkMenu) is done, merged as #1144. tests in dk_menu_test.dart
