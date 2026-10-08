@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
+import 'motion/dk_transition_motion.dart';
 
 /// How tall a sheet opens (UI spec §11.7): its content's height, half the
 /// screen, or 92 % of it.
 enum DkSheetDetent { small, medium, large }
 
 /// Opens a [DkSheet] (DK-0182). On a phone it is a bottom sheet at
-/// [detent], dragged down to close; medium and large snap between 50 % and
-/// 92 %. On a tablet (600 dp and wider) it is a centred dialog, at most 560
-/// wide.
+/// [detent] in `DkSheetRoute` (§9: it slides up in `motion.standard` while
+/// the scrim is in by `motion.fast`; Reduce Motion fades it in place). A
+/// swipe down on its handle and title closes it; medium and large also
+/// close when dragged to their bottom, and snap between 50 % and 92 %. On a
+/// tablet (600 dp and wider) it is a centred dialog, at most 560 wide, that
+/// fades and grows in `motion.standard`.
 ///
 /// [confirmDismiss] (unsaved content): every way of closing it (the swipe,
 /// back, the scrim, the ×) asks first and closes only on true. The sheet's
@@ -29,6 +33,7 @@ Future<T?> showDkSheet<T>(
   final t = context.tokens;
   final motion = context.motion(DkMotionKind.standard);
 
+  // Every way of closing goes through maybePop, so PopScope can ask.
   Widget guarded(BuildContext context, Widget child) {
     if (confirmDismiss == null) return child;
     return PopScope<T>(
@@ -42,89 +47,111 @@ Future<T?> showDkSheet<T>(
     );
   }
 
-  DkSheet sheet(BuildContext context, {ScrollController? controller}) =>
-      DkSheet(
-        title: title,
-        body: body,
-        actions: actions,
-        scrollController: controller,
-        closeLabel: closeLabel,
-        onClose: showClose ? () => Navigator.maybePop(context) : null,
-        // The built-in drag pops without asking: with a confirmation, a
-        // swipe on the handle asks through PopScope instead.
-        onSwipeDown: confirmDismiss == null
-            ? null
-            : () => Navigator.maybePop(context),
-      );
+  DkSheet sheet(
+    BuildContext context, {
+    ScrollController? controller,
+    bool inDialog = false,
+  }) => DkSheet(
+    title: title,
+    body: body,
+    actions: actions,
+    scrollController: controller,
+    closeLabel: closeLabel,
+    inDialog: inDialog,
+    onClose: showClose ? () => Navigator.maybePop(context) : null,
+    onSwipeDown: inDialog ? null : () => Navigator.maybePop(context),
+  );
 
   if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) != DkGrid.phone) {
-    return showDialog<T>(
+    return showGeneralDialog<T>(
       context: context,
       barrierColor: t.color.scrim,
-      builder: (context) => guarded(
+      barrierDismissible: true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      transitionDuration: motion.duration,
+      pageBuilder: (context, _, _) => guarded(
         context,
-        Dialog(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 560),
-            child: DkSheet(
-              title: title,
-              body: body,
-              actions: actions,
-              closeLabel: closeLabel,
-              onClose: showClose ? () => Navigator.maybePop(context) : null,
-              inDialog: true,
+        SafeArea(
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.all(t.space.xl),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 560),
+                child: Material(
+                  type: MaterialType.transparency,
+                  child: sheet(context, inDialog: true),
+                ),
+              ),
             ),
           ),
         ),
       ),
+      transitionBuilder: (context, animation, _, child) {
+        final curved = CurvedAnimation(parent: animation, curve: motion.curve);
+        return FadeTransition(
+          opacity: curved,
+          child: motion.crossFade
+              ? child
+              : ScaleTransition(
+                  scale: Tween(begin: 0.96, end: 1.0).animate(curved),
+                  child: child,
+                ),
+        );
+      },
     );
   }
 
-  return showModalBottomSheet<T>(
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    barrierColor: t.color.scrim,
-    enableDrag: confirmDismiss == null,
-    sheetAnimationStyle: AnimationStyle(
-      duration: motion.duration,
-      reverseDuration: motion.duration,
-      curve: motion.curve,
-    ),
-    builder: (context) => guarded(
+  return Navigator.of(context).push(
+    DkSheetRoute<T>.of(
       context,
-      // The keyboard pushes the content and the action area up.
-      Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.viewInsetsOf(context).bottom,
+      builder: (context) => guarded(
+        context,
+        SafeArea(
+          bottom: false,
+          child: Padding(
+            // The keyboard pushes the content and the action area up.
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.viewInsetsOf(context).bottom,
+            ),
+            child: Material(
+              type: MaterialType.transparency,
+              child: switch (detent) {
+                DkSheetDetent.small => sheet(context),
+                DkSheetDetent.medium || DkSheetDetent.large => () {
+                  final min = confirmDismiss == null
+                      ? 0.25
+                      : (detent == DkSheetDetent.medium ? 0.5 : 0.92);
+                  return NotificationListener<DraggableScrollableNotification>(
+                    // Dragged down to its bottom: close (or ask).
+                    onNotification: (n) {
+                      if (confirmDismiss == null &&
+                          n.extent <= n.minExtent + 0.001) {
+                        Navigator.maybePop(context);
+                      }
+                      return false;
+                    },
+                    child: DraggableScrollableSheet(
+                      expand: false,
+                      initialChildSize: detent == DkSheetDetent.medium
+                          ? 0.5
+                          : 0.92,
+                      minChildSize: min,
+                      maxChildSize: 0.92,
+                      // Snap sizes must lie strictly between min and max:
+                      // with a confirmation a large sheet can't move at all.
+                      snap: min < 0.92,
+                      snapSizes: [if (min < 0.5) 0.5],
+                      // §9: detent changes take `motion.standard`.
+                      snapAnimationDuration: motion.duration,
+                      builder: (context, controller) =>
+                          sheet(context, controller: controller),
+                    ),
+                  );
+                }(),
+              },
+            ),
+          ),
         ),
-        child: switch (detent) {
-          DkSheetDetent.small => sheet(context),
-          DkSheetDetent.medium || DkSheetDetent.large => () {
-            final min = confirmDismiss == null
-                ? 0.25
-                : (detent == DkSheetDetent.medium ? 0.5 : 0.92);
-            return DraggableScrollableSheet(
-              expand: false,
-              initialChildSize: detent == DkSheetDetent.medium ? 0.5 : 0.92,
-              minChildSize: min,
-              maxChildSize: 0.92,
-              // Snap sizes must lie strictly between min and max: with a
-              // confirmation a large sheet can't move at all.
-              snap: min < 0.92,
-              snapSizes: [if (min < 0.5) 0.5],
-              // §9: detent changes take `motion.standard`.
-              snapAnimationDuration: motion.duration,
-              shouldCloseOnMinExtent: confirmDismiss == null,
-              builder: (context, controller) =>
-                  sheet(context, controller: controller),
-            );
-          }(),
-        },
       ),
     ),
   );

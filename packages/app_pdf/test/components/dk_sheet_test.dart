@@ -217,7 +217,7 @@ void main() {
     );
     await tester.tap(find.text('open'));
     await tester.pumpAndSettle();
-    expect(find.byType(Dialog), findsOneWidget);
+    expect(tester.widget<DkSheet>(find.byType(DkSheet)).inDialog, isTrue);
     final rect = tester.getRect(find.byType(DkSheet));
     expect(rect.width, lessThanOrEqualTo(560));
     expect(rect.center.dx, closeTo(512, 1));
@@ -262,5 +262,81 @@ void main() {
       findsNothing,
     );
     handle.dispose();
+  });
+
+  testWidgets('§9 motion: slides up while the scrim is in by 120 ms; with '
+      'Reduce Motion it fades in place', (tester) async {
+    phone(tester);
+    Future<void> open({required bool reduce}) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: dokuloTheme(DkTokens.light),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(disableAnimations: reduce),
+            child: child!,
+          ),
+          home: Scaffold(
+            body: opener(
+              (c) =>
+                  showDkSheet<void>(c, title: 'Sort by', body: const Text('b')),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('open'));
+      await tester.pump();
+    }
+
+    await open(reduce: false);
+    await tester.pump(const Duration(milliseconds: 60));
+    final moving = tester.getTopLeft(find.byType(DkSheet)).dy;
+    await tester.pumpAndSettle();
+    final settled = tester.getTopLeft(find.byType(DkSheet)).dy;
+    expect(moving, greaterThan(settled), reason: 'it slides up');
+
+    await tester.tapAt(const Offset(196, 20));
+    await tester.pumpAndSettle();
+    await open(reduce: true);
+    await tester.pump(const Duration(milliseconds: 60));
+    expect(
+      tester.getTopLeft(find.byType(DkSheet)).dy,
+      settled,
+      reason: 'Reduce Motion: no movement, a fade',
+    );
+    final fade = tester.widget<FadeTransition>(
+      find
+          .ancestor(
+            of: find.byType(DkSheet),
+            matching: find.byType(FadeTransition),
+          )
+          .first,
+    );
+    expect(fade.opacity.value, lessThan(1));
+  });
+
+  testWidgets('medium closes when dragged down to its bottom', (tester) async {
+    phone(tester);
+    await tester.pumpWidget(
+      app(
+        opener(
+          (c) => showDkSheet<void>(
+            c,
+            title: 'Options',
+            detent: DkSheetDetent.medium,
+            body: const SizedBox(
+              height: 800,
+              child: Align(alignment: Alignment.topLeft, child: Text('long')),
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    await tester.drag(find.text('long'), const Offset(0, 500));
+    await tester.pumpAndSettle();
+    expect(find.byType(DkSheet), findsNothing);
   });
 }
