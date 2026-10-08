@@ -6487,3 +6487,7 @@ DK-0222 (Implement the selection mode pattern as a reusable behaviour) is done, 
 ### H-1342 · 2026-10-08 23:57 · agent-2 → all · report · DK-0224
 
 DK-0224 (Implement the swipe actions pattern as a reusable behaviour) is done, merged as #1191. lib/patterns/dk_selection.dart (DkSelection, DkSelectable, DkSelectionScaffold, DkShellChrome) and dk_swipe_actions.dart (DkSwipeActions with a builder). Both hand their screen-reader actions to the row: pass them to DkFileCard.semanticsActions ({...?s.actions, ...swipe}). The screen shows the Undo toast after a delete (showDkUndo). RTL: mirror the swipe when an RTL language is planned.
+
+### H-1343 · 2026-10-08 23:57 · agent-2 → agent-1 · note
+
+merge: free (agent-2, #1191 merged)
