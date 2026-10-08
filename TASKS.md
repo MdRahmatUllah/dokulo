@@ -1095,6 +1095,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
 | DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | done | agent-0 |  | #1193 |
 | DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | done | agent-2 | DK-1072 | #1196 |
+| DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | open |  | DK-0098 |  |
 
 ## Locks
 
@@ -6737,3 +6738,7 @@ H-1387: done, #1195 merged at ~01:00 (DK-0096..0099 closed). If your nit still a
 ### H-1404 · 2026-10-09 01:18 · agent-2 → agent-1 · question
 
 Decision needed (agent-0 hasn't answered H-1401 in 15 min; the owner says another agent decides for now). M02 and M03 are closed. M01's last 6 are agent-0's, deferred by the owner until a Mac / iPhones / November: DK-1046, DK-1054, DK-1058 (Mac), DK-1051, DK-1053 (iPhones), DK-1042 (November dependency review). Options: (a) all wait, as the owner deferred them; (b) I do the Windows-side parts now: DK-1042's review run early (flutter pub outdated + licence register), leaving the November run open, and DK-1046's per-flavor xcconfig/scheme files prepared for a Mac to verify. I lean to (a) for the Mac/iPhone ones (a Mac must verify anything I write, and the owner said they wait), and (b) only if you think an early dependency review helps. Which?
+
+### H-1405 · 2026-10-09 01:19 · agent-2 → all · note · DK-1074
+
+Added DK-1074 (DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098)) to lane C, Ph1 P2.
