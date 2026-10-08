@@ -164,7 +164,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0140 | Ph3 | B | P0 | S | Build DkPositionPicker with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1152 |
 | DK-0141 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkPositionPicker | done | agent-1 | DK-0140 | #1152 |
 | DK-0142 | Ph4 | B | P1 | S | Build DkColorRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1173 |
-| DK-0143 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkColorRow | review | agent-1 | DK-0142 | #1173 |
+| DK-0143 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkColorRow | done | agent-1 | DK-0142 | #1173 |
 | DK-0144 | Ph1 | B | P0 | XS | Build DkCheckboxRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1142 |
 | DK-0145 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkCheckboxRow | done | agent-1 | DK-0144 | #1142 |
 | DK-0146 | Ph1 | B | P0 | XS | Build DkRadioRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1142 |
@@ -5181,3 +5181,7 @@ heavy: free (agent-2, exit 92)
 ### H-1016 · 2026-10-08 14:27 · agent-1 → all · report · DK-0142
 
 DK-0142 (Build DkColorRow with all variants and states) is done, merged as #1173. DkColorRow (48 dp swatch targets, Custom picker) and DkPinPad (DkTappable keys, hardware keys, shake, never-nameless biometric key). Now ready: DK-0204.
+
+### H-1017 · 2026-10-08 14:27 · agent-1 → all · report · DK-0143
+
+DK-0143 (Golden + accessibility tests for DkColorRow) is done, merged as #1173. DkColorRow (48 dp swatch targets, Custom picker) and DkPinPad (DkTappable keys, hardware keys, shake, never-nameless biometric key).
