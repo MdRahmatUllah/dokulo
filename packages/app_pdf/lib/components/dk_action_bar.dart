@@ -12,6 +12,8 @@ import 'dk_number_text.dart';
 /// · 12 pages", "Free try · Pro unlocks unlimited use").
 ///
 /// Put it in the Scaffold's `bottomNavigationBar`, so toasts float above it.
+/// It rides on top of the keyboard (§10, §12.7): Scaffold doesn't lift a
+/// `bottomNavigationBar`, so the bar pads itself by the keyboard's height.
 class DkActionBar extends StatelessWidget {
   const DkActionBar({
     super.key,
@@ -64,6 +66,11 @@ class DkActionBar extends StatelessWidget {
             variant: DkButtonVariant.secondary,
             expand: true,
           );
+    // At 150 % text and more, side by side leaves each label too little
+    // room: stack them.
+    final beside =
+        secondaryBeside && MediaQuery.textScalerOf(context).scale(1) < 1.5;
+    final keyboard = MediaQuery.viewInsetsOf(context).bottom;
     return DecoratedBox(
       decoration: BoxDecoration(
         color: t.color.surface,
@@ -71,7 +78,8 @@ class DkActionBar extends StatelessWidget {
       ),
       child: SafeArea(
         top: false,
-        minimum: EdgeInsets.only(bottom: t.space.m),
+        // Over the keyboard, the home indicator's inset is under it already.
+        minimum: EdgeInsets.only(bottom: t.space.m + keyboard),
         child: Padding(
           padding: EdgeInsets.fromLTRB(t.space.l, t.space.m, t.space.l, 0),
           child: Column(
@@ -85,8 +93,8 @@ class DkActionBar extends StatelessWidget {
                   style: t.text.caption.copyWith(color: t.color.textSecondary),
                   textAlign: TextAlign.center,
                 ),
-              if (secondary != null && !secondaryBeside) secondary,
-              if (secondary != null && secondaryBeside)
+              if (secondary != null && !beside) secondary,
+              if (secondary != null && beside)
                 Row(
                   spacing: t.space.s,
                   children: [

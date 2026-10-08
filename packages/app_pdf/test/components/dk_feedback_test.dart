@@ -7,6 +7,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(
@@ -47,7 +48,12 @@ void main() {
     ]) {
       for (final scale in [1.0, 2.0]) {
         testWidgets('$what, $name, ${(scale * 100).round()} %', (tester) async {
-          tester.view.physicalSize = Size(393, scale == 1 ? 900 : 1800);
+          // The empty states are three tall columns.
+          final tall = what == 'empty_state';
+          tester.view.physicalSize = Size(
+            393,
+            (tall ? 1300 : 900) * (scale == 1 ? 1 : 2),
+          );
           tester.view.devicePixelRatio = 1;
           addTearDown(tester.view.reset);
           await tester.pumpWidget(
@@ -137,6 +143,85 @@ void main() {
       expect(moved, 1);
       handle.dispose();
     });
+  });
+  testWidgets('the action bar rides on top of the keyboard', (tester) async {
+    tester.view.physicalSize = const Size(393, 852);
+    tester.view.devicePixelRatio = 1;
+    tester.view.viewInsets = const FakeViewPadding(bottom: 300);
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: dokuloTheme(DkTokens.light),
+        home: const Scaffold(
+          body: TextField(autofocus: true),
+          bottomNavigationBar: DkActionBar(label: 'Rename', onPressed: _tap),
+        ),
+      ),
+    );
+    await tester.pump();
+    final button = tester.getRect(find.byType(DkButton));
+    expect(button.bottom, lessThanOrEqualTo(852 - 300));
+  });
+
+  testWidgets('side by side at 100 %, stacked from 150 %; the button is a '
+      'button for screen readers', (tester) async {
+    final handle = tester.ensureSemantics();
+    for (final (scale, beside) in [(1.0, true), (1.5, false)]) {
+      await tester.pumpWidget(
+        app(
+          const DkActionBar(
+            label: 'Save',
+            onPressed: _tap,
+            secondaryLabel: 'Review',
+            onSecondary: _tap,
+            secondaryBeside: true,
+          ),
+          textScale: scale,
+        ),
+      );
+      final save = tester.getCenter(find.text('Save'));
+      final review = tester.getCenter(find.text('Review'));
+      expect(save.dy == review.dy, beside, reason: 'at ${scale * 100} %');
+    }
+    expect(
+      tester.getSemantics(find.bySemanticsLabel('Save')),
+      isSemantics(label: 'Save', isButton: true, hasTapAction: true),
+    );
+    handle.dispose();
+  });
+
+  testWidgets('empty state: the title is a heading, buttons are 48 dp, the '
+      'illustration has no semantics', (tester) async {
+    final handle = tester.ensureSemantics();
+    await tester.pumpWidget(
+      app(
+        const SizedBox(
+          height: 600,
+          child: DkEmptyState(
+            illustration: DkIllustrations.folderEmpty,
+            title: 'This folder is empty',
+            body: 'Move files here.',
+            action: 'Move files here',
+            onAction: _tap,
+            secondaryAction: 'Scan a document',
+            onSecondaryAction: _tap,
+          ),
+        ),
+      ),
+    );
+    await settle(tester);
+    expect(
+      tester.getSemantics(find.text('This folder is empty')),
+      isSemantics(label: 'This folder is empty', isHeader: true),
+    );
+    for (final b in tester.widgetList<DkButton>(find.byType(DkButton))) {
+      expect(tester.getSize(find.byWidget(b)).height, greaterThanOrEqualTo(48));
+    }
+    expect(
+      tester.widget<SvgPicture>(find.byType(SvgPicture)).excludeFromSemantics,
+      isTrue,
+    );
+    handle.dispose();
   });
 }
 
