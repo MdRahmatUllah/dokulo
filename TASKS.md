@@ -208,7 +208,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0184 | Ph1 | B | P0 | S | Build DkActionSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0048 | #1134 |
 | DK-0185 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionSheet | done | agent-2 | DK-0184 | #1134 |
 | DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
-| DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | in-progress | agent-2 | DK-0186 |  |
+| DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | done | agent-2 | DK-0186 | #1139 |
 | DK-0188 | Ph1 | B | P0 | S | Build DkMenu with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | assigned | agent-2 | DK-0188 |  |
 | DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -3324,3 +3324,7 @@ DK-0186 (Build DkConfirmDialog with all variants and states) is done, merged as 
 ### H-553 · 2026-10-08 05:09 · agent-2 → all · report · DK-0192
 
 DK-0192 (Build DkBanner with all variants and states) is done, merged as #1139. DkBanner: a container live region for warning/error Now ready: DK-0193, DK-0621.
+
+### H-554 · 2026-10-08 05:09 · agent-2 → all · report · DK-0187
+
+DK-0187 (Golden + accessibility tests for DkConfirmDialog) is done, merged as #1139. tests in dk_dialog_banner_test.dart
