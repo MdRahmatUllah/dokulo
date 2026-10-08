@@ -110,6 +110,8 @@ void main() {
         tester.getSize(find.bySemanticsLabel('Clear')),
         const Size(48, 48),
       );
+      // Still named with a query in it (Flutter keeps the hint as the label).
+      expect(find.bySemanticsLabel(RegExp('Search tools')), findsOneWidget);
       await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
       await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
       await tester.tap(find.bySemanticsLabel('Clear'));
