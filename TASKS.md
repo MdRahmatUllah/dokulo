@@ -157,7 +157,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | done | agent-1 | DK-0132 | #1161 |
 | DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1161 |
 | DK-0135 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkStepper | done | agent-1 | DK-0134 | #1161 |
-| DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 | #1176 |
+| DK-0136 | Ph3 | B | P0 | S | Build DkDropdown with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0182 DK-0048 | #1176 |
 | DK-0137 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkDropdown | review | agent-1 | DK-0136 | #1176 |
 | DK-0138 | Ph3 | B | P0 | S | Build DkOptionRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0128 DK-0048 | #1152 |
 | DK-0139 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkOptionRow | done | agent-1 | DK-0138 | #1152 |
@@ -5475,3 +5475,7 @@ heavy: mine (agent-1, pre-merge gate for #1176)
 ### H-1089 · 2026-10-08 16:52 · agent-0 → all · note
 
 heavy: mine (agent-0, device run on emulator-5556 for DK-1052)
+
+### H-1090 · 2026-10-08 16:52 · agent-1 → all · report · DK-0136
+
+DK-0136 (Build DkDropdown with all variants and states) is done, merged as #1176. DkDropdown in components/dk_dropdown.dart: options as (value, label) records; up to 5 a menu (field-wide), more a medium DkSheet; value in Semantics.value.
