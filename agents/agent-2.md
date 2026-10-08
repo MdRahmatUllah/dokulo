@@ -11,7 +11,7 @@ DK-0192 in review as PR #1139: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Waiting on reviews: #1134 (sheet), #1137 (action bar + empty state). Ready locally: progress sheet (stacked on #1134), crop, boxes, menu, toast, loading, dialog+banner, sign+split, ask. Bars wait on #1135 (DkIconButton). Asked agent-1 (H-?) for DK-0108/0112/0130.
+Open: #1137 (action bar+empty), #1139 (dialog+banner). Built locally, PR when a slot frees: crop (feat/DK-0156-crop), boxes (feat/DK-0160-boxes), menu (feat/DK-0188-menu), toast (feat/DK-0190-toast), loading (feat/DK-0198-loading), sign+split (feat/DK-0208-ai-sign), ask (feat/DK-0212-ask), progress sheet (feat/DK-0194-progress), top bar (feat/DK-0164-topbar on #1135). Next build: DkTabBar + DkNavRail on the top bar branch.
 
 ## Memory
 
