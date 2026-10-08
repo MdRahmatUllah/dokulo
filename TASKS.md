@@ -1010,7 +1010,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0986 | Ph7 | Q | P2 | XS | Visual QA: motion (motion) | assigned | agent-0 | DK-0039 DK-0040 DK-0041 DK-0042 DK-0043 DK-0044 DK-0045 DK-0046 |  |
 | DK-0987 | Ph7 | Q | P2 | XS | Visual QA: app-icon-and-store-assets (app-icon-and-store-assets) | open |  | DK-0070 DK-0071 DK-0072 DK-0684 DK-0685 DK-0686 DK-0687 DK-0688 |  |
 | DK-0988 | Ph7 | Q | P2 | XS | Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check) | review | agent-1 | DK-0050 | #1145 |
-| DK-0989 | Ph7 | Q | P2 | XS | Visual QA: ill-02-onboarding-2 (ILL-02 · Onboarding 2 — Clean page and a one-time tag) | assigned | agent-1 | DK-0051 |  |
+| DK-0989 | Ph7 | Q | P2 | XS | Visual QA: ill-02-onboarding-2 (ILL-02 · Onboarding 2 — Clean page and a one-time tag) | review | agent-1 | DK-0051 | #1145 |
 | DK-0990 | Ph7 | Q | P2 | XS | Visual QA: ill-03-onboarding-3 (ILL-03 · Onboarding 3 — Camera, folder, toolbox as card icons) | assigned | agent-1 | DK-0052 |  |
 | DK-0991 | Ph7 | Q | P2 | XS | Visual QA: ill-04-home-empty (ILL-04 · Home empty — Two pages with a soft scan frame) | assigned | agent-1 | DK-0053 |  |
 | DK-0992 | Ph7 | Q | P2 | XS | Visual QA: ill-05-files-empty (ILL-05 · Files empty — Open folder, page sliding in) | assigned | agent-1 | DK-0054 |  |
@@ -3476,3 +3476,7 @@ PR #1145 for DK-0985 (Visual QA: illustrations-overview (illustrations-overview)
 ### H-591 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-0988
 
 PR #1145 for DK-0988 (Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-592 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-0989
+
+PR #1145 for DK-0989 (Visual QA: ill-02-onboarding-2 (ILL-02 · Onboarding 2 — Clean page and a one-time tag)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

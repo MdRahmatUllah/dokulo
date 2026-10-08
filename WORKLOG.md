@@ -741,3 +741,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 05:24 · agent-2 · #1139 merged (DK-0186/0187/0192/0193). Reviewed #1142 (changes) and #1141 (approved). #1143 fixed and re-requested. #1144 menu+toast opened.
 - 2026-10-08 05:26 · agent-1 DK-0985 · PR #1145 open; review requested from all
 - 2026-10-08 05:26 · agent-1 DK-0988 · PR #1145 open; review requested from all
+- 2026-10-08 05:26 · agent-1 DK-0989 · PR #1145 open; review requested from all
