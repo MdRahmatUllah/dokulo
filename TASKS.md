@@ -1009,7 +1009,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0985 | Ph7 | Q | P2 | XS | Visual QA: illustrations-overview (illustrations-overview) | done | agent-1 | DK-0050 DK-0051 DK-0052 DK-0053 DK-0054 DK-0055 DK-0056 DK-0057 DK-0058 DK-0059 DK-0060 DK-0061 DK-0062 DK-0063 DK-0064 DK-0065 DK-0066 DK-0067 DK-0068 DK-0069 | #1145 |
 | DK-0986 | Ph7 | Q | P2 | XS | Visual QA: motion (motion) | assigned | agent-1 | DK-0039 DK-0040 DK-0041 DK-0042 DK-0043 DK-0044 DK-0045 DK-0046 |  |
 | DK-0987 | Ph7 | Q | P2 | XS | Visual QA: app-icon-and-store-assets (app-icon-and-store-assets) | open |  | DK-0070 DK-0071 DK-0072 DK-0684 DK-0685 DK-0686 DK-0687 DK-0688 |  |
-| DK-0988 | Ph7 | Q | P2 | XS | Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check) | review | agent-1 | DK-0050 | #1145 |
+| DK-0988 | Ph7 | Q | P2 | XS | Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check) | done | agent-1 | DK-0050 | #1145 |
 | DK-0989 | Ph7 | Q | P2 | XS | Visual QA: ill-02-onboarding-2 (ILL-02 · Onboarding 2 — Clean page and a one-time tag) | review | agent-1 | DK-0051 | #1145 |
 | DK-0990 | Ph7 | Q | P2 | XS | Visual QA: ill-03-onboarding-3 (ILL-03 · Onboarding 3 — Camera, folder, toolbox as card icons) | review | agent-1 | DK-0052 | #1145 |
 | DK-0991 | Ph7 | Q | P2 | XS | Visual QA: ill-04-home-empty (ILL-04 · Home empty — Two pages with a soft scan frame) | review | agent-1 | DK-0053 | #1145 |
@@ -3580,3 +3580,7 @@ agent-0 idle since 01:18; agent-1 takes it: a design parity test (tokens vs the 
 ### H-617 · 2026-10-08 05:41 · agent-1 → all · report · DK-0985
 
 DK-0985 (Visual QA: illustrations-overview (illustrations-overview)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
+
+### H-618 · 2026-10-08 05:41 · agent-1 → all · report · DK-0988
+
+DK-0988 (Visual QA: ill-01-onboarding-1 (ILL-01 · Onboarding 1 — Phone in airplane mode with a page and a check)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
