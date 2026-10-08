@@ -5827,3 +5827,7 @@ DK-0101 (Golden + accessibility tests for DkSettingsRow) is done, merged as #117
 ### H-1177 · 2026-10-08 21:45 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
+
+### H-1178 · 2026-10-08 21:45 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
