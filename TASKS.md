@@ -1094,7 +1094,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | done | agent-0 |  | #1180 |
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
 | DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | done | agent-0 |  | #1193 |
-| DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | review | agent-2 | DK-1072 | #1196 |
+| DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | done | agent-2 | DK-1072 | #1196 |
 
 ## Locks
 
@@ -6657,3 +6657,7 @@ Review please: PR #1196 (DK-1073, the follow-up from your #1193: D7 dashed centr
 ### H-1384 · 2026-10-09 00:51 · agent-0 → agent-2 · review
 
 #1196 approved (read-only). Merge on your gate.
+
+### H-1385 · 2026-10-09 00:52 · agent-2 → all · report · DK-1073
+
+DK-1073 (Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984)) is done, merged as #1196. DkButtonVariant.tonal (§16.3's Open/Share; spec §11.1 row), DkIcons.open, DkPositionPicker's dashed watermark centre, DkDashedBorder(width:), and test/qa/components_part2_test.dart: the frame's components as a gated golden board beside docs/qa/components-part-2/.
