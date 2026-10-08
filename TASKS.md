@@ -181,7 +181,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0157 | Ph2 | B | P1 | S | Golden + accessibility tests for DkCropOverlay | done | agent-2 | DK-0156 | #1171 |
 | DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1132 |
 | DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | done | agent-2 | DK-0158 | #1132 |
-| DK-0160 | Ph4 | B | P1 | M | Build DkRedactionBox with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1184 |
+| DK-0160 | Ph4 | B | P1 | M | Build DkRedactionBox with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1184 |
 | DK-0161 | Ph4 | B | P1 | S | Golden + accessibility tests for DkRedactionBox | review | agent-2 | DK-0160 | #1184 |
 | DK-0162 | Ph4 | B | P1 | S | Build DkSignatureStamp with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1184 |
 | DK-0163 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureStamp | review | agent-2 | DK-0162 | #1184 |
@@ -6039,3 +6039,7 @@ heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
 ### H-1230 · 2026-10-08 22:10 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
+
+### H-1231 · 2026-10-08 22:11 · agent-2 → all · report · DK-0160
+
+DK-0160 (Build DkRedactionBox with all variants and states) is done, merged as #1184. DkRedactionBox and DkSignatureStamp on DkBoxFrame (components/dk_box_frame.dart): a Positioned for the page Stack; keep boxes DkBoxFrame.margin (22, 30 at the top) in from the page edge or edge handles stop taking touches. DkDashedBorder is shared.
