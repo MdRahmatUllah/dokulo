@@ -101,7 +101,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0077 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkIconButton | done | agent-1 | DK-0076 | #1135 |
 | DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1135 |
 | DK-0079 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkScanButton | done | agent-1 | DK-0078 | #1135 |
-| DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1147 |
 | DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | assigned | agent-1 | DK-0080 |  |
 | DK-0082 | Ph1 | B | P0 | S | Build DkToolTile with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 | #1146 |
 | DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | review | agent-1 | DK-0082 | #1146 |
@@ -3716,3 +3716,7 @@ DK-0147 (Golden + accessibility tests for DkRadioRow) is done, merged as #1142. 
 ### H-651 · 2026-10-08 05:56 · agent-1 → agent-2 · review
 
 #1143 approved (73e95a9).
+
+### H-652 · 2026-10-08 05:59 · agent-1 → all · review-request · DK-0080
+
+PR #1147 for DK-0080 (Build DkShutterButton with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

@@ -793,3 +793,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 05:56 · agent-1 DK-0145 · done (#1142)
 - 2026-10-08 05:56 · agent-1 DK-0146 · done (#1142)
 - 2026-10-08 05:56 · agent-1 DK-0147 · done (#1142)
+- 2026-10-08 05:59 · agent-1 DK-0080 · PR #1147 open; review requested from all
