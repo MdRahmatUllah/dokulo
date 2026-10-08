@@ -140,21 +140,38 @@ class _DkCropOverlayState extends State<DkCropOverlay> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        AspectRatio(
-          aspectRatio: widget.aspectRatio,
-          child: LayoutBuilder(
-            builder: (context, box) {
-              _size = box.biggest;
-              final q = [for (final f in widget.quad) _px(f)];
-              final dragged = _dragging;
-              return Stack(
+        // The image sits 22 in on every side (half a handle's 44 target),
+        // so a handle on the image's edge is grabbable all round: Flutter
+        // hit-tests only inside the Stack, whatever it paints past it.
+        LayoutBuilder(
+          builder: (context, box) {
+            const inset = _Handle.hit / 2;
+            final width = box.maxWidth - 2 * inset;
+            _size = Size(width, width / widget.aspectRatio);
+            final page = [for (final f in widget.quad) _px(f)];
+            final q = [for (final p in page) p + const Offset(inset, inset)];
+            final dragged = _dragging;
+            return SizedBox(
+              width: box.maxWidth,
+              height: _size.height + 2 * inset,
+              child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  Positioned.fill(child: widget.image),
-                  Positioned.fill(
+                  Positioned(
+                    left: inset,
+                    top: inset,
+                    width: _size.width,
+                    height: _size.height,
+                    child: widget.image,
+                  ),
+                  Positioned(
+                    left: inset,
+                    top: inset,
+                    width: _size.width,
+                    height: _size.height,
                     child: CustomPaint(
                       painter: _QuadPainter(
-                        q,
+                        page,
                         // Black at 50 %: the camera chrome's black.
                         shade: t.color.cameraChrome.withValues(alpha: 0.5),
                         stroke: t.color.quadStroke,
@@ -182,9 +199,9 @@ class _DkCropOverlayState extends State<DkCropOverlay> {
                   if (dragged != null && dragged < 4)
                     DkMagnifier(finger: q[dragged]),
                 ],
-              );
-            },
-          ),
+              ),
+            );
+          },
         ),
         SizedBox(height: t.space.m),
         Wrap(

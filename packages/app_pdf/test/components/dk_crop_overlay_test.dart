@@ -66,7 +66,7 @@ class _HarnessState extends State<Harness> {
   Widget build(BuildContext context) => Align(
     alignment: Alignment.topLeft,
     child: SizedBox(
-      width: 300,
+      width: 344,
       child: DkCropOverlay(
         image: const ColoredBox(color: Color(0xFFFFFFFF)),
         aspectRatio: 3 / 4,
@@ -86,7 +86,11 @@ class _HarnessState extends State<Harness> {
 }
 
 /// Fractions of the 300 × 400 image, in pixels.
-Offset px(Offset f) => Offset(f.dx * 300, f.dy * 400);
+/// The overlay keeps its image 22 dp in on every side (half a handle's 44
+/// target): a fraction's point on the image, and on the screen.
+const inset = 22.0;
+Offset local(Offset f) => Offset(f.dx * 300, f.dy * 400);
+Offset px(Offset f) => local(f) + const Offset(inset, inset);
 
 void main() {
   for (final (name, tokens) in [
@@ -127,8 +131,8 @@ void main() {
     final last = changes.last;
     // The drag-start slop is part of the movement: the corner is under the
     // finger, not behind it.
-    expect(px(last[0]).dx, closeTo(60 + 30, 0.5));
-    expect(px(last[0]).dy, closeTo(80 + 20, 0.5));
+    expect(local(last[0]).dx, closeTo(60 + 30, 0.5));
+    expect(local(last[0]).dy, closeTo(80 + 20, 0.5));
     await gesture.up();
     await tester.pump();
     expect(find.byType(DkMagnifier), findsNothing);
@@ -165,11 +169,11 @@ void main() {
     final gesture = await tester.startGesture(px(Harness.start[0]));
     await gesture.moveBy(const Offset(-30, -40));
     await tester.pump();
-    final q = changes.last.map(px).toList();
+    final q = changes.last.map(local).toList();
     expect(q[0], const Offset(30, 40));
     expect(q[1].dy, 40); // the top side moved
     expect(q[3].dx, 30); // the left side moved
-    expect(q[2], px(Harness.start[2]));
+    expect(q[2], local(Harness.start[2]));
     await gesture.up();
 
     // Dragging a corner across the opposite one is refused.
@@ -220,5 +224,57 @@ void main() {
     expect(find.text('Reset'), findsOne);
     expect(find.text('Full page'), findsNothing);
     expect(find.text('Auto'), findsNothing);
+  });
+
+  testWidgets('a corner on the image corner (Full page) is grabbable from '
+      'outside the image: the overlay covers every handle', (tester) async {
+    phone(tester, const Size(393, 600));
+    final changes = <List<Offset>>[];
+    await tester.pumpWidget(
+      app(
+        Align(
+          alignment: Alignment.topLeft,
+          child: SizedBox(
+            width: 344,
+            child: DkCropOverlay(
+              image: const ColoredBox(color: Color(0xFFFFFFFF)),
+              aspectRatio: 3 / 4,
+              quad: const [
+                Offset(0, 0),
+                Offset(1, 0),
+                Offset(1, 1),
+                Offset(0, 1),
+              ],
+              onChanged: changes.add,
+            ),
+          ),
+        ),
+      ),
+    );
+    // 15 dp up and left of the image's top-left corner, inside the handle.
+    final gesture = await tester.startGesture(
+      px(Offset.zero) - const Offset(15, 15),
+    );
+    await gesture.moveBy(const Offset(40, 50));
+    await tester.pump();
+    await gesture.up();
+    expect(changes, isNotEmpty);
+    expect(local(changes.last[0]).dx, greaterThan(0));
+    // Every handle's 44 target lies inside the overlay.
+    final overlay = tester.getRect(find.byType(DkCropOverlay));
+    for (final f in const [
+      Offset(0, 0),
+      Offset(1, 0),
+      Offset(1, 1),
+      Offset(0, 1),
+    ]) {
+      final hit = Rect.fromCenter(center: px(f), width: 44, height: 44);
+      expect(
+        overlay.contains(hit.topLeft) &&
+            overlay.contains(hit.bottomRight - const Offset(0.1, 0.1)),
+        isTrue,
+        reason: '$f',
+      );
+    }
   });
 }
