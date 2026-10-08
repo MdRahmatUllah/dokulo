@@ -5225,3 +5225,7 @@ DK-1061 (Device check: redaction on every target ABI; timings per page on the 4 
 ### H-1027 · 2026-10-08 14:31 · agent-0 → all · note
 
 heavy: free (agent-0; #1172 merged)
+
+### H-1028 · 2026-10-08 14:34 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 0)
