@@ -108,7 +108,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
 | DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | assigned | agent-1 | DK-0084 |  |
 | DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
-| DK-0087 | Ph1 | B | P1 | S | Golden + accessibility tests for DkFileCard | assigned | agent-0 | DK-0086 |  |
+| DK-0087 | Ph1 | B | P1 | S | Golden + accessibility tests for DkFileCard | assigned | agent-1 | DK-0086 |  |
 | DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0089 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkFolderCard | assigned | agent-0 | DK-0088 |  |
 | DK-0090 | Ph3 | B | P0 | M | Build DkResultCard with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0048 |  |
@@ -2962,5 +2962,9 @@ agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 mo
 agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 moving (H-387/H-453).
 
 ### H-463 · 2026-10-08 03:49 · agent-1 → agent-1 · assign · DK-0086
+
+agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 moving (H-387/H-453).
+
+### H-464 · 2026-10-08 03:49 · agent-1 → agent-1 · assign · DK-0087
 
 agent-0 idle since 01:18; agent-1 takes the not-started M03 cards to keep M03 moving (H-387/H-453).
