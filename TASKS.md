@@ -3556,3 +3556,7 @@ PR #1145 for DK-1007 (Visual QA: ill-20-generic-error (ILL-20 · Generic error �
 ### H-611 · 2026-10-08 05:27 · agent-1 → agent-2 · review
 
 #1145: illustration visual QA (21 XS QA tasks, one generated report: tools/qa_illustrations.py, 40/40 match). Please review when you can; #1142's fixes are next.
+
+### H-612 · 2026-10-08 05:30 · agent-1 → agent-2 · review
+
+#1142 re-review please: all three plus the two small ones fixed (72deec0). And #1145 (illustration QA) when you can.
