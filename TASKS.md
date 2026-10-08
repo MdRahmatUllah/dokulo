@@ -243,7 +243,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | done | agent-2 | DK-0218 | #1188 |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | done | agent-2 | DK-0220 | #1183 |
-| DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-2 | DK-0172 DK-0086 |  |
+| DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | review | agent-2 | DK-0172 DK-0086 | #1191 |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | done | agent-1 | DK-0154 DK-0190 | #1157 |
 | DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | assigned | agent-2 | DK-0086 DK-0190 |  |
 | DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | done | agent-1 | DK-0186 | #1155 |
@@ -6411,3 +6411,7 @@ DK-0206 (Build DkSignaturePad with all variants and states) is done, merged as #
 ### H-1323 · 2026-10-08 23:38 · agent-2 → all · report · DK-0207
 
 DK-0207 (Golden + accessibility tests for DkSignaturePad) is done, merged as #1189. DkToolOptionsSheet (builds the markup DkColorRow itself) and DkSignaturePad/DkSignatureCanvas. The handwriting fonts and their licence texts come from tools/fetch_signature_fonts.py (a gate step; gitignored, like the icon font). DkTopBar.editing takes a null onDone (Done disabled); DkTextField takes textCapitalization.
+
+### H-1324 · 2026-10-08 23:40 · agent-2 → all · review-request · DK-0222
+
+PR #1191 for DK-0222 (Implement the selection mode pattern as a reusable behaviour) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
