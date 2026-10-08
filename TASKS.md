@@ -238,7 +238,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
 | DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
-| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
+| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | review | agent-2 | DK-0216 | #1187 |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
@@ -5995,3 +5995,7 @@ PR #1187 for DK-0209 (Golden + accessibility tests for DkSignatureCard) is up. R
 ### H-1219 · 2026-10-08 22:05 · agent-2 → all · review-request · DK-0216
 
 PR #1187 for DK-0216 (Build DkSplitMarker with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1220 · 2026-10-08 22:05 · agent-2 → all · review-request · DK-0217
+
+PR #1187 for DK-0217 (Golden + accessibility tests for DkSplitMarker) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
