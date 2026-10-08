@@ -698,6 +698,10 @@
   "@scanner_button_shutter": {
     "description": "Screen readers: the scanner's shutter button."
   },
+  "common_refresh": "Refresh",
+  "@common_refresh": {
+    "description": "DkRefresh (UI spec §12.8): the screen-reader action that does what pulling down does."
+  },
   "common_loading": "Loading",
   "@common_loading": {
     "description": "Screen-reader label of DkSkeleton and DkLoadingSpinner (UI spec §11.7)."
@@ -975,6 +979,27 @@
   "@crop_reset": {
     "description": "DkCropOverlay: undo this crop's changes."
   },
+  "redact_box_label": "Black-out box: {category}",
+  "@redact_box_label": {
+    "description": "Screen-reader label of a DkRedactionBox (UI spec §11.5); category is the detector's name, e.g. IBAN.",
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "redact_box_remove": "Remove box",
+  "@redact_box_remove": {
+    "description": "The delete × of a DkRedactionBox (UI spec §11.5)."
+  },
+  "sign_stamp_label": "Signature",
+  "@sign_stamp_label": {
+    "description": "Screen-reader label of a placed DkSignatureStamp (UI spec §11.5)."
+  },
+  "sign_stamp_remove": "Remove signature",
+  "@sign_stamp_remove": {
+    "description": "The delete × of a DkSignatureStamp (UI spec §11.5; the design export's label)."
+  },
   "sign_card_label": "Saved signature",
   "@sign_card_label": {
     "description": "Screen-reader label of a DkSignatureCard (UI spec §11.8)."
@@ -990,6 +1015,18 @@
   "split_remove": "Don't split here",
   "@split_remove": {
     "description": "Smart Split: a cut between two pages, tap to remove it."
+  },
+  "compare_added": "Added",
+  "@compare_added": {
+    "description": "Compare PDFs: the change tag (UI spec §4.3, DkDiffRow)."
+  },
+  "compare_removed": "Removed",
+  "@compare_removed": {
+    "description": "Compare PDFs: the change tag."
+  },
+  "compare_changed": "Changed",
+  "@compare_changed": {
+    "description": "Compare PDFs: the change tag."
   },
   "ai_footer": "On this phone · {model} · AI can make mistakes",
   "@ai_footer": {
