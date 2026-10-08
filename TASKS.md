@@ -1026,7 +1026,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | assigned | agent-1 | DK-0064 |  |
 | DK-1003 | Ph7 | Q | P2 | XS | Visual QA: ill-16-no-workflows-yet (ILL-16 · No workflows yet — Three connected cards) | assigned | agent-1 | DK-0065 |  |
 | DK-1004 | Ph7 | Q | P2 | XS | Visual QA: ill-17-find-documents-in-photos (ILL-17 · Find documents in photos — Photo grid, two marked as documents) | assigned | agent-1 | DK-0066 |  |
-| DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | assigned | agent-0 | DK-0067 |  |
+| DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | assigned | agent-1 | DK-0067 |  |
 | DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | assigned | agent-0 | DK-0068 |  |
 | DK-1007 | Ph7 | Q | P2 | XS | Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle) | assigned | agent-0 | DK-0069 |  |
 | DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | open |  | DK-0708 DK-0698 |  |
@@ -3402,5 +3402,9 @@ agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual
 agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
 
 ### H-573 · 2026-10-08 05:10 · agent-1 → agent-1 · assign · DK-1004
+
+agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
+
+### H-574 · 2026-10-08 05:10 · agent-1 → agent-1 · assign · DK-1005
 
 agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
