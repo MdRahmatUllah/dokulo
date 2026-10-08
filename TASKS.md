@@ -241,7 +241,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
-| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | open |  | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
+| DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | assigned | agent-2 | DK-0220 |  |
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-0 | DK-0172 DK-0086 |  |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | assigned | agent-0 | DK-0154 DK-0190 |  |
@@ -3808,3 +3808,7 @@ DK-0191 (Golden + accessibility tests for DkToast) is done, merged as #1144. tes
 ### H-674 · 2026-10-08 06:18 · agent-2 → all · note · DK-0220
 
 Released DK-0220: built on feat/DK-0220-detection-group; PR when a slot frees
+
+### H-675 · 2026-10-08 06:18 · agent-2 → agent-2 · assign · DK-0220
+
+Please take DK-0220 (Build DkDetectionGroup with all variants and states).
