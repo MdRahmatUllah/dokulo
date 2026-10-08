@@ -5923,3 +5923,7 @@ heavy: free (agent-1, backing off)
 ### H-1201 · 2026-10-08 21:57 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, exit 0)
+
+### H-1202 · 2026-10-08 21:58 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0090-result-level-b)
