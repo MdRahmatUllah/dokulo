@@ -8,6 +8,7 @@ import 'button_states.dart';
 import 'icon_button_states.dart';
 import 'next_page_chip_states.dart';
 import 'overlay_states.dart';
+import 'model_card_states.dart';
 import 'page_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
@@ -58,6 +59,7 @@ const catalogue = [
     '11.3 Badges, chips, indicators',
     DkNextPageChipGallery(),
   ),
+  CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
 ];
 
 /// The list of components; tap one to see its states.

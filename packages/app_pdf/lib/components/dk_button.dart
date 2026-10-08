@@ -11,6 +11,9 @@ enum DkButtonVariant {
   primary,
   secondary,
   tertiary,
+
+  /// Tertiary in `color.danger` (the export's `.ter.cdg`): Delete in a card.
+  tertiaryDanger,
   destructive,
   destructiveSecondary,
 
@@ -131,6 +134,7 @@ class _DkButtonState extends State<DkButton> {
         c.outlineStrong,
       ),
       DkButtonVariant.tertiary => (Colors.transparent, c.primary, null),
+      DkButtonVariant.tertiaryDanger => (Colors.transparent, c.danger, null),
       DkButtonVariant.destructive => (c.danger, c.onDanger, null),
       DkButtonVariant.destructiveSecondary => (
         Colors.transparent,
