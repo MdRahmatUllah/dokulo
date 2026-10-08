@@ -27,7 +27,7 @@ Five layer packages in one monorepo; dependencies point one way only: `app_pdf â
 | Package | Role |
 |---|---|
 | `app_pdf` | Screens, tool grid, viewer, file manager, paywall, Riverpod providers |
-| `doc_tools` | One `ToolJob` per feature, progress stream, cancel, undo snapshot, workflow runner; pure Dart in worker isolates |
+| `doc_tools` | One `ToolJob` per feature, progress stream, cancel, undo snapshot, workflow runner; the work on worker isolates |
 | `doc_core` | Open/save/render PDFs, page ops, text extraction, image pipeline, OCR text layer (pdfrx/PDFium, our `qpdf_ffi`, Dart `pdf`, opencv_dart) |
 | `doc_vision` | Scanner flows, edge detection, OCR engines, layout, document-in-photo detection |
 | `ai_core` | Imported from Sogda: model manager, LLM arbiter (llama.cpp), translation, embeddings, retrieval |

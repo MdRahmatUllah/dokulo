@@ -39,6 +39,16 @@ class _Fixed implements OcrEngine {
     String imagePath, {
     OcrLanguage language = OcrLanguage.auto,
   }) async => PageOcr(name, const [], PageQuality.noText);
+
+  @override
+  Future<PageOcr> recognizeRaster(
+    Raster raster, {
+    OcrLanguage language = OcrLanguage.auto,
+    required Directory scratch,
+  }) async => PageOcr(name, const [], PageQuality.noText);
+
+  @override
+  Future<void> close() async {}
 }
 
 Raster scan(String name) =>
