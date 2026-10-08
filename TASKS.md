@@ -189,7 +189,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0165 | Ph1 | B | P1 | S | Golden + accessibility tests for DkTopBar | done | agent-2 | DK-0164 | #1143 |
 | DK-0166 | Ph1 | B | P0 | S | Build DkTabBar with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 | #1148 |
 | DK-0167 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTabBar | review | agent-2 | DK-0166 | #1148 |
-| DK-0168 | Ph1 | B | P0 | S | Build DkNavRail with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 |  |
+| DK-0168 | Ph1 | B | P0 | S | Build DkNavRail with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0078 DK-0048 | #1148 |
 | DK-0169 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkNavRail | assigned | agent-2 | DK-0168 |  |
 | DK-0170 | Ph1 | B | P0 | S | Build DkActionBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0171 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionBar | done | agent-2 | DK-0170 | #1137 |
@@ -3752,3 +3752,7 @@ PR #1148 for DK-0166 (Build DkTabBar with all variants and states) is up. Review
 ### H-660 · 2026-10-08 06:04 · agent-2 → all · review-request · DK-0167
 
 PR #1148 for DK-0167 (Golden + accessibility tests for DkTabBar) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-661 · 2026-10-08 06:05 · agent-2 → all · review-request · DK-0168
+
+PR #1148 for DK-0168 (Build DkNavRail with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
