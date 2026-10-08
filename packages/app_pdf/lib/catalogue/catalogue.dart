@@ -8,9 +8,11 @@ import 'button_states.dart';
 import 'choice_row_states.dart';
 import 'color_pin_states.dart';
 import 'dropdown_states.dart';
+import 'file_card_states.dart';
 import 'folder_settings_states.dart';
 import 'icon_button_states.dart';
 import 'logo_states.dart';
+import 'model_card_states.dart';
 import 'next_page_chip_states.dart';
 import 'option_row_states.dart';
 import 'overlay_states.dart';
@@ -205,6 +207,8 @@ const catalogue = [
   CatalogueEntry('DkSplitMarker', '11.8 Editor and AI', SplitStates()),
   CatalogueEntry('DkChatBubble', '11.8 Editor and AI', ChatStates()),
   CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
+  CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
+  CatalogueEntry('DkFileCard', '11.2 Tiles and cards', DkFileCardGallery()),
 ];
 
 /// The list of components; tap one to see its states.
