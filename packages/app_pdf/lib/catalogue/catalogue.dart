@@ -12,11 +12,13 @@ import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
 import 'page_states.dart';
-import 'progress_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 import 'bar_states.dart';
+import 'shutter_button_states.dart';
+import 'tool_tile_states.dart';
+import 'progress_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -91,6 +93,18 @@ const catalogue = [
     DkChoiceRowsGallery(),
   ),
   CatalogueEntry('DkTopBar', '11.6 Bars', TopBarStates()),
+  CatalogueEntry('DkMenu', '11.7 Sheets, dialogs, menus, toasts', MenuStates()),
+  CatalogueEntry(
+    'DkToast',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ToastStates(),
+  ),
+  CatalogueEntry(
+    'DkToolTile, DkToolRow',
+    '11.2 Tiles and cards',
+    DkToolTileGallery(),
+  ),
+  CatalogueEntry('DkShutterButton', '11.1 Buttons', DkShutterButtonGallery()),
   CatalogueEntry(
     'DkProgressSheet',
     '11.7 Sheets, dialogs, menus, toasts',
