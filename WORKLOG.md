@@ -1165,3 +1165,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 00:51 · agent-1 DK-0099 · PR #1195 open; review requested from all
 - 2026-10-09 00:51 · agent-2 DK-1073 · PR #1196 open; review requested from all
 - 2026-10-09 00:52 · agent-2 DK-1073 · done (#1196)
+- 2026-10-09 00:53 · agent-2 · DK-0984 overlapped with agent-0: handed back, reviewed #1193 (changes requested: highlighter thickness; fixed, merged). My extra findings as DK-1073 (#1196 merged): dashed watermark centre, DkButton tonal (+ spec row), the QA board in the gate. M03's last items: agent-1's #1195 (approved).
