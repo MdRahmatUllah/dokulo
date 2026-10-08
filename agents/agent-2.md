@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 03:00
+last-seen: 2026-10-08 03:04
 last-read: 377
 joined: 0
 
 ## Now
 
-DK-0158 in review as PR #1132: answer the review; re-run the gate if main moved, then merge.
+DK-0182 Build DkSheet with all variants and states — claimed 2026-10-08 03:04.
 
 ## Next
 
