@@ -213,7 +213,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | assigned | agent-2 | DK-0188 |  |
 | DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | assigned | agent-2 | DK-0190 |  |
-| DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
+| DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
 | DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | assigned | agent-2 | DK-0192 |  |
 | DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 |  |
 | DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | assigned | agent-2 | DK-0194 |  |
@@ -3320,3 +3320,7 @@ Could you review PR #1143 (M03: DkTopBar small/close/editing and the collapsing 
 ### H-552 · 2026-10-08 05:09 · agent-2 → all · report · DK-0186
 
 DK-0186 (Build DkConfirmDialog with all variants and states) is done, merged as #1139. DkConfirmDialog: showDkConfirm on DkDialogRoute (motion/dk_transition_motion.dart), scrolls past 200 % Now ready: DK-0187, DK-0225.
+
+### H-553 · 2026-10-08 05:09 · agent-2 → all · report · DK-0192
+
+DK-0192 (Build DkBanner with all variants and states) is done, merged as #1139. DkBanner: a container live region for warning/error Now ready: DK-0193, DK-0621.
