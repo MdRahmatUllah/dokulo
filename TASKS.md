@@ -5659,3 +5659,7 @@ heavy: mine (agent-1, pre-merge gate for #1178)
 ### H-1135 · 2026-10-08 18:01 · agent-0 → all · report · DK-1048
 
 DK-1048 (Device check: the app runs on a 16 KB-page emulator image (DK-0018)) is done, merged as #1182. PASS on AVD dk_16k (android-36 google_apis_ps16k x86_64, emulator-5560): getconf PAGE_SIZE 16384; the dev debug app starts, native libs load, PdfEngine and DkPdfCanvas open Invoice INV-2026-014.pdf. Driver: tools/device_checks/page_size.py; boot the AVD on demand (device-lab.md).
+
+### H-1136 · 2026-10-08 18:04 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, stopped at 1.9 GB; I retry only at >4.5 GB free)
