@@ -6,6 +6,9 @@ import '../theme/dk_tokens.dart';
 /// An on/off switch (DK-0128; UI spec §11.4) in the platform's look: iOS
 /// 51 × 31, Android Material 3; on in `color.primary`. Give [label] when the
 /// switch stands without a row title (DkOptionRow labels it otherwise).
+// ponytail: the iOS switch is UISwitch's 51 × 31, under the 44 target: it
+// lives in a DkOptionRow, whose whole row is the target. A standalone iOS
+// switch would need a 44 dp hit band around it.
 class DkSwitch extends StatelessWidget {
   const DkSwitch({
     super.key,

@@ -90,7 +90,7 @@ void main() {
   });
 
   group('DkSegmented (DK-0130)', () {
-    testWidgets('36 tall; the selected segment is surface with raised '
+    testWidgets('a 36 dp track in a 48 dp target; the selected segment is surface with raised '
         'elevation; a tap picks', (tester) async {
       int? picked;
       await tester.pumpWidget(
@@ -103,7 +103,12 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(tester.getSize(find.byType(DkSegmented<int>)).height, 36);
+      expect(tester.getSize(find.byType(DkSegmented<int>)).height, 48);
+      final track = find.descendant(
+        of: find.byType(DkSegmented<int>),
+        matching: find.byType(DecoratedBox),
+      );
+      expect(tester.getSize(track.first).height, 36);
       final selected = tester.widget<AnimatedContainer>(
         find.ancestor(
           of: find.text('Every N'),
@@ -158,5 +163,30 @@ void main() {
       await tester.tap(find.text('Each'));
       expect(picked, 2, reason: 'the whole row selects');
     });
+  });
+
+  testWidgets('tap targets and labels: the segments on both platforms, the '
+      'Android switch', (tester) async {
+    final handle = tester.ensureSemantics();
+    for (final platform in [TargetPlatform.android, TargetPlatform.iOS]) {
+      await tester.pumpWidget(
+        app(
+          Column(
+            children: [
+              // The iOS switch is 51 × 31, as the spec says; a row is its
+              // target there (DkOptionRow).
+              if (platform == TargetPlatform.android)
+                DkSwitch(value: true, onChanged: (_) {}, label: 'Wi-Fi only'),
+              DkSegmented<int>(segments: modes, selected: 0, onChanged: (_) {}),
+            ],
+          ),
+          platform: platform,
+        ),
+      );
+      await tester.pumpAndSettle();
+      await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+    }
+    handle.dispose();
   });
 }
