@@ -138,6 +138,10 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const expandMore = IconData(
+    0xe5cf,
+    fontFamily: _font,
+  ) /* expand_more */;
   static const scanDocument = IconData(
     0xe873,
     fontFamily: _font,
