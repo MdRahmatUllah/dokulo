@@ -635,5 +635,9 @@
   "shell_button_scan_hint": "Choose a scan mode",
   "@shell_button_scan_hint": {
     "description": "Screen readers: what a long press on the Scan button does."
+  },
+  "scanner_button_shutter": "Take photo",
+  "@scanner_button_shutter": {
+    "description": "Screen readers: the scanner's shutter button."
   }
 }

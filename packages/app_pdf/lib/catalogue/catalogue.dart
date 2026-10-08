@@ -10,6 +10,7 @@ import 'overlay_states.dart';
 import 'page_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
+import 'shutter_button_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -52,6 +53,7 @@ const catalogue = [
     '11.3 Badges, chips, indicators',
     DkProBadgeChipGallery(),
   ),
+  CatalogueEntry('DkShutterButton', '11.1 Buttons', DkShutterButtonGallery()),
 ];
 
 /// The list of components; tap one to see its states.
