@@ -1028,6 +1028,27 @@
   "@compare_changed": {
     "description": "Compare PDFs: the change tag."
   },
+  "model_not_available": "Not available on this phone",
+  "@model_not_available": {
+    "description": "DkModelCard: the phone can't run this model (memory, chip)."
+  },
+  "model_pause_progress": "Pause, {percent} %",
+  "@model_pause_progress": {
+    "description": "DkModelCard, screen readers: the pause button with the download's progress.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "file_locked": "Locked",
+  "@file_locked": {
+    "description": "DkFileCard, screen readers: the file needs a password or the locked folder."
+  },
+  "file_encrypted": "Password protected",
+  "@file_encrypted": {
+    "description": "DkFileCard, screen readers: an encrypted PDF."
+  },
   "sign_pad_hint": "Sign on the line",
   "@sign_pad_hint": {
     "description": "DkSignaturePad (UI spec §11.8): the hint under the baseline, until something is drawn."
