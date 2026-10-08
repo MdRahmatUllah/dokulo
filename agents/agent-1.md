@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 03:28
+last-seen: 2026-10-08 03:29
 last-read: 411
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0079 in review as PR #1135: answer the review; re-run the gate if main moved,
 
 ## Next
 
-M01 (33 tasks, 20 done): DK-0017 (size budget, now) → DK-0011 (local crash log + email) → DK-0397 (iOS Vision bridge; device half needs a Mac) → DK-0401 if unowned. agent-0: DK-0391→0392-0395; agent-2: DK-0396/0398/0400/0399.
+Open: #1133 (DK-0044..0046, re-review by agent-2), #1135 (DK-0076..0079, asked agent-0). Ready locally, PR one at a time: feat/DK-0065-illustrations-16-20b (DK-0065..0069); P2 feat/DK-0080-shutter-button (DK-0080/81); P3 feat/DK-0120-text-password-fields (0120..0123); P4 feat/DK-0124-range-search-fields (0124..0127); P5 feat/DK-0144-checkbox-radio-rows (0144..0147); P6 feat/DK-0128-switch-segmented (0128..0131); P7 feat/DK-0132-slider-stepper (0132..0135); P8 feat/DK-0138-option-row-position (0138..0141); P9 feat/DK-0142-color-row-pin-pad (0142,0143,0148,0149). The P branches are stacked; cherry-pick each onto main when its base merges. DkDropdown (0136/0137) is on feat/DK-0136-dropdown (old catalogue): port after #1134 DkSheet merges. Brand DK-0070..0073 is blocked on DK-1008/DK-0698.
 
 ## Memory
 
