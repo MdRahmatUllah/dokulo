@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1073 Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) — claimed 2026-10-09 00:41.
+DK-1073 in review as PR #1196: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
