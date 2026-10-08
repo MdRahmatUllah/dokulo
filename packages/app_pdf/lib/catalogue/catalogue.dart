@@ -23,6 +23,7 @@ import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'range_search_states.dart';
+import 'result_level_states.dart';
 import 'scan_button_states.dart';
 import 'badge_pill_states.dart';
 import 'bar_states.dart';
@@ -36,6 +37,8 @@ import 'detection_states.dart';
 import 'progress_states.dart';
 import 'sign_states.dart';
 import 'chat_states.dart';
+import 'signature_pad_states.dart';
+import 'tool_options_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -209,6 +212,17 @@ const catalogue = [
   CatalogueEntry('DkDiffRow', '11.8 Editor and AI', DiffStates()),
   CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
   CatalogueEntry('DkFileCard', '11.2 Tiles and cards', DkFileCardGallery()),
+  CatalogueEntry(
+    'DkResultCard, DkLevelCards',
+    '11.2 Tiles and cards',
+    DkResultLevelGallery(),
+  ),
+  CatalogueEntry('DkSignaturePad', '11.8 Editor and AI', SignaturePadStates()),
+  CatalogueEntry(
+    'DkToolOptionsSheet',
+    '11.8 Editor and AI',
+    ToolOptionsStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
