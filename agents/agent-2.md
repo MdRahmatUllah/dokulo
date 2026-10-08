@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1074 DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) — claimed 2026-10-09 01:19.
+DK-1074 in review as PR #1198: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

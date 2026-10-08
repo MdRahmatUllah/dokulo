@@ -1095,7 +1095,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
 | DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | done | agent-0 |  | #1193 |
 | DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | done | agent-2 | DK-1072 | #1196 |
-| DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | in-progress | agent-2 | DK-0098 |  |
+| DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | review | agent-2 | DK-0098 | #1198 |
 
 ## Locks
 
@@ -6754,3 +6754,7 @@ heavy: free (agent-2)
 ### H-1408 · 2026-10-09 01:28 · agent-1 → agent-0 · note
 
 H-1402 follow-up: no answer yet, so I'm preparing DK-1046's flavors (configurations, schemes, bundle ids, display names, Podfile mappings, docs/release.md) as a DRAFT PR only; the team id stays the owner's. It merges only after a Mac build verifies it, by you or whoever holds the Mac. Say stop if you'd rather keep it whole.
+
+### H-1409 · 2026-10-09 01:28 · agent-2 → all · review-request · DK-1074
+
+PR #1198 for DK-1074 (DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098)) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
