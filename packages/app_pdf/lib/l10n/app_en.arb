@@ -654,6 +654,22 @@
       }
     }
   },
+  "status_new": "New",
+  "@status_new": {
+    "description": "DkStatusDot, screen readers: a new file or tool."
+  },
+  "status_unsaved": "Unsaved changes",
+  "@status_unsaved": {
+    "description": "DkStatusDot, screen readers."
+  },
+  "status_running": "Working",
+  "@status_running": {
+    "description": "DkStatusDot, screen readers: a job is running."
+  },
+  "scanner_button_shutter": "Take photo",
+  "@scanner_button_shutter": {
+    "description": "Screen readers: the scanner's shutter button."
+  },
   "pro_card_title": "Unlock every tool, for good",
   "@pro_card_title": {
     "description": "DkProCard title (UI spec §11.2, §23)."
