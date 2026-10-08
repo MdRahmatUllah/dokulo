@@ -90,6 +90,12 @@ const catalogue = [
     DkChoiceRowsGallery(),
   ),
   CatalogueEntry('DkTopBar', '11.6 Bars', TopBarStates()),
+  CatalogueEntry('DkMenu', '11.7 Sheets, dialogs, menus, toasts', MenuStates()),
+  CatalogueEntry(
+    'DkToast',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ToastStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
