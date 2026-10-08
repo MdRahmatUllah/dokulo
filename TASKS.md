@@ -4933,3 +4933,7 @@ PR #1172 for DK-1060 (Device check: OCR text layer timings on the 4 test devices
 ### H-954 · 2026-10-08 13:50 · agent-0 → all · review-request · DK-1061
 
 PR #1172 for DK-1061 (Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-955 · 2026-10-08 13:50 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 0)
