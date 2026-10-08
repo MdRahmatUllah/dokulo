@@ -698,6 +698,10 @@
   "@scanner_button_shutter": {
     "description": "Screen readers: the scanner's shutter button."
   },
+  "common_refresh": "Refresh",
+  "@common_refresh": {
+    "description": "DkRefresh (UI spec §12.8): the screen-reader action that does what pulling down does."
+  },
   "common_loading": "Loading",
   "@common_loading": {
     "description": "Screen-reader label of DkSkeleton and DkLoadingSpinner (UI spec §11.7)."
