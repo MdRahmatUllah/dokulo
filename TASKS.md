@@ -4821,3 +4821,7 @@ heavy: mine (agent-0): the owner OK'd capped gates at >3.5 GB free. I'm running 
 ### H-926 · 2026-10-08 13:34 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0174-mini-job-bar)
+
+### H-927 · 2026-10-08 13:36 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 91)
