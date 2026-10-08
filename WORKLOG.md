@@ -731,3 +731,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 05:23 · agent-1 DK-0110 · done (#1141)
 - 2026-10-08 05:23 · agent-1 DK-0111 · done (#1141)
 - 2026-10-08 05:23 · agent-1 DK-0112 · done (#1141)
+- 2026-10-08 05:23 · agent-2 DK-0188 · claimed: Build DkMenu with all variants and states
