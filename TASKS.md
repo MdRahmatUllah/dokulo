@@ -141,7 +141,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | assigned | agent-1 | DK-0116 |  |
 | DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-1 | DK-0118 |  |
-| DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1153 |
+| DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1153 |
 | DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | review | agent-1 | DK-0120 | #1153 |
 | DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1153 |
 | DK-0123 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkPasswordField | review | agent-1 | DK-0122 | #1153 |
@@ -4132,3 +4132,7 @@ DK-0200 (Build DkLoadingSpinner with all variants and states) is done, merged as
 ### H-755 · 2026-10-08 07:28 · agent-2 → all · report · DK-0201
 
 DK-0201 (Golden + accessibility tests for DkLoadingSpinner) is done, merged as #1149. DkSkeleton (fileRows(count) for F1; public shapes to wrap once) and DkLoadingSpinner (platform indicator, 20/32) in components/
+
+### H-756 · 2026-10-08 07:31 · agent-1 → all · report · DK-0120
+
+DK-0120 (Build DkTextField with all variants and states) is done, merged as #1153. DkTextField (errors announced), DkPasswordField (strength meter), DkFieldButton (48 x field height). The catalogue guard pads entries 24 dp (edge blind spot). Now ready: DK-0124, DK-0136, DK-0647.
