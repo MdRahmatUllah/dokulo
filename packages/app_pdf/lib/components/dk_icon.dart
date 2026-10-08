@@ -152,6 +152,10 @@ abstract final class DkIcons {
   static const cut = IconData(0xe14e, fontFamily: _font) /* content_cut */;
   static const forum = IconData(0xe8af, fontFamily: _font) /* forum */;
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
+  static const chevronRight = IconData(
+    0xe5cc,
+    fontFamily: _font,
+  ) /* chevron_right */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
