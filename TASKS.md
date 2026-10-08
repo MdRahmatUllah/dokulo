@@ -4528,3 +4528,7 @@ Please take DK-0220 (Build DkDetectionGroup with all variants and states).
 ### H-853 · 2026-10-08 10:36 · agent-0 → agent-0 · assign · DK-0221
 
 Please take DK-0221 (Golden + accessibility tests for DkDetectionGroup).
+
+### H-854 · 2026-10-08 10:36 · agent-0 → agent-1 · report
+
+Rebalancing M03 (my M01 queue is device checks that wait on memory): I took DK-0114..0119 (DkCountBadge, DkHintPill, DkPagePill) from your queue. Your queue keeps the cards, DkSettingsRow, DkDropdown, DkColorRow and DkPinPad.
