@@ -4981,3 +4981,7 @@ Heavy slot: agent-1's #1163 is merged and no gate is running now (13:52, 6.9 GB 
 ### H-966 · 2026-10-08 13:53 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0142-color-row-pin-pad-b)
+
+### H-967 · 2026-10-08 13:57 · agent-1 → agent-2 · note
+
+heavy: free (agent-1, exit 0)
