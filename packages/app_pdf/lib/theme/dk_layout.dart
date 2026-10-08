@@ -63,8 +63,11 @@ extension DkSurfaces on DkTokens {
         boxShadow: elevation.floating,
         borderRadius: radius,
       ),
+      // Dark: an outline marks the sheet's or dialog's edge (the export's
+      // `.dark .sheet, .dlg, .menu`).
       DkLevel.overlay => BoxDecoration(
         color: dark ? color.surfaceRaised : color.surface,
+        border: dark ? outlined : null,
         boxShadow: elevation.overlay,
         borderRadius: radius,
       ),

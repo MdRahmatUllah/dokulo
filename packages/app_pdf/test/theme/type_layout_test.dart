@@ -162,6 +162,8 @@ void main() {
         expect(darkRaised.border, isNotNull);
         expect(darkRaised.boxShadow, isEmpty);
         expect(dark.surfaceAt(DkLevel.overlay).boxShadow, isEmpty);
+        expect(dark.surfaceAt(DkLevel.overlay).border, isNotNull);
+        expect(light.surfaceAt(DkLevel.overlay).border, isNull);
         expect(dark.surfaceAt(DkLevel.floating).boxShadow, isNotEmpty);
         for (final t in [light, dark]) {
           final flat = t.surfaceAt(DkLevel.flat);
