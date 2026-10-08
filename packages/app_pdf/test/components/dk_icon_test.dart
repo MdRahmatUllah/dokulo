@@ -3,7 +3,6 @@ import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_tools/doc_tools.dart' show toolJobIds;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget themed(Widget child, {DkTokens? tokens, TargetPlatform? platform}) {
@@ -57,14 +56,6 @@ class _Sheet extends StatelessWidget {
 }
 
 void main() {
-  setUpAll(() async {
-    // Tests don't load package fonts on their own: load the icon font, so
-    // the goldens show the glyphs.
-    final font = FontLoader('MaterialSymbolsRounded')
-      ..addFont(rootBundle.load('assets/fonts/MaterialSymbolsRounded.ttf'));
-    await font.load();
-  });
-
   testWidgets('sizes are the spec\'s five; the font is set as the spec says', (
     tester,
   ) async {

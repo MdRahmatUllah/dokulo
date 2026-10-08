@@ -159,6 +159,7 @@ Colour is defined as tokens with a Light and a Dark value. Design every screen i
 | `color.warning` | #B54708 | #FDB022 | Partial success, low memory, storage warnings |
 | `color.warningContainer` | #FFF1E0 | #3A2410 | Warning banners |
 | `color.danger` | #C8281E | #FF7A70 | Delete, destructive buttons, error text |
+| `color.onDanger` | #FFFFFF | #14171C | Text and icons on a `color.danger` fill (Destructive button); dark in Dark for contrast |
 | `color.dangerContainer` | #FDECEA | #3A1614 | Error banners, destructive confirm icon background |
 | `color.scrim` | #14171C @ 40 % | #000000 @ 55 % | Behind sheets and dialogs |
 | `color.cameraChrome` | #000000 @ 60 % | same | Scanner bars over the camera image |
@@ -199,7 +200,7 @@ Colour is defined as tokens with a Light and a Dark value. Design every screen i
 | Hover (tablets with pointer) | `color.textPrimary` @ 4 % |
 | Pressed | `color.textPrimary` @ 8 % |
 | Selected (list rows) | `color.primaryContainer` fill |
-| Dragged item | `raised` elevation + 2 % scale up |
+| Dragged item | `raised` elevation + 2 % scale up (pages in DkPageTray and DkPageGrid; tool tiles lift 1.04, §9 Tile reorder) |
 | Disabled | 40 % opacity of the whole element |
 
 ### 4.5 Contrast requirements
@@ -465,7 +466,7 @@ Every component below must exist in the Figma library with all listed variants a
 | Primary | `color.primary` | `color.onPrimary` | none |
 | Secondary | transparent | `color.primary` | 1 dp `color.outlineStrong` |
 | Tertiary (text) | transparent | `color.primary` | none |
-| Destructive | `color.danger` | #FFFFFF | none |
+| Destructive | `color.danger` | `color.onDanger` | none |
 | Destructive secondary | transparent | `color.danger` | 1 dp `color.danger` |
 | On camera | #FFFFFF @ 16 % | `color.onCamera` | none |
 
