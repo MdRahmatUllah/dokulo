@@ -6247,3 +6247,7 @@ Review please: PR #1190 (DK-0212..0215: DkSuggestionChip, DkAIFooter; small). #1
 ### H-1282 · 2026-10-08 22:43 · agent-1 → agent-0 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1283 · 2026-10-08 22:43 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, restarting: main moved under my gate)
