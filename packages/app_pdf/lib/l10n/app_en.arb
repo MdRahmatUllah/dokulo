@@ -105,6 +105,10 @@
   "@common_add_files": {
     "description": "Copy deck (UI spec §27): common_add_files."
   },
+  "common_add_pages": "Add pages",
+  "@common_add_pages": {
+    "description": "The page tray's + tile and the scan review's back button (UI spec §11.5, §19.3 S2)."
+  },
   "common_browse": "Browse device",
   "@common_browse": {
     "description": "Copy deck (UI spec §27): common_browse."
@@ -331,5 +335,496 @@
   "markup_ink": "Blue ink",
   "@markup_ink": {
     "description": "Markup colour name (UI spec §4.2, DK-0032): the ink signature ink."
+  },
+  "tool_scan_name": "Scan",
+  "@tool_scan_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id scan."
+  },
+  "tool_scan_description": "Scan paper documents with the camera into a clean, searchable PDF.",
+  "@tool_scan_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id scan."
+  },
+  "tool_merge_name": "Merge PDF",
+  "@tool_merge_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id merge."
+  },
+  "tool_merge_description": "Combine PDFs and images into one PDF, in the order you choose.",
+  "@tool_merge_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id merge."
+  },
+  "tool_split_name": "Split PDF",
+  "@tool_split_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id split."
+  },
+  "tool_split_description": "Split a PDF into several files by page ranges, every few pages, or one file per page.",
+  "@tool_split_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id split."
+  },
+  "tool_extract_name": "Extract pages",
+  "@tool_extract_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id extract."
+  },
+  "tool_extract_description": "Save selected pages as a new PDF.",
+  "@tool_extract_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id extract."
+  },
+  "tool_organize_name": "Organize pages",
+  "@tool_organize_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id organize."
+  },
+  "tool_organize_description": "Reorder, rotate, delete and add pages in one view.",
+  "@tool_organize_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id organize."
+  },
+  "tool_rotate_name": "Rotate PDF",
+  "@tool_rotate_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id rotate."
+  },
+  "tool_rotate_description": "Turn pages that are sideways or upside down.",
+  "@tool_rotate_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id rotate."
+  },
+  "tool_smartsplit_name": "Smart Split",
+  "@tool_smartsplit_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id smartsplit."
+  },
+  "tool_smartsplit_description": "Find where one document ends and the next begins in a bundle of scans, then split them.",
+  "@tool_smartsplit_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id smartsplit."
+  },
+  "tool_img2pdf_name": "Image to PDF",
+  "@tool_img2pdf_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id img2pdf."
+  },
+  "tool_img2pdf_description": "Turn photos and images into a PDF.",
+  "@tool_img2pdf_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id img2pdf."
+  },
+  "tool_pdf2img_name": "PDF to images",
+  "@tool_pdf2img_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id pdf2img."
+  },
+  "tool_pdf2img_description": "Save PDF pages as JPG or PNG images.",
+  "@tool_pdf2img_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id pdf2img."
+  },
+  "tool_web_name": "Web page to PDF",
+  "@tool_web_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id web."
+  },
+  "tool_web_description": "Save a web page or HTML file as a PDF.",
+  "@tool_web_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id web."
+  },
+  "tool_pdfa_name": "Convert to PDF/A",
+  "@tool_pdfa_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id pdfa."
+  },
+  "tool_pdfa_description": "Convert to the archive format many authorities and courts ask for.",
+  "@tool_pdfa_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id pdfa."
+  },
+  "tool_text_name": "PDF to text",
+  "@tool_text_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id text."
+  },
+  "tool_text_description": "Get the text of a PDF as Markdown or plain text.",
+  "@tool_text_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id text."
+  },
+  "tool_compress_name": "Compress PDF",
+  "@tool_compress_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id compress."
+  },
+  "tool_compress_description": "Make PDFs smaller for email and upload portals.",
+  "@tool_compress_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id compress."
+  },
+  "tool_repair_name": "Repair PDF",
+  "@tool_repair_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id repair."
+  },
+  "tool_repair_description": "Try to fix PDFs that won't open or show errors.",
+  "@tool_repair_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id repair."
+  },
+  "tool_ocr_name": "Make text searchable",
+  "@tool_ocr_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id ocr."
+  },
+  "tool_ocr_description": "Recognise text in scans so you can search, copy and use AI on it.",
+  "@tool_ocr_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id ocr."
+  },
+  "tool_pagenum_name": "Add page numbers",
+  "@tool_pagenum_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id pagenum."
+  },
+  "tool_pagenum_description": "Number the pages, in the position and format you choose.",
+  "@tool_pagenum_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id pagenum."
+  },
+  "tool_watermark_name": "Add watermark",
+  "@tool_watermark_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id watermark."
+  },
+  "tool_watermark_description": "Put text or an image across your pages, like “Draft” or “Copy”.",
+  "@tool_watermark_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id watermark."
+  },
+  "tool_crop_name": "Crop pages",
+  "@tool_crop_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id crop."
+  },
+  "tool_crop_description": "Trim the margins of one page or of all pages.",
+  "@tool_crop_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id crop."
+  },
+  "tool_markup_name": "Mark up",
+  "@tool_markup_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id markup."
+  },
+  "tool_markup_description": "Highlight, underline, draw and add notes on a PDF.",
+  "@tool_markup_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id markup."
+  },
+  "tool_form_name": "Fill form",
+  "@tool_form_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id form."
+  },
+  "tool_form_description": "Fill in PDF forms, and lock the values if you want.",
+  "@tool_form_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id form."
+  },
+  "tool_sign_name": "Sign PDF",
+  "@tool_sign_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id sign."
+  },
+  "tool_sign_description": "Add your signature, initials or a stamp to a PDF.",
+  "@tool_sign_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id sign."
+  },
+  "tool_protect_name": "Add password",
+  "@tool_protect_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id protect."
+  },
+  "tool_protect_description": "Lock a PDF with a password and choose what others may do with it.",
+  "@tool_protect_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id protect."
+  },
+  "tool_unlock_name": "Remove password",
+  "@tool_unlock_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id unlock."
+  },
+  "tool_unlock_description": "Remove the password from a PDF you can open.",
+  "@tool_unlock_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id unlock."
+  },
+  "tool_redact_name": "Black out (redact)",
+  "@tool_redact_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id redact."
+  },
+  "tool_redact_description": "Remove names, numbers and other details for good, not just cover them.",
+  "@tool_redact_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id redact."
+  },
+  "tool_compare_name": "Compare PDFs",
+  "@tool_compare_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id compare."
+  },
+  "tool_compare_description": "See what changed between two versions of a PDF.",
+  "@tool_compare_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id compare."
+  },
+  "tool_extractassets_name": "Extract images & text",
+  "@tool_extractassets_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id extractassets."
+  },
+  "tool_extractassets_description": "Save the images and the text in a PDF as separate files.",
+  "@tool_extractassets_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id extractassets."
+  },
+  "tool_batch_name": "Batch",
+  "@tool_batch_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id batch."
+  },
+  "tool_batch_description": "Run one tool on many files at once.",
+  "@tool_batch_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id batch."
+  },
+  "tool_workflows_name": "Workflows",
+  "@tool_workflows_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id workflows."
+  },
+  "tool_workflows_description": "Chain tools into steps you can run again with one tap.",
+  "@tool_workflows_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id workflows."
+  },
+  "tool_summarize_name": "Summarize",
+  "@tool_summarize_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id summarize."
+  },
+  "tool_summarize_description": "Get a short summary of a PDF, made on your phone.",
+  "@tool_summarize_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id summarize."
+  },
+  "tool_ask_name": "Ask this PDF",
+  "@tool_ask_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id ask."
+  },
+  "tool_ask_description": "Ask questions about a PDF and get answers with the page they come from.",
+  "@tool_ask_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id ask."
+  },
+  "tool_translate_name": "Translate PDF",
+  "@tool_translate_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id translate."
+  },
+  "tool_translate_description": "Translate a PDF on your phone, without uploading it.",
+  "@tool_translate_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id translate."
+  },
+  "tools_category_organize": "Organize",
+  "@tools_category_organize": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_convert": "Convert",
+  "@tools_category_convert": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_optimize": "Optimize",
+  "@tools_category_optimize": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_edit": "Edit",
+  "@tools_category_edit": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_security": "Security",
+  "@tools_category_security": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_ai": "AI",
+  "@tools_category_ai": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_automation": "Automation",
+  "@tools_category_automation": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "scan_mode_document": "Document",
+  "@scan_mode_document": {
+    "description": "Scan mode (DkScanButton menu, S1 mode switcher)."
+  },
+  "scan_mode_idcard": "ID card",
+  "@scan_mode_idcard": {
+    "description": "Scan mode: both sides of an ID card."
+  },
+  "scan_mode_book": "Book",
+  "@scan_mode_book": {
+    "description": "Scan mode: a book spread."
+  },
+  "scan_mode_batch": "Batch",
+  "@scan_mode_batch": {
+    "description": "Scan mode: many pages with auto-capture."
+  },
+  "scan_mode_import": "Import photos",
+  "@scan_mode_import": {
+    "description": "Scan menu: photos from the gallery instead of the camera."
+  },
+  "shell_button_scan_hint": "Choose a scan mode",
+  "@shell_button_scan_hint": {
+    "description": "Screen readers: what a long press on the Scan button does."
+  },
+  "position_top_left": "Top left",
+  "@position_top_left": {
+    "description": "DkPositionPicker target (screen readers)."
+  },
+  "position_top_centre": "Top centre",
+  "@position_top_centre": {
+    "description": "DkPositionPicker target."
+  },
+  "position_top_right": "Top right",
+  "@position_top_right": {
+    "description": "DkPositionPicker target."
+  },
+  "position_bottom_left": "Bottom left",
+  "@position_bottom_left": {
+    "description": "DkPositionPicker target."
+  },
+  "position_bottom_centre": "Bottom centre",
+  "@position_bottom_centre": {
+    "description": "DkPositionPicker target."
+  },
+  "position_bottom_right": "Bottom right",
+  "@position_bottom_right": {
+    "description": "DkPositionPicker target."
+  },
+  "position_centre": "Centre",
+  "@position_centre": {
+    "description": "DkPositionPicker: the page centre (watermark)."
+  },
+  "viewer_page_chip": "p. {n}",
+  "@viewer_page_chip": {
+    "description": "DkPageChip: a page reference in AI answers (UI spec §11.3).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "viewer_page_chip_go": "Go to page {n}",
+  "@viewer_page_chip_go": {
+    "description": "DkPageChip, screen readers: what a tap does.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "status_new": "New",
+  "@status_new": {
+    "description": "DkStatusDot, screen readers: a new file or tool."
+  },
+  "status_unsaved": "Unsaved changes",
+  "@status_unsaved": {
+    "description": "DkStatusDot, screen readers."
+  },
+  "status_running": "Working",
+  "@status_running": {
+    "description": "DkStatusDot, screen readers: a job is running."
+  },
+  "scanner_button_shutter": "Take photo",
+  "@scanner_button_shutter": {
+    "description": "Screen readers: the scanner's shutter button."
+  },
+  "common_loading": "Loading",
+  "@common_loading": {
+    "description": "Screen-reader label of DkSkeleton and DkLoadingSpinner (UI spec §11.7)."
+  },
+  "common_clear": "Clear",
+  "@common_clear": {
+    "description": "Screen readers: the × that empties a text field."
+  },
+  "field_password_show": "Show password",
+  "@field_password_show": {
+    "description": "DkPasswordField reveal toggle (screen readers)."
+  },
+  "field_password_hide": "Hide password",
+  "@field_password_hide": {
+    "description": "DkPasswordField reveal toggle (screen readers)."
+  },
+  "field_password_weak": "Weak",
+  "@field_password_weak": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "field_password_ok": "OK",
+  "@field_password_ok": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "field_password_strong": "Strong",
+  "@field_password_strong": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "confirm_delete_forever_title": "{n, plural, one{Delete this file for good?} other{Delete {n} files for good?}}",
+  "@confirm_delete_forever_title": {
+    "description": "UI spec §12.4: delete forever and empty Recently deleted (§16, 'Confirm empty').",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "confirm_cant_undo": "This can't be undone.",
+  "@confirm_cant_undo": {
+    "description": "UI spec §12.4: the body of delete forever and empty Recently deleted."
+  },
+  "confirm_redact_title": "Black out for good?",
+  "@confirm_redact_title": {
+    "description": "UI spec §12.4: apply redaction (copy filled in by DK-0225)."
+  },
+  "confirm_redact_body": "What you blacked out is removed from the file and can't be recovered.",
+  "@confirm_redact_body": {
+    "description": "UI spec §12.4: apply redaction (copy filled in by DK-0225)."
+  },
+  "confirm_redact_action": "Black out",
+  "@confirm_redact_action": {
+    "description": "UI spec §12.4: apply redaction, the button."
+  },
+  "confirm_replace_title": "Replace the original file?",
+  "@confirm_replace_title": {
+    "description": "UI spec §12.4; T3 (§18): Replace original."
+  },
+  "confirm_replace_body": "The original will be kept in Versions for 30 days.",
+  "@confirm_replace_body": {
+    "description": "UI spec §12.4; T3 (§18): Replace original."
+  },
+  "confirm_replace_action": "Replace",
+  "@confirm_replace_action": {
+    "description": "UI spec §12.4: Replace original, the button."
+  },
+  "confirm_discard_scan_title": "Discard this scan?",
+  "@confirm_discard_scan_title": {
+    "description": "UI spec §12.4; S2: deleting the last page."
+  },
+  "confirm_discard_scan_body": "All pages of this scan will be deleted.",
+  "@confirm_discard_scan_body": {
+    "description": "UI spec §12.4; S2: deleting the last page."
+  },
+  "confirm_discard_edits_title": "Discard your changes?",
+  "@confirm_discard_edits_title": {
+    "description": "UI spec §12.4; V2: Cancel with changes."
+  },
+  "confirm_discard_edits_body": "Your edits since opening edit mode will be lost.",
+  "@confirm_discard_edits_body": {
+    "description": "UI spec §12.4; V2: Cancel with changes."
+  },
+  "confirm_stop_job_title": "Stop this job?",
+  "@confirm_stop_job_title": {
+    "description": "UI spec §12.4; T2: cancel a job running > 30 s (a tool may name its own, 'Stop compressing?')."
+  },
+  "confirm_stop_job_body": "Your original file stays unchanged.",
+  "@confirm_stop_job_body": {
+    "description": "UI spec §12.4; T2: cancel a job running > 30 s."
+  },
+  "confirm_remove_signature_title": "Remove this signature?",
+  "@confirm_remove_signature_title": {
+    "description": "UI spec §12.4: remove a saved signature (copy filled in by DK-0225)."
+  },
+  "confirm_remove_signature_body": "It's deleted from this phone.",
+  "@confirm_remove_signature_body": {
+    "description": "UI spec §12.4: remove a saved signature (copy filled in by DK-0225)."
+  },
+  "common_keep": "Keep",
+  "@common_keep": {
+    "description": "The way out of a discard dialog (UI spec §12.4)."
+  },
+  "common_keep_editing": "Keep editing",
+  "@common_keep_editing": {
+    "description": "V2's discard dialog: the way out."
+  },
+  "common_keep_going": "Keep going",
+  "@common_keep_going": {
+    "description": "T2's stop dialog: the way out."
+  },
+  "common_discard": "Discard",
+  "@common_discard": {
+    "description": "Discard a scan or edits (danger)."
+  },
+  "common_stop": "Stop",
+  "@common_stop": {
+    "description": "Stop a running job."
+  },
+  "common_remove": "Remove",
+  "@common_remove": {
+    "description": "Remove a saved signature (danger)."
+  },
+  "form_previous_field": "Previous field",
+  "@form_previous_field": {
+    "description": "The form accessory bar over the keyboard (UI spec §12.7)."
+  },
+  "form_next_field": "Next field",
+  "@form_next_field": {
+    "description": "The form accessory bar over the keyboard (UI spec §12.7)."
   }
 }

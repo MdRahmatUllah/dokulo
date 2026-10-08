@@ -6,6 +6,7 @@ import 'package:doc_vision/doc_vision.dart';
 import 'package:image/image.dart' as img;
 
 import '../tool_job.dart';
+import 'output_name.dart';
 
 /// Make text searchable's input (T2): the files, where the outputs go, the
 /// recognition language.
@@ -138,7 +139,12 @@ class OcrJob extends ToolJob<OcrInput> {
             JobProgress('recognising', pageIndex: done++, pageCount: total),
           );
         }
-        final output = current = _freeName(input, file, outputs);
+        final output = current = outputName(
+          input.outputDir,
+          file,
+          input.suffix,
+          outputs,
+        );
         final overlay = await OcrTextLayer.writeOverlay(
           file,
           words,
@@ -185,19 +191,6 @@ class OcrJob extends ToolJob<OcrInput> {
       ),
     );
     return path;
-  }
-
-  /// `<name><suffix>.pdf` in the output folder, "(2)" and up when taken.
-  static String _freeName(OcrInput input, String file, List<String> taken) {
-    final base = file
-        .split(RegExp(r'[\\/]'))
-        .last
-        .replaceAll(RegExp(r'\.pdf$', caseSensitive: false), '');
-    for (var n = 1; ; n++) {
-      final name =
-          '${input.outputDir}/$base${input.suffix}${n == 1 ? '' : ' ($n)'}.pdf';
-      if (!taken.contains(name) && !File(name).existsSync()) return name;
-    }
   }
 }
 

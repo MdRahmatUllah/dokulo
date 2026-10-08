@@ -1,7 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../catalogue/catalogue.dart';
+import '../components/dk_scan_button.dart';
+import '../components/motion/dk_transition_motion.dart';
 import '../screens/placeholder_screen.dart';
 import 'app_shell.dart';
 
@@ -19,6 +23,9 @@ abstract final class Routes {
   static const models = '/me/models'; // M2
   static String settings(String page) => '/me/settings/$page'; // M3
   static const scan = '/scan'; // S1
+
+  /// S1 in a mode from the Scan button's menu.
+  static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
   static String tool(String toolId) => '/tool/$toolId'; // T2
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
@@ -26,6 +33,9 @@ abstract final class Routes {
   static String viewer(String fileId, {bool edit = false}) =>
       '/viewer/$fileId${edit ? '?mode=edit' : ''}';
   static String organize(String fileId) => '/organize/$fileId'; // P1
+
+  /// The component catalogue (`lib/catalogue/`): debug builds only.
+  static const catalogue = '/dev/catalogue';
 }
 
 GoRoute _screen(String path, String id, {List<RouteBase> routes = const []}) =>
@@ -90,7 +100,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
       fullScreen(
         Routes.scan,
-        (_) => const PlaceholderScreen('S1'),
+        (s) => PlaceholderScreen(
+          'S1',
+          detail: s.uri.queryParameters['mode'] ?? '',
+        ),
         routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
       ),
       fullScreen(
@@ -103,17 +116,38 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
         ],
       ),
-      fullScreen(
-        '/viewer/:fileId',
-        (s) => PlaceholderScreen(
-          s.uri.queryParameters['mode'] == 'edit' ? 'V2' : 'V1',
-          detail: s.pathParameters['fileId']!,
+      GoRoute(
+        path: '/viewer/:fileId',
+        parentNavigatorKey: root,
+        // The file's thumbnail expands into the first page (DK-0046).
+        pageBuilder: (context, s) => dkViewerPage(
+          context,
+          key: s.pageKey,
+          child: _HomeUnderneath(
+            child: PlaceholderScreen(
+              s.uri.queryParameters['mode'] == 'edit' ? 'V2' : 'V1',
+              detail: s.pathParameters['fileId']!,
+            ),
+          ),
         ),
       ),
       fullScreen(
         '/organize/:fileId',
         (s) => PlaceholderScreen('P1', detail: s.pathParameters['fileId']!),
       ),
+      // The component catalogue: debug builds only (kDebugMode is a
+      // constant, so a release build doesn't contain it).
+      if (kDebugMode)
+        fullScreen(
+          Routes.catalogue,
+          (_) => const CatalogueScreen(),
+          routes: [
+            fullScreen(
+              ':name',
+              (s) => CatalogueEntryScreen(s.pathParameters['name']!),
+            ),
+          ],
+        ),
     ],
   );
 }
