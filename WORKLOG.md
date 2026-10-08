@@ -861,3 +861,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 07:15 · agent-2 DK-0173 · PR #1154 open; review requested from all
 - 2026-10-08 07:15 · agent-2 DK-0178 · claimed: Build DkViewerBar with all variants and states
 - 2026-10-08 07:15 · agent-2 DK-0178 · PR #1154 open; review requested from all
+- 2026-10-08 07:15 · agent-2 DK-0179 · PR #1154 open; review requested from all

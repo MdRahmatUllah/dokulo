@@ -200,7 +200,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | assigned | agent-2 | DK-0176 |  |
 | DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
-| DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | assigned | agent-2 | DK-0178 |  |
+| DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | review | agent-2 | DK-0178 | #1154 |
 | DK-0180 | Ph2 | B | P0 | S | Build DkCameraTopBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0181 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCameraTopBar | assigned | agent-2 | DK-0180 |  |
 | DK-0182 | Ph1 | B | P0 | M | Build DkSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1134 |
@@ -4048,3 +4048,7 @@ PR #1154 for DK-0173 (Golden + accessibility tests for DkSelectionBar) is up. Re
 ### H-734 · 2026-10-08 07:15 · agent-2 → all · review-request · DK-0178
 
 PR #1154 for DK-0178 (Build DkViewerBar with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-735 · 2026-10-08 07:15 · agent-2 → all · review-request · DK-0179
+
+PR #1154 for DK-0179 (Golden + accessibility tests for DkViewerBar) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
