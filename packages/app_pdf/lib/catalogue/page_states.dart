@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/dk_magnifier.dart';
 import '../components/dk_page_grid.dart';
 import '../components/dk_page_thumb.dart';
 import '../components/dk_page_tray.dart';
@@ -171,4 +172,53 @@ class _PageGridStatesState extends State<PageGridStates> {
       ),
     ),
   );
+}
+
+/// DkMagnifier (DK-0158): over a page, with the finger on the title bar
+/// (the loupe above it) and near the top edge (flipped below). The finger is
+/// marked with a small ring.
+class MagnifierStates extends StatelessWidget {
+  const MagnifierStates({super.key});
+
+  static const fingers = [Offset(80, 230), Offset(250, 40)];
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return ColoredBox(
+      color: t.color.surfaceSunken,
+      child: SizedBox(
+        height: 320,
+        child: Stack(
+          children: [
+            Positioned(
+              left: t.space.l,
+              top: t.space.l,
+              width: 300,
+              height: 288,
+              child: ColoredBox(
+                color: t.color.pageWhite,
+                child: const FittedBox(child: CataloguePage()),
+              ),
+            ),
+            for (final f in fingers) ...[
+              Positioned(
+                left: f.dx - 6,
+                top: f.dy - 6,
+                child: Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: t.color.danger),
+                  ),
+                ),
+              ),
+              DkMagnifier(finger: f),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
 }
