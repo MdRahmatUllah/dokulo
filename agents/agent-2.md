@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 04:58
+last-seen: 2026-10-08 05:03
 last-read: 539
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0164 in review as PR #1143: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Open: #1137 (action bar+empty), #1139 (dialog+banner). Built locally, PR when a slot frees: crop (feat/DK-0156-crop), boxes (feat/DK-0160-boxes), menu (feat/DK-0188-menu), toast (feat/DK-0190-toast), loading (feat/DK-0198-loading), sign+split (feat/DK-0208-ai-sign), ask (feat/DK-0212-ask), progress sheet (feat/DK-0194-progress), top bar (feat/DK-0164-topbar on #1135). Next build: DkTabBar + DkNavRail on the top bar branch.
+Open: #1139 (dialog+banner, fixes pushed), #1143 (top bar). Built locally, PR as slots free (P0 Ph1 first): menu (feat/DK-0188-menu, stacked on old sheet branch: rebase on main), toast (feat/DK-0190-toast), loading (feat/DK-0198-loading), tab bar+rail + selection/viewer/camera bars + tool strip/markup bar (feat/DK-0172-bottom-bars, stacked on feat/DK-0164-topbar), crop (feat/DK-0156-crop), boxes (feat/DK-0160-boxes), sign+split (feat/DK-0208-ai-sign), ask (feat/DK-0212-ask), progress (feat/DK-0194-progress), chat+diff (feat/DK-0210-chat-diff). Waiting on agent-1: StatusDot (MiniJobBar), Segmented (SignaturePad), Slider/Stepper/ColorRow (ToolOptionsSheet), CheckboxRow (DetectionGroup).
 
 ## Memory
 
