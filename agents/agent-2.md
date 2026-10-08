@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0171 Golden + accessibility tests for DkActionBar — claimed 2026-10-08 04:55.
 
 ## Next
 
