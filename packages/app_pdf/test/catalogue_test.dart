@@ -51,7 +51,13 @@ void main() {
 
   // Every component's targets, for the "Golden + accessibility tests" tasks:
   // 48 dp and labelled. A component the spec makes smaller keeps iOS's 44.
-  const ios44 = {'DkMenu'}; // §11.7: 44 dp rows
+  const ios44 = {
+    'DkMenu', // §11.7: 44 dp rows
+    'DkToolStrip · DkMarkupBar', // §11.8: the markup pill is 44 tall
+    'DkChatBubble', // §11.3: DkPageChip's 44 target
+    'DkDetectionGroup', // §11.3: DkPageChip's 44 target
+    'DkRedactionBox · DkSignatureStamp', // the × is an icon button: 44
+  };
   for (final entry in catalogue) {
     testWidgets('${entry.name}: tap targets and labels', (tester) async {
       tester.view.physicalSize = const Size(393, 4000);
