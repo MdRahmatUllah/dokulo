@@ -196,9 +196,13 @@ class _Toolbar extends StatelessWidget {
                   )
                 : child;
             return NavigationToolbar(
-              leading: leading == null
-                  ? SizedBox(width: t.space.l - t.space.xs - spacing)
-                  : side(leading!),
+              // Nothing on the left: a left-aligned title still starts 16
+              // in; a centred one needs no spacer.
+              leading: leading != null
+                  ? side(leading!)
+                  : centred
+                  ? null
+                  : SizedBox(width: t.space.l - t.space.xs - spacing),
               middle: middle,
               trailing: side(trailing),
               centerMiddle: centred,

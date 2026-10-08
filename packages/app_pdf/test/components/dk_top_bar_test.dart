@@ -331,4 +331,39 @@ void main() {
     }
     handle.dispose();
   });
+
+  testWidgets('iOS with nothing on the left: the small bar and the large bar '
+      'lay out, the title centred', (tester) async {
+    phone(tester);
+    await tester.pumpWidget(
+      app(
+        const Scaffold(
+          appBar: DkTopBar(title: 'Files', leading: DkTopBarLeading.none),
+        ),
+        platform: TargetPlatform.iOS,
+      ),
+    );
+    expect(tester.takeException(), isNull);
+    expect(tester.getCenter(find.text('Files')).dx, closeTo(393 / 2, 1));
+    final scroll = ScrollController(initialScrollOffset: 200);
+    addTearDown(scroll.dispose);
+    await tester.pumpWidget(
+      app(
+        Scaffold(
+          body: CustomScrollView(
+            controller: scroll,
+            slivers: [
+              const DkLargeTopBar(title: 'Files'),
+              SliverList.list(
+                children: [for (var i = 0; i < 40; i++) Text('row $i')],
+              ),
+            ],
+          ),
+        ),
+        platform: TargetPlatform.iOS,
+      ),
+    );
+    expect(tester.takeException(), isNull);
+    expect(tester.getCenter(find.text('Files').last).dx, closeTo(393 / 2, 1));
+  });
 }
