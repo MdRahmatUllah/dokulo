@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0174 Build DkMiniJobBar with all variants and states — claimed 2026-10-08 13:41.
+DK-0174 in review as PR #1170: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
