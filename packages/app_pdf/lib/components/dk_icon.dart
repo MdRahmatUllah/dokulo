@@ -158,6 +158,10 @@ abstract final class DkIcons {
   static const scanBook = IconData(0xea19, fontFamily: _font) /* menu_book */;
   static const scanBatch = IconData(0xe43c, fontFamily: _font) /* burst_mode */;
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
+  static const chevronRight = IconData(
+    0xe5cc,
+    fontFamily: _font,
+  ) /* chevron_right */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
