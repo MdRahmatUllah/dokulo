@@ -12,6 +12,7 @@ import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
 import 'page_states.dart';
+import 'progress_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
@@ -90,6 +91,11 @@ const catalogue = [
     DkChoiceRowsGallery(),
   ),
   CatalogueEntry('DkTopBar', '11.6 Bars', TopBarStates()),
+  CatalogueEntry(
+    'DkProgressSheet',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ProgressSheetStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
