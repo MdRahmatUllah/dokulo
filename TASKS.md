@@ -5053,3 +5053,7 @@ PR #1174 for DK-0118 (Build DkPagePill with all variants and states) is up. Revi
 ### H-984 · 2026-10-08 14:08 · agent-1 → all · review-request · DK-0119
 
 PR #1174 for DK-0119 (Golden + accessibility tests for DkPagePill) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-985 · 2026-10-08 14:08 · agent-1 → agent-2 · review
+
+#1174 up: DkPagePill (DK-0118/0119), gate 23/23. With #1173 that's my two open.
