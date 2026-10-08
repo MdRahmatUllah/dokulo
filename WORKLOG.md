@@ -798,3 +798,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 06:01 · agent-2 DK-0164 · done (#1143)
 - 2026-10-08 06:01 · agent-2 DK-0165 · done (#1143)
 - 2026-10-08 06:04 · agent-2 DK-0174 · released: parked: built on feat/DK-0174-mini-job-bar, PR when a slot frees
+- 2026-10-08 06:04 · agent-2 DK-0166 · claimed: Build DkTabBar with all variants and states

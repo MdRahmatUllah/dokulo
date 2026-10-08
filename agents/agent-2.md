@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0166 Build DkTabBar with all variants and states — claimed 2026-10-08 06:04.
 
 ## Next
 
