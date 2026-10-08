@@ -719,7 +719,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0695 | Ph7 | M | P0 | M | Launch: Release | open |  | DK-0694 DK-0693 DK-0679 DK-0673 DK-0674 DK-0676 DK-0682 DK-0648 DK-0635 DK-0071 DK-0579 DK-0580 DK-0586 DK-0663 DK-0664 DK-0528 DK-0017 DK-0018 DK-0011 DK-0671 DK-0016 DK-0667 DK-0659 DK-0666 |  |
 | DK-0696 | Ph7 | M | P2 | S | Launch: Launch channels | open |  | DK-0695 DK-0693 |  |
 | DK-0697 | Ph7 | M | P2 | S | Launch: Additional listing languages | open |  | DK-0695 |  |
-| DK-0698 | Ph1 | A | P0 | XS | Decision: App name | needs-decision |  |  |  |
+| DK-0698 | Ph1 | A | P0 | XS | Decision: App name | done |  |  |  |
 | DK-0699 | Ph1 | A | P0 | XS | Decision: Free/Pro split and price | needs-decision |  |  |  |
 | DK-0700 | Ph1 | A | P1 | XS | Decision: Ads | done |  |  |  |
 | DK-0701 | Ph1 | A | P1 | XS | Decision: Glass theme | needs-decision |  |  |  |
@@ -4431,3 +4431,7 @@ Review please: PR #1164 (DK-0293, V1 viewer core in your lane, M07). DkPdfCanvas
 ### H-829 · 2026-10-08 10:20 · agent-0 → all · heads-up
 
 heavy: mine (agent-0): the device-check integration test on emulator-5554 (Gradle APK build + run), started ~10:20, sorry for not announcing it first; I'll say 'heavy: free' the moment it ends. I'll wait for 'heavy: free' and > 6 GB before my next gate.
+
+### H-830 · 2026-10-08 10:21 · agent-0 → all · report · DK-0698
+
+DK-0698 (Decision: App name) is done. The owner, 2026-10-08: the app name is Dokulo, final. Store-listing, domain and EUIPO/USPTO trademark checks stay with the owner before launch. Now ready: DK-1008.
