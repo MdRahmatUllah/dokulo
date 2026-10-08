@@ -1,3 +1,4 @@
+import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -132,9 +133,21 @@ void main() {
     tester,
   ) async {
     await pumpAt(tester, Routes.files);
-    await tester.tap(find.byTooltip('Scan'));
+    await tester.tap(find.bySemanticsLabel('Scan'));
     await tester.pumpAndSettle();
     expect(title(tester), 'S1');
     expect(tabBarShown(tester), isFalse);
+  });
+
+  testWidgets('a long press on Scan picks a mode for the scanner', (
+    tester,
+  ) async {
+    await pumpAt(tester, Routes.home);
+    await tester.longPress(find.bySemanticsLabel('Scan'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('ID card'));
+    await tester.pumpAndSettle();
+    expect(title(tester), 'S1 idCard');
+    expect(Routes.scanIn(DkScanMode.book), '/scan?mode=book');
   });
 }

@@ -138,6 +138,13 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const scanDocument = IconData(
+    0xe873,
+    fontFamily: _font,
+  ) /* description */;
+  static const scanIdCard = IconData(0xea67, fontFamily: _font) /* badge */;
+  static const scanBook = IconData(0xea19, fontFamily: _font) /* menu_book */;
+  static const scanBatch = IconData(0xe43c, fontFamily: _font) /* burst_mode */;
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
   static const arrowForward = IconData(
     0xe5c8,
