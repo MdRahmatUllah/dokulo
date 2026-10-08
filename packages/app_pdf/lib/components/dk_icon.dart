@@ -211,6 +211,15 @@ abstract final class DkIcons {
   static const shape = IconData(0xe602, fontFamily: _font) /* shapes */;
   static const note = IconData(0xf1fc, fontFamily: _font) /* sticky_note_2 */;
   static const pan = IconData(0xe925, fontFamily: _font) /* pan_tool */;
+  static const copy = IconData(0xe14d, fontFamily: _font) /* content_copy */;
+  static const underline = IconData(
+    0xe249,
+    fontFamily: _font,
+  ) /* format_underlined */;
+  static const strike = IconData(
+    0xe257,
+    fontFamily: _font,
+  ) /* strikethrough_s */;
   static const colour = IconData(0xe40a, fontFamily: _font) /* palette */;
   static const reveal = IconData(0xe8f4, fontFamily: _font) /* visibility */;
   static const conceal = IconData(
