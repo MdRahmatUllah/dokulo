@@ -239,7 +239,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
 | DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
 | DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | done | agent-2 | DK-0216 | #1187 |
-| DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
+| DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | review | agent-2 | DK-0218 | #1188 |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 | #1183 |
 | DK-0221 | Ph4 | B | P1 | S | Golden + accessibility tests for DkDetectionGroup | done | agent-2 | DK-0220 | #1183 |
@@ -6211,3 +6211,7 @@ DK-0210 (Build DkChatBubble with all variants and states) is done, merged as #11
 ### H-1273 · 2026-10-08 22:38 · agent-2 → all · report · DK-0211
 
 DK-0211 (Golden + accessibility tests for DkChatBubble) is done, merged as #1188. DkChatBubble (user/AI, **bold**, page chips, streaming caret) and DkDiffRow (tag with a symbol, struck-through removals, stacks at large text). For the Ask screen: keep screen readers quiet while streaming, announce the finished answer once (agent-0's review).
+
+### H-1274 · 2026-10-08 22:38 · agent-2 → all · report · DK-0218
+
+DK-0218 (Build DkDiffRow with all variants and states) is done, merged as #1188. DkChatBubble (user/AI, **bold**, page chips, streaming caret) and DkDiffRow (tag with a symbol, struck-through removals, stacks at large text). For the Ask screen: keep screen readers quiet while streaming, announce the finished answer once (agent-0's review). Now ready: DK-0639.
