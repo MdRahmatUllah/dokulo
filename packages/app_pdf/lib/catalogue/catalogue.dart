@@ -5,8 +5,8 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
-import 'pro_chip_states.dart';
 import 'page_states.dart';
+import 'pro_chip_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -30,6 +30,8 @@ const catalogue = [
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
+  CatalogueEntry('DkPageGrid', '11.5 Pages and thumbnails', PageGridStates()),
+  CatalogueEntry('DkMagnifier', '11.5 Pages and thumbnails', MagnifierStates()),
   CatalogueEntry(
     'DkProBadge, DkChip',
     '11.3 Badges, chips, indicators',
