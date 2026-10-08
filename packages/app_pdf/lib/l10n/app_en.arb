@@ -636,6 +636,34 @@
   "@shell_button_scan_hint": {
     "description": "Screen readers: what a long press on the Scan button does."
   },
+  "position_top_left": "Top left",
+  "@position_top_left": {
+    "description": "DkPositionPicker target (screen readers)."
+  },
+  "position_top_centre": "Top centre",
+  "@position_top_centre": {
+    "description": "DkPositionPicker target."
+  },
+  "position_top_right": "Top right",
+  "@position_top_right": {
+    "description": "DkPositionPicker target."
+  },
+  "position_bottom_left": "Bottom left",
+  "@position_bottom_left": {
+    "description": "DkPositionPicker target."
+  },
+  "position_bottom_centre": "Bottom centre",
+  "@position_bottom_centre": {
+    "description": "DkPositionPicker target."
+  },
+  "position_bottom_right": "Bottom right",
+  "@position_bottom_right": {
+    "description": "DkPositionPicker target."
+  },
+  "position_centre": "Centre",
+  "@position_centre": {
+    "description": "DkPositionPicker: the page centre (watermark)."
+  },
   "viewer_page_chip": "p. {n}",
   "@viewer_page_chip": {
     "description": "DkPageChip: a page reference in AI answers (UI spec §11.3).",
@@ -669,6 +697,151 @@
   "scanner_button_shutter": "Take photo",
   "@scanner_button_shutter": {
     "description": "Screen readers: the scanner's shutter button."
+  },
+  "common_loading": "Loading",
+  "@common_loading": {
+    "description": "Screen-reader label of DkSkeleton and DkLoadingSpinner (UI spec §11.7)."
+  },
+  "common_clear": "Clear",
+  "@common_clear": {
+    "description": "Screen readers: the × that empties a text field."
+  },
+  "field_password_show": "Show password",
+  "@field_password_show": {
+    "description": "DkPasswordField reveal toggle (screen readers)."
+  },
+  "field_password_hide": "Hide password",
+  "@field_password_hide": {
+    "description": "DkPasswordField reveal toggle (screen readers)."
+  },
+  "field_password_weak": "Weak",
+  "@field_password_weak": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "field_password_ok": "OK",
+  "@field_password_ok": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "field_password_strong": "Strong",
+  "@field_password_strong": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "confirm_delete_forever_title": "{n, plural, one{Delete this file for good?} other{Delete {n} files for good?}}",
+  "@confirm_delete_forever_title": {
+    "description": "UI spec §12.4: delete forever and empty Recently deleted (§16, 'Confirm empty').",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "confirm_cant_undo": "This can't be undone.",
+  "@confirm_cant_undo": {
+    "description": "UI spec §12.4: the body of delete forever and empty Recently deleted."
+  },
+  "confirm_redact_title": "Black out for good?",
+  "@confirm_redact_title": {
+    "description": "UI spec §12.4: apply redaction (copy filled in by DK-0225)."
+  },
+  "confirm_redact_body": "What you blacked out is removed from the file and can't be recovered.",
+  "@confirm_redact_body": {
+    "description": "UI spec §12.4: apply redaction (copy filled in by DK-0225)."
+  },
+  "confirm_redact_action": "Black out",
+  "@confirm_redact_action": {
+    "description": "UI spec §12.4: apply redaction, the button."
+  },
+  "confirm_replace_title": "Replace the original file?",
+  "@confirm_replace_title": {
+    "description": "UI spec §12.4; T3 (§18): Replace original."
+  },
+  "confirm_replace_body": "The original will be kept in Versions for 30 days.",
+  "@confirm_replace_body": {
+    "description": "UI spec §12.4; T3 (§18): Replace original."
+  },
+  "confirm_replace_action": "Replace",
+  "@confirm_replace_action": {
+    "description": "UI spec §12.4: Replace original, the button."
+  },
+  "confirm_discard_scan_title": "Discard this scan?",
+  "@confirm_discard_scan_title": {
+    "description": "UI spec §12.4; S2: deleting the last page."
+  },
+  "confirm_discard_scan_body": "All pages of this scan will be deleted.",
+  "@confirm_discard_scan_body": {
+    "description": "UI spec §12.4; S2: deleting the last page."
+  },
+  "confirm_discard_edits_title": "Discard your changes?",
+  "@confirm_discard_edits_title": {
+    "description": "UI spec §12.4; V2: Cancel with changes."
+  },
+  "confirm_discard_edits_body": "Your edits since opening edit mode will be lost.",
+  "@confirm_discard_edits_body": {
+    "description": "UI spec §12.4; V2: Cancel with changes."
+  },
+  "confirm_stop_job_title": "Stop this job?",
+  "@confirm_stop_job_title": {
+    "description": "UI spec §12.4; T2: cancel a job running > 30 s (a tool may name its own, 'Stop compressing?')."
+  },
+  "confirm_stop_job_body": "Your original file stays unchanged.",
+  "@confirm_stop_job_body": {
+    "description": "UI spec §12.4; T2: cancel a job running > 30 s."
+  },
+  "confirm_remove_signature_title": "Remove this signature?",
+  "@confirm_remove_signature_title": {
+    "description": "UI spec §12.4: remove a saved signature (copy filled in by DK-0225)."
+  },
+  "confirm_remove_signature_body": "It's deleted from this phone.",
+  "@confirm_remove_signature_body": {
+    "description": "UI spec §12.4: remove a saved signature (copy filled in by DK-0225)."
+  },
+  "common_keep": "Keep",
+  "@common_keep": {
+    "description": "The way out of a discard dialog (UI spec §12.4)."
+  },
+  "common_keep_editing": "Keep editing",
+  "@common_keep_editing": {
+    "description": "V2's discard dialog: the way out."
+  },
+  "common_keep_going": "Keep going",
+  "@common_keep_going": {
+    "description": "T2's stop dialog: the way out."
+  },
+  "common_discard": "Discard",
+  "@common_discard": {
+    "description": "Discard a scan or edits (danger)."
+  },
+  "common_stop": "Stop",
+  "@common_stop": {
+    "description": "Stop a running job."
+  },
+  "common_remove": "Remove",
+  "@common_remove": {
+    "description": "Remove a saved signature (danger)."
+  },
+  "form_previous_field": "Previous field",
+  "@form_previous_field": {
+    "description": "The form accessory bar over the keyboard (UI spec §12.7)."
+  },
+  "form_next_field": "Next field",
+  "@form_next_field": {
+    "description": "The form accessory bar over the keyboard (UI spec §12.7)."
+  },
+  "field_range_pick": "Pick pages",
+  "@field_range_pick": {
+    "description": "DkRangeField trailing button: choose pages on thumbnails."
+  },
+  "field_range_hint": "1–3, 5, 8–end",
+  "@field_range_hint": {
+    "description": "DkRangeField placeholder (UI spec §11.4)."
+  },
+  "common_decrease": "Decrease",
+  "@common_decrease": {
+    "description": "DkStepper − button (screen readers)."
+  },
+  "common_increase": "Increase",
+  "@common_increase": {
+    "description": "DkStepper + button (screen readers)."
   },
   "viewer_page_pill": "Page {i} of {n}",
   "@viewer_page_pill": {
