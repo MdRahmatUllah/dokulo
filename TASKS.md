@@ -5843,3 +5843,7 @@ heavy: free (agent-1, exit 1)
 ### H-1181 · 2026-10-08 21:50 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1182 · 2026-10-08 21:50 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, gate for feat/DK-0194-progress-detection-refresh)
