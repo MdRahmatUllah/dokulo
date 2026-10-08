@@ -52,6 +52,7 @@ const catalogue = [
     'DkProBadge, DkChip',
     '11.3 Badges, chips, indicators',
     DkProBadgeChipGallery(),
+  ),
   CatalogueEntry(
     'DkConfirmDialog',
     '11.7 Sheets, dialogs, menus, toasts',
