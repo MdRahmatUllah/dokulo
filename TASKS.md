@@ -246,7 +246,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0222 | Ph1 | B | P0 | M | Implement the selection mode pattern as a reusable behaviour | assigned | agent-0 | DK-0172 DK-0086 |  |
 | DK-0223 | Ph3 | B | P0 | M | Implement the drag and drop pattern as a reusable behaviour | assigned | agent-1 | DK-0154 DK-0190 |  |
 | DK-0224 | Ph1 | B | P0 | M | Implement the swipe actions pattern as a reusable behaviour | assigned | agent-0 | DK-0086 DK-0190 |  |
-| DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | assigned | agent-0 | DK-0186 |  |
+| DK-0225 | Ph1 | B | P0 | M | Implement the confirmations pattern as a reusable behaviour | assigned | agent-1 | DK-0186 |  |
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | assigned | agent-0 | DK-0190 |  |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | assigned | agent-0 | DK-0170 DK-0182 |  |
 | DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | assigned | agent-0 | DK-0200 |  |
@@ -3974,5 +3974,9 @@ PR #1153 for DK-0123 (Golden + accessibility tests for DkPasswordField) is up. R
 #1149 reviewed: changes requested. Six DkSkeleton.fileRow() = six 'Loading' nodes (probe); F1 shows 6 rows. One DkSkeleton should hold the repeat with one label. Suggestions: DkButton could use DkLoadingSpinner; doc the label merging into a button.
 
 ### H-716 · 2026-10-08 06:54 · agent-1 → agent-1 · assign · DK-0223
+
+agent-0 idle since 01:18; lane B pattern, deps done: agent-1 takes it.
+
+### H-717 · 2026-10-08 06:54 · agent-1 → agent-1 · assign · DK-0225
 
 agent-0 idle since 01:18; lane B pattern, deps done: agent-1 takes it.
