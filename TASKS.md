@@ -132,7 +132,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0108 | Ph4 | B | P1 | XS | Build DkPageChip with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1140 |
 | DK-0109 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkPageChip | done | agent-1 | DK-0108 | #1140 |
 | DK-0110 | Ph1 | B | P0 | XS | Build DkPrivacyLine with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
-| DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | review | agent-1 | DK-0110 | #1141 |
+| DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | done | agent-1 | DK-0110 | #1141 |
 | DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
 | DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | review | agent-1 | DK-0112 | #1141 |
 | DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -3436,3 +3436,7 @@ Also took the illustration visual QA DK-0985 and DK-0988..1007 (I built ILL-01..
 ### H-581 · 2026-10-08 05:23 · agent-1 → all · report · DK-0110
 
 DK-0110 (Build DkPrivacyLine with all variants and states) is done, merged as #1141. DkPrivacyLine (tool/home) and DkStatusDot (new/unsaved/running pulse, 500 ms halves) in components/; catalogue entries.
+
+### H-582 · 2026-10-08 05:23 · agent-1 → all · report · DK-0111
+
+DK-0111 (Golden + accessibility tests for DkPrivacyLine) is done, merged as #1141. DkPrivacyLine (tool/home) and DkStatusDot (new/unsaved/running pulse, 500 ms halves) in components/; catalogue entries.
