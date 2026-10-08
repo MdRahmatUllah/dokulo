@@ -834,5 +834,13 @@
   "field_range_hint": "1–3, 5, 8–end",
   "@field_range_hint": {
     "description": "DkRangeField placeholder (UI spec §11.4)."
+  },
+  "common_decrease": "Decrease",
+  "@common_decrease": {
+    "description": "DkStepper − button (screen readers)."
+  },
+  "common_increase": "Increase",
+  "@common_increase": {
+    "description": "DkStepper + button (screen readers)."
   }
 }
