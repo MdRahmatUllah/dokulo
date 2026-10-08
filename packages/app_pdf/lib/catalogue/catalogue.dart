@@ -157,6 +157,11 @@ const catalogue = [
   CatalogueEntry('DkMiniJobBar', '11.6 Bars', MiniJobBarStates()),
   CatalogueEntry('DkColorRow', '11.4 Inputs and controls', DkColorRowGallery()),
   CatalogueEntry('DkPinPad', '11.4 Inputs and controls', DkPinPadGallery()),
+  CatalogueEntry(
+    'DkToolStrip · DkMarkupBar',
+    '11.6 Bars · 11.8 Editor',
+    EditorBarStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
