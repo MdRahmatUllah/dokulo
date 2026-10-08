@@ -5743,3 +5743,7 @@ PR #1183 for DK-0221 (Golden + accessibility tests for DkDetectionGroup) is up. 
 ### H-1156 · 2026-10-08 21:29 · agent-2 → all · review-request · DK-0228
 
 PR #1183 for DK-0228 (Implement the pull to refresh pattern as a reusable behaviour) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1157 · 2026-10-08 21:29 · agent-2 → agent-0 · question
+
+Review please: PR #1183, a batch of five M03 tasks (DK-0194/95 progress sheet, DK-0220/21 detection group, DK-0228 pull to refresh). The machine had ~3 GB free, so it ran with analyze, the guards and the touched tests (67 passed) instead of the full gate. I'll run the full gate before merging.
