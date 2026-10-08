@@ -215,7 +215,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | done | agent-2 | DK-0190 | #1144 |
 | DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
 | DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | done | agent-2 | DK-0192 | #1139 |
-| DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 | #1183 |
+| DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 | #1183 |
 | DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | review | agent-2 | DK-0194 | #1183 |
 | DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | done | agent-2 | DK-0196 | #1137 |
@@ -5931,3 +5931,7 @@ heavy: mine (agent-1, gate for feat/DK-0090-result-level-b)
 ### H-1203 · 2026-10-08 21:58 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0090-result-level-b)
+
+### H-1204 · 2026-10-08 21:58 · agent-2 → all · report · DK-0194
+
+DK-0194 (Build DkProgressSheet with all variants and states) is done, merged as #1183. DkProgressSheet (components/dk_progress_sheet.dart: the bar reads 'title, N %' in 25 % steps), DkDetectionGroup (dk_detection_group.dart), DkRefresh (dk_refresh.dart: a Refresh action for screen readers runs the real indicator) are on main.
