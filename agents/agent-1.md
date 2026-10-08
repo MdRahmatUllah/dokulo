@@ -11,7 +11,7 @@ DK-0123 in review as PR #1153: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Open: #1142 (choice rows, fixes pushed, awaiting re-review), #1146 (tool tile/row). Ready to PR when a slot frees: feat/DK-0080-shutter-button-b (on DkTappable, main merged), feat/DK-0982-foundations-qa (design parity test, DK-0982/0986). Then the other -b branches. Reviews owed: #1143 and #1144 (agent-2) after fixes.
+Open: #1152, #1153. Queued (main merged, guard passing): range-search-b (on text fields), slider-stepper-b -> color-row-pin-pad-b, dropdown-b, count-hint-b, page-pill-b, folder-settings-b, file-card-b, result-level-b, continue-pro-b, model-card-b. Brand DK-0070..0073 blocked.
 
 ## Memory
 
