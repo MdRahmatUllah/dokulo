@@ -466,6 +466,7 @@ Every component below must exist in the Figma library with all listed variants a
 | Primary | `color.primary` | `color.onPrimary` | none |
 | Secondary | transparent | `color.primary` | 1 dp `color.outlineStrong` |
 | Tertiary (text) | transparent | `color.primary` | none |
+| Tonal | `color.primaryContainer` | `color.onPrimaryContainer` | none |
 | Destructive | `color.danger` | `color.onDanger` | none |
 | Destructive secondary | transparent | `color.danger` | 1 dp `color.danger` |
 | On camera | #FFFFFF @ 16 % | `color.onCamera` | none |

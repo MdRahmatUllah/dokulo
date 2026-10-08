@@ -224,29 +224,37 @@ class _DkBoxFrameState extends State<DkBoxFrame> {
   }
 }
 
-/// A 1 dp dashed rectangle, rounded by [radius] (CSS `border: 1px dashed`:
-/// 3 on, 3 off).
+/// A dashed rectangle, rounded by [radius]: CSS `border: 1px dashed` by
+/// default (3 on, 3 off), or [width] wide.
 class DkDashedBorder extends CustomPainter {
-  const DkDashedBorder(this.color, {this.radius = BorderRadius.zero});
+  const DkDashedBorder(
+    this.color, {
+    this.radius = BorderRadius.zero,
+    this.width = 1,
+  });
   final Color color;
   final BorderRadius radius;
+
+  /// The line's width; dashes and gaps are 3 widths, as CSS draws them.
+  final double width;
 
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = color
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
+      ..strokeWidth = width;
     final outline = Path()
-      ..addRRect(radius.toRRect(Offset.zero & size).deflate(0.5));
+      ..addRRect(radius.toRRect(Offset.zero & size).deflate(width / 2));
+    final dash = 3 * width;
     for (final metric in outline.computeMetrics()) {
-      for (var d = 0.0; d < metric.length; d += 6) {
-        canvas.drawPath(metric.extractPath(d, d + 3), paint);
+      for (var d = 0.0; d < metric.length; d += 2 * dash) {
+        canvas.drawPath(metric.extractPath(d, d + dash), paint);
       }
     }
   }
 
   @override
   bool shouldRepaint(DkDashedBorder old) =>
-      old.color != color || old.radius != radius;
+      old.color != color || old.radius != radius || old.width != width;
 }

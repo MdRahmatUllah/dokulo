@@ -119,6 +119,7 @@ abstract final class DkIcons {
 
   // Actions.
   static const close = IconData(0xe5cd, fontFamily: _font) /* close */;
+  static const open = IconData(0xe89e, fontFamily: _font) /* open_in_new */;
   static const search = IconData(0xef7a, fontFamily: _font) /* search */;
   static const previousField = IconData(
     0xe316,
