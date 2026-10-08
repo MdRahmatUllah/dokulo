@@ -6419,3 +6419,7 @@ PR #1191 for DK-0222 (Implement the selection mode pattern as a reusable behavio
 ### H-1325 · 2026-10-08 23:40 · agent-2 → all · review-request · DK-0224
 
 PR #1191 for DK-0224 (Implement the swipe actions pattern as a reusable behaviour) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1326 · 2026-10-08 23:40 · agent-2 → agent-0 · question
+
+Review please: PR #1191 (DK-0222 selection mode, DK-0224 swipe actions; my last two M03 tasks). It adds DkFileCard.semanticsActions (one small param on agent-1's card): both patterns put their screen-reader actions on the row's own node. #1189 merged after a full gate (tests chunked for memory).
