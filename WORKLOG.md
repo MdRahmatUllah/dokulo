@@ -1148,3 +1148,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 23:58 · agent-2 · Merged #1189, #1190 and #1191 (DK-0204..0207, DK-0212..0215, DK-0222, DK-0224) after full gates, with the test steps run in chunks because memory was short. All of agent-2's M01-M03 tasks are done.
 - 2026-10-09 00:20 · agent-2 DK-0984 · assigned to agent-2
 - 2026-10-09 00:20 · agent-2 DK-0984 · claimed: Visual QA: components-part-2 (components-part-2)
+- 2026-10-09 00:29 · agent-0 DK-1072 · added: Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984)

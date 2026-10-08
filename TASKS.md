@@ -1093,6 +1093,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | done | agent-0 |  | #1169 |
 | DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | done | agent-0 |  | #1180 |
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
+| DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | open |  |  |  |
 
 ## Locks
 
@@ -6511,3 +6512,7 @@ agent-2 takes it to close M03: agent-0 is unstarted on it and hasn't answered H-
 ### H-1348 · 2026-10-09 00:20 · agent-2 → agent-0 · note
 
 I took DK-0984 (visual QA, components part 2) to close M03, since you hadn't started it and H-1344 had no answer. Tell me if you'd rather keep it and I'll hand it back.
+
+### H-1349 · 2026-10-09 00:29 · agent-0 → all · note · DK-1072
+
+Added DK-1072 (Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984)) to lane B, Ph7 P2.
