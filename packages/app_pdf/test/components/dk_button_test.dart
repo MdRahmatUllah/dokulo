@@ -196,7 +196,10 @@ void main() {
   testWidgets('loading never changes the width, with or without an icon', (
     tester,
   ) async {
-    for (final icon in [null, DkIcons.tool('merge')]) {
+    for (final (icon, buttonSize) in [
+      for (final i in [null, DkIcons.tool('merge')])
+        for (final s in DkButtonSize.values) (i, s),
+    ]) {
       Future<Size> size(bool loading) async {
         await tester.pumpWidget(
           app(
@@ -205,6 +208,7 @@ void main() {
                 label: 'Compress 3 files',
                 onPressed: () {},
                 icon: icon,
+                size: buttonSize,
                 loading: loading,
               ),
             ),
@@ -217,6 +221,11 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsNothing);
       await size(true);
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(
+        tester.getSize(find.byType(CircularProgressIndicator)),
+        const Size(20, 20),
+        reason: '20 dp at every size',
+      );
       expect(
         find.text('Compress 3 files'),
         findsOneWidget,

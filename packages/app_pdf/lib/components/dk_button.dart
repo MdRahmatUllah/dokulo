@@ -154,9 +154,14 @@ class _DkButtonState extends State<DkButton> {
         : fill;
     final shape = BorderRadius.circular(radius);
 
+    // The spinner is 20 dp at every size (UI spec §11.1); beside a compact
+    // 16 dp icon's place it takes the extra 4 dp from the gap, so the width
+    // stays.
+    const spinner = 20.0;
+    final spinnerGap = gap - (spinner - iconSize.dp);
     final leading = widget.loading
         ? SizedBox.square(
-            dimension: iconSize.dp,
+            dimension: spinner,
             child: CircularProgressIndicator(strokeWidth: 2, color: ink),
           )
         : widget.icon == null
@@ -185,7 +190,7 @@ class _DkButtonState extends State<DkButton> {
           // Without an icon the spinner sits in the padding: the width stays.
           if (leading != null && widget.icon != null) ...[
             leading,
-            SizedBox(width: gap),
+            SizedBox(width: widget.loading ? spinnerGap : gap),
           ],
           Flexible(child: label),
         ],
@@ -197,7 +202,7 @@ class _DkButtonState extends State<DkButton> {
         children: [
           body,
           Positioned(
-            left: ((padding - iconSize.dp) / 2).clamp(t.space.xxs, padding),
+            left: ((padding - spinner) / 2).clamp(t.space.xxs, padding),
             child: leading!,
           ),
         ],
