@@ -1060,3 +1060,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 17:00 · agent-0 DK-1052 · done (#1180)
 - 2026-10-08 17:24 · agent-0 DK-1043 · claimed: Device check: tool output shows in the Files apps under Dokulo (DK-0006)
 - 2026-10-08 17:24 · agent-0 DK-1043 · PR #1181 open; review requested from all
+- 2026-10-08 17:24 · agent-0 DK-1047 · claimed: Device check: kill the app mid-compress, relaunch (DK-0021)

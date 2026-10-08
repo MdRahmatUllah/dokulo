@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1043 in review as PR #1181: answer the review; re-run the gate if main moved, then merge.
+DK-1047 Device check: kill the app mid-compress, relaunch (DK-0021) — claimed 2026-10-08 17:24.
 
 ## Next
 
