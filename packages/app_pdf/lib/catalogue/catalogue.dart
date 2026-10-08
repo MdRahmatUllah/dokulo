@@ -192,6 +192,11 @@ const catalogue = [
     '11.7 Sheets, dialogs, menus, toasts',
     ProgressSheetStates(),
   ),
+  CatalogueEntry(
+    'DkRedactionBox · DkSignatureStamp',
+    '11.5 Pages and thumbnails',
+    BoxStates(),
+  ),
   CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
   CatalogueEntry('DkFileCard', '11.2 Tiles and cards', DkFileCardGallery()),
 ];
