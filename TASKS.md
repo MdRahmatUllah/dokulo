@@ -496,7 +496,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0472 | Ph3 | B | P1 | XS | Repair PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0473 | Ph3 | C | P1 | S | Repair PDF: golden-PDF and widget tests | open |  | DK-0468 DK-0658 |  |
 | DK-0474 | Ph5 | A | P1 | M | Make text searchable: implement the ocr ToolJob (engine) | review | agent-0 | DK-0400 DK-0394 DK-0270 DK-0008 | #1124 |
-| DK-0475 | Ph5 | C | P1 | M | Make text searchable: T2 options UI | open |  | DK-0370 DK-0474 |  |
+| DK-0475 | Ph5 | C | P1 | M | Make text searchable: T2 options UI | open |  | DK-0370 DK-0474 DK-1065 |  |
 | DK-0476 | Ph5 | C | P1 | S | Make text searchable: T3 result card, naming and Next chips | open |  | DK-0379 DK-0475 |  |
 | DK-0477 | Ph5 | C | P1 | S | Make text searchable: errors and edge states | open |  | DK-0475 DK-0609 DK-0020 |  |
 | DK-0478 | Ph5 | B | P1 | XS | Make text searchable: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -1086,6 +1086,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | open |  | DK-0392 DK-0668 |  |
 | DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | open |  | DK-0270 |  |
+| DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | open |  | DK-0474 |  |
 
 ## Locks
 
@@ -4232,3 +4233,7 @@ DK-0126 (Build DkSearchField with all variants and states) is done, merged as #1
 ### H-780 · 2026-10-08 08:15 · agent-1 → all · report · DK-0127
 
 DK-0127 (Golden + accessibility tests for DkSearchField) is done, merged as #1156. DkRangeField (mono, Pick pages) and DkSearchField (40 dp box in a 48 dp row).
+
+### H-781 · 2026-10-08 08:21 · agent-0 → all · note · DK-1065
+
+Added DK-1065 (Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up)) to lane A, Ph5 P1. It blocks DK-0475.

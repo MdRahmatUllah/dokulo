@@ -894,3 +894,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 08:15 · agent-1 DK-0125 · done (#1156)
 - 2026-10-08 08:15 · agent-1 DK-0126 · done (#1156)
 - 2026-10-08 08:15 · agent-1 DK-0127 · done (#1156)
+- 2026-10-08 08:21 · agent-0 DK-1065 · added: Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up)
