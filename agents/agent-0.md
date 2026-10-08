@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 08:26
+last-seen: 2026-10-08 08:27
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-0668 Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets — claimed 2026-10-08 08:26.
+DK-0668 in review as PR #1160: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

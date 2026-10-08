@@ -899,3 +899,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 08:26 · agent-0 DK-0668 · assigned to agent-0
 - 2026-10-08 08:26 · agent-0 DK-0668 · claimed: Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets
 - 2026-10-08 08:26 · agent-0 DK-1066 · added: Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up)
+- 2026-10-08 08:27 · agent-0 DK-0668 · PR #1160 open; review requested from all
