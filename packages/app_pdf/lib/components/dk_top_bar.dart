@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
-import 'dk_button.dart';
 import 'dk_icon.dart';
 import 'dk_icon_button.dart';
+import 'dk_tappable.dart';
 
 /// What sits at the left of a [DkTopBar].
 enum DkTopBarLeading { none, back, close }
@@ -83,17 +83,24 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
   State<DkTopBar> createState() => _DkTopBarState();
 }
 
+/// The bars hold their text at 130 % at most, as iOS navigation bars do:
+/// at 200 % a 56 dp bar can't fit Cancel, a title and Done in German.
+// ponytail: a clamp, not a growing bar; grow it (preferredSize from the
+// text scale) if a screen ever needs the bar's text at full size.
+const _maxTextScale = 1.3;
+
+bool _isIos(BuildContext context) => switch (Theme.of(context).platform) {
+  TargetPlatform.iOS || TargetPlatform.macOS => true,
+  _ => false,
+};
+
 class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l10n = MaterialLocalizations.of(context);
-    final ios = switch (Theme.of(context).platform) {
-      TargetPlatform.iOS || TargetPlatform.macOS => true,
-      _ => false,
-    };
     final editing = widget.onDone != null;
-    final centred = ios || editing;
+    final centred = _isIos(context) || editing;
     final title = widget.title == null
         ? null
         : Semantics(
@@ -108,13 +115,11 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
           );
 
     final Widget? leading = editing
-        ? DkButton(
+        ? _TextAction(
             label:
                 widget.cancelLabel ??
                 AppLocalizations.of(context).common_cancel,
-            onPressed: widget.onCancel,
-            variant: DkButtonVariant.tertiary,
-            size: DkButtonSize.compact,
+            onTap: widget.onCancel!,
           )
         : switch (widget.leading) {
             DkTopBarLeading.none => null,
@@ -129,32 +134,13 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
               onPressed: widget.onLeading ?? () => Navigator.maybePop(context),
             ),
           };
-    final trailing = editing
-        ? [
-            DkButton(
-              label:
-                  widget.doneLabel ?? AppLocalizations.of(context).common_done,
-              onPressed: widget.onDone,
-              variant: DkButtonVariant.tertiary,
-              size: DkButtonSize.compact,
-            ),
-          ]
-        : [
-            for (final a in widget.actions)
-              DkIconButton(
-                icon: a.icon,
-                tooltip: a.tooltip,
-                onPressed: a.onPressed,
-              ),
-            if (widget.onOverflow != null)
-              Builder(
-                builder: (anchor) => DkIconButton(
-                  icon: DkIcons.overflow(context),
-                  tooltip: l10n.moreButtonTooltip,
-                  onPressed: () => widget.onOverflow!(anchor),
-                ),
-              ),
-          ];
+    final Widget trailing = editing
+        ? _TextAction(
+            label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
+            onTap: widget.onDone!,
+            bold: true,
+          )
+        : _Actions(actions: widget.actions, onOverflow: widget.onOverflow);
 
     // Scaffold gives the bar its height plus the status bar's: pad for it.
     return _BarSurface(
@@ -163,14 +149,136 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
         bottom: false,
         child: SizedBox(
           height: DkTopBar.height,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: t.space.xs),
-            child: NavigationToolbar(
-              leading: leading,
-              middle: title,
-              trailing: Row(mainAxisSize: MainAxisSize.min, children: trailing),
+          child: _Toolbar(
+            leading: leading,
+            middle: title,
+            trailing: trailing,
+            centred: centred,
+            // Cancel and Done never run into each other: each gets half.
+            capSides: editing,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The bar's row: [NavigationToolbar] inside a `space.xs` inset, with the
+/// title 16 from the edge when there is nothing on the left. Holds the
+/// text at [_maxTextScale].
+class _Toolbar extends StatelessWidget {
+  const _Toolbar({
+    required this.leading,
+    required this.middle,
+    required this.trailing,
+    required this.centred,
+    this.capSides = false,
+  });
+
+  final Widget? leading, middle;
+  final Widget trailing;
+  final bool centred, capSides;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final spacing = centred ? t.space.l : t.space.xs;
+    return MediaQuery.withClampedTextScaling(
+      maxScaleFactor: _maxTextScale,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: t.space.xs),
+        child: LayoutBuilder(
+          builder: (context, box) {
+            Widget side(Widget child) => capSides
+                ? ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: box.maxWidth / 2),
+                    child: child,
+                  )
+                : child;
+            return NavigationToolbar(
+              leading: leading == null
+                  ? SizedBox(width: t.space.l - t.space.xs - spacing)
+                  : side(leading!),
+              middle: middle,
+              trailing: side(trailing),
               centerMiddle: centred,
-              middleSpacing: centred ? t.space.l : t.space.xs,
+              middleSpacing: spacing,
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+/// Up to two actions and the overflow, at the right of a bar.
+class _Actions extends StatelessWidget {
+  const _Actions({required this.actions, required this.onOverflow});
+
+  final List<DkTopBarAction> actions;
+  final void Function(BuildContext anchor)? onOverflow;
+
+  @override
+  Widget build(BuildContext context) => Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      for (final a in actions)
+        DkIconButton(icon: a.icon, tooltip: a.tooltip, onPressed: a.onPressed),
+      if (onOverflow != null)
+        Builder(
+          builder: (anchor) => DkIconButton(
+            icon: DkIcons.overflow(context),
+            tooltip: MaterialLocalizations.of(context).moreButtonTooltip,
+            onPressed: () => onOverflow!(anchor),
+          ),
+        ),
+    ],
+  );
+}
+
+/// Cancel or Done in the editing bar: `labelL` in `color.primary`, Done
+/// bold (UI spec §11.6), with a 48 dp target.
+class _TextAction extends StatelessWidget {
+  const _TextAction({
+    required this.label,
+    required this.onTap,
+    this.bold = false,
+  });
+
+  final String label;
+  final VoidCallback onTap;
+  final bool bold;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return Semantics(
+      button: true,
+      child: DkTappable(
+        onTap: onTap,
+        radius: t.radius.s,
+        builder: (context, pressed) => Container(
+          constraints: const BoxConstraints(
+            minWidth: kMinInteractiveDimension,
+            minHeight: kMinInteractiveDimension,
+          ),
+          padding: EdgeInsets.symmetric(horizontal: t.space.m),
+          decoration: BoxDecoration(
+            color: pressed ? t.state.pressed : null,
+            borderRadius: BorderRadius.circular(t.radius.s),
+          ),
+          // Centred, but only as wide as the label: the title needs the rest.
+          child: Align(
+            widthFactor: 1,
+            heightFactor: 1,
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: t.text.labelL.copyWith(
+                color: t.color.primary,
+                fontWeight: bold ? FontWeight.w700 : null,
+              ),
             ),
           ),
         ),
@@ -181,9 +289,9 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
 
 /// The collapsing top bar of a tab root (UI spec §11.6, large; DK-0164): a
 /// pinned sliver, 112 tall when expanded with the title in `titleL` at the
-/// bottom left, collapsing into the small bar (56, `titleM`) as the content
-/// scrolls. The actions stay at the top right. Use it as the first sliver
-/// of a CustomScrollView.
+/// bottom left, collapsing into the small bar (56, `titleM`; centred on
+/// iOS) as the content scrolls. The actions stay at the top right. Use it
+/// as the first sliver of a CustomScrollView.
 class DkLargeTopBar extends StatelessWidget {
   const DkLargeTopBar({
     super.key,
@@ -241,52 +349,29 @@ class _LargeBar extends SliverPersistentHeaderDelegate {
     final range = maxExtent - minExtent;
     // 0 expanded … 1 collapsed.
     final k = (shrinkOffset / range).clamp(0.0, 1.0);
-    final l10n = MaterialLocalizations.of(context);
     return _BarSurface(
       hairline: k >= 1,
       child: Padding(
         padding: EdgeInsets.only(top: top),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            // The big title, bottom left, fading out as the bar collapses.
-            Positioned(
-              left: t.space.l,
-              right: t.space.l,
-              bottom: t.space.s,
-              child: Opacity(
-                opacity: 1 - k,
-                child: ExcludeSemantics(
-                  excluding: k > 0.5,
-                  child: Semantics(
-                    header: true,
-                    child: Text(
-                      title,
-                      style: t.text.titleL.copyWith(color: t.color.textPrimary),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            // The small title, in the 56 bar, fading in.
-            Positioned(
-              left: t.space.l,
-              right: 120,
-              top: 0,
-              height: DkTopBar.height,
-              child: Opacity(
-                opacity: k,
-                child: ExcludeSemantics(
-                  excluding: k <= 0.5,
-                  child: Align(
-                    alignment: AlignmentDirectional.centerStart,
+        child: MediaQuery.withClampedTextScaling(
+          maxScaleFactor: _maxTextScale,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              // The big title, bottom left, fading out as the bar collapses.
+              Positioned(
+                left: t.space.l,
+                right: t.space.l,
+                bottom: t.space.s,
+                child: Opacity(
+                  opacity: 1 - k,
+                  child: ExcludeSemantics(
+                    excluding: k > 0.5,
                     child: Semantics(
                       header: true,
                       child: Text(
                         title,
-                        style: t.text.titleM.copyWith(
+                        style: t.text.titleL.copyWith(
                           color: t.color.textPrimary,
                         ),
                         maxLines: 1,
@@ -296,32 +381,38 @@ class _LargeBar extends SliverPersistentHeaderDelegate {
                   ),
                 ),
               ),
-            ),
-            // Actions: always top right.
-            Positioned(
-              right: t.space.xs,
-              top: (DkTopBar.height - 48) / 2,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (final a in actions)
-                    DkIconButton(
-                      icon: a.icon,
-                      tooltip: a.tooltip,
-                      onPressed: a.onPressed,
-                    ),
-                  if (onOverflow != null)
-                    Builder(
-                      builder: (anchor) => DkIconButton(
-                        icon: DkIcons.overflow(context),
-                        tooltip: l10n.moreButtonTooltip,
-                        onPressed: () => onOverflow!(anchor),
+              // The 56 bar: the small title fading in, between the edge and
+              // the actions.
+              Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                height: DkTopBar.height,
+                child: _Toolbar(
+                  leading: null,
+                  middle: Opacity(
+                    opacity: k,
+                    child: ExcludeSemantics(
+                      excluding: k <= 0.5,
+                      child: Semantics(
+                        header: true,
+                        child: Text(
+                          title,
+                          style: t.text.titleM.copyWith(
+                            color: t.color.textPrimary,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
-                ],
+                  ),
+                  trailing: _Actions(actions: actions, onOverflow: onOverflow),
+                  centred: _isIos(context),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -331,6 +422,7 @@ class _LargeBar extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_LargeBar old) =>
       old.title != title ||
       old.actions != actions ||
+      old.onOverflow != onOverflow ||
       old.top != top ||
       old.tokens != tokens;
 }

@@ -25,25 +25,6 @@ class TopBarStates extends StatelessWidget {
       data: Theme.of(context).copyWith(platform: p),
       child: child,
     );
-    Widget large({required bool collapsed}) => SizedBox(
-      height: 180,
-      child: CustomScrollView(
-        controller: ScrollController(initialScrollOffset: collapsed ? 80 : 0),
-        slivers: [
-          const DkLargeTopBar(
-            title: 'Files',
-            actions: actions,
-            onOverflow: _anchor,
-          ),
-          SliverList.list(
-            children: [
-              for (var i = 0; i < 12; i++)
-                ListTile(title: Text('Row ${i + 1}')),
-            ],
-          ),
-        ],
-      ),
-    );
     return ColoredBox(
       color: t.color.background,
       child: Column(
@@ -71,10 +52,51 @@ class TopBarStates extends StatelessWidget {
             onCancel: _none,
             onDone: _none,
           ),
-          large(collapsed: false),
-          large(collapsed: true),
+          const _LargeBarDemo(collapsed: false),
+          const _LargeBarDemo(collapsed: true),
         ],
       ),
     );
   }
+}
+
+/// The large bar over a list, scrolled so it shows [collapsed] or expanded.
+class _LargeBarDemo extends StatefulWidget {
+  const _LargeBarDemo({required this.collapsed});
+  final bool collapsed;
+
+  @override
+  State<_LargeBarDemo> createState() => _LargeBarDemoState();
+}
+
+class _LargeBarDemoState extends State<_LargeBarDemo> {
+  late final _scroll = ScrollController(
+    initialScrollOffset: widget.collapsed ? 80 : 0,
+  );
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    height: 180,
+    child: CustomScrollView(
+      controller: _scroll,
+      slivers: [
+        const DkLargeTopBar(
+          title: 'Files',
+          actions: TopBarStates.actions,
+          onOverflow: _anchor,
+        ),
+        SliverList.list(
+          children: [
+            for (var i = 0; i < 12; i++) ListTile(title: Text('Row ${i + 1}')),
+          ],
+        ),
+      ],
+    ),
+  );
 }
