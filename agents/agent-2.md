@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-08 07:15
+last-seen: 2026-10-08 07:16
 last-read: 720
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0181 in review as PR #1154: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Open: #1139 (dialog+banner, fixes pushed), #1143 (top bar). Built locally, PR as slots free (P0 Ph1 first): menu (feat/DK-0188-menu, stacked on old sheet branch: rebase on main), toast (feat/DK-0190-toast), loading (feat/DK-0198-loading), tab bar+rail + selection/viewer/camera bars + tool strip/markup bar (feat/DK-0172-bottom-bars, stacked on feat/DK-0164-topbar), crop (feat/DK-0156-crop), boxes (feat/DK-0160-boxes), sign+split (feat/DK-0208-ai-sign), ask (feat/DK-0212-ask), progress (feat/DK-0194-progress), chat+diff (feat/DK-0210-chat-diff). Waiting on agent-1: StatusDot (MiniJobBar), Segmented (SignaturePad), Slider/Stepper/ColorRow (ToolOptionsSheet), CheckboxRow (DetectionGroup).
+Open PRs: #1149 (skeleton/spinner, re-review asked), #1154 (selection/viewer/camera bars). Queued branches, each refreshed against main and the catalogue guard, PR in this order: feat/DK-0174-mini-job-bar; feat/DK-0172-bars-d (tool strip + markup bar: merge main after #1154 lands, then only DK-0176/0177/0202/0203 remain); feat/DK-0156-crop-b; feat/DK-0194-progress-b; feat/DK-0208-sign-b (signature card + split marker); feat/DK-0212-ask-b (stacked on sign-b); feat/DK-0160-boxes-b; feat/DK-0210-chat-diff; feat/DK-0220-detection-group (drop its expandLess/expandMore if #1152 lands first); feat/DK-0206-signature-pad (fonts fetch + disabled Done in DkTopBar.editing; swap TextField for DkTextField after #1153). Only DK-0204/0205 (tool options sheet) is unbuilt: waits on agent-1's DkSlider/DkStepper/DkColorRow (asked in H-698). Scripts in the scratchpad: merge_catalogue.py, merge_arb.py, refresh.sh, ios44.py.
 
 ## Memory
 
