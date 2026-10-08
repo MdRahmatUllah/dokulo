@@ -142,5 +142,8 @@
   "scan_mode_book": "Buch",
   "scan_mode_batch": "Stapelverarbeitung",
   "scan_mode_import": "Fotos importieren",
-  "shell_button_scan_hint": "Scanmodus wählen"
+  "shell_button_scan_hint": "Scanmodus wählen",
+  "status_new": "Neu",
+  "status_unsaved": "Nicht gespeichert",
+  "status_running": "Läuft"
 }

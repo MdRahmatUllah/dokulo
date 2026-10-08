@@ -635,5 +635,17 @@
   "shell_button_scan_hint": "Choose a scan mode",
   "@shell_button_scan_hint": {
     "description": "Screen readers: what a long press on the Scan button does."
+  },
+  "status_new": "New",
+  "@status_new": {
+    "description": "DkStatusDot, screen readers: a new file or tool."
+  },
+  "status_unsaved": "Unsaved changes",
+  "@status_unsaved": {
+    "description": "DkStatusDot, screen readers."
+  },
+  "status_running": "Working",
+  "@status_running": {
+    "description": "DkStatusDot, screen readers: a job is running."
   }
 }

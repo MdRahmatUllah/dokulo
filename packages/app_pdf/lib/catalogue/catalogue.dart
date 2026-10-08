@@ -8,6 +8,7 @@ import 'button_states.dart';
 import 'icon_button_states.dart';
 import 'overlay_states.dart';
 import 'page_states.dart';
+import 'privacy_status_states.dart';
 import 'scan_button_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -46,6 +47,11 @@ const catalogue = [
   ),
   CatalogueEntry('DkIconButton', '11.1 Buttons', DkIconButtonGallery()),
   CatalogueEntry('DkScanButton', '11.1 Buttons', DkScanButtonGallery()),
+  CatalogueEntry(
+    'DkPrivacyLine, DkStatusDot',
+    '11.3 Badges, chips, indicators',
+    DkPrivacyStatusGallery(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
