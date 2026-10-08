@@ -206,5 +206,16 @@
   "markup_strike": "Durchstreichen",
   "markup_ask": "KI fragen",
   "common_redo": "Wiederholen",
-  "viewer_file_missing": "Diese Datei ist nicht mehr in Dokulo."
+  "viewer_file_missing": "Diese Datei ist nicht mehr in Dokulo.",
+  "colour_yellow": "Gelb",
+  "colour_green": "Grün",
+  "colour_blue": "Blau",
+  "colour_pink": "Pink",
+  "colour_red": "Rot",
+  "colour_black": "Schwarz",
+  "colour_custom": "Eigene",
+  "colour_hue": "Farbton",
+  "colour_brightness": "Helligkeit",
+  "pin_delete_digit": "Ziffer löschen",
+  "pin_biometric": "Fingerabdruck oder Gesicht verwenden"
 }
