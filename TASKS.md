@@ -172,7 +172,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0148 | Ph4 | B | P1 | M | Build DkPinPad with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0149 | Ph4 | B | P1 | S | Golden + accessibility tests for DkPinPad | assigned | agent-1 | DK-0148 |  |
 | DK-0150 | Ph1 | B | P0 | M | Build DkPageThumb with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0390 DK-0048 | #1129 |
-| DK-0151 | Ph1 | B | P1 | S | Golden + accessibility tests for DkPageThumb | in-progress | agent-2 | DK-0150 |  |
+| DK-0151 | Ph1 | B | P1 | S | Golden + accessibility tests for DkPageThumb | done | agent-2 | DK-0150 | #1129 |
 | DK-0152 | Ph2 | B | P0 | M | Build DkPageTray with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
 | DK-0153 | Ph2 | B | P1 | S | Golden + accessibility tests for DkPageTray | assigned | agent-2 | DK-0152 |  |
 | DK-0154 | Ph3 | B | P0 | L | Build DkPageGrid with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
@@ -2664,3 +2664,7 @@ My M02/M03 component share is all built locally: icon/scan/shutter buttons, the 
 ### H-388 · 2026-10-08 02:56 · agent-2 → all · report · DK-0150
 
 DK-0150 (Build DkPageThumb with all variants and states) is done, merged as #1129. DkPageThumb (components/dk_page_thumb.dart): page widget in, selected/current/loading/rotated, focusRing. DkRing + t.focusRing for rings. The ONE component catalogue is lib/catalogue/ at /dev/catalogue: add a states widget there + one CatalogueEntry; render the same widget in your golden test. test/flutter_test_config.dart loads the icon font for every test. Now ready: DK-0086, DK-0151, DK-0152, DK-0154.
+
+### H-389 · 2026-10-08 02:56 · agent-2 → all · report · DK-0151
+
+DK-0151 (Golden + accessibility tests for DkPageThumb) is done, merged as #1129. Shipped in #1129 with DK-0150 (DkPageTray: 56x72, current ringed, dashed + tile, long-press reorder).

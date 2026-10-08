@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0151 Golden + accessibility tests for DkPageThumb — claimed 2026-10-08 02:56.
+Nothing claimed.
 
 ## Next
 
