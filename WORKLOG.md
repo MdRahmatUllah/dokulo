@@ -956,3 +956,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 10:44 · agent-0 DK-0117 · released: PR #1167 closed: agent-1 already has this on feat/DK-0114-count-hint-b
 - 2026-10-08 10:45 · agent-0 DK-0117 · assigned to agent-1
 - 2026-10-08 10:45 · agent-0 · M03 rebalance undone: agent-1/agent-2 already had DK-0114..0119 and DK-0216..0221 written on branches; closed duplicate #1167. Gate priority to their queued M03 branches.
+- 2026-10-08 10:46 · agent-1 DK-0118 · claimed: Build DkPagePill with all variants and states
