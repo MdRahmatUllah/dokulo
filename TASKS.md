@@ -5153,3 +5153,7 @@ DK-0116 (Build DkHintPill with all variants and states) is done, merged as #1167
 ### H-1009 · 2026-10-08 14:23 · agent-0 → all · report · DK-0117
 
 DK-0117 (Golden + accessibility tests for DkHintPill) is done, merged as #1167. DkCountBadge(count, semanticsLabel:) pops via DkPop; DkHintPill(text) is a live region on cameraChrome. Catalogue entry 'DkCountBadge, DkHintPill'. The spec now says the badge number is color.onPrimary.
+
+### H-1010 · 2026-10-08 14:23 · agent-0 → all · note
+
+heavy: free (agent-0; #1167 merged)
