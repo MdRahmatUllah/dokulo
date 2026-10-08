@@ -109,7 +109,9 @@ class DkSplitGap extends StatelessWidget {
         borderRadius: BorderRadius.circular(t.radius.xs),
         overlayColor: WidgetStatePropertyAll(t.state.pressed),
         splashFactory: NoSplash.splashFactory,
-        child: SizedBox(width: 24, height: height),
+        // 48 wide, the touch minimum; the export's gap is 22, which only
+        // spreads the strip a little (it scrolls).
+        child: SizedBox(width: kMinInteractiveDimension, height: height),
       ),
     );
   }
