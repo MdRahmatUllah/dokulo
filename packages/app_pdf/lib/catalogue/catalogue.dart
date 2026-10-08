@@ -32,6 +32,8 @@ import 'switch_segmented_states.dart';
 import 'text_field_states.dart';
 import 'tool_tile_states.dart';
 import 'crop_states.dart';
+import 'detection_states.dart';
+import 'progress_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -179,6 +181,16 @@ const catalogue = [
     'DkFolderCard, DkSettingsRow',
     '11.2 Tiles and cards',
     DkFolderSettingsGallery(),
+  ),
+  CatalogueEntry(
+    'DkDetectionGroup',
+    '11.8 Editor and AI',
+    DetectionGroupStates(),
+  ),
+  CatalogueEntry(
+    'DkProgressSheet',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ProgressSheetStates(),
   ),
   CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
   CatalogueEntry('DkFileCard', '11.2 Tiles and cards', DkFileCardGallery()),
