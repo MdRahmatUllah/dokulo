@@ -165,4 +165,54 @@ void main() {
       expect(tester.widget<Text>(find.text('Stark')).style!.color, c.success);
     });
   });
+
+  testWidgets('a new error is announced at once', (tester) async {
+    Widget field(String? error) =>
+        app(DkTextField(label: 'File name', error: error));
+    await tester.pumpWidget(field(null));
+    expect(tester.takeAnnouncements(), isEmpty);
+    await tester.pumpWidget(field('Use a shorter name'));
+    expect(
+      tester.takeAnnouncements(),
+      contains(isAccessibilityAnnouncement('Use a shorter name')),
+    );
+    // The same error again isn't repeated.
+    await tester.pumpWidget(field('Use a shorter name'));
+    expect(tester.takeAnnouncements(), isEmpty);
+  });
+
+  testWidgets('the field buttons are 48 dp targets with labels', (
+    tester,
+  ) async {
+    final handle = tester.ensureSemantics();
+    // Away from the screen's edges: the guideline skips nodes that touch
+    // them.
+    await tester.pumpWidget(
+      app(
+        Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              DkTextField(
+                label: 'Name',
+                controller: TextEditingController(text: 'abc'),
+              ),
+              const DkPasswordField(label: 'Password'),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.enterText(find.byType(TextField).last, 'secret');
+    await tester.pump();
+    for (final label in ['Clear', 'Show password']) {
+      expect(
+        tester.getSize(find.bySemanticsLabel(label).first),
+        const Size(48, 48),
+      );
+    }
+    await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+    await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+    handle.dispose();
+  });
 }

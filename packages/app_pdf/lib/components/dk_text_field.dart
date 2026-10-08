@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
@@ -88,6 +89,16 @@ class _DkTextFieldState extends State<DkTextField> {
     if (old.controller != widget.controller) {
       (old.controller ?? _own)?.removeListener(_changed);
       _text.addListener(_changed);
+    }
+    // A new error is said at once (after Save, say), not only when the
+    // field next gets focus.
+    final error = widget.error;
+    if (error != null && error != old.error) {
+      SemanticsService.sendAnnouncement(
+        View.of(context),
+        error,
+        Directionality.of(context),
+      );
     }
   }
 
@@ -186,7 +197,9 @@ class _DkTextFieldState extends State<DkTextField> {
             // The field says its label and error itself; the buttons in
             // it stay their own nodes.
             child: Semantics(
-              label: [?widget.label, ?error].join('\n'),
+              label: widget.label == null && error == null
+                  ? null
+                  : [?widget.label, ?error].join('\n'),
               child: field,
             ),
           ),
@@ -223,7 +236,7 @@ class _DkTextFieldState extends State<DkTextField> {
 }
 
 /// A small icon button inside a field (×, reveal, pick pages, filter):
-/// 20 dp icon, 44 × the field's height to touch, with its label for screen
+/// 20 dp icon, 48 × the field's [height] to touch, with its label for screen
 /// readers.
 class DkFieldButton extends StatelessWidget {
   const DkFieldButton({
@@ -231,11 +244,15 @@ class DkFieldButton extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.onTap,
+    this.height = 48,
   });
 
   final IconData icon;
   final String label;
   final VoidCallback onTap;
+
+  /// The field's height (48; 40 in a search bar).
+  final double height;
 
   @override
   Widget build(BuildContext context) => Semantics(
@@ -247,8 +264,8 @@ class DkFieldButton extends StatelessWidget {
       onTap: onTap,
       radius: context.tokens.radius.s,
       builder: (context, pressed) => SizedBox(
-        width: 44,
-        height: 40,
+        width: 48,
+        height: height,
         child: Center(
           child: DkIcon(
             icon,
