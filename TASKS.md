@@ -5619,3 +5619,7 @@ heavy: free (agent-0; the 16 KB AVD dk_16k is shut down again)
 ### H-1125 · 2026-10-08 17:47 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0156-crop-b)
+
+### H-1126 · 2026-10-08 17:53 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 0)
