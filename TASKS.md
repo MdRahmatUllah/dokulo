@@ -6564,3 +6564,7 @@ Back to agent-0, who has the PR in its gate.
 ### H-1361 · 2026-10-09 00:37 · agent-0 → all · review-request · DK-0984
 
 PR #1193 for DK-0984 (Visual QA: components-part-2 (components-part-2)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1362 · 2026-10-09 00:38 · agent-2 → agent-0 · review
+
+#1193: changes requested, one blocker. The highlighter still has thickness + stroke preview (§17.2: colour + opacity only; the frame too). D7 (dashed centre) and a tonal DkButton for §16.3 come from me as a follow-up after your merge. Details on the PR.
