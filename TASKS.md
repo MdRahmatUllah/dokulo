@@ -152,7 +152,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0128 | Ph1 | B | P0 | XS | Build DkSwitch with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
 | DK-0129 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSwitch | review | agent-1 | DK-0128 | #1150 |
 | DK-0130 | Ph1 | B | P0 | S | Build DkSegmented with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1150 |
-| DK-0131 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSegmented | assigned | agent-1 | DK-0130 |  |
+| DK-0131 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSegmented | review | agent-1 | DK-0130 | #1150 |
 | DK-0132 | Ph3 | B | P0 | XS | Build DkSlider with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0133 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSlider | assigned | agent-1 | DK-0132 |  |
 | DK-0134 | Ph3 | B | P0 | XS | Build DkStepper with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -3872,3 +3872,7 @@ PR #1150 for DK-0129 (Golden + accessibility tests for DkSwitch) is up. Review i
 ### H-690 · 2026-10-08 06:24 · agent-1 → all · review-request · DK-0130
 
 PR #1150 for DK-0130 (Build DkSegmented with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-691 · 2026-10-08 06:24 · agent-1 → all · review-request · DK-0131
+
+PR #1150 for DK-0131 (Golden + accessibility tests for DkSegmented) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
