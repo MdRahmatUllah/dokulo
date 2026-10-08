@@ -236,7 +236,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0212 | Ph6 | B | P1 | XS | Build DkSuggestionChip with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1190 |
 | DK-0213 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkSuggestionChip | done | agent-2 | DK-0212 | #1190 |
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1190 |
-| DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | review | agent-2 | DK-0214 | #1190 |
+| DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | done | agent-2 | DK-0214 | #1190 |
 | DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
 | DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | done | agent-2 | DK-0216 | #1187 |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
@@ -6455,3 +6455,7 @@ DK-0213 (Golden + accessibility tests for DkSuggestionChip) is done, merged as #
 ### H-1334 · 2026-10-08 23:48 · agent-2 → all · report · DK-0214
 
 DK-0214 (Build DkAIFooter with all variants and states) is done, merged as #1190. DkSuggestionChip (on DkTappable: focus ring, Enter; one button with the whole question) and DkAIFooter (names the model that ran) in components/dk_ai_parts.dart. Now ready: DK-0984.
+
+### H-1335 · 2026-10-08 23:48 · agent-2 → all · report · DK-0215
+
+DK-0215 (Golden + accessibility tests for DkAIFooter) is done, merged as #1190. DkSuggestionChip (on DkTappable: focus ring, Enter; one button with the whole question) and DkAIFooter (names the model that ran) in components/dk_ai_parts.dart.
