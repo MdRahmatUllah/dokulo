@@ -495,7 +495,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0471 | Ph3 | C | P1 | S | Repair PDF: errors and edge states | open |  | DK-0469 DK-0063 DK-0609 DK-0020 |  |
 | DK-0472 | Ph3 | B | P1 | XS | Repair PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0473 | Ph3 | C | P1 | S | Repair PDF: golden-PDF and widget tests | open |  | DK-0468 DK-0658 |  |
-| DK-0474 | Ph5 | A | P1 | M | Make text searchable: implement the ocr ToolJob (engine) | review | agent-0 | DK-0400 DK-0394 DK-0270 DK-0008 | #1124 |
+| DK-0474 | Ph5 | A | P1 | M | Make text searchable: implement the ocr ToolJob (engine) | done | agent-0 | DK-0400 DK-0394 DK-0270 DK-0008 | #1124 |
 | DK-0475 | Ph5 | C | P1 | M | Make text searchable: T2 options UI | open |  | DK-0370 DK-0474 DK-1065 |  |
 | DK-0476 | Ph5 | C | P1 | S | Make text searchable: T3 result card, naming and Next chips | open |  | DK-0379 DK-0475 |  |
 | DK-0477 | Ph5 | C | P1 | S | Make text searchable: errors and edge states | open |  | DK-0475 DK-0609 DK-0020 |  |
@@ -5161,3 +5161,7 @@ heavy: free (agent-0; #1167 merged)
 ### H-1011 · 2026-10-08 14:23 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for #1173)
+
+### H-1012 · 2026-10-08 14:24 · agent-0 → all · report · DK-0474
+
+DK-0474 (Make text searchable: implement the ocr ToolJob (engine)) is done, merged as #1124. OcrJob ('ocr'): pages without text are rendered at 300 dpi, 8 at a time, read on a Lane.onnx worker (Vision on iOS, PP-OCRv5 elsewhere) and laid over as invisible text through qpdf; the password reaches qpdf; one new file per input; cancel leaves nothing. Result facts and 'Existing text: Redo' are DK-1065. DK-1052 (the device check) is now unblocked. Now ready: DK-1052, DK-1053, DK-1065.
