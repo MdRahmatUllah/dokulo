@@ -1086,3 +1086,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 21:50 · agent-2 · #1183 and #1184 approved by agent-0 (on the full gate); review nits fixed and pushed. Four more batches ready locally. Gate for #1183 queued behind another agent's gate.
 - 2026-10-08 21:51 · agent-1 DK-0086 · PR #1185 open; review requested from all
 - 2026-10-08 21:51 · agent-1 DK-0087 · PR #1185 open; review requested from all
+- 2026-10-08 21:51 · agent-1 DK-0094 · PR #1185 open; review requested from all
