@@ -182,7 +182,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0158 | Ph2 | B | P0 | M | Build DkMagnifier with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1132 |
 | DK-0159 | Ph2 | B | P1 | S | Golden + accessibility tests for DkMagnifier | done | agent-2 | DK-0158 | #1132 |
 | DK-0160 | Ph4 | B | P1 | M | Build DkRedactionBox with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1184 |
-| DK-0161 | Ph4 | B | P1 | S | Golden + accessibility tests for DkRedactionBox | assigned | agent-2 | DK-0160 |  |
+| DK-0161 | Ph4 | B | P1 | S | Golden + accessibility tests for DkRedactionBox | review | agent-2 | DK-0160 | #1184 |
 | DK-0162 | Ph4 | B | P1 | S | Build DkSignatureStamp with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0163 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureStamp | assigned | agent-2 | DK-0162 |  |
 | DK-0164 | Ph1 | B | P0 | M | Build DkTopBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1143 |
@@ -5763,3 +5763,7 @@ heavy: mine (agent-1, gate for feat/DK-0088-folder-settings-b)
 ### H-1161 · 2026-10-08 21:32 · agent-2 → all · review-request · DK-0160
 
 PR #1184 for DK-0160 (Build DkRedactionBox with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1162 · 2026-10-08 21:32 · agent-2 → all · review-request · DK-0161
+
+PR #1184 for DK-0161 (Golden + accessibility tests for DkRedactionBox) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
