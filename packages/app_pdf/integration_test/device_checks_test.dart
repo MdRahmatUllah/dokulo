@@ -1,14 +1,16 @@
-// The engines' device checks (DK-1045, DK-1049, DK-1059, DK-1060, DK-1061,
-// DK-1063): each engine runs on this device on documents made here (a device
+// The engines' device checks (DK-1045, DK-1049, DK-1052, DK-1059, DK-1060,
+// DK-1061, DK-1063): each engine runs on this device on documents made here (a device
 // can't read the repo's fixtures), timed, with peak memory. Run it on the
 // shared emulator under `team.py device` (docs/qa/device-lab.md):
 //   flutter test integration_test/device_checks_test.dart -d emulator-5554 --flavor dev
 // Lines starting "DEVICE |" are the results for the tasks' done messages.
+import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
 import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as img;
@@ -85,6 +87,66 @@ Future<void> scanPdf(String path, int pages) async {
     );
   }
   await File(path).writeAsBytes(await doc.save());
+}
+
+/// The letter of doc_vision's OCR test (test/fixtures/ocr/letter-de.jpg),
+/// whose lines PP-OCRv5 reads on the development machine.
+const letter = [
+  'Stadtwerke Musterstadt',
+  'Herrn Max Mustermann',
+  'Musterstraße 12',
+  '80331 München',
+  'Jahresabrechnung Strom 2025',
+  'Sehr geehrter Herr Mustermann,',
+  'Zahlungen bitte auf IBAN DE00 0000 0000 0000 0000 00.',
+  'Mit freundlichen Grüßen',
+  'Seite 1 von 2',
+];
+
+/// A scan of [letter]: the lines typeset, rendered at 150 dpi and put back
+/// as a page image only (no text layer), [pages] times.
+Future<void> letterScan(String dir, String path, int pages) async {
+  final typeset = pw.Document()
+    ..addPage(
+      pw.Page(
+        pageFormat: pdf.PdfPageFormat.a4,
+        build: (_) => pw.Column(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            for (final line in letter)
+              pw.Padding(
+                padding: const pw.EdgeInsets.only(bottom: 18),
+                child: pw.Text(line, style: const pw.TextStyle(fontSize: 13)),
+              ),
+          ],
+        ),
+      ),
+    );
+  final typed = '$dir/letter-typeset.pdf';
+  await File(typed).writeAsBytes(await typeset.save());
+  final shot = await PdfEngine.render(typed, 0, dpi: 150);
+  final jpeg = img.encodeJpg(
+    img.Image.fromBytes(
+      width: shot.width,
+      height: shot.height,
+      bytes: shot.bgra.buffer,
+      numChannels: 4,
+      order: img.ChannelOrder.bgra,
+    ),
+    quality: 85,
+  );
+  final scan = pw.Document();
+  final image = pw.MemoryImage(jpeg);
+  for (var p = 0; p < pages; p++) {
+    scan.addPage(
+      pw.Page(
+        pageFormat: pdf.PdfPageFormat.a4,
+        margin: pw.EdgeInsets.zero,
+        build: (_) => pw.Image(image, fit: pw.BoxFit.fill),
+      ),
+    );
+  }
+  await File(path).writeAsBytes(await scan.save());
 }
 
 List<String> _qpdf((String, String, String) job, JobContext context) =>
@@ -257,6 +319,48 @@ void main() {
         isEmpty,
       );
       report('DK-1061', 'leaks (text, raw)', 'none');
+    });
+  });
+
+  testWidgets('DK-1052: Make text searchable reads a letter with PP-OCRv5', (
+    tester,
+  ) async {
+    await tester.runAsync(() async {
+      final scan = '${dir.path}/letter-scan.pdf';
+      await letterScan(dir.path, scan, 3);
+      final out = Directory('${dir.path}/ocr')..createSync();
+      final db = DokuloDatabase.memory();
+      var peak = ProcessInfo.currentRss;
+      final sampler = Timer.periodic(const Duration(milliseconds: 100), (_) {
+        if (ProcessInfo.currentRss > peak) peak = ProcessInfo.currentRss;
+      });
+      final before = ProcessInfo.currentRss;
+      final clock = Stopwatch()..start();
+      final run = await JobQueue(pool, db, ToolRegistry.app()).start(
+        'ocr',
+        OcrInput(files: [scan], outputDir: out.path, suffix: ' – searchable'),
+      );
+      final output = await run.result as OneFile;
+      clock.stop();
+      sampler.cancel();
+      await db.close();
+      report(
+        'DK-1052',
+        'ocr per page (3 pages, 300 dpi, PP-OCRv5 on an ONNX worker)',
+        '${clock.elapsedMilliseconds ~/ 3} ms',
+      );
+      report(
+        'DK-1052',
+        'peak RAM above the start (sessions + one page)',
+        mb(peak - before),
+      );
+      final text = (await PdfEngine.pageText(output.path, 1)).text;
+      final missing = [
+        for (final line in letter)
+          if (!text.contains(line)) line,
+      ];
+      report('DK-1052', 'lines not read', missing.isEmpty ? 'none' : missing);
+      expect(missing, isEmpty);
     });
   });
 
