@@ -58,6 +58,7 @@ void main() {
     'DkChatBubble', // §11.3: DkPageChip's 44 target
     'DkDetectionGroup', // §11.3: DkPageChip's 44 target
     'DkRedactionBox · DkSignatureStamp', // the × is an icon button: 44
+    'DkContinueCard, DkProCard', // the × is an icon button: 44
   };
   for (final entry in catalogue) {
     testWidgets('${entry.name}: tap targets and labels', (tester) async {
