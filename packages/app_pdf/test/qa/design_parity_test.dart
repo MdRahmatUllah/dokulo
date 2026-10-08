@@ -4,6 +4,7 @@
 // colours in Light and Dark, the type scale, durations and curves. A
 // deliberate change is listed in [approved] with its reason.
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/animation.dart';
@@ -50,8 +51,10 @@ const approved = {
   'light.ok': 'WCAG: #117A4B reaches 4.5:1 on its container (PR #1116)',
   'light.ols': 'WCAG 1.4.11: input boundaries need 3:1 (PR #1116)',
   'dark.ols': 'WCAG 1.4.11: input boundaries need 3:1 (PR #1116)',
-  // Overview & foundations names Flutter's curves; the export's CSS has the
-  // nearest cubic-bezier. Docs win; the difference is under 0.05 in value.
+  // Overview & foundations names Flutter's curves. Docs win. The export's
+  // CSS has other cubic-beziers: --e-out (0, 0, .2, 1) decelerates harder
+  // than CSS's own ease-out (0, 0, .58, 1), up to 0.20 in value; --e-std is
+  // within 0.025.
   'motion.e-out': 'Curves.easeOut (0, 0, .58, 1), as the docs name it',
   'motion.e-std': 'Curves.easeInOutCubic (.645, .045, .355, 1), as the docs',
 };
@@ -150,15 +153,17 @@ void main() {
       return Cubic(v[0], v[1], v[2], v[3]);
     }
 
-    bool same(Curve a, Cubic b) => [
+    // The largest difference in value over the curve.
+    double gap(Curve a, Cubic b) => [
       for (var x = 0.0; x <= 1; x += 0.05)
         (a.transform(x) - b.transform(x)).abs(),
-    ].every((d) => d < 1e-6);
+    ].reduce(math.max);
 
-    expect(same(m.emphasisCurve, bezier('e-emph')), isTrue);
+    expect(gap(m.emphasisCurve, bezier('e-emph')), lessThan(1e-6));
+    // The approvals cover the named curves and nothing further.
     expect(approved, contains('motion.e-out'));
-    expect(same(m.fastCurve, bezier('e-out')), isFalse);
+    expect(gap(m.fastCurve, bezier('e-out')), inInclusiveRange(1e-6, 0.21));
     expect(approved, contains('motion.e-std'));
-    expect(same(m.standardCurve, bezier('e-std')), isFalse);
+    expect(gap(m.standardCurve, bezier('e-std')), inInclusiveRange(1e-6, 0.03));
   });
 }
