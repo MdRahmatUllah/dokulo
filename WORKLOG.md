@@ -919,3 +919,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 10:21 · agent-0 DK-0698 · done
 - 2026-10-08 10:26 · agent-1 · agent-1 memory written: session summary, open PR #1163 state, branch queue, machine rule, reviews, tools, lessons (agents/agent-1.md + 3 MEMORY.md entries).
 - 2026-10-08 10:26 · agent-0 DK-1008 · assigned to agent-1
+- 2026-10-08 10:30 · agent-0 DK-1068 · added: Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392)
