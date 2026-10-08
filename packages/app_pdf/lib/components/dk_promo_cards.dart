@@ -136,37 +136,44 @@ class DkProCard extends StatelessWidget {
         color: c.proContainer,
         borderRadius: BorderRadius.circular(t.radius.m),
       ),
+      // The column starts 8 dp early, so the tertiary button's own padding
+      // lines its label up with the text while its whole target stays inside
+      // the column (a Transform would leave 8 dp that take no touches); the
+      // title and body take those 8 dp back.
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: t.space.m,
         children: [
           Icon(DkIcons.pro, size: 24, color: c.pro),
+          SizedBox(width: t.space.m - t.space.s),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: t.space.xs,
               children: [
-                Text(
-                  l.pro_card_title,
-                  style: t.text.titleS.copyWith(color: c.textPrimary),
-                ),
-                Text(
-                  l.pro_card_body,
-                  style: t.text.bodyM.copyWith(color: c.textSecondary),
-                ),
-                Transform.translate(
-                  // The tertiary button's own padding: line its text up.
-                  offset: Offset(-t.space.s, 0),
-                  child: DkButton(
-                    label: l.pro_card_action,
-                    onPressed: onOpen,
-                    variant: DkButtonVariant.tertiary,
-                    size: DkButtonSize.compact,
+                Padding(
+                  padding: EdgeInsets.only(left: t.space.s),
+                  child: Text(
+                    l.pro_card_title,
+                    style: t.text.titleS.copyWith(color: c.textPrimary),
                   ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: t.space.s),
+                  child: Text(
+                    l.pro_card_body,
+                    style: t.text.bodyM.copyWith(color: c.textSecondary),
+                  ),
+                ),
+                DkButton(
+                  label: l.pro_card_action,
+                  onPressed: onOpen,
+                  variant: DkButtonVariant.tertiary,
+                  size: DkButtonSize.compact,
                 ),
               ],
             ),
           ),
+          if (onDismiss != null) SizedBox(width: t.space.m),
           if (onDismiss != null) _Close(onTap: onDismiss!),
         ],
       ),

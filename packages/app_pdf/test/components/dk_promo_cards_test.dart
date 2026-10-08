@@ -107,6 +107,16 @@ void main() {
       expect(find.bySemanticsLabel('Schließen'), findsOneWidget);
     });
 
+    testWidgets('all of See Pro takes touches, its left edge too (DK-1074)', (
+      tester,
+    ) async {
+      var opened = 0;
+      await tester.pumpWidget(app(DkProCard(onOpen: () => opened++)));
+      final button = tester.getRect(find.byType(DkButton));
+      await tester.tapAt(button.centerLeft + const Offset(2, 0));
+      expect(opened, 1);
+    });
+
     testWidgets('on Me: no ×', (tester) async {
       await tester.pumpWidget(app(DkProCard(onOpen: () {})));
       expect(find.bySemanticsLabel('Close'), findsNothing);
