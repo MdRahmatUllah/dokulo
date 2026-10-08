@@ -3,6 +3,7 @@ import 'package:app_pdf/catalogue/page_states.dart';
 import 'package:app_pdf/components/dk_action_sheet.dart';
 import 'package:app_pdf/components/dk_ai_parts.dart';
 import 'package:app_pdf/components/dk_bottom_bars.dart';
+import 'package:app_pdf/components/dk_box_frame.dart';
 import 'package:app_pdf/components/dk_button.dart';
 import 'package:app_pdf/components/dk_chat_bubble.dart';
 import 'package:app_pdf/components/dk_checkbox_row.dart';
@@ -462,4 +463,68 @@ void main() {
       expect(find.text(text), findsWidgets, reason: text);
     }
   });
+
+  testWidgets('D7: the watermark-only centre is dashed until it is chosen', (
+    tester,
+  ) async {
+    Iterable<DkDashedBorder> dashes() => tester
+        .widgetList<CustomPaint>(find.byType(CustomPaint))
+        .map((p) => p.foregroundPainter)
+        .whereType<DkDashedBorder>();
+    for (final (selected, dashed) in [
+      (DkPagePosition.bottomCentre, 1),
+      (DkPagePosition.centre, 0),
+    ]) {
+      await tester.pumpWidget(
+        _wrap(
+          DkPositionPicker(
+            selected: selected,
+            onChanged: (_) {},
+            withCentre: true,
+          ),
+        ),
+      );
+      expect(dashes(), hasLength(dashed), reason: '$selected');
+      for (final d in dashes()) {
+        expect((d.width, d.color), (2, DkTokens.light.color.outlineStrong));
+      }
+    }
+  });
+
+  testWidgets('D8: DkButton tonal is primaryContainer with its ink (§16.3)', (
+    tester,
+  ) async {
+    await tester.pumpWidget(
+      _wrap(
+        const DkButton(
+          label: 'Open',
+          icon: DkIcons.open,
+          variant: DkButtonVariant.tonal,
+          size: DkButtonSize.large,
+          onPressed: _none,
+        ),
+      ),
+    );
+    final c = DkTokens.light.color;
+    final box = tester.widget<Container>(
+      find.descendant(
+        of: find.byType(DkButton),
+        matching: find.byWidgetPredicate(
+          (w) => w is Container && w.decoration is BoxDecoration,
+        ),
+      ),
+    );
+    expect((box.decoration! as BoxDecoration).color, c.primaryContainer);
+    expect(
+      tester.widget<Text>(find.text('Open')).style!.color,
+      c.onPrimaryContainer,
+    );
+  });
 }
+
+Widget _wrap(Widget child) => MaterialApp(
+  theme: dokuloTheme(DkTokens.light),
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
+  supportedLocales: AppLocalizations.supportedLocales,
+  home: Scaffold(body: Center(child: child)),
+);
