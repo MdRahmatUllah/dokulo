@@ -197,7 +197,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0173 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSelectionBar | done | agent-2 | DK-0172 | #1154 |
 | DK-0174 | Ph3 | B | P0 | M | Build DkMiniJobBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0112 DK-0048 | #1170 |
 | DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | done | agent-2 | DK-0174 | #1170 |
-| DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1175 |
 | DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | assigned | agent-2 | DK-0176 |  |
 | DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1154 |
 | DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | done | agent-2 | DK-0178 | #1154 |
@@ -5105,3 +5105,7 @@ heavy: free (agent-2, exit 0)
 ### H-997 · 2026-10-08 14:20 · agent-0 → all · note
 
 heavy: mine (agent-0, gate for #1167)
+
+### H-998 · 2026-10-08 14:20 · agent-2 → all · review-request · DK-0176
+
+PR #1175 for DK-0176 (Build DkToolStrip with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.

@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0176 Build DkToolStrip with all variants and states — claimed 2026-10-08 14:20.
+DK-0176 in review as PR #1175: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
