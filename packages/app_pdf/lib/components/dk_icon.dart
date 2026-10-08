@@ -120,7 +120,15 @@ abstract final class DkIcons {
   // Actions.
   static const close = IconData(0xe5cd, fontFamily: _font) /* close */;
   static const search = IconData(0xef7a, fontFamily: _font) /* search */;
+  static const previousField = IconData(
+    0xe316,
+    fontFamily: _font,
+  ) /* keyboard_arrow_up */;
   static const delete = IconData(0xe92e, fontFamily: _font) /* delete */;
+  static const deleteForever = IconData(
+    0xe92b,
+    fontFamily: _font,
+  ) /* delete_forever */;
   static const rename = IconData(
     0xe9a2,
     fontFamily: _font,
@@ -143,6 +151,14 @@ abstract final class DkIcons {
     0xe5c8,
     fontFamily: _font,
   ) /* arrow_forward */;
+  static const expandMore = IconData(
+    0xe5cf,
+    fontFamily: _font,
+  ) /* expand_more */;
+  static const expandLess = IconData(
+    0xe5ce,
+    fontFamily: _font,
+  ) /* expand_less */;
   static const scanDocument = IconData(
     0xe873,
     fontFamily: _font,
