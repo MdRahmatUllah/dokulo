@@ -33,6 +33,7 @@ class DkPageTray extends StatelessWidget {
   final ValueChanged<int>? onSelect;
 
   /// The page at `from` moves to index `to` (its place after the move).
+  /// The caller plays the landing haptic (`hapticsProvider.dropped()`, §9).
   final void Function(int from, int to)? onReorder;
 
   /// The "+" tile; hidden when null.

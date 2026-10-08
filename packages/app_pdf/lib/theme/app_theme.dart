@@ -24,7 +24,7 @@ ThemeData dokuloTheme(DkTokens tokens) {
       tertiaryContainer: c.proContainer,
       onTertiaryContainer: c.pro,
       error: c.danger,
-      onError: c.onPrimary,
+      onError: c.onDanger,
       errorContainer: c.dangerContainer,
       onErrorContainer: c.danger,
       surface: c.surface,

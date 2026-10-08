@@ -19,7 +19,23 @@ enum DkIllustrations {
   homeEmpty('ill-04-home-empty', 120, 120),
 
   /// ILL-05: open folder with a page sliding in (Files empty).
-  filesEmpty('ill-05-files-empty', 120, 120);
+  filesEmpty('ill-05-files-empty', 120, 120),
+
+  /// ILL-06: an empty folder outline (Folder empty).
+  folderEmpty('ill-06-folder-empty', 120, 120),
+
+  /// ILL-07: a magnifier over a blank page (Search, no results).
+  searchNoResults('ill-07-search-no-results', 120, 120),
+
+  /// ILL-08: an empty bin with a check (Trash empty).
+  trashEmpty('ill-08-trash-empty', 120, 120),
+
+  /// ILL-09: a folder with a lock and a fingerprint (Locked folder intro).
+  lockedFolderIntro('ill-09-locked-folder-intro', 120, 120),
+
+  /// ILL-10: a camera with a slash and a page (Camera permission denied; the
+  /// scanner shows it inverted on black).
+  cameraDenied('ill-10-camera-denied', 120, 120);
 
   const DkIllustrations(this.file, this.width, this.height);
   final String file;

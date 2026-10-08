@@ -335,5 +335,281 @@
   "markup_ink": "Blue ink",
   "@markup_ink": {
     "description": "Markup colour name (UI spec §4.2, DK-0032): the ink signature ink."
+  },
+  "tool_scan_name": "Scan",
+  "@tool_scan_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id scan."
+  },
+  "tool_scan_description": "Scan paper documents with the camera into a clean, searchable PDF.",
+  "@tool_scan_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id scan."
+  },
+  "tool_merge_name": "Merge PDF",
+  "@tool_merge_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id merge."
+  },
+  "tool_merge_description": "Combine PDFs and images into one PDF, in the order you choose.",
+  "@tool_merge_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id merge."
+  },
+  "tool_split_name": "Split PDF",
+  "@tool_split_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id split."
+  },
+  "tool_split_description": "Split a PDF into several files by page ranges, every few pages, or one file per page.",
+  "@tool_split_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id split."
+  },
+  "tool_extract_name": "Extract pages",
+  "@tool_extract_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id extract."
+  },
+  "tool_extract_description": "Save selected pages as a new PDF.",
+  "@tool_extract_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id extract."
+  },
+  "tool_organize_name": "Organize pages",
+  "@tool_organize_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id organize."
+  },
+  "tool_organize_description": "Reorder, rotate, delete and add pages in one view.",
+  "@tool_organize_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id organize."
+  },
+  "tool_rotate_name": "Rotate PDF",
+  "@tool_rotate_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id rotate."
+  },
+  "tool_rotate_description": "Turn pages that are sideways or upside down.",
+  "@tool_rotate_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id rotate."
+  },
+  "tool_smartsplit_name": "Smart Split",
+  "@tool_smartsplit_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id smartsplit."
+  },
+  "tool_smartsplit_description": "Find where one document ends and the next begins in a bundle of scans, then split them.",
+  "@tool_smartsplit_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id smartsplit."
+  },
+  "tool_img2pdf_name": "Image to PDF",
+  "@tool_img2pdf_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id img2pdf."
+  },
+  "tool_img2pdf_description": "Turn photos and images into a PDF.",
+  "@tool_img2pdf_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id img2pdf."
+  },
+  "tool_pdf2img_name": "PDF to images",
+  "@tool_pdf2img_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id pdf2img."
+  },
+  "tool_pdf2img_description": "Save PDF pages as JPG or PNG images.",
+  "@tool_pdf2img_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id pdf2img."
+  },
+  "tool_web_name": "Web page to PDF",
+  "@tool_web_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id web."
+  },
+  "tool_web_description": "Save a web page or HTML file as a PDF.",
+  "@tool_web_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id web."
+  },
+  "tool_pdfa_name": "Convert to PDF/A",
+  "@tool_pdfa_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id pdfa."
+  },
+  "tool_pdfa_description": "Convert to the archive format many authorities and courts ask for.",
+  "@tool_pdfa_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id pdfa."
+  },
+  "tool_text_name": "PDF to text",
+  "@tool_text_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id text."
+  },
+  "tool_text_description": "Get the text of a PDF as Markdown or plain text.",
+  "@tool_text_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id text."
+  },
+  "tool_compress_name": "Compress PDF",
+  "@tool_compress_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id compress."
+  },
+  "tool_compress_description": "Make PDFs smaller for email and upload portals.",
+  "@tool_compress_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id compress."
+  },
+  "tool_repair_name": "Repair PDF",
+  "@tool_repair_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id repair."
+  },
+  "tool_repair_description": "Try to fix PDFs that won't open or show errors.",
+  "@tool_repair_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id repair."
+  },
+  "tool_ocr_name": "Make text searchable",
+  "@tool_ocr_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id ocr."
+  },
+  "tool_ocr_description": "Recognise text in scans so you can search, copy and use AI on it.",
+  "@tool_ocr_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id ocr."
+  },
+  "tool_pagenum_name": "Add page numbers",
+  "@tool_pagenum_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id pagenum."
+  },
+  "tool_pagenum_description": "Number the pages, in the position and format you choose.",
+  "@tool_pagenum_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id pagenum."
+  },
+  "tool_watermark_name": "Add watermark",
+  "@tool_watermark_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id watermark."
+  },
+  "tool_watermark_description": "Put text or an image across your pages, like “Draft” or “Copy”.",
+  "@tool_watermark_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id watermark."
+  },
+  "tool_crop_name": "Crop pages",
+  "@tool_crop_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id crop."
+  },
+  "tool_crop_description": "Trim the margins of one page or of all pages.",
+  "@tool_crop_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id crop."
+  },
+  "tool_markup_name": "Mark up",
+  "@tool_markup_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id markup."
+  },
+  "tool_markup_description": "Highlight, underline, draw and add notes on a PDF.",
+  "@tool_markup_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id markup."
+  },
+  "tool_form_name": "Fill form",
+  "@tool_form_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id form."
+  },
+  "tool_form_description": "Fill in PDF forms, and lock the values if you want.",
+  "@tool_form_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id form."
+  },
+  "tool_sign_name": "Sign PDF",
+  "@tool_sign_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id sign."
+  },
+  "tool_sign_description": "Add your signature, initials or a stamp to a PDF.",
+  "@tool_sign_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id sign."
+  },
+  "tool_protect_name": "Add password",
+  "@tool_protect_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id protect."
+  },
+  "tool_protect_description": "Lock a PDF with a password and choose what others may do with it.",
+  "@tool_protect_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id protect."
+  },
+  "tool_unlock_name": "Remove password",
+  "@tool_unlock_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id unlock."
+  },
+  "tool_unlock_description": "Remove the password from a PDF you can open.",
+  "@tool_unlock_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id unlock."
+  },
+  "tool_redact_name": "Black out (redact)",
+  "@tool_redact_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id redact."
+  },
+  "tool_redact_description": "Remove names, numbers and other details for good, not just cover them.",
+  "@tool_redact_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id redact."
+  },
+  "tool_compare_name": "Compare PDFs",
+  "@tool_compare_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id compare."
+  },
+  "tool_compare_description": "See what changed between two versions of a PDF.",
+  "@tool_compare_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id compare."
+  },
+  "tool_extractassets_name": "Extract images & text",
+  "@tool_extractassets_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id extractassets."
+  },
+  "tool_extractassets_description": "Save the images and the text in a PDF as separate files.",
+  "@tool_extractassets_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id extractassets."
+  },
+  "tool_batch_name": "Batch",
+  "@tool_batch_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id batch."
+  },
+  "tool_batch_description": "Run one tool on many files at once.",
+  "@tool_batch_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id batch."
+  },
+  "tool_workflows_name": "Workflows",
+  "@tool_workflows_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id workflows."
+  },
+  "tool_workflows_description": "Chain tools into steps you can run again with one tap.",
+  "@tool_workflows_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id workflows."
+  },
+  "tool_summarize_name": "Summarize",
+  "@tool_summarize_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id summarize."
+  },
+  "tool_summarize_description": "Get a short summary of a PDF, made on your phone.",
+  "@tool_summarize_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id summarize."
+  },
+  "tool_ask_name": "Ask this PDF",
+  "@tool_ask_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id ask."
+  },
+  "tool_ask_description": "Ask questions about a PDF and get answers with the page they come from.",
+  "@tool_ask_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id ask."
+  },
+  "tool_translate_name": "Translate PDF",
+  "@tool_translate_name": {
+    "description": "The fixed tool name (Overview & foundations); tool id translate."
+  },
+  "tool_translate_description": "Translate a PDF on your phone, without uploading it.",
+  "@tool_translate_description": {
+    "description": "Search rows and About this tool (UI spec §21); tool id translate."
+  },
+  "tools_category_organize": "Organize",
+  "@tools_category_organize": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_convert": "Convert",
+  "@tools_category_convert": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_optimize": "Optimize",
+  "@tools_category_optimize": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_edit": "Edit",
+  "@tools_category_edit": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_security": "Security",
+  "@tools_category_security": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_ai": "AI",
+  "@tools_category_ai": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
+  },
+  "tools_category_automation": "Automation",
+  "@tools_category_automation": {
+    "description": "T1 category chip and section header (UI spec §15.2)."
   }
 }

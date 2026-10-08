@@ -3,9 +3,11 @@ import 'package:go_router/go_router.dart';
 
 import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
+import '../routes/routes.dart';
+import 'button_states.dart';
 import 'page_states.dart';
 
-/// The component catalogue (debug builds only, at `/dev/components`): every
+/// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
 /// task adds one entry here; its golden test renders the same states widget,
 /// so the catalogue shows exactly what is tested.
@@ -24,6 +26,7 @@ class CatalogueEntry {
 }
 
 const catalogue = [
+  CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
   CatalogueEntry('DkPageGrid', '11.5 Pages and thumbnails', PageGridStates()),
@@ -43,7 +46,9 @@ class CatalogueScreen extends StatelessWidget {
           ListTile(
             title: Text(entry.name),
             subtitle: Text(entry.section),
-            onTap: () => context.push('/dev/components/${entry.name}'),
+            onTap: () => context.push(
+              '${Routes.catalogue}/${Uri.encodeComponent(entry.name)}',
+            ),
           ),
       ],
     ),
@@ -57,7 +62,13 @@ class CatalogueEntryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final entry = catalogue.firstWhere((e) => e.name == name);
+    final entry = catalogue.where((e) => e.name == name).firstOrNull;
+    if (entry == null) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Center(child: Text('No component called "$name"')),
+      );
+    }
     return Scaffold(
       appBar: AppBar(title: Text(entry.name)),
       // Both themes are built (not lazily), so a tall entry's Dark half
