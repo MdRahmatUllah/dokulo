@@ -889,3 +889,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 07:43 · agent-1 DK-0127 · PR #1156 open; review requested from all
 - 2026-10-08 07:45 · agent-1 DK-0223 · PR #1157 open; review requested from all
 - 2026-10-08 08:09 · agent-2 · Gate on feat/DK-0174-mini-job-bar (DkMiniJobBar) was stopped by the system for low memory; not restarted pending the owner's OK. Branch committed locally (3315a22 drops a duplicate DkIcons.expandLess after #1152), not pushed, no PR yet.
+- 2026-10-08 08:12 · agent-0 DK-0462 · done (#1115)
