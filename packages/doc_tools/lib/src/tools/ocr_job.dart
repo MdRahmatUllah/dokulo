@@ -270,8 +270,11 @@ Future<Map<int, List<LayerWord>>> _readPages(
   try {
     final words = <int, List<LayerWord>>{};
     for (final (n, page) in job.pages.indexed) {
-      final bgra = await File(page.path).readAsBytes();
-      await File(page.path).delete();
+      // Sync, with no await while the file is open: a cancel kills this
+      // isolate, and a handle it held open would lock the job's temp folder
+      // on Windows until a GC.
+      final bgra = File(page.path).readAsBytesSync();
+      File(page.path).deleteSync();
       final ocr = await engine.recognizeRaster(
         Raster.fromBgra(page.width, page.height, bgra),
         language: job.language,
