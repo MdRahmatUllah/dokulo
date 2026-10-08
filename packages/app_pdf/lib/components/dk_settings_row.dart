@@ -29,6 +29,9 @@ class DkSettingsRow extends StatelessWidget {
 
   /// A control instead of the chevron (a DkSwitch).
   final Widget? trailing;
+
+  /// Opens the page, or with a switch [trailing] toggles it from the whole
+  /// row as the platforms do: `onTap: () => onChanged(!value)`.
   final VoidCallback? onTap;
 
   @override
@@ -59,10 +62,14 @@ class DkSettingsRow extends StatelessWidget {
           if (trailing != null)
             trailing!
           else ...[
+            // Flexible: a long value at 200 % shares the room with the title.
             if (value != null)
-              Text(
-                value!,
-                style: t.text.bodyM.copyWith(color: c.textSecondary),
+              Flexible(
+                child: Text(
+                  value!,
+                  textAlign: TextAlign.end,
+                  style: t.text.bodyM.copyWith(color: c.textSecondary),
+                ),
               ),
             if (onTap != null)
               DkIcon(DkIcons.chevronRight, color: c.iconSecondary),

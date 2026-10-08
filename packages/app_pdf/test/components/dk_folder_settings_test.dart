@@ -143,6 +143,26 @@ void main() {
       handle.dispose();
     });
 
+    testWidgets('a long value at 200 % leaves room for the title', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(360, 640);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        app(
+          DkSettingsRow(
+            title: 'Language',
+            value: 'Deutsch (Deutschland)',
+            onTap: () {},
+          ),
+          scale: 2,
+        ),
+      );
+      expect(tester.takeException(), isNull);
+      expect(tester.getSize(find.text('Language')).width, greaterThan(40));
+    });
+
     testWidgets('a switch row reads as the switch with its title', (
       tester,
     ) async {
