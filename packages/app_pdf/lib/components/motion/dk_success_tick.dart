@@ -20,7 +20,10 @@ class DkSuccessTick extends StatefulWidget {
 
 class _DkSuccessTickState extends State<DkSuccessTick>
     with SingleTickerProviderStateMixin {
-  late final _draw = AnimationController(vsync: this);
+  late final _draw = AnimationController(
+    vsync: this,
+    animationBehavior: AnimationBehavior.preserve,
+  );
   var _reduce = false;
 
   @override
@@ -145,7 +148,10 @@ class DkCountUp extends StatefulWidget {
 
 class _DkCountUpState extends State<DkCountUp>
     with SingleTickerProviderStateMixin {
-  late final _count = AnimationController(vsync: this);
+  late final _count = AnimationController(
+    vsync: this,
+    animationBehavior: AnimationBehavior.preserve,
+  );
   late Animation<double> _t;
   var _reduce = false;
 
