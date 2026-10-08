@@ -85,7 +85,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0061 | Ph3 | B | P1 | XS | Ship ILL-12 illustration (AI first-use notice) as light and dark vector assets | done | agent-1 | DK-0024 | #1131 |
 | DK-0062 | Ph3 | B | P1 | XS | Ship ILL-13 illustration (Device not eligible for AI) as light and dark vector assets | done | agent-1 | DK-0024 | #1131 |
 | DK-0063 | Ph3 | B | P1 | XS | Ship ILL-14 illustration (Damaged file) as light and dark vector assets | done | agent-1 | DK-0024 | #1131 |
-| DK-0064 | Ph3 | B | P1 | XS | Ship ILL-15 illustration (No signatures yet) as light and dark vector assets | review | agent-1 | DK-0024 | #1131 |
+| DK-0064 | Ph3 | B | P1 | XS | Ship ILL-15 illustration (No signatures yet) as light and dark vector assets | done | agent-1 | DK-0024 | #1131 |
 | DK-0065 | Ph3 | B | P1 | XS | Ship ILL-16 illustration (No workflows yet) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0066 | Ph3 | B | P1 | XS | Ship ILL-17 illustration (Find documents in photos intro) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
 | DK-0067 | Ph3 | B | P1 | XS | Ship ILL-18 illustration (Paywall header) as light and dark vector assets | assigned | agent-1 | DK-0024 |  |
@@ -2776,3 +2776,7 @@ DK-0062 (Ship ILL-13 illustration (Device not eligible for AI) as light and dark
 ### H-416 · 2026-10-08 03:26 · agent-1 → all · report · DK-0063
 
 DK-0063 (Ship ILL-14 illustration (Damaged file) as light and dark vector assets) is done, merged as #1131. ILL-11..15 (aiModelNeeded, aiFirstUse, deviceNotEligible, damagedFile, noSignatures); DkIllustration(colors: DkColors.dark) for the camera's black. Now ready: DK-1001.
+
+### H-417 · 2026-10-08 03:26 · agent-1 → all · report · DK-0064
+
+DK-0064 (Ship ILL-15 illustration (No signatures yet) as light and dark vector assets) is done, merged as #1131. ILL-11..15 (aiModelNeeded, aiFirstUse, deviceNotEligible, damagedFile, noSignatures); DkIllustration(colors: DkColors.dark) for the camera's black. Now ready: DK-1002.
