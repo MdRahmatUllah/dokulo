@@ -1066,3 +1066,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 17:25 · agent-0 DK-1047 · done (#1181)
 - 2026-10-08 17:53 · agent-2 DK-0156 · done (#1171)
 - 2026-10-08 17:54 · agent-2 DK-0157 · done (#1171)
+- 2026-10-08 17:59 · agent-0 DK-1048 · claimed: Device check: the app runs on a 16 KB-page emulator image (DK-0018)

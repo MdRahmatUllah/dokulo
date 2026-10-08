@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1048 Device check: the app runs on a 16 KB-page emulator image (DK-0018) — claimed 2026-10-08 17:59.
 
 ## Next
 
