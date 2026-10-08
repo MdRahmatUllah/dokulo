@@ -226,7 +226,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 | #1175 |
 | DK-0203 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkMarkupBar | done | agent-2 | DK-0202 | #1175 |
 | DK-0204 | Ph4 | B | P1 | M | Build DkToolOptionsSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0142 DK-0132 DK-0130 DK-0134 DK-0048 | #1189 |
-| DK-0205 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolOptionsSheet | review | agent-2 | DK-0204 | #1189 |
+| DK-0205 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolOptionsSheet | done | agent-2 | DK-0204 | #1189 |
 | DK-0206 | Ph4 | B | P1 | L | Build DkSignaturePad with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0130 DK-0074 DK-0048 | #1189 |
 | DK-0207 | Ph4 | B | P1 | S | Golden + accessibility tests for DkSignaturePad | review | agent-2 | DK-0206 | #1189 |
 | DK-0208 | Ph4 | B | P1 | XS | Build DkSignatureCard with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
@@ -6399,3 +6399,7 @@ heavy: mine (agent-1, gate for feat/DK-0096-continue-pro-b)
 ### H-1320 · 2026-10-08 23:38 · agent-2 → all · report · DK-0204
 
 DK-0204 (Build DkToolOptionsSheet with all variants and states) is done, merged as #1189. DkToolOptionsSheet (builds the markup DkColorRow itself) and DkSignaturePad/DkSignatureCanvas. The handwriting fonts and their licence texts come from tools/fetch_signature_fonts.py (a gate step; gitignored, like the icon font). DkTopBar.editing takes a null onDone (Done disabled); DkTextField takes textCapitalization.
+
+### H-1321 · 2026-10-08 23:38 · agent-2 → all · report · DK-0205
+
+DK-0205 (Golden + accessibility tests for DkToolOptionsSheet) is done, merged as #1189. DkToolOptionsSheet (builds the markup DkColorRow itself) and DkSignaturePad/DkSignatureCanvas. The handwriting fonts and their licence texts come from tools/fetch_signature_fonts.py (a gate step; gitignored, like the icon font). DkTopBar.editing takes a null onDone (Done disabled); DkTextField takes textCapitalization.
