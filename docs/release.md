@@ -11,8 +11,8 @@ decision (2026-10-07): `app.dokulo`.
 
 | Flavor | Android application id | iOS bundle id | Name on the phone | For |
 | --- | --- | --- | --- | --- |
-| `dev` | `app.dokulo.dev` | `app.dokulo.dev` (follow-up) | Dokulo Dev | Daily work; the default (`flutter run`) |
-| `staging` | `app.dokulo.staging` | `app.dokulo.staging` (follow-up) | Dokulo Staging | Release candidates, SQA's device checks |
+| `dev` | `app.dokulo.dev` | `app.dokulo.dev` | Dokulo Dev | Daily work; the default (`flutter run`) |
+| `staging` | `app.dokulo.staging` | `app.dokulo.staging` | Dokulo Staging | Release candidates, SQA's device checks |
 | `prod` | `app.dokulo` | `app.dokulo` | Dokulo | The stores |
 
 `packages/app_pdf/pubspec.yaml` sets `flutter: default-flavor: dev`, so a plain
@@ -84,11 +84,31 @@ with the owner, per version, outside the repo. They are only needed to read
 a stack trace a user chose to send (the opt-in crash report, DK-0011):
 `flutter symbolize -i <trace> -d <dir>/app.android-arm64.symbols`.
 
-## iOS (follow-up: needs a Mac and the owner's Apple team)
+## iOS (DK-1046)
 
-Done here: the bundle id `app.dokulo` (and `app.dokulo.RunnerTests`).
-Still open, in its own task: the Xcode schemes and build configurations per
-flavor (`dev`, `staging`, `prod`; required by `default-flavor`, so before the
-first iOS build), signing with the owner's Apple team, and one App Group shared
-by the app, the Share Extension, the Files Action Extension and the widgets
-once those targets exist.
+Each flavor has its Xcode scheme (`dev`, `staging`, `prod`, in
+`ios/Runner.xcodeproj/xcshareddata/xcschemes`) and its build configurations
+`Debug-<flavor>`, `Release-<flavor>` and `Profile-<flavor>`, as Flutter's
+`--flavor` needs. The plain `Debug`/`Release`/`Profile` stay for Xcode's
+`Runner` scheme. Per flavor, the Runner target sets `PRODUCT_BUNDLE_IDENTIFIER`
+(the table above) and `FLAVOR_DISPLAY_NAME`, which `CFBundleDisplayName` reads,
+so the three install side by side. `BGTaskSchedulerPermittedIdentifiers` uses
+`$(PRODUCT_BUNDLE_IDENTIFIER).jobs`, so it follows the flavor.
+
+```bash
+cd packages/app_pdf
+flutter run -d <iPhone>                          # dev (default-flavor)
+flutter build ios --flavor staging --release
+flutter build ipa --flavor prod --release --obfuscate --split-debug-info=../../build/symbols/1.0.0+100
+```
+
+Plugins come in through Swift Package Manager (`FlutterGeneratedPluginSwiftPackage`).
+If a plugin ever needs CocoaPods, Flutter writes an `ios/Podfile`. Map every
+flavor configuration there, or the `Debug-*` builds link release pods:
+`'Debug-dev' => :debug, 'Release-dev' => :release, 'Profile-dev' => :release`,
+and the same for `staging` and `prod`.
+
+Still open:
+- the first build of the schemes on a Mac (`flutter build ios --flavor <f>` for all three, side by side on one iPhone);
+- signing with the owner's Apple team (`DEVELOPMENT_TEAM`, never in git when it is personal);
+- one App Group shared by the app, the Share Extension, the Files Action Extension and the widgets, once those targets exist.
