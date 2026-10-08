@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0155 Golden + accessibility tests for DkPageGrid — claimed 2026-10-08 03:47.
 
 ## Next
 
