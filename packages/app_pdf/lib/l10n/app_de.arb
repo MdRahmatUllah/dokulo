@@ -144,5 +144,15 @@
   "scan_mode_import": "Fotos importieren",
   "shell_button_scan_hint": "Scanmodus wählen",
   "common_decrease": "Verringern",
-  "common_increase": "Erhöhen"
+  "common_increase": "Erhöhen",
+  "colour_yellow": "Gelb",
+  "colour_green": "Grün",
+  "colour_blue": "Blau",
+  "colour_pink": "Pink",
+  "colour_red": "Rot",
+  "colour_black": "Schwarz",
+  "colour_custom": "Eigene",
+  "colour_hue": "Farbton",
+  "colour_brightness": "Helligkeit",
+  "pin_delete_digit": "Ziffer löschen"
 }

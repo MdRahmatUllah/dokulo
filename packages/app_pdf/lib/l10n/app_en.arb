@@ -643,5 +643,45 @@
   "common_increase": "Increase",
   "@common_increase": {
     "description": "DkStepper + button (screen readers)."
+  },
+  "colour_yellow": "Yellow",
+  "@colour_yellow": {
+    "description": "Markup colour name (DkColorRow, screen readers)."
+  },
+  "colour_green": "Green",
+  "@colour_green": {
+    "description": "Markup colour name."
+  },
+  "colour_blue": "Blue",
+  "@colour_blue": {
+    "description": "Markup colour name."
+  },
+  "colour_pink": "Pink",
+  "@colour_pink": {
+    "description": "Markup colour name."
+  },
+  "colour_red": "Red",
+  "@colour_red": {
+    "description": "Markup colour name."
+  },
+  "colour_black": "Black",
+  "@colour_black": {
+    "description": "Markup colour name."
+  },
+  "colour_custom": "Custom",
+  "@colour_custom": {
+    "description": "DkColorRow last swatch: pick any colour (export: edit-penopts)."
+  },
+  "colour_hue": "Hue",
+  "@colour_hue": {
+    "description": "Custom colour picker slider."
+  },
+  "colour_brightness": "Brightness",
+  "@colour_brightness": {
+    "description": "Custom colour picker slider."
+  },
+  "pin_delete_digit": "Delete digit",
+  "@pin_delete_digit": {
+    "description": "DkPinPad delete key (export: locked-folder-applock)."
   }
 }

@@ -138,6 +138,13 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const backspace = IconData(0xe14a, fontFamily: _font) /* backspace */;
+  static const fingerprint = IconData(
+    0xe90d,
+    fontFamily: _font,
+  ) /* fingerprint */;
+  static const faceId = IconData(0xf008, fontFamily: _font) /* face */;
+  static const palette = IconData(0xe40a, fontFamily: _font) /* palette */;
   static const remove = IconData(0xe15b, fontFamily: _font) /* remove */;
   static const scanDocument = IconData(
     0xe873,

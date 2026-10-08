@@ -5,6 +5,7 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
+import 'color_pin_states.dart';
 import 'icon_button_states.dart';
 import 'overlay_states.dart';
 import 'page_states.dart';
@@ -58,6 +59,8 @@ const catalogue = [
     '11.4 Inputs and controls',
     DkSliderStepperGallery(),
   ),
+  CatalogueEntry('DkColorRow', '11.4 Inputs and controls', DkColorRowGallery()),
+  CatalogueEntry('DkPinPad', '11.4 Inputs and controls', DkPinPadGallery()),
 ];
 
 /// The list of components; tap one to see its states.
