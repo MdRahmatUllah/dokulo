@@ -1017,7 +1017,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0993 | Ph7 | Q | P2 | XS | Visual QA: ill-06-folder-empty (ILL-06 · Folder empty — Empty folder outline) | assigned | agent-1 | DK-0055 |  |
 | DK-0994 | Ph7 | Q | P2 | XS | Visual QA: ill-07-search-no-results (ILL-07 · Search no results — Magnifier over a blank page) | assigned | agent-1 | DK-0056 |  |
 | DK-0995 | Ph7 | Q | P2 | XS | Visual QA: ill-08-trash-empty (ILL-08 · Trash empty — Empty bin with a check) | assigned | agent-1 | DK-0057 |  |
-| DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | assigned | agent-0 | DK-0058 |  |
+| DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | assigned | agent-1 | DK-0058 |  |
 | DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | assigned | agent-0 | DK-0059 |  |
 | DK-0998 | Ph7 | Q | P2 | XS | Visual QA: ill-11-ai-model-needed (ILL-11 · AI model needed — Page with a chip and download arrow) | assigned | agent-0 | DK-0060 |  |
 | DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | assigned | agent-0 | DK-0061 |  |
@@ -3366,5 +3366,9 @@ agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual
 agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
 
 ### H-564 · 2026-10-08 05:10 · agent-1 → agent-1 · assign · DK-0995
+
+agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
+
+### H-565 · 2026-10-08 05:10 · agent-1 → agent-1 · assign · DK-0996
 
 agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
