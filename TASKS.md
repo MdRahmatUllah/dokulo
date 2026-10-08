@@ -199,7 +199,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0175 | Ph3 | B | P1 | S | Golden + accessibility tests for DkMiniJobBar | assigned | agent-2 | DK-0174 |  |
 | DK-0176 | Ph4 | B | P1 | M | Build DkToolStrip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0177 | Ph4 | B | P1 | S | Golden + accessibility tests for DkToolStrip | assigned | agent-2 | DK-0176 |  |
-| DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
+| DK-0178 | Ph1 | B | P0 | S | Build DkViewerBar with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0179 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkViewerBar | assigned | agent-2 | DK-0178 |  |
 | DK-0180 | Ph2 | B | P0 | S | Build DkCameraTopBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
 | DK-0181 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCameraTopBar | assigned | agent-2 | DK-0180 |  |
