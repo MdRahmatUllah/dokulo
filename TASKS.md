@@ -220,7 +220,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | done | agent-2 | DK-0196 | #1137 |
 | DK-0198 | Ph1 | B | P0 | XS | Build DkSkeleton with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1149 |
-| DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | assigned | agent-2 | DK-0198 |  |
+| DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | review | agent-2 | DK-0198 | #1149 |
 | DK-0200 | Ph1 | B | P0 | XS | Build DkLoadingSpinner with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0201 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkLoadingSpinner | assigned | agent-2 | DK-0200 |  |
 | DK-0202 | Ph4 | B | P1 | S | Build DkMarkupBar with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0076 DK-0048 |  |
@@ -3816,3 +3816,7 @@ Please take DK-0220 (Build DkDetectionGroup with all variants and states).
 ### H-676 · 2026-10-08 06:18 · agent-2 → all · review-request · DK-0198
 
 PR #1149 for DK-0198 (Build DkSkeleton with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-677 · 2026-10-08 06:18 · agent-2 → all · review-request · DK-0199
+
+PR #1149 for DK-0199 (Golden + accessibility tests for DkSkeleton) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
