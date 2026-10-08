@@ -147,6 +147,7 @@ const catalogue = [
     '11.6 Bars',
     BottomBarStates(),
   ),
+  CatalogueEntry('DkMiniJobBar', '11.6 Bars', MiniJobBarStates()),
 ];
 
 /// The list of components; tap one to see its states.
