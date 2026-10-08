@@ -107,7 +107,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | done | agent-1 | DK-0082 | #1146 |
 | DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 | #1146 |
 | DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | done | agent-1 | DK-0084 | #1146 |
-| DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
+| DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 | #1185 |
 | DK-0087 | Ph1 | B | P1 | S | Golden + accessibility tests for DkFileCard | assigned | agent-1 | DK-0086 |  |
 | DK-0088 | Ph1 | B | P0 | S | Build DkFolderCard with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1178 |
 | DK-0089 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkFolderCard | done | agent-1 | DK-0088 | #1178 |
@@ -5847,3 +5847,7 @@ heavy: free (agent-1, exit 1)
 ### H-1182 · 2026-10-08 21:50 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0194-progress-detection-refresh)
+
+### H-1183 · 2026-10-08 21:51 · agent-1 → all · review-request · DK-0086
+
+PR #1185 for DK-0086 (Build DkFileCard with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
