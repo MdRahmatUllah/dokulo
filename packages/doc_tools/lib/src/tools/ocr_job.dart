@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
@@ -66,9 +65,9 @@ class OcrInput {
 /// touched. Files search indexes the output once it's saved (DK-0270).
 ///
 /// The calling isolate only renders (PDFium through pdfrx) and writes the
-/// pixels to the job's temp folder; one `Lane.onnx` job per file reads them,
-/// with the engine made once and closed at the end, so OCR's Dart work never
-/// runs on the UI isolate.
+/// pixels to the job's temp folder, [window] pages at a time; a `Lane.onnx`
+/// job reads each window, with the engine made once per window and closed at
+/// its end, so OCR's Dart work never runs on the UI isolate.
 class OcrJob extends ToolJob<OcrInput> {
   const OcrJob();
 
@@ -81,6 +80,12 @@ class OcrJob extends ToolJob<OcrInput> {
 
   /// What OCR reads at: sharp enough for small print.
   static const dpi = 300.0;
+
+  /// Pages rendered ahead of the OCR worker. Each is a raw bitmap on disk
+  /// (~35 MB for A4 at [dpi]), so this bounds the job's temp storage (~280 MB).
+  /// ponytail: the engine loads once per window (a fraction of a second
+  /// against ~1 s per page); stream pages to one worker if that shows.
+  static int window = 8;
 
   @override
   String get id => 'ocr';
@@ -140,66 +145,69 @@ class OcrJob extends ToolJob<OcrInput> {
     var done = 0;
     try {
       for (final (i, file) in input.files.indexed) {
-        // On this isolate: the pages that have no text yet, rendered to raw
-        // pixels on disk. A page with text (born digital, or OCR'd before)
-        // keeps it and gets no second layer.
-        final toRead = <_PageImage>[];
-        for (final page in selected[i]) {
-          await context.checkCancelled();
-          if ((await PdfEngine.pageText(
-            file,
-            page,
-            password: input.password,
-          )).text.trim().isNotEmpty) {
-            context.report(
-              JobProgress('recognising', pageIndex: done++, pageCount: total),
+        final words = <int, List<LayerWord>>{};
+        for (var start = 0; start < selected[i].length; start += window) {
+          // On this isolate: the window's pages that have no text yet,
+          // rendered to raw pixels on disk. A page with text (born digital,
+          // or OCR'd before) keeps it and gets no second layer.
+          final toRead = <_PageImage>[];
+          for (final page in selected[i].skip(start).take(window)) {
+            await context.checkCancelled();
+            if ((await PdfEngine.pageText(
+              file,
+              page,
+              password: input.password,
+            )).text.trim().isNotEmpty) {
+              context.report(
+                JobProgress('recognising', pageIndex: done++, pageCount: total),
+              );
+              continue;
+            }
+            final shot = await PdfEngine.render(
+              file,
+              page,
+              dpi: dpi,
+              password: input.password,
             );
-            continue;
+            final path = '${context.tempDir.path}/ocr_${i}_$page.bgra';
+            await File(path).writeAsBytes(shot.bgra);
+            toRead.add((
+              page: page,
+              path: path,
+              width: shot.width,
+              height: shot.height,
+            ));
           }
-          final shot = await PdfEngine.render(
-            file,
-            page,
-            dpi: dpi,
-            password: input.password,
-          );
-          final path = '${context.tempDir.path}/ocr_${i}_$page.bgra';
-          await File(path).writeAsBytes(shot.bgra);
-          toRead.add((
-            page: page,
-            path: path,
-            width: shot.width,
-            height: shot.height,
-          ));
-        }
+          if (toRead.isEmpty) continue;
 
-        // On an ONNX worker: every page read, progress per page.
-        final read = pool.run(Lane.onnx, _readPages, (
-          pages: toRead,
-          language: input.language,
-          scratch: context.tempDir.path,
-          setup: setup,
-        ));
-        final before = done;
-        final progress = read.progress.listen(
-          (n) => context.report(
-            JobProgress(
-              'recognising',
-              pageIndex: before + (n as int),
-              pageCount: total,
+          // On an ONNX worker: the window's pages read, progress per page.
+          final read = pool.run(Lane.onnx, _readPages, (
+            pages: toRead,
+            language: input.language,
+            scratch: context.tempDir.path,
+            setup: setup,
+          ));
+          final before = done;
+          final progress = read.progress.listen(
+            (n) => context.report(
+              JobProgress(
+                'recognising',
+                pageIndex: before + (n as int),
+                pageCount: total,
+              ),
             ),
-          ),
-        );
-        final watch = Timer.periodic(const Duration(milliseconds: 200), (_) {
-          if (context.isCancelled) read.cancel();
-        });
-        final Map<int, List<LayerWord>> words;
-        try {
-          words = await read.result;
-        } finally {
-          watch.cancel();
-          await progress.cancel();
+          );
+          final watch = Timer.periodic(const Duration(milliseconds: 200), (_) {
+            if (context.isCancelled) read.cancel();
+          });
+          try {
+            words.addAll(await read.result);
+          } finally {
+            watch.cancel();
+            await progress.cancel();
+          }
+          done = before + toRead.length;
         }
-        done = before + toRead.length;
         await context.checkCancelled();
 
         final output = current = outputName(
@@ -262,7 +270,7 @@ Future<Map<int, List<LayerWord>>> _readPages(
   try {
     final words = <int, List<LayerWord>>{};
     for (final (n, page) in job.pages.indexed) {
-      final bgra = Uint8List.fromList(await File(page.path).readAsBytes());
+      final bgra = await File(page.path).readAsBytes();
       await File(page.path).delete();
       final ocr = await engine.recognizeRaster(
         Raster.fromBgra(page.width, page.height, bgra),

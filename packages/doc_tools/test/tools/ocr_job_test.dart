@@ -61,6 +61,26 @@ class _FakeOcr implements OcrEngine {
 
 Future<OcrEngine> _fake(OcrAssets? assets) async => const _FakeOcr();
 
+/// [_FakeOcr], failing when more than two rendered pages wait on disk.
+class _WindowOcr extends _FakeOcr {
+  const _WindowOcr();
+
+  @override
+  Future<PageOcr> recognizeRaster(
+    Raster raster, {
+    OcrLanguage language = OcrLanguage.auto,
+    required Directory scratch,
+  }) async {
+    final waiting = scratch.listSync().where((f) => f.path.endsWith('.bgra'));
+    if (waiting.length > 2) {
+      throw StateError('${waiting.length} pages rendered ahead');
+    }
+    return super.recognizeRaster(raster, language: language, scratch: scratch);
+  }
+}
+
+Future<OcrEngine> _windowed(OcrAssets? assets) async => const _WindowOcr();
+
 void main() {
   setUpAll(pdfrxInitialize);
   late Directory dir, outDir;
@@ -145,6 +165,17 @@ void main() {
       isEmpty,
       reason: 'pixels cleaned up',
     );
+  });
+
+  test('pages are rendered a window at a time, never the whole file', () async {
+    OcrJob.window = 2;
+    OcrJob.engine = _windowed;
+    addTearDown(() => OcrJob.window = 8);
+    final output =
+        await (await queue.start('ocr', input([scan]))).result as OneFile;
+    for (var p = 0; p < 6; p++) {
+      expect(await text(output.path, p), contains('Jahresabrechnung'));
+    }
   });
 
   test('"Pages: Choose…" reads only those pages', () async {
