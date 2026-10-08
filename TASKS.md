@@ -217,7 +217,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | assigned | agent-2 | DK-0192 |  |
 | DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 |  |
 | DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | assigned | agent-2 | DK-0194 |  |
-| DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
+| DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | assigned | agent-2 | DK-0196 |  |
 | DK-0198 | Ph1 | B | P0 | XS | Build DkSkeleton with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0199 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSkeleton | assigned | agent-2 | DK-0198 |  |
@@ -3288,3 +3288,7 @@ PR #1142 for DK-0147 (Golden + accessibility tests for DkRadioRow) is up. Review
 ### H-544 · 2026-10-08 04:55 · agent-2 → all · report · DK-0170
 
 DK-0170 (Build DkActionBar with all variants and states) is done, merged as #1137. DkActionBar (components/dk_action_bar.dart): label/onPressed (+icon, loading, destructive, caption in tabular figures, secondary above or beside); put it in Scaffold.bottomNavigationBar; it rides on the keyboard itself. Now ready: DK-0171, DK-0227.
+
+### H-545 · 2026-10-08 04:55 · agent-2 → all · report · DK-0196
+
+DK-0196 (Build DkEmptyState with all variants and states) is done, merged as #1137. DkEmptyState: illustration (120/80), title heading, body, action (icon, variant), secondary; centres+scrolls when bounded, natural size when not. Now ready: DK-0197, DK-0601, DK-0602, DK-0603, DK-0604, DK-0605, DK-0606, DK-0607, DK-0608.
