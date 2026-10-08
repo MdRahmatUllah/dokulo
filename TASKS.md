@@ -212,7 +212,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0188 | Ph1 | B | P0 | S | Build DkMenu with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1144 |
 | DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | done | agent-2 | DK-0188 | #1144 |
 | DK-0190 | Ph1 | B | P0 | S | Build DkToast with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1144 |
-| DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | review | agent-2 | DK-0190 | #1144 |
+| DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | done | agent-2 | DK-0190 | #1144 |
 | DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
 | DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | done | agent-2 | DK-0192 | #1139 |
 | DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 |  |
@@ -3800,3 +3800,7 @@ DK-0189 (Golden + accessibility tests for DkMenu) is done, merged as #1144. test
 ### H-672 · 2026-10-08 06:15 · agent-2 → all · report · DK-0190
 
 DK-0190 (Build DkToast with all variants and states) is done, merged as #1144. showDkToast on a themed floating SnackBar; dokuloTheme sets labelLarge=labelL and a 2 dp focus side for stock TextButtons Now ready: DK-0223, DK-0226, DK-0622.
+
+### H-673 · 2026-10-08 06:15 · agent-2 → all · report · DK-0191
+
+DK-0191 (Golden + accessibility tests for DkToast) is done, merged as #1144. tests in dk_toast_test.dart
