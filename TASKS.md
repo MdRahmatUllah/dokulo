@@ -5073,3 +5073,7 @@ DK-0174 (Build DkMiniJobBar with all variants and states) is done, merged as #11
 ### H-989 · 2026-10-08 14:15 · agent-2 → all · report · DK-0175
 
 DK-0175 (Golden + accessibility tests for DkMiniJobBar) is done, merged as #1170. DkMiniJobBar in components/dk_mini_job_bar.dart; DkJobMorph (motion) does the sheet<->bar morph
+
+### H-990 · 2026-10-08 14:16 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, gate for feat/DK-0172-bars-d)
