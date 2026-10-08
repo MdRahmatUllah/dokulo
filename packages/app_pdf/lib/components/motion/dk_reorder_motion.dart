@@ -59,7 +59,11 @@ class DkSlot extends StatefulWidget {
 }
 
 class _DkSlotState extends State<DkSlot> with SingleTickerProviderStateMixin {
-  late final _fade = AnimationController(vsync: this, value: 1);
+  late final _fade = AnimationController(
+    vsync: this,
+    value: 1,
+    animationBehavior: AnimationBehavior.preserve,
+  );
 
   @override
   void didUpdateWidget(DkSlot old) {
