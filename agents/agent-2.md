@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0156 Build DkCropOverlay with all variants and states — claimed 2026-10-08 13:46.
+DK-0156 in review as PR #1171: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
