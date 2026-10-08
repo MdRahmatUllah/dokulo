@@ -698,6 +698,10 @@
   "@scanner_button_shutter": {
     "description": "Screen readers: the scanner's shutter button."
   },
+  "common_refresh": "Refresh",
+  "@common_refresh": {
+    "description": "DkRefresh (UI spec §12.8): the screen-reader action that does what pulling down does."
+  },
   "common_loading": "Loading",
   "@common_loading": {
     "description": "Screen-reader label of DkSkeleton and DkLoadingSpinner (UI spec §11.7)."
@@ -974,5 +978,75 @@
   "crop_reset": "Reset",
   "@crop_reset": {
     "description": "DkCropOverlay: undo this crop's changes."
+  },
+  "redact_box_label": "Black-out box: {category}",
+  "@redact_box_label": {
+    "description": "Screen-reader label of a DkRedactionBox (UI spec §11.5); category is the detector's name, e.g. IBAN.",
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "redact_box_remove": "Remove box",
+  "@redact_box_remove": {
+    "description": "The delete × of a DkRedactionBox (UI spec §11.5)."
+  },
+  "sign_stamp_label": "Signature",
+  "@sign_stamp_label": {
+    "description": "Screen-reader label of a placed DkSignatureStamp (UI spec §11.5)."
+  },
+  "sign_stamp_remove": "Remove signature",
+  "@sign_stamp_remove": {
+    "description": "The delete × of a DkSignatureStamp (UI spec §11.5; the design export's label)."
+  },
+  "sign_card_label": "Saved signature",
+  "@sign_card_label": {
+    "description": "Screen-reader label of a DkSignatureCard (UI spec §11.8)."
+  },
+  "sign_card_delete": "Delete signature",
+  "@sign_card_delete": {
+    "description": "DkSignatureCard's long-press action (UI spec §11.8)."
+  },
+  "split_add": "Split here",
+  "@split_add": {
+    "description": "Smart Split: the gap between two pages, with no cut yet (UI spec §11.8, §21)."
+  },
+  "split_remove": "Don't split here",
+  "@split_remove": {
+    "description": "Smart Split: a cut between two pages, tap to remove it."
+  },
+  "compare_added": "Added",
+  "@compare_added": {
+    "description": "Compare PDFs: the change tag (UI spec §4.3, DkDiffRow)."
+  },
+  "compare_removed": "Removed",
+  "@compare_removed": {
+    "description": "Compare PDFs: the change tag."
+  },
+  "compare_changed": "Changed",
+  "@compare_changed": {
+    "description": "Compare PDFs: the change tag."
+  },
+  "model_not_available": "Not available on this phone",
+  "@model_not_available": {
+    "description": "DkModelCard: the phone can't run this model (memory, chip)."
+  },
+  "model_pause_progress": "Pause, {percent} %",
+  "@model_pause_progress": {
+    "description": "DkModelCard, screen readers: the pause button with the download's progress.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "file_locked": "Locked",
+  "@file_locked": {
+    "description": "DkFileCard, screen readers: the file needs a password or the locked folder."
+  },
+  "file_encrypted": "Password protected",
+  "@file_encrypted": {
+    "description": "DkFileCard, screen readers: an encrypted PDF."
   }
 }
