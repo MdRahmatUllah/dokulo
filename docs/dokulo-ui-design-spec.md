@@ -591,7 +591,7 @@ Height 56 (single line) / 72 (with description). Leading 24 icon (optional), tit
 | `DkPageChip` | Height 22; "p. 3" / "S. 3" `type.labelM`; `color.primaryContainer`; tap target expanded to 44 |
 | `DkPrivacyLine` | `smartphone` 16 icon + text `type.caption` `color.textSecondary` "Processed on this phone"; left-aligned under titles |
 | `DkStatusDot` | 8 dp circle; `color.primary` (new), `color.warning` (unsaved), animated pulse for running jobs (static with reduced motion) |
-| `DkCountBadge` | Min 18 tall pill, `color.primary` fill, white `type.labelM`; on scanner tray and tab icons |
+| `DkCountBadge` | Min 18 tall pill, `color.primary` fill, `color.onPrimary` `type.labelM` (white in Light; Dark's light primary needs the dark `onPrimary`, white would be 2.3:1); on scanner tray and tab icons |
 | `DkHintPill` (camera) | Height 32, padding 14, `radius.pill`, `color.cameraChrome`, text `type.labelL` white |
 | `DkPagePill` (viewer) | Height 28, `radius.pill`, `color.surfaceRaised` @ 92 % with `elevation.raised`, "3 / 12" `type.labelM` tabular |
 

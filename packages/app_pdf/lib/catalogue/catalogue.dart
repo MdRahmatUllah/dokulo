@@ -18,6 +18,7 @@ import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'range_search_states.dart';
 import 'scan_button_states.dart';
+import 'badge_pill_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'slider_stepper_states.dart';
@@ -71,6 +72,11 @@ const catalogue = [
     'DkNextChip, DkPageChip',
     '11.3 Badges, chips, indicators',
     DkNextPageChipGallery(),
+  ),
+  CatalogueEntry(
+    'DkCountBadge, DkHintPill',
+    '11.3 Badges, chips, indicators',
+    DkBadgePillGallery(),
   ),
   CatalogueEntry('DkActionBar', '11.6 Bars', ActionBarStates()),
   CatalogueEntry(
