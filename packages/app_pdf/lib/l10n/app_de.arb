@@ -219,6 +219,11 @@
   "pin_delete_digit": "Ziffer löschen",
   "pin_biometric": "Fingerabdruck oder Gesicht verwenden",
   "viewer_page_pill": "Seite {i} von {n}",
+  "crop_auto": "Auto",
+  "crop_full_page": "Ganze Seite",
+  "crop_reset": "Zurücksetzen",
+  "model_not_available": "Auf diesem Handy nicht verfügbar",
+  "model_pause_progress": "Pausieren, {percent} %",
   "file_locked": "Gesperrt",
   "file_encrypted": "Passwortgeschützt"
 }

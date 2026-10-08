@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
+import 'dk_loading_spinner.dart';
 
 /// DkButton's sizes (UI spec §11.1).
 enum DkButtonSize { large, regular, compact }
@@ -11,6 +12,9 @@ enum DkButtonVariant {
   primary,
   secondary,
   tertiary,
+
+  /// Tertiary in `color.danger` (the export's `.ter.cdg`): Delete in a card.
+  tertiaryDanger,
   destructive,
   destructiveSecondary,
 
@@ -131,6 +135,7 @@ class _DkButtonState extends State<DkButton> {
         c.outlineStrong,
       ),
       DkButtonVariant.tertiary => (Colors.transparent, c.primary, null),
+      DkButtonVariant.tertiaryDanger => (Colors.transparent, c.danger, null),
       DkButtonVariant.destructive => (c.danger, c.onDanger, null),
       DkButtonVariant.destructiveSecondary => (
         Colors.transparent,
@@ -157,13 +162,11 @@ class _DkButtonState extends State<DkButton> {
     // The spinner is 20 dp at every size (UI spec §11.1); beside a compact
     // 16 dp icon's place it takes the extra 4 dp from the gap, so the width
     // stays.
-    const spinner = 20.0;
+    final spinner = DkSpinnerSize.small.dp;
     final spinnerGap = gap - (spinner - iconSize.dp);
+    // The platform's indicator (petals on iOS), in the label's colour.
     final leading = widget.loading
-        ? SizedBox.square(
-            dimension: spinner,
-            child: CircularProgressIndicator(strokeWidth: 2, color: ink),
-          )
+        ? DkLoadingSpinner(color: ink)
         : widget.icon == null
         ? null
         : DkIcon(widget.icon!, size: iconSize, color: ink);
@@ -233,7 +236,10 @@ class _DkButtonState extends State<DkButton> {
       );
     }
 
+    // Its own node, always: inside a parent with text (a banner) it must not
+    // merge into one "text + action" button.
     return Semantics(
+      container: true,
       button: true,
       enabled: _enabled,
       label: widget.label,

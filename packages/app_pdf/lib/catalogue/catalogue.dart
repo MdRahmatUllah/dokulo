@@ -11,6 +11,7 @@ import 'dropdown_states.dart';
 import 'file_card_states.dart';
 import 'icon_button_states.dart';
 import 'logo_states.dart';
+import 'model_card_states.dart';
 import 'next_page_chip_states.dart';
 import 'option_row_states.dart';
 import 'overlay_states.dart';
@@ -29,6 +30,7 @@ import 'slider_stepper_states.dart';
 import 'switch_segmented_states.dart';
 import 'text_field_states.dart';
 import 'tool_tile_states.dart';
+import 'crop_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -171,6 +173,8 @@ const catalogue = [
     DkPagePillGallery(),
   ),
   CatalogueEntry('DkDropdown', '11.4 Inputs and controls', DkDropdownGallery()),
+  CatalogueEntry('DkCropOverlay', '11.5 Pages and thumbnails', CropStates()),
+  CatalogueEntry('DkModelCard', '11.2 Tiles and cards', DkModelCardGallery()),
   CatalogueEntry('DkFileCard', '11.2 Tiles and cards', DkFileCardGallery()),
 ];
 
