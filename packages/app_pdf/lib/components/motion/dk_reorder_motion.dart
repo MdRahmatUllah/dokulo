@@ -133,7 +133,7 @@ class _DkInsertionLineState extends State<DkInsertionLine>
 
   @override
   Widget build(BuildContext context) {
-    const cap = 6.0; // the end caps' diameter
+    const cap = 8.0; // the end caps (UI spec §11.5, DkPageGrid)
     final vertical = widget.axis == Axis.vertical;
     return ExcludeSemantics(
       child: FadeTransition(
