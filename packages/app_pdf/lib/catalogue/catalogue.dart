@@ -20,6 +20,7 @@ import 'range_search_states.dart';
 import 'scan_button_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
+import 'slider_stepper_states.dart';
 import 'switch_segmented_states.dart';
 import 'text_field_states.dart';
 import 'tool_tile_states.dart';
@@ -135,6 +136,11 @@ const catalogue = [
     'DkRangeField, DkSearchField',
     '11.4 Inputs and controls',
     DkRangeSearchGallery(),
+  ),
+  CatalogueEntry(
+    'DkSlider, DkStepper',
+    '11.4 Inputs and controls',
+    DkSliderStepperGallery(),
   ),
 ];
 
