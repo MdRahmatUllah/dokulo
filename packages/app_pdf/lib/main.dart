@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pdfrx/pdfrx.dart';
 
 import 'l10n/app_localizations.dart';
 import 'providers/crash_providers.dart';
@@ -11,7 +12,9 @@ import 'routes/routes.dart';
 import 'theme/app_theme.dart';
 import 'theme/dk_tokens.dart';
 
-void main() {
+Future<void> main() async {
+  // PDFium (pdfrx) for the viewer and doc_core's PDF engine (DK-0293).
+  await pdfrxFlutterInitialize();
   final container = ProviderContainer();
   installCrashHooks(container); // opt-in, local only (DK-0011)
   runApp(

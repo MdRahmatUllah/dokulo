@@ -7,6 +7,7 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/v1_viewer/viewer_screen.dart';
 import 'app_shell.dart';
 
 part 'routes.g.dart';
@@ -124,10 +125,9 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           context,
           key: s.pageKey,
           child: _HomeUnderneath(
-            child: PlaceholderScreen(
-              s.uri.queryParameters['mode'] == 'edit' ? 'V2' : 'V1',
-              detail: s.pathParameters['fileId']!,
-            ),
+            child: s.uri.queryParameters['mode'] == 'edit'
+                ? PlaceholderScreen('V2', detail: s.pathParameters['fileId']!)
+                : ViewerScreen(fileId: int.parse(s.pathParameters['fileId']!)),
           ),
         ),
       ),
