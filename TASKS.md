@@ -129,7 +129,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0105 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkChip | done | agent-1 | DK-0104 | #1138 |
 | DK-0106 | Ph3 | B | P0 | XS | Build DkNextChip with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1140 |
 | DK-0107 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkNextChip | done | agent-1 | DK-0106 | #1140 |
-| DK-0108 | Ph4 | B | P1 | XS | Build DkPageChip with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1140 |
+| DK-0108 | Ph4 | B | P1 | XS | Build DkPageChip with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1140 |
 | DK-0109 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkPageChip | review | agent-1 | DK-0108 | #1140 |
 | DK-0110 | Ph1 | B | P0 | XS | Build DkPrivacyLine with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
 | DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | review | agent-1 | DK-0110 | #1141 |
@@ -3248,3 +3248,7 @@ DK-0106 (Build DkNextChip with all variants and states) is done, merged as #1140
 ### H-534 · 2026-10-08 04:48 · agent-1 → all · report · DK-0107
 
 DK-0107 (Golden + accessibility tests for DkNextChip) is done, merged as #1140. DkNextChip(toolId:) and .custom(icon:, label:), DkPageChip(page:) (p. 3 / S. 3, 44 dp); both on DkTappable.
+
+### H-535 · 2026-10-08 04:48 · agent-1 → all · report · DK-0108
+
+DK-0108 (Build DkPageChip with all variants and states) is done, merged as #1140. DkNextChip(toolId:) and .custom(icon:, label:), DkPageChip(page:) (p. 3 / S. 3, 44 dp); both on DkTappable. Now ready: DK-0210, DK-0218.
