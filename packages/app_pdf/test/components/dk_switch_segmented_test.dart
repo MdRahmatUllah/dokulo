@@ -6,6 +6,7 @@ import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget app(
@@ -143,6 +144,25 @@ void main() {
         ),
       );
       handle.dispose();
+    });
+
+    testWidgets('keyboard: Tab reaches each segment, Space picks it', (
+      tester,
+    ) async {
+      int? picked;
+      await tester.pumpWidget(
+        app(
+          DkSegmented<int>(
+            segments: modes,
+            selected: 0,
+            onChanged: (v) => picked = v,
+          ),
+        ),
+      );
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.sendKeyEvent(LogicalKeyboardKey.space);
+      expect(picked, 1);
     });
 
     testWidgets('a radio list at 160 % text where asked', (tester) async {
