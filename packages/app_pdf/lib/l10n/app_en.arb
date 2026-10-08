@@ -762,5 +762,13 @@
   "common_remove": "Remove",
   "@common_remove": {
     "description": "Remove a saved signature (danger)."
+  },
+  "form_previous_field": "Previous field",
+  "@form_previous_field": {
+    "description": "The form accessory bar over the keyboard (UI spec §12.7)."
+  },
+  "form_next_field": "Next field",
+  "@form_next_field": {
+    "description": "The form accessory bar over the keyboard (UI spec §12.7)."
   }
 }

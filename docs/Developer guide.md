@@ -305,6 +305,12 @@ message, onUndo: …)` (4 s; Replace original 10 s), where `onUndo` restores
 the exact state before (order, folder, pages). Don't call `showDkConfirm` for
 anything else.
 
+**The keyboard (UI spec §12.7).** DkSheet and DkActionBar ride the keyboard
+by themselves. A form screen wraps its Scaffold body in
+`DkFormAccessory(child: …)`: while the keyboard is open, Previous field ·
+Next field · Done sit on top of it (they move the focus without closing the
+keyboard).
+
 **Light, Dark, System (DK-0047; UI spec §29).** The theme follows the system
 unless Settings → Appearance overrides it (`appThemeModeProvider`,
 `lib/providers/theme_providers.dart`); `MaterialApp` watches it, so a change

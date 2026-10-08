@@ -170,5 +170,7 @@
   "common_keep_going": "Weitermachen",
   "common_discard": "Verwerfen",
   "common_stop": "Stoppen",
-  "common_remove": "Entfernen"
+  "common_remove": "Entfernen",
+  "form_previous_field": "Vorheriges Feld",
+  "form_next_field": "Nächstes Feld"
 }
