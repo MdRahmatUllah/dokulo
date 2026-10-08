@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1045 Device check: PdfEngine on every target ABI, timings on the 4 test devices (DK-0390) — claimed 2026-10-08 13:49.
 
 ## Next
 
