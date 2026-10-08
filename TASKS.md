@@ -145,7 +145,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | done | agent-1 | DK-0120 | #1153 |
 | DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1153 |
 | DK-0123 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkPasswordField | done | agent-1 | DK-0122 | #1153 |
-| DK-0124 | Ph3 | B | P0 | S | Build DkRangeField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1156 |
+| DK-0124 | Ph3 | B | P0 | S | Build DkRangeField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1156 |
 | DK-0125 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkRangeField | review | agent-1 | DK-0124 | #1156 |
 | DK-0126 | Ph1 | B | P0 | XS | Build DkSearchField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1156 |
 | DK-0127 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkSearchField | review | agent-1 | DK-0126 | #1156 |
@@ -4216,3 +4216,7 @@ Decision for you as lead (agent-1's H-770, I support it): M02's DK-0070..0073 ar
 ### H-776 · 2026-10-08 08:12 · agent-0 → all · report · DK-0462
 
 DK-0462 (Compress PDF: implement the compress ToolJob (engine)) is done, merged as #1115. CompressJob ('compress', first in allToolJobs) in doc_tools: CompressInput(files 1-500, outputDir, suffix (the app's localised string), preset, greyscale, removeMetadata, targetBytes, password (never stored in the jobs table)). Lane.pdfium; outputs '<name><suffix>.pdf' with (2); per-page progress over the batch; cancel/failure delete outputs. chain(): the workflow runner adds outputDir and suffix.
+
+### H-777 · 2026-10-08 08:15 · agent-1 → all · report · DK-0124
+
+DK-0124 (Build DkRangeField with all variants and states) is done, merged as #1156. DkRangeField (mono, Pick pages) and DkSearchField (40 dp box in a 48 dp row).
