@@ -14,6 +14,7 @@ import 'option_row_states.dart';
 import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
+import 'page_pill_states.dart';
 import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
@@ -157,6 +158,16 @@ const catalogue = [
   CatalogueEntry('DkMiniJobBar', '11.6 Bars', MiniJobBarStates()),
   CatalogueEntry('DkColorRow', '11.4 Inputs and controls', DkColorRowGallery()),
   CatalogueEntry('DkPinPad', '11.4 Inputs and controls', DkPinPadGallery()),
+  CatalogueEntry(
+    'DkToolStrip · DkMarkupBar',
+    '11.6 Bars · 11.8 Editor',
+    EditorBarStates(),
+  ),
+  CatalogueEntry(
+    'DkPagePill',
+    '11.3 Badges, chips, indicators',
+    DkPagePillGallery(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.

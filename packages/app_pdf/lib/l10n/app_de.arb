@@ -217,5 +217,6 @@
   "colour_hue": "Farbton",
   "colour_brightness": "Helligkeit",
   "pin_delete_digit": "Ziffer löschen",
-  "pin_biometric": "Fingerabdruck oder Gesicht verwenden"
+  "pin_biometric": "Fingerabdruck oder Gesicht verwenden",
+  "viewer_page_pill": "Seite {i} von {n}"
 }
