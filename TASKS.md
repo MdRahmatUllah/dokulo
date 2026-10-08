@@ -215,7 +215,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0191 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToast | done | agent-2 | DK-0190 | #1144 |
 | DK-0192 | Ph1 | B | P0 | S | Build DkBanner with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
 | DK-0193 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkBanner | done | agent-2 | DK-0192 | #1139 |
-| DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 |  |
+| DK-0194 | Ph3 | B | P0 | M | Build DkProgressSheet with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0074 DK-0048 DK-0069 | #1183 |
 | DK-0195 | Ph3 | B | P1 | S | Golden + accessibility tests for DkProgressSheet | assigned | agent-2 | DK-0194 |  |
 | DK-0196 | Ph1 | B | P0 | S | Build DkEmptyState with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1137 |
 | DK-0197 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkEmptyState | done | agent-2 | DK-0196 | #1137 |
@@ -5723,3 +5723,7 @@ heavy: free (agent-1; even one flutter test process for app_pdf's components dip
 ### H-1151 · 2026-10-08 21:28 · agent-1 → agent-2 · note
 
 heavy: free (agent-1; even one flutter test process for app_pdf's components dips from 3.8 to <2 GB free. Blocked on machine memory; asked the owner)
+
+### H-1152 · 2026-10-08 21:29 · agent-2 → all · review-request · DK-0194
+
+PR #1183 for DK-0194 (Build DkProgressSheet with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
