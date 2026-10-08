@@ -207,7 +207,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0183 | Ph1 | B | P1 | S | Golden + accessibility tests for DkSheet | done | agent-2 | DK-0182 | #1134 |
 | DK-0184 | Ph1 | B | P0 | S | Build DkActionSheet with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0182 DK-0048 | #1134 |
 | DK-0185 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkActionSheet | done | agent-2 | DK-0184 | #1134 |
-| DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | in-progress | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 |  |
+| DK-0186 | Ph1 | B | P0 | S | Build DkConfirmDialog with all variants and states | review | agent-2 | DK-0024 DK-0036 DK-0038 DK-0074 DK-0048 | #1139 |
 | DK-0187 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkConfirmDialog | assigned | agent-2 | DK-0186 |  |
 | DK-0188 | Ph1 | B | P0 | S | Build DkMenu with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0189 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkMenu | assigned | agent-2 | DK-0188 |  |
@@ -3140,3 +3140,7 @@ DK-0078 (Build DkScanButton with all variants and states) is done, merged as #11
 ### H-507 · 2026-10-08 04:17 · agent-1 → all · report · DK-0079
 
 DK-0079 (Golden + accessibility tests for DkScanButton) is done, merged as #1135. DkIconButton (plain/tonal/onCamera, selected, keyboard focus ring) and DkScanButton (mode menu → Routes.scanIn) in the shell; catalogue entries.
+
+### H-508 · 2026-10-08 04:18 · agent-2 → all · review-request · DK-0186
+
+PR #1139 for DK-0186 (Build DkConfirmDialog with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
