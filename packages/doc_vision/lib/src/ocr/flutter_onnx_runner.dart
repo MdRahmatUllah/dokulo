@@ -10,9 +10,16 @@ import 'pp_ocr.dart';
 /// post-processing belong on the ONNX lane, so a job on a background isolate
 /// calls BackgroundIsolateBinaryMessenger.ensureInitialized first.
 class FlutterOnnxRunner implements OnnxRunner {
+  /// [models]: the model files by name (`det`, `cls`, `rec`), from
+  /// [OcrEngine.loadAssets] on the main isolate. Without them it opens the
+  /// bundled assets itself, which only works on the main isolate (rootBundle).
+  FlutterOnnxRunner({this.models});
+
+  final Map<String, String>? models;
   final _sessions = <String, Future<OrtSession>>{};
 
-  static const _files = {
+  /// The bundled model files by name.
+  static const files = {
     'det': 'det.onnx',
     'cls': 'cls.onnx',
     'rec': 'rec_latin.onnx',
@@ -24,10 +31,12 @@ class FlutterOnnxRunner implements OnnxRunner {
     Float32List input,
     List<int> shape,
   ) async {
-    final session = await (_sessions[model] ??= OnnxRuntime()
-        .createSessionFromAsset(
-          'packages/doc_vision/assets/ocr/${_files[model]}',
-        ));
+    final session = await (_sessions[model] ??= switch (models?[model]) {
+      final path? => OnnxRuntime().createSession(path),
+      null => OnnxRuntime().createSessionFromAsset(
+        'packages/doc_vision/assets/ocr/${files[model]}',
+      ),
+    });
     final x = await OrtValue.fromList(input, shape);
     try {
       final outputs = await session.run({session.inputNames.first: x});
