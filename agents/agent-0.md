@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1063 Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) — claimed 2026-10-08 17:00.
+DK-1063 in review as PR #1180: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
