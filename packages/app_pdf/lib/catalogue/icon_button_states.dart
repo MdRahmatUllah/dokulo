@@ -16,7 +16,11 @@ class DkIconButtonGallery extends StatelessWidget {
     final t = context.tokens;
     void tap() {}
     Widget row(DkIconButtonVariant v) => Container(
-      color: v == DkIconButtonVariant.onCamera ? t.color.cameraChrome : null,
+      color:
+          v == DkIconButtonVariant.onCamera ||
+              v == DkIconButtonVariant.onCameraPlain
+          ? t.color.cameraChrome
+          : null,
       child: Row(
         children: [
           DkIconButton(
