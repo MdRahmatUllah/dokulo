@@ -907,6 +907,74 @@
   "@viewer_file_missing": {
     "description": "V1 when the file's row is gone (deleted, or a stale link). A spec gap filled in DK-0293."
   },
+  "colour_yellow": "Yellow",
+  "@colour_yellow": {
+    "description": "Markup colour name (DkColorRow, screen readers)."
+  },
+  "colour_green": "Green",
+  "@colour_green": {
+    "description": "Markup colour name."
+  },
+  "colour_blue": "Blue",
+  "@colour_blue": {
+    "description": "Markup colour name."
+  },
+  "colour_pink": "Pink",
+  "@colour_pink": {
+    "description": "Markup colour name."
+  },
+  "colour_red": "Red",
+  "@colour_red": {
+    "description": "Markup colour name."
+  },
+  "colour_black": "Black",
+  "@colour_black": {
+    "description": "Markup colour name."
+  },
+  "colour_custom": "Custom",
+  "@colour_custom": {
+    "description": "DkColorRow last swatch: pick any colour (export: edit-penopts)."
+  },
+  "colour_hue": "Hue",
+  "@colour_hue": {
+    "description": "Custom colour picker slider."
+  },
+  "colour_brightness": "Brightness",
+  "@colour_brightness": {
+    "description": "Custom colour picker slider."
+  },
+  "pin_delete_digit": "Delete digit",
+  "@pin_delete_digit": {
+    "description": "DkPinPad delete key (export: locked-folder-applock)."
+  },
+  "pin_biometric": "Use fingerprint or face",
+  "@pin_biometric": {
+    "description": "DkPinPad's biometric key when the screen gives no platform word (screen readers)."
+  },
+  "viewer_page_pill": "Page {i} of {n}",
+  "@viewer_page_pill": {
+    "description": "DkPagePill, screen readers (the pill shows \"3 / 12\").",
+    "placeholders": {
+      "i": {
+        "type": "int"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "crop_auto": "Auto",
+  "@crop_auto": {
+    "description": "DkCropOverlay: back to the detected edges (UI spec §11.5, §19.3 crop mode)."
+  },
+  "crop_full_page": "Full page",
+  "@crop_full_page": {
+    "description": "DkCropOverlay: the whole photo, no crop."
+  },
+  "crop_reset": "Reset",
+  "@crop_reset": {
+    "description": "DkCropOverlay: undo this crop's changes."
+  },
   "pro_card_title": "Unlock every tool, for good",
   "@pro_card_title": {
     "description": "DkProCard title (UI spec §11.2, §23)."
