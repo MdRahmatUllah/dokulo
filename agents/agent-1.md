@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0118 Build DkPagePill with all variants and states — claimed 2026-10-08 10:46.
+Nothing claimed.
 
 ## Next
 

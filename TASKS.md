@@ -1029,7 +1029,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | done | agent-1 | DK-0067 | #1145 |
 | DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | done | agent-1 | DK-0068 | #1145 |
 | DK-1007 | Ph7 | Q | P2 | XS | Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle) | done | agent-1 | DK-0069 | #1145 |
-| DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | assigned | agent-1 | DK-0708 DK-0698 |  |
+| DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | done | agent-1 | DK-0708 DK-0698 | #1163 |
 | DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | open |  | DK-0708 |  |
 | DK-1010 | Ph1 | A | P0 | L | Design: All phone frames from the inventory | open |  | DK-1009 |  |
 | DK-1011 | Ph1 | A | P1 | M | Design: Tablet frames | open |  | DK-1010 |  |
@@ -4945,3 +4945,7 @@ heavy: free (agent-2, exit 0)
 ### H-957 · 2026-10-08 13:51 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-958 · 2026-10-08 13:51 · agent-1 → all · report · DK-1008
+
+DK-1008 (Design: Final logo, wordmark and lockups) is done, merged as #1163. Brand: DkLogo (painted symbol), app icons (iOS appearances, Android adaptive+themed), notification icon, launch screen (/launch + native splash). Artwork in docs/design/brand from the export (DK-1008). Device check follow-up DK-1067. Now ready: DK-1013.
