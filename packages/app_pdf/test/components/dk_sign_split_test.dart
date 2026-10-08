@@ -1,5 +1,4 @@
-import 'package:app_pdf/catalogue/ai_states.dart';
-import 'package:app_pdf/components/dk_ai_parts.dart';
+import 'package:app_pdf/catalogue/sign_states.dart';
 import 'package:app_pdf/components/dk_signature_card.dart';
 import 'package:app_pdf/components/dk_split_marker.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
@@ -30,7 +29,6 @@ Widget app(
 void main() {
   final galleries = <String, Widget>{
     'signature_card': const SignatureCardStates(),
-    'ask': const AskStates(),
     'split': const SplitStates(),
   };
   for (final MapEntry(key: what, value: gallery) in galleries.entries) {
@@ -81,45 +79,6 @@ void main() {
       'Delete signature',
     ]);
     handle.dispose();
-  });
-
-  testWidgets('DkSuggestionChip: a 48 target, two lines at most', (
-    tester,
-  ) async {
-    var asked = 0;
-    await tester.pumpWidget(
-      app(
-        DkSuggestionChip(
-          text:
-              'A very long question that goes on and on and on and on and '
-              'on and on and on and on and on and on and on and on',
-          onTap: () => asked++,
-        ),
-      ),
-    );
-    final chip = find.byType(DkSuggestionChip);
-    expect(tester.getSize(chip).height, greaterThanOrEqualTo(48));
-    expect(tester.widget<Text>(find.byType(Text)).maxLines, 2);
-    await tester.tap(chip);
-    expect(asked, 1);
-  });
-
-  testWidgets('DkAIFooter names the model, in EN and DE', (tester) async {
-    for (final (locale, text) in [
-      (
-        const Locale('en'),
-        'On this phone · Gemma 4 E2B · AI can make mistakes',
-      ),
-      (
-        const Locale('de'),
-        'Auf diesem Handy · Gemma 4 E2B · KI kann Fehler machen',
-      ),
-    ]) {
-      await tester.pumpWidget(
-        app(const DkAIFooter(model: 'Gemma 4 E2B'), locale: locale),
-      );
-      expect(find.text(text), findsOneWidget);
-    }
   });
 
   testWidgets('DkSplitMarker removes a cut, DkSplitGap adds one; both are '

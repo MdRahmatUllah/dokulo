@@ -15,6 +15,7 @@ import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 import 'ai_states.dart';
+import 'sign_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component

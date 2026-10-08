@@ -674,15 +674,6 @@
   "@sign_card_delete": {
     "description": "DkSignatureCard's long-press action (UI spec §11.8)."
   },
-  "ai_footer": "On this phone · {model} · AI can make mistakes",
-  "@ai_footer": {
-    "description": "DkAIFooter under AI answers (UI spec §11.8); model is the model's name, e.g. Gemma 4 E2B.",
-    "placeholders": {
-      "model": {
-        "type": "String"
-      }
-    }
-  },
   "split_add": "Split here",
   "@split_add": {
     "description": "Smart Split: the gap between two pages, with no cut yet (UI spec §11.8, §21)."

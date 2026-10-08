@@ -150,7 +150,6 @@
   "status_running": "Läuft",
   "sign_card_label": "Gespeicherte Unterschrift",
   "sign_card_delete": "Unterschrift löschen",
-  "ai_footer": "Auf diesem Handy · {model} · KI kann Fehler machen",
   "split_add": "Hier teilen",
   "split_remove": "Hier nicht teilen"
 }

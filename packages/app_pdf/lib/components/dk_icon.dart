@@ -152,8 +152,11 @@ abstract final class DkIcons {
   static const scanBatch = IconData(0xe43c, fontFamily: _font) /* burst_mode */;
 =======
   static const cut = IconData(0xe14e, fontFamily: _font) /* content_cut */;
+<<<<<<< HEAD
   static const forum = IconData(0xe8af, fontFamily: _font) /* forum */;
 >>>>>>> 9aee401 (wip: signature card, suggestion chip, AI footer, split marker)
+=======
+>>>>>>> 6cf8373 (feat(ui): DkSignatureCard and DkSplitMarker (DK-0208, DK-0209, DK-0216, DK-0217))
   static const check = IconData(0xe5ca, fontFamily: _font) /* check */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
