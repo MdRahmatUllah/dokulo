@@ -192,6 +192,11 @@ const catalogue = [
     ProgressSheetStates(),
   ),
   CatalogueEntry(
+    'DkRedactionBox · DkSignatureStamp',
+    '11.5 Pages and thumbnails',
+    BoxStates(),
+  ),
+  CatalogueEntry(
     'DkSignatureCard',
     '11.8 Editor and AI',
     SignatureCardStates(),
