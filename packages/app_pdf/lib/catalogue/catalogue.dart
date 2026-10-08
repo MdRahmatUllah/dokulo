@@ -65,6 +65,8 @@ const catalogue = [
     'DkEmptyState',
     '11.7 Sheets, dialogs, menus, toasts',
     EmptyStateStates(),
+  ),
+  CatalogueEntry(
     'DkConfirmDialog',
     '11.7 Sheets, dialogs, menus, toasts',
     ConfirmDialogStates(),
