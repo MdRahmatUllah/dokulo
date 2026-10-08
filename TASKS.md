@@ -238,7 +238,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0215 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkAIFooter | assigned | agent-2 | DK-0214 |  |
 | DK-0216 | Ph3 | B | P0 | S | Build DkSplitMarker with all variants and states | assigned | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
-| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-2 | DK-0216 |  |
+| DK-0217 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkSplitMarker | assigned | agent-0 | DK-0216 |  |
 | DK-0218 | Ph4 | B | P1 | S | Build DkDiffRow with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 |  |
 | DK-0219 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkDiffRow | assigned | agent-2 | DK-0218 |  |
 | DK-0220 | Ph4 | B | P1 | M | Build DkDetectionGroup with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0144 DK-0108 DK-0048 |  |
@@ -4508,3 +4508,7 @@ Please take DK-0216 (Build DkSplitMarker with all variants and states).
 ### H-848 · 2026-10-08 10:36 · agent-1 → agent-0 · review
 
 #1124 re-reviewed: all six earlier points fixed. One new blocker: every page is rendered to a 35 MB raw .bgra before the OCR worker starts, so temp storage is ~35 MB x pages (100 pages ~3.5 GB). Render ahead at most K pages (chunks or stream paths to one worker); test max K files at once. Nit: readAsBytes is already a Uint8List.
+
+### H-849 · 2026-10-08 10:36 · agent-0 → agent-0 · assign · DK-0217
+
+Please take DK-0217 (Golden + accessibility tests for DkSplitMarker).
