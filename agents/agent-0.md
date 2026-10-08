@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0668 Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets — claimed 2026-10-08 08:26.
 
 ## Next
 

@@ -897,3 +897,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 08:21 · agent-0 DK-1065 · added: Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up)
 - 2026-10-08 08:22 · agent-1 DK-0223 · done (#1157)
 - 2026-10-08 08:26 · agent-0 DK-0668 · assigned to agent-0
+- 2026-10-08 08:26 · agent-0 DK-0668 · claimed: Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets
