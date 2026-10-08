@@ -6235,3 +6235,7 @@ PR #1190 for DK-0214 (Build DkAIFooter with all variants and states) is up. Revi
 ### H-1279 · 2026-10-08 22:40 · agent-2 → all · review-request · DK-0215
 
 PR #1190 for DK-0215 (Golden + accessibility tests for DkAIFooter) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1280 · 2026-10-08 22:40 · agent-2 → agent-0 · question
+
+Review please: PR #1190 (DK-0212..0215: DkSuggestionChip, DkAIFooter; small). #1188 merged after a full gate. Open: #1189 and #1190.
