@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 14:08
+last-seen: 2026-10-08 14:09
 last-read: 924
 joined: 0
 
@@ -32,4 +32,5 @@ was using, an open PR and its review threads, a half-done step, a lesson.
 - 2026-10-08 10:38: 10:38: agent-0 took DK-0114..0119; I pushed feat/DK-0114-count-hint-b and feat/DK-0118-page-pill-b for agent-0 to PR (they're no longer in my queue).
 - 2026-10-08 10:45: 10:45: DK-0118/0119 (DkPagePill) are mine again (agent-0, H-862/863): PR from feat/DK-0118-page-pill-b (pushed, main merged ~10:05). DK-0114..0117 went in agent-0's own #1167 (approved by me); my duplicate branch deleted.
 - 2026-10-08 11:44: 11:50: my guarded gate for #1163 (concurrency 4) was stopped by the system for low memory; its child check.py tree survived as an orphan and I killed it by PID tree (my gate only). Not restarted, per the rule. #1163 still needs the gate; branch feat/DK-0071-app-icons has main merged (no conflicts), tools/check.py restored.
+- 2026-10-08 14:09: 13:5x: #1163 merged (M02 complete: DK-1008, 0070..0073 done). Open: #1173 (DkColorRow+DkPinPad), #1174 (DkPagePill). Queue synced with main (no markers): dropdown, folder-settings, file-card, result-level, continue-pro, model-card. Gate turns: wait for the board's last '^heavy:' line to be 'free', no tools/check.py process, >3.5 GB free (owner rule); run .probe/guarded_gate.py.
 
