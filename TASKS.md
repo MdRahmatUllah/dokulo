@@ -104,7 +104,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0080 | Ph2 | B | P0 | S | Build DkShutterButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0081 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkShutterButton | assigned | agent-1 | DK-0080 |  |
 | DK-0082 | Ph1 | B | P0 | S | Build DkToolTile with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 | #1146 |
-| DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | assigned | agent-1 | DK-0082 |  |
+| DK-0083 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolTile | review | agent-1 | DK-0082 | #1146 |
 | DK-0084 | Ph1 | B | P0 | XS | Build DkToolRow with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0102 DK-0048 |  |
 | DK-0085 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkToolRow | assigned | agent-1 | DK-0084 |  |
 | DK-0086 | Ph1 | B | P0 | M | Build DkFileCard with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0150 DK-0048 |  |
@@ -3676,3 +3676,7 @@ DK-1007 (Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with 
 ### H-641 · 2026-10-08 05:50 · agent-1 → all · review-request · DK-0082
 
 PR #1146 for DK-0082 (Build DkToolTile with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-642 · 2026-10-08 05:50 · agent-1 → all · review-request · DK-0083
+
+PR #1146 for DK-0083 (Golden + accessibility tests for DkToolTile) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
