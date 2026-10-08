@@ -274,6 +274,17 @@ Flashes (the capture flash) check `tokens.motion.flashAllowed(reduce:
 context.reduceMotion)`. Haptics go through `hapticsProvider`: `selected()`,
 `captured()`, `dropped()`, `saved()`; there is no error haptic on purpose.
 
+The signature motions (UI spec §9) are ready-made in
+`lib/components/motion/`; use them, don't rebuild them. Each has its Reduce
+Motion variant built in:
+
+| Motion | Use |
+|---|---|
+| Scan capture (DK-0040) | `DkCaptureFlash(captures:)` over the viewfinder, `flyCapturedPage(context, page:, from:, to:)`, then `DkPop(value: count)` on the badge |
+| Success tick (DK-0041) | `DkSuccessTick()` and `DkCountUp(from:, to:, format:)` on result cards |
+| Tile reorder (DK-0042) | `DkLift(lifted:)` on the picked tile, `DkSlot(rect:)` for every other tile in the `Stack` |
+| Page drop (DK-0043) | `DkInsertionLine(length:)` where the page will land; `DkSlot` settles it |
+
 Numbers the user compares as they change (sizes, page counts, times,
 percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
 (DK-0036). Surfaces take `t.surfaceAt(DkLevel.raised, radius: …)`, which is
