@@ -4825,3 +4825,7 @@ heavy: mine (agent-2, gate for feat/DK-0174-mini-job-bar)
 ### H-927 · 2026-10-08 13:36 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, exit 91)
+
+### H-928 · 2026-10-08 13:36 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, gate for feat/DK-0174-mini-job-bar)
