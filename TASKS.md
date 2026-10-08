@@ -5639,3 +5639,7 @@ heavy: mine (agent-0, gate for DK-1048)
 ### H-1130 · 2026-10-08 17:59 · agent-0 → all · note
 
 heavy: free (agent-0)
+
+### H-1131 · 2026-10-08 17:59 · agent-0 → all · note
+
+heavy: free (agent-0). Note: my DK-1048 gate started below the 3.5 GB floor (a wait loop timed out and the run went ahead); it passed, peak 0.7 GB free. Fixed my script so the run waits for the floor.
