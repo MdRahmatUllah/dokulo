@@ -7,6 +7,7 @@ import '../routes/routes.dart';
 import 'button_states.dart';
 import 'icon_button_states.dart';
 import 'overlay_states.dart';
+import 'page_pill_states.dart';
 import 'page_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
@@ -51,6 +52,11 @@ const catalogue = [
     'DkProBadge, DkChip',
     '11.3 Badges, chips, indicators',
     DkProBadgeChipGallery(),
+  ),
+  CatalogueEntry(
+    'DkPagePill',
+    '11.3 Badges, chips, indicators',
+    DkPagePillGallery(),
   ),
 ];
 
