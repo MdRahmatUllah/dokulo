@@ -9,6 +9,7 @@ import 'icon_button_states.dart';
 import 'next_page_chip_states.dart';
 import 'overlay_states.dart';
 import 'page_states.dart';
+import 'result_level_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
 
@@ -57,6 +58,11 @@ const catalogue = [
     'DkNextChip, DkPageChip',
     '11.3 Badges, chips, indicators',
     DkNextPageChipGallery(),
+  ),
+  CatalogueEntry(
+    'DkResultCard, DkLevelCards',
+    '11.2 Tiles and cards',
+    DkResultLevelGallery(),
   ),
 ];
 
