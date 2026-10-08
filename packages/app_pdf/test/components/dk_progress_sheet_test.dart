@@ -127,7 +127,11 @@ void main() {
       await tester.pumpWidget(app(sheet(progress: progress)));
       expect(
         bar(),
-        isSemantics(value: heard, isLiveRegion: true),
+        isSemantics(
+          label: 'Compressing Mietvertrag.pdf',
+          value: heard,
+          isLiveRegion: true,
+        ),
         reason: '$progress',
       );
     }

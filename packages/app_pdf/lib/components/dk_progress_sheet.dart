@@ -147,6 +147,7 @@ class DkProgressSheet extends StatelessWidget {
             Expanded(
               child: Semantics(
                 liveRegion: true,
+                label: title,
                 value: '$step %',
                 child: ExcludeSemantics(
                   child: ClipRRect(

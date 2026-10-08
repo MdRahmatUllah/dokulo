@@ -10,12 +10,19 @@ import '../theme/dk_tokens.dart';
 /// ring), in `color.primary` on `color.surfaceRaised`.
 ///
 /// Pulling is a gesture only, so screen readers get a "Refresh" action that
-/// does the same.
-class DkRefresh extends StatelessWidget {
+/// does the same, spinner included.
+class DkRefresh extends StatefulWidget {
   const DkRefresh({super.key, required this.onRefresh, required this.child});
 
   final Future<void> Function() onRefresh;
   final Widget child;
+
+  @override
+  State<DkRefresh> createState() => _DkRefreshState();
+}
+
+class _DkRefreshState extends State<DkRefresh> {
+  final _indicator = GlobalKey<RefreshIndicatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +31,15 @@ class DkRefresh extends StatelessWidget {
       customSemanticsActions: {
         CustomSemanticsAction(
           label: AppLocalizations.of(context).common_refresh,
-        ): onRefresh,
+        ): () =>
+            _indicator.currentState?.show(),
       },
       child: RefreshIndicator.adaptive(
-        onRefresh: onRefresh,
+        key: _indicator,
+        onRefresh: widget.onRefresh,
         color: t.color.primary,
         backgroundColor: t.color.surfaceRaised,
-        child: child,
+        child: widget.child,
       ),
     );
   }

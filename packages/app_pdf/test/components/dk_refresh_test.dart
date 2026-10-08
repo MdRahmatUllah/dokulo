@@ -68,7 +68,12 @@ void main() {
         SemanticsAction.customAction,
         CustomSemanticsAction.getIdentifier(id!),
       );
+      // The same refresh as a pull, spinner included (after its 200 ms
+      // snap).
       await tester.pump();
+      await tester.pump(const Duration(milliseconds: 250));
+      expect(find.byType(RefreshProgressIndicator), findsOne, reason: label);
+      await tester.pumpAndSettle();
       expect(refreshed, 1, reason: label);
     }
     handle.dispose();
