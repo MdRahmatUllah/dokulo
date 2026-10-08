@@ -697,5 +697,9 @@
   "scanner_button_shutter": "Take photo",
   "@scanner_button_shutter": {
     "description": "Screen readers: the scanner's shutter button."
+  },
+  "common_refresh": "Refresh",
+  "@common_refresh": {
+    "description": "DkRefresh (UI spec §12.8): the screen-reader action that does what pulling down does."
   }
 }
