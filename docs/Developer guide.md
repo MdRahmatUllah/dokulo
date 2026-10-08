@@ -24,7 +24,7 @@ packages/
       routes/           the go_router config and route names
       l10n/             app_en.arb, app_de.arb (DK-0009)
     test/               mirrors lib/; goldens next to their tests in goldens/
-  doc_tools/            layer 2: one ToolJob per feature (pure Dart)
+  doc_tools/            layer 2: one ToolJob per feature, work on worker isolates
   doc_core/             layer 3: PDFs: open, render, page ops, text, image pipeline;
                         the database (lib/src/db/schema.drift, drift_schemas/)
   doc_vision/           layer 3: scanner, OCR engines, layout, photo finder

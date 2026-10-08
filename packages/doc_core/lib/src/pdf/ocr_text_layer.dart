@@ -116,8 +116,15 @@ abstract final class OcrTextLayer {
 
   /// Lays [overlayPath] over [input]'s pages into [output] (page n on page
   /// n): call it inside a `Lane.qpdf` job. qpdf places each overlay page
-  /// upright in its page's crop box, undoing /Rotate. A locked [input] fails
-  /// as [DocErrorKind.locked]: unlock first.
-  static List<String> apply(String input, String overlayPath, String output) =>
-      QpdfService.run(() => Qpdf.overlay(input, overlayPath, output));
+  /// upright in its page's crop box, undoing /Rotate. A locked [input] needs
+  /// its [password] (the output keeps the encryption); without it, it fails
+  /// as [DocErrorKind.locked].
+  static List<String> apply(
+    String input,
+    String overlayPath,
+    String output, {
+    String? password,
+  }) => QpdfService.run(
+    () => Qpdf.overlay(input, overlayPath, output, password: password),
+  );
 }
