@@ -653,5 +653,17 @@
         "type": "int"
       }
     }
+  },
+  "pro_card_title": "Unlock every tool, for good",
+  "@pro_card_title": {
+    "description": "DkProCard title (UI spec §11.2, §23)."
+  },
+  "pro_card_body": "Black out, searchable scans, AI and more. One payment, no subscription.",
+  "@pro_card_body": {
+    "description": "DkProCard line (design export home-procard)."
+  },
+  "pro_card_action": "See Pro",
+  "@pro_card_action": {
+    "description": "DkProCard button: opens the paywall (X3)."
   }
 }

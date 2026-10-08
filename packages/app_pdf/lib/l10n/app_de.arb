@@ -144,5 +144,8 @@
   "scan_mode_import": "Fotos importieren",
   "shell_button_scan_hint": "Scanmodus wählen",
   "viewer_page_chip": "S. {n}",
-  "viewer_page_chip_go": "Zu Seite {n}"
+  "viewer_page_chip_go": "Zu Seite {n}",
+  "pro_card_title": "Alle Werkzeuge freischalten – für immer",
+  "pro_card_body": "Schwärzen, durchsuchbare Scans, KI und mehr. Einmal zahlen, kein Abo.",
+  "pro_card_action": "Pro ansehen"
 }
