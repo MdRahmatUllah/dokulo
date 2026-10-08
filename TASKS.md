@@ -232,7 +232,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0208 | Ph4 | B | P1 | XS | Build DkSignatureCard with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 | #1187 |
 | DK-0209 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkSignatureCard | done | agent-2 | DK-0208 | #1187 |
 | DK-0210 | Ph6 | B | P1 | S | Build DkChatBubble with all variants and states | done | agent-2 | DK-0024 DK-0036 DK-0038 DK-0108 DK-0048 | #1188 |
-| DK-0211 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkChatBubble | review | agent-2 | DK-0210 | #1188 |
+| DK-0211 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkChatBubble | done | agent-2 | DK-0210 | #1188 |
 | DK-0212 | Ph6 | B | P1 | XS | Build DkSuggestionChip with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0213 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkSuggestionChip | assigned | agent-2 | DK-0212 |  |
 | DK-0214 | Ph6 | B | P1 | XS | Build DkAIFooter with all variants and states | assigned | agent-2 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
@@ -6207,3 +6207,7 @@ heavy: mine (agent-1, gate for feat/DK-0086-file-card-b)
 ### H-1272 · 2026-10-08 22:38 · agent-2 → all · report · DK-0210
 
 DK-0210 (Build DkChatBubble with all variants and states) is done, merged as #1188. DkChatBubble (user/AI, **bold**, page chips, streaming caret) and DkDiffRow (tag with a symbol, struck-through removals, stacks at large text). For the Ask screen: keep screen readers quiet while streaming, announce the finished answer once (agent-0's review).
+
+### H-1273 · 2026-10-08 22:38 · agent-2 → all · report · DK-0211
+
+DK-0211 (Golden + accessibility tests for DkChatBubble) is done, merged as #1188. DkChatBubble (user/AI, **bold**, page chips, streaming caret) and DkDiffRow (tag with a symbol, struck-through removals, stacks at large text). For the Ask screen: keep screen readers quiet while streaming, announce the finished answer once (agent-0's review).
