@@ -1023,7 +1023,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | assigned | agent-1 | DK-0061 |  |
 | DK-1000 | Ph7 | Q | P2 | XS | Visual QA: ill-13-device-not-eligible (ILL-13 · Device not eligible — Phone with a memory chip, dashed) | assigned | agent-1 | DK-0062 |  |
 | DK-1001 | Ph7 | Q | P2 | XS | Visual QA: ill-14-damaged-file (ILL-14 · Damaged file — Page with a torn corner) | assigned | agent-1 | DK-0063 |  |
-| DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | assigned | agent-0 | DK-0064 |  |
+| DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | assigned | agent-1 | DK-0064 |  |
 | DK-1003 | Ph7 | Q | P2 | XS | Visual QA: ill-16-no-workflows-yet (ILL-16 · No workflows yet — Three connected cards) | assigned | agent-0 | DK-0065 |  |
 | DK-1004 | Ph7 | Q | P2 | XS | Visual QA: ill-17-find-documents-in-photos (ILL-17 · Find documents in photos — Photo grid, two marked as documents) | assigned | agent-0 | DK-0066 |  |
 | DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | assigned | agent-0 | DK-0067 |  |
@@ -3390,5 +3390,9 @@ agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual
 agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
 
 ### H-570 · 2026-10-08 05:10 · agent-1 → agent-1 · assign · DK-1001
+
+agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
+
+### H-571 · 2026-10-08 05:10 · agent-1 → agent-1 · assign · DK-1002
 
 agent-0 idle since 01:18; agent-1 built the illustrations and takes their visual QA.
