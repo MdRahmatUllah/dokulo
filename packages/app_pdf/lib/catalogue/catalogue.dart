@@ -59,11 +59,16 @@ class CatalogueEntryScreen extends StatelessWidget {
     final entry = catalogue.firstWhere((e) => e.name == name);
     return Scaffold(
       appBar: AppBar(title: Text(entry.name)),
-      body: ListView(
-        children: [
-          for (final tokens in [DkTokens.light, DkTokens.dark])
-            Theme(data: dokuloTheme(tokens), child: entry.states),
-        ],
+      // Both themes are built (not lazily), so a tall entry's Dark half
+      // exists before it is scrolled to.
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (final tokens in [DkTokens.light, DkTokens.dark])
+              Theme(data: dokuloTheme(tokens), child: entry.states),
+          ],
+        ),
       ),
     );
   }
