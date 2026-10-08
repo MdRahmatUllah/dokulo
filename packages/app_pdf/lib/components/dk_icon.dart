@@ -202,6 +202,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* photo_library */;
   static const retake = IconData(0xf053, fontFamily: _font) /* restart_alt */;
+  static const camera = IconData(0xe412, fontFamily: _font) /* photo_camera */;
   static const filters = IconData(0xe429, fontFamily: _font) /* tune */;
 
   // Viewer and editor.

@@ -1008,7 +1008,7 @@ Confirm empty: icon dialog (danger), "Delete {n} files for good?", "This can't b
 | Screen | Spec |
 | --- | --- |
 | Signatures sheet (medium) | Title "Your signatures"; grid of `DkSignatureCard` (2 columns); "Add signature" card (dashed); toggles below: "Add date next to signature" · "Initials on every page"; empty: ILL-15 "No signatures yet" + "Add signature" |
-| Signature pad | `DkSignaturePad` full-screen landscape. Draw tab: canvas. Type tab: text field + 3 handwriting-style font previews to choose (fonts: e.g. "Caveat", "Dancing Script", "Homemade Apple" – all OFL); Image tab: "Choose photo" button → crops to the signature, removes white background |
+| Signature pad | `DkSignaturePad` full-screen landscape. Draw tab: canvas. Type tab: text field + 3 handwriting-style font previews to choose (fonts: "Caveat" and "Dancing Script", SIL OFL 1.1, and "Homemade Apple", Apache-2.0; fetched by `tools/fetch_signature_fonts.py`); Image tab: "Choose photo" button → crops to the signature, removes white background |
 | Placement | Stamp appears centred on the visible page at 40 % page width, selected; drag/resize; tap outside deselects; "Sign" chips on pages with signature fields ("Sign here" pill on the field) |
 | Date stamp | Date in locale format `type.bodyM` size relative to the signature height, right of it, grouped with it |
 

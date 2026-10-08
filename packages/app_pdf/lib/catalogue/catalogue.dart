@@ -29,6 +29,7 @@ import 'switch_segmented_states.dart';
 import 'text_field_states.dart';
 import 'tool_tile_states.dart';
 import 'crop_states.dart';
+import 'signature_pad_states.dart';
 import 'tool_options_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
@@ -173,6 +174,7 @@ const catalogue = [
   ),
   CatalogueEntry('DkDropdown', '11.4 Inputs and controls', DkDropdownGallery()),
   CatalogueEntry('DkCropOverlay', '11.5 Pages and thumbnails', CropStates()),
+  CatalogueEntry('DkSignaturePad', '11.8 Editor and AI', SignaturePadStates()),
   CatalogueEntry(
     'DkToolOptionsSheet',
     '11.8 Editor and AI',

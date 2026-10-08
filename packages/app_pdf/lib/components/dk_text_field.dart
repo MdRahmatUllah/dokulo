@@ -24,6 +24,7 @@ class DkTextField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.keyboardType,
+    this.textCapitalization = TextCapitalization.none,
     this.textInputAction,
     this.enabled = true,
     this.focusNode,
@@ -47,6 +48,7 @@ class DkTextField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onSubmitted;
   final TextInputType? keyboardType;
+  final TextCapitalization textCapitalization;
   final TextInputAction? textInputAction;
   final bool enabled;
   final FocusNode? focusNode;
@@ -147,6 +149,7 @@ class _DkTextFieldState extends State<DkTextField> {
       enabled: widget.enabled,
       obscureText: widget.obscureText,
       keyboardType: widget.keyboardType,
+      textCapitalization: widget.textCapitalization,
       textInputAction: widget.textInputAction,
       onChanged: widget.onChanged,
       onSubmitted: widget.onSubmitted,

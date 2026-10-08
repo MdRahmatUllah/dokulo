@@ -15,7 +15,9 @@ class DkTextAction extends StatelessWidget {
   });
 
   final String label;
-  final VoidCallback onTap;
+
+  /// Null: disabled.
+  final VoidCallback? onTap;
   final bool bold;
 
   @override
@@ -23,6 +25,7 @@ class DkTextAction extends StatelessWidget {
     final t = context.tokens;
     return Semantics(
       button: true,
+      enabled: onTap != null,
       child: DkTappable(
         onTap: onTap,
         radius: t.radius.s,
@@ -45,7 +48,7 @@ class DkTextAction extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: t.text.labelL.copyWith(
-                color: t.color.primary,
+                color: onTap == null ? t.color.textDisabled : t.color.primary,
                 fontWeight: bold ? FontWeight.w700 : null,
               ),
             ),
