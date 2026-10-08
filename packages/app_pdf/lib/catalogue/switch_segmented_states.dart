@@ -22,9 +22,10 @@ class DkSwitchSegmentedGallery extends StatelessWidget {
         Row(
           spacing: t.space.m,
           children: [
-            DkSwitch(value: true, onChanged: any),
-            DkSwitch(value: false, onChanged: any),
-            const DkSwitch(value: true, onChanged: null),
+            // Standalone switches carry their label (a row labels its own).
+            DkSwitch(value: true, onChanged: any, label: 'On'),
+            DkSwitch(value: false, onChanged: any, label: 'Off'),
+            const DkSwitch(value: true, onChanged: null, label: 'Disabled'),
           ],
         ),
         DkSegmented<int>(segments: _modes, selected: 1, onChanged: any),
