@@ -197,11 +197,12 @@ class _OptionTile extends StatelessWidget {
       label: label,
       excludeSemantics: true,
       onTap: onTap,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
+      child: DkTappable(
         onTap: onTap,
-        child: Container(
+        radius: 0,
+        builder: (context, pressed) => Container(
           constraints: const BoxConstraints(minHeight: 48, minWidth: 160),
+          color: pressed ? t.state.pressed : null,
           padding: EdgeInsets.symmetric(horizontal: t.space.l),
           child: Row(
             children: [
