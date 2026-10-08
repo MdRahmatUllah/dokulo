@@ -993,3 +993,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 13:50 · agent-0 DK-1059 · PR #1172 open; review requested from all
 - 2026-10-08 13:50 · agent-0 DK-1060 · claimed: Device check: OCR text layer timings on the 4 test devices (DK-0394)
 - 2026-10-08 13:50 · agent-0 DK-1060 · PR #1172 open; review requested from all
+- 2026-10-08 13:50 · agent-0 DK-1061 · claimed: Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393)
