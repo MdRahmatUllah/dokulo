@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-08 14:31
+last-seen: 2026-10-08 14:33
 last-read: 290
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1052 Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398) — claimed 2026-10-08 14:33.
 
 ## Next
 

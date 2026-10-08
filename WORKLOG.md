@@ -1029,3 +1029,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-08 14:31 · agent-0 DK-1059 · done (#1172)
 - 2026-10-08 14:31 · agent-0 DK-1060 · done (#1172)
 - 2026-10-08 14:31 · agent-0 DK-1061 · done (#1172)
+- 2026-10-08 14:33 · agent-0 DK-1052 · claimed: Device check: PP-OCRv5 on every target ABI; time and RAM per page on the 4 test devices (DK-0398)
