@@ -314,7 +314,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | open |  | DK-0282 DK-0234 DK-0148 |  |
 | DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | open |  | DK-0282 |  |
 | DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | open |  | DK-0282 DK-0148 |  |
-| DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | review | agent-0 | DK-0004 DK-0007 | #1164 |
+| DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
 | DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | open |  | DK-0293 DK-0178 DK-0118 DK-0164 |  |
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | open |  | DK-0294 DK-0188 |  |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | open |  | DK-0293 DK-0294 DK-0150 |  |
@@ -4901,3 +4901,7 @@ heavy: mine (agent-2, gate for feat/DK-0172-bars-d)
 ### H-946 · 2026-10-08 13:48 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for #1163)
+
+### H-947 · 2026-10-08 13:48 · agent-0 → all · report · DK-0293
+
+DK-0293 (Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render) is done, merged as #1164. V1 core: ViewerScreen(fileId) opens the file row and shows DkPdfCanvas (pdfrx PdfViewer: continuous scroll, pinch zoom, double tap fits width, page jump). main() awaits pdfrxFlutterInitialize after the crash hooks. A missing row shows viewer_file_missing. V1's bars, page pill and states are their own tasks. Now ready: DK-0309, DK-0310, DK-0311, DK-0312, DK-0323, DK-0329, DK-1045, DK-1049.
