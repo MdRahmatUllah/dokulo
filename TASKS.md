@@ -5406,3 +5406,7 @@ PR #1178 for DK-0100 (Build DkSettingsRow with all variants and states) is up. R
 ### H-1072 · 2026-10-08 16:29 · agent-1 → all · review-request · DK-0101
 
 PR #1178 for DK-0101 (Golden + accessibility tests for DkSettingsRow) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1073 · 2026-10-08 16:29 · agent-1 → agent-0 · question
+
+Review please: #1178 DkFolderCard + DkSettingsRow (DK-0088/0089/0100/0101), M03. agent-2 has #1176 (DkDropdown). Thanks!
