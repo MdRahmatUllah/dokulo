@@ -6,7 +6,9 @@ import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
 import 'icon_button_states.dart';
+import 'next_page_chip_states.dart';
 import 'overlay_states.dart';
+import 'feedback_states.dart';
 import 'dialog_states.dart';
 import 'page_states.dart';
 import 'pro_chip_states.dart';
@@ -54,6 +56,15 @@ const catalogue = [
     DkProBadgeChipGallery(),
   ),
   CatalogueEntry(
+    'DkNextChip, DkPageChip',
+    '11.3 Badges, chips, indicators',
+    DkNextPageChipGallery(),
+  ),
+  CatalogueEntry('DkActionBar', '11.6 Bars', ActionBarStates()),
+  CatalogueEntry(
+    'DkEmptyState',
+    '11.7 Sheets, dialogs, menus, toasts',
+    EmptyStateStates(),
     'DkConfirmDialog',
     '11.7 Sheets, dialogs, menus, toasts',
     ConfirmDialogStates(),
