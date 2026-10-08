@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-08 18:14
+last-seen: 2026-10-08 18:35
 last-read: 1138
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-1) When agent-0 says yes (H-831): assign DK-1008 to me, merge main into feat/DK-0071-app-icons, gate (heavy rules), merge #1163, done DK-1008 + DK-0070..0073, close issues. 2) After agent-0's device check and agent-2's #1154 gate post 'heavy: free': gate feat/DK-0142-color-row-pin-pad-b (swatches 48 dp), PR (DK-0142,0143,0148,0149). 3) Then PR the queue two at a time: dropdown-b, count-hint-b, page-pill-b, folder-settings-b, file-card-b, result-level-b, continue-pro-b, model-card-b. 4) DK-0984 QA after those merge.
+1) #1178 (approved, nits done, main merged): pre-merge gate when the slot and >4.2 GB free, then merge. 2) DkFileCard (feat/DK-0086-file-card-b, main merged): gate, PR (agent-2's swipe/selection need it). 3) result-level, continue-pro, model-card: gate, PR, two at a time. 4) DK-0984 visual QA once they merge.
 
 ## Memory
 
