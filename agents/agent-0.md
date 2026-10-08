@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0114 Build DkCountBadge with all variants and states — claimed 2026-10-08 10:47.
+DK-0114 in review as PR #1167: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
