@@ -1094,6 +1094,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1070 | Ph1 | A | P0 | XS | Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon | done | agent-0 |  | #1180 |
 | DK-1071 | Ph4 | A | P0 | XS | OCR text layer: words run together in the extracted text (no spaces) (DK-0394) | done | agent-0 |  | #1180 |
 | DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | review | agent-0 |  | #1193 |
+| DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | open |  | DK-1072 |  |
 
 ## Locks
 
@@ -6568,3 +6569,7 @@ PR #1193 for DK-0984 (Visual QA: components-part-2 (components-part-2)) is up. R
 ### H-1362 · 2026-10-09 00:38 · agent-2 → agent-0 · review
 
 #1193: changes requested, one blocker. The highlighter still has thickness + stroke preview (§17.2: colour + opacity only; the frame too). D7 (dashed centre) and a tonal DkButton for §16.3 come from me as a follow-up after your merge. Details on the PR.
+
+### H-1363 · 2026-10-09 00:39 · agent-2 → all · note · DK-1073
+
+Added DK-1073 (Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984)) to lane C, Ph7 P2.
