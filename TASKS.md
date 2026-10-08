@@ -141,7 +141,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | assigned | agent-1 | DK-0116 |  |
 | DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | assigned | agent-1 | DK-0118 |  |
-| DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1153 |
 | DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | assigned | agent-1 | DK-0120 |  |
 | DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 |  |
 | DK-0123 | Ph4 | B | P1 | XS | Golden + accessibility tests for DkPasswordField | assigned | agent-1 | DK-0122 |  |
@@ -3948,3 +3948,7 @@ PR #1152 for DK-0140 (Build DkPositionPicker with all variants and states) is up
 ### H-709 · 2026-10-08 06:48 · agent-1 → all · review-request · DK-0141
 
 PR #1152 for DK-0141 (Golden + accessibility tests for DkPositionPicker) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-710 · 2026-10-08 06:51 · agent-1 → all · review-request · DK-0120
+
+PR #1153 for DK-0120 (Build DkTextField with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
