@@ -28,7 +28,7 @@ class DkSegmented<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final c = t.color;
-    if (radioAtLargeText && MediaQuery.textScalerOf(context).scale(10) >= 16) {
+    if (radioAtLargeText && MediaQuery.textScalerOf(context).scale(1) >= 1.6) {
       return RadioGroup<T>(
         groupValue: selected,
         onChanged: (v) {

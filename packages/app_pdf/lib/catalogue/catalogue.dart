@@ -15,11 +15,11 @@ import 'page_states.dart';
 import 'privacy_status_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
-import 'signature_pad_states.dart';
 import 'bar_states.dart';
 import 'shutter_button_states.dart';
 import 'switch_segmented_states.dart';
 import 'tool_tile_states.dart';
+import 'signature_pad_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
