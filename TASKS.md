@@ -1020,7 +1020,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0996 | Ph7 | Q | P2 | XS | Visual QA: ill-09-locked-folder-intro (ILL-09 · Locked folder intro — Folder with lock and fingerprint) | done | agent-1 | DK-0058 | #1145 |
 | DK-0997 | Ph7 | Q | P2 | XS | Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera with a slash and a page) | done | agent-1 | DK-0059 | #1145 |
 | DK-0998 | Ph7 | Q | P2 | XS | Visual QA: ill-11-ai-model-needed (ILL-11 · AI model needed — Page with a chip and download arrow) | done | agent-1 | DK-0060 | #1145 |
-| DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | review | agent-1 | DK-0061 | #1145 |
+| DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | done | agent-1 | DK-0061 | #1145 |
 | DK-1000 | Ph7 | Q | P2 | XS | Visual QA: ill-13-device-not-eligible (ILL-13 · Device not eligible — Phone with a memory chip, dashed) | review | agent-1 | DK-0062 | #1145 |
 | DK-1001 | Ph7 | Q | P2 | XS | Visual QA: ill-14-damaged-file (ILL-14 · Damaged file — Page with a torn corner) | review | agent-1 | DK-0063 | #1145 |
 | DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | review | agent-1 | DK-0064 | #1145 |
@@ -3624,3 +3624,7 @@ DK-0997 (Visual QA: ill-10-camera-denied (ILL-10 · Camera denied — Camera wit
 ### H-628 · 2026-10-08 05:42 · agent-1 → all · report · DK-0998
 
 DK-0998 (Visual QA: ill-11-ai-model-needed (ILL-11 · AI model needed — Page with a chip and download arrow)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
+
+### H-629 · 2026-10-08 05:42 · agent-1 → all · report · DK-0999
+
+DK-0999 (Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier)) is done, merged as #1145. Illustration visual QA: tools/qa_illustrations.py, report in docs/qa/illustrations (40/40 match, <=0.04 %). Rerun it after an illustration changes.
