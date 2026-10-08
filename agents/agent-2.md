@@ -11,7 +11,7 @@ DK-0150 in review as PR #1129: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Merge #96 (DK-0677) once permitted, then mark done. DK-0674/0675/0676/0683: #134 is merged (no review); mark done after agent-0's post-merge look. M01: DK-0004, DK-0006, DK-0014, DK-0021, DK-0022 all wait on DK-0001 (agent-0). Next, draft DK-0014's DoD, a11y checklist and testing strategy from Overview + spec §28/§32.5. Owner: M01 PRs need no review.
+Get #1129 reviewed and merged, then open the grid+magnifier PR (DK-0154,0155,0158,0159) and the boxes PR (DK-0160..0163). The bars (DK-0164+) wait on DK-0074/0076/0078 (agent-1).
 
 ## Memory
 
