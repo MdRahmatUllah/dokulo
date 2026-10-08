@@ -6,6 +6,7 @@ import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
 import 'icon_button_states.dart';
+import 'overlay_states.dart';
 import 'page_states.dart';
 import 'scan_button_states.dart';
 
@@ -29,12 +30,22 @@ class CatalogueEntry {
 
 const catalogue = [
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
-  CatalogueEntry('DkIconButton', '11.1 Buttons', DkIconButtonGallery()),
-  CatalogueEntry('DkScanButton', '11.1 Buttons', DkScanButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
   CatalogueEntry('DkPageGrid', '11.5 Pages and thumbnails', PageGridStates()),
   CatalogueEntry('DkMagnifier', '11.5 Pages and thumbnails', MagnifierStates()),
+  CatalogueEntry(
+    'DkSheet',
+    '11.7 Sheets, dialogs, menus, toasts',
+    SheetStates(),
+  ),
+  CatalogueEntry(
+    'DkActionSheet',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ActionSheetStates(),
+  ),
+  CatalogueEntry('DkIconButton', '11.1 Buttons', DkIconButtonGallery()),
+  CatalogueEntry('DkScanButton', '11.1 Buttons', DkScanButtonGallery()),
 ];
 
 /// The list of components; tap one to see its states.
