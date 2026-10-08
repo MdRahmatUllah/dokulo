@@ -1023,7 +1023,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0999 | Ph7 | Q | P2 | XS | Visual QA: ill-12-ai-first-use-notice (ILL-12 · AI first-use notice — Page, speech bubble and check magnifier) | review | agent-1 | DK-0061 | #1145 |
 | DK-1000 | Ph7 | Q | P2 | XS | Visual QA: ill-13-device-not-eligible (ILL-13 · Device not eligible — Phone with a memory chip, dashed) | review | agent-1 | DK-0062 | #1145 |
 | DK-1001 | Ph7 | Q | P2 | XS | Visual QA: ill-14-damaged-file (ILL-14 · Damaged file — Page with a torn corner) | review | agent-1 | DK-0063 | #1145 |
-| DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | assigned | agent-1 | DK-0064 |  |
+| DK-1002 | Ph7 | Q | P2 | XS | Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen) | review | agent-1 | DK-0064 | #1145 |
 | DK-1003 | Ph7 | Q | P2 | XS | Visual QA: ill-16-no-workflows-yet (ILL-16 · No workflows yet — Three connected cards) | assigned | agent-1 | DK-0065 |  |
 | DK-1004 | Ph7 | Q | P2 | XS | Visual QA: ill-17-find-documents-in-photos (ILL-17 · Find documents in photos — Photo grid, two marked as documents) | assigned | agent-1 | DK-0066 |  |
 | DK-1005 | Ph7 | Q | P2 | XS | Visual QA: ill-18-paywall-header (ILL-18 · Paywall header — Dokulo symbol with a Pro ribbon) | assigned | agent-1 | DK-0067 |  |
@@ -3528,3 +3528,7 @@ PR #1145 for DK-1000 (Visual QA: ill-13-device-not-eligible (ILL-13 · Device no
 ### H-604 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-1001
 
 PR #1145 for DK-1001 (Visual QA: ill-14-damaged-file (ILL-14 · Damaged file — Page with a torn corner)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-605 · 2026-10-08 05:26 · agent-1 → all · review-request · DK-1002
+
+PR #1145 for DK-1002 (Visual QA: ill-15-no-signatures-yet (ILL-15 · No signatures yet — Signature line with a pen)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
