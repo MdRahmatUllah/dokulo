@@ -950,5 +950,17 @@
   "pin_biometric": "Use fingerprint or face",
   "@pin_biometric": {
     "description": "DkPinPad's biometric key when the screen gives no platform word (screen readers)."
+  },
+  "viewer_page_pill": "Page {i} of {n}",
+  "@viewer_page_pill": {
+    "description": "DkPagePill, screen readers (the pill shows \"3 / 12\").",
+    "placeholders": {
+      "i": {
+        "type": "int"
+      },
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }
