@@ -1,0 +1,7 @@
+<svg viewBox="0 0 120 120" role="img" aria-label="Globe with a cloud-off sign"><g fill="none" stroke="#2E3440" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="60" cy="60" r="56" fill="#E6ECFF" stroke="none"></circle>
+<circle cx="52" cy="54" r="30" fill="#FFFFFF"></circle>
+<path d="M22 54h60M52 24c-10 9-10 51 0 60M52 24c10 9 10 51 0 60M26 40h52M26 68h52"></path>
+<path d="M72 96h22a10 10 0 0 0 0-20 14 14 0 0 0-27 4 8 8 0 0 0 5 16z" fill="#FFFFFF"></path>
+<path d="M66 100l32-32" stroke="#2251E6" stroke-width="3"></path>
+</g></svg>
