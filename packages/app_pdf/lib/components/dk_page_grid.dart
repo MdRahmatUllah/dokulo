@@ -314,26 +314,24 @@ class _DkPageGridState extends State<DkPageGrid> {
       final line = _dragging != null && (before || after);
       // Always a Stack, the line or not: swapping the cell's root widget
       // would dispose the Draggable in the middle of its drag.
-      {
-        cell = Stack(
-          clipBehavior: Clip.none,
-          children: [
-            cell,
-            // The I-beam (#1128), centred in the gutter.
-            if (line)
-              Positioned(
-                top: 0,
-                left: before ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
-                right: after ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
-                child: IgnorePointer(
-                  child: DkInsertionLine(
-                    length: _m.cell.width / _Metrics.pageAspect,
-                  ),
+      cell = Stack(
+        clipBehavior: Clip.none,
+        children: [
+          cell,
+          // The I-beam (#1128), centred in the gutter.
+          if (line)
+            Positioned(
+              top: 0,
+              left: before ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
+              right: after ? -_m.gutter / 2 - DkInsertionLine.cap / 2 : null,
+              child: IgnorePointer(
+                child: DkInsertionLine(
+                  length: _m.cell.width / _Metrics.pageAspect,
                 ),
               ),
-          ],
-        );
-      }
+            ),
+        ],
+      );
     }
     return cell;
   }
