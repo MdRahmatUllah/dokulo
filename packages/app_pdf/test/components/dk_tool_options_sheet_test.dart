@@ -1,4 +1,6 @@
 import 'package:app_pdf/catalogue/tool_options_states.dart';
+import 'package:app_pdf/components/dk_color_row.dart';
+import 'package:app_pdf/components/dk_icon.dart';
 import 'package:app_pdf/components/dk_segmented.dart';
 import 'package:app_pdf/components/dk_slider.dart';
 import 'package:app_pdf/components/dk_stepper.dart';
@@ -33,7 +35,6 @@ Widget sheet(DkMarkupKind kind, List<DkToolOptions> changes) => Padding(
     kind: kind,
     options: DkToolOptions(color: const DkMarkup().red),
     onChanged: changes.add,
-    colorRow: const SizedBox(key: Key('colours'), height: 32),
   ),
 );
 
@@ -81,10 +82,7 @@ void main() {
             find.byType(DkSegmented<DkEraserMode>).evaluate().length,
         segmented ? 1 : 0,
       );
-      expect(
-        find.byKey(const Key('colours')),
-        colours ? findsOne : findsNothing,
-      );
+      expect(find.byType(DkColorRow), colours ? findsOne : findsNothing);
       expect(
         find.byType(DkStrokePreview),
         sliders > 0 ? findsOne : findsNothing,
@@ -97,7 +95,7 @@ void main() {
   ) async {
     final changes = <DkToolOptions>[];
     await tester.pumpWidget(app(sheet(DkMarkupKind.text, changes)));
-    await tester.tap(find.bySemanticsLabel('Increase'));
+    await tester.tap(find.byIcon(DkIcons.add));
     expect(changes.last.fontSize, 15);
     await tester.pumpWidget(app(sheet(DkMarkupKind.shape, changes)));
     await tester.tap(find.text('Arrow'));

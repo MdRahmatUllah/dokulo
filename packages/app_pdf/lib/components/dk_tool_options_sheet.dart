@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
+import 'dk_color_row.dart';
 import 'dk_segmented.dart';
 import 'dk_slider.dart';
 import 'dk_stepper.dart';
@@ -60,8 +61,8 @@ class DkToolOptions {
 }
 
 /// The options of the selected markup tool (DK-0204; UI spec §11.8), the
-/// body of a small `showDkSheet` titled with the tool's name: the colours
-/// ([colorRow], a DkColorRow), then what the tool has:
+/// body of a small `showDkSheet` titled with the tool's name: the markup
+/// colours (DkColorRow), then what the tool has:
 ///
 /// - **pen, shape:** the thickness slider with a live 120 × 24 stroke;
 /// - **highlighter:** the thickness, and the opacity slider;
@@ -76,13 +77,11 @@ class DkToolOptionsSheet extends StatelessWidget {
     required this.kind,
     required this.options,
     required this.onChanged,
-    this.colorRow,
   });
 
   final DkMarkupKind kind;
   final DkToolOptions options;
   final ValueChanged<DkToolOptions> onChanged;
-  final Widget? colorRow;
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +99,12 @@ class DkToolOptionsSheet extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       spacing: t.space.l,
       children: [
-        if (kind != DkMarkupKind.eraser) ?colorRow,
+        if (kind != DkMarkupKind.eraser)
+          DkColorRow(
+            swatches: markupSwatches(t, l),
+            selected: o.color,
+            onChanged: (c) => onChanged(o.copyWith(color: c)),
+          ),
         if (stroke) ...[
           DkSlider(
             title: l.options_thickness,

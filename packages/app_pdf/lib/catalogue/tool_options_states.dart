@@ -6,8 +6,7 @@ import '../theme/dk_tokens.dart';
 
 /// DkToolOptionsSheet (DK-0204) on a sheet's surface, for each tool:
 /// highlighter (opacity, as in the export), pen, text, shape, eraser. Live:
-/// the sliders, stepper and segments change the options. The colour row is
-/// a stand-in until DkColorRow (DK-0142) lands.
+/// the colours, sliders, stepper and segments change the options.
 class ToolOptionsStates extends StatefulWidget {
   const ToolOptionsStates({super.key});
 
