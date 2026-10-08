@@ -10,7 +10,8 @@ import 'dk_tappable.dart';
 /// (4 dp) around a 58 dp white disc, which shrinks to 52 while pressed.
 /// [countdown] (0–1) is the auto-capture: a `color.quadStroke` arc fills the
 /// ring while the page holds still (`motion.autoCapture`, 0.5 s). Drive it
-/// from the same animation that fires the capture, so they end together.
+/// from the same animation that fires the capture, so they end together;
+/// the screen announces the capture ("Photo taken") for screen readers.
 /// `onPressed: null` (no camera permission) draws it at 40 %.
 class DkShutterButton extends StatelessWidget {
   const DkShutterButton({
