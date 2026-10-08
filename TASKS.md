@@ -63,7 +63,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0039 | Ph1 | B | P0 | S | Implement motion tokens, reduce-motion handling and the haptics service | done | agent-1 | DK-0024 | #1117 |
 | DK-0040 | Ph3 | B | P1 | S | Build signature motion: Scan capture | review | agent-1 | DK-0039 | #1128 |
 | DK-0041 | Ph3 | B | P1 | S | Build signature motion: Success tick | review | agent-1 | DK-0039 | #1128 |
-| DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | assigned | agent-1 | DK-0039 |  |
+| DK-0042 | Ph3 | B | P1 | S | Build signature motion: Tile reorder | review | agent-1 | DK-0039 | #1128 |
 | DK-0043 | Ph3 | B | P1 | S | Build signature motion: Page drop in grid | assigned | agent-1 | DK-0039 |  |
 | DK-0044 | Ph3 | B | P1 | S | Build signature motion: Sheet | assigned | agent-1 | DK-0039 |  |
 | DK-0045 | Ph3 | B | P1 | S | Build signature motion: Mini job bar | assigned | agent-1 | DK-0039 |  |
@@ -2552,3 +2552,7 @@ PR #1128 for DK-0040 (Build signature motion: Scan capture) is up. Review it on 
 ### H-360 · 2026-10-08 02:14 · agent-1 → all · review-request · DK-0041
 
 PR #1128 for DK-0041 (Build signature motion: Success tick) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-361 · 2026-10-08 02:14 · agent-1 → all · review-request · DK-0042
+
+PR #1128 for DK-0042 (Build signature motion: Tile reorder) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
