@@ -31,6 +31,23 @@ class ConfirmDialogStates extends StatelessWidget {
               onCancel: _none,
               onAction: _none,
             ),
+            // Short labels: side by side.
+            const DkConfirmDialog(
+              title: 'Delete?',
+              action: 'Delete',
+              destructive: true,
+              onCancel: _none,
+              onAction: _none,
+            ),
+            // Not destructive, with its icon on primaryContainer.
+            const DkConfirmDialog(
+              title: 'Stop compressing?',
+              body: 'Your original file stays unchanged.',
+              action: 'Stop',
+              icon: DkIcons.info,
+              onCancel: _none,
+              onAction: _none,
+            ),
             const DkConfirmDialog(
               title: 'Replace the original?',
               body: 'The original file is overwritten with the new version.',

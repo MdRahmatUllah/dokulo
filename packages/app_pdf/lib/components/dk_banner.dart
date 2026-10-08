@@ -44,33 +44,51 @@ class DkBanner extends StatelessWidget {
       DkBannerVariant.error => (c.dangerContainer, c.danger, DkIcons.error),
       DkBannerVariant.pro => (c.proContainer, c.pro, DkIcons.pro),
     };
-    return Container(
-      padding: EdgeInsets.all(t.space.m),
-      decoration: BoxDecoration(
-        color: fill,
-        borderRadius: BorderRadius.circular(t.radius.m),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: t.space.m,
-        children: [
-          DkIcon(icon, size: DkIconSize.m, color: ink),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(text, style: t.text.bodyM.copyWith(color: c.textPrimary)),
-                if (action != null)
-                  DkButton(
-                    label: action!,
-                    onPressed: onAction,
-                    variant: DkButtonVariant.tertiary,
-                    size: DkButtonSize.compact,
+    // A warning or an error that appears after an action is announced.
+    final announce =
+        variant == DkBannerVariant.warning || variant == DkBannerVariant.error;
+    // Its own node, the text and the action as separate children (merged,
+    // the whole banner would read as one button).
+    return Semantics(
+      container: true,
+      explicitChildNodes: true,
+      liveRegion: announce,
+      child: Container(
+        padding: EdgeInsets.all(t.space.m),
+        decoration: BoxDecoration(
+          color: fill,
+          borderRadius: BorderRadius.circular(t.radius.m),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: t.space.m,
+          children: [
+            DkIcon(icon, size: DkIconSize.m, color: ink),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    text,
+                    style: t.text.bodyM.copyWith(color: c.textPrimary),
                   ),
-              ],
+                  if (action != null)
+                    // Flush with the text: undo the compact button's 14 dp
+                    // padding (the export's banner action), as DkProCard does.
+                    Transform.translate(
+                      offset: const Offset(-14, 0),
+                      child: DkButton(
+                        label: action!,
+                        onPressed: onAction,
+                        variant: DkButtonVariant.tertiary,
+                        size: DkButtonSize.compact,
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
