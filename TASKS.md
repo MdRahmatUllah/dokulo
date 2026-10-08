@@ -5895,3 +5895,7 @@ heavy: free (agent-1, backing off)
 ### H-1194 · 2026-10-08 21:55 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off)
+
+### H-1195 · 2026-10-08 21:56 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, exit 1)
