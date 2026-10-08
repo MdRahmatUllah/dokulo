@@ -5,6 +5,7 @@ import '../theme/app_theme.dart';
 import '../theme/dk_tokens.dart';
 import '../routes/routes.dart';
 import 'button_states.dart';
+import 'choice_row_states.dart';
 import 'icon_button_states.dart';
 import 'overlay_states.dart';
 import 'page_states.dart';
@@ -46,6 +47,11 @@ const catalogue = [
   ),
   CatalogueEntry('DkIconButton', '11.1 Buttons', DkIconButtonGallery()),
   CatalogueEntry('DkScanButton', '11.1 Buttons', DkScanButtonGallery()),
+  CatalogueEntry(
+    'DkRadioRow, DkCheckboxRow',
+    '11.4 Inputs and controls',
+    DkChoiceRowsGallery(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.
