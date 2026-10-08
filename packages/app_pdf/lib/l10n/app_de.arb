@@ -147,5 +147,9 @@
   "viewer_page_chip_go": "Zu Seite {n}",
   "status_new": "Neu",
   "status_unsaved": "Nicht gespeichert",
-  "status_running": "Läuft"
+  "status_running": "Läuft",
+  "redact_box_label": "Schwärzungsfeld: {category}",
+  "redact_box_remove": "Feld entfernen",
+  "sign_stamp_label": "Unterschrift",
+  "sign_stamp_remove": "Unterschrift entfernen"
 }

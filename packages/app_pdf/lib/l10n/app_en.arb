@@ -665,5 +665,26 @@
   "status_running": "Working",
   "@status_running": {
     "description": "DkStatusDot, screen readers: a job is running."
+  },
+  "redact_box_label": "Black-out box: {category}",
+  "@redact_box_label": {
+    "description": "Screen-reader label of a DkRedactionBox (UI spec §11.5); category is the detector's name, e.g. IBAN.",
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
+  },
+  "redact_box_remove": "Remove box",
+  "@redact_box_remove": {
+    "description": "The delete × of a DkRedactionBox (UI spec §11.5)."
+  },
+  "sign_stamp_label": "Signature",
+  "@sign_stamp_label": {
+    "description": "Screen-reader label of a placed DkSignatureStamp (UI spec §11.5)."
+  },
+  "sign_stamp_remove": "Remove signature",
+  "@sign_stamp_remove": {
+    "description": "The delete × of a DkSignatureStamp (UI spec §11.5; the design export's label)."
   }
 }
