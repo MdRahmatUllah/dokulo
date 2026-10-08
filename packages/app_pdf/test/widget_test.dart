@@ -13,6 +13,7 @@ void main() {
     tester.platformDispatcher.localesTestValue = const [Locale('de', 'DE')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
     await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
+    await tester.pumpAndSettle(); // past the launch screen (DK-0073)
     expect(find.text('Start'), findsOneWidget); // the Home tab
   });
 
@@ -22,6 +23,7 @@ void main() {
     tester.platformDispatcher.localesTestValue = const [Locale('en', 'US')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
     await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
+    await tester.pumpAndSettle(); // past the launch screen (DK-0073)
     final language = ProviderScope.containerOf(
       tester.element(find.byType(DokuloApp)),
     ).read(appLanguageSettingProvider.notifier);

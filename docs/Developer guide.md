@@ -24,7 +24,7 @@ packages/
       routes/           the go_router config and route names
       l10n/             app_en.arb, app_de.arb (DK-0009)
     test/               mirrors lib/; goldens next to their tests in goldens/
-  doc_tools/            layer 2: one ToolJob per feature (pure Dart)
+  doc_tools/            layer 2: one ToolJob per feature, work on worker isolates
   doc_core/             layer 3: PDFs: open, render, page ops, text, image pipeline;
                         the database (lib/src/db/schema.drift, drift_schemas/)
   doc_vision/           layer 3: scanner, OCR engines, layout, photo finder
@@ -178,7 +178,8 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 
 | Route | Screen | Where | Notes |
 | --- | --- | --- | --- |
-| `/home` | H1 Home | tab 1 | The start route |
+| `/launch` | Launch | full screen | The app's first frame: the native splash again (symbol 72 on `color.background`, DK-0073), then Home |
+| `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
 | `/files/locked` | F2 Locked folder | tab 3, pushed | Behind biometrics (its task adds the guard) |

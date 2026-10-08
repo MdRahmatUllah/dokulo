@@ -4,6 +4,7 @@ import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
 
 import '../tool_job.dart';
+import 'output_name.dart';
 
 /// Compress PDF's input (T2): the files, where the outputs go, and the
 /// options.
@@ -122,7 +123,12 @@ class CompressJob extends ToolJob<CompressInput> {
     var before = 0;
     try {
       for (final (i, file) in input.files.indexed) {
-        final output = current = _freeName(input, file, outputs);
+        final output = current = outputName(
+          input.outputDir,
+          file,
+          input.suffix,
+          outputs,
+        );
         await PdfCompress(pool).compress(
           file,
           output,
@@ -159,23 +165,5 @@ class CompressJob extends ToolJob<CompressInput> {
       rethrow;
     }
     return outputs.length == 1 ? OneFile(outputs.single) : ManyFiles(outputs);
-  }
-
-  /// `<name><suffix>.pdf` in the output folder, "(2)" and up when a name is
-  /// already taken in this batch or on disk.
-  static String _freeName(
-    CompressInput input,
-    String file,
-    List<String> taken,
-  ) {
-    final base = file
-        .split(RegExp(r'[\\/]'))
-        .last
-        .replaceAll(RegExp(r'\.pdf$', caseSensitive: false), '');
-    for (var n = 1; ; n++) {
-      final name =
-          '${input.outputDir}/$base${input.suffix}${n == 1 ? '' : ' ($n)'}.pdf';
-      if (!taken.contains(name) && !File(name).existsSync()) return name;
-    }
   }
 }

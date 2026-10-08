@@ -54,6 +54,10 @@ void main() {
   const ios44 = {
     'DkMenu', // §11.7: 44 dp rows
     'DkNextChip, DkPageChip', // §11.3: the page chip's target is 44
+    'DkToolStrip · DkMarkupBar', // §11.8: the markup pill is 44 tall
+    'DkChatBubble', // §11.3: DkPageChip's 44 target
+    'DkDetectionGroup', // §11.3: DkPageChip's 44 target
+    'DkRedactionBox · DkSignatureStamp', // the × is an icon button: 44
   };
   for (final entry in catalogue) {
     testWidgets('${entry.name}: tap targets and labels', (tester) async {

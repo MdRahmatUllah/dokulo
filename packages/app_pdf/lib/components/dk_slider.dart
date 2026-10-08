@@ -48,10 +48,15 @@ class DkSlider extends StatelessWidget {
             trackHeight: 4,
             activeTrackColor: c.primary,
             inactiveTrackColor: c.outline,
-            thumbColor: c.pageWhite,
+            // White on Light; the export's softer #DDE2EA on Dark (pure white
+            // glares on a dark sheet), which is Dark's iconPrimary.
+            thumbColor: Theme.of(context).brightness == Brightness.dark
+                ? c.iconPrimary
+                : c.surface,
             overlayColor: t.state.pressed,
             thumbShape: const RoundSliderThumbShape(
               enabledThumbRadius: 10,
+              // elevation.raised (the shape takes a plain number).
               elevation: 2,
               pressedElevation: 4,
             ),
