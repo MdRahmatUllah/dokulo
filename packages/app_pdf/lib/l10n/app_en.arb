@@ -635,5 +635,29 @@
   "shell_button_scan_hint": "Choose a scan mode",
   "@shell_button_scan_hint": {
     "description": "Screen readers: what a long press on the Scan button does."
+  },
+  "common_clear": "Clear",
+  "@common_clear": {
+    "description": "Screen readers: the × that empties a text field."
+  },
+  "field_password_show": "Show password",
+  "@field_password_show": {
+    "description": "DkPasswordField reveal toggle (screen readers)."
+  },
+  "field_password_hide": "Hide password",
+  "@field_password_hide": {
+    "description": "DkPasswordField reveal toggle (screen readers)."
+  },
+  "field_password_weak": "Weak",
+  "@field_password_weak": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "field_password_ok": "OK",
+  "@field_password_ok": {
+    "description": "Password strength meter (UI spec §11.4)."
+  },
+  "field_password_strong": "Strong",
+  "@field_password_strong": {
+    "description": "Password strength meter (UI spec §11.4)."
   }
 }

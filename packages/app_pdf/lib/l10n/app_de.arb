@@ -142,5 +142,11 @@
   "scan_mode_book": "Buch",
   "scan_mode_batch": "Stapelverarbeitung",
   "scan_mode_import": "Fotos importieren",
-  "shell_button_scan_hint": "Scanmodus wählen"
+  "shell_button_scan_hint": "Scanmodus wählen",
+  "common_clear": "Leeren",
+  "field_password_show": "Passwort anzeigen",
+  "field_password_hide": "Passwort verbergen",
+  "field_password_weak": "Schwach",
+  "field_password_ok": "OK",
+  "field_password_strong": "Stark"
 }

@@ -10,6 +10,7 @@ import 'overlay_states.dart';
 import 'page_states.dart';
 import 'pro_chip_states.dart';
 import 'scan_button_states.dart';
+import 'text_field_states.dart';
 
 /// The component catalogue (debug builds only, at `/dev/catalogue`): every
 /// Dk component with each variant and state, in Light and Dark. A component
@@ -51,6 +52,11 @@ const catalogue = [
     'DkProBadge, DkChip',
     '11.3 Badges, chips, indicators',
     DkProBadgeChipGallery(),
+  ),
+  CatalogueEntry(
+    'DkTextField, DkPasswordField',
+    '11.4 Inputs and controls',
+    DkTextFieldGallery(),
   ),
 ];
 
