@@ -1147,6 +1147,15 @@
   "@options_eraser_stroke": {
     "description": "DkToolOptionsSheet, eraser: removes the stroke under the finger."
   },
+  "ai_footer": "On this phone · {model} · AI can make mistakes",
+  "@ai_footer": {
+    "description": "DkAIFooter under AI answers (UI spec §11.8); model is the model's name, e.g. Gemma 4 E2B.",
+    "placeholders": {
+      "model": {
+        "type": "String"
+      }
+    }
+  },
   "common_select": "Select",
   "@common_select": {
     "description": "Selection mode (UI spec §12.1): the screen-reader action that does what a long press does, and the Select button in a section header."
