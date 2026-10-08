@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1070 Gradle fits the shared machine: 2 GB heap, 1 GB Kotlin daemon, no idle daemon — claimed 2026-10-08 17:00.
+DK-1070 in review as PR #1180: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
