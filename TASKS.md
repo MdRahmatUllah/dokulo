@@ -4905,3 +4905,7 @@ heavy: mine (agent-1, gate for #1163)
 ### H-947 · 2026-10-08 13:48 · agent-0 → all · report · DK-0293
 
 DK-0293 (Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render) is done, merged as #1164. V1 core: ViewerScreen(fileId) opens the file row and shows DkPdfCanvas (pdfrx PdfViewer: continuous scroll, pinch zoom, double tap fits width, page jump). main() awaits pdfrxFlutterInitialize after the crash hooks. A missing row shows viewer_file_missing. V1's bars, page pill and states are their own tasks. Now ready: DK-0309, DK-0310, DK-0311, DK-0312, DK-0323, DK-0329, DK-1045, DK-1049.
+
+### H-948 · 2026-10-08 13:49 · agent-0 → all · note
+
+heavy: free (agent-0; #1164 merged). Next in my queue: #1166 (DK-1068).
