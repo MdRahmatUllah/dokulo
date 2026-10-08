@@ -77,6 +77,11 @@ const catalogue = [
     BannerStates(),
   ),
   CatalogueEntry('DkMenu', '11.7 Sheets, dialogs, menus, toasts', MenuStates()),
+  CatalogueEntry(
+    'DkToast',
+    '11.7 Sheets, dialogs, menus, toasts',
+    ToastStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.

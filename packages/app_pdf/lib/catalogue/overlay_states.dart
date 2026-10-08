@@ -5,6 +5,7 @@ import '../components/dk_icon.dart';
 import '../components/dk_menu.dart';
 import '../components/dk_page_thumb.dart';
 import '../components/dk_sheet.dart';
+import '../components/dk_toast.dart';
 import '../theme/dk_tokens.dart';
 import 'page_states.dart';
 
@@ -232,6 +233,59 @@ class MenuStates extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// DkToast (DK-0190): a screen with a bottom bar (where DkActionBar or the
+/// mini job bar go) and buttons that show toasts; they queue above the bar.
+class ToastStates extends StatelessWidget {
+  const ToastStates({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return SizedBox(
+      height: 340,
+      // Its own messenger: the toasts show in this frame, not the page's.
+      child: ScaffoldMessenger(
+        child: Scaffold(
+          body: Builder(
+            builder: (context) => Padding(
+              padding: EdgeInsets.all(t.space.l),
+              child: Wrap(
+                spacing: t.space.s,
+                runSpacing: t.space.s,
+                children: [
+                  OutlinedButton(
+                    onPressed: () =>
+                        showDkToast(context, 'Saved to Documents/Dokulo'),
+                    child: const Text('Toast'),
+                  ),
+                  OutlinedButton(
+                    onPressed: () => showDkToast(
+                      context,
+                      'Moved to Recently deleted',
+                      action: 'Undo',
+                      onAction: () {},
+                    ),
+                    child: const Text('With an action'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          bottomNavigationBar: Container(
+            height: 64,
+            color: t.color.surface,
+            alignment: Alignment.center,
+            child: Text(
+              'Bottom bar',
+              style: t.text.caption.copyWith(color: t.color.textSecondary),
+            ),
+          ),
         ),
       ),
     );
