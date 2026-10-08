@@ -19,6 +19,7 @@ packages/
       main.dart         runApp, nothing else
       screens/          one folder per screen ID: screens/h1_home/, screens/t2_tool/, …
       components/       the Dk* widgets (DkToolTile, DkFileCard, …), one file each
+      patterns/         the interaction patterns of UI spec §12 (confirmations, undo, …)
       providers/        Riverpod providers that aren't private to one screen
       routes/           the go_router config and route names
       l10n/             app_en.arb, app_de.arb (DK-0009)
@@ -287,6 +288,15 @@ Motion variant built in:
 | Sheet (DK-0044) | `DkSheetRoute.of(context, builder:)` (DkSheet's `showDkSheet` pushes it); detents with `animateDkSheetTo(context, controller, size)` |
 | Mini job bar (DK-0045) | `DkJobMorph(collapsed:, sheet:, bar:)` |
 | Viewer open (DK-0046) | `DkHero(tag: 'file-$id')` on the thumbnail and the viewer's first page; the viewer route uses `dkViewerPage` |
+
+**Drag and drop (UI spec §12.2; `lib/patterns/dk_drag.dart`).** A 300 ms
+press lifts (`dkLiftDelay`, not the platform's 500 ms) and a list or grid
+scrolls while the finger is within 48 dp of its edge (`DkEdgeScroller`).
+Files onto folders: `DkDraggable` and `DkDropTarget` (the haptics are
+built in; a move offers Undo). A `ReorderableListView` takes
+`buildDefaultDragHandles: false`, `DkReorderStartListener` around each
+item and `proxyDecorator: dkReorderProxy`. DkPageGrid and DkPageTray use
+them already.
 
 Numbers the user compares as they change (sizes, page counts, times,
 percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures

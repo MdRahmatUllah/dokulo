@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter/semantics.dart';
 
 import '../theme/dk_tokens.dart';
 import 'dk_page_thumb.dart';
+import '../patterns/dk_drag.dart';
 import 'motion/dk_reorder_motion.dart';
 
 /// The pages of a document as a grid (UI spec §11.5; DK-0154): DkPageThumbs,
@@ -74,7 +74,7 @@ class _DkPageGridState extends State<DkPageGrid> {
   /// that row's end, not before the next row's first page (the same slot).
   bool _atRowEnd = false;
   Offset? _finger;
-  Timer? _edgeScroll;
+  DkEdgeScroller? _edge;
 
   /// The last finger down, and the one carrying the lifted page.
   int? _lastDown, _dragPointer;
@@ -82,7 +82,7 @@ class _DkPageGridState extends State<DkPageGrid> {
 
   @override
   void dispose() {
-    _edgeScroll?.cancel();
+    _edge?.stop();
     _ownController?.dispose();
     super.dispose();
   }
@@ -164,32 +164,15 @@ class _DkPageGridState extends State<DkPageGrid> {
     _finger = local;
     _showSlot(local);
     // Within 48 dp of an edge: keep scrolling while the finger stays there.
-    const edge = 48.0;
-    final dy = local.dy < edge
-        ? -6.0
-        : local.dy > box.size.height - edge
-        ? 6.0
-        : 0.0;
-    if (dy == 0) {
-      _edgeScroll?.cancel();
-      _edgeScroll = null;
-    } else {
-      _edgeScroll ??= Timer.periodic(const Duration(milliseconds: 16), (_) {
-        final p = _scroll.position;
-        final next = (p.pixels + dy).clamp(
-          p.minScrollExtent,
-          p.maxScrollExtent,
-        );
-        if (next == p.pixels) return;
-        _scroll.jumpTo(next);
-        _showSlot(_finger!);
-      });
-    }
+    (_edge ??= DkEdgeScroller(
+      _scroll,
+      onScroll: () => _showSlot(_finger!),
+    )).update(local, box.size);
   }
 
   void _dragEnd() {
-    _edgeScroll?.cancel();
-    _edgeScroll = null;
+    _edge?.stop();
+    _edge = null;
     final from = _dragging, slot = _insertAt;
     _dragPointer = null;
     setState(() => _dragging = _insertAt = null);
@@ -278,7 +261,7 @@ class _DkPageGridState extends State<DkPageGrid> {
         },
         child: LongPressDraggable<int>(
           data: i,
-          delay: const Duration(milliseconds: 300),
+          delay: dkLiftDelay,
           onDragStarted: () {
             _dragPointer = _lastDown;
             setState(() => _dragging = i);
