@@ -159,6 +159,11 @@ const catalogue = [
   CatalogueEntry('DkColorRow', '11.4 Inputs and controls', DkColorRowGallery()),
   CatalogueEntry('DkPinPad', '11.4 Inputs and controls', DkPinPadGallery()),
   CatalogueEntry(
+    'DkToolStrip · DkMarkupBar',
+    '11.6 Bars · 11.8 Editor',
+    EditorBarStates(),
+  ),
+  CatalogueEntry(
     'DkPagePill',
     '11.3 Badges, chips, indicators',
     DkPagePillGallery(),
