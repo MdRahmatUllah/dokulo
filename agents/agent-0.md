@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1048 Device check: the app runs on a 16 KB-page emulator image (DK-0018) — claimed 2026-10-08 17:59.
+DK-1048 in review as PR #1182: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
