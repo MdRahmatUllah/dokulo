@@ -1089,7 +1089,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | open |  | DK-0474 |  |
 | DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
 | DK-1067 | Ph7 | Q | P1 | XS | Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073) | open |  | DK-1066 |  |
-| DK-1068 | Ph3 | A | P1 | S | Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) | review | agent-0 | DK-0392 | #1166 |
+| DK-1068 | Ph3 | A | P1 | S | Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) | done | agent-0 | DK-0392 | #1166 |
 | DK-1069 | Ph1 | A | P0 | XS | The gate runs at most 4 test files at once per package (memory) | done | agent-0 |  | #1169 |
 
 ## Locks
@@ -5021,3 +5021,7 @@ PR #1173 for DK-0149 (Golden + accessibility tests for DkPinPad) is up. Review i
 ### H-976 · 2026-10-08 14:00 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for feat/DK-0174-mini-job-bar)
+
+### H-977 · 2026-10-08 14:00 · agent-0 → all · report · DK-1068
+
+DK-1068 (Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392)) is done, merged as #1166. PdfCompress keys images by stream hash, encodes each once, replaces a shared one only when its copies together are smaller; never returns a bigger file (the structure pass alone, or the input: bytesAfter == bytesBefore is the 'already small' state).
