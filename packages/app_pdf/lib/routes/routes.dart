@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../screens/catalogue_screen.dart';
 import '../screens/placeholder_screen.dart';
 import 'app_shell.dart';
 
@@ -26,6 +28,9 @@ abstract final class Routes {
   static String viewer(String fileId, {bool edit = false}) =>
       '/viewer/$fileId${edit ? '?mode=edit' : ''}';
   static String organize(String fileId) => '/organize/$fileId'; // P1
+
+  /// The component catalogue: debug builds only.
+  static const catalogue = '/dev/catalogue';
 }
 
 GoRoute _screen(String path, String id, {List<RouteBase> routes = const []}) =>
@@ -88,6 +93,8 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
+      if (kDebugMode)
+        fullScreen(Routes.catalogue, (_) => const CatalogueScreen()),
       fullScreen(
         Routes.scan,
         (_) => const PlaceholderScreen('S1'),
