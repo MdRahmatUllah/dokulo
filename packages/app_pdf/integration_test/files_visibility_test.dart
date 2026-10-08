@@ -2,6 +2,7 @@
 // public Documents/Dokulo folder (where the Files app shows it), and a file
 // deleted outside the app leaves the index on the next refresh. The host
 // steers it with adb (docs/qa/device-lab.md):
+//   python tools/device_checks/files_visibility.py emulator-5556 runs these:
 //   1. flutter test integration_test/files_visibility_test.dart -d emulator-5556 --flavor dev
 //   2. when "DEVICE | DK-1043 | saved | <path>" prints: check the file with
 //      `adb shell ls` and MediaStore (`content query`), then `adb shell rm` it
