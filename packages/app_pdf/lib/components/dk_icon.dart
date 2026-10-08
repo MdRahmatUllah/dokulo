@@ -119,6 +119,10 @@ abstract final class DkIcons {
 
   // Actions.
   static const close = IconData(0xe5cd, fontFamily: _font) /* close */;
+  static const expandLess = IconData(
+    0xe5ce,
+    fontFamily: _font,
+  ) /* expand_less */;
   static const search = IconData(0xef7a, fontFamily: _font) /* search */;
   static const previousField = IconData(
     0xe316,
@@ -178,6 +182,10 @@ abstract final class DkIcons {
     0xe5cc,
     fontFamily: _font,
   ) /* chevron_right */;
+  static const expandMore = IconData(
+    0xe5cf,
+    fontFamily: _font,
+  ) /* expand_more */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
