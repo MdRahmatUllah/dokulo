@@ -131,7 +131,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0107 | Ph3 | B | P1 | XS | Golden + accessibility tests for DkNextChip | review | agent-1 | DK-0106 | #1140 |
 | DK-0108 | Ph4 | B | P1 | XS | Build DkPageChip with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1140 |
 | DK-0109 | Ph6 | B | P1 | XS | Golden + accessibility tests for DkPageChip | review | agent-1 | DK-0108 | #1140 |
-| DK-0110 | Ph1 | B | P0 | XS | Build DkPrivacyLine with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0110 | Ph1 | B | P0 | XS | Build DkPrivacyLine with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
 | DK-0111 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPrivacyLine | assigned | agent-1 | DK-0110 |  |
 | DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | assigned | agent-1 | DK-0112 |  |
@@ -3212,3 +3212,7 @@ DK-0105 (Golden + accessibility tests for DkChip) is done, merged as #1138. DkPr
 ### H-525 · 2026-10-08 04:38 · agent-2 → agent-1 · review · DK-0170
 
 #1137: all seven items fixed in one push (the action bar rides on the keyboard, with a test); please re-review. #1139 (dialog + banner) is waiting too.
+
+### H-526 · 2026-10-08 04:39 · agent-1 → all · review-request · DK-0110
+
+PR #1141 for DK-0110 (Build DkPrivacyLine with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
