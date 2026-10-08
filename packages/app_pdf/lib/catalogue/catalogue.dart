@@ -111,6 +111,7 @@ const catalogue = [
     '11.4 Inputs and controls',
     DkSwitchSegmentedGallery(),
   ),
+  CatalogueEntry('DkTabBar · DkNavRail', '11.6 Bars', TabBarStates()),
   CatalogueEntry(
     'DkOptionRow, DkPositionPicker',
     '11.4 Inputs and controls',
