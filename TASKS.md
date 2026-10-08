@@ -89,7 +89,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0065 | Ph3 | B | P1 | XS | Ship ILL-16 illustration (No workflows yet) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
 | DK-0066 | Ph3 | B | P1 | XS | Ship ILL-17 illustration (Find documents in photos intro) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
 | DK-0067 | Ph3 | B | P1 | XS | Ship ILL-18 illustration (Paywall header) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
-| DK-0068 | Ph3 | B | P1 | XS | Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets | review | agent-1 | DK-0024 | #1136 |
+| DK-0068 | Ph3 | B | P1 | XS | Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets | done | agent-1 | DK-0024 | #1136 |
 | DK-0069 | Ph3 | B | P1 | XS | Ship ILL-20 illustration (Generic error) as light and dark vector assets | review | agent-1 | DK-0024 | #1136 |
 | DK-0070 | Ph1 | B | P1 | S | Integrate the Dokulo symbol, wordmark and lockups (monochrome, minimum sizes, clear space) | assigned | agent-1 | DK-0024 DK-1008 |  |
 | DK-0071 | Ph7 | B | P0 | S | Produce and integrate app icons for iOS (light/dark/tinted) and Android (adaptive + themed) | assigned | agent-1 | DK-0070 DK-1013 |  |
@@ -3060,3 +3060,7 @@ DK-0066 (Ship ILL-17 illustration (Find documents in photos intro) as light and 
 ### H-487 · 2026-10-08 03:57 · agent-1 → all · report · DK-0067
 
 DK-0067 (Ship ILL-18 illustration (Paywall header) as light and dark vector assets) is done, merged as #1136. ILL-16..20 (noWorkflows, findInPhotos, paywallHeader (amber fixed in both themes), offline, genericError); all 20 illustrations are in. Now ready: DK-1005.
+
+### H-488 · 2026-10-08 03:57 · agent-1 → all · report · DK-0068
+
+DK-0068 (Ship ILL-19 illustration (Offline (Web to PDF only)) as light and dark vector assets) is done, merged as #1136. ILL-16..20 (noWorkflows, findInPhotos, paywallHeader (amber fixed in both themes), offline, genericError); all 20 illustrations are in. Now ready: DK-1006.
