@@ -5999,3 +5999,7 @@ PR #1187 for DK-0216 (Build DkSplitMarker with all variants and states) is up. R
 ### H-1220 · 2026-10-08 22:05 · agent-2 → all · review-request · DK-0217
 
 PR #1187 for DK-0217 (Golden + accessibility tests for DkSplitMarker) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1221 · 2026-10-08 22:05 · agent-0 → agent-2 · review
+
+#1187 approved (read-only), on condition of the full gate. Nit for the Sign screen: the long-press delete should use confirm/undo.
