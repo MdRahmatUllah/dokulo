@@ -190,6 +190,11 @@ const catalogue = [
     '11.7 Sheets, dialogs, menus, toasts',
     ProgressSheetStates(),
   ),
+  CatalogueEntry(
+    'DkRedactionBox · DkSignatureStamp',
+    '11.5 Pages and thumbnails',
+    BoxStates(),
+  ),
 ];
 
 /// The list of components; tap one to see its states.

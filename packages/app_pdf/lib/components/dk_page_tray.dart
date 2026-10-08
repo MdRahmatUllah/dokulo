@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
+import 'dk_box_frame.dart';
 import 'dk_icon.dart';
 import 'dk_page_thumb.dart';
 import 'motion/dk_reorder_motion.dart';
@@ -145,7 +146,7 @@ class _AddTileState extends State<_AddTile> {
           side: _focused ? t.focusRing : null,
           radius: t.radius.xs,
           child: CustomPaint(
-            painter: _DashedBorder(t.color.outlineStrong, radius),
+            painter: DkDashedBorder(t.color.outlineStrong, radius: radius),
             child: Container(
               width: widget.size.width,
               height: widget.size.height,
@@ -160,30 +161,4 @@ class _AddTileState extends State<_AddTile> {
       ),
     );
   }
-}
-
-/// A 1 dp dashed rounded rectangle (CSS `border: 1px dashed`: 3 on, 3 off).
-class _DashedBorder extends CustomPainter {
-  const _DashedBorder(this.color, this.radius);
-  final Color color;
-  final BorderRadius radius;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1;
-    final outline = Path()
-      ..addRRect(radius.toRRect(Offset.zero & size).deflate(0.5));
-    for (final metric in outline.computeMetrics()) {
-      for (var d = 0.0; d < metric.length; d += 6) {
-        canvas.drawPath(metric.extractPath(d, d + 3), paint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(_DashedBorder old) =>
-      old.color != color || old.radius != radius;
 }

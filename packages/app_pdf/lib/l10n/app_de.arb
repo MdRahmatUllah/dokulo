@@ -222,5 +222,9 @@
   "viewer_page_pill": "Seite {i} von {n}",
   "crop_auto": "Auto",
   "crop_full_page": "Ganze Seite",
-  "crop_reset": "Zurücksetzen"
+  "crop_reset": "Zurücksetzen",
+  "redact_box_label": "Schwärzungsfeld: {category}",
+  "redact_box_remove": "Feld entfernen",
+  "sign_stamp_label": "Unterschrift",
+  "sign_stamp_remove": "Unterschrift entfernen"
 }
