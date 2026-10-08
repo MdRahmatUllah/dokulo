@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0180 Build DkCameraTopBar with all variants and states — claimed 2026-10-08 07:15.
+DK-0180 in review as PR #1154: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
