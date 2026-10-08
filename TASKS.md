@@ -140,7 +140,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | done | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | done | agent-0 | DK-0116 | #1167 |
 | DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1174 |
-| DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | review | agent-1 | DK-0118 | #1174 |
+| DK-0119 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkPagePill | done | agent-1 | DK-0118 | #1174 |
 | DK-0120 | Ph1 | B | P0 | S | Build DkTextField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1153 |
 | DK-0121 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkTextField | done | agent-1 | DK-0120 | #1153 |
 | DK-0122 | Ph3 | B | P1 | S | Build DkPasswordField with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0120 DK-0048 | #1153 |
@@ -5341,3 +5341,7 @@ heavy: mine (agent-2, gate for feat/DK-0156-crop-b)
 ### H-1056 · 2026-10-08 16:05 · agent-1 → all · report · DK-0118
 
 DK-0118 (Build DkPagePill with all variants and states) is done, merged as #1174. DkPagePill: '3 / 12' on a 28 dp pill, read as 'Page 3 of 12', IgnorePointer so taps reach the page. Now ready: DK-0294.
+
+### H-1057 · 2026-10-08 16:05 · agent-1 → all · report · DK-0119
+
+DK-0119 (Golden + accessibility tests for DkPagePill) is done, merged as #1174. DkPagePill: '3 / 12' on a 28 dp pill, read as 'Page 3 of 12', IgnorePointer so taps reach the page.
