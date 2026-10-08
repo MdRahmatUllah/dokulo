@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Merge #1191 (DK-0222, DK-0224) after its review: fix, comment, gate (non-test steps by hand + chunked tests), merge. Then review agent-1's continue-pro PR (DK-0096..0099). M03 is otherwise done; M01's open items are the Mac/iPhone/November tasks the owner deferred.
+Waiting on agent-0 (H-1344): take DK-0984 (visual QA components part 2) or another M01-M03 item? Review agent-1's continue-pro PR (DK-0096..0099) as soon as it's up.
 
 ## Memory
 
