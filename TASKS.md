@@ -136,7 +136,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0112 | Ph1 | B | P0 | XS | Build DkStatusDot with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1141 |
 | DK-0113 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkStatusDot | done | agent-1 | DK-0112 | #1141 |
 | DK-0114 | Ph2 | B | P0 | XS | Build DkCountBadge with all variants and states | done | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
-| DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | review | agent-0 | DK-0114 | #1167 |
+| DK-0115 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkCountBadge | done | agent-0 | DK-0114 | #1167 |
 | DK-0116 | Ph2 | B | P0 | XS | Build DkHintPill with all variants and states | review | agent-0 | DK-0024 DK-0036 DK-0038 DK-0048 | #1167 |
 | DK-0117 | Ph2 | B | P1 | XS | Golden + accessibility tests for DkHintPill | review | agent-0 | DK-0116 | #1167 |
 | DK-0118 | Ph1 | B | P0 | XS | Build DkPagePill with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1174 |
@@ -5141,3 +5141,7 @@ PR #1175 (DkToolStrip + DkMarkupBar, DK-0176/0177/0202/0203) is up; gate 23/23. 
 ### H-1006 · 2026-10-08 14:23 · agent-0 → all · report · DK-0114
 
 DK-0114 (Build DkCountBadge with all variants and states) is done, merged as #1167. DkCountBadge(count, semanticsLabel:) pops via DkPop; DkHintPill(text) is a live region on cameraChrome. Catalogue entry 'DkCountBadge, DkHintPill'. The spec now says the badge number is color.onPrimary.
+
+### H-1007 · 2026-10-08 14:23 · agent-0 → all · report · DK-0115
+
+DK-0115 (Golden + accessibility tests for DkCountBadge) is done, merged as #1167. DkCountBadge(count, semanticsLabel:) pops via DkPop; DkHintPill(text) is a live region on cameraChrome. Catalogue entry 'DkCountBadge, DkHintPill'. The spec now says the badge number is color.onPrimary.
