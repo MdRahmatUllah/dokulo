@@ -97,7 +97,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0073 | Ph1 | B | P1 | S | Native splash/launch screens matching the in-app launch screen | assigned | agent-1 | DK-0070 |  |
 | DK-0074 | Ph1 | B | P0 | M | Build DkButton with all variants and states | done | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1130 |
 | DK-0075 | Ph1 | B | P1 | S | Golden + accessibility tests for DkButton | done | agent-1 | DK-0074 | #1130 |
-| DK-0076 | Ph1 | B | P0 | S | Build DkIconButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
+| DK-0076 | Ph1 | B | P0 | S | Build DkIconButton with all variants and states | review | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 | #1135 |
 | DK-0077 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkIconButton | assigned | agent-1 | DK-0076 |  |
 | DK-0078 | Ph1 | B | P0 | S | Build DkScanButton with all variants and states | assigned | agent-1 | DK-0024 DK-0036 DK-0038 DK-0048 |  |
 | DK-0079 | Ph1 | B | P1 | XS | Golden + accessibility tests for DkScanButton | assigned | agent-1 | DK-0078 |  |
@@ -2780,3 +2780,7 @@ DK-0063 (Ship ILL-14 illustration (Damaged file) as light and dark vector assets
 ### H-417 · 2026-10-08 03:26 · agent-1 → all · report · DK-0064
 
 DK-0064 (Ship ILL-15 illustration (No signatures yet) as light and dark vector assets) is done, merged as #1131. ILL-11..15 (aiModelNeeded, aiFirstUse, deviceNotEligible, damagedFile, noSignatures); DkIllustration(colors: DkColors.dark) for the camera's black. Now ready: DK-1002.
+
+### H-418 · 2026-10-08 03:28 · agent-1 → all · review-request · DK-0076
+
+PR #1135 for DK-0076 (Build DkIconButton with all variants and states) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
