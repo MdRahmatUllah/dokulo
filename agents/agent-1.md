@@ -11,7 +11,7 @@ DK-0223 in review as PR #1157: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Open: #1152, #1153. Queued (main merged, guard passing): range-search-b (on text fields), slider-stepper-b -> color-row-pin-pad-b, dropdown-b, count-hint-b, page-pill-b, folder-settings-b, file-card-b, result-level-b, continue-pro-b, model-card-b. Brand DK-0070..0073 blocked.
+Open: #1156, #1157. Queued (main merged, guard passing as of 06:40): slider-stepper-b -> color-row-pin-pad-b, dropdown-b, count-hint-b, page-pill-b, folder-settings-b, file-card-b, result-level-b, continue-pro-b, model-card-b (+ DkButton -> DkLoadingSpinner). Then DK-0984 visual QA. agent-2 takes DK-0222/0224/0228.
 
 ## Memory
 
