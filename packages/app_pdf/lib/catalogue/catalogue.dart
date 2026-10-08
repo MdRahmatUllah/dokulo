@@ -26,6 +26,7 @@ class CatalogueEntry {
 const catalogue = [
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
   CatalogueEntry('DkPageTray', '11.5 Pages and thumbnails', PageTrayStates()),
+  CatalogueEntry('DkPageGrid', '11.5 Pages and thumbnails', PageGridStates()),
 ];
 
 /// The list of components; tap one to see its states.

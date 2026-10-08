@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/dk_page_grid.dart';
 import '../components/dk_page_thumb.dart';
 import '../components/dk_page_tray.dart';
 import '../theme/dk_tokens.dart';
@@ -136,4 +137,38 @@ class PageTrayStates extends StatelessWidget {
       ),
     );
   }
+}
+
+/// DkPageGrid (DK-0154): 9 pages, 3 columns, pages 2 and 5 selected, page 7
+/// still loading. Live: tap selects, long-press and drag reorders, pinch
+/// changes the columns.
+class PageGridStates extends StatefulWidget {
+  const PageGridStates({super.key, this.pageCount = 9});
+  final int pageCount;
+
+  @override
+  State<PageGridStates> createState() => _PageGridStatesState();
+}
+
+class _PageGridStatesState extends State<PageGridStates> {
+  late final ids = [for (var i = 1; i <= widget.pageCount; i++) i];
+  final selected = {1, 4};
+
+  @override
+  Widget build(BuildContext context) => ColoredBox(
+    color: context.tokens.color.background,
+    child: SizedBox(
+      height: 560,
+      child: DkPageGrid(
+        pageIds: ids,
+        pageBuilder: (_, i) => ids[i] == 7 ? null : const CataloguePage(),
+        selected: selected,
+        onTap: (i) => setState(
+          () => selected.contains(i) ? selected.remove(i) : selected.add(i),
+        ),
+        onReorder: (from, to) =>
+            setState(() => ids.insert(to, ids.removeAt(from))),
+      ),
+    ),
+  );
 }
