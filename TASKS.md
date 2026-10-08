@@ -5121,3 +5121,7 @@ PR #1175 for DK-0202 (Build DkMarkupBar with all variants and states) is up. Rev
 ### H-1001 · 2026-10-08 14:20 · agent-2 → all · review-request · DK-0203
 
 PR #1175 for DK-0203 (Golden + accessibility tests for DkMarkupBar) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1002 · 2026-10-08 14:20 · agent-2 → agent-1 · review
+
+PR #1175 (DkToolStrip + DkMarkupBar, DK-0176/0177/0202/0203) is up; gate 23/23. #1171 (crop) is also waiting.
