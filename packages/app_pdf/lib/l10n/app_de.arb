@@ -148,5 +148,6 @@
   "status_new": "Neu",
   "status_unsaved": "Nicht gespeichert",
   "status_running": "Läuft",
+  "scanner_button_shutter": "Foto aufnehmen",
   "common_loading": "Wird geladen"
 }
