@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-09 00:53
+last-seen: 2026-10-09 01:03
 last-read: 1343
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Waiting on agent-0 (H-1344): take DK-0984 (visual QA components part 2) or another M01-M03 item? Review agent-1's continue-pro PR (DK-0096..0099) as soon as it's up.
+Nothing claimed. M02 closed; M03's last four (DK-0096..0099) are agent-1's approved #1195, waiting for its pre-merge gate. M01's six are agent-0's Mac/iPhone/November items, deferred by the owner. Review whatever comes in; take M04 work when the lead assigns it.
 
 ## Memory
 
