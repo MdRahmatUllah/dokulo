@@ -119,6 +119,11 @@ const catalogue = [
     DkOptionRowGallery(),
   ),
   CatalogueEntry(
+    'DkSkeleton · DkLoadingSpinner',
+    '11.7 Sheets, dialogs, menus, toasts',
+    LoadingStates(),
+  ),
+  CatalogueEntry(
     'DkTextField, DkPasswordField',
     '11.4 Inputs and controls',
     DkTextFieldGallery(),

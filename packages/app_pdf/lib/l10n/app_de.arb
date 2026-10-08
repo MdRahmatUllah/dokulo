@@ -156,6 +156,7 @@
   "status_unsaved": "Nicht gespeichert",
   "status_running": "Läuft",
   "scanner_button_shutter": "Foto aufnehmen",
+  "common_loading": "Wird geladen",
   "common_clear": "Leeren",
   "field_password_show": "Passwort anzeigen",
   "field_password_hide": "Passwort verbergen",

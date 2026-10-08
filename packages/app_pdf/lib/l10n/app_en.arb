@@ -698,6 +698,10 @@
   "@scanner_button_shutter": {
     "description": "Screen readers: the scanner's shutter button."
   },
+  "common_loading": "Loading",
+  "@common_loading": {
+    "description": "Screen-reader label of DkSkeleton and DkLoadingSpinner (UI spec §11.7)."
+  },
   "common_clear": "Clear",
   "@common_clear": {
     "description": "Screen readers: the × that empties a text field."
