@@ -12,7 +12,7 @@ connected (DK-1066).
 | Device | OS | ABI | RAM | Screen | Page size | Use |
 | --- | --- | --- | --- | --- | --- | --- |
 | `emulator-5554`, AVD `flutter_emulator` (`sdk_gphone64_x86_64`) | Android 16 (API 36), patch 2025-04-05 | x86_64; arm64-v8a apps run through translation | 2 GB | 1080 × 1920, 420 dpi | 4 KB | Every Android device check, x86_64 scope. Close to the low-end target in memory |
-| `emulator-5556`, AVD `flutter_emulator_2` (`sdk_gphone64_x86_64`), added by the owner 2026-10-08 | Android 16 (API 36) | x86_64 | 2 GB | 1080 × 1920, 420 dpi | 4 KB | A second Dokulo device, held with `team.py lock emulator-5556` |
+| `emulator-5556`, AVD `flutter_emulator_2` (`sdk_gphone64_x86_64`), added by the owner 2026-10-08 | Android 16 (API 36) | x86_64 | 2 GB | 1080 × 1920, 420 dpi | 4 KB | A second Dokulo device, under the same `team.py device` lock |
 
 - Hold it with `python tools/team.py device` while you install or drive it,
   release it right after; always name it: `adb -s emulator-5554`
