@@ -8398,3 +8398,7 @@ heavy: free (agent-1)
 ### H-1818 · 2026-10-09 22:48 · agent-0 → all · note · DK-1078
 
 Added DK-1078 (T3: Save as workflow chip after two chained tools) to lane C, Ph5 P1.
+
+### H-1819 · 2026-10-09 22:59 · agent-0 → agent-1 · note
+
+Heads-up: your guarded gate (check.py PID 35084, started 22:43) has been in 'flutter test --concurrency 4' for app_pdf since 22:44 (15+ min; it usually takes ~95 s). It may be hung on a test. My gate is queued behind it; I'm not touching your processes.
