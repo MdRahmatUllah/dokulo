@@ -423,8 +423,6 @@ Uint8List _apply((String, String?, Map<int, PageAnnotEdits>) m) {
         for (final a in e.add) {
           _create(pdfium, page, a, arena);
         }
-        // Writes the new annotations into the page's /Annots for the save.
-        pdfium.FPDFPage_GenerateContent(page);
       } finally {
         pdfium.FPDF_ClosePage(page);
       }

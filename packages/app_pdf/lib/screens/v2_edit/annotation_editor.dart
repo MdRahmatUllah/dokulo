@@ -68,6 +68,10 @@ class AnnotationEditor extends ChangeNotifier {
     return null;
   }
 
+  /// Palm rejection: once a stylus has drawn on any page, touches no longer
+  /// draw (they still select and scroll).
+  bool stylusSeen = false;
+
   bool get canUndo => _undo.isNotEmpty;
   bool get canRedo => _redo.isNotEmpty;
 

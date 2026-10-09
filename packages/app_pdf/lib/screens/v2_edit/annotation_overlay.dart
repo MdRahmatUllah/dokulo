@@ -77,7 +77,6 @@ enum _Drag { none, draw, move, resize }
 class _AnnotationOverlayState extends State<AnnotationOverlay> {
   int? _pointer;
   var _drag = _Drag.none;
-  var _stylusSeen = false;
   final _stroke = <PagePoint>[];
   PagePoint? _start, _last;
   int _corner = 0; // 0 tl, 1 tr, 2 br, 3 bl
@@ -115,8 +114,8 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
         ev.kind == PointerDeviceKind.stylus ||
         ev.kind == PointerDeviceKind.invertedStylus;
     final tool = _e.tool;
-    if (_draws(tool) && stylus) _stylusSeen = true;
-    if (_draws(tool) && _stylusSeen && !stylus) return; // a palm
+    if (_draws(tool) && stylus) _e.stylusSeen = true;
+    if (_draws(tool) && _e.stylusSeen && !stylus) return; // a palm
     _pointer = ev.pointer;
     final at = _toPage(ev.localPosition, size);
     _start = _last = at;
@@ -214,6 +213,16 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
           );
         }
       case EditTool.text:
+        // A tap on a text box edits it rather than stacking a new one.
+        final hit = _e.hitTest(page, start, tolerance: _tolerance(size));
+        if (hit != null &&
+            _e
+                .annotsOn(page)
+                .any((a) => a.id == hit && a.annot is FreeTextAnnot)) {
+          _e.select((page: page, id: hit));
+          widget.onPlaced?.call((page: page, id: hit));
+          break;
+        }
         final id = _e.add(
           page,
           FreeTextAnnot(

@@ -121,6 +121,32 @@ void main() {
     },
   );
 
+  testWidgets('text: a tap on a text box edits it, no second box', (
+    tester,
+  ) async {
+    await pump(tester);
+    editor.tool = EditTool.text;
+    await tester.tapAt(const Offset(100, 200));
+    await tester.pump();
+    final first = editor.selected;
+    editor.select(null);
+    await tester.tapAt(const Offset(110, 205));
+    await tester.pump();
+    expect(editor.annotsOn(0), hasLength(1));
+    expect(editor.selected, first);
+    expect(placed, first);
+  });
+
+  testWidgets('palm rejection holds across pages (the editor remembers)', (
+    tester,
+  ) async {
+    editor.stylusSeen = true;
+    await pump(tester);
+    editor.tool = EditTool.pen;
+    await drag(tester, const [Offset(100, 100), Offset(150, 150)]);
+    expect(editor.annotsOn(0), isEmpty);
+  });
+
   testWidgets('eraser: wipes the ink it touches, nothing else', (tester) async {
     editor
       ..add(
