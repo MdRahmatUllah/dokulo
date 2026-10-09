@@ -353,7 +353,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0329 | Ph3 | C | P0 | L | P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar | done | agent-0 | DK-0154 DK-0293 DK-0164 DK-0172 | #1244 |
 | DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | done | agent-0 | DK-0007 | #1240 |
 | DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
-| DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | review | agent-0 | DK-0329 DK-0330 | #1244 |
+| DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
 | DK-0333 | Ph3 | C | P0 | S | P1 Organize pages: implement the "After delete" state | review | agent-0 | DK-0329 DK-0330 | #1244 |
 | DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | assigned | agent-0 | DK-0329 DK-0330 |  |
@@ -8787,3 +8787,7 @@ DK-0329 (P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection b
 ### H-1915 · 2026-10-10 00:22 · agent-0 → all · report · DK-0331
 
 DK-0331 (P1 Organize pages: implement the "Dragging" state) is done, merged as #1244. OrganizeScreen (/organize/:fileId) on PageEdit: grid drag/select, Rotate/Duplicate/Delete(+Undo toast)/Extract, insert blank or another PDF, Undo/Redo, Save as copy next to the original. Scan/photos insert and Replace original: DK-1079. Now ready: DK-0799.
+
+### H-1916 · 2026-10-10 00:22 · agent-0 → all · report · DK-0332
+
+DK-0332 (P1 Organize pages: implement the "Insert sheet" state) is done, merged as #1244. OrganizeScreen (/organize/:fileId) on PageEdit: grid drag/select, Rotate/Duplicate/Delete(+Undo toast)/Extract, insert blank or another PDF, Undo/Redo, Save as copy next to the original. Scan/photos insert and Replace original: DK-1079. Now ready: DK-0801.
