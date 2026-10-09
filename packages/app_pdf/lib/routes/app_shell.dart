@@ -83,7 +83,13 @@ class _AppShellState extends State<AppShell> {
         // DkTabBar shows "Scan" in its gap, in line with the other labels.
         showLabel: false,
         onPressed: scan,
-        onMode: (mode) => context.push(Routes.scanIn(mode)),
+        // Each mode opens S1 in it; Import photos goes to S2's picker
+        // (UI spec §13.1, DK-0230).
+        onMode: (mode) => context.push(
+          mode == DkScanMode.importPhotos
+              ? Routes.scanImport
+              : Routes.scanIn(mode),
+        ),
       ),
       floatingActionButtonLocation: DkTabBar.scanLocation,
       bottomNavigationBar: DkTabBar(

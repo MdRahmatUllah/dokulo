@@ -177,4 +177,38 @@ void main() {
     expect(title(tester), 'S1 idCard');
     expect(Routes.scanIn(DkScanMode.book), '/scan?mode=book');
   });
+
+  testWidgets('Import photos in the Scan popover goes to S2 and its picker '
+      '(DK-0230)', (tester) async {
+    await pumpAt(tester, Routes.home);
+    await tester.longPress(find.bySemanticsLabel('Scan'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Import photos'));
+    await tester.pumpAndSettle();
+    expect(title(tester), 'S2 photos');
+    expect(tabBarShown(tester), isFalse);
+  });
+
+  testWidgets('from 840 dp the rail replaces the tab bar, live on resize, '
+      'and the tabs keep their stacks (DK-0232)', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(393, 852);
+    addTearDown(tester.view.reset);
+    final router = await pumpAt(tester, Routes.files);
+    router.push(Routes.lockedFolder);
+    await tester.pumpAndSettle();
+    expect(tabBarShown(tester), isTrue);
+
+    tester.view.physicalSize = const Size(1280, 800); // rotated tablet
+    await tester.pumpAndSettle();
+    expect(find.byType(DkNavRail), findsOneWidget);
+    expect(tabBarShown(tester), isFalse);
+    expect(title(tester), 'F2', reason: 'the Files stack survives');
+
+    tester.view.physicalSize = const Size(700, 1000); // medium: tab bar
+    await tester.pumpAndSettle();
+    expect(find.byType(DkNavRail), findsNothing);
+    expect(tabBarShown(tester), isTrue);
+    expect(title(tester), 'F2');
+  });
 }
