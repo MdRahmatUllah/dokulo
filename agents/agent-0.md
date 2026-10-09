@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0371 T2 empty input state: picker card with recent compatible files, Browse device, Choose photos — claimed 2026-10-09 22:02.
+DK-0371 in review as PR #1236: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
