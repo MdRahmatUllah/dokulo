@@ -868,7 +868,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | review | agent-0 | DK-0375 | #1249 |
 | DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | assigned | agent-0 | DK-0233 DK-0375 |  |
 | DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | assigned | agent-0 | DK-0376 |  |
-| DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | assigned | agent-0 | DK-0377 |  |
+| DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | in-progress | agent-0 | DK-0377 |  |
 | DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | assigned | agent-0 | DK-0235 DK-0387 |  |
 | DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | assigned | agent-1 | DK-0235 DK-0387 DK-0255 |  |
 | DK-0850 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-result (T3 Compress – result) | open |  | DK-0379 DK-0386 DK-0463 DK-0464 DK-0465 |  |
