@@ -190,6 +190,9 @@ abstract final class DkIcons {
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
   static const info = IconData(0xe88e, fontFamily: _font) /* info */;
+  static const input = IconData(0xe890, fontFamily: _font) /* input */;
+  static const output = IconData(0xebbe, fontFamily: _font) /* output */;
+  static const internet = IconData(0xe80b, fontFamily: _font) /* public */;
 
   // Files.
   static const folder = IconData(0xe2c7, fontFamily: _font) /* folder */;
