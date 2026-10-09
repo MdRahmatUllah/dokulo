@@ -370,7 +370,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0347 | Ph2 | C | P0 | S | S1 Scanner: implement the "Book mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0348 | Ph2 | C | P0 | S | S1 Scanner: implement the "Batch mode" state | assigned | agent-2 | DK-0343 |  |
-| DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | assigned | agent-2 | DK-0343 |  |
+| DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | review | agent-2 | DK-0343 | #1219 |
 | DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | assigned | agent-2 | DK-0343 |  |
 | DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | assigned | agent-2 | DK-0343 |  |
 | DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | assigned | agent-2 | DK-0343 DK-0152 DK-0164 |  |
@@ -7651,3 +7651,7 @@ PR #1219 for DK-0344 (Hint pill logic with priority order and spoken guidance) i
 ### H-1632 · 2026-10-09 18:29 · agent-2 → all · review-request · DK-0345
 
 PR #1219 for DK-0345 (S1 Scanner: implement the "Flash menu" state) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1633 · 2026-10-09 18:29 · agent-2 → all · review-request · DK-0349
+
+PR #1219 for DK-0349 (S1 Scanner: implement the "Capture feedback" state) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
