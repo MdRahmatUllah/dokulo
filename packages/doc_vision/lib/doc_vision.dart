@@ -7,6 +7,7 @@ export 'src/ocr/pp_ocr.dart';
 export 'src/scan/book_and_id.dart';
 export 'src/scan/quad_detector.dart';
 export 'src/scan/scan_filters.dart';
+export 'src/scan/visual_diff.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
 const int docVisionLayer = 4;
