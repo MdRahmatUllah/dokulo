@@ -237,12 +237,20 @@ void main() {
     ]) {
       testWidgets(name, (tester) async {
         await tester.runAsync(() async {
+          // Fixed times today, so the meta reads "Today 14:32" whenever
+          // the test runs (3 hours before now read "Yesterday" after
+          // midnight, a wider text).
           final now = DateTime.now();
-          await addFile(db, 'Mietvertrag Musterstraße 12.pdf', opened: now);
+          final today = DateTime(now.year, now.month, now.day);
+          await addFile(
+            db,
+            'Mietvertrag Musterstraße 12.pdf',
+            opened: today.add(const Duration(hours: 14, minutes: 32)),
+          );
           await addFile(
             db,
             'Invoice INV-2026-014.pdf',
-            opened: now.subtract(const Duration(hours: 3)),
+            opened: today.add(const Duration(hours: 11, minutes: 32)),
           );
         });
         await pumpHome(tester, db, tokens: tokens, locale: locale);

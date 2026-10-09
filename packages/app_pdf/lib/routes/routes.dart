@@ -156,9 +156,9 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                   // The folder screen (DK-0262) and the trash (DK-0278).
                   GoRoute(
                     path: 'folder/:id',
-                    builder: (context, state) => PlaceholderScreen(
-                      'Folder',
-                      detail: state.pathParameters['id']!,
+                    builder: (context, state) => FilesScreen(
+                      // A malformed id finds no folder: the screen is empty.
+                      folder: int.tryParse(state.pathParameters['id']!) ?? -1,
                     ),
                   ),
                   _screen('trash', 'Recently deleted'),
