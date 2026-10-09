@@ -95,7 +95,6 @@ void main() {
     Routes.scanReview: ('S2', false),
     '/tool/compress': ('Compress PDF', false),
     '/viewer/f42?mode=edit': ('V2 f42', false),
-    '/organize/f42': ('P1 f42', false),
   };
   for (final MapEntry(key: location, value: (screen, tabs))
       in coldStarts.entries) {

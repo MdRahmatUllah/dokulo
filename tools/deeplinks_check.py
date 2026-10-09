@@ -24,7 +24,7 @@ ROUTES = {
     "/me/settings/appearance": ("M3 appearance", True), "/welcome": ("Onboarding", False),
     "/scan": ("S1", False), "/scan/review": ("S2", False), "/tool/compress": ("T2 compress", False),
     "/tool/compress/result": ("T3 compress", False), "/viewer/f42": ("V1 f42", False),
-    "/viewer/f42?mode=edit": ("V2 f42", False), "/organize/f42": ("P1 f42", False),
+    "/viewer/f42?mode=edit": ("V2 f42", False), "/organize/f42": ("This file isn't in Dokulo any more.", False),
     # DK-0236: a job link lands on Home (the job has ended: a toast); a broken link says so.
     "/job/7": ("H1", True), "/tool/teleport": ("This link doesn't work any more", False),
     "/tool/compress?file=999": ("This file isn't in Dokulo any more.", False),

@@ -365,6 +365,18 @@ else the outputs as they are; it takes T3's place. `ToolResult.chain` lists
 the tools run so far ("Save as workflow" after two: DK-1078). Share and the
 split Save's menu come with DK-1077, DK-0380 and DK-0385.
 
+**P1, Organize pages (DK-0329…DK-0333).** `/organize/:fileId` opens
+`OrganizeScreen` (`lib/screens/p1_organize/`) on doc_core's `PageEdit`
+(DK-0330): the pages as `PageSource`s in `DkPageGrid`; a drag moves one (the
+landing haptic); a tap or long-press selects, and the selection bar rotates,
+duplicates, deletes ("2 pages deleted · Undo") or extracts them (a new
+"<name> – extracted.pdf"). + opens the insert sheet: a blank page the size of
+its neighbour, or another PDF's pages (copied into the inbox first), after
+the last selected page or at the end. Undo and Redo step through every
+edit. Save keeps the result as a copy next to the original (never touched);
+Cancel asks first when something changed. Insert from a scan or photos and
+Replace original: DK-1079.
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear
