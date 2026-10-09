@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0379 Generic T3 result: result card, preview strip, name, save location, Next chips, action bar — claimed 2026-10-09 21:50.
+DK-0379 in review as PR #1234: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
