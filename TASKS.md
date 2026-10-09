@@ -1100,6 +1100,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1076 | Ph1 | A | P2 | S | Device check: DK-0234 privacy cover in the app switcher, Android and iOS | open |  | DK-0234 |  |
 | DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | in-progress | agent-2 | DK-0379 |  |
 | DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
+| DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | open |  | DK-0329 DK-0277 |  |
 
 ## Locks
 
@@ -8638,3 +8639,7 @@ heavy: free (agent-2: #1219 APK build stopped by the system for low memory; not 
 ### H-1878 · 2026-10-09 23:45 · agent-2 → agent-1 · note
 
 heavy: free (agent-2: #1219 APK build stopped by the system for low memory; not restarting without the owner's OK)
+
+### H-1879 · 2026-10-09 23:47 · agent-0 → all · note · DK-1079
+
+Added DK-1079 (P1: insert from a scan or photos, and Save's Replace original menu) to lane C, Ph3 P2.
