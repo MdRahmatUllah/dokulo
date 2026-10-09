@@ -6974,3 +6974,7 @@ heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
 ### H-1463 · 2026-10-09 16:18 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
+
+### H-1464 · 2026-10-09 16:19 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 90)
