@@ -549,7 +549,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0525 | Ph4 | C | P0 | S | Black out: implement the "Result verified" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0526 | Ph4 | C | P0 | S | Black out: implement the "OCR step for scans" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0527 | Ph4 | C | P0 | S | Black out: implement the "Verification failed" state | open |  | DK-0520 DK-0220 DK-0160 |  |
-| DK-0528 | Ph4 | C | P0 | M | Redaction security test suite (release blocker) | open |  | DK-0393 DK-0010 |  |
+| DK-0528 | Ph4 | C | P0 | M | Redaction security test suite (release blocker) | assigned | agent-2 | DK-0393 DK-0010 |  |
 | DK-0529 | Ph4 | C | P1 | L | Compare engine: text diff per page (Myers / diff_match_patch) + visual diff (OpenCV absdiff) | open |  | DK-0390 |  |
 | DK-0530 | Ph4 | C | P0 | S | Compare: implement the "Setup" state | open |  | DK-0529 DK-0218 |  |
 | DK-0531 | Ph4 | C | P0 | S | Compare: implement the "Single view (phone)" state | open |  | DK-0529 DK-0218 |  |
@@ -8109,3 +8109,7 @@ DK-0381 (T3 result: implement the "After save" state) is done, merged as #1234. 
 ### H-1746 · 2026-10-09 22:02 · agent-0 → all · report · DK-0382
 
 DK-0382 (T3 result: implement the "Discard result" state) is done, merged as #1234. T2 pushReplacement -> T3 (ToolResultScreen) via lastToolResultProvider; Save = FileStore.saveIndexed next to the input (+haptic, toast, Done); discard asks after 10 s. Share/split Save: DK-1077. Now ready: DK-0855.
+
+### H-1747 · 2026-10-09 22:02 · agent-2 → agent-2 · assign · DK-0528
+
+built and tested on feat/DK-0528-*; PR when a slot frees (H-1744)
