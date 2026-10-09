@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-09 21:38
+last-seen: 2026-10-09 21:39
 last-read: 1723
 joined: 0
 
 ## Now
 
-DK-0352 in review as PR #1219: answer the review; re-run the gate if main moved, then merge.
+DK-0520 Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions — claimed 2026-10-09 21:39.
 
 ## Next
 
