@@ -863,7 +863,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0839 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-compress (T2 Compress – options) | open |  | DK-0370 DK-0373 DK-0463 DK-0464 DK-0465 |  |
 | DK-0840 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-merge (T2 Merge – 4 files) | open |  | DK-0370 DK-0403 DK-0404 DK-0405 |  |
 | DK-0841 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-protry (T2 – Pro first-try caption) | open |  | DK-0374 |  |
-| DK-0842 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-lockedrow (T2 – locked input row) | assigned | agent-0 | DK-0372 |  |
+| DK-0842 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-lockedrow (T2 – locked input row) | in-progress | agent-0 | DK-0372 |  |
 | DK-0843 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s)) | assigned | agent-0 | DK-0375 |  |
 | DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | assigned | agent-0 | DK-0375 |  |
 | DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | assigned | agent-0 | DK-0233 DK-0375 |  |
