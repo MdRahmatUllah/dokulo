@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,8 +9,12 @@ import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
+import '../tools/tool_catalogue.dart';
 import 'app_shell.dart';
+import 'bottom_chrome.dart';
+import 'link_error.dart';
 
 part 'routes.g.dart';
 
@@ -31,12 +35,21 @@ abstract final class Routes {
   /// S1 in a mode from the Scan button's menu.
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
-  static String tool(String toolId) => '/tool/$toolId'; // T2
+
+  /// Import photos (the Scan popover): S2 opens the photo picker first.
+  static const scanImport = '/scan/review?source=photos';
+
+  /// T2; [fileId] preselects a file (a share, a widget, an extension).
+  static String tool(String toolId, {String? fileId}) =>
+      '/tool/$toolId${fileId == null ? '' : '?file=$fileId'}';
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
   static String viewer(String fileId, {bool edit = false}) =>
       '/viewer/$fileId${edit ? '?mode=edit' : ''}';
   static String organize(String fileId) => '/organize/$fileId'; // P1
+
+  /// A running job's progress (X2) over Home: a notification's tap.
+  static String job(int jobId) => '/job/$jobId';
 
   /// The component catalogue (`lib/catalogue/`): debug builds only.
   static const catalogue = '/dev/catalogue';
@@ -45,7 +58,11 @@ abstract final class Routes {
 GoRoute _screen(String path, String id, {List<RouteBase> routes = const []}) =>
     GoRoute(
       path: path,
-      builder: (context, state) => PlaceholderScreen(id),
+      // A MaterialPage, so a push takes the theme's transition (UI spec
+      // §13.4, DkPageTransitionsBuilder); go_router's own choice depends on
+      // the app type it finds.
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: PlaceholderScreen(id)),
       routes: routes,
     );
 
@@ -63,13 +80,22 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
   }) => GoRoute(
     path: path,
     parentNavigatorKey: root,
-    builder: (context, state) => _HomeUnderneath(child: builder(state)),
+    // A MaterialPage, so it takes the theme's push transition (§13.4).
+    pageBuilder: (context, state) => MaterialPage(
+      key: state.pageKey,
+      child: _HomeUnderneath(child: builder(state)),
+    ),
     routes: routes,
   );
 
   return GoRouter(
     navigatorKey: root,
     initialLocation: initialLocation,
+    // A link to no route says so (DK-0236), instead of go_router's page.
+    errorPageBuilder: (context, state) => MaterialPage(
+      key: state.pageKey,
+      child: const _HomeUnderneath(child: LinkErrorScreen()),
+    ),
     routes: [
       // The app starts here (DK-0073): no transition, the splash again.
       GoRoute(
@@ -78,8 +104,14 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         pageBuilder: (context, state) =>
             const NoTransitionPage(child: LaunchScreen()),
       ),
-      StatefulShellRoute.indexedStack(
+      StatefulShellRoute(
         builder: (context, state, shell) => AppShell(shell),
+        // Tabs cross-fade (UI spec §13.4); each keeps its stack.
+        navigatorContainerBuilder: (context, shell, children) =>
+            DkFadingBranches(
+              currentIndex: shell.currentIndex,
+              children: children,
+            ),
         branches: [
           StatefulShellBranch(routes: [_screen(Routes.home, 'H1')]),
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
@@ -93,9 +125,12 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                   _screen('models', 'M2'),
                   GoRoute(
                     path: 'settings/:page',
-                    builder: (context, state) => PlaceholderScreen(
-                      'M3',
-                      detail: state.pathParameters['page']!,
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: PlaceholderScreen(
+                        'M3',
+                        detail: state.pathParameters['page']!,
+                      ),
                     ),
                   ),
                 ],
@@ -107,21 +142,56 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
       fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
-      fullScreen(
-        Routes.scan,
-        (s) => PlaceholderScreen(
-          'S1',
-          detail: s.uri.queryParameters['mode'] ?? '',
+      // The scanner slides up and back down (UI spec §13.4).
+      GoRoute(
+        path: Routes.scan,
+        parentNavigatorKey: root,
+        pageBuilder: (context, s) => dkSlideUpPage(
+          context,
+          key: s.pageKey,
+          child: _HomeUnderneath(
+            child: _scanner(s.uri.queryParameters['mode'] ?? ''),
+          ),
         ),
-        routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
+        routes: [
+          fullScreen(
+            'review',
+            (s) => PlaceholderScreen(
+              'S2',
+              detail: s.uri.queryParameters['source'] ?? '',
+            ),
+          ),
+        ],
       ),
       fullScreen(
         '/tool/:toolId',
-        (s) => PlaceholderScreen('T2', detail: s.pathParameters['toolId']!),
+        (s) {
+          final toolId = s.pathParameters['toolId']!;
+          // A link to a tool this version doesn't have (DK-0236).
+          if (!ToolCatalogue.all.any((t) => t.id == toolId)) {
+            return const LinkErrorScreen();
+          }
+          final screen = PlaceholderScreen('T2', detail: toolId);
+          final file = s.uri.queryParameters['file'];
+          return file == null
+              ? screen
+              : LinkedFileGate(fileId: file, child: screen);
+        },
         routes: [
-          fullScreen(
-            'result',
-            (s) => PlaceholderScreen('T3', detail: s.pathParameters['toolId']!),
+          // The result cross-fades in after the progress (UI spec §13.4).
+          GoRoute(
+            path: 'result',
+            parentNavigatorKey: root,
+            pageBuilder: (context, s) => dkFadePage(
+              context,
+              key: s.pageKey,
+              child: _HomeUnderneath(
+                child: PlaceholderScreen(
+                  'T3',
+                  detail: s.pathParameters['toolId']!,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -141,6 +211,21 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                   ),
           ),
         ),
+      ),
+      // A job link opens Home with the job's progress sheet; a job that has
+      // ended says so in a toast (DK-0236).
+      GoRoute(
+        path: '/job/:jobId',
+        redirect: (context, s) {
+          final id = int.tryParse(s.pathParameters['jobId']!);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            final context = root.currentContext;
+            if (context != null && context.mounted) {
+              showJobProgress(context, id ?? -1);
+            }
+          });
+          return Routes.home;
+        },
       ),
       fullScreen(
         '/organize/:fileId',
@@ -189,4 +274,19 @@ class _HomeUnderneath extends StatelessWidget {
       child: child,
     );
   }
+}
+
+/// S1 behind its camera permission (DK-0342). Importing photos needs no
+/// camera; every other mode asks for it first.
+Widget _scanner(String mode) {
+  final camera = PlaceholderScreen('S1', detail: mode);
+  if (mode == DkScanMode.importPhotos.name) return camera;
+  return Builder(
+    builder: (context) => CameraPermissionGate(
+      camera: (_) => camera,
+      onClose: () => context.canPop() ? context.pop() : context.go(Routes.home),
+      // As the Scan button's Import photos: S2's picker (DK-0230).
+      onImport: () => context.pushReplacement(Routes.scanImport),
+    ),
+  );
 }

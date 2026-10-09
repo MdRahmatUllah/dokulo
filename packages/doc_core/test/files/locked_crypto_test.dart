@@ -80,6 +80,14 @@ void main() {
 
     test('a damaged stored value never verifies', () async {
       expect(await PinHash.verify('1234', 'nonsense'), isFalse);
+      expect(
+        await PinHash.verify('1234', r'pbkdf2-sha256$x$AAAA$AAAA'),
+        isFalse,
+      );
+      expect(
+        await PinHash.verify('1234', r'pbkdf2-sha256$10$not base64!$AAAA'),
+        isFalse,
+      );
     });
   });
 

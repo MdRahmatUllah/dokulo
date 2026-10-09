@@ -170,8 +170,12 @@ Riverpod 3 with code generation, the same versions as Sogda:
 
 ## 3. Routing
 
-`go_router` 18 with `StatefulShellRoute.indexedStack`, so each tab keeps its
-scroll position and its pushed pages (DK-0004). The code is
+`go_router` 18 with a `StatefulShellRoute`, so each tab keeps its scroll
+position and its pushed pages (DK-0004); its `DkFadingBranches` container
+cross-fades the tabs in 120 ms (UI spec §13.4, DK-0229). Pages are explicit
+`MaterialPage`s, so a push takes the theme's `DkPageTransitionsBuilder` (iOS
+slide, Android shared axis X); the scanner (`dkSlideUpPage`), the viewer
+(`dkViewerPage`) and T3 (`dkFadePage`) have their own (DK-0237). The code is
 `app_pdf/lib/routes/routes.dart`: `Routes` holds every path, `buildRouter()`
 the tree, and `appRouterProvider` the app's router (kept alive). Build paths
 with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
@@ -187,12 +191,13 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/me/models` | M2 Model manager | tab 4, pushed | |
 | `/me/settings/:page` | M3 Settings | tab 4, pushed | `:page` is the settings group, e.g. `appearance` |
 | `/welcome` | Onboarding | full screen | Shown once |
-| `/scan` | S1 Camera | full screen | The raised Scan button pushes it |
+| `/scan` | S1 Camera | full screen | The raised Scan button pushes it; `?mode=` a scan mode (`document`, `idCard`, …) |
 | `/scan/review` | S2 Review | full screen | |
-| `/tool/:toolId` | T2 Tool options | full screen | `:toolId` is the tool's id (`compress`, `merge`, …) |
+| `/tool/:toolId` | T2 Tool options | full screen | `:toolId` is the tool's id (`compress`, `merge`, …); `?file=<fileId>` preselects a file |
 | `/tool/:toolId/result` | T3 Result | full screen | |
 | `/viewer/:fileId` | V1 Viewer | full screen | `?mode=edit` opens V2 Edit mode |
 | `/organize/:fileId` | P1 Organize pages | full screen | |
+| `/job/:jobId` | Home + X2 Progress | tab 1 | A notification's link: Home with the running job's progress sheet; a toast if the job has ended |
 | `/dev/catalogue` | Component catalogue | full screen | Debug builds only: a list of components; each opens its variants and states in Light and Dark (`lib/catalogue/`) |
 
 - **Full-screen routes** sit on the root navigator, above the shell: the tab
@@ -206,6 +211,11 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
   android.intent.action.VIEW -d "dokulo://open/tool/compress"` or `xcrun simctl
   openurl booted "dokulo://open/viewer/f42?mode=edit"`.
   `test/routes/routes_test.dart` cold-starts the router at every route.
+  A link that leads nowhere never crashes (DK-0236): an unknown route or
+  tool shows `LinkErrorScreen` ("This link doesn't work any more", Go to
+  Home), a file handle that's malformed or gone shows "This file isn't in
+  Dokulo any more" (`LinkedFileGate`), a job that has ended a toast
+  (`test/routes/deep_links_test.dart`).
   On a device, `python tools/deeplinks_check.py` fires every route from a
   cold start (all 15 passed on emulator-5554, 2026-10-08, DK-1041).
 - **Back from a deep-linked full-screen page goes to Home** (nothing is

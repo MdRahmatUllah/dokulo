@@ -83,13 +83,18 @@ abstract final class PinHash {
 
   static Future<bool> verify(String pin, String stored) async {
     final parts = stored.split(r'$');
-    if (parts.length != 4 || parts[0] != 'pbkdf2-sha256') return false;
-    final hash = await _derive(
-      pin,
-      base64.decode(parts[2]),
-      int.parse(parts[1]),
-    );
-    final expected = base64.decode(parts[3]);
+    final rounds = parts.length == 4 ? int.tryParse(parts[1]) : null;
+    if (parts[0] != 'pbkdf2-sha256' || rounds == null || rounds < 1) {
+      return false;
+    }
+    final List<int> salt, expected;
+    try {
+      salt = base64.decode(parts[2]);
+      expected = base64.decode(parts[3]);
+    } on FormatException {
+      return false;
+    }
+    final hash = await _derive(pin, salt, rounds);
     // Constant time: compare every byte.
     var diff = hash.length ^ expected.length;
     for (var i = 0; i < hash.length && i < expected.length; i++) {

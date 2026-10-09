@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
 
+import 'preflight.dart';
 import 'registry.dart';
 import 'tool_job.dart';
 
@@ -64,18 +65,35 @@ class ChainStep {
 /// jobs table, so a job the OS kills is found on the next launch
 /// ([unfinished]). One queue per app.
 class JobQueue {
-  JobQueue(this._pool, this._db, this._tools, {this.hooks = const JobHooks()});
+  JobQueue(
+    this._pool,
+    this._db,
+    this._tools, {
+    this.hooks = const JobHooks(),
+    this.preflight,
+  });
 
   final IsolatePool _pool;
   final DokuloDatabase _db;
   final ToolRegistry _tools;
   final JobHooks hooks;
+
+  /// The checks before a job starts (DK-0020); none in tests that don't
+  /// give one.
+  final Preflight? preflight;
   final _running = <int, ToolRun>{};
 
   Iterable<ToolRun> get running => _running.values;
 
   /// Starts tool [toolId] on [input].
   Future<ToolRun> start(String toolId, Object? input) async {
+    final tool = _tools[toolId];
+    // Known to fail (no space, too large, locked)? Then it never starts.
+    await preflight?.check(tool, input);
+    return _start(toolId, input);
+  }
+
+  Future<ToolRun> _start(String toolId, Object? input) async {
     final tool = _tools[toolId];
     final id = await _db
         .into(_db.jobs)
@@ -128,8 +146,13 @@ class JobQueue {
   /// Runs an unfinished job again from the start (jobs never write in place,
   /// so a rerun is safe).
   Future<ToolRun> resume(UnfinishedJob job) async {
+    final tool = _tools[job.toolId];
+    final input = tool.decode(job.input);
+    // Checked before its row goes: a job that can't run keeps its row, so
+    // "Couldn't finish" can offer Try again (DK-0020, DK-0021).
+    await preflight?.check(tool, input);
     await forget(job);
-    return start(job.toolId, _tools[job.toolId].decode(job.input));
+    return _start(job.toolId, input);
   }
 
   Future<void> forget(UnfinishedJob job) => _deleteRow(job.id);
