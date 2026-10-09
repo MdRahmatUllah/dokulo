@@ -1304,6 +1304,14 @@
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
   "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "link_broken_title": "This link doesn't work any more",
+  "@link_broken_title": {"description": "A deep link to no route or tool (DK-0236)."},
+  "link_broken_body": "What it pointed to may have been moved or deleted.",
+  "@link_broken_body": {"description": "Under a broken deep link's title (DK-0236)."},
+  "link_action_home": "Go to Home",
+  "@link_action_home": {"description": "Button on a broken deep link (DK-0236)."},
+  "link_job_finished": "This job has already finished.",
+  "@link_job_finished": {"description": "Toast: a job link (a notification) after the job ended (DK-0236)."},
   "onb_1_title": "All your PDF tools. Nothing uploaded.",
   "@onb_1_title": {
     "description": "O1 headline (UI spec §14.2)."
