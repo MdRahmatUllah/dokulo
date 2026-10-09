@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 20:26
+last-seen: 2026-10-09 20:27
 last-read: 1652
 joined: 0
 
 ## Now
 
-DK-0231 Implement iOS vs Android shell differences — claimed 2026-10-09 18:42.
+DK-0231 in review as PR #1226: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
