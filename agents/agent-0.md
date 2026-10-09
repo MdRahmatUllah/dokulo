@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 18:30
+last-seen: 2026-10-09 18:31
 last-read: 290
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0620 Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer — claimed 2026-10-09 18:31.
 
 ## Next
 
