@@ -325,7 +325,8 @@ Page<void> dkViewerPage(
 class DkPageTransitionsBuilder extends PageTransitionsBuilder {
   const DkPageTransitionsBuilder();
 
-  static const _shift = 30.0;
+  /// 7.5 % of the width: about 30 dp on a phone (Material's shared axis).
+  static const _shift = 0.075;
 
   @override
   Widget buildTransitions<T>(
@@ -350,14 +351,24 @@ class DkPageTransitionsBuilder extends PageTransitionsBuilder {
     final curve = context.tokens.motion.standardCurve;
     final enter = CurvedAnimation(parent: animation, curve: curve);
     final leave = CurvedAnimation(parent: secondaryAnimation, curve: curve);
-    return AnimatedBuilder(
-      animation: Listenable.merge([enter, leave]),
-      child: child,
-      builder: (context, child) => Opacity(
-        opacity: enter.value * (1 - leave.value),
-        child: Transform.translate(
-          offset: Offset((1 - enter.value) * _shift - leave.value * _shift, 0),
-          child: child,
+    // Transitions, not Opacity/Transform: no rebuild per frame, and an idle
+    // page carries no extra Opacity or Transform in its tree.
+    return FadeTransition(
+      opacity: enter,
+      child: FadeTransition(
+        opacity: ReverseAnimation(leave),
+        child: SlideTransition(
+          position: Tween(
+            begin: const Offset(_shift, 0),
+            end: Offset.zero,
+          ).animate(enter),
+          child: SlideTransition(
+            position: Tween(
+              begin: Offset.zero,
+              end: const Offset(-_shift, 0),
+            ).animate(leave),
+            child: child,
+          ),
         ),
       ),
     );

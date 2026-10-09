@@ -220,7 +220,7 @@ void main() {
     });
 
     testWidgets('a pushed page comes in along the x axis (Android shared '
-        'axis), by at most 30 dp', (tester) async {
+        'axis), by at most 7.5 % of the width', (tester) async {
       final router = await pumpAt(tester, Routes.files);
       router.push(Routes.lockedFolder);
       await tester.pump();
@@ -228,7 +228,10 @@ void main() {
       final mid = tester.getTopLeft(find.text('F2')).dx;
       await tester.pumpAndSettle();
       final end = tester.getTopLeft(find.text('F2')).dx;
-      expect(mid - end, inExclusiveRange(0, 30.01));
+      // At most 7.5 % of the width (about 30 dp on a phone).
+      final width =
+          tester.view.physicalSize.width / tester.view.devicePixelRatio;
+      expect(mid - end, inExclusiveRange(0, width * 0.075 + 0.01));
     });
 
     testWidgets('on iOS a pushed page slides in from the right edge', (
@@ -256,7 +259,10 @@ void main() {
       final mid = tester.getTopLeft(find.text('T2 compress')).dx;
       await tester.pumpAndSettle();
       final end = tester.getTopLeft(find.text('T2 compress')).dx;
-      expect(mid - end, inExclusiveRange(0, 30.01));
+      // At most 7.5 % of the width (about 30 dp on a phone).
+      final width =
+          tester.view.physicalSize.width / tester.view.devicePixelRatio;
+      expect(mid - end, inExclusiveRange(0, width * 0.075 + 0.01));
     });
   });
 }
