@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -67,14 +68,13 @@ PhotoLibrary photoLibrary(Ref ref) => const PluginPhotoLibrary();
 /// a page quad + page proportions). Runs off the UI isolate.
 typedef DocumentScorer = Future<double> Function(Uint8List jpeg);
 
-/// The finder's scorer. Until doc_vision's lands (DK-0337's detector is in
-/// #1217), nothing is a document.
+/// The finder's scorer: doc_tools' [DocumentPhotoScorer].
 @Riverpod(keepAlive: true)
-DocumentScorer documentScorer(Ref ref) =>
-    (_) async => 0;
-
-/// A score from here up is a document.
-const documentThreshold = 0.5;
+DocumentScorer documentScorer(Ref ref) {
+  final scorer = DocumentPhotoScorer();
+  ref.onDispose(scorer.close);
+  return scorer.call;
+}
 
 /// Where a scan of the library stands.
 class PhotoFinderState {
