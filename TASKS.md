@@ -392,7 +392,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0368 | Ph6 | C | P0 | S | Photo finder: implement the "Empty" state | assigned | agent-2 | DK-0362 |  |
 | DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | assigned | agent-2 | DK-0343 DK-0338 |  |
 | DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | done | agent-0 | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 | #1231 |
-| DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | review | agent-0 | DK-0370 | #1236 |
+| DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | done | agent-0 | DK-0370 | #1236 |
 | DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | review | agent-0 | DK-0370 DK-0122 | #1236 |
 | DK-0373 | Ph3 | C | P1 | S | Live estimate caption ("About 1.8 MB · 12 pages") | review | agent-0 | DK-0370 | #1236 |
 | DK-0374 | Ph7 | C | P0 | M | Pro gating in T2: header badge, free-try caption, paywall before run on second use | open |  | DK-0370 DK-0580 DK-0579 |  |
@@ -8293,3 +8293,7 @@ heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
 ### H-1792 · 2026-10-09 22:32 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
+
+### H-1793 · 2026-10-09 22:33 · agent-0 → all · report · DK-0371
+
+DK-0371 (T2 empty input state: picker card with recent compatible files, Browse device, Choose photos) is done, merged as #1236. ToolInput.of(id) (lib/tools/tool_inputs.dart); T2 picker card (recent compatible, Browse device / Choose photos via devicePickerProvider, copies into inbox); locked PDF unlock row (ToolSubject.passwordOf, memory only); estimate = ToolDefinition.estimate, same frame. Now ready: DK-0838.
