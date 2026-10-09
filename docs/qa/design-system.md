@@ -98,8 +98,8 @@ Fixed:
   (`DkErrorSituation.icon` and `iconColor`): lock, broken_image, storage,
   memory, assignment_late in warning or danger, download in primary, cancel
   and cloud_off in `iconSecondary`. New `DkIcons`: `damaged`, `storage`,
-  `memory`, `formUnsupported`, `cancelled`. The progress sheet's error state
-  shows them.
+  `memory`, `formUnsupported`, `cancelled`, for every screen that shows an
+  error (the progress sheet's error state, M10).
 - G2. The "no searchable text" banner shows `manage_search` and the camera
   permission banner `no_photography`, as the frame; DkBanner takes an `icon`
   over its variant's. The other permissions keep the warning icon (the frame
