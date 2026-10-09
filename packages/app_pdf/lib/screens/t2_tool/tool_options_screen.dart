@@ -107,6 +107,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
       _handle = run;
       _phase = X2Phase.quiet;
     });
+    final started = DateTime.now();
     _askBeforeCancel = false;
     _toAsk = Timer(confirmCancelAfter, () => _askBeforeCancel = true);
     _toButton = Timer(x2Button, () => setState(() => _phase = X2Phase.button));
@@ -122,11 +123,24 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
       );
     });
     try {
-      await run.result;
+      final output = await run.result;
       _end();
       if (!mounted) return;
       _closeSheet();
-      context.push(Routes.toolResult(_def.id));
+      if (output is JobOutput) {
+        ref
+            .read(lastToolResultProvider.notifier)
+            .set(
+              ToolResult(
+                toolId: _def.id,
+                inputs: subject.files,
+                output: output,
+                took: DateTime.now().difference(started),
+              ),
+            );
+      }
+      // T3 takes T2's place: its Close returns to where the tool started.
+      context.pushReplacement(Routes.toolResult(_def.id));
     } catch (e) {
       _end();
       await run.discard();

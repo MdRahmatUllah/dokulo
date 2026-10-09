@@ -11,6 +11,7 @@ import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
+import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import '../tools/tool_catalogue.dart';
 import '../tools/tool_definition.dart';
@@ -196,10 +197,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               context,
               key: s.pageKey,
               child: _HomeUnderneath(
-                child: PlaceholderScreen(
-                  'T3',
-                  detail: s.pathParameters['toolId']!,
-                ),
+                child: ToolResultScreen(toolId: s.pathParameters['toolId']!),
               ),
             ),
           ),

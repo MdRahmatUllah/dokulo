@@ -87,7 +87,6 @@ void main() {
     Routes.scan: ('S1', false),
     Routes.scanReview: ('S2', false),
     '/tool/compress': ('Compress PDF', false),
-    '/tool/compress/result': ('T3 compress', false),
     '/viewer/f42?mode=edit': ('V2 f42', false),
     '/organize/f42': ('P1 f42', false),
   };

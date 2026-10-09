@@ -58,6 +58,12 @@ void main() {
     expect(title(tester), 'H1');
   });
 
+  testWidgets('a link to a result that is gone (a cold start) shows the link '
+      'error', (tester) async {
+    await pumpAt(tester, Routes.toolResult('compress'));
+    expect(find.byType(LinkErrorScreen), findsOneWidget);
+  });
+
   testWidgets('a link to a tool this version lacks shows the link error', (
     tester,
   ) async {
