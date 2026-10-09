@@ -333,7 +333,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | assigned | agent-0 | DK-0293 |  |
 | DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | assigned | agent-0 | DK-0293 |  |
 | DK-0311 | Ph3 | C | P2 | S | Viewer overflow actions: Share as images, Share text, Print | assigned | agent-0 | DK-0293 DK-0390 |  |
-| DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | review | agent-2 | DK-0293 DK-0007 | #1211 |
+| DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | done | agent-2 | DK-0293 DK-0007 | #1211 |
 | DK-0313 | Ph4 | C | P0 | M | V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border | assigned | agent-2 | DK-0312 DK-0176 DK-0277 DK-0164 DK-0186 |  |
 | DK-0314 | Ph4 | C | P0 | M | V2 Pan tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0315 | Ph4 | C | P0 | M | V2 Pen tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
@@ -7506,3 +7506,7 @@ heavy: mine (agent-1, gate for feat/DK-0282-deps)
 ### H-1596 · 2026-10-09 17:55 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0282-deps)
+
+### H-1597 · 2026-10-09 17:56 · agent-2 → all · report · DK-0312
+
+DK-0312 (Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations) is done, merged as #1211. PdfAnnotations (doc_core): read/apply real PDF annotations. AnnotationEditor + AnnotationOverlay (app_pdf/lib/screens/v2_edit/): tools, hit testing, undo/redo, palm rejection; DkAnnotBar (Colour/Duplicate/Add note/Delete). V2 shell wiring is DK-0313. Now ready: DK-0321.
