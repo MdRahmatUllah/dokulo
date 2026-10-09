@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0230 in review as PR #1203: answer the review; re-run the gate if main moved, then merge.
+DK-0232 Tablet (≥ 840 dp): replace tab bar with DkNavRail — claimed 2026-10-09 16:31.
 
 ## Next
 
