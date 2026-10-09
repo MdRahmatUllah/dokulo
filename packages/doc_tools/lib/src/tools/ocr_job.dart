@@ -81,6 +81,12 @@ class OcrJob extends ToolJob<OcrInput> {
   /// What OCR reads at: sharp enough for small print.
   static const dpi = 300.0;
 
+  @override
+  double get renderDpi => dpi;
+
+  @override
+  String? passwordOf(OcrInput input) => input.password;
+
   /// Pages rendered ahead of the OCR worker. Each is a raw bitmap on disk
   /// (~35 MB for A4 at [dpi]), so this bounds the job's temp storage (~280 MB).
   /// ponytail: the engine loads once per window (a fraction of a second

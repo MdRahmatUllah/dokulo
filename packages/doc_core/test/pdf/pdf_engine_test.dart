@@ -182,4 +182,20 @@ void main() {
       isA<List<ImageObject>>(),
     );
   });
+
+  test('an XFA form is not fillable; an AcroForm is (DK-0614)', () async {
+    expect(await PdfEngine.isXfaForm(fixture('form-xfa.pdf')), isTrue);
+    expect(await PdfEngine.isXfaForm(fixture('form-acroform.pdf')), isFalse);
+    await expectLater(
+      PdfEngine.ensureFillable(fixture('form-xfa.pdf')),
+      throwsA(
+        isA<DocError>().having(
+          (e) => e.kind,
+          'kind',
+          DocErrorKind.unsupportedForm,
+        ),
+      ),
+    );
+    await PdfEngine.ensureFillable(fixture('form-acroform.pdf'));
+  });
 }

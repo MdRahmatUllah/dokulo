@@ -87,9 +87,14 @@ Future<StartupReport> startupCleanup({
   final resumed = <ToolRun>[];
   final couldNotFinish = <UnfinishedJob>[];
   for (final job in await queue.unfinished()) {
-    if (await _canResume(tools, job)) {
+    if (!await _canResume(tools, job)) {
+      couldNotFinish.add(job);
+      continue;
+    }
+    try {
       resumed.add(await queue.resume(job));
-    } else {
+    } on DocError {
+      // Its preflight fails now (no space, too large): reported, row kept.
       couldNotFinish.add(job);
     }
   }

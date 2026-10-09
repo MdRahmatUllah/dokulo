@@ -120,6 +120,21 @@ abstract class ToolJob<I> {
   /// next launch only if they all still exist (DK-0021). Outputs don't count.
   List<String> inputFiles(I input) => const [];
 
+  /// The password [input] carries for a locked file, for the preflight's
+  /// encryption and memory checks (DK-0020).
+  String? passwordOf(I input) => null;
+
+  /// Storage the job needs, as a multiple of its inputs' size: the output
+  /// plus temp files (DK-0020). Two by default: about one copy each.
+  double get spaceFactor => 2;
+
+  /// The resolution the job renders pages at, for the memory check; 0 for a
+  /// tool that doesn't render (DK-0020).
+  double get renderDpi => 0;
+
+  /// How many rendered pages the job holds at once (DK-0020).
+  int get pagesInMemory => 1;
+
   /// This tool's input when it follows another one in a chain: the previous
   /// step's output plus this step's saved options.
   I chain(JobOutput previous, Map<String, Object?> options);

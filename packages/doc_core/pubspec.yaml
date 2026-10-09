@@ -10,6 +10,7 @@ dependencies:
   pdf: 3.13.1 # the invisible OCR text layer (DK-0394)
   ai_core:
     path: ../ai_core
+  cryptography: 2.9.0 # AES-256-GCM for locked files (DK-0282)
   drift: 2.35.0
   ffi: 2.2.0
   image: 4.10.1

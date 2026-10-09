@@ -16,7 +16,8 @@ class DkButtonGallery extends StatelessWidget {
     final t = context.tokens;
     void tap() {}
     Widget row(DkButtonVariant v) {
-      final on = v == DkButtonVariant.onCamera;
+      final on =
+          v == DkButtonVariant.onCamera || v == DkButtonVariant.onCameraPrimary;
       return Container(
         // On camera sits on the camera preview: shown on its dark chrome.
         color: on ? t.color.cameraChrome : null,
