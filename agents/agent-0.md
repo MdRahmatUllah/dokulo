@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0388 Tablet T2/T3: options left (480) + live preview right; medium: max width 640 — claimed 2026-10-10 00:33.
+DK-0388 in review as PR #1246: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
