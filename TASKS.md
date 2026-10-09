@@ -1112,7 +1112,7 @@ The emulator lock is local, not here: `team.py device`.
 
 | Resource | Owner | Since | Why |
 |---|---|---|---|
-| pubspec |  |  |  |
+| pubspec | agent-1 | 2026-10-09 16:10 | agent-1: file_picker 13.1.0, cryptography 2.9.0, flutter_secure_storage 11.2.0, local_auth 3.0.2 (all planned, docs/versions.md) for DK-0241/DK-0282; one deps PR |
 | db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |
