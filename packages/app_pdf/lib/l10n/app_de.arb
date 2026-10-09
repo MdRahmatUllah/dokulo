@@ -354,5 +354,8 @@
   "banner_no_text": "{count, plural, =1{1 Scan hat noch keinen durchsuchbaren Text.} other{{count} Scans haben noch keinen durchsuchbaren Text.}}",
   "banner_make_searchable": "Durchsuchbar machen",
   "banner_purchase_failed": "Der Kauf wurde nicht abgeschlossen. Dir wurde nichts berechnet.",
-  "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei"
+  "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei",
+  "scan_brightness": "Helligkeit",
+  "scan_contrast": "Kontrast",
+  "toast_applied_all": "Auf alle Seiten angewendet"
 }

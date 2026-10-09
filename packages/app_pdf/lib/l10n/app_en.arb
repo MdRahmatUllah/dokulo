@@ -1454,5 +1454,17 @@
   "banner_purchase_failed": "Purchase didn't complete. You weren't charged.",
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
-  "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."}
+  "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "scan_brightness": "Brightness",
+  "@scan_brightness": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "scan_contrast": "Contrast",
+  "@scan_contrast": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "toast_applied_all": "Applied to all pages",
+  "@toast_applied_all": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  }
 }

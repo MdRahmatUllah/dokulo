@@ -8,6 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../components/dk_scan_button.dart';
 import 'scanner_camera.dart';
+import 'scanner_settings.dart';
 
 part 'scan_session.g.dart';
 
@@ -27,9 +28,18 @@ QuadDetector quadDetector(Ref ref) =>
 /// One captured page, as S2 reviews it: the photo on disk (so an unsaved
 /// scan survives the app being killed), the corners found at capture, the
 /// user's own crop (S2's crop mode) and the quarter turns the user rotated
-/// it by.
+/// it by, and its filter (S2's filter mode).
 class ScannedPage {
-  const ScannedPage(this.id, this.path, {this.quad, this.crop, this.turns = 0});
+  const ScannedPage(
+    this.id,
+    this.path, {
+    this.quad,
+    this.crop,
+    this.turns = 0,
+    this.filter,
+    this.brightness = 0,
+    this.contrast = 0,
+  });
 
   final String id;
   final String path;
@@ -42,6 +52,12 @@ class ScannedPage {
   final DetectedQuad? crop;
   final int turns;
 
+  /// The page's own filter; null: the scanner's default.
+  final ScanFilterChoice? filter;
+
+  /// The "Adjust" sliders, -0.5 to 0.5 (0: as the filter leaves it).
+  final double brightness, contrast;
+
   /// The corners the page is cut at.
   DetectedQuad get corners => crop ?? quad ?? fullPage;
 
@@ -52,12 +68,21 @@ class ScannedPage {
     Offset(0, 1),
   ];
 
-  ScannedPage copyWith({DetectedQuad? crop, int? turns}) => ScannedPage(
+  ScannedPage copyWith({
+    DetectedQuad? crop,
+    int? turns,
+    ScanFilterChoice? filter,
+    double? brightness,
+    double? contrast,
+  }) => ScannedPage(
     id,
     path,
     quad: quad,
     crop: crop ?? this.crop,
     turns: turns ?? this.turns,
+    filter: filter ?? this.filter,
+    brightness: brightness ?? this.brightness,
+    contrast: contrast ?? this.contrast,
   );
 
   ScannedPage rotated() => copyWith(turns: (turns + 1) % 4);
@@ -84,6 +109,9 @@ class ScannedPage {
     'turns': turns,
     'quad': ?_flat(quad),
     'crop': ?_flat(crop),
+    'filter': ?filter?.name,
+    'brightness': brightness,
+    'contrast': contrast,
   };
 
   static ScannedPage fromJson(Map<String, Object?> j) => ScannedPage(
@@ -92,6 +120,9 @@ class ScannedPage {
     turns: (j['turns'] as int?) ?? 0,
     quad: _quad(j['quad']),
     crop: _quad(j['crop']),
+    filter: ScanFilterChoice.values.asNameMap()[j['filter']],
+    brightness: (j['brightness'] as num?)?.toDouble() ?? 0,
+    contrast: (j['contrast'] as num?)?.toDouble() ?? 0,
   );
 }
 
@@ -260,9 +291,39 @@ class ScanSession extends _$ScanSession {
     await _save();
   }
 
-  /// "Apply to all pages": every page gets [crop] and/or [turns].
-  Future<void> applyToAll({DetectedQuad? crop, int? turns}) async {
-    state = [for (final p in state) p.copyWith(crop: crop, turns: turns)];
+  /// A page's own changes (the filter mode's).
+  Future<void> update(int index, ScannedPage page) async {
+    state = [...state]..[index] = page;
+    await _save();
+  }
+
+  /// "Apply to all pages": every page gets what is given. Returns the pages
+  /// as they were, for Undo ([restoreAll]).
+  Future<List<ScannedPage>> applyToAll({
+    DetectedQuad? crop,
+    int? turns,
+    ScanFilterChoice? filter,
+    double? brightness,
+    double? contrast,
+  }) async {
+    final before = state;
+    state = [
+      for (final p in state)
+        p.copyWith(
+          crop: crop,
+          turns: turns,
+          filter: filter,
+          brightness: brightness,
+          contrast: contrast,
+        ),
+    ];
+    await _save();
+    return before;
+  }
+
+  /// Undo of [applyToAll].
+  Future<void> restoreAll(List<ScannedPage> pages) async {
+    state = pages;
     await _save();
   }
 

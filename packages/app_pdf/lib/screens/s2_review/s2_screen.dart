@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,11 +9,14 @@ import '../../components/dk_chip.dart';
 import '../../components/dk_crop_overlay.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_page_tray.dart';
+import '../../components/dk_slider.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_undo.dart';
 import '../../theme/dk_tokens.dart';
 import '../s1_scanner/scan_session.dart';
+import '../s1_scanner/scanner_quick_settings.dart';
+import '../s1_scanner/scanner_settings.dart';
 
 /// S2, the scan's review (DK-0352; UI spec S2, design
 /// `10-scanner/scanner-review-review`, `-reorder`):
@@ -20,12 +25,18 @@ import '../s1_scanner/scan_session.dart';
 /// - the current page large on `color.surfaceSunken` (swipe between them)
 ///   with "3 of 6" under it;
 /// - the edit row: Crop · Rotate · Filter · Retake · Delete. Rotate and
-///   Delete act here (Delete offers Undo); Filter and Retake open their
-///   states ([onFilter], [onRetake]);
+///   Delete act here (Rotate turns in 220 ms; Delete offers Undo); Retake
+///   opens the camera ([onRetake]);
 /// - crop mode (DK-0353, `scanner-review-crop`): the uncropped photo in
 ///   DkCropOverlay (Auto · Full page · Reset, the magnifier while a corner
 ///   is dragged), Cancel / Apply under it. After Full page or a rotation, a
 ///   chip "Apply to all pages" does the same to every page;
+/// - filter mode (DK-0354, `scanner-review-filter`): a strip of the five
+///   filters under the edit row and Brightness / Contrast; after a change
+///   the chips "Apply to all pages" · "Use as default" (a long press on a
+///   filter is Use as default too). Applying to all offers Undo (DK-0355).
+///   The preview is a colour matrix; the real filter runs when the scan is
+///   saved (doc_vision's applyScanFilter);
 /// - DkPageTray: tap to go to a page, drag to reorder, "+" to add pages.
 ///
 /// The pages are [scanSessionProvider]'s, which keeps them on disk: an
@@ -35,7 +46,6 @@ class S2Screen extends ConsumerStatefulWidget {
     super.key,
     required this.onAddPages,
     this.onSave,
-    this.onFilter,
     this.onRetake,
   });
 
@@ -45,7 +55,7 @@ class S2Screen extends ConsumerStatefulWidget {
   final VoidCallback? onSave;
 
   /// The page's index; null hides nothing, but disables the button.
-  final ValueChanged<int>? onFilter, onRetake;
+  final ValueChanged<int>? onRetake;
 
   @override
   ConsumerState<S2Screen> createState() => _S2ScreenState();
@@ -60,14 +70,22 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
   DetectedQuad? _draft, _cropStart;
   var _aspect = 3 / 4;
 
-  /// The chip after Full page or a rotation: does it to every page.
-  Future<void> Function()? _applyAll;
+  /// The chip after Full page, a rotation or a filter change: does it to
+  /// every page and returns the pages as they were (for Undo).
+  Future<List<ScannedPage>> Function()? _applyAll;
+
+  /// Filter mode is open; [_filterChanged]: show "Use as default".
+  var _filtering = false, _filterChanged = false;
+
+  /// The page Rotate was last tapped on: it turns into place.
+  String? _turned;
 
   @override
   void initState() {
     super.initState();
     // After a kill: bring the unsaved scan back.
     ref.read(scanSessionProvider.notifier).restore();
+    ref.read(scannerSettingsProvider.notifier).load();
   }
 
   @override
@@ -80,6 +98,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     setState(() {
       _current = index;
       _applyAll = null;
+      _filterChanged = false;
     });
     if (_pager.hasClients) _pager.jumpToPage(index);
   }
@@ -88,6 +107,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     setState(() {
       _draft = _cropStart = page.corners;
       _applyAll = null;
+      _filtering = false;
     });
     final stream = ref
         .read(scanStoreProvider)
@@ -119,11 +139,55 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
 
   Future<void> _rotate(int index) async {
     final session = ref.read(scanSessionProvider.notifier);
+    setState(() => _turned = ref.read(scanSessionProvider)[index].id);
     await session.rotate(index);
     final turns = ref.read(scanSessionProvider)[index].turns;
     if (mounted) {
       setState(() => _applyAll = () => session.applyToAll(turns: turns));
     }
+  }
+
+  /// A filter-mode change to the current page.
+  Future<void> _setFilter(
+    int index, {
+    ScanFilterChoice? filter,
+    double? brightness,
+    double? contrast,
+  }) async {
+    final session = ref.read(scanSessionProvider.notifier);
+    final page = ref
+        .read(scanSessionProvider)[index]
+        .copyWith(filter: filter, brightness: brightness, contrast: contrast);
+    await session.update(index, page);
+    if (!mounted) return;
+    final chosen = page.filter ?? ref.read(scannerSettingsProvider).filter;
+    setState(() {
+      _filterChanged = true;
+      _applyAll = () => session.applyToAll(
+        filter: chosen,
+        brightness: page.brightness,
+        contrast: page.contrast,
+      );
+    });
+  }
+
+  Future<void> _useAsDefault(ScanFilterChoice filter) async {
+    await ref.read(scannerSettingsProvider.notifier).setFilter(filter);
+    if (mounted) setState(() => _filterChanged = false);
+  }
+
+  Future<void> _applyToAll() async {
+    final apply = _applyAll!;
+    final l = AppLocalizations.of(context);
+    setState(() => _applyAll = null);
+    final before = await apply();
+    if (!mounted) return;
+    await showDkUndo(
+      context,
+      DkUndo.applyToAll,
+      l.toast_applied_all,
+      onUndo: () => ref.read(scanSessionProvider.notifier).restoreAll(before),
+    );
   }
 
   Future<void> _delete() async {
@@ -158,10 +222,16 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     final pages = ref.watch(scanSessionProvider);
     final current = pages.isEmpty ? 0 : _current.clamp(0, pages.length - 1);
     final draft = pages.isEmpty ? null : _draft;
+    final defaultFilter = ref.watch(scannerSettingsProvider).filter;
+    final reduceMotion = MediaQuery.disableAnimationsOf(context);
 
-    Widget pageImage(ScannedPage p, {BoxFit fit = BoxFit.contain}) =>
-        RotatedBox(
-          quarterTurns: p.turns,
+    Widget photo(ScannedPage p, BoxFit fit, {ScanFilterChoice? filter}) =>
+        ColorFiltered(
+          colorFilter: scanPreviewFilter(
+            filter ?? p.filter ?? defaultFilter,
+            brightness: p.brightness,
+            contrast: p.contrast,
+          ),
           child: Image(
             image: ref.read(scanStoreProvider).image(p.path),
             fit: fit,
@@ -169,7 +239,33 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
           ),
         );
 
-    Widget tool(IconData icon, String label, VoidCallback? onTap) => Expanded(
+    Widget pageImage(
+      ScannedPage p, {
+      BoxFit fit = BoxFit.contain,
+      bool animate = false,
+    }) {
+      final page = RotatedBox(quarterTurns: p.turns, child: photo(p, fit));
+      if (!animate) return page;
+      // Rotate: the page turns into place over 220 ms (from where it was).
+      return TweenAnimationBuilder<double>(
+        key: ValueKey((p.id, p.turns)),
+        tween: Tween(begin: -0.25, end: 0),
+        duration: reduceMotion
+            ? Duration.zero
+            : const Duration(milliseconds: 220),
+        curve: Curves.easeOut,
+        builder: (context, turn, child) =>
+            Transform.rotate(angle: turn * 2 * math.pi, child: child),
+        child: page,
+      );
+    }
+
+    Widget tool(
+      IconData icon,
+      String label,
+      VoidCallback? onTap, {
+      bool active = false,
+    }) => Expanded(
       child: Semantics(
         button: true,
         enabled: onTap != null,
@@ -186,10 +282,12 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: t.space.xxs,
                 children: [
-                  DkIcon(icon, color: c.iconPrimary),
+                  DkIcon(icon, color: active ? c.primary : c.iconPrimary),
                   Text(
                     label,
-                    style: t.text.caption.copyWith(color: c.textPrimary),
+                    style: t.text.caption.copyWith(
+                      color: active ? c.primary : c.textPrimary,
+                    ),
                     maxLines: 1,
                   ),
                 ],
@@ -232,7 +330,10 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                                 t.space.xl,
                                 t.space.s,
                               ),
-                              child: pageImage(pages[i]),
+                              child: pageImage(
+                                pages[i],
+                                animate: pages[i].id == _turned,
+                              ),
                             ),
                           ),
                         ),
@@ -282,30 +383,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                 ),
               ),
             ),
-          if (draft == null && _applyAll != null)
-            ColoredBox(
-              color: c.surface,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(
-                  t.space.l,
-                  t.space.s,
-                  t.space.l,
-                  t.space.xxs,
-                ),
-                child: Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: DkChip(
-                    label: l.common_apply_all,
-                    selected: false,
-                    onSelected: (_) async {
-                      final apply = _applyAll!;
-                      setState(() => _applyAll = null);
-                      await apply();
-                    },
-                  ),
-                ),
-              ),
-            ),
+          if (draft == null && !_filtering && _applyAll != null) _chips(null),
           if (draft == null) ...[
             DecoratedBox(
               decoration: BoxDecoration(
@@ -327,9 +405,14 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                   tool(
                     DkIcons.filters,
                     l.scan_filter,
-                    widget.onFilter == null || pages.isEmpty
+                    pages.isEmpty
                         ? null
-                        : () => widget.onFilter!(current),
+                        : () => setState(() {
+                            _filtering = !_filtering;
+                            _applyAll = null;
+                            _filterChanged = false;
+                          }),
+                    active: _filtering,
                   ),
                   tool(
                     DkIcons.retake,
@@ -346,6 +429,8 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                 ],
               ),
             ),
+            if (_filtering && pages.isNotEmpty)
+              _filterPanel(pages[current], current, photo, defaultFilter),
             DecoratedBox(
               decoration: BoxDecoration(
                 color: c.surface,
@@ -373,6 +458,139 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
             ),
           ],
         ],
+      ),
+    );
+  }
+
+  /// "Apply to all pages", and after a filter change "Use as default".
+  Widget _chips(ScanFilterChoice? filter) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    return ColoredBox(
+      color: t.color.surface,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(t.space.l, t.space.s, t.space.l, 0),
+        child: Wrap(
+          spacing: t.space.s,
+          runSpacing: t.space.s,
+          children: [
+            if (_applyAll != null)
+              DkChip(
+                label: l.common_apply_all,
+                selected: false,
+                onSelected: (_) => _applyToAll(),
+              ),
+            if (filter != null && _filterChanged)
+              DkChip(
+                label: l.common_use_default,
+                selected: false,
+                onSelected: (_) => _useAsDefault(filter),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Filter mode: the five filters as previews of the page (56 × 72, the
+  /// chosen one ringed in 2 dp primary), Brightness and Contrast.
+  Widget _filterPanel(
+    ScannedPage page,
+    int index,
+    Widget Function(ScannedPage, BoxFit, {ScanFilterChoice? filter}) photo,
+    ScanFilterChoice defaultFilter,
+  ) {
+    final t = context.tokens;
+    final c = t.color;
+    final l = AppLocalizations.of(context);
+    final chosen = page.filter ?? defaultFilter;
+    String percent(double v) => '${(v * 200).round()}';
+    return ColoredBox(
+      color: c.surface,
+      child: Padding(
+        padding: EdgeInsets.only(top: t.space.s),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: EdgeInsets.symmetric(horizontal: t.space.l),
+              child: Row(
+                spacing: t.space.m,
+                children: [
+                  for (final f in ScanFilterChoice.values)
+                    Semantics(
+                      button: true,
+                      selected: f == chosen,
+                      label: f.label(l),
+                      excludeSemantics: true,
+                      onTap: () => _setFilter(index, filter: f),
+                      onLongPress: () => _useAsDefault(f),
+                      child: GestureDetector(
+                        onTap: () => _setFilter(index, filter: f),
+                        onLongPress: () => _useAsDefault(f),
+                        child: Column(
+                          spacing: t.space.xs,
+                          children: [
+                            Container(
+                              width: 56,
+                              height: 72,
+                              padding: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: f == chosen
+                                      ? c.primary
+                                      : Colors.transparent,
+                                  width: 2,
+                                ),
+                              ),
+                              child: RotatedBox(
+                                quarterTurns: page.turns,
+                                child: photo(page, BoxFit.cover, filter: f),
+                              ),
+                            ),
+                            Text(
+                              f.label(l),
+                              style: t.text.caption.copyWith(
+                                color: c.textPrimary,
+                                fontWeight: f == chosen
+                                    ? FontWeight.w600
+                                    : FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            _chips(chosen),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: t.space.l),
+              child: Column(
+                children: [
+                  DkSlider(
+                    title: l.scan_brightness,
+                    value: page.brightness,
+                    min: -0.5,
+                    max: 0.5,
+                    format: percent,
+                    onChanged: (v) => _setFilter(index, brightness: v),
+                  ),
+                  DkSlider(
+                    title: l.scan_contrast,
+                    value: page.contrast,
+                    min: -0.5,
+                    max: 0.5,
+                    format: percent,
+                    onChanged: (v) => _setFilter(index, contrast: v),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -419,4 +637,33 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
       },
     );
   }
+}
+
+/// The filter's look in the review, as a colour matrix (the design's CSS
+/// filters): greyscale, contrast around mid-grey, brightness as an offset.
+/// [brightness] and [contrast] are the sliders, -0.5 to 0.5.
+ColorFilter scanPreviewFilter(
+  ScanFilterChoice filter, {
+  double brightness = 0,
+  double contrast = 0,
+}) {
+  final grey =
+      filter == ScanFilterChoice.greyscale ||
+      filter == ScanFilterChoice.blackWhite;
+  final k =
+      (1 + contrast) *
+      switch (filter) {
+        ScanFilterChoice.blackWhite => 1.8,
+        ScanFilterChoice.autoColour => 1.05,
+        _ => 1.0,
+      };
+  final offset =
+      128 * (1 - k) +
+      255 * brightness +
+      (filter == ScanFilterChoice.removeShadows ? 12 : 0);
+  // Rec. 709 luma for grey; the identity otherwise.
+  List<double> row(int channel) => grey
+      ? [0.2126 * k, 0.7152 * k, 0.0722 * k, 0, offset]
+      : [for (var i = 0; i < 3; i++) i == channel ? k : 0.0, 0, offset];
+  return ColorFilter.matrix([...row(0), ...row(1), ...row(2), 0, 0, 0, 1, 0]);
 }

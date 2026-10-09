@@ -4,6 +4,7 @@ import 'package:app_pdf/components/dk_page_thumb.dart';
 import 'package:app_pdf/components/dk_text_action.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/screens/s2_review/s2_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -30,6 +31,7 @@ Uint8List photo(int n) {
 void main() {
   late ProviderContainer container;
   late MemoryScanStore store;
+  late MemoryPrefsStore prefs;
   var added = 0;
   int? retook;
 
@@ -49,7 +51,10 @@ void main() {
     retook = null;
     store = MemoryScanStore();
     container = ProviderContainer(
-      overrides: [scanStoreProvider.overrideWithValue(store)],
+      overrides: [
+        scanStoreProvider.overrideWithValue(store),
+        scannerPrefsStoreProvider.overrideWithValue(prefs = MemoryPrefsStore()),
+      ],
     );
     addTearDown(container.dispose);
     for (var i = 1; i <= count; i++) {
@@ -192,6 +197,67 @@ void main() {
     expect(pages().map((p) => p.turns), everyElement(1));
   });
 
+  testWidgets('Filter: a filter for this page, then for all with Undo', (
+    tester,
+  ) async {
+    await pump(tester);
+    await tester.tap(find.text('Filter'));
+    await tester.pumpAndSettle();
+    expect(find.text('Brightness'), findsOneWidget);
+    await tester.tap(find.text('Greyscale'));
+    await tester.pumpAndSettle();
+    expect(pages().first.filter, ScanFilterChoice.greyscale);
+    expect(pages()[1].filter, isNull);
+    await tester.tap(find.text('Apply to all pages'));
+    await tester.pumpAndSettle();
+    expect(
+      pages().map((p) => p.filter),
+      everyElement(ScanFilterChoice.greyscale),
+    );
+    expect(find.text('Applied to all pages'), findsOneWidget);
+    await tester.tap(find.text('Undo'));
+    await tester.pumpAndSettle();
+    expect(pages()[1].filter, isNull);
+    expect(pages().first.filter, ScanFilterChoice.greyscale);
+  });
+
+  testWidgets('Filter: Use as default, and a long press does the same', (
+    tester,
+  ) async {
+    await pump(tester);
+    await tester.tap(find.text('Filter'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('Black & white'));
+    await tester.tap(find.text('Black & white'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Use as default'));
+    await tester.pumpAndSettle();
+    expect(
+      container.read(scannerSettingsProvider).filter,
+      ScanFilterChoice.blackWhite,
+    );
+    expect(prefs.json, contains('blackWhite'));
+    await tester.ensureVisible(find.text('Original'));
+    await tester.longPress(find.text('Original'));
+    await tester.pumpAndSettle();
+    expect(
+      container.read(scannerSettingsProvider).filter,
+      ScanFilterChoice.original,
+    );
+  });
+
+  test('the preview matrix: Original is the identity', () {
+    expect(
+      scanPreviewFilter(ScanFilterChoice.original),
+      const ColorFilter.matrix([
+        1, 0, 0, 0, 0, //
+        0, 1, 0, 0, 0, //
+        0, 0, 1, 0, 0, //
+        0, 0, 0, 1, 0, //
+      ]),
+    );
+  });
+
   test('a page keeps its crop through the manifest', () {
     const page = ScannedPage(
       'a',
@@ -238,6 +304,23 @@ void main() {
       await expectLater(
         find.byType(S2Screen),
         matchesGoldenFile('goldens/s2_crop_$name.png'),
+      );
+    });
+
+    testWidgets('golden: filter ($name)', (tester) async {
+      await pump(tester, count: 6, tokens: tokens, locale: locale);
+      await tester.tap(find.text('Filter'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text(name == 'de' ? 'Graustufen' : 'Greyscale'));
+      await tester.runAsync(() async {
+        for (final e in find.byType(Image).evaluate()) {
+          await precacheImage((e.widget as Image).image, e);
+        }
+      });
+      await tester.pumpAndSettle();
+      await expectLater(
+        find.byType(S2Screen),
+        matchesGoldenFile('goldens/s2_filter_$name.png'),
       );
     });
   }
