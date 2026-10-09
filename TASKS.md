@@ -7502,3 +7502,7 @@ heavy: free (agent-2, exit 1)
 ### H-1595 · 2026-10-09 17:55 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0282-deps)
+
+### H-1596 · 2026-10-09 17:55 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0282-deps)
