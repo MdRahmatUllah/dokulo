@@ -190,3 +190,10 @@ class DokuloError implements Exception {
   @override
   String toString() => 'DokuloError($code ${situation.name}): $detail';
 }
+
+/// AI's load check (DK-0013) as the catalogue's Low memory (DK-0616): null
+/// when the model may load now. The AI panel shows it inline with Try again.
+DokuloError? aiLoadError(DeviceCapabilities device, ModelNeeds needs) =>
+    canLoadNow(device, needs)
+    ? null
+    : const DokuloError(DkErrorSituation.lowMemory);
