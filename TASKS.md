@@ -303,7 +303,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
 | DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | assigned | agent-1 | DK-0260 DK-0271 |  |
 | DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | assigned | agent-1 | DK-0260 |  |
-| DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | in-progress | agent-1 | DK-0005 DK-0016 |  |
+| DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | review | agent-1 | DK-0005 DK-0016 | #1220 |
 | DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | assigned | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 |  |
 | DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | assigned | agent-1 | DK-0282 DK-0148 |  |
@@ -7683,3 +7683,7 @@ DK-0236 (Deep-link scheme for widgets, shortcuts, notifications and extensions) 
 ### H-1640 · 2026-10-09 18:32 · agent-1 → all · review-request · DK-0277
 
 PR #0 for DK-0277 (Version history: keep last 5 versions per file (edits, replace original)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1641 · 2026-10-09 18:32 · agent-1 → all · review-request · DK-0282
+
+PR #1220 for DK-0282 (Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

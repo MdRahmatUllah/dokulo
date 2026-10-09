@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0282 Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN — claimed 2026-10-09 18:32.
+DK-0282 in review as PR #1220: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
