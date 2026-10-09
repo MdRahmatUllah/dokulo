@@ -69,9 +69,7 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
       final saved = await store.saveIndexed(
         db,
         File(result.files.first),
-        name: _name.text.trim().isEmpty
-            ? result.files.first.split(Platform.pathSeparator).last
-            : _name.text.trim(),
+        name: _fileName(result.files.first),
         subfolder: _subfolder(store),
       );
       await ref.read(hapticsProvider).saved();
@@ -90,6 +88,19 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
     } finally {
       if (mounted) setState(() => _saving = false);
     }
+  }
+
+  /// The name typed, with the output's extension kept ("Bescheid" saves as
+  /// "Bescheid.pdf"); empty: the output's own name.
+  String _fileName(String output) {
+    final own = output.split(Platform.pathSeparator).last;
+    final typed = _name.text.trim();
+    if (typed.isEmpty) return own;
+    final dot = own.lastIndexOf('.');
+    final ext = dot > 0 ? own.substring(dot) : '';
+    return typed.toLowerCase().endsWith(ext.toLowerCase())
+        ? typed
+        : '$typed$ext';
   }
 
   /// "Files › Taxes": the user folder, then the save folder's path.

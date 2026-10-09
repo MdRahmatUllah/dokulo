@@ -162,10 +162,12 @@ void main() {
     expect(find.text('Save to: Files › Taxes'), findsOneWidget);
     expect(bar(tester).label, 'Save');
 
+    // A name without its extension keeps the output's.
+    await tester.enterText(find.byType(TextField), 'Mietvertrag klein');
     await tester.tap(find.text('Save'));
     await settle(tester);
     final saved = File(
-      '${store.userFolder.path}${sep}Taxes${sep}Mietvertrag – compressed.pdf',
+      '${store.userFolder.path}${sep}Taxes${sep}Mietvertrag klein.pdf',
     );
     expect(saved.existsSync(), isTrue);
     expect(output.existsSync(), isFalse);
