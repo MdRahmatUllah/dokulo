@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0339 Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast — claimed 2026-10-09 15:52.
 
 ## Next
 

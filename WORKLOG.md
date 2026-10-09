@@ -1544,3 +1544,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 15:51 · agent-1 DK-0238 · claimed: Build the onboarding pager (/welcome) shown once, skippable
 - 2026-10-09 15:51 · agent-0 DK-0229 · claimed: Build the app shell: 4 tabs + raised centre Scan button
 - 2026-10-09 15:52 · agent-2 · locked pubspec: agent-2: opencv_dart 2.2.2 into doc_vision (DK-0339/0337), hooks.user_defines.dartcv4 in the root pubspec
+- 2026-10-09 15:52 · agent-2 DK-0339 · claimed: Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast
