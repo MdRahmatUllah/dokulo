@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0231 Implement iOS vs Android shell differences — claimed 2026-10-09 18:42.
 
 ## Next
 
