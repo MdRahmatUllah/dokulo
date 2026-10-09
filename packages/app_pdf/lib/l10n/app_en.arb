@@ -1713,5 +1713,18 @@
         "type": "String"
       }
     }
+  },
+  "locked_moved_in": "{n, plural, one{Moved 1 file to Locked folder} other{Moved {n} files to Locked folder}}",
+  "@locked_moved_in": {
+    "description": "Toast after Move to locked folder, with Undo (DK-0289).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "locked_move_out": "Move out of locked folder",
+  "@locked_move_out": {
+    "description": "F2 file sheet: decrypts it back to its folder."
   }
 }

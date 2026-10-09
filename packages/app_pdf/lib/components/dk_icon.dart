@@ -148,6 +148,7 @@ abstract final class DkIcons {
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
   static const lock = IconData(0xe899, fontFamily: _font) /* lock */;
+  static const lockOpen = IconData(0xe898, fontFamily: _font) /* lock_open */;
   static const backspace = IconData(0xe14a, fontFamily: _font) /* backspace */;
   static const fingerprint = IconData(
     0xe90d,

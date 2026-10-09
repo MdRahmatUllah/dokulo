@@ -189,7 +189,13 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
-      fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
+      fullScreen(
+        Routes.lockedFolder,
+        // "Move to locked folder" hands over the file ids (DK-0289).
+        (s) => LockedFolderScreen(
+          moveIn: s.extra is List<int> ? s.extra! as List<int> : const [],
+        ),
+      ),
       fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
