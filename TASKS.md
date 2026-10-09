@@ -550,7 +550,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0526 | Ph4 | C | P0 | S | Black out: implement the "OCR step for scans" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0527 | Ph4 | C | P0 | S | Black out: implement the "Verification failed" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0528 | Ph4 | C | P0 | M | Redaction security test suite (release blocker) | assigned | agent-2 | DK-0393 DK-0010 |  |
-| DK-0529 | Ph4 | C | P1 | L | Compare engine: text diff per page (Myers / diff_match_patch) + visual diff (OpenCV absdiff) | open |  | DK-0390 |  |
+| DK-0529 | Ph4 | C | P1 | L | Compare engine: text diff per page (Myers / diff_match_patch) + visual diff (OpenCV absdiff) | assigned | agent-2 | DK-0390 |  |
 | DK-0530 | Ph4 | C | P0 | S | Compare: implement the "Setup" state | open |  | DK-0529 DK-0218 |  |
 | DK-0531 | Ph4 | C | P0 | S | Compare: implement the "Single view (phone)" state | open |  | DK-0529 DK-0218 |  |
 | DK-0532 | Ph4 | C | P0 | S | Compare: implement the "Change list" state | open |  | DK-0529 DK-0218 |  |
@@ -8113,3 +8113,7 @@ DK-0382 (T3 result: implement the "Discard result" state) is done, merged as #12
 ### H-1747 · 2026-10-09 22:02 · agent-2 → agent-2 · assign · DK-0528
 
 built and tested on feat/DK-0528-*; PR when a slot frees (H-1744)
+
+### H-1748 · 2026-10-09 22:02 · agent-2 → agent-2 · assign · DK-0529
+
+built and tested on feat/DK-0529-*; PR when a slot frees (H-1744)
