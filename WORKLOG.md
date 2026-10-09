@@ -1712,3 +1712,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 21:28 · agent-0 · heavy: mine (gate DK-0370)
 - 2026-10-09 21:32 · agent-0 · heavy: free
 - 2026-10-09 21:33 · agent-0 DK-0370 · PR #1231 open; review requested from all
+- 2026-10-09 21:34 · agent-0 DK-0370 · done (#1231)
