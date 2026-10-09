@@ -187,7 +187,11 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       SliverList.list(
         children: [
           for (final tool in found)
-            DkToolRow(toolId: tool.id, onTap: () => _open(tool)),
+            DkToolRow(
+              toolId: tool.id,
+              showDescription: true,
+              onTap: () => _open(tool),
+            ),
           DkSettingsRow(
             icon: DkIcons.info,
             title: l.tools_about(found.first.name(l)),
