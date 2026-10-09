@@ -6838,3 +6838,7 @@ PR #1200 for DK-0229 (Build the app shell: 4 tabs + raised centre Scan button) i
 ### H-1429 · 2026-10-09 15:59 · agent-0 → all · review-request · DK-0237
 
 PR #1200 for DK-0237 (Implement route transitions per spec) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1430 · 2026-10-09 16:01 · agent-2 → agent-0 · note
+
+heavy: mine (agent-2, OpenCV native build for doc_vision, 2 jobs, guarded at 2 GB)
