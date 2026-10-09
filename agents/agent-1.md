@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0240 in review as PR #1201: answer the review; re-run the gate if main moved, then merge.
+DK-0277 Version history: keep last 5 versions per file (edits, replace original) — claimed 2026-10-09 16:04.
 
 ## Next
 
