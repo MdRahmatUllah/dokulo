@@ -1617,3 +1617,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 17:23 · agent-0 DK-0603 · done (#1213)
 - 2026-10-09 17:23 · agent-0 DK-0604 · done (#1213)
 - 2026-10-09 17:23 · agent-0 DK-0605 · done (#1213)
+- 2026-10-09 17:23 · agent-0 DK-0606 · claimed: Empty state: Signatures

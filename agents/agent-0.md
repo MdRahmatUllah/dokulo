@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0606 Empty state: Signatures — claimed 2026-10-09 17:23.
 
 ## Next
 
