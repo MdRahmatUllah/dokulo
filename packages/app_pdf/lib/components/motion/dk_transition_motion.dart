@@ -472,12 +472,16 @@ class _DkFadingBranchesState extends State<DkFadingBranches>
             excluding: !current,
             child: TickerMode(
               enabled: current || leaving,
-              child: current || leaving
-                  ? FadeTransition(
-                      opacity: current ? _fade : ReverseAnimation(_fade),
-                      child: child,
-                    )
-                  : child,
+              // Always a FadeTransition, so a branch's subtree keeps its
+              // shape (and place) as it comes and goes.
+              child: FadeTransition(
+                opacity: current
+                    ? _fade
+                    : leaving
+                    ? ReverseAnimation(_fade)
+                    : kAlwaysDismissedAnimation,
+                child: child,
+              ),
             ),
           ),
         ),

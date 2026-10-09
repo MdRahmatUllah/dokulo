@@ -66,7 +66,11 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
   }) => GoRoute(
     path: path,
     parentNavigatorKey: root,
-    builder: (context, state) => _HomeUnderneath(child: builder(state)),
+    // A MaterialPage, so it takes the theme's push transition (§13.4).
+    pageBuilder: (context, state) => MaterialPage(
+      key: state.pageKey,
+      child: _HomeUnderneath(child: builder(state)),
+    ),
     routes: routes,
   );
 

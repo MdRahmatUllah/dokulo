@@ -245,5 +245,18 @@ void main() {
       expect(mid - tester.getTopLeft(find.text('F2')).dx, greaterThan(30));
       debugDefaultTargetPlatformOverride = null;
     });
+
+    testWidgets('a full-screen page (T2) is pushed with the transition too', (
+      tester,
+    ) async {
+      final router = await pumpAt(tester, Routes.home);
+      router.push(Routes.tool('compress'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 40));
+      final mid = tester.getTopLeft(find.text('T2 compress')).dx;
+      await tester.pumpAndSettle();
+      final end = tester.getTopLeft(find.text('T2 compress')).dx;
+      expect(mid - end, inExclusiveRange(0, 30.01));
+    });
   });
 }
