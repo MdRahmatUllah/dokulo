@@ -1701,3 +1701,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 20:53 · agent-0 DK-0234 · done (#1228)
 - 2026-10-09 20:54 · agent-0 DK-0980 · claimed: Visual QA: global-states (global-states)
 - 2026-10-09 20:58 · agent-2 · locked db-schema: agent-2: signatures.ink column, schema v4 (DK-0325)
+- 2026-10-09 21:01 · agent-0 · heavy: mine (gate DK-0980)
