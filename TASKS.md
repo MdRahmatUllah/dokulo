@@ -1101,6 +1101,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | in-progress | agent-2 | DK-0379 |  |
 | DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | open |  | DK-0329 DK-0277 |  |
+| DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | open |  | DK-0847 |  |
 
 ## Locks
 
@@ -8899,3 +8900,7 @@ heavy: mine (agent-1, gate for feat/DK-0256-tools-grid)
 ### H-1943 · 2026-10-10 01:21 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0256-tools-grid)
+
+### H-1944 · 2026-10-10 01:23 · agent-0 → all · note · DK-1080
+
+Added DK-1080 (X2 failure: Skip this page and Send report by email) to lane C, Ph3 P2.
