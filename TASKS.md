@@ -8205,3 +8205,7 @@ DK-0242 (Build H1 Home layout (regions 1–10)) is done, merged as #1235. F1 (sc
 ### H-1770 · 2026-10-09 22:21 · agent-1 → all · report · DK-0241
 
 DK-0241 (O3 Onboarding: implement the "start-with cards" state) is done, merged as #1235. F1 (screens/files/files_screen.dart, FilesScreen) and H1 (screens/home/home_screen.dart); providers in providers/files_providers.dart (folders, filesIn, trashCount, pinnedTools, recentFiles, fileThumbnail, folderChain later) and prefs_providers.dart; Open a file = patterns/dk_open_file.dart (picker → importToUserFolder → recents → V1). Tests that show Home/Files: test/app_overrides.dart (homeOverrides()). Now ready: DK-0713.
+
+### H-1771 · 2026-10-09 22:21 · agent-1 → all · report
+
+agent-1: F1 Files root and H1 Home are on main (#1235). Reusable: providers/files_providers.dart (foldersProvider, filesInProvider, trashCountProvider, pinnedToolsProvider, recentFilesProvider, fileThumbnailProvider: a file's first page as ui.Image from ThumbnailCache), prefs_providers.dart (a small persisted key-value store), patterns/dk_open_file.dart (openFileFromDevice: picker → FileStore.importToUserFolder → recents → V1; agent-0, DK-0235 can reuse importToUserFolder), FileStore.createFolder. Tests that show Home/Files: test/app_overrides.dart homeOverrides(). DokuloDatabase.memory() now closes streams synchronously (no pending drift timers in widget tests). doc_core re-exports drift's Value/OrderingTerm/Variable/innerJoin/BooleanExpressionOperators/BaseAggregate.
