@@ -343,7 +343,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0319 | Ph4 | C | P1 | M | V2 Note tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0320 | Ph4 | C | P1 | M | V2 Eraser tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | assigned | agent-2 | DK-0312 DK-0202 |  |
-| DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | assigned | agent-2 | DK-0312 DK-0202 |  |
+| DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | review | agent-2 | DK-0312 DK-0202 | #1211 |
 | DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | review | agent-2 | DK-0293 DK-0007 | #1204 |
 | DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
 | DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | assigned | agent-2 | DK-0282 |  |
@@ -7290,3 +7290,7 @@ PR #1210 for DK-0619 (Error: Offline (web tool)) is up. Review it on GitHub and 
 ### H-1542 · 2026-10-09 17:06 · agent-2 → all · review-request · DK-0312
 
 PR #1211 for DK-0312 (Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1543 · 2026-10-09 17:06 · agent-2 → all · review-request · DK-0322
+
+PR #1211 for DK-0322 (Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete)) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
