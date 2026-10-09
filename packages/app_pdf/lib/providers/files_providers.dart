@@ -149,21 +149,24 @@ Stream<List<String>> pinnedTools(Ref ref) {
   );
 }
 
-/// The files opened last, newest first (at most 20, the table's trigger),
+/// The files opened or added last, newest first, at most 20 (DK-0243);
 /// not deleted. Home's Recent list.
 @riverpod
 Stream<List<FileEntry>> recentFiles(Ref ref) {
   final db = ref.watch(appDatabaseProvider);
+  // Opened, or added (a scan, a tool's result, an import) and not opened yet.
+  final last = coalesce([db.recents.openedAt, db.files.created]);
   final query =
       db.select(db.files).join([
-          innerJoin(db.recents, db.recents.fileId.equalsExp(db.files.id)),
+          leftOuterJoin(db.recents, db.recents.fileId.equalsExp(db.files.id)),
         ])
         ..where(
           db.files.id.isNotInQuery(
             db.selectOnly(db.trash)..addColumns([db.trash.fileId]),
           ),
         )
-        ..orderBy([OrderingTerm.desc(db.recents.openedAt)]);
+        ..orderBy([OrderingTerm.desc(last)])
+        ..limit(20);
   return query.watch().map(
     (rows) => [for (final r in rows) r.readTable(db.files)],
   );
