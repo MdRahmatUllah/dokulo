@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0621 Permissions denied: inline warning banner with "Open settings", never repeated prompts — claimed 2026-10-09 17:37.
 
 ## Next
 
