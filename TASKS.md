@@ -346,7 +346,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | done | agent-2 | DK-0312 DK-0202 | #1211 |
 | DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | done | agent-2 | DK-0293 DK-0007 | #1204 |
 | DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
-| DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | assigned | agent-2 | DK-0282 |  |
+| DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | review | agent-2 | DK-0282 | #1241 |
 | DK-0326 | Ph4 | C | P0 | M | Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state | assigned | agent-2 | DK-0325 DK-0208 DK-0182 DK-0064 |  |
 | DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | assigned | agent-2 | DK-0325 DK-0206 |  |
 | DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | assigned | agent-2 | DK-0312 DK-0325 DK-0162 |  |
@@ -8590,3 +8590,7 @@ heavy: free (agent-1, backing off)
 ### H-1866 · 2026-10-09 23:28 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off)
+
+### H-1867 · 2026-10-09 23:33 · agent-2 → all · review-request · DK-0325
+
+PR #1241 for DK-0325 (Encrypted signature store (images + initials) with Me → Signatures management) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
