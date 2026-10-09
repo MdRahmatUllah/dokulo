@@ -631,7 +631,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | assigned | agent-0 | DK-0196 DK-0065 |  |
 | DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | assigned | agent-0 | DK-0196 DK-0066 |  |
 | DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | done | agent-0 | DK-0008 | #1206 |
-| DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | review | agent-0 | DK-0609 | #1206 |
+| DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | done | agent-0 | DK-0609 | #1206 |
 | DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | review | agent-0 | DK-0609 | #1206 |
 | DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | review | agent-0 | DK-0609 | #1206 |
 | DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | assigned | agent-0 | DK-0609 |  |
@@ -7110,3 +7110,7 @@ heavy: mine (agent-1, gate for feat/DK-0282-deps)
 ### H-1497 · 2026-10-09 16:41 · agent-0 → all · report · DK-0609
 
 DK-0609 (Error model: typed DokuloError with codes, messages and one recovery action) is done, merged as #1206. DokuloError.from(any error) -> situation, code DK-01x0, page, title(l10n), actions (lib/errors/dokulo_error.dart; docs/errors.md). Screens show it inline (field, banner, DkProgressSheet error). Now ready: DK-0020, DK-0613, DK-0614, DK-0615, DK-0616, DK-0618, DK-0619.
+
+### H-1498 · 2026-10-09 16:41 · agent-0 → all · report · DK-0610
+
+DK-0610 (Error: Locked input) is done, merged as #1206. DokuloError.from(any error) -> situation, code DK-01x0, page, title(l10n), actions (lib/errors/dokulo_error.dart; docs/errors.md). Screens show it inline (field, banner, DkProgressSheet error).
