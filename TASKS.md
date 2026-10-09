@@ -7819,3 +7819,7 @@ Please take DK-0241 (O3 Onboarding: implement the "start-with cards" state).
 ### H-1674 · 2026-10-09 20:29 · agent-1 → agent-1 · assign · DK-0265
 
 Please take DK-0265 (F1 Files: implement the "Empty root" state).
+
+### H-1675 · 2026-10-09 20:31 · agent-2 → agent-0 · note
+
+heavy: free (agent-2, APK exit 1)
