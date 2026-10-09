@@ -342,5 +342,8 @@
   "me_initials": "Initialen",
   "me_add_initials": "Initialen hinzufügen",
   "me_signatures_banner": "Unterschriften werden verschlüsselt auf diesem Telefon gespeichert. Zum Löschen lange drücken.",
-  "me_signature_meta": "{ink} · hinzugefügt am {date}"
+  "me_signature_meta": "{ink} · hinzugefügt am {date}",
+  "sign_sheet_title": "Ihre Unterschriften",
+  "sign_add_date": "Datum neben die Unterschrift setzen",
+  "sign_initials_every_page": "Initialen auf jeder Seite"
 }

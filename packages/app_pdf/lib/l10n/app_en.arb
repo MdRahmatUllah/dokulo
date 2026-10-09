@@ -1365,5 +1365,11 @@
   "me_signatures_banner": "Signatures are stored encrypted on this phone. Long-press one to delete it.",
   "@me_signatures_banner": {"description": "Me → Signatures (DK-0325)."},
   "me_signature_meta": "{ink} · added {date}",
-  "@me_signature_meta": {"description": "Me → Signatures (DK-0325).", "placeholders": {"ink": {"type": "String"}, "date": {"type": "String"}}}
+  "@me_signature_meta": {"description": "Me → Signatures (DK-0325).", "placeholders": {"ink": {"type": "String"}, "date": {"type": "String"}}},
+  "sign_sheet_title": "Your signatures",
+  "@sign_sheet_title": {"description": "The Signatures sheet (DK-0326)."},
+  "sign_add_date": "Add date next to signature",
+  "@sign_add_date": {"description": "The Signatures sheet (DK-0326)."},
+  "sign_initials_every_page": "Initials on every page",
+  "@sign_initials_every_page": {"description": "The Signatures sheet (DK-0326)."}
 }

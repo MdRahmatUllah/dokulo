@@ -8,7 +8,6 @@ import '../../components/dk_banner.dart';
 import '../../components/dk_box_frame.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_signature_card.dart';
-import '../../components/dk_signature_pad.dart';
 import '../../components/dk_tappable.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
@@ -16,6 +15,7 @@ import '../../l10n/formats.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../providers/signature_providers.dart';
 import '../../theme/dk_tokens.dart';
+import '../sign/signatures_sheet.dart';
 
 /// Me → Signatures (DK-0325; design `22-me-settings/me-signatures`): the
 /// saved signatures and initials, two columns each, with the ink and the
@@ -23,25 +23,10 @@ import '../../theme/dk_tokens.dart';
 /// long press removes one, after "Remove this signature?". They are stored
 /// encrypted (the banner says so).
 class SignaturesScreen extends ConsumerWidget {
-  const SignaturesScreen({super.key, this.addSignature = _pad});
+  const SignaturesScreen({super.key, this.addSignature = openSignaturePad});
 
   /// Draws a new one: the signature pad, full screen. Tests replace it.
   final Future<(Uint8List, Color)?> Function(BuildContext) addSignature;
-
-  static Future<(Uint8List, Color)?> _pad(BuildContext context) =>
-      Navigator.of(context).push<(Uint8List, Color)>(
-        MaterialPageRoute(
-          fullscreenDialog: true,
-          builder: (pad) => Scaffold(
-            body: SafeArea(
-              child: DkSignaturePad(
-                onCancel: () => Navigator.of(pad).pop(),
-                onSave: (png, ink) => Navigator.of(pad).pop((png, ink)),
-              ),
-            ),
-          ),
-        ),
-      );
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,15 +40,7 @@ class SignaturesScreen extends ConsumerWidget {
       final result = await addSignature(context);
       if (result == null) return;
       final (png, ink) = result;
-      await ref
-          .read(signaturesProvider.notifier)
-          .add(
-            kind,
-            png,
-            ink == const DkMarkup().ink
-                ? SignatureInk.blue
-                : SignatureInk.black,
-          );
+      await ref.read(signaturesProvider.notifier).add(kind, png, inkOf(ink));
     }
 
     Future<void> remove(int id) async {
