@@ -170,8 +170,12 @@ Riverpod 3 with code generation, the same versions as Sogda:
 
 ## 3. Routing
 
-`go_router` 18 with `StatefulShellRoute.indexedStack`, so each tab keeps its
-scroll position and its pushed pages (DK-0004). The code is
+`go_router` 18 with a `StatefulShellRoute`, so each tab keeps its scroll
+position and its pushed pages (DK-0004); its `DkFadingBranches` container
+cross-fades the tabs in 120 ms (UI spec §13.4, DK-0229). Pages are explicit
+`MaterialPage`s, so a push takes the theme's `DkPageTransitionsBuilder` (iOS
+slide, Android shared axis X); the scanner (`dkSlideUpPage`), the viewer
+(`dkViewerPage`) and T3 (`dkFadePage`) have their own (DK-0237). The code is
 `app_pdf/lib/routes/routes.dart`: `Routes` holds every path, `buildRouter()`
 the tree, and `appRouterProvider` the app's router (kept alive). Build paths
 with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.

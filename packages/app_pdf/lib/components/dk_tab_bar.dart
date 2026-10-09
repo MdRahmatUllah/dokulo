@@ -36,6 +36,9 @@ class DkTabBar extends StatelessWidget {
 
   static const height = 64.0, scanGap = 88.0;
 
+  /// The Scan button's centre sits this far above the bar's top edge.
+  static const scanRise = 12.0;
+
   /// How far the labels follow the system text size.
   static const maxTextScale = 1.25;
 
@@ -100,11 +103,17 @@ class _ScanLocation extends StandardFabLocation with FabCenterOffsetX {
   const _ScanLocation();
 
   @override
-  double getOffsetY(ScaffoldPrelayoutGeometry geometry, double adjustment) =>
-      // contentBottom is the bar's top edge.
-      geometry.contentBottom -
-      geometry.floatingActionButtonSize.height / 2 -
-      12;
+  double getOffsetY(ScaffoldPrelayoutGeometry geometry, double adjustment) {
+    // The tab bar's own top edge (64 + the safe area from the bottom), not
+    // the bottom slot's: the mini job bar may sit above the tab bar there.
+    final barTop =
+        geometry.scaffoldSize.height -
+        geometry.minViewPadding.bottom -
+        DkTabBar.height;
+    return barTop -
+        geometry.floatingActionButtonSize.height / 2 -
+        DkTabBar.scanRise;
+  }
 
   @override
   String toString() => 'DkTabBar.scanLocation';
