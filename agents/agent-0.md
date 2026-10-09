@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 21:49
+last-seen: 2026-10-09 21:50
 last-read: 1652
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0379 Generic T3 result: result card, preview strip, name, save location, Next chips, action bar — claimed 2026-10-09 21:50.
 
 ## Next
 

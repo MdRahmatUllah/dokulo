@@ -400,7 +400,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | done | agent-0 | DK-0375 | #1232 |
 | DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | done | agent-0 | DK-0375 DK-0069 | #1232 |
 | DK-0378 | Ph3 | C | P1 | S | Notifications permission pre-prompt the first time a job runs > 30 s in the background | assigned | agent-0 | DK-0375 |  |
-| DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | assigned | agent-0 | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 |  |
+| DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | in-progress | agent-0 | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 |  |
 | DK-0380 | Ph3 | C | P0 | S | T3 result: implement the "Replace original" state | assigned | agent-0 | DK-0379 DK-0277 |  |
 | DK-0381 | Ph3 | C | P0 | S | T3 result: implement the "After save" state | assigned | agent-0 | DK-0379 |  |
 | DK-0382 | Ph3 | C | P0 | S | T3 result: implement the "Discard result" state | assigned | agent-0 | DK-0379 |  |
