@@ -88,10 +88,14 @@ void main() {
     tester,
   ) async {
     await pumpTools(tester);
+    await tester.ensureVisible(find.text('Security').first);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Security').first);
     await tester.pumpAndSettle();
     expect(chip(tester, 'Security').selected, isTrue);
     expect(find.text('Sign PDF'), findsOneWidget);
+    await tester.ensureVisible(find.text('All'));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('All'));
     await tester.pumpAndSettle();
     expect(chip(tester, 'All').selected, isTrue);
@@ -129,6 +133,8 @@ void main() {
       ai: AiEligibility.tooLittleRam,
       ram: (3.6 * _gib).round(),
     );
+    await tester.ensureVisible(find.text('AI').first);
+    await tester.pumpAndSettle();
     await tester.tap(find.text('AI').first);
     await tester.pumpAndSettle();
     await tester.tap(find.text('Summarize'));

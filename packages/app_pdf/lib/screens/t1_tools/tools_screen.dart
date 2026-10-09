@@ -1,5 +1,6 @@
 import 'package:ai_core/ai_core.dart' show AiEligibility, gemmaNeeds;
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart' show ScrollCacheExtent, ScrollDirection;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -31,11 +32,15 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
   final _scroll = ScrollController();
   final _sections = {for (final c in ToolCategory.values) c: GlobalKey()};
   final _chipsKey = GlobalKey();
+  final _chipKeys = {
+    for (final c in [null, ...ToolCategory.values]) c: GlobalKey(),
+  };
 
   /// Null: All.
   ToolCategory? _selected;
 
-  /// While a chip's scroll runs, the scroll doesn't move the selection.
+  /// After a chip's tap the selection stays, even where the section can't
+  /// reach the chips (the last ones), until the user scrolls again.
   bool _jumping = false;
 
   /// Gemma's eligibility on this phone, from the last build.
@@ -63,7 +68,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     if (_jumping) return;
     final line = _chipsBottom() + 1;
     ToolCategory? current;
-    final end = _scroll.position.pixels >= _scroll.position.maxScrollExtent;
+    final end = _scroll.position.pixels >= _scroll.position.maxScrollExtent - 1;
     if (_scroll.offset > 0) {
       for (final c in _visible) {
         final top = _sectionTop(c);
@@ -72,11 +77,27 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       // The last sections can't reach the chips: at the end, the last one.
       if (end) current = _visible.last;
     }
-    if (current != _selected) setState(() => _selected = current);
+    if (current != _selected) _select(current);
+  }
+
+  /// Selects [c]'s chip and scrolls the chip row to show it.
+  void _select(ToolCategory? c) {
+    setState(() => _selected = c);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final chip = _chipKeys[c]!.currentContext;
+      if (chip == null || !chip.mounted) return;
+      // The chip row only: Scrollable.ensureVisible would scroll the page
+      // back up to the pinned chips too.
+      Scrollable.maybeOf(chip)?.position.ensureVisible(
+        chip.findRenderObject()!,
+        alignment: 0.5,
+        duration: context.motion(DkMotionKind.fast).duration,
+      );
+    });
   }
 
   Future<void> _jump(ToolCategory? c) async {
-    setState(() => _selected = c);
+    _select(c);
     final top = c == null ? null : _sectionTop(c);
     final target = c == null
         ? 0.0
@@ -92,7 +113,6 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     } else {
       await _scroll.animateTo(to, duration: m.duration, curve: m.curve);
     }
-    _jumping = false;
   }
 
   List<ToolCategory> get _visible => [
@@ -100,10 +120,11 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
       if (c != ToolCategory.ai || _ai != AiEligibility.notArm64) c,
   ];
 
-  void _open(ToolInfo tool) {
+  Future<void> _open(ToolInfo tool) async {
     if (tool.category == ToolCategory.ai && _ai == AiEligibility.tooLittleRam) {
-      final ram = ref.read(deviceCapabilitiesProvider).value?.totalRam;
-      showAiNotEligible(
+      final ram = (await ref.read(deviceCapabilitiesProvider.future)).totalRam;
+      if (!mounted) return;
+      await showAiNotEligible(
         context,
         needGb: gemmaNeeds.advertisedGb,
         haveGb: ram == null ? 0 : memoryGb(ram),
@@ -121,13 +142,23 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     final visible = _visible;
     return Scaffold(
       backgroundColor: t.color.background,
-      body: NotificationListener<ScrollUpdateNotification>(
-        onNotification: (_) {
-          _follow();
+      body: NotificationListener<ScrollNotification>(
+        // The page's own scroll, not the chip row's.
+        onNotification: (n) {
+          if (n.depth != 0) return false;
+          if (n is UserScrollNotification &&
+              n.direction != ScrollDirection.idle) {
+            _jumping = false; // the user scrolls: the chips follow again
+          }
+          if (n is ScrollUpdateNotification) _follow();
           return false;
         },
         child: CustomScrollView(
           controller: _scroll,
+          // Every section built, so a chip can find its section's offset.
+          // ponytail: fine for ~30 tiles; measure offsets instead if T1
+          // ever grows to hundreds.
+          scrollCacheExtent: const ScrollCacheExtent.pixels(10000),
           slivers: [
             DkLargeTopBar(title: l.shell_tab_tools),
             SliverPadding(
@@ -145,6 +176,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                 colour: t.color.background,
                 chips: [
                   DkChip(
+                    key: _chipKeys[null],
                     label: l.tools_all,
                     kind: DkChipKind.choice,
                     selected: _selected == null,
@@ -152,6 +184,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                   ),
                   for (final c in visible)
                     DkChip(
+                      key: _chipKeys[c],
                       label: c.label(l),
                       kind: DkChipKind.choice,
                       selected: _selected == c,
@@ -162,8 +195,8 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
             ),
             for (final c in visible) ...[
               SliverToBoxAdapter(
-                key: _sections[c],
                 child: Padding(
+                  key: _sections[c],
                   padding: EdgeInsets.fromLTRB(
                     t.space.l,
                     t.space.l,
@@ -240,19 +273,14 @@ class _ChipsBar extends SliverPersistentHeaderDelegate {
     return ColoredBox(
       key: key,
       color: colour,
-      child: ListView(
+      // A Row, not a lazy list: every chip exists to scroll to.
+      child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.symmetric(
           horizontal: t.space.l,
           vertical: t.space.s,
         ),
-        children: [
-          for (final (i, chip) in chips.indexed)
-            Padding(
-              padding: EdgeInsets.only(left: i == 0 ? 0 : t.space.s),
-              child: chip,
-            ),
-        ],
+        child: Row(spacing: t.space.s, children: chips),
       ),
     );
   }
