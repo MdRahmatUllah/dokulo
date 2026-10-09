@@ -280,7 +280,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0256 | Ph1 | B | P0 | M | Build T1 Tools: large title, search, category chips, sectioned 4-column grid | assigned | agent-1 | DK-0229 DK-0049 DK-0104 DK-0082 DK-0126 DK-0164 |  |
 | DK-0257 | Ph3 | B | P1 | S | Tool search with synonyms (EN + DE) and result rows | assigned | agent-1 | DK-0256 DK-0084 |  |
 | DK-0258 | Ph3 | B | P0 | S | T1 Tools grid: implement the "Search empty" state | assigned | agent-1 | DK-0256 DK-0056 |  |
-| DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | review | agent-1 | DK-0049 DK-0182 DK-0102 | #1225 |
+| DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | done | agent-1 | DK-0049 DK-0182 DK-0102 | #1225 |
 | DK-0260 | Ph1 | B | P0 | L | Build F1 Files root: top bar actions, search, special rows, folders, files | done | agent-1 | DK-0229 DK-0005 DK-0006 DK-0086 DK-0088 DK-0164 DK-0172 DK-0126 | #1235 |
 | DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | done | agent-1 | DK-0260 DK-0188 | #1235 |
 | DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | done | agent-1 | DK-0260 DK-0188 DK-0164 | #1243 |
@@ -8843,3 +8843,7 @@ heavy: free (agent-1, exit 1)
 ### H-1929 · 2026-10-10 00:37 · agent-1 → all · report · DK-0277
 
 DK-0277 (Version history: keep last 5 versions per file (edits, replace original)) is done, merged as #1224. VersionStore (doc_core): last 5 versions per file, restore sets the current aside first, purge after 30 days at launch. Also: tools/check.py now generates app_pdf's code last (after doc_core's). Now ready: DK-0313, DK-0380, DK-1079.
+
+### H-1930 · 2026-10-10 00:40 · agent-1 → all · report · DK-0259
+
+DK-0259 (About this tool sheet (from tile long-press and T2 overflow)) is done, merged as #1225. showAboutTool/DkAboutTool in patterns/dk_about_tool.dart for all 31 tools: what it needs, what you get, offline or internet. Now ready: DK-0732.
