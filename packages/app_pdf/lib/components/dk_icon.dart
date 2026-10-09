@@ -192,8 +192,13 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* drag_indicator */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
+  static const blankPage = IconData(0xe89c, fontFamily: _font) /* note_add */;
+  static const pdf = IconData(0xe415, fontFamily: _font) /* picture_as_pdf */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
   static const info = IconData(0xe88e, fontFamily: _font) /* info */;
+  static const input = IconData(0xe890, fontFamily: _font) /* input */;
+  static const output = IconData(0xebbe, fontFamily: _font) /* output */;
+  static const internet = IconData(0xe80b, fontFamily: _font) /* public */;
 
   // Files.
   static const folder = IconData(0xe2c7, fontFamily: _font) /* folder */;
@@ -287,20 +292,20 @@ abstract final class DkIcons {
       Theme.of(context).platform == TargetPlatform.iOS;
 
   static IconData back(BuildContext context) => _ios(context)
-      ? IconData(0xe2ea, fontFamily: _font) /* arrow_back_ios_new */
-      : IconData(0xe5c4, fontFamily: _font) /* arrow_back */;
+      ? const IconData(0xe2ea, fontFamily: _font) /* arrow_back_ios_new */
+      : const IconData(0xe5c4, fontFamily: _font) /* arrow_back */;
 
   static IconData overflow(BuildContext context) => _ios(context)
-      ? IconData(0xe5d3, fontFamily: _font) /* more_horiz */
-      : IconData(0xe5d4, fontFamily: _font) /* more_vert */;
+      ? const IconData(0xe5d3, fontFamily: _font) /* more_horiz */
+      : const IconData(0xe5d4, fontFamily: _font) /* more_vert */;
 
   static IconData share(BuildContext context) => _ios(context)
-      ? IconData(0xe6b8, fontFamily: _font) /* ios_share */
-      : IconData(0xe80d, fontFamily: _font) /* share */;
+      ? const IconData(0xe6b8, fontFamily: _font) /* ios_share */
+      : const IconData(0xe80d, fontFamily: _font) /* share */;
 
   /// Face ID on an iPhone that has it; a fingerprint everywhere else.
   static IconData biometrics(BuildContext context, {required bool faceId}) =>
       _ios(context) && faceId
-      ? IconData(0xf008, fontFamily: _font) /* face */
-      : IconData(0xe90d, fontFamily: _font) /* fingerprint */;
+      ? const IconData(0xf008, fontFamily: _font) /* face */
+      : const IconData(0xe90d, fontFamily: _font) /* fingerprint */;
 }
