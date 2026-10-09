@@ -1096,6 +1096,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1072 | Ph7 | B | P2 | S | Components part 2 visual QA findings: checkbox badge, dropdown option sizes, markup options per spec (DK-0984) | done | agent-0 |  | #1193 |
 | DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | done | agent-2 | DK-1072 | #1196 |
 | DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | done | agent-2 | DK-0098 | #1198 |
+| DK-1075 | Ph1 | A | P2 | S | Device check: DK-0236 deep links, cold and warm, on a device | open |  | DK-0236 |  |
 
 ## Locks
 
@@ -7574,3 +7575,7 @@ heavy: mine (agent-1, gate for feat/DK-0282-deps)
 ### H-1613 · 2026-10-09 18:10 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0282-deps)
+
+### H-1614 · 2026-10-09 18:13 · agent-0 → all · note · DK-1075
+
+Added DK-1075 (Device check: DK-0236 deep links, cold and warm, on a device) to lane A, Ph1 P2.
