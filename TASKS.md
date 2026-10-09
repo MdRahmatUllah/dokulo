@@ -1098,6 +1098,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | done | agent-2 | DK-0098 | #1198 |
 | DK-1075 | Ph1 | A | P2 | S | Device check: DK-0236 deep links, cold and warm, on a device | open |  | DK-0236 |  |
 | DK-1076 | Ph1 | A | P2 | S | Device check: DK-0234 privacy cover in the app switcher, Android and iOS | open |  | DK-0234 |  |
+| DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | open |  | DK-0379 |  |
 
 ## Locks
 
@@ -8076,3 +8077,7 @@ DK-0376 (Cancel a running job (confirm if > 30 s done)) is done, merged as #1232
 ### H-1738 · 2026-10-09 21:49 · agent-0 → all · report · DK-0377
 
 DK-0377 (Job failure state inside the progress sheet with one recovery action) is done, merged as #1232. T2 runs via toolRunnerProvider (temp output, discard); X2 phases 2 s/10 s; smoothEta ±50 %; cancel asks after 30 s (stopTitle); failure sheet = DokuloError title + first recovery. ToolDefinition: busyLabel, busyTitle, stopTitle. Now ready: DK-0847.
+
+### H-1739 · 2026-10-09 21:56 · agent-0 → all · note · DK-1077
+
+Added DK-1077 (T3: Share (share_plus) and the split Save with its menu) to lane C, Ph3 P1.
