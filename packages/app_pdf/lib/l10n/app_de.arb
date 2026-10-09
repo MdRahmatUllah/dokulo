@@ -342,5 +342,7 @@
   "t2_section_files": "Dateien ({n})",
   "t2_section_options": "Optionen",
   "t2_reset_options": "Optionen zurücksetzen",
-  "t2_remove_file": "Entfernen"
+  "t2_remove_file": "Entfernen",
+  "t2_busy": "Wird bearbeitet…",
+  "t2_failed_body": "Deine Originaldatei wurde nicht verändert."
 }

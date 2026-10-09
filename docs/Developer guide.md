@@ -313,6 +313,20 @@ runs (`toolOptionValuesProvider`), so going back and opening the tool again
 keeps them. A tool without a definition yet shows its input and its name on a
 disabled button.
 
+Running (UI spec §20.2, DK-0375…DK-0377): the button starts the job through
+`toolRunnerProvider` (the JobQueue, with a fresh temp output folder; tests
+override it with a simulated run). Under 2 s nothing shows but the press; from
+2 s the button loads with the tool's `busyLabel` ("Compressing…"); from 10 s
+T2's progress sheet slides up (`busyTitle`, the bar, "Page 18 of 40 · about
+20 s left", the time left smoothed to at most ±50 % per update), and Keep
+working leaves the mini job bar. Cancel stops at once, after asking (the
+tool's `stopTitle`, "Stop compressing?") once the job has run 30 s; a cancel
+toasts "Cancelled. Your original file wasn't changed." A failure, also one the
+preflight refused, turns the sheet into its error state: the catalogue's title
+(`DokuloError`), "Your original file wasn't changed." and its first recovery
+(Try again, Try Repair, Split it first, …). A cancel or a failure deletes the
+temp output, so nothing partial is kept. Success opens T3.
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear

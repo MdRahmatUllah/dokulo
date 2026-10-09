@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +15,9 @@ import '../../components/dk_icon_button.dart';
 import '../../components/dk_menu.dart';
 import '../../components/dk_option_row.dart';
 import '../../components/dk_privacy_line.dart';
+import '../../components/dk_progress_sheet.dart';
 import '../../components/dk_segmented.dart';
+import '../../components/dk_sheet.dart';
 import '../../components/dk_skeleton.dart';
 import '../../components/dk_switch.dart';
 import '../../components/dk_toast.dart';
@@ -21,8 +25,7 @@ import '../../components/dk_top_bar.dart';
 import '../../errors/dokulo_error.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
-import '../../providers/file_providers.dart';
-import '../../providers/job_providers.dart';
+import '../../patterns/dk_confirmations.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
@@ -30,6 +33,7 @@ import '../../tools/tool_catalogue.dart';
 import '../../tools/tool_definition.dart';
 import '../v1_viewer/viewer_providers.dart';
 import 'tool_options_providers.dart';
+import 'tool_run.dart';
 
 /// T2, the tool options screen (UI spec §20.1; DK-0370): one shell for every
 /// tool. Top bar (the tool's icon, name and Pro badge; overflow: Reset
@@ -54,29 +58,189 @@ class ToolOptionsScreen extends ConsumerStatefulWidget {
 
 class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
   late List<int> _ids = widget.fileIds;
-  var _starting = false;
+  // The run (UI spec §20.2): its phase, the progress sheet's state, and
+  // whether the sheet is open (its context, to close it).
+  ToolRunHandle? _handle;
+  var _phase = X2Phase.quiet;
+  // Set once the job has run 30 s: cancelling then asks first (DK-0376).
+  var _askBeforeCancel = false;
+  final _sheet = ValueNotifier<_SheetState>(const _SheetState());
+  BuildContext? _sheetContext;
+  Timer? _toButton, _toSheet, _toAsk;
+  StreamSubscription<JobProgress>? _progress;
 
   ToolDefinition get _def => widget.definition;
 
+  @override
+  void dispose() {
+    _stopFollowing();
+    _sheet.dispose();
+    super.dispose();
+  }
+
+  void _stopFollowing() {
+    _toButton?.cancel();
+    _toSheet?.cancel();
+    _toAsk?.cancel();
+    _progress?.cancel();
+  }
+
+  /// Starts the tool and follows it: nothing under 2 s, the button's
+  /// loading state to 10 s, then the progress sheet (DK-0375). It ends in T3,
+  /// a "Cancelled" toast (DK-0376) or the sheet's error state (DK-0377).
   Future<void> _run(ToolSubject subject, ToolValues values) async {
     final l = AppLocalizations.of(context);
-    setState(() => _starting = true);
+    _sheet.value = const _SheetState();
+    final ToolRunHandle run;
     try {
-      final store = await ref.read(fileStoreProvider.future);
-      final out = await store.workDirectory.createTemp('${_def.id}_');
-      final queue = await ref.read(jobQueueProvider.future);
-      final run = await queue.start(
+      run = await ref.read(toolRunnerProvider)(
         _def.id,
-        _def.input!(subject, values, ToolEnv(outputDir: out.path, l10n: l)),
+        (out) => _def.input!(subject, values, ToolEnv(outputDir: out, l10n: l)),
       );
-      // The mini job bar shows it from here; X2's button and sheet come
-      // with DK-0375, the failure state with DK-0377.
-      await run.result;
-      if (mounted) context.push(Routes.toolResult(_def.id));
     } catch (e) {
-      if (mounted) showDkToast(context, DokuloError.from(e).title(l));
-    } finally {
-      if (mounted) setState(() => _starting = false);
+      // The preflight refused it (no space, too large, locked).
+      if (mounted) _fail(subject, values, e);
+      return;
+    }
+    if (!mounted) return run.cancel();
+    setState(() {
+      _handle = run;
+      _phase = X2Phase.quiet;
+    });
+    _askBeforeCancel = false;
+    _toAsk = Timer(confirmCancelAfter, () => _askBeforeCancel = true);
+    _toButton = Timer(x2Button, () => setState(() => _phase = X2Phase.button));
+    _toSheet = Timer(x2Sheet, () {
+      setState(() => _phase = X2Phase.sheet);
+      _openSheet(subject, values);
+    });
+    _progress = run.progress.listen((p) {
+      final shown = _sheet.value.eta;
+      _sheet.value = _sheet.value.copyWith(
+        progress: p,
+        eta: p.etaSeconds == null ? shown : smoothEta(shown, p.etaSeconds!),
+      );
+    });
+    try {
+      await run.result;
+      _end();
+      if (!mounted) return;
+      _closeSheet();
+      context.push(Routes.toolResult(_def.id));
+    } catch (e) {
+      _end();
+      await run.discard();
+      if (!mounted) return;
+      final error = DokuloError.from(e);
+      if (error.situation == DkErrorSituation.cancelled) {
+        _closeSheet();
+        showDkToast(context, error.title(l));
+      } else {
+        _fail(subject, values, e);
+      }
+    }
+  }
+
+  void _end() {
+    _stopFollowing();
+    if (mounted) {
+      setState(() {
+        _handle = null;
+        _phase = X2Phase.quiet;
+      });
+    }
+  }
+
+  /// The sheet's error state, opening the sheet if it isn't (DK-0377).
+  void _fail(ToolSubject subject, ToolValues values, Object e) {
+    _sheet.value = _sheet.value.copyWith(error: DokuloError.from(e));
+    if (_sheetContext == null) _openSheet(subject, values);
+  }
+
+  void _openSheet(ToolSubject subject, ToolValues values) {
+    final l = AppLocalizations.of(context);
+    final tool = ToolCatalogue.of(_def.id);
+    showDkSheet<void>(
+      context,
+      body: Builder(
+        builder: (sheetContext) {
+          _sheetContext = sheetContext;
+          return ValueListenableBuilder(
+            valueListenable: _sheet,
+            builder: (context, s, _) {
+              final p = s.progress;
+              final error = s.error;
+              return DkProgressSheet(
+                toolIcon: tool.icon,
+                title: _def.busyTitle?.call(l, subject) ?? tool.name(l),
+                progress: p?.fraction ?? 0,
+                page: p?.pageIndex == null ? null : p!.pageIndex! + 1,
+                pageCount: p?.pageCount,
+                timeLeft: s.eta == null ? null : formatSeconds(s.eta!),
+                onCancel: () => _cancel(sheetContext),
+                onKeepWorking: _closeSheet,
+                error: error == null || error.actions.isEmpty
+                    ? null
+                    : DkProgressError(
+                        title: error.title(l),
+                        body: l.t2_failed_body,
+                        action: error.actions.first.label(l),
+                        onAction: () =>
+                            _recover(error.actions.first, subject, values),
+                      ),
+              );
+            },
+          );
+        },
+      ),
+    ).whenComplete(() => _sheetContext = null);
+  }
+
+  void _closeSheet() {
+    final sheet = _sheetContext;
+    if (sheet != null && sheet.mounted) Navigator.of(sheet).pop();
+    _sheetContext = null;
+  }
+
+  /// Cancel: asks first once the job has run 30 s (DK-0376).
+  Future<void> _cancel(BuildContext sheetContext) async {
+    final run = _handle;
+    if (run == null) return;
+    if (_askBeforeCancel) {
+      final l = AppLocalizations.of(context);
+      final stop = await confirmDk(
+        sheetContext,
+        DkConfirmation.cancelJob,
+        title: _def.stopTitle?.call(l),
+      );
+      if (!stop) return;
+    }
+    run.cancel();
+  }
+
+  /// The error's recovery action (UI spec §26.3).
+  void _recover(DkRecovery action, ToolSubject subject, ToolValues values) {
+    _closeSheet();
+    final files = [for (final f in subject.files) '${f.id}'];
+    switch (action) {
+      case DkRecovery.tryAgain:
+        _run(subject, values);
+      case DkRecovery.tryRepair:
+        context.push(Routes.tool('repair', files: files));
+      case DkRecovery.splitFirst:
+        context.push(Routes.tool('split', files: files));
+      case DkRecovery.openReadOnly:
+        context.push(Routes.viewer(files.first));
+      case DkRecovery.manageStorage:
+        context.push(Routes.settings('storage'));
+      case DkRecovery.download:
+        context.push(Routes.models);
+      // The password row is under the file (DK-0372); the rest need the
+      // engine's or the report's support first.
+      case DkRecovery.enterPassword:
+      case DkRecovery.skipPage:
+      case DkRecovery.sendReport:
+        break;
     }
   }
 
@@ -206,10 +370,17 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
       // The main action is the last thing a screen reader reaches.
       bottomNavigationBar: DkBottomChrome(
         child: DkActionBar(
-          label: _def.action?.call(l, subject) ?? tool.name(l),
+          label: _phase == X2Phase.quiet
+              ? _def.action?.call(l, subject) ?? tool.name(l)
+              : _def.busyLabel?.call(l) ?? l.t2_busy,
           caption: ready ? _def.estimate?.call(l, subject, values) : null,
-          loading: _starting,
-          onPressed: canRun && !_starting ? () => _run(subject, values) : null,
+          // Under 2 s only the press shows; then "Compressing…" (§20.2).
+          loading: _phase != X2Phase.quiet,
+          onPressed: canRun
+              ? () {
+                  if (_handle == null) _run(subject, values);
+                }
+              : null,
         ),
       ),
     );
@@ -345,4 +516,21 @@ class _OptionRow extends StatelessWidget {
       ),
     };
   }
+}
+
+/// What the progress sheet shows: the latest progress, the smoothed time
+/// left, and an error once the job failed.
+class _SheetState {
+  const _SheetState({this.progress, this.eta, this.error});
+
+  final JobProgress? progress;
+  final int? eta;
+  final DokuloError? error;
+
+  _SheetState copyWith({JobProgress? progress, int? eta, DokuloError? error}) =>
+      _SheetState(
+        progress: progress ?? this.progress,
+        eta: eta ?? this.eta,
+        error: error ?? this.error,
+      );
 }
