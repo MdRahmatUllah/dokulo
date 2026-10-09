@@ -1570,3 +1570,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:34 · agent-0 DK-0609 · claimed: Error model: typed DokuloError with codes, messages and one recovery action
 - 2026-10-09 16:35 · agent-2 DK-0342 · PR #1202 open; review requested from all
 - 2026-10-09 16:35 · agent-2 DK-0323 · PR #1204 open; review requested from all
+- 2026-10-09 16:35 · agent-2 · DK-0342 #1202 (camera pre-prompt/denied) and DK-0323 #1204 (AcroForm fill/flatten/XFA) open, self-reviewed; gates queued. DK-0339/0337 (OpenCV filters+quad) on a WIP branch: the OpenCV source build needs ~5 GB free, stopped twice at the 2 GB floor (Chrome holds 15 GB).
