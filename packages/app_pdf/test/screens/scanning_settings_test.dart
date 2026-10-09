@@ -16,7 +16,7 @@ void main() {
 
   Future<void> pump(
     WidgetTester tester, {
-    DkTokens tokens = DkTokens.light,
+    DkTokens? tokens,
     Locale locale = const Locale('en'),
   }) async {
     tester.view.physicalSize = const Size(393, 852);
@@ -36,7 +36,7 @@ void main() {
         container: container,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: dokuloTheme(tokens),
+          theme: dokuloTheme(tokens ?? DkTokens.light),
           locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
