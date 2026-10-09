@@ -1960,5 +1960,11 @@
     "description": "About this tool, workflows: what you get."
   },
   "t2_about_tool": "About this tool",
-  "@t2_about_tool": {"description": "T2's overflow menu: opens About this tool (UI spec §20.1, §20.5)."}
+  "@t2_about_tool": {"description": "T2's overflow menu: opens About this tool (UI spec §20.1, §20.5)."},
+  "error_unexpected_short": "Something went wrong.",
+  "@error_unexpected_short": {"description": "Unexpected, no page known, without the code: the progress sheet shows the code on its own line (tool-shell-failure)."},
+  "error_unexpected_page_short": "Something went wrong on page {page}.",
+  "@error_unexpected_page_short": {"description": "Unexpected on a page, without the code (tool-shell-failure).", "placeholders": {"page": {"type": "int"}}},
+  "error_code_line": "Code {code}",
+  "@error_code_line": {"description": "The error code on its own line under a failure (tool-shell-failure).", "placeholders": {"code": {"type": "String"}}}
 }
