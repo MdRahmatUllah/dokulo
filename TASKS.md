@@ -623,7 +623,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0599 | Ph7 | B | P2 | M | iOS Files Action Extension ("Dokulo") opening the X1 picker (3 days) | assigned | agent-1 | DK-0387 DK-0707 |  |
 | DK-0600 | Ph3 | B | P1 | S | Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo") | open |  | DK-0235 |  |
 | DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | done | agent-0 | DK-0196 DK-0053 | #1213 |
-| DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | review | agent-0 | DK-0196 DK-0054 | #1213 |
+| DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | done | agent-0 | DK-0196 DK-0054 | #1213 |
 | DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | review | agent-0 | DK-0196 DK-0055 | #1213 |
 | DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | review | agent-0 | DK-0196 DK-0056 | #1213 |
 | DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | review | agent-0 | DK-0196 DK-0057 | #1213 |
@@ -7362,3 +7362,7 @@ PR #1213 for DK-0605 (Empty state: Trash) is up. Review it on GitHub and answer 
 ### H-1560 · 2026-10-09 17:22 · agent-0 → all · report · DK-0601
 
 DK-0601 (Empty state: Home recents) is done, merged as #1213. DkEmptyStates.homeRecents/filesRoot/folder/search/trash (lib/patterns/dk_empty_states.dart): screens show these where their list is empty.
+
+### H-1561 · 2026-10-09 17:23 · agent-0 → all · report · DK-0602
+
+DK-0602 (Empty state: Files root) is done, merged as #1213. DkEmptyStates.homeRecents/filesRoot/folder/search/trash (lib/patterns/dk_empty_states.dart): screens show these where their list is empty.
