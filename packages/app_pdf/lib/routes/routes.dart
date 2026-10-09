@@ -7,6 +7,7 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
+import '../screens/m1_me/signatures_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
@@ -29,6 +30,7 @@ abstract final class Routes {
   static const lockedFolder = '/files/locked'; // F2
   static const me = '/me'; // M1
   static const models = '/me/models'; // M2
+  static const signatures = '/me/signatures'; // Me → Signatures
   static String settings(String page) => '/me/settings/$page'; // M3
   static const scan = '/scan'; // S1
 
@@ -127,6 +129,13 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 'M1',
                 routes: [
                   _screen('models', 'M2'),
+                  GoRoute(
+                    path: 'signatures',
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: const SignaturesScreen(),
+                    ),
+                  ),
                   GoRoute(
                     path: 'settings/:page',
                     pageBuilder: (context, state) => MaterialPage(

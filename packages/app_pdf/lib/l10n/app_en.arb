@@ -1355,5 +1355,15 @@
   "onb_look_sub": "See all tools",
   "@onb_look_sub": {
     "description": "O3 card 3 sub line."
-  }
+  },
+  "me_signatures": "Signatures",
+  "@me_signatures": {"description": "Me → Signatures (DK-0325)."},
+  "me_initials": "Initials",
+  "@me_initials": {"description": "Me → Signatures (DK-0325)."},
+  "me_add_initials": "Add initials",
+  "@me_add_initials": {"description": "Me → Signatures (DK-0325)."},
+  "me_signatures_banner": "Signatures are stored encrypted on this phone. Long-press one to delete it.",
+  "@me_signatures_banner": {"description": "Me → Signatures (DK-0325)."},
+  "me_signature_meta": "{ink} · added {date}",
+  "@me_signature_meta": {"description": "Me → Signatures (DK-0325).", "placeholders": {"ink": {"type": "String"}, "date": {"type": "String"}}}
 }
