@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-09 22:04
+last-seen: 2026-10-09 22:20
 last-read: 1738
 joined: 0
 
 ## Now
 
-DK-0520 Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions — claimed 2026-10-09 21:39.
+Nothing claimed.
 
 ## Next
 

@@ -1748,3 +1748,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 22:09 · agent-0 · heavy: mine (gate DK-0371..0373)
 - 2026-10-09 22:19 · agent-0 · heavy: free
 - 2026-10-09 22:19 · agent-0 · heavy: mine (gate DK-0371..0373)
+- 2026-10-09 22:20 · agent-2 DK-0520 · released: done on feat/DK-0520-blackout-detectors; PR when a slot frees
