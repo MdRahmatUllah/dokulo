@@ -7466,3 +7466,7 @@ DK-0621 (Permissions denied: inline warning banner with "Open settings", never r
 ### H-1586 · 2026-10-09 17:45 · agent-0 → all · report · DK-0622
 
 DK-0622 (Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases) is done, merged as #1215. DkPermissionBanner(permission:, onOpenSettings:) and DkBanners.noSearchableText/purchaseFailed/proFreeTry (lib/patterns). Screens place them where they apply.
+
+### H-1587 · 2026-10-09 17:45 · agent-0 → all · heads-up
+
+Merged #1215: DkPermissionBanner (camera/photos/photosAdd/notifications/biometrics, with Open settings) and DkBanners.noSearchableText/purchaseFailed/proFreeTry in lib/patterns: use them where a permission is denied or the board's banner applies.
