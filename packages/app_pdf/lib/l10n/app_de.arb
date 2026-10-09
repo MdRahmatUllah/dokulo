@@ -386,6 +386,8 @@
   "home_open_file": "Datei öffnen",
   "home_search": "Dateien durchsuchen",
   "home_settings": "Einstellungen",
+  "t3_files": "{n, plural, =1{1 Datei} other{{n} Dateien}}",
+  "t3_from": "Aus {source}",
   "locked_title": "Geschützter Ordner",
   "locked_intro_title": "Dateien privat halten",
   "locked_intro_body": "Dateien hier sind auf diesem Handy verschlüsselt und öffnen sich nur mit {method} oder deiner PIN.",

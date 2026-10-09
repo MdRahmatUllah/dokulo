@@ -1502,6 +1502,10 @@
   "@home_settings": {
     "description": "H1 top bar action."
   },
+  "t3_files": "{n, plural, =1{1 file} other{{n} files}}",
+  "@t3_files": {"description": "T3's headline and list header for a multi-file result (UI spec §20.4, DK-0384).", "placeholders": {"n": {"type": "int"}}},
+  "t3_from": "From {source}",
+  "@t3_from": {"description": "T3's line under the headline: From Zeugnisse.pdf · 34 pages (DK-0384).", "placeholders": {"source": {"type": "String"}}},
   "locked_title": "Locked folder",
   "@locked_title": {
     "description": "F2's title (§16.6)."

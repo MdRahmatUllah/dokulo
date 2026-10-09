@@ -351,8 +351,14 @@ Save keeps it as a new file, with a medium haptic and "Saved to Files › Taxes
 · Open"; the button becomes Done (DK-0381). Open saves first, then opens it.
 Closing an unsaved result of a job over 10 s asks "Discard this result?";
 a shorter one closes silently; either way the temp output is deleted
-(DK-0382). Share, the split Save's menu and Next chips come with DK-1077,
-DK-0380, DK-0385 and DK-0386.
+(DK-0382). The card is the definition's `summary` (`ToolSummary`: the
+headline, its delta, the line, and for a partial result the warning tint with
+one inline action, "Retake page 7", DK-0383); without one it shows the
+output's size, or "3 files", over "From Zeugnisse.pdf · 34 pages". A
+multi-file result (DK-0384) lists its parts with the definition's `partLine`
+("Pages 1–3 · 420 KB", or their size) and no name field; Save keeps every
+part next to the input. Share, the split Save's menu and Next chips come
+with DK-1077, DK-0380, DK-0385 and DK-0386.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
