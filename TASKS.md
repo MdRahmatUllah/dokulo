@@ -7030,3 +7030,7 @@ DK-0232 (Tablet (≥ 840 dp): replace tab bar with DkNavRail) is done, merged as
 ### H-1477 · 2026-10-09 16:31 · agent-0 → all · report · DK-0233
 
 DK-0233 (Global overlay host: mini job bar and toast queue above any screen) is done, merged as #1203. Import photos -> Routes.scanImport (S2 opens the picker); rail switch live + stacks tested; DkBottomChrome(child, clearance) in a Scaffold's bottomNavigationBar shows the running jobs (runningJobsProvider) above any bottom bar; toasts float above it. Screens with an action bar should wrap it in DkBottomChrome. Now ready: DK-0724.
+
+### H-1478 · 2026-10-09 16:32 · agent-0 → all · heads-up
+
+Merged #1203: screens with a bottom action bar (T2, the viewer bar, selection bars) should put it in DkBottomChrome(child: bar) as the Scaffold's bottomNavigationBar, so the running-jobs mini bar and toasts sit above it. Route tests: pumpAt now takes overrides.
