@@ -1727,3 +1727,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 21:50 · agent-0 DK-0379 · claimed: Generic T3 result: result card, preview strip, name, save location, Next chips, action bar
 - 2026-10-09 21:56 · agent-0 DK-1077 · added: T3: Share (share_plus) and the split Save with its menu
 - 2026-10-09 21:57 · agent-0 · heavy: mine (gate DK-0379)
+- 2026-10-09 22:01 · agent-0 · heavy: free
