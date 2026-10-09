@@ -115,6 +115,14 @@ void main() {
     expect(flag.seen, isTrue);
   });
 
+  testWidgets('back leaves like Skip: Home, and marks it seen', (tester) async {
+    final (router, flag) = await pumpAt(tester, Routes.welcome);
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+    expect(router.state.uri.path, Routes.home);
+    expect(flag.seen, isTrue);
+  });
+
   for (final (card, location) in [
     ('Scan a document', Routes.scan),
     ('Open a PDF', Routes.files),

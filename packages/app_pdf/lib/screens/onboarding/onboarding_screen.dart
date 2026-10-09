@@ -52,63 +52,68 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final last = _page == _count - 1;
-    return Scaffold(
-      backgroundColor: t.color.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 44,
-              child: Align(
-                alignment: AlignmentDirectional.centerEnd,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: t.space.s),
+    // Back leaves it like Skip: Home (the route's own scope), and seen.
+    return PopScope(
+      onPopInvokedWithResult: (_, _) =>
+          ref.read(onboardingDoneProvider.notifier).complete(),
+      child: Scaffold(
+        backgroundColor: t.color.background,
+        body: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 44,
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: t.space.s),
+                    child: DkButton(
+                      label: l.common_skip,
+                      variant: DkButtonVariant.tertiary,
+                      onPressed: () => _finish(Routes.home),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: PageView(
+                  controller: _pages,
+                  onPageChanged: (page) => setState(() => _page = page),
+                  children: [
+                    _Intro(
+                      illustration: DkIllustrations.onboarding1,
+                      title: l.onb_1_title,
+                      body: l.onb_1_body,
+                    ),
+                    _Intro(
+                      illustration: DkIllustrations.onboarding2,
+                      title: l.onb_2_title,
+                      body: l.onb_2_body,
+                    ),
+                    _StartWith(onChoose: _finish),
+                  ],
+                ),
+              ),
+              _Dots(count: _count, active: _page),
+              if (last)
+                SizedBox(height: t.space.xxl)
+              else
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    t.space.l,
+                    t.space.xxl,
+                    t.space.l,
+                    t.space.l,
+                  ),
                   child: DkButton(
-                    label: l.common_skip,
-                    variant: DkButtonVariant.tertiary,
-                    onPressed: () => _finish(Routes.home),
+                    label: l.common_next,
+                    size: DkButtonSize.large,
+                    expand: true,
+                    onPressed: _next,
                   ),
                 ),
-              ),
-            ),
-            Expanded(
-              child: PageView(
-                controller: _pages,
-                onPageChanged: (page) => setState(() => _page = page),
-                children: [
-                  _Intro(
-                    illustration: DkIllustrations.onboarding1,
-                    title: l.onb_1_title,
-                    body: l.onb_1_body,
-                  ),
-                  _Intro(
-                    illustration: DkIllustrations.onboarding2,
-                    title: l.onb_2_title,
-                    body: l.onb_2_body,
-                  ),
-                  _StartWith(onChoose: _finish),
-                ],
-              ),
-            ),
-            _Dots(count: _count, active: _page),
-            if (last)
-              SizedBox(height: t.space.xxxl + t.space.l)
-            else
-              Padding(
-                padding: EdgeInsets.fromLTRB(
-                  t.space.l,
-                  t.space.xxl,
-                  t.space.l,
-                  t.space.l,
-                ),
-                child: DkButton(
-                  label: l.common_next,
-                  size: DkButtonSize.large,
-                  expand: true,
-                  onPressed: _next,
-                ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
