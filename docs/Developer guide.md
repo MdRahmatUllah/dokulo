@@ -182,7 +182,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 
 | Route | Screen | Where | Notes |
 | --- | --- | --- | --- |
-| `/launch` | Launch | full screen | The app's first frame: the native splash again (symbol 72 on `color.background`, DK-0073), then Home |
+| `/launch` | Launch | full screen | The app's first frame: the native splash again (symbol 72 on `color.background`, DK-0073), then Home, or `/welcome` on the first launch |
 | `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
@@ -190,13 +190,14 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/me` | M1 Me | tab 4 | |
 | `/me/models` | M2 Model manager | tab 4, pushed | |
 | `/me/settings/:page` | M3 Settings | tab 4, pushed | `:page` is the settings group, e.g. `appearance` |
-| `/welcome` | Onboarding | full screen | Shown once |
-| `/scan` | S1 Camera | full screen | The raised Scan button pushes it |
+| `/welcome` | Onboarding | full screen | O1–O3, shown once (DK-0238): `onboardingDoneProvider` is a marker file in app support; Skip and the O3 cards set it. Tests that start the whole app override it with `test/onboarding_seen.dart` |
+| `/scan` | S1 Camera | full screen | The raised Scan button pushes it; `?mode=` a scan mode (`document`, `idCard`, …) |
 | `/scan/review` | S2 Review | full screen | |
-| `/tool/:toolId` | T2 Tool options | full screen | `:toolId` is the tool's id (`compress`, `merge`, …) |
+| `/tool/:toolId` | T2 Tool options | full screen | `:toolId` is the tool's id (`compress`, `merge`, …); `?file=<fileId>` preselects a file |
 | `/tool/:toolId/result` | T3 Result | full screen | |
 | `/viewer/:fileId` | V1 Viewer | full screen | `?mode=edit` opens V2 Edit mode |
 | `/organize/:fileId` | P1 Organize pages | full screen | |
+| `/job/:jobId` | Home + X2 Progress | tab 1 | A notification's link: Home with the running job's progress sheet; a toast if the job has ended |
 | `/dev/catalogue` | Component catalogue | full screen | Debug builds only: a list of components; each opens its variants and states in Light and Dark (`lib/catalogue/`) |
 
 - **Full-screen routes** sit on the root navigator, above the shell: the tab
@@ -210,8 +211,20 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
   android.intent.action.VIEW -d "dokulo://open/tool/compress"` or `xcrun simctl
   openurl booted "dokulo://open/viewer/f42?mode=edit"`.
   `test/routes/routes_test.dart` cold-starts the router at every route.
+  A link that leads nowhere never crashes (DK-0236): an unknown route or
+  tool shows `LinkErrorScreen` ("This link doesn't work any more", Go to
+  Home), a file handle that's malformed or gone shows "This file isn't in
+  Dokulo any more" (`LinkedFileGate`), a job that has ended a toast
+  (`test/routes/deep_links_test.dart`).
   On a device, `python tools/deeplinks_check.py` fires every route from a
   cold start (all 15 passed on emulator-5554, 2026-10-08, DK-1041).
+- **The privacy cover (DK-0234)** wraps the whole app (`MaterialApp.builder`,
+  `DkPrivacyCover`): while locked content is open or Settings → Security →
+  Hide previews is on (`privacyCoverProvider`), the app switcher shows
+  `color.background` with the symbol, as the launch screen, and Android sets
+  FLAG_SECURE (blank recents card, no screenshots); otherwise screenshots are
+  allowed. A screen with locked-folder content wraps its body in
+  `DkLockedContent`; the Security screen sets `hidePreviewsProvider`.
 - **Back from a deep-linked full-screen page goes to Home** (nothing is
   beneath it, so leaving the app would be the surprise); pushed from a tab,
   it returns to that tab.
@@ -256,6 +269,19 @@ a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
 
+**iOS and Android (UI spec §13.2, DK-0231).** The components switch on
+`Theme.of(context).platform`, never on `dart:io`'s `Platform`, so a test
+sets `ThemeData(platform: …)`. Back, overflow, share and biometric icons come
+from `DkIcons.back/overflow/share/biometrics(context)`; DkTopBar centres its
+title on iOS; DkSwitch and DkLoadingSpinner are Cupertino on iOS and
+Material 3 on Android; DkConfirmDialog and DkSheet look the same on both;
+the push transition is the theme's (§13.4). Back is the chevron alone on
+iOS, as every artboard draws it (the spec also allows the previous title).
+A screen adds nothing platform-specific of its own;
+`test/components/platform_differences_test.dart` holds one screen per
+platform as goldens and fails on a Cupertino widget on Android or a
+Material switch or spinner on iOS.
+
 **The component catalogue (DK-0150).** Every `Dk` component shows each
 variant and state in Light and Dark at `/dev/catalogue` (debug builds only;
 `dokulo://open/dev/catalogue` on the emulator). A component task adds a
@@ -271,6 +297,68 @@ its fixed EN/DE name, its one-line description (UI spec §21), its tier and its
 Tools-tab section. The grid, the T2 header, the X1 picker, search, About this
 tool and the notifications all read it, so they never disagree. A new tool is
 a new entry there, an icon in `DkIcons.tools` and two ARB strings each.
+
+**T2, one shell for every tool (DK-0370).** `/tool/:id?file=1&file=2` opens
+`ToolOptionsScreen` (`lib/screens/t2_tool/`) with the files as its input. It
+draws the top bar (the tool's icon, name and Pro badge; overflow: Reset
+options), the privacy line, the input (`DkFileCard` rows; with several files,
+× to remove and a drag handle to reorder), the options and the action bar.
+A tool's own task declares what is specific to it in a `ToolDefinition`
+(`lib/tools/tool_definition.dart`, added to `ToolDefinitions`): its options
+(`ToolSwitch`, `ToolSegments`, or `ToolCustom` for level cards, chips and
+fields), the "More options" ones, the button's label ("Compress 12 pages",
+§21), the estimate caption, and how the files and options become its
+ToolJob's input. The shell keeps the chosen values per tool while the app
+runs (`toolOptionValuesProvider`), so going back and opening the tool again
+keeps them. A tool without a definition yet shows its input and its name on a
+disabled button.
+
+What a tool takes is `ToolInput.of(id)` (`lib/tools/tool_inputs.dart`, UI spec
+§21: the kinds, at least / at most how many). Opened without a file, T2 shows
+its picker card (DK-0371): "Choose a PDF / images / files", the 5 most recent
+files the tool takes, Browse device and, for image tools, Choose photos
+(`devicePickerProvider`, file_picker; tests override it). A picked file is
+copied into the sandbox inbox first and stays out of the index. A tool that
+needs two files (Merge, Compare) shows checkboxes until it has them. A locked
+PDF input gets "This file is locked" with a password field and Unlock under
+its card (DK-0372); the password is checked by opening the file and kept in
+memory for the run (`ToolSubject.passwordOf`). Until every input is unlocked
+the button waits with "Unlock {name} to continue". The estimate (DK-0373) is
+the definition's `estimate`, recomputed in the same frame as any option
+change; a tool words it as an estimate ("About 1.9 MB", "≈ 0.9 MB"), never a
+promise.
+
+Running (UI spec §20.2, DK-0375…DK-0377): the button starts the job through
+`toolRunnerProvider` (the JobQueue, with a fresh temp output folder; tests
+override it with a simulated run). Under 2 s nothing shows but the press; from
+2 s the button loads with the tool's `busyLabel` ("Compressing…"); from 10 s
+T2's progress sheet slides up (`busyTitle`, the bar, "Page 18 of 40 · about
+20 s left", the time left smoothed to at most ±50 % per update), and Keep
+working leaves the mini job bar. Cancel stops at once, after asking (the
+tool's `stopTitle`, "Stop compressing?") once the job has run 30 s; a cancel
+toasts "Cancelled. Your original file wasn't changed." A failure, also one the
+preflight refused, turns the sheet into its error state: the catalogue's title
+(`DokuloError`), "Your original file wasn't changed." and its first recovery
+(Try again, Try Repair, Split it first, …). A cancel or a failure deletes the
+temp output, so nothing partial is kept. Success replaces T2 with T3
+(`ToolResultScreen`, DK-0379), so T3's Close returns to where the tool
+started; T2 hands the run over in `lastToolResultProvider`.
+
+T3 shows the result card (the output's size, its first pages), the file name
+(the job's own `<name> – <suffix>`) and "Save to: Files › Taxes": a result is
+saved next to its input (`FileStore.saveIndexed`, which also indexes it).
+Save keeps it as a new file, with a medium haptic and "Saved to Files › Taxes
+· Open"; the button becomes Done (DK-0381). Open saves first, then opens it.
+Closing an unsaved result of a job over 10 s asks "Discard this result?";
+a shorter one closes silently; either way the temp output is deleted
+(DK-0382). The card is the definition's `summary` (`ToolSummary`: the
+headline, its delta, the line, and for a partial result the warning tint with
+one inline action, "Retake page 7", DK-0383); without one it shows the
+output's size, or "3 files", over "From Zeugnisse.pdf · 34 pages". A
+multi-file result (DK-0384) lists its parts with the definition's `partLine`
+("Pages 1–3 · 420 KB", or their size) and no name field; Save keeps every
+part next to the input. Share, the split Save's menu and Next chips come
+with DK-1077, DK-0380, DK-0385 and DK-0386.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
@@ -405,7 +493,9 @@ template's checklist (`.github/pull_request_template.md`).
 - [ ] **EN and DE:** every string from the ARB files; German checked for wrapping (`dokulo-design/deutsch/…`).
 - [ ] **200 % text** where the spec marks it, without clipping.
 - [ ] **Screen-reader labels** and reading order (checklist above).
-- [ ] **States:** empty, loading, error, success and Pro-gated, as the screen spec lists them.
+- [ ] **States:** empty, loading, error, success and Pro-gated, as the screen spec lists them. Loading is a
+      `DkSkeleton` (its presets, V1's `ViewerPageSkeleton`), never a blank screen; a spinner only inside a
+      button or for a wait under 2 s in a sheet; thumbnails fade in (`DkThumbFade`) (UI spec §26.2).
 - [ ] **Tests:** widget tests and goldens for the states above; unit tests for the logic; golden PDFs for a tool.
 - [ ] **The basic check** passes (`CLAUDE.md`).
 - [ ] **Docs:** a behaviour change updates the spec in the same PR; a spec gap you filled is named in the PR.

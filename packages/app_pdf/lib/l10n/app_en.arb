@@ -1394,5 +1394,207 @@
   "banner_purchase_failed": "Purchase didn't complete. You weren't charged.",
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
-  "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."}
+  "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "link_broken_title": "This link doesn't work any more",
+  "@link_broken_title": {"description": "A deep link to no route or tool (DK-0236)."},
+  "link_broken_body": "What it pointed to may have been moved or deleted.",
+  "@link_broken_body": {"description": "Under a broken deep link's title (DK-0236)."},
+  "link_action_home": "Go to Home",
+  "@link_action_home": {"description": "Button on a broken deep link (DK-0236)."},
+  "link_job_finished": "This job has already finished.",
+  "@link_job_finished": {"description": "Toast: a job link (a notification) after the job ended (DK-0236)."},
+  "onb_1_title": "All your PDF tools. Nothing uploaded.",
+  "@onb_1_title": {
+    "description": "O1 headline (UI spec §14.2)."
+  },
+  "onb_1_body": "Scan, merge, compress, sign and more – right on this phone.",
+  "@onb_1_body": {
+    "description": "O1 body (UI spec §14.2)."
+  },
+  "onb_2_title": "No watermark. No subscription.",
+  "@onb_2_title": {
+    "description": "O2 headline (UI spec §14.2)."
+  },
+  "onb_2_body": "Most tools are free with no limits. Pro is a one-time unlock.",
+  "@onb_2_body": {
+    "description": "O2 body (UI spec §14.2)."
+  },
+  "onb_3_title": "What do you want to do first?",
+  "@onb_3_title": {
+    "description": "O3 headline (UI spec §14.2)."
+  },
+  "onb_scan_title": "Scan a document",
+  "@onb_scan_title": {
+    "description": "O3 card 1 title: opens the scanner (S1)."
+  },
+  "onb_scan_sub": "Use the camera",
+  "@onb_scan_sub": {
+    "description": "O3 card 1 sub line."
+  },
+  "onb_open_title": "Open a PDF",
+  "@onb_open_title": {
+    "description": "O3 card 2 title: the system file picker, then the viewer (V1)."
+  },
+  "onb_open_sub": "From Files or another app",
+  "@onb_open_sub": {
+    "description": "O3 card 2 sub line."
+  },
+  "onb_look_title": "Look around",
+  "@onb_look_title": {
+    "description": "O3 card 3 title: goes to Home (H1)."
+  },
+  "onb_look_sub": "See all tools",
+  "@onb_look_sub": {
+    "description": "O3 card 3 sub line."
+  },
+  "t2_section_file": "File",
+  "@t2_section_file": {"description": "T2's input header, one file (UI spec §20.1)."},
+  "t2_section_files": "Files ({n})",
+  "@t2_section_files": {"description": "T2's input header, several files (§20.1).", "placeholders": {"n": {"type": "int"}}},
+  "t2_section_options": "Options",
+  "@t2_section_options": {"description": "T2's options header (§20.1)."},
+  "t2_reset_options": "Reset options",
+  "@t2_reset_options": {"description": "T2's overflow menu (§20.1)."},
+  "t2_remove_file": "Remove",
+  "@t2_remove_file": {"description": "The × on a T2 input file (§20.1)."},
+  "t2_busy": "Working…",
+  "@t2_busy": {"description": "T2's main button while a tool runs 2–10 s, for a tool without its own verb (UI spec §20.2)."},
+  "t2_failed_body": "Your original file wasn't changed.",
+  "@t2_failed_body": {"description": "Under the error title in the progress sheet's error state (§20.2, DK-0377)."},
+  "t3_file_name": "File name",
+  "@t3_file_name": {"description": "T3's file name field (UI spec §20.4)."},
+  "t3_save_to": "Save to: {place}",
+  "@t3_save_to": {"description": "T3's save location, e.g. Save to: Files › Taxes (§20.4).", "placeholders": {"place": {"type": "String"}}},
+  "t3_save": "Save",
+  "@t3_save": {"description": "T3's main button (§20.4)."},
+  "t3_discard_title": "Discard this result?",
+  "@t3_discard_title": {"description": "Closing an unsaved result after a long job (§20.4, DK-0382)."},
+  "t3_discard_body": "You'll need to run the tool again to get it back.",
+  "@t3_discard_body": {"description": "Body of the discard result dialog (DK-0382)."},
+  "t2_choose_pdf": "Choose a PDF",
+  "@t2_choose_pdf": {"description": "T2's picker card title, a PDF tool (UI spec §20.1, DK-0371)."},
+  "t2_choose_images": "Choose images",
+  "@t2_choose_images": {"description": "T2's picker card title, an image tool (§20.1)."},
+  "t2_choose_files": "Choose files",
+  "@t2_choose_files": {"description": "T2's picker card title, a tool for PDFs and images (§20.1)."},
+  "t2_recent": "Recent",
+  "@t2_recent": {"description": "Header of the recent files in T2's picker card."},
+  "t2_choose_photos": "Choose photos",
+  "@t2_choose_photos": {"description": "T2's picker card, image tools (§20.1)."},
+  "t2_choose_to_continue": "Choose a file to continue",
+  "@t2_choose_to_continue": {"description": "Caption over T2's disabled button with no input (§20.1)."},
+  "t2_file_locked": "This file is locked",
+  "@t2_file_locked": {"description": "Under a locked input in T2 (DK-0372)."},
+  "t2_password": "Password",
+  "@t2_password": {"description": "The password field of a locked input (DK-0372)."},
+  "t2_unlock": "Unlock",
+  "@t2_unlock": {"description": "Unlocks a locked input in T2 (DK-0372)."},
+  "t2_wrong_password": "That password doesn't open this file.",
+  "@t2_wrong_password": {"description": "A wrong password for a locked input (DK-0372, UI spec §17.1)."},
+  "t2_unlock_to_continue": "Unlock {name} to continue",
+  "@t2_unlock_to_continue": {"description": "Caption over T2's disabled button while an input is locked (DK-0372).", "placeholders": {"name": {"type": "String"}}},
+  "files_search_hint": "Search names and text",
+  "@files_search_hint": {
+    "description": "F1 search field."
+  },
+  "files_locked_folder": "Locked folder",
+  "@files_locked_folder": {
+    "description": "F1 special row: opens F2."
+  },
+  "files_recently_deleted": "Recently deleted",
+  "@files_recently_deleted": {
+    "description": "F1 special row: the trash."
+  },
+  "files_folders": "Folders",
+  "@files_folders": {
+    "description": "F1 section header."
+  },
+  "files_files": "Files",
+  "@files_files": {
+    "description": "F1 section header."
+  },
+  "files_grid_view": "Grid view",
+  "@files_grid_view": {
+    "description": "F1 action: switch to the grid."
+  },
+  "files_list_view": "List view",
+  "@files_list_view": {
+    "description": "F1 action: switch to the list."
+  },
+  "files_sort": "Sort",
+  "@files_sort": {
+    "description": "F1 action: the sort menu."
+  },
+  "files_new_folder": "New folder",
+  "@files_new_folder": {
+    "description": "F1 action and the new folder dialog's title."
+  },
+  "files_folder_name": "Folder name",
+  "@files_folder_name": {
+    "description": "New folder dialog: the field's placeholder."
+  },
+  "files_create": "Create",
+  "@files_create": {
+    "description": "New folder dialog: the action."
+  },
+  "files_folder_exists": "A folder with this name already exists.",
+  "@files_folder_exists": {
+    "description": "New folder dialog: the name is taken."
+  },
+  "files_sort_modified": "Date modified",
+  "@files_sort_modified": {
+    "description": "Sort menu."
+  },
+  "files_sort_name": "Name",
+  "@files_sort_name": {
+    "description": "Sort menu."
+  },
+  "files_sort_size": "Size",
+  "@files_sort_size": {
+    "description": "Sort menu."
+  },
+  "files_sort_created": "Date created",
+  "@files_sort_created": {
+    "description": "Sort menu."
+  },
+  "files_sort_ascending": "Ascending",
+  "@files_sort_ascending": {
+    "description": "Sort menu, second group."
+  },
+  "files_sort_descending": "Descending",
+  "@files_sort_descending": {
+    "description": "Sort menu, second group."
+  },
+  "files_more_actions": "More actions",
+  "@files_more_actions": {
+    "description": "A file row's more button."
+  },
+  "home_your_tools": "Your tools",
+  "@home_your_tools": {
+    "description": "H1 section header over the pinned tools."
+  },
+  "home_recent": "Recent",
+  "@home_recent": {
+    "description": "H1 section header over the recent files."
+  },
+  "home_see_all": "See all",
+  "@home_see_all": {
+    "description": "H1: opens Files."
+  },
+  "home_open_file": "Open a file",
+  "@home_open_file": {
+    "description": "H1: the system picker, then V1."
+  },
+  "home_search": "Search files",
+  "@home_search": {
+    "description": "H1 top bar action: Files with the search field focused."
+  },
+  "home_settings": "Settings",
+  "@home_settings": {
+    "description": "H1 top bar action."
+  },
+  "t3_files": "{n, plural, =1{1 file} other{{n} files}}",
+  "@t3_files": {"description": "T3's headline and list header for a multi-file result (UI spec §20.4, DK-0384).", "placeholders": {"n": {"type": "int"}}},
+  "t3_from": "From {source}",
+  "@t3_from": {"description": "T3's line under the headline: From Zeugnisse.pdf · 34 pages (DK-0384).", "placeholders": {"source": {"type": "String"}}}
 }
