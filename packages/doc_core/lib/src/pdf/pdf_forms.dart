@@ -114,7 +114,9 @@ final class ChoiceFieldValue extends PdfFieldValue {
 /// widgets' appearances are regenerated as Acrobat does). Everything runs on
 /// pdfrx's worker, like the rest of [PdfEngine].
 abstract final class PdfForms {
-  /// The document's form kind; XFA can't be filled on phones.
+  /// The document's form kind; XFA can't be filled on phones. A flattened
+  /// document can still say [PdfFormKind.acroForm] (its empty form
+  /// dictionary stays): decide "no fields" from [fields] being empty.
   static Future<PdfFormKind> kind(String path, {String? password}) async {
     await PdfEngine.inspect(path, password: password); // password, damage
     return PdfrxEntryFunctions.instance.compute(_kindOnWorker, (
@@ -137,7 +139,8 @@ abstract final class PdfForms {
 
   /// Writes [path] with [values] filled in to [outPath] (a full rewrite).
   /// With [flatten], the fields become part of the page and nothing stays
-  /// editable ("Lock form values?"). An unknown id, a read-only field or a
+  /// editable ("Lock form values?"). Like every PDF flatten, it bakes in all
+  /// annotations that have an appearance, so highlights and notes too. An unknown id, a read-only field or a
   /// value of the wrong kind is a [DocError] (unsupportedForm), and nothing
   /// is written.
   static Future<void> fill(
