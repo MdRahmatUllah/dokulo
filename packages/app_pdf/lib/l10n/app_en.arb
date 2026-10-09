@@ -1466,5 +1466,31 @@
   "toast_applied_all": "Applied to all pages",
   "@toast_applied_all": {
     "description": "S2 filter mode (DK-0354/0355)."
-  }
+  },
+  "scan_save_title": "Save scan",
+  "@scan_save_title": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_name": "Name",
+  "@scan_name": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_format": "Format",
+  "@scan_format": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality": "Quality",
+  "@scan_quality": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_smaller": "Smaller",
+  "@scan_quality_smaller": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_smaller_desc": "For upload limits",
+  "@scan_quality_smaller_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_recommended": "Recommended",
+  "@scan_quality_recommended": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_recommended_desc": "Sharp text",
+  "@scan_quality_recommended_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_best": "Best",
+  "@scan_quality_best": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_best_desc": "For printing",
+  "@scan_quality_best_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_folder": "Folder",
+  "@scan_folder": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_save_pdf": "{count, plural, =1{Save PDF · 1 page} other{Save PDF · {count} pages}}",
+  "@scan_save_pdf": {"description": "The scan's Save sheet (DK-0359).", "placeholders": {"count": {"type": "int"}}},
+  "scan_save_images": "{count, plural, =1{Save 1 image} other{Save {count} images}}",
+  "@scan_save_images": {"description": "The scan's Save sheet (DK-0359).", "placeholders": {"count": {"type": "int"}}}
 }

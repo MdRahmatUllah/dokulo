@@ -136,6 +136,9 @@ abstract interface class ScanStore {
   Future<void> clear();
   bool exists(String path);
 
+  /// A photo's size in bytes (the Save sheet's estimates).
+  int length(String path);
+
   /// How a screen shows the photo at [path].
   ImageProvider image(String path);
 }
@@ -185,6 +188,9 @@ class FileScanStore implements ScanStore {
   bool exists(String path) => File(path).existsSync();
 
   @override
+  int length(String path) => File(path).lengthSync();
+
+  @override
   ImageProvider image(String path) => FileImage(File(path));
 }
 
@@ -213,6 +219,9 @@ class MemoryScanStore implements ScanStore {
 
   @override
   bool exists(String path) => files.containsKey(path);
+
+  @override
+  int length(String path) => files[path]!.length;
   @override
   ImageProvider image(String path) => MemoryImage(files[path]!);
 }

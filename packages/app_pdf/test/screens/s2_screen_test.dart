@@ -6,6 +6,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/screens/s2_review/s2_screen.dart';
+import 'package:app_pdf/screens/s2_review/save_sheet.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ void main() {
   late MemoryScanStore store;
   late MemoryPrefsStore prefs;
   var added = 0, discarded = 0;
+  ScanSaveOptions? saved;
   int? retook;
 
   List<ScannedPage> pages() => container.read(scanSessionProvider);
@@ -48,12 +50,19 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     added = discarded = 0;
+    saved = null;
     retook = null;
     store = MemoryScanStore();
     container = ProviderContainer(
       overrides: [
         scanStoreProvider.overrideWithValue(store),
         scannerPrefsStoreProvider.overrideWithValue(prefs = MemoryPrefsStore()),
+        scanClockProvider.overrideWithValue(
+          () => DateTime(2026, 10, 7, 14, 32),
+        ),
+        scanFoldersProvider.overrideWithValue(
+          () async => ['Taxes', 'Taxes/2025'],
+        ),
       ],
     );
     addTearDown(container.dispose);
@@ -72,7 +81,7 @@ void main() {
           home: S2Screen(
             onAddPages: () => added++,
             onDiscard: () => discarded++,
-            onSave: withSave ? () {} : null,
+            onSave: withSave ? (o) => saved = o : null,
             onRetake: (i) => retook = i,
           ),
         ),
@@ -271,6 +280,89 @@ void main() {
         0, 0, 0, 1, 0, //
       ]),
     );
+  });
+
+  group('the Save sheet (DK-0359)', () {
+    Future<void> open(WidgetTester tester) async {
+      await tester.tap(find.text('Save'));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('defaults: a dated name, PDF, Recommended; Save returns them', (
+      tester,
+    ) async {
+      await pump(tester);
+      await open(tester);
+      expect(find.text('Save scan'), findsOneWidget);
+      final name = tester.widget<EditableText>(find.byType(EditableText));
+      expect(name.controller.text, 'Scan 2026-10-07 14.32');
+      expect(
+        name.controller.selection.extentOffset,
+        name.controller.text.length,
+      );
+      await tester.tap(find.text('Save PDF · 3 pages'));
+      await tester.pumpAndSettle();
+      expect(saved!.format, ScanFormat.pdf);
+      expect(saved!.quality, ScanQuality.recommended);
+      expect(saved!.searchable, isFalse, reason: 'free: off until switched on');
+      expect(saved!.folder, isNull);
+    });
+
+    testWidgets('JPG: "Save 3 images", no OCR row; Best; a folder', (
+      tester,
+    ) async {
+      await pump(tester);
+      await open(tester);
+      await tester.tap(find.text('JPG'));
+      await tester.pumpAndSettle();
+      expect(find.text('Make text searchable'), findsNothing);
+      await tester.tap(find.text('Best'));
+      await tester.ensureVisible(find.text('Folder'));
+      await tester.tap(find.text('Folder'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Files › Taxes › 2025'));
+      await tester.pumpAndSettle();
+      expect(find.text('Files › Taxes › 2025'), findsOneWidget);
+      await tester.ensureVisible(find.text('Save 3 images'));
+      await tester.tap(find.text('Save 3 images'));
+      await tester.pumpAndSettle();
+      expect(
+        (saved!.format, saved!.quality, saved!.folder),
+        (ScanFormat.jpg, ScanQuality.best, 'Taxes/2025'),
+      );
+      expect(prefs.json, contains('Taxes/2025'), reason: 'the last folder');
+    });
+
+    testWidgets('the estimates grow with the quality', (tester) async {
+      await pump(tester);
+      await open(tester);
+      final sizes = [
+        for (final e in find.textContaining('≈').evaluate())
+          (e.widget as Text).data!,
+      ];
+      expect(sizes, hasLength(3));
+      expect(sizes.toSet(), hasLength(3));
+    });
+
+    test('scanName', () {
+      expect(scanName(DateTime(2026, 10, 7, 14, 32)), 'Scan 2026-10-07 14.32');
+    });
+
+    for (final (name, tokens, locale) in [
+      ('light', DkTokens.light, const Locale('en')),
+      ('dark', DkTokens.dark, const Locale('en')),
+      ('de', DkTokens.light, const Locale('de')),
+    ]) {
+      testWidgets('golden: save sheet ($name)', (tester) async {
+        await pump(tester, count: 6, tokens: tokens, locale: locale);
+        await tester.tap(find.text(name == 'de' ? 'Speichern' : 'Save'));
+        await tester.pumpAndSettle();
+        await expectLater(
+          find.byType(MaterialApp),
+          matchesGoldenFile('goldens/s2_save_$name.png'),
+        );
+      });
+    }
   });
 
   test('a page keeps its crop through the manifest', () {

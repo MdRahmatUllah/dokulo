@@ -18,6 +18,7 @@ import '../../theme/dk_tokens.dart';
 import '../s1_scanner/scan_session.dart';
 import '../s1_scanner/scanner_quick_settings.dart';
 import '../s1_scanner/scanner_settings.dart';
+import 'save_sheet.dart';
 
 /// S2, the scan's review (DK-0352; UI spec S2, design
 /// `10-scanner/scanner-review-review`, `-reorder`):
@@ -57,8 +58,9 @@ class S2Screen extends ConsumerStatefulWidget {
   /// The scan was discarded (its last page deleted): leave the scanner.
   final VoidCallback onDiscard;
 
-  /// The Save sheet (DK-0359); Save is disabled until it is given.
-  final VoidCallback? onSave;
+  /// Save opens the Save sheet (DK-0359); this gets what it chose. Save is
+  /// disabled until it is given.
+  final ValueChanged<ScanSaveOptions>? onSave;
 
   /// The page's index; null hides nothing, but disables the button.
   final ValueChanged<int>? onRetake;
@@ -196,6 +198,19 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     );
   }
 
+  Future<void> _save() async {
+    final store = ref.read(scanStoreProvider);
+    final pages = ref.read(scanSessionProvider);
+    final options = await showScanSaveSheet(
+      context,
+      pages: pages.length,
+      photoBytes: pages.fold(0, (sum, p) => sum + store.length(p.path)),
+      folders: ref.read(scanFoldersProvider),
+      now: ref.read(scanClockProvider)(),
+    );
+    if (options != null) widget.onSave?.call(options);
+  }
+
   Future<void> _delete() async {
     final session = ref.read(scanSessionProvider.notifier);
     final l = AppLocalizations.of(context);
@@ -313,7 +328,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
         cancelLabel: l.scan_add_pages,
         onCancel: widget.onAddPages,
         doneLabel: l.common_save,
-        onDone: pages.isEmpty ? null : widget.onSave,
+        onDone: pages.isEmpty || widget.onSave == null ? null : _save,
       ),
       body: Column(
         children: [

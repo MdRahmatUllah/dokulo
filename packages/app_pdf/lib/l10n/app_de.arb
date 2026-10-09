@@ -357,5 +357,18 @@
   "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei",
   "scan_brightness": "Helligkeit",
   "scan_contrast": "Kontrast",
-  "toast_applied_all": "Auf alle Seiten angewendet"
+  "toast_applied_all": "Auf alle Seiten angewendet",
+  "scan_save_title": "Scan speichern",
+  "scan_name": "Name",
+  "scan_format": "Format",
+  "scan_quality": "Qualität",
+  "scan_quality_smaller": "Kleiner",
+  "scan_quality_smaller_desc": "Für Upload-Limits",
+  "scan_quality_recommended": "Empfohlen",
+  "scan_quality_recommended_desc": "Scharfer Text",
+  "scan_quality_best": "Beste",
+  "scan_quality_best_desc": "Zum Drucken",
+  "scan_folder": "Ordner",
+  "scan_save_pdf": "{count, plural, =1{PDF speichern · 1 Seite} other{PDF speichern · {count} Seiten}}",
+  "scan_save_images": "{count, plural, =1{1 Bild speichern} other{{count} Bilder speichern}}"
 }

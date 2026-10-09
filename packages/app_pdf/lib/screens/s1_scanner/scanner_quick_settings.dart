@@ -73,7 +73,7 @@ class _QuickSettings extends ConsumerWidget {
         DkSettingsRow(
           title: l.scan_default_filter,
           value: prefs.filter.label(l),
-          onTap: () => _pick(
+          onTap: () => showDkPickSheet(
             context,
             l.scan_default_filter,
             ScanFilterChoice.values,
@@ -85,7 +85,7 @@ class _QuickSettings extends ConsumerWidget {
         DkSettingsRow(
           title: l.scan_page_size,
           value: prefs.pageSize.label(l),
-          onTap: () => _pick(
+          onTap: () => showDkPickSheet(
             context,
             l.scan_page_size,
             ScanPageSizeLabel.ordered(Localizations.localeOf(context)),
@@ -104,33 +104,33 @@ class _QuickSettings extends ConsumerWidget {
       ],
     );
   }
+}
 
-  /// A choice in a second small sheet: radio rows; picking one closes it.
-  static Future<void> _pick<T>(
-    BuildContext context,
-    String title,
-    List<T> options,
-    T current,
-    String Function(T) label,
-    Future<void> Function(T) onPick,
-  ) => showDkSheet<void>(
-    context,
-    title: title,
-    body: Builder(
-      builder: (sheet) => RadioGroup<T>(
-        groupValue: current,
-        onChanged: (v) {
-          if (v == null) return;
-          onPick(v);
-          Navigator.of(sheet).pop();
-        },
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final o in options) DkRadioRow<T>(value: o, label: label(o)),
-          ],
-        ),
+/// A choice in a second small sheet: radio rows; picking one closes it.
+Future<void> showDkPickSheet<T>(
+  BuildContext context,
+  String title,
+  List<T> options,
+  T current,
+  String Function(T) label,
+  Future<void> Function(T) onPick,
+) => showDkSheet<void>(
+  context,
+  title: title,
+  body: Builder(
+    builder: (sheet) => RadioGroup<T>(
+      groupValue: current,
+      onChanged: (v) {
+        if (v == null) return;
+        onPick(v);
+        Navigator.of(sheet).pop();
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          for (final o in options) DkRadioRow<T>(value: o, label: label(o)),
+        ],
       ),
     ),
-  );
-}
+  ),
+);

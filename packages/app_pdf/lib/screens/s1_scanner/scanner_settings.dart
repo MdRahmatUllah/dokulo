@@ -28,22 +28,29 @@ class ScannerPrefs {
     this.autoCrop = true,
     this.filter = ScanFilterChoice.autoColour,
     this.pageSize = ScanPageSize.auto,
+    this.folder,
   });
 
   final bool autoCapture, autoCrop;
   final ScanFilterChoice filter;
   final ScanPageSize pageSize;
 
+  /// The Save sheet's last folder, relative to the user folder (null: its
+  /// top).
+  final String? folder;
+
   ScannerPrefs copyWith({
     bool? autoCapture,
     bool? autoCrop,
     ScanFilterChoice? filter,
     ScanPageSize? pageSize,
+    String? Function()? folder,
   }) => ScannerPrefs(
     autoCapture: autoCapture ?? this.autoCapture,
     autoCrop: autoCrop ?? this.autoCrop,
     filter: filter ?? this.filter,
     pageSize: pageSize ?? this.pageSize,
+    folder: folder == null ? this.folder : folder(),
   );
 
   Map<String, Object?> toJson() => {
@@ -51,6 +58,7 @@ class ScannerPrefs {
     'autoCrop': autoCrop,
     'filter': filter.name,
     'pageSize': pageSize.name,
+    'folder': ?folder,
   };
 
   static ScannerPrefs fromJson(Map<String, Object?> j) => ScannerPrefs(
@@ -61,6 +69,7 @@ class ScannerPrefs {
         ScanFilterChoice.autoColour,
     pageSize:
         ScanPageSize.values.asNameMap()[j['pageSize']] ?? ScanPageSize.auto,
+    folder: j['folder'] as String?,
   );
 }
 
@@ -138,4 +147,6 @@ class ScannerSettings extends _$ScannerSettings {
   Future<void> setFilter(ScanFilterChoice f) => _set(state.copyWith(filter: f));
 
   Future<void> setPageSize(ScanPageSize s) => _set(state.copyWith(pageSize: s));
+
+  Future<void> setFolder(String? f) => _set(state.copyWith(folder: () => f));
 }
