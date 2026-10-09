@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 16:30
+last-seen: 2026-10-09 16:31
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-0230 Long-press on the Scan button opens the scan-mode popover — claimed 2026-10-09 16:12.
+DK-0230 in review as PR #1203: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

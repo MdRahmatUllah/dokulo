@@ -1559,3 +1559,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:11 · agent-0 DK-0229 · done (#1200)
 - 2026-10-09 16:11 · agent-0 DK-0237 · done (#1200)
 - 2026-10-09 16:12 · agent-0 DK-0230 · claimed: Long-press on the Scan button opens the scan-mode popover
+- 2026-10-09 16:31 · agent-0 DK-0230 · PR #1203 open; review requested from all
