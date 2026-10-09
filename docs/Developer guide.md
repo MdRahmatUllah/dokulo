@@ -313,6 +313,21 @@ runs (`toolOptionValuesProvider`), so going back and opening the tool again
 keeps them. A tool without a definition yet shows its input and its name on a
 disabled button.
 
+What a tool takes is `ToolInput.of(id)` (`lib/tools/tool_inputs.dart`, UI spec
+§21: the kinds, at least / at most how many). Opened without a file, T2 shows
+its picker card (DK-0371): "Choose a PDF / images / files", the 5 most recent
+files the tool takes, Browse device and, for image tools, Choose photos
+(`devicePickerProvider`, file_picker; tests override it). A picked file is
+copied into the sandbox inbox first and stays out of the index. A tool that
+needs two files (Merge, Compare) shows checkboxes until it has them. A locked
+PDF input gets "This file is locked" with a password field and Unlock under
+its card (DK-0372); the password is checked by opening the file and kept in
+memory for the run (`ToolSubject.passwordOf`). Until every input is unlocked
+the button waits with "Unlock {name} to continue". The estimate (DK-0373) is
+the definition's `estimate`, recomputed in the same frame as any option
+change; a tool words it as an estimate ("About 1.9 MB", "≈ 0.9 MB"), never a
+promise.
+
 Running (UI spec §20.2, DK-0375…DK-0377): the button starts the job through
 `toolRunnerProvider` (the JobQueue, with a fresh temp output folder; tests
 override it with a simulated run). Under 2 s nothing shows but the press; from
