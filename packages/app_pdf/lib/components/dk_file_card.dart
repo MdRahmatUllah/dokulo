@@ -9,6 +9,7 @@ import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_tappable.dart';
 import 'dk_text_rules.dart';
+import 'motion/dk_transition_motion.dart';
 
 /// How a file card lays out (UI spec §11.2).
 enum DkFileCardVariant {
@@ -42,7 +43,8 @@ enum DkFileKind { pdf, image, html }
 /// `primaryContainer` row tint; [locked] blurs the thumbnail with a lock on
 /// it; [progress] draws a 2 dp `color.primary` line along the bottom;
 /// [encrypted] puts a 16 dp lock after the meta. While [thumbnail] is null
-/// (it renders lazily, from doc_core's ThumbnailCache) a skeleton shows.
+/// (it renders lazily, from doc_core's ThumbnailCache) a skeleton shows,
+/// and the thumbnail fades in over it.
 class DkFileCard extends StatefulWidget {
   const DkFileCard({
     super.key,
@@ -128,6 +130,8 @@ class _DkFileCardState extends State<DkFileCard> {
       // Loading: a skeleton block.
       (_, null) => ColoredBox(color: c.surfaceSunken),
     };
+    // The thumbnail fades in as it renders (DK-0620).
+    page = DkThumbFade(loaded: w.thumbnail != null, child: page);
     if (w.locked) {
       page = Stack(
         fit: StackFit.expand,

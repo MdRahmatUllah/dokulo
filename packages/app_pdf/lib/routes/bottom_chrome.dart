@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../components/dk_mini_job_bar.dart';
 import '../components/dk_progress_sheet.dart';
 import '../components/dk_sheet.dart';
+import '../components/dk_toast.dart';
 import '../l10n/app_localizations.dart';
+import '../l10n/formats.dart';
 import '../providers/job_providers.dart';
 import '../theme/dk_tokens.dart';
 import '../tools/tool_catalogue.dart';
@@ -48,7 +50,7 @@ class DkBottomChrome extends ConsumerWidget {
             label: label,
             progress: p?.fraction ?? 0,
             jobs: jobs.length,
-            onTap: () => _showProgress(context, job.id),
+            onTap: () => showJobProgress(context, job.id),
           ),
         ),
         ?child,
@@ -59,9 +61,15 @@ class DkBottomChrome extends ConsumerWidget {
 
 /// The progress sheet of the job with row [id], live until the job ends
 /// (then it closes). Cancel stops the job; Keep working closes the sheet.
+/// A job that isn't running (a stale link) gets a toast instead.
 // ponytail: several jobs open the newest one's sheet; a job list when
 // someone runs three at once and asks for it.
-void _showProgress(BuildContext context, int id) {
+void showJobProgress(BuildContext context, int id) {
+  final container = ProviderScope.containerOf(context, listen: false);
+  if (!container.read(runningJobsProvider).any((j) => j.id == id)) {
+    showDkToast(context, AppLocalizations.of(context).link_job_finished);
+    return;
+  }
   showDkSheet<void>(
     context,
     body: Consumer(
@@ -85,7 +93,9 @@ void _showProgress(BuildContext context, int id) {
           progress: p?.fraction ?? 0,
           page: p?.pageIndex == null ? null : p!.pageIndex! + 1,
           pageCount: p?.pageCount,
-          timeLeft: p?.etaSeconds == null ? null : _duration(p!.etaSeconds!),
+          timeLeft: p?.etaSeconds == null
+              ? null
+              : formatSeconds(p!.etaSeconds!),
           onCancel: () {
             job.cancel();
             Navigator.of(context).maybePop();
@@ -96,8 +106,3 @@ void _showProgress(BuildContext context, int id) {
     ),
   );
 }
-
-/// "20 s", "3 min": SI units, the same in EN and DE.
-// ponytail: whole minutes from 60 s; hours when a job runs that long.
-String _duration(int seconds) =>
-    seconds < 60 ? '$seconds s' : '${(seconds / 60).ceil()} min';

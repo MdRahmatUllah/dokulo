@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 
 import '../db/database.dart';
+import '../pdf/pdf_engine.dart';
 
 /// Where the user's files live and how files move (DK-0006).
 ///
@@ -104,6 +105,46 @@ class FileStore {
         }
       }
     });
+  }
+
+  /// The folder of [path] inside the user folder ("Taxes", "Work/2026" with
+  /// the platform's separator),
+  /// or null when it is the user folder itself or outside it (the inbox,
+  /// temp): a tool's result is saved next to its input.
+  String? subfolderOf(String path) {
+    if (!_inUserFolder(path)) return null;
+    final parent = File(path).parent.path;
+    if (parent.length <= userFolder.path.length) return null;
+    return parent.substring(userFolder.path.length + 1);
+  }
+
+  /// [save]s a tool's [output] and adds it to the index, with its page
+  /// count when it is a PDF (T3's Save, DK-0379).
+  Future<FileEntry> saveIndexed(
+    DokuloDatabase db,
+    File output, {
+    required String name,
+    String? subfolder,
+  }) async {
+    final saved = await save(output, name: name, subfolder: subfolder);
+    final stat = await saved.stat();
+    final pages = saved.path.toLowerCase().endsWith('.pdf')
+        ? (await PdfEngine.inspect(saved.path)).pageCount
+        : 0;
+    final id = await db
+        .into(db.files)
+        .insert(
+          FilesCompanion.insert(
+            path: saved.path,
+            name: _name(saved),
+            size: stat.size,
+            pages: Value(pages),
+            created: stat.changed,
+            modified: stat.modified,
+            folderId: Value(await _folderId(db, saved.parent)),
+          ),
+        );
+    return (db.select(db.files)..where((f) => f.id.equals(id))).getSingle();
   }
 
   /// The folder row for [dir] (null for the user folder itself), creating
