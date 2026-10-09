@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 17:06
+last-seen: 2026-10-09 17:10
 last-read: 290
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0601 Empty state: Home recents — claimed 2026-10-09 17:10.
 
 ## Next
 

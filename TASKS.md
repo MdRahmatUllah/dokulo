@@ -622,7 +622,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0598 | Ph3 | B | P0 | M | iOS Share Extension UI: "Open in Dokulo" card with 6 quick tools | open |  | DK-0235 DK-0236 |  |
 | DK-0599 | Ph7 | B | P2 | M | iOS Files Action Extension ("Dokulo") opening the X1 picker (3 days) | assigned | agent-1 | DK-0387 DK-0707 |  |
 | DK-0600 | Ph3 | B | P1 | S | Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo") | open |  | DK-0235 |  |
-| DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | assigned | agent-0 | DK-0196 DK-0053 |  |
+| DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | in-progress | agent-0 | DK-0196 DK-0053 |  |
 | DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | assigned | agent-0 | DK-0196 DK-0054 |  |
 | DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | assigned | agent-0 | DK-0196 DK-0055 |  |
 | DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | assigned | agent-0 | DK-0196 DK-0056 |  |
