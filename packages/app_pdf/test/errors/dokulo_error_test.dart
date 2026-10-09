@@ -166,4 +166,85 @@ void main() {
     expect(large.actions, [DkRecovery.splitFirst]);
     expect(DkRecovery.splitFirst.label(en), 'Split it first');
   });
+
+  test('the rest of the catalogue, EN and DE, with its actions (DK-0614, '
+      'DK-0615, DK-0616, DK-0618, DK-0619)', () {
+    final cases = <DokuloError, (String, String, List<DkRecovery>)>{
+      const DokuloError(DkErrorSituation.unsupportedForm): (
+        "This form type can't be filled on phones.",
+        'Dieser Formulartyp lässt sich auf Handys nicht ausfüllen.',
+        [DkRecovery.openReadOnly],
+      ),
+      const DokuloError(DkErrorSituation.modelMissing, modelBytes: 440000000): (
+        'Translation needs a language model (440 MB).',
+        'Für die Übersetzung wird ein Sprachmodell benötigt (440 MB).',
+        [DkRecovery.download],
+      ),
+      const DokuloError(DkErrorSituation.lowMemory): (
+        'Close other apps to use AI – it needs about 2 GB free.',
+        'Schließe andere Apps, um KI zu nutzen – sie braucht etwa 2 GB freien '
+            'Speicher.',
+        [DkRecovery.tryAgain],
+      ),
+      const DokuloError(DkErrorSituation.offline): (
+        "You're offline.",
+        'Du bist offline.',
+        [DkRecovery.tryAgain],
+      ),
+    };
+    for (final MapEntry(key: error, value: (english, german, actions))
+        in cases.entries) {
+      expect(error.title(en), english);
+      expect(error.title(de), german);
+      expect(error.actions, actions, reason: error.situation.name);
+    }
+    expect(DkRecovery.openReadOnly.label(de), 'Schreibgeschützt öffnen');
+  });
+
+  test('Low memory: AI may not load with too little free memory (DK-0616)', () {
+    const tight = DeviceCapabilities(
+      totalRam: 8 * 1024 * 1024 * 1024,
+      availableRam: 200 * 1024 * 1024,
+    );
+    expect(
+      aiLoadError(tight, gemmaNeeds)?.situation,
+      DkErrorSituation.lowMemory,
+    );
+    const roomy = DeviceCapabilities(
+      totalRam: 8 * 1024 * 1024 * 1024,
+      availableRam: 6 * 1024 * 1024 * 1024,
+    );
+    expect(aiLoadError(roomy, gemmaNeeds), isNull);
+  });
+
+  test('Offline: the web tool failing to load reads as offline (DK-0619)', () {
+    expect(
+      DokuloError.from(JobFailed('WebToPdfException(loadFailed) net::ERR', ''))
+          .situation,
+      DkErrorSituation.offline,
+    );
+  });
+
+  testWidgets('reproducible with the fixtures: the XFA form, and an engine '
+      'failure that reads as Unexpected with a code (DK-0614, DK-0618)', (
+    tester,
+  ) async {
+    await tester.runAsync(() async {
+      final xfa = await thrownBy(
+        () => PdfEngine.ensureFillable(fixture('form-xfa.pdf')),
+      );
+      expect(xfa.situation, DkErrorSituation.unsupportedForm);
+      final odd = await thrownBy(
+        () => PdfEngine.render(
+          fixture('Invoice INV-2026-014.pdf'),
+          99,
+          width: 100,
+        ),
+      );
+      expect(odd.situation, DkErrorSituation.unexpected);
+      expect(odd.title(en), contains('(code DK-0190)'));
+      expect(odd.actions.first, DkRecovery.tryAgain);
+      expect(odd.actions.last, DkRecovery.sendReport);
+    });
+  });
 }

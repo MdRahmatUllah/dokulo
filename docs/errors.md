@@ -45,6 +45,12 @@ password). The device is read again for every check; an unknown value never
 blocks. A killed job whose preflight fails at the next launch keeps its row
 and is reported as "Couldn't finish".
 
+Elsewhere: `PdfEngine.ensureFillable` raises Unsupported form for an XFA
+form (Fill form calls it first; DK-0614); `aiLoadError(device, needs)` turns
+AI's load check into Low memory (DK-0616); the web tool's `loadFailed` reads
+as Offline (DK-0619); the model manager (M13) raises Model missing with the
+model's size (DK-0615).
+
 ## Presentation
 
 Inline where it happens, whenever possible: a field error (a wrong password),
