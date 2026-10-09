@@ -78,6 +78,11 @@ const found = [
 
 void main() {
   late FakeCamera camera;
+  Future<void> capture(WidgetTester tester) async {
+    await tester.tap(find.byType(DkShutterButton));
+    await tester.pumpAndSettle();
+  }
+
   late ProviderContainer container;
   var closed = 0, imported = 0, reviewed = 0;
 
@@ -100,6 +105,7 @@ void main() {
           (ref) =>
               (_) async => quad,
         ),
+        scanStoreProvider.overrideWithValue(MemoryScanStore()),
       ],
     );
     addTearDown(container.dispose);
@@ -150,10 +156,8 @@ void main() {
     final semantics = tester.ensureSemantics();
     await pump(tester);
     expect(find.byType(DkCountBadge), findsNothing);
-    await tester.tap(find.byType(DkShutterButton));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byType(DkShutterButton));
-    await tester.pumpAndSettle();
+    await capture(tester);
+    await capture(tester);
     expect(camera.shots, 2);
     expect(container.read(scanSessionProvider), hasLength(2));
     expect(find.text('2'), findsOneWidget);
@@ -242,8 +246,17 @@ void main() {
         locale: locale,
         quad: found,
       );
+      // Two frames with the same quad: steady, "Ready".
       camera.frame();
-      await tester.tap(find.byType(DkShutterButton));
+      await tester.pumpAndSettle();
+      camera.frame();
+      await capture(tester);
+      // The stack's thumbnail: decode it for real.
+      await tester.runAsync(() async {
+        for (final e in find.byType(Image).evaluate()) {
+          await precacheImage((e.widget as Image).image, e);
+        }
+      });
       await tester.pumpAndSettle();
       await expectLater(
         find.byType(S1Screen),

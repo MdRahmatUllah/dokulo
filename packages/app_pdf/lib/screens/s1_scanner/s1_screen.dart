@@ -41,10 +41,18 @@ class S1Screen extends ConsumerStatefulWidget {
     required this.onReview,
     required this.onSettings,
     this.initialMode,
+    this.retake,
+    this.onRetaken,
   });
 
   final VoidCallback onClose, onImport, onReview, onSettings;
   final DkScanMode? initialMode;
+
+  /// Retake (DK-0350; opened from S2): the 0-based page this capture
+  /// replaces. The hint says "Retake page 3" and [onRetaken] follows the
+  /// shot.
+  final int? retake;
+  final VoidCallback? onRetaken;
 
   @override
   ConsumerState<S1Screen> createState() => _S1ScreenState();
@@ -151,7 +159,14 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       final jpeg = await _camera.capture();
       if (!mounted) return;
       final session = ref.read(scanSessionProvider.notifier);
-      session.add(ScannedPage(jpeg, quad: _quad));
+      if (widget.retake case final i?) {
+        // Retake (DK-0350): the page is replaced and S2 comes back.
+        await session.replace(i, jpeg, quad: _quad);
+        widget.onRetaken?.call();
+        return;
+      }
+      await session.add(jpeg, quad: _quad);
+      if (!mounted) return;
       _speak(l.camera_page_captured(ref.read(scanSessionProvider).length));
       if (!reduce) {
         setState(() => _flying = jpeg);
@@ -199,7 +214,11 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       steady: _steady,
     );
     _announcer.update(hintKind, hintKind.text(l), _clock.elapsed);
-    final hint = DkHintPill(hintKind.text(l));
+    final hint = DkHintPill(
+      widget.retake == null
+          ? hintKind.text(l)
+          : l.camera_retake_page(widget.retake! + 1),
+    );
     final modes = _ModeSwitcher(
       mode: mode,
       onMode: (m) => ref.read(scanModeStateProvider.notifier).set(m),
@@ -239,6 +258,9 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       ]).animate(_pop),
       child: _PageStack(
         pages: pages,
+        image: pages.isEmpty
+            ? null
+            : ref.read(scanStoreProvider).image(pages.last.path),
         onTap: pages.isEmpty ? null : widget.onReview,
       ),
     );
@@ -704,9 +726,16 @@ class _ModeSwitcher extends StatelessWidget {
 /// The last page captured (48 × 60, a 2 dp white border) with the count: to
 /// S2. Empty until the first capture.
 class _PageStack extends StatelessWidget {
-  const _PageStack({required this.pages, required this.onTap});
+  const _PageStack({
+    required this.pages,
+    required this.image,
+    required this.onTap,
+  });
 
   final List<ScannedPage> pages;
+
+  /// The last page's photo.
+  final ImageProvider? image;
   final VoidCallback? onTap;
 
   @override
@@ -734,10 +763,13 @@ class _PageStack extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   clipBehavior: Clip.antiAlias,
-                  child: Image.memory(
-                    pages.last.jpeg,
-                    fit: BoxFit.cover,
-                    gaplessPlayback: true,
+                  child: RotatedBox(
+                    quarterTurns: pages.last.turns,
+                    child: Image(
+                      image: image!,
+                      fit: BoxFit.cover,
+                      gaplessPlayback: true,
+                    ),
                   ),
                 ),
               ),

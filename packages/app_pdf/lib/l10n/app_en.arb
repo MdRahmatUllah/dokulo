@@ -924,6 +924,47 @@
   "@camera_flash_menu": {
     "description": "S1: the flash menu (Off, On, Auto), opened with a long press on the flash button."
   },
+  "camera_retake_page": "Retake page {number}",
+  "@camera_retake_page": {
+    "description": "S1 opened from S2 Retake: the label over the camera.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "scan_add_pages": "Add pages",
+  "@scan_add_pages": {
+    "description": "S2: back to the camera to add pages (the bar's left button, and the tray's +)."
+  },
+  "scan_crop": "Crop",
+  "@scan_crop": {
+    "description": "S2 edit row: crop the page."
+  },
+  "scan_rotate": "Rotate",
+  "@scan_rotate": {
+    "description": "S2 edit row: rotate the page 90 degrees."
+  },
+  "scan_filter": "Filter",
+  "@scan_filter": {
+    "description": "S2 edit row: the page's filter."
+  },
+  "scan_retake": "Retake",
+  "@scan_retake": {
+    "description": "S2 edit row: take this page again."
+  },
+  "scan_page_of": "{number} of {total}",
+  "@scan_page_of": {
+    "description": "S2: which page is shown, under the preview.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "camera_review": "{count, plural, =1{Review 1 page} other{Review {count} pages}}",
   "@camera_review": {
     "description": "S1 page stack: opens S2 with the captured pages (screen readers).",
