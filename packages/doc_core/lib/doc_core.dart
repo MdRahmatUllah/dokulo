@@ -17,6 +17,7 @@ export 'src/files/file_store.dart';
 export 'src/files/locked_crypto.dart';
 export 'src/files/text_indexer.dart';
 export 'src/pdf/pdf_annotations.dart';
+export 'src/pdf/page_edit.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/pdf_forms.dart';
 export 'src/pdf/compress/raster_fallback.dart';
