@@ -31,12 +31,17 @@ class ToolResult {
     required this.inputs,
     required this.output,
     required this.took,
+    this.chain = const [],
   });
 
   final String toolId;
   final List<FileEntry> inputs;
   final JobOutput output;
   final Duration took;
+
+  /// The tools run so far in this chain, this one last (DK-0386): after two,
+  /// T3 offers "Save as workflow".
+  final List<String> chain;
 
   /// The files the job wrote.
   List<String> get files => switch (output) {
@@ -166,6 +171,7 @@ class ToolDefinition {
     this.stopTitle,
     this.summary,
     this.partLine,
+    this.next = const [],
   });
 
   final String id;
@@ -202,6 +208,10 @@ class ToolDefinition {
   /// A part's line in a multi-file result ("Pages 1–3 · 420 KB", DK-0384);
   /// null: its size.
   final String Function(AppLocalizations, ToolResult, int part)? partLine;
+
+  /// T3's Next chips, 2–4 tool ids (UI spec §21 "Next"): each opens that
+  /// tool with this result as its input (DK-0386).
+  final List<String> next;
 
   /// Every option's starting value.
   ToolValues get initialValues => {

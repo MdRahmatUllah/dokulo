@@ -49,11 +49,23 @@ abstract final class Routes {
   static const scanImport = '/scan/review?source=photos';
 
   /// T2; [files] (row ids) are its input, in order (X1, a share, a widget,
-  /// an extension): `?file=` once per file.
-  static String tool(String toolId, {List<String> files = const []}) => Uri(
-    path: '/tool/$toolId',
-    queryParameters: files.isEmpty ? null : {'file': files},
-  ).toString();
+  /// an extension): `?file=` once per file. [chained]: the input is the
+  /// result before it (a Next chip, DK-0386).
+  static String tool(
+    String toolId, {
+    List<String> files = const [],
+    bool chained = false,
+  }) {
+    final query = {
+      if (files.isNotEmpty) 'file': files,
+      if (chained) 'chain': '1',
+    };
+    return Uri(
+      path: '/tool/$toolId',
+      queryParameters: query.isEmpty ? null : query,
+    ).toString();
+  }
+
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
   static String viewer(String fileId, {bool edit = false}) =>
@@ -212,6 +224,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           final screen = ToolOptionsScreen(
             definition: ToolDefinitions.of(toolId),
             fileIds: [for (final f in files) int.tryParse(f) ?? -1],
+            chained: s.uri.queryParameters['chain'] == '1',
           );
           return files.isEmpty
               ? screen

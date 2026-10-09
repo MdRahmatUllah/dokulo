@@ -357,8 +357,13 @@ one inline action, "Retake page 7", DK-0383); without one it shows the
 output's size, or "3 files", over "From Zeugnisse.pdf · 34 pages". A
 multi-file result (DK-0384) lists its parts with the definition's `partLine`
 ("Pages 1–3 · 420 KB", or their size) and no name field; Save keeps every
-part next to the input. Share, the split Save's menu and Next chips come
-with DK-1077, DK-0380, DK-0385 and DK-0386.
+part next to the input. The definition's `next` (2–4 tool ids, §21) are
+T3's Next chips (DK-0386), each shown only when that tool takes this result:
+a chip opens that tool's T2 with the result as its input
+(`chainInputProvider`, `/tool/:id?chain=1`), the saved files if Save ran,
+else the outputs as they are; it takes T3's place. `ToolResult.chain` lists
+the tools run so far ("Save as workflow" after two: DK-1078). Share and the
+split Save's menu come with DK-1077, DK-0380 and DK-0385.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
