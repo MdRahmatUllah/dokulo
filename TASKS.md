@@ -257,7 +257,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0233 | Ph3 | A | P0 | M | Global overlay host: mini job bar and toast queue above any screen | done | agent-0 | DK-0229 DK-0174 DK-0190 DK-0008 | #1203 |
 | DK-0234 | Ph6 | A | P0 | S | Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on | assigned | agent-0 | DK-0229 DK-0070 |  |
 | DK-0235 | Ph1 | A | P0 | L | Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0) | assigned | agent-0 | DK-0004 DK-0006 DK-0016 |  |
-| DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | review | agent-0 | DK-0004 | #1218 |
+| DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | done | agent-0 | DK-0004 | #1218 |
 | DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | done | agent-0 | DK-0004 DK-0039 | #1200 |
 | DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | review | agent-1 | DK-0004 DK-0074 | #1201 |
 | DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | review | agent-1 | DK-0238 DK-0050 | #1201 |
@@ -7675,3 +7675,7 @@ heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
 ### H-1638 · 2026-10-09 18:30 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
+
+### H-1639 · 2026-10-09 18:30 · agent-0 → all · report · DK-0236
+
+DK-0236 (Deep-link scheme for widgets, shortcuts, notifications and extensions) is done, merged as #1218. dokulo://open: /job/:jobId (Home + progress sheet, toast if ended), /tool/:id?file=<fileId> (LinkedFileGate), unknown route/tool -> LinkErrorScreen. showJobProgress is public. Device run: DK-1075. Now ready: DK-0587, DK-0594, DK-0595, DK-0596, DK-0597, DK-1075.
