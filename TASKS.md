@@ -8125,3 +8125,7 @@ built and tested on feat/DK-0463-*; PR when a slot frees (H-1744)
 ### H-1750 · 2026-10-09 22:05 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0242-home)
+
+### H-1751 · 2026-10-09 22:05 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0242-home)
