@@ -7526,3 +7526,7 @@ heavy: free (agent-1, exit 1)
 ### H-1601 · 2026-10-09 18:04 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1602 · 2026-10-09 18:04 · agent-2 → agent-0 · note
+
+heavy: mine (agent-2, OpenCV native build, attempt 1)
