@@ -5,6 +5,7 @@ import 'package:app_pdf/providers/camera_permission.dart';
 import 'package:app_pdf/screens/s1_scanner/s1_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/s1_scanner/scanner_camera.dart';
+import 'package:app_pdf/screens/s2_review/s2_screen.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -61,6 +62,7 @@ Future<GoRouter> pumpAt(
       overrides: [
         cameraPermissionProvider.overrideWithValue(_Granted()),
         scannerCameraProvider.overrideWith((ref) => _FakeCamera()),
+        scanStoreProvider.overrideWithValue(MemoryScanStore()),
         ...overrides,
       ],
       child: MaterialApp.router(
@@ -98,7 +100,6 @@ void main() {
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
     Routes.welcome: ('Onboarding', false),
-    Routes.scanReview: ('S2', false),
     '/tool/compress': ('T2 compress', false),
     '/tool/compress/result': ('T3 compress', false),
     '/viewer/f42?mode=edit': ('V2 f42', false),
@@ -206,6 +207,14 @@ void main() {
     await tester.pumpAndSettle();
     expect(title(tester), 'H1');
     expect(tabBarShown(tester), isTrue);
+  });
+
+  testWidgets('cold start at /scan/review shows S2, no tab bar', (
+    tester,
+  ) async {
+    await pumpAt(tester, Routes.scanReview);
+    expect(find.byType(S2Screen), findsOneWidget);
+    expect(tabBarShown(tester), isFalse);
   });
 
   testWidgets('cold start at /scan shows S1, no tab bar', (tester) async {
