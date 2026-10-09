@@ -4,6 +4,7 @@ library;
 export 'src/db/database.dart';
 export 'src/files/file_store.dart';
 export 'src/files/text_indexer.dart';
+export 'src/pdf/pdf_annotations.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/id_card_page.dart';
 export 'src/pdf/pdf_forms.dart';

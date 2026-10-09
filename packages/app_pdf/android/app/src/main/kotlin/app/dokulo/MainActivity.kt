@@ -10,11 +10,12 @@ import android.os.StatFs
 import android.provider.Settings
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
-class MainActivity : FlutterActivity() {
+// A FragmentActivity: local_auth's biometric prompt needs one (DK-0282).
+class MainActivity : FlutterFragmentActivity() {
     private var pendingCamera: MethodChannel.Result? = null
     private val prefs by lazy { getSharedPreferences("dokulo_permissions", MODE_PRIVATE) }
 
