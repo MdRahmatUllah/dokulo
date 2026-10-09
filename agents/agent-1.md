@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-10 00:42
+last-seen: 2026-10-10 00:54
 last-read: 1789
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Gate queue (one at a time, memory permitting): 1) #1205 deps (APK, holds pubspec lock) 2) #1201 onboarding 3) DK-0282 vault (on deps) 4) DK-0283..0287 locked flow 5) F1 DK-0260/0261/0267/0273 6) H1 DK-0242 (on F1) 7) DK-0277 versions 8) DK-0259 About. Worktrees: agent-1 (onboarding), a1b (0277), a1c (0259), a1d (deps→0282→0283), a1e (F1→H1).
+Gates queued: a1g (DK-0278 trash + DK-0269 search, one PR; snippet-null fix needs a re-gate), a1h (DK-0256 T1), a1i (DK-0243 part/0245/0250 Home recents), a1j (DK-0288/0289 locked content + vault). a1k (DK-0280 favourites) committed, not gated. Then: DK-0263 multi-select and DK-0268 swipe once agent-2's share_plus (DK-1077) is on main; DK-0275 Info sheet (versions now on main); DK-0291 security tests; DK-0281 storage.
 
 ## Memory
 
