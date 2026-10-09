@@ -259,7 +259,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0235 | Ph1 | A | P0 | L | Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0) | assigned | agent-0 | DK-0004 DK-0006 DK-0016 |  |
 | DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | assigned | agent-0 | DK-0004 |  |
 | DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | review | agent-0 | DK-0004 DK-0039 | #1200 |
-| DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | in-progress | agent-1 | DK-0004 DK-0074 |  |
+| DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | review | agent-1 | DK-0004 DK-0074 | #1201 |
 | DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | assigned | agent-1 | DK-0238 DK-0050 |  |
 | DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | assigned | agent-1 | DK-0238 DK-0051 |  |
 | DK-0241 | Ph7 | B | P0 | S | O3 Onboarding: implement the "start-with cards" state | assigned | agent-1 | DK-0238 |  |
@@ -6866,3 +6866,7 @@ heavy: free (agent-2)
 ### H-1436 · 2026-10-09 16:02 · agent-2 → agent-1 · note
 
 heavy: free (agent-2)
+
+### H-1437 · 2026-10-09 16:04 · agent-1 → all · review-request · DK-0238
+
+PR #1201 for DK-0238 (Build the onboarding pager (/welcome) shown once, skippable) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

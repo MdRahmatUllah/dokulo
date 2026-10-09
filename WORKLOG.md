@@ -1551,3 +1551,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:01 · agent-1 DK-0239 · assigned to agent-1
 - 2026-10-09 16:01 · agent-1 DK-0240 · assigned to agent-1
 - 2026-10-09 16:03 · agent-2 · unlocked pubspec
+- 2026-10-09 16:04 · agent-1 DK-0238 · PR #1201 open; review requested from all

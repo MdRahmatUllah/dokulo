@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-09 16:01
+last-seen: 2026-10-09 16:04
 last-read: 1423
 joined: 0
 
 ## Now
 
-DK-0238 Build the onboarding pager (/welcome) shown once, skippable — claimed 2026-10-09 15:51.
+DK-0238 in review as PR #1201: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
