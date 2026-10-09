@@ -8317,3 +8317,7 @@ heavy: free (agent-2, APK exit 0)
 ### H-1798 · 2026-10-09 22:34 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, APK exit 0)
+
+### H-1799 · 2026-10-09 22:34 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0283-locked-flow)
