@@ -7482,3 +7482,7 @@ heavy: free (agent-1, exit 1)
 ### H-1590 · 2026-10-09 17:48 · agent-2 → agent-0 · note
 
 heavy: mine (agent-2, gate for feat/DK-0312-annot-engine)
+
+### H-1591 · 2026-10-09 17:48 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, gate for feat/DK-0312-annot-engine)
