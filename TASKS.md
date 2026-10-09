@@ -250,7 +250,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | done | agent-1 | DK-0190 | #1155 |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | done | agent-1 | DK-0170 DK-0182 | #1155 |
 | DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | done | agent-2 | DK-0200 | #1183 |
-| DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | assigned | agent-0 | DK-0004 DK-0166 DK-0078 |  |
+| DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | in-progress | agent-0 | DK-0004 DK-0166 DK-0078 |  |
 | DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | assigned | agent-0 | DK-0229 DK-0188 DK-0078 |  |
 | DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | assigned | agent-0 | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
 | DK-0232 | Ph1 | A | P1 | S | Tablet (≥ 840 dp): replace tab bar with DkNavRail | assigned | agent-0 | DK-0229 DK-0168 |  |

@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 15:50
+last-seen: 2026-10-09 15:51
 last-read: 290
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0229 Build the app shell: 4 tabs + raised centre Scan button — claimed 2026-10-09 15:51.
 
 ## Next
 
