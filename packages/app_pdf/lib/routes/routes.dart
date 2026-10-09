@@ -152,18 +152,16 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         routes: [
           fullScreen(
             'review',
-            (s) => s.uri.queryParameters['source'] == 'photos'
-                // The photo picker: DK-0351.
-                ? const PlaceholderScreen('S2', detail: 'photos')
-                : Builder(
-                    builder: (context) => S2Screen(
-                      onAddPages: () => context.canPop()
-                          ? context.pop()
-                          : context.go(Routes.scan),
-                      onDiscard: () => context.go(Routes.home),
-                      onRetake: (i) => context.push(Routes.scanRetake(i)),
-                    ),
-                  ),
+            (s) => Builder(
+              builder: (context) => S2Screen(
+                // The photo picker first (DK-0351).
+                importOnOpen: s.uri.queryParameters['source'] == 'photos',
+                onAddPages: () =>
+                    context.canPop() ? context.pop() : context.go(Routes.scan),
+                onDiscard: () => context.go(Routes.home),
+                onRetake: (i) => context.push(Routes.scanRetake(i)),
+              ),
+            ),
           ),
         ],
       ),

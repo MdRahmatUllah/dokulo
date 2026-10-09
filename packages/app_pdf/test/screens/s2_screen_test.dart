@@ -45,6 +45,7 @@ void main() {
     DkTokens? tokens,
     Locale locale = const Locale('en'),
     bool withSave = true,
+    List<Uint8List>? imported,
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
@@ -57,6 +58,9 @@ void main() {
       overrides: [
         scanStoreProvider.overrideWithValue(store),
         scannerPrefsStoreProvider.overrideWithValue(prefs = MemoryPrefsStore()),
+        scanImportPickerProvider.overrideWithValue(
+          () async => imported ?? const [],
+        ),
         scanClockProvider.overrideWithValue(
           () => DateTime(2026, 10, 7, 14, 32),
         ),
@@ -83,6 +87,7 @@ void main() {
             onDiscard: () => discarded++,
             onSave: withSave ? (o) => saved = o : null,
             onRetake: (i) => retook = i,
+            importOnOpen: imported != null,
           ),
         ),
       ),
@@ -363,6 +368,17 @@ void main() {
         );
       });
     }
+  });
+
+  testWidgets('Import photos: the picked photos join the scan', (tester) async {
+    await pump(tester, count: 1, imported: [photo(4), photo(5)]);
+    expect(pages(), hasLength(3));
+    expect(find.text('Review 3 pages'), findsOneWidget);
+  });
+
+  testWidgets('Import photos cancelled with no pages: leaves', (tester) async {
+    await pump(tester, count: 0, imported: const []);
+    expect(discarded, 1);
   });
 
   test('a page keeps its crop through the manifest', () {

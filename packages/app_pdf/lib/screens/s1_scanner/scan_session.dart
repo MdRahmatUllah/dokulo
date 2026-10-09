@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/painting.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -362,6 +363,18 @@ class ScanSession extends _$ScanSession {
     await _store.clear();
   }
 }
+
+/// Picks photos to add to a scan (DK-0351): the system photo picker, which
+/// needs no library permission (PHPicker on iOS 14+, the photo picker on
+/// Android 13+). JPG, PNG, HEIC and WebP. Empty when the user cancels.
+typedef ScanImportPicker = Future<List<Uint8List>> Function();
+
+@riverpod
+ScanImportPicker scanImportPicker(Ref ref) =>
+    () async => [
+      for (final f in await FilePicker.pickFiles(type: FileType.image))
+        await f.readAsBytes(),
+    ];
 
 /// The scanner's mode (the mode switcher; the Scan button's long press).
 @riverpod

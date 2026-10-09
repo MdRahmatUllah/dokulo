@@ -51,6 +51,7 @@ class S2Screen extends ConsumerStatefulWidget {
     required this.onDiscard,
     this.onSave,
     this.onRetake,
+    this.importOnOpen = false,
   });
 
   final VoidCallback onAddPages;
@@ -64,6 +65,10 @@ class S2Screen extends ConsumerStatefulWidget {
 
   /// The page's index; null hides nothing, but disables the button.
   final ValueChanged<int>? onRetake;
+
+  /// Import photos (DK-0351): the picker opens first, and what is picked
+  /// joins the scan. Cancelling with no pages leaves ([onDiscard]).
+  final bool importOnOpen;
 
   @override
   ConsumerState<S2Screen> createState() => _S2ScreenState();
@@ -94,6 +99,19 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     // After a kill: bring the unsaved scan back.
     ref.read(scanSessionProvider.notifier).restore();
     ref.read(scannerSettingsProvider.notifier).load();
+    if (widget.importOnOpen) _import();
+  }
+
+  /// Adds picked photos as pages. ponytail: they keep their full frame;
+  /// the page detection and auto-crop of captures join here once doc_vision's
+  /// detector is wired into the session (#1217).
+  Future<void> _import() async {
+    final photos = await ref.read(scanImportPickerProvider)();
+    final session = ref.read(scanSessionProvider.notifier);
+    for (final jpeg in photos) {
+      await session.add(jpeg);
+    }
+    if (mounted && ref.read(scanSessionProvider).isEmpty) widget.onDiscard();
   }
 
   @override
