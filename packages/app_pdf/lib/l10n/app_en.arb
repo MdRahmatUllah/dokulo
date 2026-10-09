@@ -1171,5 +1171,97 @@
   "pro_card_action": "See Pro",
   "@pro_card_action": {
     "description": "DkProCard button: opens the paywall (X3)."
+  },
+  "files_search_hint": "Search names and text",
+  "@files_search_hint": {
+    "description": "F1 search field."
+  },
+  "files_locked_folder": "Locked folder",
+  "@files_locked_folder": {
+    "description": "F1 special row: opens F2."
+  },
+  "files_recently_deleted": "Recently deleted",
+  "@files_recently_deleted": {
+    "description": "F1 special row: the trash."
+  },
+  "files_folders": "Folders",
+  "@files_folders": {
+    "description": "F1 section header."
+  },
+  "files_files": "Files",
+  "@files_files": {
+    "description": "F1 section header."
+  },
+  "files_grid_view": "Grid view",
+  "@files_grid_view": {
+    "description": "F1 action: switch to the grid."
+  },
+  "files_list_view": "List view",
+  "@files_list_view": {
+    "description": "F1 action: switch to the list."
+  },
+  "files_sort": "Sort",
+  "@files_sort": {
+    "description": "F1 action: the sort menu."
+  },
+  "files_new_folder": "New folder",
+  "@files_new_folder": {
+    "description": "F1 action and the new folder dialog's title."
+  },
+  "files_folder_name": "Folder name",
+  "@files_folder_name": {
+    "description": "New folder dialog: the field's placeholder."
+  },
+  "files_create": "Create",
+  "@files_create": {
+    "description": "New folder dialog: the action."
+  },
+  "files_folder_exists": "A folder with this name already exists.",
+  "@files_folder_exists": {
+    "description": "New folder dialog: the name is taken."
+  },
+  "files_sort_modified": "Date modified",
+  "@files_sort_modified": {
+    "description": "Sort menu."
+  },
+  "files_sort_name": "Name",
+  "@files_sort_name": {
+    "description": "Sort menu."
+  },
+  "files_sort_size": "Size",
+  "@files_sort_size": {
+    "description": "Sort menu."
+  },
+  "files_sort_created": "Date created",
+  "@files_sort_created": {
+    "description": "Sort menu."
+  },
+  "files_sort_ascending": "Ascending",
+  "@files_sort_ascending": {
+    "description": "Sort menu, second group."
+  },
+  "files_sort_descending": "Descending",
+  "@files_sort_descending": {
+    "description": "Sort menu, second group."
+  },
+  "files_empty_title": "No files yet",
+  "@files_empty_title": {
+    "description": "F1 empty root."
+  },
+  "files_empty_body": "Scan a document or open a PDF to get started.",
+  "@files_empty_body": {
+    "description": "F1 empty root."
+  },
+  "files_empty_scan": "Scan a document",
+  "@files_empty_scan": {
+    "description": "F1 empty root: the primary action."
+  },
+  "files_empty_open": "Open a file",
+  "@files_empty_open": {
+    "description": "F1 empty root: the secondary action."
+  },
+  "files_more_actions": "More actions",
+  "@files_more_actions": {
+    "description": "A file row's more button."
   }
 }

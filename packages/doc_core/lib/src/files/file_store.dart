@@ -106,6 +106,52 @@ class FileStore {
     });
   }
 
+  /// A new folder named [name] in folder [parent] (null: the root): the
+  /// directory in the user folder and its row. Throws [FolderNameException]
+  /// for an empty name, one with a path separator, or one already there
+  /// (case-insensitive, as both phones' file systems compare names).
+  Future<int> createFolder(
+    DokuloDatabase db,
+    String name, {
+    int? parent,
+  }) async {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty ||
+        trimmed == '.' ||
+        trimmed == '..' ||
+        trimmed.contains('/') ||
+        trimmed.contains(r'\')) {
+      throw const FolderNameException(FolderNameProblem.invalid);
+    }
+    final siblings =
+        await (db.select(db.folders)..where(
+              (f) => parent == null
+                  ? f.parentId.isNull()
+                  : f.parentId.equals(parent),
+            ))
+            .get();
+    final base = await folderDirectory(db, parent);
+    if (siblings.any((f) => f.name.toLowerCase() == trimmed.toLowerCase()) ||
+        await _dir(base, trimmed).exists()) {
+      throw const FolderNameException(FolderNameProblem.taken);
+    }
+    await _dir(base, trimmed).create(recursive: true);
+    return (await _folderId(db, _dir(base, trimmed)))!;
+  }
+
+  /// Where folder [id] is on disk (null: the user folder).
+  Future<Directory> folderDirectory(DokuloDatabase db, int? id) async {
+    final names = <String>[];
+    for (var at = id; at != null;) {
+      final row = await (db.select(
+        db.folders,
+      )..where((f) => f.id.equals(at!))).getSingle();
+      names.insert(0, row.name);
+      at = row.parentId;
+    }
+    return names.fold(userFolder, _dir);
+  }
+
   /// The folder row for [dir] (null for the user folder itself), creating
   /// the chain of rows on the way.
   Future<int?> _folderId(DokuloDatabase db, Directory dir) async {
@@ -161,4 +207,13 @@ class FileStore {
     }
     return '${dir.path}${Platform.pathSeparator}$candidate';
   }
+}
+
+enum FolderNameProblem { invalid, taken }
+
+class FolderNameException implements Exception {
+  const FolderNameException(this.problem);
+  final FolderNameProblem problem;
+  @override
+  String toString() => 'FolderNameException: ${problem.name}';
 }

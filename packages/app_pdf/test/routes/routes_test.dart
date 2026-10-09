@@ -4,6 +4,8 @@ import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
+import 'package:app_pdf/providers/prefs_providers.dart';
+import 'package:app_pdf/screens/files/files_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
@@ -22,9 +24,16 @@ Future<GoRouter> pumpAt(
 }) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
+  // F1 reads the file index and its view: an empty database, no prefs file.
+  final db = DokuloDatabase.memory();
+  addTearDown(db.close);
   await tester.pumpWidget(
     ProviderScope(
-      overrides: overrides,
+      overrides: [
+        appDatabaseProvider.overrideWithValue(db),
+        prefsProvider.overrideWith(Prefs.memory),
+        ...overrides,
+      ],
       child: MaterialApp.router(
         routerConfig: router,
         theme: dokuloTheme(DkTokens.light), // components read the tokens
@@ -54,7 +63,6 @@ void main() {
   const coldStarts = {
     Routes.home: ('H1', true),
     Routes.tools: ('T1', true),
-    Routes.files: ('F1', true),
     Routes.lockedFolder: ('F2', true),
     Routes.me: ('M1', true),
     Routes.models: ('M2', true),
@@ -75,6 +83,12 @@ void main() {
       expect(tabBarShown(tester), tabs);
     });
   }
+
+  testWidgets('cold start at /files shows F1 with the tab bar', (tester) async {
+    await pumpAt(tester, Routes.files);
+    expect(find.byType(FilesScreen), findsOneWidget);
+    expect(tabBarShown(tester), isTrue);
+  });
 
   testWidgets('cold start at /viewer/42 shows the V1 viewer, no tab bar', (
     tester,
@@ -236,11 +250,11 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 60));
       expect(find.text('H1'), findsOneWidget, reason: 'still fading out');
-      expect(find.text('F1'), findsOneWidget, reason: 'fading in');
+      expect(find.byType(FilesScreen), findsOneWidget, reason: 'fading in');
       await tester.pump(const Duration(milliseconds: 100));
       await tester.pump();
       expect(find.text('H1'), findsNothing, reason: 'offstage after 120 ms');
-      expect(find.text('F1'), findsOneWidget);
+      expect(find.byType(FilesScreen), findsOneWidget);
     });
 
     testWidgets('the scanner slides up in 220 ms; with Reduce Motion it '

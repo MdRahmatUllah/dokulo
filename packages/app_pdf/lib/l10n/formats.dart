@@ -1,3 +1,5 @@
+import 'app_localizations.dart';
+
 import 'package:intl/intl.dart';
 
 /// Narrow no-break space between a number and its unit: the "thin space" of the
@@ -27,3 +29,28 @@ String formatBytes(int bytes, String locale) {
 String formatDate(DateTime date, String locale) => locale.startsWith('de')
     ? DateFormat.yMMMd(locale).format(date)
     : DateFormat('d MMM y', locale).format(date);
+
+/// When a file changed, as its meta line says it (UI spec §11.2): "Today
+/// 14:32", "Yesterday 18:20", "5 Oct" this year, "5 Oct 2025" before.
+String formatWhen(
+  DateTime when,
+  AppLocalizations l,
+  String locale, {
+  DateTime? now,
+}) {
+  now ??= DateTime.now();
+  // Calendar days, in UTC so a DST change can't shift them.
+  final days = DateTime.utc(
+    now.year,
+    now.month,
+    now.day,
+  ).difference(DateTime.utc(when.year, when.month, when.day)).inDays;
+  final time = DateFormat.Hm(locale).format(when);
+  if (days == 0) return l.meta_today(time);
+  if (days == 1) return l.meta_yesterday(time);
+  if (when.year != now.year) return formatDate(when, locale);
+  return DateFormat(
+    locale.startsWith('de') ? 'd. MMM' : 'd MMM',
+    locale,
+  ).format(when);
+}

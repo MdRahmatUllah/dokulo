@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
+import '../screens/files/files_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
@@ -22,6 +23,8 @@ abstract final class Routes {
   static const tools = '/tools'; // T1
   static const files = '/files'; // F1
   static const lockedFolder = '/files/locked'; // F2
+  static String folder(int id) => '/files/folder/$id'; // a folder in F1
+  static const trash = '/files/trash'; // Recently deleted
   static const me = '/me'; // M1
   static const models = '/me/models'; // M2
   static String settings(String page) => '/me/settings/$page'; // M3
@@ -101,7 +104,22 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
           StatefulShellBranch(
             routes: [
-              _screen(Routes.files, 'F1', routes: [_screen('locked', 'F2')]),
+              GoRoute(
+                path: Routes.files,
+                builder: (context, state) => const FilesScreen(),
+                routes: [
+                  _screen('locked', 'F2'),
+                  // The folder screen (DK-0262) and the trash (DK-0278).
+                  GoRoute(
+                    path: 'folder/:id',
+                    builder: (context, state) => PlaceholderScreen(
+                      'Folder',
+                      detail: state.pathParameters['id']!,
+                    ),
+                  ),
+                  _screen('trash', 'Recently deleted'),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(

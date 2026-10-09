@@ -112,4 +112,54 @@ void main() {
     expect(files.single.size, 'a longer letter'.length);
     expect(await db.select(db.folders).get(), hasLength(2));
   });
+
+  group('createFolder (DK-0273)', () {
+    test('makes the directory and its row, nested too', () async {
+      final taxes = await store.createFolder(db, 'Taxes');
+      final year = await store.createFolder(db, ' 2026 ', parent: taxes);
+      expect(
+        Directory('${store.userFolder.path}${sep}Taxes').existsSync(),
+        isTrue,
+      );
+      expect(
+        (await store.folderDirectory(db, year)).path,
+        '${store.userFolder.path}${sep}Taxes${sep}2026',
+      );
+      expect(
+        Directory('${store.userFolder.path}${sep}Taxes${sep}2026').existsSync(),
+        isTrue,
+      );
+      // A reconcile finds the same rows, not new ones.
+      await store.reconcile(db);
+      expect(await db.select(db.folders).get(), hasLength(2));
+    });
+
+    test('a taken name is refused, whatever its case', () async {
+      await store.createFolder(db, 'Taxes');
+      expect(
+        () => store.createFolder(db, 'taxes'),
+        throwsA(
+          isA<FolderNameException>().having(
+            (e) => e.problem,
+            'problem',
+            FolderNameProblem.taken,
+          ),
+        ),
+      );
+      // The same name elsewhere is fine.
+      final work = await store.createFolder(db, 'Work');
+      expect(await store.createFolder(db, 'Taxes', parent: work), isPositive);
+    });
+
+    test('empty, dot and path names are refused', () async {
+      for (final name in ['', '  ', '.', '..', 'a/b', r'a\b']) {
+        expect(
+          () => store.createFolder(db, name),
+          throwsA(isA<FolderNameException>()),
+          reason: '"$name"',
+        );
+      }
+      expect(await store.createFolder(db, 'Rechnungen (alt)'), isPositive);
+    });
+  });
 }
