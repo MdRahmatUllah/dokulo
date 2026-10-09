@@ -49,10 +49,12 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
   late final AppLifecycleListener _lifecycle;
 
   LockedVault get _vault => ref.read(lockedVaultProvider);
+  late final LockedSession _session = ref.read(lockedSessionProvider.notifier);
 
   @override
   void initState() {
     super.initState();
+    _session; // read now: ref can't be used in dispose
     _lifecycle = AppLifecycleListener(
       onHide: () => _hiddenAt = DateTime.now(),
       onShow: () {
@@ -71,7 +73,8 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
   void dispose() {
     _lifecycle.dispose();
     // Leaving the folder locks it: no key, no decrypted thumbnails stay.
-    ref.read(lockedSessionProvider.notifier).lock();
+    // After the unmount: a provider can't change while the tree finalizes.
+    Future.microtask(_session.lock);
     super.dispose();
   }
 
@@ -308,50 +311,71 @@ class _PinStep extends StatelessWidget {
     final c = t.color;
     final l = AppLocalizations.of(context);
     final kind = this.kind;
-    return SingleChildScrollView(
-      padding: EdgeInsets.only(
-        top: lockIcon ? t.space.s : t.space.xxxl,
-        bottom: t.space.l,
-      ),
-      child: Column(
-        children: [
-          if (lockIcon) ...[
-            Container(
-              width: 64,
-              height: 64,
-              decoration: BoxDecoration(
-                color: c.primaryContainer,
-                borderRadius: BorderRadius.circular(t.radius.l),
+    // The title and the dots near the top, the keypad 56 above the bottom
+    // (the export); on a short screen or at large text it scrolls.
+    return LayoutBuilder(
+      builder: (context, box) => SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: box.maxHeight),
+          child: IntrinsicHeight(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                t.space.l,
+                lockIcon ? t.space.s : t.space.xxxl + t.space.l,
+                t.space.l,
+                t.space.xxxl + t.space.s,
               ),
-              // 40 dp, as the export: larger than DkIconSize goes.
-              child: Icon(DkIcons.lock, size: 40, color: c.onPrimaryContainer),
-            ),
-            SizedBox(height: t.space.l),
-          ],
-          Semantics(
-            header: true,
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: t.text.titleM.copyWith(color: c.textPrimary),
+              child: Column(
+                children: [
+                  if (lockIcon) ...[
+                    Container(
+                      width: 64,
+                      height: 64,
+                      decoration: BoxDecoration(
+                        color: c.primaryContainer,
+                        borderRadius: BorderRadius.circular(t.radius.l),
+                      ),
+                      // 40 dp, as the export: larger than DkIconSize goes.
+                      child: Icon(
+                        DkIcons.lock,
+                        size: 40,
+                        color: c.onPrimaryContainer,
+                      ),
+                    ),
+                    SizedBox(height: t.space.l),
+                  ],
+                  Semantics(
+                    header: true,
+                    child: Text(
+                      title,
+                      textAlign: TextAlign.center,
+                      style: t.text.titleM.copyWith(color: c.textPrimary),
+                    ),
+                  ),
+                  SizedBox(height: t.space.l),
+                  Expanded(
+                    child: DkPinPad(
+                      expand: true,
+                      onComplete: onComplete,
+                      error: error,
+                      errorCount: errorCount,
+                      onBiometric: kind == null ? null : onBiometric,
+                      biometricIcon: kind == BiometricKind.faceId
+                          ? DkIcons.faceId
+                          : DkIcons.fingerprint,
+                      biometricLabel: switch (kind) {
+                        null => null,
+                        BiometricKind.fingerprint =>
+                          l.locked_bio_use_fingerprint,
+                        final apple => l.locked_bio_use(_method(apple)),
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-          SizedBox(height: t.space.l),
-          DkPinPad(
-            onComplete: onComplete,
-            error: error,
-            errorCount: errorCount,
-            onBiometric: kind == null ? null : onBiometric,
-            biometricIcon: kind == BiometricKind.faceId
-                ? DkIcons.faceId
-                : DkIcons.fingerprint,
-            biometricLabel: switch (kind) {
-              null => null,
-              BiometricKind.fingerprint => l.locked_bio_use_fingerprint,
-              final apple => l.locked_bio_use(_method(apple)),
-            },
-          ),
-        ],
+        ),
       ),
     );
   }
