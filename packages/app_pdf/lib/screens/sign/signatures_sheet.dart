@@ -1,11 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../components/dk_box_frame.dart';
 import '../../components/dk_icon.dart';
@@ -18,6 +14,7 @@ import '../../components/dk_tappable.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_empty_states.dart';
+import '../../providers/prefs_providers.dart';
 import '../../providers/signature_providers.dart';
 import '../../theme/dk_tokens.dart';
 
@@ -54,82 +51,9 @@ Future<(Uint8List, Color)?> openSignaturePad(BuildContext context) async {
 SignatureInk inkOf(Color ink) =>
     ink == const DkMarkup().ink ? SignatureInk.blue : SignatureInk.black;
 
-/// The Signatures sheet's two switches (DK-0326), kept across launches.
-typedef SignPrefs = ({bool addDate, bool initialsEveryPage});
-
-/// Where [SignPrefs] are kept: a small JSON file, or memory in tests.
-abstract interface class SignPrefsStore {
-  Future<String?> read();
-  Future<void> write(String json);
-}
-
-class FileSignPrefsStore implements SignPrefsStore {
-  const FileSignPrefsStore();
-
-  Future<File> get _file async => File(
-    '${(await getApplicationSupportDirectory()).path}'
-    '${Platform.pathSeparator}sign_settings.json',
-  );
-
-  @override
-  Future<String?> read() async {
-    final f = await _file;
-    return await f.exists() ? f.readAsString() : null;
-  }
-
-  @override
-  Future<void> write(String json) async =>
-      (await _file).writeAsString(json, flush: true);
-}
-
-class MemorySignPrefsStore implements SignPrefsStore {
-  String? json;
-  @override
-  Future<String?> read() async => json;
-  @override
-  Future<void> write(String value) async => json = value;
-}
-
-final signPrefsStoreProvider = Provider<SignPrefsStore>(
-  (ref) => const FileSignPrefsStore(),
-);
-
-class SignSettings extends AsyncNotifier<SignPrefs> {
-  @override
-  Future<SignPrefs> build() async {
-    final json = await ref.read(signPrefsStoreProvider).read();
-    try {
-      final m = json == null ? const {} : jsonDecode(json) as Map;
-      return (
-        addDate: m['addDate'] as bool? ?? false,
-        initialsEveryPage: m['initialsEveryPage'] as bool? ?? false,
-      );
-    } on FormatException {
-      return (addDate: false, initialsEveryPage: false);
-    }
-  }
-
-  Future<void> set({bool? addDate, bool? initialsEveryPage}) async {
-    final now = await future;
-    final next = (
-      addDate: addDate ?? now.addDate,
-      initialsEveryPage: initialsEveryPage ?? now.initialsEveryPage,
-    );
-    state = AsyncData(next);
-    await ref
-        .read(signPrefsStoreProvider)
-        .write(
-          jsonEncode({
-            'addDate': next.addDate,
-            'initialsEveryPage': next.initialsEveryPage,
-          }),
-        );
-  }
-}
-
-final signSettingsProvider = AsyncNotifierProvider<SignSettings, SignPrefs>(
-  SignSettings.new,
-);
+/// The Signatures sheet's switches (DK-0326), in [prefsProvider].
+const signAddDateKey = 'sign.addDate',
+    signInitialsKey = 'sign.initialsEveryPage';
 
 /// "Your signatures" (DK-0326; UI spec §17.3, design `08-sign/sign-list`,
 /// `sign-empty`): a medium sheet with the saved signatures in two columns,
@@ -166,10 +90,10 @@ class _SignaturesSheet extends ConsumerWidget {
       for (final s in ref.watch(signaturesProvider).value ?? const [])
         if (s.$1.kind == SignatureKind.signature) s,
     ];
-    final prefs =
-        ref.watch(signSettingsProvider).value ??
-        (addDate: false, initialsEveryPage: false);
-    final settings = ref.read(signSettingsProvider.notifier);
+    final prefs = ref.watch(prefsProvider).value ?? const {};
+    final addDate = prefs[signAddDateKey] == true;
+    final initials = prefs[signInitialsKey] == true;
+    final settings = ref.read(prefsProvider.notifier);
 
     Future<void> add() async {
       final drawn = await openPad(context);
@@ -184,19 +108,18 @@ class _SignaturesSheet extends ConsumerWidget {
         DkSettingsRow(
           title: l.sign_add_date,
           trailing: DkSwitch(
-            value: prefs.addDate,
-            onChanged: (v) => settings.set(addDate: v),
+            value: addDate,
+            onChanged: (v) => settings.set(signAddDateKey, v),
           ),
-          onTap: () => settings.set(addDate: !prefs.addDate),
+          onTap: () => settings.set(signAddDateKey, !addDate),
         ),
         DkSettingsRow(
           title: l.sign_initials_every_page,
           trailing: DkSwitch(
-            value: prefs.initialsEveryPage,
-            onChanged: (v) => settings.set(initialsEveryPage: v),
+            value: initials,
+            onChanged: (v) => settings.set(signInitialsKey, v),
           ),
-          onTap: () =>
-              settings.set(initialsEveryPage: !prefs.initialsEveryPage),
+          onTap: () => settings.set(signInitialsKey, !initials),
         ),
       ],
     );

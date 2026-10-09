@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:app_pdf/components/dk_signature_card.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/signature_providers.dart';
 import 'package:app_pdf/screens/sign/signatures_sheet.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -42,7 +43,6 @@ void main() {
   late Directory dir;
   late SignatureStore store;
   late ProviderContainer container;
-  late MemorySignPrefsStore prefs;
   (SavedSignature, Uint8List)? picked;
 
   setUp(() async {
@@ -68,9 +68,7 @@ void main() {
     container = ProviderContainer(
       overrides: [
         signatureStoreProvider.overrideWith((ref) async => store),
-        signPrefsStoreProvider.overrideWithValue(
-          prefs = MemorySignPrefsStore(),
-        ),
+        prefsProvider.overrideWith(Prefs.memory),
       ],
     );
     addTearDown(container.dispose);
@@ -132,22 +130,15 @@ void main() {
     expect(picked?.$1.ink, SignatureInk.blue);
   });
 
-  testWidgets('the switches persist', (tester) async {
+  testWidgets("the switches are kept in the app's prefs", (tester) async {
     await open(tester);
     await tester.ensureVisible(find.text('Add date next to signature'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Add date next to signature'));
     await tester.pumpAndSettle();
-    expect(prefs.json, contains('"addDate":true'));
-    final again = ProviderContainer(
-      overrides: [signPrefsStoreProvider.overrideWithValue(prefs)],
-    );
-    addTearDown(again.dispose);
-    final read = await tester.runAsync(
-      () => again.read(signSettingsProvider.future),
-    );
-    expect(read!.addDate, isTrue);
-    expect(read.initialsEveryPage, isFalse);
+    final prefs = container.read(prefsProvider).value!;
+    expect(prefs[signAddDateKey], isTrue);
+    expect(prefs[signInitialsKey], isNull);
   });
 
   testWidgets('the pad opens in landscape and gives the phone back', (
