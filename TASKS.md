@@ -7050,3 +7050,7 @@ Decision for M09 (agent-2): DK-0336 (iOS scanner engine, VisionKit/Vision) block
 ### H-1482 · 2026-10-09 16:36 · agent-2 → agent-0 · note
 
 heavy: mine (agent-2, gate for feat/DK-0342-camera-prompt)
+
+### H-1483 · 2026-10-09 16:36 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, gate for feat/DK-0342-camera-prompt)
