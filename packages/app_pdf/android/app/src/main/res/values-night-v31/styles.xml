@@ -2,12 +2,12 @@
 <!-- Android 12+ (DK-0073): the system splash shows the symbol on
      color.background, no branding image, then the first Flutter frame. -->
 <resources>
-    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+    <style name="LaunchTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowSplashScreenBackground">@color/dk_background</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
         <item name="android:windowBackground">@drawable/launch_background</item>
     </style>
-    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+    <style name="NormalTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- The splash stays behind Flutter until its first frame covers it
              (DK-0073): no blank gap. -->
         <item name="android:windowBackground">@drawable/launch_background</item>

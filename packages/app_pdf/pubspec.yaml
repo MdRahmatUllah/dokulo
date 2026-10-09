@@ -47,6 +47,9 @@ dependencies:
   camera: 0.12.1 # S1's preview and frames: CameraX on Android, AVFoundation on iOS (DK-0343)
   path_provider: 2.1.6
   pdfrx: 2.6.5 # the viewer (DK-0293); PDFium through pdfrx's worker
+  file_picker: 13.1.0 # O3 Open a PDF, Browse device (DK-0241)
+  flutter_secure_storage: 11.2.0 # the locked folder's key (DK-0282)
+  local_auth: 3.0.2 # biometric unlock of the locked folder (DK-0282)
   doc_core:
     path: ../doc_core
 dev_dependencies:
