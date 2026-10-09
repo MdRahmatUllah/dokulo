@@ -38,6 +38,10 @@ class CameraPermissionGate extends ConsumerStatefulWidget {
 
 class _CameraPermissionGateState extends ConsumerState<CameraPermissionGate> {
   CameraAccess? _access;
+
+  /// While the system prompt is up, a resume must not re-read the status:
+  /// the answer comes from [_request].
+  var _requesting = false;
   late final AppLifecycleListener _lifecycle;
 
   CameraPermission get _permission => ref.read(cameraPermissionProvider);
@@ -57,20 +61,25 @@ class _CameraPermissionGateState extends ConsumerState<CameraPermissionGate> {
   }
 
   Future<void> _check() async {
+    if (_requesting) return;
     final access = await _permission.status();
     if (mounted) setState(() => _access = access);
   }
 
   Future<void> _request() async {
-    final access = await _permission.request();
-    if (mounted) setState(() => _access = access);
+    _requesting = true;
+    try {
+      final access = await _permission.request();
+      if (mounted) setState(() => _access = access);
+    } finally {
+      _requesting = false;
+    }
   }
 
   @override
   Widget build(BuildContext context) => switch (_access) {
-    null => ColoredBox(
-      color: context.tokens.color.cameraChrome.withValues(alpha: 1),
-    ),
+    // The pre-prompt's background, so nothing flickers while we ask.
+    null => ColoredBox(color: DkColors.dark.background),
     CameraAccess.granted => widget.camera(context),
     CameraAccess.notAsked => _PrePrompt(
       onContinue: _request,

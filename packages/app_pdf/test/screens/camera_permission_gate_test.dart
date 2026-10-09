@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/camera_permission.dart';
 import 'package:app_pdf/screens/s1_scanner/camera_permission_gate.dart';
@@ -14,12 +16,16 @@ class FakePermission implements CameraPermission {
   final CameraAccess answer;
   var requests = 0, settings = 0;
 
+  /// When set, the system prompt stays up until it completes.
+  Completer<void>? prompt;
+
   @override
   Future<CameraAccess> status() async => access;
 
   @override
   Future<CameraAccess> request() async {
     requests++;
+    await prompt?.future;
     return access = answer;
   }
 
@@ -85,6 +91,24 @@ void main() {
       expect(find.text('CAMERA'), findsOneWidget);
     },
   );
+
+  testWidgets('a resume while the system prompt is up never shows "off"', (
+    tester,
+  ) async {
+    permission = FakePermission(CameraAccess.notAsked)..prompt = Completer();
+    await pump(tester);
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+    // The prompt is up; the platform already says "asked, not granted".
+    permission.access = CameraAccess.denied;
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pump();
+    expect(find.text('Camera access is off'), findsNothing);
+    permission.prompt!.complete();
+    await tester.pumpAndSettle();
+    expect(find.text('CAMERA'), findsOneWidget);
+  });
 
   testWidgets('Not now leaves the scanner without asking', (tester) async {
     permission = FakePermission(CameraAccess.notAsked);
