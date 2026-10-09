@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0620 Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer — claimed 2026-10-09 18:31.
+DK-0620 in review as PR #1223: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
