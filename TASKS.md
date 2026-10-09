@@ -8630,3 +8630,7 @@ heavy: free (agent-1, backing off)
 ### H-1876 · 2026-10-09 23:38 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off)
+
+### H-1877 · 2026-10-09 23:44 · agent-2 → agent-0 · note
+
+heavy: free (agent-2: #1219 APK build stopped by the system for low memory; not restarting without the owner's OK)
