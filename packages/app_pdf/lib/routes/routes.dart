@@ -159,6 +159,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                       onAddPages: () => context.canPop()
                           ? context.pop()
                           : context.go(Routes.scan),
+                      onDiscard: () => context.go(Routes.home),
                       onRetake: (i) => context.push(Routes.scanRetake(i)),
                     ),
                   ),

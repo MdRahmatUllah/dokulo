@@ -32,7 +32,7 @@ void main() {
   late ProviderContainer container;
   late MemoryScanStore store;
   late MemoryPrefsStore prefs;
-  var added = 0;
+  var added = 0, discarded = 0;
   int? retook;
 
   List<ScannedPage> pages() => container.read(scanSessionProvider);
@@ -47,7 +47,7 @@ void main() {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    added = 0;
+    added = discarded = 0;
     retook = null;
     store = MemoryScanStore();
     container = ProviderContainer(
@@ -71,6 +71,7 @@ void main() {
           supportedLocales: AppLocalizations.supportedLocales,
           home: S2Screen(
             onAddPages: () => added++,
+            onDiscard: () => discarded++,
             onSave: withSave ? () {} : null,
             onRetake: (i) => retook = i,
           ),
@@ -112,11 +113,25 @@ void main() {
     expect(pages().first.id, first);
   });
 
-  testWidgets('deleting the last page goes back to the camera', (tester) async {
+  testWidgets('deleting the last page asks; Discard drops the scan', (
+    tester,
+  ) async {
     await pump(tester, count: 1);
     await tester.tap(find.text('Delete'));
     await tester.pumpAndSettle();
-    expect(added, 1);
+    expect(
+      find.text('All pages of this scan will be deleted.'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Keep'));
+    await tester.pumpAndSettle();
+    expect((pages().length, discarded), (1, 0));
+    await tester.tap(find.text('Delete'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Discard'));
+    await tester.pumpAndSettle();
+    expect((pages().length, discarded), (0, 1));
+    expect(store.manifest, isNull);
   });
 
   testWidgets(

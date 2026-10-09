@@ -187,6 +187,26 @@ void main() {
     semantics.dispose();
   });
 
+  testWidgets('closing with pages taken asks "Discard this scan?"', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester);
+    await capture(tester);
+    await tester.tap(find.bySemanticsLabel('Close scanner'));
+    await tester.pumpAndSettle();
+    expect(find.text('Discard this scan?'), findsOneWidget);
+    await tester.tap(find.text('Keep'));
+    await tester.pumpAndSettle();
+    expect((closed, container.read(scanSessionProvider).length), (0, 1));
+    await tester.tap(find.bySemanticsLabel('Close scanner'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Discard'));
+    await tester.pumpAndSettle();
+    expect((closed, container.read(scanSessionProvider).length), (1, 0));
+    semantics.dispose();
+  });
+
   testWidgets('a long press on flash opens the menu; a pick sets it', (
     tester,
   ) async {

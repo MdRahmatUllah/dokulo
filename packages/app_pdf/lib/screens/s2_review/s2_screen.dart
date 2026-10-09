@@ -12,6 +12,7 @@ import '../../components/dk_page_tray.dart';
 import '../../components/dk_slider.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
+import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_undo.dart';
 import '../../theme/dk_tokens.dart';
 import '../s1_scanner/scan_session.dart';
@@ -25,8 +26,9 @@ import '../s1_scanner/scanner_settings.dart';
 /// - the current page large on `color.surfaceSunken` (swipe between them)
 ///   with "3 of 6" under it;
 /// - the edit row: Crop · Rotate · Filter · Retake · Delete. Rotate and
-///   Delete act here (Rotate turns in 220 ms; Delete offers Undo); Retake
-///   opens the camera ([onRetake]);
+///   Delete act here (Rotate turns in 220 ms; Delete offers Undo, and the
+///   last page asks "Discard this scan?" first, DK-0357/0358); Retake opens
+///   the camera ([onRetake]);
 /// - crop mode (DK-0353, `scanner-review-crop`): the uncropped photo in
 ///   DkCropOverlay (Auto · Full page · Reset, the magnifier while a corner
 ///   is dragged), Cancel / Apply under it. After Full page or a rotation, a
@@ -45,11 +47,15 @@ class S2Screen extends ConsumerStatefulWidget {
   const S2Screen({
     super.key,
     required this.onAddPages,
+    required this.onDiscard,
     this.onSave,
     this.onRetake,
   });
 
   final VoidCallback onAddPages;
+
+  /// The scan was discarded (its last page deleted): leave the scanner.
+  final VoidCallback onDiscard;
 
   /// The Save sheet (DK-0359); Save is disabled until it is given.
   final VoidCallback? onSave;
@@ -194,13 +200,15 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     final session = ref.read(scanSessionProvider.notifier);
     final l = AppLocalizations.of(context);
     final index = _current;
-    final page = await session.remove(index);
-    final left = ref.read(scanSessionProvider).length;
-    if (left == 0) {
-      // ponytail: the last page gone leaves the review; DK-0357 refines it.
-      widget.onAddPages();
+    if (ref.read(scanSessionProvider).length == 1) {
+      // The last page: the whole scan goes, so ask (no Undo for that).
+      if (!await confirmDk(context, DkConfirmation.discardScan)) return;
+      await session.clear();
+      widget.onDiscard();
       return;
     }
+    final page = await session.remove(index);
+    final left = ref.read(scanSessionProvider).length;
     if (_current >= left) _go(left - 1);
     if (!mounted) return;
     await showDkUndo(
