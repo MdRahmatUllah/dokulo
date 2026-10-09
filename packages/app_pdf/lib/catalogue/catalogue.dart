@@ -62,11 +62,7 @@ class CatalogueEntry {
 }
 
 const catalogue = [
-  CatalogueEntry(
-    'Empty states (Home, Files, Folder, Search, Trash)',
-    '26.1 Empty states',
-    EmptyStatesGallery(),
-  ),
+  CatalogueEntry('Empty states', '26.1 Empty states', EmptyStatesGallery()),
   CatalogueEntry('DkLogo', '3 Brand', LogoStates()),
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),
