@@ -56,8 +56,15 @@ class FakeCamera implements ScannerCamera {
   @override
   Future<void> close() async => closed = true;
 
+  /// A bright frame (the fake page is lit).
   void frame() => frames$.add(
-    GreyFrame(Uint8List(4), 2, 2, rowStride: 2, time: Duration.zero),
+    GreyFrame(
+      Uint8List.fromList(List.filled(256, 200)),
+      16,
+      16,
+      rowStride: 16,
+      time: Duration.zero,
+    ),
   );
 }
 
@@ -129,6 +136,9 @@ void main() {
 
   testWidgets('a document in view: "Ready"', (tester) async {
     await pump(tester, quad: found);
+    // Two frames with the same quad: it held steady.
+    camera.frame();
+    await tester.pumpAndSettle();
     camera.frame();
     await tester.pumpAndSettle();
     expect(find.text('Ready'), findsOneWidget);
@@ -167,6 +177,40 @@ void main() {
     semantics.dispose();
   });
 
+  testWidgets('a long press on flash opens the menu; a pick sets it', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester);
+    await tester.longPress(find.bySemanticsLabel(RegExp('^Flash')));
+    await tester.pumpAndSettle();
+    expect(find.text('On'), findsOneWidget);
+    await tester.tap(find.text('Auto').last);
+    await tester.pumpAndSettle();
+    expect(camera.flash, DkFlash.auto);
+    expect(find.bySemanticsLabel('Flash options'), findsNothing);
+    semantics.dispose();
+  });
+
+  testWidgets(
+    'capture: "Page 1 captured" for screen readers; Reduce Motion: no flash',
+    (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue =
+          const FakeAccessibilityFeatures(disableAnimations: true);
+      addTearDown(
+        tester.platformDispatcher.clearAccessibilityFeaturesTestValue,
+      );
+      await pump(tester);
+      await tester.tap(find.byType(DkShutterButton));
+      await tester.pump();
+      expect(
+        tester.takeAnnouncements().map((a) => a.message),
+        contains('Page 1 captured'),
+      );
+      expect(container.read(scanSessionProvider), hasLength(1));
+    },
+  );
+
   testWidgets('closing the screen closes the camera', (tester) async {
     await pump(tester);
     await tester.pumpWidget(const SizedBox());
@@ -204,6 +248,22 @@ void main() {
       await expectLater(
         find.byType(S1Screen),
         matchesGoldenFile('goldens/s1_$name.png'),
+      );
+    });
+  }
+
+  for (final (name, tokens) in [
+    ('light', DkTokens.light),
+    ('dark', DkTokens.dark),
+  ]) {
+    testWidgets('golden: flash menu ($name)', (tester) async {
+      await pump(tester, tokens: tokens, quad: found);
+      // The flash button sits second from the left in the top bar.
+      await tester.longPressAt(tester.getCenter(find.text('Off').first));
+      await tester.pumpAndSettle();
+      await expectLater(
+        find.byType(S1Screen),
+        matchesGoldenFile('goldens/s1_flash_menu_$name.png'),
       );
     });
   }

@@ -21,6 +21,7 @@ class DkCameraTopBar extends StatelessWidget {
     required this.onClose,
     required this.flash,
     required this.onFlash,
+    this.onFlashMenu,
     required this.autoCapture,
     required this.onAutoCapture,
     required this.grid,
@@ -33,6 +34,9 @@ class DkCameraTopBar extends StatelessWidget {
 
   /// The next setting after a tap: off → on → auto → off.
   final ValueChanged<DkFlash> onFlash;
+
+  /// A long press on flash: the menu with Off, On and Auto (DK-0345).
+  final VoidCallback? onFlashMenu;
   final bool autoCapture;
   final ValueChanged<bool> onAutoCapture;
   final bool grid;
@@ -65,6 +69,7 @@ class DkCameraTopBar extends StatelessWidget {
                   const Spacer(),
                   _FlashButton(
                     flash: flash,
+                    onLongPress: onFlashMenu,
                     onPressed: () => onFlash(
                       DkFlash.values[(flash.index + 1) % DkFlash.values.length],
                     ),
@@ -95,9 +100,14 @@ class DkCameraTopBar extends StatelessWidget {
 
 /// The flash: its icon over a tiny label (Off / On / Auto), 52 wide.
 class _FlashButton extends StatefulWidget {
-  const _FlashButton({required this.flash, required this.onPressed});
+  const _FlashButton({
+    required this.flash,
+    required this.onPressed,
+    this.onLongPress,
+  });
   final DkFlash flash;
   final VoidCallback onPressed;
+  final VoidCallback? onLongPress;
 
   @override
   State<_FlashButton> createState() => _FlashButtonState();
@@ -122,11 +132,13 @@ class _FlashButtonState extends State<_FlashButton> {
       excludeSemantics: true,
       // The children are excluded, the tap with them: give it back.
       onTap: widget.onPressed,
+      onLongPress: widget.onLongPress,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.m,
         child: InkWell(
           onTap: widget.onPressed,
+          onLongPress: widget.onLongPress,
           onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
           borderRadius: BorderRadius.circular(t.radius.m),
           overlayColor: WidgetStatePropertyAll(ink.withValues(alpha: 0.16)),

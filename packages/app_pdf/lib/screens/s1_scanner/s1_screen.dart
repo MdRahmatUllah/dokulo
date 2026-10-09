@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,6 +13,7 @@ import '../../components/dk_scan_button.dart';
 import '../../components/dk_shutter_button.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/dk_tokens.dart';
+import 'scan_hints.dart';
 import 'scan_session.dart';
 import 'scanner_camera.dart';
 
@@ -48,16 +50,48 @@ class S1Screen extends ConsumerStatefulWidget {
   ConsumerState<S1Screen> createState() => _S1ScreenState();
 }
 
-class _S1ScreenState extends ConsumerState<S1Screen> {
+class _S1ScreenState extends ConsumerState<S1Screen>
+    with TickerProviderStateMixin {
   late final ScannerCamera _camera = ref.read(scannerCameraProvider);
   StreamSubscription<GreyFrame>? _frames;
   var _open = false;
   var _detecting = false;
   var _capturing = false;
   DetectedQuad? _quad;
+  var _brightness = 1.0;
+  var _steady = false;
   var _flash = DkFlash.off;
   var _auto = false;
   var _grid = false;
+  var _flashMenu = false;
+  final _clock = Stopwatch()..start();
+  late final HintAnnouncer _announcer = HintAnnouncer(_speak);
+
+  // Capture feedback (DK-0349): an 80 ms white flash, the page flying to
+  // the stack in 320 ms, the count popping.
+  late final _flashFx = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 80),
+  );
+  late final _fly = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 320),
+  );
+  late final _pop = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 240),
+  );
+  Uint8List? _flying;
+  final _stackKey = GlobalKey();
+
+  void _speak(String text) {
+    if (!mounted) return;
+    SemanticsService.sendAnnouncement(
+      View.of(context),
+      text,
+      Directionality.of(context),
+    );
+  }
 
   @override
   void initState() {
@@ -83,7 +117,12 @@ class _S1ScreenState extends ConsumerState<S1Screen> {
       _detecting = true;
       try {
         final quad = await detect(frame);
-        if (mounted) setState(() => _quad = quad);
+        if (!mounted) return;
+        setState(() {
+          _steady = quadSteady(_quad, quad);
+          _quad = quad;
+          _brightness = brightnessOf(frame.bytes);
+        });
       } finally {
         _detecting = false;
       }
@@ -95,20 +134,33 @@ class _S1ScreenState extends ConsumerState<S1Screen> {
   void dispose() {
     _frames?.cancel();
     _camera.close();
+    _flashFx.dispose();
+    _fly.dispose();
+    _pop.dispose();
     super.dispose();
   }
 
   Future<void> _capture() async {
     if (_capturing || !_open) return;
     _capturing = true;
+    final reduce = MediaQuery.disableAnimationsOf(context);
+    final l = AppLocalizations.of(context);
     try {
-      HapticFeedback.mediumImpact();
+      HapticFeedback.lightImpact();
+      if (!reduce) _flashFx.forward(from: 0).then((_) => _flashFx.reverse());
       final jpeg = await _camera.capture();
-      ref
-          .read(scanSessionProvider.notifier)
-          .add(ScannedPage(jpeg, quad: _quad));
+      if (!mounted) return;
+      final session = ref.read(scanSessionProvider.notifier);
+      session.add(ScannedPage(jpeg, quad: _quad));
+      _speak(l.camera_page_captured(ref.read(scanSessionProvider).length));
+      if (!reduce) {
+        setState(() => _flying = jpeg);
+        await _fly.forward(from: 0);
+        if (mounted) setState(() => _flying = null);
+        _pop.forward(from: 0);
+      }
     } on CameraUnavailable {
-      // ponytail: a failed shot is just not added; DK-0349 adds the feedback.
+      // ponytail: a failed shot is just not added; the camera stays open.
     } finally {
       _capturing = false;
     }
@@ -139,10 +191,15 @@ class _S1ScreenState extends ConsumerState<S1Screen> {
       grid: _grid,
       onGrid: (v) => setState(() => _grid = v),
       onSettings: widget.onSettings,
+      onFlashMenu: () => setState(() => _flashMenu = true),
     );
-    final hint = DkHintPill(
-      _quad == null ? l.camera_hint_point : l.camera_hint_ready,
+    final hintKind = scanHint(
+      quad: _quad,
+      brightness: _brightness,
+      steady: _steady,
     );
+    _announcer.update(hintKind, hintKind.text(l), _clock.elapsed);
+    final hint = DkHintPill(hintKind.text(l));
     final modes = _ModeSwitcher(
       mode: mode,
       onMode: (m) => ref.read(scanModeStateProvider.notifier).set(m),
@@ -173,122 +230,282 @@ class _S1ScreenState extends ConsumerState<S1Screen> {
       ),
     );
     final shutter = DkShutterButton(onPressed: _open ? _capture : null);
-    final stack = _PageStack(
-      pages: pages,
-      onTap: pages.isEmpty ? null : widget.onReview,
+    final stack = ScaleTransition(
+      key: _stackKey,
+      // The count pops when the page lands.
+      scale: TweenSequence([
+        TweenSequenceItem(tween: Tween(begin: 1.0, end: 1.18), weight: 1),
+        TweenSequenceItem(tween: Tween(begin: 1.18, end: 1.0), weight: 1),
+      ]).animate(_pop),
+      child: _PageStack(
+        pages: pages,
+        onTap: pages.isEmpty ? null : widget.onReview,
+      ),
     );
 
     return Material(
       // The camera's black around the preview, in both themes.
       color: c.cameraChrome.withValues(alpha: 1),
-      child: OrientationBuilder(
-        builder: (context, orientation) {
-          if (orientation == Orientation.landscape) {
-            // Phone landscape: the controls along the right edge.
-            return Row(
-              children: [
-                Expanded(
-                  child: Stack(
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: OrientationBuilder(
+              builder: (context, orientation) {
+                if (orientation == Orientation.landscape) {
+                  // Phone landscape: the controls along the right edge.
+                  return Row(
                     children: [
-                      Positioned.fill(child: preview),
-                      Positioned(
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        child: SafeArea(
-                          bottom: false,
-                          right: false,
-                          child: top,
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Positioned.fill(child: preview),
+                            Positioned(
+                              top: 0,
+                              left: 0,
+                              right: 0,
+                              child: SafeArea(
+                                bottom: false,
+                                right: false,
+                                child: top,
+                              ),
+                            ),
+                            Positioned(
+                              top: 72,
+                              left: 0,
+                              right: 0,
+                              child: SafeArea(child: Center(child: hint)),
+                            ),
+                          ],
                         ),
                       ),
-                      Positioned(
-                        top: 72,
-                        left: 0,
-                        right: 0,
-                        child: SafeArea(child: Center(child: hint)),
+                      Container(
+                        width: 120,
+                        color: c.cameraChrome,
+                        child: SafeArea(
+                          left: false,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              stack,
+                              shutter,
+                              importButton,
+                              Flexible(
+                                child: _ModeSwitcher(
+                                  mode: mode,
+                                  onMode: (m) => ref
+                                      .read(scanModeStateProvider.notifier)
+                                      .set(m),
+                                  axis: Axis.vertical,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
-                  ),
-                ),
-                Container(
-                  width: 120,
-                  color: c.cameraChrome,
-                  child: SafeArea(
-                    left: false,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        stack,
-                        shutter,
-                        importButton,
-                        Flexible(
-                          child: _ModeSwitcher(
-                            mode: mode,
-                            onMode: (m) =>
-                                ref.read(scanModeStateProvider.notifier).set(m),
-                            axis: Axis.vertical,
+                  );
+                }
+                return Stack(
+                  children: [
+                    Positioned.fill(child: preview),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        color: c.cameraChrome,
+                        child: SafeArea(bottom: false, child: top),
+                      ),
+                    ),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: SafeArea(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: 56 + t.space.l),
+                          child: Center(child: hint),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        color: c.cameraChrome,
+                        child: SafeArea(
+                          top: false,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(height: 44, child: modes),
+                              SizedBox(
+                                height: 120,
+                                child: Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    28,
+                                    0,
+                                    28,
+                                    24,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [importButton, shutter, stack],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            );
-          }
-          return Stack(
+                  ],
+                );
+              },
+            ),
+          ),
+          // The capture flash: white, 80 ms in and out.
+          IgnorePointer(
+            child: FadeTransition(
+              opacity: _flashFx,
+              child: ColoredBox(
+                color: c.onCamera,
+                child: const SizedBox.expand(),
+              ),
+            ),
+          ),
+          if (_flying case final jpeg?) _flyingPage(jpeg),
+          if (_flashMenu) ...[
+            Positioned.fill(
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () => setState(() => _flashMenu = false),
+              ),
+            ),
+            Positioned(
+              top: MediaQuery.paddingOf(context).top + 56,
+              right: 96,
+              child: _FlashMenu(
+                flash: _flash,
+                onPick: (f) {
+                  setState(() {
+                    _flash = f;
+                    _flashMenu = false;
+                  });
+                  _camera.setFlash(f);
+                },
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  /// The captured page flying from the middle of the screen to the stack.
+  Widget _flyingPage(Uint8List jpeg) {
+    final size = MediaQuery.sizeOf(context);
+    final from = Rect.fromCenter(
+      center: size.center(Offset.zero),
+      width: size.width * 0.6,
+      height: size.width * 0.75,
+    );
+    final box = _stackKey.currentContext?.findRenderObject() as RenderBox?;
+    final to = box == null ? from : box.localToGlobal(Offset.zero) & box.size;
+    return AnimatedBuilder(
+      animation: _fly,
+      builder: (context, _) {
+        final r = Rect.lerp(
+          from,
+          to,
+          Curves.easeInOutCubic.transform(_fly.value),
+        )!;
+        return Positioned.fromRect(
+          rect: r,
+          child: IgnorePointer(
+            child: Image.memory(jpeg, fit: BoxFit.cover, gaplessPlayback: true),
+          ),
+        );
+      },
+    );
+  }
+}
+
+/// The flash menu (DK-0345; design `scanner-camera-flash`): Off, On, Auto on
+/// a dark panel (#14171C at 92 %, radius 12), a check by the current one.
+class _FlashMenu extends StatelessWidget {
+  const _FlashMenu({required this.flash, required this.onPick});
+
+  final DkFlash flash;
+  final ValueChanged<DkFlash> onPick;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    final on = t.color.onCamera;
+    return Semantics(
+      container: true,
+      label: l.camera_flash_menu,
+      explicitChildNodes: true,
+      // As wide as its longest row, at least 150.
+      child: IntrinsicWidth(
+        child: Container(
+          constraints: const BoxConstraints(minWidth: 150),
+          padding: EdgeInsets.symmetric(vertical: t.space.xs),
+          decoration: BoxDecoration(
+            // The export's panel: the light ink, 92 %, in both themes.
+            color: DkColors.light.textPrimary.withValues(alpha: 0.92),
+            borderRadius: BorderRadius.circular(t.radius.m),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Positioned.fill(child: preview),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  color: c.cameraChrome,
-                  child: SafeArea(bottom: false, child: top),
-                ),
-              ),
-              Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                child: SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 56 + t.space.l),
-                    child: Center(child: hint),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: 0,
-                child: Container(
-                  color: c.cameraChrome,
-                  child: SafeArea(
-                    top: false,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(height: 44, child: modes),
-                        SizedBox(
-                          height: 120,
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(28, 0, 28, 24),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [importButton, shutter, stack],
+              for (final (f, icon, label) in [
+                (DkFlash.off, DkIcons.flashOff, l.camera_flash_off),
+                (DkFlash.on, DkIcons.flashOn, l.camera_flash_on),
+                (DkFlash.auto, DkIcons.flashAuto, l.camera_flash_auto),
+              ])
+                Semantics(
+                  button: true,
+                  selected: f == flash,
+                  inMutuallyExclusiveGroup: true,
+                  label: label,
+                  excludeSemantics: true,
+                  onTap: () => onPick(f),
+                  child: InkWell(
+                    onTap: () => onPick(f),
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 48),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: t.space.l),
+                        child: Row(
+                          spacing: t.space.m,
+                          children: [
+                            DkIcon(icon, color: on),
+                            Expanded(
+                              child: Text(
+                                label,
+                                style: t.text.bodyL.copyWith(color: on),
+                              ),
                             ),
-                          ),
+                            if (f == flash)
+                              DkIcon(
+                                DkIcons.check,
+                                color: DkColors.dark.primary,
+                              ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
             ],
-          );
-        },
+          ),
+        ),
       ),
     );
   }

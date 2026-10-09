@@ -891,6 +891,39 @@
   "@camera_hint_point": {
     "description": "S1 hint pill: no document found yet."
   },
+  "camera_hint_closer": "Move closer",
+  "@camera_hint_closer": {
+    "description": "S1 hint: the page is too small in the frame."
+  },
+  "camera_hint_steady": "Hold steady",
+  "@camera_hint_steady": {
+    "description": "S1 hint: the camera is moving."
+  },
+  "camera_hint_light": "More light needed",
+  "@camera_hint_light": {
+    "description": "S1 hint: the scene is too dark."
+  },
+  "camera_hint_fit": "Fit the whole page in view",
+  "@camera_hint_fit": {
+    "description": "S1 hint: the page is cut off at the edge."
+  },
+  "camera_hint_capturing": "Capturing…",
+  "@camera_hint_capturing": {
+    "description": "S1 hint: auto-capture is taking the photo."
+  },
+  "camera_page_captured": "Page {number} captured",
+  "@camera_page_captured": {
+    "description": "S1: spoken to screen readers after each capture.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "camera_flash_menu": "Flash options",
+  "@camera_flash_menu": {
+    "description": "S1: the flash menu (Off, On, Auto), opened with a long press on the flash button."
+  },
   "camera_review": "{count, plural, =1{Review 1 page} other{Review {count} pages}}",
   "@camera_review": {
     "description": "S1 page stack: opens S2 with the captured pages (screen readers).",
