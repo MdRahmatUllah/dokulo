@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_pdf/l10n/formats.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/files/trash_screen.dart';
 import 'package:doc_core/doc_core.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'files_screen_test.dart' show FilesFixture, pumpFiles, settle;
 
 void main() {
+  final size = formatBytes(4, 'en');
   late FilesFixture f;
   setUp(() async {
     f = FilesFixture();
@@ -40,7 +42,7 @@ void main() {
   Future<void> tapReal(WidgetTester tester, Finder finder) async {
     await tester.runAsync(() async {
       await tester.tap(finder);
-      await Future<void>.delayed(const Duration(milliseconds: 150));
+      await Future<void>.delayed(const Duration(milliseconds: 600));
     });
     await settle(tester);
   }
@@ -51,8 +53,8 @@ void main() {
     await seed(tester);
     await pumpFiles(tester, f, location: Routes.trash);
     expect(find.text('Files are deleted for good after 30 days.'), findsOne);
-    expect(find.text('4 B · 28 days left'), findsOneWidget);
-    expect(find.text('4 B · 4 days left'), findsOneWidget);
+    expect(find.text('$size · 28 days left'), findsOneWidget);
+    expect(find.text('$size · 4 days left'), findsOneWidget);
   });
 
   testWidgets('the restore button takes a file back to Files', (tester) async {
@@ -89,6 +91,10 @@ void main() {
     expect(find.text('Delete 2 files for good?'), findsOneWidget);
     expect(find.text("This can't be undone."), findsOneWidget);
     await tapReal(tester, find.text('Delete for good'));
+    // Each file's delete is a real disk and index round trip.
+    for (var i = 0; i < 3; i++) {
+      await settle(tester);
+    }
     expect(find.text('Nothing here'), findsOneWidget);
     expect(await tester.runAsync(() => f.db.select(f.db.files).get()), isEmpty);
   });
@@ -100,8 +106,8 @@ void main() {
     await seed(tester);
     await pumpFiles(tester, f, location: Routes.trash);
     expect(find.text('Files are deleted for good after 7 days.'), findsOne);
-    expect(find.text('4 B · 5 days left'), findsOneWidget);
-    expect(find.text('4 B · 0 days left'), findsOneWidget);
+    expect(find.text('$size · 5 days left'), findsOneWidget);
+    expect(find.text('$size · 0 days left'), findsOneWidget);
   });
 
   test('daysLeft rounds up and stops at 0', () {

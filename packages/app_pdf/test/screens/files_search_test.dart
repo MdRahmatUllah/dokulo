@@ -59,10 +59,7 @@ void main() {
     await type(tester, 'anerkannt');
     await tester.tap(find.byType(DkPageChip));
     await settle(tester);
-    expect(
-      router.routerDelegate.currentConfiguration.uri.toString(),
-      endsWith('?page=2'),
-    );
+    expect(router.state.uri.toString(), endsWith('?page=2'));
   });
 
   testWidgets('nothing found: ILL-07 with the query; Cancel clears', (
