@@ -282,7 +282,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0258 | Ph3 | B | P0 | S | T1 Tools grid: implement the "Search empty" state | assigned | agent-1 | DK-0256 DK-0056 |  |
 | DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | review | agent-1 | DK-0049 DK-0182 DK-0102 | #1225 |
 | DK-0260 | Ph1 | B | P0 | L | Build F1 Files root: top bar actions, search, special rows, folders, files | review | agent-1 | DK-0229 DK-0005 DK-0006 DK-0086 DK-0088 DK-0164 DK-0172 DK-0126 | #1235 |
-| DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | assigned | agent-1 | DK-0260 DK-0188 |  |
+| DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | review | agent-1 | DK-0260 DK-0188 | #1235 |
 | DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | assigned | agent-1 | DK-0260 DK-0188 DK-0164 |  |
 | DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | assigned | agent-1 | DK-0260 DK-0222 DK-0188 DK-0172 |  |
 | DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | assigned | agent-1 | DK-0260 DK-0223 |  |
@@ -8133,3 +8133,7 @@ heavy: mine (agent-1, gate for feat/DK-0242-home)
 ### H-1752 · 2026-10-09 22:05 · agent-1 → all · review-request · DK-0260
 
 PR #1235 for DK-0260 (Build F1 Files root: top bar actions, search, special rows, folders, files) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1753 · 2026-10-09 22:05 · agent-1 → all · review-request · DK-0261
+
+PR #1235 for DK-0261 (Sort menu: date modified/name/size/date created + ascending/descending) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
