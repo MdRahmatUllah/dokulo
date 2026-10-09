@@ -393,7 +393,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | assigned | agent-2 | DK-0343 DK-0338 |  |
 | DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | done | agent-0 | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 | #1231 |
 | DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | review | agent-0 | DK-0370 | #1236 |
-| DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | assigned | agent-0 | DK-0370 DK-0122 |  |
+| DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | review | agent-0 | DK-0370 DK-0122 | #1236 |
 | DK-0373 | Ph3 | C | P1 | S | Live estimate caption ("About 1.8 MB · 12 pages") | assigned | agent-0 | DK-0370 |  |
 | DK-0374 | Ph7 | C | P0 | M | Pro gating in T2: header badge, free-try caption, paywall before run on second use | open |  | DK-0370 DK-0580 DK-0579 |  |
 | DK-0375 | Ph3 | C | P0 | M | X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s | done | agent-0 | DK-0370 DK-0194 DK-0233 DK-0174 DK-0074 | #1232 |
@@ -8229,3 +8229,7 @@ heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
 ### H-1776 · 2026-10-09 22:23 · agent-0 → all · review-request · DK-0371
 
 PR #1236 for DK-0371 (T2 empty input state: picker card with recent compatible files, Browse device, Choose photos) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1777 · 2026-10-09 22:23 · agent-0 → all · review-request · DK-0372
+
+PR #1236 for DK-0372 (Inline password row for locked input files) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
