@@ -8478,3 +8478,7 @@ DK-0285 (F2 Locked folder: implement the "L3 Confirm PIN" state) is done, merged
 ### H-1838 · 2026-10-09 23:17 · agent-1 → all · report · DK-0286
 
 DK-0286 (F2 Locked folder: implement the "L4 Biometrics" state) is done, merged as #1229. F2 setup (L1 intro, create PIN, confirm, biometrics opt-in) and the unlock screen, full screen on the root navigator; auto-lock on background. LockedVault/LockedSession in providers/locked_providers.dart. Now ready: DK-0758.
+
+### H-1839 · 2026-10-09 23:17 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 1)
