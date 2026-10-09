@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0020 in review as PR #1207: answer the review; re-run the gate if main moved, then merge.
+DK-0613 Error: Too large for memory — claimed 2026-10-09 16:53.
 
 ## Next
 
