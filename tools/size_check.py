@@ -21,7 +21,7 @@ BUDGET_MB = 90  # per-ABI APK; docs/size-budget.md says why
 # Model files by type; .bin/.spm (Bergamot packs) only inside a models/ folder,
 # since Flutter and Kotlin ship unrelated .bin files.
 MODEL = re.compile(r"\.(onnx|ort|gguf|tflite|pt|pth|safetensors|ckpt)$|(^|/)models?/.*\.(bin|spm)$", re.I)
-ALLOWED_MODEL = re.compile(r"(?i)pp[-_]?ocr.*(det|rec|cls)")
+ALLOWED_MODEL = re.compile(r"(?i)pp[-_]?ocr[^/]*(det|rec|cls)[^/]*$|doc_vision/assets/ocr/(det|rec_[a-z]+|cls)\.onnx$")
 
 
 def per_abi(apk: Path) -> dict[str, int]:
@@ -38,7 +38,7 @@ def per_abi(apk: Path) -> dict[str, int]:
 
 def bundled_models(apk: Path) -> list[str]:
     with zipfile.ZipFile(apk) as z:
-        return [n for n in z.namelist() if MODEL.search(n) and not ALLOWED_MODEL.search(Path(n).name)]
+        return [n for n in z.namelist() if MODEL.search(n) and not ALLOWED_MODEL.search(n)]
 
 
 def main() -> int:

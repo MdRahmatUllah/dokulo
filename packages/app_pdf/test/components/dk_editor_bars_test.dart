@@ -34,7 +34,7 @@ void main() {
     for (final (lang, scale) in [('en', 1.0), ('en', 2.0), ('de', 2.0)]) {
       final file = 'editor_bars_${name}_${lang}_${(scale * 100).round()}';
       testWidgets('golden: $file', (tester) async {
-        tester.view.physicalSize = const Size(393, 320);
+        tester.view.physicalSize = const Size(393, 460);
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(

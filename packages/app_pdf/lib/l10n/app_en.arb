@@ -935,6 +935,14 @@
   "@viewer_file_missing": {
     "description": "V1 when the file's row is gone (deleted, or a stale link). A spec gap filled in DK-0293."
   },
+  "annot_colour": "Colour",
+  "@annot_colour": {
+    "description": "V2 selected annotation mini bar: change its colour."
+  },
+  "annot_add_note": "Add note",
+  "@annot_add_note": {
+    "description": "V2 selected annotation mini bar: attach a note (icon-only, screen-reader label)."
+  },
   "colour_yellow": "Yellow",
   "@colour_yellow": {
     "description": "Markup colour name (DkColorRow, screen readers)."
