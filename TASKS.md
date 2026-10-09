@@ -8715,3 +8715,7 @@ heavy: mine (agent-1, gate for feat/DK-0277-versions)
 ### H-1897 · 2026-10-10 00:02 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0277-versions)
+
+### H-1898 · 2026-10-10 00:06 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 1)
