@@ -8,6 +8,7 @@ import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import 'app_shell.dart';
 
@@ -108,14 +109,22 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
-      fullScreen(
-        Routes.scan,
-        (s) => PlaceholderScreen(
-          'S1',
-          detail: s.uri.queryParameters['mode'] ?? '',
-        ),
-        routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
-      ),
+      fullScreen(Routes.scan, (s) {
+        final mode = s.uri.queryParameters['mode'] ?? '';
+        final camera = PlaceholderScreen('S1', detail: mode);
+        // Importing photos needs no camera; every other mode asks for it
+        // first (DK-0342).
+        if (mode == DkScanMode.importPhotos.name) return camera;
+        return Builder(
+          builder: (context) => CameraPermissionGate(
+            camera: (_) => camera,
+            onClose: () =>
+                context.canPop() ? context.pop() : context.go(Routes.home),
+            onImport: () =>
+                context.pushReplacement(Routes.scanIn(DkScanMode.importPhotos)),
+          ),
+        );
+      }, routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))]),
       fullScreen(
         '/tool/:toolId',
         (s) => PlaceholderScreen('T2', detail: s.pathParameters['toolId']!),

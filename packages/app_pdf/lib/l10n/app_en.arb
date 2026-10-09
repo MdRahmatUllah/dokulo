@@ -883,6 +883,30 @@
   "@camera_settings": {
     "description": "DkCameraTopBar: tune, opens the scanning settings."
   },
+  "camera_access_title": "Allow camera access",
+  "@camera_access_title": {
+    "description": "S1 camera pre-prompt sheet: title (before the system prompt)."
+  },
+  "camera_access_body": "Dokulo uses the camera only to scan. Images stay on this phone.",
+  "@camera_access_body": {
+    "description": "S1 camera pre-prompt sheet: why the camera is needed."
+  },
+  "camera_off_title": "Camera access is off",
+  "@camera_off_title": {
+    "description": "S1 when camera access is denied: title."
+  },
+  "camera_off_body": "Turn it on in Settings to scan, or import photos instead.",
+  "@camera_off_body": {
+    "description": "S1 when camera access is denied: what to do."
+  },
+  "camera_open_settings": "Open settings",
+  "@camera_open_settings": {
+    "description": "S1 denied: opens this app's page in the system settings."
+  },
+  "scan_import_photos": "Import from photos",
+  "@scan_import_photos": {
+    "description": "S1 denied: import photos instead of scanning."
+  },
   "markup_copy": "Copy",
   "@markup_copy": {
     "description": "DkMarkupBar (UI spec §11.8)."
