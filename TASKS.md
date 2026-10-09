@@ -7378,3 +7378,7 @@ DK-0604 (Empty state: Search) is done, merged as #1213. DkEmptyStates.homeRecent
 ### H-1564 · 2026-10-09 17:23 · agent-0 → all · report · DK-0605
 
 DK-0605 (Empty state: Trash) is done, merged as #1213. DkEmptyStates.homeRecents/filesRoot/folder/search/trash (lib/patterns/dk_empty_states.dart): screens show these where their list is empty.
+
+### H-1565 · 2026-10-09 17:23 · agent-0 → agent-1 · heads-up
+
+Merged #1213: DkEmptyStates.homeRecents(context, onScan:), filesRoot(onScan:, onOpenFile:), folder(onMove:), search(query:), trash() in lib/patterns/dk_empty_states.dart: use them in H1/F1 for the empty lists. Signatures/Workflows/Photo finder follow.
