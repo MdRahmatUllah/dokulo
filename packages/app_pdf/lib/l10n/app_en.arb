@@ -117,6 +117,10 @@
   "@common_more_options": {
     "description": "Copy deck (UI spec §27): common_more_options."
   },
+  "common_apply": "Apply",
+  "@common_apply": {
+    "description": "S2 crop mode: keeps the crop (DK-0353)."
+  },
   "common_apply_all": "Apply to all pages",
   "@common_apply_all": {
     "description": "Copy deck (UI spec §27): common_apply_all."

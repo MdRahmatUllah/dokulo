@@ -150,6 +150,63 @@ void main() {
     expect(store.manifest, manifest);
   });
 
+  testWidgets('Crop: Full page, Apply, then the chip crops every page', (
+    tester,
+  ) async {
+    await pump(tester);
+    await tester.tap(find.text('Crop'));
+    await tester.pumpAndSettle();
+    // Crop mode: the overlay and Cancel / Apply instead of the edit row.
+    expect(find.text('Rotate'), findsNothing);
+    expect(find.text('Auto'), findsNothing, reason: 'nothing was detected');
+    await tester.tap(find.text('Full page'));
+    await tester.tap(find.text('Apply'));
+    await tester.pumpAndSettle();
+    expect(pages().first.crop, ScannedPage.fullPage);
+    expect(pages()[1].crop, isNull);
+    await tester.tap(find.text('Apply to all pages'));
+    await tester.pumpAndSettle();
+    expect(pages().map((p) => p.crop), everyElement(ScannedPage.fullPage));
+    expect(find.text('Apply to all pages'), findsNothing);
+  });
+
+  testWidgets('Crop: Cancel keeps the page as it was', (tester) async {
+    await pump(tester);
+    await tester.tap(find.text('Crop'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Full page'));
+    await tester.tap(find.text('Cancel'));
+    await tester.pumpAndSettle();
+    expect(pages().first.crop, isNull);
+    expect(find.text('Rotate'), findsOneWidget);
+  });
+
+  testWidgets('a rotation offers the chip; it turns every page alike', (
+    tester,
+  ) async {
+    await pump(tester);
+    await tester.tap(find.text('Rotate'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Apply to all pages'));
+    await tester.pumpAndSettle();
+    expect(pages().map((p) => p.turns), everyElement(1));
+  });
+
+  test('a page keeps its crop through the manifest', () {
+    const page = ScannedPage(
+      'a',
+      '/a.jpg',
+      quad: [Offset(.1, .1), Offset(.9, .1), Offset(.9, .9), Offset(.1, .9)],
+      crop: ScannedPage.fullPage,
+      turns: 2,
+    );
+    final back = ScannedPage.fromJson(page.toJson());
+    expect(back.quad, page.quad);
+    expect(back.crop, page.crop);
+    expect(back.turns, 2);
+    expect(back.corners, ScannedPage.fullPage);
+  });
+
   for (final (name, tokens, locale) in [
     ('light', DkTokens.light, const Locale('en')),
     ('dark', DkTokens.dark, const Locale('en')),
@@ -166,6 +223,21 @@ void main() {
       await expectLater(
         find.byType(S2Screen),
         matchesGoldenFile('goldens/s2_review_$name.png'),
+      );
+    });
+
+    testWidgets('golden: crop ($name)', (tester) async {
+      await pump(tester, count: 6, tokens: tokens, locale: locale);
+      await tester.tap(find.text(name == 'de' ? 'Zuschneiden' : 'Crop'));
+      await tester.runAsync(() async {
+        for (final e in find.byType(Image).evaluate()) {
+          await precacheImage((e.widget as Image).image, e);
+        }
+      });
+      await tester.pumpAndSettle();
+      await expectLater(
+        find.byType(S2Screen),
+        matchesGoldenFile('goldens/s2_crop_$name.png'),
       );
     });
   }

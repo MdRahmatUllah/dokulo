@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../components/dk_button.dart';
+import '../../components/dk_chip.dart';
+import '../../components/dk_crop_overlay.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_page_tray.dart';
 import '../../components/dk_top_bar.dart';
@@ -16,8 +20,12 @@ import '../s1_scanner/scan_session.dart';
 /// - the current page large on `color.surfaceSunken` (swipe between them)
 ///   with "3 of 6" under it;
 /// - the edit row: Crop · Rotate · Filter · Retake · Delete. Rotate and
-///   Delete act here (Delete offers Undo); Crop, Filter and Retake open
-///   their states ([onCrop], [onFilter], [onRetake]);
+///   Delete act here (Delete offers Undo); Filter and Retake open their
+///   states ([onFilter], [onRetake]);
+/// - crop mode (DK-0353, `scanner-review-crop`): the uncropped photo in
+///   DkCropOverlay (Auto · Full page · Reset, the magnifier while a corner
+///   is dragged), Cancel / Apply under it. After Full page or a rotation, a
+///   chip "Apply to all pages" does the same to every page;
 /// - DkPageTray: tap to go to a page, drag to reorder, "+" to add pages.
 ///
 /// The pages are [scanSessionProvider]'s, which keeps them on disk: an
@@ -27,7 +35,6 @@ class S2Screen extends ConsumerStatefulWidget {
     super.key,
     required this.onAddPages,
     this.onSave,
-    this.onCrop,
     this.onFilter,
     this.onRetake,
   });
@@ -38,7 +45,7 @@ class S2Screen extends ConsumerStatefulWidget {
   final VoidCallback? onSave;
 
   /// The page's index; null hides nothing, but disables the button.
-  final ValueChanged<int>? onCrop, onFilter, onRetake;
+  final ValueChanged<int>? onFilter, onRetake;
 
   @override
   ConsumerState<S2Screen> createState() => _S2ScreenState();
@@ -47,6 +54,14 @@ class S2Screen extends ConsumerStatefulWidget {
 class _S2ScreenState extends ConsumerState<S2Screen> {
   final _pager = PageController();
   var _current = 0;
+
+  /// Crop mode: the quad being edited and the one it started from, and the
+  /// photo's width : height (3:4 until the photo has loaded).
+  DetectedQuad? _draft, _cropStart;
+  var _aspect = 3 / 4;
+
+  /// The chip after Full page or a rotation: does it to every page.
+  Future<void> Function()? _applyAll;
 
   @override
   void initState() {
@@ -62,8 +77,53 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
   }
 
   void _go(int index) {
-    setState(() => _current = index);
+    setState(() {
+      _current = index;
+      _applyAll = null;
+    });
     if (_pager.hasClients) _pager.jumpToPage(index);
+  }
+
+  void _crop(ScannedPage page) {
+    setState(() {
+      _draft = _cropStart = page.corners;
+      _applyAll = null;
+    });
+    final stream = ref
+        .read(scanStoreProvider)
+        .image(page.path)
+        .resolve(ImageConfiguration.empty);
+    late final ImageStreamListener listener;
+    listener = ImageStreamListener((info, _) {
+      stream.removeListener(listener);
+      if (mounted) {
+        setState(() => _aspect = info.image.width / info.image.height);
+      }
+      info.dispose();
+    }, onError: (_, _) => stream.removeListener(listener));
+    stream.addListener(listener);
+  }
+
+  Future<void> _applyCrop(int index) async {
+    final crop = _draft!;
+    setState(() => _draft = null);
+    final session = ref.read(scanSessionProvider.notifier);
+    await session.setCrop(index, crop);
+    if (!mounted) return;
+    setState(
+      () => _applyAll = listEquals(crop, ScannedPage.fullPage)
+          ? () => session.applyToAll(crop: ScannedPage.fullPage)
+          : null,
+    );
+  }
+
+  Future<void> _rotate(int index) async {
+    final session = ref.read(scanSessionProvider.notifier);
+    await session.rotate(index);
+    final turns = ref.read(scanSessionProvider)[index].turns;
+    if (mounted) {
+      setState(() => _applyAll = () => session.applyToAll(turns: turns));
+    }
   }
 
   Future<void> _delete() async {
@@ -97,6 +157,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     final c = t.color;
     final pages = ref.watch(scanSessionProvider);
     final current = pages.isEmpty ? 0 : _current.clamp(0, pages.length - 1);
+    final draft = pages.isEmpty ? null : _draft;
 
     Widget pageImage(ScannedPage p, {BoxFit fit = BoxFit.contain}) =>
         RotatedBox(
@@ -155,6 +216,8 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
               color: c.surfaceSunken,
               child: pages.isEmpty
                   ? const SizedBox.expand()
+                  : draft != null
+                  ? _cropView(pages[current], draft)
                   : Column(
                       children: [
                         Expanded(
@@ -186,78 +249,174 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                     ),
             ),
           ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: c.surface,
-              border: Border(top: BorderSide(color: c.outline)),
-            ),
-            child: Row(
-              children: [
-                tool(
-                  DkIcons.tool('crop'),
-                  l.scan_crop,
-                  widget.onCrop == null || pages.isEmpty
-                      ? null
-                      : () => widget.onCrop!(current),
-                ),
-                tool(
-                  DkIcons.tool('rotate'),
-                  l.scan_rotate,
-                  pages.isEmpty
-                      ? null
-                      : () => ref
-                            .read(scanSessionProvider.notifier)
-                            .rotate(current),
-                ),
-                tool(
-                  DkIcons.filters,
-                  l.scan_filter,
-                  widget.onFilter == null || pages.isEmpty
-                      ? null
-                      : () => widget.onFilter!(current),
-                ),
-                tool(
-                  DkIcons.retake,
-                  l.scan_retake,
-                  widget.onRetake == null || pages.isEmpty
-                      ? null
-                      : () => widget.onRetake!(current),
-                ),
-                tool(
-                  DkIcons.delete,
-                  l.common_delete,
-                  pages.isEmpty ? null : _delete,
-                ),
-              ],
-            ),
-          ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: c.surface,
-              border: Border(top: BorderSide(color: c.outline)),
-            ),
-            child: SafeArea(
-              top: false,
-              child: Padding(
-                padding: EdgeInsets.only(top: t.space.s),
-                child: DkPageTray(
-                  pageIds: [for (final p in pages) p.id],
-                  pageBuilder: (context, i) =>
-                      pageImage(pages[i], fit: BoxFit.cover),
-                  current: pages.isEmpty ? null : current,
-                  onSelect: _go,
-                  onReorder: (from, to) {
-                    ref.read(scanSessionProvider.notifier).move(from, to);
-                    // The current page follows its move.
-                    if (from == current) _go(to);
-                  },
-                  onAdd: widget.onAddPages,
+          if (draft != null)
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: c.surface,
+                border: Border(top: BorderSide(color: c.outline)),
+              ),
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: EdgeInsets.all(t.space.m),
+                  child: Row(
+                    spacing: t.space.m,
+                    children: [
+                      Expanded(
+                        child: DkButton(
+                          label: l.common_cancel,
+                          variant: DkButtonVariant.secondary,
+                          expand: true,
+                          onPressed: () => setState(() => _draft = null),
+                        ),
+                      ),
+                      Expanded(
+                        child: DkButton(
+                          label: l.common_apply,
+                          expand: true,
+                          onPressed: () => _applyCrop(current),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
+          if (draft == null && _applyAll != null)
+            ColoredBox(
+              color: c.surface,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  t.space.l,
+                  t.space.s,
+                  t.space.l,
+                  t.space.xxs,
+                ),
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: DkChip(
+                    label: l.common_apply_all,
+                    selected: false,
+                    onSelected: (_) async {
+                      final apply = _applyAll!;
+                      setState(() => _applyAll = null);
+                      await apply();
+                    },
+                  ),
+                ),
+              ),
+            ),
+          if (draft == null) ...[
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: c.surface,
+                border: Border(top: BorderSide(color: c.outline)),
+              ),
+              child: Row(
+                children: [
+                  tool(
+                    DkIcons.tool('crop'),
+                    l.scan_crop,
+                    pages.isEmpty ? null : () => _crop(pages[current]),
+                  ),
+                  tool(
+                    DkIcons.tool('rotate'),
+                    l.scan_rotate,
+                    pages.isEmpty ? null : () => _rotate(current),
+                  ),
+                  tool(
+                    DkIcons.filters,
+                    l.scan_filter,
+                    widget.onFilter == null || pages.isEmpty
+                        ? null
+                        : () => widget.onFilter!(current),
+                  ),
+                  tool(
+                    DkIcons.retake,
+                    l.scan_retake,
+                    widget.onRetake == null || pages.isEmpty
+                        ? null
+                        : () => widget.onRetake!(current),
+                  ),
+                  tool(
+                    DkIcons.delete,
+                    l.common_delete,
+                    pages.isEmpty ? null : _delete,
+                  ),
+                ],
+              ),
+            ),
+            DecoratedBox(
+              decoration: BoxDecoration(
+                color: c.surface,
+                border: Border(top: BorderSide(color: c.outline)),
+              ),
+              child: SafeArea(
+                top: false,
+                child: Padding(
+                  padding: EdgeInsets.only(top: t.space.s),
+                  child: DkPageTray(
+                    pageIds: [for (final p in pages) p.id],
+                    pageBuilder: (context, i) =>
+                        pageImage(pages[i], fit: BoxFit.cover),
+                    current: pages.isEmpty ? null : current,
+                    onSelect: _go,
+                    onReorder: (from, to) {
+                      ref.read(scanSessionProvider.notifier).move(from, to);
+                      // The current page follows its move.
+                      if (from == current) _go(to);
+                    },
+                    onAdd: widget.onAddPages,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
+    );
+  }
+
+  /// Crop mode's page: the whole photo (unrotated: the corners are the
+  /// photo's), as large as fits with the buttons under it.
+  Widget _cropView(ScannedPage page, DetectedQuad draft) {
+    final t = context.tokens;
+    return LayoutBuilder(
+      builder: (context, box) {
+        // DkCropOverlay is as tall as its width allows, plus its 44 dp
+        // handle margin and the button row: fit the width to the height.
+        // ponytail: the button row's 56 is estimated; at large text it wraps.
+        const chrome = 44.0 + 56;
+        final pad = t.space.l;
+        final width = ((box.maxHeight - 2 * pad - chrome) * _aspect + 44).clamp(
+          0.0,
+          box.maxWidth - 2 * pad,
+        );
+        return Padding(
+          padding: EdgeInsets.all(pad),
+          child: Center(
+            child: SizedBox(
+              width: width,
+              child: DkCropOverlay(
+                image: Image(
+                  image: ref.read(scanStoreProvider).image(page.path),
+                  fit: BoxFit.fill,
+                  gaplessPlayback: true,
+                ),
+                aspectRatio: _aspect,
+                quad: draft,
+                snapTo: page.quad,
+                onChanged: (q) => setState(() => _draft = q),
+                onAuto: page.quad == null
+                    ? null
+                    : () => setState(() => _draft = page.quad),
+                onFullPage: () => setState(() => _draft = ScannedPage.fullPage),
+                onReset: () => setState(() => _draft = _cropStart),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

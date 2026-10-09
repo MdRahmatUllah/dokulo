@@ -25,43 +25,74 @@ QuadDetector quadDetector(Ref ref) =>
     (_) async => null;
 
 /// One captured page, as S2 reviews it: the photo on disk (so an unsaved
-/// scan survives the app being killed), the corners found at capture and
-/// the quarter turns the user rotated it by.
+/// scan survives the app being killed), the corners found at capture, the
+/// user's own crop (S2's crop mode) and the quarter turns the user rotated
+/// it by.
 class ScannedPage {
-  const ScannedPage(this.id, this.path, {this.quad, this.turns = 0});
+  const ScannedPage(this.id, this.path, {this.quad, this.crop, this.turns = 0});
 
   final String id;
   final String path;
+
+  /// Found at capture; null when nothing was.
   final DetectedQuad? quad;
+
+  /// The user's crop, in the same fractions; null: [quad], or the full
+  /// photo.
+  final DetectedQuad? crop;
   final int turns;
 
-  ScannedPage rotated() =>
-      ScannedPage(id, path, quad: quad, turns: (turns + 1) % 4);
+  /// The corners the page is cut at.
+  DetectedQuad get corners => crop ?? quad ?? fullPage;
+
+  static const DetectedQuad fullPage = [
+    Offset.zero,
+    Offset(1, 0),
+    Offset(1, 1),
+    Offset(0, 1),
+  ];
+
+  ScannedPage copyWith({DetectedQuad? crop, int? turns}) => ScannedPage(
+    id,
+    path,
+    quad: quad,
+    crop: crop ?? this.crop,
+    turns: turns ?? this.turns,
+  );
+
+  ScannedPage rotated() => copyWith(turns: (turns + 1) % 4);
+
+  static List<num>? _flat(DetectedQuad? q) => q == null
+      ? null
+      : [
+          for (final o in q) ...[o.dx, o.dy],
+        ];
+
+  static DetectedQuad? _quad(Object? json) {
+    final q = (json as List?)?.cast<num>();
+    return q == null
+        ? null
+        : [
+            for (var i = 0; i + 1 < q.length; i += 2)
+              Offset(q[i].toDouble(), q[i + 1].toDouble()),
+          ];
+  }
 
   Map<String, Object?> toJson() => {
     'id': id,
     'path': path,
     'turns': turns,
-    if (quad case final q?)
-      'quad': [
-        for (final o in q) ...[o.dx, o.dy],
-      ],
+    'quad': ?_flat(quad),
+    'crop': ?_flat(crop),
   };
 
-  static ScannedPage fromJson(Map<String, Object?> j) {
-    final q = (j['quad'] as List?)?.cast<num>();
-    return ScannedPage(
-      j['id']! as String,
-      j['path']! as String,
-      turns: (j['turns'] as int?) ?? 0,
-      quad: q == null
-          ? null
-          : [
-              for (var i = 0; i + 1 < q.length; i += 2)
-                Offset(q[i].toDouble(), q[i + 1].toDouble()),
-            ],
-    );
-  }
+  static ScannedPage fromJson(Map<String, Object?> j) => ScannedPage(
+    j['id']! as String,
+    j['path']! as String,
+    turns: (j['turns'] as int?) ?? 0,
+    quad: _quad(j['quad']),
+    crop: _quad(j['crop']),
+  );
 }
 
 /// Where the scan in progress is kept: photos and a manifest.
@@ -220,6 +251,18 @@ class ScanSession extends _$ScanSession {
 
   Future<void> rotate(int index) async {
     state = [...state]..[index] = state[index].rotated();
+    await _save();
+  }
+
+  /// Crop mode's Apply.
+  Future<void> setCrop(int index, DetectedQuad crop) async {
+    state = [...state]..[index] = state[index].copyWith(crop: crop);
+    await _save();
+  }
+
+  /// "Apply to all pages": every page gets [crop] and/or [turns].
+  Future<void> applyToAll({DetectedQuad? crop, int? turns}) async {
+    state = [for (final p in state) p.copyWith(crop: crop, turns: turns)];
     await _save();
   }
 
