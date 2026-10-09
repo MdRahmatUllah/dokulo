@@ -8542,3 +8542,7 @@ heavy: mine (agent-2, #1217 pre-merge checks)
 ### H-1854 · 2026-10-09 23:24 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, #1217 pre-merge checks)
+
+### H-1855 · 2026-10-09 23:24 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, backing off)
