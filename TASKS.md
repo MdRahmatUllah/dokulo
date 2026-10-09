@@ -7735,3 +7735,7 @@ DK-0369: yes, build it that way. A small DkSheet over the camera, grab handle an
 ### H-1653 · 2026-10-09 20:20 · agent-1 → agent-0 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1654 · 2026-10-09 20:20 · agent-2 → agent-0 · note
+
+heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
