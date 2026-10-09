@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
+import 'package:app_pdf/providers/camera_permission.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/files/files_screen.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
+import 'package:app_pdf/screens/onboarding/onboarding_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
@@ -16,6 +18,16 @@ import 'package:app_pdf/components/dk_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+
+/// The camera is allowed: these tests are about routes, not the permission.
+class _Granted implements CameraPermission {
+  @override
+  Future<CameraAccess> status() async => CameraAccess.granted;
+  @override
+  Future<CameraAccess> request() async => CameraAccess.granted;
+  @override
+  Future<void> openSettings() async {}
+}
 
 Future<GoRouter> pumpAt(
   WidgetTester tester,
@@ -29,10 +41,12 @@ Future<GoRouter> pumpAt(
   final db = DokuloDatabase.memory();
   addTearDown(db.close);
   await tester.pumpWidget(
+    // As in the app; S1's camera gate reads its permission from a provider.
     ProviderScope(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         prefsProvider.overrideWith(Prefs.memory),
+        cameraPermissionProvider.overrideWithValue(_Granted()),
         ...overrides,
       ],
       child: MaterialApp.router(
@@ -67,7 +81,6 @@ void main() {
     Routes.me: ('M1', true),
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
-    Routes.welcome: ('Onboarding', false),
     Routes.scan: ('S1', false),
     Routes.scanReview: ('S2', false),
     '/tool/compress': ('T2 compress', false),
@@ -94,6 +107,26 @@ void main() {
     await pumpAt(tester, Routes.files);
     expect(find.byType(FilesScreen), findsOneWidget);
     expect(tabBarShown(tester), isTrue);
+  });
+
+  testWidgets('cold start at /welcome shows onboarding, no tab bar', (
+    tester,
+  ) async {
+    final router = buildRouter(initialLocation: Routes.welcome);
+    addTearDown(router.dispose);
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp.router(
+          routerConfig: router,
+          theme: dokuloTheme(DkTokens.light),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(OnboardingScreen), findsOneWidget);
+    expect(tabBarShown(tester), isFalse);
   });
 
   testWidgets('cold start at /viewer/42 shows the V1 viewer, no tab bar', (

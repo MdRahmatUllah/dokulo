@@ -883,6 +883,30 @@
   "@camera_settings": {
     "description": "DkCameraTopBar: tune, opens the scanning settings."
   },
+  "camera_access_title": "Allow camera access",
+  "@camera_access_title": {
+    "description": "S1 camera pre-prompt sheet: title (before the system prompt)."
+  },
+  "camera_access_body": "Dokulo uses the camera only to scan. Images stay on this phone.",
+  "@camera_access_body": {
+    "description": "S1 camera pre-prompt sheet: why the camera is needed."
+  },
+  "camera_off_title": "Camera access is off",
+  "@camera_off_title": {
+    "description": "S1 when camera access is denied: title."
+  },
+  "camera_off_body": "Turn it on in Settings to scan, or import photos instead.",
+  "@camera_off_body": {
+    "description": "S1 when camera access is denied: what to do."
+  },
+  "camera_open_settings": "Open settings",
+  "@camera_open_settings": {
+    "description": "S1 denied: opens this app's page in the system settings."
+  },
+  "scan_import_photos": "Import from photos",
+  "@scan_import_photos": {
+    "description": "S1 denied: import photos instead of scanning."
+  },
   "markup_copy": "Copy",
   "@markup_copy": {
     "description": "DkMarkupBar (UI spec §11.8)."
@@ -910,6 +934,14 @@
   "viewer_file_missing": "This file isn't in Dokulo any more.",
   "@viewer_file_missing": {
     "description": "V1 when the file's row is gone (deleted, or a stale link). A spec gap filled in DK-0293."
+  },
+  "annot_colour": "Colour",
+  "@annot_colour": {
+    "description": "V2 selected annotation mini bar: change its colour."
+  },
+  "annot_add_note": "Add note",
+  "@annot_add_note": {
+    "description": "V2 selected annotation mini bar: attach a note (icon-only, screen-reader label)."
   },
   "colour_yellow": "Yellow",
   "@colour_yellow": {
@@ -1171,6 +1203,158 @@
   "pro_card_action": "See Pro",
   "@pro_card_action": {
     "description": "DkProCard button: opens the paywall (X3)."
+  },
+  "error_locked": "This PDF is locked.",
+  "@error_locked": {"description": "Locked input (UI spec §26.3)."},
+  "error_damaged": "This file can't be opened.",
+  "@error_damaged": {"description": "Damaged file (§26.3)."},
+  "error_storage": "Not enough space on this phone.",
+  "@error_storage": {"description": "Not enough storage, size unknown (§26.3)."},
+  "error_storage_needs": "Not enough space on this phone (needs about {mb} MB).",
+  "@error_storage_needs": {"description": "Not enough storage (§26.3).", "placeholders": {"mb": {"type": "int"}}},
+  "error_too_large": "This file is too large to process at once on this phone.",
+  "@error_too_large": {"description": "Too large for memory (§26.3)."},
+  "error_unsupported_form": "This form type can't be filled on phones.",
+  "@error_unsupported_form": {"description": "Unsupported (XFA) form (§26.3)."},
+  "error_model_missing": "Translation needs a language model ({mb} MB).",
+  "@error_model_missing": {"description": "Model missing (§26.3).", "placeholders": {"mb": {"type": "int"}}},
+  "error_low_memory": "Close other apps to use AI – it needs about 2 GB free.",
+  "@error_low_memory": {"description": "Low memory (§26.3)."},
+  "error_cancelled": "Cancelled. Your original file wasn't changed.",
+  "@error_cancelled": {"description": "Cancelled (§26.3)."},
+  "error_offline": "You're offline.",
+  "@error_offline": {"description": "Offline, web tool (§26.3)."},
+  "error_unexpected": "Something went wrong. (code {code})",
+  "@error_unexpected": {"description": "Unexpected, no page known (§26.3).", "placeholders": {"code": {"type": "String"}}},
+  "error_unexpected_page": "Something went wrong on page {page}. (code {code})",
+  "@error_unexpected_page": {"description": "Unexpected (§26.3).", "placeholders": {"page": {"type": "int"}, "code": {"type": "String"}}},
+  "error_action_enter_password": "Enter password",
+  "@error_action_enter_password": {"description": "Recovery action (§26.3)."},
+  "error_action_try_repair": "Try Repair",
+  "@error_action_try_repair": {"description": "Recovery action: opens Repair PDF (§26.3)."},
+  "error_action_manage_storage": "Manage storage",
+  "@error_action_manage_storage": {"description": "Recovery action (§26.3)."},
+  "error_action_split_first": "Split it first",
+  "@error_action_split_first": {"description": "Recovery action: opens Split PDF (§26.3)."},
+  "error_action_open_read_only": "Open read-only",
+  "@error_action_open_read_only": {"description": "Recovery action (§26.3)."},
+  "error_action_skip_page": "Skip this page",
+  "@error_action_skip_page": {"description": "Recovery action (§26.3)."},
+  "error_action_send_report": "Send report by email",
+  "@error_action_send_report": {"description": "Recovery action: user-initiated (DK-0011, §26.3)."},
+  "empty_home_title": "Your scans and PDFs will appear here",
+  "@empty_home_title": {"description": "H1 recents empty (UI spec §26.1)."},
+  "empty_home_body": "Scan a document or open a PDF to get started.",
+  "@empty_home_body": {"description": "H1 recents and F1 root empty (§26.1)."},
+  "empty_files_title": "No files yet",
+  "@empty_files_title": {"description": "F1 root empty (§26.1)."},
+  "empty_folder_title": "This folder is empty",
+  "@empty_folder_title": {"description": "A folder empty (§26.1)."},
+  "empty_folder_body": "Move files here or save tool results here.",
+  "@empty_folder_body": {"description": "A folder empty (§26.1)."},
+  "empty_search_title": "Nothing found for “{q}”",
+  "@empty_search_title": {"description": "Search, no results (§26.1).", "placeholders": {"q": {"type": "String"}}},
+  "empty_search_body": "Try another word or check the spelling.",
+  "@empty_search_body": {"description": "Search, no results (§26.1)."},
+  "empty_trash_title": "Nothing here",
+  "@empty_trash_title": {"description": "Recently deleted empty (§26.1)."},
+  "empty_trash_body": "Deleted files stay here for 30 days.",
+  "@empty_trash_body": {"description": "Recently deleted empty (§26.1; DE added in DK-0605)."},
+  "empty_signatures_title": "No signatures yet",
+  "@empty_signatures_title": {"description": "Signatures empty (§26.1)."},
+  "empty_signatures_body": "Add one to sign PDFs in seconds.",
+  "@empty_signatures_body": {"description": "Signatures empty (§26.1; DE added in DK-0606)."},
+  "empty_workflows_title": "No workflows yet",
+  "@empty_workflows_title": {"description": "Workflows empty (§26.1)."},
+  "empty_workflows_body": "Chain tools you use together, then run them in one tap.",
+  "@empty_workflows_body": {"description": "Workflows empty (§26.1; DE added in DK-0607)."},
+  "empty_photos_title": "No documents found",
+  "@empty_photos_title": {"description": "Photo finder found nothing (§26.1)."},
+  "empty_photos_body": "No documents found in your photos.",
+  "@empty_photos_body": {"description": "Photo finder found nothing (the export's line)."},
+  "empty_action_scan": "Scan a document",
+  "@empty_action_scan": {"description": "Empty state button (§26.1)."},
+  "empty_action_open_file": "Open a file",
+  "@empty_action_open_file": {"description": "Empty state button (§26.1)."},
+  "empty_action_move_here": "Move files here",
+  "@empty_action_move_here": {"description": "Empty state button (§26.1)."},
+  "empty_action_add_signature": "Add signature",
+  "@empty_action_add_signature": {"description": "Empty state button (§26.1)."},
+  "empty_action_new_workflow": "New workflow",
+  "@empty_action_new_workflow": {"description": "Empty state button (§26.1)."},
+  "empty_action_use_template": "Use a template",
+  "@empty_action_use_template": {"description": "Empty state button (§26.1)."},
+  "common_close": "Close",
+  "@common_close": {"description": "Closes a sheet or a screen."},
+  "permission_off_camera": "Camera access is off, so scanning doesn't work.",
+  "@permission_off_camera": {"description": "The global states board's banner (UI spec §26.4)."},
+  "permission_off_photos": "Photo access is off, so photos can't be imported.",
+  "@permission_off_photos": {"description": "Photos denied (§26.4)."},
+  "permission_off_photos_add": "Photo access is off, so pages can't be saved to Photos.",
+  "@permission_off_photos_add": {"description": "Add-to-Photos denied (§26.4)."},
+  "permission_off_notifications": "Notifications are off, so you won't hear when a long job is done.",
+  "@permission_off_notifications": {"description": "Notifications denied (§26.4)."},
+  "permission_off_biometrics": "Face ID and fingerprint are off for Dokulo, so the locked folder asks for your PIN.",
+  "@permission_off_biometrics": {"description": "Biometrics denied (§26.4)."},
+  "banner_no_text": "{count, plural, =1{1 scan has no searchable text yet.} other{{count} scans have no searchable text yet.}}",
+  "@banner_no_text": {"description": "Info banner on Home/Files (global states board).", "placeholders": {"count": {"type": "int"}}},
+  "banner_make_searchable": "Make searchable",
+  "@banner_make_searchable": {"description": "The info banner's action: opens Make text searchable."},
+  "banner_purchase_failed": "Purchase didn't complete. You weren't charged.",
+  "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
+  "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
+  "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "link_broken_title": "This link doesn't work any more",
+  "@link_broken_title": {"description": "A deep link to no route or tool (DK-0236)."},
+  "link_broken_body": "What it pointed to may have been moved or deleted.",
+  "@link_broken_body": {"description": "Under a broken deep link's title (DK-0236)."},
+  "link_action_home": "Go to Home",
+  "@link_action_home": {"description": "Button on a broken deep link (DK-0236)."},
+  "link_job_finished": "This job has already finished.",
+  "@link_job_finished": {"description": "Toast: a job link (a notification) after the job ended (DK-0236)."},
+  "onb_1_title": "All your PDF tools. Nothing uploaded.",
+  "@onb_1_title": {
+    "description": "O1 headline (UI spec §14.2)."
+  },
+  "onb_1_body": "Scan, merge, compress, sign and more – right on this phone.",
+  "@onb_1_body": {
+    "description": "O1 body (UI spec §14.2)."
+  },
+  "onb_2_title": "No watermark. No subscription.",
+  "@onb_2_title": {
+    "description": "O2 headline (UI spec §14.2)."
+  },
+  "onb_2_body": "Most tools are free with no limits. Pro is a one-time unlock.",
+  "@onb_2_body": {
+    "description": "O2 body (UI spec §14.2)."
+  },
+  "onb_3_title": "What do you want to do first?",
+  "@onb_3_title": {
+    "description": "O3 headline (UI spec §14.2)."
+  },
+  "onb_scan_title": "Scan a document",
+  "@onb_scan_title": {
+    "description": "O3 card 1 title: opens the scanner (S1)."
+  },
+  "onb_scan_sub": "Use the camera",
+  "@onb_scan_sub": {
+    "description": "O3 card 1 sub line."
+  },
+  "onb_open_title": "Open a PDF",
+  "@onb_open_title": {
+    "description": "O3 card 2 title: the system file picker, then the viewer (V1)."
+  },
+  "onb_open_sub": "From Files or another app",
+  "@onb_open_sub": {
+    "description": "O3 card 2 sub line."
+  },
+  "onb_look_title": "Look around",
+  "@onb_look_title": {
+    "description": "O3 card 3 title: goes to Home (H1)."
+  },
+  "onb_look_sub": "See all tools",
+  "@onb_look_sub": {
+    "description": "O3 card 3 sub line."
   },
   "files_search_hint": "Search names and text",
   "@files_search_hint": {

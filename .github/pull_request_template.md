@@ -12,7 +12,7 @@ What and why:
 - [ ] EN and DE from the ARB files; German checked for wrapping
 - [ ] 200 % text where the spec marks it, without clipping
 - [ ] Screen-reader labels and reading order (§6 checklist)
-- [ ] States: empty, loading, error, success, Pro-gated
+- [ ] States: empty, loading (a skeleton, never blank), error, success, Pro-gated
 - [ ] Tests: widget tests and goldens; unit tests; golden PDFs for a tool
 - [ ] The basic check passes (CLAUDE.md)
 - [ ] Docs updated with any behaviour change; spec gaps named

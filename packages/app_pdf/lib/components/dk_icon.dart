@@ -193,6 +193,10 @@ abstract final class DkIcons {
 
   // Files.
   static const folder = IconData(0xe2c7, fontFamily: _font) /* folder */;
+  static const folderOpen = IconData(
+    0xe2c8,
+    fontFamily: _font,
+  ) /* folder_open */;
   static const lockedFolder = IconData(0xe899, fontFamily: _font) /* lock */;
   static const trash = IconData(0xe16c, fontFamily: _font) /* delete_sweep */;
 
