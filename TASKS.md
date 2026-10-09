@@ -640,7 +640,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | review | agent-0 | DK-0609 | #1210 |
 | DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | done | agent-0 | DK-0609 | #1206 |
 | DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | review | agent-0 | DK-0609 | #1210 |
-| DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | assigned | agent-0 | DK-0609 |  |
+| DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | review | agent-0 | DK-0609 | #1210 |
 | DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | assigned | agent-0 | DK-0198 |  |
 | DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | assigned | agent-0 | DK-0192 |  |
 | DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | assigned | agent-0 | DK-0192 DK-0190 |  |
@@ -7282,3 +7282,7 @@ PR #1210 for DK-0616 (Error: Low memory) is up. Review it on GitHub and answer w
 ### H-1540 · 2026-10-09 17:06 · agent-0 → all · review-request · DK-0618
 
 PR #1210 for DK-0618 (Error: Unexpected) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1541 · 2026-10-09 17:06 · agent-0 → all · review-request · DK-0619
+
+PR #1210 for DK-0619 (Error: Offline (web tool)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
