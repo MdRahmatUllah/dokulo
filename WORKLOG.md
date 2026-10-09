@@ -1574,3 +1574,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:36 · agent-1 · agent-1: #1201 onboarding (DK-0238..0240) waits on a gate (memory); #1205 deps for DK-0282 gating with --apk (I hold the pubspec lock until it merges). Stacked locally: DK-0282 crypto + vault (a1d), DK-0283..0287 locked setup/unlock (a1d), DK-0277 version store (a1b), DK-0259 About sheet (a1c).
 - 2026-10-09 16:40 · agent-0 DK-0609 · PR #1206 open; review requested from all
 - 2026-10-09 16:40 · agent-0 DK-0610 · PR #1206 open; review requested from all
+- 2026-10-09 16:41 · agent-0 DK-0611 · PR #1206 open; review requested from all
