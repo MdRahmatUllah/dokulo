@@ -9,7 +9,9 @@ import '../components/motion/dk_transition_motion.dart';
 import '../screens/files/files_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
+import '../screens/locked/locked_folder_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
+import '../screens/p1_organize/organize_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
@@ -48,11 +50,23 @@ abstract final class Routes {
   static const scanImport = '/scan/review?source=photos';
 
   /// T2; [files] (row ids) are its input, in order (X1, a share, a widget,
-  /// an extension): `?file=` once per file.
-  static String tool(String toolId, {List<String> files = const []}) => Uri(
-    path: '/tool/$toolId',
-    queryParameters: files.isEmpty ? null : {'file': files},
-  ).toString();
+  /// an extension): `?file=` once per file. [chained]: the input is the
+  /// result before it (a Next chip, DK-0386).
+  static String tool(
+    String toolId, {
+    List<String> files = const [],
+    bool chained = false,
+  }) {
+    final query = {
+      if (files.isNotEmpty) 'file': files,
+      if (chained) 'chain': '1',
+    };
+    return Uri(
+      path: '/tool/$toolId',
+      queryParameters: query.isEmpty ? null : query,
+    ).toString();
+  }
+
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
   static String viewer(String fileId, {bool edit = false}) =>
@@ -139,13 +153,12 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 path: Routes.files,
                 builder: (context, state) => const FilesScreen(),
                 routes: [
-                  _screen('locked', 'F2'),
                   // The folder screen (DK-0262) and the trash (DK-0278).
                   GoRoute(
                     path: 'folder/:id',
-                    builder: (context, state) => PlaceholderScreen(
-                      'Folder',
-                      detail: state.pathParameters['id']!,
+                    builder: (context, state) => FilesScreen(
+                      // A malformed id finds no folder: the screen is empty.
+                      folder: int.tryParse(state.pathParameters['id']!) ?? -1,
                     ),
                   ),
                   _screen('trash', 'Recently deleted'),
@@ -176,6 +189,8 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
         ],
       ),
+      // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
+      fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
       fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
@@ -210,6 +225,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           final screen = ToolOptionsScreen(
             definition: ToolDefinitions.of(toolId),
             fileIds: [for (final f in files) int.tryParse(f) ?? -1],
+            chained: s.uri.queryParameters['chain'] == '1',
           );
           return files.isEmpty
               ? screen
@@ -264,7 +280,9 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       ),
       fullScreen(
         '/organize/:fileId',
-        (s) => PlaceholderScreen('P1', detail: s.pathParameters['fileId']!),
+        (s) => OrganizeScreen(
+          fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+        ),
       ),
       // The component catalogue: debug builds only (kDebugMode is a
       // constant, so a release build doesn't contain it).

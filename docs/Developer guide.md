@@ -186,7 +186,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
-| `/files/locked` | F2 Locked folder | tab 3, pushed | Behind biometrics (its task adds the guard) |
+| `/files/locked` | F2 Locked folder | full screen | Setup L1–L4 the first time, then the unlock screen (PIN, biometrics); unlocked, the content. Leaving it, Lock now or a minute in the background locks it (DK-0283..0288) |
 | `/me` | M1 Me | tab 4 | |
 | `/me/models` | M2 Model manager | tab 4, pushed | |
 | `/me/settings/:page` | M3 Settings | tab 4, pushed | `:page` is the settings group, e.g. `appearance` |
@@ -357,8 +357,28 @@ one inline action, "Retake page 7", DK-0383); without one it shows the
 output's size, or "3 files", over "From Zeugnisse.pdf · 34 pages". A
 multi-file result (DK-0384) lists its parts with the definition's `partLine`
 ("Pages 1–3 · 420 KB", or their size) and no name field; Save keeps every
-part next to the input. Share, the split Save's menu and Next chips come
-with DK-1077, DK-0380, DK-0385 and DK-0386.
+part next to the input. The definition's `next` (2–4 tool ids, §21) are
+T3's Next chips (DK-0386), each shown only when that tool takes this result:
+a chip opens that tool's T2 with the result as its input
+(`chainInputProvider`, `/tool/:id?chain=1`), the saved files if Save ran,
+else the outputs as they are; it takes T3's place. `ToolResult.chain` lists
+the tools run so far ("Save as workflow" after two: DK-1078). Share and the
+split Save's menu come with DK-1077, DK-0380 and DK-0385.
+
+**P1, Organize pages (DK-0329…DK-0333).** `/organize/:fileId` opens
+`OrganizeScreen` (`lib/screens/p1_organize/`) on doc_core's `PageEdit`
+(DK-0330): the pages as `PageSource`s in `DkPageGrid`; a drag moves one (the
+landing haptic); a tap or long-press selects, and the selection bar rotates,
+duplicates, deletes ("2 pages deleted · Undo") or extracts them (a new
+"<name> – extracted.pdf"). + opens the insert sheet: a blank page the size of
+its neighbour, or another PDF's pages (copied into the inbox first), after
+the last selected page or at the end. Undo and Redo step through every
+edit. Save keeps the result as a copy next to the original (never touched);
+Cancel asks first when something changed. Phones start at 3 columns, tablets
+at 5 and 8; a pinch goes from 2 to 6 (DK-0334). The grid is virtualised: only
+the visible pages ask for their thumbnails (one subscription each), so a
+300-page document shows skeletons with page numbers that fade in as they
+render (DK-0335). Insert from a scan or photos and Replace original: DK-1079.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration

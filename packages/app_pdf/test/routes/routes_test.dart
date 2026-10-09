@@ -88,7 +88,6 @@ void main() {
   // whether the tab bar shows.
   const coldStarts = {
     Routes.tools: ('T1', true),
-    Routes.lockedFolder: ('F2', true),
     Routes.me: ('M1', true),
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
@@ -96,7 +95,6 @@ void main() {
     Routes.scanReview: ('S2', false),
     '/tool/compress': ('Compress PDF', false),
     '/viewer/f42?mode=edit': ('V2 f42', false),
-    '/organize/f42': ('P1 f42', false),
   };
   for (final MapEntry(key: location, value: (screen, tabs))
       in coldStarts.entries) {
@@ -186,11 +184,11 @@ void main() {
         .pixels;
     expect(scrolled, greaterThan(0));
 
-    await tester.tap(find.text('Files'));
+    await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
-    router.push(Routes.lockedFolder);
+    router.push(Routes.models);
     await tester.pumpAndSettle();
-    expect(title(tester), 'F2');
+    expect(title(tester), 'M2');
 
     await tester.tap(find.text('Tools'));
     await tester.pumpAndSettle();
@@ -203,9 +201,9 @@ void main() {
       scrolled,
     );
 
-    await tester.tap(find.text('Files'));
+    await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'F2');
+    expect(title(tester), 'M2');
   });
 
   testWidgets('back from a pushed tool page returns to the tab it came from', (
@@ -272,8 +270,8 @@ void main() {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(393, 852);
     addTearDown(tester.view.reset);
-    final router = await pumpAt(tester, Routes.files);
-    router.push(Routes.lockedFolder);
+    final router = await pumpAt(tester, Routes.me);
+    router.push(Routes.models);
     await tester.pumpAndSettle();
     expect(tabBarShown(tester), isTrue);
 
@@ -281,13 +279,13 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(DkNavRail), findsOneWidget);
     expect(tabBarShown(tester), isFalse);
-    expect(title(tester), 'F2', reason: 'the Files stack survives');
+    expect(title(tester), 'M2', reason: 'the Me stack survives');
 
     tester.view.physicalSize = const Size(700, 1000); // medium: tab bar
     await tester.pumpAndSettle();
     expect(find.byType(DkNavRail), findsNothing);
     expect(tabBarShown(tester), isTrue);
-    expect(title(tester), 'F2');
+    expect(title(tester), 'M2');
   });
 
   group('transitions (UI spec §13.4; DK-0229, DK-0237)', () {
@@ -332,13 +330,13 @@ void main() {
 
     testWidgets('a pushed page comes in along the x axis (Android shared '
         'axis), by at most 7.5 % of the width', (tester) async {
-      final router = await pumpAt(tester, Routes.files);
-      router.push(Routes.lockedFolder);
+      final router = await pumpAt(tester, Routes.me);
+      router.push(Routes.models);
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 40));
-      final mid = tester.getTopLeft(find.text('F2')).dx;
+      final mid = tester.getTopLeft(find.text('M2')).dx;
       await tester.pumpAndSettle();
-      final end = tester.getTopLeft(find.text('F2')).dx;
+      final end = tester.getTopLeft(find.text('M2')).dx;
       // At most 7.5 % of the width (about 30 dp on a phone).
       final width =
           tester.view.physicalSize.width / tester.view.devicePixelRatio;
@@ -350,13 +348,13 @@ void main() {
     ) async {
       debugDefaultTargetPlatformOverride = TargetPlatform.iOS;
       addTearDown(() => debugDefaultTargetPlatformOverride = null);
-      final router = await pumpAt(tester, Routes.files);
-      router.push(Routes.lockedFolder);
+      final router = await pumpAt(tester, Routes.me);
+      router.push(Routes.models);
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 60));
-      final mid = tester.getTopLeft(find.text('F2')).dx;
+      final mid = tester.getTopLeft(find.text('M2')).dx;
       await tester.pumpAndSettle();
-      expect(mid - tester.getTopLeft(find.text('F2')).dx, greaterThan(30));
+      expect(mid - tester.getTopLeft(find.text('M2')).dx, greaterThan(30));
       debugDefaultTargetPlatformOverride = null;
     });
 

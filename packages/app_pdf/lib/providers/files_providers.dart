@@ -87,6 +87,22 @@ Stream<List<FileEntry>> filesIn(Ref ref, int? folder) {
   return query.watch().map((rows) => rows..sort(view.compare));
 }
 
+/// Folder [id] and its parents, the root's child first (the folder screen's
+/// title and breadcrumb), live; empty once the folder is gone.
+@riverpod
+Stream<List<Folder>> folderChain(Ref ref, int id) {
+  final db = ref.watch(appDatabaseProvider);
+  return db.select(db.folders).watch().map((all) {
+    final byId = {for (final f in all) f.id: f};
+    final chain = <Folder>[];
+    for (int? at = id; at != null && byId.containsKey(at);) {
+      chain.insert(0, byId[at]!);
+      at = byId[at]!.parentId;
+    }
+    return chain;
+  });
+}
+
 /// How many files are in Recently deleted, for F1's special row.
 @riverpod
 Stream<int> trashCount(Ref ref) {

@@ -111,7 +111,8 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   SliverList.builder(
                     itemCount: value.length,
-                    itemBuilder: (_, i) => FileEntryCard(value[i]),
+                    itemBuilder: (_, i) =>
+                        FileEntryCard(value[i], longPressActions: true),
                   ),
                 ],
               ),

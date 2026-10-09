@@ -34,3 +34,12 @@ def test_steps_pick_the_right_test_runner(tmp_path: Path) -> None:
     assert plan["test core"][1:] == ["test"] and "dart" in plan["test core"][0]
     assert "test empty" not in plan
     assert plan["native libs"][-1] == "x.apk" and plan["size budget"][-1] == "x.apk"
+
+
+def test_app_pdf_generates_last(tmp_path: Path) -> None:
+    for name in ("app_pdf", "doc_core", "zeta"):
+        (tmp_path / "packages" / name).mkdir(parents=True)
+        (tmp_path / "packages" / name / "pubspec.yaml").write_text(
+            "dev_dependencies:\n  build_runner: ^2.0.0\n", encoding="utf-8")
+    plan = [name for name, _, _ in check.steps(tmp_path, apk=None) if name.startswith("build_runner")]
+    assert plan == ["build_runner doc_core", "build_runner zeta", "build_runner app_pdf"]

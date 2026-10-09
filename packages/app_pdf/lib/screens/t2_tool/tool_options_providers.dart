@@ -36,6 +36,17 @@ class LastToolResult extends _$LastToolResult {
   void set(ToolResult result) => state = result;
 }
 
+/// A result on its way to the next tool (a Next chip, DK-0386): the files
+/// and the chain so far. T2 opened with `?chain=1` takes it.
+@Riverpod(keepAlive: true)
+class ChainInput extends _$ChainInput {
+  @override
+  ({List<FileEntry> files, List<String> chain})? build() => null;
+
+  void set(List<FileEntry> files, List<String> chain) =>
+      state = (files: files, chain: chain);
+}
+
 /// Page thumbnails on disk (DK-0390's ThumbnailCache), in app support.
 @Riverpod(keepAlive: true, retry: _noRetry)
 Future<ThumbnailCache> thumbnailCache(Ref ref) async {
