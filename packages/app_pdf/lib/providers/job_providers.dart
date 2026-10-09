@@ -7,6 +7,7 @@ import 'package:doc_tools/doc_tools.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'database_providers.dart';
+import 'device_providers.dart';
 import 'file_providers.dart';
 
 part 'job_providers.g.dart';
@@ -29,6 +30,12 @@ Future<JobQueue> jobQueue(Ref ref) async => JobQueue(
   ToolRegistry.app(),
   // Every started job shows in the mini job bar until it ends (DK-0233).
   hooks: JobHooks(onStarted: ref.read(runningJobsProvider.notifier).add),
+  // No job starts that is known to fail; the free storage and memory are
+  // read again for each (DK-0020).
+  preflight: Preflight(() {
+    ref.invalidate(deviceCapabilitiesProvider);
+    return ref.read(deviceCapabilitiesProvider.future);
+  }),
 );
 
 /// A running job and its latest progress, for the mini job bar.

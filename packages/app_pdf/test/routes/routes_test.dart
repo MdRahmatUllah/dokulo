@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
+import 'package:app_pdf/providers/camera_permission.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +15,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
+/// The camera is allowed: these tests are about routes, not the permission.
+class _Granted implements CameraPermission {
+  @override
+  Future<CameraAccess> status() async => CameraAccess.granted;
+  @override
+  Future<CameraAccess> request() async => CameraAccess.granted;
+  @override
+  Future<void> openSettings() async {}
+}
+
 Future<GoRouter> pumpAt(
   WidgetTester tester,
   String location, {
@@ -23,8 +34,12 @@ Future<GoRouter> pumpAt(
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
   await tester.pumpWidget(
+    // As in the app; S1's camera gate reads its permission from a provider.
     ProviderScope(
-      overrides: overrides,
+      overrides: [
+        cameraPermissionProvider.overrideWithValue(_Granted()),
+        ...overrides,
+      ],
       child: MaterialApp.router(
         routerConfig: router,
         theme: dokuloTheme(DkTokens.light), // components read the tokens

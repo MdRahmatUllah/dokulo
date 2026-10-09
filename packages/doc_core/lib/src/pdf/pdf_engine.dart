@@ -23,6 +23,25 @@ import 'package:pdfrx_engine/pdfrx_engine.dart';
 /// Failures are [DocError]s, mapped to the error catalogue (UI spec §26.3).
 abstract final class PdfEngine {
   /// Page count and page sizes.
+  /// Whether the document's form is XFA (PDFium's FORMTYPE_XFA_FULL or
+  /// XFA_FOREGROUND): phones can't fill it (DK-0614).
+  static Future<bool> isXfaForm(String path, {String? password}) async {
+    await _withDocument(path, password, (doc) async {}); // path, password
+    final type = await PdfrxEntryFunctions.instance.compute(_formTypeOnWorker, (
+      path,
+      password,
+    ));
+    return type == 2 || type == 3;
+  }
+
+  /// Throws [DocErrorKind.unsupportedForm] for an XFA form ("This form type
+  /// can't be filled on phones", Open read-only): Fill form calls it first.
+  static Future<void> ensureFillable(String path, {String? password}) async {
+    if (await isXfaForm(path, password: password)) {
+      throw DocError(DocErrorKind.unsupportedForm, detail: 'XFA form: $path');
+    }
+  }
+
   static Future<PdfInfo> inspect(String path, {String? password}) =>
       _withDocument(path, password, (doc) async {
         return PdfInfo(
@@ -289,6 +308,36 @@ T _onPage<T>(
   });
 }
 
+/// On pdfrx's worker: PDFium's form type (0 none, 1 AcroForm, 2 XFA full,
+/// 3 XFA foreground).
+int _formTypeOnWorker((String, String?) message) {
+  final (path, password) = message;
+  final pdfium = fpdf.getPdfium();
+  return using((arena) {
+    // From memory, as _onPage: PDFium's path handling isn't UTF-8-safe.
+    final bytes = File(path).readAsBytesSync();
+    final buffer = arena<Uint8>(bytes.length);
+    buffer.asTypedList(bytes.length).setAll(0, bytes);
+    final doc = pdfium.FPDF_LoadMemDocument64(
+      buffer.cast(),
+      bytes.length,
+      password == null
+          ? nullptr
+          : password.toNativeUtf8(allocator: arena).cast(),
+    );
+    if (doc == nullptr) {
+      throw StateError(
+        'FPDF_LoadMemDocument64 failed: ${pdfium.FPDF_GetLastError()}',
+      );
+    }
+    try {
+      return pdfium.FPDF_GetFormType(doc);
+    } finally {
+      pdfium.FPDF_CloseDocument(doc);
+    }
+  });
+}
+
 /// On pdfrx's worker: the page's image objects.
 List<ImageObject> _imagesOnWorker((String, String?, int) message) =>
     _onPage(message, (pdfium, page, arena) {
@@ -508,7 +557,13 @@ enum DocErrorKind {
 }
 
 class DocError implements Exception {
-  const DocError(this.kind, {this.page, this.detail = '', this.code});
+  const DocError(
+    this.kind, {
+    this.page,
+    this.detail = '',
+    this.code,
+    this.bytes,
+  });
   final DocErrorKind kind;
 
   /// The 0-based page the failure happened on, if known ("on page 14").
@@ -519,6 +574,9 @@ class DocError implements Exception {
 
   /// PDFium's error code, if any.
   final int? code;
+
+  /// Not enough storage: the bytes the job needs (DK-0020).
+  final int? bytes;
 
   @override
   String toString() =>
