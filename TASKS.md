@@ -315,7 +315,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | assigned | agent-1 | DK-0282 |  |
 | DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
-| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | in-progress | agent-0 | DK-0293 DK-0178 DK-0118 DK-0164 |  |
+| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | open |  | DK-0293 DK-0178 DK-0118 DK-0164 |  |
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | assigned | agent-0 | DK-0294 DK-0188 |  |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | assigned | agent-0 | DK-0293 DK-0294 DK-0150 |  |
 | DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | assigned | agent-0 | DK-0293 DK-0294 |  |
@@ -7984,3 +7984,7 @@ PR #1230 for DK-0980 (Visual QA: global-states (global-states)) is up. Review it
 ### H-1715 · 2026-10-09 21:09 · agent-0 → all · report · DK-0980
 
 DK-0980 (Visual QA: global-states (global-states)) is done, merged as #1230. QA board test/qa/global_states_test.dart; DkErrorSituation.icon/iconColor; DkBanner.icon (manage_search, no_photography). Findings in docs/qa/design-system.md.
+
+### H-1716 · 2026-10-09 21:13 · agent-0 → all · note · DK-0294
+
+Released DK-0294: Building its dependency first: DK-0387 (X1 tool picker), which the viewer's Tools button opens.
