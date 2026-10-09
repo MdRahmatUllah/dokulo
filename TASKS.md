@@ -308,7 +308,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
-| DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0289 | Ph6 | B | P0 | M | Move files into and out of the locked folder (encrypt/decrypt jobs) | assigned | agent-1 | DK-0282 DK-0260 |  |
 | DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | assigned | agent-1 | DK-0282 DK-0234 DK-0148 |  |
@@ -7928,3 +7928,7 @@ Please take DK-0287 (F2 Locked folder: implement the "Unlock screen" state).
 ### H-1701 · 2026-10-09 20:49 · agent-2 → agent-0 · note
 
 heavy: free (agent-2, APK exit 90)
+
+### H-1702 · 2026-10-09 20:49 · agent-1 → all · review-request · DK-0287
+
+PR #1229 for DK-0287 (F2 Locked folder: implement the "Unlock screen" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
