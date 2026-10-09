@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../app_overrides.dart';
+
 class _Setup {
   final store = MemorySecretStore();
   var biometricOk = true;
@@ -39,6 +41,7 @@ Future<ProviderContainer> pumpLocked(
     overrides: [
       lockedVaultProvider.overrideWithValue(setup.vault),
       biometricKindProvider.overrideWith((ref) async => kind),
+      ...homeOverrides(), // leaving goes back to Files or Home
     ],
   );
   addTearDown(container.dispose);
