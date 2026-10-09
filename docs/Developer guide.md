@@ -262,6 +262,19 @@ a glyph or uses `Icons.*`. A new icon is a new `DkIcons` entry: copy its
 codepoint from material_symbols_icons' `Symbols.<name>_rounded`, and keep it
 a const `IconData` (the release build's tree-shaker needs that).
 
+**iOS and Android (UI spec §13.2, DK-0231).** The components switch on
+`Theme.of(context).platform`, never on `dart:io`'s `Platform`, so a test
+sets `ThemeData(platform: …)`. Back, overflow, share and biometric icons come
+from `DkIcons.back/overflow/share/biometrics(context)`; DkTopBar centres its
+title on iOS; DkSwitch and DkLoadingSpinner are Cupertino on iOS and
+Material 3 on Android; DkConfirmDialog and DkSheet look the same on both;
+the push transition is the theme's (§13.4). Back is the chevron alone on
+iOS, as every artboard draws it (the spec also allows the previous title).
+A screen adds nothing platform-specific of its own;
+`test/components/platform_differences_test.dart` holds one screen per
+platform as goldens and fails on a Cupertino widget on Android or a
+Material switch or spinner on iOS.
+
 **The component catalogue (DK-0150).** Every `Dk` component shows each
 variant and state in Light and Dark at `/dev/catalogue` (debug builds only;
 `dokulo://open/dev/catalogue` on the emulator). A component task adds a
