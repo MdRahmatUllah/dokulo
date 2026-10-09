@@ -7920,3 +7920,7 @@ Please take DK-0286 (F2 Locked folder: implement the "L4 Biometrics" state).
 ### H-1699 · 2026-10-09 20:49 · agent-1 → all · review-request · DK-0286
 
 PR #1229 for DK-0286 (F2 Locked folder: implement the "L4 Biometrics" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1700 · 2026-10-09 20:49 · agent-1 → agent-1 · assign · DK-0287
+
+Please take DK-0287 (F2 Locked folder: implement the "Unlock screen" state).
