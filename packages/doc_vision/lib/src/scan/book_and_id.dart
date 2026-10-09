@@ -9,7 +9,8 @@ const idCardAspect = 85.6 / 54;
 const idCardPixels = (1011, 638);
 
 /// The card inside [quad], flattened to ID-1 at 300 dpi (DK-0340), landscape
-/// whichever way it was held. Returns a new Mat the caller disposes.
+/// whichever way it was held. Returns a new Mat the caller disposes. Like
+/// everything here, call it off the UI isolate (OpenCV's own isolate).
 cv.Mat cropIdCard(cv.Mat photo, Quad quad) {
   final flat = warpQuad(photo, quad);
   // Held upright: turn it to landscape, as the card reads.
@@ -24,7 +25,8 @@ cv.Mat cropIdCard(cv.Mat photo, Quad quad) {
 
 /// Where the spine of an open book is in [spread]: an x in pixels, from the
 /// darkest column band in the middle third (the gutter's shadow), refined
-/// by the most vertical long Hough line near it (DK-0341).
+/// by the most vertical long Hough line near it (DK-0341). Off the UI
+/// isolate.
 int findSpine(cv.Mat spread) {
   final grey = spread.channels == 1
       ? spread.clone()
@@ -160,7 +162,7 @@ cv.Mat rotated(cv.Mat page, double degrees) {
 
 /// An open book's spread split at the spine into the left and the right
 /// page, each deskewed (DK-0341; full curve dewarping is later). The Mats
-/// are new; the caller disposes them.
+/// are new; the caller disposes them. Off the UI isolate.
 ({cv.Mat left, cv.Mat right, int spine}) splitSpread(cv.Mat spread) {
   final spine = findSpine(spread);
   final leftRoi = spread.region(cv.Rect(0, 0, spine, spread.rows));

@@ -92,12 +92,16 @@ QuadDetection? detectQuadInGrey(
   int? rowStride,
 }) {
   final stride = rowStride ?? width;
-  final packed = stride == width
-      ? bytes
-      : Uint8List.fromList([
-          for (var r = 0; r < height; r++)
-            ...bytes.sublist(r * stride, r * stride + width),
-        ]);
+  // Drop the row padding: one buffer, a row at a time (every preview frame).
+  final Uint8List packed;
+  if (stride == width) {
+    packed = bytes;
+  } else {
+    packed = Uint8List(width * height);
+    for (var r = 0; r < height; r++) {
+      packed.setRange(r * width, (r + 1) * width, bytes, r * stride);
+    }
+  }
   final grey = cv.Mat.fromList(height, width, cv.MatType.CV_8UC1, packed);
   try {
     return detectQuad(grey);
