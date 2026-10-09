@@ -7,6 +7,7 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/files/files_screen.dart';
+import '../screens/files/trash_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
@@ -152,7 +153,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 path: Routes.files,
                 builder: (context, state) => const FilesScreen(),
                 routes: [
-                  // The folder screen (DK-0262) and the trash (DK-0278).
+                  // The folder screen (DK-0262).
                   GoRoute(
                     path: 'folder/:id',
                     builder: (context, state) => FilesScreen(
@@ -160,7 +161,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                       folder: int.tryParse(state.pathParameters['id']!) ?? -1,
                     ),
                   ),
-                  _screen('trash', 'Recently deleted'),
+                  GoRoute(
+                    path: 'trash',
+                    builder: (context, state) => const TrashScreen(),
+                  ),
                 ],
               ),
             ],

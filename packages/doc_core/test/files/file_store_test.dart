@@ -339,6 +339,30 @@ void main() {
       await store.restoreFromTrash(db, id);
       expect(await db.select(db.trash).get(), isEmpty);
     });
+
+    test('restore: a file whose folder went comes back to the root', () async {
+      final taxes = await store.createFolder(db, 'Taxes');
+      final id = await addFile('Taxes${sep}x.pdf', folder: taxes);
+      await store.deleteFolder(db, taxes);
+      await store.restoreFromTrash(db, id);
+      final r = await row(id);
+      expect(r.folderId, isNull);
+      expect(r.path, '${store.userFolder.path}${sep}x.pdf');
+      expect(File(r.path).existsSync(), isTrue);
+      expect(await db.select(db.trash).get(), isEmpty);
+    });
+
+    test('deleteForever removes the file, its row and its trash row', () async {
+      final id = await addFile('gone.pdf');
+      await store.trashFile(db, id);
+      await store.deleteForever(db, id);
+      expect(
+        File('${store.userFolder.path}${sep}gone.pdf').existsSync(),
+        isFalse,
+      );
+      expect(await db.select(db.files).get(), isEmpty);
+      expect(await db.select(db.trash).get(), isEmpty);
+    });
   });
 
   group('createFolder (DK-0273)', () {

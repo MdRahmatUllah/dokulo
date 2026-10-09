@@ -126,6 +126,10 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* keyboard_arrow_up */;
   static const delete = IconData(0xe92e, fontFamily: _font) /* delete */;
+  static const restoreFromTrash = IconData(
+    0xe938,
+    fontFamily: _font,
+  ) /* restore_from_trash */;
   static const deleteForever = IconData(
     0xe92b,
     fontFamily: _font,

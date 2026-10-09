@@ -1713,5 +1713,27 @@
         "type": "String"
       }
     }
+  },
+  "trash_empty": "Empty",
+  "@trash_empty": {
+    "description": "R1 top bar: empties Recently deleted (DK-0278)."
+  },
+  "trash_banner": "Files are deleted for good after {n} days.",
+  "@trash_banner": {
+    "description": "R1's info banner; n is the retention, 30 or 7.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "meta_days_left": "{n, plural, one{1 day left} other{{n} days left}}",
+  "@meta_days_left": {
+    "description": "R1 row meta, after the size.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }

@@ -191,3 +191,31 @@ Future<void> recordOpened(DokuloDatabase db, int fileId) => db
     .insertOnConflictUpdate(
       RecentsCompanion.insert(fileId: Value(fileId), openedAt: DateTime.now()),
     );
+
+/// How long Recently deleted keeps a file: 30 days, or 7 (DK-0278). The
+/// launch purge and R1's banner read it.
+// ponytail: a pref without its Settings row yet; that row comes with the
+// Settings screens.
+@riverpod
+int trashRetentionDays(Ref ref) =>
+    trashDays(ref.watch(prefsProvider).value ?? const {});
+
+int trashDays(Map<String, Object?> prefs) => prefs['trash.days'] == 7 ? 7 : 30;
+
+/// Recently deleted (R1), the last deleted first, with when each went.
+@riverpod
+Stream<List<({FileEntry file, DateTime deletedAt})>> trashedFiles(Ref ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final query = db.select(db.files).join([
+    innerJoin(db.trash, db.trash.fileId.equalsExp(db.files.id)),
+  ])..orderBy([OrderingTerm.desc(db.trash.deletedAt)]);
+  return query.watch().map(
+    (rows) => [
+      for (final r in rows)
+        (
+          file: r.readTable(db.files),
+          deletedAt: r.readTable(db.trash).deletedAt,
+        ),
+    ],
+  );
+}

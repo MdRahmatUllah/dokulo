@@ -62,6 +62,8 @@ class DkFileCard extends StatefulWidget {
     this.progress,
     this.showPressed = false,
     this.semanticsActions,
+    this.moreIcon,
+    this.moreLabel,
   });
 
   final String name;
@@ -81,6 +83,11 @@ class DkFileCard extends StatefulWidget {
 
   /// The file menu; no more button when null.
   final VoidCallback? onMore;
+
+  /// The more button's icon and label, when it does one thing (R1's
+  /// restore) rather than open the menu.
+  final IconData? moreIcon;
+  final String? moreLabel;
 
   /// Null: not in multi-select. False/true: the empty or checked circle.
   final bool? selected;
@@ -196,7 +203,9 @@ class _DkFileCardState extends State<DkFileCard> {
         : Semantics(
             container: true, // its own button inside the card's node
             button: true,
-            label: MaterialLocalizations.of(context).moreButtonTooltip,
+            label:
+                w.moreLabel ??
+                MaterialLocalizations.of(context).moreButtonTooltip,
             excludeSemantics: true,
             onTap: w.onMore,
             child: DkTappable(
@@ -214,13 +223,13 @@ class _DkFileCardState extends State<DkFileCard> {
                             color: c.primaryContainer,
                           ),
                           child: Icon(
-                            DkIcons.overflow(context),
+                            w.moreIcon ?? DkIcons.overflow(context),
                             size: 18,
                             color: c.onPrimaryContainer,
                           ),
                         )
                       : DkIcon(
-                          DkIcons.overflow(context),
+                          w.moreIcon ?? DkIcons.overflow(context),
                           color: c.iconSecondary,
                         ),
                 ),
@@ -365,3 +374,4 @@ class _DkFileCardState extends State<DkFileCard> {
     );
   }
 }
+

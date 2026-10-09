@@ -170,23 +170,7 @@ class FileStore {
   Future<int?> moveFile(DokuloDatabase db, int id, int? folder) async {
     final row = await _file(db, id);
     if (row.folderId == folder) return folder;
-    final dir = await folderDirectory(db, folder);
-    await dir.create(recursive: true);
-    final target = _freePath(dir, row.name);
-    // Rename where it can, copy-and-delete across volumes.
-    try {
-      await File(row.path).rename(target);
-    } on FileSystemException {
-      await File(row.path).copy(target);
-      await File(row.path).delete();
-    }
-    await (db.update(db.files)..where((f) => f.id.equals(id))).write(
-      FilesCompanion(
-        path: Value(target),
-        name: Value(_name(File(target))),
-        folderId: Value(folder),
-      ),
-    );
+    await _relocate(db, row, folder);
     return row.folderId;
   }
 
@@ -201,8 +185,47 @@ class FileStore {
         ),
       );
 
-  Future<void> restoreFromTrash(DokuloDatabase db, int id) =>
-      (db.delete(db.trash)..where((t) => t.fileId.equals(id))).go();
+  /// Takes file [id] out of Recently deleted, back to its folder (DK-0278);
+  /// if that folder was deleted meanwhile, to the root.
+  Future<void> restoreFromTrash(DokuloDatabase db, int id) async {
+    final row = await _file(db, id);
+    final orphan =
+        row.folderId == null && File(row.path).parent.path != userFolder.path;
+    if (orphan && await File(row.path).exists()) {
+      await _relocate(db, row, null);
+    }
+    await (db.delete(db.trash)..where((t) => t.fileId.equals(id))).go();
+  }
+
+  /// Deletes file [id] for good (DK-0278): from disk and from the index
+  /// (its trash row goes with it).
+  Future<void> deleteForever(DokuloDatabase db, int id) async {
+    final row = await _file(db, id);
+    final file = File(row.path);
+    if (await file.exists()) await file.delete();
+    await (db.delete(db.files)..where((f) => f.id.equals(id))).go();
+  }
+
+  /// [row]'s file into folder [folder] (null: the root), under a free name.
+  Future<void> _relocate(DokuloDatabase db, FileEntry row, int? folder) async {
+    final dir = await folderDirectory(db, folder);
+    await dir.create(recursive: true);
+    final target = _freePath(dir, row.name);
+    // Rename where it can, copy-and-delete across volumes.
+    try {
+      await File(row.path).rename(target);
+    } on FileSystemException {
+      await File(row.path).copy(target);
+      await File(row.path).delete();
+    }
+    await (db.update(db.files)..where((f) => f.id.equals(row.id))).write(
+      FilesCompanion(
+        path: Value(target),
+        name: Value(_name(File(target))),
+        folderId: Value(folder),
+      ),
+    );
+  }
 
   Future<FileEntry> _file(DokuloDatabase db, int id) =>
       (db.select(db.files)..where((f) => f.id.equals(id))).getSingle();

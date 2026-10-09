@@ -12,6 +12,7 @@ class DkTextAction extends StatelessWidget {
     required this.label,
     required this.onTap,
     this.bold = false,
+    this.danger = false,
   });
 
   final String label;
@@ -19,6 +20,9 @@ class DkTextAction extends StatelessWidget {
   /// Null: disabled.
   final VoidCallback? onTap;
   final bool bold;
+
+  /// `color.danger`: R1's Empty.
+  final bool danger;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +52,11 @@ class DkTextAction extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: t.text.labelL.copyWith(
-                color: onTap == null ? t.color.textDisabled : t.color.primary,
+                color: onTap == null
+                    ? t.color.textDisabled
+                    : danger
+                    ? t.color.danger
+                    : t.color.primary,
                 fontWeight: bold ? FontWeight.w700 : null,
               ),
             ),
