@@ -7896,3 +7896,7 @@ Please take DK-0283 (F2 Locked folder: implement the "L1 Intro" state).
 ### H-1693 · 2026-10-09 20:49 · agent-1 → all · review-request · DK-0283
 
 PR #1229 for DK-0283 (F2 Locked folder: implement the "L1 Intro" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1694 · 2026-10-09 20:49 · agent-1 → agent-1 · assign · DK-0284
+
+Please take DK-0284 (F2 Locked folder: implement the "L2 Create PIN" state).
