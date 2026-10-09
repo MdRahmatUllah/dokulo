@@ -95,10 +95,18 @@ final scanFoldersProvider = Provider<Future<List<String>> Function()>(
 /// The time a scan is named after (tests fix it).
 final scanClockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
 
-/// "Scan 2026-10-07 14.32": the default name. ponytail: the pattern from
-/// Settings → Scanning comes with DK-0361.
-String scanName(DateTime now) =>
-    'Scan ${DateFormat('yyyy-MM-dd HH.mm').format(now)}';
+/// A scan's name from Settings → Scanning's [pattern] (DK-0361): `{date}`
+/// is 2026-10-07, `{time}` 14.32, `{number}` [number]. The default gives
+/// "Scan 2026-10-07 14.32".
+String scanName(
+  DateTime now, {
+  String pattern = defaultNamePattern,
+  int number = 1,
+}) => pattern
+    .replaceAll('{date}', DateFormat('yyyy-MM-dd').format(now))
+    .replaceAll('{time}', DateFormat('HH.mm').format(now))
+    .replaceAll('{number}', '$number')
+    .trim();
 
 /// The Save sheet over S2 (DK-0359; UI spec §19.4, design
 /// `10-scanner/scanner-review-save`): Name (selected, ready to type over),
@@ -125,7 +133,12 @@ Future<ScanSaveOptions?> showScanSaveSheet(
       pages: pages,
       photoBytes: photoBytes,
       folders: folders,
-      name: scanName(now ?? DateTime.now()),
+      name: scanName(
+        now ?? DateTime.now(),
+        pattern: ProviderScope.containerOf(context)
+            .read(scannerSettingsProvider)
+            .namePattern,
+      ),
     ),
   );
 }

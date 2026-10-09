@@ -7,6 +7,7 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
+import '../screens/m3_settings/scanning_settings_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/s1_scanner/s1_screen.dart';
@@ -121,10 +122,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                     path: 'settings/:page',
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
-                      child: PlaceholderScreen(
-                        'M3',
-                        detail: state.pathParameters['page']!,
-                      ),
+                      child: switch (state.pathParameters['page']!) {
+                        'scanning' => const ScanningSettingsScreen(),
+                        final page => PlaceholderScreen('M3', detail: page),
+                      },
                     ),
                   ),
                 ],

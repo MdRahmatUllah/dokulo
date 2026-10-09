@@ -370,5 +370,20 @@
   "scan_quality_best_desc": "Zum Drucken",
   "scan_folder": "Ordner",
   "scan_save_pdf": "{count, plural, =1{PDF speichern · 1 Seite} other{PDF speichern · {count} Seiten}}",
-  "scan_save_images": "{count, plural, =1{1 Bild speichern} other{{count} Bilder speichern}}"
+  "scan_save_images": "{count, plural, =1{1 Bild speichern} other{{count} Bilder speichern}}",
+  "settings_scanning": "Scannen",
+  "settings_file_name": "Dateiname",
+  "settings_name_pattern": "Namensmuster",
+  "settings_insert": "Einfügen",
+  "settings_token_date": "Datum",
+  "settings_token_time": "Uhrzeit",
+  "settings_token_number": "Nummer",
+  "settings_preview": "Vorschau",
+  "settings_ocr_language": "Sprache der Texterkennung",
+  "filter_original_desc": "Wie fotografiert",
+  "filter_auto_colour_desc": "Am besten für die meisten Dokumente",
+  "filter_greyscale_desc": "Kleinere Dateien",
+  "filter_black_white_desc": "Klarer Text, kleinste Dateien",
+  "filter_remove_shadows_desc": "Für schräg aufgenommene Fotos",
+  "filter_default_footer": "Gilt ab dem nächsten Scan. Beim Scannen einen Filter lange drücken, um ihn dort zu ändern."
 }
