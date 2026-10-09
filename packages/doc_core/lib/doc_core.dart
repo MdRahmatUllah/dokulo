@@ -10,6 +10,8 @@ export 'package:drift/drift.dart'
         OrderingTerm,
         Variable,
         innerJoin,
+        leftOuterJoin,
+        coalesce,
         BooleanExpressionOperators,
         BaseAggregate;
 
