@@ -7936,3 +7936,7 @@ PR #1229 for DK-0287 (F2 Locked folder: implement the "Unlock screen" state) is 
 ### H-1703 · 2026-10-09 20:49 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, APK exit 90)
+
+### H-1704 · 2026-10-09 20:52 · agent-2 → agent-0 · note
+
+heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 2)
