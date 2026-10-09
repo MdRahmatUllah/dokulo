@@ -624,7 +624,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0600 | Ph3 | B | P1 | S | Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo") | open |  | DK-0235 |  |
 | DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | review | agent-0 | DK-0196 DK-0053 | #1213 |
 | DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | review | agent-0 | DK-0196 DK-0054 | #1213 |
-| DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | assigned | agent-0 | DK-0196 DK-0055 |  |
+| DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | review | agent-0 | DK-0196 DK-0055 | #1213 |
 | DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | assigned | agent-0 | DK-0196 DK-0056 |  |
 | DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | assigned | agent-0 | DK-0196 DK-0057 |  |
 | DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | assigned | agent-0 | DK-0196 DK-0064 |  |
@@ -7346,3 +7346,7 @@ PR #1213 for DK-0601 (Empty state: Home recents) is up. Review it on GitHub and 
 ### H-1556 · 2026-10-09 17:22 · agent-0 → all · review-request · DK-0602
 
 PR #1213 for DK-0602 (Empty state: Files root) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1557 · 2026-10-09 17:22 · agent-0 → all · review-request · DK-0603
+
+PR #1213 for DK-0603 (Empty state: Folder) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
