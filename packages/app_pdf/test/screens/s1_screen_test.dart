@@ -87,7 +87,7 @@ void main() {
   }
 
   late ProviderContainer container;
-  var closed = 0, imported = 0, reviewed = 0;
+  var closed = 0, imported = 0, reviewed = 0, settingsOpened = 0;
 
   Future<void> pump(
     WidgetTester tester, {
@@ -102,7 +102,7 @@ void main() {
     addTearDown(tester.view.reset);
     camera = FakeCamera();
     prefs = MemoryPrefsStore()..json = prefsJson;
-    closed = imported = reviewed = 0;
+    closed = imported = reviewed = settingsOpened = 0;
     container = ProviderContainer(
       overrides: [
         scannerCameraProvider.overrideWith((ref) => camera),
@@ -128,7 +128,7 @@ void main() {
             onClose: () => closed++,
             onImport: () => imported++,
             onReview: () => reviewed++,
-            onSettings: () {},
+            onSettings: () => settingsOpened++,
           ),
         ),
       ),
@@ -291,6 +291,87 @@ void main() {
       expect(camera.opened, isTrue);
     },
   );
+
+  group('quick settings (DK-0369)', () {
+    Future<void> open(WidgetTester tester) async {
+      await tester.tap(
+        find.bySemanticsLabel(RegExp(r'^Scanner( settings|-Einstellungen)$')),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('the tune button opens them; the switches are stored', (
+      tester,
+    ) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester);
+      await open(tester);
+      expect(
+        find.text('Take the photo when the page is steady'),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Auto-crop'));
+      await tester.pumpAndSettle();
+      expect(prefs.json, contains('"autoCrop":false'));
+      await tester.tap(find.text('Auto-capture').last);
+      await tester.pumpAndSettle();
+      expect(prefs.json, contains('"autoCapture":true'));
+      semantics.dispose();
+    });
+
+    testWidgets(
+      'Default filter: a choice from the list; More goes to Settings',
+      (tester) async {
+        final semantics = tester.ensureSemantics();
+        await pump(tester);
+        await open(tester);
+        expect(find.text('Auto colour'), findsOneWidget, reason: 'the default');
+        await tester.tap(find.text('Default filter'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Black & white'));
+        await tester.pumpAndSettle();
+        expect(prefs.json, contains('"filter":"blackWhite"'));
+        expect(
+          find.text('Black & white'),
+          findsOneWidget,
+          reason: 'shown as the value',
+        );
+        await tester.tap(find.text('More scanning settings'));
+        await tester.pumpAndSettle();
+        expect(settingsOpened, 1);
+        semantics.dispose();
+      },
+    );
+
+    testWidgets('page sizes: A4 first in German', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester, locale: const Locale('de'));
+      await open(tester);
+      await tester.tap(find.text('Seitengröße'));
+      await tester.pumpAndSettle();
+      final a4 = tester.getTopLeft(find.text('A4')).dy;
+      final letter = tester.getTopLeft(find.text('Letter')).dy;
+      expect(a4, lessThan(letter));
+      semantics.dispose();
+    });
+
+    for (final (name, tokens, locale) in [
+      ('light', DkTokens.light, const Locale('en')),
+      ('dark', DkTokens.dark, const Locale('en')),
+      ('de', DkTokens.light, const Locale('de')),
+    ]) {
+      testWidgets('golden: quick settings ($name)', (tester) async {
+        final semantics = tester.ensureSemantics();
+        await pump(tester, tokens: tokens, locale: locale);
+        await open(tester);
+        semantics.dispose();
+        await expectLater(
+          find.byType(MaterialApp),
+          matchesGoldenFile('goldens/s1_quick_settings_$name.png'),
+        );
+      });
+    }
+  });
 
   testWidgets('closing the screen closes the camera', (tester) async {
     await pump(tester);

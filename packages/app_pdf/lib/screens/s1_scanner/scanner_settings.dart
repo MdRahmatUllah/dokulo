@@ -10,24 +10,57 @@ part 'scanner_settings.g.dart';
 /// and auto-capture are separate (the top complaint about other scanners):
 /// auto-crop is on and auto-capture off on first use; then the user's last
 /// choice. DK-0361's defaults (filter, page size, name) join them here.
+/// The filter a new page gets (S2's filter strip; doc_vision's ScanFilter).
+enum ScanFilterChoice {
+  original,
+  autoColour,
+  greyscale,
+  blackWhite,
+  removeShadows,
+}
+
+/// The page size a scan is saved at.
+enum ScanPageSize { auto, a4, letter }
+
 class ScannerPrefs {
-  const ScannerPrefs({this.autoCapture = false, this.autoCrop = true});
+  const ScannerPrefs({
+    this.autoCapture = false,
+    this.autoCrop = true,
+    this.filter = ScanFilterChoice.autoColour,
+    this.pageSize = ScanPageSize.auto,
+  });
 
   final bool autoCapture, autoCrop;
+  final ScanFilterChoice filter;
+  final ScanPageSize pageSize;
 
-  ScannerPrefs copyWith({bool? autoCapture, bool? autoCrop}) => ScannerPrefs(
+  ScannerPrefs copyWith({
+    bool? autoCapture,
+    bool? autoCrop,
+    ScanFilterChoice? filter,
+    ScanPageSize? pageSize,
+  }) => ScannerPrefs(
     autoCapture: autoCapture ?? this.autoCapture,
     autoCrop: autoCrop ?? this.autoCrop,
+    filter: filter ?? this.filter,
+    pageSize: pageSize ?? this.pageSize,
   );
 
   Map<String, Object?> toJson() => {
     'autoCapture': autoCapture,
     'autoCrop': autoCrop,
+    'filter': filter.name,
+    'pageSize': pageSize.name,
   };
 
   static ScannerPrefs fromJson(Map<String, Object?> j) => ScannerPrefs(
     autoCapture: j['autoCapture'] as bool? ?? false,
     autoCrop: j['autoCrop'] as bool? ?? true,
+    filter:
+        ScanFilterChoice.values.asNameMap()[j['filter']] ??
+        ScanFilterChoice.autoColour,
+    pageSize:
+        ScanPageSize.values.asNameMap()[j['pageSize']] ?? ScanPageSize.auto,
   );
 }
 
@@ -101,4 +134,8 @@ class ScannerSettings extends _$ScannerSettings {
   Future<void> setAutoCapture(bool on) => _set(state.copyWith(autoCapture: on));
 
   Future<void> setAutoCrop(bool on) => _set(state.copyWith(autoCrop: on));
+
+  Future<void> setFilter(ScanFilterChoice f) => _set(state.copyWith(filter: f));
+
+  Future<void> setPageSize(ScanPageSize s) => _set(state.copyWith(pageSize: s));
 }

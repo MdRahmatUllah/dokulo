@@ -965,6 +965,62 @@
       }
     }
   },
+  "scan_auto_capture_desc": "Take the photo when the page is steady",
+  "@scan_auto_capture_desc": {
+    "description": "Scanning settings: what Auto-capture does."
+  },
+  "scan_auto_crop": "Auto-crop",
+  "@scan_auto_crop": {
+    "description": "Scanning settings: crop each photo to the detected page."
+  },
+  "scan_auto_crop_desc": "Crop to the detected page",
+  "@scan_auto_crop_desc": {
+    "description": "Scanning settings: what Auto-crop does."
+  },
+  "scan_default_filter": "Default filter",
+  "@scan_default_filter": {
+    "description": "Scanning settings: the filter a new page gets."
+  },
+  "scan_page_size": "Page size",
+  "@scan_page_size": {
+    "description": "Scanning settings: the page size a scan is saved at."
+  },
+  "scan_page_auto": "Auto",
+  "@scan_page_auto": {
+    "description": "Page size: as photographed."
+  },
+  "scan_page_a4": "A4",
+  "@scan_page_a4": {
+    "description": "Page size A4."
+  },
+  "scan_page_letter": "Letter",
+  "@scan_page_letter": {
+    "description": "Page size US Letter."
+  },
+  "scan_more_settings": "More scanning settings",
+  "@scan_more_settings": {
+    "description": "S1 quick settings: opens Settings → Scanning."
+  },
+  "filter_original": "Original",
+  "@filter_original": {
+    "description": "Scan filter: as photographed."
+  },
+  "filter_auto_colour": "Auto colour",
+  "@filter_auto_colour": {
+    "description": "Scan filter: colour boost."
+  },
+  "filter_greyscale": "Greyscale",
+  "@filter_greyscale": {
+    "description": "Scan filter: greyscale."
+  },
+  "filter_black_white": "Black & white",
+  "@filter_black_white": {
+    "description": "Scan filter: black and white."
+  },
+  "filter_remove_shadows": "Remove shadows",
+  "@filter_remove_shadows": {
+    "description": "Scan filter: shadow removal."
+  },
   "camera_review": "{count, plural, =1{Review 1 page} other{Review {count} pages}}",
   "@camera_review": {
     "description": "S1 page stack: opens S2 with the captured pages (screen readers).",

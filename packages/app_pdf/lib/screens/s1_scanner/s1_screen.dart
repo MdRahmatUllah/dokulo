@@ -15,6 +15,7 @@ import '../../l10n/app_localizations.dart';
 import '../../theme/dk_tokens.dart';
 import 'scan_hints.dart';
 import 'scan_session.dart';
+import 'scanner_quick_settings.dart';
 import 'scanner_settings.dart';
 import 'scanner_camera.dart';
 
@@ -263,7 +264,9 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       autoLocked: mode == DkScanMode.batch,
       grid: _grid,
       onGrid: (v) => setState(() => _grid = v),
-      onSettings: widget.onSettings,
+      // The quick settings (DK-0369); More → Settings → Scanning.
+      onSettings: () =>
+          showScannerQuickSettings(context, onMore: widget.onSettings),
       onFlashMenu: () => setState(() => _flashMenu = true),
     );
     final hintKind = scanHint(
