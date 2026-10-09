@@ -69,10 +69,11 @@ void main() {
     );
     final s = c.read(photoFinderProvider);
     expect((s.scanned, s.total, s.running), (5, 5, false));
-    expect(s.found, [
-      'doc-90',
-      'doc-60',
-    ], reason: 'doc-40 is under the threshold');
+    expect(
+      [for (final p in s.found) p.id],
+      unorderedEquals(['doc-90', 'doc-60']),
+      reason: 'doc-40 is under the threshold',
+    );
   });
 
   test(
@@ -86,7 +87,9 @@ void main() {
       final c = finder();
       await c.read(photoFinderProvider.notifier).scan();
       expect(library.thumbs, unorderedEquals(['cat', 'doc-75']));
-      expect(c.read(photoFinderProvider).found, ['doc-90', 'doc-75', 'doc-60']);
+      expect([
+        for (final p in c.read(photoFinderProvider).found) p.id,
+      ], unorderedEquals(['doc-90', 'doc-75', 'doc-60']));
     },
   );
 
@@ -95,20 +98,28 @@ void main() {
     final f = c.read(photoFinderProvider.notifier);
     await f.scan();
     await f.notADocument('doc-90');
-    expect(c.read(photoFinderProvider).found, ['doc-60']);
+    expect(
+      [for (final p in c.read(photoFinderProvider).found) p.id],
+      ['doc-60'],
+    );
     library.photos[0] = (
       id: 'doc-90',
       modified: t0.add(const Duration(days: 1)),
     );
     await f.scan();
-    expect(c.read(photoFinderProvider).found, ['doc-60']);
+    expect(
+      [for (final p in c.read(photoFinderProvider).found) p.id],
+      ['doc-60'],
+    );
   });
 
   test('earlier results load without scanning', () async {
     await finder().read(photoFinderProvider.notifier).scan();
     final c = finder();
     await c.read(photoFinderProvider.notifier).load();
-    expect(c.read(photoFinderProvider).found, ['doc-90', 'doc-60']);
+    expect([
+      for (final p in c.read(photoFinderProvider).found) p.id,
+    ], unorderedEquals(['doc-90', 'doc-60']));
   });
 
   test('no access: nothing is scanned', () async {

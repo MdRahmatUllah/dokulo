@@ -326,5 +326,22 @@
   "link_broken_title": "Dieser Link funktioniert nicht mehr",
   "link_broken_body": "Was er öffnen sollte, wurde vielleicht verschoben oder gelöscht.",
   "link_action_home": "Zur Startseite",
-  "link_job_finished": "Diese Aufgabe ist schon fertig."
+  "link_job_finished": "Diese Aufgabe ist schon fertig.",
+  "photos_intro_title": "Dokumente in Ihren Fotos finden",
+  "photos_intro_body": "Dokulo durchsucht die Fotos auf diesem Telefon nach Dokumenten und Belegen. Nichts wird hochgeladen.",
+  "photos_allow": "Zugriff auf Fotos erlauben",
+  "photos_scanning": "Fotos werden durchsucht",
+  "photos_scanning_progress": "{done} von {total} · Sie können diesen Bildschirm verlassen",
+  "photos_title": "Dokumente in Fotos",
+  "photos_document_photo": "Foto eines Dokuments",
+  "photos_convert": "{count, plural, =1{1 in PDF umwandeln} other{{count} in PDF umwandeln}}",
+  "photos_convert_title": "{count, plural, =1{1 Foto umwandeln} other{{count} Fotos umwandeln}}",
+  "photos_not_document": "Kein Dokument",
+  "photos_preview": "Vorschau",
+  "photos_one_pdf": "Eine PDF",
+  "photos_pdf_per_photo": "Eine PDF pro Foto",
+  "photos_clean_up": "Wie einen Scan aufbereiten",
+  "photos_clean_up_desc": "Auf das Dokument zuschneiden und den Kontrast verbessern",
+  "photos_create_pdf": "{count, plural, =1{PDF erstellen · 1 Seite} other{PDF erstellen · {count} Seiten}}",
+  "photos_create_pdfs": "{count, plural, =1{1 PDF erstellen} other{{count} PDFs erstellen}}"
 }

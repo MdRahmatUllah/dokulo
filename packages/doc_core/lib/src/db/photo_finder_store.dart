@@ -57,13 +57,14 @@ class PhotoFinderStore {
         ),
       );
 
-  /// The photos that look like documents, best first.
-  Future<List<String>> documents() async => [
+  /// The photos that look like documents, newest first, with when they
+  /// last changed (the results' month headers).
+  Future<List<({String id, DateTime modified})>> documents() async => [
     for (final r
         in await (_db.select(_db.photoFinderCache)
               ..where((r) => r.isDocument.equals(true))
-              ..orderBy([(r) => OrderingTerm.desc(r.score)]))
+              ..orderBy([(r) => OrderingTerm.desc(r.modified)]))
             .get())
-      r.assetId,
+      (id: r.assetId, modified: r.modified),
   ];
 }

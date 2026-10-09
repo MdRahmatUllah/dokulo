@@ -38,6 +38,7 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
     this.onLeading,
     this.actions = const [],
     this.onOverflow,
+    this.trailing,
   }) : onCancel = null,
        onDone = null,
        cancelLabel = null,
@@ -58,6 +59,7 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
        onLeading = null,
        actions = const [],
        onOverflow = null,
+       trailing = null,
        _editing = true;
 
   final String? title;
@@ -71,6 +73,9 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// Opens the overflow menu, anchored to the given context (DkMenu).
   final void Function(BuildContext anchor)? onOverflow;
+
+  /// In place of [actions]: a text action ("Select", DkTextAction).
+  final Widget? trailing;
 
   final VoidCallback? onCancel, onDone;
   final bool _editing;
@@ -144,7 +149,8 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
             onTap: widget.onDone,
             bold: true,
           )
-        : _Actions(actions: widget.actions, onOverflow: widget.onOverflow);
+        : widget.trailing ??
+              _Actions(actions: widget.actions, onOverflow: widget.onOverflow);
 
     // Scaffold gives the bar its height plus the status bar's: pad for it.
     return _BarSurface(

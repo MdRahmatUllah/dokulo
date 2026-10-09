@@ -88,8 +88,8 @@ class PhotoFinderState {
   final int scanned, total;
   final bool running;
 
-  /// The photos that look like documents, best first.
-  final List<String> found;
+  /// The photos that look like documents, newest first.
+  final List<LibraryPhoto> found;
 
   double get progress => total == 0 ? 0 : scanned / total;
 
@@ -97,7 +97,7 @@ class PhotoFinderState {
     int? scanned,
     int? total,
     bool? running,
-    List<String>? found,
+    List<LibraryPhoto>? found,
   }) => PhotoFinderState(
     scanned: scanned ?? this.scanned,
     total: total ?? this.total,
@@ -170,11 +170,16 @@ class PhotoFinder extends _$PhotoFinder {
   /// marks the user's choice, which a rescan never overrides).
   Future<void> notADocument(String id) async {
     await _store.notADocument(id);
-    state = state.copyWith(found: [...state.found]..remove(id));
+    state = state.copyWith(
+      found: [
+        for (final p in state.found)
+          if (p.id != id) p,
+      ],
+    );
   }
 
   /// Loads the results of earlier scans (Home's scanning card, the grid).
   Future<void> load() async => state = state.copyWith(found: await _found());
 
-  Future<List<String>> _found() => _store.documents();
+  Future<List<LibraryPhoto>> _found() => _store.documents();
 }
