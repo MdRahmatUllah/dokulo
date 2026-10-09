@@ -440,6 +440,10 @@
   "file_move_title": "{n, plural, one{1 Datei verschieben} other{{n} Dateien verschieben}}",
   "file_move_here": "Hierher verschieben",
   "toast_duplicated": "Dupliziert als {name}",
+  "privacy_line_tool_tablet": "Wird auf diesem Tablet verarbeitet",
+  "privacy_line_home_tablet": "Alles bleibt auf diesem Tablet",
+  "t2_live_preview": "Live-Vorschau",
+  "t3_result_preview": "Ergebnisvorschau",
   "about_tool_need": "Was du brauchst",
   "about_tool_get": "Was du bekommst",
   "about_tool_offline": "Funktioniert offline",
@@ -492,5 +496,12 @@
   "tool_batch_need": "Viele PDFs",
   "tool_batch_get": "Jede Datei mit demselben Werkzeug bearbeitet, in einem neuen Ordner",
   "tool_workflows_need": "Eine oder mehrere PDFs",
-  "tool_workflows_get": "Das Ergebnis mehrerer Werkzeuge nacheinander"
+  "tool_workflows_get": "Das Ergebnis mehrerer Werkzeuge nacheinander",
+  "t2_about_tool": "Über dieses Werkzeug",
+  "tools_search_hint": "Werkzeuge suchen",
+  "tools_all": "Alle",
+  "tools_count": "{n, plural, one{1 Werkzeug} other{{n} Werkzeuge}}",
+  "ai_not_eligible_title": "KI ist auf diesem Handy nicht verfügbar",
+  "ai_not_eligible_body": "Dafür braucht es mindestens {need} GB Arbeitsspeicher. Dieses Handy hat {have} GB.",
+  "common_ok": "OK"
 }

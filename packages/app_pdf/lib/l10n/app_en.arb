@@ -1734,6 +1734,14 @@
       }
     }
   },
+  "privacy_line_tool_tablet": "Processed on this tablet",
+  "@privacy_line_tool_tablet": {"description": "The privacy line under a tool's title on a tablet (24-tablet artboards)."},
+  "privacy_line_home_tablet": "Everything stays on this tablet",
+  "@privacy_line_home_tablet": {"description": "The privacy line on Home on a tablet."},
+  "t2_live_preview": "Live preview",
+  "@t2_live_preview": {"description": "T2's preview pane on a tablet in landscape (DK-0388)."},
+  "t3_result_preview": "Result preview",
+  "@t3_result_preview": {"description": "T3's preview pane on a tablet in landscape (DK-0388)."},
   "about_tool_need": "What you need",
   "@about_tool_need": {
     "description": "About this tool (§20.5): the input heading."
@@ -1950,5 +1958,44 @@
   "tool_workflows_get": "The result of several tools in a row",
   "@tool_workflows_get": {
     "description": "About this tool, workflows: what you get."
+  },
+  "t2_about_tool": "About this tool",
+  "@t2_about_tool": {"description": "T2's overflow menu: opens About this tool (UI spec §20.1, §20.5)."},
+  "tools_search_hint": "Search tools",
+  "@tools_search_hint": {
+    "description": "T1's search field (DK-0256)."
+  },
+  "tools_all": "All",
+  "@tools_all": {
+    "description": "T1's first category chip: back to the top."
+  },
+  "tools_count": "{n, plural, one{1 tool} other{{n} tools}}",
+  "@tools_count": {
+    "description": "T1 section header: how many tools the section has.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ai_not_eligible_title": "AI isn't available on this phone",
+  "@ai_not_eligible_title": {
+    "description": "The device-not-eligible sheet (ILL-13), from V1's AI button and T1's AI tools."
+  },
+  "ai_not_eligible_body": "It needs at least {need} GB of memory. This phone has {have} GB.",
+  "@ai_not_eligible_body": {
+    "description": "The device-not-eligible sheet's text.",
+    "placeholders": {
+      "need": {
+        "type": "int"
+      },
+      "have": {
+        "type": "int"
+      }
+    }
+  },
+  "common_ok": "OK",
+  "@common_ok": {
+    "description": "Closes an information sheet."
   }
 }
