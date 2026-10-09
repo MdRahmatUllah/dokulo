@@ -1754,3 +1754,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 22:20 · agent-2 DK-1077 · claimed: T3: Share (share_plus) and the split Save with its menu
 - 2026-10-09 22:20 · agent-2 DK-0294 · assigned to agent-2
 - 2026-10-09 22:20 · agent-1 DK-0261 · done (#1235)
+- 2026-10-09 22:20 · agent-2 · locked pubspec: agent-2: share_plus for T3 Share (DK-1077)
