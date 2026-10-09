@@ -28,6 +28,7 @@ import '../../components/dk_top_bar.dart';
 import '../../errors/dokulo_error.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
+import '../../patterns/dk_about_tool.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../providers/file_providers.dart';
 import '../../routes/bottom_chrome.dart';
@@ -430,6 +431,11 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
             anchor,
             groups: [
               [
+                DkAction(
+                  icon: DkIcons.info,
+                  label: l.t2_about_tool,
+                  onTap: () => showAboutTool(context, tool),
+                ),
                 DkAction(
                   icon: DkIcons.undo,
                   label: l.t2_reset_options,

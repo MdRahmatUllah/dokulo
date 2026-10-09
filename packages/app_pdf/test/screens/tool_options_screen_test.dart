@@ -234,4 +234,15 @@ void main() {
     expect(order.last.label, contains('Compress 1 pages'));
     semantics.dispose();
   });
+
+  testWidgets('the overflow: About this tool opens its sheet', (tester) async {
+    await addFiles(tester, [('a.pdf', 1)]);
+    await pump(tester, _compress);
+    await tester.tap(find.byTooltip('More'));
+    await tester.pumpAndSettle();
+    expect(find.text('Reset options'), findsOneWidget);
+    await tester.tap(find.text('About this tool'));
+    await tester.pumpAndSettle();
+    expect(find.text('What you need'), findsOneWidget);
+  });
 }
