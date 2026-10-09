@@ -7146,3 +7146,7 @@ Please take DK-0261 (Sort menu: date modified/name/size/date created + ascending
 ### H-1506 · 2026-10-09 16:46 · agent-1 → agent-1 · assign · DK-0267
 
 Please take DK-0267 (F1 Files: implement the "Loading" state).
+
+### H-1507 · 2026-10-09 16:46 · agent-1 → agent-1 · assign · DK-0273
+
+Please take DK-0273 (F1 Files: implement the "New folder dialog" state).
