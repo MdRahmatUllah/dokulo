@@ -1837,3 +1837,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 00:22 · agent-0 DK-0333 · done (#1244)
 - 2026-10-10 00:22 · agent-0 DK-0334 · claimed: P1 Organize pages: implement the "Pinch to 5 columns" state
 - 2026-10-10 00:26 · agent-0 · heavy: mine (gate DK-0334/0335)
+- 2026-10-10 00:31 · agent-0 · heavy: free
