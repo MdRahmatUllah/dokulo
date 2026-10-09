@@ -404,7 +404,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0380 | Ph3 | C | P0 | S | T3 result: implement the "Replace original" state | assigned | agent-0 | DK-0379 DK-0277 |  |
 | DK-0381 | Ph3 | C | P0 | S | T3 result: implement the "After save" state | done | agent-0 | DK-0379 | #1234 |
 | DK-0382 | Ph3 | C | P0 | S | T3 result: implement the "Discard result" state | done | agent-0 | DK-0379 | #1234 |
-| DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | assigned | agent-0 | DK-0379 |  |
+| DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | in-progress | agent-0 | DK-0379 |  |
 | DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | assigned | agent-0 | DK-0379 |  |
 | DK-0385 | Ph3 | C | P0 | S | T3 result: implement the "Save to…" state | assigned | agent-0 | DK-0379 |  |
 | DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | assigned | agent-0 | DK-0379 |  |

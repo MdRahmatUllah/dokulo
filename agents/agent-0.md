@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0383 T3 result: implement the "Partial success" state — claimed 2026-10-09 22:33.
 
 ## Next
 
