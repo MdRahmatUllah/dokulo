@@ -298,7 +298,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0274 | Ph1 | B | P0 | S | F1 Files: implement the "Move sheet" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
 | DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
 | DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
-| DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | review | agent-1 | DK-0005 | #1224 |
+| DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | done | agent-1 | DK-0005 | #1224 |
 | DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | assigned | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 |  |
 | DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
 | DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | assigned | agent-1 | DK-0260 DK-0271 |  |
@@ -8839,3 +8839,7 @@ heavy: free (agent-1, exit 1)
 ### H-1928 · 2026-10-10 00:36 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1929 · 2026-10-10 00:37 · agent-1 → all · report · DK-0277
+
+DK-0277 (Version history: keep last 5 versions per file (edits, replace original)) is done, merged as #1224. VersionStore (doc_core): last 5 versions per file, restore sets the current aside first, purge after 30 days at launch. Also: tools/check.py now generates app_pdf's code last (after doc_core's). Now ready: DK-0313, DK-0380, DK-1079.
