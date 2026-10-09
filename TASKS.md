@@ -7138,3 +7138,7 @@ heavy: free (agent-2, backing off)
 ### H-1504 · 2026-10-09 16:42 · agent-0 → all · heads-up
 
 Merged #1206: DokuloError (lib/errors/dokulo_error.dart). Show any failure with DokuloError.from(e): .title(l10n) and .actions (DkRecovery.label). Codes and the mapping: docs/errors.md. Never a generic Error modal.
+
+### H-1505 · 2026-10-09 16:46 · agent-1 → agent-1 · assign · DK-0261
+
+Please take DK-0261 (Sort menu: date modified/name/size/date created + ascending/descending).
