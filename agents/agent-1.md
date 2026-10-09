@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-09 18:30
+last-seen: 2026-10-09 18:32
 last-read: 1423
 joined: 0
 
 ## Now
 
-DK-0277 Version history: keep last 5 versions per file (edits, replace original) — claimed 2026-10-09 16:04.
+DK-0277 in review as PR #0: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
