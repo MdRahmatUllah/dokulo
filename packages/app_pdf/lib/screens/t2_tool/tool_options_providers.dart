@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:doc_core/doc_core.dart';
-import 'package:doc_tools/doc_tools.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,29 +25,6 @@ class ToolOptionValues extends _$ToolOptionValues {
   void set(String key, Object? value) => state = {...state, key: value};
 
   void reset() => state = const {};
-}
-
-/// A finished run, as T3 shows it (DK-0379): the inputs, what the job wrote
-/// (in temp, until saved), and how long it took.
-class ToolResult {
-  const ToolResult({
-    required this.toolId,
-    required this.inputs,
-    required this.output,
-    required this.took,
-  });
-
-  final String toolId;
-  final List<FileEntry> inputs;
-  final JobOutput output;
-  final Duration took;
-
-  /// The files the job wrote.
-  List<String> get files => switch (output) {
-    OneFile(:final path) => [path],
-    ManyFiles(:final paths) => paths,
-    TextOutput() => const [],
-  };
 }
 
 /// The latest finished run: T2 sets it, then opens T3.
