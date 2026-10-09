@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'database_providers.dart';
+import 'file_providers.dart';
 import 'prefs_providers.dart';
 
 part 'files_providers.g.dart';
@@ -191,3 +192,38 @@ Future<void> recordOpened(DokuloDatabase db, int fileId) => db
     .insertOnConflictUpdate(
       RecentsCompanion.insert(fileId: Value(fileId), openedAt: DateTime.now()),
     );
+
+/// Version history (DK-0277), in the sandbox next to the inbox.
+@Riverpod(keepAlive: true)
+Future<VersionStore> versionStore(Ref ref) async {
+  final files = await ref.watch(fileStoreProvider.future);
+  return VersionStore(
+    ref.watch(appDatabaseProvider),
+    Directory('${files.workDirectory.path}${Platform.pathSeparator}versions'),
+  );
+}
+
+/// File [fileId]'s versions, newest first (Info, DK-0275).
+@riverpod
+Future<List<Version>> fileVersions(Ref ref, int fileId) async =>
+    (await ref.watch(versionStoreProvider.future)).list(fileId);
+
+/// The PDF version Info shows (DK-0275).
+@riverpod
+Future<String?> pdfVersion(Ref ref, String path) => readPdfVersion(path);
+
+/// The version in a PDF's header ("%PDF-1.7" → "1.7"), from its first
+/// bytes; null for anything else.
+Future<String?> readPdfVersion(String path) async {
+  try {
+    final raf = await File(path).open();
+    try {
+      final head = String.fromCharCodes(await raf.read(16));
+      return RegExp(r'%PDF-(\d\.\d)').firstMatch(head)?.group(1);
+    } finally {
+      await raf.close();
+    }
+  } on FileSystemException {
+    return null;
+  }
+}

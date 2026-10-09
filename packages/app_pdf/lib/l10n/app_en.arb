@@ -1950,5 +1950,53 @@
   "tool_workflows_get": "The result of several tools in a row",
   "@tool_workflows_get": {
     "description": "About this tool, workflows: what you get."
+  },
+  "info_location": "Location",
+  "@info_location": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_size": "Size",
+  "@info_size": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_pages": "Pages",
+  "@info_pages": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_created": "Created",
+  "@info_created": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_modified": "Modified",
+  "@info_modified": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_pdf_version": "PDF version",
+  "@info_pdf_version": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_password": "Password",
+  "@info_password": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_searchable": "Searchable text",
+  "@info_searchable": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_versions": "Versions",
+  "@info_versions": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_current": "current",
+  "@info_current": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "common_yes": "Yes",
+  "@common_yes": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "common_no": "No",
+  "@common_no": {
+    "description": "The file Info sheet (DK-0275)."
   }
 }

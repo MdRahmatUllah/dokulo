@@ -492,5 +492,17 @@
   "tool_batch_need": "Viele PDFs",
   "tool_batch_get": "Jede Datei mit demselben Werkzeug bearbeitet, in einem neuen Ordner",
   "tool_workflows_need": "Eine oder mehrere PDFs",
-  "tool_workflows_get": "Das Ergebnis mehrerer Werkzeuge nacheinander"
+  "tool_workflows_get": "Das Ergebnis mehrerer Werkzeuge nacheinander",
+  "info_location": "Ort",
+  "info_size": "Größe",
+  "info_pages": "Seiten",
+  "info_created": "Erstellt",
+  "info_modified": "Geändert",
+  "info_pdf_version": "PDF-Version",
+  "info_password": "Passwort",
+  "info_searchable": "Durchsuchbarer Text",
+  "info_versions": "Versionen",
+  "info_current": "aktuell",
+  "common_yes": "Ja",
+  "common_no": "Nein"
 }

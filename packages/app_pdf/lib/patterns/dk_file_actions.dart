@@ -17,6 +17,7 @@ import '../routes/routes.dart';
 import '../screens/files/files_screen.dart' show fileMeta, newFolder;
 import '../theme/dk_tokens.dart';
 import '../tools/tool_catalogue.dart';
+import 'dk_file_info.dart';
 import 'dk_text_dialog.dart';
 import 'dk_undo.dart';
 
@@ -136,6 +137,11 @@ Future<void> showFileActions(
           label: l.file_move_to_locked,
           // The encrypt job comes with DK-0289; until then, the folder.
           onTap: () => context.push(Routes.lockedFolder),
+        ),
+        DkAction(
+          icon: DkIcons.info,
+          label: l.common_info,
+          onTap: () => showFileInfo(context, file),
         ),
       ],
       [
