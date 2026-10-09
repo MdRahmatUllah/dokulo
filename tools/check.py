@@ -60,8 +60,11 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         ("signature fonts", [py, "tools/fetch_signature_fonts.py"], root),
         ("pub get", [flutter, "pub", "get"], root),
     ]
+    # app_pdf last: its generators read the other packages' generated types
+    # (doc_core's database rows), which must be current first.
     out += [(f"build_runner {p.name}", [dart, "run", "build_runner", "build", "-d"], p)
-            for p in packages(root) if uses(p, "build_runner")]
+            for p in sorted(packages(root), key=lambda p: p.name == "app_pdf")
+            if uses(p, "build_runner")]
     out += [
         ("analyze", [flutter, "analyze", "--fatal-infos"], root),
         ("format", [dart, "format", "--output=none", "--set-exit-if-changed", "packages"], root),

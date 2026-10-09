@@ -25,6 +25,9 @@ class FileStore {
   Directory get inbox => _dir(workDirectory, 'inbox');
   Directory get temp => _dir(workDirectory, 'temp');
 
+  /// Version history copies ([VersionStore], DK-0277).
+  Directory get versions => _dir(workDirectory, 'versions');
+
   /// Copies an incoming file into the sandbox; the original stays untouched.
   Future<File> importIncoming(File source) async {
     await inbox.create(recursive: true);

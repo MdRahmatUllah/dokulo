@@ -51,6 +51,63 @@ class ToolInfo {
 
   /// The one-line description (UI spec §21).
   String description(AppLocalizations l) => _text(l);
+
+  /// About this tool (§20.5): what it takes.
+  String need(AppLocalizations l) => switch (id) {
+    'scan' => l.tool_scan_need,
+    'merge' => l.tool_merge_need,
+    'smartsplit' => l.tool_smartsplit_need,
+    'img2pdf' => l.tool_img2pdf_need,
+    'web' => l.tool_web_need,
+    'compress' => l.tool_compress_need,
+    'repair' => l.tool_repair_need,
+    'ocr' => l.tool_ocr_need,
+    'form' => l.tool_form_need,
+    'unlock' => l.tool_unlock_need,
+    'compare' => l.tool_compare_need,
+    'batch' => l.tool_batch_need,
+    'workflows' => l.tool_workflows_need,
+    _ => l.about_need_one_pdf,
+  };
+
+  /// About this tool (§20.5): what it makes.
+  String get(AppLocalizations l) => switch (id) {
+    'scan' => l.tool_scan_get,
+    'merge' => l.tool_merge_get,
+    'split' => l.tool_split_get,
+    'extract' => l.tool_extract_get,
+    'organize' => l.tool_organize_get,
+    'rotate' => l.tool_rotate_get,
+    'smartsplit' => l.tool_smartsplit_get,
+    'img2pdf' => l.tool_img2pdf_get,
+    'pdf2img' => l.tool_pdf2img_get,
+    'web' => l.tool_web_get,
+    'pdfa' => l.tool_pdfa_get,
+    'text' => l.tool_text_get,
+    'compress' => l.tool_compress_get,
+    'repair' => l.tool_repair_get,
+    'ocr' => l.tool_ocr_get,
+    'pagenum' => l.tool_pagenum_get,
+    'watermark' => l.tool_watermark_get,
+    'crop' => l.tool_crop_get,
+    'markup' => l.tool_markup_get,
+    'form' => l.tool_form_get,
+    'sign' => l.tool_sign_get,
+    'protect' => l.tool_protect_get,
+    'unlock' => l.tool_unlock_get,
+    'redact' => l.tool_redact_get,
+    'compare' => l.tool_compare_get,
+    'summarize' => l.tool_summarize_get,
+    'ask' => l.tool_ask_get,
+    'translate' => l.tool_translate_get,
+    'extractassets' => l.tool_extractassets_get,
+    'batch' => l.tool_batch_get,
+    'workflows' => l.tool_workflows_get,
+    _ => throw ArgumentError('no About text for tool "$id"'),
+  };
+
+  /// Every tool runs on the phone; Web page to PDF loads its page first.
+  bool get needsInternet => id == 'web';
 }
 
 /// Every tool, in the Tools tab's order (DK-0049; UI spec §15.2, §21).

@@ -65,6 +65,13 @@ void main() {
     expect(find.byType(LinkErrorScreen), findsOneWidget);
   });
 
+  testWidgets('P1 with a file handle that is gone says so', (tester) async {
+    await pumpAt(tester, Routes.organize('999')); // its own empty database
+    await tester.runAsync(() => Future<void>.delayed(Duration.zero));
+    await tester.pumpAndSettle();
+    expect(find.text("This file isn't in Dokulo any more."), findsOne);
+  });
+
   testWidgets('a link to a tool this version lacks shows the link error', (
     tester,
   ) async {

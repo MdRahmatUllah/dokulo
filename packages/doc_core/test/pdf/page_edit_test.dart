@@ -65,6 +65,7 @@ void main() {
 
   test('duplicate puts the copy right after', () async {
     final edit = PageEdit(five, 5)..duplicate({0, 4});
+    expect(identical(edit.pages[0], edit.pages[1]), isFalse);
     expect(await order(await saved(edit)), ['1', '1', '2', '3', '4', '5', '5']);
   });
 

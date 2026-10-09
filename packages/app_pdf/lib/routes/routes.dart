@@ -12,6 +12,7 @@ import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
+import '../screens/p1_organize/organize_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
@@ -289,7 +290,9 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       ),
       fullScreen(
         '/organize/:fileId',
-        (s) => PlaceholderScreen('P1', detail: s.pathParameters['fileId']!),
+        (s) => OrganizeScreen(
+          fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+        ),
       ),
       // The component catalogue: debug builds only (kDebugMode is a
       // constant, so a release build doesn't contain it).

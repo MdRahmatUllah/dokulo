@@ -196,8 +196,13 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* drag_indicator */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
+  static const blankPage = IconData(0xe89c, fontFamily: _font) /* note_add */;
+  static const pdf = IconData(0xe415, fontFamily: _font) /* picture_as_pdf */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
   static const info = IconData(0xe88e, fontFamily: _font) /* info */;
+  static const input = IconData(0xe890, fontFamily: _font) /* input */;
+  static const output = IconData(0xebbe, fontFamily: _font) /* output */;
+  static const internet = IconData(0xe80b, fontFamily: _font) /* public */;
 
   // Files.
   static const folder = IconData(0xe2c7, fontFamily: _font) /* folder */;
