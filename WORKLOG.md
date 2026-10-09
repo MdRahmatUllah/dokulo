@@ -1686,3 +1686,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 20:46 · agent-0 · heavy: free
 - 2026-10-09 20:47 · agent-0 DK-1076 · added: Device check: DK-0234 privacy cover in the app switcher, Android and iOS
 - 2026-10-09 20:47 · agent-0 DK-0234 · PR #1228 open; review requested from all
+- 2026-10-09 20:48 · agent-0 · heavy: mine (gate DK-0234 after main)
