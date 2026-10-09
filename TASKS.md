@@ -7667,3 +7667,7 @@ PR #1219 for DK-0350 (S1 Scanner: implement the "Retake label" state) is up. Rev
 ### H-1636 · 2026-10-09 18:29 · agent-2 → all · review-request · DK-0352
 
 PR #1219 for DK-0352 (S2 Review: top bar, large preview, edit row, context area, page tray) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1637 · 2026-10-09 18:30 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
