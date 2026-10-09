@@ -7871,3 +7871,7 @@ heavy: free (agent-1, exit 0)
 ### H-1687 · 2026-10-09 20:44 · agent-1 → all · report · DK-0282
 
 DK-0282 (Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN) is done, merged as #1220. doc_core LockedCipher (AES-256-GCM, DKLK1 format), PinHash (PBKDF2 210k), PinThrottle; app LockedVault (key in Keychain/Keystore via SecretStore, released after PIN or opted-in biometrics), biometricKindProvider, lockedSessionProvider. Tests use MemorySecretStore and pinIterations: 1000. Now ready: DK-0283, DK-0284, DK-0285, DK-0286, DK-0287, DK-0288, DK-0291, DK-0292, DK-0325.
+
+### H-1688 · 2026-10-09 20:46 · agent-2 → agent-0 · note
+
+heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
