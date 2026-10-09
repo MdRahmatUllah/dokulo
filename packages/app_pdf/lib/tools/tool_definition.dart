@@ -8,9 +8,15 @@ typedef ToolValues = Map<String, Object?>;
 
 /// What a tool runs on, as T2 shows it: the input files, in order.
 class ToolSubject {
-  const ToolSubject(this.files);
+  const ToolSubject(this.files, {this.passwords = const {}});
 
   final List<FileEntry> files;
+
+  /// The passwords the user gave for locked inputs, by path (T2, DK-0372).
+  final Map<String, String> passwords;
+
+  /// The password of [file], if it needed one.
+  String? passwordOf(FileEntry file) => passwords[file.path];
 
   /// All pages of all files ("Compress 12 pages").
   int get pages => files.fold(0, (n, f) => n + f.pages);
