@@ -1812,3 +1812,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 23:37 · agent-0 DK-0330 · done (#1240)
 - 2026-10-09 23:38 · agent-0 DK-0329 · claimed: P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar
 - 2026-10-09 23:47 · agent-0 DK-1079 · added: P1: insert from a scan or photos, and Save's Replace original menu
+- 2026-10-09 23:47 · agent-0 · heavy: mine (gate DK-0329..0333)
