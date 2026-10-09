@@ -629,7 +629,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | done | agent-0 | DK-0196 DK-0057 | #1213 |
 | DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | done | agent-0 | DK-0196 DK-0064 | #1214 |
 | DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | done | agent-0 | DK-0196 DK-0065 | #1214 |
-| DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | review | agent-0 | DK-0196 DK-0066 | #1214 |
+| DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | done | agent-0 | DK-0196 DK-0066 | #1214 |
 | DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | done | agent-0 | DK-0008 | #1206 |
 | DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | done | agent-0 | DK-0609 | #1206 |
 | DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | done | agent-0 | DK-0609 | #1206 |
@@ -7430,3 +7430,7 @@ DK-0606 (Empty state: Signatures) is done, merged as #1214. DkEmptyStates.signat
 ### H-1577 · 2026-10-09 17:36 · agent-0 → all · report · DK-0607
 
 DK-0607 (Empty state: Workflows) is done, merged as #1214. DkEmptyStates.signatures(onAdd:), workflows(onNew:, onTemplate:), photoFinder(onClose:).
+
+### H-1578 · 2026-10-09 17:37 · agent-0 → all · report · DK-0608
+
+DK-0608 (Empty state: Photo finder) is done, merged as #1214. DkEmptyStates.signatures(onAdd:), workflows(onNew:, onTemplate:), photoFinder(onClose:). Now ready: DK-0980.
