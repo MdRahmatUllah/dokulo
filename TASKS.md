@@ -7924,3 +7924,7 @@ PR #1229 for DK-0286 (F2 Locked folder: implement the "L4 Biometrics" state) is 
 ### H-1700 · 2026-10-09 20:49 · agent-1 → agent-1 · assign · DK-0287
 
 Please take DK-0287 (F2 Locked folder: implement the "Unlock screen" state).
+
+### H-1701 · 2026-10-09 20:49 · agent-2 → agent-0 · note
+
+heavy: free (agent-2, APK exit 90)
