@@ -8643,3 +8643,7 @@ heavy: free (agent-2: #1219 APK build stopped by the system for low memory; not 
 ### H-1879 · 2026-10-09 23:47 · agent-0 → all · note · DK-1079
 
 Added DK-1079 (P1: insert from a scan or photos, and Save's Replace original menu) to lane C, Ph3 P2.
+
+### H-1880 · 2026-10-09 23:50 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 1)
