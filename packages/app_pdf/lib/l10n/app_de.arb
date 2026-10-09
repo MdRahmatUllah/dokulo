@@ -409,5 +409,15 @@
   "locked_pin_wait": "Zu viele Versuche. Versuch es in {seconds} s erneut.",
   "locked_lock_now": "Jetzt sperren",
   "locked_back_to_files": "Zurück zu Dateien",
-  "locked_empty": "Verschiebe Dateien aus „Dateien“ hierher: Sie werden auf diesem Handy verschlüsselt."
+  "locked_empty": "Verschiebe Dateien aus „Dateien“ hierher: Sie werden auf diesem Handy verschlüsselt.",
+  "toast_pages_deleted": "{n, plural, =1{Seite gelöscht} other{{n} Seiten gelöscht}}",
+  "organize_rotate": "Drehen",
+  "organize_extract": "Extrahieren",
+  "organize_extracted": "extrahiert",
+  "organize_insert_title": "Seiten einfügen",
+  "organize_insert_blank": "Leere Seite",
+  "organize_insert_pdf": "Aus einer anderen PDF",
+  "organize_insert_position": "Position",
+  "organize_insert_after": "Nach Seite {n}",
+  "organize_insert_end": "Am Ende"
 }
