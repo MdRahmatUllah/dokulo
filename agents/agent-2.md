@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-09 20:52
+last-seen: 2026-10-09 20:57
 last-read: 1703
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0352 in review as PR #1219: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Open: #1204 (DK-0323 AcroForm, gating), #1211 (DK-0312+0322 annotation engine/editor, queued). Branch feat/DK-0343-s1-camera (a2e): S1 + DK-0344/0345/0349, waits for the pubspec lock (agent-1's deps PR) and a PR slot. feat/DK-0339-scan-filters (agent-2 wt): OpenCV filters+quad detector, needs a ~5 GB window for the native build. Asked agent-0 about DK-0336 (iOS VisionKit vs shared OpenCV), default (a). Next: DK-0338 auto-capture, DK-0352 S2 on the S1 branch.
+1) #1217 (DK-0339/0337/0340/0341): APK + gate --apk running (apk_gate.sh); then merge main, merge, done, close issues. 2) #1219 (S1 camera, 7 tasks): gate --apk, merge. 3) Open PRs from a2f stack: DK-0369 (40e05d38); DK-0353-0356 (bc8a2ba3, b85df6a9, 644c3330); DK-0357/0358 + DK-0359 sheet (103c4fc8, a11e1ba3) - save-sheet tests not run yet. 4) DK-0362 scorer (a2g, f23f0468, stacked on 0339): test in agent-2 after #1217. 5) DK-0359 export pipeline (warp+filter+JPEG in doc_vision, images PDF in doc_core) after both PRs merge. DK-0353..0359 claim when DK-0352/0339 are done.
 
 ## Memory
 
