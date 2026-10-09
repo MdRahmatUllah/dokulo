@@ -41,7 +41,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0017 | Ph1 | A | P1 | S | App size budget: keep the base app small; everything optional is a download | done | agent-1 | DK-0010 | #684 |
 | DK-0018 | Ph1 | A | P0 | S | Verify 16 KB page-size alignment for every native library (Android) | done | agent-1 | DK-0010 | #659 |
 | DK-0019 | Ph6 | A | P1 | S | Backup rules: include user files, exclude models, caches and temp; keys device-only | open |  | DK-0006 DK-0282 DK-0545 |  |
-| DK-0020 | Ph3 | A | P0 | M | Preflight checks before every job: free storage, memory guard, encryption, file type | open |  | DK-0008 DK-0013 DK-0609 |  |
+| DK-0020 | Ph3 | A | P0 | M | Preflight checks before every job: free storage, memory guard, encryption, file type | assigned | agent-0 | DK-0008 DK-0013 DK-0609 |  |
 | DK-0021 | Ph3 | A | P1 | S | Startup cleanup and job recovery: purge orphaned temp files, report or resume killed jobs | done | agent-2 | DK-0008 DK-0006 | #622 |
 | DK-0022 | Ph3 | A | P1 | S | Local tool-usage tracking (never uploaded) for suggestions and shortcuts | done | agent-2 | DK-0005 | #427 |
 | DK-0023 | Ph1 | A | P0 | S | Create the fictional sample-document set for demos, tests and store screenshots | done | agent-1 | DK-0001 | #286 |
@@ -250,167 +250,167 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | done | agent-1 | DK-0190 | #1155 |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | done | agent-1 | DK-0170 DK-0182 | #1155 |
 | DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | done | agent-2 | DK-0200 | #1183 |
-| DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | open |  | DK-0004 DK-0166 DK-0078 |  |
-| DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | open |  | DK-0229 DK-0188 DK-0078 |  |
-| DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | open |  | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
-| DK-0232 | Ph1 | A | P1 | S | Tablet (≥ 840 dp): replace tab bar with DkNavRail | open |  | DK-0229 DK-0168 |  |
-| DK-0233 | Ph3 | A | P0 | M | Global overlay host: mini job bar and toast queue above any screen | open |  | DK-0229 DK-0174 DK-0190 DK-0008 |  |
-| DK-0234 | Ph6 | A | P0 | S | Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on | open |  | DK-0229 DK-0070 |  |
-| DK-0235 | Ph1 | A | P0 | L | Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0) | open |  | DK-0004 DK-0006 DK-0016 |  |
-| DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | open |  | DK-0004 |  |
-| DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | open |  | DK-0004 DK-0039 |  |
-| DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | open |  | DK-0004 DK-0074 |  |
-| DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | open |  | DK-0238 DK-0050 |  |
-| DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | open |  | DK-0238 DK-0051 |  |
-| DK-0241 | Ph7 | B | P0 | S | O3 Onboarding: implement the "start-with cards" state | open |  | DK-0238 |  |
-| DK-0242 | Ph1 | B | P0 | L | Build H1 Home layout (regions 1–10) | open |  | DK-0229 DK-0082 DK-0086 DK-0110 DK-0005 DK-0164 DK-0166 DK-0096 DK-0098 DK-0074 |  |
-| DK-0243 | Ph1 | B | P0 | M | Recent files data: last 20 opened or created files with swipe quick actions | open |  | DK-0242 DK-0005 DK-0224 DK-0086 |  |
-| DK-0244 | Ph3 | B | P0 | S | Pinned tools: default 8, persisted order, tap → T2, long-press menu | open |  | DK-0242 DK-0049 DK-0082 DK-0188 DK-0702 |  |
-| DK-0245 | Ph3 | B | P0 | S | H1 Home: implement the "First launch" state | open |  | DK-0242 DK-0053 |  |
-| DK-0246 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: unsaved scan" state | open |  | DK-0242 DK-0096 |  |
-| DK-0247 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: job finished" state | open |  | DK-0242 DK-0096 |  |
-| DK-0248 | Ph3 | B | P0 | S | H1 Home: implement the "Edit pinned tools" state | open |  | DK-0242 |  |
-| DK-0249 | Ph3 | B | P0 | S | H1 Home: implement the "Add-tool sheet" state | open |  | DK-0242 DK-0182 DK-0084 |  |
-| DK-0250 | Ph3 | B | P0 | S | H1 Home: implement the "Job running" state | open |  | DK-0242 DK-0174 |  |
-| DK-0251 | Ph7 | B | P0 | S | H1 Home: implement the "Pro card visible" state | open |  | DK-0242 DK-0098 |  |
-| DK-0252 | Ph3 | B | P0 | S | H1 Home: implement the "Find documents banner" state | open |  | DK-0242 DK-0192 |  |
-| DK-0253 | Ph7 | B | P0 | S | H1 Home: implement the "Rating prompt" state | open |  | DK-0242 |  |
-| DK-0254 | Ph7 | B | P1 | S | H1 at 200 % text and screen-reader order | open |  | DK-0242 |  |
-| DK-0255 | Ph3 | B | P2 | M | Quick drop: pick, paste or drag files straight into a tool | open |  | DK-0242 DK-0387 |  |
-| DK-0256 | Ph1 | B | P0 | M | Build T1 Tools: large title, search, category chips, sectioned 4-column grid | open |  | DK-0229 DK-0049 DK-0104 DK-0082 DK-0126 DK-0164 |  |
-| DK-0257 | Ph3 | B | P1 | S | Tool search with synonyms (EN + DE) and result rows | open |  | DK-0256 DK-0084 |  |
-| DK-0258 | Ph3 | B | P0 | S | T1 Tools grid: implement the "Search empty" state | open |  | DK-0256 DK-0056 |  |
-| DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | open |  | DK-0049 DK-0182 DK-0102 |  |
-| DK-0260 | Ph1 | B | P0 | L | Build F1 Files root: top bar actions, search, special rows, folders, files | open |  | DK-0229 DK-0005 DK-0006 DK-0086 DK-0088 DK-0164 DK-0172 DK-0126 |  |
-| DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | open |  | DK-0260 DK-0188 |  |
-| DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | open |  | DK-0260 DK-0188 DK-0164 |  |
-| DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | open |  | DK-0260 DK-0222 DK-0188 DK-0172 |  |
-| DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | open |  | DK-0260 DK-0223 |  |
-| DK-0265 | Ph1 | B | P0 | S | F1 Files: implement the "Empty root" state | open |  | DK-0260 DK-0054 |  |
-| DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | open |  | DK-0260 DK-0055 |  |
-| DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | open |  | DK-0260 DK-0198 |  |
-| DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | open |  | DK-0260 |  |
-| DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | open |  | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
+| DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | assigned | agent-0 | DK-0004 DK-0166 DK-0078 |  |
+| DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | assigned | agent-0 | DK-0229 DK-0188 DK-0078 |  |
+| DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | assigned | agent-0 | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
+| DK-0232 | Ph1 | A | P1 | S | Tablet (≥ 840 dp): replace tab bar with DkNavRail | assigned | agent-0 | DK-0229 DK-0168 |  |
+| DK-0233 | Ph3 | A | P0 | M | Global overlay host: mini job bar and toast queue above any screen | assigned | agent-0 | DK-0229 DK-0174 DK-0190 DK-0008 |  |
+| DK-0234 | Ph6 | A | P0 | S | Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on | assigned | agent-0 | DK-0229 DK-0070 |  |
+| DK-0235 | Ph1 | A | P0 | L | Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0) | assigned | agent-0 | DK-0004 DK-0006 DK-0016 |  |
+| DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | assigned | agent-0 | DK-0004 |  |
+| DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | assigned | agent-0 | DK-0004 DK-0039 |  |
+| DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | assigned | agent-1 | DK-0004 DK-0074 |  |
+| DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | assigned | agent-1 | DK-0238 DK-0050 |  |
+| DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | assigned | agent-1 | DK-0238 DK-0051 |  |
+| DK-0241 | Ph7 | B | P0 | S | O3 Onboarding: implement the "start-with cards" state | assigned | agent-1 | DK-0238 |  |
+| DK-0242 | Ph1 | B | P0 | L | Build H1 Home layout (regions 1–10) | assigned | agent-1 | DK-0229 DK-0082 DK-0086 DK-0110 DK-0005 DK-0164 DK-0166 DK-0096 DK-0098 DK-0074 |  |
+| DK-0243 | Ph1 | B | P0 | M | Recent files data: last 20 opened or created files with swipe quick actions | assigned | agent-1 | DK-0242 DK-0005 DK-0224 DK-0086 |  |
+| DK-0244 | Ph3 | B | P0 | S | Pinned tools: default 8, persisted order, tap → T2, long-press menu | assigned | agent-1 | DK-0242 DK-0049 DK-0082 DK-0188 DK-0702 |  |
+| DK-0245 | Ph3 | B | P0 | S | H1 Home: implement the "First launch" state | assigned | agent-1 | DK-0242 DK-0053 |  |
+| DK-0246 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: unsaved scan" state | assigned | agent-1 | DK-0242 DK-0096 |  |
+| DK-0247 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: job finished" state | assigned | agent-1 | DK-0242 DK-0096 |  |
+| DK-0248 | Ph3 | B | P0 | S | H1 Home: implement the "Edit pinned tools" state | assigned | agent-1 | DK-0242 |  |
+| DK-0249 | Ph3 | B | P0 | S | H1 Home: implement the "Add-tool sheet" state | assigned | agent-1 | DK-0242 DK-0182 DK-0084 |  |
+| DK-0250 | Ph3 | B | P0 | S | H1 Home: implement the "Job running" state | assigned | agent-1 | DK-0242 DK-0174 |  |
+| DK-0251 | Ph7 | B | P0 | S | H1 Home: implement the "Pro card visible" state | assigned | agent-1 | DK-0242 DK-0098 |  |
+| DK-0252 | Ph3 | B | P0 | S | H1 Home: implement the "Find documents banner" state | assigned | agent-1 | DK-0242 DK-0192 |  |
+| DK-0253 | Ph7 | B | P0 | S | H1 Home: implement the "Rating prompt" state | assigned | agent-1 | DK-0242 |  |
+| DK-0254 | Ph7 | B | P1 | S | H1 at 200 % text and screen-reader order | assigned | agent-1 | DK-0242 |  |
+| DK-0255 | Ph3 | B | P2 | M | Quick drop: pick, paste or drag files straight into a tool | assigned | agent-1 | DK-0242 DK-0387 |  |
+| DK-0256 | Ph1 | B | P0 | M | Build T1 Tools: large title, search, category chips, sectioned 4-column grid | assigned | agent-1 | DK-0229 DK-0049 DK-0104 DK-0082 DK-0126 DK-0164 |  |
+| DK-0257 | Ph3 | B | P1 | S | Tool search with synonyms (EN + DE) and result rows | assigned | agent-1 | DK-0256 DK-0084 |  |
+| DK-0258 | Ph3 | B | P0 | S | T1 Tools grid: implement the "Search empty" state | assigned | agent-1 | DK-0256 DK-0056 |  |
+| DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | assigned | agent-1 | DK-0049 DK-0182 DK-0102 |  |
+| DK-0260 | Ph1 | B | P0 | L | Build F1 Files root: top bar actions, search, special rows, folders, files | assigned | agent-1 | DK-0229 DK-0005 DK-0006 DK-0086 DK-0088 DK-0164 DK-0172 DK-0126 |  |
+| DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | assigned | agent-1 | DK-0260 DK-0188 |  |
+| DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | assigned | agent-1 | DK-0260 DK-0188 DK-0164 |  |
+| DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | assigned | agent-1 | DK-0260 DK-0222 DK-0188 DK-0172 |  |
+| DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | assigned | agent-1 | DK-0260 DK-0223 |  |
+| DK-0265 | Ph1 | B | P0 | S | F1 Files: implement the "Empty root" state | assigned | agent-1 | DK-0260 DK-0054 |  |
+| DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | assigned | agent-1 | DK-0260 DK-0055 |  |
+| DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | assigned | agent-1 | DK-0260 DK-0198 |  |
+| DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | assigned | agent-1 | DK-0260 |  |
+| DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | assigned | agent-1 | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
 | DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | done | agent-0 | DK-0005 DK-0008 | #1118 |
-| DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | open |  | DK-0260 DK-0184 DK-0084 DK-0022 |  |
-| DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | open |  | DK-0260 DK-0186 DK-0182 DK-0120 |  |
-| DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | open |  | DK-0260 DK-0186 DK-0182 |  |
-| DK-0274 | Ph1 | B | P0 | S | F1 Files: implement the "Move sheet" state | open |  | DK-0260 DK-0186 DK-0182 |  |
-| DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | open |  | DK-0260 DK-0186 DK-0182 |  |
-| DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | open |  | DK-0260 DK-0186 DK-0182 |  |
-| DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | open |  | DK-0005 |  |
-| DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | open |  | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 |  |
-| DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | open |  | DK-0260 DK-0232 |  |
-| DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | open |  | DK-0260 DK-0271 |  |
-| DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | open |  | DK-0260 |  |
-| DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | open |  | DK-0005 DK-0016 |  |
-| DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | open |  | DK-0282 DK-0148 DK-0192 DK-0058 |  |
-| DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | open |  | DK-0282 DK-0148 |  |
-| DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | open |  | DK-0282 DK-0148 |  |
-| DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | open |  | DK-0282 DK-0148 |  |
-| DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | open |  | DK-0282 DK-0148 |  |
-| DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | open |  | DK-0282 DK-0148 |  |
-| DK-0289 | Ph6 | B | P0 | M | Move files into and out of the locked folder (encrypt/decrypt jobs) | open |  | DK-0282 DK-0260 |  |
-| DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | open |  | DK-0282 DK-0234 DK-0148 |  |
-| DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | open |  | DK-0282 |  |
-| DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | open |  | DK-0282 DK-0148 |  |
+| DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | assigned | agent-1 | DK-0260 DK-0184 DK-0084 DK-0022 |  |
+| DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 DK-0120 |  |
+| DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
+| DK-0274 | Ph1 | B | P0 | S | F1 Files: implement the "Move sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
+| DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
+| DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
+| DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | assigned | agent-1 | DK-0005 |  |
+| DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | assigned | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 |  |
+| DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
+| DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | assigned | agent-1 | DK-0260 DK-0271 |  |
+| DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | assigned | agent-1 | DK-0260 |  |
+| DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | assigned | agent-1 | DK-0005 DK-0016 |  |
+| DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | assigned | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 |  |
+| DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0289 | Ph6 | B | P0 | M | Move files into and out of the locked folder (encrypt/decrypt jobs) | assigned | agent-1 | DK-0282 DK-0260 |  |
+| DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | assigned | agent-1 | DK-0282 DK-0234 DK-0148 |  |
+| DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | assigned | agent-1 | DK-0282 |  |
+| DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
-| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | open |  | DK-0293 DK-0178 DK-0118 DK-0164 |  |
-| DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | open |  | DK-0294 DK-0188 |  |
-| DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | open |  | DK-0293 DK-0294 DK-0150 |  |
-| DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | open |  | DK-0293 DK-0294 |  |
-| DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | open |  | DK-0293 DK-0294 |  |
-| DK-0299 | Ph5 | C | P0 | S | V1 Viewer: implement the "Search on scan without text" state | open |  | DK-0293 DK-0294 DK-0192 |  |
-| DK-0300 | Ph4 | C | P0 | S | V1 Viewer: implement the "Text selected" state | open |  | DK-0293 DK-0294 DK-0202 |  |
-| DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | open |  | DK-0293 DK-0294 DK-0122 |  |
-| DK-0302 | Ph3 | C | P0 | S | V1 Viewer: implement the "Wrong password" state | open |  | DK-0293 DK-0294 |  |
-| DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | open |  | DK-0293 DK-0294 |  |
-| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | open |  | DK-0293 DK-0294 |  |
-| DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | open |  | DK-0293 DK-0294 DK-0063 |  |
-| DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | open |  | DK-0293 DK-0294 DK-0192 |  |
-| DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | open |  | DK-0293 DK-0294 |  |
-| DK-0308 | Ph3 | C | P0 | S | V1 Viewer: implement the "External link dialog" state | open |  | DK-0293 DK-0294 |  |
-| DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | open |  | DK-0293 |  |
-| DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | open |  | DK-0293 |  |
-| DK-0311 | Ph3 | C | P2 | S | Viewer overflow actions: Share as images, Share text, Print | open |  | DK-0293 DK-0390 |  |
-| DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | open |  | DK-0293 DK-0007 |  |
-| DK-0313 | Ph4 | C | P0 | M | V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border | open |  | DK-0312 DK-0176 DK-0277 DK-0164 DK-0186 |  |
-| DK-0314 | Ph4 | C | P0 | M | V2 Pan tool with its options sheet | open |  | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
-| DK-0315 | Ph4 | C | P0 | M | V2 Pen tool with its options sheet | open |  | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
-| DK-0316 | Ph4 | C | P0 | M | V2 Highlighter tool with its options sheet | open |  | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
-| DK-0317 | Ph4 | C | P0 | M | V2 Text tool with its options sheet | open |  | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
-| DK-0318 | Ph4 | C | P1 | M | V2 Shapes tool with its options sheet | open |  | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
-| DK-0319 | Ph4 | C | P1 | M | V2 Note tool with its options sheet | open |  | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
-| DK-0320 | Ph4 | C | P1 | M | V2 Eraser tool with its options sheet | open |  | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
-| DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | open |  | DK-0312 DK-0202 |  |
-| DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | open |  | DK-0312 DK-0202 |  |
-| DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | open |  | DK-0293 DK-0007 |  |
-| DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | open |  | DK-0323 DK-0313 DK-0227 |  |
-| DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | open |  | DK-0282 |  |
-| DK-0326 | Ph4 | C | P0 | M | Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state | open |  | DK-0325 DK-0208 DK-0182 DK-0064 |  |
-| DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | open |  | DK-0325 DK-0206 |  |
-| DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | open |  | DK-0312 DK-0325 DK-0162 |  |
-| DK-0329 | Ph3 | C | P0 | L | P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar | open |  | DK-0154 DK-0293 DK-0164 DK-0172 |  |
-| DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | open |  | DK-0007 |  |
-| DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | open |  | DK-0329 DK-0330 |  |
-| DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | open |  | DK-0329 DK-0330 |  |
-| DK-0333 | Ph3 | C | P0 | S | P1 Organize pages: implement the "After delete" state | open |  | DK-0329 DK-0330 |  |
-| DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | open |  | DK-0329 DK-0330 |  |
-| DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | open |  | DK-0329 DK-0330 |  |
-| DK-0336 | Ph2 | C | P0 | L | iOS scanner engine with VisionKit / Vision (VNDetectDocumentSegmentationRequest on our own camera view) | open |  | DK-0007 |  |
-| DK-0337 | Ph2 | C | P0 | XL | Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring) | open |  | DK-0007 DK-0677 |  |
-| DK-0338 | Ph2 | C | P0 | M | Separate auto-capture and auto-crop: stability-based capture (~0.5 s steady quad) | open |  | DK-0336 DK-0337 DK-0080 |  |
-| DK-0339 | Ph2 | C | P0 | M | Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast | open |  | DK-0007 |  |
-| DK-0340 | Ph2 | C | P1 | S | ID card mode engine: crop to ID-1 (85.6 × 54 mm), front + back on one A4 at true size | open |  | DK-0336 DK-0337 |  |
-| DK-0341 | Ph2 | C | P1 | M | Book mode engine: spine detection (projection profile + Hough), split into two pages, deskew each | open |  | DK-0336 DK-0337 |  |
-| DK-0342 | Ph2 | C | P0 | S | Camera permission pre-prompt sheet and denied state | open |  | DK-0182 DK-0059 DK-0016 |  |
-| DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | open |  | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 |  |
-| DK-0344 | Ph2 | C | P0 | M | Hint pill logic with priority order and spoken guidance | open |  | DK-0343 |  |
-| DK-0345 | Ph2 | C | P0 | S | S1 Scanner: implement the "Flash menu" state | open |  | DK-0343 |  |
-| DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | open |  | DK-0343 |  |
-| DK-0347 | Ph2 | C | P0 | S | S1 Scanner: implement the "Book mode" state | open |  | DK-0343 |  |
-| DK-0348 | Ph2 | C | P0 | S | S1 Scanner: implement the "Batch mode" state | open |  | DK-0343 |  |
-| DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | open |  | DK-0343 |  |
-| DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | open |  | DK-0343 |  |
-| DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | open |  | DK-0343 |  |
-| DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | open |  | DK-0343 DK-0152 DK-0164 |  |
-| DK-0353 | Ph2 | C | P0 | S | S2 Scanner: implement the "Crop mode" state | open |  | DK-0352 DK-0339 DK-0156 DK-0158 |  |
-| DK-0354 | Ph2 | C | P0 | S | S2 Scanner: implement the "Filter mode" state | open |  | DK-0352 DK-0339 DK-0156 DK-0158 |  |
-| DK-0355 | Ph2 | C | P0 | S | S2 Scanner: implement the "Apply-to-all chip" state | open |  | DK-0352 DK-0339 DK-0156 DK-0158 |  |
-| DK-0356 | Ph2 | C | P0 | S | S2 Scanner: implement the "Rotate" state | open |  | DK-0352 DK-0339 DK-0156 DK-0158 |  |
-| DK-0357 | Ph2 | C | P0 | S | S2 Scanner: implement the "Delete page" state | open |  | DK-0352 DK-0339 DK-0156 DK-0158 |  |
-| DK-0358 | Ph2 | C | P0 | S | S2 Scanner: implement the "Discard dialog" state | open |  | DK-0352 DK-0339 DK-0156 DK-0158 |  |
-| DK-0359 | Ph2 | C | P0 | M | Save sheet: name, format, page size, quality, folder, Make text searchable | open |  | DK-0352 DK-0092 DK-0120 DK-0182 DK-0102 DK-0128 DK-0130 |  |
-| DK-0360 | Ph2 | C | P0 | S | Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share) | open |  | DK-0359 |  |
-| DK-0361 | Ph2 | C | P1 | S | Scanning defaults: filter, crop mode, page size, file-name pattern ("Save as default") | open |  | DK-0352 |  |
-| DK-0362 | Ph6 | C | P1 | L | Find documents in photos: on-device scoring (text-area ratio + quad + aspect), background, cached | open |  | DK-0007 DK-0005 DK-0016 |  |
-| DK-0363 | Ph6 | C | P0 | S | Photo finder: implement the "Intro sheet" state | open |  | DK-0362 DK-0066 |  |
-| DK-0364 | Ph6 | C | P0 | S | Photo finder: implement the "Scanning card" state | open |  | DK-0362 |  |
-| DK-0365 | Ph6 | C | P0 | S | Photo finder: implement the "Results grid" state | open |  | DK-0362 |  |
-| DK-0366 | Ph6 | C | P0 | S | Photo finder: implement the "Convert options" state | open |  | DK-0362 |  |
-| DK-0367 | Ph6 | C | P0 | S | Photo finder: implement the "Not a document" state | open |  | DK-0362 |  |
-| DK-0368 | Ph6 | C | P0 | S | Photo finder: implement the "Empty" state | open |  | DK-0362 |  |
-| DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | open |  | DK-0343 DK-0338 |  |
-| DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | open |  | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 |  |
-| DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | open |  | DK-0370 |  |
-| DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | open |  | DK-0370 DK-0122 |  |
-| DK-0373 | Ph3 | C | P1 | S | Live estimate caption ("About 1.8 MB · 12 pages") | open |  | DK-0370 |  |
+| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | assigned | agent-0 | DK-0293 DK-0178 DK-0118 DK-0164 |  |
+| DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | assigned | agent-0 | DK-0294 DK-0188 |  |
+| DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | assigned | agent-0 | DK-0293 DK-0294 DK-0150 |  |
+| DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0299 | Ph5 | C | P0 | S | V1 Viewer: implement the "Search on scan without text" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
+| DK-0300 | Ph4 | C | P0 | S | V1 Viewer: implement the "Text selected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0202 |  |
+| DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | assigned | agent-0 | DK-0293 DK-0294 DK-0122 |  |
+| DK-0302 | Ph3 | C | P0 | S | V1 Viewer: implement the "Wrong password" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | assigned | agent-0 | DK-0293 DK-0294 DK-0063 |  |
+| DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
+| DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0308 | Ph3 | C | P0 | S | V1 Viewer: implement the "External link dialog" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | assigned | agent-0 | DK-0293 |  |
+| DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | assigned | agent-0 | DK-0293 |  |
+| DK-0311 | Ph3 | C | P2 | S | Viewer overflow actions: Share as images, Share text, Print | assigned | agent-0 | DK-0293 DK-0390 |  |
+| DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | assigned | agent-2 | DK-0293 DK-0007 |  |
+| DK-0313 | Ph4 | C | P0 | M | V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border | assigned | agent-2 | DK-0312 DK-0176 DK-0277 DK-0164 DK-0186 |  |
+| DK-0314 | Ph4 | C | P0 | M | V2 Pan tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0315 | Ph4 | C | P0 | M | V2 Pen tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0316 | Ph4 | C | P0 | M | V2 Highlighter tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0317 | Ph4 | C | P0 | M | V2 Text tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0318 | Ph4 | C | P1 | M | V2 Shapes tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0319 | Ph4 | C | P1 | M | V2 Note tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0320 | Ph4 | C | P1 | M | V2 Eraser tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | assigned | agent-2 | DK-0312 DK-0202 |  |
+| DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | assigned | agent-2 | DK-0312 DK-0202 |  |
+| DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | assigned | agent-2 | DK-0293 DK-0007 |  |
+| DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
+| DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | assigned | agent-2 | DK-0282 |  |
+| DK-0326 | Ph4 | C | P0 | M | Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state | assigned | agent-2 | DK-0325 DK-0208 DK-0182 DK-0064 |  |
+| DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | assigned | agent-2 | DK-0325 DK-0206 |  |
+| DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | assigned | agent-2 | DK-0312 DK-0325 DK-0162 |  |
+| DK-0329 | Ph3 | C | P0 | L | P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar | assigned | agent-0 | DK-0154 DK-0293 DK-0164 DK-0172 |  |
+| DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | assigned | agent-0 | DK-0007 |  |
+| DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0333 | Ph3 | C | P0 | S | P1 Organize pages: implement the "After delete" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0336 | Ph2 | C | P0 | L | iOS scanner engine with VisionKit / Vision (VNDetectDocumentSegmentationRequest on our own camera view) | assigned | agent-2 | DK-0007 |  |
+| DK-0337 | Ph2 | C | P0 | XL | Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring) | assigned | agent-2 | DK-0007 DK-0677 |  |
+| DK-0338 | Ph2 | C | P0 | M | Separate auto-capture and auto-crop: stability-based capture (~0.5 s steady quad) | assigned | agent-2 | DK-0336 DK-0337 DK-0080 |  |
+| DK-0339 | Ph2 | C | P0 | M | Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast | assigned | agent-2 | DK-0007 |  |
+| DK-0340 | Ph2 | C | P1 | S | ID card mode engine: crop to ID-1 (85.6 × 54 mm), front + back on one A4 at true size | assigned | agent-2 | DK-0336 DK-0337 |  |
+| DK-0341 | Ph2 | C | P1 | M | Book mode engine: spine detection (projection profile + Hough), split into two pages, deskew each | assigned | agent-2 | DK-0336 DK-0337 |  |
+| DK-0342 | Ph2 | C | P0 | S | Camera permission pre-prompt sheet and denied state | assigned | agent-2 | DK-0182 DK-0059 DK-0016 |  |
+| DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | assigned | agent-2 | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 |  |
+| DK-0344 | Ph2 | C | P0 | M | Hint pill logic with priority order and spoken guidance | assigned | agent-2 | DK-0343 |  |
+| DK-0345 | Ph2 | C | P0 | S | S1 Scanner: implement the "Flash menu" state | assigned | agent-2 | DK-0343 |  |
+| DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | assigned | agent-2 | DK-0343 |  |
+| DK-0347 | Ph2 | C | P0 | S | S1 Scanner: implement the "Book mode" state | assigned | agent-2 | DK-0343 |  |
+| DK-0348 | Ph2 | C | P0 | S | S1 Scanner: implement the "Batch mode" state | assigned | agent-2 | DK-0343 |  |
+| DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | assigned | agent-2 | DK-0343 |  |
+| DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | assigned | agent-2 | DK-0343 |  |
+| DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | assigned | agent-2 | DK-0343 |  |
+| DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | assigned | agent-2 | DK-0343 DK-0152 DK-0164 |  |
+| DK-0353 | Ph2 | C | P0 | S | S2 Scanner: implement the "Crop mode" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0354 | Ph2 | C | P0 | S | S2 Scanner: implement the "Filter mode" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0355 | Ph2 | C | P0 | S | S2 Scanner: implement the "Apply-to-all chip" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0356 | Ph2 | C | P0 | S | S2 Scanner: implement the "Rotate" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0357 | Ph2 | C | P0 | S | S2 Scanner: implement the "Delete page" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0358 | Ph2 | C | P0 | S | S2 Scanner: implement the "Discard dialog" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0359 | Ph2 | C | P0 | M | Save sheet: name, format, page size, quality, folder, Make text searchable | assigned | agent-2 | DK-0352 DK-0092 DK-0120 DK-0182 DK-0102 DK-0128 DK-0130 |  |
+| DK-0360 | Ph2 | C | P0 | S | Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share) | assigned | agent-2 | DK-0359 |  |
+| DK-0361 | Ph2 | C | P1 | S | Scanning defaults: filter, crop mode, page size, file-name pattern ("Save as default") | assigned | agent-2 | DK-0352 |  |
+| DK-0362 | Ph6 | C | P1 | L | Find documents in photos: on-device scoring (text-area ratio + quad + aspect), background, cached | assigned | agent-2 | DK-0007 DK-0005 DK-0016 |  |
+| DK-0363 | Ph6 | C | P0 | S | Photo finder: implement the "Intro sheet" state | assigned | agent-2 | DK-0362 DK-0066 |  |
+| DK-0364 | Ph6 | C | P0 | S | Photo finder: implement the "Scanning card" state | assigned | agent-2 | DK-0362 |  |
+| DK-0365 | Ph6 | C | P0 | S | Photo finder: implement the "Results grid" state | assigned | agent-2 | DK-0362 |  |
+| DK-0366 | Ph6 | C | P0 | S | Photo finder: implement the "Convert options" state | assigned | agent-2 | DK-0362 |  |
+| DK-0367 | Ph6 | C | P0 | S | Photo finder: implement the "Not a document" state | assigned | agent-2 | DK-0362 |  |
+| DK-0368 | Ph6 | C | P0 | S | Photo finder: implement the "Empty" state | assigned | agent-2 | DK-0362 |  |
+| DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | assigned | agent-2 | DK-0343 DK-0338 |  |
+| DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | assigned | agent-0 | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 |  |
+| DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | assigned | agent-0 | DK-0370 |  |
+| DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | assigned | agent-0 | DK-0370 DK-0122 |  |
+| DK-0373 | Ph3 | C | P1 | S | Live estimate caption ("About 1.8 MB · 12 pages") | assigned | agent-0 | DK-0370 |  |
 | DK-0374 | Ph7 | C | P0 | M | Pro gating in T2: header badge, free-try caption, paywall before run on second use | open |  | DK-0370 DK-0580 DK-0579 |  |
-| DK-0375 | Ph3 | C | P0 | M | X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s | open |  | DK-0370 DK-0194 DK-0233 DK-0174 DK-0074 |  |
-| DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | open |  | DK-0375 |  |
-| DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | open |  | DK-0375 DK-0069 |  |
-| DK-0378 | Ph3 | C | P1 | S | Notifications permission pre-prompt the first time a job runs > 30 s in the background | open |  | DK-0375 |  |
-| DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | open |  | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 |  |
-| DK-0380 | Ph3 | C | P0 | S | T3 result: implement the "Replace original" state | open |  | DK-0379 DK-0277 |  |
-| DK-0381 | Ph3 | C | P0 | S | T3 result: implement the "After save" state | open |  | DK-0379 |  |
-| DK-0382 | Ph3 | C | P0 | S | T3 result: implement the "Discard result" state | open |  | DK-0379 |  |
-| DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | open |  | DK-0379 |  |
-| DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | open |  | DK-0379 |  |
-| DK-0385 | Ph3 | C | P0 | S | T3 result: implement the "Save to…" state | open |  | DK-0379 |  |
-| DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | open |  | DK-0379 |  |
-| DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | open |  | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 |  |
-| DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | open |  | DK-0370 DK-0379 |  |
-| DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | open |  | DK-0370 DK-0379 |  |
+| DK-0375 | Ph3 | C | P0 | M | X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s | assigned | agent-0 | DK-0370 DK-0194 DK-0233 DK-0174 DK-0074 |  |
+| DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | assigned | agent-0 | DK-0375 |  |
+| DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | assigned | agent-0 | DK-0375 DK-0069 |  |
+| DK-0378 | Ph3 | C | P1 | S | Notifications permission pre-prompt the first time a job runs > 30 s in the background | assigned | agent-0 | DK-0375 |  |
+| DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | assigned | agent-0 | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 |  |
+| DK-0380 | Ph3 | C | P0 | S | T3 result: implement the "Replace original" state | assigned | agent-0 | DK-0379 DK-0277 |  |
+| DK-0381 | Ph3 | C | P0 | S | T3 result: implement the "After save" state | assigned | agent-0 | DK-0379 |  |
+| DK-0382 | Ph3 | C | P0 | S | T3 result: implement the "Discard result" state | assigned | agent-0 | DK-0379 |  |
+| DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | assigned | agent-0 | DK-0379 |  |
+| DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | assigned | agent-0 | DK-0379 |  |
+| DK-0385 | Ph3 | C | P0 | S | T3 result: implement the "Save to…" state | assigned | agent-0 | DK-0379 |  |
+| DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | assigned | agent-0 | DK-0379 |  |
+| DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | assigned | agent-0 | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 |  |
+| DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | assigned | agent-0 | DK-0370 DK-0379 |  |
+| DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | assigned | agent-0 | DK-0370 DK-0379 |  |
 | DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | done | agent-2 | DK-0007 | #576 |
 | DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | done | agent-0 | DK-0007 DK-0010 | #935 |
 | DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | done | agent-0 | DK-0390 DK-0391 | #1112 |
@@ -453,10 +453,10 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0429 | Ph6 | C | P1 | S | Smart Split: errors and edge states | open |  | DK-0427 DK-0192 DK-0609 DK-0020 |  |
 | DK-0430 | Ph6 | B | P1 | XS | Smart Split: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0431 | Ph6 | C | P1 | S | Smart Split: golden-PDF and widget tests | open |  | DK-0426 DK-0658 |  |
-| DK-0432 | Ph3 | A | P0 | M | Image to PDF: implement the img2pdf ToolJob (engine) | open |  | DK-0390 DK-0339 DK-0008 |  |
-| DK-0433 | Ph3 | C | P0 | M | Image to PDF: T2 options UI | open |  | DK-0370 DK-0432 DK-0152 |  |
-| DK-0434 | Ph3 | C | P0 | S | Image to PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0433 |  |
-| DK-0435 | Ph3 | C | P1 | S | Image to PDF: errors and edge states | open |  | DK-0433 DK-0609 DK-0020 |  |
+| DK-0432 | Ph3 | A | P0 | M | Image to PDF: implement the img2pdf ToolJob (engine) | assigned | agent-0 | DK-0390 DK-0339 DK-0008 |  |
+| DK-0433 | Ph3 | C | P0 | M | Image to PDF: T2 options UI | assigned | agent-2 | DK-0370 DK-0432 DK-0152 |  |
+| DK-0434 | Ph3 | C | P0 | S | Image to PDF: T3 result card, naming and Next chips | assigned | agent-2 | DK-0379 DK-0433 |  |
+| DK-0435 | Ph3 | C | P1 | S | Image to PDF: errors and edge states | assigned | agent-2 | DK-0433 DK-0609 DK-0020 |  |
 | DK-0436 | Ph3 | B | P1 | XS | Image to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0437 | Ph3 | C | P1 | S | Image to PDF: golden-PDF and widget tests | open |  | DK-0432 DK-0658 |  |
 | DK-0438 | Ph3 | A | P0 | M | PDF to images: implement the pdf2img ToolJob (engine) | open |  | DK-0390 DK-0008 |  |
@@ -538,9 +538,9 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0514 | Ph3 | B | P1 | XS | Extract images & text: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0515 | Ph3 | C | P1 | S | Extract images & text: golden-PDF and widget tests | open |  | DK-0510 DK-0658 |  |
 | DK-0516 | Ph3 | C | P0 | XS | Organize pages tool entry: opens P1 directly (toast instead of T3) | open |  | DK-0329 |  |
-| DK-0517 | Ph4 | C | P0 | XS | Mark up tool entry: opens V2 with the Highlighter selected; saved as a new version | open |  | DK-0313 |  |
-| DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | open |  | DK-0323 DK-0313 |  |
-| DK-0519 | Ph4 | C | P0 | XS | Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo" | open |  | DK-0313 DK-0325 |  |
+| DK-0517 | Ph4 | C | P0 | XS | Mark up tool entry: opens V2 with the Highlighter selected; saved as a new version | assigned | agent-2 | DK-0313 |  |
+| DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | assigned | agent-2 | DK-0323 DK-0313 |  |
+| DK-0519 | Ph4 | C | P0 | XS | Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo" | assigned | agent-2 | DK-0313 DK-0325 |  |
 | DK-0520 | Ph4 | C | P0 | L | Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions | open |  | DK-0393 DK-0400 |  |
 | DK-0521 | Ph4 | C | P0 | S | Black out: implement the "Screen & step indicator" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0522 | Ph4 | C | P0 | S | Black out: implement the "Find panel" state | open |  | DK-0520 DK-0220 DK-0160 |  |
@@ -620,30 +620,30 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0596 | Ph7 | B | P2 | M | Home-screen widget: Last scan | open |  | DK-0236 |  |
 | DK-0597 | Ph7 | B | P2 | S | App-icon long-press shortcuts: Scan · Merge PDF · Compress PDF · {last used tool} | open |  | DK-0236 DK-0022 |  |
 | DK-0598 | Ph3 | B | P0 | M | iOS Share Extension UI: "Open in Dokulo" card with 6 quick tools | open |  | DK-0235 DK-0236 |  |
-| DK-0599 | Ph7 | B | P2 | M | iOS Files Action Extension ("Dokulo") opening the X1 picker (3 days) | open |  | DK-0387 DK-0707 |  |
+| DK-0599 | Ph7 | B | P2 | M | iOS Files Action Extension ("Dokulo") opening the X1 picker (3 days) | assigned | agent-1 | DK-0387 DK-0707 |  |
 | DK-0600 | Ph3 | B | P1 | S | Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo") | open |  | DK-0235 |  |
-| DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | open |  | DK-0196 DK-0053 |  |
-| DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | open |  | DK-0196 DK-0054 |  |
-| DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | open |  | DK-0196 DK-0055 |  |
-| DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | open |  | DK-0196 DK-0056 |  |
-| DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | open |  | DK-0196 DK-0057 |  |
-| DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | open |  | DK-0196 DK-0064 |  |
-| DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | open |  | DK-0196 DK-0065 |  |
-| DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | open |  | DK-0196 DK-0066 |  |
-| DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | open |  | DK-0008 |  |
-| DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | open |  | DK-0609 |  |
-| DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | open |  | DK-0609 |  |
-| DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | open |  | DK-0609 |  |
-| DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | open |  | DK-0609 |  |
-| DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | open |  | DK-0609 |  |
-| DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | open |  | DK-0609 |  |
-| DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | open |  | DK-0609 |  |
-| DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | open |  | DK-0609 |  |
-| DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | open |  | DK-0609 |  |
-| DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | open |  | DK-0609 |  |
-| DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | open |  | DK-0198 |  |
-| DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | open |  | DK-0192 |  |
-| DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | open |  | DK-0192 DK-0190 |  |
+| DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | assigned | agent-0 | DK-0196 DK-0053 |  |
+| DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | assigned | agent-0 | DK-0196 DK-0054 |  |
+| DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | assigned | agent-0 | DK-0196 DK-0055 |  |
+| DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | assigned | agent-0 | DK-0196 DK-0056 |  |
+| DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | assigned | agent-0 | DK-0196 DK-0057 |  |
+| DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | assigned | agent-0 | DK-0196 DK-0064 |  |
+| DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | assigned | agent-0 | DK-0196 DK-0065 |  |
+| DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | assigned | agent-0 | DK-0196 DK-0066 |  |
+| DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | assigned | agent-0 | DK-0008 |  |
+| DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | assigned | agent-0 | DK-0609 |  |
+| DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | assigned | agent-0 | DK-0609 |  |
+| DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | assigned | agent-0 | DK-0609 |  |
+| DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | assigned | agent-0 | DK-0609 |  |
+| DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
+| DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
+| DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | assigned | agent-0 | DK-0609 |  |
+| DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | assigned | agent-0 | DK-0609 |  |
+| DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | assigned | agent-0 | DK-0609 |  |
+| DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | assigned | agent-0 | DK-0609 |  |
+| DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | assigned | agent-0 | DK-0198 |  |
+| DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | assigned | agent-0 | DK-0192 |  |
+| DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | assigned | agent-0 | DK-0192 DK-0190 |  |
 | DK-0623 | Ph3 | B | P0 | S | ARB strings: Common actions | open |  | DK-0009 |  |
 | DK-0624 | Ph3 | B | P0 | S | ARB strings: Common labels and toasts | open |  | DK-0009 |  |
 | DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | open |  | DK-0009 |  |
@@ -665,15 +665,15 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | open |  | DK-0024 |  |
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | open |  | DK-0024 DK-0039 |  |
-| DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | open |  | DK-0024 DK-0343 |  |
-| DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | open |  | DK-0024 DK-0375 |  |
+| DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | assigned | agent-1 | DK-0024 DK-0343 |  |
+| DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | assigned | agent-1 | DK-0024 DK-0375 |  |
 | DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | open |  | DK-0024 |  |
 | DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | open |  | DK-0024 DK-0120 |  |
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
-| DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | open |  | DK-0232 DK-0242 |  |
-| DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | open |  | DK-0232 DK-0256 |  |
-| DK-0651 | Ph7 | B | P2 | M | Tablet layout: P1 Organize | open |  | DK-0232 DK-0329 |  |
-| DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | open |  | DK-0232 DK-0343 |  |
+| DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | assigned | agent-1 | DK-0232 DK-0242 |  |
+| DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | assigned | agent-1 | DK-0232 DK-0256 |  |
+| DK-0651 | Ph7 | B | P2 | M | Tablet layout: P1 Organize | assigned | agent-1 | DK-0232 DK-0329 |  |
+| DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | assigned | agent-1 | DK-0232 DK-0343 |  |
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
 | DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | open |  | DK-0232 DK-0182 |  |
@@ -683,7 +683,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | open |  | DK-0010 DK-0395 |  |
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | open |  | DK-0010 DK-0392 |  |
 | DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | open |  | DK-0010 DK-0023 DK-0400 |  |
-| DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | open |  | DK-0010 DK-0023 DK-0336 DK-0337 |  |
+| DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | assigned | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 |  |
 | DK-0663 | Ph7 | B | P0 | M | Test suite: Performance benchmarks | open |  | DK-0010 DK-0402 DK-0462 DK-0474 DK-0343 DK-0293 DK-0668 |  |
 | DK-0664 | Ph7 | B | P0 | S | Test suite: Privacy network check | open |  | DK-0010 DK-0012 DK-0008 |  |
 | DK-0665 | Ph7 | B | P0 | L | Test suite: Integration tests for prototype flows | open |  | DK-0010 DK-0238 DK-0352 DK-0359 DK-0463 DK-0387 DK-0235 DK-0499 DK-0403 DK-0375 DK-0587 DK-0379 DK-0293 DK-0559 DK-0550 DK-0580 DK-0374 DK-0260 DK-0282 DK-0222 DK-0233 DK-0524 |  |
@@ -731,159 +731,159 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0707 | Ph3 | A | P1 | XS | Decision: iOS Files action lands on the X1 picker (UI spec) or directly on the chosen tool (UX plan) | needs-decision |  |  |  |
 | DK-0708 | Ph1 | A | P0 | XS | Decision: confirm the palette together with the app-icon design | done |  |  |  |
 | DK-0709 | Ph1 | A | P2 | XS | Document the not-planned scope so it is not built by accident | open |  |  |  |
-| DK-0710 | Ph7 | Q | P2 | XS | Visual QA: onboarding-launch (Launch) | open |  | DK-0073 |  |
-| DK-0711 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1 (no uploads) | open |  | DK-0238 DK-0239 |  |
-| DK-0712 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o2 (no watermark) | open |  | DK-0240 |  |
-| DK-0713 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o3 (start with) | open |  | DK-0241 |  |
-| DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | open |  | DK-0238 |  |
-| DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | open |  | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 |  |
-| DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | open |  | DK-0245 |  |
-| DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | open |  | DK-0246 |  |
-| DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | open |  | DK-0247 |  |
-| DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | open |  | DK-0248 |  |
-| DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | open |  | DK-0249 |  |
-| DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | open |  | DK-0251 |  |
-| DK-0722 | Ph7 | Q | P2 | XS | Visual QA: home-photobanner (find documents banner) | open |  | DK-0252 |  |
-| DK-0723 | Ph7 | Q | P2 | XS | Visual QA: home-job (mini job bar) | open |  | DK-0233 DK-0250 |  |
-| DK-0724 | Ph7 | Q | P2 | XS | Visual QA: home-jobs3 (3 jobs running) | open |  | DK-0233 |  |
-| DK-0725 | Ph7 | Q | P2 | XS | Visual QA: home-tilemenu (tile long-press menu) | open |  | DK-0244 |  |
-| DK-0726 | Ph7 | Q | P2 | XS | Visual QA: home-scanmenu (Scan button long-press modes) | open |  | DK-0229 DK-0230 |  |
-| DK-0727 | Ph7 | Q | P2 | XS | Visual QA: home-rating (rating prompt (system)) | open |  | DK-0253 |  |
-| DK-0728 | Ph7 | Q | P2 | XS | Visual QA: tools-default (default) | open |  | DK-0049 DK-0256 |  |
-| DK-0729 | Ph7 | Q | P2 | XS | Visual QA: tools-chip (scrolled, Security selected) | open |  | DK-0256 |  |
-| DK-0730 | Ph7 | Q | P2 | XS | Visual QA: tools-search (search results (synonym)) | open |  | DK-0257 |  |
-| DK-0731 | Ph7 | Q | P2 | XS | Visual QA: tools-searchempty (search, no result) | open |  | DK-0258 |  |
-| DK-0732 | Ph7 | Q | P2 | XS | Visual QA: tools-about (About this tool sheet) | open |  | DK-0259 |  |
-| DK-0733 | Ph7 | Q | P2 | XS | Visual QA: files-list (root list) | open |  | DK-0228 DK-0260 |  |
-| DK-0734 | Ph7 | Q | P2 | XS | Visual QA: files-grid (root grid) | open |  | DK-0260 |  |
-| DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | open |  | DK-0262 |  |
-| DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | open |  | DK-0222 DK-0263 |  |
-| DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | open |  | DK-0265 |  |
-| DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | open |  | DK-0266 |  |
-| DK-0739 | Ph7 | Q | P2 | XS | Visual QA: files-search (search results) | open |  | DK-0269 |  |
-| DK-0740 | Ph7 | Q | P2 | XS | Visual QA: files-searchempty (search empty + OCR banner) | open |  | DK-0269 |  |
-| DK-0741 | Ph7 | Q | P2 | XS | Visual QA: files-sort (sort menu) | open |  | DK-0261 |  |
-| DK-0742 | Ph7 | Q | P2 | XS | Visual QA: files-action (file action sheet) | open |  | DK-0271 DK-0276 |  |
-| DK-0743 | Ph7 | Q | P2 | XS | Visual QA: files-info (info sheet) | open |  | DK-0275 DK-0281 |  |
-| DK-0744 | Ph7 | Q | P2 | XS | Visual QA: files-rename (rename dialog (error)) | open |  | DK-0272 |  |
-| DK-0745 | Ph7 | Q | P2 | XS | Visual QA: files-move (move sheet) | open |  | DK-0274 |  |
-| DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | open |  | DK-0273 |  |
-| DK-0747 | Ph7 | Q | P2 | XS | Visual QA: files-trash (recently deleted) | open |  | DK-0278 |  |
-| DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | open |  | DK-0225 DK-0278 |  |
-| DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | open |  | DK-0267 DK-0620 |  |
-| DK-0750 | Ph7 | Q | P2 | XS | Visual QA: files-swipe (swipe actions) | open |  | DK-0224 DK-0268 |  |
-| DK-0751 | Ph7 | Q | P2 | XS | Visual QA: files-dragfolder (grid – drag file onto folder) | open |  | DK-0223 DK-0264 |  |
-| DK-0752 | Ph7 | Q | P2 | XS | Visual QA: files-selmore (selection – More menu) | open |  | DK-0263 DK-0289 |  |
-| DK-0753 | Ph7 | Q | P2 | XS | Visual QA: files-trashaction (deleted file – Restore / Delete for good) | open |  | DK-0278 |  |
-| DK-0754 | Ph7 | Q | P2 | XS | Visual QA: files-foldermenu (folder overflow – rename, colour, delete) | open |  | DK-0262 |  |
-| DK-0755 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l1 (L1 intro) | open |  | DK-0283 |  |
-| DK-0756 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l2 (L2 create PIN) | open |  | DK-0284 DK-0292 |  |
-| DK-0757 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l3 (L3 PIN mismatch) | open |  | DK-0285 DK-0292 |  |
-| DK-0758 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l4 (L4 biometrics) | open |  | DK-0286 |  |
-| DK-0759 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-unlock (unlock screen) | open |  | DK-0287 |  |
-| DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | open |  | DK-0288 DK-0289 |  |
-| DK-0761 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-applock (app lock screen) | open |  | DK-0290 |  |
-| DK-0762 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-cover (app-switcher privacy cover) | open |  | DK-0234 |  |
-| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | open |  | DK-0293 DK-0294 |  |
-| DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | open |  | DK-0294 |  |
-| DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | open |  | DK-0297 DK-0620 |  |
-| DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | open |  | DK-0298 |  |
-| DK-0767 | Ph7 | Q | P2 | XS | Visual QA: viewer-searchnotext (search, scan without text) | open |  | DK-0299 |  |
-| DK-0768 | Ph7 | Q | P2 | XS | Visual QA: viewer-select (text selected + markup bar) | open |  | DK-0300 DK-0321 |  |
-| DK-0769 | Ph7 | Q | P2 | XS | Visual QA: viewer-locked (locked PDF) | open |  | DK-0301 |  |
-| DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | open |  | DK-0302 |  |
-| DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | open |  | DK-0304 |  |
-| DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | open |  | DK-0305 |  |
-| DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | open |  | DK-0306 |  |
-| DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | open |  | DK-0307 |  |
-| DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | open |  | DK-0308 |  |
-| DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | open |  | DK-0295 DK-0311 |  |
-| DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | open |  | DK-0296 |  |
-| DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | open |  | DK-0303 |  |
-| DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | open |  | DK-0313 DK-0314 |  |
-| DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | open |  | DK-0315 |  |
-| DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | open |  | DK-0321 DK-0517 |  |
-| DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | open |  | DK-0047 |  |
-| DK-0783 | Ph7 | Q | P2 | XS | Visual QA: edit-shapes (shapes) | open |  | DK-0047 |  |
-| DK-0784 | Ph7 | Q | P2 | XS | Visual QA: edit-note (note sheet) | open |  | DK-0319 |  |
-| DK-0785 | Ph7 | Q | P2 | XS | Visual QA: edit-annsel (annotation selected) | open |  | DK-0322 |  |
-| DK-0786 | Ph7 | Q | P2 | XS | Visual QA: edit-form (form filling + accessory bar) | open |  | DK-0227 DK-0324 |  |
-| DK-0787 | Ph7 | Q | P2 | XS | Visual QA: edit-discard (discard dialog) | open |  | DK-0313 |  |
-| DK-0788 | Ph7 | Q | P2 | XS | Visual QA: edit-hiopts (highlighter options) | open |  | DK-0316 |  |
-| DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | open |  | DK-0317 |  |
-| DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | open |  | DK-0318 |  |
-| DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | open |  | DK-0320 |  |
-| DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | open |  | DK-0326 DK-0519 |  |
-| DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | open |  | DK-0326 |  |
-| DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | open |  | DK-0328 DK-0519 |  |
-| DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | open |  | DK-0327 |  |
-| DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | open |  | DK-0327 |  |
-| DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | open |  | DK-0327 |  |
+| DK-0710 | Ph7 | Q | P2 | XS | Visual QA: onboarding-launch (Launch) | assigned | agent-1 | DK-0073 |  |
+| DK-0711 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1 (no uploads) | assigned | agent-1 | DK-0238 DK-0239 |  |
+| DK-0712 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o2 (no watermark) | assigned | agent-1 | DK-0240 |  |
+| DK-0713 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o3 (start with) | assigned | agent-1 | DK-0241 |  |
+| DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | assigned | agent-1 | DK-0238 |  |
+| DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | assigned | agent-1 | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 |  |
+| DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | assigned | agent-1 | DK-0245 |  |
+| DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | assigned | agent-1 | DK-0246 |  |
+| DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | assigned | agent-1 | DK-0247 |  |
+| DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | assigned | agent-1 | DK-0248 |  |
+| DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | assigned | agent-1 | DK-0249 |  |
+| DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | assigned | agent-1 | DK-0251 |  |
+| DK-0722 | Ph7 | Q | P2 | XS | Visual QA: home-photobanner (find documents banner) | assigned | agent-1 | DK-0252 |  |
+| DK-0723 | Ph7 | Q | P2 | XS | Visual QA: home-job (mini job bar) | assigned | agent-1 | DK-0233 DK-0250 |  |
+| DK-0724 | Ph7 | Q | P2 | XS | Visual QA: home-jobs3 (3 jobs running) | assigned | agent-1 | DK-0233 |  |
+| DK-0725 | Ph7 | Q | P2 | XS | Visual QA: home-tilemenu (tile long-press menu) | assigned | agent-1 | DK-0244 |  |
+| DK-0726 | Ph7 | Q | P2 | XS | Visual QA: home-scanmenu (Scan button long-press modes) | assigned | agent-1 | DK-0229 DK-0230 |  |
+| DK-0727 | Ph7 | Q | P2 | XS | Visual QA: home-rating (rating prompt (system)) | assigned | agent-1 | DK-0253 |  |
+| DK-0728 | Ph7 | Q | P2 | XS | Visual QA: tools-default (default) | assigned | agent-1 | DK-0049 DK-0256 |  |
+| DK-0729 | Ph7 | Q | P2 | XS | Visual QA: tools-chip (scrolled, Security selected) | assigned | agent-1 | DK-0256 |  |
+| DK-0730 | Ph7 | Q | P2 | XS | Visual QA: tools-search (search results (synonym)) | assigned | agent-1 | DK-0257 |  |
+| DK-0731 | Ph7 | Q | P2 | XS | Visual QA: tools-searchempty (search, no result) | assigned | agent-1 | DK-0258 |  |
+| DK-0732 | Ph7 | Q | P2 | XS | Visual QA: tools-about (About this tool sheet) | assigned | agent-1 | DK-0259 |  |
+| DK-0733 | Ph7 | Q | P2 | XS | Visual QA: files-list (root list) | assigned | agent-1 | DK-0228 DK-0260 |  |
+| DK-0734 | Ph7 | Q | P2 | XS | Visual QA: files-grid (root grid) | assigned | agent-1 | DK-0260 |  |
+| DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | assigned | agent-1 | DK-0262 |  |
+| DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | assigned | agent-1 | DK-0222 DK-0263 |  |
+| DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | assigned | agent-1 | DK-0265 |  |
+| DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | assigned | agent-1 | DK-0266 |  |
+| DK-0739 | Ph7 | Q | P2 | XS | Visual QA: files-search (search results) | assigned | agent-1 | DK-0269 |  |
+| DK-0740 | Ph7 | Q | P2 | XS | Visual QA: files-searchempty (search empty + OCR banner) | assigned | agent-1 | DK-0269 |  |
+| DK-0741 | Ph7 | Q | P2 | XS | Visual QA: files-sort (sort menu) | assigned | agent-1 | DK-0261 |  |
+| DK-0742 | Ph7 | Q | P2 | XS | Visual QA: files-action (file action sheet) | assigned | agent-1 | DK-0271 DK-0276 |  |
+| DK-0743 | Ph7 | Q | P2 | XS | Visual QA: files-info (info sheet) | assigned | agent-1 | DK-0275 DK-0281 |  |
+| DK-0744 | Ph7 | Q | P2 | XS | Visual QA: files-rename (rename dialog (error)) | assigned | agent-1 | DK-0272 |  |
+| DK-0745 | Ph7 | Q | P2 | XS | Visual QA: files-move (move sheet) | assigned | agent-1 | DK-0274 |  |
+| DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | assigned | agent-1 | DK-0273 |  |
+| DK-0747 | Ph7 | Q | P2 | XS | Visual QA: files-trash (recently deleted) | assigned | agent-1 | DK-0278 |  |
+| DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | assigned | agent-1 | DK-0225 DK-0278 |  |
+| DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | assigned | agent-1 | DK-0267 DK-0620 |  |
+| DK-0750 | Ph7 | Q | P2 | XS | Visual QA: files-swipe (swipe actions) | assigned | agent-1 | DK-0224 DK-0268 |  |
+| DK-0751 | Ph7 | Q | P2 | XS | Visual QA: files-dragfolder (grid – drag file onto folder) | assigned | agent-1 | DK-0223 DK-0264 |  |
+| DK-0752 | Ph7 | Q | P2 | XS | Visual QA: files-selmore (selection – More menu) | assigned | agent-1 | DK-0263 DK-0289 |  |
+| DK-0753 | Ph7 | Q | P2 | XS | Visual QA: files-trashaction (deleted file – Restore / Delete for good) | assigned | agent-1 | DK-0278 |  |
+| DK-0754 | Ph7 | Q | P2 | XS | Visual QA: files-foldermenu (folder overflow – rename, colour, delete) | assigned | agent-1 | DK-0262 |  |
+| DK-0755 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l1 (L1 intro) | assigned | agent-1 | DK-0283 |  |
+| DK-0756 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l2 (L2 create PIN) | assigned | agent-1 | DK-0284 DK-0292 |  |
+| DK-0757 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l3 (L3 PIN mismatch) | assigned | agent-1 | DK-0285 DK-0292 |  |
+| DK-0758 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l4 (L4 biometrics) | assigned | agent-1 | DK-0286 |  |
+| DK-0759 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-unlock (unlock screen) | assigned | agent-1 | DK-0287 |  |
+| DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | assigned | agent-1 | DK-0288 DK-0289 |  |
+| DK-0761 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-applock (app lock screen) | assigned | agent-1 | DK-0290 |  |
+| DK-0762 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-cover (app-switcher privacy cover) | assigned | agent-1 | DK-0234 |  |
+| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | assigned | agent-0 | DK-0294 |  |
+| DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | assigned | agent-0 | DK-0297 DK-0620 |  |
+| DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | assigned | agent-0 | DK-0298 |  |
+| DK-0767 | Ph7 | Q | P2 | XS | Visual QA: viewer-searchnotext (search, scan without text) | assigned | agent-0 | DK-0299 |  |
+| DK-0768 | Ph7 | Q | P2 | XS | Visual QA: viewer-select (text selected + markup bar) | assigned | agent-2 | DK-0300 DK-0321 |  |
+| DK-0769 | Ph7 | Q | P2 | XS | Visual QA: viewer-locked (locked PDF) | assigned | agent-0 | DK-0301 |  |
+| DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | assigned | agent-0 | DK-0302 |  |
+| DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | assigned | agent-0 | DK-0304 |  |
+| DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | assigned | agent-0 | DK-0305 |  |
+| DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-0 | DK-0306 |  |
+| DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-0 | DK-0307 |  |
+| DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | assigned | agent-0 | DK-0308 |  |
+| DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-0 | DK-0295 DK-0311 |  |
+| DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-0 | DK-0296 |  |
+| DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | assigned | agent-0 | DK-0303 |  |
+| DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-2 | DK-0313 DK-0314 |  |
+| DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-2 | DK-0315 |  |
+| DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-2 | DK-0321 DK-0517 |  |
+| DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | assigned | agent-2 | DK-0047 |  |
+| DK-0783 | Ph7 | Q | P2 | XS | Visual QA: edit-shapes (shapes) | assigned | agent-2 | DK-0047 |  |
+| DK-0784 | Ph7 | Q | P2 | XS | Visual QA: edit-note (note sheet) | assigned | agent-2 | DK-0319 |  |
+| DK-0785 | Ph7 | Q | P2 | XS | Visual QA: edit-annsel (annotation selected) | assigned | agent-2 | DK-0322 |  |
+| DK-0786 | Ph7 | Q | P2 | XS | Visual QA: edit-form (form filling + accessory bar) | assigned | agent-2 | DK-0227 DK-0324 |  |
+| DK-0787 | Ph7 | Q | P2 | XS | Visual QA: edit-discard (discard dialog) | assigned | agent-2 | DK-0313 |  |
+| DK-0788 | Ph7 | Q | P2 | XS | Visual QA: edit-hiopts (highlighter options) | assigned | agent-2 | DK-0316 |  |
+| DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | assigned | agent-2 | DK-0317 |  |
+| DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | assigned | agent-2 | DK-0318 |  |
+| DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | assigned | agent-2 | DK-0320 |  |
+| DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-2 | DK-0326 DK-0519 |  |
+| DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | assigned | agent-2 | DK-0326 |  |
+| DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-2 | DK-0328 DK-0519 |  |
+| DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | assigned | agent-2 | DK-0327 |  |
+| DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | assigned | agent-2 | DK-0327 |  |
+| DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-2 | DK-0327 |  |
 | DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | open |  | DK-0329 DK-0516 |  |
-| DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | open |  | DK-0331 |  |
-| DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | open |  | DK-0329 |  |
-| DK-0801 | Ph7 | Q | P2 | XS | Visual QA: organize-insert (insert sheet) | open |  | DK-0332 |  |
-| DK-0802 | Ph7 | Q | P2 | XS | Visual QA: organize-deleted (after delete toast) | open |  | DK-0333 |  |
-| DK-0803 | Ph7 | Q | P2 | XS | Visual QA: organize-pinch (pinch to 5 columns) | open |  | DK-0334 |  |
-| DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | open |  | DK-0335 |  |
-| DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | open |  | DK-0329 |  |
-| DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | open |  | DK-0342 |  |
-| DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | open |  | DK-0342 DK-0621 |  |
-| DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | open |  | DK-0343 DK-0344 |  |
-| DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | open |  | DK-0343 DK-0349 DK-0369 |  |
-| DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | open |  | DK-0338 |  |
-| DK-0811 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-flash (flash menu open) | open |  | DK-0345 |  |
-| DK-0812 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idfront (ID card – front) | open |  | DK-0340 DK-0346 |  |
-| DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | open |  | DK-0340 |  |
-| DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | open |  | DK-0341 DK-0347 |  |
-| DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | open |  | DK-0348 |  |
-| DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | open |  | DK-0350 |  |
-| DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | open |  | DK-0344 |  |
-| DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | open |  | DK-0344 |  |
-| DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | open |  | DK-0344 |  |
-| DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | open |  | DK-0343 |  |
-| DK-0821 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-review (S2 – default) | open |  | DK-0352 DK-0356 |  |
-| DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | open |  | DK-0353 |  |
-| DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | open |  | DK-0339 DK-0354 |  |
-| DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | open |  | DK-0355 |  |
-| DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | open |  | DK-0357 |  |
-| DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | open |  | DK-0358 |  |
-| DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | open |  | DK-0359 |  |
-| DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | open |  | DK-0360 |  |
-| DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | open |  | DK-0352 |  |
-| DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | open |  | DK-0359 |  |
-| DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | open |  | DK-0341 |  |
-| DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | open |  | DK-0363 |  |
-| DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | open |  | DK-0364 |  |
-| DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | open |  | DK-0365 |  |
-| DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | open |  | DK-0366 |  |
-| DK-0836 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-empty (no documents found) | open |  | DK-0368 |  |
-| DK-0837 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-notdoc (long-press – Not a document) | open |  | DK-0367 |  |
-| DK-0838 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-t2empty (T2 – empty input) | open |  | DK-0371 |  |
+| DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | assigned | agent-0 | DK-0331 |  |
+| DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | assigned | agent-0 | DK-0329 |  |
+| DK-0801 | Ph7 | Q | P2 | XS | Visual QA: organize-insert (insert sheet) | assigned | agent-0 | DK-0332 |  |
+| DK-0802 | Ph7 | Q | P2 | XS | Visual QA: organize-deleted (after delete toast) | assigned | agent-0 | DK-0333 |  |
+| DK-0803 | Ph7 | Q | P2 | XS | Visual QA: organize-pinch (pinch to 5 columns) | assigned | agent-0 | DK-0334 |  |
+| DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | assigned | agent-0 | DK-0335 |  |
+| DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | assigned | agent-0 | DK-0329 |  |
+| DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-2 | DK-0342 |  |
+| DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-2 | DK-0342 DK-0621 |  |
+| DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | assigned | agent-2 | DK-0343 DK-0344 |  |
+| DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | assigned | agent-2 | DK-0343 DK-0349 DK-0369 |  |
+| DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | assigned | agent-2 | DK-0338 |  |
+| DK-0811 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-flash (flash menu open) | assigned | agent-2 | DK-0345 |  |
+| DK-0812 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idfront (ID card – front) | assigned | agent-2 | DK-0340 DK-0346 |  |
+| DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | assigned | agent-2 | DK-0340 |  |
+| DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | assigned | agent-2 | DK-0341 DK-0347 |  |
+| DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | assigned | agent-2 | DK-0348 |  |
+| DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-2 | DK-0350 |  |
+| DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | assigned | agent-2 | DK-0344 |  |
+| DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | assigned | agent-2 | DK-0344 |  |
+| DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | assigned | agent-2 | DK-0344 |  |
+| DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | assigned | agent-2 | DK-0343 |  |
+| DK-0821 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-review (S2 – default) | assigned | agent-2 | DK-0352 DK-0356 |  |
+| DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | assigned | agent-2 | DK-0353 |  |
+| DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-2 | DK-0339 DK-0354 |  |
+| DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | assigned | agent-2 | DK-0355 |  |
+| DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | assigned | agent-2 | DK-0357 |  |
+| DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-2 | DK-0358 |  |
+| DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-2 | DK-0359 |  |
+| DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-2 | DK-0360 |  |
+| DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | assigned | agent-2 | DK-0352 |  |
+| DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | assigned | agent-2 | DK-0359 |  |
+| DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-2 | DK-0341 |  |
+| DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-2 | DK-0363 |  |
+| DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-2 | DK-0364 |  |
+| DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | assigned | agent-2 | DK-0365 |  |
+| DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-2 | DK-0366 |  |
+| DK-0836 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-empty (no documents found) | assigned | agent-2 | DK-0368 |  |
+| DK-0837 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-notdoc (long-press – Not a document) | assigned | agent-2 | DK-0367 |  |
+| DK-0838 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-t2empty (T2 – empty input) | assigned | agent-0 | DK-0371 |  |
 | DK-0839 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-compress (T2 Compress – options) | open |  | DK-0370 DK-0373 DK-0463 DK-0464 DK-0465 |  |
 | DK-0840 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-merge (T2 Merge – 4 files) | open |  | DK-0370 DK-0403 DK-0404 DK-0405 |  |
 | DK-0841 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-protry (T2 – Pro first-try caption) | open |  | DK-0374 |  |
-| DK-0842 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-lockedrow (T2 – locked input row) | open |  | DK-0372 |  |
-| DK-0843 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s)) | open |  | DK-0375 |  |
-| DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | open |  | DK-0375 |  |
-| DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | open |  | DK-0233 DK-0375 |  |
-| DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | open |  | DK-0376 |  |
-| DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | open |  | DK-0377 |  |
-| DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | open |  | DK-0235 DK-0387 |  |
-| DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | open |  | DK-0235 DK-0387 DK-0255 |  |
+| DK-0842 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-lockedrow (T2 – locked input row) | assigned | agent-0 | DK-0372 |  |
+| DK-0843 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s)) | assigned | agent-0 | DK-0375 |  |
+| DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | assigned | agent-0 | DK-0375 |  |
+| DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | assigned | agent-0 | DK-0233 DK-0375 |  |
+| DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | assigned | agent-0 | DK-0376 |  |
+| DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | assigned | agent-0 | DK-0377 |  |
+| DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | assigned | agent-0 | DK-0235 DK-0387 |  |
+| DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | assigned | agent-1 | DK-0235 DK-0387 DK-0255 |  |
 | DK-0850 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-result (T3 Compress – result) | open |  | DK-0379 DK-0386 DK-0463 DK-0464 DK-0465 |  |
 | DK-0851 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-split (T3 – multi-file result (Split)) | open |  | DK-0384 DK-0410 DK-0411 |  |
 | DK-0852 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-partial (T3 – partial success (OCR)) | open |  | DK-0383 DK-0475 DK-0476 DK-0477 |  |
-| DK-0853 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-savemenu (T3 – save menu) | open |  | DK-0379 DK-0385 |  |
-| DK-0854 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replace (T3 – replace original dialog) | open |  | DK-0380 |  |
-| DK-0855 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-discard (T3 – discard dialog) | open |  | DK-0382 |  |
-| DK-0856 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-aftersave (T3 – after Save) | open |  | DK-0381 |  |
-| DK-0857 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replaced (T3 – replaced, Undo) | open |  | DK-0226 DK-0380 |  |
+| DK-0853 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-savemenu (T3 – save menu) | assigned | agent-0 | DK-0379 DK-0385 |  |
+| DK-0854 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replace (T3 – replace original dialog) | assigned | agent-0 | DK-0380 |  |
+| DK-0855 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-discard (T3 – discard dialog) | assigned | agent-0 | DK-0382 |  |
+| DK-0856 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-aftersave (T3 – after Save) | assigned | agent-0 | DK-0381 |  |
+| DK-0857 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replaced (T3 – replaced, Undo) | assigned | agent-0 | DK-0226 DK-0380 |  |
 | DK-0858 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergerange (T2 Merge – page-range sheet) | open |  | DK-0403 DK-0404 DK-0405 |  |
 | DK-0859 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergefew (T2 Merge – fewer than 2 files) | open |  | DK-0404 DK-0405 |  |
-| DK-0860 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-moreopts (T2 Compress – More options open) | open |  | DK-0370 |  |
+| DK-0860 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-moreopts (T2 Compress – More options open) | assigned | agent-0 | DK-0370 |  |
 | DK-0861 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-prosecond (T2 – Pro tool second use (opens paywall)) | open |  | DK-0374 |  |
-| DK-0862 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt) | open |  | DK-0378 |  |
+| DK-0862 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt) | assigned | agent-0 | DK-0378 |  |
 | DK-0863 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-split (ranges + visual markers) | open |  | DK-0409 DK-0410 DK-0411 |  |
 | DK-0864 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-extract (grid) | open |  | DK-0415 DK-0416 DK-0417 |  |
 | DK-0865 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-rotate (grid + sideways banner) | open |  | DK-0421 DK-0422 DK-0423 |  |
@@ -892,7 +892,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0868 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-splitinvalid (invalid range) | open |  | DK-0410 DK-0411 |  |
 | DK-0869 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-smartinput (input) | open |  | DK-0427 DK-0428 DK-0429 |  |
 | DK-0870 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-smartprogress (checking uncertain pages) | open |  | DK-0428 DK-0429 |  |
-| DK-0871 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-img2pdf (Image to PDF) | open |  | DK-0433 DK-0434 DK-0435 |  |
+| DK-0871 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-img2pdf (Image to PDF) | assigned | agent-2 | DK-0433 DK-0434 DK-0435 |  |
 | DK-0872 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-pdf2img (PDF to images) | open |  | DK-0439 DK-0440 DK-0441 |  |
 | DK-0873 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-web (preview) | open |  | DK-0445 DK-0446 DK-0447 |  |
 | DK-0874 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-weboffline (offline) | open |  | DK-0445 DK-0446 DK-0447 |  |
@@ -913,9 +913,9 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0889 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-pagenum (Add page numbers) | open |  | DK-0481 DK-0482 DK-0483 |  |
 | DK-0890 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-watermark (Add watermark) | open |  | DK-0487 DK-0488 DK-0489 |  |
 | DK-0891 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-crop (Crop pages) | open |  | DK-0493 DK-0494 DK-0495 |  |
-| DK-0892 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-formlock (lock values dialog) | open |  | DK-0518 |  |
-| DK-0893 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-noform (no fields dialog) | open |  | DK-0518 |  |
-| DK-0894 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-xfa (XFA not supported) | open |  | DK-0518 |  |
+| DK-0892 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-formlock (lock values dialog) | assigned | agent-2 | DK-0518 |  |
+| DK-0893 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-noform (no fields dialog) | assigned | agent-2 | DK-0518 |  |
+| DK-0894 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-xfa (XFA not supported) | assigned | agent-2 | DK-0518 |  |
 | DK-0895 | Ph7 | Q | P2 | XS | Visual QA: black-out-find (1 Find) | open |  | DK-0521 DK-0522 |  |
 | DK-0896 | Ph7 | Q | P2 | XS | Visual QA: black-out-review (2 Review boxes) | open |  | DK-0523 |  |
 | DK-0897 | Ph7 | Q | P2 | XS | Visual QA: black-out-confirm (3 Confirm) | open |  | DK-0524 |  |
@@ -969,7 +969,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | open |  | DK-0576 |  |
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | open |  | DK-0577 |  |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | open |  | DK-0577 |  |
-| DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | open |  | DK-0325 |  |
+| DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-2 | DK-0325 |  |
 | DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | open |  | DK-0361 DK-0571 |  |
 | DK-0950 | Ph7 | Q | P2 | XS | Visual QA: me-filter (Scanning – default filter picker) | open |  | DK-0361 DK-0571 |  |
 | DK-0951 | Ph7 | Q | P2 | XS | Visual QA: paywall-tool (se) | open |  | DK-0580 |  |
@@ -980,31 +980,31 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0956 | Ph7 | Q | P2 | XS | Visual QA: paywall-restore (restore) | open |  | DK-0584 |  |
 | DK-0957 | Ph7 | Q | P2 | XS | Visual QA: paywall-restored (restored) | open |  | DK-0584 |  |
 | DK-0958 | Ph7 | Q | P2 | XS | Visual QA: paywall-tool-iphone-se (se · iPhone SE) | open |  | DK-0580 |  |
-| DK-0959 | Ph7 | Q | P2 | XS | Visual QA: tablet-home-landscape (tablet-home-landscape) | open |  | DK-0232 DK-0649 |  |
-| DK-0960 | Ph7 | Q | P2 | XS | Visual QA: tablet-home-portrait (tablet-home-portrait) | open |  | DK-0649 |  |
-| DK-0961 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-landscape (tablet-tools-landscape) | open |  | DK-0650 |  |
-| DK-0962 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-portrait (tablet-tools-portrait) | open |  | DK-0650 |  |
+| DK-0959 | Ph7 | Q | P2 | XS | Visual QA: tablet-home-landscape (tablet-home-landscape) | assigned | agent-1 | DK-0232 DK-0649 |  |
+| DK-0960 | Ph7 | Q | P2 | XS | Visual QA: tablet-home-portrait (tablet-home-portrait) | assigned | agent-1 | DK-0649 |  |
+| DK-0961 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-landscape (tablet-tools-landscape) | assigned | agent-1 | DK-0650 |  |
+| DK-0962 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-portrait (tablet-tools-portrait) | assigned | agent-1 | DK-0650 |  |
 | DK-0963 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-landscape (tablet-files-landscape) | open |  | DK-0232 DK-0279 DK-0655 |  |
-| DK-0964 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-portrait (tablet-files-portrait) | open |  | DK-0279 |  |
-| DK-0965 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-landscape (tablet-viewer-landscape) | open |  | DK-0310 |  |
-| DK-0966 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-portrait (tablet-viewer-portrait) | open |  | DK-0310 |  |
-| DK-0967 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-landscape (tablet-organize-landscape) | open |  | DK-0651 |  |
-| DK-0968 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-portrait (tablet-organize-portrait) | open |  | DK-0651 |  |
-| DK-0969 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-landscape (options) | open |  | DK-0388 |  |
-| DK-0970 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-landscape (result) | open |  | DK-0388 |  |
-| DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | open |  | DK-0388 |  |
+| DK-0964 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-portrait (tablet-files-portrait) | assigned | agent-1 | DK-0279 |  |
+| DK-0965 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-landscape (tablet-viewer-landscape) | assigned | agent-0 | DK-0310 |  |
+| DK-0966 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-portrait (tablet-viewer-portrait) | assigned | agent-0 | DK-0310 |  |
+| DK-0967 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-landscape (tablet-organize-landscape) | assigned | agent-0 | DK-0651 |  |
+| DK-0968 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-portrait (tablet-organize-portrait) | assigned | agent-0 | DK-0651 |  |
+| DK-0969 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-landscape (options) | assigned | agent-0 | DK-0388 |  |
+| DK-0970 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-landscape (result) | assigned | agent-0 | DK-0388 |  |
+| DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | assigned | agent-0 | DK-0388 |  |
 | DK-0972 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-portrait (result) | open |  | DK-0232 |  |
 | DK-0973 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-landscape (tablet-compare-landscape) | open |  | DK-0533 DK-0653 |  |
 | DK-0974 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-portrait (tablet-compare-portrait) | open |  | DK-0653 |  |
 | DK-0975 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-landscape (tablet-paywall-landscape) | open |  | DK-0580 DK-0654 |  |
 | DK-0976 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-portrait (tablet-paywall-portrait) | open |  | DK-0654 |  |
-| DK-0977 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-landscape (tablet-scanner-landscape) | open |  | DK-0652 |  |
-| DK-0978 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-portrait (tablet-scanner-portrait) | open |  | DK-0652 |  |
+| DK-0977 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-landscape (tablet-scanner-landscape) | assigned | agent-2 | DK-0652 |  |
+| DK-0978 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-portrait (tablet-scanner-portrait) | assigned | agent-2 | DK-0652 |  |
 | DK-0979 | Ph7 | Q | P2 | XS | Visual QA: system-surfaces (system-surfaces) | open |  | DK-0072 DK-0587 DK-0588 DK-0589 DK-0590 DK-0591 DK-0592 DK-0593 |  |
-| DK-0980 | Ph7 | Q | P2 | XS | Visual QA: global-states (global-states) | open |  | DK-0601 DK-0602 DK-0603 DK-0604 DK-0605 DK-0606 DK-0607 DK-0608 |  |
+| DK-0980 | Ph7 | Q | P2 | XS | Visual QA: global-states (global-states) | assigned | agent-0 | DK-0601 DK-0602 DK-0603 DK-0604 DK-0605 DK-0606 DK-0607 DK-0608 |  |
 | DK-0981 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent (text-200-percent) | open |  | DK-0037 |  |
 | DK-0982 | Ph7 | Q | P2 | XS | Visual QA: foundations (foundations) | done | agent-1 | DK-0024 DK-0025 DK-0026 DK-0027 DK-0028 DK-0029 DK-0030 DK-0031 DK-0032 DK-0033 DK-0034 DK-0036 DK-0038 DK-0047 DK-0048 DK-1009 | #1151 |
-| DK-0983 | Ph7 | Q | P2 | XS | Visual QA: components (components) | open |  | DK-0048 DK-0049 DK-0074 DK-0076 DK-0078 DK-0080 DK-0082 DK-0084 DK-0086 DK-0088 DK-0090 DK-0092 DK-0096 DK-0098 DK-0102 DK-0104 DK-0106 DK-0108 DK-0110 DK-0112 DK-0114 DK-0116 DK-0118 DK-0120 DK-0122 DK-0124 DK-0126 DK-0128 DK-0130 DK-0132 DK-0134 DK-0136 DK-0138 DK-0144 DK-0146 DK-0164 DK-0166 DK-0168 DK-0170 DK-0172 DK-0174 DK-0178 DK-0182 DK-0184 DK-0186 DK-0188 DK-0190 DK-0192 DK-0194 DK-0196 DK-0198 DK-0200 DK-0231 DK-1009 |  |
+| DK-0983 | Ph7 | Q | P2 | XS | Visual QA: components (components) | assigned | agent-0 | DK-0048 DK-0049 DK-0074 DK-0076 DK-0078 DK-0080 DK-0082 DK-0084 DK-0086 DK-0088 DK-0090 DK-0092 DK-0096 DK-0098 DK-0102 DK-0104 DK-0106 DK-0108 DK-0110 DK-0112 DK-0114 DK-0116 DK-0118 DK-0120 DK-0122 DK-0124 DK-0126 DK-0128 DK-0130 DK-0132 DK-0134 DK-0136 DK-0138 DK-0144 DK-0146 DK-0164 DK-0166 DK-0168 DK-0170 DK-0172 DK-0174 DK-0178 DK-0182 DK-0184 DK-0186 DK-0188 DK-0190 DK-0192 DK-0194 DK-0196 DK-0198 DK-0200 DK-0231 DK-1009 |  |
 | DK-0984 | Ph7 | Q | P2 | XS | Visual QA: components-part-2 (components-part-2) | done | agent-0 | DK-0094 DK-0100 DK-0140 DK-0142 DK-0148 DK-0150 DK-0152 DK-0154 DK-0156 DK-0158 DK-0160 DK-0162 DK-0176 DK-0180 DK-0202 DK-0204 DK-0206 DK-0208 DK-0210 DK-0212 DK-0214 DK-0216 DK-0218 DK-0220 | #1193 |
 | DK-0985 | Ph7 | Q | P2 | XS | Visual QA: illustrations-overview (illustrations-overview) | done | agent-1 | DK-0050 DK-0051 DK-0052 DK-0053 DK-0054 DK-0055 DK-0056 DK-0057 DK-0058 DK-0059 DK-0060 DK-0061 DK-0062 DK-0063 DK-0064 DK-0065 DK-0066 DK-0067 DK-0068 DK-0069 | #1145 |
 | DK-0986 | Ph7 | Q | P2 | XS | Visual QA: motion (motion) | done | agent-1 | DK-0039 DK-0040 DK-0041 DK-0042 DK-0043 DK-0044 DK-0045 DK-0046 | #1151 |
@@ -1030,7 +1030,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | done | agent-1 | DK-0068 | #1145 |
 | DK-1007 | Ph7 | Q | P2 | XS | Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle) | done | agent-1 | DK-0069 | #1145 |
 | DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | done | agent-1 | DK-0708 DK-0698 | #1163 |
-| DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | open |  | DK-0708 |  |
+| DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | assigned | agent-0 | DK-0708 |  |
 | DK-1010 | Ph1 | A | P0 | L | Design: All phone frames from the inventory | open |  | DK-1009 |  |
 | DK-1011 | Ph1 | A | P1 | M | Design: Tablet frames | open |  | DK-1010 |  |
 | DK-1012 | Ph1 | A | P0 | M | Design: Clickable prototype of the 6 flows with signature motions | open |  | DK-1010 |  |
@@ -1085,7 +1085,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | done | agent-0 | DK-0668 | #1172 |
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | done | agent-0 | DK-0392 DK-0668 | #1180 |
-| DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | open |  | DK-0270 |  |
+| DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | assigned | agent-0 | DK-0270 |  |
 | DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | open |  | DK-0474 |  |
 | DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
 | DK-1067 | Ph7 | Q | P1 | XS | Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073) | open |  | DK-1066 |  |
@@ -6798,3 +6798,15 @@ H-1401: (a). The owner decided just now: M01's six stay open as deferred (DK-104
 ### H-1419 · 2026-10-09 15:50 · agent-1 → all · heads-up
 
 New owner goal (2026-10-09, in MEMORY.md): M04-M10 with the team; self-review with /pr-review (not posted), fix, gate, merge; real-device cases tested on an emulator now plus an issue in the new GitHub milestone 'Real-device checks'; never wait. Proposed split by lane (PLAN.md): agent-1 lane B (Home/Files/Locked folder/shell UI/strings/layout), agent-2 lane C (tool shell, scanner, viewer, editor), agent-0 lane A (engine, data, platform) plus the M04 routing/state backbone. Each of us claims 2-5 related ready tasks per PR. agent-0, correct the split if you prefer.
+
+### H-1420 · 2026-10-09 15:50 · agent-0 → agent-0 · assign
+
+The owner's goal (2026-10-09): M04-M10, split by area (agent-1's lane proposal H-1419, with the QA tasks going to whoever owns their screen). Yours: M04 shell & global states, M07 viewer & organize, M10 tool shell, every lane-A task: 125 tasks (M04 34, M06 1, M07 51, M09 1, M10 37, M17 1). team.py status lists the ready ones first; batch 2-5 related tasks per PR; self-review with /pr-review (not posted), gate, merge, close the issue; a real-device part becomes an issue in 'Real-device checks'. Never wait: if a task waits on someone's active work, take another.
+
+### H-1421 · 2026-10-09 15:50 · agent-0 → agent-1 · assign
+
+The owner's goal (2026-10-09): M04-M10, split by area (agent-1's lane proposal H-1419, with the QA tasks going to whoever owns their screen). Yours: M05 Home/tools grid/onboarding, M06 Files & locked folder, every lane-B task: 121 tasks (M05 52, M06 63, M07 1, M09 3, M10 2). team.py status lists the ready ones first; batch 2-5 related tasks per PR; self-review with /pr-review (not posted), gate, merge, close the issue; a real-device part becomes an issue in 'Real-device checks'. Never wait: if a task waits on someone's active work, take another.
+
+### H-1422 · 2026-10-09 15:50 · agent-0 → agent-2 · assign
+
+The owner's goal (2026-10-09): M04-M10, split by area (agent-1's lane proposal H-1419, with the QA tasks going to whoever owns their screen). Yours: M08 edit mode/signatures/forms, M09 scanner & photo finder: 116 tasks (M08 44, M09 72). team.py status lists the ready ones first; batch 2-5 related tasks per PR; self-review with /pr-review (not posted), gate, merge, close the issue; a real-device part becomes an issue in 'Real-device checks'. Never wait: if a task waits on someone's active work, take another.
