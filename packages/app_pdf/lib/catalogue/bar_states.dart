@@ -206,7 +206,8 @@ class BottomBarStates extends StatelessWidget {
 }
 
 /// DkToolStrip (DK-0176), Pen selected, nothing to redo; DkMarkupBar
-/// (DK-0202) over a selection, and below one at the top.
+/// (DK-0202) over a selection, and below one at the top; DkAnnotBar
+/// (DK-0322) over a selected annotation.
 class EditorBarStates extends StatelessWidget {
   const EditorBarStates({super.key});
 
@@ -225,6 +226,7 @@ class EditorBarStates extends StatelessWidget {
     final t = context.tokens;
     const top = Rect.fromLTWH(60, 12, 160, 18);
     const middle = Rect.fromLTWH(120, 150, 200, 18);
+    const annot = Rect.fromLTWH(100, 64, 160, 48);
     return Column(
       spacing: t.space.l,
       children: [
@@ -249,6 +251,26 @@ class EditorBarStates extends StatelessWidget {
                 ),
               DkMarkupBar.over(selection: middle, onAction: (_) {}),
               DkMarkupBar.over(selection: top, onAction: (_) {}),
+            ],
+          ),
+        ),
+        // DkAnnotBar (DK-0322) over a selected annotation.
+        SizedBox(
+          height: 120,
+          child: Stack(
+            children: [
+              Positioned.fill(child: ColoredBox(color: t.color.pageWhite)),
+              Positioned.fromRect(
+                rect: annot,
+                child: ColoredBox(
+                  color: t.color.primary.withValues(alpha: 0.25),
+                ),
+              ),
+              DkAnnotBar.over(
+                selection: annot,
+                color: t.color.danger,
+                onAction: (_) {},
+              ),
             ],
           ),
         ),

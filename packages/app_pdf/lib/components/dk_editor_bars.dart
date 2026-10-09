@@ -287,16 +287,144 @@ class DkMarkupBar extends StatelessWidget {
   }
 }
 
+/// What DkAnnotBar can do with the selected annotation.
+enum DkAnnotAction { colour, duplicate, note, delete }
+
+/// The selected annotation's mini bar (UI spec §17.2, `edit-annsel`;
+/// DK-0322): the same floating pill as [DkMarkupBar]: Colour (a dot in the
+/// annotation's [color]), Duplicate and Add note (icon-only, labelled for
+/// screen readers), Delete in `color.danger`. [DkAnnotBar.over] places it
+/// like [DkMarkupBar.over]: 8 above the selection, below near the top.
+class DkAnnotBar extends StatelessWidget {
+  const DkAnnotBar({super.key, required this.color, required this.onAction});
+
+  final Color color;
+  final ValueChanged<DkAnnotAction> onAction;
+
+  static Widget over({
+    Key? key,
+    required Rect selection,
+    required Color color,
+    required ValueChanged<DkAnnotAction> onAction,
+  }) => Positioned.fill(
+    key: key,
+    child: CustomSingleChildLayout(
+      delegate: _AboveSelection(selection),
+      child: DkAnnotBar(color: color, onAction: onAction),
+    ),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    final radius = BorderRadius.circular(t.radius.pill);
+    // Labels where they fit, as in DkMarkupBar; else the icons and the dot
+    // alone (screen readers still hear every label).
+    final scaler = MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.25);
+    double textWidth(String s) {
+      final p = TextPainter(
+        text: TextSpan(text: s, style: t.text.labelM),
+        textDirection: Directionality.of(context),
+        textScaler: scaler,
+        maxLines: 1,
+      )..layout();
+      final w = p.width;
+      p.dispose();
+      return w;
+    }
+
+    final full =
+        [
+          l.annot_colour,
+          l.common_delete,
+        ].map((s) => 40 + textWidth(s)).reduce((a, b) => a + b) +
+        2 * 44 +
+        2 * t.space.xs;
+    final compact =
+        full > MediaQuery.sizeOf(context).width - 2 * _AboveSelection.gap;
+    Widget item(
+      DkAnnotAction a,
+      IconData? icon,
+      String label, {
+      bool iconOnly = false,
+      Color? ink,
+      Widget? leading,
+    }) => _PillButton(
+      icon: icon,
+      leading: leading,
+      label: label,
+      iconOnly: iconOnly || compact,
+      color: ink ?? t.color.textPrimary,
+      onTap: () => onAction(a),
+    );
+    return DecoratedBox(
+      decoration: t.surfaceAt(DkLevel.floating, radius: radius),
+      child: Material(
+        type: MaterialType.transparency,
+        borderRadius: radius,
+        clipBehavior: Clip.antiAlias,
+        child: MediaQuery.withClampedTextScaling(
+          maxScaleFactor: 1.25,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: t.space.xs),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                item(
+                  DkAnnotAction.colour,
+                  null,
+                  l.annot_colour,
+                  leading: Container(
+                    width: 16,
+                    height: 16,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                      border: Border.all(color: t.color.outline),
+                    ),
+                  ),
+                ),
+                item(
+                  DkAnnotAction.duplicate,
+                  DkIcons.duplicate,
+                  l.common_duplicate,
+                  iconOnly: true,
+                ),
+                item(
+                  DkAnnotAction.note,
+                  DkIcons.note,
+                  l.annot_add_note,
+                  iconOnly: true,
+                ),
+                item(
+                  DkAnnotAction.delete,
+                  DkIcons.delete,
+                  l.common_delete,
+                  ink: t.color.danger,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _PillButton extends StatefulWidget {
   const _PillButton({
     required this.icon,
+    this.leading,
     required this.label,
     required this.iconOnly,
     required this.color,
     required this.onTap,
   });
 
-  final IconData icon;
+  /// The icon, or [leading] in its place (DkAnnotBar's colour dot).
+  final IconData? icon;
+  final Widget? leading;
   final String label;
   final bool iconOnly;
   final Color color;
@@ -340,7 +468,12 @@ class _PillButtonState extends State<_PillButton> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 spacing: t.space.xs,
                 children: [
-                  DkIcon(widget.icon, size: DkIconSize.m, color: widget.color),
+                  widget.leading ??
+                      DkIcon(
+                        widget.icon!,
+                        size: DkIconSize.m,
+                        color: widget.color,
+                      ),
                   if (!widget.iconOnly)
                     Text(
                       widget.label,
