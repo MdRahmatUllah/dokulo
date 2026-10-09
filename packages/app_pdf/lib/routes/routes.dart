@@ -6,11 +6,17 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
+import '../screens/files/files_screen.dart';
+import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
+import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
+import '../screens/t2_tool/tool_options_screen.dart';
+import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import '../tools/tool_catalogue.dart';
+import '../tools/tool_definition.dart';
 import 'app_shell.dart';
 import 'bottom_chrome.dart';
 import 'link_error.dart';
@@ -25,7 +31,10 @@ abstract final class Routes {
   static const home = '/home'; // H1
   static const tools = '/tools'; // T1
   static const files = '/files'; // F1
+  static const filesSearch = '/files?search=1'; // F1, the search focused
   static const lockedFolder = '/files/locked'; // F2
+  static String folder(int id) => '/files/folder/$id'; // a folder in F1
+  static const trash = '/files/trash'; // Recently deleted
   static const me = '/me'; // M1
   static const models = '/me/models'; // M2
   static String settings(String page) => '/me/settings/$page'; // M3
@@ -38,9 +47,12 @@ abstract final class Routes {
   /// Import photos (the Scan popover): S2 opens the photo picker first.
   static const scanImport = '/scan/review?source=photos';
 
-  /// T2; [fileId] preselects a file (a share, a widget, an extension).
-  static String tool(String toolId, {String? fileId}) =>
-      '/tool/$toolId${fileId == null ? '' : '?file=$fileId'}';
+  /// T2; [files] (row ids) are its input, in order (X1, a share, a widget,
+  /// an extension): `?file=` once per file.
+  static String tool(String toolId, {List<String> files = const []}) => Uri(
+    path: '/tool/$toolId',
+    queryParameters: files.isEmpty ? null : {'file': files},
+  ).toString();
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
   static String viewer(String fileId, {bool edit = false}) =>
@@ -112,11 +124,33 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               children: children,
             ),
         branches: [
-          StatefulShellBranch(routes: [_screen(Routes.home, 'H1')]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
           StatefulShellBranch(
             routes: [
-              _screen(Routes.files, 'F1', routes: [_screen('locked', 'F2')]),
+              GoRoute(
+                path: Routes.files,
+                builder: (context, state) => const FilesScreen(),
+                routes: [
+                  _screen('locked', 'F2'),
+                  // The folder screen (DK-0262) and the trash (DK-0278).
+                  GoRoute(
+                    path: 'folder/:id',
+                    builder: (context, state) => PlaceholderScreen(
+                      'Folder',
+                      detail: state.pathParameters['id']!,
+                    ),
+                  ),
+                  _screen('trash', 'Recently deleted'),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(
@@ -142,7 +176,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
         ],
       ),
-      fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
+      fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
         path: Routes.scan,
@@ -172,11 +206,14 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           if (!ToolCatalogue.all.any((t) => t.id == toolId)) {
             return const LinkErrorScreen();
           }
-          final screen = PlaceholderScreen('T2', detail: toolId);
-          final file = s.uri.queryParameters['file'];
-          return file == null
+          final files = s.uri.queryParametersAll['file'] ?? const [];
+          final screen = ToolOptionsScreen(
+            definition: ToolDefinitions.of(toolId),
+            fileIds: [for (final f in files) int.tryParse(f) ?? -1],
+          );
+          return files.isEmpty
               ? screen
-              : LinkedFileGate(fileId: file, child: screen);
+              : LinkedFileGate(fileIds: files, child: screen);
         },
         routes: [
           // The result cross-fades in after the progress (UI spec §13.4).
@@ -187,10 +224,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               context,
               key: s.pageKey,
               child: _HomeUnderneath(
-                child: PlaceholderScreen(
-                  'T3',
-                  detail: s.pathParameters['toolId']!,
-                ),
+                child: ToolResultScreen(toolId: s.pathParameters['toolId']!),
               ),
             ),
           ),

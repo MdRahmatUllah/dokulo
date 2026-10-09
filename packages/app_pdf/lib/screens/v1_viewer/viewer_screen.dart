@@ -3,14 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/dk_loading_spinner.dart';
 import '../../components/dk_pdf_canvas.dart';
+import '../../components/dk_skeleton.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/dk_tokens.dart';
 import 'viewer_providers.dart';
 
 /// V1, the viewer (UI spec §17.1). This is its core (DK-0293): the file's
-/// pages on [DkPdfCanvas]. The top bar, page pill, bottom bar and the states
-/// (loading skeleton, locked, damaged, search, night) come with their own
-/// tasks.
+/// pages on [DkPdfCanvas]; while the file opens, the page skeleton (DK-0620).
+/// The top bar, page pill, bottom bar and the other states (locked, damaged,
+/// search, night) come with their own tasks.
 class ViewerScreen extends ConsumerWidget {
   const ViewerScreen({super.key, required this.fileId});
 
@@ -36,10 +37,51 @@ class ViewerScreen extends ConsumerWidget {
             ),
           ),
         ),
-        // ponytail: the loading skeleton and the damaged/locked states are
-        // V1's own state tasks; until then a spinner.
-        _ => const Center(child: DkLoadingSpinner()),
+        _ => const ViewerPageSkeleton(),
       },
+    );
+  }
+}
+
+/// V1 loading (UI spec §26.2, viewer-loading): the first page as an A4
+/// skeleton with a large spinner on it, the next page's top below, 8 from
+/// the edges. The pages are `color.surface` on the viewer's
+/// `color.surfaceSunken` (the artboard draws them in the background's own
+/// colour, so only the spinner would show), pulsing as any DkSkeleton.
+class ViewerPageSkeleton extends StatelessWidget {
+  const ViewerPageSkeleton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final page = DecoratedBox(
+      decoration: BoxDecoration(
+        color: t.color.surface,
+        borderRadius: BorderRadius.circular(t.radius.xs),
+      ),
+    );
+    final a4 = AspectRatio(aspectRatio: 1 / 1.4142, child: page);
+    // Pages as the viewer lays them out, cut off by the screen's edge
+    // (any height, any orientation).
+    return DkSkeleton(
+      child: ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.all(t.space.s),
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              a4,
+              DkLoadingSpinner(
+                size: DkSpinnerSize.large,
+                color: t.color.textDisabled, // the artboard's --t3
+              ),
+            ],
+          ),
+          SizedBox(height: t.space.s),
+          a4,
+        ],
+      ),
     );
   }
 }

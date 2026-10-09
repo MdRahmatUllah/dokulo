@@ -9,7 +9,7 @@ import 'dk_sheet.dart';
 /// One row of a [DkActionSheet]: an icon and a label.
 class DkAction {
   const DkAction({
-    required this.icon,
+    this.icon,
     required this.label,
     required this.onTap,
     this.destructive = false,
@@ -18,7 +18,8 @@ class DkAction {
     this.trailing,
   });
 
-  final IconData icon;
+  /// None in an options menu (F1's sort): the label and the check.
+  final IconData? icon;
   final String label;
 
   /// Runs after the sheet has closed.
@@ -173,7 +174,7 @@ class _DkActionRowState extends State<DkActionRow> {
     final a = widget.action;
     final ink = a.destructive ? t.color.danger : t.color.textPrimary;
     final icon = DkIcon(
-      a.icon,
+      a.icon ?? DkIcons.check,
       size: DkIconSize.m,
       color: a.destructive
           ? t.color.danger
@@ -221,9 +222,9 @@ class _DkActionRowState extends State<DkActionRow> {
                       ),
                       child: icon,
                     )
-                  else
+                  else if (a.icon != null)
                     icon,
-                  SizedBox(width: t.space.m),
+                  if (a.icon != null) SizedBox(width: t.space.m),
                   Expanded(
                     child: Text(
                       a.label,
