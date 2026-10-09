@@ -298,6 +298,21 @@ Tools-tab section. The grid, the T2 header, the X1 picker, search, About this
 tool and the notifications all read it, so they never disagree. A new tool is
 a new entry there, an icon in `DkIcons.tools` and two ARB strings each.
 
+**T2, one shell for every tool (DK-0370).** `/tool/:id?file=1&file=2` opens
+`ToolOptionsScreen` (`lib/screens/t2_tool/`) with the files as its input. It
+draws the top bar (the tool's icon, name and Pro badge; overflow: Reset
+options), the privacy line, the input (`DkFileCard` rows; with several files,
+× to remove and a drag handle to reorder), the options and the action bar.
+A tool's own task declares what is specific to it in a `ToolDefinition`
+(`lib/tools/tool_definition.dart`, added to `ToolDefinitions`): its options
+(`ToolSwitch`, `ToolSegments`, or `ToolCustom` for level cards, chips and
+fields), the "More options" ones, the button's label ("Compress 12 pages",
+§21), the estimate caption, and how the files and options become its
+ToolJob's input. The shell keeps the chosen values per tool while the app
+runs (`toolOptionValuesProvider`), so going back and opening the tool again
+keeps them. A tool without a definition yet shows its input and its name on a
+disabled button.
+
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
 and curve, or, when the platform's Reduce Motion is on, a 120 ms linear

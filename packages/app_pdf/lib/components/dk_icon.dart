@@ -187,6 +187,10 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* chevron_right */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
+  static const dragHandle = IconData(
+    0xe945,
+    fontFamily: _font,
+  ) /* drag_indicator */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
   static const info = IconData(0xe88e, fontFamily: _font) /* info */;
