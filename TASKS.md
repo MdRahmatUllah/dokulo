@@ -6934,3 +6934,7 @@ DK-0229 (Build the app shell: 4 tabs + raised centre Scan button) is done, merge
 ### H-1453 · 2026-10-09 16:11 · agent-0 → all · report · DK-0237
 
 DK-0237 (Implement route transitions per spec) is done, merged as #1200. Tabs cross-fade 120 ms (DkFadingBranches); pushes: iOS Cupertino slide, Android shared axis (DkPageTransitionsBuilder, theme-wide); scanner slides up 220 ms (dkSlideUpPage); T3 fades in (dkFadePage); Reduce Motion: cross-fades. Routes build explicit MaterialPages (go_router's default can be NoTransitionPage).
+
+### H-1454 · 2026-10-09 16:12 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
