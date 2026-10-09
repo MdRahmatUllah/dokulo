@@ -325,7 +325,19 @@ toasts "Cancelled. Your original file wasn't changed." A failure, also one the
 preflight refused, turns the sheet into its error state: the catalogue's title
 (`DokuloError`), "Your original file wasn't changed." and its first recovery
 (Try again, Try Repair, Split it first, …). A cancel or a failure deletes the
-temp output, so nothing partial is kept. Success opens T3.
+temp output, so nothing partial is kept. Success replaces T2 with T3
+(`ToolResultScreen`, DK-0379), so T3's Close returns to where the tool
+started; T2 hands the run over in `lastToolResultProvider`.
+
+T3 shows the result card (the output's size, its first pages), the file name
+(the job's own `<name> – <suffix>`) and "Save to: Files › Taxes": a result is
+saved next to its input (`FileStore.saveIndexed`, which also indexes it).
+Save keeps it as a new file, with a medium haptic and "Saved to Files › Taxes
+· Open"; the button becomes Done (DK-0381). Open saves first, then opens it.
+Closing an unsaved result of a job over 10 s asks "Discard this result?";
+a shorter one closes silently; either way the temp output is deleted
+(DK-0382). Share, the split Save's menu and Next chips come with DK-1077,
+DK-0380, DK-0385 and DK-0386.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration

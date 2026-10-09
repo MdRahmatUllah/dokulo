@@ -344,5 +344,10 @@
   "t2_reset_options": "Optionen zurücksetzen",
   "t2_remove_file": "Entfernen",
   "t2_busy": "Wird bearbeitet…",
-  "t2_failed_body": "Deine Originaldatei wurde nicht verändert."
+  "t2_failed_body": "Deine Originaldatei wurde nicht verändert.",
+  "t3_file_name": "Dateiname",
+  "t3_save_to": "Speichern in: {place}",
+  "t3_save": "Speichern",
+  "t3_discard_title": "Dieses Ergebnis verwerfen?",
+  "t3_discard_body": "Um es zurückzubekommen, musst du das Werkzeug erneut ausführen."
 }

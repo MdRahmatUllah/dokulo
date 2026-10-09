@@ -1369,5 +1369,15 @@
   "t2_busy": "Working…",
   "@t2_busy": {"description": "T2's main button while a tool runs 2–10 s, for a tool without its own verb (UI spec §20.2)."},
   "t2_failed_body": "Your original file wasn't changed.",
-  "@t2_failed_body": {"description": "Under the error title in the progress sheet's error state (§20.2, DK-0377)."}
+  "@t2_failed_body": {"description": "Under the error title in the progress sheet's error state (§20.2, DK-0377)."},
+  "t3_file_name": "File name",
+  "@t3_file_name": {"description": "T3's file name field (UI spec §20.4)."},
+  "t3_save_to": "Save to: {place}",
+  "@t3_save_to": {"description": "T3's save location, e.g. Save to: Files › Taxes (§20.4).", "placeholders": {"place": {"type": "String"}}},
+  "t3_save": "Save",
+  "@t3_save": {"description": "T3's main button (§20.4)."},
+  "t3_discard_title": "Discard this result?",
+  "@t3_discard_title": {"description": "Closing an unsaved result after a long job (§20.4, DK-0382)."},
+  "t3_discard_body": "You'll need to run the tool again to get it back.",
+  "@t3_discard_body": {"description": "Body of the discard result dialog (DK-0382)."}
 }
