@@ -2,6 +2,7 @@
 library;
 
 export 'src/db/database.dart';
+export 'src/db/photo_finder_store.dart';
 export 'src/files/file_store.dart';
 export 'src/files/text_indexer.dart';
 export 'src/pdf/pdf_annotations.dart';
