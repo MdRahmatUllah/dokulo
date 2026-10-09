@@ -11,7 +11,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../app_overrides.dart';
 
-class _Setup {
+class LockedSetup {
   final store = MemorySecretStore();
   var biometricOk = true;
   var prompts = 0;
@@ -27,7 +27,7 @@ class _Setup {
 
 Future<ProviderContainer> pumpLocked(
   WidgetTester tester,
-  _Setup setup, {
+  LockedSetup setup, {
   BiometricKind? kind = BiometricKind.faceId,
   DkTokens? tokens,
   Locale locale = const Locale('en'),
@@ -74,14 +74,14 @@ Future<void> typePin(WidgetTester tester, String pin) async {
 
 void main() {
   testWidgets('F2 is full screen: no tab bar', (tester) async {
-    await pumpLocked(tester, _Setup());
+    await pumpLocked(tester, LockedSetup());
     expect(find.byType(DkTabBar), findsNothing);
   });
 
   testWidgets('first time: L1 → L2 → L3 → L4 → the folder, open', (
     tester,
   ) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     final container = await pumpLocked(tester, setup);
     expect(find.text('Keep files private'), findsOneWidget);
     expect(find.textContaining('need Face ID or your PIN'), findsOneWidget);
@@ -109,7 +109,7 @@ void main() {
   testWidgets('L3 mismatch: back to L2, cleared, with the message', (
     tester,
   ) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await pumpLocked(tester, setup);
     await tester.tap(find.text('Set up'));
     await tester.pumpAndSettle();
@@ -123,7 +123,7 @@ void main() {
   testWidgets('without biometrics: no L4, and the PIN-only copy', (
     tester,
   ) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await pumpLocked(tester, setup, kind: null);
     expect(find.textContaining('need your PIN to open'), findsOneWidget);
     await tester.tap(find.text('Set up'));
@@ -134,7 +134,7 @@ void main() {
   });
 
   testWidgets('Android wording: fingerprint', (tester) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await setup.vault.setPin('482915');
     await pumpLocked(tester, setup, kind: BiometricKind.fingerprint);
     expect(find.bySemanticsLabel('Use fingerprint'), findsOneWidget);
@@ -143,7 +143,7 @@ void main() {
   testWidgets('unlock: a wrong PIN says so; the right one opens', (
     tester,
   ) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await setup.vault.setPin('482915');
     await pumpLocked(tester, setup);
     expect(setup.prompts, 0, reason: 'biometrics were never turned on');
@@ -157,7 +157,7 @@ void main() {
   testWidgets('the biometric prompt opens it on arrival when turned on', (
     tester,
   ) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await setup.vault.setPin('482915');
     await setup.vault.enableBiometrics('test');
     setup.prompts = 0;
@@ -168,7 +168,7 @@ void main() {
   });
 
   testWidgets('a cancelled prompt leaves the PIN pad', (tester) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await setup.vault.setPin('482915');
     await setup.vault.enableBiometrics('test');
     setup.biometricOk = false;
@@ -177,7 +177,7 @@ void main() {
   });
 
   testWidgets('Lock now locks; leaving locks too', (tester) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await setup.vault.setPin('482915');
     final container = await pumpLocked(tester, setup);
     await typePin(tester, '482915');
@@ -194,7 +194,7 @@ void main() {
   });
 
   testWidgets('after 5 wrong PINs it asks to wait', (tester) async {
-    final setup = _Setup();
+    final setup = LockedSetup();
     await setup.vault.setPin('482915');
     await pumpLocked(tester, setup);
     for (var i = 0; i < 5; i++) {
@@ -212,7 +212,7 @@ void main() {
       ('de', DkTokens.light, const Locale('de')),
     ]) {
       testWidgets('L1, L2 and L4 ($name)', (tester) async {
-        final setup = _Setup();
+        final setup = LockedSetup();
         await pumpLocked(tester, setup, tokens: tokens, locale: locale);
         final screen = find.byType(MaterialApp);
         await expectLater(
