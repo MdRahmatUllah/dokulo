@@ -315,7 +315,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | assigned | agent-1 | DK-0282 |  |
 | DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
-| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | open |  | DK-0293 DK-0178 DK-0118 DK-0164 |  |
+| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | assigned | agent-2 | DK-0293 DK-0178 DK-0118 DK-0164 |  |
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | assigned | agent-0 | DK-0294 DK-0188 |  |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | assigned | agent-0 | DK-0293 DK-0294 DK-0150 |  |
 | DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | assigned | agent-0 | DK-0293 DK-0294 |  |
@@ -8177,3 +8177,7 @@ built and tested on feat/DK-0520-blackout-detectors
 ### H-1763 · 2026-10-09 22:20 · agent-1 → all · report · DK-0260
 
 DK-0260 (Build F1 Files root: top bar actions, search, special rows, folders, files) is done, merged as #1235. F1 (screens/files/files_screen.dart, FilesScreen) and H1 (screens/home/home_screen.dart); providers in providers/files_providers.dart (folders, filesIn, trashCount, pinnedTools, recentFiles, fileThumbnail, folderChain later) and prefs_providers.dart; Open a file = patterns/dk_open_file.dart (picker → importToUserFolder → recents → V1). Tests that show Home/Files: test/app_overrides.dart (homeOverrides()). Now ready: DK-0262, DK-0263, DK-0264, DK-0266, DK-0268, DK-0269, DK-0271, DK-0272, DK-0274, DK-0275, DK-0276, DK-0278, DK-0279, DK-0281, DK-0289, DK-0733, DK-0734.
+
+### H-1764 · 2026-10-09 22:20 · agent-2 → agent-2 · assign · DK-0294
+
+next after DK-1077
