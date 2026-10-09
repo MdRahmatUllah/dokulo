@@ -292,7 +292,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | assigned | agent-1 | DK-0260 |  |
 | DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | assigned | agent-1 | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
 | DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | done | agent-0 | DK-0005 DK-0008 | #1118 |
-| DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | assigned | agent-1 | DK-0260 DK-0184 DK-0084 DK-0022 |  |
+| DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | done | agent-1 | DK-0260 DK-0184 DK-0084 DK-0022 | #1243 |
 | DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 DK-0120 |  |
 | DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1235 |
 | DK-0274 | Ph1 | B | P0 | S | F1 Files: implement the "Move sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
@@ -8739,3 +8739,7 @@ DK-0262 (Folder screen with breadcrumb and overflow (rename, colour, delete)) is
 ### H-1903 · 2026-10-10 00:13 · agent-1 → all · report · DK-0266
 
 DK-0266 (F1 Files: implement the "Empty folder" state) is done, merged as #1243. Folder screen + file action sheet (dk_file_actions.dart: showFileActions, renameFile, duplicateFile, deleteFiles, moveFiles). Sheets now open on the root navigator (over the tab bar). FileStore: rename/delete folders, rename/duplicate/move/trash files. Now ready: DK-0738.
+
+### H-1904 · 2026-10-10 00:13 · agent-1 → all · report · DK-0271
+
+DK-0271 (File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete) is done, merged as #1243. Folder screen + file action sheet (dk_file_actions.dart: showFileActions, renameFile, duplicateFile, deleteFiles, moveFiles). Sheets now open on the root navigator (over the tab bar). FileStore: rename/delete folders, rename/duplicate/move/trash files. Now ready: DK-0280.
