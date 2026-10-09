@@ -1659,3 +1659,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 18:30 · agent-0 DK-0236 · done (#1218)
 - 2026-10-09 18:31 · agent-0 DK-0620 · claimed: Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer
 - 2026-10-09 18:32 · agent-1 DK-0277 · PR #0 open; review requested from all
+- 2026-10-09 18:32 · agent-1 DK-0282 · claimed: Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN
