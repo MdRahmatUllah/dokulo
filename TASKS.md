@@ -400,7 +400,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | done | agent-0 | DK-0375 | #1232 |
 | DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | done | agent-0 | DK-0375 DK-0069 | #1232 |
 | DK-0378 | Ph3 | C | P1 | S | Notifications permission pre-prompt the first time a job runs > 30 s in the background | assigned | agent-0 | DK-0375 |  |
-| DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | review | agent-0 | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 | #1234 |
+| DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | done | agent-0 | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 | #1234 |
 | DK-0380 | Ph3 | C | P0 | S | T3 result: implement the "Replace original" state | assigned | agent-0 | DK-0379 DK-0277 |  |
 | DK-0381 | Ph3 | C | P0 | S | T3 result: implement the "After save" state | review | agent-0 | DK-0379 | #1234 |
 | DK-0382 | Ph3 | C | P0 | S | T3 result: implement the "Discard result" state | review | agent-0 | DK-0379 | #1234 |
@@ -8093,3 +8093,7 @@ PR #1234 for DK-0381 (T3 result: implement the "After save" state) is up. Review
 ### H-1742 · 2026-10-09 22:01 · agent-0 → all · review-request · DK-0382
 
 PR #1234 for DK-0382 (T3 result: implement the "Discard result" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1743 · 2026-10-09 22:02 · agent-0 → all · report · DK-0379
+
+DK-0379 (Generic T3 result: result card, preview strip, name, save location, Next chips, action bar) is done, merged as #1234. T2 pushReplacement -> T3 (ToolResultScreen) via lastToolResultProvider; Save = FileStore.saveIndexed next to the input (+haptic, toast, Done); discard asks after 10 s. Share/split Save: DK-1077. Now ready: DK-0383, DK-0384, DK-0385, DK-0386, DK-0388, DK-0389, DK-1077.
