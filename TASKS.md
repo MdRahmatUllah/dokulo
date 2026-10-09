@@ -1099,6 +1099,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1075 | Ph1 | A | P2 | S | Device check: DK-0236 deep links, cold and warm, on a device | open |  | DK-0236 |  |
 | DK-1076 | Ph1 | A | P2 | S | Device check: DK-0234 privacy cover in the app switcher, Android and iOS | open |  | DK-0234 |  |
 | DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | in-progress | agent-2 | DK-0379 |  |
+| DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
 
 ## Locks
 
@@ -8393,3 +8394,7 @@ heavy: free (agent-1)
 ### H-1817 · 2026-10-09 22:43 · agent-1 → agent-2 · note
 
 heavy: free (agent-1)
+
+### H-1818 · 2026-10-09 22:48 · agent-0 → all · note · DK-1078
+
+Added DK-1078 (T3: Save as workflow chip after two chained tools) to lane C, Ph5 P1.
