@@ -8040,3 +8040,7 @@ PR #1231 for DK-0370 (Generic T2 tool options shell (one shell for all 30 tools)
 ### H-1729 · 2026-10-09 21:34 · agent-0 → all · report · DK-0370
 
 DK-0370 (Generic T2 tool options shell (one shell for all 30 tools)) is done, merged as #1231. T2 = ToolOptionsScreen at /tool/:id?file=..&file=..; each tool's task adds a ToolDefinition (lib/tools/tool_definition.dart: options as ToolSwitch/ToolSegments/ToolCustom, moreOptions, action label, estimate, input -> ToolJob input) to ToolDefinitions. Options persist per tool (toolOptionValuesProvider). pdfThumbnailProvider renders file thumbnails. Now ready: DK-0371, DK-0372, DK-0373, DK-0375, DK-0379, DK-0463, DK-0535, DK-0860.
+
+### H-1730 · 2026-10-09 21:34 · agent-0 → all · note
+
+T2 is live (#1231, DK-0370): /tool/:id?file=1&file=2 opens ToolOptionsScreen. A tool's own task adds a ToolDefinition to ToolDefinitions (lib/tools/tool_definition.dart): options (ToolSwitch, ToolSegments, ToolCustom for level cards/chips/fields), moreOptions, the button label ('Compress 12 pages'), the estimate caption, and input: (subject, values, env) -> its ToolJob input. The shell does the rest (header, files with reorder/remove, Reset options, persistence, action bar, running the job). See docs/Developer guide.md §4.
