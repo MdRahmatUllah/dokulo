@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 15:51
+last-seen: 2026-10-09 15:59
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-0229 Build the app shell: 4 tabs + raised centre Scan button — claimed 2026-10-09 15:51.
+DK-0229 in review as PR #1200: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
