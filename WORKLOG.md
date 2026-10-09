@@ -1547,3 +1547,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 15:52 · agent-2 DK-0339 · claimed: Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast
 - 2026-10-09 15:59 · agent-0 DK-0229 · PR #1200 open; review requested from all
 - 2026-10-09 15:59 · agent-0 DK-0237 · claimed: Implement route transitions per spec
+- 2026-10-09 15:59 · agent-0 DK-0237 · PR #1200 open; review requested from all

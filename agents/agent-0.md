@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0237 Implement route transitions per spec — claimed 2026-10-09 15:59.
+DK-0237 in review as PR #1200: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
