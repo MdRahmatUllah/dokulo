@@ -4,6 +4,7 @@ import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_icon_button.dart';
+import 'dk_pro_badge.dart';
 import 'dk_text_action.dart';
 
 /// What sits at the left of a [DkTopBar].
@@ -15,11 +16,20 @@ class DkTopBarAction {
     required this.icon,
     required this.tooltip,
     required this.onPressed,
-  });
+  }) : onMenu = null;
+
+  /// An action that opens a menu under itself (F1's sort): [onMenu] gets the
+  /// button's context as the menu's anchor.
+  const DkTopBarAction.menu({
+    required this.icon,
+    required this.tooltip,
+    required void Function(BuildContext anchor) this.onMenu,
+  }) : onPressed = null;
 
   final IconData icon;
   final String tooltip;
   final VoidCallback? onPressed;
+  final void Function(BuildContext anchor)? onMenu;
 }
 
 /// The small top bar (UI spec §11.6; DK-0164): 56 tall below the status
@@ -38,6 +48,8 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
     this.onLeading,
     this.actions = const [],
     this.onOverflow,
+    this.titleIcon,
+    this.titlePro = false,
   }) : onCancel = null,
        onDone = null,
        cancelLabel = null,
@@ -58,9 +70,17 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
        onLeading = null,
        actions = const [],
        onOverflow = null,
+       titleIcon = null,
+       titlePro = false,
        _editing = true;
 
   final String? title;
+
+  /// A 20 dp icon before the title (T2: the tool's icon).
+  final IconData? titleIcon;
+
+  /// The Pro badge after the title (T2 of a Pro tool).
+  final bool titlePro;
   final DkTopBarLeading leading;
 
   /// Back or close; `Navigator.maybePop` when null.
@@ -105,7 +125,7 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
     final l10n = MaterialLocalizations.of(context);
     final editing = widget._editing;
     final centred = _isIos(context) || editing;
-    final title = widget.title == null
+    Widget? title = widget.title == null
         ? null
         : Semantics(
             header: true,
@@ -117,6 +137,22 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
               textAlign: centred ? TextAlign.center : TextAlign.start,
             ),
           );
+    if (title != null && (widget.titleIcon != null || widget.titlePro)) {
+      title = Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: t.space.s,
+        children: [
+          if (widget.titleIcon != null)
+            DkIcon(
+              widget.titleIcon!,
+              size: DkIconSize.m,
+              color: t.color.iconPrimary,
+            ),
+          Flexible(child: title),
+          if (widget.titlePro) const DkProBadge(small: true),
+        ],
+      );
+    }
 
     final Widget? leading = editing
         ? DkTextAction(
@@ -231,7 +267,20 @@ class _Actions extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       for (final a in actions)
-        DkIconButton(icon: a.icon, tooltip: a.tooltip, onPressed: a.onPressed),
+        if (a.onMenu case final onMenu?)
+          Builder(
+            builder: (anchor) => DkIconButton(
+              icon: a.icon,
+              tooltip: a.tooltip,
+              onPressed: () => onMenu(anchor),
+            ),
+          )
+        else
+          DkIconButton(
+            icon: a.icon,
+            tooltip: a.tooltip,
+            onPressed: a.onPressed,
+          ),
       if (onOverflow != null)
         Builder(
           builder: (anchor) => DkIconButton(

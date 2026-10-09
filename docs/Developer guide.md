@@ -218,6 +218,13 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
   (`test/routes/deep_links_test.dart`).
   On a device, `python tools/deeplinks_check.py` fires every route from a
   cold start (all 15 passed on emulator-5554, 2026-10-08, DK-1041).
+- **The privacy cover (DK-0234)** wraps the whole app (`MaterialApp.builder`,
+  `DkPrivacyCover`): while locked content is open or Settings → Security →
+  Hide previews is on (`privacyCoverProvider`), the app switcher shows
+  `color.background` with the symbol, as the launch screen, and Android sets
+  FLAG_SECURE (blank recents card, no screenshots); otherwise screenshots are
+  allowed. A screen with locked-folder content wraps its body in
+  `DkLockedContent`; the Security screen sets `hidePreviewsProvider`.
 - **Back from a deep-linked full-screen page goes to Home** (nothing is
   beneath it, so leaving the app would be the surprise); pushed from a tab,
   it returns to that tab.
@@ -290,6 +297,47 @@ its fixed EN/DE name, its one-line description (UI spec §21), its tier and its
 Tools-tab section. The grid, the T2 header, the X1 picker, search, About this
 tool and the notifications all read it, so they never disagree. A new tool is
 a new entry there, an icon in `DkIcons.tools` and two ARB strings each.
+
+**T2, one shell for every tool (DK-0370).** `/tool/:id?file=1&file=2` opens
+`ToolOptionsScreen` (`lib/screens/t2_tool/`) with the files as its input. It
+draws the top bar (the tool's icon, name and Pro badge; overflow: Reset
+options), the privacy line, the input (`DkFileCard` rows; with several files,
+× to remove and a drag handle to reorder), the options and the action bar.
+A tool's own task declares what is specific to it in a `ToolDefinition`
+(`lib/tools/tool_definition.dart`, added to `ToolDefinitions`): its options
+(`ToolSwitch`, `ToolSegments`, or `ToolCustom` for level cards, chips and
+fields), the "More options" ones, the button's label ("Compress 12 pages",
+§21), the estimate caption, and how the files and options become its
+ToolJob's input. The shell keeps the chosen values per tool while the app
+runs (`toolOptionValuesProvider`), so going back and opening the tool again
+keeps them. A tool without a definition yet shows its input and its name on a
+disabled button.
+
+Running (UI spec §20.2, DK-0375…DK-0377): the button starts the job through
+`toolRunnerProvider` (the JobQueue, with a fresh temp output folder; tests
+override it with a simulated run). Under 2 s nothing shows but the press; from
+2 s the button loads with the tool's `busyLabel` ("Compressing…"); from 10 s
+T2's progress sheet slides up (`busyTitle`, the bar, "Page 18 of 40 · about
+20 s left", the time left smoothed to at most ±50 % per update), and Keep
+working leaves the mini job bar. Cancel stops at once, after asking (the
+tool's `stopTitle`, "Stop compressing?") once the job has run 30 s; a cancel
+toasts "Cancelled. Your original file wasn't changed." A failure, also one the
+preflight refused, turns the sheet into its error state: the catalogue's title
+(`DokuloError`), "Your original file wasn't changed." and its first recovery
+(Try again, Try Repair, Split it first, …). A cancel or a failure deletes the
+temp output, so nothing partial is kept. Success replaces T2 with T3
+(`ToolResultScreen`, DK-0379), so T3's Close returns to where the tool
+started; T2 hands the run over in `lastToolResultProvider`.
+
+T3 shows the result card (the output's size, its first pages), the file name
+(the job's own `<name> – <suffix>`) and "Save to: Files › Taxes": a result is
+saved next to its input (`FileStore.saveIndexed`, which also indexes it).
+Save keeps it as a new file, with a medium haptic and "Saved to Files › Taxes
+· Open"; the button becomes Done (DK-0381). Open saves first, then opens it.
+Closing an unsaved result of a job over 10 s asks "Discard this result?";
+a shorter one closes silently; either way the temp output is deleted
+(DK-0382). Share, the split Save's menu and Next chips come with DK-1077,
+DK-0380, DK-0385 and DK-0386.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration

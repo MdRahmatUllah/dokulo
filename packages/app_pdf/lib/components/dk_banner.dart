@@ -19,6 +19,7 @@ class DkBanner extends StatelessWidget {
     this.variant = DkBannerVariant.info,
     this.action,
     this.onAction,
+    this.icon,
   }) : assert((action == null) == (onAction == null), 'an action needs both');
 
   final String text;
@@ -26,11 +27,15 @@ class DkBanner extends StatelessWidget {
   final String? action;
   final VoidCallback? onAction;
 
+  /// A more specific icon than the variant's (the board's `manage_search`
+  /// for scans without text, `no_photography` for the camera).
+  final IconData? icon;
+
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final c = t.color;
-    final (fill, ink, icon) = switch (variant) {
+    final (fill, ink, kindIcon) = switch (variant) {
       DkBannerVariant.info => (
         c.primaryContainer,
         c.onPrimaryContainer,
@@ -63,7 +68,7 @@ class DkBanner extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: t.space.m,
           children: [
-            DkIcon(icon, size: DkIconSize.m, color: ink),
+            DkIcon(icon ?? kindIcon, size: DkIconSize.m, color: ink),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
