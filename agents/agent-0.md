@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0020 Preflight checks before every job: free storage, memory guard, encryption, file type — claimed 2026-10-09 16:43.
+DK-0020 in review as PR #1207: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
