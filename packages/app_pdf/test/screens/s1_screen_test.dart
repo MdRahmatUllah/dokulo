@@ -276,6 +276,22 @@ void main() {
     });
   });
 
+  testWidgets(
+    'the camera is released in the background and opened again on return',
+    (tester) async {
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await pump(tester);
+      expect(camera.opened, isTrue);
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      await tester.pumpAndSettle();
+      expect(camera.closed, isTrue);
+      camera.opened = false;
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await tester.pumpAndSettle();
+      expect(camera.opened, isTrue);
+    },
+  );
+
   testWidgets('closing the screen closes the camera', (tester) async {
     await pump(tester);
     await tester.pumpWidget(const SizedBox());

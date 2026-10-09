@@ -61,7 +61,14 @@ class S1Screen extends ConsumerStatefulWidget {
 
 class _S1ScreenState extends ConsumerState<S1Screen>
     with TickerProviderStateMixin {
-  late final ScannerCamera _camera = ref.read(scannerCameraProvider);
+  late ScannerCamera _camera;
+
+  /// The camera is released when the app goes to the background and opened
+  /// again on return (the `camera` plugin's lifecycle rule).
+  late final AppLifecycleListener _lifecycle = AppLifecycleListener(
+    onInactive: _stop,
+    onResume: _start,
+  );
   StreamSubscription<GreyFrame>? _frames;
   var _open = false;
   var _detecting = false;
@@ -115,6 +122,7 @@ class _S1ScreenState extends ConsumerState<S1Screen>
   void initState() {
     super.initState();
     ref.read(scannerSettingsProvider.notifier).load();
+    _lifecycle; // starts listening
     if (widget.initialMode case final m? when m != DkScanMode.importPhotos) {
       Future.microtask(() => ref.read(scanModeStateProvider.notifier).set(m));
     }
@@ -122,6 +130,8 @@ class _S1ScreenState extends ConsumerState<S1Screen>
   }
 
   Future<void> _start() async {
+    if (_open) return;
+    _camera = ref.read(scannerCameraProvider);
     try {
       await _camera.open();
     } on CameraUnavailable {
@@ -167,8 +177,23 @@ class _S1ScreenState extends ConsumerState<S1Screen>
     setState(() => _open = true);
   }
 
+  Future<void> _stop() async {
+    if (!_open) return;
+    // Not awaited: the camera is closed right away either way.
+    _frames?.cancel();
+    _frames = null;
+    setState(() {
+      _open = false;
+      _quad = null;
+      _steadySince = null;
+      _countdown = 0;
+    });
+    await _camera.close();
+  }
+
   @override
   void dispose() {
+    _lifecycle.dispose();
     _frames?.cancel();
     _camera.close();
     _flashFx.dispose();
