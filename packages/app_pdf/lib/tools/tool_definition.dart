@@ -110,6 +110,9 @@ class ToolDefinition {
     this.action,
     this.estimate,
     this.input,
+    this.busyLabel,
+    this.busyTitle,
+    this.stopTitle,
   });
 
   final String id;
@@ -128,6 +131,16 @@ class ToolDefinition {
   /// The job's input from the files and options; null: the tool can't run
   /// yet.
   final Object Function(ToolSubject, ToolValues, ToolEnv)? input;
+
+  /// The button while it runs ("Compressing…", UI spec §20.2); null: "Working…".
+  final String Function(AppLocalizations)? busyLabel;
+
+  /// The progress sheet's title ("Compressing Mietvertrag.pdf"); null: the
+  /// tool's name.
+  final String Function(AppLocalizations, ToolSubject)? busyTitle;
+
+  /// The cancel dialog's title ("Stop compressing?"); null: "Stop this job?".
+  final String Function(AppLocalizations)? stopTitle;
 
   /// Every option's starting value.
   ToolValues get initialValues => {

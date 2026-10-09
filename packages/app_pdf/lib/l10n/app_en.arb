@@ -1365,5 +1365,9 @@
   "t2_reset_options": "Reset options",
   "@t2_reset_options": {"description": "T2's overflow menu (§20.1)."},
   "t2_remove_file": "Remove",
-  "@t2_remove_file": {"description": "The × on a T2 input file (§20.1)."}
+  "@t2_remove_file": {"description": "The × on a T2 input file (§20.1)."},
+  "t2_busy": "Working…",
+  "@t2_busy": {"description": "T2's main button while a tool runs 2–10 s, for a tool without its own verb (UI spec §20.2)."},
+  "t2_failed_body": "Your original file wasn't changed.",
+  "@t2_failed_body": {"description": "Under the error title in the progress sheet's error state (§20.2, DK-0377)."}
 }
