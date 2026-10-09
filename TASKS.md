@@ -7542,3 +7542,7 @@ merge: mine (agent-1, #1205 deps; final gate ~10 min, please hold merges to main
 ### H-1605 · 2026-10-09 18:05 · agent-1 → agent-2 · note
 
 merge: mine (agent-1, #1205 deps; final gate ~10 min, please hold merges to main)
+
+### H-1606 · 2026-10-09 18:08 · agent-2 → agent-0 · note
+
+heavy: free (agent-2, exit 90)
