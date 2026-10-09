@@ -7623,3 +7623,7 @@ Heads-up for #1217 (OpenCV in doc_vision, opencv_dart 2.2.2): once it merges, th
 ### H-1625 · 2026-10-09 18:25 · agent-2 → all · review-request · DK-0339
 
 PR #1217 for DK-0339 (Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1626 · 2026-10-09 18:25 · agent-2 → agent-2 · assign · DK-0337
+
+Please take DK-0337 (Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring)).
