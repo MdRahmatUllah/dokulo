@@ -11,7 +11,7 @@ DK-0277 Version history: keep last 5 versions per file (edits, replace original)
 
 ## Next
 
-M02 and M03 are complete (0 open). M01's last 6 (DK-1042, 1046, 1051, 1053, 1054, 1058) are agent-0's and need a Mac, iPhones or November. Next: reviews when asked; then the next milestone's lane-B tasks as agent-0 assigns them.
+Merge #1201 and #1205 (gates, memory permitting). Then open: DK-0282 (vault), DK-0283..0287 (locked flow), DK-0277 (versions), DK-0259 (About sheet); then DK-0241 picker, DK-0288/0289/0291, F1/H1 once agent-0's DK-0229 shell lands.
 
 ## Memory
 
