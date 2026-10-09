@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:doc_core/doc_core.dart';
-import 'package:drift/drift.dart';
 import 'package:test/test.dart';
 
 void main() {
