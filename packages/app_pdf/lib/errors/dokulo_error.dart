@@ -2,27 +2,47 @@ import 'dart:io';
 
 import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:flutter/widgets.dart' show Color, IconData;
 
+import '../components/dk_icon.dart';
 import '../l10n/app_localizations.dart';
+import '../theme/dk_tokens.dart';
 
 /// The situations of the error catalogue (UI spec §26.3; docs/errors.md).
 enum DkErrorSituation {
-  locked('DK-0100'),
-  damaged('DK-0110'),
-  notEnoughStorage('DK-0120'),
-  tooLarge('DK-0130'),
-  unsupportedForm('DK-0140'),
-  modelMissing('DK-0150'),
-  lowMemory('DK-0160'),
-  cancelled('DK-0170'),
-  offline('DK-0180'),
-  unexpected('DK-0190');
+  locked('DK-0100', DkIcons.lock, _Tone.warning),
+  damaged('DK-0110', DkIcons.damaged, _Tone.danger),
+  notEnoughStorage('DK-0120', DkIcons.storage, _Tone.warning),
+  tooLarge('DK-0130', DkIcons.memory, _Tone.warning),
+  unsupportedForm('DK-0140', DkIcons.formUnsupported, _Tone.warning),
+  modelMissing('DK-0150', DkIcons.download, _Tone.primary),
+  lowMemory('DK-0160', DkIcons.memory, _Tone.warning),
+  cancelled('DK-0170', DkIcons.cancelled, _Tone.quiet),
+  offline('DK-0180', DkIcons.offline, _Tone.quiet),
+  unexpected('DK-0190', DkIcons.error, _Tone.danger);
 
-  const DkErrorSituation(this.code);
+  const DkErrorSituation(this.code, this.icon, this._tone);
 
   /// Shown with "Something went wrong" and in a sent report; never alone.
   final String code;
+
+  /// The situation's 20 dp icon, before the title (the error catalogue of
+  /// 26-global-states).
+  final IconData icon;
+  final _Tone _tone;
+
+  /// The icon's colour: warning for what the user can fix, danger for a
+  /// broken file or a failure, primary for a download, secondary for a
+  /// cancel or being offline.
+  Color iconColor(DkColors c) => switch (_tone) {
+    _Tone.warning => c.warning,
+    _Tone.danger => c.danger,
+    _Tone.primary => c.primary,
+    _Tone.quiet => c.iconSecondary,
+  };
 }
+
+enum _Tone { warning, danger, primary, quiet }
 
 /// What the user can do about an error: one action per situation, none
 /// after a cancel, three after an unexpected failure (§26.3).

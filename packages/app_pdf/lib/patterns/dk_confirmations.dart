@@ -23,6 +23,9 @@ enum DkConfirmation {
   /// Delete the last page of a scan, and with it the scan.
   discardScan,
 
+  /// Close a tool's unsaved result (T3, after a job over 10 s).
+  discardResult,
+
   /// Leave edit mode with changes.
   discardEdits,
 
@@ -69,6 +72,13 @@ Future<bool> confirmDk(
     DkConfirmation.discardScan => (
       l.confirm_discard_scan_title,
       l.confirm_discard_scan_body,
+      l.common_discard,
+      l.common_keep,
+      true,
+    ),
+    DkConfirmation.discardResult => (
+      l.t3_discard_title,
+      l.t3_discard_body,
       l.common_discard,
       l.common_keep,
       true,

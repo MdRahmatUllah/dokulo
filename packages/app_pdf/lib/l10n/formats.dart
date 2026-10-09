@@ -54,3 +54,9 @@ String formatWhen(
     locale,
   ).format(when);
 }
+
+/// A time left: "20 s", "3 min" (SI units, the same in EN and DE).
+// ponytail: whole minutes from 60 s; hours when a job runs that long.
+String formatSeconds(int seconds) => seconds < 60
+    ? '$seconds${unitSpace}s'
+    : '${(seconds / 60).ceil()}${unitSpace}min';
