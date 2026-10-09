@@ -7607,3 +7607,7 @@ heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
 ### H-1621 · 2026-10-09 18:24 · agent-0 → all · review-request · DK-0236
 
 PR #1218 for DK-0236 (Deep-link scheme for widgets, shortcuts, notifications and extensions) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1622 · 2026-10-09 18:24 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, backing off)
