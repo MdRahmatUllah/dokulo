@@ -29,6 +29,11 @@ def test_only_the_ocr_models_may_be_bundled(tmp_path: Path) -> None:
         "assets/flutter_assets/assets/models/PP-OCRv5_mobile_det.onnx": 10,
         "assets/flutter_assets/assets/models/ppocr_latin_rec.onnx": 10,
         "assets/flutter_assets/assets/models/pp_ocr_cls.onnx": 10,
+        # doc_vision's bundled PP-OCRv5 (DK-0398), under its own names
+        "assets/flutter_assets/packages/doc_vision/assets/ocr/det.onnx": 10,
+        "assets/flutter_assets/packages/doc_vision/assets/ocr/rec_latin.onnx": 10,
+        "assets/flutter_assets/packages/doc_vision/assets/ocr/cls.onnx": 10,
+        "assets/flutter_assets/assets/other/det.onnx": 10,  # not the OCR folder
         "assets/flutter_assets/assets/models/gemma-4-e2b.gguf": 10,
         "assets/flutter_assets/assets/models/e5-small.onnx": 10,
         "assets/flutter_assets/assets/models/bergamot/model.deen.intgemm.alphas.bin": 10,
@@ -36,7 +41,7 @@ def test_only_the_ocr_models_may_be_bundled(tmp_path: Path) -> None:
         "DebugProbesKt.bin": 10,
     })
     assert sorted(Path(m).name for m in size_check.bundled_models(target)) == [
-        "e5-small.onnx", "gemma-4-e2b.gguf", "model.deen.intgemm.alphas.bin"]
+        "det.onnx", "e5-small.onnx", "gemma-4-e2b.gguf", "model.deen.intgemm.alphas.bin"]
 
 
 def test_the_budget_fails_the_run(tmp_path: Path, monkeypatch, capsys) -> None:
