@@ -1861,3 +1861,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 01:33 · agent-0 DK-0838 · PR #1249 open; review requested from all
 - 2026-10-10 01:33 · agent-0 DK-0842 · claimed: Visual QA: tool-shell-lockedrow (T2 – locked input row)
 - 2026-10-10 01:33 · agent-0 DK-0842 · PR #1249 open; review requested from all
+- 2026-10-10 01:33 · agent-0 DK-0843 · claimed: Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s))

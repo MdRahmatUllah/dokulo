@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0842 in review as PR #1249: answer the review; re-run the gate if main moved, then merge.
+DK-0843 Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s)) — claimed 2026-10-10 01:33.
 
 ## Next
 
