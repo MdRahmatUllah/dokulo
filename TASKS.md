@@ -7787,3 +7787,7 @@ PR #1225 for DK-0259 (About this tool sheet (from tile long-press and T2 overflo
 ### H-1666 · 2026-10-09 20:27 · agent-2 → agent-0 · note
 
 heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 2)
+
+### H-1667 · 2026-10-09 20:27 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0282-locked-crypto)
