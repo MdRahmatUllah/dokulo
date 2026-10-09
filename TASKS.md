@@ -8578,3 +8578,7 @@ DK-0341 (Book mode engine: spine detection (projection profile + Hough), split i
 ### H-1863 · 2026-10-09 23:28 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0259-about-tool)
+
+### H-1864 · 2026-10-09 23:28 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0259-about-tool)
