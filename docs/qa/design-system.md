@@ -6,6 +6,7 @@
 | DK-0986 | `00-design-system/motion.html` | The same test: the legend's durations (fast, standard, emphasis, reduced, capture flash) and the three easing curves | Match, except 2 approved curve changes |
 | DK-0985, DK-0988..DK-1007 | `00-design-system/illustrations/` | `tools/qa_illustrations.py`, see [illustrations/](illustrations/README.md) | 40/40 match |
 | DK-0984 | `00-design-system/components-part-2.html` (Light, Dark; 1440 wide) | Side by side with the catalogue entries' goldens (layout, colour, spacing) and the code (type tokens, copy); `tools/device_checks/catalogue_shots.py` screenshots the same entries on a device with real fonts | 6 deviations fixed (DK-1072), 3 approved, below |
+| DK-0980 | `26-global-states/global-states.html` (Light, Dark; 1440 × 1700) | A QA board in the gate, `packages/app_pdf/test/qa/global_states_test.dart`: the frame's regions built from the real empty states, toasts, banners, error catalogue and skeleton, side by side with the frame's screenshots; the copy, icons and actions checked as values | 2 deviations fixed, 6 approved, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
@@ -79,3 +80,45 @@ Also approved (the spec decides; the export is a sketch there):
 - DkSettingsGroup is an inset `color.surface` card without an outline
   (§11.2); the frame's 1 dp outline only shows on its white panel.
 
+## Global states (DK-0980)
+
+Side by side: the frame, [light](global-states/design-light.png) and
+[dark](global-states/design-dark.png), and the board,
+[light](../../packages/app_pdf/test/qa/goldens/global_states_light.png) and
+[dark](../../packages/app_pdf/test/qa/goldens/global_states_dark.png). Every
+region has its implementation: the eight empty states (`DkEmptyStates`), the
+toasts (`showDkToast`, the theme's SnackBar style), the banners (`DkBanners`,
+`DkPermissionBanner`), the error catalogue (`DokuloError`) and the loading
+skeleton (`DkSkeleton.fileRows`). Order, tokens and the EN copy match in both
+themes (the test checks every title, action and banner string), except:
+
+Fixed:
+
+- G1. Each error situation has the frame's icon and colour
+  (`DkErrorSituation.icon` and `iconColor`): lock, broken_image, storage,
+  memory, assignment_late in warning or danger, download in primary, cancel
+  and cloud_off in `iconSecondary`. New `DkIcons`: `damaged`, `storage`,
+  `memory`, `formUnsupported`, `cancelled`. The progress sheet's error state
+  shows them.
+- G2. The "no searchable text" banner shows `manage_search` and the camera
+  permission banner `no_photography`, as the frame; DkBanner takes an `icon`
+  over its variant's. The other permissions keep the warning icon (the frame
+  shows none of them).
+
+Approved:
+
+- The Files root and Workflows cards add their second action (Open a file;
+  Use a template), as UI spec §26.1 lists them; the frame shows one button.
+- The Folder and Photo finder cards' buttons are secondary, and the photo
+  finder's illustration is 80, as their own artboards
+  (`04-files/files-emptyfolder`, `11-photo-finder/photo-finder-empty`); the
+  overview frame draws them primary and full size.
+- Banner text is `color.textPrimary` with the icon in the variant's colour
+  (§11.7 names no text colour; the frame's tinted inks `--dgf`, `--wrf` and
+  `--prof` aren't tokens of Overview & foundations).
+- In Dark the toast's action is `inversePrimary` (#2251E6) on the light toast;
+  the frame's #8AA8FF is under 3:1 there.
+- "Something went wrong on page 14" ends with the situation's own code
+  (DK-0190); the frame and §26.3 show an example code.
+- The frame's "2 pages deleted" toast is the plural of the copy deck's
+  `toast_page_deleted`; P1's multi-delete task adds the plural with its copy.
