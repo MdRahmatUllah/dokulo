@@ -1312,6 +1312,50 @@
   "@link_action_home": {"description": "Button on a broken deep link (DK-0236)."},
   "link_job_finished": "This job has already finished.",
   "@link_job_finished": {"description": "Toast: a job link (a notification) after the job ended (DK-0236)."},
+  "onb_1_title": "All your PDF tools. Nothing uploaded.",
+  "@onb_1_title": {
+    "description": "O1 headline (UI spec §14.2)."
+  },
+  "onb_1_body": "Scan, merge, compress, sign and more – right on this phone.",
+  "@onb_1_body": {
+    "description": "O1 body (UI spec §14.2)."
+  },
+  "onb_2_title": "No watermark. No subscription.",
+  "@onb_2_title": {
+    "description": "O2 headline (UI spec §14.2)."
+  },
+  "onb_2_body": "Most tools are free with no limits. Pro is a one-time unlock.",
+  "@onb_2_body": {
+    "description": "O2 body (UI spec §14.2)."
+  },
+  "onb_3_title": "What do you want to do first?",
+  "@onb_3_title": {
+    "description": "O3 headline (UI spec §14.2)."
+  },
+  "onb_scan_title": "Scan a document",
+  "@onb_scan_title": {
+    "description": "O3 card 1 title: opens the scanner (S1)."
+  },
+  "onb_scan_sub": "Use the camera",
+  "@onb_scan_sub": {
+    "description": "O3 card 1 sub line."
+  },
+  "onb_open_title": "Open a PDF",
+  "@onb_open_title": {
+    "description": "O3 card 2 title: the system file picker, then the viewer (V1)."
+  },
+  "onb_open_sub": "From Files or another app",
+  "@onb_open_sub": {
+    "description": "O3 card 2 sub line."
+  },
+  "onb_look_title": "Look around",
+  "@onb_look_title": {
+    "description": "O3 card 3 title: goes to Home (H1)."
+  },
+  "onb_look_sub": "See all tools",
+  "@onb_look_sub": {
+    "description": "O3 card 3 sub line."
+  },
   "locked_title": "Locked folder",
   "@locked_title": {
     "description": "F2's title (§16.6)."

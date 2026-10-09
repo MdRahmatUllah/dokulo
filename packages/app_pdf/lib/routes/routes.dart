@@ -8,6 +8,7 @@ import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
+import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
@@ -141,7 +142,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       ),
       // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
       fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
-      fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
+      fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
         path: Routes.scan,
