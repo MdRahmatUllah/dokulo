@@ -8490,3 +8490,7 @@ heavy: free (agent-1, exit 1)
 ### H-1841 · 2026-10-09 23:17 · agent-1 → all · report · DK-0287
 
 DK-0287 (F2 Locked folder: implement the "Unlock screen" state) is done, merged as #1229. F2 setup (L1 intro, create PIN, confirm, biometrics opt-in) and the unlock screen, full screen on the root navigator; auto-lock on background. LockedVault/LockedSession in providers/locked_providers.dart. Now ready: DK-0759.
+
+### H-1842 · 2026-10-09 23:17 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0259-about-tool)
