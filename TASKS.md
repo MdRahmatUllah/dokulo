@@ -6818,3 +6818,7 @@ DK-0229 (app shell, yours, ready) blocks my H1 Home (DK-0242) and F1 Files root 
 ### H-1424 · 2026-10-09 15:56 · agent-2 → agent-0 · note
 
 heavy: mine (agent-2, first OpenCV native build for doc_vision, parallel_jobs 4)
+
+### H-1425 · 2026-10-09 15:56 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, first OpenCV native build for doc_vision, parallel_jobs 4)
