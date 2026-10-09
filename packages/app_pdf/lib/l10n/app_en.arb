@@ -1394,5 +1394,13 @@
   "banner_purchase_failed": "Purchase didn't complete. You weren't charged.",
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
-  "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."}
+  "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "camera_id_front": "Front side",
+  "@camera_id_front": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_id_back": "Turn the card over",
+  "@camera_id_back": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_book_spine": "Align the spine with the line",
+  "@camera_book_spine": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@camera_pages": {"description": "S1 mode overlays (DK-0346/0347/0348).", "placeholders": {"count": {"type": "int"}}}
 }

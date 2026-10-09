@@ -339,5 +339,9 @@
   "banner_no_text": "{count, plural, =1{1 Scan hat noch keinen durchsuchbaren Text.} other{{count} Scans haben noch keinen durchsuchbaren Text.}}",
   "banner_make_searchable": "Durchsuchbar machen",
   "banner_purchase_failed": "Der Kauf wurde nicht abgeschlossen. Dir wurde nichts berechnet.",
-  "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei"
+  "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei",
+  "camera_id_front": "Vorderseite",
+  "camera_id_back": "Karte umdrehen",
+  "camera_book_spine": "Buchrücken an der Linie ausrichten",
+  "camera_pages": "{count, plural, =1{1 Seite} other{{count} Seiten}}"
 }
