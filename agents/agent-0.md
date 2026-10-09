@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0388 Tablet T2/T3: options left (480) + live preview right; medium: max width 640 — claimed 2026-10-10 00:33.
 
 ## Next
 
