@@ -1,5 +1,16 @@
 /// What a detector found (Technology plan, "Redaction auto-detect").
-enum SensitiveKind { iban, taxId, email, phone, ssn, niNumber, dateOfBirth }
+/// [personName] and [address] come only from the AI suggestions (DK-0520).
+enum SensitiveKind {
+  iban,
+  taxId,
+  email,
+  phone,
+  ssn,
+  niNumber,
+  dateOfBirth,
+  personName,
+  address,
+}
 
 /// A sensitive span of a page's text. The review sheet shows every finding;
 /// [verified] means its check digits hold (an IBAN, a Steuer-ID), so it can
@@ -137,3 +148,40 @@ final _birth = RegExp(
   r'(\d{1,2}\.\s?\d{1,2}\.\s?\d{2,4}|\d{1,2}\.? [A-Za-zäÄ]+ \d{4}|[A-Za-z]+ \d{1,2},? \d{4}|\d{4}-\d{2}-\d{2})',
   caseSensitive: false,
 );
+
+/// The finding as Black out's review lists it (DK-0520): enough to know it
+/// again, not to read it. An IBAN keeps its country, check digits and last
+/// four ("DE89 •••• •••• •••• 3000"); an email its first letter and domain
+/// ("m•••@example.com"); a suggested name or address its first letter of
+/// each word; everything else its last two characters, separators kept.
+String maskedPreview(SensitiveKind kind, String text) {
+  const dot = '•';
+  switch (kind) {
+    case SensitiveKind.iban:
+      final s = text.replaceAll(' ', '');
+      if (s.length < 9) return dot * s.length;
+      final groups = (s.length - 8) ~/ 4;
+      return [
+        s.substring(0, 4),
+        for (var i = 0; i < groups; i++) dot * 4,
+        s.substring(s.length - 4),
+      ].join(' ');
+    case SensitiveKind.email:
+      final at = text.indexOf('@');
+      if (at < 1) return dot * text.length;
+      return '${text[0]}${dot * 3}${text.substring(at)}';
+    case SensitiveKind.personName || SensitiveKind.address:
+      return text
+          .split(' ')
+          .map((w) => w.isEmpty ? w : '${w[0]}${dot * (w.length - 1)}')
+          .join(' ');
+    case _:
+      final keep = text.length - 2;
+      return String.fromCharCodes([
+        for (var i = 0; i < text.length; i++)
+          i < keep && RegExp(r'[A-Za-z0-9]').hasMatch(text[i])
+              ? dot.codeUnitAt(0)
+              : text.codeUnitAt(i),
+      ]);
+  }
+}
