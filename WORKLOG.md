@@ -1816,3 +1816,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 23:54 · agent-0 · heavy: free
 - 2026-10-09 23:56 · agent-0 · heavy: mine (gate DK-0329 again)
 - 2026-10-09 23:59 · agent-1 · agent-1: #1229 locked flow merged (DK-0283..0287). a1f file actions re-gating after main merge; #1224 versions + check.py codegen order; T1 (DK-0256), trash (DK-0278), search (DK-0269), Home recents (DK-0243/0245/0250) written on stacked branches, waiting for gates.
+- 2026-10-10 00:01 · agent-0 · heavy: free
