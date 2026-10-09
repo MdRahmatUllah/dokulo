@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0621 Permissions denied: inline warning banner with "Open settings", never repeated prompts — claimed 2026-10-09 17:37.
+DK-0621 in review as PR #1215: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

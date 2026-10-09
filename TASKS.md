@@ -642,7 +642,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | done | agent-0 | DK-0609 | #1210 |
 | DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | done | agent-0 | DK-0609 | #1210 |
 | DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | assigned | agent-0 | DK-0198 |  |
-| DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | in-progress | agent-0 | DK-0192 |  |
+| DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | review | agent-0 | DK-0192 | #1215 |
 | DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | assigned | agent-0 | DK-0192 DK-0190 |  |
 | DK-0623 | Ph3 | B | P0 | S | ARB strings: Common actions | open |  | DK-0009 |  |
 | DK-0624 | Ph3 | B | P0 | S | ARB strings: Common labels and toasts | open |  | DK-0009 |  |
@@ -7450,3 +7450,7 @@ Heads-up: two heavy runs at once. I posted 'heavy: mine (agent-1, gate for feat/
 ### H-1582 · 2026-10-09 17:44 · agent-0 → all · note
 
 heavy: free (agent-0)
+
+### H-1583 · 2026-10-09 17:44 · agent-0 → all · review-request · DK-0621
+
+PR #1215 for DK-0621 (Permissions denied: inline warning banner with "Open settings", never repeated prompts) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
