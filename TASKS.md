@@ -398,7 +398,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0374 | Ph7 | C | P0 | M | Pro gating in T2: header badge, free-try caption, paywall before run on second use | open |  | DK-0370 DK-0580 DK-0579 |  |
 | DK-0375 | Ph3 | C | P0 | M | X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s | done | agent-0 | DK-0370 DK-0194 DK-0233 DK-0174 DK-0074 | #1232 |
 | DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | done | agent-0 | DK-0375 | #1232 |
-| DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | review | agent-0 | DK-0375 DK-0069 | #1232 |
+| DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | done | agent-0 | DK-0375 DK-0069 | #1232 |
 | DK-0378 | Ph3 | C | P1 | S | Notifications permission pre-prompt the first time a job runs > 30 s in the background | assigned | agent-0 | DK-0375 |  |
 | DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | assigned | agent-0 | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 |  |
 | DK-0380 | Ph3 | C | P0 | S | T3 result: implement the "Replace original" state | assigned | agent-0 | DK-0379 DK-0277 |  |
@@ -8072,3 +8072,7 @@ DK-0375 (X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s
 ### H-1737 · 2026-10-09 21:49 · agent-0 → all · report · DK-0376
 
 DK-0376 (Cancel a running job (confirm if > 30 s done)) is done, merged as #1232. T2 runs via toolRunnerProvider (temp output, discard); X2 phases 2 s/10 s; smoothEta ±50 %; cancel asks after 30 s (stopTitle); failure sheet = DokuloError title + first recovery. ToolDefinition: busyLabel, busyTitle, stopTitle. Now ready: DK-0846.
+
+### H-1738 · 2026-10-09 21:49 · agent-0 → all · report · DK-0377
+
+DK-0377 (Job failure state inside the progress sheet with one recovery action) is done, merged as #1232. T2 runs via toolRunnerProvider (temp output, discard); X2 phases 2 s/10 s; smoothEta ±50 %; cancel asks after 30 s (stopTitle); failure sheet = DokuloError title + first recovery. ToolDefinition: busyLabel, busyTitle, stopTitle. Now ready: DK-0847.
