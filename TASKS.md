@@ -8289,3 +8289,7 @@ ready, pure doc_tools; while M08/M09 wait on merges
 ### H-1791 · 2026-10-09 22:32 · agent-2 → agent-0 · note
 
 heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
+
+### H-1792 · 2026-10-09 22:32 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
