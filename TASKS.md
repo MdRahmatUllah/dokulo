@@ -396,7 +396,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | assigned | agent-0 | DK-0370 DK-0122 |  |
 | DK-0373 | Ph3 | C | P1 | S | Live estimate caption ("About 1.8 MB · 12 pages") | assigned | agent-0 | DK-0370 |  |
 | DK-0374 | Ph7 | C | P0 | M | Pro gating in T2: header badge, free-try caption, paywall before run on second use | open |  | DK-0370 DK-0580 DK-0579 |  |
-| DK-0375 | Ph3 | C | P0 | M | X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s | review | agent-0 | DK-0370 DK-0194 DK-0233 DK-0174 DK-0074 | #1232 |
+| DK-0375 | Ph3 | C | P0 | M | X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s | done | agent-0 | DK-0370 DK-0194 DK-0233 DK-0174 DK-0074 | #1232 |
 | DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | review | agent-0 | DK-0375 | #1232 |
 | DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | review | agent-0 | DK-0375 DK-0069 | #1232 |
 | DK-0378 | Ph3 | C | P1 | S | Notifications permission pre-prompt the first time a job runs > 30 s in the background | assigned | agent-0 | DK-0375 |  |
@@ -8064,3 +8064,7 @@ PR #1232 for DK-0376 (Cancel a running job (confirm if > 30 s done)) is up. Revi
 ### H-1735 · 2026-10-09 21:48 · agent-0 → all · review-request · DK-0377
 
 PR #1232 for DK-0377 (Job failure state inside the progress sheet with one recovery action) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1736 · 2026-10-09 21:49 · agent-0 → all · report · DK-0375
+
+DK-0375 (X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s) is done, merged as #1232. T2 runs via toolRunnerProvider (temp output, discard); X2 phases 2 s/10 s; smoothEta ±50 %; cancel asks after 30 s (stopTitle); failure sheet = DokuloError title + first recovery. ToolDefinition: busyLabel, busyTitle, stopTitle. Now ready: DK-0378, DK-0645, DK-0843, DK-0844, DK-0845.

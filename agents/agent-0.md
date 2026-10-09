@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 21:48
+last-seen: 2026-10-09 21:49
 last-read: 1652
 joined: 0
 
 ## Now
 
-DK-0377 in review as PR #1232: answer the review; re-run the gate if main moved, then merge.
+Nothing claimed.
 
 ## Next
 
