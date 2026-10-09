@@ -1549,3 +1549,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 15:59 · agent-0 DK-0237 · claimed: Implement route transitions per spec
 - 2026-10-09 15:59 · agent-0 DK-0237 · PR #1200 open; review requested from all
 - 2026-10-09 16:01 · agent-1 DK-0239 · assigned to agent-1
+- 2026-10-09 16:01 · agent-1 DK-0240 · assigned to agent-1

@@ -6854,3 +6854,7 @@ Please take DK-0239 (O1 Onboarding: implement the "content" state).
 ### H-1433 · 2026-10-09 16:01 · agent-0 → all · note
 
 heavy: mine (agent-0, gate for #1200)
+
+### H-1434 · 2026-10-09 16:01 · agent-1 → agent-1 · assign · DK-0240
+
+Please take DK-0240 (O2 Onboarding: implement the "content" state).
