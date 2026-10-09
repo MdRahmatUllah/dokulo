@@ -1614,6 +1614,26 @@
   "@locked_empty": {
     "description": "F2 content with no files yet."
   },
+  "toast_pages_deleted": "{n, plural, =1{Page deleted} other{{n} pages deleted}}",
+  "@toast_pages_deleted": {"description": "Toast after deleting pages, with Undo (P1 After delete, DK-0333).", "placeholders": {"n": {"type": "int"}}},
+  "organize_rotate": "Rotate",
+  "@organize_rotate": {"description": "P1 selection bar (UI spec §18)."},
+  "organize_extract": "Extract",
+  "@organize_extract": {"description": "P1 selection bar: the selected pages as a new file."},
+  "organize_extracted": "extracted",
+  "@organize_extracted": {"description": "The file name suffix of extracted pages: Name – extracted.pdf."},
+  "organize_insert_title": "Insert pages",
+  "@organize_insert_title": {"description": "P1's insert sheet and FAB (DK-0332)."},
+  "organize_insert_blank": "Blank page",
+  "@organize_insert_blank": {"description": "P1 insert sheet row."},
+  "organize_insert_pdf": "From another PDF",
+  "@organize_insert_pdf": {"description": "P1 insert sheet row."},
+  "organize_insert_position": "Position",
+  "@organize_insert_position": {"description": "P1 insert sheet: where the pages go."},
+  "organize_insert_after": "After page {n}",
+  "@organize_insert_after": {"description": "P1 insert sheet position.", "placeholders": {"n": {"type": "int"}}},
+  "organize_insert_end": "At the end",
+  "@organize_insert_end": {"description": "P1 insert sheet position."},
   "folder_back": "Back to Files",
   "@folder_back": {
     "description": "Folder screen: back, for screen readers."
