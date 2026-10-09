@@ -277,7 +277,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0253 | Ph7 | B | P0 | S | H1 Home: implement the "Rating prompt" state | assigned | agent-1 | DK-0242 |  |
 | DK-0254 | Ph7 | B | P1 | S | H1 at 200 % text and screen-reader order | assigned | agent-1 | DK-0242 |  |
 | DK-0255 | Ph3 | B | P2 | M | Quick drop: pick, paste or drag files straight into a tool | assigned | agent-1 | DK-0242 DK-0387 |  |
-| DK-0256 | Ph1 | B | P0 | M | Build T1 Tools: large title, search, category chips, sectioned 4-column grid | assigned | agent-1 | DK-0229 DK-0049 DK-0104 DK-0082 DK-0126 DK-0164 |  |
+| DK-0256 | Ph1 | B | P0 | M | Build T1 Tools: large title, search, category chips, sectioned 4-column grid | done | agent-1 | DK-0229 DK-0049 DK-0104 DK-0082 DK-0126 DK-0164 | #1248 |
 | DK-0257 | Ph3 | B | P1 | S | Tool search with synonyms (EN + DE) and result rows | assigned | agent-1 | DK-0256 DK-0084 |  |
 | DK-0258 | Ph3 | B | P0 | S | T1 Tools grid: implement the "Search empty" state | assigned | agent-1 | DK-0256 DK-0056 |  |
 | DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | done | agent-1 | DK-0049 DK-0182 DK-0102 | #1225 |
@@ -8912,3 +8912,7 @@ heavy: free (agent-1, exit 0)
 ### H-1946 · 2026-10-10 01:29 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-1947 · 2026-10-10 01:33 · agent-1 → all · report · DK-0256
+
+DK-0256 (Build T1 Tools: large title, search, category chips, sectioned 4-column grid) is done, merged as #1248. T1 Tools (screens/t1_tools/tools_screen.dart): sections from ToolCatalogue, pinned chips that follow the scroll, AI tiles open showAiNotEligible (patterns/dk_ai_not_eligible.dart, reusable from V1) on too-little-RAM phones; no AI on 32-bit. Search filtering is DK-0257. Now ready: DK-0257, DK-0258, DK-0650, DK-0728, DK-0729.

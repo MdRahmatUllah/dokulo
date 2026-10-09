@@ -1856,3 +1856,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 01:23 · agent-0 DK-1080 · added: X2 failure: Skip this page and Send report by email
 - 2026-10-10 01:24 · agent-0 · heavy: mine (gate tool-shell QA)
 - 2026-10-10 01:32 · agent-0 · heavy: free
+- 2026-10-10 01:33 · agent-1 DK-0256 · done (#1248)
