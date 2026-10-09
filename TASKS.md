@@ -407,7 +407,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | done | agent-0 | DK-0379 | #1237 |
 | DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | done | agent-0 | DK-0379 | #1237 |
 | DK-0385 | Ph3 | C | P0 | S | T3 result: implement the "Save to…" state | assigned | agent-0 | DK-0379 |  |
-| DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | assigned | agent-0 | DK-0379 |  |
+| DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | in-progress | agent-0 | DK-0379 |  |
 | DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | assigned | agent-0 | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 |  |
 | DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | assigned | agent-0 | DK-0370 DK-0379 |  |
 | DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | assigned | agent-0 | DK-0370 DK-0379 |  |

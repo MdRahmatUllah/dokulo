@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0386 Chaining via Next chips and "Save as workflow" — claimed 2026-10-09 22:43.
 
 ## Next
 

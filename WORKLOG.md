@@ -1779,3 +1779,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 22:42 · agent-0 DK-0384 · PR #1237 open; review requested from all
 - 2026-10-09 22:43 · agent-0 DK-0383 · done (#1237)
 - 2026-10-09 22:43 · agent-0 DK-0384 · done (#1237)
+- 2026-10-09 22:43 · agent-0 DK-0386 · claimed: Chaining via Next chips and "Save as workflow"
