@@ -18,6 +18,8 @@ import 'option_row_states.dart';
 import 'overlay_states.dart';
 import 'feedback_states.dart';
 import 'dialog_states.dart';
+import 'empty_states_gallery.dart';
+import 'global_banners_gallery.dart';
 import 'page_pill_states.dart';
 import 'page_states.dart';
 import 'privacy_status_states.dart';
@@ -61,6 +63,12 @@ class CatalogueEntry {
 }
 
 const catalogue = [
+  CatalogueEntry(
+    'Banners (global states)',
+    '26.4 Permissions, 32.2 Global',
+    GlobalBannersGallery(),
+  ),
+  CatalogueEntry('Empty states', '26.1 Empty states', EmptyStatesGallery()),
   CatalogueEntry('DkLogo', '3 Brand', LogoStates()),
   CatalogueEntry('DkButton', '11.1 Buttons', DkButtonGallery()),
   CatalogueEntry('DkPageThumb', '11.5 Pages and thumbnails', PageThumbStates()),

@@ -24,6 +24,10 @@ enum DkButtonVariant {
 
   /// On the camera preview: translucent white on any image.
   onCamera,
+
+  /// The camera's main action: white with dark ink (the export's `.wht`):
+  /// "Open settings" when camera access is off (S1).
+  onCameraPrimary,
 }
 
 /// The app's button (DK-0074; UI spec §11.1). The label is verb + object
@@ -150,6 +154,12 @@ class _DkButtonState extends State<DkButton> {
       DkButtonVariant.onCamera => (
         c.onCamera.withValues(alpha: 0.16),
         c.onCamera,
+        null,
+      ),
+      // The light theme's ink in both themes: the camera is dark in both.
+      DkButtonVariant.onCameraPrimary => (
+        c.onCamera,
+        DkColors.light.textPrimary,
         null,
       ),
     };

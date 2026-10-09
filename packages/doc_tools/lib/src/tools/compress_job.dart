@@ -80,6 +80,13 @@ class CompressJob extends ToolJob<CompressInput> {
   @override
   Lane get lane => Lane.pdfium;
 
+  /// Scan pages may be rendered whole (the raster fallback) at up to 200 dpi.
+  @override
+  double get renderDpi => 200;
+
+  @override
+  String? passwordOf(CompressInput input) => input.password;
+
   @override
   Map<String, Object?> encode(CompressInput input) => input.toJson();
 
