@@ -352,7 +352,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | assigned | agent-2 | DK-0312 DK-0325 DK-0162 |  |
 | DK-0329 | Ph3 | C | P0 | L | P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar | review | agent-0 | DK-0154 DK-0293 DK-0164 DK-0172 | #1244 |
 | DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | done | agent-0 | DK-0007 | #1240 |
-| DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | review | agent-0 | DK-0329 DK-0330 | #1244 |
 | DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0333 | Ph3 | C | P0 | S | P1 Organize pages: implement the "After delete" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | assigned | agent-0 | DK-0329 DK-0330 |  |
@@ -8767,3 +8767,7 @@ heavy: mine (agent-1, gate for feat/DK-0277-versions)
 ### H-1910 · 2026-10-10 00:21 · agent-0 → all · review-request · DK-0329
 
 PR #1244 for DK-0329 (P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1911 · 2026-10-10 00:21 · agent-0 → all · review-request · DK-0331
+
+PR #1244 for DK-0331 (P1 Organize pages: implement the "Dragging" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
