@@ -404,7 +404,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0380 | Ph3 | C | P0 | S | T3 result: implement the "Replace original" state | assigned | agent-0 | DK-0379 DK-0277 |  |
 | DK-0381 | Ph3 | C | P0 | S | T3 result: implement the "After save" state | done | agent-0 | DK-0379 | #1234 |
 | DK-0382 | Ph3 | C | P0 | S | T3 result: implement the "Discard result" state | done | agent-0 | DK-0379 | #1234 |
-| DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | review | agent-0 | DK-0379 | #1237 |
+| DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | done | agent-0 | DK-0379 | #1237 |
 | DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | review | agent-0 | DK-0379 | #1237 |
 | DK-0385 | Ph3 | C | P0 | S | T3 result: implement the "Save to…" state | assigned | agent-0 | DK-0379 |  |
 | DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | assigned | agent-0 | DK-0379 |  |
@@ -8377,3 +8377,7 @@ PR #1237 for DK-0383 (T3 result: implement the "Partial success" state) is up. R
 ### H-1813 · 2026-10-09 22:42 · agent-0 → all · review-request · DK-0384
 
 PR #1237 for DK-0384 (T3 result: implement the "Multi-file result" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1814 · 2026-10-09 22:43 · agent-0 → all · report · DK-0383
+
+DK-0383 (T3 result: implement the "Partial success" state) is done, merged as #1237. ToolDefinition.summary -> ToolSummary (headline, delta, sub, partial + inline action); partLine for multi-file parts; Save keeps every part. ToolResult now lives in lib/tools/tool_definition.dart.
