@@ -6902,3 +6902,7 @@ heavy: free (agent-1, backing off)
 ### H-1445 · 2026-10-09 16:07 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
+
+### H-1446 · 2026-10-09 16:07 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
