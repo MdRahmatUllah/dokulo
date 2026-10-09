@@ -186,7 +186,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
-| `/files/locked` | F2 Locked folder | tab 3, pushed | Behind biometrics (its task adds the guard) |
+| `/files/locked` | F2 Locked folder | full screen | Setup L1–L4 the first time, then the unlock screen (PIN, biometrics); unlocked, the content. Leaving it, Lock now or a minute in the background locks it (DK-0283..0288) |
 | `/me` | M1 Me | tab 4 | |
 | `/me/models` | M2 Model manager | tab 4, pushed | |
 | `/me/settings/:page` | M3 Settings | tab 4, pushed | `:page` is the settings group, e.g. `appearance` |
