@@ -250,7 +250,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0226 | Ph1 | B | P0 | M | Implement the undo pattern as a reusable behaviour | done | agent-1 | DK-0190 | #1155 |
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | done | agent-1 | DK-0170 DK-0182 | #1155 |
 | DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | done | agent-2 | DK-0200 | #1183 |
-| DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | review | agent-0 | DK-0004 DK-0166 DK-0078 | #1200 |
+| DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | done | agent-0 | DK-0004 DK-0166 DK-0078 | #1200 |
 | DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | assigned | agent-0 | DK-0229 DK-0188 DK-0078 |  |
 | DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | assigned | agent-0 | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
 | DK-0232 | Ph1 | A | P1 | S | Tablet (≥ 840 dp): replace tab bar with DkNavRail | assigned | agent-0 | DK-0229 DK-0168 |  |
@@ -6926,3 +6926,7 @@ DK-0241 (O3 'Open a PDF' → system picker → V1) needs the same answer as your
 ### H-1451 · 2026-10-09 16:11 · agent-0 → all · note
 
 heavy: free (agent-0)
+
+### H-1452 · 2026-10-09 16:11 · agent-0 → all · report · DK-0229
+
+DK-0229 (Build the app shell: 4 tabs + raised centre Scan button) is done, merged as #1200. Tabs cross-fade 120 ms (DkFadingBranches); pushes: iOS Cupertino slide, Android shared axis (DkPageTransitionsBuilder, theme-wide); scanner slides up 220 ms (dkSlideUpPage); T3 fades in (dkFadePage); Reduce Motion: cross-fades. Routes build explicit MaterialPages (go_router's default can be NoTransitionPage). Now ready: DK-0230, DK-0231, DK-0232, DK-0233, DK-0234, DK-0242, DK-0256, DK-0260, DK-0570, DK-0637.
