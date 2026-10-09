@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0233 Global overlay host: mini job bar and toast queue above any screen — claimed 2026-10-09 16:31.
+DK-0233 in review as PR #1203: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

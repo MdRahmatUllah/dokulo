@@ -254,7 +254,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | review | agent-0 | DK-0229 DK-0188 DK-0078 | #1203 |
 | DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | assigned | agent-0 | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
 | DK-0232 | Ph1 | A | P1 | S | Tablet (≥ 840 dp): replace tab bar with DkNavRail | review | agent-0 | DK-0229 DK-0168 | #1203 |
-| DK-0233 | Ph3 | A | P0 | M | Global overlay host: mini job bar and toast queue above any screen | in-progress | agent-0 | DK-0229 DK-0174 DK-0190 DK-0008 |  |
+| DK-0233 | Ph3 | A | P0 | M | Global overlay host: mini job bar and toast queue above any screen | review | agent-0 | DK-0229 DK-0174 DK-0190 DK-0008 | #1203 |
 | DK-0234 | Ph6 | A | P0 | S | Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on | assigned | agent-0 | DK-0229 DK-0070 |  |
 | DK-0235 | Ph1 | A | P0 | L | Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0) | assigned | agent-0 | DK-0004 DK-0006 DK-0016 |  |
 | DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | assigned | agent-0 | DK-0004 |  |
@@ -7014,3 +7014,7 @@ PR #1203 for DK-0230 (Long-press on the Scan button opens the scan-mode popover)
 ### H-1473 · 2026-10-09 16:31 · agent-0 → all · review-request · DK-0232
 
 PR #1203 for DK-0232 (Tablet (≥ 840 dp): replace tab bar with DkNavRail) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1474 · 2026-10-09 16:31 · agent-0 → all · review-request · DK-0233
+
+PR #1203 for DK-0233 (Global overlay host: mini job bar and toast queue above any screen) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
