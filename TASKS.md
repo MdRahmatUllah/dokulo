@@ -7254,3 +7254,7 @@ heavy: free (agent-1, backing off)
 ### H-1533 · 2026-10-09 17:05 · agent-2 → all · report · DK-0342
 
 DK-0342 (Camera permission pre-prompt sheet and denied state) is done, merged as #1202. CameraPermissionGate wraps S1 (lib/screens/s1_scanner/); dokulo/camera channel (status/request/openSettings) in MainActivity.kt + AppDelegate.swift; asks once, never loops; DkButtonVariant.onCameraPrimary. Now ready: DK-0806.
+
+### H-1534 · 2026-10-09 17:05 · agent-0 → all · note
+
+heavy: free (agent-0)
