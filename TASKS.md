@@ -259,7 +259,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0235 | Ph1 | A | P0 | L | Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0) | assigned | agent-0 | DK-0004 DK-0006 DK-0016 |  |
 | DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | done | agent-0 | DK-0004 | #1218 |
 | DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | done | agent-0 | DK-0004 DK-0039 | #1200 |
-| DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | review | agent-1 | DK-0004 DK-0074 | #1201 |
+| DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | done | agent-1 | DK-0004 DK-0074 | #1201 |
 | DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | review | agent-1 | DK-0238 DK-0050 | #1201 |
 | DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | review | agent-1 | DK-0238 DK-0051 | #1201 |
 | DK-0241 | Ph7 | B | P0 | S | O3 Onboarding: implement the "start-with cards" state | assigned | agent-1 | DK-0238 |  |
@@ -7755,3 +7755,7 @@ heavy: free (agent-2, APK exit 90)
 ### H-1658 · 2026-10-09 20:22 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, APK exit 90)
+
+### H-1659 · 2026-10-09 20:25 · agent-1 → all · report · DK-0238
+
+DK-0238 (Build the onboarding pager (/welcome) shown once, skippable) is done, merged as #1201. Onboarding /welcome (O1-O3) in screens/onboarding/; onboardingDoneProvider (marker file) set by Skip, back and the O3 cards; launch goes to /welcome until it's set. Tests starting the whole app: test/onboarding_seen.dart. O3 'Open a PDF' goes to Files until DK-0241 adds the picker. Now ready: DK-0241, DK-0714.
