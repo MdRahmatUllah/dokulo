@@ -40,7 +40,6 @@ void main() {
     Routes.home: ('H1', true),
     Routes.tools: ('T1', true),
     Routes.files: ('F1', true),
-    Routes.lockedFolder: ('F2', true),
     Routes.me: ('M1', true),
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
@@ -108,11 +107,11 @@ void main() {
         .pixels;
     expect(scrolled, greaterThan(0));
 
-    await tester.tap(find.text('Files'));
+    await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
-    router.push(Routes.lockedFolder);
+    router.push(Routes.models);
     await tester.pumpAndSettle();
-    expect(title(tester), 'F2');
+    expect(title(tester), 'M2');
 
     await tester.tap(find.text('Home'));
     await tester.pumpAndSettle();
@@ -125,9 +124,9 @@ void main() {
       scrolled,
     );
 
-    await tester.tap(find.text('Files'));
+    await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'F2');
+    expect(title(tester), 'M2');
   });
 
   testWidgets('back from a pushed tool page returns to the tab it came from', (

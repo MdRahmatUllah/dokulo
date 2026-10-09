@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/services.dart';
@@ -72,7 +73,11 @@ class LockedVault {
     this._store, {
     required this.biometrics,
     DateTime Function()? clock,
+    this.pinIterations = PinHash.iterations,
   }) : _now = clock ?? DateTime.now;
+
+  /// PBKDF2 rounds for a new PIN; tests use fewer.
+  final int pinIterations;
 
   final SecretStore _store;
 
@@ -82,7 +87,8 @@ class LockedVault {
 
   static const _key = 'locked.key',
       _pin = 'locked.pin',
-      _throttle = 'locked.throttle';
+      _throttle = 'locked.throttle',
+      _bio = 'locked.biometrics';
 
   Future<bool> get hasPin async => await _store.read(_pin) != null;
 
@@ -91,7 +97,10 @@ class LockedVault {
     if (await _store.read(_key) == null) {
       await _store.write(_key, base64.encode(await LockedCipher.newKey()));
     }
-    await _store.write(_pin, await PinHash.create(pin));
+    await _store.write(
+      _pin,
+      await PinHash.create(pin, iterations: pinIterations),
+    );
     await _store.delete(_throttle);
   }
 
@@ -114,9 +123,27 @@ class LockedVault {
     return PinWrong(throttle.waitAt(now));
   }
 
-  /// Null when the prompt was cancelled or failed, or there is no key yet.
+  /// Whether the user said yes in L4 (and the prompt succeeded then).
+  Future<bool> get biometricsEnabled async => await _store.read(_bio) == 'on';
+
+  /// L4 "Use Face ID": runs the prompt once; on success biometrics may open
+  /// the folder from now on. False when it was cancelled or failed.
+  Future<bool> enableBiometrics(String reason) async {
+    try {
+      if (!await biometrics(reason)) return false;
+    } on PlatformException {
+      return false;
+    }
+    await _store.write(_bio, 'on');
+    return true;
+  }
+
+  /// Null when biometrics are off, the prompt was cancelled or failed, or
+  /// there is no key yet.
   Future<LockedCipher?> unlockWithBiometrics(String reason) async {
-    if (await _store.read(_key) == null) return null;
+    if (await _store.read(_key) == null || !await biometricsEnabled) {
+      return null;
+    }
     try {
       if (!await biometrics(reason)) return null;
     } on PlatformException {
@@ -146,4 +173,37 @@ LockedVault lockedVault(Ref ref) {
     biometrics: (reason) =>
         auth.authenticate(localizedReason: reason, biometricOnly: true),
   );
+}
+
+/// How this phone unlocks, for the copy ("Use Face ID?"): null means no
+/// biometrics, the PIN only.
+enum BiometricKind { faceId, touchId, fingerprint }
+
+@Riverpod(keepAlive: true)
+Future<BiometricKind?> biometricKind(Ref ref) async {
+  try {
+    final auth = LocalAuthentication();
+    if (!await auth.canCheckBiometrics) return null;
+    final types = await auth.getAvailableBiometrics();
+    if (types.isEmpty) return null;
+    if (!Platform.isIOS) return BiometricKind.fingerprint;
+    return types.contains(BiometricType.face)
+        ? BiometricKind.faceId
+        : BiometricKind.touchId;
+  } on PlatformException {
+    return null;
+  } on MissingPluginException {
+    return null;
+  }
+}
+
+/// The open locked folder's cipher; null while it is locked. "Lock now",
+/// leaving the folder and a minute in the background clear it (DK-0288).
+@Riverpod(keepAlive: true)
+class LockedSession extends _$LockedSession {
+  @override
+  LockedCipher? build() => null;
+
+  void open(LockedCipher cipher) => state = cipher;
+  void lock() => state = null;
 }

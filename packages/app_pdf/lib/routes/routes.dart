@@ -7,6 +7,7 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
+import '../screens/locked/locked_folder_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import 'app_shell.dart';
@@ -82,11 +83,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         branches: [
           StatefulShellBranch(routes: [_screen(Routes.home, 'H1')]),
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
-          StatefulShellBranch(
-            routes: [
-              _screen(Routes.files, 'F1', routes: [_screen('locked', 'F2')]),
-            ],
-          ),
+          StatefulShellBranch(routes: [_screen(Routes.files, 'F1')]),
           StatefulShellBranch(
             routes: [
               _screen(
@@ -107,6 +104,8 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
         ],
       ),
+      // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
+      fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
       fullScreen(
         Routes.scan,

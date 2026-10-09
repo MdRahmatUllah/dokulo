@@ -20,6 +20,7 @@ void main() {
     vault = LockedVault(
       store,
       clock: () => now,
+      pinIterations: 1000,
       biometrics: (_) async {
         if (biometricError != null) throw biometricError!;
         return biometricResult;
@@ -66,6 +67,7 @@ void main() {
       final again = LockedVault(
         store,
         clock: () => now,
+        pinIterations: 1000,
         biometrics: (_) async => true,
       );
       final throttled = await again.unlockWithPin('482915');
@@ -79,6 +81,13 @@ void main() {
     },
   );
 
+  test('L4: a cancelled prompt leaves biometrics off', () async {
+    await vault.setPin('482915');
+    biometricResult = false;
+    expect(await vault.enableBiometrics('Use Face ID'), isFalse);
+    expect(await vault.biometricsEnabled, isFalse);
+  });
+
   test('biometrics release the key only on success', () async {
     expect(
       await vault.unlockWithBiometrics('Unlock'),
@@ -86,6 +95,13 @@ void main() {
       reason: 'no key yet',
     );
     await vault.setPin('482915');
+    expect(
+      await vault.unlockWithBiometrics('Unlock'),
+      isNull,
+      reason: 'not turned on in L4',
+    );
+    expect(await vault.enableBiometrics('Use Face ID'), isTrue);
+    expect(await vault.biometricsEnabled, isTrue);
     expect(await vault.unlockWithBiometrics('Unlock'), isA<LockedCipher>());
     biometricResult = false;
     expect(await vault.unlockWithBiometrics('Unlock'), isNull);
@@ -97,6 +113,7 @@ void main() {
     'a cipher from the PIN and one from biometrics are the same key',
     () async {
       await vault.setPin('482915');
+      await vault.enableBiometrics('Use Face ID');
       final byPin = (await vault.unlockWithPin('482915') as PinUnlocked).cipher;
       final byFace = (await vault.unlockWithBiometrics('Unlock'))!;
       final sealed = await byPin.seal([1, 2, 3]);
