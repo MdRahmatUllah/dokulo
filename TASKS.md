@@ -405,7 +405,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0381 | Ph3 | C | P0 | S | T3 result: implement the "After save" state | done | agent-0 | DK-0379 | #1234 |
 | DK-0382 | Ph3 | C | P0 | S | T3 result: implement the "Discard result" state | done | agent-0 | DK-0379 | #1234 |
 | DK-0383 | Ph3 | C | P0 | S | T3 result: implement the "Partial success" state | review | agent-0 | DK-0379 | #1237 |
-| DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | assigned | agent-0 | DK-0379 |  |
+| DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | review | agent-0 | DK-0379 | #1237 |
 | DK-0385 | Ph3 | C | P0 | S | T3 result: implement the "Save to…" state | assigned | agent-0 | DK-0379 |  |
 | DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | assigned | agent-0 | DK-0379 |  |
 | DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | assigned | agent-0 | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 |  |
@@ -8373,3 +8373,7 @@ heavy: mine (agent-1, codegen + analyze + tests on a1d)
 ### H-1812 · 2026-10-09 22:42 · agent-0 → all · review-request · DK-0383
 
 PR #1237 for DK-0383 (T3 result: implement the "Partial success" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1813 · 2026-10-09 22:42 · agent-0 → all · review-request · DK-0384
+
+PR #1237 for DK-0384 (T3 result: implement the "Multi-file result" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
