@@ -13,9 +13,14 @@ import 'viewer_providers.dart';
 /// The top bar, page pill, bottom bar and the other states (locked, damaged,
 /// search, night) come with their own tasks.
 class ViewerScreen extends ConsumerWidget {
-  const ViewerScreen({super.key, required this.fileId});
+  const ViewerScreen({super.key, required this.fileId, this.page});
 
   final int fileId;
+
+  /// Where it opens, 1-based (a search hit, DK-0269); the first page if null.
+  // ponytail: the page only; the hit's term is highlighted once V1 search
+  // lands, which will take it as a second parameter.
+  final int? page;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +28,10 @@ class ViewerScreen extends ConsumerWidget {
     return Scaffold(
       backgroundColor: context.tokens.color.surfaceSunken,
       body: switch (file) {
-        AsyncData(:final value) => DkPdfCanvas(path: value.path),
+        AsyncData(:final value) => DkPdfCanvas(
+          path: value.path,
+          initialPage: page ?? 1,
+        ),
         // The file's row is gone (deleted, or a stale link).
         AsyncError() => Center(
           child: Padding(

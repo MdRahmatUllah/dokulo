@@ -194,8 +194,7 @@ Future<void> recordOpened(DokuloDatabase db, int fileId) => db
 
 /// How long Recently deleted keeps a file: 30 days, or 7 (DK-0278). The
 /// launch purge and R1's banner read it.
-// ponytail: a pref without its Settings row yet; that row comes with the
-// Settings screens.
+// M3's "Keep deleted files" row (DK-0572) writes `trash.days`.
 @riverpod
 int trashRetentionDays(Ref ref) =>
     trashDays(ref.watch(prefsProvider).value ?? const {});
@@ -219,3 +218,62 @@ Stream<List<({FileEntry file, DateTime deletedAt})>> trashedFiles(Ref ref) {
     ],
   );
 }
+
+/// F1's search field (DK-0269); empty: no search.
+@riverpod
+class FilesQuery extends _$FilesQuery {
+  @override
+  String build() => '';
+
+  void set(String query) => state = query.trim();
+}
+
+/// A page whose text matches: its file, the 1-based page, and the sentence
+/// with the hit in [ ].
+typedef TextHit = ({FileEntry file, int page, String snippet});
+
+/// F1 search (DK-0269): files whose name holds [query], and pages whose
+/// text matches it (FTS5, each word as a prefix), one per file, best first;
+/// deleted files left out. [unsearchable]: files with no text layer yet.
+@riverpod
+Future<({List<FileEntry> names, List<TextHit> text, int unsearchable})>
+fileSearch(Ref ref, String query) async {
+  final db = ref.watch(appDatabaseProvider);
+  final trashed = {for (final t in await db.select(db.trash).get()) t.fileId};
+  // ponytail: names are matched in Dart over every row; a LIKE query when
+  // libraries reach tens of thousands of files.
+  final all = [
+    for (final f in await db.select(db.files).get())
+      if (!trashed.contains(f.id)) f,
+  ];
+  final byId = {for (final f in all) f.id: f};
+  final lower = query.toLowerCase();
+  final fts = ftsQuery(query);
+  final text = <int, TextHit>{};
+  if (fts.isNotEmpty) {
+    for (final h in await db.searchText(fts).get()) {
+      final file = byId[h.fileId];
+      if (file != null) {
+        text.putIfAbsent(
+          h.fileId,
+          () => (file: file, page: h.page, snippet: h.snippet),
+        );
+      }
+    }
+  }
+  return (
+    names: [
+      for (final f in all)
+        if (f.name.toLowerCase().contains(lower)) f,
+    ],
+    text: text.values.toList(),
+    unsearchable: all.where((f) => !f.hasText).length,
+  );
+}
+
+/// The user's words as an FTS5 query: each quoted (no operators) and
+/// matched as a prefix, all of them required.
+String ftsQuery(String query) => [
+  for (final w in query.split(RegExp(r'\s+')))
+    if (w.isNotEmpty) '"${w.replaceAll('"', '""')}"*',
+].join(' ');

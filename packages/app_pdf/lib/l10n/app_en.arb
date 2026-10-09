@@ -1735,5 +1735,13 @@
         "type": "int"
       }
     }
+  },
+  "search_names": "Names",
+  "@search_names": {
+    "description": "F1 search: the group of files whose name matches (DK-0269)."
+  },
+  "search_text": "Text inside files",
+  "@search_text": {
+    "description": "F1 search: the group of pages whose text matches."
   }
 }

@@ -69,8 +69,13 @@ abstract final class Routes {
 
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
-  static String viewer(String fileId, {bool edit = false}) =>
-      '/viewer/$fileId${edit ? '?mode=edit' : ''}';
+  /// [page] (1-based) opens it there (a search hit, DK-0269).
+  static String viewer(String fileId, {bool edit = false, int? page}) =>
+      '/viewer/$fileId${edit
+          ? '?mode=edit'
+          : page != null
+          ? '?page=$page'
+          : ''}';
   static String organize(String fileId) => '/organize/$fileId'; // P1
 
   /// A running job's progress (X2) over Home: a notification's tap.
@@ -262,6 +267,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(
                     fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+                    page: int.tryParse(s.uri.queryParameters['page'] ?? ''),
                   ),
           ),
         ),

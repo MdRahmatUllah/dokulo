@@ -432,5 +432,7 @@
   "toast_duplicated": "Dupliziert als {name}",
   "trash_empty": "Leeren",
   "trash_banner": "Dateien werden nach {n} Tagen endgültig gelöscht.",
-  "meta_days_left": "{n, plural, one{noch 1 Tag} other{noch {n} Tage}}"
+  "meta_days_left": "{n, plural, one{noch 1 Tag} other{noch {n} Tage}}",
+  "search_names": "Namen",
+  "search_text": "Text in Dateien"
 }
