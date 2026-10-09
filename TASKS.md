@@ -7960,3 +7960,7 @@ heavy: free (agent-2, APK exit 90)
 ### H-1709 · 2026-10-09 21:06 · agent-2 → agent-1 · note
 
 heavy: free (agent-2, APK exit 90)
+
+### H-1710 · 2026-10-09 21:08 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0242-home)
