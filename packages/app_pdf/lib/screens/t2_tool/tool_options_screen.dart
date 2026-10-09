@@ -50,12 +50,17 @@ class ToolOptionsScreen extends ConsumerStatefulWidget {
     super.key,
     required this.definition,
     required this.fileIds,
+    this.chained = false,
   });
 
   final ToolDefinition definition;
 
   /// The input files' row ids, in order.
   final List<int> fileIds;
+
+  /// Opened from a Next chip: the input is the result before it
+  /// ([chainInputProvider], DK-0386).
+  final bool chained;
 
   @override
   ConsumerState<ToolOptionsScreen> createState() => _ToolOptionsScreenState();
@@ -70,6 +75,22 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
   /// (DK-0372).
   final _passwords = <String, String>{};
   var _nextPickedId = -1;
+
+  /// The tools run before this one in a chain (DK-0386).
+  var _chain = const <String>[];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.chained) {
+      final chained = ref.read(chainInputProvider);
+      if (chained != null) {
+        _input = chained.files;
+        _chain = chained.chain;
+      }
+    }
+  }
+
   // The run (UI spec §20.2): its phase, the progress sheet's state, and
   // whether the sheet is open (its context, to close it).
   ToolRunHandle? _handle;
@@ -202,6 +223,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                 inputs: subject.files,
                 output: output,
                 took: DateTime.now().difference(started),
+                chain: [..._chain, _def.id],
               ),
             );
       }
