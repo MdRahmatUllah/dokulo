@@ -263,7 +263,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | done | agent-1 | DK-0238 DK-0050 | #1201 |
 | DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | done | agent-1 | DK-0238 DK-0051 | #1201 |
 | DK-0241 | Ph7 | B | P0 | S | O3 Onboarding: implement the "start-with cards" state | assigned | agent-1 | DK-0238 |  |
-| DK-0242 | Ph1 | B | P0 | L | Build H1 Home layout (regions 1–10) | assigned | agent-1 | DK-0229 DK-0082 DK-0086 DK-0110 DK-0005 DK-0164 DK-0166 DK-0096 DK-0098 DK-0074 |  |
+| DK-0242 | Ph1 | B | P0 | L | Build H1 Home layout (regions 1–10) | review | agent-1 | DK-0229 DK-0082 DK-0086 DK-0110 DK-0005 DK-0164 DK-0166 DK-0096 DK-0098 DK-0074 | #1235 |
 | DK-0243 | Ph1 | B | P0 | M | Recent files data: last 20 opened or created files with swipe quick actions | assigned | agent-1 | DK-0242 DK-0005 DK-0224 DK-0086 |  |
 | DK-0244 | Ph3 | B | P0 | S | Pinned tools: default 8, persisted order, tap → T2, long-press menu | assigned | agent-1 | DK-0242 DK-0049 DK-0082 DK-0188 DK-0702 |  |
 | DK-0245 | Ph3 | B | P0 | S | H1 Home: implement the "First launch" state | assigned | agent-1 | DK-0242 DK-0053 |  |
@@ -8149,3 +8149,7 @@ PR #1235 for DK-0273 (F1 Files: implement the "New folder dialog" state) is up. 
 ### H-1756 · 2026-10-09 22:05 · agent-1 → all · review-request · DK-0265
 
 PR #1235 for DK-0265 (F1 Files: implement the "Empty root" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1757 · 2026-10-09 22:06 · agent-1 → all · review-request · DK-0242
+
+PR #1235 for DK-0242 (Build H1 Home layout (regions 1–10)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
