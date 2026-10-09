@@ -39,7 +39,7 @@ void main() {
       'running app, and a broken one says so', (tester) async {
     await pumpAt(tester, Routes.files);
     await openLink(tester, 'dokulo://open/tool/compress');
-    expect(title(tester), 'T2 compress');
+    expect(title(tester), 'Compress PDF');
     await openLink(tester, 'dokulo://open/scan?mode=idCard');
     expect(title(tester), 'S1 idCard');
     await openLink(tester, 'dokulo://open/me/models');
@@ -84,15 +84,18 @@ void main() {
               ),
             ),
       );
-      expect(Routes.tool('compress', fileId: '$id'), '/tool/compress?file=$id');
+      expect(
+        Routes.tool('compress', files: ['$id']),
+        '/tool/compress?file=$id',
+      );
       await pumpAt(
         tester,
-        Routes.tool('compress', fileId: '$id'),
+        Routes.tool('compress', files: ['$id']),
         overrides: [appDatabaseProvider.overrideWithValue(db)],
       );
       await tester.runAsync(() => Future<void>.delayed(Duration.zero));
       await tester.pumpAndSettle();
-      expect(title(tester), 'T2 compress');
+      expect(title(tester), 'Compress PDF');
     });
 
     for (final handle in ['999', 'f42']) {
@@ -100,7 +103,7 @@ void main() {
           '($handle)', (tester) async {
         await pumpAt(
           tester,
-          Routes.tool('compress', fileId: handle),
+          Routes.tool('compress', files: [handle]),
           overrides: [appDatabaseProvider.overrideWithValue(db)],
         );
         await tester.runAsync(() => Future<void>.delayed(Duration.zero));

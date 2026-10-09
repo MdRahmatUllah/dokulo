@@ -12,6 +12,8 @@ import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/components/dk_tab_bar.dart';
+import 'package:app_pdf/components/dk_top_bar.dart';
+import 'package:app_pdf/screens/t2_tool/tool_options_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -58,8 +60,15 @@ Future<GoRouter> pumpAt(
   return router;
 }
 
-String title(WidgetTester tester) =>
-    (tester.widget<AppBar>(find.byType(AppBar).last).title! as Text).data!;
+/// The title of the screen on top: a placeholder's AppBar, or a real
+/// screen's DkTopBar (T2).
+String title(WidgetTester tester) {
+  final bar = find.byType(DkTopBar);
+  if (bar.evaluate().isNotEmpty) {
+    return tester.widget<DkTopBar>(bar.last).title!;
+  }
+  return (tester.widget<AppBar>(find.byType(AppBar).last).title! as Text).data!;
+}
 
 bool tabBarShown(WidgetTester tester) =>
     find.byType(DkTabBar).evaluate().isNotEmpty;
@@ -77,7 +86,7 @@ void main() {
     '/me/settings/appearance': ('M3 appearance', true),
     Routes.scan: ('S1', false),
     Routes.scanReview: ('S2', false),
-    '/tool/compress': ('T2 compress', false),
+    '/tool/compress': ('Compress PDF', false),
     '/tool/compress/result': ('T3 compress', false),
     '/viewer/f42?mode=edit': ('V2 f42', false),
     '/organize/f42': ('P1 f42', false),
@@ -186,7 +195,7 @@ void main() {
     final router = await pumpAt(tester, Routes.tools);
     router.push(Routes.tool('compress'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'T2 compress');
+    expect(title(tester), 'Compress PDF');
     expect(tabBarShown(tester), isFalse);
 
     router.pop();
@@ -199,7 +208,7 @@ void main() {
     tester,
   ) async {
     await pumpAt(tester, Routes.tool('compress')); // a cold-start deep link
-    expect(title(tester), 'T2 compress');
+    expect(title(tester), 'Compress PDF');
     await tester.binding.handlePopRoute(); // the system back button
     await tester.pumpAndSettle();
     expect(title(tester), 'H1');
@@ -331,9 +340,9 @@ void main() {
       router.push(Routes.tool('compress'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 40));
-      final mid = tester.getTopLeft(find.text('T2 compress')).dx;
+      final mid = tester.getTopLeft(find.byType(ToolOptionsScreen)).dx;
       await tester.pumpAndSettle();
-      final end = tester.getTopLeft(find.text('T2 compress')).dx;
+      final end = tester.getTopLeft(find.byType(ToolOptionsScreen)).dx;
       // At most 7.5 % of the width (about 30 dp on a phone).
       final width =
           tester.view.physicalSize.width / tester.view.devicePixelRatio;

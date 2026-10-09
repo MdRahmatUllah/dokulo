@@ -337,5 +337,10 @@
   "onb_open_title": "PDF öffnen",
   "onb_open_sub": "Aus Dateien oder einer anderen App",
   "onb_look_title": "Erst mal umsehen",
-  "onb_look_sub": "Alle Werkzeuge ansehen"
+  "onb_look_sub": "Alle Werkzeuge ansehen",
+  "t2_section_file": "Datei",
+  "t2_section_files": "Dateien ({n})",
+  "t2_section_options": "Optionen",
+  "t2_reset_options": "Optionen zurücksetzen",
+  "t2_remove_file": "Entfernen"
 }

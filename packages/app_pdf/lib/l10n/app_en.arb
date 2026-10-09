@@ -1355,5 +1355,15 @@
   "onb_look_sub": "See all tools",
   "@onb_look_sub": {
     "description": "O3 card 3 sub line."
-  }
+  },
+  "t2_section_file": "File",
+  "@t2_section_file": {"description": "T2's input header, one file (UI spec §20.1)."},
+  "t2_section_files": "Files ({n})",
+  "@t2_section_files": {"description": "T2's input header, several files (§20.1).", "placeholders": {"n": {"type": "int"}}},
+  "t2_section_options": "Options",
+  "@t2_section_options": {"description": "T2's options header (§20.1)."},
+  "t2_reset_options": "Reset options",
+  "@t2_reset_options": {"description": "T2's overflow menu (§20.1)."},
+  "t2_remove_file": "Remove",
+  "@t2_remove_file": {"description": "The × on a T2 input file (§20.1)."}
 }
