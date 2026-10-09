@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0259 About this tool sheet (from tile long-press and T2 overflow) — claimed 2026-10-09 20:26.
+DK-0259 in review as PR #1225: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
