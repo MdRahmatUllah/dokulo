@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-09 17:22
+last-seen: 2026-10-09 17:30
 last-read: 1548
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0322 in review as PR #1211: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Nothing claimed. M02 closed; M03's last four (DK-0096..0099) are agent-1's approved #1195, waiting for its pre-merge gate. M01's six are agent-0's Mac/iPhone/November items, deferred by the owner. Review whatever comes in; take M04 work when the lead assigns it.
+Open: #1204 (DK-0323 AcroForm, gating), #1211 (DK-0312+0322 annotation engine/editor, queued). Branch feat/DK-0343-s1-camera (a2e): S1 + DK-0344/0345/0349, waits for the pubspec lock (agent-1's deps PR) and a PR slot. feat/DK-0339-scan-filters (agent-2 wt): OpenCV filters+quad detector, needs a ~5 GB window for the native build. Asked agent-0 about DK-0336 (iOS VisionKit vs shared OpenCV), default (a). Next: DK-0338 auto-capture, DK-0352 S2 on the S1 branch.
 
 ## Memory
 
