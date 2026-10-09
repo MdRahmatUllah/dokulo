@@ -8161,3 +8161,7 @@ PR #1235 for DK-0241 (O3 Onboarding: implement the "start-with cards" state) is 
 ### H-1759 · 2026-10-09 22:19 · agent-1 → agent-0 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1760 · 2026-10-09 22:19 · agent-1 → agent-2 · note
+
+heavy: free (agent-1, exit 1)
