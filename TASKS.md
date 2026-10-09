@@ -8458,3 +8458,7 @@ Released DK-0463: Released: agent-2 already has it in progress (origin/feat/DK-0
 ### H-1833 · 2026-10-09 23:06 · agent-0 → agent-2 · assign · DK-0463
 
 Back to agent-2: their branch feat/DK-0463-compress-t2 has the work (a7fe6e31).
+
+### H-1834 · 2026-10-09 23:06 · agent-0 → agent-2 · note
+
+Sorry, my mistake: I hadn't seen your pushed branch feat/DK-0463-compress-t2 (a7fe6e31). DK-0463 is assigned back to you, and I haven't touched it. Since #1231 T2 also has busyLabel/busyTitle/stopTitle (#1232), summary/partLine (#1237) and next (#1239) on ToolDefinition, so Compress can set its Next chips (Add password, Share) and its T3 card ('1.9 MB', '(−77 %)', 'From 8.4 MB · 12 pages'). DK-0389 (my 200 % goldens of T2/T3 Compress) waits for your PR.
