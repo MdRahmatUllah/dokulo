@@ -5,6 +5,9 @@ import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
+import 'package:app_pdf/providers/prefs_providers.dart';
+import 'package:app_pdf/screens/files/files_screen.dart';
+import 'package:app_pdf/screens/home/home_screen.dart';
 import 'package:app_pdf/screens/onboarding/onboarding_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
@@ -33,13 +36,20 @@ Future<GoRouter> pumpAt(
   String location, {
   bool reduceMotion = false,
   List<Override> overrides = const [],
+  DokuloDatabase? database,
 }) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
+  // Home and F1 read the file index and their view: an empty database
+  // unless the test gives one, no prefs file.
+  final db = database ?? DokuloDatabase.memory();
+  if (database == null) addTearDown(db.close);
   await tester.pumpWidget(
     // As in the app; S1's camera gate reads its permission from a provider.
     ProviderScope(
       overrides: [
+        appDatabaseProvider.overrideWithValue(db),
+        prefsProvider.overrideWith(Prefs.memory),
         cameraPermissionProvider.overrideWithValue(_Granted()),
         ...overrides,
       ],
@@ -77,9 +87,7 @@ void main() {
   // Every route from a cold start (what a deep link does): the screen, and
   // whether the tab bar shows.
   const coldStarts = {
-    Routes.home: ('H1', true),
     Routes.tools: ('T1', true),
-    Routes.files: ('F1', true),
     Routes.lockedFolder: ('F2', true),
     Routes.me: ('M1', true),
     Routes.models: ('M2', true),
@@ -98,6 +106,18 @@ void main() {
       expect(tabBarShown(tester), tabs);
     });
   }
+
+  testWidgets('cold start at /home shows H1 with the tab bar', (tester) async {
+    await pumpAt(tester, Routes.home);
+    expect(find.byType(HomeScreen), findsOneWidget);
+    expect(tabBarShown(tester), isTrue);
+  });
+
+  testWidgets('cold start at /files shows F1 with the tab bar', (tester) async {
+    await pumpAt(tester, Routes.files);
+    expect(find.byType(FilesScreen), findsOneWidget);
+    expect(tabBarShown(tester), isTrue);
+  });
 
   testWidgets('cold start at /welcome shows onboarding, no tab bar', (
     tester,
@@ -157,7 +177,7 @@ void main() {
   testWidgets('each tab keeps its scroll position and pushed pages', (
     tester,
   ) async {
-    final router = await pumpAt(tester, Routes.home);
+    final router = await pumpAt(tester, Routes.tools);
     await tester.drag(find.byType(ListView), const Offset(0, -600));
     await tester.pumpAndSettle();
     final scrolled = tester
@@ -172,9 +192,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(title(tester), 'F2');
 
-    await tester.tap(find.text('Home'));
+    await tester.tap(find.text('Tools'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'H1');
+    expect(title(tester), 'T1');
     expect(
       tester
           .state<ScrollableState>(find.byType(Scrollable).last)
@@ -210,7 +230,7 @@ void main() {
     expect(title(tester), 'Compress PDF');
     await tester.binding.handlePopRoute(); // the system back button
     await tester.pumpAndSettle();
-    expect(title(tester), 'H1');
+    expect(find.byType(HomeScreen), findsOneWidget);
     expect(tabBarShown(tester), isTrue);
   });
 
@@ -278,12 +298,20 @@ void main() {
       await tester.tap(find.text('Files'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 60));
-      expect(find.text('H1'), findsOneWidget, reason: 'still fading out');
-      expect(find.text('F1'), findsOneWidget, reason: 'fading in');
+      expect(
+        find.byType(HomeScreen),
+        findsOneWidget,
+        reason: 'still fading out',
+      );
+      expect(find.byType(FilesScreen), findsOneWidget, reason: 'fading in');
       await tester.pump(const Duration(milliseconds: 100));
       await tester.pump();
-      expect(find.text('H1'), findsNothing, reason: 'offstage after 120 ms');
-      expect(find.text('F1'), findsOneWidget);
+      expect(
+        find.byType(HomeScreen),
+        findsNothing,
+        reason: 'offstage after 120 ms',
+      );
+      expect(find.byType(FilesScreen), findsOneWidget);
     });
 
     testWidgets('the scanner slides up in 220 ms; with Reduce Motion it '

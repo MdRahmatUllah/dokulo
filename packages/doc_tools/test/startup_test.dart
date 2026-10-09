@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
-import 'package:drift/drift.dart' show Value;
 import 'package:pdfrx_engine/pdfrx_engine.dart' show pdfrxInitialize;
 import 'package:test/test.dart';
 

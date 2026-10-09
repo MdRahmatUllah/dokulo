@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../app_overrides.dart';
 import '../onboarding_seen.dart';
 
 void main() {
@@ -25,7 +26,7 @@ void main() {
       addTearDown(router.dispose);
       await tester.pumpWidget(
         ProviderScope(
-          overrides: [onboardingSeen],
+          overrides: [onboardingSeen, ...homeOverrides()],
           child: MaterialApp.router(
             routerConfig: router,
             theme: dokuloTheme(tokens),
