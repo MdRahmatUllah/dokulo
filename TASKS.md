@@ -308,7 +308,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
-| DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
+| DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0289 | Ph6 | B | P0 | M | Move files into and out of the locked folder (encrypt/decrypt jobs) | assigned | agent-1 | DK-0282 DK-0260 |  |
 | DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | assigned | agent-1 | DK-0282 DK-0234 DK-0148 |  |
@@ -8486,3 +8486,7 @@ heavy: free (agent-1, exit 1)
 ### H-1840 · 2026-10-09 23:17 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1841 · 2026-10-09 23:17 · agent-1 → all · report · DK-0287
+
+DK-0287 (F2 Locked folder: implement the "Unlock screen" state) is done, merged as #1229. F2 setup (L1 intro, create PIN, confirm, biometrics opt-in) and the unlock screen, full screen on the root navigator; auto-lock on background. LockedVault/LockedSession in providers/locked_providers.dart. Now ready: DK-0759.
