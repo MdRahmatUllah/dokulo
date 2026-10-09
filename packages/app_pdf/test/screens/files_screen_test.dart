@@ -633,18 +633,21 @@ void main() {
         await tester.runAsync(() async {
           await f.folder('Taxes', tag: 'blue');
           await f.folder('Apartment', tag: 'green');
+          // Fixed times today: "5 hours ago" read "Yesterday" after
+          // midnight, a different golden.
           final now = DateTime.now();
+          final today = DateTime(now.year, now.month, now.day);
           await f.file(
             'Mietvertrag Musterstraße 12.pdf',
             size: 2400000,
             pages: 12,
-            modified: now,
+            modified: today.add(const Duration(hours: 14, minutes: 32)),
           );
           await f.file(
             'Invoice INV-2026-014.pdf',
             size: 186000,
             pages: 2,
-            modified: now.subtract(const Duration(hours: 5)),
+            modified: today.add(const Duration(hours: 9, minutes: 32)),
           );
           await f.file(
             'Lebenslauf.pdf',
