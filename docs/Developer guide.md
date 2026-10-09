@@ -365,6 +365,15 @@ else the outputs as they are; it takes T3's place. `ToolResult.chain` lists
 the tools run so far ("Save as workflow" after two: DK-1078). Share and the
 split Save's menu come with DK-1077, DK-0380 and DK-0385.
 
+**T2 and T3 on tablets (DK-0388).** `ToolLayout`
+(`lib/screens/t2_tool/tool_layout.dart`) is their body by width: phones as
+before; a small tablet (600–839) one 640-wide centred column with the action
+bar under it; a large tablet (840+) the content and the action bar in a
+480-wide column beside a preview pane ("Live preview" in T2: the
+definition's `preview`, rebuilt with every option change, or the first PDF
+input in `DkPdfCanvas`; "Result preview" in T3: the output). On tablets the
+privacy line says "this tablet".
+
 **P1, Organize pages (DK-0329…DK-0333).** `/organize/:fileId` opens
 `OrganizeScreen` (`lib/screens/p1_organize/`) on doc_core's `PageEdit`
 (DK-0330): the pages as `PageSource`s in `DkPageGrid`; a drag moves one (the

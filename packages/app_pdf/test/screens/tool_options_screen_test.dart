@@ -128,6 +128,9 @@ void main() {
 
   testWidgets('renders the declared options, the action with the number, '
       'and the estimate; More options holds the rest', (tester) async {
+    tester.view.physicalSize = const Size(393, 852); // a phone
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
     await addFiles(tester, [('Mietvertrag.pdf', 12)]);
     await pump(tester, _compress);
     expect(find.text('Compress PDF'), findsOneWidget, reason: 'the title');

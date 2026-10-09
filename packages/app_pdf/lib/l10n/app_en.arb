@@ -1733,5 +1733,13 @@
         "type": "String"
       }
     }
-  }
+  },
+  "privacy_line_tool_tablet": "Processed on this tablet",
+  "@privacy_line_tool_tablet": {"description": "The privacy line under a tool's title on a tablet (24-tablet artboards)."},
+  "privacy_line_home_tablet": "Everything stays on this tablet",
+  "@privacy_line_home_tablet": {"description": "The privacy line on Home on a tablet."},
+  "t2_live_preview": "Live preview",
+  "@t2_live_preview": {"description": "T2's preview pane on a tablet in landscape (DK-0388)."},
+  "t3_result_preview": "Result preview",
+  "@t3_result_preview": {"description": "T3's preview pane on a tablet in landscape (DK-0388)."}
 }
