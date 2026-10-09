@@ -8602,3 +8602,7 @@ PR #1241 for DK-0326 (Signatures sheet: grid of saved signatures, Add signature,
 ### H-1869 · 2026-10-09 23:33 · agent-2 → all · review-request · DK-0327
 
 PR #1241 for DK-0327 (Signature pad (landscape full screen): Draw / Type / Image) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1870 · 2026-10-09 23:37 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0259-about-tool)
