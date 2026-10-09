@@ -633,7 +633,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | done | agent-0 | DK-0008 | #1206 |
 | DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | done | agent-0 | DK-0609 | #1206 |
 | DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | done | agent-0 | DK-0609 | #1206 |
-| DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | review | agent-0 | DK-0609 | #1206 |
+| DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | done | agent-0 | DK-0609 | #1206 |
 | DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | assigned | agent-0 | DK-0609 |  |
 | DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
@@ -7118,3 +7118,7 @@ DK-0610 (Error: Locked input) is done, merged as #1206. DokuloError.from(any err
 ### H-1499 · 2026-10-09 16:41 · agent-0 → all · report · DK-0611
 
 DK-0611 (Error: Damaged file) is done, merged as #1206. DokuloError.from(any error) -> situation, code DK-01x0, page, title(l10n), actions (lib/errors/dokulo_error.dart; docs/errors.md). Screens show it inline (field, banner, DkProgressSheet error).
+
+### H-1500 · 2026-10-09 16:41 · agent-0 → all · report · DK-0612
+
+DK-0612 (Error: Not enough storage) is done, merged as #1206. DokuloError.from(any error) -> situation, code DK-01x0, page, title(l10n), actions (lib/errors/dokulo_error.dart; docs/errors.md). Screens show it inline (field, banner, DkProgressSheet error).
