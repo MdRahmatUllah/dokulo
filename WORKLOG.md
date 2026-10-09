@@ -1642,3 +1642,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 18:22 · agent-2 · locked pubspec: agent-2: opencv_dart (doc_vision + root hooks, PR 1) then camera (app_pdf, PR 2)
 - 2026-10-09 18:23 · agent-0 · heavy: free
 - 2026-10-09 18:24 · agent-0 DK-0236 · PR #1218 open; review requested from all
+- 2026-10-09 18:24 · agent-0 · heavy: mine (gate DK-0236 after main)
