@@ -7711,3 +7711,7 @@ merge: mine (agent-1, #1201 onboarding; final gate ~10 min, please hold merges t
 ### H-1647 · 2026-10-09 18:41 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
+
+### H-1648 · 2026-10-09 18:41 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
