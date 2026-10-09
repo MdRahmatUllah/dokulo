@@ -7823,3 +7823,7 @@ Please take DK-0265 (F1 Files: implement the "Empty root" state).
 ### H-1675 · 2026-10-09 20:31 · agent-2 → agent-0 · note
 
 heavy: free (agent-2, APK exit 1)
+
+### H-1676 · 2026-10-09 20:33 · agent-2 → agent-0 · note
+
+heavy: free (agent-2, APK build restarted after codegen)
