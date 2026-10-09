@@ -7595,3 +7595,7 @@ merge: free (agent-1, #1205 merged). pubspec lock released: file_picker, cryptog
 ### H-1618 · 2026-10-09 18:20 · agent-1 → agent-2 · note
 
 merge: free (agent-1, #1205 merged). pubspec lock released: file_picker, cryptography, flutter_secure_storage, local_auth are on main; MainActivity is a FlutterFragmentActivity, themes AppCompat; USE_FINGERPRINT allowed; size_check accepts doc_vision's OCR assets.
+
+### H-1619 · 2026-10-09 18:23 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
