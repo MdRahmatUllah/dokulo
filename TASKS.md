@@ -623,7 +623,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0599 | Ph7 | B | P2 | M | iOS Files Action Extension ("Dokulo") opening the X1 picker (3 days) | assigned | agent-1 | DK-0387 DK-0707 |  |
 | DK-0600 | Ph3 | B | P1 | S | Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo") | open |  | DK-0235 |  |
 | DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | review | agent-0 | DK-0196 DK-0053 | #1213 |
-| DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | assigned | agent-0 | DK-0196 DK-0054 |  |
+| DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | review | agent-0 | DK-0196 DK-0054 | #1213 |
 | DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | assigned | agent-0 | DK-0196 DK-0055 |  |
 | DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | assigned | agent-0 | DK-0196 DK-0056 |  |
 | DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | assigned | agent-0 | DK-0196 DK-0057 |  |
@@ -7342,3 +7342,7 @@ heavy: mine (agent-2, gate for feat/DK-0323-acroform)
 ### H-1555 · 2026-10-09 17:22 · agent-0 → all · review-request · DK-0601
 
 PR #1213 for DK-0601 (Empty state: Home recents) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1556 · 2026-10-09 17:22 · agent-0 → all · review-request · DK-0602
+
+PR #1213 for DK-0602 (Empty state: Files root) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
