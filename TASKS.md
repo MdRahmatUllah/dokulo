@@ -364,7 +364,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0340 | Ph2 | C | P1 | S | ID card mode engine: crop to ID-1 (85.6 × 54 mm), front + back on one A4 at true size | review | agent-2 | DK-0336 DK-0337 | #1217 |
 | DK-0341 | Ph2 | C | P1 | M | Book mode engine: spine detection (projection profile + Hough), split into two pages, deskew each | review | agent-2 | DK-0336 DK-0337 | #1217 |
 | DK-0342 | Ph2 | C | P0 | S | Camera permission pre-prompt sheet and denied state | done | agent-2 | DK-0182 DK-0059 DK-0016 | #1202 |
-| DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | assigned | agent-2 | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 |  |
+| DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | review | agent-2 | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 | #1219 |
 | DK-0344 | Ph2 | C | P0 | M | Hint pill logic with priority order and spoken guidance | assigned | agent-2 | DK-0343 |  |
 | DK-0345 | Ph2 | C | P0 | S | S1 Scanner: implement the "Flash menu" state | assigned | agent-2 | DK-0343 |  |
 | DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | assigned | agent-2 | DK-0343 |  |
@@ -7639,3 +7639,7 @@ PR #1217 for DK-0340 (ID card mode engine: crop to ID-1 (85.6 × 54 mm), front +
 ### H-1629 · 2026-10-09 18:25 · agent-2 → all · review-request · DK-0341
 
 PR #1217 for DK-0341 (Book mode engine: spine detection (projection profile + Hough), split into two pages, deskew each) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1630 · 2026-10-09 18:29 · agent-2 → all · review-request · DK-0343
+
+PR #1219 for DK-0343 (S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
