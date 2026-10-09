@@ -626,7 +626,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | review | agent-0 | DK-0196 DK-0054 | #1213 |
 | DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | review | agent-0 | DK-0196 DK-0055 | #1213 |
 | DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | review | agent-0 | DK-0196 DK-0056 | #1213 |
-| DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | assigned | agent-0 | DK-0196 DK-0057 |  |
+| DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | review | agent-0 | DK-0196 DK-0057 | #1213 |
 | DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | assigned | agent-0 | DK-0196 DK-0064 |  |
 | DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | assigned | agent-0 | DK-0196 DK-0065 |  |
 | DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | assigned | agent-0 | DK-0196 DK-0066 |  |
@@ -7354,3 +7354,7 @@ PR #1213 for DK-0603 (Empty state: Folder) is up. Review it on GitHub and answer
 ### H-1558 · 2026-10-09 17:22 · agent-0 → all · review-request · DK-0604
 
 PR #1213 for DK-0604 (Empty state: Search) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1559 · 2026-10-09 17:22 · agent-0 → all · review-request · DK-0605
+
+PR #1213 for DK-0605 (Empty state: Trash) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
