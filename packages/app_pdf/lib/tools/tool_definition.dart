@@ -1,4 +1,5 @@
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/widgets.dart';
 
 import '../l10n/app_localizations.dart';
@@ -20,6 +21,50 @@ class ToolSubject {
 
   /// All pages of all files ("Compress 12 pages").
   int get pages => files.fold(0, (n, f) => n + f.pages);
+}
+
+/// A finished run, as T3 shows it (DK-0379): the inputs, what the job wrote
+/// (in temp, until saved), and how long it took.
+class ToolResult {
+  const ToolResult({
+    required this.toolId,
+    required this.inputs,
+    required this.output,
+    required this.took,
+  });
+
+  final String toolId;
+  final List<FileEntry> inputs;
+  final JobOutput output;
+  final Duration took;
+
+  /// The files the job wrote.
+  List<String> get files => switch (output) {
+    OneFile(:final path) => [path],
+    ManyFiles(:final paths) => paths,
+    TextOutput() => const [],
+  };
+}
+
+/// T3's result card for a run (UI spec §20.4): the headline (always a
+/// number, or a count in a sentence: "Text found on 11 of 12 pages"), its
+/// delta ("(−77 %)"), the line under it, and for a partial result the
+/// warning tint with one inline action ("Retake page 7").
+class ToolSummary {
+  const ToolSummary({
+    required this.headline,
+    required this.sub,
+    this.delta,
+    this.partial = false,
+    this.action,
+    this.onAction,
+  }) : assert((action == null) == (onAction == null), 'an action needs both');
+
+  final String headline, sub;
+  final String? delta;
+  final bool partial;
+  final String? action;
+  final void Function(BuildContext context)? onAction;
 }
 
 /// Where a tool's job writes, and the words it needs (the engine has none).
@@ -119,6 +164,8 @@ class ToolDefinition {
     this.busyLabel,
     this.busyTitle,
     this.stopTitle,
+    this.summary,
+    this.partLine,
   });
 
   final String id;
@@ -147,6 +194,14 @@ class ToolDefinition {
 
   /// The cancel dialog's title ("Stop compressing?"); null: "Stop this job?".
   final String Function(AppLocalizations)? stopTitle;
+
+  /// T3's card (DK-0383: a partial result); null: the output's size, or "3
+  /// files", with "From Zeugnisse.pdf · 34 pages".
+  final ToolSummary Function(AppLocalizations, ToolResult)? summary;
+
+  /// A part's line in a multi-file result ("Pages 1–3 · 420 KB", DK-0384);
+  /// null: its size.
+  final String Function(AppLocalizations, ToolResult, int part)? partLine;
 
   /// Every option's starting value.
   ToolValues get initialValues => {

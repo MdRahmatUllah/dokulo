@@ -6,6 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_bar.dart';
+import '../../components/dk_button.dart';
+import '../../components/dk_file_card.dart';
 import '../../components/dk_page_thumb.dart';
 import '../../components/dk_result_card.dart';
 import '../../components/dk_text_field.dart';
@@ -21,6 +23,7 @@ import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../../theme/haptics.dart';
 import '../../tools/tool_catalogue.dart';
+import '../../tools/tool_definition.dart';
 import '../t2_tool/tool_options_providers.dart';
 
 /// T3, a tool's result (UI spec §20.4; DK-0379): the result card with the
@@ -30,9 +33,12 @@ import '../t2_tool/tool_options_providers.dart';
 /// when the job took over 10 s (DK-0382). The result fades in after the
 /// progress (the route's transition).
 class ToolResultScreen extends ConsumerStatefulWidget {
-  const ToolResultScreen({super.key, required this.toolId});
+  const ToolResultScreen({super.key, required this.toolId, this.definition});
 
   final String toolId;
+
+  /// The tool's definition (its card and part lines); null: the app's.
+  final ToolDefinition? definition;
 
   @override
   ConsumerState<ToolResultScreen> createState() => _ToolResultScreenState();
@@ -55,6 +61,9 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
     super.dispose();
   }
 
+  ToolDefinition get _def =>
+      widget.definition ?? ToolDefinitions.of(widget.toolId);
+
   /// Where Save puts it: next to the (first) input, or the user folder.
   String? _subfolder(FileStore store) =>
       store.subfolderOf(_result!.inputs.firstOrNull?.path ?? '');
@@ -66,23 +75,31 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
     try {
       final store = await ref.read(fileStoreProvider.future);
       final db = ref.read(appDatabaseProvider);
-      final saved = await store.saveIndexed(
-        db,
-        File(result.files.first),
-        name: _fileName(result.files.first),
-        subfolder: _subfolder(store),
-      );
+      // One file takes the typed name; the parts of a multi-file result
+      // keep theirs (DK-0384).
+      final many = result.files.length > 1;
+      FileEntry? saved;
+      for (final f in result.files) {
+        final entry = await store.saveIndexed(
+          db,
+          File(f),
+          name: many ? f.split(Platform.pathSeparator).last : _fileName(f),
+          subfolder: _subfolder(store),
+        );
+        saved ??= entry;
+      }
+      final first = saved!;
       await ref.read(hapticsProvider).saved();
       if (!mounted) return;
-      setState(() => _savedId = saved.id);
+      setState(() => _savedId = first.id);
       if (open) {
-        context.push(Routes.viewer('${saved.id}'));
+        context.push(Routes.viewer('${first.id}'));
       } else {
         showDkToast(
           context,
           l.toast_saved_to(_place(l, store)),
           action: l.common_open,
-          onAction: () => context.push(Routes.viewer('${saved.id}')),
+          onAction: () => context.push(Routes.viewer('${first.id}')),
         );
       }
     } finally {
@@ -108,6 +125,18 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
     l.shell_tab_files,
     ...?_subfolder(store)?.split(Platform.pathSeparator),
   ].join(' › ');
+
+  /// "From Zeugnisse.pdf · 34 pages": the (first) input; or the output's
+  /// name when the run had no input file.
+  String _from(AppLocalizations l, ToolResult result) {
+    final input = result.inputs.firstOrNull;
+    if (input == null) {
+      return result.files.first.split(Platform.pathSeparator).last;
+    }
+    return l.t3_from(
+      [input.name, if (input.pages > 0) l.meta_pages(input.pages)].join(' · '),
+    );
+  }
 
   /// Back to where the tool was started (T3 took T2's place).
   Future<void> _close() async {
@@ -143,6 +172,15 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
     final size = output.existsSync() ? output.lengthSync() : 0;
     final store = ref.watch(fileStoreProvider).value;
     final isPdf = output.path.toLowerCase().endsWith('.pdf');
+    final many = result.files.length > 1;
+    final summary =
+        _def.summary?.call(l, result) ??
+        ToolSummary(
+          headline: many
+              ? l.t3_files(result.files.length)
+              : formatBytes(size, locale),
+          sub: _from(l, result),
+        );
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -162,12 +200,20 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
           padding: EdgeInsets.all(t.space.l),
           children: [
             DkResultCard(
-              headline: formatBytes(size, locale),
-              sub: result.files.length == 1
-                  ? output.path.split(Platform.pathSeparator).last
-                  : l.t2_section_files(result.files.length),
+              headline: summary.headline,
+              delta: summary.delta,
+              sub: summary.sub,
+              partial: summary.partial,
+              action: summary.action == null
+                  ? null
+                  : DkButton(
+                      label: summary.action!,
+                      variant: DkButtonVariant.secondary,
+                      size: DkButtonSize.compact,
+                      onPressed: () => summary.onAction!(context),
+                    ),
               // Decoration: the headline and the name say what it is.
-              preview: isPdf
+              preview: isPdf && !many
                   ? ExcludeSemantics(
                       child: Row(
                         spacing: t.space.s,
@@ -185,12 +231,45 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
                     )
                   : null,
             ),
-            SizedBox(height: t.space.xl),
-            DkTextField(
-              label: l.t3_file_name,
-              controller: _name,
-              enabled: _savedId == null,
-            ),
+            if (many) ...[
+              Padding(
+                padding: EdgeInsets.only(top: t.space.xl, bottom: t.space.s),
+                child: Semantics(
+                  container: true,
+                  header: true,
+                  child: Text(
+                    l.t3_files(result.files.length),
+                    style: t.text.titleS.copyWith(color: t.color.textPrimary),
+                  ),
+                ),
+              ),
+              // The parts (DK-0384): edge to edge, as file rows are.
+              for (final (i, f) in result.files.indexed)
+                Transform.translate(
+                  offset: Offset(-t.space.l, 0),
+                  child: SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    child: DkFileCard(
+                      name: f.split(Platform.pathSeparator).last,
+                      meta:
+                          _def.partLine?.call(l, result, i) ??
+                          formatBytes(
+                            File(f).existsSync() ? File(f).lengthSync() : 0,
+                            locale,
+                          ),
+                      onTap: () {},
+                    ),
+                  ),
+                ),
+            ],
+            if (!many) ...[
+              SizedBox(height: t.space.xl),
+              DkTextField(
+                label: l.t3_file_name,
+                controller: _name,
+                enabled: _savedId == null,
+              ),
+            ],
             SizedBox(height: t.space.s),
             if (store != null)
               Text(

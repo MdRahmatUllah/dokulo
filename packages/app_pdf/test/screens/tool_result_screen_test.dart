@@ -10,6 +10,7 @@ import 'package:app_pdf/screens/t3_result/tool_result_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/theme/haptics.dart';
+import 'package:app_pdf/tools/tool_definition.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ void main() {
   late DokuloDatabase db;
   late File output;
   late FileEntry input;
+  late List<String> partFiles;
   var saves = 0;
 
   setUp(() {
@@ -51,6 +53,8 @@ void main() {
     Duration took = const Duration(seconds: 3),
     bool result = true,
     DkTokens? tokens,
+    int parts = 1,
+    ToolDefinition? definition,
   }) async {
     await tester.runAsync(() async {
       final inputFile = File(
@@ -73,6 +77,12 @@ void main() {
       )..where((f) => f.id.equals(id))).getSingle();
       output = await store.newTempFile('Mietvertrag – compressed.pdf');
       await File(fixture('Invoice INV-2026-014.pdf')).copy(output.path);
+      partFiles = [];
+      for (var i = 1; i <= parts && parts > 1; i++) {
+        final part = await store.newTempFile('Zeugnisse – part $i.pdf');
+        await File(fixture('Invoice INV-2026-014.pdf')).copy(part.path);
+        partFiles.add(part.path);
+      }
     });
     final container = ProviderContainer(
       overrides: [
@@ -91,7 +101,7 @@ void main() {
             ToolResult(
               toolId: 'compress',
               inputs: [input],
-              output: OneFile(output.path),
+              output: parts > 1 ? ManyFiles(partFiles) : OneFile(output.path),
               took: took,
             ),
           );
@@ -105,8 +115,10 @@ void main() {
           routes: [
             GoRoute(
               path: 'result',
-              builder: (_, s) =>
-                  ToolResultScreen(toolId: s.pathParameters['id']!),
+              builder: (_, s) => ToolResultScreen(
+                toolId: s.pathParameters['id']!,
+                definition: definition,
+              ),
             ),
           ],
         ),
@@ -217,6 +229,57 @@ void main() {
   testWidgets('a link to a result that is gone says so', (tester) async {
     await pumpT3(tester, result: false);
     expect(find.byType(LinkErrorScreen), findsOneWidget);
+  });
+  testWidgets('a multi-file result: "3 files", one row per part with its '
+      'line, no name field; Save keeps every part (DK-0384)', (tester) async {
+    await pumpT3(
+      tester,
+      parts: 3,
+      definition: ToolDefinition(
+        id: 'compress',
+        partLine: (l, r, i) => 'Pages ${i * 3 + 1}–${i * 3 + 3}',
+      ),
+    );
+    expect(find.text('3 files'), findsNWidgets(2), reason: 'card and list');
+    expect(find.text('From Mietvertrag.pdf'), findsOneWidget);
+    expect(find.text('Zeugnisse – part 2.pdf'), findsOneWidget);
+    expect(find.text('Pages 4–6'), findsOneWidget);
+    expect(find.text('File name'), findsNothing);
+
+    await tester.tap(find.text('Save'));
+    // Three saves, each opening its PDF for the page count.
+    for (var i = 0; i < 3; i++) {
+      await settle(tester);
+    }
+    for (var i = 1; i <= 3; i++) {
+      expect(
+        File('${store.userFolder.path}${sep}Taxes${sep}Zeugnisse – part $i.pdf')
+            .existsSync(),
+        isTrue,
+      );
+    }
+  });
+
+  testWidgets('a partial result: the warning card with its inline action '
+      '(DK-0383)', (tester) async {
+    var retakes = 0;
+    await pumpT3(
+      tester,
+      definition: ToolDefinition(
+        id: 'compress',
+        summary: (l, r) => ToolSummary(
+          headline: 'Text found on 11 of 12 pages',
+          sub: 'Page 7 is too blurry.',
+          partial: true,
+          action: 'Retake page 7',
+          onAction: (_) => retakes++,
+        ),
+      ),
+    );
+    expect(find.text('Text found on 11 of 12 pages'), findsOneWidget);
+    expect(find.text('Page 7 is too blurry.'), findsOneWidget);
+    await tester.tap(find.text('Retake page 7'));
+    expect(retakes, 1);
   });
 }
 

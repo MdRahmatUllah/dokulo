@@ -385,5 +385,7 @@
   "home_see_all": "Alle anzeigen",
   "home_open_file": "Datei öffnen",
   "home_search": "Dateien durchsuchen",
-  "home_settings": "Einstellungen"
+  "home_settings": "Einstellungen",
+  "t3_files": "{n, plural, =1{1 Datei} other{{n} Dateien}}",
+  "t3_from": "Aus {source}"
 }
