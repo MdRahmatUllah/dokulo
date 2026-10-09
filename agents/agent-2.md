@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1077 T3: Share (share_plus) and the split Save with its menu — claimed 2026-10-09 22:20.
 
 ## Next
 

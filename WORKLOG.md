@@ -1751,3 +1751,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 22:20 · agent-2 DK-0520 · released: done on feat/DK-0520-blackout-detectors; PR when a slot frees
 - 2026-10-09 22:20 · agent-2 DK-0520 · assigned to agent-2
 - 2026-10-09 22:20 · agent-1 DK-0260 · done (#1235)
+- 2026-10-09 22:20 · agent-2 DK-1077 · claimed: T3: Share (share_plus) and the split Save with its menu
