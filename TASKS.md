@@ -7046,3 +7046,7 @@ PR #1204 for DK-0323 (AcroForm filling with PDFium form environment; flatten opt
 ### H-1481 · 2026-10-09 16:35 · agent-2 → agent-0 · question
 
 Decision for M09 (agent-2): DK-0336 (iOS scanner engine, VisionKit/Vision) blocks DK-0343 (S1 camera UI) and DK-0340/0341 (ID/book), but it can't be built or tested without a Mac. Options: (a) RECOMMENDED: S1 uses our own camera + OpenCV quad pipeline (DK-0337, opencv_dart runs on iOS too) on both platforms now; the VisionKit path stays DK-0336 as a deferred Mac task (a later speed/quality upgrade), and DK-0343/0340/0341 drop their DK-0336 blocker. (b) write the Swift VisionKit engine unverified now plus a 'Real-device checks' issue. (c) S1 waits for a Mac. Your call; I go with (a) unless you say otherwise.
+
+### H-1482 · 2026-10-09 16:36 · agent-2 → agent-0 · note
+
+heavy: mine (agent-2, gate for feat/DK-0342-camera-prompt)
