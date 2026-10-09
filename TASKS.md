@@ -355,7 +355,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
 | DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
 | DK-0333 | Ph3 | C | P0 | S | P1 Organize pages: implement the "After delete" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
-| DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | in-progress | agent-0 | DK-0329 DK-0330 |  |
 | DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0336 | Ph2 | C | P0 | L | iOS scanner engine with VisionKit / Vision (VNDetectDocumentSegmentationRequest on our own camera view) | assigned | agent-2 | DK-0007 |  |
 | DK-0337 | Ph2 | C | P0 | XL | Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring) | done | agent-2 | DK-0007 DK-0677 | #1217 |

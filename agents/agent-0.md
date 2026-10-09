@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0334 P1 Organize pages: implement the "Pinch to 5 columns" state — claimed 2026-10-10 00:22.
 
 ## Next
 
