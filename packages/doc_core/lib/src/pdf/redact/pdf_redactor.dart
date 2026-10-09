@@ -14,17 +14,37 @@ import '../pdf_engine.dart';
 import '../qpdf_service.dart';
 import 'detectors.dart';
 
+/// The AI pass that suggests personal names and addresses in a page's text
+/// (DK-0520): each as its kind ([SensitiveKind.personName] or
+/// [SensitiveKind.address]) and the exact text. Gemma behind it (DK-0548).
+typedef NameAddressSuggester = Future<List<(SensitiveKind, String)>> Function(
+  String pageText,
+);
+
 /// An area to black out: in page space (PDF points, origin bottom-left, the
 /// page unrotated), as PDFium's character boxes are. A finding gives one per
 /// line it spans; the review sheet lets the user move, add and drop them.
 class RedactionBox {
-  const RedactionBox(this.page, this.box, {this.text = '', this.kind});
+  const RedactionBox(
+    this.page,
+    this.box, {
+    this.text = '',
+    this.kind,
+    this.suggested = false,
+  });
   final int page;
   final Box box;
 
   /// The text under the box, for the leak check; empty for a hand-drawn box.
   final String text;
   final SensitiveKind? kind;
+
+  /// From the AI's name and address suggestions: listed apart and never
+  /// checked for the user (DK-0520).
+  final bool suggested;
+
+  /// What the review shows for it ("DE89 •••• •••• •••• 3000").
+  String get preview => kind == null ? '' : maskedPreview(kind!, text);
 
   @override
   String toString() => 'p$page ${kind?.name ?? 'manual'} "$text" $box';
@@ -75,6 +95,55 @@ abstract final class PdfRedactor {
       }
     }
     return boxes;
+  }
+
+  /// The detectors on a scan's OCR words (DK-0520): the words joined with
+  /// spaces, each finding boxed by the words it covers, one box per line.
+  static List<RedactionBox> findInWords(int page, List<(String, Box)> words) {
+    final (text, chars) = _joined(words);
+    return [
+      for (final f in findSensitive(text))
+        for (final box in lineBoxes(chars, f.start, f.end))
+          RedactionBox(page, box, text: f.text, kind: f.kind),
+    ];
+  }
+
+  /// The AI's suggestions on one page's text (DK-0520; the Gemma pass,
+  /// DK-0548): each suggested name or address, wherever it appears, boxed
+  /// and marked [RedactionBox.suggested], so the review lists it apart and
+  /// leaves it unchecked.
+  static Future<List<RedactionBox>> suggest(
+    int page,
+    String text,
+    List<Box> charBoxes,
+    NameAddressSuggester suggester,
+  ) async => [
+    for (final (kind, value) in await suggester(text))
+      if (value.trim().isNotEmpty)
+        for (
+          var at = text.indexOf(value);
+          at >= 0;
+          at = text.indexOf(value, at + value.length)
+        )
+          for (final box in lineBoxes(charBoxes, at, at + value.length))
+            RedactionBox(page, box, text: value, kind: kind, suggested: true),
+  ];
+
+  /// OCR words as one text with a box per character (each character takes
+  /// its word's box; a space none, which [lineBoxes] skips).
+  static (String, List<Box>) _joined(List<(String, Box)> words) {
+    const none = (left: 0.0, top: 0.0, right: 0.0, bottom: 0.0);
+    final text = StringBuffer();
+    final chars = <Box>[];
+    for (final (word, box) in words) {
+      if (text.isNotEmpty) {
+        text.write(' ');
+        chars.add(none);
+      }
+      text.write(word);
+      chars.addAll(List.filled(word.length, box));
+    }
+    return (text.toString(), chars);
   }
 
   /// The boxes of characters [start]..[end], one per line (a new line where
