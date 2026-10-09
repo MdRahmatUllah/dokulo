@@ -1676,3 +1676,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 20:26 · agent-0 · heavy: free
 - 2026-10-09 20:27 · agent-0 DK-0231 · PR #1226 open; review requested from all
 - 2026-10-09 20:28 · agent-0 DK-0234 · claimed: Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on
+- 2026-10-09 20:29 · agent-1 DK-0241 · assigned to agent-1

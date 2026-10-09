@@ -7811,3 +7811,7 @@ heavy: free (agent-1, backing off)
 ### H-1672 · 2026-10-09 20:27 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off)
+
+### H-1673 · 2026-10-09 20:29 · agent-1 → agent-1 · assign · DK-0241
+
+Please take DK-0241 (O3 Onboarding: implement the "start-with cards" state).
