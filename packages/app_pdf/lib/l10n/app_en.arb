@@ -1614,6 +1614,26 @@
   "@locked_empty": {
     "description": "F2 content with no files yet."
   },
+  "toast_pages_deleted": "{n, plural, =1{Page deleted} other{{n} pages deleted}}",
+  "@toast_pages_deleted": {"description": "Toast after deleting pages, with Undo (P1 After delete, DK-0333).", "placeholders": {"n": {"type": "int"}}},
+  "organize_rotate": "Rotate",
+  "@organize_rotate": {"description": "P1 selection bar (UI spec §18)."},
+  "organize_extract": "Extract",
+  "@organize_extract": {"description": "P1 selection bar: the selected pages as a new file."},
+  "organize_extracted": "extracted",
+  "@organize_extracted": {"description": "The file name suffix of extracted pages: Name – extracted.pdf."},
+  "organize_insert_title": "Insert pages",
+  "@organize_insert_title": {"description": "P1's insert sheet and FAB (DK-0332)."},
+  "organize_insert_blank": "Blank page",
+  "@organize_insert_blank": {"description": "P1 insert sheet row."},
+  "organize_insert_pdf": "From another PDF",
+  "@organize_insert_pdf": {"description": "P1 insert sheet row."},
+  "organize_insert_position": "Position",
+  "@organize_insert_position": {"description": "P1 insert sheet: where the pages go."},
+  "organize_insert_after": "After page {n}",
+  "@organize_insert_after": {"description": "P1 insert sheet position.", "placeholders": {"n": {"type": "int"}}},
+  "organize_insert_end": "At the end",
+  "@organize_insert_end": {"description": "P1 insert sheet position."},
   "folder_back": "Back to Files",
   "@folder_back": {
     "description": "Folder screen: back, for screen readers."
@@ -1713,6 +1733,223 @@
         "type": "String"
       }
     }
+  },
+  "about_tool_need": "What you need",
+  "@about_tool_need": {
+    "description": "About this tool (§20.5): the input heading."
+  },
+  "about_tool_get": "What you get",
+  "@about_tool_get": {
+    "description": "About this tool: the output heading."
+  },
+  "about_tool_offline": "Works offline",
+  "@about_tool_offline": {
+    "description": "About this tool: the offline line's heading."
+  },
+  "about_tool_offline_sub": "Processed on this phone",
+  "@about_tool_offline_sub": {
+    "description": "About this tool: under Works offline."
+  },
+  "about_tool_online": "Needs the internet",
+  "@about_tool_online": {
+    "description": "About this tool, Web page to PDF only: the heading instead of Works offline."
+  },
+  "about_tool_online_sub": "Loads the page from the internet; the PDF is made on this phone",
+  "@about_tool_online_sub": {
+    "description": "About this tool, Web page to PDF only."
+  },
+  "about_tool_open": "Open {tool}",
+  "@about_tool_open": {
+    "description": "About this tool: the button that opens the tool.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "tool_tier_free": "Free",
+  "@tool_tier_free": {
+    "description": "A tool's tier under its name (About this tool); Pro tools show the Pro badge instead."
+  },
+  "about_need_one_pdf": "One PDF",
+  "@about_need_one_pdf": {
+    "description": "What you need: one PDF (most tools)."
+  },
+  "tool_scan_need": "The camera, or photos of documents",
+  "@tool_scan_need": {
+    "description": "About this tool, scan: what you need."
+  },
+  "tool_scan_get": "A clean PDF of your pages",
+  "@tool_scan_get": {
+    "description": "About this tool, scan: what you get."
+  },
+  "tool_merge_need": "2 or more PDFs or images",
+  "@tool_merge_need": {
+    "description": "About this tool, merge: what you need."
+  },
+  "tool_merge_get": "One PDF with all the pages, in your order",
+  "@tool_merge_get": {
+    "description": "About this tool, merge: what you get."
+  },
+  "tool_split_get": "Several smaller PDFs",
+  "@tool_split_get": {
+    "description": "About this tool, split: what you get."
+  },
+  "tool_extract_get": "A new PDF with the pages you pick",
+  "@tool_extract_get": {
+    "description": "About this tool, extract: what you get."
+  },
+  "tool_organize_get": "Your pages reordered, rotated or removed",
+  "@tool_organize_get": {
+    "description": "About this tool, organize: what you get."
+  },
+  "tool_rotate_get": "A copy with the pages turned the right way",
+  "@tool_rotate_get": {
+    "description": "About this tool, rotate: what you get."
+  },
+  "tool_smartsplit_need": "A PDF with several documents in it",
+  "@tool_smartsplit_need": {
+    "description": "About this tool, smartsplit: what you need."
+  },
+  "tool_smartsplit_get": "One PDF per document",
+  "@tool_smartsplit_get": {
+    "description": "About this tool, smartsplit: what you get."
+  },
+  "tool_img2pdf_need": "One or more images",
+  "@tool_img2pdf_need": {
+    "description": "About this tool, img2pdf: what you need."
+  },
+  "tool_img2pdf_get": "One PDF, a page for each image",
+  "@tool_img2pdf_get": {
+    "description": "About this tool, img2pdf: what you get."
+  },
+  "tool_pdf2img_get": "A JPG image for each page",
+  "@tool_pdf2img_get": {
+    "description": "About this tool, pdf2img: what you get."
+  },
+  "tool_web_need": "A web address or an HTML file",
+  "@tool_web_need": {
+    "description": "About this tool, web: what you need."
+  },
+  "tool_web_get": "A PDF of the page",
+  "@tool_web_get": {
+    "description": "About this tool, web: what you get."
+  },
+  "tool_pdfa_get": "A PDF/A copy for long-term archiving",
+  "@tool_pdfa_get": {
+    "description": "About this tool, pdfa: what you get."
+  },
+  "tool_text_get": "Its text, ready to copy or share",
+  "@tool_text_get": {
+    "description": "About this tool, text: what you get."
+  },
+  "tool_compress_need": "One or more PDFs",
+  "@tool_compress_need": {
+    "description": "About this tool, compress: what you need."
+  },
+  "tool_compress_get": "A smaller copy. Your original stays unchanged.",
+  "@tool_compress_get": {
+    "description": "About this tool, compress: what you get."
+  },
+  "tool_repair_need": "A damaged PDF",
+  "@tool_repair_need": {
+    "description": "About this tool, repair: what you need."
+  },
+  "tool_repair_get": "A copy that opens again",
+  "@tool_repair_get": {
+    "description": "About this tool, repair: what you get."
+  },
+  "tool_ocr_need": "A scanned PDF",
+  "@tool_ocr_need": {
+    "description": "About this tool, ocr: what you need."
+  },
+  "tool_ocr_get": "A copy whose text you can search and copy",
+  "@tool_ocr_get": {
+    "description": "About this tool, ocr: what you get."
+  },
+  "tool_pagenum_get": "A copy with page numbers",
+  "@tool_pagenum_get": {
+    "description": "About this tool, pagenum: what you get."
+  },
+  "tool_watermark_get": "A copy with your text or image on its pages",
+  "@tool_watermark_get": {
+    "description": "About this tool, watermark: what you get."
+  },
+  "tool_crop_get": "A copy with the margins trimmed",
+  "@tool_crop_get": {
+    "description": "About this tool, crop: what you get."
+  },
+  "tool_markup_get": "Your PDF with highlights, notes and drawings",
+  "@tool_markup_get": {
+    "description": "About this tool, markup: what you get."
+  },
+  "tool_form_need": "A PDF with a form",
+  "@tool_form_need": {
+    "description": "About this tool, form: what you need."
+  },
+  "tool_form_get": "The form, filled in",
+  "@tool_form_get": {
+    "description": "About this tool, form: what you get."
+  },
+  "tool_sign_get": "A copy with your signature",
+  "@tool_sign_get": {
+    "description": "About this tool, sign: what you get."
+  },
+  "tool_protect_get": "A copy that opens only with your password",
+  "@tool_protect_get": {
+    "description": "About this tool, protect: what you get."
+  },
+  "tool_unlock_need": "A PDF with a password, and the password",
+  "@tool_unlock_need": {
+    "description": "About this tool, unlock: what you need."
+  },
+  "tool_unlock_get": "A copy without the password",
+  "@tool_unlock_get": {
+    "description": "About this tool, unlock: what you get."
+  },
+  "tool_redact_get": "A copy with what you chose removed for good",
+  "@tool_redact_get": {
+    "description": "About this tool, redact: what you get."
+  },
+  "tool_compare_need": "Two versions of a PDF",
+  "@tool_compare_need": {
+    "description": "About this tool, compare: what you need."
+  },
+  "tool_compare_get": "What changed, page by page",
+  "@tool_compare_get": {
+    "description": "About this tool, compare: what you get."
+  },
+  "tool_summarize_get": "A short summary of it",
+  "@tool_summarize_get": {
+    "description": "About this tool, summarize: what you get."
+  },
+  "tool_ask_get": "Answers, with the pages they come from",
+  "@tool_ask_get": {
+    "description": "About this tool, ask: what you get."
+  },
+  "tool_translate_get": "Its text in another language",
+  "@tool_translate_get": {
+    "description": "About this tool, translate: what you get."
+  },
+  "tool_extractassets_get": "Its images and text, to save or share",
+  "@tool_extractassets_get": {
+    "description": "About this tool, extractassets: what you get."
+  },
+  "tool_batch_need": "Many PDFs",
+  "@tool_batch_need": {
+    "description": "About this tool, batch: what you need."
+  },
+  "tool_batch_get": "Every file done by the same tool, in a new folder",
+  "@tool_batch_get": {
+    "description": "About this tool, batch: what you get."
+  },
+  "tool_workflows_need": "One or more PDFs",
+  "@tool_workflows_need": {
+    "description": "About this tool, workflows: what you need."
+  },
+  "tool_workflows_get": "The result of several tools in a row",
+  "@tool_workflows_get": {
+    "description": "About this tool, workflows: what you get."
   },
   "locked_moved_in": "{n, plural, one{Moved 1 file to Locked folder} other{Moved {n} files to Locked folder}}",
   "@locked_moved_in": {
