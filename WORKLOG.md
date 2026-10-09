@@ -1788,3 +1788,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 23:06 · agent-0 DK-0463 · assigned to agent-0
 - 2026-10-09 23:06 · agent-0 DK-0463 · claimed: Compress PDF: T2 options UI
 - 2026-10-09 23:06 · agent-0 DK-0463 · released: Released: agent-2 already has it in progress (origin/feat/DK-0463-compress-t2, a7fe6e31).
+- 2026-10-09 23:06 · agent-0 DK-0463 · assigned to agent-2
