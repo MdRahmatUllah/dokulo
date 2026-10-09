@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 21:32
+last-seen: 2026-10-09 21:33
 last-read: 1652
 joined: 0
 
 ## Now
 
-DK-0370 Generic T2 tool options shell (one shell for all 30 tools) — claimed 2026-10-09 21:13.
+DK-0370 in review as PR #1231: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

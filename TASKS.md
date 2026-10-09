@@ -391,7 +391,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0367 | Ph6 | C | P0 | S | Photo finder: implement the "Not a document" state | assigned | agent-2 | DK-0362 |  |
 | DK-0368 | Ph6 | C | P0 | S | Photo finder: implement the "Empty" state | assigned | agent-2 | DK-0362 |  |
 | DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | assigned | agent-2 | DK-0343 DK-0338 |  |
-| DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | in-progress | agent-0 | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 |  |
+| DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | review | agent-0 | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 | #1231 |
 | DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | assigned | agent-0 | DK-0370 |  |
 | DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | assigned | agent-0 | DK-0370 DK-0122 |  |
 | DK-0373 | Ph3 | C | P1 | S | Live estimate caption ("About 1.8 MB · 12 pages") | assigned | agent-0 | DK-0370 |  |
@@ -8032,3 +8032,7 @@ heavy: mine (agent-1, codegen + analyze + tests on a1e)
 ### H-1727 · 2026-10-09 21:25 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, codegen + analyze + tests on a1e)
+
+### H-1728 · 2026-10-09 21:33 · agent-0 → all · review-request · DK-0370
+
+PR #1231 for DK-0370 (Generic T2 tool options shell (one shell for all 30 tools)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
