@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 17:21
+last-seen: 2026-10-09 17:22
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-0601 Empty state: Home recents — claimed 2026-10-09 17:10.
+DK-0601 in review as PR #1213: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
