@@ -5,15 +5,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/dk_chip.dart';
+import '../../components/dk_empty_state.dart';
+import '../../components/dk_icon.dart';
+import '../../components/dk_illustration.dart';
+import '../../components/dk_settings_row.dart';
+import '../../components/dk_text_action.dart';
 import '../../components/dk_text_field.dart';
 import '../../components/dk_tool_tile.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
+import '../../patterns/dk_about_tool.dart';
 import '../../patterns/dk_ai_not_eligible.dart';
 import '../../providers/device_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../../tools/tool_catalogue.dart';
+import '../../tools/tool_search.dart';
 
 /// T1 · Tools (DK-0256; UI spec §15.2): the large top bar, the search field,
 /// the category chips (pinned under the bar; a tap scrolls to the section,
@@ -46,8 +53,13 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
   /// Gemma's eligibility on this phone, from the last build.
   AiEligibility? _ai;
 
+  /// The search field (DK-0257); typing replaces the sections with rows.
+  final _search = TextEditingController();
+  String get _query => _search.text.trim();
+
   @override
   void dispose() {
+    _search.dispose();
     _scroll.dispose();
     super.dispose();
   }
@@ -134,6 +146,62 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     context.push(Routes.tool(tool.id));
   }
 
+  /// The search results (DK-0257, DK-0258): "{n} tools", a row per tool
+  /// (its name and description), About for the first; or ILL-07.
+  List<Widget> _results(BuildContext context) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    final found = [
+      for (final tool in searchTools(_query, l))
+        if (tool.category != ToolCategory.ai || _ai != AiEligibility.notArm64)
+          tool,
+    ];
+    if (found.isEmpty) {
+      return [
+        SliverFillRemaining(
+          hasScrollBody: true, // DkEmptyState centres and scrolls itself
+          child: DkEmptyState(
+            illustration: DkIllustrations.searchNoResults,
+            illustrationSize: 80,
+            title: l.tools_search_empty_title(_query),
+            body: l.tools_search_empty_body,
+          ),
+        ),
+      ];
+    }
+    return [
+      SliverPadding(
+        padding: EdgeInsets.fromLTRB(
+          t.space.l,
+          t.space.l,
+          t.space.l,
+          t.space.s,
+        ),
+        sliver: SliverToBoxAdapter(
+          child: Text(
+            l.tools_count(found.length),
+            style: t.text.caption.copyWith(color: t.color.textSecondary),
+          ),
+        ),
+      ),
+      SliverList.list(
+        children: [
+          for (final tool in found)
+            DkToolRow(toolId: tool.id, onTap: () => _open(tool)),
+          DkSettingsRow(
+            icon: DkIcons.info,
+            title: l.tools_about(found.first.name(l)),
+            onTap: () => showAboutTool(
+              context,
+              found.first,
+              onOpen: () => _open(found.first),
+            ),
+          ),
+        ],
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
@@ -163,83 +231,106 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
             DkLargeTopBar(title: l.shell_tab_tools),
             SliverPadding(
               padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, 0),
-              // ponytail: the field is here; filtering is DK-0257's.
               sliver: SliverToBoxAdapter(
-                child: DkSearchField(hint: l.tools_search_hint),
-              ),
-            ),
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _ChipsBar(
-                key: _chipsKey,
-                height: 56,
-                colour: t.color.background,
-                chips: [
-                  DkChip(
-                    key: _chipKeys[null],
-                    label: l.tools_all,
-                    kind: DkChipKind.choice,
-                    selected: _selected == null,
-                    onSelected: (_) => _jump(null),
-                  ),
-                  for (final c in visible)
-                    DkChip(
-                      key: _chipKeys[c],
-                      label: c.label(l),
-                      kind: DkChipKind.choice,
-                      selected: _selected == c,
-                      onSelected: (_) => _jump(c),
-                    ),
-                ],
-              ),
-            ),
-            for (final c in visible) ...[
-              SliverToBoxAdapter(
-                child: Padding(
-                  key: _sections[c],
-                  padding: EdgeInsets.fromLTRB(
-                    t.space.l,
-                    t.space.l,
-                    t.space.l,
-                    t.space.s,
-                  ),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    spacing: t.space.s,
-                    children: [
-                      Semantics(
-                        header: true,
-                        child: Text(
-                          c.label(l),
-                          style: t.text.titleS.copyWith(
-                            color: t.color.textPrimary,
-                          ),
-                        ),
-                      ),
-                      Text(
-                        l.tools_count(ToolCatalogue.inCategory(c).length),
-                        style: t.text.caption.copyWith(
-                          color: t.color.textSecondary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SliverPadding(
-                padding: EdgeInsets.symmetric(horizontal: t.space.l),
-                sliver: SliverGrid.count(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: t.space.m,
-                  crossAxisSpacing: t.space.m,
-                  childAspectRatio: 0.78,
+                child: Row(
+                  spacing: t.space.xs,
                   children: [
-                    for (final tool in ToolCatalogue.inCategory(c))
-                      DkToolTile(toolId: tool.id, onTap: () => _open(tool)),
+                    Expanded(
+                      child: DkSearchField(
+                        hint: l.tools_search_hint,
+                        controller: _search,
+                        onChanged: (_) => setState(() {}),
+                      ),
+                    ),
+                    if (_query.isNotEmpty)
+                      DkTextAction(
+                        label: l.common_cancel,
+                        onTap: () {
+                          _search.clear();
+                          FocusScope.of(context).unfocus();
+                          setState(() {});
+                        },
+                      ),
                   ],
                 ),
               ),
+            ),
+            if (_query.isNotEmpty)
+              ..._results(context)
+            else ...[
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _ChipsBar(
+                  key: _chipsKey,
+                  height: 56,
+                  colour: t.color.background,
+                  chips: [
+                    DkChip(
+                      key: _chipKeys[null],
+                      label: l.tools_all,
+                      kind: DkChipKind.choice,
+                      selected: _selected == null,
+                      onSelected: (_) => _jump(null),
+                    ),
+                    for (final c in visible)
+                      DkChip(
+                        key: _chipKeys[c],
+                        label: c.label(l),
+                        kind: DkChipKind.choice,
+                        selected: _selected == c,
+                        onSelected: (_) => _jump(c),
+                      ),
+                  ],
+                ),
+              ),
+              for (final c in visible) ...[
+                SliverToBoxAdapter(
+                  child: Padding(
+                    key: _sections[c],
+                    padding: EdgeInsets.fromLTRB(
+                      t.space.l,
+                      t.space.l,
+                      t.space.l,
+                      t.space.s,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      spacing: t.space.s,
+                      children: [
+                        Semantics(
+                          header: true,
+                          child: Text(
+                            c.label(l),
+                            style: t.text.titleS.copyWith(
+                              color: t.color.textPrimary,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          l.tools_count(ToolCatalogue.inCategory(c).length),
+                          style: t.text.caption.copyWith(
+                            color: t.color.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(horizontal: t.space.l),
+                  sliver: SliverGrid.count(
+                    crossAxisCount: 4,
+                    mainAxisSpacing: t.space.m,
+                    crossAxisSpacing: t.space.m,
+                    childAspectRatio: 0.78,
+                    children: [
+                      for (final tool in ToolCatalogue.inCategory(c))
+                        DkToolTile(toolId: tool.id, onTap: () => _open(tool)),
+                    ],
+                  ),
+                ),
+              ],
             ],
             SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
           ],

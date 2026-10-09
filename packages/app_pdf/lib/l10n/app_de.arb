@@ -503,5 +503,8 @@
   "tools_count": "{n, plural, one{1 Werkzeug} other{{n} Werkzeuge}}",
   "ai_not_eligible_title": "KI ist auf diesem Handy nicht verfügbar",
   "ai_not_eligible_body": "Dafür braucht es mindestens {need} GB Arbeitsspeicher. Dieses Handy hat {have} GB.",
-  "common_ok": "OK"
+  "common_ok": "OK",
+  "tools_search_empty_title": "Kein Werkzeug für „{query}“",
+  "tools_search_empty_body": "Versuch „verkleinern“ oder „unterschreiben“.",
+  "tools_about": "Über „{tool}“"
 }

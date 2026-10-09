@@ -1997,5 +1997,27 @@
   "common_ok": "OK",
   "@common_ok": {
     "description": "Closes an information sheet."
+  },
+  "tools_search_empty_title": "No tool for “{query}”",
+  "@tools_search_empty_title": {
+    "description": "T1 search, no result (DK-0258): the query in typographic quotes.",
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "tools_search_empty_body": "Try “compress” or “sign”.",
+  "@tools_search_empty_body": {
+    "description": "T1 search, no result."
+  },
+  "tools_about": "About {tool}",
+  "@tools_about": {
+    "description": "T1 search: the row under the results that opens About this tool for the first.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
   }
 }
