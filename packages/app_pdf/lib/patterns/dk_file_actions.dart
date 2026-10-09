@@ -107,7 +107,7 @@ Future<void> showFileActions(
             icon: DkIcons.tool(id),
             label: ToolCatalogue.of(id).name(l),
             tool: true,
-            onTap: () => context.push('${Routes.tool(id)}?file=${file.id}'),
+            onTap: () => context.push(Routes.tool(id, files: ['${file.id}'])),
           ),
         DkAction(
           icon: DkIcons.toolsTab,
