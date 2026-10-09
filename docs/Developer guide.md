@@ -178,7 +178,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 
 | Route | Screen | Where | Notes |
 | --- | --- | --- | --- |
-| `/launch` | Launch | full screen | The app's first frame: the native splash again (symbol 72 on `color.background`, DK-0073), then Home |
+| `/launch` | Launch | full screen | The app's first frame: the native splash again (symbol 72 on `color.background`, DK-0073), then Home, or `/welcome` on the first launch |
 | `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
@@ -186,7 +186,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/me` | M1 Me | tab 4 | |
 | `/me/models` | M2 Model manager | tab 4, pushed | |
 | `/me/settings/:page` | M3 Settings | tab 4, pushed | `:page` is the settings group, e.g. `appearance` |
-| `/welcome` | Onboarding | full screen | Shown once |
+| `/welcome` | Onboarding | full screen | O1–O3, shown once (DK-0238): `onboardingDoneProvider` is a marker file in app support; Skip and the O3 cards set it. Tests that start the whole app override it with `test/onboarding_seen.dart` |
 | `/scan` | S1 Camera | full screen | The raised Scan button pushes it |
 | `/scan/review` | S2 Review | full screen | |
 | `/tool/:toolId` | T2 Tool options | full screen | `:toolId` is the tool's id (`compress`, `merge`, …) |

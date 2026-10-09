@@ -7,6 +7,7 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
+import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import 'app_shell.dart';
@@ -107,7 +108,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
         ],
       ),
-      fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
+      fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       fullScreen(
         Routes.scan,
         (s) => PlaceholderScreen(
