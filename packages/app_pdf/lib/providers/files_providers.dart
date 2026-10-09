@@ -191,3 +191,34 @@ Future<void> recordOpened(DokuloDatabase db, int fileId) => db
     .insertOnConflictUpdate(
       RecentsCompanion.insert(fileId: Value(fileId), openedAt: DateTime.now()),
     );
+
+/// The favourites (DK-0280), the last marked first, deleted ones left out.
+@riverpod
+Stream<List<FileEntry>> favouriteFiles(Ref ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final query =
+      db.select(db.files).join([
+          innerJoin(db.favourites, db.favourites.fileId.equalsExp(db.files.id)),
+        ])
+        ..where(
+          db.files.id.isNotInQuery(
+            db.selectOnly(db.trash)..addColumns([db.trash.fileId]),
+          ),
+        )
+        ..orderBy([OrderingTerm.desc(db.favourites.addedAt)]);
+  return query.watch().map(
+    (rows) => [for (final r in rows) r.readTable(db.files)],
+  );
+}
+
+/// Marks file [id] a favourite, or not.
+Future<void> setFavourite(DokuloDatabase db, int id, bool on) => on
+    ? db
+          .into(db.favourites)
+          .insertOnConflictUpdate(
+            FavouritesCompanion.insert(
+              fileId: Value(id),
+              addedAt: DateTime.now(),
+            ),
+          )
+    : (db.delete(db.favourites)..where((f) => f.fileId.equals(id))).go();

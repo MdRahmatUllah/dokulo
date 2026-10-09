@@ -16,7 +16,11 @@ class DkAction {
     this.tool = false,
     this.checked = false,
     this.trailing,
+    this.filled = false,
   });
+
+  /// The icon filled: a state that is on (a favourite's star, DK-0280).
+  final bool filled;
 
   /// None in an options menu (F1's sort): the label and the check.
   final IconData? icon;
@@ -176,6 +180,7 @@ class _DkActionRowState extends State<DkActionRow> {
     final icon = DkIcon(
       a.icon ?? DkIcons.check,
       size: DkIconSize.m,
+      filled: a.filled,
       color: a.destructive
           ? t.color.danger
           : a.tool

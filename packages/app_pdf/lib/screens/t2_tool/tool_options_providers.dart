@@ -113,8 +113,17 @@ Future<List<FileEntry>> recentCompatibleFiles(Ref ref, String toolId) async {
   final db = ref.watch(appDatabaseProvider);
   // ponytail: sorts the whole index in Dart; a recentFiles query in
   // schema.drift when people keep thousands of files.
+  // Favourites first (DK-0280), then the newest.
+  final favourites = {
+    for (final f in await db.select(db.favourites).get()) f.fileId,
+  };
   final all = await db.select(db.files).get()
-    ..sort((a, b) => b.modified.compareTo(a.modified));
+    ..sort((a, b) {
+      final fav =
+          (favourites.contains(b.id) ? 1 : 0) -
+          (favourites.contains(a.id) ? 1 : 0);
+      return fav != 0 ? fav : b.modified.compareTo(a.modified);
+    });
   return all.where((f) => input.takes(f.name)).take(5).toList();
 }
 

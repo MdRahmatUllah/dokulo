@@ -1950,5 +1950,17 @@
   "tool_workflows_get": "The result of several tools in a row",
   "@tool_workflows_get": {
     "description": "About this tool, workflows: what you get."
+  },
+  "file_favourite_add": "Add to favourites",
+  "@file_favourite_add": {
+    "description": "File action sheet (DK-0280)."
+  },
+  "file_favourite_remove": "Remove from favourites",
+  "@file_favourite_remove": {
+    "description": "File action sheet, on a favourite."
+  },
+  "files_favourites": "Favourites",
+  "@files_favourites": {
+    "description": "F1: the favourites' section, above the folders."
   }
 }

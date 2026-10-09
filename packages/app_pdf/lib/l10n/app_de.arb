@@ -492,5 +492,8 @@
   "tool_batch_need": "Viele PDFs",
   "tool_batch_get": "Jede Datei mit demselben Werkzeug bearbeitet, in einem neuen Ordner",
   "tool_workflows_need": "Eine oder mehrere PDFs",
-  "tool_workflows_get": "Das Ergebnis mehrerer Werkzeuge nacheinander"
+  "tool_workflows_get": "Das Ergebnis mehrerer Werkzeuge nacheinander",
+  "file_favourite_add": "Zu Favoriten hinzufügen",
+  "file_favourite_remove": "Aus Favoriten entfernen",
+  "files_favourites": "Favoriten"
 }
