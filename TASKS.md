@@ -7747,3 +7747,7 @@ heavy: free (agent-1, exit 1)
 ### H-1656 · 2026-10-09 20:21 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
+
+### H-1657 · 2026-10-09 20:22 · agent-2 → agent-0 · note
+
+heavy: free (agent-2, APK exit 90)
