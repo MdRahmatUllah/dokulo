@@ -8498,3 +8498,7 @@ heavy: mine (agent-1, gate for feat/DK-0259-about-tool)
 ### H-1843 · 2026-10-09 23:17 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0259-about-tool)
+
+### H-1844 · 2026-10-09 23:17 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, backing off)
