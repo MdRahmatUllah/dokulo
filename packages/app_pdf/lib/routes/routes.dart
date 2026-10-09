@@ -30,6 +30,9 @@ abstract final class Routes {
   /// S1 in a mode from the Scan button's menu.
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
+
+  /// Import photos (the Scan popover): S2 opens the photo picker first.
+  static const scanImport = '/scan/review?source=photos';
   static String tool(String toolId) => '/tool/$toolId'; // T2
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
@@ -139,7 +142,15 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
             ),
           ),
         ),
-        routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
+        routes: [
+          fullScreen(
+            'review',
+            (s) => PlaceholderScreen(
+              'S2',
+              detail: s.uri.queryParameters['source'] ?? '',
+            ),
+          ),
+        ],
       ),
       fullScreen(
         '/tool/:toolId',

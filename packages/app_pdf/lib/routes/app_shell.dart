@@ -7,6 +7,7 @@ import '../components/dk_tab_bar.dart';
 import '../l10n/app_localizations.dart';
 import '../patterns/dk_selection.dart';
 import '../theme/dk_layout.dart';
+import 'bottom_chrome.dart';
 import 'routes.dart';
 
 /// Home, Tools, Files and Me, in the user's language.
@@ -63,6 +64,7 @@ class _AppShellState extends State<AppShell> {
     if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) ==
         DkGrid.largeTablet) {
       return Scaffold(
+        bottomNavigationBar: const DkBottomChrome(),
         body: Row(
           children: [
             DkNavRail(
@@ -76,20 +78,34 @@ class _AppShellState extends State<AppShell> {
         ),
       );
     }
-    if (hidden) return Scaffold(body: shell);
+    if (hidden) {
+      return Scaffold(body: shell, bottomNavigationBar: const DkBottomChrome());
+    }
     return Scaffold(
       body: shell,
       floatingActionButton: DkScanButton(
         // DkTabBar shows "Scan" in its gap, in line with the other labels.
         showLabel: false,
         onPressed: scan,
-        onMode: (mode) => context.push(Routes.scanIn(mode)),
+        // Each mode opens S1 in it; Import photos goes to S2's picker
+        // (UI spec §13.1, DK-0230).
+        onMode: (mode) => context.push(
+          mode == DkScanMode.importPhotos
+              ? Routes.scanImport
+              : Routes.scanIn(mode),
+        ),
       ),
       floatingActionButtonLocation: DkTabBar.scanLocation,
-      bottomNavigationBar: DkTabBar(
-        items: items,
-        currentIndex: shell.currentIndex,
-        onSelect: select,
+      // The running jobs ride above the tab bar, clear of the raised Scan
+      // button (DK-0233).
+      bottomNavigationBar: DkBottomChrome(
+        clearance:
+            DkScanButton.diameter / 2 + DkScanButton.ring + DkTabBar.scanRise,
+        child: DkTabBar(
+          items: items,
+          currentIndex: shell.currentIndex,
+          onSelect: select,
+        ),
       ),
     );
   }
