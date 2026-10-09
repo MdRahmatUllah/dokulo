@@ -11,6 +11,7 @@ import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
@@ -132,7 +133,14 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               ),
             ],
           ),
-          StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.tools,
+                builder: (context, state) => const ToolsScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             routes: [
               GoRoute(
