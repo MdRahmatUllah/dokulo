@@ -1755,3 +1755,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 22:20 · agent-2 DK-0294 · assigned to agent-2
 - 2026-10-09 22:20 · agent-1 DK-0261 · done (#1235)
 - 2026-10-09 22:20 · agent-2 · locked pubspec: agent-2: share_plus for T3 Share (DK-1077)
+- 2026-10-09 22:21 · agent-1 DK-0267 · done (#1235)

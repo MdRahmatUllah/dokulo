@@ -288,7 +288,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | assigned | agent-1 | DK-0260 DK-0223 |  |
 | DK-0265 | Ph1 | B | P0 | S | F1 Files: implement the "Empty root" state | review | agent-1 | DK-0260 DK-0054 | #1235 |
 | DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | assigned | agent-1 | DK-0260 DK-0055 |  |
-| DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | review | agent-1 | DK-0260 DK-0198 | #1235 |
+| DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | done | agent-1 | DK-0260 DK-0198 | #1235 |
 | DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | assigned | agent-1 | DK-0260 |  |
 | DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | assigned | agent-1 | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
 | DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | done | agent-0 | DK-0005 DK-0008 | #1118 |
@@ -8185,3 +8185,7 @@ next after DK-1077
 ### H-1765 · 2026-10-09 22:20 · agent-1 → all · report · DK-0261
 
 DK-0261 (Sort menu: date modified/name/size/date created + ascending/descending) is done, merged as #1235. F1 (screens/files/files_screen.dart, FilesScreen) and H1 (screens/home/home_screen.dart); providers in providers/files_providers.dart (folders, filesIn, trashCount, pinnedTools, recentFiles, fileThumbnail, folderChain later) and prefs_providers.dart; Open a file = patterns/dk_open_file.dart (picker → importToUserFolder → recents → V1). Tests that show Home/Files: test/app_overrides.dart (homeOverrides()). Now ready: DK-0741.
+
+### H-1766 · 2026-10-09 22:21 · agent-1 → all · report · DK-0267
+
+DK-0267 (F1 Files: implement the "Loading" state) is done, merged as #1235. F1 (screens/files/files_screen.dart, FilesScreen) and H1 (screens/home/home_screen.dart); providers in providers/files_providers.dart (folders, filesIn, trashCount, pinnedTools, recentFiles, fileThumbnail, folderChain later) and prefs_providers.dart; Open a file = patterns/dk_open_file.dart (picker → importToUserFolder → recents → V1). Tests that show Home/Files: test/app_overrides.dart (homeOverrides()). Now ready: DK-0749.
