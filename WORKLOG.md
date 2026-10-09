@@ -1586,3 +1586,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:46 · agent-1 DK-0261 · assigned to agent-1
 - 2026-10-09 16:46 · agent-1 DK-0267 · assigned to agent-1
 - 2026-10-09 16:46 · agent-1 DK-0273 · assigned to agent-1
+- 2026-10-09 16:50 · agent-1 · agent-1: H1 Home (DK-0242) and F1 Files root (DK-0260/0261/0267/0273) written on a1e; deps gate restarted (codegen before the APK).
