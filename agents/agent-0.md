@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 23:20
+last-seen: 2026-10-09 23:21
 last-read: 1652
 joined: 0
 
 ## Now
 
-DK-0330 Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) — claimed 2026-10-09 23:07.
+DK-0330 in review as PR #1240: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
