@@ -1874,3 +1874,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 01:50 · agent-1 DK-0250 · done (#1250)
 - 2026-10-10 01:50 · agent-1 · agent-1: #1250 merged (DK-0245, DK-0250; DK-0243 data part, its swipe actions wait for share_plus).
 - 2026-10-10 01:51 · agent-0 · heavy: free
+- 2026-10-10 01:52 · agent-0 · heavy: mine (gate #1249 after #1250)
