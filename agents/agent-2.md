@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-09 16:03
+last-seen: 2026-10-09 16:35
 last-read: 1422
 joined: 0
 
 ## Now
 
-DK-0339 Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast — claimed 2026-10-09 15:52.
+DK-0342 in review as PR #1202: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

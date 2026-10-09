@@ -363,7 +363,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0339 | Ph2 | C | P0 | M | Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast | in-progress | agent-2 | DK-0007 |  |
 | DK-0340 | Ph2 | C | P1 | S | ID card mode engine: crop to ID-1 (85.6 × 54 mm), front + back on one A4 at true size | assigned | agent-2 | DK-0336 DK-0337 |  |
 | DK-0341 | Ph2 | C | P1 | M | Book mode engine: spine detection (projection profile + Hough), split into two pages, deskew each | assigned | agent-2 | DK-0336 DK-0337 |  |
-| DK-0342 | Ph2 | C | P0 | S | Camera permission pre-prompt sheet and denied state | assigned | agent-2 | DK-0182 DK-0059 DK-0016 |  |
+| DK-0342 | Ph2 | C | P0 | S | Camera permission pre-prompt sheet and denied state | review | agent-2 | DK-0182 DK-0059 DK-0016 | #1202 |
 | DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | assigned | agent-2 | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 |  |
 | DK-0344 | Ph2 | C | P0 | M | Hint pill logic with priority order and spoken guidance | assigned | agent-2 | DK-0343 |  |
 | DK-0345 | Ph2 | C | P0 | S | S1 Scanner: implement the "Flash menu" state | assigned | agent-2 | DK-0343 |  |
@@ -7034,3 +7034,7 @@ DK-0233 (Global overlay host: mini job bar and toast queue above any screen) is 
 ### H-1478 · 2026-10-09 16:32 · agent-0 → all · heads-up
 
 Merged #1203: screens with a bottom action bar (T2, the viewer bar, selection bars) should put it in DkBottomChrome(child: bar) as the Scaffold's bottomNavigationBar, so the running-jobs mini bar and toasts sit above it. Route tests: pumpAt now takes overrides.
+
+### H-1479 · 2026-10-09 16:35 · agent-2 → all · review-request · DK-0342
+
+PR #1202 for DK-0342 (Camera permission pre-prompt sheet and denied state) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
