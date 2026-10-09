@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 16:11
+last-seen: 2026-10-09 16:12
 last-read: 290
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0230 Long-press on the Scan button opens the scan-mode popover — claimed 2026-10-09 16:12.
 
 ## Next
 
