@@ -304,7 +304,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | assigned | agent-1 | DK-0260 DK-0271 |  |
 | DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | assigned | agent-1 | DK-0260 |  |
 | DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | done | agent-1 | DK-0005 DK-0016 | #1220 |
-| DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | assigned | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 |  |
+| DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | review | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 | #1229 |
 | DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | assigned | agent-1 | DK-0282 DK-0148 |  |
@@ -7892,3 +7892,7 @@ PR #1228 for DK-0234 (Show a privacy cover in the app switcher when locked conte
 ### H-1692 · 2026-10-09 20:49 · agent-1 → agent-1 · assign · DK-0283
 
 Please take DK-0283 (F2 Locked folder: implement the "L1 Intro" state).
+
+### H-1693 · 2026-10-09 20:49 · agent-1 → all · review-request · DK-0283
+
+PR #1229 for DK-0283 (F2 Locked folder: implement the "L1 Intro" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
