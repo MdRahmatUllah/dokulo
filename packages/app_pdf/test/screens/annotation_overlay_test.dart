@@ -1,3 +1,5 @@
+import 'package:app_pdf/components/dk_editor_bars.dart';
+import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/screens/v2_edit/annotation_editor.dart';
 import 'package:app_pdf/screens/v2_edit/annotation_overlay.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -12,17 +14,19 @@ const a4 = Size(595, 842);
 
 void main() {
   late AnnotationEditor editor;
-  AnnotRef? placed;
+  AnnotRef? placed, coloured, noted;
 
   Future<void> pump(WidgetTester tester, {DkTokens? tokens}) async {
     tester.view.physicalSize = const Size(297.5, 421);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
-    placed = null;
+    placed = coloured = noted = null;
     await tester.pumpWidget(
       MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: dokuloTheme(tokens ?? DkTokens.light),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Align(
           alignment: Alignment.topLeft,
           child: SizedBox(
@@ -32,6 +36,8 @@ void main() {
               page: 0,
               pageSize: a4,
               onPlaced: (r) => placed = r,
+              onColour: (r) => coloured = r,
+              onNote: (r) => noted = r,
             ),
           ),
         ),
@@ -180,6 +186,65 @@ void main() {
     await tester.tapAt(const Offset(250, 380));
     await tester.pump();
     expect(editor.selected, isNull);
+  });
+
+  group('the mini bar (DK-0322)', () {
+    const shape = ShapeAnnot(
+      ShapeKind.square,
+      (left: 100, top: 500, right: 300, bottom: 400),
+      width: 2,
+      color: 0xFFE53935,
+    );
+
+    testWidgets('shows over the selection; Delete is undoable', (tester) async {
+      final handle = tester.ensureSemantics();
+      final id = editor.add(0, shape);
+      await pump(tester);
+      expect(find.byType(DkAnnotBar), findsOneWidget);
+      // Above the selection (its frame starts at y 171 - 4).
+      expect(tester.getBottomLeft(find.byType(DkAnnotBar)).dy, lessThan(167));
+      await tester.tap(find.bySemanticsLabel('Delete'));
+      await tester.pump();
+      expect(editor.annotsOn(0), isEmpty);
+      expect(find.byType(DkAnnotBar), findsNothing);
+      editor.undo();
+      await tester.pump();
+      expect(editor.annotsOn(0).single.id, id);
+      handle.dispose();
+    });
+
+    testWidgets('Duplicate copies; Colour and Add note ask the host', (
+      tester,
+    ) async {
+      final handle = tester.ensureSemantics();
+      final id = editor.add(0, shape);
+      await pump(tester);
+      await tester.tap(find.bySemanticsLabel('Colour'));
+      expect(coloured, (page: 0, id: id));
+      await tester.tap(find.bySemanticsLabel('Add note'));
+      expect(noted, (page: 0, id: id));
+      await tester.tap(find.bySemanticsLabel('Duplicate'));
+      await tester.pump();
+      expect(editor.annotsOn(0), hasLength(2));
+      handle.dispose();
+    });
+
+    testWidgets('near the top edge it flips below', (tester) async {
+      editor.add(
+        0,
+        const ShapeAnnot(
+          ShapeKind.square,
+          (left: 100, top: 835, right: 300, bottom: 760),
+          width: 2,
+          color: 0xFFE53935,
+        ),
+      );
+      await pump(tester);
+      expect(
+        tester.getTopLeft(find.byType(DkAnnotBar)).dy,
+        greaterThan(41 + 4),
+      );
+    });
   });
 
   for (final (name, tokens) in [

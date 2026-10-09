@@ -5,6 +5,7 @@ import 'package:doc_core/doc_core.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/dk_editor_bars.dart';
 import '../../theme/dk_tokens.dart';
 import 'annotation_editor.dart';
 
@@ -51,6 +52,8 @@ class AnnotationOverlay extends StatefulWidget {
     required this.pageSize,
     this.style = const EditStyle(),
     this.onPlaced,
+    this.onColour,
+    this.onNote,
   });
 
   final AnnotationEditor editor;
@@ -60,6 +63,10 @@ class AnnotationOverlay extends StatefulWidget {
 
   /// A text box or note was placed: open its sheet.
   final ValueChanged<AnnotRef>? onPlaced;
+
+  /// The mini bar's Colour and Add note (DK-0322): open their sheets.
+  /// Duplicate and Delete act here (both undoable).
+  final ValueChanged<AnnotRef>? onColour, onNote;
 
   @override
   State<AnnotationOverlay> createState() => _AnnotationOverlayState();
@@ -84,6 +91,16 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
   PagePoint _toPage(Offset o, Size size) {
     final s = _scale(size);
     return (x: o.dx * s, y: widget.pageSize.height - o.dy * s);
+  }
+
+  Rect _toWidget(Box b, Size size) {
+    final k = 1 / _scale(size);
+    return Rect.fromLTRB(
+      b.left * k,
+      (widget.pageSize.height - b.top) * k,
+      b.right * k,
+      (widget.pageSize.height - b.bottom) * k,
+    );
   }
 
   /// A finger's tolerance in points: 8 logical pixels.
@@ -273,7 +290,7 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
       // Pan without a selection lets the viewer scroll and zoom.
       final passive =
           _e.tool == EditTool.pan && _e.selected == null && _pointer == null;
-      return Listener(
+      final listener = Listener(
         behavior: passive
             ? HitTestBehavior.translucent
             : HitTestBehavior.opaque,
@@ -337,6 +354,34 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
               handleFill: context.tokens.color.surface,
             ),
           ),
+        ),
+      );
+      // The mini bar over the selection, while nothing is being dragged.
+      return ListenableBuilder(
+        listenable: _e,
+        builder: (context, _) => Stack(
+          clipBehavior: Clip.none,
+          children: [
+            listener,
+            if (_e.selectedAnnot case final sel? when _pointer == null)
+              DkAnnotBar.over(
+                selection: _toWidget(sel.annot.bounds, size).inflate(4),
+                color: Color(sel.annot.color),
+                onAction: (a) {
+                  final ref = _e.selected!;
+                  switch (a) {
+                    case DkAnnotAction.colour:
+                      widget.onColour?.call(ref);
+                    case DkAnnotAction.duplicate:
+                      _e.duplicate(ref);
+                    case DkAnnotAction.note:
+                      widget.onNote?.call(ref);
+                    case DkAnnotAction.delete:
+                      _e.delete(ref);
+                  }
+                },
+              ),
+          ],
         ),
       );
     },
@@ -494,24 +539,37 @@ class AnnotationPainter extends CustomPainter {
       }
     }
     if (selected case final b?) {
+      // The design's frame: 1 dp dashed primary, 4 outside the annotation,
+      // and 9 dp square handles (surface, 2 dp primary) on its corners.
       final rr = r(b).inflate(4);
-      canvas.drawRect(
-        rr,
-        Paint()
-          ..color = ring
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 1.5,
-      );
+      final dash = Paint()
+        ..color = ring
+        ..strokeWidth = 1;
+      for (final (a, z) in [
+        (rr.topLeft, rr.topRight),
+        (rr.topRight, rr.bottomRight),
+        (rr.bottomRight, rr.bottomLeft),
+        (rr.bottomLeft, rr.topLeft),
+      ]) {
+        final len = (z - a).distance;
+        for (var d = 0.0; d < len; d += 8) {
+          canvas.drawLine(
+            Offset.lerp(a, z, d / len)!,
+            Offset.lerp(a, z, math.min(d + 4, len) / len)!,
+            dash,
+          );
+        }
+      }
       for (final c in [
         rr.topLeft,
         rr.topRight,
         rr.bottomRight,
         rr.bottomLeft,
       ]) {
-        canvas.drawCircle(c, 6, Paint()..color = handleFill);
-        canvas.drawCircle(
-          c,
-          6,
+        final h = Rect.fromCenter(center: c, width: 9, height: 9);
+        canvas.drawRect(h, Paint()..color = handleFill);
+        canvas.drawRect(
+          h,
           Paint()
             ..color = ring
             ..style = PaintingStyle.stroke
