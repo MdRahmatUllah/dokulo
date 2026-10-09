@@ -541,7 +541,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0517 | Ph4 | C | P0 | XS | Mark up tool entry: opens V2 with the Highlighter selected; saved as a new version | assigned | agent-2 | DK-0313 |  |
 | DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | assigned | agent-2 | DK-0323 DK-0313 |  |
 | DK-0519 | Ph4 | C | P0 | XS | Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo" | assigned | agent-2 | DK-0313 DK-0325 |  |
-| DK-0520 | Ph4 | C | P0 | L | Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions | open |  | DK-0393 DK-0400 |  |
+| DK-0520 | Ph4 | C | P0 | L | Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions | assigned | agent-2 | DK-0393 DK-0400 |  |
 | DK-0521 | Ph4 | C | P0 | S | Black out: implement the "Screen & step indicator" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0522 | Ph4 | C | P0 | S | Black out: implement the "Find panel" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0523 | Ph4 | C | P0 | S | Black out: implement the "Review" state | open |  | DK-0520 DK-0220 DK-0160 |  |
@@ -8169,3 +8169,7 @@ heavy: free (agent-1, exit 1)
 ### H-1761 · 2026-10-09 22:20 · agent-2 → all · note · DK-0520
 
 Released DK-0520: done on feat/DK-0520-blackout-detectors; PR when a slot frees
+
+### H-1762 · 2026-10-09 22:20 · agent-2 → agent-2 · assign · DK-0520
+
+built and tested on feat/DK-0520-blackout-detectors
