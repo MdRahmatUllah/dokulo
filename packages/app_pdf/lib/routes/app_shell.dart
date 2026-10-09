@@ -7,6 +7,7 @@ import '../components/dk_tab_bar.dart';
 import '../l10n/app_localizations.dart';
 import '../patterns/dk_selection.dart';
 import '../theme/dk_layout.dart';
+import 'bottom_chrome.dart';
 import 'routes.dart';
 
 /// Home, Tools, Files and Me, in the user's language.
@@ -63,6 +64,7 @@ class _AppShellState extends State<AppShell> {
     if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) ==
         DkGrid.largeTablet) {
       return Scaffold(
+        bottomNavigationBar: const DkBottomChrome(),
         body: Row(
           children: [
             DkNavRail(
@@ -76,7 +78,9 @@ class _AppShellState extends State<AppShell> {
         ),
       );
     }
-    if (hidden) return Scaffold(body: shell);
+    if (hidden) {
+      return Scaffold(body: shell, bottomNavigationBar: const DkBottomChrome());
+    }
     return Scaffold(
       body: shell,
       floatingActionButton: DkScanButton(
@@ -92,10 +96,16 @@ class _AppShellState extends State<AppShell> {
         ),
       ),
       floatingActionButtonLocation: DkTabBar.scanLocation,
-      bottomNavigationBar: DkTabBar(
-        items: items,
-        currentIndex: shell.currentIndex,
-        onSelect: select,
+      // The running jobs ride above the tab bar, clear of the raised Scan
+      // button (DK-0233).
+      bottomNavigationBar: DkBottomChrome(
+        clearance:
+            DkScanButton.diameter / 2 + DkScanButton.ring + DkTabBar.scanRise,
+        child: DkTabBar(
+          items: items,
+          currentIndex: shell.currentIndex,
+          onSelect: select,
+        ),
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
@@ -17,18 +18,23 @@ Future<GoRouter> pumpAt(
   WidgetTester tester,
   String location, {
   bool reduceMotion = false,
+  List<Override> overrides = const [],
 }) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
   await tester.pumpWidget(
-    MaterialApp.router(
-      routerConfig: router,
-      theme: dokuloTheme(DkTokens.light), // components read the tokens
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(disableAnimations: reduceMotion),
-        child: child!,
+    ProviderScope(
+      overrides: overrides,
+      child: MaterialApp.router(
+        routerConfig: router,
+        theme: dokuloTheme(DkTokens.light), // components read the tokens
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(disableAnimations: reduceMotion),
+          child: child!,
+        ),
       ),
     ),
   );
