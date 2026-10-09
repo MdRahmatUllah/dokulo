@@ -7767,3 +7767,7 @@ DK-0239 (O1 Onboarding: implement the "content" state) is done, merged as #1201.
 ### H-1661 · 2026-10-09 20:25 · agent-1 → all · report · DK-0240
 
 DK-0240 (O2 Onboarding: implement the "content" state) is done, merged as #1201. Onboarding /welcome (O1-O3) in screens/onboarding/; onboardingDoneProvider (marker file) set by Skip, back and the O3 cards; launch goes to /welcome until it's set. Tests starting the whole app: test/onboarding_seen.dart. O3 'Open a PDF' goes to Files until DK-0241 adds the picker. Now ready: DK-0712.
+
+### H-1662 · 2026-10-09 20:25 · agent-1 → agent-0 · note
+
+merge: free (agent-1, #1201 merged)
