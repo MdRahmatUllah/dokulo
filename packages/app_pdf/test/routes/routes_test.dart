@@ -5,6 +5,7 @@ import 'package:app_pdf/providers/camera_permission.dart';
 import 'package:app_pdf/screens/s1_scanner/s1_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/s1_scanner/scanner_camera.dart';
+import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/screens/s2_review/s2_screen.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
@@ -63,6 +64,7 @@ Future<GoRouter> pumpAt(
         cameraPermissionProvider.overrideWithValue(_Granted()),
         scannerCameraProvider.overrideWith((ref) => _FakeCamera()),
         scanStoreProvider.overrideWithValue(MemoryScanStore()),
+        scannerPrefsStoreProvider.overrideWithValue(MemoryPrefsStore()),
         ...overrides,
       ],
       child: MaterialApp.router(

@@ -15,6 +15,7 @@ import '../../l10n/app_localizations.dart';
 import '../../theme/dk_tokens.dart';
 import 'scan_hints.dart';
 import 'scan_session.dart';
+import 'scanner_settings.dart';
 import 'scanner_camera.dart';
 
 /// S1, the scanner's camera (DK-0343; UI spec S1, design
@@ -69,7 +70,11 @@ class _S1ScreenState extends ConsumerState<S1Screen>
   var _brightness = 1.0;
   var _steady = false;
   var _flash = DkFlash.off;
-  var _auto = false;
+  // Auto-capture (DK-0338): when the quad has held still, a countdown on
+  // the shutter's arc, then the shot.
+  Duration? _steadySince;
+  var _countdown = 0.0;
+  static const _steadyFor = Duration(milliseconds: 500);
   var _grid = false;
   var _flashMenu = false;
   final _clock = Stopwatch()..start();
@@ -101,9 +106,15 @@ class _S1ScreenState extends ConsumerState<S1Screen>
     );
   }
 
+  /// Auto-capture is on: the user's choice, or forced by Batch.
+  bool get _autoActive =>
+      ref.read(scanModeStateProvider) == DkScanMode.batch ||
+      ref.read(scannerSettingsProvider).autoCapture;
+
   @override
   void initState() {
     super.initState();
+    ref.read(scannerSettingsProvider.notifier).load();
     if (widget.initialMode case final m? when m != DkScanMode.importPhotos) {
       Future.microtask(() => ref.read(scanModeStateProvider.notifier).set(m));
     }
@@ -130,7 +141,25 @@ class _S1ScreenState extends ConsumerState<S1Screen>
           _steady = quadSteady(_quad, quad);
           _quad = quad;
           _brightness = brightnessOf(frame.bytes);
+          final ready =
+              scanHint(quad: quad, brightness: _brightness, steady: _steady) ==
+              ScanHint.ready;
+          if (_autoActive && ready) {
+            _steadySince ??= frame.time;
+            _countdown =
+                ((frame.time - _steadySince!).inMicroseconds /
+                        _steadyFor.inMicroseconds)
+                    .clamp(0.0, 1.0);
+          } else {
+            _steadySince = null;
+            _countdown = 0;
+          }
         });
+        if (_countdown >= 1) {
+          _steadySince = null;
+          _countdown = 0;
+          await _capture();
+        }
       } finally {
         _detecting = false;
       }
@@ -201,8 +230,12 @@ class _S1ScreenState extends ConsumerState<S1Screen>
         setState(() => _flash = f);
         _camera.setFlash(f);
       },
-      autoCapture: _auto,
-      onAutoCapture: (v) => setState(() => _auto = v),
+      autoCapture:
+          mode == DkScanMode.batch ||
+          ref.watch(scannerSettingsProvider).autoCapture,
+      onAutoCapture: (v) =>
+          ref.read(scannerSettingsProvider.notifier).setAutoCapture(v),
+      autoLocked: mode == DkScanMode.batch,
       grid: _grid,
       onGrid: (v) => setState(() => _grid = v),
       onSettings: widget.onSettings,
@@ -212,6 +245,7 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       quad: _quad,
       brightness: _brightness,
       steady: _steady,
+      capturing: _countdown > 0,
     );
     _announcer.update(hintKind, hintKind.text(l), _clock.elapsed);
     final hint = DkHintPill(
@@ -248,7 +282,10 @@ class _S1ScreenState extends ConsumerState<S1Screen>
         ),
       ),
     );
-    final shutter = DkShutterButton(onPressed: _open ? _capture : null);
+    final shutter = DkShutterButton(
+      onPressed: _open ? _capture : null,
+      countdown: _countdown,
+    );
     final stack = ScaleTransition(
       key: _stackKey,
       // The count pops when the page lands.

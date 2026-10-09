@@ -8,7 +8,9 @@ import 'package:app_pdf/components/dk_shutter_button.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/screens/s1_scanner/s1_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:app_pdf/components/dk_icon.dart';
 import 'package:app_pdf/screens/s1_scanner/scanner_camera.dart';
+import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
@@ -56,14 +58,14 @@ class FakeCamera implements ScannerCamera {
   @override
   Future<void> close() async => closed = true;
 
-  /// A bright frame (the fake page is lit).
-  void frame() => frames$.add(
+  /// A bright frame (the fake page is lit), taken at [ms] milliseconds.
+  void frame([int ms = 0]) => frames$.add(
     GreyFrame(
       Uint8List.fromList(List.filled(256, 200)),
       16,
       16,
       rowStride: 16,
-      time: Duration.zero,
+      time: Duration(milliseconds: ms),
     ),
   );
 }
@@ -78,6 +80,7 @@ const found = [
 
 void main() {
   late FakeCamera camera;
+  late MemoryPrefsStore prefs;
   Future<void> capture(WidgetTester tester) async {
     await tester.tap(find.byType(DkShutterButton));
     await tester.pumpAndSettle();
@@ -92,11 +95,13 @@ void main() {
     DkTokens? tokens,
     Locale locale = const Locale('en'),
     DetectedQuad? quad,
+    String? prefsJson,
   }) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     camera = FakeCamera();
+    prefs = MemoryPrefsStore()..json = prefsJson;
     closed = imported = reviewed = 0;
     container = ProviderContainer(
       overrides: [
@@ -106,6 +111,7 @@ void main() {
               (_) async => quad,
         ),
         scanStoreProvider.overrideWithValue(MemoryScanStore()),
+        scannerPrefsStoreProvider.overrideWithValue(prefs),
       ],
     );
     addTearDown(container.dispose);
@@ -214,6 +220,61 @@ void main() {
       expect(container.read(scanSessionProvider), hasLength(1));
     },
   );
+
+  group('auto-capture (DK-0338)', () {
+    Future<void> frames(WidgetTester tester, List<int> times) async {
+      for (final t in times) {
+        camera.frame(t);
+        await tester.pumpAndSettle();
+      }
+    }
+
+    testWidgets('steady for 0.5 s: "Capturing…", the arc, then the shot', (
+      tester,
+    ) async {
+      await pump(tester, quad: found, prefsJson: '{"autoCapture": true}');
+      await frames(tester, [0, 100, 300]);
+      expect(find.text('Capturing…'), findsOneWidget);
+      final arc = tester
+          .widget<DkShutterButton>(find.byType(DkShutterButton))
+          .countdown;
+      expect(arc, closeTo(0.4, 0.01));
+      expect(camera.shots, 0);
+      await frames(tester, [600]);
+      expect(camera.shots, 1);
+    });
+
+    testWidgets('off by default: a steady page is only "Ready"', (
+      tester,
+    ) async {
+      await pump(tester, quad: found);
+      await frames(tester, [0, 100, 900]);
+      expect(find.text('Ready'), findsOneWidget);
+      expect(camera.shots, 0);
+    });
+
+    testWidgets('Batch forces it on with a lock; the toggle is remembered', (
+      tester,
+    ) async {
+      await pump(tester, quad: found);
+      await tester.tap(find.text('Auto'));
+      await tester.pumpAndSettle();
+      expect(prefs.json, contains('"autoCapture":true'));
+      await tester.tap(find.text('Auto'));
+      await tester.pumpAndSettle();
+      expect(prefs.json, contains('"autoCapture":false'));
+      await tester.ensureVisible(find.text('Batch'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Batch'));
+      await tester.pumpAndSettle();
+      expect(
+        find.byWidgetPredicate((w) => w is DkIcon && w.icon == DkIcons.lock),
+        findsOneWidget,
+      );
+      await frames(tester, [0, 100, 700]);
+      expect(camera.shots, 1, reason: 'Batch captures by itself');
+    });
+  });
 
   testWidgets('closing the screen closes the camera', (tester) async {
     await pump(tester);
