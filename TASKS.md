@@ -7791,3 +7791,7 @@ heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 2)
 ### H-1667 · 2026-10-09 20:27 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0282-locked-crypto)
+
+### H-1668 · 2026-10-09 20:27 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 2)
