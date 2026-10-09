@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' show CupertinoPageTransitionsBuilder;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -314,4 +315,188 @@ Page<void> dkViewerPage(
       child: child,
     ),
   );
+}
+
+/// Push (UI spec §13.4; DK-0237): iOS slides from the right (Cupertino's
+/// own, with its back swipe); Android is a shared-axis X: the new page comes
+/// in 30 dp from the right as it fades in, the old one leaves 30 dp to the
+/// left as it fades out. With Reduce Motion both are a plain cross-fade.
+/// The theme sets it for every pushed page ([dokuloTheme]).
+class DkPageTransitionsBuilder extends PageTransitionsBuilder {
+  const DkPageTransitionsBuilder();
+
+  /// 7.5 % of the width: about 30 dp on a phone (Material's shared axis).
+  static const _shift = 0.075;
+
+  @override
+  Widget buildTransitions<T>(
+    PageRoute<T> route,
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    if (context.reduceMotion) {
+      return FadeTransition(opacity: animation, child: child);
+    }
+    if (Theme.of(context).platform == TargetPlatform.iOS) {
+      return const CupertinoPageTransitionsBuilder().buildTransitions(
+        route,
+        context,
+        animation,
+        secondaryAnimation,
+        child,
+      );
+    }
+    final curve = context.tokens.motion.standardCurve;
+    final enter = CurvedAnimation(parent: animation, curve: curve);
+    final leave = CurvedAnimation(parent: secondaryAnimation, curve: curve);
+    // Transitions, not Opacity/Transform: no rebuild per frame, and an idle
+    // page carries no extra Opacity or Transform in its tree.
+    return FadeTransition(
+      opacity: enter,
+      child: FadeTransition(
+        opacity: ReverseAnimation(leave),
+        child: SlideTransition(
+          position: Tween(
+            begin: const Offset(_shift, 0),
+            end: Offset.zero,
+          ).animate(enter),
+          child: SlideTransition(
+            position: Tween(
+              begin: Offset.zero,
+              end: const Offset(-_shift, 0),
+            ).animate(leave),
+            child: child,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Scanner open / close (UI spec §13.4; DK-0229): the page slides up from
+/// the bottom in 220 ms and back down on close; with Reduce Motion it
+/// cross-fades in 120 ms.
+Page<void> dkSlideUpPage(
+  BuildContext context, {
+  required LocalKey key,
+  required Widget child,
+}) {
+  final m = context.motion(DkMotionKind.standard);
+  return CustomTransitionPage<void>(
+    key: key,
+    child: child,
+    transitionDuration: m.duration,
+    reverseTransitionDuration: m.duration,
+    transitionsBuilder: (context, animation, _, child) => m.crossFade
+        ? FadeTransition(opacity: animation, child: child)
+        : SlideTransition(
+            position: Tween(
+              begin: const Offset(0, 1),
+              end: Offset.zero,
+            ).chain(CurveTween(curve: m.curve)).animate(animation),
+            child: child,
+          ),
+  );
+}
+
+/// Result after progress (UI spec §13.4; DK-0237): T3 cross-fades in over
+/// the tool in 220 ms (120 ms with Reduce Motion).
+Page<void> dkFadePage(
+  BuildContext context, {
+  required LocalKey key,
+  required Widget child,
+}) {
+  final m = context.motion(DkMotionKind.standard);
+  return CustomTransitionPage<void>(
+    key: key,
+    child: child,
+    transitionDuration: m.duration,
+    reverseTransitionDuration: m.duration,
+    transitionsBuilder: (context, animation, _, child) =>
+        FadeTransition(opacity: animation, child: child),
+  );
+}
+
+/// Tab switch (UI spec §13.4; DK-0229): the shell's tabs cross-fade in
+/// 120 ms. Every tab's navigator stays alive (each keeps its stack and
+/// scroll); only the current one takes touches, focus and semantics, and the
+/// others are offstage, as in IndexedStack, once the fade has ended.
+class DkFadingBranches extends StatefulWidget {
+  const DkFadingBranches({
+    super.key,
+    required this.currentIndex,
+    required this.children,
+  });
+
+  final int currentIndex;
+  final List<Widget> children;
+
+  @override
+  State<DkFadingBranches> createState() => _DkFadingBranchesState();
+}
+
+class _DkFadingBranchesState extends State<DkFadingBranches>
+    with SingleTickerProviderStateMixin {
+  late final _fade = AnimationController(vsync: this, value: 1);
+
+  /// The tab fading out, while [_fade] runs.
+  int? _previous;
+
+  @override
+  void didUpdateWidget(DkFadingBranches old) {
+    super.didUpdateWidget(old);
+    if (old.currentIndex == widget.currentIndex) return;
+    _previous = old.currentIndex;
+    _fade
+      ..duration = context.tokens.motion.fast
+      ..forward(from: 0).whenComplete(() {
+        if (mounted) setState(() => _previous = null);
+      });
+  }
+
+  @override
+  void dispose() {
+    _fade.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Stack(
+    fit: StackFit.expand,
+    children: [
+      for (final (i, child) in widget.children.indexed) _branch(i, child),
+    ],
+  );
+
+  Widget _branch(int i, Widget child) {
+    final current = i == widget.currentIndex;
+    final leaving = i == _previous;
+    return Offstage(
+      offstage: !current && !leaving,
+      child: IgnorePointer(
+        ignoring: !current,
+        child: ExcludeFocus(
+          excluding: !current,
+          child: ExcludeSemantics(
+            excluding: !current,
+            child: TickerMode(
+              enabled: current || leaving,
+              // Always a FadeTransition, so a branch's subtree keeps its
+              // shape (and place) as it comes and goes.
+              child: FadeTransition(
+                opacity: current
+                    ? _fade
+                    : leaving
+                    ? ReverseAnimation(_fade)
+                    : kAlwaysDismissedAnimation,
+                child: child,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
