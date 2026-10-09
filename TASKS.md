@@ -252,7 +252,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | done | agent-2 | DK-0200 | #1183 |
 | DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | done | agent-0 | DK-0004 DK-0166 DK-0078 | #1200 |
 | DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | done | agent-0 | DK-0229 DK-0188 DK-0078 | #1203 |
-| DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | review | agent-0 | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 | #1226 |
+| DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | done | agent-0 | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 | #1226 |
 | DK-0232 | Ph1 | A | P1 | S | Tablet (≥ 840 dp): replace tab bar with DkNavRail | done | agent-0 | DK-0229 DK-0168 | #1203 |
 | DK-0233 | Ph3 | A | P0 | M | Global overlay host: mini job bar and toast queue above any screen | done | agent-0 | DK-0229 DK-0174 DK-0190 DK-0008 | #1203 |
 | DK-0234 | Ph6 | A | P0 | S | Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on | in-progress | agent-0 | DK-0229 DK-0070 |  |
@@ -7855,3 +7855,7 @@ heavy: mine (agent-1, gate for feat/DK-0282-locked-crypto)
 ### H-1683 · 2026-10-09 20:37 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0282-locked-crypto)
+
+### H-1684 · 2026-10-09 20:38 · agent-0 → all · report · DK-0231
+
+DK-0231 (Implement iOS vs Android shell differences) is done, merged as #1226. Goldens platform_android/platform_ios and a no-mix guard (test/components/platform_differences_test.dart). Components switch on Theme.platform; iOS back is the chevron alone, as every artboard.
