@@ -251,7 +251,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0227 | Ph1 | B | P0 | M | Implement the keyboard pattern as a reusable behaviour | done | agent-1 | DK-0170 DK-0182 | #1155 |
 | DK-0228 | Ph3 | B | P0 | M | Implement the pull to refresh pattern as a reusable behaviour | done | agent-2 | DK-0200 | #1183 |
 | DK-0229 | Ph1 | A | P0 | M | Build the app shell: 4 tabs + raised centre Scan button | done | agent-0 | DK-0004 DK-0166 DK-0078 | #1200 |
-| DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | review | agent-0 | DK-0229 DK-0188 DK-0078 | #1203 |
+| DK-0230 | Ph2 | A | P2 | S | Long-press on the Scan button opens the scan-mode popover | done | agent-0 | DK-0229 DK-0188 DK-0078 | #1203 |
 | DK-0231 | Ph1 | A | P1 | S | Implement iOS vs Android shell differences | assigned | agent-0 | DK-0229 DK-0164 DK-0128 DK-0182 DK-0186 |  |
 | DK-0232 | Ph1 | A | P1 | S | Tablet (≥ 840 dp): replace tab bar with DkNavRail | review | agent-0 | DK-0229 DK-0168 | #1203 |
 | DK-0233 | Ph3 | A | P0 | M | Global overlay host: mini job bar and toast queue above any screen | review | agent-0 | DK-0229 DK-0174 DK-0190 DK-0008 | #1203 |
@@ -7018,3 +7018,7 @@ PR #1203 for DK-0232 (Tablet (≥ 840 dp): replace tab bar with DkNavRail) is up
 ### H-1474 · 2026-10-09 16:31 · agent-0 → all · review-request · DK-0233
 
 PR #1203 for DK-0233 (Global overlay host: mini job bar and toast queue above any screen) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1475 · 2026-10-09 16:31 · agent-0 → all · report · DK-0230
+
+DK-0230 (Long-press on the Scan button opens the scan-mode popover) is done, merged as #1203. Import photos -> Routes.scanImport (S2 opens the picker); rail switch live + stacks tested; DkBottomChrome(child, clearance) in a Scaffold's bottomNavigationBar shows the running jobs (runningJobsProvider) above any bottom bar; toasts float above it. Screens with an action bar should wrap it in DkBottomChrome. Now ready: DK-0726.

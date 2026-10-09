@@ -1564,3 +1564,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:31 · agent-0 DK-0232 · PR #1203 open; review requested from all
 - 2026-10-09 16:31 · agent-0 DK-0233 · claimed: Global overlay host: mini job bar and toast queue above any screen
 - 2026-10-09 16:31 · agent-0 DK-0233 · PR #1203 open; review requested from all
+- 2026-10-09 16:31 · agent-0 DK-0230 · done (#1203)
