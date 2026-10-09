@@ -1,5 +1,6 @@
 import 'package:app_pdf/components/dk_illustration.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
+import 'package:app_pdf/patterns/dk_open_file.dart';
 import 'package:app_pdf/providers/onboarding_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/launch/launch_screen.dart';
@@ -42,7 +43,11 @@ Future<(GoRouter, _Flag)> pumpAt(
   addTearDown(router.dispose);
   await tester.pumpWidget(
     ProviderScope(
-      overrides: [onboardingDoneProvider.overrideWith(() => flag)],
+      overrides: [
+        onboardingDoneProvider.overrideWith(() => flag),
+        // The picker is cancelled: nothing else happens.
+        pickPdfProvider.overrideWithValue(() async => null),
+      ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: router,
@@ -125,7 +130,6 @@ void main() {
 
   for (final (card, location) in [
     ('Scan a document', Routes.scan),
-    ('Open a PDF', Routes.files),
     ('Look around', Routes.home),
   ]) {
     testWidgets('O3 "$card" goes to $location and marks it seen', (
@@ -150,6 +154,21 @@ void main() {
       expect(flag.seen, isTrue);
     });
   }
+
+  testWidgets('O3 "Open a PDF" opens the picker and marks it seen', (
+    tester,
+  ) async {
+    final (router, flag) = await pumpAt(tester, Routes.welcome);
+    for (var i = 0; i < 2; i++) {
+      await tester.tap(next);
+      await tester.pumpAndSettle();
+    }
+    await tester.tap(find.text('Open a PDF'));
+    await tester.pumpAndSettle();
+    expect(flag.seen, isTrue);
+    // Cancelled: still on O3, where the user can choose again.
+    expect(router.state.uri.path, Routes.welcome);
+  });
 
   testWidgets('every O3 card is at least 72 tall and 48 to touch', (
     tester,

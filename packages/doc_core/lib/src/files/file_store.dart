@@ -106,6 +106,27 @@ class FileStore {
     });
   }
 
+  /// "Open a file" from the system picker or another app (DK-0241): a copy
+  /// of [source] in the user folder (under a free name; the original stays
+  /// where it was) and its row, so Files, Recent and V1 find it. Returns the
+  /// row's id.
+  Future<int> importToUserFolder(DokuloDatabase db, File source) async {
+    await userFolder.create(recursive: true);
+    final copy = await source.copy(_freePath(userFolder, _name(source)));
+    final stat = await copy.stat();
+    return db
+        .into(db.files)
+        .insert(
+          FilesCompanion.insert(
+            path: copy.path,
+            name: _name(copy),
+            size: stat.size,
+            created: stat.modified,
+            modified: stat.modified,
+          ),
+        );
+  }
+
   /// A new folder named [name] in folder [parent] (null: the root): the
   /// directory in the user folder and its row. Throws [FolderNameException]
   /// for an empty name, one with a path separator, or one already there

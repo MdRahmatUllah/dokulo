@@ -143,6 +143,7 @@ void main() {
     expect(find.byType(DkEmptyState), findsOneWidget);
     expect(find.text('No files yet'), findsOneWidget);
     expect(find.text('Locked folder'), findsOneWidget);
+    expect(find.text('Open a file'), findsOneWidget);
     await tester.tap(find.text('Scan a document'));
     await settle(tester);
     expect(router.state.uri.path, Routes.scan);

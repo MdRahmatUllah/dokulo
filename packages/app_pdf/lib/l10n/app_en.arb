@@ -1428,22 +1428,6 @@
   "@files_sort_descending": {
     "description": "Sort menu, second group."
   },
-  "files_empty_title": "No files yet",
-  "@files_empty_title": {
-    "description": "F1 empty root."
-  },
-  "files_empty_body": "Scan a document or open a PDF to get started.",
-  "@files_empty_body": {
-    "description": "F1 empty root."
-  },
-  "files_empty_scan": "Scan a document",
-  "@files_empty_scan": {
-    "description": "F1 empty root: the primary action."
-  },
-  "files_empty_open": "Open a file",
-  "@files_empty_open": {
-    "description": "F1 empty root: the secondary action."
-  },
   "files_more_actions": "More actions",
   "@files_more_actions": {
     "description": "A file row's more button."
@@ -1471,13 +1455,5 @@
   "home_settings": "Settings",
   "@home_settings": {
     "description": "H1 top bar action."
-  },
-  "home_empty_title": "Your scans and PDFs will appear here",
-  "@home_empty_title": {
-    "description": "H1 first launch."
-  },
-  "home_empty_body": "Scan a document or open a PDF to get started.",
-  "@home_empty_body": {
-    "description": "H1 first launch."
   }
 }

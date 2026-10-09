@@ -113,6 +113,32 @@ void main() {
     expect(await db.select(db.folders).get(), hasLength(2));
   });
 
+  test(
+    'importToUserFolder: a copy in Dokulo, indexed; the original stays',
+    () async {
+      final picked = File('${root.path}${sep}Downloads${sep}Rechnung.pdf')
+        ..createSync(recursive: true)
+        ..writeAsStringSync('%PDF-1.7 picked');
+      final id = await store.importToUserFolder(db, picked);
+      final row = await (db.select(
+        db.files,
+      )..where((f) => f.id.equals(id))).getSingle();
+      expect(row.name, 'Rechnung.pdf');
+      expect(row.path, startsWith(store.userFolder.path));
+      expect(File(row.path).readAsStringSync(), '%PDF-1.7 picked');
+      expect(picked.existsSync(), isTrue);
+      // The same file again: a second copy under a free name.
+      final again = await store.importToUserFolder(db, picked);
+      final second = await (db.select(
+        db.files,
+      )..where((f) => f.id.equals(again))).getSingle();
+      expect(second.name, 'Rechnung (2).pdf');
+      // A reconcile keeps both rows as they are.
+      await store.reconcile(db);
+      expect(await db.select(db.files).get(), hasLength(2));
+    },
+  );
+
   group('createFolder (DK-0273)', () {
     test('makes the directory and its row, nested too', () async {
       final taxes = await store.createFolder(db, 'Taxes');

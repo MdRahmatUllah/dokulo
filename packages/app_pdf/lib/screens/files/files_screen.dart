@@ -4,11 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_sheet.dart';
-import '../../components/dk_empty_state.dart';
 import '../../components/dk_file_card.dart';
 import '../../components/dk_folder_card.dart';
 import '../../components/dk_icon.dart';
-import '../../components/dk_illustration.dart';
 import '../../components/dk_menu.dart';
 import '../../components/dk_refresh.dart';
 import '../../components/dk_settings_row.dart';
@@ -17,6 +15,8 @@ import '../../components/dk_text_field.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
+import '../../patterns/dk_empty_states.dart';
+import '../../patterns/dk_open_file.dart';
 import '../../patterns/dk_text_dialog.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
@@ -116,12 +116,10 @@ class FilesScreen extends ConsumerWidget {
             else if (empty)
               SliverFillRemaining(
                 hasScrollBody: false,
-                child: DkEmptyState(
-                  illustration: DkIllustrations.filesEmpty,
-                  title: l.files_empty_title,
-                  body: l.files_empty_body,
-                  action: l.files_empty_scan,
-                  onAction: () => context.push(Routes.scan),
+                child: DkEmptyStates.filesRoot(
+                  context,
+                  onScan: () => context.push(Routes.scan),
+                  onOpenFile: () => openFileFromDevice(context, ref),
                 ),
               )
             else ...[

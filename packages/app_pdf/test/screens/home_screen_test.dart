@@ -5,7 +5,9 @@ import 'package:app_pdf/components/dk_empty_state.dart';
 import 'package:app_pdf/components/dk_file_card.dart';
 import 'package:app_pdf/components/dk_tool_tile.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
+import 'package:app_pdf/patterns/dk_open_file.dart';
 import 'package:app_pdf/providers/database_providers.dart';
+import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
@@ -16,6 +18,7 @@ import 'package:doc_core/doc_core.dart';
 import 'package:drift/drift.dart' show OrderingTerm, Value;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,6 +42,7 @@ Future<GoRouter> pumpHome(
   DokuloDatabase db, {
   DkTokens? tokens,
   Locale locale = const Locale('en'),
+  List<Override> overrides = const [],
 }) async {
   tester.view.physicalSize = const Size(393, 852);
   tester.view.devicePixelRatio = 1;
@@ -51,6 +55,7 @@ Future<GoRouter> pumpHome(
         appDatabaseProvider.overrideWithValue(db),
         prefsProvider.overrideWith(() => Prefs.memory()),
         thumbnailCacheProvider.overrideWith((ref) async => _WhitePages()),
+        ...overrides,
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -146,6 +151,39 @@ void main() {
               .getSingle(),
     );
     expect(top!.fileId, older);
+  });
+
+  testWidgets('Open a file: picked, copied into Dokulo, at the top, in V1', (
+    tester,
+  ) async {
+    final root = (await tester.runAsync(
+      () => Directory.systemTemp.createTemp('dk_h1_'),
+    ))!;
+    addTearDown(() => root.delete(recursive: true));
+    final picked = File('${root.path}/Downloads/Vertrag.pdf')
+      ..createSync(recursive: true)
+      ..writeAsStringSync('%PDF-1.7');
+    final store = FileStore(
+      userFolder: Directory('${root.path}/Dokulo'),
+      workDirectory: Directory('${root.path}/work'),
+    );
+    final router = await pumpHome(
+      tester,
+      db,
+      overrides: [
+        pickPdfProvider.overrideWithValue(() async => picked.path),
+        fileStoreProvider.overrideWith((ref) async => store),
+      ],
+    );
+    await tester.runAsync(() async {
+      await tester.tap(find.text('Open a file'));
+      await Future<void>.delayed(const Duration(milliseconds: 200));
+    });
+    await settle(tester);
+    expect(router.state.uri.path, startsWith('/viewer/'));
+    expect(File('${root.path}/Dokulo/Vertrag.pdf').existsSync(), isTrue);
+    final recents = await tester.runAsync(() => db.select(db.recents).get());
+    expect(recents, hasLength(1));
   });
 
   testWidgets('pinned tools come from the table, in order', (tester) async {

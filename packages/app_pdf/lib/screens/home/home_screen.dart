@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/dk_button.dart';
-import '../../components/dk_empty_state.dart';
 import '../../components/dk_icon.dart';
-import '../../components/dk_illustration.dart';
 import '../../components/dk_privacy_line.dart';
 import '../../components/dk_refresh.dart';
 import '../../components/dk_tool_tile.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
+import '../../patterns/dk_empty_states.dart';
+import '../../patterns/dk_open_file.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
 import '../../providers/files_providers.dart';
@@ -88,8 +88,7 @@ class HomeScreen extends ConsumerWidget {
                   icon: DkIcons.folderOpen,
                   variant: DkButtonVariant.secondary,
                   expand: true,
-                  // ponytail: Files until the system picker lands (DK-0241)
-                  onPressed: () => context.go(Routes.files),
+                  onPressed: () => openFileFromDevice(context, ref),
                 ),
               ),
             ),
@@ -97,12 +96,9 @@ class HomeScreen extends ConsumerWidget {
               AsyncData(:final value) when value.isEmpty => SliverPadding(
                 padding: EdgeInsets.only(top: t.space.xl),
                 sliver: SliverToBoxAdapter(
-                  child: DkEmptyState(
-                    illustration: DkIllustrations.homeEmpty,
-                    title: l.home_empty_title,
-                    body: l.home_empty_body,
-                    action: l.files_empty_scan,
-                    onAction: () => context.push(Routes.scan),
+                  child: DkEmptyStates.homeRecents(
+                    context,
+                    onScan: () => context.push(Routes.scan),
                   ),
                 ),
               ),
