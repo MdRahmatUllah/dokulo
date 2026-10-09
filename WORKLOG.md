@@ -1699,3 +1699,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 20:49 · agent-1 DK-0287 · PR #1229 open; review requested from all
 - 2026-10-09 20:52 · agent-0 · heavy: free
 - 2026-10-09 20:53 · agent-0 DK-0234 · done (#1228)
+- 2026-10-09 20:54 · agent-0 DK-0980 · claimed: Visual QA: global-states (global-states)

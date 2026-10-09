@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 20:53
+last-seen: 2026-10-09 20:54
 last-read: 1652
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0980 Visual QA: global-states (global-states) — claimed 2026-10-09 20:54.
 
 ## Next
 
