@@ -89,11 +89,12 @@ Future<GoRouter> pumpFiles(
   FilesFixture f, {
   DkTokens? tokens,
   Locale locale = const Locale('en'),
+  String location = Routes.files,
 }) async {
   tester.view.physicalSize = const Size(393, 852);
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
-  final router = buildRouter(initialLocation: Routes.files);
+  final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
   await tester.pumpWidget(
     ProviderScope(
@@ -337,6 +338,275 @@ void main() {
       fileMeta(entry(DateTime(2025, 3, 1)), l, 'en', now: now),
       endsWith('1 Mar 2025'),
     );
+  });
+
+  group('the folder screen (DK-0262)', () {
+    late int taxes, year;
+
+    Future<void> seed(WidgetTester tester) => tester.runAsync(() async {
+      taxes = await f.store.createFolder(f.db, 'Taxes');
+      year = await f.store.createFolder(f.db, '2026', parent: taxes);
+      final pdf = File('${f.root.path}/Dokulo/Taxes/2026/Bescheid.pdf')
+        ..createSync(recursive: true)
+        ..writeAsStringSync('%PDF');
+      await f.db
+          .into(f.db.files)
+          .insert(
+            FilesCompanion.insert(
+              path: pdf.path,
+              name: 'Bescheid.pdf',
+              size: 4,
+              created: DateTime(2026, 10, 1),
+              modified: DateTime(2026, 10, 1),
+              folderId: Value(year),
+            ),
+          );
+    });
+
+    testWidgets('title, breadcrumb, files with their count', (tester) async {
+      await seed(tester);
+      final router = await pumpFiles(tester, f, location: Routes.folder(year));
+      expect(find.text('2026'), findsWidgets);
+      expect(find.text('Taxes'), findsOneWidget, reason: 'breadcrumb');
+      expect(find.text('1 file'), findsOneWidget);
+      expect(find.text('Bescheid.pdf'), findsOneWidget);
+      expect(find.text('Locked folder'), findsNothing, reason: 'root only');
+      // A breadcrumb part opens that level.
+      await tester.tap(find.text('Taxes'));
+      await settle(tester);
+      expect(router.state.uri.path, Routes.folder(taxes));
+      await tester.tap(find.text('Files').first);
+      await settle(tester);
+      expect(router.state.uri.path, Routes.files);
+    });
+
+    testWidgets('an empty folder shows its empty state', (tester) async {
+      await seed(tester);
+      final empty = (await tester.runAsync(
+        () => f.store.createFolder(f.db, 'Leer'),
+      ))!;
+      await pumpFiles(tester, f, location: Routes.folder(empty));
+      expect(find.text('This folder is empty'), findsOneWidget);
+    });
+
+    testWidgets('Rename folder renames it on disk and in the title', (
+      tester,
+    ) async {
+      await seed(tester);
+      await pumpFiles(tester, f, location: Routes.folder(taxes));
+      await tester.tap(find.byTooltip('More options'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Rename folder'));
+      await tester.pumpAndSettle();
+      await tester.enterText(dialogField, 'Steuern');
+      await tester.pump();
+      await tester.runAsync(() async {
+        await tester.tap(find.text('Rename'));
+        await Future<void>.delayed(const Duration(milliseconds: 150));
+      });
+      await settle(tester);
+      expect(find.text('Steuern'), findsWidgets);
+      expect(
+        Directory('${f.root.path}/Dokulo/Steuern/2026').existsSync(),
+        isTrue,
+      );
+    });
+
+    testWidgets('Colour tags the folder everywhere', (tester) async {
+      await seed(tester);
+      await pumpFiles(tester, f, location: Routes.folder(taxes));
+      await tester.tap(find.byTooltip('More options'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Colour'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Green'));
+      await settle(tester);
+      final row = await tester.runAsync(
+        () => (f.db.select(
+          f.db.folders,
+        )..where((x) => x.id.equals(taxes))).getSingle(),
+      );
+      expect(row!.colourTag, 'green');
+    });
+
+    testWidgets('Delete folder asks first when it holds files', (tester) async {
+      await seed(tester);
+      final router = await pumpFiles(tester, f, location: Routes.folder(taxes));
+      await tester.tap(find.byTooltip('More options'));
+      await tester.pumpAndSettle();
+      await tester.runAsync(() async {
+        await tester.tap(find.text('Delete folder'));
+        await Future<void>.delayed(const Duration(milliseconds: 100));
+      });
+      await tester.pumpAndSettle();
+      expect(find.text('Delete “Taxes”?'), findsOneWidget);
+      expect(find.text('Its file moves to Recently deleted.'), findsOneWidget);
+      await tester.runAsync(() async {
+        await tester.tap(find.text('Delete folder').last);
+        await Future<void>.delayed(const Duration(milliseconds: 150));
+      });
+      await settle(tester);
+      expect(router.state.uri.path, Routes.files);
+      expect(
+        await tester.runAsync(() => f.db.select(f.db.folders).get()),
+        isEmpty,
+      );
+      expect(
+        await tester.runAsync(() => f.db.select(f.db.trash).get()),
+        hasLength(1),
+      );
+    });
+  });
+
+  group('file actions (DK-0271, DK-0272, DK-0274, DK-0276)', () {
+    late int id;
+    Future<void> seed(WidgetTester tester) => tester.runAsync(() async {
+      final pdf = File('${f.root.path}/Dokulo/Vertrag.pdf')
+        ..createSync(recursive: true)
+        ..writeAsStringSync('%PDF');
+      id = await f.db
+          .into(f.db.files)
+          .insert(
+            FilesCompanion.insert(
+              path: pdf.path,
+              name: 'Vertrag.pdf',
+              size: 4,
+              created: DateTime(2026, 10, 1),
+              modified: DateTime(2026, 10, 1),
+            ),
+          );
+    });
+
+    Future<void> openSheet(WidgetTester tester) async {
+      await tester.runAsync(() async {
+        await tester.tap(find.byTooltip('More actions'));
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+      });
+      await tester.pumpAndSettle();
+    }
+
+    Future<void> tapReal(WidgetTester tester, Finder finder) async {
+      await tester.runAsync(() async {
+        await tester.tap(finder);
+        await Future<void>.delayed(const Duration(milliseconds: 150));
+      });
+      await settle(tester);
+    }
+
+    Future<FileEntry> row(WidgetTester tester, int id) async =>
+        (await tester.runAsync(
+          () => (f.db.select(
+            f.db.files,
+          )..where((x) => x.id.equals(id))).getSingle(),
+        ))!;
+
+    testWidgets('the sheet: header, Open/Share, 5 tools, the actions', (
+      tester,
+    ) async {
+      await seed(tester);
+      await pumpFiles(tester, f);
+      await openSheet(tester);
+      expect(find.text('Open'), findsOneWidget);
+      expect(find.text('Share'), findsOneWidget);
+      for (final tool in [
+        'Compress PDF',
+        'Sign PDF',
+        'Add password',
+        'Black out',
+      ]) {
+        expect(find.text(tool), findsOneWidget, reason: tool);
+      }
+      for (final action in [
+        'All tools…',
+        'Rename',
+        'Duplicate',
+        'Move',
+        'Move to locked folder',
+        'Delete',
+      ]) {
+        expect(find.text(action), findsOneWidget, reason: action);
+      }
+    });
+
+    testWidgets('Rename keeps .pdf; a taken name is refused inline', (
+      tester,
+    ) async {
+      await seed(tester);
+      await tester.runAsync(
+        () async =>
+            File('${f.root.path}/Dokulo/Taken.pdf').writeAsStringSync('x'),
+      );
+      await pumpFiles(tester, f);
+      await openSheet(tester);
+      await tester.tap(find.text('Rename'));
+      await tester.pumpAndSettle();
+      expect(
+        find.text('.pdf'),
+        findsOneWidget,
+        reason: 'the extension is shown, not edited',
+      );
+      await tester.enterText(dialogField, 'Taken');
+      await tester.pump();
+      await tapReal(tester, find.text('Rename').last);
+      expect(
+        find.text('A file with this name already exists.'),
+        findsOneWidget,
+      );
+      await tester.enterText(dialogField, 'Mietvertrag');
+      await tester.pump();
+      await tapReal(tester, find.text('Rename').last);
+      expect((await row(tester, id)).name, 'Mietvertrag.pdf');
+    });
+
+    testWidgets('Duplicate makes (2) with Undo', (tester) async {
+      await seed(tester);
+      await pumpFiles(tester, f);
+      await openSheet(tester);
+      await tapReal(tester, find.text('Duplicate'));
+      expect(find.text('Duplicated as Vertrag (2).pdf'), findsOneWidget);
+      expect(find.text('Vertrag (2).pdf'), findsOneWidget);
+      await tapReal(tester, find.text('Undo'));
+      expect(find.text('Vertrag (2).pdf'), findsNothing);
+      expect(
+        File('${f.root.path}/Dokulo/Vertrag (2).pdf').existsSync(),
+        isFalse,
+      );
+    });
+
+    testWidgets('Delete moves to Recently deleted; Undo brings it back', (
+      tester,
+    ) async {
+      await seed(tester);
+      await pumpFiles(tester, f);
+      await openSheet(tester);
+      await tapReal(tester, find.text('Delete'));
+      expect(find.text('Moved to Recently deleted'), findsOneWidget);
+      expect(find.text('Vertrag.pdf'), findsNothing);
+      await tapReal(tester, find.text('Undo'));
+      expect(find.text('Vertrag.pdf'), findsOneWidget);
+    });
+
+    testWidgets('Move: into a folder from the sheet, Undo moves it back', (
+      tester,
+    ) async {
+      await seed(tester);
+      late int taxes;
+      await tester.runAsync(() async {
+        taxes = await f.store.createFolder(f.db, 'Taxes');
+      });
+      await pumpFiles(tester, f);
+      await openSheet(tester);
+      await tester.tap(find.text('Move'));
+      await settle(tester);
+      expect(find.text('Move 1 file'), findsOneWidget);
+      await tester.tap(find.text('Taxes').last);
+      await settle(tester);
+      await tapReal(tester, find.text('Move here'));
+      expect(find.text('Moved to Taxes'), findsOneWidget);
+      expect((await row(tester, id)).folderId, taxes);
+      await tapReal(tester, find.text('Undo'));
+      expect((await row(tester, id)).folderId, isNull);
+    });
   });
 
   group('goldens', () {

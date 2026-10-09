@@ -1479,5 +1479,105 @@
   "home_settings": "Settings",
   "@home_settings": {
     "description": "H1 top bar action."
+  },
+  "folder_back": "Back to Files",
+  "@folder_back": {
+    "description": "Folder screen: back, for screen readers."
+  },
+  "folder_rename": "Rename folder",
+  "@folder_rename": {
+    "description": "Folder menu (DK-0262)."
+  },
+  "folder_colour": "Colour",
+  "@folder_colour": {
+    "description": "Folder menu: the colour tag."
+  },
+  "folder_delete": "Delete folder",
+  "@folder_delete": {
+    "description": "Folder menu."
+  },
+  "folder_delete_title": "Delete “{name}”?",
+  "@folder_delete_title": {
+    "description": "Delete folder: the confirmation's title.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "folder_delete_body": "{n, plural, one{Its file moves} other{Its {n} files move}} to Recently deleted.",
+  "@folder_delete_body": {
+    "description": "Delete folder: what happens to its files.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "folder_tag_none": "No colour",
+  "@folder_tag_none": {
+    "description": "Folder colour menu."
+  },
+  "folder_tag_blue": "Blue",
+  "@folder_tag_blue": {
+    "description": "Folder colour."
+  },
+  "folder_tag_green": "Green",
+  "@folder_tag_green": {
+    "description": "Folder colour."
+  },
+  "folder_tag_orange": "Orange",
+  "@folder_tag_orange": {
+    "description": "Folder colour."
+  },
+  "folder_tag_red": "Red",
+  "@folder_tag_red": {
+    "description": "Folder colour."
+  },
+  "folder_tag_purple": "Purple",
+  "@folder_tag_purple": {
+    "description": "Folder colour."
+  },
+  "folder_tag_grey": "Grey",
+  "@folder_tag_grey": {
+    "description": "Folder colour."
+  },
+  "file_name_taken": "A file with this name already exists.",
+  "@file_name_taken": {
+    "description": "Rename dialog: the name is taken (DK-0272)."
+  },
+  "file_name_invalid": "That name can't be used.",
+  "@file_name_invalid": {
+    "description": "Rename dialog: nothing usable is left of the name."
+  },
+  "file_move_to_locked": "Move to locked folder",
+  "@file_move_to_locked": {
+    "description": "File action sheet (DK-0271)."
+  },
+  "file_all_tools": "All tools…",
+  "@file_all_tools": {
+    "description": "File action sheet: opens the tool picker."
+  },
+  "file_move_title": "{n, plural, one{Move 1 file} other{Move {n} files}}",
+  "@file_move_title": {
+    "description": "Move sheet's title (DK-0274).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "file_move_here": "Move here",
+  "@file_move_here": {
+    "description": "Move sheet: the sticky button."
+  },
+  "toast_duplicated": "Duplicated as {name}",
+  "@toast_duplicated": {
+    "description": "Toast after Duplicate, with Undo (DK-0276).",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   }
 }
