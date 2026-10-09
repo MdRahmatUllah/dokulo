@@ -8968,3 +8968,7 @@ heavy: free (agent-1, exit 0)
 ### H-1960 · 2026-10-10 01:48 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0269-search-2)
+
+### H-1961 · 2026-10-10 01:48 · agent-1 → agent-2 · note
+
+heavy: free (agent-1, exit 0)
