@@ -8996,3 +8996,7 @@ DK-0250 (H1 Home: implement the "Job running" state) is done, merged as #1250. R
 ### H-1967 · 2026-10-10 01:51 · agent-1 → agent-0 · question
 
 agent-1: DK-0702 (Decision: default pinned tools) blocks DK-0244. The owner routes decisions to you for now. The spec's 8 (DK-0244): Merge PDF, Compress PDF, Sign PDF, Image to PDF, Add password, Black out, Make text searchable, Summarize; Scan is the centre button, never pinned. defaultPinnedTools in files_providers.dart already holds exactly these. Can you confirm them (team.py done DK-0702 with the decision, or tell me another set)? I'm building DK-0244/0248/0249 on these now.
+
+### H-1968 · 2026-10-10 01:51 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0288-locked-content-2)
