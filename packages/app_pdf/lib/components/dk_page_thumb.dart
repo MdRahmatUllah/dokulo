@@ -5,12 +5,14 @@ import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_ring.dart';
+import 'motion/dk_transition_motion.dart';
 
 /// A page as a thumbnail (UI spec §11.5; DK-0150): the page on
 /// `color.pageWhite` with a 1 dp outline, its number below. Selected: a 2 dp
 /// primary ring and a check circle; [current] (the page shown in the editor,
 /// DkPageTray): the ring alone. The same ring shows keyboard focus.
-/// Loading ([page] null): a `color.surfaceSunken` block with the number.
+/// Loading ([page] null): a `color.surfaceSunken` block with the number;
+/// the page fades in over it (DkThumbFade).
 ///
 /// The parent sets the width (3 columns in DkPageGrid, 56 in DkPageTray);
 /// the page keeps [aspectRatio]. [page] is the rendered page: a `RawImage`
@@ -130,7 +132,10 @@ class _DkPageThumbState extends State<DkPageThumb> {
                     radius: t.radius.xs,
                     child: AspectRatio(
                       aspectRatio: widget.aspectRatio,
-                      child: page,
+                      child: DkThumbFade(
+                        loaded: widget.page != null,
+                        child: page,
+                      ),
                     ),
                   ),
                   if (overlay != null)
