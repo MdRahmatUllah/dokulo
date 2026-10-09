@@ -9,6 +9,7 @@ import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
+import '../screens/s1_scanner/s1_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import 'app_shell.dart';
 
@@ -240,14 +241,26 @@ class _HomeUnderneath extends StatelessWidget {
 /// S1 behind its camera permission (DK-0342). Importing photos needs no
 /// camera; every other mode asks for it first.
 Widget _scanner(String mode) {
-  final camera = PlaceholderScreen('S1', detail: mode);
-  if (mode == DkScanMode.importPhotos.name) return camera;
+  if (mode == DkScanMode.importPhotos.name) {
+    return PlaceholderScreen('S1', detail: mode);
+  }
   return Builder(
-    builder: (context) => CameraPermissionGate(
-      camera: (_) => camera,
-      onClose: () => context.canPop() ? context.pop() : context.go(Routes.home),
+    builder: (context) {
+      void close() =>
+          context.canPop() ? context.pop() : context.go(Routes.home);
       // As the Scan button's Import photos: S2's picker (DK-0230).
-      onImport: () => context.pushReplacement(Routes.scanImport),
-    ),
+      void import() => context.pushReplacement(Routes.scanImport);
+      return CameraPermissionGate(
+        camera: (_) => S1Screen(
+          initialMode: DkScanMode.values.asNameMap()[mode],
+          onClose: close,
+          onImport: import,
+          onReview: () => context.push(Routes.scanReview),
+          onSettings: () => context.push(Routes.settings('scanning')),
+        ),
+        onClose: close,
+        onImport: import,
+      );
+    },
   );
 }

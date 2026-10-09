@@ -883,6 +883,23 @@
   "@camera_settings": {
     "description": "DkCameraTopBar: tune, opens the scanning settings."
   },
+  "camera_hint_ready": "Ready",
+  "@camera_hint_ready": {
+    "description": "S1 hint pill: a document is in view."
+  },
+  "camera_hint_point": "Point at a document",
+  "@camera_hint_point": {
+    "description": "S1 hint pill: no document found yet."
+  },
+  "camera_review": "{count, plural, =1{Review 1 page} other{Review {count} pages}}",
+  "@camera_review": {
+    "description": "S1 page stack: opens S2 with the captured pages (screen readers).",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "camera_access_title": "Allow camera access",
   "@camera_access_title": {
     "description": "S1 camera pre-prompt sheet: title (before the system prompt)."
