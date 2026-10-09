@@ -500,5 +500,11 @@
   "t2_about_tool": "Über dieses Werkzeug",
   "error_unexpected_short": "Etwas ist schiefgegangen.",
   "error_unexpected_page_short": "Auf Seite {page} ist etwas schiefgegangen.",
-  "error_code_line": "Code {code}"
+  "error_code_line": "Code {code}",
+  "tools_search_hint": "Werkzeuge suchen",
+  "tools_all": "Alle",
+  "tools_count": "{n, plural, one{1 Werkzeug} other{{n} Werkzeuge}}",
+  "ai_not_eligible_title": "KI ist auf diesem Handy nicht verfügbar",
+  "ai_not_eligible_body": "Dafür braucht es mindestens {need} GB Arbeitsspeicher. Dieses Handy hat {have} GB.",
+  "common_ok": "OK"
 }
