@@ -635,7 +635,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | done | agent-0 | DK-0609 | #1206 |
 | DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | done | agent-0 | DK-0609 | #1206 |
 | DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | done | agent-0 | DK-0609 | #1207 |
-| DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
+| DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | in-progress | agent-0 | DK-0609 |  |
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
 | DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | assigned | agent-0 | DK-0609 |  |
 | DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | done | agent-0 | DK-0609 | #1206 |
