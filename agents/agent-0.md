@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0370 Generic T2 tool options shell (one shell for all 30 tools) — claimed 2026-10-09 21:13.
 
 ## Next
 

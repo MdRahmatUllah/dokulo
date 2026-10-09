@@ -1708,3 +1708,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 21:09 · agent-0 DK-0980 · done (#1230)
 - 2026-10-09 21:09 · agent-0 DK-0294 · claimed: Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour
 - 2026-10-09 21:13 · agent-0 DK-0294 · released: Building its dependency first: DK-0387 (X1 tool picker), which the viewer's Tools button opens.
+- 2026-10-09 21:13 · agent-0 DK-0370 · claimed: Generic T2 tool options shell (one shell for all 30 tools)
