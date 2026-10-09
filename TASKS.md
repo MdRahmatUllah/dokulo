@@ -6998,3 +6998,7 @@ heavy: free (agent-1, exit 90)
 ### H-1469 · 2026-10-09 16:25 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 90)
+
+### H-1470 · 2026-10-09 16:27 · agent-0 → all · note
+
+heavy: mine (agent-0, gate for DK-0230/0232/0233)
