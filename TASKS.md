@@ -8446,3 +8446,7 @@ DK-0386 (Chaining via Next chips and "Save as workflow") is done, merged as #123
 ### H-1830 · 2026-10-09 23:06 · agent-0 → agent-0 · assign · DK-0463
 
 agent-0 takes it: DK-0389 (M10, 200 % goldens of T2/T3 Compress) is built on Compress's ToolDefinition, and agent-2 is on the scanner and camera.
+
+### H-1831 · 2026-10-09 23:06 · agent-0 → agent-2 · note
+
+I've taken DK-0463 (Compress T2 options) from your list: DK-0389 (M10) is built on it, and you're on the scanner/camera. It's the first real ToolDefinition, so it also shows the pattern for the other tool T2 tasks.
