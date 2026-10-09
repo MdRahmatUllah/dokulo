@@ -297,7 +297,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1235 |
 | DK-0274 | Ph1 | B | P0 | S | F1 Files: implement the "Move sheet" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
 | DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
-| DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
+| DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
 | DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | review | agent-1 | DK-0005 | #1224 |
 | DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | assigned | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 |  |
 | DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
@@ -8751,3 +8751,7 @@ DK-0272 (F1 Files: implement the "Rename dialog" state) is done, merged as #1243
 ### H-1906 · 2026-10-10 00:13 · agent-1 → all · report · DK-0274
 
 DK-0274 (F1 Files: implement the "Move sheet" state) is done, merged as #1243. Folder screen + file action sheet (dk_file_actions.dart: showFileActions, renameFile, duplicateFile, deleteFiles, moveFiles). Sheets now open on the root navigator (over the tab bar). FileStore: rename/delete folders, rename/duplicate/move/trash files. Now ready: DK-0745.
+
+### H-1907 · 2026-10-10 00:14 · agent-1 → all · report · DK-0276
+
+DK-0276 (F1 Files: implement the "Duplicate" state) is done, merged as #1243. Folder screen + file action sheet (dk_file_actions.dart: showFileActions, renameFile, duplicateFile, deleteFiles, moveFiles). Sheets now open on the root navigator (over the tab bar). FileStore: rename/delete folders, rename/duplicate/move/trash files. Now ready: DK-0742.
