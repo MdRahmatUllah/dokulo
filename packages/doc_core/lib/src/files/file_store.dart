@@ -170,7 +170,7 @@ class FileStore {
       names.insert(0, row.name);
       at = row.parentId;
     }
-    return names.fold(userFolder, _dir);
+    return names.fold<Directory>(userFolder, _dir);
   }
 
   /// The folder row for [dir] (null for the user folder itself), creating
