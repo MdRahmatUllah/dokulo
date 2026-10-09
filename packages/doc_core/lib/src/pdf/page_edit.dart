@@ -78,9 +78,14 @@ class PageEdit {
     ]);
   }
 
-  /// A copy of each page at [indexes], right after it.
+  /// A copy of each page at [indexes], right after it: a new [PageSource],
+  /// so every entry stays one item (a grid keys its tiles by them).
   void duplicate(Set<int> indexes) => _apply([
-    for (final (i, p) in _pages.indexed) ...[p, if (indexes.contains(i)) p],
+    for (final (i, p) in _pages.indexed) ...[
+      p,
+      if (indexes.contains(i))
+        PageSource(p.path, p.page, addQuarterTurns: p.addQuarterTurns),
+    ],
   ]);
 
   /// Turns the pages at [indexes] by [quarterTurns] clockwise (negative:
