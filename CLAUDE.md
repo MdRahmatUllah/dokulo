@@ -106,6 +106,7 @@ python tools/check_permissions.py [built apk]                    # only the Andr
 python tools/check_tokens.py                                     # no raw colours in screens/components: DkTokens only
 python tools/check_privacy_manifests.py                          # the iOS privacy manifest, and one per native iOS plugin
 (cd packages/<p> && flutter test --timeout 60s --concurrency 4 | dart test)  # every package with tests; 4 flutter_testers at once (memory)
+(cd packages/doc_core && dart test --tags=redaction-security)       # the redaction security suite (DK-0528): a release blocker, its own step
 python -m pytest tools/tests -q
 python tools/check_pdfa.py                                       # PDF/A writer output validates in veraPDF (install: docs/compliance/pdfa.md)
 python tools/native_libs_check.py <built apk>                    # only with --apk: no FFmpeg/excluded OpenCV, 16 KB-aligned .so (Play)

@@ -34,3 +34,12 @@ def test_steps_pick_the_right_test_runner(tmp_path: Path) -> None:
     assert plan["test core"][1:] == ["test"] and "dart" in plan["test core"][0]
     assert "test empty" not in plan
     assert plan["native libs"][-1] == "x.apk" and plan["size budget"][-1] == "x.apk"
+
+
+def test_the_redaction_suite_is_its_own_step(tmp_path: Path) -> None:
+    core = tmp_path / "packages" / "doc_core"
+    (core / "test").mkdir(parents=True)
+    (core / "pubspec.yaml").write_text("name: doc_core\n", encoding="utf-8")
+    plan = {name: command for name, command, _ in check.steps(tmp_path)}
+    assert plan["test doc_core"][-1] == "--exclude-tags=redaction-security"
+    assert plan["redaction security"][1:] == ["test", "--tags=redaction-security"]

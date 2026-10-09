@@ -233,11 +233,13 @@ abstract final class PdfRedactor {
   /// Inside a `Lane.qpdf` job: the [strings] that occur in [path] written out
   /// uncompressed (QDF) to [scratch], as Latin-1 or UTF-16 bytes, with or
   /// without spaces: metadata, attachments, form values, stray streams.
+  /// [exact]: only as given (a key with its trailing space, "/AA ").
   static List<String> rawLeaks(
     String path,
     Iterable<String> strings,
-    String scratch,
-  ) {
+    String scratch, {
+    bool exact = false,
+  }) {
     QpdfService.run(
       () => Qpdf.run({
         'inputFile': path,
@@ -271,7 +273,7 @@ abstract final class PdfRedactor {
         if (s.trim().isNotEmpty &&
             {
               s,
-              _squash(s),
+              if (!exact) _squash(s),
             }.any((v) => contains(latin(v)) || contains(utf16(v))))
           s,
     ];

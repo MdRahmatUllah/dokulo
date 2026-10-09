@@ -76,7 +76,14 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         if (p / "test").is_dir():
             command = ([flutter, "test", "--timeout", "60s", "--concurrency", TEST_CONCURRENCY]
                        if is_flutter(p) else [dart, "test"])
+            if p.name == "doc_core":
+                command.append("--exclude-tags=redaction-security")  # its own step, below
             out.append((f"test {p.name}", command, p))
+    # The redaction security suite (DK-0528): a release blocker, so a step
+    # of its own that the gate names when it fails.
+    core = root / "packages" / "doc_core"
+    if (core / "test").is_dir():
+        out.append(("redaction security", [dart, "test", "--tags=redaction-security"], core))
     out.append(("tools tests", [py, "-m", "pytest", "tools/tests", "-q"], root))
     out.append(("pdfa (veraPDF)", [py, "tools/check_pdfa.py"], root))
     if apk:

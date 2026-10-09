@@ -3,3 +3,8 @@
 # PDFium (not thread-safe) at once and hang or crash. The app has one: the
 # main isolate's (see PdfEngine).
 concurrency: 1
+
+tags:
+  # The redaction security suite (DK-0528): its own step of tools/check.py,
+  # left out of the package's test step.
+  redaction-security:
