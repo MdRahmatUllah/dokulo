@@ -15,7 +15,6 @@ import 'package:app_pdf/screens/files/files_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
-import 'package:drift/drift.dart' show Value;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -37,8 +36,8 @@ class _WhitePages extends ThumbnailCache {
   );
 }
 
-class _Fixture {
-  _Fixture() : db = DokuloDatabase.memory();
+class FilesFixture {
+  FilesFixture() : db = DokuloDatabase.memory();
   final DokuloDatabase db;
   late final Directory root;
   late final FileStore store;
@@ -84,7 +83,7 @@ class _Fixture {
 
 Future<GoRouter> pumpFiles(
   WidgetTester tester,
-  _Fixture f, {
+  FilesFixture f, {
   DkTokens? tokens,
   Locale locale = const Locale('en'),
 }) async {
@@ -131,9 +130,9 @@ List<String> names(WidgetTester tester) => [
 ];
 
 void main() {
-  late _Fixture f;
+  late FilesFixture f;
   setUp(() async {
-    f = _Fixture();
+    f = FilesFixture();
     await f.setUp();
   });
   tearDown(() => f.tearDown());
