@@ -143,4 +143,27 @@ void main() {
       expect(damaged.actions, [DkRecovery.tryRepair]);
     });
   });
+
+  test('the preflight errors read as the catalogue: the space needed, and '
+      'too large with Split it first (DK-0020, DK-0613)', () {
+    final storage = DokuloError.from(
+      const DocError(DocErrorKind.notEnoughStorage, bytes: 119500000),
+    );
+    expect(
+      storage.title(en),
+      'Not enough space on this phone (needs about 120 MB).',
+    );
+    final large = DokuloError.from(const DocError(DocErrorKind.tooLarge));
+    expect(
+      large.title(en),
+      'This file is too large to process at once on this phone.',
+    );
+    expect(
+      large.title(de),
+      'Diese Datei ist zu groß, um sie auf diesem Handy auf einmal zu '
+      'verarbeiten.',
+    );
+    expect(large.actions, [DkRecovery.splitFirst]);
+    expect(DkRecovery.splitFirst.label(en), 'Split it first');
+  });
 }
