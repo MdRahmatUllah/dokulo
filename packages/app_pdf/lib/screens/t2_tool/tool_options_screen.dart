@@ -9,6 +9,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_bar.dart';
 import '../../components/dk_action_sheet.dart';
+import '../../components/dk_button.dart';
 import '../../components/dk_file_card.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_icon_button.dart';
@@ -20,17 +21,21 @@ import '../../components/dk_segmented.dart';
 import '../../components/dk_sheet.dart';
 import '../../components/dk_skeleton.dart';
 import '../../components/dk_switch.dart';
+import '../../components/dk_text_field.dart';
 import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../errors/dokulo_error.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../patterns/dk_confirmations.dart';
+import '../../providers/file_providers.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
+import '../../theme/dk_layout.dart';
 import '../../tools/tool_catalogue.dart';
 import '../../tools/tool_definition.dart';
+import '../../tools/tool_inputs.dart';
 import '../v1_viewer/viewer_providers.dart';
 import 'tool_options_providers.dart';
 import 'tool_run.dart';
@@ -45,6 +50,7 @@ class ToolOptionsScreen extends ConsumerStatefulWidget {
     super.key,
     required this.definition,
     required this.fileIds,
+    this.chained = false,
   });
 
   final ToolDefinition definition;
@@ -52,12 +58,39 @@ class ToolOptionsScreen extends ConsumerStatefulWidget {
   /// The input files' row ids, in order.
   final List<int> fileIds;
 
+  /// Opened from a Next chip: the input is the result before it
+  /// ([chainInputProvider], DK-0386).
+  final bool chained;
+
   @override
   ConsumerState<ToolOptionsScreen> createState() => _ToolOptionsScreenState();
 }
 
 class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
-  late List<int> _ids = widget.fileIds;
+  /// The input once the user changed it (picked, removed, reordered); until
+  /// then the route's files, as they load.
+  List<FileEntry>? _input;
+
+  /// Passwords of unlocked inputs, by path: in memory, for this run only
+  /// (DK-0372).
+  final _passwords = <String, String>{};
+  var _nextPickedId = -1;
+
+  /// The tools run before this one in a chain (DK-0386).
+  var _chain = const <String>[];
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.chained) {
+      final chained = ref.read(chainInputProvider);
+      if (chained != null) {
+        _input = chained.files;
+        _chain = chained.chain;
+      }
+    }
+  }
+
   // The run (UI spec §20.2): its phase, the progress sheet's state, and
   // whether the sheet is open (its context, to close it).
   ToolRunHandle? _handle;
@@ -83,6 +116,60 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     _toSheet?.cancel();
     _toAsk?.cancel();
     _progress?.cancel();
+  }
+
+  void _setInput(List<FileEntry> files) => setState(() => _input = files);
+
+  /// Adds [picked] to the input (a one-file tool: replaces it), skipping
+  /// files already in it.
+  void _add(List<FileEntry> current, List<FileEntry> picked, ToolInput input) {
+    if (!input.many) return _setInput(picked.take(1).toList());
+    final paths = {for (final f in current) f.path};
+    _setInput([
+      ...current,
+      for (final f in picked)
+        if (paths.add(f.path)) f,
+    ]);
+  }
+
+  /// Browse device or Choose photos: copies into the sandbox first (the
+  /// original stays untouched), then adds them (DK-0371).
+  Future<void> _browse(
+    List<FileEntry> current,
+    ToolInput input, {
+    required bool photos,
+  }) async {
+    final paths = await ref.read(devicePickerProvider)(input, photos: photos);
+    if (paths.isEmpty) return;
+    final store = await ref.read(fileStoreProvider.future);
+    final picked = <FileEntry>[];
+    for (final path in paths) {
+      if (!input.takes(path)) continue;
+      final copy = await store.importIncoming(File(path));
+      final stat = await copy.stat();
+      var pages = 0;
+      if (ToolInput.kindOf(copy.path) == DkFileKind.pdf) {
+        try {
+          pages = (await PdfEngine.inspect(copy.path)).pageCount;
+        } on DocError {
+          // Locked or damaged: its row says so (DK-0372) or the run does.
+        }
+      }
+      picked.add(
+        FileEntry(
+          id: _nextPickedId--,
+          path: copy.path,
+          name: copy.uri.pathSegments.last,
+          size: stat.size,
+          pages: pages,
+          created: stat.changed,
+          modified: stat.modified,
+          hasText: false,
+          encrypted: false,
+        ),
+      );
+    }
+    if (mounted && picked.isNotEmpty) _add(current, picked, input);
   }
 
   /// Starts the tool and follows it: nothing under 2 s, the button's
@@ -136,6 +223,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                 inputs: subject.files,
                 output: output,
                 took: DateTime.now().difference(started),
+                chain: [..._chain, _def.id],
               ),
             );
       }
@@ -265,18 +353,42 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     final tool = ToolCatalogue.of(_def.id);
     final chosen = ref.watch(toolOptionValuesProvider(_def.id));
     final values = {..._def.initialValues, ...chosen};
-    final loaded = [for (final id in _ids) ref.watch(viewerFileProvider(id))];
-    final files = [
-      for (final f in loaded)
-        if (f case AsyncData(:final value)) value,
+    final input = ToolInput.of(_def.id) ?? const ToolInput({DkFileKind.pdf});
+    final loaded = [
+      for (final id in widget.fileIds) ref.watch(viewerFileProvider(id)),
     ];
-    final ready = files.length == _ids.length;
-    final subject = ToolSubject(files);
+    final ready = _input != null || loaded.every((f) => f is AsyncData);
+    final files =
+        _input ??
+        [
+          for (final f in loaded)
+            if (f case AsyncData(:final value)) value,
+        ];
+    final locked = [
+      for (final f in files)
+        if (ref.watch(pdfLockedProvider(f.path)).value == true &&
+            !_passwords.containsKey(f.path))
+          f,
+    ];
+    final subject = ToolSubject(files, passwords: Map.of(_passwords));
+    // Until the tool has enough files, the picker stays: for Merge and
+    // Compare (two at least) with checkboxes.
+    final choosing = ready && files.length < input.min;
+    final canRun = ready && !choosing && locked.isEmpty && _def.input != null;
+    final String? caption;
+    if (!ready) {
+      caption = null;
+    } else if (choosing) {
+      caption = l.t2_choose_to_continue;
+    } else if (locked.isNotEmpty) {
+      caption = l.t2_unlock_to_continue(locked.first.name);
+    } else {
+      caption = _def.estimate?.call(l, subject, values);
+    }
 
     void set(String key, Object? value) =>
         ref.read(toolOptionValuesProvider(_def.id).notifier).set(key, value);
 
-    final canRun = ready && files.isNotEmpty && _def.input != null;
     return Scaffold(
       backgroundColor: t.color.background,
       appBar: PreferredSize(
@@ -312,39 +424,83 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
               child: DkPrivacyLine(),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: t.space.l),
-            child: _Header(
-              _ids.length == 1
-                  ? l.t2_section_file
-                  : l.t2_section_files(_ids.length),
-            ),
-          ),
-          if (!ready)
-            DkSkeleton.fileRows(count: _ids.length.clamp(1, 4))
-          else if (_ids.length == 1)
-            _InputFile(file: files.single)
-          else
-            ReorderableListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              buildDefaultDragHandles: false,
-              onReorderItem: (from, to) => setState(() {
-                final ids = [..._ids];
-                ids.insert(to, ids.removeAt(from));
-                _ids = ids;
-              }),
-              children: [
-                for (final (i, f) in files.indexed)
-                  _InputFile(
-                    key: ValueKey(f.id),
-                    file: f,
-                    index: i,
-                    onRemove: () =>
-                        setState(() => _ids = [..._ids]..remove(f.id)),
+          if (choosing)
+            _PickerCard(
+              toolId: _def.id,
+              input: input,
+              selected: files,
+              onToggle: (f) => files.any((x) => x.path == f.path)
+                  ? _setInput([
+                      for (final x in files)
+                        if (x.path != f.path) x,
+                    ])
+                  : _add(files, [f], input),
+              onBrowse: () => _browse(files, input, photos: false),
+              onPhotos: input.images
+                  ? () => _browse(files, input, photos: true)
+                  : null,
+            )
+          else ...[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: t.space.l),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _Header(
+                      files.length == 1
+                          ? l.t2_section_file
+                          : l.t2_section_files(files.length),
+                    ),
                   ),
-              ],
+                  if (input.many && ready)
+                    Padding(
+                      padding: EdgeInsets.only(top: t.space.l),
+                      child: DkButton(
+                        label: l.common_add_files,
+                        icon: DkIcons.add,
+                        variant: DkButtonVariant.tertiary,
+                        size: DkButtonSize.compact,
+                        onPressed: () => _browse(files, input, photos: false),
+                      ),
+                    ),
+                ],
+              ),
             ),
+            if (!ready)
+              DkSkeleton.fileRows(count: widget.fileIds.length.clamp(1, 4))
+            else if (files.length == 1)
+              _InputFile(
+                file: files.single,
+                locked: locked.contains(files.single),
+                onUnlock: (pw) =>
+                    setState(() => _passwords[files.single.path] = pw),
+              )
+            else
+              ReorderableListView(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                buildDefaultDragHandles: false,
+                onReorderItem: (from, to) {
+                  final order = [...files];
+                  order.insert(to, order.removeAt(from));
+                  _setInput(order);
+                },
+                children: [
+                  for (final (i, f) in files.indexed)
+                    _InputFile(
+                      key: ValueKey(f.path),
+                      file: f,
+                      index: i,
+                      locked: locked.contains(f),
+                      onUnlock: (pw) => setState(() => _passwords[f.path] = pw),
+                      onRemove: () => _setInput([
+                        for (final x in files)
+                          if (x.path != f.path) x,
+                      ]),
+                    ),
+                ],
+              ),
+          ],
           if (_def.options.isNotEmpty || _def.moreOptions.isNotEmpty)
             Padding(
               padding: EdgeInsets.symmetric(horizontal: t.space.l),
@@ -387,7 +543,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
           label: _phase == X2Phase.quiet
               ? _def.action?.call(l, subject) ?? tool.name(l)
               : _def.busyLabel?.call(l) ?? l.t2_busy,
-          caption: ready ? _def.estimate?.call(l, subject, values) : null,
+          caption: caption,
           // Under 2 s only the press shows; then "Compressing…" (§20.2).
           loading: _phase != X2Phase.quiet,
           onPressed: canRun
@@ -427,9 +583,20 @@ class _Header extends StatelessWidget {
 /// One input file as a DkFileCard row; in a multi-file tool with × to remove
 /// it and a drag handle to reorder (UI spec §20.1 region 3).
 class _InputFile extends ConsumerWidget {
-  const _InputFile({super.key, required this.file, this.index, this.onRemove});
+  const _InputFile({
+    super.key,
+    required this.file,
+    required this.locked,
+    required this.onUnlock,
+    this.index,
+    this.onRemove,
+  });
 
   final FileEntry file;
+
+  /// It needs a password (DK-0372): the unlock row shows under it.
+  final bool locked;
+  final ValueChanged<String> onUnlock;
 
   /// Its place in a reorderable list; null for a single file.
   final int? index;
@@ -456,11 +623,20 @@ class _InputFile extends ConsumerWidget {
           : thumb == null
           ? null
           : RawImage(image: thumb),
-      encrypted: file.encrypted,
-      onTap: () => context.push(Routes.viewer('${file.id}')),
+      encrypted: file.encrypted || locked,
+      // A picked file isn't in the index (negative id): nothing to open.
+      onTap: file.id < 0
+          ? () {}
+          : () => context.push(Routes.viewer('${file.id}')),
     );
-    if (index == null) return card;
-    return Row(
+    final unlock = locked ? _UnlockRow(file: file, onUnlock: onUnlock) : null;
+    if (index == null) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [card, ?unlock],
+      );
+    }
+    final row = Row(
       children: [
         Expanded(child: card),
         DkIconButton(
@@ -476,6 +652,11 @@ class _InputFile extends ConsumerWidget {
           ),
         ),
       ],
+    );
+    if (unlock == null) return row;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [row, unlock],
     );
   }
 
@@ -547,4 +728,195 @@ class _SheetState {
         eta: eta ?? this.eta,
         error: error ?? this.error,
       );
+}
+
+/// "This file is locked" with the password and Unlock, under a locked input
+/// (DK-0372). The password is checked by opening the file; it stays in
+/// memory for this run only.
+class _UnlockRow extends StatefulWidget {
+  const _UnlockRow({required this.file, required this.onUnlock});
+
+  final FileEntry file;
+  final ValueChanged<String> onUnlock;
+
+  @override
+  State<_UnlockRow> createState() => _UnlockRowState();
+}
+
+class _UnlockRowState extends State<_UnlockRow> {
+  final _password = TextEditingController();
+  var _wrong = false;
+  var _checking = false;
+
+  @override
+  void dispose() {
+    _password.dispose();
+    super.dispose();
+  }
+
+  Future<void> _unlock() async {
+    final password = _password.text;
+    if (password.isEmpty) return;
+    setState(() => _checking = true);
+    try {
+      await PdfEngine.inspect(widget.file.path, password: password);
+      widget.onUnlock(password);
+    } on DocError {
+      if (mounted) setState(() => _wrong = true);
+    } finally {
+      if (mounted) setState(() => _checking = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    return Padding(
+      padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, t.space.m),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: t.space.s,
+        children: [
+          Row(
+            spacing: t.space.xs,
+            children: [
+              DkIcon(DkIcons.lock, size: DkIconSize.s, color: t.color.warning),
+              Text(
+                l.t2_file_locked,
+                style: t.text.labelM.copyWith(color: t.color.textPrimary),
+              ),
+            ],
+          ),
+          DkPasswordField(
+            label: l.t2_password,
+            controller: _password,
+            error: _wrong ? l.t2_wrong_password : null,
+            onChanged: (_) {
+              if (_wrong) setState(() => _wrong = false);
+            },
+            onSubmitted: (_) => _unlock(),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: DkButton(
+              label: l.t2_unlock,
+              variant: DkButtonVariant.secondary,
+              size: DkButtonSize.compact,
+              loading: _checking,
+              onPressed: _checking ? null : _unlock,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// T2 without input (DK-0371): "Choose a PDF" / "Choose images" / "Choose
+/// files", the 5 most recent files the tool takes, Browse device and, for
+/// image tools, Choose photos. A tool that needs two files or more shows
+/// checkboxes; the others take the file tapped.
+class _PickerCard extends ConsumerWidget {
+  const _PickerCard({
+    required this.toolId,
+    required this.input,
+    required this.selected,
+    required this.onToggle,
+    required this.onBrowse,
+    required this.onPhotos,
+  });
+
+  final String toolId;
+  final ToolInput input;
+  final List<FileEntry> selected;
+  final ValueChanged<FileEntry> onToggle;
+  final VoidCallback onBrowse;
+  final VoidCallback? onPhotos;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    final checkboxes = input.min > 1;
+    final recent = ref.watch(recentCompatibleFilesProvider(toolId)).value;
+    final paths = {for (final f in selected) f.path};
+    // Picked from the device, they show too, checked.
+    final rows = [
+      ...?recent,
+      for (final f in selected)
+        if (!(recent ?? const []).any((r) => r.path == f.path)) f,
+    ];
+    final title = input.kinds.length > 1
+        ? l.t2_choose_files
+        : input.images
+        ? l.t2_choose_images
+        : l.t2_choose_pdf;
+    return Container(
+      margin: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
+      padding: EdgeInsets.symmetric(vertical: t.space.m),
+      decoration: t.surfaceAt(
+        DkLevel.raised,
+        radius: BorderRadius.circular(t.radius.m),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: t.space.l),
+            child: Semantics(
+              container: true,
+              header: true,
+              child: Text(
+                title,
+                style: t.text.titleS.copyWith(color: t.color.textPrimary),
+              ),
+            ),
+          ),
+          if (rows.isNotEmpty)
+            Padding(
+              padding: EdgeInsets.fromLTRB(t.space.l, t.space.m, t.space.l, 0),
+              child: Text(
+                l.t2_recent,
+                style: t.text.labelM.copyWith(color: t.color.textSecondary),
+              ),
+            ),
+          for (final f in rows)
+            DkFileCard(
+              name: f.name,
+              meta: [
+                formatBytes(f.size, locale),
+                if (f.pages > 0) l.meta_pages(f.pages),
+              ].join(' · '),
+              kind: ToolInput.kindOf(f.name) ?? DkFileKind.pdf,
+              selected: checkboxes ? paths.contains(f.path) : null,
+              onTap: () => onToggle(f),
+            ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(t.space.l, t.space.s, t.space.l, 0),
+            child: Wrap(
+              spacing: t.space.s,
+              runSpacing: t.space.s,
+              children: [
+                DkButton(
+                  label: l.common_browse,
+                  icon: DkIcons.folderOpen,
+                  variant: DkButtonVariant.secondary,
+                  onPressed: onBrowse,
+                ),
+                if (onPhotos != null)
+                  DkButton(
+                    label: l.t2_choose_photos,
+                    icon: DkIcons.importPhotos,
+                    variant: DkButtonVariant.secondary,
+                    onPressed: onPhotos,
+                  ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

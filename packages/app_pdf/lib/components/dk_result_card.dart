@@ -26,6 +26,7 @@ class DkResultCard extends StatelessWidget {
     this.format,
     this.toggle,
     this.preview,
+    this.action,
   });
 
   /// Always a number ("1.9 MB", "38 pages", "3 files").
@@ -42,6 +43,10 @@ class DkResultCard extends StatelessWidget {
   final String Function(double value)? format;
   final Widget? toggle;
   final Widget? preview;
+
+  /// A partial result's one action under the line ("Retake page 7", a
+  /// small secondary button).
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +100,8 @@ class DkResultCard extends StatelessWidget {
                 ),
               ),
               Text(sub, style: t.text.bodyM.copyWith(color: c.textPrimary)),
+              if (action != null)
+                Align(alignment: Alignment.centerLeft, child: action),
               ?toggle,
             ],
           ),

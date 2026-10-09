@@ -6,7 +6,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
+import '../screens/files/files_screen.dart';
+import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
+import '../screens/locked/locked_folder_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
@@ -29,7 +32,10 @@ abstract final class Routes {
   static const home = '/home'; // H1
   static const tools = '/tools'; // T1
   static const files = '/files'; // F1
+  static const filesSearch = '/files?search=1'; // F1, the search focused
   static const lockedFolder = '/files/locked'; // F2
+  static String folder(int id) => '/files/folder/$id'; // a folder in F1
+  static const trash = '/files/trash'; // Recently deleted
   static const me = '/me'; // M1
   static const models = '/me/models'; // M2
   static String settings(String page) => '/me/settings/$page'; // M3
@@ -43,11 +49,23 @@ abstract final class Routes {
   static const scanImport = '/scan/review?source=photos';
 
   /// T2; [files] (row ids) are its input, in order (X1, a share, a widget,
-  /// an extension): `?file=` once per file.
-  static String tool(String toolId, {List<String> files = const []}) => Uri(
-    path: '/tool/$toolId',
-    queryParameters: files.isEmpty ? null : {'file': files},
-  ).toString();
+  /// an extension): `?file=` once per file. [chained]: the input is the
+  /// result before it (a Next chip, DK-0386).
+  static String tool(
+    String toolId, {
+    List<String> files = const [],
+    bool chained = false,
+  }) {
+    final query = {
+      if (files.isNotEmpty) 'file': files,
+      if (chained) 'chain': '1',
+    };
+    return Uri(
+      path: '/tool/$toolId',
+      queryParameters: query.isEmpty ? null : query,
+    ).toString();
+  }
+
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
   static String viewer(String fileId, {bool edit = false}) =>
@@ -119,11 +137,32 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               children: children,
             ),
         branches: [
-          StatefulShellBranch(routes: [_screen(Routes.home, 'H1')]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
           StatefulShellBranch(
             routes: [
-              _screen(Routes.files, 'F1', routes: [_screen('locked', 'F2')]),
+              GoRoute(
+                path: Routes.files,
+                builder: (context, state) => const FilesScreen(),
+                routes: [
+                  // The folder screen (DK-0262) and the trash (DK-0278).
+                  GoRoute(
+                    path: 'folder/:id',
+                    builder: (context, state) => PlaceholderScreen(
+                      'Folder',
+                      detail: state.pathParameters['id']!,
+                    ),
+                  ),
+                  _screen('trash', 'Recently deleted'),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(
@@ -149,6 +188,8 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
         ],
       ),
+      // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
+      fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
       fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
@@ -183,6 +224,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           final screen = ToolOptionsScreen(
             definition: ToolDefinitions.of(toolId),
             fileIds: [for (final f in files) int.tryParse(f) ?? -1],
+            chained: s.uri.queryParameters['chain'] == '1',
           );
           return files.isEmpty
               ? screen
