@@ -1541,3 +1541,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 15:50 · agent-0 DK-1009 · assigned to agent-0 (M04-M10 goal)
 - 2026-10-09 15:50 · agent-0 DK-1064 · assigned to agent-0 (M04-M10 goal)
 - 2026-10-09 15:50 · agent-2 · session started
+- 2026-10-09 15:51 · agent-1 DK-0238 · claimed: Build the onboarding pager (/welcome) shown once, skippable

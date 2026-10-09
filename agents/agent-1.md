@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0238 Build the onboarding pager (/welcome) shown once, skippable — claimed 2026-10-09 15:51.
 
 ## Next
 
