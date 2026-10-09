@@ -311,5 +311,14 @@
   "empty_action_add_signature": "Unterschrift hinzufügen",
   "empty_action_new_workflow": "Neuer Ablauf",
   "empty_action_use_template": "Vorlage verwenden",
-  "common_close": "Schließen"
+  "common_close": "Schließen",
+  "permission_off_camera": "Kamerazugriff ist aus, daher funktioniert das Scannen nicht.",
+  "permission_off_photos": "Fotozugriff ist aus, daher können keine Fotos importiert werden.",
+  "permission_off_photos_add": "Fotozugriff ist aus, daher können keine Seiten in Fotos gespeichert werden.",
+  "permission_off_notifications": "Mitteilungen sind aus, daher erfährst du nicht, wann eine lange Aufgabe fertig ist.",
+  "permission_off_biometrics": "Face ID und Fingerabdruck sind für Dokulo aus, daher fragt der gesperrte Ordner nach deiner PIN.",
+  "banner_no_text": "{count, plural, =1{1 Scan hat noch keinen durchsuchbaren Text.} other{{count} Scans haben noch keinen durchsuchbaren Text.}}",
+  "banner_make_searchable": "Durchsuchbar machen",
+  "banner_purchase_failed": "Der Kauf wurde nicht abgeschlossen. Dir wurde nichts berechnet.",
+  "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei"
 }
