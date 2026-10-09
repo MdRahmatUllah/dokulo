@@ -663,8 +663,10 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
 }
 
 /// The filter's look in the review, as a colour matrix (the design's CSS
-/// filters): greyscale, contrast around mid-grey, brightness as an offset.
-/// [brightness] and [contrast] are the sliders, -0.5 to 0.5.
+/// filters: greyscale, contrast around mid-grey), then the sliders as
+/// doc_vision's applyScanFilter applies them on save: contrast scales
+/// (`1 + contrast`), brightness adds `100 * brightness`. [brightness] and
+/// [contrast] are the sliders, -0.5 to 0.5.
 ColorFilter scanPreviewFilter(
   ScanFilterChoice filter, {
   double brightness = 0,
@@ -673,17 +675,15 @@ ColorFilter scanPreviewFilter(
   final grey =
       filter == ScanFilterChoice.greyscale ||
       filter == ScanFilterChoice.blackWhite;
-  final k =
-      (1 + contrast) *
-      switch (filter) {
-        ScanFilterChoice.blackWhite => 1.8,
-        ScanFilterChoice.autoColour => 1.05,
-        _ => 1.0,
-      };
-  final offset =
-      128 * (1 - k) +
-      255 * brightness +
-      (filter == ScanFilterChoice.removeShadows ? 12 : 0);
+  final f = switch (filter) {
+    ScanFilterChoice.blackWhite => 1.8,
+    ScanFilterChoice.autoColour => 1.05,
+    _ => 1.0,
+  };
+  final shift =
+      128 * (1 - f) + (filter == ScanFilterChoice.removeShadows ? 12 : 0);
+  final k = (1 + contrast) * f;
+  final offset = (1 + contrast) * shift + 100 * brightness;
   // Rec. 709 luma for grey; the identity otherwise.
   List<double> row(int channel) => grey
       ? [0.2126 * k, 0.7152 * k, 0.0722 * k, 0, offset]
