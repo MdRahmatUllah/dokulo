@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0371 T2 empty input state: picker card with recent compatible files, Browse device, Choose photos — claimed 2026-10-09 22:02.
 
 ## Next
 
