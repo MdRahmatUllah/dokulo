@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-09 16:49
+last-seen: 2026-10-09 16:50
 last-read: 1423
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0277 Version history: keep last 5 versions per file (edits, replace original)
 
 ## Next
 
-Merge #1201 and #1205 (gates, memory permitting). Then open: DK-0282 (vault), DK-0283..0287 (locked flow), DK-0277 (versions), DK-0259 (About sheet); then DK-0241 picker, DK-0288/0289/0291, F1/H1 once agent-0's DK-0229 shell lands.
+Gate queue (one at a time, memory permitting): 1) #1205 deps (APK, holds pubspec lock) 2) #1201 onboarding 3) DK-0282 vault (on deps) 4) DK-0283..0287 locked flow 5) F1 DK-0260/0261/0267/0273 6) H1 DK-0242 (on F1) 7) DK-0277 versions 8) DK-0259 About. Worktrees: agent-1 (onboarding), a1b (0277), a1c (0259), a1d (deps→0282→0283), a1e (F1→H1).
 
 ## Memory
 
