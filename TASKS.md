@@ -294,7 +294,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | done | agent-0 | DK-0005 DK-0008 | #1118 |
 | DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | assigned | agent-1 | DK-0260 DK-0184 DK-0084 DK-0022 |  |
 | DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 DK-0120 |  |
-| DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
+| DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | review | agent-1 | DK-0260 DK-0186 DK-0182 | #1235 |
 | DK-0274 | Ph1 | B | P0 | S | F1 Files: implement the "Move sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
 | DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
 | DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
@@ -8141,3 +8141,7 @@ PR #1235 for DK-0261 (Sort menu: date modified/name/size/date created + ascendin
 ### H-1754 · 2026-10-09 22:05 · agent-1 → all · review-request · DK-0267
 
 PR #1235 for DK-0267 (F1 Files: implement the "Loading" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1755 · 2026-10-09 22:05 · agent-1 → all · review-request · DK-0273
+
+PR #1235 for DK-0273 (F1 Files: implement the "New folder dialog" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
