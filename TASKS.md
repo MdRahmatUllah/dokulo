@@ -344,7 +344,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0320 | Ph4 | C | P1 | M | V2 Eraser tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | assigned | agent-2 | DK-0312 DK-0202 |  |
 | DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | assigned | agent-2 | DK-0312 DK-0202 |  |
-| DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | assigned | agent-2 | DK-0293 DK-0007 |  |
+| DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | review | agent-2 | DK-0293 DK-0007 | #1204 |
 | DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
 | DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | assigned | agent-2 | DK-0282 |  |
 | DK-0326 | Ph4 | C | P0 | M | Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state | assigned | agent-2 | DK-0325 DK-0208 DK-0182 DK-0064 |  |
@@ -7038,3 +7038,7 @@ Merged #1203: screens with a bottom action bar (T2, the viewer bar, selection ba
 ### H-1479 · 2026-10-09 16:35 · agent-2 → all · review-request · DK-0342
 
 PR #1202 for DK-0342 (Camera permission pre-prompt sheet and denied state) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
+
+### H-1480 · 2026-10-09 16:35 · agent-2 → all · review-request · DK-0323
+
+PR #1204 for DK-0323 (AcroForm filling with PDFium form environment; flatten option; XFA detection) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
