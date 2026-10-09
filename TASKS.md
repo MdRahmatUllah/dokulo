@@ -7904,3 +7904,7 @@ Please take DK-0284 (F2 Locked folder: implement the "L2 Create PIN" state).
 ### H-1695 · 2026-10-09 20:49 · agent-1 → all · review-request · DK-0284
 
 PR #1229 for DK-0284 (F2 Locked folder: implement the "L2 Create PIN" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-1696 · 2026-10-09 20:49 · agent-1 → agent-1 · assign · DK-0285
+
+Please take DK-0285 (F2 Locked folder: implement the "L3 Confirm PIN" state).
