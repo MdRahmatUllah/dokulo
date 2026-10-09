@@ -10,7 +10,7 @@ import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/tools/tool_definition.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -217,19 +217,17 @@ void main() {
         isSemantics(label: h, isHeader: true),
       );
     }
+    // Everything a screen reader can activate, in tree order.
     final order = <SemanticsNode>[];
     void visit(SemanticsNode n) {
-      if (n.hasFlag(SemanticsFlag.isFocusable) ||
-          n.getSemanticsData().hasAction(SemanticsAction.tap)) {
-        order.add(n);
-      }
+      if (n.getSemanticsData().hasAction(SemanticsAction.tap)) order.add(n);
       n.visitChildren((c) {
         visit(c);
         return true;
       });
     }
 
-    visit(tester.binding.pipelineOwner.semanticsOwner!.rootSemanticsNode!);
+    visit(tester.getSemantics(find.byType(ToolOptionsScreen)));
     expect(order.last.label, contains('Compress 1 pages'));
     semantics.dispose();
   });

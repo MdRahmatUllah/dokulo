@@ -64,8 +64,9 @@ Future<GoRouter> pumpAt(
 /// screen's DkTopBar (T2).
 String title(WidgetTester tester) {
   final bar = find.byType(DkTopBar);
-  if (bar.evaluate().isNotEmpty)
+  if (bar.evaluate().isNotEmpty) {
     return tester.widget<DkTopBar>(bar.last).title!;
+  }
   return (tester.widget<AppBar>(find.byType(AppBar).last).title! as Text).data!;
 }
 
