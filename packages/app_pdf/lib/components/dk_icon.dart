@@ -256,6 +256,21 @@ abstract final class DkIcons {
   static const warning = IconData(0xf083, fontFamily: _font) /* warning */;
   static const error = IconData(0xf8b6, fontFamily: _font) /* error */;
   static const offline = IconData(0xe2c1, fontFamily: _font) /* cloud_off */;
+  // The error catalogue's situations (UI spec §26.3; DokuloError).
+  static const damaged = IconData(0xe3ad, fontFamily: _font) /* broken_image */;
+  static const storage = IconData(0xe1db, fontFamily: _font) /* storage */;
+  static const memory = IconData(0xe322, fontFamily: _font) /* memory */;
+  static const formUnsupported = IconData(
+    0xe85f,
+    fontFamily: _font,
+  ) /* assignment_late */;
+  static const cancelled = IconData(0xe888, fontFamily: _font) /* cancel */;
+  // Banners (26-global-states).
+  static const noText = IconData(0xf02f, fontFamily: _font) /* manage_search */;
+  static const cameraOff = IconData(
+    0xf1a8,
+    fontFamily: _font,
+  ) /* no_photography */;
   static const download = IconData(0xf090, fontFamily: _font) /* download */;
   static const pause = IconData(0xe034, fontFamily: _font) /* pause */;
   static const settings = IconData(0xe8b8, fontFamily: _font) /* settings */;
