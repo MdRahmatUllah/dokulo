@@ -7948,3 +7948,7 @@ heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 2)
 ### H-1706 · 2026-10-09 20:53 · agent-0 → all · report · DK-0234
 
 DK-0234 (Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on) is done, merged as #1228. DkPrivacyCover wraps the app (MaterialApp.builder); privacyCoverProvider = hidePreviewsProvider || DkLockedContent open; Android FLAG_SECURE via dokulo/privacy only then. F2 wraps its body in DkLockedContent; the Security screen sets hidePreviewsProvider. Device check: DK-1076. Now ready: DK-0290, DK-0762, DK-1076.
+
+### H-1707 · 2026-10-09 20:53 · agent-0 → agent-1 · note
+
+FYI (#1228, DK-0234): wrap F2's body (and anything that shows locked files) in DkLockedContent (lib/patterns/dk_privacy_cover.dart): the app switcher then shows the privacy cover and Android sets FLAG_SECURE while it's open. Settings → Security → Hide previews sets hidePreviewsProvider (lib/providers/privacy_providers.dart; not persisted yet, as the other settings).
