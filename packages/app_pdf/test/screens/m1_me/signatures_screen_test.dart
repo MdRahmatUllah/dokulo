@@ -27,6 +27,18 @@ Uint8List png() {
   return Uint8List.fromList(img.encodePng(im));
 }
 
+/// Lets real file I/O started inside the test finish: real time and pumps
+/// in turn, so each await in the chain gets its turn.
+Future<void> settleIo(WidgetTester tester) async {
+  for (var i = 0; i < 20; i++) {
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 20)),
+    );
+    await tester.pump();
+  }
+  await tester.pumpAndSettle();
+}
+
 void main() {
   late DokuloDatabase db;
   late Directory dir;
@@ -35,7 +47,7 @@ void main() {
 
   Future<void> pump(
     WidgetTester tester, {
-    DkTokens tokens = DkTokens.light,
+    DkTokens? tokens,
     Locale locale = const Locale('en'),
     Future<(Uint8List, Color)?> Function(BuildContext)? add,
   }) async {
@@ -52,7 +64,7 @@ void main() {
         container: container,
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: dokuloTheme(tokens),
+          theme: dokuloTheme(tokens ?? DkTokens.light),
           locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -102,10 +114,7 @@ void main() {
   testWidgets('Add signature saves what the pad drew, sealed', (tester) async {
     await pump(tester, add: (_) async => (png(), const DkMarkup().ink));
     await tester.tap(find.text('Add signature'));
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 200)),
-    );
-    await tester.pumpAndSettle();
+    await settleIo(tester);
     final list = await tester.runAsync(store.list);
     expect(
       [for (final s in list!) (s.kind, s.ink)],
@@ -120,10 +129,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Remove this signature?'), findsOneWidget);
     await tester.tap(find.text('Remove'));
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 200)),
-    );
-    await tester.pumpAndSettle();
+    await settleIo(tester);
     expect(await tester.runAsync(store.list), hasLength(1));
   });
 
