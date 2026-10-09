@@ -104,11 +104,7 @@ class DkAboutTool extends StatelessWidget {
         _Fact(DkIcons.output, l.about_tool_get, tool.get(l)),
         SizedBox(height: t.space.m),
         if (tool.needsInternet)
-          _Fact(
-            DkIcons.internet,
-            l.about_tool_online,
-            l.about_tool_online_sub,
-          )
+          _Fact(DkIcons.internet, l.about_tool_online, l.about_tool_online_sub)
         else
           _Fact(
             DkIcons.privacy,
@@ -141,7 +137,10 @@ class _Fact extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(label, style: t.text.labelM.copyWith(color: c.textPrimary)),
+                Text(
+                  label,
+                  style: t.text.labelM.copyWith(color: c.textPrimary),
+                ),
                 Text(
                   text,
                   style: t.text.bodyM.copyWith(color: c.textSecondary),
