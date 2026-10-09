@@ -10,6 +10,7 @@ export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/pdf_forms.dart';
 export 'src/pdf/compress/raster_fallback.dart';
 export 'src/pdf/compress/size_target.dart';
+export 'src/pdf/compare/text_compare.dart';
 export 'src/pdf/ocr_text_layer.dart';
 export 'src/pdf/pdf_compress.dart';
 export 'src/pdf/pdf_structure.dart';
