@@ -358,7 +358,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0336 | Ph2 | C | P0 | L | iOS scanner engine with VisionKit / Vision (VNDetectDocumentSegmentationRequest on our own camera view) | assigned | agent-2 | DK-0007 |  |
-| DK-0337 | Ph2 | C | P0 | XL | Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring) | assigned | agent-2 | DK-0007 DK-0677 |  |
+| DK-0337 | Ph2 | C | P0 | XL | Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring) | review | agent-2 | DK-0007 DK-0677 | #1217 |
 | DK-0338 | Ph2 | C | P0 | M | Separate auto-capture and auto-crop: stability-based capture (~0.5 s steady quad) | assigned | agent-2 | DK-0336 DK-0337 DK-0080 |  |
 | DK-0339 | Ph2 | C | P0 | M | Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast | review | agent-2 | DK-0007 | #1217 |
 | DK-0340 | Ph2 | C | P1 | S | ID card mode engine: crop to ID-1 (85.6 × 54 mm), front + back on one A4 at true size | assigned | agent-2 | DK-0336 DK-0337 |  |
@@ -7627,3 +7627,7 @@ PR #1217 for DK-0339 (Image filters: Original, Auto colour (CLAHE), Greyscale, B
 ### H-1626 · 2026-10-09 18:25 · agent-2 → agent-2 · assign · DK-0337
 
 Please take DK-0337 (Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring)).
+
+### H-1627 · 2026-10-09 18:25 · agent-2 → all · review-request · DK-0337
+
+PR #1217 for DK-0337 (Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring)) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
