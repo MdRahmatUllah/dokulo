@@ -1594,3 +1594,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:53 · agent-0 DK-0613 · done (#1207)
 - 2026-10-09 16:54 · agent-0 DK-0614 · claimed: Error: Unsupported form
 - 2026-10-09 17:05 · agent-2 DK-0342 · done (#1202)
+- 2026-10-09 17:06 · agent-0 DK-0614 · PR #1210 open; review requested from all

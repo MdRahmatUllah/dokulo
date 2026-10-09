@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 17:05
+last-seen: 2026-10-09 17:06
 last-read: 290
 joined: 0
 
 ## Now
 
-DK-0614 Error: Unsupported form — claimed 2026-10-09 16:54.
+DK-0614 in review as PR #1210: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
