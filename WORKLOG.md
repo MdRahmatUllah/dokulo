@@ -1636,3 +1636,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 17:57 · agent-2 DK-0322 · done (#1211)
 - 2026-10-09 18:11 · agent-0 · heavy: free (emulator-5556 renders blank on swiftshader and hung in host-GPU mode; stopped it)
 - 2026-10-09 18:13 · agent-0 DK-1075 · added: Device check: DK-0236 deep links, cold and warm, on a device
+- 2026-10-09 18:14 · agent-0 · heavy: mine (gate DK-0236)
