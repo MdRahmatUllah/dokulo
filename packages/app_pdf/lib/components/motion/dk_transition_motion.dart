@@ -500,3 +500,26 @@ class _DkFadingBranchesState extends State<DkFadingBranches>
     );
   }
 }
+
+/// A thumbnail fades in over its skeleton as it renders (UI spec §26.2;
+/// DK-0620): [child] changes when [loaded] does, cross-fading in
+/// `motion.standard` (a shorter fade with Reduce Motion).
+class DkThumbFade extends StatelessWidget {
+  const DkThumbFade({super.key, required this.loaded, required this.child});
+
+  final bool loaded;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final m = context.motion(DkMotionKind.standard);
+    return AnimatedSwitcher(
+      duration: m.duration,
+      switchInCurve: m.curve,
+      switchOutCurve: m.curve,
+      layoutBuilder: (current, previous) =>
+          Stack(fit: StackFit.passthrough, children: [...previous, ?current]),
+      child: KeyedSubtree(key: ValueKey(loaded), child: child),
+    );
+  }
+}
