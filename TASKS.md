@@ -634,7 +634,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | done | agent-0 | DK-0609 | #1206 |
 | DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | done | agent-0 | DK-0609 | #1206 |
 | DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | done | agent-0 | DK-0609 | #1206 |
-| DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | review | agent-0 | DK-0609 | #1207 |
+| DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | done | agent-0 | DK-0609 | #1207 |
 | DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
 | DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | assigned | agent-0 | DK-0609 |  |
@@ -7210,3 +7210,7 @@ PR #1207 for DK-0613 (Error: Too large for memory) is up. Review it on GitHub an
 ### H-1522 · 2026-10-09 16:53 · agent-0 → all · report · DK-0020
 
 DK-0020 (Preflight checks before every job: free storage, memory guard, encryption, file type) is done, merged as #1207. Preflight (doc_tools) in JobQueue.start/resume: storage (spaceFactor), memory (renderDpi x pagesInMemory vs 60% free RAM), locked. ToolJob: passwordOf/spaceFactor/renderDpi/pagesInMemory; DocError.bytes. A new tool sets renderDpi if it renders pages.
+
+### H-1523 · 2026-10-09 16:53 · agent-0 → all · report · DK-0613
+
+DK-0613 (Error: Too large for memory) is done, merged as #1207. Preflight (doc_tools) in JobQueue.start/resume: storage (spaceFactor), memory (renderDpi x pagesInMemory vs 60% free RAM), locked. ToolJob: passwordOf/spaceFactor/renderDpi/pagesInMemory; DocError.bytes. A new tool sets renderDpi if it renders pages.

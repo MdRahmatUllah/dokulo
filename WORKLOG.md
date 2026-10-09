@@ -1591,3 +1591,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:53 · agent-0 DK-0613 · claimed: Error: Too large for memory
 - 2026-10-09 16:53 · agent-0 DK-0613 · PR #1207 open; review requested from all
 - 2026-10-09 16:53 · agent-0 DK-0020 · done (#1207)
+- 2026-10-09 16:53 · agent-0 DK-0613 · done (#1207)
