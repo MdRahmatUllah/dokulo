@@ -65,7 +65,7 @@ Future<T?> showDkSheet<T>(
   if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) != DkGrid.phone) {
     // The same fade and grow as DkConfirmDialog (DkDialogRoute keeps the
     // 120 ms fade under Reduce Motion).
-    return Navigator.of(context).push<T>(
+    return Navigator.of(context, rootNavigator: true).push<T>(
       DkDialogRoute<T>.of(
         context,
         builder: (context) => guarded(
@@ -89,7 +89,9 @@ Future<T?> showDkSheet<T>(
     );
   }
 
-  return Navigator.of(context).push(
+  // On the root navigator: over the tab bar and the raised Scan button, not
+  // under them (a sheet opened from a tab's screen).
+  return Navigator.of(context, rootNavigator: true).push(
     DkSheetRoute<T>.of(
       context,
       builder: (context) => guarded(

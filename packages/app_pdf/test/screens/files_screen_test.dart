@@ -133,6 +133,11 @@ Future<void> settle(WidgetTester tester) async {
 }
 
 /// The text field in an open dialog (F1's search field is a field too).
+/// A file card's More button (a labelled node, no tooltip).
+Finder get cardMore => find
+    .byWidgetPredicate((w) => w is Semantics && w.properties.label == 'More')
+    .first;
+
 Finder get dialogField => find.descendant(
   of: find.byType(DkConfirmDialog),
   matching: find.byType(EditableText),
@@ -394,7 +399,7 @@ void main() {
     ) async {
       await seed(tester);
       await pumpFiles(tester, f, location: Routes.folder(taxes));
-      await tester.tap(find.byTooltip('More options'));
+      await tester.tap(find.byTooltip('More'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Rename folder'));
       await tester.pumpAndSettle();
@@ -415,7 +420,7 @@ void main() {
     testWidgets('Colour tags the folder everywhere', (tester) async {
       await seed(tester);
       await pumpFiles(tester, f, location: Routes.folder(taxes));
-      await tester.tap(find.byTooltip('More options'));
+      await tester.tap(find.byTooltip('More'));
       await tester.pumpAndSettle();
       await tester.tap(find.text('Colour'));
       await tester.pumpAndSettle();
@@ -432,7 +437,7 @@ void main() {
     testWidgets('Delete folder asks first when it holds files', (tester) async {
       await seed(tester);
       final router = await pumpFiles(tester, f, location: Routes.folder(taxes));
-      await tester.tap(find.byTooltip('More options'));
+      await tester.tap(find.byTooltip('More'));
       await tester.pumpAndSettle();
       await tester.runAsync(() async {
         await tester.tap(find.text('Delete folder'));
@@ -479,13 +484,16 @@ void main() {
 
     Future<void> openSheet(WidgetTester tester) async {
       await tester.runAsync(() async {
-        await tester.tap(find.byTooltip('More actions'));
+        await tester.tap(cardMore);
         await Future<void>.delayed(const Duration(milliseconds: 50));
       });
       await tester.pumpAndSettle();
     }
 
     Future<void> tapReal(WidgetTester tester, Finder finder) async {
+      // The medium sheet scrolls: its last rows start below the fold.
+      await tester.ensureVisible(finder);
+      await tester.pumpAndSettle();
       await tester.runAsync(() async {
         await tester.tap(finder);
         await Future<void>.delayed(const Duration(milliseconds: 150));
@@ -512,7 +520,7 @@ void main() {
         'Compress PDF',
         'Sign PDF',
         'Add password',
-        'Black out',
+        'Black out (redact)',
       ]) {
         expect(find.text(tool), findsOneWidget, reason: tool);
       }
@@ -538,6 +546,8 @@ void main() {
       );
       await pumpFiles(tester, f);
       await openSheet(tester);
+      await tester.ensureVisible(find.text('Rename'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Rename'));
       await tester.pumpAndSettle();
       expect(
@@ -596,6 +606,8 @@ void main() {
       });
       await pumpFiles(tester, f);
       await openSheet(tester);
+      await tester.ensureVisible(find.text('Move'));
+      await tester.pumpAndSettle();
       await tester.tap(find.text('Move'));
       await settle(tester);
       expect(find.text('Move 1 file'), findsOneWidget);
