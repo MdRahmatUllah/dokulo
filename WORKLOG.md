@@ -1718,3 +1718,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 21:39 · agent-2 DK-0520 · claimed: Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions
 - 2026-10-09 21:44 · agent-0 · heavy: mine (gate DK-0375..0377)
 - 2026-10-09 21:48 · agent-0 · heavy: free
+- 2026-10-09 21:48 · agent-0 DK-0375 · PR #1232 open; review requested from all

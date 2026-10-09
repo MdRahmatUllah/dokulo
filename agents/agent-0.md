@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0375 X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s — claimed 2026-10-09 21:34.
+DK-0375 in review as PR #1232: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
