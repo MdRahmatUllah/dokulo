@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -44,7 +44,11 @@ abstract final class Routes {
 GoRoute _screen(String path, String id, {List<RouteBase> routes = const []}) =>
     GoRoute(
       path: path,
-      builder: (context, state) => PlaceholderScreen(id),
+      // A MaterialPage, so a push takes the theme's transition (UI spec
+      // §13.4, DkPageTransitionsBuilder); go_router's own choice depends on
+      // the app type it finds.
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: PlaceholderScreen(id)),
       routes: routes,
     );
 
@@ -77,8 +81,14 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         pageBuilder: (context, state) =>
             const NoTransitionPage(child: LaunchScreen()),
       ),
-      StatefulShellRoute.indexedStack(
+      StatefulShellRoute(
         builder: (context, state, shell) => AppShell(shell),
+        // Tabs cross-fade (UI spec §13.4); each keeps its stack.
+        navigatorContainerBuilder: (context, shell, children) =>
+            DkFadingBranches(
+              currentIndex: shell.currentIndex,
+              children: children,
+            ),
         branches: [
           StatefulShellBranch(routes: [_screen(Routes.home, 'H1')]),
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
@@ -96,9 +106,12 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                   _screen('models', 'M2'),
                   GoRoute(
                     path: 'settings/:page',
-                    builder: (context, state) => PlaceholderScreen(
-                      'M3',
-                      detail: state.pathParameters['page']!,
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: PlaceholderScreen(
+                        'M3',
+                        detail: state.pathParameters['page']!,
+                      ),
                     ),
                   ),
                 ],
@@ -108,11 +121,19 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
-      fullScreen(
-        Routes.scan,
-        (s) => PlaceholderScreen(
-          'S1',
-          detail: s.uri.queryParameters['mode'] ?? '',
+      // The scanner slides up and back down (UI spec §13.4).
+      GoRoute(
+        path: Routes.scan,
+        parentNavigatorKey: root,
+        pageBuilder: (context, s) => dkSlideUpPage(
+          context,
+          key: s.pageKey,
+          child: _HomeUnderneath(
+            child: PlaceholderScreen(
+              'S1',
+              detail: s.uri.queryParameters['mode'] ?? '',
+            ),
+          ),
         ),
         routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
       ),
@@ -120,9 +141,20 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         '/tool/:toolId',
         (s) => PlaceholderScreen('T2', detail: s.pathParameters['toolId']!),
         routes: [
-          fullScreen(
-            'result',
-            (s) => PlaceholderScreen('T3', detail: s.pathParameters['toolId']!),
+          // The result cross-fades in after the progress (UI spec §13.4).
+          GoRoute(
+            path: 'result',
+            parentNavigatorKey: root,
+            pageBuilder: (context, s) => dkFadePage(
+              context,
+              key: s.pageKey,
+              child: _HomeUnderneath(
+                child: PlaceholderScreen(
+                  'T3',
+                  detail: s.pathParameters['toolId']!,
+                ),
+              ),
+            ),
           ),
         ],
       ),
