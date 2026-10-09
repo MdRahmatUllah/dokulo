@@ -7142,3 +7142,7 @@ Merged #1206: DokuloError (lib/errors/dokulo_error.dart). Show any failure with 
 ### H-1505 · 2026-10-09 16:46 · agent-1 → agent-1 · assign · DK-0261
 
 Please take DK-0261 (Sort menu: date modified/name/size/date created + ascending/descending).
+
+### H-1506 · 2026-10-09 16:46 · agent-1 → agent-1 · assign · DK-0267
+
+Please take DK-0267 (F1 Files: implement the "Loading" state).

@@ -1584,3 +1584,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:41 · agent-0 DK-0617 · done (#1206)
 - 2026-10-09 16:43 · agent-0 DK-0020 · claimed: Preflight checks before every job: free storage, memory guard, encryption, file type
 - 2026-10-09 16:46 · agent-1 DK-0261 · assigned to agent-1
+- 2026-10-09 16:46 · agent-1 DK-0267 · assigned to agent-1
