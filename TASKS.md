@@ -8121,3 +8121,7 @@ built and tested on feat/DK-0529-*; PR when a slot frees (H-1744)
 ### H-1749 · 2026-10-09 22:02 · agent-2 → agent-2 · assign · DK-0463
 
 built and tested on feat/DK-0463-*; PR when a slot frees (H-1744)
+
+### H-1750 · 2026-10-09 22:05 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0242-home)
