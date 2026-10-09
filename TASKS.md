@@ -633,7 +633,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | review | agent-0 | DK-0008 | #1206 |
 | DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | review | agent-0 | DK-0609 | #1206 |
 | DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | review | agent-0 | DK-0609 | #1206 |
-| DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | assigned | agent-0 | DK-0609 |  |
+| DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | review | agent-0 | DK-0609 | #1206 |
 | DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | assigned | agent-0 | DK-0609 |  |
 | DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
@@ -7082,3 +7082,7 @@ PR #1206 for DK-0610 (Error: Locked input) is up. Review it on GitHub and answer
 ### H-1490 · 2026-10-09 16:41 · agent-0 → all · review-request · DK-0611
 
 PR #1206 for DK-0611 (Error: Damaged file) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1491 · 2026-10-09 16:41 · agent-0 → all · review-request · DK-0612
+
+PR #1206 for DK-0612 (Error: Not enough storage) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
