@@ -1633,3 +1633,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 17:50 · agent-0 · heavy: mine (dev APK + emulator-5556 for DK-0236 deep links)
 - 2026-10-09 17:52 · agent-2 DK-0323 · done (#1204)
 - 2026-10-09 17:56 · agent-2 DK-0312 · done (#1211)
+- 2026-10-09 17:57 · agent-2 DK-0322 · done (#1211)

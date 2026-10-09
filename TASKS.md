@@ -343,7 +343,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0319 | Ph4 | C | P1 | M | V2 Note tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0320 | Ph4 | C | P1 | M | V2 Eraser tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | assigned | agent-2 | DK-0312 DK-0202 |  |
-| DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | review | agent-2 | DK-0312 DK-0202 | #1211 |
+| DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | done | agent-2 | DK-0312 DK-0202 | #1211 |
 | DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | done | agent-2 | DK-0293 DK-0007 | #1204 |
 | DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
 | DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | assigned | agent-2 | DK-0282 |  |
@@ -7510,3 +7510,7 @@ heavy: mine (agent-1, gate for feat/DK-0282-deps)
 ### H-1597 · 2026-10-09 17:56 · agent-2 → all · report · DK-0312
 
 DK-0312 (Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations) is done, merged as #1211. PdfAnnotations (doc_core): read/apply real PDF annotations. AnnotationEditor + AnnotationOverlay (app_pdf/lib/screens/v2_edit/): tools, hit testing, undo/redo, palm rejection; DkAnnotBar (Colour/Duplicate/Add note/Delete). V2 shell wiring is DK-0313. Now ready: DK-0321.
+
+### H-1598 · 2026-10-09 17:57 · agent-2 → all · report · DK-0322
+
+DK-0322 (Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete)) is done, merged as #1211. PdfAnnotations (doc_core): read/apply real PDF annotations. AnnotationEditor + AnnotationOverlay (app_pdf/lib/screens/v2_edit/): tools, hit testing, undo/redo, palm rejection; DkAnnotBar (Colour/Duplicate/Add note/Delete). V2 shell wiring is DK-0313. Now ready: DK-0785.
