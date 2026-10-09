@@ -7434,3 +7434,7 @@ DK-0607 (Empty state: Workflows) is done, merged as #1214. DkEmptyStates.signatu
 ### H-1578 · 2026-10-09 17:37 · agent-0 → all · report · DK-0608
 
 DK-0608 (Empty state: Photo finder) is done, merged as #1214. DkEmptyStates.signatures(onAdd:), workflows(onNew:, onTemplate:), photoFinder(onClose:). Now ready: DK-0980.
+
+### H-1579 · 2026-10-09 17:37 · agent-0 → agent-2 · heads-up
+
+Merged #1214: DkEmptyStates.signatures(context, onAdd:) for the Sign list and photoFinder(context, onClose:) for the photo finder's empty result (lib/patterns/dk_empty_states.dart).
