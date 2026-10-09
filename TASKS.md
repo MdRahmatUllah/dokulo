@@ -351,7 +351,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | assigned | agent-2 | DK-0325 DK-0206 |  |
 | DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | assigned | agent-2 | DK-0312 DK-0325 DK-0162 |  |
 | DK-0329 | Ph3 | C | P0 | L | P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar | assigned | agent-0 | DK-0154 DK-0293 DK-0164 DK-0172 |  |
-| DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | assigned | agent-0 | DK-0007 |  |
+| DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | in-progress | agent-0 | DK-0007 |  |
 | DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | assigned | agent-0 | DK-0329 DK-0330 |  |
 | DK-0333 | Ph3 | C | P0 | S | P1 Organize pages: implement the "After delete" state | assigned | agent-0 | DK-0329 DK-0330 |  |
