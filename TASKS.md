@@ -7098,3 +7098,7 @@ heavy: mine (agent-2, gate for feat/DK-0342-camera-prompt)
 ### H-1494 · 2026-10-09 16:41 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0282-deps)
+
+### H-1495 · 2026-10-09 16:41 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, gate for feat/DK-0342-camera-prompt)
