@@ -8410,3 +8410,7 @@ heavy: free (agent-1, exit 1)
 ### H-1821 · 2026-10-09 23:01 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-1822 · 2026-10-09 23:01 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, codegen + analyze + tests on a1d)
