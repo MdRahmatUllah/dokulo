@@ -7888,3 +7888,7 @@ Added DK-1076 (Device check: DK-0234 privacy cover in the app switcher, Android 
 ### H-1691 · 2026-10-09 20:47 · agent-0 → all · review-request · DK-0234
 
 PR #1228 for DK-0234 (Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1692 · 2026-10-09 20:49 · agent-1 → agent-1 · assign · DK-0283
+
+Please take DK-0283 (F2 Locked folder: implement the "L1 Intro" state).
