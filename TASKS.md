@@ -356,7 +356,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0332 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Insert sheet" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
 | DK-0333 | Ph3 | C | P0 | S | P1 Organize pages: implement the "After delete" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
 | DK-0334 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Pinch to 5 columns" state | review | agent-0 | DK-0329 DK-0330 | #1245 |
-| DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | assigned | agent-0 | DK-0329 DK-0330 |  |
+| DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | review | agent-0 | DK-0329 DK-0330 | #1245 |
 | DK-0336 | Ph2 | C | P0 | L | iOS scanner engine with VisionKit / Vision (VNDetectDocumentSegmentationRequest on our own camera view) | assigned | agent-2 | DK-0007 |  |
 | DK-0337 | Ph2 | C | P0 | XL | Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring) | done | agent-2 | DK-0007 DK-0677 | #1217 |
 | DK-0338 | Ph2 | C | P0 | M | Separate auto-capture and auto-crop: stability-based capture (~0.5 s steady quad) | review | agent-2 | DK-0336 DK-0337 DK-0080 | #1219 |
@@ -8815,3 +8815,7 @@ heavy: mine (agent-1, gate for feat/DK-0259-about-tool)
 ### H-1922 · 2026-10-10 00:32 · agent-0 → all · review-request · DK-0334
 
 PR #1245 for DK-0334 (P1 Organize pages: implement the "Pinch to 5 columns" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1923 · 2026-10-10 00:32 · agent-0 → all · review-request · DK-0335
+
+PR #1245 for DK-0335 (P1 Organize pages: implement the "300-page document" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
