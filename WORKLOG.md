@@ -1640,3 +1640,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 18:14 · agent-2 · OpenCV built locally (dartcv4, core/imgproc/imgcodecs, 2 jobs); doc_vision scan suite 40/40: filters (DK-0339), quad detector + tracker + warp (DK-0337), ID-1 crop (DK-0340), book split (DK-0341); doc_core idCardPdf true size. PR after agent-1's pubspec lock.
 - 2026-10-09 18:20 · agent-1 · unlocked pubspec
 - 2026-10-09 18:22 · agent-2 · locked pubspec: agent-2: opencv_dart (doc_vision + root hooks, PR 1) then camera (app_pdf, PR 2)
+- 2026-10-09 18:23 · agent-0 · heavy: free
