@@ -2,12 +2,24 @@
 library;
 
 export 'src/db/database.dart';
+
+// The query and row helpers app_pdf's providers and tests use with the index.
+export 'package:drift/drift.dart'
+    show
+        Value,
+        OrderingTerm,
+        Variable,
+        innerJoin,
+        BooleanExpressionOperators,
+        BaseAggregate;
+
 export 'src/files/file_store.dart';
 export 'src/files/locked_crypto.dart';
 export 'src/files/signature_store.dart';
 export 'src/files/text_indexer.dart';
 export 'src/pdf/pdf_annotations.dart';
 export 'src/pdf/pdf_engine.dart';
+export 'src/pdf/id_card_page.dart';
 export 'src/pdf/pdf_forms.dart';
 export 'src/pdf/compress/raster_fallback.dart';
 export 'src/pdf/compress/size_target.dart';

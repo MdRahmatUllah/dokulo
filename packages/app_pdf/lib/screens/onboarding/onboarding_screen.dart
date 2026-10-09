@@ -7,6 +7,7 @@ import '../../components/dk_icon.dart';
 import '../../components/dk_illustration.dart';
 import '../../components/dk_tappable.dart';
 import '../../l10n/app_localizations.dart';
+import '../../patterns/dk_open_file.dart';
 import '../../providers/onboarding_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
@@ -90,7 +91,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       title: l.onb_2_title,
                       body: l.onb_2_body,
                     ),
-                    _StartWith(onChoose: _finish),
+                    _StartWith(
+                      onChoose: _finish,
+                      onOpenFile: () {
+                        ref.read(onboardingDoneProvider.notifier).complete();
+                        openFileFromDevice(context, ref);
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -170,9 +177,10 @@ class _Intro extends StatelessWidget {
 
 /// O3: what to do first. Each card marks onboarding seen and goes there.
 class _StartWith extends StatelessWidget {
-  const _StartWith({required this.onChoose});
+  const _StartWith({required this.onChoose, required this.onOpenFile});
 
   final void Function(String location) onChoose;
+  final VoidCallback onOpenFile;
 
   @override
   Widget build(BuildContext context) {
@@ -202,8 +210,7 @@ class _StartWith extends StatelessWidget {
             icon: DkIcons.folderOpen,
             title: l.onb_open_title,
             sub: l.onb_open_sub,
-            // ponytail: the Files tab until the system picker lands (DK-0241)
-            onTap: () => onChoose(Routes.files),
+            onTap: onOpenFile,
           ),
           SizedBox(height: t.space.m),
           _StartCard(

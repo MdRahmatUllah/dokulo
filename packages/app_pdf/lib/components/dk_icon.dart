@@ -187,6 +187,10 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* chevron_right */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
+  static const dragHandle = IconData(
+    0xe945,
+    fontFamily: _font,
+  ) /* drag_indicator */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
   static const info = IconData(0xe88e, fontFamily: _font) /* info */;
@@ -256,6 +260,21 @@ abstract final class DkIcons {
   static const warning = IconData(0xf083, fontFamily: _font) /* warning */;
   static const error = IconData(0xf8b6, fontFamily: _font) /* error */;
   static const offline = IconData(0xe2c1, fontFamily: _font) /* cloud_off */;
+  // The error catalogue's situations (UI spec §26.3; DokuloError).
+  static const damaged = IconData(0xe3ad, fontFamily: _font) /* broken_image */;
+  static const storage = IconData(0xe1db, fontFamily: _font) /* storage */;
+  static const memory = IconData(0xe322, fontFamily: _font) /* memory */;
+  static const formUnsupported = IconData(
+    0xe85f,
+    fontFamily: _font,
+  ) /* assignment_late */;
+  static const cancelled = IconData(0xe888, fontFamily: _font) /* cancel */;
+  // Banners (26-global-states).
+  static const noText = IconData(0xf02f, fontFamily: _font) /* manage_search */;
+  static const cameraOff = IconData(
+    0xf1a8,
+    fontFamily: _font,
+  ) /* no_photography */;
   static const download = IconData(0xf090, fontFamily: _font) /* download */;
   static const pause = IconData(0xe034, fontFamily: _font) /* pause */;
   static const settings = IconData(0xe8b8, fontFamily: _font) /* settings */;
@@ -268,20 +287,20 @@ abstract final class DkIcons {
       Theme.of(context).platform == TargetPlatform.iOS;
 
   static IconData back(BuildContext context) => _ios(context)
-      ? IconData(0xe2ea, fontFamily: _font) /* arrow_back_ios_new */
-      : IconData(0xe5c4, fontFamily: _font) /* arrow_back */;
+      ? const IconData(0xe2ea, fontFamily: _font) /* arrow_back_ios_new */
+      : const IconData(0xe5c4, fontFamily: _font) /* arrow_back */;
 
   static IconData overflow(BuildContext context) => _ios(context)
-      ? IconData(0xe5d3, fontFamily: _font) /* more_horiz */
-      : IconData(0xe5d4, fontFamily: _font) /* more_vert */;
+      ? const IconData(0xe5d3, fontFamily: _font) /* more_horiz */
+      : const IconData(0xe5d4, fontFamily: _font) /* more_vert */;
 
   static IconData share(BuildContext context) => _ios(context)
-      ? IconData(0xe6b8, fontFamily: _font) /* ios_share */
-      : IconData(0xe80d, fontFamily: _font) /* share */;
+      ? const IconData(0xe6b8, fontFamily: _font) /* ios_share */
+      : const IconData(0xe80d, fontFamily: _font) /* share */;
 
   /// Face ID on an iPhone that has it; a fingerprint everywhere else.
   static IconData biometrics(BuildContext context, {required bool faceId}) =>
       _ios(context) && faceId
-      ? IconData(0xf008, fontFamily: _font) /* face */
-      : IconData(0xe90d, fontFamily: _font) /* fingerprint */;
+      ? const IconData(0xf008, fontFamily: _font) /* face */
+      : const IconData(0xe90d, fontFamily: _font) /* fingerprint */;
 }

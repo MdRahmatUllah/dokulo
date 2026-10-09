@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/dk_banner.dart';
+import '../components/dk_icon.dart';
 import '../l10n/app_localizations.dart';
 
 /// The global states board's banners (UI spec §32.2; DK-0622), one per
@@ -16,6 +17,7 @@ abstract final class DkBanners {
   }) {
     final l = AppLocalizations.of(context);
     return DkBanner(
+      icon: DkIcons.noText,
       text: l.banner_no_text(count),
       action: l.banner_make_searchable,
       onAction: onMakeSearchable,
