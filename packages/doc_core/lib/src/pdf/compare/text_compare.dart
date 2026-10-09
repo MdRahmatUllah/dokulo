@@ -1,3 +1,8 @@
+import 'dart:typed_data';
+
+import 'package:pdf/pdf.dart' show PdfPageFormat;
+import 'package:pdf/widgets.dart' as pw;
+
 import '../pdf_engine.dart';
 import '../redact/pdf_redactor.dart';
 
@@ -147,4 +152,54 @@ abstract final class PdfCompare {
     for (final k in ChangeKind.values)
       k: changes.where((c) => c.kind == k).length,
   };
+}
+
+/// The words Compare's report needs, in the app's language.
+typedef CompareReportText = ({
+  String title,
+  String Function(int count) summary,
+  String Function(ChangeKind kind) kind,
+  String Function(int oldPage, int newPage) pages,
+});
+
+/// Compare's "Export report" (DK-0529): an A4 PDF listing every change in
+/// page order with its kind, pages, and the text before and after.
+/// ponytail: the built-in Helvetica (Latin-1); embed a Unicode font
+/// (Noto Sans) when reports need other scripts.
+Future<Uint8List> compareReportPdf(
+  List<TextChange> changes,
+  CompareReportText words,
+) {
+  final doc = pw.Document();
+  doc.addPage(
+    pw.MultiPage(
+      pageFormat: PdfPageFormat.a4,
+      build: (_) => [
+        pw.Header(level: 0, text: words.title),
+        pw.Paragraph(text: words.summary(changes.length)),
+        for (final c in changes)
+          pw.Container(
+            margin: const pw.EdgeInsets.only(bottom: 8),
+            child: pw.Column(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Text(
+                  '${words.kind(c.kind)} · ${words.pages(c.oldPage + 1, c.newPage + 1)}',
+                  style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                ),
+                if (c.before.isNotEmpty)
+                  pw.Text(
+                    '- ${c.before}',
+                    style: const pw.TextStyle(
+                      decoration: pw.TextDecoration.lineThrough,
+                    ),
+                  ),
+                if (c.after.isNotEmpty) pw.Text('+ ${c.after}'),
+              ],
+            ),
+          ),
+      ],
+    ),
+  );
+  return doc.save();
 }

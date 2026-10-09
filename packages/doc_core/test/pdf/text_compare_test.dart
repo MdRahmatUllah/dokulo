@@ -71,4 +71,37 @@ void main() {
     expect((added.newPage, added.after), (1, 'Anlage: Hausordnung'));
     expect(added.newBoxes, isNotEmpty, reason: 'highlightable');
   });
+
+  test('the report: one page per few changes, readable back', () async {
+    final dir = await Directory.systemTemp.createTemp('dk_rep_');
+    addTearDown(() => dir.delete(recursive: true));
+    final changes = [
+      const TextChange(
+        ChangeKind.changed,
+        oldPage: 0,
+        newPage: 0,
+        before: '900',
+        after: '950',
+      ),
+      const TextChange(
+        ChangeKind.added,
+        oldPage: 1,
+        newPage: 1,
+        after: 'Anlage: Hausordnung',
+      ),
+    ];
+    final path = '${dir.path}/report.pdf';
+    await File(path).writeAsBytes(
+      await compareReportPdf(changes, (
+        title: 'Comparison',
+        summary: (n) => '$n changes',
+        kind: (k) => k.name,
+        pages: (a, b) => 'page $a / $b',
+      )),
+    );
+    final text = (await PdfEngine.pageText(path, 0)).text;
+    expect(text, contains('2 changes'));
+    expect(text, contains('Anlage: Hausordnung'));
+    expect(text, contains('changed · page 1 / 1'));
+  });
 }
