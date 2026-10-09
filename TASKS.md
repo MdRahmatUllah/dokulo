@@ -639,7 +639,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | done | agent-0 | DK-0609 | #1210 |
 | DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | done | agent-0 | DK-0609 | #1210 |
 | DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | done | agent-0 | DK-0609 | #1206 |
-| DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | review | agent-0 | DK-0609 | #1210 |
+| DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | done | agent-0 | DK-0609 | #1210 |
 | DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | review | agent-0 | DK-0609 | #1210 |
 | DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | assigned | agent-0 | DK-0198 |  |
 | DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | assigned | agent-0 | DK-0192 |  |
@@ -7306,3 +7306,7 @@ DK-0615 (Error: Model missing) is done, merged as #1210. DokuloError catalogue c
 ### H-1546 · 2026-10-09 17:06 · agent-0 → all · report · DK-0616
 
 DK-0616 (Error: Low memory) is done, merged as #1210. DokuloError catalogue complete: PdfEngine.ensureFillable (XFA), aiLoadError (low memory), Offline from the web tool, Unexpected with DK-0190; Model missing raised by the model manager (M13). docs/errors.md.
+
+### H-1547 · 2026-10-09 17:06 · agent-0 → all · report · DK-0618
+
+DK-0618 (Error: Unexpected) is done, merged as #1210. DokuloError catalogue complete: PdfEngine.ensureFillable (XFA), aiLoadError (low memory), Offline from the web tool, Unexpected with DK-0190; Model missing raised by the model manager (M13). docs/errors.md.
