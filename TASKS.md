@@ -397,7 +397,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0373 | Ph3 | C | P1 | S | Live estimate caption ("About 1.8 MB · 12 pages") | assigned | agent-0 | DK-0370 |  |
 | DK-0374 | Ph7 | C | P0 | M | Pro gating in T2: header badge, free-try caption, paywall before run on second use | open |  | DK-0370 DK-0580 DK-0579 |  |
 | DK-0375 | Ph3 | C | P0 | M | X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s | review | agent-0 | DK-0370 DK-0194 DK-0233 DK-0174 DK-0074 | #1232 |
-| DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | assigned | agent-0 | DK-0375 |  |
+| DK-0376 | Ph3 | C | P0 | S | Cancel a running job (confirm if > 30 s done) | review | agent-0 | DK-0375 | #1232 |
 | DK-0377 | Ph3 | C | P0 | M | Job failure state inside the progress sheet with one recovery action | assigned | agent-0 | DK-0375 DK-0069 |  |
 | DK-0378 | Ph3 | C | P1 | S | Notifications permission pre-prompt the first time a job runs > 30 s in the background | assigned | agent-0 | DK-0375 |  |
 | DK-0379 | Ph3 | C | P0 | L | Generic T3 result: result card, preview strip, name, save location, Next chips, action bar | assigned | agent-0 | DK-0370 DK-0090 DK-0106 DK-0170 DK-0120 DK-0086 |  |
@@ -8056,3 +8056,7 @@ heavy: free (agent-1)
 ### H-1733 · 2026-10-09 21:48 · agent-0 → all · review-request · DK-0375
 
 PR #1232 for DK-0375 (X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1734 · 2026-10-09 21:48 · agent-0 → all · review-request · DK-0376
+
+PR #1232 for DK-0376 (Cancel a running job (confirm if > 30 s done)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
