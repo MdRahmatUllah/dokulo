@@ -1619,3 +1619,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 17:23 · agent-0 DK-0605 · done (#1213)
 - 2026-10-09 17:23 · agent-0 DK-0606 · claimed: Empty state: Signatures
 - 2026-10-09 17:30 · agent-2 · S1 camera (DK-0343) + hints/flash menu/capture feedback (DK-0344/0345/0349) built and tested on feat/DK-0343-s1-camera; PR after the pubspec lock frees
+- 2026-10-09 17:36 · agent-0 DK-0606 · PR #1214 open; review requested from all

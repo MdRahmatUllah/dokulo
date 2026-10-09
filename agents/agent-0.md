@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0606 Empty state: Signatures — claimed 2026-10-09 17:23.
+DK-0606 in review as PR #1214: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
