@@ -1714,3 +1714,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 21:33 · agent-0 DK-0370 · PR #1231 open; review requested from all
 - 2026-10-09 21:34 · agent-0 DK-0370 · done (#1231)
 - 2026-10-09 21:34 · agent-0 DK-0375 · claimed: X2 progress: none < 2 s, button loading 2–10 s, progress sheet > 10 s
+- 2026-10-09 21:38 · agent-2 · Built and tested (local, no PR slot free: #1217/#1219 wait on the stopped APK gate): S2 stack DK-0353..0361+0351 (feat/DK-0353-s2-crop), S1 modes DK-0346..0348 (feat/DK-0346-s1-modes), photo finder UI DK-0363..0368 (feat/DK-0363-photo-finder-ui), signatures DK-0325..0327 (feat/DK-0325-signature-store), scan export engine (feat/DK-0359-scan-export), DK-0362 scorer tests pass.
