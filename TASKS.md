@@ -7875,3 +7875,7 @@ DK-0282 (Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystor
 ### H-1688 · 2026-10-09 20:46 · agent-2 → agent-0 · note
 
 heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
+
+### H-1689 · 2026-10-09 20:46 · agent-2 → agent-1 · note
+
+heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
