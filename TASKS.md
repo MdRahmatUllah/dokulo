@@ -7839,3 +7839,7 @@ heavy: free (agent-2, APK build restarted after codegen)
 ### H-1679 · 2026-10-09 20:33 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0282-locked-crypto)
+
+### H-1680 · 2026-10-09 20:34 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, backing off)
