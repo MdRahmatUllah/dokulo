@@ -218,6 +218,13 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
   (`test/routes/deep_links_test.dart`).
   On a device, `python tools/deeplinks_check.py` fires every route from a
   cold start (all 15 passed on emulator-5554, 2026-10-08, DK-1041).
+- **The privacy cover (DK-0234)** wraps the whole app (`MaterialApp.builder`,
+  `DkPrivacyCover`): while locked content is open or Settings → Security →
+  Hide previews is on (`privacyCoverProvider`), the app switcher shows
+  `color.background` with the symbol, as the launch screen, and Android sets
+  FLAG_SECURE (blank recents card, no screenshots); otherwise screenshots are
+  allowed. A screen with locked-folder content wraps its body in
+  `DkLockedContent`; the Security screen sets `hidePreviewsProvider`.
 - **Back from a deep-linked full-screen page goes to Home** (nothing is
   beneath it, so leaving the app would be the surprise); pushed from a tab,
   it returns to that tab.
