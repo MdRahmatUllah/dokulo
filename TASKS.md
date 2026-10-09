@@ -484,7 +484,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0460 | Ph5 | B | P1 | XS | PDF to text: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0461 | Ph5 | C | P1 | S | PDF to text: golden-PDF and widget tests | open |  | DK-0456 DK-0658 |  |
 | DK-0462 | Ph3 | A | P0 | M | Compress PDF: implement the compress ToolJob (engine) | done | agent-0 | DK-0392 DK-0008 | #1115 |
-| DK-0463 | Ph3 | C | P0 | M | Compress PDF: T2 options UI | open |  | DK-0370 DK-0462 DK-0092 DK-0104 |  |
+| DK-0463 | Ph3 | C | P0 | M | Compress PDF: T2 options UI | assigned | agent-2 | DK-0370 DK-0462 DK-0092 DK-0104 |  |
 | DK-0464 | Ph3 | C | P0 | S | Compress PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0463 |  |
 | DK-0465 | Ph3 | C | P1 | S | Compress PDF: errors and edge states | open |  | DK-0463 DK-0609 DK-0020 |  |
 | DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -8117,3 +8117,7 @@ built and tested on feat/DK-0528-*; PR when a slot frees (H-1744)
 ### H-1748 · 2026-10-09 22:02 · agent-2 → agent-2 · assign · DK-0529
 
 built and tested on feat/DK-0529-*; PR when a slot frees (H-1744)
+
+### H-1749 · 2026-10-09 22:02 · agent-2 → agent-2 · assign · DK-0463
+
+built and tested on feat/DK-0463-*; PR when a slot frees (H-1744)
