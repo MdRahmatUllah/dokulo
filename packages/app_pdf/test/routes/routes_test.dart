@@ -16,6 +16,7 @@ import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/components/dk_tab_bar.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
+import 'package:app_pdf/screens/t1_tools/tools_screen.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -80,6 +81,19 @@ String title(WidgetTester tester) {
   return (tester.widget<AppBar>(find.byType(AppBar).last).title! as Text).data!;
 }
 
+/// How far T1's list has scrolled.
+double toolsScroll(WidgetTester tester) => tester
+    .state<ScrollableState>(
+      find.descendant(
+        of: find.byType(CustomScrollView),
+        matching: find.byWidgetPredicate(
+          (w) => w is Scrollable && w.axisDirection == AxisDirection.down,
+        ),
+      ),
+    )
+    .position
+    .pixels;
+
 bool tabBarShown(WidgetTester tester) =>
     find.byType(DkTabBar).evaluate().isNotEmpty;
 
@@ -87,7 +101,6 @@ void main() {
   // Every route from a cold start (what a deep link does): the screen, and
   // whether the tab bar shows.
   const coldStarts = {
-    Routes.tools: ('T1', true),
     Routes.me: ('M1', true),
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
@@ -108,6 +121,12 @@ void main() {
   testWidgets('cold start at /home shows H1 with the tab bar', (tester) async {
     await pumpAt(tester, Routes.home);
     expect(find.byType(HomeScreen), findsOneWidget);
+    expect(tabBarShown(tester), isTrue);
+  });
+
+  testWidgets('cold start at /tools shows T1 with the tab bar', (tester) async {
+    await pumpAt(tester, Routes.tools);
+    expect(find.byType(ToolsScreen), findsOneWidget);
     expect(tabBarShown(tester), isTrue);
   });
 
@@ -176,12 +195,9 @@ void main() {
     tester,
   ) async {
     final router = await pumpAt(tester, Routes.tools);
-    await tester.drag(find.byType(ListView), const Offset(0, -600));
+    await tester.drag(find.byType(CustomScrollView), const Offset(0, -600));
     await tester.pumpAndSettle();
-    final scrolled = tester
-        .state<ScrollableState>(find.byType(Scrollable).last)
-        .position
-        .pixels;
+    final scrolled = toolsScroll(tester);
     expect(scrolled, greaterThan(0));
 
     await tester.tap(find.text('Me'));
@@ -190,16 +206,10 @@ void main() {
     await tester.pumpAndSettle();
     expect(title(tester), 'M2');
 
-    await tester.tap(find.text('Tools'));
+    await tester.tap(find.text('Tools').last);
     await tester.pumpAndSettle();
-    expect(title(tester), 'T1');
-    expect(
-      tester
-          .state<ScrollableState>(find.byType(Scrollable).last)
-          .position
-          .pixels,
-      scrolled,
-    );
+    expect(find.byType(ToolsScreen), findsOneWidget);
+    expect(toolsScroll(tester), scrolled);
 
     await tester.tap(find.text('Me'));
     await tester.pumpAndSettle();
@@ -217,7 +227,7 @@ void main() {
 
     router.pop();
     await tester.pumpAndSettle();
-    expect(title(tester), 'T1');
+    expect(find.byType(ToolsScreen), findsOneWidget);
     expect(tester.widget<DkTabBar>(find.byType(DkTabBar)).currentIndex, 1);
   });
 

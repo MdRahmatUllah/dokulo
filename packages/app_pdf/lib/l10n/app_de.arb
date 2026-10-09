@@ -497,5 +497,11 @@
   "tool_batch_get": "Jede Datei mit demselben Werkzeug bearbeitet, in einem neuen Ordner",
   "tool_workflows_need": "Eine oder mehrere PDFs",
   "tool_workflows_get": "Das Ergebnis mehrerer Werkzeuge nacheinander",
-  "t2_about_tool": "Über dieses Werkzeug"
+  "t2_about_tool": "Über dieses Werkzeug",
+  "tools_search_hint": "Werkzeuge suchen",
+  "tools_all": "Alle",
+  "tools_count": "{n, plural, one{1 Werkzeug} other{{n} Werkzeuge}}",
+  "ai_not_eligible_title": "KI ist auf diesem Handy nicht verfügbar",
+  "ai_not_eligible_body": "Dafür braucht es mindestens {need} GB Arbeitsspeicher. Dieses Handy hat {have} GB.",
+  "common_ok": "OK"
 }

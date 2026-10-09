@@ -1960,5 +1960,42 @@
     "description": "About this tool, workflows: what you get."
   },
   "t2_about_tool": "About this tool",
-  "@t2_about_tool": {"description": "T2's overflow menu: opens About this tool (UI spec §20.1, §20.5)."}
+  "@t2_about_tool": {"description": "T2's overflow menu: opens About this tool (UI spec §20.1, §20.5)."},
+  "tools_search_hint": "Search tools",
+  "@tools_search_hint": {
+    "description": "T1's search field (DK-0256)."
+  },
+  "tools_all": "All",
+  "@tools_all": {
+    "description": "T1's first category chip: back to the top."
+  },
+  "tools_count": "{n, plural, one{1 tool} other{{n} tools}}",
+  "@tools_count": {
+    "description": "T1 section header: how many tools the section has.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ai_not_eligible_title": "AI isn't available on this phone",
+  "@ai_not_eligible_title": {
+    "description": "The device-not-eligible sheet (ILL-13), from V1's AI button and T1's AI tools."
+  },
+  "ai_not_eligible_body": "It needs at least {need} GB of memory. This phone has {have} GB.",
+  "@ai_not_eligible_body": {
+    "description": "The device-not-eligible sheet's text.",
+    "placeholders": {
+      "need": {
+        "type": "int"
+      },
+      "have": {
+        "type": "int"
+      }
+    }
+  },
+  "common_ok": "OK",
+  "@common_ok": {
+    "description": "Closes an information sheet."
+  }
 }
