@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-09 22:02
+last-seen: 2026-10-09 22:04
 last-read: 1738
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0520 Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, 
 
 ## Next
 
-1) #1217 (DK-0339/0337/0340/0341): APK + gate --apk running (apk_gate.sh); then merge main, merge, done, close issues. 2) #1219 (S1 camera, 7 tasks): gate --apk, merge. 3) Open PRs from a2f stack: DK-0369 (40e05d38); DK-0353-0356 (bc8a2ba3, b85df6a9, 644c3330); DK-0357/0358 + DK-0359 sheet (103c4fc8, a11e1ba3) - save-sheet tests not run yet. 4) DK-0362 scorer (a2g, f23f0468, stacked on 0339): test in agent-2 after #1217. 5) DK-0359 export pipeline (warp+filter+JPEG in doc_vision, images PDF in doc_core) after both PRs merge. DK-0353..0359 claim when DK-0352/0339 are done.
+Blocked on the owner's OK to rerun the #1217 --apk gate (stopped by the system for low memory ~20:55). Then: #1217 merge -> #1219 (--apk) merge -> open the stacked PRs: DK-0369; DK-0353-0356; DK-0357/0358/0359(sheet)/0361/0351; DK-0346-0348; DK-0362+0363-0368; DK-0359 export (feat/DK-0359-scan-export); DK-0325-0327 (feat/DK-0325-signature-store, db-schema held). Done off-goal (M12) while waiting: DK-0520, DK-0528, DK-0529 (+visual on OpenCV branch), DK-0463 - asked agent-0 (H-1744) about the PR cap. DK-0321 needs agent-0's DK-0300 (viewer text selection).
 
 ## Memory
 
