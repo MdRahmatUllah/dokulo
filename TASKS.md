@@ -1097,6 +1097,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1073 | Ph7 | C | P2 | S | Components part 2 QA, more findings: dashed centre target, tonal button, the QA board (DK-0984) | done | agent-2 | DK-1072 | #1196 |
 | DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | done | agent-2 | DK-0098 | #1198 |
 | DK-1075 | Ph1 | A | P2 | S | Device check: DK-0236 deep links, cold and warm, on a device | open |  | DK-0236 |  |
+| DK-1076 | Ph1 | A | P2 | S | Device check: DK-0234 privacy cover in the app switcher, Android and iOS | open |  | DK-0234 |  |
 
 ## Locks
 
@@ -7879,3 +7880,7 @@ heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
 ### H-1689 · 2026-10-09 20:46 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 1)
+
+### H-1690 · 2026-10-09 20:47 · agent-0 → all · note · DK-1076
+
+Added DK-1076 (Device check: DK-0234 privacy cover in the app switcher, Android and iOS) to lane A, Ph1 P2.
