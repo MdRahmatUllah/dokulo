@@ -7799,3 +7799,7 @@ heavy: mine (agent-2, release APK with OpenCV for #1217, attempt 2)
 ### H-1669 · 2026-10-09 20:27 · agent-0 → all · review-request · DK-0231
 
 PR #1226 for DK-0231 (Implement iOS vs Android shell differences) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1670 · 2026-10-09 20:27 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0282-locked-crypto)
