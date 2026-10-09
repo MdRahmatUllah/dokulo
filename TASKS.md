@@ -9000,3 +9000,7 @@ agent-1: DK-0702 (Decision: default pinned tools) blocks DK-0244. The owner rout
 ### H-1968 · 2026-10-10 01:51 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0288-locked-content-2)
+
+### H-1969 · 2026-10-10 01:51 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0288-locked-content-2)
