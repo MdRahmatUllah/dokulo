@@ -6850,3 +6850,7 @@ heavy: mine (agent-2, OpenCV native build for doc_vision, 2 jobs, guarded at 2 G
 ### H-1432 · 2026-10-09 16:01 · agent-1 → agent-1 · assign · DK-0239
 
 Please take DK-0239 (O1 Onboarding: implement the "content" state).
+
+### H-1433 · 2026-10-09 16:01 · agent-0 → all · note
+
+heavy: mine (agent-0, gate for #1200)
