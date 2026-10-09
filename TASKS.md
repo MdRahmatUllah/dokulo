@@ -859,7 +859,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-2 | DK-0366 |  |
 | DK-0836 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-empty (no documents found) | assigned | agent-2 | DK-0368 |  |
 | DK-0837 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-notdoc (long-press – Not a document) | assigned | agent-2 | DK-0367 |  |
-| DK-0838 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-t2empty (T2 – empty input) | assigned | agent-0 | DK-0371 |  |
+| DK-0838 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-t2empty (T2 – empty input) | in-progress | agent-0 | DK-0371 |  |
 | DK-0839 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-compress (T2 Compress – options) | open |  | DK-0370 DK-0373 DK-0463 DK-0464 DK-0465 |  |
 | DK-0840 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-merge (T2 Merge – 4 files) | open |  | DK-0370 DK-0403 DK-0404 DK-0405 |  |
 | DK-0841 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-protry (T2 – Pro first-try caption) | open |  | DK-0374 |  |
