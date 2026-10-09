@@ -60,11 +60,15 @@ class VersionStore {
   /// version itself, so a restore can be undone the same way; the restored
   /// copy leaves the list (its content is the file now).
   Future<void> restore(Version version) async {
+    // Set the copy aside first: saving the current content may drop the
+    // oldest version, and that may be the one being restored.
+    final aside = await File(version.path).copy('${version.path}.restore');
     await save(version.fileId);
     final file = await (db.select(
       db.files,
     )..where((f) => f.id.equals(version.fileId))).getSingle();
-    final restored = await File(version.path).copy(file.path);
+    final restored = await aside.copy(file.path);
+    await aside.delete();
     await (db.update(db.files)..where((f) => f.id.equals(file.id))).write(
       FilesCompanion(
         size: Value(await restored.length()),

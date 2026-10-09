@@ -89,6 +89,21 @@ void main() {
     expect(copiesOnDisk(), hasLength(2));
   });
 
+  test('restoring the oldest of 5 still works', () async {
+    for (var i = 1; i <= 5; i++) {
+      await edit('v$i'); // versions v4..v0, the file v5
+    }
+    final oldest = (await versions.list(fileId)).last;
+    expect(File(oldest.path).readAsStringSync(), 'v0');
+    await versions.restore(oldest);
+    expect(pdf.readAsStringSync(), 'v0');
+    final list = await versions.list(fileId);
+    expect(list.first.path, isNot(oldest.path));
+    expect(File(list.first.path).readAsStringSync(), 'v5');
+    expect(list.length, lessThanOrEqualTo(VersionStore.keep));
+    expect(copiesOnDisk().length, list.length, reason: 'no stray copies');
+  });
+
   test('purge drops versions older than 30 days, files and rows', () async {
     await edit('v1'); // the copy of v0, at day 0
     now = now.add(const Duration(days: 20));
