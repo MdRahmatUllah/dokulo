@@ -374,8 +374,11 @@ duplicates, deletes ("2 pages deleted · Undo") or extracts them (a new
 its neighbour, or another PDF's pages (copied into the inbox first), after
 the last selected page or at the end. Undo and Redo step through every
 edit. Save keeps the result as a copy next to the original (never touched);
-Cancel asks first when something changed. Insert from a scan or photos and
-Replace original: DK-1079.
+Cancel asks first when something changed. Phones start at 3 columns, tablets
+at 5 and 8; a pinch goes from 2 to 6 (DK-0334). The grid is virtualised: only
+the visible pages ask for their thumbnails (one subscription each), so a
+300-page document shows skeletons with page numbers that fade in as they
+render (DK-0335). Insert from a scan or photos and Replace original: DK-1079.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration

@@ -47,18 +47,27 @@ void main() {
     }
   });
 
-  Future<void> pumpP1(WidgetTester tester, {DkTokens? tokens}) async {
+  Future<void> pumpP1(
+    WidgetTester tester, {
+    DkTokens? tokens,
+    int pages = 5,
+    Size size = const Size(393, 852),
+  }) async {
     // A phone: three columns, so the 5 pages fit on screen.
-    tester.view.physicalSize = const Size(393, 852);
+    tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     final id = (await tester.runAsync(() async {
       original = File('${store.userFolder.path}${sep}Taxes${sep}Five.pdf')
         ..parent.createSync(recursive: true);
-      await PdfEngine.assemble([
-        for (var i = 0; i < 5; i++)
-          PageSource(fixture('long-300-pages.pdf'), i),
-      ], original.path);
+      if (pages == 300) {
+        await File(fixture('long-300-pages.pdf')).copy(original.path);
+      } else {
+        await PdfEngine.assemble([
+          for (var i = 0; i < pages; i++)
+            PageSource(fixture('long-300-pages.pdf'), i),
+        ], original.path);
+      }
       return db
           .into(db.files)
           .insert(
@@ -243,6 +252,59 @@ void main() {
     await tester.tap(find.text('Cancel'));
     await settle(tester);
     expect(find.text('Discard'), findsOneWidget);
+  });
+
+  double thumbWidth(WidgetTester tester) =>
+      tester.getSize(find.byType(DkPageThumb).first).width;
+
+  testWidgets('pinch: bigger or smaller pages, 2 to 6 columns (DK-0334)', (
+    tester,
+  ) async {
+    await pumpP1(tester);
+    final three = thumbWidth(tester);
+    Future<void> pinch(double from, double to) async {
+      const centre = Offset(196, 300);
+      final a = await tester.startGesture(centre - Offset(from / 2, 0));
+      final b = await tester.startGesture(centre + Offset(from / 2, 0));
+      for (var i = 1; i <= 10; i++) {
+        final d = from + (to - from) * i / 10;
+        await a.moveTo(centre - Offset(d / 2, 0));
+        await b.moveTo(centre + Offset(d / 2, 0));
+        await tester.pump();
+      }
+      await a.up();
+      await b.up();
+      await settle(tester);
+    }
+
+    await pinch(100, 140); // out: 2 columns, bigger
+    expect(thumbWidth(tester), greaterThan(three));
+    await pinch(200, 50); // in: down to 6 columns, smaller
+    expect(thumbWidth(tester), lessThan(three));
+  });
+
+  testWidgets('a tablet starts at 5 columns', (tester) async {
+    await pumpP1(tester, size: const Size(700, 1000));
+    expect(
+      tester.widget<DkPageGrid>(find.byType(DkPageGrid)).initialColumns,
+      5,
+    );
+  });
+
+  testWidgets('300 pages: only the visible ones are built, as skeletons '
+      'with their numbers until they render (DK-0335)', (tester) async {
+    await pumpP1(tester, pages: 300);
+    expect(find.text('300 pages'), findsOneWidget);
+    final built = find.byType(DkPageThumb).evaluate().length;
+    expect(built, lessThan(40), reason: 'virtualised');
+    // No thumbnail renders in a test: every page is its skeleton + number.
+    final thumbs = tester.widgetList<DkPageThumb>(find.byType(DkPageThumb));
+    expect(thumbs.every((t) => t.page == null), isTrue);
+    expect(find.text('1'), findsWidgets); // on the skeleton and under it
+
+    await tester.drag(find.byType(DkPageGrid), const Offset(0, -60000));
+    await settle(tester);
+    expect(find.text('300'), findsWidgets);
   });
 }
 
