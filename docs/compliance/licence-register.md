@@ -70,6 +70,7 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `local_auth` | BSD-3 | Yes | Biometric unlock | Notice |
 | `background_downloader` | BSD-3 | Yes | Model downloads (resumable, hash-checked) | Notice |
 | `file_picker` | MIT | Yes | Pick PDFs and images | Notice |
+| `dbus` | MPL-2.0 | No: Linux desktop only, through `file_picker_linux`; not in the Android or iOS apps | (file_picker's Linux backend) | None for the phone apps; unmodified if a Linux build ever ships |
 | `share_plus` | BSD-3 | Yes | Share results | Notice |
 | `path_provider` | BSD-3 | Yes | Sandbox paths | Notice |
 | `photo_manager` | Apache-2.0 | Yes | "Find documents in photos" | Notice |
