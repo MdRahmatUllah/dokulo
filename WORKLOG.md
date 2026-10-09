@@ -1866,3 +1866,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 01:33 · agent-0 DK-0844 · claimed: Visual QA: tool-shell-progress (X2 – progress sheet)
 - 2026-10-10 01:33 · agent-0 DK-0844 · PR #1249 open; review requested from all
 - 2026-10-10 01:33 · agent-0 DK-0847 · claimed: Visual QA: tool-shell-failure (X2 – failure state)
+- 2026-10-10 01:33 · agent-0 DK-0847 · PR #1249 open; review requested from all

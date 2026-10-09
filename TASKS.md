@@ -868,7 +868,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | review | agent-0 | DK-0375 | #1249 |
 | DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | assigned | agent-0 | DK-0233 DK-0375 |  |
 | DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | assigned | agent-0 | DK-0376 |  |
-| DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | in-progress | agent-0 | DK-0377 |  |
+| DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | review | agent-0 | DK-0377 | #1249 |
 | DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | assigned | agent-0 | DK-0235 DK-0387 |  |
 | DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | assigned | agent-1 | DK-0235 DK-0387 DK-0255 |  |
 | DK-0850 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-result (T3 Compress – result) | open |  | DK-0379 DK-0386 DK-0463 DK-0464 DK-0465 |  |
@@ -8940,3 +8940,7 @@ PR #1249 for DK-0843 (Visual QA: tool-shell-btnloading (X2 – button loading (2
 ### H-1953 · 2026-10-10 01:33 · agent-0 → all · review-request · DK-0844
 
 PR #1249 for DK-0844 (Visual QA: tool-shell-progress (X2 – progress sheet)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1954 · 2026-10-10 01:33 · agent-0 → all · review-request · DK-0847
+
+PR #1249 for DK-0847 (Visual QA: tool-shell-failure (X2 – failure state)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
