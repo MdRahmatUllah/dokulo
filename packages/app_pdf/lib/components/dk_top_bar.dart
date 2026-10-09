@@ -16,11 +16,20 @@ class DkTopBarAction {
     required this.icon,
     required this.tooltip,
     required this.onPressed,
-  });
+  }) : onMenu = null;
+
+  /// An action that opens a menu under itself (F1's sort): [onMenu] gets the
+  /// button's context as the menu's anchor.
+  const DkTopBarAction.menu({
+    required this.icon,
+    required this.tooltip,
+    required void Function(BuildContext anchor) this.onMenu,
+  }) : onPressed = null;
 
   final IconData icon;
   final String tooltip;
   final VoidCallback? onPressed;
+  final void Function(BuildContext anchor)? onMenu;
 }
 
 /// The small top bar (UI spec §11.6; DK-0164): 56 tall below the status
@@ -258,7 +267,20 @@ class _Actions extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       for (final a in actions)
-        DkIconButton(icon: a.icon, tooltip: a.tooltip, onPressed: a.onPressed),
+        if (a.onMenu case final onMenu?)
+          Builder(
+            builder: (anchor) => DkIconButton(
+              icon: a.icon,
+              tooltip: a.tooltip,
+              onPressed: () => onMenu(anchor),
+            ),
+          )
+        else
+          DkIconButton(
+            icon: a.icon,
+            tooltip: a.tooltip,
+            onPressed: a.onPressed,
+          ),
       if (onOverflow != null)
         Builder(
           builder: (anchor) => DkIconButton(
