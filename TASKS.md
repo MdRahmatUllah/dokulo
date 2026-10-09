@@ -638,7 +638,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
 | DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | assigned | agent-0 | DK-0609 |  |
-| DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | review | agent-0 | DK-0609 | #1206 |
+| DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | done | agent-0 | DK-0609 | #1206 |
 | DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | assigned | agent-0 | DK-0609 |  |
 | DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | assigned | agent-0 | DK-0609 |  |
 | DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | assigned | agent-0 | DK-0198 |  |
@@ -7122,3 +7122,7 @@ DK-0611 (Error: Damaged file) is done, merged as #1206. DokuloError.from(any err
 ### H-1500 · 2026-10-09 16:41 · agent-0 → all · report · DK-0612
 
 DK-0612 (Error: Not enough storage) is done, merged as #1206. DokuloError.from(any error) -> situation, code DK-01x0, page, title(l10n), actions (lib/errors/dokulo_error.dart; docs/errors.md). Screens show it inline (field, banner, DkProgressSheet error).
+
+### H-1501 · 2026-10-09 16:41 · agent-0 → all · report · DK-0617
+
+DK-0617 (Error: Cancelled) is done, merged as #1206. DokuloError.from(any error) -> situation, code DK-01x0, page, title(l10n), actions (lib/errors/dokulo_error.dart; docs/errors.md). Screens show it inline (field, banner, DkProgressSheet error).
