@@ -24,6 +24,7 @@ ALLOWED = {
     "android.permission.FOREGROUND_SERVICE",               # long jobs
     "android.permission.FOREGROUND_SERVICE_DATA_SYNC",
     "android.permission.USE_BIOMETRIC",                    # locked folder, app lock
+    "android.permission.USE_FINGERPRINT",                  # the same, on Android 8-8.1 (androidx.biometric)
     "android.permission.INTERNET",                         # model downloads, Web to PDF, purchases
     "android.permission.WRITE_EXTERNAL_STORAGE",           # Documents/Dokulo on Android 8-9 (maxSdkVersion 28, DK-0006)
 }

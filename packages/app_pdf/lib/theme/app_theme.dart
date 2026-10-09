@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/motion/dk_transition_motion.dart';
 import 'dk_tokens.dart';
 
 /// The MaterialApp theme for [tokens] (DK-0047): the tokens as its extension
@@ -11,6 +12,13 @@ ThemeData dokuloTheme(DkTokens tokens) {
   return ThemeData(
     brightness: tokens.brightness,
     scaffoldBackgroundColor: c.background,
+    // Pushed pages (UI spec §13.4; DK-0237).
+    pageTransitionsTheme: const PageTransitionsTheme(
+      builders: {
+        TargetPlatform.android: DkPageTransitionsBuilder(),
+        TargetPlatform.iOS: DkPageTransitionsBuilder(),
+      },
+    ),
     colorScheme: ColorScheme(
       brightness: tokens.brightness,
       primary: c.primary,
