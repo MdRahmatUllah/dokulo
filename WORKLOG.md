@@ -1738,3 +1738,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 22:02 · agent-2 DK-0529 · assigned to agent-2
 - 2026-10-09 22:02 · agent-2 DK-0463 · assigned to agent-2
 - 2026-10-09 22:02 · agent-0 DK-0371 · claimed: T2 empty input state: picker card with recent compatible files, Browse device, Choose photos
+- 2026-10-09 22:05 · agent-1 DK-0260 · PR #1235 open; review requested from all
