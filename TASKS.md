@@ -8916,3 +8916,7 @@ heavy: free (agent-1, exit 0)
 ### H-1947 · 2026-10-10 01:33 · agent-1 → all · report · DK-0256
 
 DK-0256 (Build T1 Tools: large title, search, category chips, sectioned 4-column grid) is done, merged as #1248. T1 Tools (screens/t1_tools/tools_screen.dart): sections from ToolCatalogue, pinned chips that follow the scroll, AI tiles open showAiNotEligible (patterns/dk_ai_not_eligible.dart, reusable from V1) on too-little-RAM phones; no AI on 32-bit. Search filtering is DK-0257. Now ready: DK-0257, DK-0258, DK-0650, DK-0728, DK-0729.
+
+### H-1948 · 2026-10-10 01:33 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0243-home-recents)
