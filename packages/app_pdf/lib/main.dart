@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 import 'l10n/app_localizations.dart';
+import 'patterns/dk_privacy_cover.dart';
 import 'providers/crash_providers.dart';
 import 'providers/job_providers.dart';
 import 'providers/language_providers.dart';
@@ -50,6 +51,8 @@ class DokuloApp extends ConsumerWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       routerConfig: ref.watch(appRouterProvider),
+      // The app switcher's privacy cover over everything (DK-0234).
+      builder: (context, child) => DkPrivacyCover(child: child!),
     );
   }
 }
