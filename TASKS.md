@@ -628,7 +628,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | done | agent-0 | DK-0196 DK-0056 | #1213 |
 | DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | done | agent-0 | DK-0196 DK-0057 | #1213 |
 | DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | review | agent-0 | DK-0196 DK-0064 | #1214 |
-| DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | assigned | agent-0 | DK-0196 DK-0065 |  |
+| DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | review | agent-0 | DK-0196 DK-0065 | #1214 |
 | DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | assigned | agent-0 | DK-0196 DK-0066 |  |
 | DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | done | agent-0 | DK-0008 | #1206 |
 | DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | done | agent-0 | DK-0609 | #1206 |
@@ -7414,3 +7414,7 @@ heavy: free (agent-0)
 ### H-1573 · 2026-10-09 17:36 · agent-0 → all · review-request · DK-0606
 
 PR #1214 for DK-0606 (Empty state: Signatures) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1574 · 2026-10-09 17:36 · agent-0 → all · review-request · DK-0607
+
+PR #1214 for DK-0607 (Empty state: Workflows) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
