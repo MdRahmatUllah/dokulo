@@ -7214,3 +7214,7 @@ DK-0020 (Preflight checks before every job: free storage, memory guard, encrypti
 ### H-1523 · 2026-10-09 16:53 · agent-0 → all · report · DK-0613
 
 DK-0613 (Error: Too large for memory) is done, merged as #1207. Preflight (doc_tools) in JobQueue.start/resume: storage (spaceFactor), memory (renderDpi x pagesInMemory vs 60% free RAM), locked. ToolJob: passwordOf/spaceFactor/renderDpi/pagesInMemory; DocError.bytes. A new tool sets renderDpi if it renders pages.
+
+### H-1524 · 2026-10-09 16:53 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, backing off)
