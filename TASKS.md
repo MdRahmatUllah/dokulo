@@ -7258,3 +7258,7 @@ DK-0342 (Camera permission pre-prompt sheet and denied state) is done, merged as
 ### H-1534 · 2026-10-09 17:05 · agent-0 → all · note
 
 heavy: free (agent-0)
+
+### H-1535 · 2026-10-09 17:05 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0282-deps)
