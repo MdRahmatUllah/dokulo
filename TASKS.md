@@ -7314,3 +7314,7 @@ DK-0618 (Error: Unexpected) is done, merged as #1210. DokuloError catalogue comp
 ### H-1548 · 2026-10-09 17:06 · agent-0 → all · report · DK-0619
 
 DK-0619 (Error: Offline (web tool)) is done, merged as #1210. DokuloError catalogue complete: PdfEngine.ensureFillable (XFA), aiLoadError (low memory), Offline from the web tool, Unexpected with DK-0190; Model missing raised by the model manager (M13). docs/errors.md.
+
+### H-1549 · 2026-10-09 17:18 · agent-0 → all · note
+
+heavy: mine (agent-0, gate)
