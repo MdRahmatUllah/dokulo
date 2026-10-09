@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
 import '../../routes/link_error.dart';
 import '../../routes/routes.dart';
+import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../../theme/haptics.dart';
 import '../../tools/tool_catalogue.dart';
@@ -61,6 +63,38 @@ class _OrganizeState extends ConsumerState<_Organize> {
   PageEdit? _edit;
   var _selected = <int>{};
   var _saving = false;
+
+  /// The thumbnails of the pages the grid has shown, by file and page: a
+  /// page is a skeleton with its number until its thumbnail renders, then
+  /// fades in (DK-0335). Only the visible pages ask (the grid is
+  /// virtualised), so a 300-page document renders as it scrolls.
+  final _thumbs = <(String, int), ProviderSubscription<AsyncValue<ui.Image>>>{};
+
+  @override
+  void dispose() {
+    for (final sub in _thumbs.values) {
+      sub.close();
+    }
+    super.dispose();
+  }
+
+  Widget? _thumb(PageSource source) {
+    final sub = _thumbs.putIfAbsent(
+      (source.path, source.page),
+      () => ref.listenManual(
+        pdfThumbnailProvider(source.path, page: source.page + 1),
+        (_, next) {
+          if (next.hasValue && mounted) setState(() {});
+        },
+      ),
+    );
+    final image = sub.read().value;
+    if (image == null) return null;
+    return RotatedBox(
+      quarterTurns: source.addQuarterTurns,
+      child: RawImage(image: image),
+    );
+  }
 
   @override
   void initState() {
@@ -222,25 +256,44 @@ class _OrganizeState extends ConsumerState<_Organize> {
                         setState(() => _selected = {});
                         ref.read(hapticsProvider).dropped();
                       },
-                      pageBuilder: (context, i) =>
-                          _Thumb(source: edit.pages[i]),
+                      // Phones 3 columns, tablets 5 and 8; pinch for 2–6
+                      // (DK-0334).
+                      initialColumns: switch (DkGrid.forWidth(
+                        MediaQuery.sizeOf(context).width,
+                      )) {
+                        DkGrid.phone => 3,
+                        DkGrid.smallTablet => 5,
+                        _ => 8,
+                      },
+                      pageBuilder: (context, i) => _thumb(edit.pages[i]),
                     ),
                   ),
                 ],
               ),
         floatingActionButton: selecting || edit == null
             ? null
-            // A 56 primary circle with the add icon (the artboard's FAB).
-            : FloatingActionButton(
-                tooltip: l.organize_insert_title,
-                shape: const CircleBorder(),
-                backgroundColor: t.color.primary,
-                foregroundColor: t.color.onPrimary,
-                onPressed: () => _showInsert(edit),
-                child: DkIcon(
-                  DkIcons.add,
-                  size: DkIconSize.xl,
-                  color: t.color.onPrimary,
+            // A 56 primary circle with the add icon and the floating shadow
+            // (the artboard's FAB, as the Scan button).
+            : DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  boxShadow: t.elevation.floating,
+                ),
+                child: FloatingActionButton(
+                  tooltip: l.organize_insert_title,
+                  shape: const CircleBorder(),
+                  elevation: 0,
+                  focusElevation: 0,
+                  hoverElevation: 0,
+                  highlightElevation: 0,
+                  backgroundColor: t.color.primary,
+                  foregroundColor: t.color.onPrimary,
+                  onPressed: () => _showInsert(edit),
+                  child: DkIcon(
+                    DkIcons.add,
+                    size: DkIconSize.xl,
+                    color: t.color.onPrimary,
+                  ),
                 ),
               ),
         bottomNavigationBar: selecting
@@ -378,25 +431,6 @@ class _SubBar extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-/// A page of the list, turned as it will be saved.
-class _Thumb extends ConsumerWidget {
-  const _Thumb({required this.source});
-
-  final PageSource source;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final image = ref
-        .watch(pdfThumbnailProvider(source.path, page: source.page + 1))
-        .value;
-    if (image == null) return const SizedBox.shrink();
-    return RotatedBox(
-      quarterTurns: source.addQuarterTurns,
-      child: RawImage(image: image),
     );
   }
 }
