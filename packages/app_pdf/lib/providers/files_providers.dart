@@ -256,7 +256,7 @@ fileSearch(Ref ref, String query) async {
       if (file != null) {
         text.putIfAbsent(
           h.fileId,
-          () => (file: file, page: h.page, snippet: h.snippet),
+          () => (file: file, page: h.page, snippet: h.snippet ?? ''),
         );
       }
     }
