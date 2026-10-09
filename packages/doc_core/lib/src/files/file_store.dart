@@ -110,6 +110,106 @@ class FileStore {
     });
   }
 
+  /// Renames file [id] to [stem] plus its extension (DK-0272): characters
+  /// no file system takes (\ / : * ? " < > |) are dropped, the extension is
+  /// kept. A name another file in the folder has throws [FileNameException].
+  Future<void> renameFile(DokuloDatabase db, int id, String stem) async {
+    final row = await _file(db, id);
+    final dot = row.name.lastIndexOf('.');
+    final ext = dot > 0 ? row.name.substring(dot) : '';
+    final clean = stem.replaceAll(RegExp(r'[\\/:*?"<>|]'), '').trim();
+    if (clean.isEmpty || clean == '.' || clean == '..') {
+      throw const FileNameException(FileNameProblem.invalid);
+    }
+    final name = '$clean$ext';
+    if (name == row.name) return;
+    final dir = File(row.path).parent;
+    final target = File('${dir.path}${Platform.pathSeparator}$name');
+    final sameIgnoringCase = name.toLowerCase() == row.name.toLowerCase();
+    if (!sameIgnoringCase && await target.exists()) {
+      throw const FileNameException(FileNameProblem.taken);
+    }
+    await File(row.path).rename(target.path);
+    await (db.update(db.files)..where((f) => f.id.equals(id))).write(
+      FilesCompanion(path: Value(target.path), name: Value(name)),
+    );
+  }
+
+  /// A copy of file [id] next to it, "{name} (2).pdf" or the next free
+  /// number (DK-0276). Returns the copy's row id; [deleteCopy] undoes it.
+  Future<int> duplicateFile(DokuloDatabase db, int id) async {
+    final row = await _file(db, id);
+    final dir = File(row.path).parent;
+    final copy = await File(row.path).copy(_freePath(dir, row.name));
+    final stat = await copy.stat();
+    return db
+        .into(db.files)
+        .insert(
+          FilesCompanion.insert(
+            path: copy.path,
+            name: _name(copy),
+            size: stat.size,
+            pages: Value(row.pages),
+            created: stat.modified,
+            modified: stat.modified,
+            hasText: Value(row.hasText),
+            encrypted: Value(row.encrypted),
+            folderId: Value(row.folderId),
+          ),
+        );
+  }
+
+  /// Takes a [duplicateFile] back: the copy and its row go.
+  Future<void> deleteCopy(DokuloDatabase db, int id) async {
+    final row = await _file(db, id);
+    final file = File(row.path);
+    if (await file.exists()) await file.delete();
+    await (db.delete(db.files)..where((f) => f.id.equals(id))).go();
+  }
+
+  /// Moves file [id] into folder [folder] (null: the root) on disk and in
+  /// the index (DK-0274), under a free name there. Returns the folder it was
+  /// in, for Undo (move it back).
+  Future<int?> moveFile(DokuloDatabase db, int id, int? folder) async {
+    final row = await _file(db, id);
+    if (row.folderId == folder) return folder;
+    final dir = await folderDirectory(db, folder);
+    await dir.create(recursive: true);
+    final target = _freePath(dir, row.name);
+    // Rename where it can, copy-and-delete across volumes.
+    try {
+      await File(row.path).rename(target);
+    } on FileSystemException {
+      await File(row.path).copy(target);
+      await File(row.path).delete();
+    }
+    await (db.update(db.files)..where((f) => f.id.equals(id))).write(
+      FilesCompanion(
+        path: Value(target),
+        name: Value(_name(File(target))),
+        folderId: Value(folder),
+      ),
+    );
+    return row.folderId;
+  }
+
+  /// Recently deleted (DK-0271 Delete): the file stays on disk until the
+  /// trash is emptied or purged; [restoreFromTrash] takes it back.
+  Future<void> trashFile(DokuloDatabase db, int id, {DateTime? now}) => db
+      .into(db.trash)
+      .insertOnConflictUpdate(
+        TrashCompanion.insert(
+          fileId: Value(id),
+          deletedAt: now ?? DateTime.now(),
+        ),
+      );
+
+  Future<void> restoreFromTrash(DokuloDatabase db, int id) =>
+      (db.delete(db.trash)..where((t) => t.fileId.equals(id))).go();
+
+  Future<FileEntry> _file(DokuloDatabase db, int id) =>
+      (db.select(db.files)..where((f) => f.id.equals(id))).getSingle();
+
   /// "Open a file" from the system picker or another app (DK-0241): a copy
   /// of [source] in the user folder (under a free name; the original stays
   /// where it was) and its row, so Files, Recent and V1 find it. Returns the
@@ -140,14 +240,7 @@ class FileStore {
     String name, {
     int? parent,
   }) async {
-    final trimmed = name.trim();
-    if (trimmed.isEmpty ||
-        trimmed == '.' ||
-        trimmed == '..' ||
-        trimmed.contains('/') ||
-        trimmed.contains(r'\')) {
-      throw const FolderNameException(FolderNameProblem.invalid);
-    }
+    final trimmed = _checkName(name);
     final siblings =
         await (db.select(db.folders)..where(
               (f) => parent == null
@@ -162,6 +255,105 @@ class FileStore {
     }
     await _dir(base, trimmed).create(recursive: true);
     return (await _folderId(db, _dir(base, trimmed)))!;
+  }
+
+  /// Renames folder [id] (DK-0262): the directory, its row, and the path of
+  /// every file under it. A taken or invalid name throws
+  /// [FolderNameException], as [createFolder] does.
+  Future<void> renameFolder(DokuloDatabase db, int id, String name) async {
+    final row = await (db.select(
+      db.folders,
+    )..where((f) => f.id.equals(id))).getSingle();
+    final trimmed = _checkName(name);
+    if (trimmed == row.name) return;
+    final siblings =
+        await (db.select(db.folders)..where(
+              (f) => row.parentId == null
+                  ? f.parentId.isNull()
+                  : f.parentId.equals(row.parentId!),
+            ))
+            .get();
+    final old = await folderDirectory(db, id);
+    final renamed = _dir(old.parent, trimmed);
+    final sameIgnoringCase = trimmed.toLowerCase() == row.name.toLowerCase();
+    if (siblings.any(
+          (f) => f.id != id && f.name.toLowerCase() == trimmed.toLowerCase(),
+        ) ||
+        (!sameIgnoringCase && await renamed.exists())) {
+      throw const FolderNameException(FolderNameProblem.taken);
+    }
+    if (await old.exists()) await old.rename(renamed.path);
+    final prefix = '${old.path}${Platform.pathSeparator}';
+    await db.transaction(() async {
+      await (db.update(db.folders)..where((f) => f.id.equals(id))).write(
+        FoldersCompanion(name: Value(trimmed)),
+      );
+      for (final f in await db.select(db.files).get()) {
+        if (!f.path.startsWith(prefix)) continue;
+        await (db.update(db.files)..where((x) => x.id.equals(f.id))).write(
+          FilesCompanion(
+            path: Value(
+              '${renamed.path}${Platform.pathSeparator}'
+              '${f.path.substring(prefix.length)}',
+            ),
+          ),
+        );
+      }
+    });
+  }
+
+  /// Deletes folder [id] and the folders in it (DK-0262). Their files go to
+  /// Recently deleted (still on disk until the trash is emptied or purged);
+  /// an empty folder's directory goes at once. Returns how many files moved
+  /// to the trash.
+  Future<int> deleteFolder(DokuloDatabase db, int id, {DateTime? now}) async {
+    final dir = await folderDirectory(db, id);
+    final files = await _filesInTree(db, id);
+    await db.transaction(() async {
+      for (final f in files) {
+        await db
+            .into(db.trash)
+            .insertOnConflictUpdate(
+              TrashCompanion.insert(
+                fileId: Value(f.id),
+                deletedAt: now ?? DateTime.now(),
+              ),
+            );
+      }
+      // The files keep their paths; their folder rows go (folder_id SET
+      // NULL), the subfolders with them (ON DELETE CASCADE).
+      await (db.delete(db.folders)..where((f) => f.id.equals(id))).go();
+    });
+    if (files.isEmpty && await dir.exists()) {
+      try {
+        await dir.delete(recursive: true);
+      } on FileSystemException {
+        // A file the index didn't know: the directory stays; reconcile sees it.
+      }
+    }
+    return files.length;
+  }
+
+  /// How many files folder [id] and the folders in it hold, deleted ones
+  /// left out (the delete confirmation says it).
+  Future<int> countFilesInTree(DokuloDatabase db, int id) async {
+    final trashed = {for (final t in await db.select(db.trash).get()) t.fileId};
+    return (await _filesInTree(
+      db,
+      id,
+    )).where((f) => !trashed.contains(f.id)).length;
+  }
+
+  Future<List<FileEntry>> _filesInTree(DokuloDatabase db, int id) async {
+    final ids = <int>{id};
+    for (var frontier = {id}; frontier.isNotEmpty;) {
+      final children = await (db.select(
+        db.folders,
+      )..where((f) => f.parentId.isIn(frontier))).get();
+      frontier = {for (final c in children) c.id}..removeAll(ids);
+      ids.addAll(frontier);
+    }
+    return (db.select(db.files)..where((f) => f.folderId.isIn(ids))).get();
   }
 
   /// Where folder [id] is on disk (null: the user folder).
@@ -242,6 +434,19 @@ class FileStore {
     return parent;
   }
 
+  /// A folder name without spaces around it; empty, dot and path names throw.
+  static String _checkName(String name) {
+    final trimmed = name.trim();
+    if (trimmed.isEmpty ||
+        trimmed == '.' ||
+        trimmed == '..' ||
+        trimmed.contains('/') ||
+        trimmed.contains(r'\')) {
+      throw const FolderNameException(FolderNameProblem.invalid);
+    }
+    return trimmed;
+  }
+
   bool _inUserFolder(String path) => path.startsWith(userFolder.path);
 
   static bool _hidden(File file) => _name(file).startsWith('.');
@@ -281,4 +486,13 @@ class FolderNameException implements Exception {
   final FolderNameProblem problem;
   @override
   String toString() => 'FolderNameException: ${problem.name}';
+}
+
+enum FileNameProblem { invalid, taken }
+
+class FileNameException implements Exception {
+  const FileNameException(this.problem);
+  final FileNameProblem problem;
+  @override
+  String toString() => 'FileNameException: ${problem.name}';
 }
