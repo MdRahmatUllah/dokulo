@@ -883,6 +883,97 @@
   "@camera_settings": {
     "description": "DkCameraTopBar: tune, opens the scanning settings."
   },
+  "camera_hint_ready": "Ready",
+  "@camera_hint_ready": {
+    "description": "S1 hint pill: a document is in view."
+  },
+  "camera_hint_point": "Point at a document",
+  "@camera_hint_point": {
+    "description": "S1 hint pill: no document found yet."
+  },
+  "camera_hint_closer": "Move closer",
+  "@camera_hint_closer": {
+    "description": "S1 hint: the page is too small in the frame."
+  },
+  "camera_hint_steady": "Hold steady",
+  "@camera_hint_steady": {
+    "description": "S1 hint: the camera is moving."
+  },
+  "camera_hint_light": "More light needed",
+  "@camera_hint_light": {
+    "description": "S1 hint: the scene is too dark."
+  },
+  "camera_hint_fit": "Fit the whole page in view",
+  "@camera_hint_fit": {
+    "description": "S1 hint: the page is cut off at the edge."
+  },
+  "camera_hint_capturing": "Capturing…",
+  "@camera_hint_capturing": {
+    "description": "S1 hint: auto-capture is taking the photo."
+  },
+  "camera_page_captured": "Page {number} captured",
+  "@camera_page_captured": {
+    "description": "S1: spoken to screen readers after each capture.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "camera_flash_menu": "Flash options",
+  "@camera_flash_menu": {
+    "description": "S1: the flash menu (Off, On, Auto), opened with a long press on the flash button."
+  },
+  "camera_retake_page": "Retake page {number}",
+  "@camera_retake_page": {
+    "description": "S1 opened from S2 Retake: the label over the camera.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "scan_add_pages": "Add pages",
+  "@scan_add_pages": {
+    "description": "S2: back to the camera to add pages (the bar's left button, and the tray's +)."
+  },
+  "scan_crop": "Crop",
+  "@scan_crop": {
+    "description": "S2 edit row: crop the page."
+  },
+  "scan_rotate": "Rotate",
+  "@scan_rotate": {
+    "description": "S2 edit row: rotate the page 90 degrees."
+  },
+  "scan_filter": "Filter",
+  "@scan_filter": {
+    "description": "S2 edit row: the page's filter."
+  },
+  "scan_retake": "Retake",
+  "@scan_retake": {
+    "description": "S2 edit row: take this page again."
+  },
+  "scan_page_of": "{number} of {total}",
+  "@scan_page_of": {
+    "description": "S2: which page is shown, under the preview.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "camera_review": "{count, plural, =1{Review 1 page} other{Review {count} pages}}",
+  "@camera_review": {
+    "description": "S1 page stack: opens S2 with the captured pages (screen readers).",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "camera_access_title": "Allow camera access",
   "@camera_access_title": {
     "description": "S1 camera pre-prompt sheet: title (before the system prompt)."

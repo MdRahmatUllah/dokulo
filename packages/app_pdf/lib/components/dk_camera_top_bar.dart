@@ -21,6 +21,8 @@ class DkCameraTopBar extends StatelessWidget {
     required this.onClose,
     required this.flash,
     required this.onFlash,
+    this.onFlashMenu,
+    this.autoLocked = false,
     required this.autoCapture,
     required this.onAutoCapture,
     required this.grid,
@@ -33,6 +35,12 @@ class DkCameraTopBar extends StatelessWidget {
 
   /// The next setting after a tap: off → on → auto → off.
   final ValueChanged<DkFlash> onFlash;
+
+  /// A long press on flash: the menu with Off, On and Auto (DK-0345).
+  final VoidCallback? onFlashMenu;
+
+  /// Batch mode: auto-capture forced on, the pill shows a lock (DK-0338).
+  final bool autoLocked;
   final bool autoCapture;
   final ValueChanged<bool> onAutoCapture;
   final bool grid;
@@ -65,11 +73,16 @@ class DkCameraTopBar extends StatelessWidget {
                   const Spacer(),
                   _FlashButton(
                     flash: flash,
+                    onLongPress: onFlashMenu,
                     onPressed: () => onFlash(
                       DkFlash.values[(flash.index + 1) % DkFlash.values.length],
                     ),
                   ),
-                  _AutoPill(on: autoCapture, onChanged: onAutoCapture),
+                  _AutoPill(
+                    on: autoCapture,
+                    onChanged: onAutoCapture,
+                    locked: autoLocked,
+                  ),
                   DkIconButton(
                     icon: DkIcons.gridOverlay,
                     tooltip: l.camera_grid,
@@ -95,9 +108,14 @@ class DkCameraTopBar extends StatelessWidget {
 
 /// The flash: its icon over a tiny label (Off / On / Auto), 52 wide.
 class _FlashButton extends StatefulWidget {
-  const _FlashButton({required this.flash, required this.onPressed});
+  const _FlashButton({
+    required this.flash,
+    required this.onPressed,
+    this.onLongPress,
+  });
   final DkFlash flash;
   final VoidCallback onPressed;
+  final VoidCallback? onLongPress;
 
   @override
   State<_FlashButton> createState() => _FlashButtonState();
@@ -122,11 +140,13 @@ class _FlashButtonState extends State<_FlashButton> {
       excludeSemantics: true,
       // The children are excluded, the tap with them: give it back.
       onTap: widget.onPressed,
+      onLongPress: widget.onLongPress,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.m,
         child: InkWell(
           onTap: widget.onPressed,
+          onLongPress: widget.onLongPress,
           onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
           borderRadius: BorderRadius.circular(t.radius.m),
           overlayColor: WidgetStatePropertyAll(ink.withValues(alpha: 0.16)),
@@ -164,9 +184,16 @@ class _FlashButtonState extends State<_FlashButton> {
 /// Auto-capture: an "Auto" pill, 28 tall; a 1.5 white outline when off,
 /// filled white with dark text when on. A 48 target.
 class _AutoPill extends StatefulWidget {
-  const _AutoPill({required this.on, required this.onChanged});
+  const _AutoPill({
+    required this.on,
+    required this.onChanged,
+    this.locked = false,
+  });
   final bool on;
   final ValueChanged<bool> onChanged;
+
+  /// Batch forces auto-capture on: a lock, and a tap does nothing.
+  final bool locked;
 
   @override
   State<_AutoPill> createState() => _AutoPillState();
@@ -184,12 +211,13 @@ class _AutoPillState extends State<_AutoPill> {
     return Semantics(
       button: true,
       toggled: widget.on,
+      enabled: !widget.locked,
       label: l.camera_auto_capture,
       excludeSemantics: true,
       // The children are excluded, the tap with them: give it back.
-      onTap: () => widget.onChanged(!widget.on),
+      onTap: widget.locked ? null : () => widget.onChanged(!widget.on),
       child: InkWell(
-        onTap: () => widget.onChanged(!widget.on),
+        onTap: widget.locked ? null : () => widget.onChanged(!widget.on),
         onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
         borderRadius: radius,
         overlayColor: const WidgetStatePropertyAll(Colors.transparent),
@@ -211,13 +239,27 @@ class _AutoPillState extends State<_AutoPill> {
                     borderRadius: radius,
                     border: Border.all(color: white, width: 1.5),
                   ),
-                  child: Text(
-                    l.camera_auto,
-                    style: t.text.labelM.copyWith(
-                      color: widget.on
-                          ? t.color.cameraChrome.withValues(alpha: 1)
-                          : white,
-                    ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: t.space.xxs,
+                    children: [
+                      if (widget.locked)
+                        DkIcon(
+                          DkIcons.lock,
+                          size: DkIconSize.s,
+                          color: widget.on
+                              ? t.color.cameraChrome.withValues(alpha: 1)
+                              : white,
+                        ),
+                      Text(
+                        l.camera_auto,
+                        style: t.text.labelM.copyWith(
+                          color: widget.on
+                              ? t.color.cameraChrome.withValues(alpha: 1)
+                              : white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
