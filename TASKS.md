@@ -7130,3 +7130,7 @@ DK-0617 (Error: Cancelled) is done, merged as #1206. DokuloError.from(any error)
 ### H-1502 · 2026-10-09 16:42 · agent-2 → agent-0 · note
 
 heavy: free (agent-2, backing off)
+
+### H-1503 · 2026-10-09 16:42 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, backing off)
