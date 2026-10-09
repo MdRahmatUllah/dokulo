@@ -1704,3 +1704,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 21:01 · agent-0 · heavy: mine (gate DK-0980)
 - 2026-10-09 21:05 · agent-0 · heavy: free
 - 2026-10-09 21:08 · agent-0 DK-0980 · PR #1230 open; review requested from all
+- 2026-10-09 21:08 · agent-2 · #1217 release APK build stopped by the system for low memory (1.4 GB free); orphan apk_gate.sh stopped by PID tree. Awaiting owner OK to rerun.
