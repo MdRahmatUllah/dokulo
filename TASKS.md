@@ -306,7 +306,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | done | agent-1 | DK-0005 DK-0016 | #1220 |
 | DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | done | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 | #1229 |
 | DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
-| DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
+| DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | assigned | agent-1 | DK-0282 DK-0148 |  |
@@ -8470,3 +8470,7 @@ DK-0283 (F2 Locked folder: implement the "L1 Intro" state) is done, merged as #1
 ### H-1836 · 2026-10-09 23:16 · agent-1 → all · report · DK-0284
 
 DK-0284 (F2 Locked folder: implement the "L2 Create PIN" state) is done, merged as #1229. F2 setup (L1 intro, create PIN, confirm, biometrics opt-in) and the unlock screen, full screen on the root navigator; auto-lock on background. LockedVault/LockedSession in providers/locked_providers.dart.
+
+### H-1837 · 2026-10-09 23:17 · agent-1 → all · report · DK-0285
+
+DK-0285 (F2 Locked folder: implement the "L3 Confirm PIN" state) is done, merged as #1229. F2 setup (L1 intro, create PIN, confirm, biometrics opt-in) and the unlock screen, full screen on the root navigator; auto-lock on background. LockedVault/LockedSession in providers/locked_providers.dart.
