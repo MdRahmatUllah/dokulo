@@ -508,7 +508,13 @@ enum DocErrorKind {
 }
 
 class DocError implements Exception {
-  const DocError(this.kind, {this.page, this.detail = '', this.code});
+  const DocError(
+    this.kind, {
+    this.page,
+    this.detail = '',
+    this.code,
+    this.bytes,
+  });
   final DocErrorKind kind;
 
   /// The 0-based page the failure happened on, if known ("on page 14").
@@ -519,6 +525,9 @@ class DocError implements Exception {
 
   /// PDFium's error code, if any.
   final int? code;
+
+  /// Not enough storage: the bytes the job needs (DK-0020).
+  final int? bytes;
 
   @override
   String toString() =>

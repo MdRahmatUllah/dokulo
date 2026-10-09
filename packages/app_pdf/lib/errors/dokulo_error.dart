@@ -89,7 +89,12 @@ class DokuloError implements Exception {
       case DokuloError e:
         return e;
       case DocError e:
-        return DokuloError(_byKind[e.kind]!, page: e.page, detail: '$e');
+        return DokuloError(
+          _byKind[e.kind]!,
+          page: e.page,
+          neededBytes: e.bytes,
+          detail: '$e',
+        );
       case JobCancelled():
         return const DokuloError(DkErrorSituation.cancelled);
       case FileSystemException e when _noSpace(e.osError?.errorCode):

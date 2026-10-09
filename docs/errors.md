@@ -34,6 +34,17 @@ and its recovery actions. `DokuloError.from(error)` maps anything thrown:
 The German copy is in `app_de.arb` (the catalogue's DE column). A code is only
 ever shown inside "Something went wrong…" and in a report, never alone.
 
+## Where they are raised
+
+`Preflight` (doc_tools, DK-0020) runs in `JobQueue.start` and `resume`
+before a job starts: Not enough storage (the inputs × the tool's
+`spaceFactor` against the free storage, with the bytes needed), Too large for
+memory (the largest page at the tool's `renderDpi` × `pagesInMemory` against
+60 % of the free memory) and Locked (an input that won't open without its
+password). The device is read again for every check; an unknown value never
+blocks. A killed job whose preflight fails at the next launch keeps its row
+and is reported as "Couldn't finish".
+
 ## Presentation
 
 Inline where it happens, whenever possible: a field error (a wrong password),
