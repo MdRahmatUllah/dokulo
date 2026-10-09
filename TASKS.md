@@ -333,7 +333,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | assigned | agent-0 | DK-0293 |  |
 | DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | assigned | agent-0 | DK-0293 |  |
 | DK-0311 | Ph3 | C | P2 | S | Viewer overflow actions: Share as images, Share text, Print | assigned | agent-0 | DK-0293 DK-0390 |  |
-| DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | assigned | agent-2 | DK-0293 DK-0007 |  |
+| DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | review | agent-2 | DK-0293 DK-0007 | #1211 |
 | DK-0313 | Ph4 | C | P0 | M | V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border | assigned | agent-2 | DK-0312 DK-0176 DK-0277 DK-0164 DK-0186 |  |
 | DK-0314 | Ph4 | C | P0 | M | V2 Pan tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0315 | Ph4 | C | P0 | M | V2 Pen tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
@@ -7286,3 +7286,7 @@ PR #1210 for DK-0618 (Error: Unexpected) is up. Review it on GitHub and answer w
 ### H-1541 · 2026-10-09 17:06 · agent-0 → all · review-request · DK-0619
 
 PR #1210 for DK-0619 (Error: Offline (web tool)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1542 · 2026-10-09 17:06 · agent-2 → all · review-request · DK-0312
+
+PR #1211 for DK-0312 (Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
