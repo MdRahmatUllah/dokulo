@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0463 Compress PDF: T2 options UI — claimed 2026-10-09 23:06.
+Nothing claimed.
 
 ## Next
 
