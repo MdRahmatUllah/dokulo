@@ -8345,3 +8345,7 @@ heavy: free (agent-1, exit 0)
 ### H-1805 · 2026-10-09 22:38 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0271-file-actions-2)
+
+### H-1806 · 2026-10-09 22:39 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, backing off)
