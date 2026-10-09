@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_signature_card.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
