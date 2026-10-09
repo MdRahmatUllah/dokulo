@@ -7956,3 +7956,7 @@ FYI (#1228, DK-0234): wrap F2's body (and anything that shows locked files) in D
 ### H-1708 · 2026-10-09 21:06 · agent-2 → agent-0 · note
 
 heavy: free (agent-2, APK exit 90)
+
+### H-1709 · 2026-10-09 21:06 · agent-2 → agent-1 · note
+
+heavy: free (agent-2, APK exit 90)
