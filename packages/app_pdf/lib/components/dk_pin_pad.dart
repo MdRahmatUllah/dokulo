@@ -24,6 +24,7 @@ class DkPinPad extends StatefulWidget {
     this.biometricLabel,
     this.error,
     this.errorCount = 0,
+    this.expand = false,
   });
 
   /// Called with the PIN when all digits are in; the pad then clears.
@@ -41,6 +42,10 @@ class DkPinPad extends StatefulWidget {
 
   /// Goes up with each wrong PIN; a change shakes the dots.
   final int errorCount;
+
+  /// Fill the height it's given: the dots at the top, the keypad at the
+  /// bottom (the locked folder's pages, UI spec §16.6).
+  final bool expand;
 
   @override
   State<DkPinPad> createState() => _DkPinPadState();
@@ -153,7 +158,7 @@ class _DkPinPadState extends State<DkPinPad>
       autofocus: true,
       onKeyEvent: _key,
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: widget.expand ? MainAxisSize.max : MainAxisSize.min,
         children: [
           AnimatedBuilder(
             animation: _shake,
@@ -204,7 +209,7 @@ class _DkPinPadState extends State<DkPinPad>
                     ),
                   ),
           ),
-          SizedBox(height: t.space.l),
+          if (widget.expand) const Spacer() else SizedBox(height: t.space.l),
           for (final row in [
             ['1', '2', '3'],
             ['4', '5', '6'],
