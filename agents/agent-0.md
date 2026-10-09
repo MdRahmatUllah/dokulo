@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0844 Visual QA: tool-shell-progress (X2 – progress sheet) — claimed 2026-10-10 01:33.
+DK-0844 in review as PR #1249: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

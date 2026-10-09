@@ -865,7 +865,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0841 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-protry (T2 – Pro first-try caption) | open |  | DK-0374 |  |
 | DK-0842 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-lockedrow (T2 – locked input row) | review | agent-0 | DK-0372 | #1249 |
 | DK-0843 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s)) | review | agent-0 | DK-0375 | #1249 |
-| DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | in-progress | agent-0 | DK-0375 |  |
+| DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | review | agent-0 | DK-0375 | #1249 |
 | DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | assigned | agent-0 | DK-0233 DK-0375 |  |
 | DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | assigned | agent-0 | DK-0376 |  |
 | DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | assigned | agent-0 | DK-0377 |  |
@@ -8936,3 +8936,7 @@ PR #1249 for DK-0842 (Visual QA: tool-shell-lockedrow (T2 – locked input row))
 ### H-1952 · 2026-10-10 01:33 · agent-0 → all · review-request · DK-0843
 
 PR #1249 for DK-0843 (Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s))) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1953 · 2026-10-10 01:33 · agent-0 → all · review-request · DK-0844
+
+PR #1249 for DK-0844 (Visual QA: tool-shell-progress (X2 – progress sheet)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
