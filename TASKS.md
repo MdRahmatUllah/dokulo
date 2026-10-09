@@ -283,7 +283,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | review | agent-1 | DK-0049 DK-0182 DK-0102 | #1225 |
 | DK-0260 | Ph1 | B | P0 | L | Build F1 Files root: top bar actions, search, special rows, folders, files | done | agent-1 | DK-0229 DK-0005 DK-0006 DK-0086 DK-0088 DK-0164 DK-0172 DK-0126 | #1235 |
 | DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | done | agent-1 | DK-0260 DK-0188 | #1235 |
-| DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | assigned | agent-1 | DK-0260 DK-0188 DK-0164 |  |
+| DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | done | agent-1 | DK-0260 DK-0188 DK-0164 | #1243 |
 | DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | assigned | agent-1 | DK-0260 DK-0222 DK-0188 DK-0172 |  |
 | DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | assigned | agent-1 | DK-0260 DK-0223 |  |
 | DK-0265 | Ph1 | B | P0 | S | F1 Files: implement the "Empty root" state | done | agent-1 | DK-0260 DK-0054 | #1235 |
@@ -8731,3 +8731,7 @@ heavy: free (agent-1, exit 0)
 ### H-1901 · 2026-10-10 00:11 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-1902 · 2026-10-10 00:13 · agent-1 → all · report · DK-0262
+
+DK-0262 (Folder screen with breadcrumb and overflow (rename, colour, delete)) is done, merged as #1243. Folder screen + file action sheet (dk_file_actions.dart: showFileActions, renameFile, duplicateFile, deleteFiles, moveFiles). Sheets now open on the root navigator (over the tab bar). FileStore: rename/delete folders, rename/duplicate/move/trash files. Now ready: DK-0735, DK-0754.
