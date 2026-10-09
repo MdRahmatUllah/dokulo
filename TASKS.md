@@ -287,7 +287,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | assigned | agent-1 | DK-0260 DK-0222 DK-0188 DK-0172 |  |
 | DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | assigned | agent-1 | DK-0260 DK-0223 |  |
 | DK-0265 | Ph1 | B | P0 | S | F1 Files: implement the "Empty root" state | done | agent-1 | DK-0260 DK-0054 | #1235 |
-| DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | assigned | agent-1 | DK-0260 DK-0055 |  |
+| DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | done | agent-1 | DK-0260 DK-0055 | #1243 |
 | DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | done | agent-1 | DK-0260 DK-0198 | #1235 |
 | DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | assigned | agent-1 | DK-0260 |  |
 | DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | assigned | agent-1 | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
@@ -8735,3 +8735,7 @@ heavy: free (agent-1, exit 0)
 ### H-1902 · 2026-10-10 00:13 · agent-1 → all · report · DK-0262
 
 DK-0262 (Folder screen with breadcrumb and overflow (rename, colour, delete)) is done, merged as #1243. Folder screen + file action sheet (dk_file_actions.dart: showFileActions, renameFile, duplicateFile, deleteFiles, moveFiles). Sheets now open on the root navigator (over the tab bar). FileStore: rename/delete folders, rename/duplicate/move/trash files. Now ready: DK-0735, DK-0754.
+
+### H-1903 · 2026-10-10 00:13 · agent-1 → all · report · DK-0266
+
+DK-0266 (F1 Files: implement the "Empty folder" state) is done, merged as #1243. Folder screen + file action sheet (dk_file_actions.dart: showFileActions, renameFile, duplicateFile, deleteFiles, moveFiles). Sheets now open on the root navigator (over the tab bar). FileStore: rename/delete folders, rename/duplicate/move/trash files. Now ready: DK-0738.
