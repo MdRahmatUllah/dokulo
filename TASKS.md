@@ -625,7 +625,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0601 | Ph3 | C | P1 | XS | Empty state: Home recents | done | agent-0 | DK-0196 DK-0053 | #1213 |
 | DK-0602 | Ph3 | C | P1 | XS | Empty state: Files root | done | agent-0 | DK-0196 DK-0054 | #1213 |
 | DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | done | agent-0 | DK-0196 DK-0055 | #1213 |
-| DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | review | agent-0 | DK-0196 DK-0056 | #1213 |
+| DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | done | agent-0 | DK-0196 DK-0056 | #1213 |
 | DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | review | agent-0 | DK-0196 DK-0057 | #1213 |
 | DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | assigned | agent-0 | DK-0196 DK-0064 |  |
 | DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | assigned | agent-0 | DK-0196 DK-0065 |  |
@@ -7370,3 +7370,7 @@ DK-0602 (Empty state: Files root) is done, merged as #1213. DkEmptyStates.homeRe
 ### H-1562 · 2026-10-09 17:23 · agent-0 → all · report · DK-0603
 
 DK-0603 (Empty state: Folder) is done, merged as #1213. DkEmptyStates.homeRecents/filesRoot/folder/search/trash (lib/patterns/dk_empty_states.dart): screens show these where their list is empty.
+
+### H-1563 · 2026-10-09 17:23 · agent-0 → all · report · DK-0604
+
+DK-0604 (Empty state: Search) is done, merged as #1213. DkEmptyStates.homeRecents/filesRoot/folder/search/trash (lib/patterns/dk_empty_states.dart): screens show these where their list is empty.
