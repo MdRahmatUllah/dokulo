@@ -6,7 +6,7 @@ import '../components/dk_icon.dart';
 import '../components/dk_illustration.dart';
 import '../l10n/app_localizations.dart';
 
-/// The empty states of UI spec §26.1 (DK-0601…DK-0605): each place's
+/// The empty states of UI spec §26.1 (DK-0601…DK-0608): each place's
 /// illustration, copy (EN/DE) and first action, on DkEmptyState. A screen
 /// shows one where its list is empty; the illustration follows the theme.
 abstract final class DkEmptyStates {
@@ -76,6 +76,56 @@ abstract final class DkEmptyStates {
       illustration: DkIllustrations.trashEmpty,
       title: l.empty_trash_title,
       body: l.empty_trash_body,
+    );
+  }
+
+  /// Saved signatures (DK-0606): ILL-15, Add signature.
+  static Widget signatures(
+    BuildContext context, {
+    required VoidCallback onAdd,
+  }) {
+    final l = AppLocalizations.of(context);
+    return DkEmptyState(
+      illustration: DkIllustrations.noSignatures,
+      title: l.empty_signatures_title,
+      body: l.empty_signatures_body,
+      action: l.empty_action_add_signature,
+      onAction: onAdd,
+    );
+  }
+
+  /// Workflows (DK-0607): ILL-16, New workflow · Use a template.
+  static Widget workflows(
+    BuildContext context, {
+    required VoidCallback onNew,
+    required VoidCallback onTemplate,
+  }) {
+    final l = AppLocalizations.of(context);
+    return DkEmptyState(
+      illustration: DkIllustrations.noWorkflows,
+      title: l.empty_workflows_title,
+      body: l.empty_workflows_body,
+      action: l.empty_action_new_workflow,
+      onAction: onNew,
+      secondaryAction: l.empty_action_use_template,
+      onSecondaryAction: onTemplate,
+    );
+  }
+
+  /// Photo finder found nothing (DK-0608): ILL-17 small (80), Close.
+  static Widget photoFinder(
+    BuildContext context, {
+    required VoidCallback onClose,
+  }) {
+    final l = AppLocalizations.of(context);
+    return DkEmptyState(
+      illustration: DkIllustrations.findInPhotos,
+      illustrationSize: 80,
+      title: l.empty_photos_title,
+      body: l.empty_photos_body,
+      action: l.common_close,
+      actionVariant: DkButtonVariant.secondary,
+      onAction: onClose,
     );
   }
 }

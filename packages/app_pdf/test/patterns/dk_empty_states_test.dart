@@ -28,7 +28,7 @@ void main() {
   ]) {
     for (final lang in ['en', 'de']) {
       testWidgets('golden: empty_states_${theme}_$lang', (tester) async {
-        tester.view.physicalSize = const Size(393, 2200);
+        tester.view.physicalSize = const Size(393, 3400);
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         await tester.pumpWidget(
@@ -116,6 +116,63 @@ void main() {
       'Dateien hierher verschieben',
     ]) {
       expect(find.text(text), findsWidgets, reason: text);
+    }
+  });
+
+  testWidgets('Signatures, Workflows and the photo finder (DK-0606, DK-0607, '
+      'DK-0608)', (tester) async {
+    final taps = <String>[];
+    Widget all(BuildContext context) => Column(
+      children: [
+        DkEmptyStates.signatures(context, onAdd: () => taps.add('add')),
+        DkEmptyStates.workflows(
+          context,
+          onNew: () => taps.add('new'),
+          onTemplate: () => taps.add('template'),
+        ),
+        DkEmptyStates.photoFinder(context, onClose: () => taps.add('close')),
+      ],
+    );
+    tester.view.physicalSize = const Size(393, 2000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(app(Builder(builder: all)));
+    for (final text in [
+      'No signatures yet',
+      'Add one to sign PDFs in seconds.',
+      'No workflows yet',
+      'Chain tools you use together, then run them in one tap.',
+      'No documents found',
+    ]) {
+      expect(find.text(text), findsOneWidget, reason: text);
+    }
+    for (final label in [
+      'Add signature',
+      'New workflow',
+      'Use a template',
+      'Close',
+    ]) {
+      await tester.tap(find.text(label));
+    }
+    expect(taps, ['add', 'new', 'template', 'close']);
+    final photo = tester
+        .widgetList<DkEmptyState>(find.byType(DkEmptyState))
+        .last;
+    expect(photo.illustrationSize, 80, reason: 'ILL-17 small');
+
+    await tester.pumpWidget(
+      app(Builder(builder: all), locale: const Locale('de')),
+    );
+    for (final text in [
+      'Noch keine Unterschriften',
+      'Noch keine Abläufe',
+      'Keine Dokumente gefunden',
+      'Unterschrift hinzufügen',
+      'Neuer Ablauf',
+      'Vorlage verwenden',
+      'Schließen',
+    ]) {
+      expect(find.text(text), findsOneWidget, reason: text);
     }
   });
 }
