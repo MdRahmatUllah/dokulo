@@ -205,5 +205,7 @@ class LockedSession extends _$LockedSession {
   LockedCipher? build() => null;
 
   void open(LockedCipher cipher) => state = cipher;
-  void lock() => state = null;
+  void lock() {
+    if (ref.mounted) state = null; // a disposed container has no key anyway
+  }
 }

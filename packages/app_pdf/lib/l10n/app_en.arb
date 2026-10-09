@@ -1380,6 +1380,28 @@
   "@t3_discard_title": {"description": "Closing an unsaved result after a long job (§20.4, DK-0382)."},
   "t3_discard_body": "You'll need to run the tool again to get it back.",
   "@t3_discard_body": {"description": "Body of the discard result dialog (DK-0382)."},
+  "t2_choose_pdf": "Choose a PDF",
+  "@t2_choose_pdf": {"description": "T2's picker card title, a PDF tool (UI spec §20.1, DK-0371)."},
+  "t2_choose_images": "Choose images",
+  "@t2_choose_images": {"description": "T2's picker card title, an image tool (§20.1)."},
+  "t2_choose_files": "Choose files",
+  "@t2_choose_files": {"description": "T2's picker card title, a tool for PDFs and images (§20.1)."},
+  "t2_recent": "Recent",
+  "@t2_recent": {"description": "Header of the recent files in T2's picker card."},
+  "t2_choose_photos": "Choose photos",
+  "@t2_choose_photos": {"description": "T2's picker card, image tools (§20.1)."},
+  "t2_choose_to_continue": "Choose a file to continue",
+  "@t2_choose_to_continue": {"description": "Caption over T2's disabled button with no input (§20.1)."},
+  "t2_file_locked": "This file is locked",
+  "@t2_file_locked": {"description": "Under a locked input in T2 (DK-0372)."},
+  "t2_password": "Password",
+  "@t2_password": {"description": "The password field of a locked input (DK-0372)."},
+  "t2_unlock": "Unlock",
+  "@t2_unlock": {"description": "Unlocks a locked input in T2 (DK-0372)."},
+  "t2_wrong_password": "That password doesn't open this file.",
+  "@t2_wrong_password": {"description": "A wrong password for a locked input (DK-0372, UI spec §17.1)."},
+  "t2_unlock_to_continue": "Unlock {name} to continue",
+  "@t2_unlock_to_continue": {"description": "Caption over T2's disabled button while an input is locked (DK-0372).", "placeholders": {"name": {"type": "String"}}},
   "files_search_hint": "Search names and text",
   "@files_search_hint": {
     "description": "F1 search field."
@@ -1479,6 +1501,118 @@
   "home_settings": "Settings",
   "@home_settings": {
     "description": "H1 top bar action."
+  },
+  "t3_files": "{n, plural, =1{1 file} other{{n} files}}",
+  "@t3_files": {"description": "T3's headline and list header for a multi-file result (UI spec §20.4, DK-0384).", "placeholders": {"n": {"type": "int"}}},
+  "t3_from": "From {source}",
+  "@t3_from": {"description": "T3's line under the headline: From Zeugnisse.pdf · 34 pages (DK-0384).", "placeholders": {"source": {"type": "String"}}},
+  "locked_title": "Locked folder",
+  "@locked_title": {
+    "description": "F2's title (§16.6)."
+  },
+  "locked_intro_title": "Keep files private",
+  "@locked_intro_title": {
+    "description": "L1 headline."
+  },
+  "locked_intro_body": "Files here are encrypted on this phone and need {method} or your PIN to open.",
+  "@locked_intro_body": {
+    "description": "L1 body; {method} is Face ID or Touch ID.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "locked_intro_body_fingerprint": "Files here are encrypted on this phone and need your fingerprint or your PIN to open.",
+  "@locked_intro_body_fingerprint": {
+    "description": "L1 body on phones that unlock by fingerprint."
+  },
+  "locked_intro_body_pin": "Files here are encrypted on this phone and need your PIN to open.",
+  "@locked_intro_body_pin": {
+    "description": "L1 body on phones without biometrics."
+  },
+  "locked_intro_warning": "If you forget the PIN and biometrics stop working, these files can't be recovered.",
+  "@locked_intro_warning": {
+    "description": "L1 warning banner."
+  },
+  "locked_set_up": "Set up",
+  "@locked_set_up": {
+    "description": "L1 button."
+  },
+  "locked_create_pin": "Create a 6-digit PIN",
+  "@locked_create_pin": {
+    "description": "L2 title."
+  },
+  "locked_confirm_pin": "Enter the PIN again",
+  "@locked_confirm_pin": {
+    "description": "L3 title."
+  },
+  "locked_pin_mismatch": "PINs don't match. Try again.",
+  "@locked_pin_mismatch": {
+    "description": "L3 → L2 when the two PINs differ."
+  },
+  "locked_bio_title": "Use {method}?",
+  "@locked_bio_title": {
+    "description": "L4 title; {method} is Face ID or Touch ID.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "locked_bio_title_fingerprint": "Use fingerprint?",
+  "@locked_bio_title_fingerprint": {
+    "description": "L4 title on phones that unlock by fingerprint."
+  },
+  "locked_bio_body_face": "Open the locked folder with a glance. Your PIN still works as a backup.",
+  "@locked_bio_body_face": {
+    "description": "L4 body (Face ID)."
+  },
+  "locked_bio_body_touch": "Open the locked folder with a touch. Your PIN still works as a backup.",
+  "@locked_bio_body_touch": {
+    "description": "L4 body (Touch ID, fingerprint)."
+  },
+  "locked_bio_use": "Use {method}",
+  "@locked_bio_use": {
+    "description": "L4 button and the unlock pad's biometric key; {method} is Face ID or Touch ID.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "locked_bio_use_fingerprint": "Use fingerprint",
+  "@locked_bio_use_fingerprint": {
+    "description": "L4 button and the pad's key on fingerprint phones."
+  },
+  "locked_bio_reason": "Unlock the locked folder",
+  "@locked_bio_reason": {
+    "description": "The system biometric prompt's reason."
+  },
+  "locked_pin_wrong": "Wrong PIN.",
+  "@locked_pin_wrong": {
+    "description": "Unlock: a wrong PIN."
+  },
+  "locked_pin_wait": "Too many tries. Try again in {seconds} s.",
+  "@locked_pin_wait": {
+    "description": "Unlock: after 5 wrong PINs, the wait.",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "locked_lock_now": "Lock now",
+  "@locked_lock_now": {
+    "description": "F2 content: the top bar action."
+  },
+  "locked_back_to_files": "Back to Files",
+  "@locked_back_to_files": {
+    "description": "F2 content: back, for screen readers."
+  },
+  "locked_empty": "Move files here from Files: they're encrypted on this phone.",
+  "@locked_empty": {
+    "description": "F2 content with no files yet."
   },
   "folder_back": "Back to Files",
   "@folder_back": {

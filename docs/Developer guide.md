@@ -186,7 +186,7 @@ with `Routes`, never by hand: `context.push(Routes.tool('compress'))`.
 | `/home` | H1 Home | tab 1 | Where the launch screen goes; tests start here |
 | `/tools` | T1 Tools | tab 2 | |
 | `/files` | F1 Files | tab 3 | |
-| `/files/locked` | F2 Locked folder | tab 3, pushed | Behind biometrics (its task adds the guard) |
+| `/files/locked` | F2 Locked folder | full screen | Setup L1–L4 the first time, then the unlock screen (PIN, biometrics); unlocked, the content. Leaving it, Lock now or a minute in the background locks it (DK-0283..0288) |
 | `/me` | M1 Me | tab 4 | |
 | `/me/models` | M2 Model manager | tab 4, pushed | |
 | `/me/settings/:page` | M3 Settings | tab 4, pushed | `:page` is the settings group, e.g. `appearance` |
@@ -313,6 +313,21 @@ runs (`toolOptionValuesProvider`), so going back and opening the tool again
 keeps them. A tool without a definition yet shows its input and its name on a
 disabled button.
 
+What a tool takes is `ToolInput.of(id)` (`lib/tools/tool_inputs.dart`, UI spec
+§21: the kinds, at least / at most how many). Opened without a file, T2 shows
+its picker card (DK-0371): "Choose a PDF / images / files", the 5 most recent
+files the tool takes, Browse device and, for image tools, Choose photos
+(`devicePickerProvider`, file_picker; tests override it). A picked file is
+copied into the sandbox inbox first and stays out of the index. A tool that
+needs two files (Merge, Compare) shows checkboxes until it has them. A locked
+PDF input gets "This file is locked" with a password field and Unlock under
+its card (DK-0372); the password is checked by opening the file and kept in
+memory for the run (`ToolSubject.passwordOf`). Until every input is unlocked
+the button waits with "Unlock {name} to continue". The estimate (DK-0373) is
+the definition's `estimate`, recomputed in the same frame as any option
+change; a tool words it as an estimate ("About 1.9 MB", "≈ 0.9 MB"), never a
+promise.
+
 Running (UI spec §20.2, DK-0375…DK-0377): the button starts the job through
 `toolRunnerProvider` (the JobQueue, with a fresh temp output folder; tests
 override it with a simulated run). Under 2 s nothing shows but the press; from
@@ -336,8 +351,19 @@ Save keeps it as a new file, with a medium haptic and "Saved to Files › Taxes
 · Open"; the button becomes Done (DK-0381). Open saves first, then opens it.
 Closing an unsaved result of a job over 10 s asks "Discard this result?";
 a shorter one closes silently; either way the temp output is deleted
-(DK-0382). Share, the split Save's menu and Next chips come with DK-1077,
-DK-0380, DK-0385 and DK-0386.
+(DK-0382). The card is the definition's `summary` (`ToolSummary`: the
+headline, its delta, the line, and for a partial result the warning tint with
+one inline action, "Retake page 7", DK-0383); without one it shows the
+output's size, or "3 files", over "From Zeugnisse.pdf · 34 pages". A
+multi-file result (DK-0384) lists its parts with the definition's `partLine`
+("Pages 1–3 · 420 KB", or their size) and no name field; Save keeps every
+part next to the input. The definition's `next` (2–4 tool ids, §21) are
+T3's Next chips (DK-0386), each shown only when that tool takes this result:
+a chip opens that tool's T2 with the result as its input
+(`chainInputProvider`, `/tool/:id?chain=1`), the saved files if Save ran,
+else the outputs as they are; it takes T3's place. `ToolResult.chain` lists
+the tools run so far ("Save as workflow" after two: DK-1078). Share and the
+split Save's menu come with DK-1077, DK-0380 and DK-0385.
 
 **Motion and haptics (DK-0039).** Animate with `context.motion(DkMotionKind.fast
 / standard / emphasis)`, never raw durations: it returns the spec's duration
