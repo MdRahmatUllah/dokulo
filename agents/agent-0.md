@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0609 Error model: typed DokuloError with codes, messages and one recovery action — claimed 2026-10-09 16:34.
+DK-0609 in review as PR #1206: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
