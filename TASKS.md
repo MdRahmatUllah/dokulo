@@ -7671,3 +7671,7 @@ PR #1219 for DK-0352 (S2 Review: top bar, large preview, edit row, context area,
 ### H-1637 · 2026-10-09 18:30 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
+
+### H-1638 · 2026-10-09 18:30 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
