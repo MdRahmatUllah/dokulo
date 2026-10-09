@@ -1858,3 +1858,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 01:32 · agent-0 · heavy: free
 - 2026-10-10 01:33 · agent-1 DK-0256 · done (#1248)
 - 2026-10-10 01:33 · agent-0 DK-0838 · claimed: Visual QA: tool-shell-t2empty (T2 – empty input)
+- 2026-10-10 01:33 · agent-0 DK-0838 · PR #1249 open; review requested from all
