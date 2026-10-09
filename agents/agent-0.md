@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0294 Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour — claimed 2026-10-09 21:09.
 
 ## Next
 
