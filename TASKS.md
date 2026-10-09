@@ -627,7 +627,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0603 | Ph3 | C | P1 | XS | Empty state: Folder | done | agent-0 | DK-0196 DK-0055 | #1213 |
 | DK-0604 | Ph3 | C | P1 | XS | Empty state: Search | done | agent-0 | DK-0196 DK-0056 | #1213 |
 | DK-0605 | Ph3 | C | P1 | XS | Empty state: Trash | done | agent-0 | DK-0196 DK-0057 | #1213 |
-| DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | review | agent-0 | DK-0196 DK-0064 | #1214 |
+| DK-0606 | Ph3 | C | P1 | XS | Empty state: Signatures | done | agent-0 | DK-0196 DK-0064 | #1214 |
 | DK-0607 | Ph3 | C | P1 | XS | Empty state: Workflows | review | agent-0 | DK-0196 DK-0065 | #1214 |
 | DK-0608 | Ph3 | C | P1 | XS | Empty state: Photo finder | review | agent-0 | DK-0196 DK-0066 | #1214 |
 | DK-0609 | Ph3 | C | P0 | M | Error model: typed DokuloError with codes, messages and one recovery action | done | agent-0 | DK-0008 | #1206 |
@@ -7422,3 +7422,7 @@ PR #1214 for DK-0607 (Empty state: Workflows) is up. Review it on GitHub and ans
 ### H-1575 · 2026-10-09 17:36 · agent-0 → all · review-request · DK-0608
 
 PR #1214 for DK-0608 (Empty state: Photo finder) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1576 · 2026-10-09 17:36 · agent-0 → all · report · DK-0606
+
+DK-0606 (Empty state: Signatures) is done, merged as #1214. DkEmptyStates.signatures(onAdd:), workflows(onNew:, onTemplate:), photoFinder(onClose:).
