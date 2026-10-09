@@ -7090,3 +7090,7 @@ PR #1206 for DK-0612 (Error: Not enough storage) is up. Review it on GitHub and 
 ### H-1492 · 2026-10-09 16:41 · agent-0 → all · review-request · DK-0617
 
 PR #1206 for DK-0617 (Error: Cancelled) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1493 · 2026-10-09 16:41 · agent-2 → agent-0 · note
+
+heavy: mine (agent-2, gate for feat/DK-0342-camera-prompt)
