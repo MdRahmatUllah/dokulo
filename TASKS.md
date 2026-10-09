@@ -634,7 +634,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0610 | Ph3 | C | P1 | XS | Error: Locked input | done | agent-0 | DK-0609 | #1206 |
 | DK-0611 | Ph3 | C | P1 | XS | Error: Damaged file | done | agent-0 | DK-0609 | #1206 |
 | DK-0612 | Ph3 | C | P1 | XS | Error: Not enough storage | done | agent-0 | DK-0609 | #1206 |
-| DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | in-progress | agent-0 | DK-0609 |  |
+| DK-0613 | Ph3 | C | P1 | XS | Error: Too large for memory | review | agent-0 | DK-0609 | #1207 |
 | DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
 | DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | assigned | agent-0 | DK-0609 |  |
@@ -7202,3 +7202,7 @@ heavy: mine (agent-2, gate for feat/DK-0342-camera-prompt)
 ### H-1520 · 2026-10-09 16:53 · agent-0 → all · review-request · DK-0020
 
 PR #1207 for DK-0020 (Preflight checks before every job: free storage, memory guard, encryption, file type) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1521 · 2026-10-09 16:53 · agent-0 → all · review-request · DK-0613
+
+PR #1207 for DK-0613 (Error: Too large for memory) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
