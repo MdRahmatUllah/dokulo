@@ -44,7 +44,7 @@ def uses(package: Path, dependency: str) -> bool:
 # in one process, and staggering them crashes PDFium ("Cannot invoke native
 # callback from a different isolate", pdfrx's process-wide callbacks).
 # ponytail: a fixed 4; raise it when the machine has the memory to spare.
-TEST_CONCURRENCY = "1"
+TEST_CONCURRENCY = "4"
 
 
 def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Path]]:
