@@ -5,6 +5,7 @@ import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
+import 'package:app_pdf/screens/onboarding/onboarding_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
@@ -74,7 +75,6 @@ void main() {
     Routes.me: ('M1', true),
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
-    Routes.welcome: ('Onboarding', false),
     Routes.scan: ('S1', false),
     Routes.scanReview: ('S2', false),
     '/tool/compress': ('T2 compress', false),
@@ -90,6 +90,26 @@ void main() {
       expect(tabBarShown(tester), tabs);
     });
   }
+
+  testWidgets('cold start at /welcome shows onboarding, no tab bar', (
+    tester,
+  ) async {
+    final router = buildRouter(initialLocation: Routes.welcome);
+    addTearDown(router.dispose);
+    await tester.pumpWidget(
+      ProviderScope(
+        child: MaterialApp.router(
+          routerConfig: router,
+          theme: dokuloTheme(DkTokens.light),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(OnboardingScreen), findsOneWidget);
+    expect(tabBarShown(tester), isFalse);
+  });
 
   testWidgets('cold start at /viewer/42 shows the V1 viewer, no tab bar', (
     tester,

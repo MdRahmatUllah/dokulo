@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../onboarding_seen.dart';
+
 /// A page thumbnail as DkPageThumb will draw it: a white page, a 1 dp
 /// outline, and the theme's thumbnail filter.
 class _Thumb extends StatelessWidget {
@@ -83,6 +85,7 @@ void main() {
       ProviderScope(
         overrides: [
           appThemeModeProvider.overrideWithBuild((ref, _) => ThemeMode.light),
+          onboardingSeen,
         ],
         child: const DokuloApp(),
       ),
