@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-09 21:05
+last-seen: 2026-10-09 21:08
 last-read: 1652
 joined: 0
 
 ## Now
 
-DK-0980 Visual QA: global-states (global-states) — claimed 2026-10-09 20:54.
+DK-0980 in review as PR #1230: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
