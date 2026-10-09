@@ -1,5 +1,4 @@
 import 'package:app_pdf/components/dk_progress_sheet.dart';
-import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/job_providers.dart';
 import 'package:app_pdf/routes/link_error.dart';
 import 'package:app_pdf/routes/routes.dart';
@@ -9,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'routes_test.dart' show pumpAt, title;
+
+import 'package:app_pdf/screens/home/home_screen.dart';
 
 class _Jobs extends RunningJobs {
   _Jobs(this.jobs);
@@ -55,7 +56,7 @@ void main() {
     expect(find.text("This link doesn't work any more"), findsOneWidget);
     await tester.tap(find.text('Go to Home'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'H1');
+    expect(find.byType(HomeScreen), findsOneWidget);
   });
 
   testWidgets('a link to a tool this version lacks shows the link error', (
@@ -88,7 +89,7 @@ void main() {
       await pumpAt(
         tester,
         Routes.tool('compress', fileId: '$id'),
-        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        database: db,
       );
       await tester.runAsync(() => Future<void>.delayed(Duration.zero));
       await tester.pumpAndSettle();
@@ -101,7 +102,7 @@ void main() {
         await pumpAt(
           tester,
           Routes.tool('compress', fileId: handle),
-          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          database: db,
         );
         await tester.runAsync(() => Future<void>.delayed(Duration.zero));
         await tester.pumpAndSettle();
@@ -124,13 +125,13 @@ void main() {
         runningJobsProvider.overrideWith(() => _Jobs([job])),
       ],
     );
-    expect(title(tester), 'H1');
+    expect(find.byType(HomeScreen), findsOneWidget);
     expect(find.byType(DkProgressSheet), findsOneWidget);
   });
 
   testWidgets('a job link after the job ended says so on Home', (tester) async {
     await pumpAt(tester, Routes.job(7));
-    expect(title(tester), 'H1');
+    expect(find.byType(HomeScreen), findsOneWidget);
     expect(find.text('This job has already finished.'), findsOneWidget);
   });
 }

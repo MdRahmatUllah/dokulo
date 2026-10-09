@@ -1,6 +1,8 @@
 import 'dart:io';
+import 'dart:ui' show CheckedState;
 import 'dart:typed_data';
 
+import 'package:app_pdf/components/dk_confirm_dialog.dart';
 import 'package:app_pdf/components/dk_empty_state.dart';
 import 'package:app_pdf/components/dk_file_card.dart';
 import 'package:app_pdf/components/dk_folder_card.dart';
@@ -12,6 +14,7 @@ import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/files/files_screen.dart';
+import 'package:app_pdf/screens/v1_viewer/viewer_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
@@ -99,6 +102,10 @@ Future<GoRouter> pumpFiles(
         prefsProvider.overrideWith(() => Prefs.memory(f.prefs)),
         fileStoreProvider.overrideWith((ref) async => f.store),
         thumbnailCacheProvider.overrideWith((ref) async => _WhitePages()),
+        // V1 without PDFium: the file reads as missing, so no canvas opens.
+        viewerFileProvider.overrideWith(
+          (ref, fileId) async => throw StateError('no PDFium in tests'),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -123,6 +130,12 @@ Future<void> settle(WidgetTester tester) async {
     await tester.pumpAndSettle();
   }
 }
+
+/// The text field in an open dialog (F1's search field is a field too).
+Finder get dialogField => find.descendant(
+  of: find.byType(DkConfirmDialog),
+  matching: find.byType(EditableText),
+);
 
 List<String> names(WidgetTester tester) => [
   for (final card in tester.widgetList<DkFileCard>(find.byType(DkFileCard)))
@@ -230,7 +243,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(
       tester.getSemantics(find.text('Name')).flagsCollection.isChecked,
-      isTrue,
+      CheckedState.isTrue,
     );
     await tester.tap(find.text('Ascending'));
     await settle(tester);
@@ -243,7 +256,7 @@ void main() {
     await pumpFiles(tester, f);
     await tester.tap(find.byTooltip('New folder'));
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(EditableText), 'Taxes');
+    await tester.enterText(dialogField, 'Taxes');
     await tester.pump();
     await tester.runAsync(() async {
       await tester.tap(find.text('Create'));
@@ -256,7 +269,7 @@ void main() {
 
     await tester.tap(find.byTooltip('New folder'));
     await tester.pumpAndSettle();
-    await tester.enterText(find.byType(EditableText), 'taxes');
+    await tester.enterText(dialogField, 'taxes');
     await tester.pump();
     await tester.runAsync(() async {
       await tester.tap(find.text('Create'));

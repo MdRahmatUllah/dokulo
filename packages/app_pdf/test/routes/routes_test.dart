@@ -34,12 +34,14 @@ Future<GoRouter> pumpAt(
   String location, {
   bool reduceMotion = false,
   List<Override> overrides = const [],
+  DokuloDatabase? database,
 }) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
-  // F1 reads the file index and its view: an empty database, no prefs file.
-  final db = DokuloDatabase.memory();
-  addTearDown(db.close);
+  // Home and F1 read the file index and their view: an empty database
+  // unless the test gives one, no prefs file.
+  final db = database ?? DokuloDatabase.memory();
+  if (database == null) addTearDown(db.close);
   await tester.pumpWidget(
     // As in the app; S1's camera gate reads its permission from a provider.
     ProviderScope(

@@ -115,7 +115,7 @@ class FilesScreen extends ConsumerWidget {
               )
             else if (empty)
               SliverFillRemaining(
-                hasScrollBody: false,
+                hasScrollBody: true, // DkEmptyState centres and scrolls itself
                 child: DkEmptyStates.filesRoot(
                   context,
                   onScan: () => context.push(Routes.scan),

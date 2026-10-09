@@ -12,6 +12,7 @@ import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
+import 'package:app_pdf/screens/v1_viewer/viewer_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
@@ -54,6 +55,10 @@ Future<GoRouter> pumpHome(
         appDatabaseProvider.overrideWithValue(db),
         prefsProvider.overrideWith(() => Prefs.memory()),
         thumbnailCacheProvider.overrideWith((ref) async => _WhitePages()),
+        // V1 without PDFium: the file reads as missing, so no canvas opens.
+        viewerFileProvider.overrideWith(
+          (ref, fileId) async => throw StateError('no PDFium in tests'),
+        ),
         ...overrides,
       ],
       child: MaterialApp.router(

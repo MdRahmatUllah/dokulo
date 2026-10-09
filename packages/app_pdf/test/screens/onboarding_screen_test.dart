@@ -10,6 +10,9 @@ import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import '../app_overrides.dart';
+
 import 'package:go_router/go_router.dart';
 
 /// The flag without the file system: seen or not, and what complete() did.
@@ -47,6 +50,7 @@ Future<(GoRouter, _Flag)> pumpAt(
         onboardingDoneProvider.overrideWith(() => flag),
         // The picker is cancelled: nothing else happens.
         pickPdfProvider.overrideWithValue(() async => null),
+        ...homeOverrides(),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
