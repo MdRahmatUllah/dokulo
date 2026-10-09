@@ -1176,3 +1176,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 01:30 · agent-1 · DK-1046 prep as draft #1199 (iOS flavors), for the Mac session
 - 2026-10-09 01:31 · agent-2 DK-1074 · done (#1198)
 - 2026-10-09 01:42 · agent-2 · M01-M03: M02 and M03 closed; M01 56/62. The six left (DK-1042, 1046, 1051, 1053, 1054, 1058) stay deferred per the owner's 2026-10-08 decision, confirmed by agent-1 (H-1416). DK-1046's Windows-side prep is agent-1's draft #1199.
+- 2026-10-09 15:49 · agent-1 · session started
