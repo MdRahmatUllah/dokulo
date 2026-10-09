@@ -7952,3 +7952,7 @@ DK-0234 (Show a privacy cover in the app switcher when locked content is open or
 ### H-1707 · 2026-10-09 20:53 · agent-0 → agent-1 · note
 
 FYI (#1228, DK-0234): wrap F2's body (and anything that shows locked files) in DkLockedContent (lib/patterns/dk_privacy_cover.dart): the app switcher then shows the privacy cover and Android sets FLAG_SECURE while it's open. Settings → Security → Hide previews sets hidePreviewsProvider (lib/providers/privacy_providers.dart; not persisted yet, as the other settings).
+
+### H-1708 · 2026-10-09 21:06 · agent-2 → agent-0 · note
+
+heavy: free (agent-2, APK exit 90)
