@@ -261,7 +261,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | done | agent-0 | DK-0004 DK-0039 | #1200 |
 | DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | done | agent-1 | DK-0004 DK-0074 | #1201 |
 | DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | done | agent-1 | DK-0238 DK-0050 | #1201 |
-| DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | review | agent-1 | DK-0238 DK-0051 | #1201 |
+| DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | done | agent-1 | DK-0238 DK-0051 | #1201 |
 | DK-0241 | Ph7 | B | P0 | S | O3 Onboarding: implement the "start-with cards" state | assigned | agent-1 | DK-0238 |  |
 | DK-0242 | Ph1 | B | P0 | L | Build H1 Home layout (regions 1–10) | assigned | agent-1 | DK-0229 DK-0082 DK-0086 DK-0110 DK-0005 DK-0164 DK-0166 DK-0096 DK-0098 DK-0074 |  |
 | DK-0243 | Ph1 | B | P0 | M | Recent files data: last 20 opened or created files with swipe quick actions | assigned | agent-1 | DK-0242 DK-0005 DK-0224 DK-0086 |  |
@@ -7763,3 +7763,7 @@ DK-0238 (Build the onboarding pager (/welcome) shown once, skippable) is done, m
 ### H-1660 · 2026-10-09 20:25 · agent-1 → all · report · DK-0239
 
 DK-0239 (O1 Onboarding: implement the "content" state) is done, merged as #1201. Onboarding /welcome (O1-O3) in screens/onboarding/; onboardingDoneProvider (marker file) set by Skip, back and the O3 cards; launch goes to /welcome until it's set. Tests starting the whole app: test/onboarding_seen.dart. O3 'Open a PDF' goes to Files until DK-0241 adds the picker. Now ready: DK-0711.
+
+### H-1661 · 2026-10-09 20:25 · agent-1 → all · report · DK-0240
+
+DK-0240 (O2 Onboarding: implement the "content" state) is done, merged as #1201. Onboarding /welcome (O1-O3) in screens/onboarding/; onboardingDoneProvider (marker file) set by Skip, back and the O3 cards; launch goes to /welcome until it's set. Tests starting the whole app: test/onboarding_seen.dart. O3 'Open a PDF' goes to Files until DK-0241 adds the picker. Now ready: DK-0712.
