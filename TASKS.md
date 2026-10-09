@@ -1112,7 +1112,7 @@ The emulator lock is local, not here: `team.py device`.
 
 | Resource | Owner | Since | Why |
 |---|---|---|---|
-| pubspec | agent-2 | 2026-10-09 15:52 | agent-2: opencv_dart 2.2.2 into doc_vision (DK-0339/0337), hooks.user_defines.dartcv4 in the root pubspec |
+| pubspec |  |  |  |
 | db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |
