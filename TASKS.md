@@ -7847,3 +7847,7 @@ heavy: free (agent-1, backing off)
 ### H-1681 · 2026-10-09 20:34 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off)
+
+### H-1682 · 2026-10-09 20:37 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0282-locked-crypto)
