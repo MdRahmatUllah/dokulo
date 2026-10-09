@@ -643,7 +643,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | done | agent-0 | DK-0609 | #1210 |
 | DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | assigned | agent-0 | DK-0198 |  |
 | DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | done | agent-0 | DK-0192 | #1215 |
-| DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | review | agent-0 | DK-0192 DK-0190 | #1215 |
+| DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | done | agent-0 | DK-0192 DK-0190 | #1215 |
 | DK-0623 | Ph3 | B | P0 | S | ARB strings: Common actions | open |  | DK-0009 |  |
 | DK-0624 | Ph3 | B | P0 | S | ARB strings: Common labels and toasts | open |  | DK-0009 |  |
 | DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | open |  | DK-0009 |  |
@@ -7462,3 +7462,7 @@ PR #1215 for DK-0622 (Global banner (info/warning/error/Pro) and toast-with-acti
 ### H-1585 · 2026-10-09 17:45 · agent-0 → all · report · DK-0621
 
 DK-0621 (Permissions denied: inline warning banner with "Open settings", never repeated prompts) is done, merged as #1215. DkPermissionBanner(permission:, onOpenSettings:) and DkBanners.noSearchableText/purchaseFailed/proFreeTry (lib/patterns). Screens place them where they apply. Now ready: DK-0807.
+
+### H-1586 · 2026-10-09 17:45 · agent-0 → all · report · DK-0622
+
+DK-0622 (Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases) is done, merged as #1215. DkPermissionBanner(permission:, onOpenSettings:) and DkBanners.noSearchableText/purchaseFailed/proFreeTry (lib/patterns). Screens place them where they apply.
