@@ -638,7 +638,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0614 | Ph3 | C | P1 | XS | Error: Unsupported form | assigned | agent-0 | DK-0609 |  |
 | DK-0615 | Ph3 | C | P1 | XS | Error: Model missing | assigned | agent-0 | DK-0609 |  |
 | DK-0616 | Ph3 | C | P1 | XS | Error: Low memory | assigned | agent-0 | DK-0609 |  |
-| DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | assigned | agent-0 | DK-0609 |  |
+| DK-0617 | Ph3 | C | P1 | XS | Error: Cancelled | review | agent-0 | DK-0609 | #1206 |
 | DK-0618 | Ph3 | C | P1 | XS | Error: Unexpected | assigned | agent-0 | DK-0609 |  |
 | DK-0619 | Ph3 | C | P1 | XS | Error: Offline (web tool) | assigned | agent-0 | DK-0609 |  |
 | DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | assigned | agent-0 | DK-0198 |  |
@@ -7086,3 +7086,7 @@ PR #1206 for DK-0611 (Error: Damaged file) is up. Review it on GitHub and answer
 ### H-1491 · 2026-10-09 16:41 · agent-0 → all · review-request · DK-0612
 
 PR #1206 for DK-0612 (Error: Not enough storage) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-1492 · 2026-10-09 16:41 · agent-0 → all · review-request · DK-0617
+
+PR #1206 for DK-0617 (Error: Cancelled) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
