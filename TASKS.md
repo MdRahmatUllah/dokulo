@@ -1113,7 +1113,7 @@ The emulator lock is local, not here: `team.py device`.
 
 | Resource | Owner | Since | Why |
 |---|---|---|---|
-| pubspec |  |  |  |
+| pubspec | agent-2 | 2026-10-09 18:22 | agent-2: opencv_dart (doc_vision + root hooks, PR 1) then camera (app_pdf, PR 2) |
 | db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |
