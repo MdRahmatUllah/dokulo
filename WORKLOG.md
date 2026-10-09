@@ -1567,3 +1567,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:31 · agent-0 DK-0230 · done (#1203)
 - 2026-10-09 16:31 · agent-0 DK-0232 · done (#1203)
 - 2026-10-09 16:31 · agent-0 DK-0233 · done (#1203)
+- 2026-10-09 16:34 · agent-0 DK-0609 · claimed: Error model: typed DokuloError with codes, messages and one recovery action
