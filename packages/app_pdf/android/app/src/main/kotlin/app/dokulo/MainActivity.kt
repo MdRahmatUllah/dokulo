@@ -1,15 +1,77 @@
 package app.dokulo
 
+import android.Manifest
 import android.app.ActivityManager
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.StatFs
+import android.provider.Settings
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity : FlutterActivity() {
+    private var pendingCamera: MethodChannel.Result? = null
+    private val prefs by lazy { getSharedPreferences("dokulo_permissions", MODE_PRIVATE) }
+
+    // granted, notAsked (the system never asked: S1 shows the pre-prompt) or
+    // denied. Android can't tell "never asked" from "denied" by itself, so we
+    // remember that we asked.
+    private fun cameraStatus(): String = when {
+        ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
+            PackageManager.PERMISSION_GRANTED -> "granted"
+        !prefs.getBoolean("camera_asked", false) -> "notAsked"
+        else -> "denied"
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray,
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_REQUEST) {
+            pendingCamera?.success(cameraStatus())
+            pendingCamera = null
+        }
+    }
+
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+        // The camera permission (DK-0342; lib/providers/camera_permission.dart).
+        // The app asks once; after a "no" only Settings can change it.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/camera")
+            .setMethodCallHandler { call, result ->
+                when (call.method) {
+                    "status" -> result.success(cameraStatus())
+                    "request" -> {
+                        if (cameraStatus() != "notAsked") {
+                            result.success(cameraStatus())
+                        } else {
+                            pendingCamera?.success(cameraStatus())
+                            pendingCamera = result
+                            prefs.edit().putBoolean("camera_asked", true).apply()
+                            ActivityCompat.requestPermissions(
+                                this, arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST,
+                            )
+                        }
+                    }
+                    "openSettings" -> {
+                        startActivity(
+                            Intent(
+                                Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                Uri.fromParts("package", packageName, null),
+                            ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        )
+                        result.success(null)
+                    }
+                    else -> result.notImplemented()
+                }
+            }
         // What the phone can do (DK-0013; ai_core's DeviceCapabilities reads this map).
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/device")
             .setMethodCallHandler { call, result ->
@@ -35,3 +97,5 @@ class MainActivity : FlutterActivity() {
             }
     }
 }
+
+private const val CAMERA_REQUEST = 4201

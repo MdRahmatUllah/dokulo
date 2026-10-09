@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
+import 'package:app_pdf/providers/camera_permission.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/routes/routes.dart';
@@ -13,22 +15,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
+/// The camera is allowed: these tests are about routes, not the permission.
+class _Granted implements CameraPermission {
+  @override
+  Future<CameraAccess> status() async => CameraAccess.granted;
+  @override
+  Future<CameraAccess> request() async => CameraAccess.granted;
+  @override
+  Future<void> openSettings() async {}
+}
+
 Future<GoRouter> pumpAt(
   WidgetTester tester,
   String location, {
   bool reduceMotion = false,
+  List<Override> overrides = const [],
 }) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
   await tester.pumpWidget(
-    MaterialApp.router(
-      routerConfig: router,
-      theme: dokuloTheme(DkTokens.light), // components read the tokens
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      builder: (context, child) => MediaQuery(
-        data: MediaQuery.of(context).copyWith(disableAnimations: reduceMotion),
-        child: child!,
+    // As in the app; S1's camera gate reads its permission from a provider.
+    ProviderScope(
+      overrides: [
+        cameraPermissionProvider.overrideWithValue(_Granted()),
+        ...overrides,
+      ],
+      child: MaterialApp.router(
+        routerConfig: router,
+        theme: dokuloTheme(DkTokens.light), // components read the tokens
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(disableAnimations: reduceMotion),
+          child: child!,
+        ),
       ),
     ),
   );
@@ -185,6 +206,40 @@ void main() {
     await tester.pumpAndSettle();
     expect(title(tester), 'S1 idCard');
     expect(Routes.scanIn(DkScanMode.book), '/scan?mode=book');
+  });
+
+  testWidgets('Import photos in the Scan popover goes to S2 and its picker '
+      '(DK-0230)', (tester) async {
+    await pumpAt(tester, Routes.home);
+    await tester.longPress(find.bySemanticsLabel('Scan'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Import photos'));
+    await tester.pumpAndSettle();
+    expect(title(tester), 'S2 photos');
+    expect(tabBarShown(tester), isFalse);
+  });
+
+  testWidgets('from 840 dp the rail replaces the tab bar, live on resize, '
+      'and the tabs keep their stacks (DK-0232)', (tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(393, 852);
+    addTearDown(tester.view.reset);
+    final router = await pumpAt(tester, Routes.files);
+    router.push(Routes.lockedFolder);
+    await tester.pumpAndSettle();
+    expect(tabBarShown(tester), isTrue);
+
+    tester.view.physicalSize = const Size(1280, 800); // rotated tablet
+    await tester.pumpAndSettle();
+    expect(find.byType(DkNavRail), findsOneWidget);
+    expect(tabBarShown(tester), isFalse);
+    expect(title(tester), 'F2', reason: 'the Files stack survives');
+
+    tester.view.physicalSize = const Size(700, 1000); // medium: tab bar
+    await tester.pumpAndSettle();
+    expect(find.byType(DkNavRail), findsNothing);
+    expect(tabBarShown(tester), isTrue);
+    expect(title(tester), 'F2');
   });
 
   group('transitions (UI spec §13.4; DK-0229, DK-0237)', () {

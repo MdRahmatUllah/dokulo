@@ -1,3 +1,4 @@
+import AVFoundation
 import Flutter
 import UIKit
 import os
@@ -15,7 +16,42 @@ import os
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
     if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "DokuloDevice") {
       registerDeviceChannel(registrar.messenger())
+      registerCameraChannel(registrar.messenger())
     }
+  }
+
+  /// The camera permission (DK-0342; lib/providers/camera_permission.dart):
+  /// granted, notAsked (show the pre-prompt) or denied. The app asks once.
+  private func registerCameraChannel(_ messenger: FlutterBinaryMessenger) {
+    func status() -> String {
+      switch AVCaptureDevice.authorizationStatus(for: .video) {
+      case .authorized: return "granted"
+      case .notDetermined: return "notAsked"
+      default: return "denied"  // denied or restricted
+      }
+    }
+    FlutterMethodChannel(name: "dokulo/camera", binaryMessenger: messenger)
+      .setMethodCallHandler { call, result in
+        switch call.method {
+        case "status":
+          result(status())
+        case "request":
+          guard status() == "notAsked" else {
+            result(status())
+            return
+          }
+          AVCaptureDevice.requestAccess(for: .video) { _ in
+            DispatchQueue.main.async { result(status()) }
+          }
+        case "openSettings":
+          if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url)
+          }
+          result(nil)
+        default:
+          result(FlutterMethodNotImplemented)
+        }
+      }
   }
 
   /// What the phone can do (DK-0013; ai_core's DeviceCapabilities reads this map).

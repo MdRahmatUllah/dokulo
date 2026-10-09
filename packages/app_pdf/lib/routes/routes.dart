@@ -8,6 +8,7 @@ import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
 import 'app_shell.dart';
 
@@ -30,6 +31,9 @@ abstract final class Routes {
   /// S1 in a mode from the Scan button's menu.
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
+
+  /// Import photos (the Scan popover): S2 opens the photo picker first.
+  static const scanImport = '/scan/review?source=photos';
   static String tool(String toolId) => '/tool/$toolId'; // T2
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
@@ -133,13 +137,18 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           context,
           key: s.pageKey,
           child: _HomeUnderneath(
-            child: PlaceholderScreen(
-              'S1',
-              detail: s.uri.queryParameters['mode'] ?? '',
-            ),
+            child: _scanner(s.uri.queryParameters['mode'] ?? ''),
           ),
         ),
-        routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
+        routes: [
+          fullScreen(
+            'review',
+            (s) => PlaceholderScreen(
+              'S2',
+              detail: s.uri.queryParameters['source'] ?? '',
+            ),
+          ),
+        ],
       ),
       fullScreen(
         '/tool/:toolId',
@@ -226,4 +235,19 @@ class _HomeUnderneath extends StatelessWidget {
       child: child,
     );
   }
+}
+
+/// S1 behind its camera permission (DK-0342). Importing photos needs no
+/// camera; every other mode asks for it first.
+Widget _scanner(String mode) {
+  final camera = PlaceholderScreen('S1', detail: mode);
+  if (mode == DkScanMode.importPhotos.name) return camera;
+  return Builder(
+    builder: (context) => CameraPermissionGate(
+      camera: (_) => camera,
+      onClose: () => context.canPop() ? context.pop() : context.go(Routes.home),
+      // As the Scan button's Import photos: S2's picker (DK-0230).
+      onImport: () => context.pushReplacement(Routes.scanImport),
+    ),
+  );
 }
