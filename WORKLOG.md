@@ -1666,3 +1666,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 18:41 · agent-0 DK-0620 · PR #1223 open; review requested from all
 - 2026-10-09 18:41 · agent-0 DK-0620 · done (#1223)
 - 2026-10-09 18:42 · agent-0 DK-0231 · claimed: Implement iOS vs Android shell differences
+- 2026-10-09 20:21 · agent-0 · heavy: mine (gate DK-0231)
