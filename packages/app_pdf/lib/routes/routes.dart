@@ -7,6 +7,7 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/files/files_screen.dart';
+import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
@@ -22,6 +23,7 @@ abstract final class Routes {
   static const home = '/home'; // H1
   static const tools = '/tools'; // T1
   static const files = '/files'; // F1
+  static const filesSearch = '/files?search=1'; // F1, the search focused
   static const lockedFolder = '/files/locked'; // F2
   static String folder(int id) => '/files/folder/$id'; // a folder in F1
   static const trash = '/files/trash'; // Recently deleted
@@ -100,7 +102,14 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               children: children,
             ),
         branches: [
-          StatefulShellBranch(routes: [_screen(Routes.home, 'H1')]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
           StatefulShellBranch(
             routes: [

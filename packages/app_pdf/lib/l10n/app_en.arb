@@ -1263,5 +1263,37 @@
   "files_more_actions": "More actions",
   "@files_more_actions": {
     "description": "A file row's more button."
+  },
+  "home_your_tools": "Your tools",
+  "@home_your_tools": {
+    "description": "H1 section header over the pinned tools."
+  },
+  "home_recent": "Recent",
+  "@home_recent": {
+    "description": "H1 section header over the recent files."
+  },
+  "home_see_all": "See all",
+  "@home_see_all": {
+    "description": "H1: opens Files."
+  },
+  "home_open_file": "Open a file",
+  "@home_open_file": {
+    "description": "H1: the system picker, then V1."
+  },
+  "home_search": "Search files",
+  "@home_search": {
+    "description": "H1 top bar action: Files with the search field focused."
+  },
+  "home_settings": "Settings",
+  "@home_settings": {
+    "description": "H1 top bar action."
+  },
+  "home_empty_title": "Your scans and PDFs will appear here",
+  "@home_empty_title": {
+    "description": "H1 first launch."
+  },
+  "home_empty_body": "Scan a document or open a PDF to get started.",
+  "@home_empty_body": {
+    "description": "H1 first launch."
   }
 }

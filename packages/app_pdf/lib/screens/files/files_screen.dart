@@ -79,7 +79,13 @@ class FilesScreen extends ConsumerWidget {
             SliverPadding(
               padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, t.space.s),
               sliver: SliverToBoxAdapter(
-                child: DkSearchField(hint: l.files_search_hint),
+                child: DkSearchField(
+                  hint: l.files_search_hint,
+                  // Home's search action opens F1 with the field focused.
+                  autofocus:
+                      GoRouterState.of(context).uri.queryParameters['search'] ==
+                      '1',
+                ),
               ),
             ),
             SliverPadding(
@@ -286,12 +292,17 @@ class _FileList extends StatelessWidget {
   final bool grid;
 
   @override
-  Widget build(BuildContext context) =>
-      _rows(files.length, (i) => _FileCard(files[i], grid: grid), grid: grid);
+  Widget build(BuildContext context) => _rows(
+    files.length,
+    (i) => FileEntryCard(files[i], grid: grid),
+    grid: grid,
+  );
 }
 
-class _FileCard extends ConsumerWidget {
-  const _FileCard(this.file, {required this.grid});
+/// A file's card in F1 and Home: its first page, name and meta; a tap
+/// records it in Recent and opens it in V1.
+class FileEntryCard extends ConsumerWidget {
+  const FileEntryCard(this.file, {super.key, this.grid = false});
 
   final FileEntry file;
   final bool grid;
@@ -314,7 +325,10 @@ class _FileCard extends ConsumerWidget {
         AsyncError() => ColoredBox(color: context.tokens.color.pageWhite),
         _ => null,
       },
-      onTap: () => context.push(Routes.viewer('${file.id}')),
+      onTap: () {
+        recordOpened(ref.read(appDatabaseProvider), file.id);
+        context.push(Routes.viewer('${file.id}'));
+      },
     );
   }
 }

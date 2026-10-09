@@ -125,3 +125,54 @@ Future<ui.Image> fileThumbnail(Ref ref, String path, int width) async {
   ref.onDispose(image.dispose);
   return image;
 }
+
+/// Home's pinned tools (UI spec §15.1), in order; before the user edits
+/// them, the 8 defaults. Scan is the centre button, never pinned.
+const defaultPinnedTools = [
+  'merge',
+  'compress',
+  'sign',
+  'img2pdf',
+  'protect',
+  'redact',
+  'ocr',
+  'summarize',
+];
+
+@riverpod
+Stream<List<String>> pinnedTools(Ref ref) {
+  final db = ref.watch(appDatabaseProvider);
+  return (db.select(
+    db.pinnedTools,
+  )..orderBy([(p) => OrderingTerm.asc(p.position)])).watch().map(
+    (rows) =>
+        rows.isEmpty ? defaultPinnedTools : [for (final r in rows) r.toolId],
+  );
+}
+
+/// The files opened last, newest first (at most 20, the table's trigger),
+/// not deleted. Home's Recent list.
+@riverpod
+Stream<List<FileEntry>> recentFiles(Ref ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final query =
+      db.select(db.files).join([
+          innerJoin(db.recents, db.recents.fileId.equalsExp(db.files.id)),
+        ])
+        ..where(
+          db.files.id.isNotInQuery(
+            db.selectOnly(db.trash)..addColumns([db.trash.fileId]),
+          ),
+        )
+        ..orderBy([OrderingTerm.desc(db.recents.openedAt)]);
+  return query.watch().map(
+    (rows) => [for (final r in rows) r.readTable(db.files)],
+  );
+}
+
+/// A file was opened: it moves to the top of Recent.
+Future<void> recordOpened(DokuloDatabase db, int fileId) => db
+    .into(db.recents)
+    .insertOnConflictUpdate(
+      RecentsCompanion.insert(fileId: Value(fileId), openedAt: DateTime.now()),
+    );
