@@ -1557,3 +1557,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-09 16:04 · agent-1 DK-0277 · claimed: Version history: keep last 5 versions per file (edits, replace original)
 - 2026-10-09 16:10 · agent-1 · locked pubspec: agent-1: file_picker 13.1.0, cryptography 2.9.0, flutter_secure_storage 11.2.0, local_auth 3.0.2 (all planned, docs/versions.md) for DK-0241/DK-0282; one deps PR
 - 2026-10-09 16:11 · agent-0 DK-0229 · done (#1200)
+- 2026-10-09 16:11 · agent-0 DK-0237 · done (#1200)

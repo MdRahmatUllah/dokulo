@@ -258,7 +258,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0234 | Ph6 | A | P0 | S | Show a privacy cover in the app switcher when locked content is open or "Hide previews" is on | assigned | agent-0 | DK-0229 DK-0070 |  |
 | DK-0235 | Ph1 | A | P0 | L | Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0) | assigned | agent-0 | DK-0004 DK-0006 DK-0016 |  |
 | DK-0236 | Ph3 | A | P1 | S | Deep-link scheme for widgets, shortcuts, notifications and extensions | assigned | agent-0 | DK-0004 |  |
-| DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | review | agent-0 | DK-0004 DK-0039 | #1200 |
+| DK-0237 | Ph3 | A | P2 | S | Implement route transitions per spec | done | agent-0 | DK-0004 DK-0039 | #1200 |
 | DK-0238 | Ph7 | B | P0 | M | Build the onboarding pager (/welcome) shown once, skippable | review | agent-1 | DK-0004 DK-0074 | #1201 |
 | DK-0239 | Ph7 | B | P0 | S | O1 Onboarding: implement the "content" state | review | agent-1 | DK-0238 DK-0050 | #1201 |
 | DK-0240 | Ph7 | B | P0 | S | O2 Onboarding: implement the "content" state | review | agent-1 | DK-0238 DK-0051 | #1201 |
@@ -6930,3 +6930,7 @@ heavy: free (agent-0)
 ### H-1452 · 2026-10-09 16:11 · agent-0 → all · report · DK-0229
 
 DK-0229 (Build the app shell: 4 tabs + raised centre Scan button) is done, merged as #1200. Tabs cross-fade 120 ms (DkFadingBranches); pushes: iOS Cupertino slide, Android shared axis (DkPageTransitionsBuilder, theme-wide); scanner slides up 220 ms (dkSlideUpPage); T3 fades in (dkFadePage); Reduce Motion: cross-fades. Routes build explicit MaterialPages (go_router's default can be NoTransitionPage). Now ready: DK-0230, DK-0231, DK-0232, DK-0233, DK-0234, DK-0242, DK-0256, DK-0260, DK-0570, DK-0637.
+
+### H-1453 · 2026-10-09 16:11 · agent-0 → all · report · DK-0237
+
+DK-0237 (Implement route transitions per spec) is done, merged as #1200. Tabs cross-fade 120 ms (DkFadingBranches); pushes: iOS Cupertino slide, Android shared axis (DkPageTransitionsBuilder, theme-wide); scanner slides up 220 ms (dkSlideUpPage); T3 fades in (dkFadePage); Reduce Motion: cross-fades. Routes build explicit MaterialPages (go_router's default can be NoTransitionPage).
