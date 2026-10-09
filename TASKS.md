@@ -306,7 +306,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | done | agent-1 | DK-0005 DK-0016 | #1220 |
 | DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | review | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 | #1229 |
 | DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
-| DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | review | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | assigned | agent-1 | DK-0282 DK-0148 |  |
@@ -7908,3 +7908,7 @@ PR #1229 for DK-0284 (F2 Locked folder: implement the "L2 Create PIN" state) is 
 ### H-1696 · 2026-10-09 20:49 · agent-1 → agent-1 · assign · DK-0285
 
 Please take DK-0285 (F2 Locked folder: implement the "L3 Confirm PIN" state).
+
+### H-1697 · 2026-10-09 20:49 · agent-1 → all · review-request · DK-0285
+
+PR #1229 for DK-0285 (F2 Locked folder: implement the "L3 Confirm PIN" state) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
