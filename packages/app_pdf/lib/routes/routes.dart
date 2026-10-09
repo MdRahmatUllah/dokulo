@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -45,7 +45,11 @@ abstract final class Routes {
 GoRoute _screen(String path, String id, {List<RouteBase> routes = const []}) =>
     GoRoute(
       path: path,
-      builder: (context, state) => PlaceholderScreen(id),
+      // A MaterialPage, so a push takes the theme's transition (UI spec
+      // §13.4, DkPageTransitionsBuilder); go_router's own choice depends on
+      // the app type it finds.
+      pageBuilder: (context, state) =>
+          MaterialPage(key: state.pageKey, child: PlaceholderScreen(id)),
       routes: routes,
     );
 
@@ -63,7 +67,11 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
   }) => GoRoute(
     path: path,
     parentNavigatorKey: root,
-    builder: (context, state) => _HomeUnderneath(child: builder(state)),
+    // A MaterialPage, so it takes the theme's push transition (§13.4).
+    pageBuilder: (context, state) => MaterialPage(
+      key: state.pageKey,
+      child: _HomeUnderneath(child: builder(state)),
+    ),
     routes: routes,
   );
 
@@ -78,8 +86,14 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         pageBuilder: (context, state) =>
             const NoTransitionPage(child: LaunchScreen()),
       ),
-      StatefulShellRoute.indexedStack(
+      StatefulShellRoute(
         builder: (context, state, shell) => AppShell(shell),
+        // Tabs cross-fade (UI spec §13.4); each keeps its stack.
+        navigatorContainerBuilder: (context, shell, children) =>
+            DkFadingBranches(
+              currentIndex: shell.currentIndex,
+              children: children,
+            ),
         branches: [
           StatefulShellBranch(routes: [_screen(Routes.home, 'H1')]),
           StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
@@ -97,9 +111,12 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                   _screen('models', 'M2'),
                   GoRoute(
                     path: 'settings/:page',
-                    builder: (context, state) => PlaceholderScreen(
-                      'M3',
-                      detail: state.pathParameters['page']!,
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: PlaceholderScreen(
+                        'M3',
+                        detail: state.pathParameters['page']!,
+                      ),
                     ),
                   ),
                 ],
@@ -109,29 +126,37 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       fullScreen(Routes.welcome, (_) => const PlaceholderScreen('Onboarding')),
-      fullScreen(Routes.scan, (s) {
-        final mode = s.uri.queryParameters['mode'] ?? '';
-        final camera = PlaceholderScreen('S1', detail: mode);
-        // Importing photos needs no camera; every other mode asks for it
-        // first (DK-0342).
-        if (mode == DkScanMode.importPhotos.name) return camera;
-        return Builder(
-          builder: (context) => CameraPermissionGate(
-            camera: (_) => camera,
-            onClose: () =>
-                context.canPop() ? context.pop() : context.go(Routes.home),
-            onImport: () =>
-                context.pushReplacement(Routes.scanIn(DkScanMode.importPhotos)),
+      // The scanner slides up and back down (UI spec §13.4).
+      GoRoute(
+        path: Routes.scan,
+        parentNavigatorKey: root,
+        pageBuilder: (context, s) => dkSlideUpPage(
+          context,
+          key: s.pageKey,
+          child: _HomeUnderneath(
+            child: _scanner(s.uri.queryParameters['mode'] ?? ''),
           ),
-        );
-      }, routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))]),
+        ),
+        routes: [fullScreen('review', (_) => const PlaceholderScreen('S2'))],
+      ),
       fullScreen(
         '/tool/:toolId',
         (s) => PlaceholderScreen('T2', detail: s.pathParameters['toolId']!),
         routes: [
-          fullScreen(
-            'result',
-            (s) => PlaceholderScreen('T3', detail: s.pathParameters['toolId']!),
+          // The result cross-fades in after the progress (UI spec §13.4).
+          GoRoute(
+            path: 'result',
+            parentNavigatorKey: root,
+            pageBuilder: (context, s) => dkFadePage(
+              context,
+              key: s.pageKey,
+              child: _HomeUnderneath(
+                child: PlaceholderScreen(
+                  'T3',
+                  detail: s.pathParameters['toolId']!,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -199,4 +224,19 @@ class _HomeUnderneath extends StatelessWidget {
       child: child,
     );
   }
+}
+
+/// S1 behind its camera permission (DK-0342). Importing photos needs no
+/// camera; every other mode asks for it first.
+Widget _scanner(String mode) {
+  final camera = PlaceholderScreen('S1', detail: mode);
+  if (mode == DkScanMode.importPhotos.name) return camera;
+  return Builder(
+    builder: (context) => CameraPermissionGate(
+      camera: (_) => camera,
+      onClose: () => context.canPop() ? context.pop() : context.go(Routes.home),
+      onImport: () =>
+          context.pushReplacement(Routes.scanIn(DkScanMode.importPhotos)),
+    ),
+  );
 }
