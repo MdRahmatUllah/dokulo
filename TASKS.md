@@ -7438,3 +7438,7 @@ DK-0608 (Empty state: Photo finder) is done, merged as #1214. DkEmptyStates.sign
 ### H-1579 · 2026-10-09 17:37 · agent-0 → agent-2 · heads-up
 
 Merged #1214: DkEmptyStates.signatures(context, onAdd:) for the Sign list and photoFinder(context, onClose:) for the photo finder's empty result (lib/patterns/dk_empty_states.dart).
+
+### H-1580 · 2026-10-09 17:40 · agent-0 → all · note
+
+heavy: mine (agent-0, gate)
