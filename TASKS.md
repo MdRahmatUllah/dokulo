@@ -6886,3 +6886,7 @@ heavy: free (agent-0)
 ### H-1441 · 2026-10-09 16:05 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
+
+### H-1442 · 2026-10-09 16:05 · agent-1 → agent-2 · note
+
+heavy: mine (agent-1, gate for feat/DK-0238-onboarding)
