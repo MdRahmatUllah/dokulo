@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'dart:math' as math;
 
 import 'package:doc_vision/doc_vision.dart';
@@ -37,18 +39,50 @@ cv.Mat scene(
     [for (final (x, y) in corners) cv.Point(x, y)],
   ]);
   cv.fillPoly(img, pts, cv.Scalar(245, 245, 240));
-  // Text lines inside the page (between its top and bottom edges).
+  // Text lines inside the page only: drawn on a white layer, kept where the
+  // page is (real text never crosses the page's edge).
+  final text = cv.Mat.create(
+    rows: h,
+    cols: w,
+    r: 245,
+    g: 245,
+    b: 240,
+    type: cv.MatType.CV_8UC3,
+  );
   final (tlx, tly) = corners[0];
   final (brx, bry) = corners[2];
   for (var y = tly + 80; y < bry - 80; y += 40) {
     cv.line(
-      img,
-      cv.Point(tlx + 70, y),
-      cv.Point(brx - 120, y),
+      text,
+      cv.Point(0, y),
+      cv.Point(w, y),
       cv.Scalar(30, 30, 30),
       thickness: 6,
     );
   }
+  final mask = cv.Mat.zeros(h, w, cv.MatType.CV_8UC1);
+  // The page shrunk a little, so lines stop short of its edges.
+  final inner = cv.VecVecPoint.fromList([
+    [
+      for (final (x, y) in corners)
+        cv.Point(
+          (x +
+                  (corners.map((c) => c.$1).reduce((a, b) => a + b) / 4 - x) *
+                      0.15)
+              .round(),
+          (y +
+                  (corners.map((c) => c.$2).reduce((a, b) => a + b) / 4 - y) *
+                      0.15)
+              .round(),
+        ),
+    ],
+  ]);
+  cv.fillPoly(mask, inner, cv.Scalar.all(255));
+  text.copyTo(img, mask: mask);
+  for (final m in [text, mask]) {
+    m.dispose();
+  }
+  inner.dispose();
   pts.dispose();
   return img;
 }
@@ -111,7 +145,7 @@ void main() {
       padded.setRange(r * stride, r * stride + grey.cols, data, r * grey.cols);
     }
     final found = detectQuadInGrey(
-      cv.Mat.fromList(1, padded.length, cv.MatType.CV_8UC1, padded).data,
+      Uint8List.fromList(padded),
       grey.cols,
       grey.rows,
       rowStride: stride,

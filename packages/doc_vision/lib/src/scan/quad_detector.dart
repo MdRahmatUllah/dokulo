@@ -151,21 +151,15 @@ QuadDetection? detectQuad(cv.Mat image) {
     QuadDetection? best;
     try {
       for (final contour in contours) {
+        // Small pages too: the hint asks to move closer (DK-0344).
         final area = cv.contourArea(contour);
-        if (area < 0.15 * frameArea) continue;
-        final peri = cv.arcLength(contour, true);
-        final approx = cv.approxPolyDP(contour, 0.02 * peri, true);
-        try {
-          if (approx.length != 4 || !cv.isContourConvex(approx)) continue;
-          final quad = Quad.ordered([
-            for (final p in approx) (x: p.x.toDouble(), y: p.y.toDouble()),
-          ]);
-          final score = _score(quad, frameArea);
-          if (best == null || score > best.score) {
-            best = (quad: quad, score: score);
-          }
-        } finally {
-          approx.dispose();
+        if (area < minAreaShare * frameArea) continue;
+        final corners = _fourCorners(contour);
+        if (corners == null) continue;
+        final quad = Quad.ordered(corners);
+        final score = _score(quad, frameArea);
+        if (best == null || score > best.score) {
+          best = (quad: quad, score: score);
         }
       }
     } finally {
@@ -178,6 +172,51 @@ QuadDetection? detectQuad(cv.Mat image) {
     for (final m in owned) {
       m.dispose();
     }
+  }
+}
+
+/// The smallest share of the frame a page may cover and still be found.
+const minAreaShare = 0.05;
+
+/// Four corners for [contour]: its polygon at growing tolerance, then its
+/// convex hull's (a shadow or a finger touching the page edge adds spurs
+/// that a single simplification keeps). Null when neither is a convex quad.
+List<Pt>? _fourCorners(cv.VecPoint contour) {
+  List<Pt>? simplify(cv.VecPoint points) {
+    final peri = cv.arcLength(points, true);
+    for (final f in const [0.02, 0.03, 0.045, 0.06]) {
+      final approx = cv.approxPolyDP(points, f * peri, true);
+      try {
+        if (approx.length < 4) return null;
+        if (approx.length == 4 && cv.isContourConvex(approx)) {
+          return [
+            for (final p in approx) (x: p.x.toDouble(), y: p.y.toDouble()),
+          ];
+        }
+      } finally {
+        approx.dispose();
+      }
+    }
+    return null;
+  }
+
+  final direct = simplify(contour);
+  if (direct != null) return direct;
+  // The hull as its own points (a VecPoint made from the Mat would share
+  // its memory and be freed twice).
+  final hullMat = cv.convexHull(contour);
+  final hull = cv.VecPoint.fromList([
+    for (var i = 0; i < hullMat.rows; i++)
+      cv.Point(
+        hullMat.at<cv.Vec2i>(i, 0).val1,
+        hullMat.at<cv.Vec2i>(i, 0).val2,
+      ),
+  ]);
+  hullMat.dispose();
+  try {
+    return simplify(hull);
+  } finally {
+    hull.dispose();
   }
 }
 
