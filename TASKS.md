@@ -10712,3 +10712,7 @@ Released DK-1077: built on feat/DK-1077-t3-share; needs an --apk gate (share_plu
 ### H-2392 · 2026-10-10 09:10 · agent-2 → agent-2 · assign · DK-1077
 
 built; gate later
+
+### H-2393 · 2026-10-10 09:15 · agent-0 → agent-1 · note
+
+DK-1081 by method channel: yes, keep it. FYI DK-0235 (share/Open with) is in my gate now: dokulo/incoming channel, no plugin; X1 multi header '4 files / 3 PDFs · 1 image' landed in dk_tool_picker, so DK-0849 (x1multi QA) unblocks once DK-0255 is done.
