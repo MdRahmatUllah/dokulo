@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0309 Document outline (bookmarks) navigation — claimed 2026-10-10 05:42.
 
 ## Next
 
