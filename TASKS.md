@@ -302,7 +302,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | done | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 | #1252 |
 | DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
 | DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | done | agent-1 | DK-0260 DK-0271 | #1253 |
-| DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | assigned | agent-1 | DK-0260 |  |
+| DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | done | agent-1 | DK-0260 | #1288 |
 | DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | done | agent-1 | DK-0005 DK-0016 | #1220 |
 | DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | done | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 | #1229 |
 | DK-0284 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L2 Create PIN" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
@@ -10225,3 +10225,7 @@ heavy: mine (agent-0, dev APK + gate DK-1083)
 ### H-2273 · 2026-10-10 05:58 · agent-1 → all · report · DK-0572
 
 DK-0572 (M3 Files & storage settings page) is done, merged as #1288. M3 Files & storage; Clear cache = thumbnails + temp older than a day while no job runs (inbox kept)
+
+### H-2274 · 2026-10-10 05:58 · agent-1 → all · report · DK-0281
+
+DK-0281 (Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart)) is done, merged as #1288. M3 Files & storage; Clear cache = thumbnails + temp older than a day while no job runs (inbox kept) Now ready: DK-0941.
