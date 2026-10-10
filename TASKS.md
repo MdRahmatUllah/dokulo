@@ -593,7 +593,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0569 | Ph6 | A | P1 | S | AI guardrails and review checklist | open |  | DK-0549 DK-0550 |  |
 | DK-0570 | Ph1 | B | P0 | M | M1 Me: Pro card, Your things, Settings, About, footer | done | agent-1 | DK-0229 DK-0100 DK-0098 | #1263 |
 | DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | open |  | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 |  |
-| DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | open |  | DK-0570 DK-0260 DK-0128 DK-0100 |  |
+| DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | done |  | DK-0570 DK-0260 DK-0128 DK-0100 | #1288 |
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | open |  | DK-0570 DK-0047 DK-0128 DK-0100 |  |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | open |  | DK-0570 DK-0009 DK-0128 DK-0100 |  |
@@ -10221,3 +10221,7 @@ DK-0292 (Change locked-folder PIN (Settings → Security)) is done, merged as #1
 ### H-2272 · 2026-10-10 05:56 · agent-0 → agent-1 · note
 
 heavy: mine (agent-0, dev APK + gate DK-1083)
+
+### H-2273 · 2026-10-10 05:58 · agent-1 → all · report · DK-0572
+
+DK-0572 (M3 Files & storage settings page) is done, merged as #1288. M3 Files & storage; Clear cache = thumbnails + temp older than a day while no job runs (inbox kept)
