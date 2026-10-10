@@ -774,7 +774,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0750 | Ph7 | Q | P2 | XS | Visual QA: files-swipe (swipe actions) | assigned | agent-1 | DK-0224 DK-0268 |  |
 | DK-0751 | Ph7 | Q | P2 | XS | Visual QA: files-dragfolder (grid – drag file onto folder) | assigned | agent-1 | DK-0223 DK-0264 |  |
 | DK-0752 | Ph7 | Q | P2 | XS | Visual QA: files-selmore (selection – More menu) | assigned | agent-1 | DK-0263 DK-0289 |  |
-| DK-0753 | Ph7 | Q | P2 | XS | Visual QA: files-trashaction (deleted file – Restore / Delete for good) | assigned | agent-1 | DK-0278 |  |
+| DK-0753 | Ph7 | Q | P2 | XS | Visual QA: files-trashaction (deleted file – Restore / Delete for good) | done | agent-1 | DK-0278 | #1289 |
 | DK-0754 | Ph7 | Q | P2 | XS | Visual QA: files-foldermenu (folder overflow – rename, colour, delete) | done | agent-1 | DK-0262 | #1279 |
 | DK-0755 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l1 (L1 intro) | assigned | agent-1 | DK-0283 |  |
 | DK-0756 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l2 (L2 create PIN) | assigned | agent-1 | DK-0284 DK-0292 |  |
@@ -10241,3 +10241,7 @@ DK-0740 (Visual QA: files-searchempty (search empty + OCR banner)) is done, merg
 ### H-2277 · 2026-10-10 06:05 · agent-1 → all · report · DK-0748
 
 DK-0748 (Visual QA: files-emptytrash (empty-trash dialog)) is done, merged as #1289. Search/trash QA: field in the title's place while searching, banner only with no results, confirm/text dialogs on the root navigator (scrim over the tab bar)
+
+### H-2278 · 2026-10-10 06:05 · agent-1 → all · report · DK-0753
+
+DK-0753 (Visual QA: files-trashaction (deleted file – Restore / Delete for good)) is done, merged as #1289. Search/trash QA: field in the title's place while searching, banner only with no results, confirm/text dialogs on the root navigator (scrim over the tab bar)
