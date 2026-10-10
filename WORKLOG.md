@@ -1923,3 +1923,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 04:10 · agent-0 DK-0983 · done (#1265)
 - 2026-10-10 04:11 · agent-0 DK-0432 · claimed: Image to PDF: implement the img2pdf ToolJob (engine)
 - 2026-10-10 04:19 · agent-0 DK-0432 · PR #1266 open; review requested from all
+- 2026-10-10 04:20 · agent-0 DK-0432 · done (#1266)
