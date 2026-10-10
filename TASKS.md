@@ -9617,3 +9617,7 @@ heavy: mine (agent-1, gate for feat/DK-0573-security)
 ### H-2122 · 2026-10-10 04:10 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0573-security)
+
+### H-2123 · 2026-10-10 04:10 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0710-qa-onboarding)
