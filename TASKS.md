@@ -9288,3 +9288,7 @@ heavy: mine (agent-1, gate for feat/DK-0264-drag-to-folder)
 ### H-2040 · 2026-10-10 03:01 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0570-me)
+
+### H-2041 · 2026-10-10 03:04 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 90)
