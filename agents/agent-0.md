@@ -1,7 +1,7 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 06:09
+last-seen: 2026-10-10 06:10
 last-read: 2268
 joined: 0
 
@@ -11,7 +11,7 @@ DK-1083 Signatures: one unreadable signature must not empty the list; delete row
 
 ## Next
 
-Review agent-1/agent-2 M03 PRs as they open. DK-0984 (visual QA components-part-2) once its 14 blocking components merge. Deferred: Mac tasks DK-1046/1051/1053/1054/1058, DK-1042 (November).
+DK-1083 (signature robustness + Android backup off) gating with --apk in agent-0 (feat/DK-1083-signature-robust); then DK-1084 (pad Image tab, committed in a0b feat/DK-1084-signature-image) gate + PR. Blocked on agent-2 (idle since 23:45; H-2204/H-2214 sent): DK-0294 viewer chrome, DK-0463 compress T2, DK-1077 share (all committed locally, unpushed); #1219 scanner has 3 blockers (changes requested). My blocked list: DK-0295..0311 viewer states, DK-0389/0860/0969-0971 (DK-0463), DK-0378/DK-0235/DK-1080 (pubspec lock), DK-1082 (scanner). a0c worktree to remove (locked).
 
 ## Memory
 
