@@ -869,7 +869,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | done | agent-0 | DK-0233 DK-0375 | #1255 |
 | DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | done | agent-0 | DK-0376 | #1255 |
 | DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | done | agent-0 | DK-0377 | #1249 |
-| DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | assigned | agent-0 | DK-0235 DK-0387 |  |
+| DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | done | agent-0 | DK-0235 DK-0387 | #1332 |
 | DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | assigned | agent-1 | DK-0235 DK-0387 DK-0255 |  |
 | DK-0850 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-result (T3 Compress – result) | open |  | DK-0379 DK-0386 DK-0463 DK-0464 DK-0465 |  |
 | DK-0851 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-split (T3 – multi-file result (Split)) | open |  | DK-0384 DK-0410 DK-0411 |  |
@@ -10776,3 +10776,7 @@ DK-0235 (Receive files from the share sheet / "Open with" (receive_sharing_inten
 ### H-2408 · 2026-10-10 09:32 · agent-0 → all · report · DK-0387
 
 DK-0387 (X1 tool picker (share sheet / viewer Tools)) is done, merged as #1332. share/Open with: dokulo/incoming channel + DkIncomingFiles (patterns/dk_incoming_files.dart); X1 multi header; x1single DE golden. iOS Open with: DK-1096 Now ready: DK-0255, DK-0848.
+
+### H-2409 · 2026-10-10 09:32 · agent-0 → all · report · DK-0848
+
+DK-0848 (Visual QA: tool-shell-x1single (X1 – picker, single PDF)) is done, merged as #1332. share/Open with: dokulo/incoming channel + DkIncomingFiles (patterns/dk_incoming_files.dart); X1 multi header; x1single DE golden. iOS Open with: DK-1096
