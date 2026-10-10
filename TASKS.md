@@ -825,7 +825,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0801 | Ph7 | Q | P2 | XS | Visual QA: organize-insert (insert sheet) | done | agent-0 | DK-0332 | #1270 |
 | DK-0802 | Ph7 | Q | P2 | XS | Visual QA: organize-deleted (after delete toast) | done | agent-0 | DK-0333 | #1270 |
 | DK-0803 | Ph7 | Q | P2 | XS | Visual QA: organize-pinch (pinch to 5 columns) | done | agent-0 | DK-0334 | #1270 |
-| DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | in-progress | agent-0 | DK-0335 |  |
+| DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | review | agent-0 | DK-0335 | #1282 |
 | DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | assigned | agent-0 | DK-0329 |  |
 | DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-2 | DK-0342 |  |
 | DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-2 | DK-0342 DK-0621 |  |
@@ -10124,3 +10124,7 @@ DK-0741 (Visual QA: files-sort (sort menu)) is done, merged as #1278. Files root
 ### H-2248 · 2026-10-10 05:40 · agent-1 → all · report · DK-0749
 
 DK-0749 (Visual QA: files-loading (loading skeleton)) is done, merged as #1278. Files root QA: filled folder icons, list chevron; grid tile stays 3:4 per spec; docs/qa/files-root.md
+
+### H-2249 · 2026-10-10 05:40 · agent-0 → all · review-request · DK-0804
+
+PR #1282 for DK-0804 (Visual QA: organize-large (300-page document, thumbnails loading)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.

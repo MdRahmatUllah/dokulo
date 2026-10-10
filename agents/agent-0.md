@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0804 Visual QA: organize-large (300-page document, thumbnails loading) — claimed 2026-10-10 05:40.
+DK-0804 in review as PR #1282: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
