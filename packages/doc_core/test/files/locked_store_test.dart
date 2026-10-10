@@ -141,6 +141,25 @@ void main() {
     expect(await db.select(db.files).get(), hasLength(1));
   });
 
+  test('the key itself is nowhere in the vault', () async {
+    final key = await LockedCipher.newKey();
+    final own = LockedCipher(key);
+    await vault.moveIn(db, await addFile('k.pdf'), own);
+    final bytes = [
+      for (final f in vault.directory.listSync(recursive: true))
+        if (f is File) ...f.readAsBytesSync(),
+    ];
+    // No 8-byte run of the key appears in what's on disk.
+    for (var i = 0; i + 8 <= key.length; i += 8) {
+      final run = key.sublist(i, i + 8);
+      var found = false;
+      for (var j = 0; j + 8 <= bytes.length && !found; j++) {
+        found = Iterable<int>.generate(8).every((k) => bytes[j + k] == run[k]);
+      }
+      expect(found, isFalse, reason: 'key bytes $i..${i + 8}');
+    }
+  });
+
   test('the wrong key reads no list', () async {
     await vault.moveIn(db, await addFile('d.pdf'), cipher);
     final other = LockedCipher(await LockedCipher.newKey());

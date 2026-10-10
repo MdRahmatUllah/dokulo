@@ -5,6 +5,7 @@
 | DK-0982 | `00-design-system/foundations.html` | `packages/app_pdf/test/qa/design_parity_test.dart` (in the gate): the export's 27 colour variables in Light and Dark and its 9 type classes against `DkTokens` | Match, except 3 approved colour changes |
 | DK-0986 | `00-design-system/motion.html` | The same test: the legend's durations (fast, standard, emphasis, reduced, capture flash) and the three easing curves | Match, except 2 approved curve changes |
 | DK-0985, DK-0988..DK-1007 | `00-design-system/illustrations/` | `tools/qa_illustrations.py`, see [illustrations/](illustrations/README.md) | 40/40 match |
+| DK-0983 | `00-design-system/components.html` (Light, Dark; 1440 × 2800) | Each of the frame's 12 panels next to the device screenshots of its catalogue entries (`tools/device_checks/catalogue_shots.py` on emulator-5554, real fonts), in [components/](components/) | 5 deviations fixed, 6 approved, below |
 | DK-0984 | `00-design-system/components-part-2.html` (Light, Dark; 1440 wide) | Side by side with the catalogue entries' goldens (layout, colour, spacing) and the code (type tokens, copy); `tools/device_checks/catalogue_shots.py` screenshots the same entries on a device with real fonts | 6 deviations fixed (DK-1072), 3 approved, below |
 | DK-0980 | `26-global-states/global-states.html` (Light, Dark; 1440 × 1700) | A QA board in the gate, `packages/app_pdf/test/qa/global_states_test.dart`: the frame's regions built from the real empty states, toasts, banners, error catalogue and skeleton, side by side with the frame's screenshots; the copy, icons and actions checked as values | 2 deviations fixed, 6 approved, below |
 | DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
@@ -14,6 +15,58 @@ The approved changes (the test lists them in `approved`, so a new difference fai
 
 - `color.success` (light) #117A4B, and `color.outlineStrong` #828C9B light / #666E7B dark: WCAG contrast fixes in PR #1116. The UI spec and Overview & foundations agree; the export predates them.
 - `motion.fast` uses `Curves.easeOut` and `motion.standard` uses `Curves.easeInOutCubic`, as Overview & foundations names them. The export's CSS has other `cubic-bezier`s: `0,0,.2,1` decelerates harder than CSS's own `ease-out` (`0,0,.58,1`, which is `Curves.easeOut`), up to 0.20 in value; `.65,0,.35,1` is within 0.025. Docs win; the test bounds both gaps.
+
+## Components (DK-0983)
+
+Every panel of the frame has its components in code and in the catalogue
+(the §11 coverage is in `docs/design-library.md`). Each panel was put next
+to the device screenshots of its entries, in both themes:
+[components/](components/) holds the frame (`components-light.png`,
+`components-dark.png`) and one image per panel, `<panel>-<theme>.png`, the
+frame's panel on the left. Order, tokens and copy match, except:
+
+Fixed:
+
+- C1. DkModelCard's quality pill is tinted as every frame draws it:
+  "Best quality" `color.successContainer` / `color.success` (`best: true`),
+  "Fast" and "Small" `color.primaryContainer` / `color.onPrimaryContainer`;
+  it was grey for all. The catalogue's first card is Gemma 4 E2B.
+- C2. A DkToolStrip item is at least 56 wide and grows to its label: with
+  real fonts "Highlight" (and "Textmarker") was cut to "Highligh…". The
+  strip scrolls, so a label is never cut.
+- C3. DkLevelCards' title is `type.labelM` on one line, as every frame
+  draws it (`.l-m`, nowrap): in `type.titleS` "Recommended" broke mid-word
+  ("Recomm / ended") in a third of a 393 dp phone. The UI spec §11.2 says
+  so now.
+- C4. The selected DkLevelCard's check sits on the card's top-right corner
+  (−9 / −9, a 2 dp `color.surface` ring), as the export's `.lv .ck`; it
+  took 24 dp from the title.
+- C5. DkFolderCard's folder glyph is filled, as every frame draws it
+  (`FILL 1`); it was outlined. §11.2 says "filled".
+
+Also fixed, in the screenshot tool: `catalogue_shots_test.dart` pumps twice
+before each shot. MaterialApp's theme blends in from the last entry's
+theme, and an implicit animation (DkIconButton's tonal fill, DkSegmented's
+thumb) started from that blend: the first shots showed a dark navy tonal
+button in Light.
+
+Approved (the UI spec decides; the frame is a sketch there):
+
+- DkModelCard's Download is a compact secondary button on the right
+  (§11.2 "Action"); the frame shows a text link under the progress bar,
+  mixing the available and downloading states in one card.
+- DkContinueCard and DkProCard have a close × (§11.2: "close × top-right
+  (dismiss)"); the frame leaves it out. The Me tab's Pro card has none
+  (§ Me, "no close button here").
+- The tool tile's Pro badge is `DkProBadge` small, top-right of the icon
+  container (§11.2); the frame draws a medal over the icon.
+- The tool strip has Undo and Redo as icon buttons after a divider at the
+  far right (§11.8: "Undo/Redo at the far right separated by a divider");
+  the frame draws Undo as a sixth labelled tool.
+- The camera top bar's flash shows its mode under the icon (S1: "icon +
+  tiny label"); the frame shows only the crossed-out flash.
+- The skeleton panel's spinner on a `color.primary` square is the
+  catalogue's on-primary sample, not a layout.
 
 ## Components, part 2 (DK-0984)
 

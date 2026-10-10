@@ -136,8 +136,11 @@ class _StripButtonState extends State<_StripButton> {
           borderRadius: BorderRadius.circular(t.radius.m),
           overlayColor: WidgetStatePropertyAll(t.state.pressed),
           splashFactory: NoSplash.splashFactory,
-          child: SizedBox(
-            width: 56,
+          // At least 56, wider for a long label ("Highlight",
+          // "Textmarker"): the strip scrolls, so a label is never cut.
+          child: Container(
+            constraints: const BoxConstraints(minWidth: 56),
+            padding: EdgeInsets.symmetric(horizontal: t.space.xs),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: t.space.xxs,
@@ -161,7 +164,6 @@ class _StripButtonState extends State<_StripButton> {
                     color: on ? c.primary : c.textSecondary,
                   ),
                   maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

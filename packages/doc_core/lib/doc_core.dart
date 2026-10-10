@@ -24,6 +24,7 @@ export 'src/pdf/pdf_annotations.dart';
 export 'src/pdf/page_edit.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/id_card_page.dart';
+export 'src/pdf/images_pdf.dart';
 export 'src/pdf/pdf_forms.dart';
 export 'src/pdf/compress/raster_fallback.dart';
 export 'src/pdf/compress/size_target.dart';
