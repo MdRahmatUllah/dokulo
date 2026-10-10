@@ -9276,3 +9276,7 @@ DK-0291 (Security tests for the locked folder) is done, merged as #1260. F2 cont
 ### H-2037 · 2026-10-10 03:01 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0264-drag-to-folder)
+
+### H-2038 · 2026-10-10 03:01 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0570-me)
