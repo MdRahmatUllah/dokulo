@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1080 X2 failure: Skip this page and Send report by email — claimed 2026-10-10 07:16.
 
 ## Next
 
