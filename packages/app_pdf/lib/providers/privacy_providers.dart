@@ -1,16 +1,22 @@
 import 'package:flutter/services.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'prefs_providers.dart';
+
 part 'privacy_providers.g.dart';
 
-/// Settings → Security → Hide previews (UI spec §23.3). Kept alive; M3
-/// persists it.
+/// Settings → Security → Hide previews (UI spec §23.3; DK-0573): on by
+/// default, kept in [Prefs].
 @Riverpod(keepAlive: true)
 class HidePreviews extends _$HidePreviews {
   @override
-  bool build() => false;
+  bool build() =>
+      ref.watch(prefsProvider).value?['security.hidePreviews'] != false;
 
-  void set(bool on) => state = on;
+  void set(bool on) {
+    state = on;
+    ref.read(prefsProvider.notifier).set('security.hidePreviews', on);
+  }
 }
 
 /// How many screens with locked-folder content are open (F2 and what it

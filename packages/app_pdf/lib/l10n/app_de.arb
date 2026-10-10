@@ -573,5 +573,22 @@
   "t3_save_elsewhere": "Außerhalb von Dokulo speichern…",
   "viewer_outline_title": "Inhalt",
   "viewer_outline_empty": "Diese PDF hat kein Inhaltsverzeichnis.",
-  "files_drop_hint": "Auf „{folder}“ ablegen zum Verschieben"
+  "files_drop_hint": "Auf „{folder}“ ablegen zum Verschieben",
+  "security_app_lock": "App-Sperre",
+  "security_needs_pin": "Lege zuerst eine PIN für den geschützten Ordner fest.",
+  "security_bio_face": "Face ID",
+  "security_bio_touch": "Touch ID",
+  "security_bio_fingerprint": "Fingerabdruck",
+  "security_lock_after": "Sperren nach",
+  "security_after_now": "Sofort",
+  "security_after_1min": "1 Min.",
+  "security_after_5min": "5 Min.",
+  "security_hide_previews": "Vorschau im App-Umschalter ausblenden",
+  "security_change_pin": "PIN des geschützten Ordners ändern",
+  "security_current_pin": "Gib deine aktuelle PIN ein",
+  "security_pin_changed": "PIN geändert",
+  "app_lock_title": "Dokulo ist gesperrt",
+  "app_lock_reason": "Dokulo entsperren",
+  "security_app_lock_body": "Beim Öffnen von Dokulo nach {method} oder PIN fragen",
+  "security_unlock_with": "Mit {method} entsperren"
 }

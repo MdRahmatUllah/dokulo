@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app_pdf/components/dk_promo_cards.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
+import 'package:app_pdf/screens/settings/security_settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -60,8 +61,7 @@ void main() {
     await pumpAt(tester, Routes.me);
     await tester.tap(find.text('Security'));
     await tester.pumpAndSettle();
-    // M3 is a placeholder until its pages land (DK-0573, ...).
-    expect(find.text('M3 security'), findsOneWidget);
+    expect(find.byType(SecuritySettingsScreen), findsOneWidget);
   });
 
   test("the footer's version is pubspec's", () {
