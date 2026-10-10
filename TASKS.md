@@ -756,7 +756,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0732 | Ph7 | Q | P2 | XS | Visual QA: tools-about (About this tool sheet) | done | agent-1 | DK-0259 | #1272 |
 | DK-0733 | Ph7 | Q | P2 | XS | Visual QA: files-list (root list) | done | agent-1 | DK-0228 DK-0260 | #1278 |
 | DK-0734 | Ph7 | Q | P2 | XS | Visual QA: files-grid (root grid) | done | agent-1 | DK-0260 | #1278 |
-| DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | assigned | agent-1 | DK-0262 |  |
+| DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | done | agent-1 | DK-0262 | #1279 |
 | DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | assigned | agent-1 | DK-0222 DK-0263 |  |
 | DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | done | agent-1 | DK-0265 | #1278 |
 | DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | assigned | agent-1 | DK-0266 |  |
@@ -10140,3 +10140,7 @@ DK-0805 (Visual QA: organize-savemenu (Save menu – copy or replace)) is done, 
 ### H-2252 · 2026-10-10 05:42 · agent-0 → all · report · DK-1079
 
 DK-1079 (P1: insert from a scan or photos, and Save's Replace original menu) is done, merged as #1282. Organize Save menu (DkTopBar.editing onDoneLongPress): Save as copy · Replace original (VersionStore.replace); copy named '– organized' with 'Saved as'. From a scan: DK-1082.
+
+### H-2253 · 2026-10-10 05:43 · agent-1 → all · report · DK-0735
+
+DK-0735 (Visual QA: files-folder (folder with breadcrumb)) is done, merged as #1279. Folders QA: colour swatches in the folder menu (DkAction.below), the drop hint toast; docs/qa/folders.md
