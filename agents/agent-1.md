@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-10 08:48
+last-seen: 2026-10-10 08:50
 last-read: 2333
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1081 Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) — claimed 2026-10-10 08:50.
 
 ## Next
 
