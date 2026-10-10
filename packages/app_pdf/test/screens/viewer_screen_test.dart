@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:app_pdf/components/dk_pdf_canvas.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -254,6 +255,54 @@ void main() {
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/viewer_damaged_$theme.png'),
       );
+    });
+  }
+
+  testWidgets('night mode (DK-1089): the pages through the night filter on '
+      'the night canvas', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(
+      tester,
+      db,
+      fixture('Mietvertrag Musterstraße 12.pdf'),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appDatabaseProvider.overrideWithValue(db),
+          prefsProvider.overrideWith(
+            () => Prefs.memory({viewerNightKey: true}),
+          ),
+        ],
+        child: app(ViewerScreen(fileId: id)),
+      ),
+    );
+    await settle(tester);
+    expect(find.byType(ColorFiltered), findsOneWidget);
+    expect(tester.widget<DkPdfCanvas>(find.byType(DkPdfCanvas)).night, isTrue);
+  });
+
+  for (final (name, expected) in [
+    ('form-acroform.pdf', true),
+    ('Invoice INV-2026-014.pdf', false),
+  ]) {
+    testWidgets('form banner (DK-1090) on $name: $expected', (tester) async {
+      final db = DokuloDatabase.memory();
+      addTearDown(db.close);
+      final id = await addFile(tester, db, fixture(name));
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          child: app(ViewerScreen(fileId: id)),
+        ),
+      );
+      await settle(tester);
+      expect(
+        find.text('This PDF has fillable fields.'),
+        expected ? findsOneWidget : findsNothing,
+      );
+      if (expected) expect(find.text('Fill form'), findsOneWidget);
     });
   }
 }

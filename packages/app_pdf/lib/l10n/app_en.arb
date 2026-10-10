@@ -2432,5 +2432,9 @@
   "viewer_damaged_body": "It may be damaged.",
   "@viewer_damaged_body": {"description": "V1 Damaged file, under the title (§17.1; DK-0305)."},
   "viewer_unlocked": "Unlocked for viewing",
-  "@viewer_unlocked": {"description": "V1 After unlock toast, with 'Remove password' (§17.1; DK-0303)."}
+  "@viewer_unlocked": {"description": "V1 After unlock toast, with 'Remove password' (§17.1; DK-0303)."},
+  "viewer_form_banner": "This PDF has fillable fields.",
+  "@viewer_form_banner": {"description": "V1 Form detected banner (UI spec §17.1; DK-1090)."},
+  "viewer_form_fill": "Fill form",
+  "@viewer_form_fill": {"description": "V1 Form detected banner's action."}
 }
