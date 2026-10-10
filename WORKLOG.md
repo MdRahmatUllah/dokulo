@@ -1934,3 +1934,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 04:43 · agent-0 DK-0799 · claimed: Visual QA: organize-drag (page lifted mid-drag)
 - 2026-10-10 04:44 · agent-0 DK-1082 · added: Organize: Insert from a scan (the scanner's pages into P1)
 - 2026-10-10 04:55 · agent-0 DK-0799 · PR #1270 open; review requested from all
+- 2026-10-10 04:55 · agent-0 DK-0799 · done (#1270)
