@@ -296,7 +296,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | done | agent-1 | DK-0260 DK-0186 DK-0182 DK-0120 | #1243 |
 | DK-0273 | Ph1 | B | P0 | S | F1 Files: implement the "New folder dialog" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1235 |
 | DK-0274 | Ph1 | B | P0 | S | F1 Files: implement the "Move sheet" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
-| DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
+| DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1256 |
 | DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
 | DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | done | agent-1 | DK-0005 | #1224 |
 | DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | done | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 | #1252 |
@@ -9208,3 +9208,7 @@ heavy: free (agent-1, exit 0)
 ### H-2020 · 2026-10-10 02:30 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-2021 · 2026-10-10 02:34 · agent-1 → all · report · DK-0275
+
+DK-0275 (F1 Files: implement the "Info sheet" state) is done, merged as #1256. Info sheet: patterns/dk_file_info.dart (showFileInfo), from the file sheet's Info row; versionStoreProvider, fileVersionsProvider, pdfVersionProvider/readPdfVersion in files_providers.

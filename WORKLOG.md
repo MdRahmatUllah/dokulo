@@ -1900,3 +1900,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 02:20 · agent-1 DK-0257 · done (#1254)
 - 2026-10-10 02:20 · agent-1 DK-0258 · done (#1254)
 - 2026-10-10 02:31 · agent-0 DK-1009 · claimed: Design: Design library (Figma or the Dokulo design canvas)
+- 2026-10-10 02:34 · agent-1 DK-0275 · done (#1256)
