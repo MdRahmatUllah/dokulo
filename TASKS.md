@@ -9392,3 +9392,7 @@ heavy: free (agent-1, exit 0)
 ### H-2066 · 2026-10-10 03:36 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-2067 · 2026-10-10 03:36 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, app_pdf tests for DK-0983)
