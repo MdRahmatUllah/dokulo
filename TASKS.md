@@ -750,7 +750,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0726 | Ph7 | Q | P2 | XS | Visual QA: home-scanmenu (Scan button long-press modes) | assigned | agent-1 | DK-0229 DK-0230 |  |
 | DK-0727 | Ph7 | Q | P2 | XS | Visual QA: home-rating (rating prompt (system)) | assigned | agent-1 | DK-0253 |  |
 | DK-0728 | Ph7 | Q | P2 | XS | Visual QA: tools-default (default) | done | agent-1 | DK-0049 DK-0256 | #1272 |
-| DK-0729 | Ph7 | Q | P2 | XS | Visual QA: tools-chip (scrolled, Security selected) | assigned | agent-1 | DK-0256 |  |
+| DK-0729 | Ph7 | Q | P2 | XS | Visual QA: tools-chip (scrolled, Security selected) | done | agent-1 | DK-0256 | #1272 |
 | DK-0730 | Ph7 | Q | P2 | XS | Visual QA: tools-search (search results (synonym)) | assigned | agent-1 | DK-0257 |  |
 | DK-0731 | Ph7 | Q | P2 | XS | Visual QA: tools-searchempty (search, no result) | assigned | agent-1 | DK-0258 |  |
 | DK-0732 | Ph7 | Q | P2 | XS | Visual QA: tools-about (About this tool sheet) | assigned | agent-1 | DK-0259 |  |
@@ -10052,3 +10052,7 @@ DK-0714 (Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE)) is done, 
 ### H-2230 · 2026-10-10 05:31 · agent-1 → all · report · DK-0728
 
 DK-0728 (Visual QA: tools-default (default)) is done, merged as #1272. Tools QA: count at the end, search in the title's place, About as a text action; docs/qa/tools.md
+
+### H-2231 · 2026-10-10 05:31 · agent-1 → all · report · DK-0729
+
+DK-0729 (Visual QA: tools-chip (scrolled, Security selected)) is done, merged as #1272. Tools QA: count at the end, search in the title's place, About as a text action; docs/qa/tools.md
