@@ -35,6 +35,8 @@ import '../../providers/prefs_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_folder_tags.dart';
 import '../../theme/dk_tokens.dart';
+import '../../patterns/dk_selection.dart';
+import '../../components/dk_bottom_bars.dart';
 import 'file_preview_pane.dart';
 
 /// F1 · Files, the root (DK-0260; UI spec §16.1): the large top bar with the
@@ -77,120 +79,159 @@ class FilesScreen extends ConsumerWidget {
     // A large tablet: the list (360) and the preview pane (DK-0279, §30).
     final wide = MediaQuery.sizeOf(context).width >= _twoPaneFrom;
     final grid = view.grid && !wide;
+    final selection = ref.watch(filesSelectionProvider);
+    final all = [...favourites, ...?files.value];
 
-    final list = Scaffold(
-      backgroundColor: t.color.background,
-      body: DkRefresh(
-        onRefresh: () async {
-          final store = await ref.read(fileStoreProvider.future);
-          await store.reconcile(ref.read(appDatabaseProvider));
-        },
-        child: CustomScrollView(
-          slivers: [
-            // Searching, the field moves up in the title's place (the
-            // files-search frame; §16.2 "Search field focused at top").
-            if (query.isNotEmpty)
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: MediaQuery.paddingOf(context).top + t.space.xl,
-                ),
-              )
-            else
-              DkLargeTopBar(
-                title: l.shell_tab_files,
-                actions: [
-                  if (!wide)
-                    DkTopBarAction(
-                      icon: view.grid ? DkIcons.listView : DkIcons.gridView,
-                      tooltip: view.grid
-                          ? l.files_list_view
-                          : l.files_grid_view,
-                      onPressed: () => prefs.set('files.grid', !view.grid),
+    final list = DkSelectionScaffold<int>(
+      selection: selection,
+      all: () => all.map((f) => f.id).toSet(),
+      appBar: const PreferredSize(
+        preferredSize: Size.zero,
+        child: SizedBox.shrink(),
+      ),
+      actions: (ids) => _selectionActions(context, ref, selection, [
+        for (final id in ids) ?all.where((f) => f.id == id).firstOrNull,
+      ]),
+      body: ListenableBuilder(
+        listenable: selection,
+        builder: (context, _) => DkRefresh(
+          onRefresh: () async {
+            final store = await ref.read(fileStoreProvider.future);
+            await store.reconcile(ref.read(appDatabaseProvider));
+          },
+          child: CustomScrollView(
+            slivers: [
+              // Selecting, "3 selected" is on top (DkSelectionScaffold); the
+              // title, its actions and search step aside (files-select).
+              if (selection.active)
+                const SliverToBoxAdapter(child: SizedBox.shrink())
+              // Searching, the field moves up in the title's place (the
+              // files-search frame; §16.2 "Search field focused at top").
+              else if (query.isNotEmpty)
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: MediaQuery.paddingOf(context).top + t.space.xl,
+                  ),
+                )
+              else
+                DkLargeTopBar(
+                  title: l.shell_tab_files,
+                  actions: [
+                    if (!wide)
+                      DkTopBarAction(
+                        icon: view.grid ? DkIcons.listView : DkIcons.gridView,
+                        tooltip: view.grid
+                            ? l.files_list_view
+                            : l.files_grid_view,
+                        onPressed: () => prefs.set('files.grid', !view.grid),
+                      ),
+                    DkTopBarAction.menu(
+                      icon: DkIcons.sort,
+                      tooltip: l.files_sort,
+                      onMenu: (anchor) => _sortMenu(anchor, l, view, prefs),
                     ),
-                  DkTopBarAction.menu(
-                    icon: DkIcons.sort,
-                    tooltip: l.files_sort,
-                    onMenu: (anchor) => _sortMenu(anchor, l, view, prefs),
-                  ),
-                  DkTopBarAction(
-                    icon: DkIcons.newFolder,
-                    tooltip: l.files_new_folder,
-                    onPressed: () => newFolder(context, ref),
-                  ),
-                ],
-              ),
-            SliverPadding(
-              padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, t.space.s),
-              sliver: SliverToBoxAdapter(
-                child: _SearchBar(
-                  // Home's search action opens F1 with the field focused.
-                  autofocus:
-                      GoRouterState.of(context).uri.queryParameters['search'] ==
-                      '1',
+                    DkTopBarAction(
+                      icon: DkIcons.newFolder,
+                      tooltip: l.files_new_folder,
+                      onPressed: () => newFolder(context, ref),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-            if (query.isNotEmpty)
-              _SearchResults(query)
-            else ...[
-              SliverPadding(
-                padding: EdgeInsets.fromLTRB(
-                  t.space.l,
-                  t.space.s,
-                  t.space.l,
-                  0,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: DkSettingsGroup(
-                    children: [
-                      DkSettingsRow(
-                        icon: DkIcons.lockedFolder,
-                        title: l.files_locked_folder,
-                        onTap: () => context.push(Routes.lockedFolder),
-                      ),
-                      DkSettingsRow(
-                        icon: DkIcons.trash,
-                        title: l.files_recently_deleted,
-                        value: trash > 0 ? '$trash' : null,
-                        onTap: () => context.push(Routes.trash),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              if (loading)
+              if (!selection.active)
                 SliverPadding(
-                  padding: EdgeInsets.only(top: t.space.xl),
-                  sliver: SliverToBoxAdapter(child: DkSkeleton.fileRows()),
-                )
-              else if (empty)
-                SliverFillRemaining(
-                  hasScrollBody:
-                      true, // DkEmptyState centres and scrolls itself
-                  child: DkEmptyStates.filesRoot(
-                    context,
-                    onScan: () => context.push(Routes.scan),
-                    onOpenFile: () => openFileFromDevice(context, ref),
+                  padding: EdgeInsets.fromLTRB(
+                    t.space.l,
+                    0,
+                    t.space.l,
+                    t.space.s,
                   ),
-                )
+                  sliver: SliverToBoxAdapter(
+                    child: _SearchBar(
+                      // Home's search action opens F1 with the field focused.
+                      autofocus:
+                          GoRouterState.of(context)
+                              .uri
+                              .queryParameters['search'] ==
+                          '1',
+                    ),
+                  ),
+                ),
+              if (query.isNotEmpty)
+                _SearchResults(query)
               else ...[
-                // Favourites float to the top (DK-0280).
-                if (favourites.isNotEmpty) ...[
-                  _Header(l.files_favourites),
-                  _FileList(files: favourites, grid: grid),
+                SliverPadding(
+                  padding: EdgeInsets.fromLTRB(
+                    t.space.l,
+                    t.space.s,
+                    t.space.l,
+                    0,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: DkSettingsGroup(
+                      children: [
+                        DkSettingsRow(
+                          icon: DkIcons.lockedFolder,
+                          title: l.files_locked_folder,
+                          onTap: () => context.push(Routes.lockedFolder),
+                        ),
+                        DkSettingsRow(
+                          icon: DkIcons.trash,
+                          title: l.files_recently_deleted,
+                          value: trash > 0 ? '$trash' : null,
+                          onTap: () => context.push(Routes.trash),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (loading)
+                  SliverPadding(
+                    padding: EdgeInsets.only(top: t.space.xl),
+                    sliver: SliverToBoxAdapter(child: DkSkeleton.fileRows()),
+                  )
+                else if (empty)
+                  SliverFillRemaining(
+                    hasScrollBody:
+                        true, // DkEmptyState centres and scrolls itself
+                    child: DkEmptyStates.filesRoot(
+                      context,
+                      onScan: () => context.push(Routes.scan),
+                      onOpenFile: () => openFileFromDevice(context, ref),
+                    ),
+                  )
+                else ...[
+                  // Favourites float to the top (DK-0280).
+                  if (favourites.isNotEmpty) ...[
+                    _Header(l.files_favourites),
+                    _FileList(
+                      files: favourites,
+                      grid: grid,
+                      selection: selection,
+                    ),
+                  ],
+                  if (folders.value!.isNotEmpty) ...[
+                    _Header(l.files_folders),
+                    _FolderList(folders: folders.value!, grid: grid),
+                  ],
+                  if (files.value!.isNotEmpty) ...[
+                    // Select starts selection mode too (files-select).
+                    _Header(
+                      l.files_files,
+                      action: selection.active
+                          ? null
+                          : (l.common_select, selection.enter),
+                    ),
+                    _FileList(
+                      files: files.value!,
+                      grid: grid,
+                      selection: selection,
+                    ),
+                  ],
+                  SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
                 ],
-                if (folders.value!.isNotEmpty) ...[
-                  _Header(l.files_folders),
-                  _FolderList(folders: folders.value!, grid: grid),
-                ],
-                if (files.value!.isNotEmpty) ...[
-                  _Header(l.files_files),
-                  _FileList(files: files.value!, grid: grid),
-                ],
-                SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
               ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -267,10 +308,13 @@ Future<void> newFolder(
 /// A section header ("Folders", "Files"): `titleS`, 24 above, 8 below;
 /// [trailing] on the right ("4 files" in a folder).
 class _Header extends StatelessWidget {
-  const _Header(this.text, {this.trailing, this.top});
+  const _Header(this.text, {this.trailing, this.top, this.action});
   final String text;
   final String? trailing;
   final double? top;
+
+  /// A text action at the end ("Select").
+  final (String, VoidCallback)? action;
 
   @override
   Widget build(BuildContext context) {
@@ -299,6 +343,8 @@ class _Header extends StatelessWidget {
                 trailing!,
                 style: t.text.caption.copyWith(color: t.color.textSecondary),
               ),
+            if (action case (final label, final onTap))
+              DkTextAction(label: label, onTap: onTap),
           ],
         ),
       ),
@@ -641,14 +687,15 @@ class _FolderList extends ConsumerWidget {
 }
 
 class _FileList extends StatelessWidget {
-  const _FileList({required this.files, required this.grid});
+  const _FileList({required this.files, required this.grid, this.selection});
 
   final List<FileEntry> files;
   final bool grid;
+  final DkSelection<int>? selection;
 
   @override
   Widget build(BuildContext context) => _rows(files.length, (i) {
-    final card = FileEntryCard(files[i], grid: grid);
+    final card = FileEntryCard(files[i], grid: grid, selection: selection);
     if (!grid) return card;
     // Grid: long-press and drag onto a folder card (DK-0264).
     return LayoutBuilder(
@@ -676,7 +723,12 @@ class FileEntryCard extends ConsumerWidget {
     this.longPressActions = false,
     this.nameMatch,
     this.hit,
+    this.selection,
   });
+
+  /// F1's selection mode (DK-0263): a long press in the list starts it, a
+  /// tap then toggles the file.
+  final DkSelection<int>? selection;
 
   final bool longPressActions;
 
@@ -704,11 +756,15 @@ class FileEntryCard extends ConsumerWidget {
 
     // A large tablet's list: a tap selects for the preview pane (DK-0279).
     final pane = grid ? null : FilesPane.maybeOf(context);
-    Widget card([
+    Widget card({
       Map<CustomSemanticsAction, VoidCallback>? actions,
-    ]) => DkFileCard(
+      bool? selected,
+      VoidCallback? onTap,
+      VoidCallback? onLongPress,
+    }) => DkFileCard(
       name: file.name,
       semanticsActions: actions,
+      selected: selected,
       // A text hit's meta leaves the date out: the sentence says more.
       meta: hit == null
           ? fileMeta(file, l, locale)
@@ -749,26 +805,53 @@ class FileEntryCard extends ConsumerWidget {
         AsyncError() => ColoredBox(color: context.tokens.color.pageWhite),
         _ => null,
       },
-      onTap: pane == null
-          ? () => open(page: hit?.page)
-          : () => pane.onSelect(file),
+      onTap:
+          onTap ??
+          (pane == null
+              ? () => open(page: hit?.page)
+              : () => pane.onSelect(file)),
       onMore: () => showFileActions(context, ref, file),
       // Home: a long-press opens the same sheet (§15.1); F1's long-press
       // selects (DK-0263).
-      onLongPress: longPressActions
-          ? () => showFileActions(context, ref, file)
-          : null,
+      onLongPress:
+          onLongPress ??
+          (longPressActions ? () => showFileActions(context, ref, file) : null),
     );
     // A list row swipes left to Share and Delete (DK-0268, Home's recents
     // DK-0243; §12.3); a search hit and the tablet's pane don't.
-    if (!grid && pane == null && hit == null) {
-      return DkSwipeActions(
-        // ponytail: Share waits for share_plus (DK-1077), as elsewhere.
-        onShare: null,
-        onDelete: () => deleteFiles(context, ref, [file]),
-        builder: (context, actions) => card(actions),
+    final swipes = !grid && pane == null && hit == null;
+    Widget swiping({
+      Map<CustomSemanticsAction, VoidCallback>? also,
+      VoidCallback? onLongPress,
+    }) => DkSwipeActions(
+      // ponytail: Share waits for share_plus (DK-1077), as elsewhere.
+      onShare: null,
+      onDelete: () => deleteFiles(context, ref, [file]),
+      builder: (context, actions) =>
+          card(actions: {...actions, ...?also}, onLongPress: onLongPress),
+    );
+    final selection = this.selection;
+    if (selection != null && pane == null && hit == null) {
+      return DkSelectable<int>(
+        selection: selection,
+        item: file.id,
+        onOpen: open,
+        builder: (context, s) {
+          // Grid: the long press drags the file to a folder (DK-0264).
+          final longPress = grid ? null : s.onLongPress;
+          if (swipes && !s.selecting) {
+            return swiping(also: s.actions, onLongPress: longPress);
+          }
+          return card(
+            actions: s.actions,
+            selected: s.selecting ? s.selected : null,
+            onTap: s.onTap,
+            onLongPress: s.selecting ? null : longPress,
+          );
+        },
       );
     }
+    if (swipes) return swiping();
     if (pane == null || pane.selected != file.id) return card();
     return Semantics(
       selected: true,
@@ -779,6 +862,128 @@ class FileEntryCard extends ConsumerWidget {
     );
   }
 }
+
+/// The selection bar (DK-0263; UI spec §16.1): Share (off until share_plus),
+/// Move, Merge (2 PDFs or more, in the order they were selected), Compress,
+/// More (Move to locked folder, Duplicate, Run a tool…, Delete). Each action
+/// ends selection mode.
+List<DkBarAction> _selectionActions(
+  BuildContext context,
+  WidgetRef ref,
+  DkSelection<int> selection,
+  List<FileEntry> files,
+) {
+  final l = AppLocalizations.of(context);
+  final ids = [for (final f in files) '${f.id}'];
+  final pdfs = files.where((f) => f.path.toLowerCase().endsWith('.pdf'));
+  void done(void Function() action) {
+    selection.exit();
+    action();
+  }
+
+  return [
+    // ponytail: Share waits for share_plus (DK-1077), as elsewhere.
+    DkBarAction(
+      icon: DkIcons.share(context),
+      label: l.common_share,
+      onPressed: null,
+    ),
+    DkBarAction(
+      icon: DkIcons.move,
+      label: l.common_move,
+      onPressed: files.isEmpty
+          ? null
+          : () => done(() => moveFiles(context, ref, files)),
+    ),
+    DkBarAction(
+      icon: DkIcons.tool('merge'),
+      label: l.files_sel_merge,
+      onPressed: pdfs.length < 2
+          ? null
+          : () => done(() => context.push(Routes.tool('merge', files: ids))),
+    ),
+    DkBarAction(
+      icon: DkIcons.tool('compress'),
+      label: l.files_sel_compress,
+      onPressed: files.isEmpty
+          ? null
+          : () => done(() => context.push(Routes.tool('compress', files: ids))),
+    ),
+    DkBarAction.menu(
+      icon: DkIcons.overflow(context),
+      label: l.files_sel_more,
+      // Over the button, as files-selmore.
+      onMenu: (anchor) =>
+          _selectionMore(context, anchor, ref, selection, files),
+    ),
+  ];
+}
+
+/// The More menu, over its button ([anchor]); its actions use the screen's
+/// [context], as selection mode ends and the bar with the anchor goes.
+Future<void> _selectionMore(
+  BuildContext context,
+  BuildContext anchor,
+  WidgetRef ref,
+  DkSelection<int> selection,
+  List<FileEntry> files,
+) {
+  final l = AppLocalizations.of(context);
+  void done(void Function() action) {
+    selection.exit();
+    action();
+  }
+
+  return showDkMenu(
+    anchor,
+    groups: [
+      [
+        DkAction(
+          icon: DkIcons.lockedFolder,
+          label: l.file_move_to_locked,
+          // Not set up yet: F2 runs the setup first (flow 6).
+          onTap: () => done(
+            () => context.push(
+              Routes.lockedFolder,
+              extra: [for (final f in files) f.id],
+            ),
+          ),
+        ),
+        DkAction(
+          icon: DkIcons.duplicate,
+          label: l.common_duplicate,
+          onTap: () => done(() async {
+            for (final f in files) {
+              await duplicateFile(context, ref, f);
+            }
+          }),
+        ),
+        // ponytail: X1 is agent-0's DK-0387; until it lands, the Tools
+        // tab, as the file sheet's "All tools…".
+        DkAction(
+          icon: DkIcons.toolsTab,
+          label: l.files_run_tool,
+          onTap: () => done(() => context.go(Routes.tools)),
+        ),
+      ],
+      [
+        DkAction(
+          icon: DkIcons.delete,
+          label: l.common_delete,
+          destructive: true,
+          onTap: () => done(() => deleteFiles(context, ref, files)),
+        ),
+      ],
+    ],
+  );
+}
+
+/// F1's selection (DK-0263), while F1 is on screen.
+final filesSelectionProvider = Provider.autoDispose<DkSelection<int>>((ref) {
+  final selection = DkSelection<int>();
+  ref.onDispose(selection.dispose);
+  return selection;
+});
 
 /// From this width F1 is two panes (UI spec §30, Expanded).
 const _twoPaneFrom = 840.0;

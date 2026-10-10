@@ -2436,5 +2436,21 @@
   "viewer_form_banner": "This PDF has fillable fields.",
   "@viewer_form_banner": {"description": "V1 Form detected banner (UI spec §17.1; DK-1090)."},
   "viewer_form_fill": "Fill form",
-  "@viewer_form_fill": {"description": "V1 Form detected banner's action."}
+  "@viewer_form_fill": {"description": "V1 Form detected banner's action."},
+  "files_sel_merge": "Merge",
+  "@files_sel_merge": {
+    "description": "F1 selection bar (DK-0263): opens Merge PDF with the selected files."
+  },
+  "files_sel_compress": "Compress",
+  "@files_sel_compress": {
+    "description": "F1 selection bar: opens Compress PDF with the selected files."
+  },
+  "files_sel_more": "More",
+  "@files_sel_more": {
+    "description": "F1 selection bar: the menu with more actions."
+  },
+  "files_run_tool": "Run a tool…",
+  "@files_run_tool": {
+    "description": "F1 selection bar's More menu: pick a tool for the selected files."
+  }
 }

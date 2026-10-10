@@ -615,5 +615,9 @@
   "viewer_damaged_body": "Sie ist möglicherweise beschädigt.",
   "viewer_unlocked": "Zum Ansehen entsperrt",
   "viewer_form_banner": "Diese PDF hat ausfüllbare Felder.",
-  "viewer_form_fill": "Formular ausfüllen"
+  "viewer_form_fill": "Formular ausfüllen",
+  "files_sel_merge": "Zusammenfügen",
+  "files_sel_compress": "Verkleinern",
+  "files_sel_more": "Mehr",
+  "files_run_tool": "Werkzeug ausführen…"
 }
