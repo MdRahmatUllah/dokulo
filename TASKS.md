@@ -1105,7 +1105,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | open |  | DK-0432 |  |
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | done | agent-0 | DK-0325 | #1291 |
-| DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | review | agent-0 | DK-0327 | #1293 |
+| DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
 
 ## Locks
@@ -10325,3 +10325,7 @@ heavy: free (agent-0)
 ### H-2298 · 2026-10-10 06:33 · agent-0 → all · review-request · DK-1084
 
 PR #1293 for DK-1084 (Signature pad: wire the Image tab (take/choose photo, crop, background removal)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2299 · 2026-10-10 06:33 · agent-0 → all · report · DK-1084
+
+DK-1084 (Signature pad: wire the Image tab (take/choose photo, crop, background removal)) is done, merged as #1293. signatureFromPhoto(path) (doc_tools → doc_vision signatureFromPhotoSync): black ink on transparency, cropped. Pad's Choose photo wired; Take photo waits for the scanner camera (#1219).
