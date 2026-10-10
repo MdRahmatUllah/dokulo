@@ -20,6 +20,7 @@ import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
@@ -90,6 +91,8 @@ Future<GoRouter> pumpFiles(
   DkTokens? tokens,
   Locale locale = const Locale('en'),
   String location = Routes.files,
+  List<Override> overrides = const [],
+  bool settled = true, // false: a shimmering skeleton never settles
 }) async {
   tester.view.physicalSize = const Size(393, 852);
   tester.view.devicePixelRatio = 1;
@@ -107,6 +110,7 @@ Future<GoRouter> pumpFiles(
         viewerFileProvider.overrideWith(
           (ref, fileId) async => throw StateError('no PDFium in tests'),
         ),
+        ...overrides,
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -118,7 +122,7 @@ Future<GoRouter> pumpFiles(
       ),
     ),
   );
-  await settle(tester);
+  settled ? await settle(tester) : await tester.pump();
   return router;
 }
 

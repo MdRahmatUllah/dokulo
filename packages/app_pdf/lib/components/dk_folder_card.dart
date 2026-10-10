@@ -89,12 +89,26 @@ class DkFolderCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // A sunken well with the filled folder, as the files-grid
+                  // frame.
                   AspectRatio(
-                    aspectRatio: 3 / 4,
-                    child: Center(
-                      child: Icon(DkIcons.folder, size: 64, color: ink),
+                    aspectRatio: 1.5,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: c.surfaceSunken,
+                        borderRadius: BorderRadius.circular(t.radius.s),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          DkIcons.folder,
+                          size: 48,
+                          color: ink,
+                          fill: 1,
+                        ),
+                      ),
                     ),
                   ),
+                  SizedBox(height: t.space.s),
                   title,
                   caption,
                 ],
@@ -107,7 +121,7 @@ class DkFolderCard extends StatelessWidget {
             child: Row(
               spacing: t.space.m,
               children: [
-                Icon(DkIcons.folder, size: 40, color: ink),
+                Icon(DkIcons.folder, size: 40, color: ink, fill: 1),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +129,16 @@ class DkFolderCard extends StatelessWidget {
                     children: [title, caption],
                   ),
                 ),
-                ?more,
+                // Without a menu, the chevron of a row that opens (the
+                // files-list frame).
+                more ??
+                    Padding(
+                      padding: EdgeInsets.only(right: t.space.l),
+                      child: DkIcon(
+                        DkIcons.chevronRight,
+                        color: c.iconSecondary,
+                      ),
+                    ),
               ],
             ),
           );
