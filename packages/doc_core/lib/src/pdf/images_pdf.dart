@@ -134,7 +134,15 @@ class ImagesPdfWriter {
     await _flush();
     if (_batches.isEmpty) throw ArgumentError('no images');
     if (_batches.length == 1) {
-      File(_batches.single).renameSync(output);
+      final batch = File(_batches.single);
+      try {
+        batch.renameSync(output);
+      } on FileSystemException {
+        // Another volume: copy, then drop the batch.
+        batch
+          ..copySync(output)
+          ..deleteSync();
+      }
     } else {
       await pool.run(Lane.qpdf, _join, (List.of(_batches), output)).result;
       for (final b in _batches) {
