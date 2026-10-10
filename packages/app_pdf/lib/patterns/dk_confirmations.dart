@@ -90,12 +90,13 @@ Future<bool> confirmDk(
       l.common_keep_editing,
       true,
     ),
+    // Stop is destructive: the work so far is lost (tool-shell-canceldlg).
     DkConfirmation.cancelJob => (
       l.confirm_stop_job_title,
       l.confirm_stop_job_body,
       l.common_stop,
       l.common_keep_going,
-      false,
+      true,
     ),
     DkConfirmation.removeSignature => (
       l.confirm_remove_signature_title,

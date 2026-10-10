@@ -10,6 +10,7 @@ import '../l10n/formats.dart';
 import '../providers/job_providers.dart';
 import '../theme/dk_tokens.dart';
 import '../tools/tool_catalogue.dart';
+import '../tools/tool_definition.dart';
 
 /// A screen's bottom chrome with the running jobs above it (UI spec §11.6,
 /// §20.2; DK-0233): while jobs run, DkMiniJobBar sits 8 above [child] (the
@@ -35,10 +36,13 @@ class DkBottomChrome extends ConsumerWidget {
     final job = jobs.last;
     final tool = ToolCatalogue.of(job.toolId);
     final p = job.progress;
+    // "Compressing · 18 of 40" (tool-shell-minibar): the tool's busy verb
+    // without its ellipsis, or its name.
+    final busy = ToolDefinitions.of(job.toolId).busyLabel?.call(l10n);
     final label = [
-      tool.name(l10n),
+      busy?.replaceAll('…', '').trim() ?? tool.name(l10n),
       if (p?.pageIndex != null && p?.pageCount != null)
-        l10n.progress_page(p!.pageIndex! + 1, p.pageCount!),
+        l10n.progress_of(p!.pageIndex! + 1, p.pageCount!),
     ].join(' · ');
     return Column(
       mainAxisSize: MainAxisSize.min,

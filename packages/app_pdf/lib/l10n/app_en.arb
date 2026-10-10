@@ -2004,6 +2004,8 @@
   "@common_ok": {
     "description": "Closes an information sheet."
   },
+  "progress_of": "{i} of {n}",
+  "@progress_of": {"description": "The mini job bar's page count: Compressing · 18 of 40 (tool-shell-minibar).", "placeholders": {"i": {"type": "int"}, "n": {"type": "int"}}},
   "locked_moved_in": "{n, plural, one{Moved 1 file to Locked folder} other{Moved {n} files to Locked folder}}",
   "@locked_moved_in": {
     "description": "Toast after Move to locked folder, with Undo (DK-0289).",
