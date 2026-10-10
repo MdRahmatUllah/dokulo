@@ -21,8 +21,9 @@ or `pubspec.lock` changes; a step of the local gate `tools/check.py`, DK-0010) r
 1. **Fails** when its name matches a denied engine or SDK (the *Excluded* table).
 2. **Fails** when it is a direct dependency with no line in the *Dart packages* table.
 3. Reads its `LICENSE` from the pub cache (run `flutter pub get` first) and
-   classifies it: MIT, BSD, Apache-2.0, Zlib or ISC pass; AGPL, GPL, LGPL, MPL
-   and anything unrecognised **fail**, unless the package has a line in the
+   classifies it: MIT, BSD, Apache-2.0, Zlib or ISC pass; AGPL, GPL and LGPL
+   **always fail**, register line or not (see *MPL and LGPL* below); MPL and
+   anything unrecognised **fail** unless the package has a line in the
    *Dart packages* table that says what it is and why it may ship.
 
 SDK packages (`flutter`, `flutter_test`, …) and our own path packages are skipped.
@@ -82,6 +83,33 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `phone_numbers_parser` | MIT | Yes | Phone detection in redaction | Notice |
 | `diff_match_patch` | Apache-2.0 | Yes, if Compare uses it | Text diff in Compare PDF | Notice |
 | `camera` | BSD-3 | Yes | Android scanner frames (CameraX) | Notice |
+
+## MPL and LGPL (DK-0681)
+
+The decision, from the licence rules of the Technology & Package Plan:
+
+- **MPL-2.0 may ship, file by file.** MPL is copyleft per file: the MPL files
+  stay under the MPL, the rest of the app does not. Today that is `dbus` (Linux
+  only, never in the phone apps) and, when the translation tool lands,
+  Bergamot (the translator, from Sogda) and its models. When Bergamot comes in:
+  - its sources are vendored unmodified under `packages/ai_core/native/`
+    (or wherever its FFI package lives), with the upstream repository and
+    commit in a `README` next to them;
+  - a change to any MPL file is a change to that file only, kept in this
+    public repository, so the changed source is available as the MPL asks;
+    the PR that makes it says so and the notice below names the repository;
+  - our own code calls it through FFI and stays under our licence;
+  - the in-app licences screen (DK-0673, DK-0577) and the store notice carry the MPL
+    notice and say where the source is.
+- **LGPL never ships.** On iOS a Flutter plugin is linked statically into the
+  app binary, and the LGPL's relinking terms can't be met there; a pub package
+  ships to both platforms, so LGPL is out of the app on both.
+  `tools/licence_scan.py` fails on any LGPL package, as on GPL and AGPL, even
+  with a register line. A native library under the LGPL (FFmpeg builds, for
+  example) is excluded the same way (the *Excluded* table and
+  `tools/native_libs_check.py`).
+- **Tools that never ship** (veraPDF, GPL/MPL) may be used locally; they are
+  not in any `pubspec.lock` the app is built from.
 
 ## Native libraries (bundled by plugins or by our own FFI packages)
 

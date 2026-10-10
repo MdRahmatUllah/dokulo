@@ -139,6 +139,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* drive_file_rename_outline */;
   static const move = IconData(0xe9a1, fontFamily: _font) /* drive_file_move */;
+  static const replace = IconData(0xe8d4, fontFamily: _font) /* swap_horiz */;
   static const duplicate = IconData(
     0xe14d,
     fontFamily: _font,
@@ -275,6 +276,12 @@ abstract final class DkIcons {
   static const damaged = IconData(0xe3ad, fontFamily: _font) /* broken_image */;
   static const storage = IconData(0xe1db, fontFamily: _font) /* storage */;
   static const memory = IconData(0xe322, fontFamily: _font) /* memory */;
+  static const contrast = IconData(0xeb37, fontFamily: _font) /* contrast */;
+  static const shield = IconData(0xe9e0, fontFamily: _font) /* shield */;
+  static const gavel = IconData(0xe90e, fontFamily: _font) /* gavel */;
+  static const replay = IconData(0xe042, fontFamily: _font) /* replay */;
+  static const mail = IconData(0xe158, fontFamily: _font) /* mail */;
+  static const restore = IconData(0xe8b3, fontFamily: _font) /* restore */;
   static const formUnsupported = IconData(
     0xe85f,
     fontFamily: _font,

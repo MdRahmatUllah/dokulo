@@ -2168,5 +2168,83 @@
         "type": "String"
       }
     }
-  }
+  },
+  "me_pro_owned": "Pro – yours for good",
+  "@me_pro_owned": {
+    "description": "M1, for Pro users (DK-0570)."
+  },
+  "me_pro_thanks": "Thank you",
+  "@me_pro_thanks": {
+    "description": "M1, for Pro users: the row's value."
+  },
+  "me_your_things": "Your things",
+  "@me_your_things": {
+    "description": "M1 section."
+  },
+  "me_signatures": "Signatures",
+  "@me_signatures": {
+    "description": "M1 row: saved signatures."
+  },
+  "me_ai_models": "AI models",
+  "@me_ai_models": {
+    "description": "M1 row: M2."
+  },
+  "me_scanning": "Scanning",
+  "@me_scanning": {
+    "description": "M1 Settings row."
+  },
+  "me_files_storage": "Files & storage",
+  "@me_files_storage": {
+    "description": "M1 Settings row."
+  },
+  "me_appearance": "Appearance",
+  "@me_appearance": {
+    "description": "M1 Settings row."
+  },
+  "me_theme_light": "Light",
+  "@me_theme_light": {
+    "description": "Appearance: light."
+  },
+  "me_theme_dark": "Dark",
+  "@me_theme_dark": {
+    "description": "Appearance: dark."
+  },
+  "me_about": "About",
+  "@me_about": {
+    "description": "M1 section."
+  },
+  "me_privacy": "Privacy",
+  "@me_privacy": {
+    "description": "M1 About row."
+  },
+  "me_licences": "Open-source licences",
+  "@me_licences": {
+    "description": "M1 About row."
+  },
+  "me_replay_intro": "Replay intro",
+  "@me_replay_intro": {
+    "description": "M1 About row: the onboarding again."
+  },
+  "me_contact": "Contact",
+  "@me_contact": {
+    "description": "M1 About row: an email to support."
+  },
+  "me_rate": "Rate Dokulo",
+  "@me_rate": {
+    "description": "M1 About row: the store's review."
+  },
+  "me_restore_purchase": "Restore purchase",
+  "@me_restore_purchase": {
+    "description": "M1 About row; always visible."
+  },
+  "t3_save_menu": "More ways to save",
+  "@t3_save_menu": {"description": "T3's split Save: the chevron that opens Save as copy · Replace original (§20.4), for screen readers."},
+  "t3_save_here": "Save here",
+  "@t3_save_here": {"description": "T3 Save to…: the folder picker's button (DK-0385)."},
+  "t3_use_folder": "Use this folder",
+  "@t3_use_folder": {"description": "T3: the folder picker from the 'Save to' row; Save then saves there (DK-0385)."},
+  "t3_save_elsewhere": "Save outside Dokulo…",
+  "@t3_save_elsewhere": {"description": "T3 Save to…: opens the system's save dialog (DK-0385)."},
+  "organize_insert_photos": "From photos",
+  "@organize_insert_photos": {"description": "P1 insert sheet row (UI spec §18): photos become pages, one each."}
 }
