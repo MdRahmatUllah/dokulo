@@ -6,6 +6,7 @@ import '../../components/dk_loading_spinner.dart';
 import '../../components/dk_banner.dart';
 import '../../components/dk_editor_bars.dart';
 import '../../components/dk_pdf_canvas.dart';
+import '../../components/dk_pdf_search.dart';
 import '../../components/dk_skeleton.dart';
 import '../../components/dk_toast.dart';
 import '../../l10n/app_localizations.dart';
@@ -15,6 +16,7 @@ import '../../patterns/dk_viewer_dialogs.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
 import 'viewer_providers.dart';
+import 'viewer_search.dart';
 import 'viewer_states.dart';
 
 /// V1, the viewer (UI spec §17.1). This is its core (DK-0293): the file's
@@ -25,7 +27,7 @@ import 'viewer_states.dart';
 const viewerNightKey = 'viewer.night';
 
 class ViewerScreen extends ConsumerStatefulWidget {
-  const ViewerScreen({super.key, required this.fileId, this.page});
+  const ViewerScreen({super.key, required this.fileId, this.page, this.query});
 
   final int fileId;
 
@@ -34,6 +36,9 @@ class ViewerScreen extends ConsumerStatefulWidget {
   // lands, which will take it as a second parameter.
   final int? page;
 
+  /// Opens searching these words (a Files search hit, DK-1093).
+  final String? query;
+
   @override
   ConsumerState<ViewerScreen> createState() => _ViewerScreenState();
 }
@@ -41,6 +46,16 @@ class ViewerScreen extends ConsumerStatefulWidget {
 class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   /// The password that opened a locked PDF, for this visit only.
   String? _password;
+
+  /// Text search (DK-1093); [_searching] shows its bar.
+  late final _search = DkPdfSearch()..search(widget.query ?? '');
+  late var _searching = (widget.query ?? '').isNotEmpty;
+
+  @override
+  void dispose() {
+    _search.dispose();
+    super.dispose();
+  }
 
   /// Locked: does [password] open it? Then the pages, and "Unlocked for
   /// viewing · Remove password" (DK-0303).
@@ -70,7 +85,42 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
     return Scaffold(
       backgroundColor: context.tokens.color.surfaceSunken,
       body: switch (file) {
-        AsyncData(:final value) => _pages(value.path),
+        AsyncData(:final value) => Column(
+          children: [
+            if (_searching) ...[
+              ViewerSearchBar(
+                search: _search,
+                onDone: () => setState(() {
+                  _searching = false;
+                  _search.search('');
+                }),
+              ),
+              // A scan without a text layer finds nothing (§17.1).
+              if (ref
+                      .watch(
+                        viewerHasTextProvider(value.path, password: _password),
+                      )
+                      .value ==
+                  false)
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    context.tokens.space.m,
+                    context.tokens.space.s,
+                    context.tokens.space.m,
+                    0,
+                  ),
+                  child: DkBanner(
+                    text: AppLocalizations.of(context).viewer_search_no_text,
+                    action: AppLocalizations.of(context).viewer_make_searchable,
+                    onAction: () => context.push(
+                      Routes.tool('ocr', files: ['${widget.fileId}']),
+                    ),
+                  ),
+                ),
+            ],
+            Expanded(child: _pages(value.path)),
+          ],
+        ),
         // The file's row is gone (deleted, or a stale link).
         AsyncError() => Center(
           child: Padding(
@@ -130,6 +180,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           // Copy for now; Highlight, Underline, Strike come with the
           // annotations (DK-0321), Ask AI with the AI pane (M13).
           markup: const [DkMarkupAction.copy],
+          search: _search,
           initialPage: widget.page ?? 1,
           // A web link asks first; it's the only step that leaves Dokulo
           // (DK-1088).

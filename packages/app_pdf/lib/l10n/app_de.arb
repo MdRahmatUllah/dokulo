@@ -618,5 +618,11 @@
   "viewer_form_fill": "Formular ausfüllen",
   "x1_open_in_viewer": "Im Viewer öffnen",
   "x1_suggested": "Vorgeschlagen",
-  "x1_all_tools": "Alle Werkzeuge"
+  "x1_all_tools": "Alle Werkzeuge",
+  "viewer_search_of": "{i} von {n}",
+  "viewer_search_none": "0 Treffer",
+  "viewer_search_previous": "Vorheriger Treffer",
+  "viewer_search_next": "Nächster Treffer",
+  "viewer_search_no_text": "Dieser Scan hat keinen durchsuchbaren Text.",
+  "viewer_make_searchable": "Durchsuchbar machen"
 }

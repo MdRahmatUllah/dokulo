@@ -16,6 +16,7 @@ spec's tables.
 | DK-0737 | `04-files/files-empty` | Match |
 | DK-0741 | `04-files/files-sort` | Match |
 | DK-0749 | `04-files/files-loading` | Match, 2 approved |
+| DK-0750 | `04-files/files-swipe` | Match, 1 approved |
 
 ## Files: the root (DK-0733, DK-0734, DK-0737, DK-0741, DK-0749)
 
@@ -35,6 +36,11 @@ Fixed:
   files-list.
 
 Approved:
+
+- files-swipe (board: `test/screens/files_swipe_test.dart`): Share shows
+  dimmed and does nothing until share_plus lands (DK-1077), as the file
+  action sheet's Share; Delete and the full swipe ("Moved to Recently
+  deleted · Undo") work.
 
 - A grid folder card is the 3 : 4 tile with a large folder glyph (UI spec
   §11.2, DkFolderCard); files-grid draws a 3 : 2 sunken well around a smaller
