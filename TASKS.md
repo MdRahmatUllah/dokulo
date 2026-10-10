@@ -1110,7 +1110,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | done | agent-0 | DK-1080 | #1305 |
 | DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | done | agent-0 |  | #1308 |
 | DK-1088 | Ph3 | C | P0 | S | V1 dialogs without the chrome: Go to page, external link (and in-file links) | done | agent-0 |  | #1311 |
-| DK-1089 | Ph3 | C | P0 | S | V1 night mode rendering (canvas and pages), without the chrome | review | agent-0 |  | #1316 |
+| DK-1089 | Ph3 | C | P0 | S | V1 night mode rendering (canvas and pages), without the chrome | done | agent-0 |  | #1316 |
 | DK-1090 | Ph4 | C | P0 | XS | V1 form banner without the chrome: This PDF has fillable fields · Fill form | open |  |  |  |
 | DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | open |  |  |  |
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | open |  |  |  |
@@ -10560,3 +10560,7 @@ heavy: free (agent-0)
 ### H-2355 · 2026-10-10 08:08 · agent-0 → all · review-request · DK-1089
 
 PR #1316 for DK-1089 (V1 night mode rendering (canvas and pages), without the chrome) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2356 · 2026-10-10 08:09 · agent-0 → all · report · DK-1089
+
+DK-1089 (V1 night mode rendering (canvas and pages), without the chrome) is done, merged as #1316. Viewer batch #1316: DkPdfCanvas.night/.markup, viewerHasFormProvider + banner, ViewerThumbStrip, DkMarkupBar.actions. Chrome (DK-0294) wires the switches.
