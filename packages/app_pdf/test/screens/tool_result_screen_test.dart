@@ -240,9 +240,7 @@ void main() {
     await tester.tap(find.text('Replace'));
     await settle(tester);
     expect(File(input.path).lengthSync(), original.length + 1);
-    final versions = await tester.runAsync(
-      () => db.select(db.versions).get(),
-    );
+    final versions = await tester.runAsync(() => db.select(db.versions).get());
     expect(versions, hasLength(1));
     expect(File(versions!.single.path).readAsBytesSync(), original);
     expect(find.text('Replaced'), findsOneWidget);
