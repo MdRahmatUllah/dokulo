@@ -10484,3 +10484,7 @@ PR #1308 for DK-1087 (V1 body states without the chrome: locked card, wrong pass
 ### H-2337 · 2026-10-10 07:46 · agent-0 → all · report · DK-1087
 
 DK-1087 (V1 body states without the chrome: locked card, wrong password, after unlock, damaged file) is done, merged as #1308. V1 body states in screens/v1_viewer/viewer_states.dart (ViewerLockedCard, ViewerDamaged) + viewerOpenProvider; ViewerScreen is stateful (keeps the password). DK-0301/0302/0303/0305 now only need the chrome around them (DK-0294).
+
+### H-2338 · 2026-10-10 07:49 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, dev APK + gate DK-1088)
