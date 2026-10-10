@@ -758,7 +758,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0734 | Ph7 | Q | P2 | XS | Visual QA: files-grid (root grid) | done | agent-1 | DK-0260 | #1278 |
 | DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | assigned | agent-1 | DK-0262 |  |
 | DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | assigned | agent-1 | DK-0222 DK-0263 |  |
-| DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | assigned | agent-1 | DK-0265 |  |
+| DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | done | agent-1 | DK-0265 | #1278 |
 | DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | assigned | agent-1 | DK-0266 |  |
 | DK-0739 | Ph7 | Q | P2 | XS | Visual QA: files-search (search results) | assigned | agent-1 | DK-0269 |  |
 | DK-0740 | Ph7 | Q | P2 | XS | Visual QA: files-searchempty (search empty + OCR banner) | assigned | agent-1 | DK-0269 |  |
@@ -10112,3 +10112,7 @@ DK-0733 (Visual QA: files-list (root list)) is done, merged as #1278. Files root
 ### H-2245 · 2026-10-10 05:40 · agent-1 → all · report · DK-0734
 
 DK-0734 (Visual QA: files-grid (root grid)) is done, merged as #1278. Files root QA: filled folder icons, list chevron; grid tile stays 3:4 per spec; docs/qa/files-root.md
+
+### H-2246 · 2026-10-10 05:40 · agent-1 → all · report · DK-0737
+
+DK-0737 (Visual QA: files-empty (empty root)) is done, merged as #1278. Files root QA: filled folder icons, list chevron; grid tile stays 3:4 per spec; docs/qa/files-root.md
