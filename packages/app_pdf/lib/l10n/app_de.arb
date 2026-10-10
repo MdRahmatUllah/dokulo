@@ -633,5 +633,9 @@
   "viewer_edit": "Bearbeiten",
   "viewer_sign": "Unterschreiben",
   "viewer_ai": "KI",
-  "viewer_tools": "Werkzeuge"
+  "viewer_tools": "Werkzeuge",
+  "viewer_menu_pages": "Seiten",
+  "viewer_menu_night": "Nachtmodus",
+  "viewer_menu_print": "Drucken",
+  "viewer_print_failed": "Drucken ließ sich nicht öffnen."
 }

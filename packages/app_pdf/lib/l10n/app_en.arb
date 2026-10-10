@@ -2480,5 +2480,13 @@
   "viewer_ai": "AI",
   "@viewer_ai": {"description": "V1's chrome (DK-0294)."},
   "viewer_tools": "Tools",
-  "@viewer_tools": {"description": "V1's chrome (DK-0294)."}
+  "@viewer_tools": {"description": "V1's chrome (DK-0294)."},
+  "viewer_menu_pages": "Pages",
+  "@viewer_menu_pages": {"description": "V1 overflow menu: shows the thumbnail strip (UI spec §17.1; DK-0295)."},
+  "viewer_menu_night": "Night mode",
+  "@viewer_menu_night": {"description": "V1 overflow menu: the night mode switch."},
+  "viewer_menu_print": "Print",
+  "@viewer_menu_print": {"description": "V1 overflow menu: the system print dialog."},
+  "viewer_print_failed": "Couldn't open printing.",
+  "@viewer_print_failed": {"description": "Toast when the system print dialog didn't open."}
 }

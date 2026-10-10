@@ -149,6 +149,20 @@ class MainActivity : FlutterFragmentActivity() {
                     result.success(false)
                 }
             }
+        // Print (DK-0295; lib/providers/print_providers.dart): the system's
+        // print dialog for one PDF.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/print")
+            .setMethodCallHandler { call, result ->
+                val path = call.argument<String>("path")
+                if (call.method != "pdf" || path == null) {
+                    result.notImplemented()
+                    return@setMethodCallHandler
+                }
+                val name = call.argument<String>("name") ?: File(path).name
+                (getSystemService(PRINT_SERVICE) as PrintManager)
+                    .print(name, PdfPrintAdapter(File(path), name), null)
+                result.success(true)
+            }
         // The privacy cover (DK-0234; lib/providers/privacy_providers.dart):
         // FLAG_SECURE blanks the recents card and blocks screenshots, only
         // while locked content is open or Hide previews is on.
@@ -193,3 +207,42 @@ class MainActivity : FlutterFragmentActivity() {
 
 private const val CAMERA_REQUEST = 4201
 private const val NOTIFICATIONS_REQUEST = 4202
+
+/** Hands a PDF file to the print framework as it is. */
+private class PdfPrintAdapter(private val file: File, private val name: String) :
+    PrintDocumentAdapter() {
+    override fun onLayout(
+        oldAttributes: PrintAttributes?,
+        newAttributes: PrintAttributes,
+        cancellationSignal: CancellationSignal?,
+        callback: LayoutResultCallback,
+        extras: Bundle?,
+    ) {
+        if (cancellationSignal?.isCanceled == true) {
+            callback.onLayoutCancelled()
+            return
+        }
+        callback.onLayoutFinished(
+            PrintDocumentInfo.Builder(name)
+                .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                .build(),
+            true,
+        )
+    }
+
+    override fun onWrite(
+        pages: Array<out PageRange>,
+        destination: ParcelFileDescriptor,
+        cancellationSignal: CancellationSignal?,
+        callback: WriteResultCallback,
+    ) {
+        try {
+            file.inputStream().use { input ->
+                FileOutputStream(destination.fileDescriptor).use { input.copyTo(it) }
+            }
+            callback.onWriteFinished(arrayOf(PageRange.ALL_PAGES))
+        } catch (e: Exception) {
+            callback.onWriteFailed(e.message)
+        }
+    }
+}
