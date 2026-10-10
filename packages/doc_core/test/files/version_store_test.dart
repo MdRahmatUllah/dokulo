@@ -88,6 +88,22 @@ void main() {
     expect(copiesOnDisk(), hasLength(2));
   });
 
+  test('replace writes the result over the file, keeps the original, '
+      'and Undo (restore) puts it back', () async {
+    final result = File('${root.path}${Platform.pathSeparator}out.pdf')
+      ..writeAsStringSync('compressed');
+    now = now.add(const Duration(minutes: 5));
+    final kept = await versions.replace(fileId, result.path);
+    expect(pdf.readAsStringSync(), 'compressed');
+    expect(File(kept.path).readAsStringSync(), 'v0');
+    final row = await (db.select(
+      db.files,
+    )..where((f) => f.id.equals(fileId))).getSingle();
+    expect((row.size, row.modified), (10, now));
+    await versions.restore(kept);
+    expect(pdf.readAsStringSync(), 'v0');
+  });
+
   test('restoring the oldest of 5 still works', () async {
     for (var i = 1; i <= 5; i++) {
       await edit('v$i'); // versions v4..v0, the file v5

@@ -89,26 +89,17 @@ class DkFolderCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // A sunken well with the filled folder, as the files-grid
-                  // frame.
                   AspectRatio(
-                    aspectRatio: 1.5,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: c.surfaceSunken,
-                        borderRadius: BorderRadius.circular(t.radius.s),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          DkIcons.folder,
-                          size: 48,
-                          color: ink,
-                          fill: 1,
-                        ),
+                    aspectRatio: 3 / 4,
+                    child: Center(
+                      child: Icon(
+                        DkIcons.folder,
+                        size: 64,
+                        fill: 1,
+                        color: ink,
                       ),
                     ),
                   ),
-                  SizedBox(height: t.space.s),
                   title,
                   caption,
                 ],
@@ -121,7 +112,7 @@ class DkFolderCard extends StatelessWidget {
             child: Row(
               spacing: t.space.m,
               children: [
-                Icon(DkIcons.folder, size: 40, color: ink, fill: 1),
+                Icon(DkIcons.folder, size: 40, fill: 1, color: ink),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

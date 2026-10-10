@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:ui' as ui;
+
+import 'package:ai_core/ai_core.dart' show IsolatePool;
 
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +11,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_sheet.dart';
 import '../../components/dk_bottom_bars.dart';
+import '../../components/dk_file_card.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_icon_button.dart';
 import '../../components/dk_loading_spinner.dart';
@@ -27,6 +31,7 @@ import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../../theme/haptics.dart';
 import '../../tools/tool_catalogue.dart';
+import '../../tools/tool_inputs.dart';
 import '../t2_tool/tool_options_providers.dart';
 import '../v1_viewer/viewer_providers.dart';
 
@@ -248,9 +253,10 @@ class _OrganizeState extends ConsumerState<_Organize> {
                     child: DkPageGrid(
                       pageIds: edit.pages,
                       selected: _selected,
+                      // A tap selects; a long-press lifts the page only:
+                      // mid-drag the screen stays out of selection mode
+                      // (organize-drag, DK-0799).
                       onTap: _toggle,
-                      onLongPress: (i) =>
-                          setState(() => _selected = {..._selected, i}),
                       onReorder: (from, to) {
                         _do((e) => e.move(from, to));
                         setState(() => _selected = {});
@@ -356,6 +362,8 @@ class _OrganizeState extends ConsumerState<_Organize> {
             children: [
               row('blank', DkIcons.blankPage, l.organize_insert_blank),
               row('pdf', DkIcons.pdf, l.organize_insert_pdf),
+              // From a scan comes with the scanner's review (DK-1082).
+              row('photos', DkIcons.importPhotos, l.organize_insert_photos),
               if (after != null) ...[
                 SizedBox(height: t.space.m),
                 Text(
@@ -383,6 +391,28 @@ class _OrganizeState extends ConsumerState<_Organize> {
       final store = await ref.read(fileStoreProvider.future);
       await edit.insertBlank(at, store.temp);
       setState(() {});
+    } else if (choice == 'photos') {
+      final images = [
+        for (final p in await ref.read(devicePickerProvider)(
+          ToolInput.of('img2pdf')!,
+          photos: true,
+        ))
+          // HEIC needs the platform's decoder first (DK-1081).
+          if (ToolInput.kindOf(p) == DkFileKind.image &&
+              !RegExp(r'\.hei[cf]$', caseSensitive: false).hasMatch(p))
+            p,
+      ];
+      if (images.isEmpty || !mounted) return;
+      final store = await ref.read(fileStoreProvider.future);
+      final pdf = await store.newTempFile('photos.pdf');
+      // One page per photo, as Image to PDF makes them, off the UI isolate.
+      await Isolate.run(() => _photosPdf(images, pdf.path));
+      final info = await PdfEngine.inspect(pdf.path);
+      _do(
+        (e) => e.insert(at, [
+          for (var i = 0; i < info.pageCount; i++) PageSource(pdf.path, i),
+        ]),
+      );
     } else {
       final path = await ref.read(pickPdfProvider)();
       if (path == null || !mounted) return;
@@ -432,5 +462,19 @@ class _SubBar extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+/// [images] as a PDF at [output] (Fit image, no margins), on a worker.
+Future<void> _photosPdf(List<String> images, String output) async {
+  final work = Directory.systemTemp.createTempSync('dk_photos_');
+  try {
+    final writer = ImagesPdfWriter(output, workDir: work);
+    for (final image in images) {
+      await writer.add(File(image).readAsBytesSync());
+    }
+    await writer.close(IsolatePool(tempRoot: work));
+  } finally {
+    work.deleteSync(recursive: true);
   }
 }

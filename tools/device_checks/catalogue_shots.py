@@ -2,7 +2,7 @@
 integration_test/catalogue_shots_test.dart and saves one PNG per entry and
 theme into OUT, to compare with the frames in dokulo-design/.
 
-    python tools/device_checks/catalogue_shots.py emulator-5556 OUT "DkPinPad,DkDropdown"
+    python tools/device_checks/catalogue_shots.py emulator-5556 OUT "DkPinPad;DkDropdown"
 
 Hold `team.py device` while it runs (docs/qa/device-lab.md)."""
 import os

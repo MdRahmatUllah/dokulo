@@ -12,7 +12,7 @@ spec's tables.
 | Task | Frame | Result |
 | --- | --- | --- |
 | DK-0733 | `04-files/files-list` | 2 fixed, 2 approved |
-| DK-0734 | `04-files/files-grid` | 2 fixed |
+| DK-0734 | `04-files/files-grid` | 1 fixed, 1 approved |
 | DK-0737 | `04-files/files-empty` | Match |
 | DK-0741 | `04-files/files-sort` | Match |
 | DK-0749 | `04-files/files-loading` | Match, 2 approved |
@@ -29,14 +29,16 @@ the sort menu's six options and the empty state match the UI spec §16.1 and
 Fixed:
 
 - F1. A folder's icon is filled in its tag colour, in list and grid, as the
-  frames; it was outlined (DkFolderCard).
+  frames; it was outlined (DkFolderCard; the components QA, #1265, made the
+  same fix).
 - F2. A folder row without a menu ends in a chevron (it opens), as
   files-list.
-- F3. A grid folder card has a sunken well (`color.surfaceSunken`, 3 : 2)
-  around a 48 dp folder, the name and count below, as files-grid; the folder
-  sat alone on a 3 : 4 card.
 
 Approved:
+
+- A grid folder card is the 3 : 4 tile with a large folder glyph (UI spec
+  §11.2, DkFolderCard); files-grid draws a 3 : 2 sunken well around a smaller
+  folder. The spec wins.
 
 - Folders are in name order; the frames show theirs unsorted. A folder has no
   date of its own to sort by.

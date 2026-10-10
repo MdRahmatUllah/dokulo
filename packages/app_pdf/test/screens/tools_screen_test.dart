@@ -20,6 +20,7 @@ Future<GoRouter> pumpTools(
   AiEligibility ai = AiEligibility.eligible,
   int ram = 8 * _gib,
   Locale locale = const Locale('en'),
+  DkTokens? tokens,
 }) async {
   tester.view.physicalSize = const Size(393, 852);
   tester.view.devicePixelRatio = 1;
@@ -44,8 +45,9 @@ Future<GoRouter> pumpTools(
         ),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: router,
-        theme: dokuloTheme(DkTokens.light),
+        theme: dokuloTheme(tokens ?? DkTokens.light),
         locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
