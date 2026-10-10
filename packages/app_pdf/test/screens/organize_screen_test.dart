@@ -409,6 +409,52 @@ void main() {
     expect(thumbWidth(tester), lessThan(three));
   });
 
+  // DK-0651: the tablet frames (24-tablet/tablet-organize-*).
+  for (final (name, size) in [
+    ('landscape', const Size(1366, 1024)),
+    ('portrait', const Size(820, 1180)),
+  ]) {
+    testWidgets('golden: organize_tablet_$name', (tester) async {
+      await pumpP1(tester, pages: 16, size: size);
+      Finder page(int n) =>
+          find.byWidgetPredicate((w) => w is DkPageThumb && w.pageNumber == n);
+      await tester.tap(page(3));
+      await tester.tap(page(6));
+      await settle(tester);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_tablet_$name.png'),
+      );
+    });
+  }
+
+  testWidgets('tablet: the title stays, "16 pages · 2 selected", one row of '
+      'actions with Insert pages; rotating keeps the state (DK-0651)', (
+    tester,
+  ) async {
+    await pumpP1(tester, pages: 16, size: const Size(1366, 1024));
+    await tapPage(tester, 3);
+    await tapPage(tester, 6);
+    expect(find.text('Organize pages'), findsOneWidget);
+    expect(find.text('16 pages · 2 selected'), findsOneWidget);
+    expect(find.text('Insert pages'), findsOneWidget);
+    expect(find.byType(FloatingActionButton), findsNothing);
+    await tester.tap(find.text('Duplicate'));
+    await tester.pump();
+    expect(pageCount(tester), 18);
+    // Turned to portrait: the same edit, still undoable.
+    tester.view.physicalSize = const Size(820, 1180);
+    await settle(tester);
+    expect(pageCount(tester), 18);
+    expect(
+      tester.widget<DkPageGrid>(find.byType(DkPageGrid)).initialColumns,
+      5,
+    );
+    await tester.tap(find.byTooltip('Undo'));
+    await tester.pump();
+    expect(pageCount(tester), 16);
+  });
+
   testWidgets('a tablet starts at 5 columns', (tester) async {
     await pumpP1(tester, size: const Size(700, 1000));
     expect(

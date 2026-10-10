@@ -1772,7 +1772,7 @@ Sentence case · verb-first buttons · numbers instead of adjectives · no excla
 | T1 Tools | 6 columns | 8 columns, category list as a left sidebar (200) |
 | F1 Files | Grid 4 columns | Two panes: list (360) + preview (thumbnail strip, info, actions) |
 | V1 Viewer | Same as phone, wider pages | Thumbnail sidebar (120, toggle) + pages + AI pane (400, toggle) |
-| P1 Organize | 5 columns | 8 columns |
+| P1 Organize | 5 columns; 24 side padding; title stays while selecting (count in the sub-bar); one centred row of inline actions Rotate · Duplicate · Extract · Delete · Insert pages instead of the FAB and selection bar | 8 columns; same |
 | S1 Scanner | Controls on the right edge in landscape | Same |
 | T2/T3 Tool shell | Content max width 640 centred | Options left (480) + live preview right |
 | Compare | Side by side in landscape | Side by side always + change list as right sidebar |
