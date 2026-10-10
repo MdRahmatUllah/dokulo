@@ -131,30 +131,29 @@ class _ToolPickerState extends ConsumerState<_ToolPicker> {
         Row(
           spacing: t.space.m,
           children: [
-            _Thumb(path: files.first.path),
+            single ? _Thumb(path: files.single.path) : _Stack(files: files),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    single
-                        ? files.single.name
-                        : l.t2_section_files(files.length),
+                    single ? files.single.name : l.x1_files(files.length),
                     style: t.text.titleS.copyWith(color: t.color.textPrimary),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (single)
-                    Text(
-                      [
-                        formatBytes(files.single.size, locale),
-                        if (files.single.pages > 0)
-                          l.meta_pages(files.single.pages),
-                      ].join(' · '),
-                      style: t.text.caption.copyWith(
-                        color: t.color.textSecondary,
-                      ),
+                  Text(
+                    single
+                        ? [
+                            formatBytes(files.single.size, locale),
+                            if (files.single.pages > 0)
+                              l.meta_pages(files.single.pages),
+                          ].join(' · ')
+                        : _kinds(l, files),
+                    style: t.text.caption.copyWith(
+                      color: t.color.textSecondary,
                     ),
+                  ),
                 ],
               ),
             ),
@@ -189,19 +188,66 @@ class _ToolPickerState extends ConsumerState<_ToolPicker> {
   }
 }
 
-/// The file's first page, 44 × 56 (the share's first file for several).
+/// "3 PDFs · 1 image": what several files are.
+String _kinds(AppLocalizations l, List<FileEntry> files) {
+  final pdfs = files
+      .where((f) => ToolInput.kindOf(f.path) == DkFileKind.pdf)
+      .length;
+  final images = files
+      .where((f) => ToolInput.kindOf(f.path) == DkFileKind.image)
+      .length;
+  return [
+    if (pdfs > 0) l.x1_pdfs(pdfs),
+    if (images > 0) l.x1_images(images),
+  ].join(' · ');
+}
+
+/// Several files: the first three, fanned out in 52 × 52 (the x1multi
+/// frame).
+class _Stack extends StatelessWidget {
+  const _Stack({required this.files});
+
+  final List<FileEntry> files;
+
+  @override
+  Widget build(BuildContext context) {
+    const turns = [-6 / 360, 0.0, 6 / 360];
+    const lefts = <double>[0, 10, 18];
+    const tops = <double>[4, 2, 6];
+    return SizedBox.square(
+      dimension: 52,
+      child: Stack(
+        children: [
+          for (final (i, f) in files.take(3).indexed)
+            Positioned(
+              left: lefts[i],
+              top: tops[i],
+              child: RotationTransition(
+                turns: AlwaysStoppedAnimation(turns[i]),
+                child: _Thumb(path: f.path, width: 34, height: 44),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// The file's first page, 44 × 56.
 class _Thumb extends ConsumerWidget {
-  const _Thumb({required this.path});
+  const _Thumb({required this.path, this.width = 44, this.height = 56});
 
   final String path;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final t = context.tokens;
     final image = ref.watch(fileThumbnailProvider(path, 96)).value;
     return Container(
-      width: 44,
-      height: 56,
+      width: width,
+      height: height,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: t.color.pageWhite,

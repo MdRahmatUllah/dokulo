@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
+import android.provider.OpenableColumns
 import android.os.StatFs
 import android.provider.Settings
 import android.view.WindowManager
@@ -15,12 +17,94 @@ import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import java.io.File
+import java.util.concurrent.Executors
 
 // A FragmentActivity: local_auth's biometric prompt needs one (DK-0282).
 class MainActivity : FlutterFragmentActivity() {
     private var pendingCamera: MethodChannel.Result? = null
     private var pendingNotifications: MethodChannel.Result? = null
     private val prefs by lazy { getSharedPreferences("dokulo_permissions", MODE_PRIVATE) }
+
+    // Files shared to Dokulo or opened with it (DK-0235; lib/providers/incoming_providers.dart):
+    // copied into the cache off the main thread, then held until Dart takes them.
+    private val incoming = mutableListOf<Map<String, Any>>()
+    private var incomingChannel: MethodChannel? = null
+    private val copier = Executors.newSingleThreadExecutor()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // Before super: Flutter would read a content:// VIEW as a route. A
+        // restore or a launch from recents brings the old intent back, which
+        // was taken the first time.
+        val fresh = savedInstanceState == null &&
+            (intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0
+        if (isIncoming(intent)) {
+            if (fresh) receive(intent)
+            intent = Intent(Intent.ACTION_MAIN)
+        }
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        if (!isIncoming(intent)) {
+            super.onNewIntent(intent)
+            return
+        }
+        receive(intent)
+        super.onNewIntent(Intent(Intent.ACTION_MAIN))
+    }
+
+    private fun isIncoming(intent: Intent?): Boolean = when (intent?.action) {
+        Intent.ACTION_SEND, Intent.ACTION_SEND_MULTIPLE -> true
+        Intent.ACTION_VIEW -> intent.data?.scheme.let { it == "content" || it == "file" }
+        else -> false
+    }
+
+    @Suppress("DEPRECATION") // the typed getParcelable* need API 33; minSdk is 26
+    private fun receive(intent: Intent) {
+        val uris = when (intent.action) {
+            Intent.ACTION_VIEW -> listOfNotNull(intent.data)
+            Intent.ACTION_SEND -> listOfNotNull(intent.getParcelableExtra<Uri>(Intent.EXTRA_STREAM))
+            else -> intent.getParcelableArrayListExtra<Uri>(Intent.EXTRA_STREAM).orEmpty()
+        }
+        if (uris.isEmpty()) return
+        val action = if (intent.action == Intent.ACTION_VIEW) "view" else "send"
+        // The grant to read the URIs lasts as long as this activity.
+        copier.execute {
+            val dir = File(cacheDir, "incoming/${System.nanoTime()}").apply { mkdirs() }
+            val paths = uris.mapIndexedNotNull { i, uri -> copyIn(uri, dir, i) }
+            if (paths.isEmpty()) return@execute
+            runOnUiThread {
+                incoming.add(mapOf("action" to action, "paths" to paths))
+                incomingChannel?.invokeMethod("available", null)
+            }
+        }
+    }
+
+    /** One shared file into [dir] under its own name; null if it can't be read. */
+    private fun copyIn(uri: Uri, dir: File, index: Int): String? = try {
+        val mime = contentResolver.getType(uri)
+        var name = displayName(uri)?.replace('/', '_')?.takeIf { it.isNotBlank() }
+            ?: "Shared ${index + 1}"
+        val ext = when {
+            mime == "application/pdf" -> "pdf"
+            mime?.startsWith("image/") == true -> mime.removePrefix("image/").replace("jpeg", "jpg")
+            else -> null
+        }
+        if (ext != null && !name.contains('.')) name += ".$ext"
+        val out = File(File(dir, "$index").apply { mkdirs() }, name)
+        contentResolver.openInputStream(uri)!!.use { input ->
+            out.outputStream().use { input.copyTo(it) }
+        }
+        out.path
+    } catch (e: Exception) {
+        null
+    }
+
+    private fun displayName(uri: Uri): String? =
+        if (uri.scheme == "file") uri.lastPathSegment
+        else contentResolver.query(uri, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)
+            ?.use { c -> if (c.moveToFirst()) c.getString(0) else null }
 
     // granted, notAsked (the system never asked: S1 shows the pre-prompt) or
     // denied. Android can't tell "never asked" from "denied" by itself, so we
@@ -147,6 +231,19 @@ class MainActivity : FlutterFragmentActivity() {
                     result.success(true)
                 } catch (e: android.content.ActivityNotFoundException) {
                     result.success(false)
+                }
+            }
+        // Shared and "Open with" files (DK-0235): Dart takes the batches
+        // copied so far; "available" says another one is ready.
+        incomingChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/incoming")
+            .apply {
+                setMethodCallHandler { call, result ->
+                    if (call.method != "take") {
+                        result.notImplemented()
+                        return@setMethodCallHandler
+                    }
+                    result.success(incoming.toList())
+                    incoming.clear()
                 }
             }
         // The privacy cover (DK-0234; lib/providers/privacy_providers.dart):

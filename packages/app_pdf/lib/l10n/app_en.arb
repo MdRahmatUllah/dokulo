@@ -2470,5 +2470,11 @@
   "files_run_tool": "Run a tool…",
   "@files_run_tool": {
     "description": "F1 selection bar's More menu: pick a tool for the selected files."
-  }
+  },
+  "x1_files": "{n, plural, one{1 file} other{{n} files}}",
+  "@x1_files": {"description": "X1 header for several files (UI spec §20.6; DK-0387).", "placeholders": {"n": {"type": "int"}}},
+  "x1_pdfs": "{n, plural, one{1 PDF} other{{n} PDFs}}",
+  "@x1_pdfs": {"description": "X1 header's line for several files: the PDFs among them.", "placeholders": {"n": {"type": "int"}}},
+  "x1_images": "{n, plural, one{1 image} other{{n} images}}",
+  "@x1_images": {"description": "X1 header's line for several files: the images among them.", "placeholders": {"n": {"type": "int"}}}
 }

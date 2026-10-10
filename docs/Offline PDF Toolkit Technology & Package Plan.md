@@ -53,7 +53,7 @@ Versions marked ✓ were checked on pub.dev or the project page on 6 Oct 2026. T
 | [flutter\_onnxruntime](https://pub.dev/documentation/flutter_onnxruntime/latest/) | 1.8.4 ✓ (Sep 2026) | MIT | OCR models, embeddings, Supertonic TTS | ONNX Runtime 1.23; iOS min 16, Android 16 KB pages OK |
 | [opencv\_dart](https://pub.dev/documentation/opencv_dart/latest/) | 2.2.x ✓ | Apache-2.0 | Image filters, perspective, book split, contours | Uses Native Assets hooks; exclude unused modules (videoio, highgui, dnn, contrib) |
 | [google\_mlkit\_document\_scanner](https://pub.dev/documentation/google_mlkit_document_scanner/latest/) | 0.6.1 (checked 2026-10-07) | MIT (plugin) | **Not used** | Closed-source ML Kit with usage metrics; see [docs/compliance/ml-kit-scanner.md](compliance/ml-kit-scanner.md) |
-| [receive\_sharing\_intent](https://pub.dev/documentation/receive_sharing_intent/1.9.0/) | 1.9.0 ✓ | Apache-2.0 | Share sheet / "Open with" input | Includes iOS Share Extension support via SwiftPM |
+| ~~receive\_sharing\_intent~~ | not used | — | Share sheet / "Open with" input | Replaced in DK-0235 by our own `dokulo/incoming` method channel (MainActivity copies the shared files into the cache; Dart takes them): no plugin for one intent. The iOS Share Extension is DK-0598 |
 | flutter\_riverpod + riverpod\_generator | latest 3.x | MIT | State management | Same as Sogda |
 | drift + sqlite3 | 2.35 / 3.x | MIT | File index, recents, folders, OCR text index (FTS5) | sqlite3 3.x builds SQLite through build hooks; `sqlite3_flutter_libs` is obsolete |
 | SQLCipher (sqlite3 hooks option) | — | BSD-style | Encrypted DB for locked folders | `sqlcipher_flutter_libs` is obsolete with sqlite3 3.x. Alternative: encrypt files with `cryptography` and keep DB plain |
@@ -187,7 +187,7 @@ On iOS the scanner uses Apple's built-in VisionKit and Vision (part of the OS, f
 | PDF viewer | Continuous scroll, zoom, search, thumbnails, outline, night mode (colour-inverting filter) | pdfrx `PdfViewer`, `PdfTextSearcher` | Toolbar, page jump, night mode |
 | File manager | Index of all files with recents, folders, favourites, full-text search over names and OCR text | drift + sqlite FTS5 | Index updater after every tool job |
 | Locked folders / app lock | Files encrypted at rest with AES-256-GCM; key in Keychain/Keystore, released after biometric or PIN | `cryptography`, `flutter_secure_storage`, `local_auth` | Key management, lock timeout, encrypted thumbnails |
-| Share-sheet integration | Android: intent filters for `application/pdf` and `image/*` (VIEW + SEND + SEND\_MULTIPLE). iOS: Share Extension + document types (`CFBundleDocumentTypes`, open in place) | `receive_sharing_intent` 1.9.0 | iOS Action Extension for the Files app (native Swift target that hands the file to the app via an App Group) |
+| Share-sheet integration | Android: intent filters for `application/pdf` and `image/*` (VIEW + SEND + SEND\_MULTIPLE). iOS: Share Extension + document types (`CFBundleDocumentTypes`, open in place) | Our `dokulo/incoming` channel (DK-0235; iOS: DK-1096) | iOS Action Extension for the Files app (native Swift target that hands the file to the app via an App Group) |
 | Tool grid home | Grid of all tools, search, recently used | Flutter | None |
 | Languages | English and German at launch | `flutter_localizations`, `intl`, ARB files | None |
 | Pro unlock | Non-consumable purchase, restore, Family Sharing on iOS | `in_app_purchase` | Entitlement cache; no server |
@@ -301,7 +301,6 @@ Correctness of output files matters more than UI tests here: every tool gets a g
 - [flutter\_onnxruntime docs](https://pub.dev/documentation/flutter_onnxruntime/latest/)
 - [opencv\_dart docs](https://pub.dev/documentation/opencv_dart/latest/)
 - [google\_mlkit\_document\_scanner docs](https://pub.dev/documentation/google_mlkit_document_scanner/latest/)
-- [receive\_sharing\_intent 1.9.0](https://pub.dev/documentation/receive_sharing_intent/1.9.0/)
 - [qpdf 12.3.2 package details](https://pkgs.alpinelinux.org/package/edge/community/x86_64/qpdf)
 - [PP-OCRv5 ONNX models (Apache-2.0)](https://github.com/gitakoos/ocr-models)
 - [PP-OCRv5 mobile ONNX bundle notes](https://github.com/ben-milanko/dart-pdf/releases/tag/ocr-models-v1)
