@@ -11,6 +11,7 @@
 | DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
 | DK-0845, DK-0846, DK-0855, DK-0856 | `12-tool-shell/` minibar, canceldlg, discard, aftersave (Light, Dark; phone) | The same QA board: the shell at Tools with a running job, T2 after 30 s with Cancel, T3 closed unsaved after a long job, T3 after Save | 2 deviations fixed, 2 approved, below |
 | DK-0854, DK-0857 | `12-tool-shell/` replace, replaced (Light, Dark; phone) | The same QA board: T3 → the split Save's menu → Replace original (the dialog), then Replace (the toast and Done) | Match, 2 approved, below |
+| DK-0799, DK-0800, DK-0801, DK-0802, DK-0803 | `09-organize-pages/` organize-drag, -selected, -insert, -deleted, -pinch (Light, Dark; phone) | Goldens in the gate, `organize_<state>_<theme>` in `packages/app_pdf/test/screens/organize_screen_test.dart`: P1 with 12 pages, page 5 long-pressed and held between 8 and 9, the navigator's overlay included; side by side with the frame in [organize/](organize/) | 5 deviations fixed, 3 approved, 1 follow-up, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
@@ -261,3 +262,39 @@ file?", the Versions line, Cancel and a danger Replace) and the toast
   the frame (DkConfirmDialog stacks only when the labels don't fit).
 
 Share, beside Open, comes with DK-1077.
+## Organize pages: drag, selected, insert, deleted, pinch (DK-0799..DK-0803)
+
+The frame: the sub-bar still says "12 pages", the lifted page floats over
+the grid just above the finger, its place stays empty, and a 2 dp
+`color.primary` insertion line with end caps shows where it lands. Fixed:
+
+- O1. Lifting a page no longer selects it: P1 selects by tap, and the
+  long-press only lifts, so mid-drag the screen stays out of selection mode
+  (it showed "1 selected" and the selection bar).
+- O2. DkPageGrid leaves the lifted page's place empty while it's dragged;
+  it showed the page at 40 %.
+
+Thumbnails are skeletons in the goldens (PDFium doesn't render in widget
+tests); the layout, the line and the bars are what the golden checks.
+
+Selected, insert, deleted and pinch (DK-0800..DK-0803), the goldens beside
+the frames in [organize/](organize/):
+
+- O3. In selection mode an unselected page shows an empty 20 dp circle
+  (`color.surface`, 2 dp `color.outlineStrong`) where the check goes
+  (`DkPageThumb.selecting`, from DkPageGrid when anything is selected); it
+  showed nothing.
+- O4. The insert sheet has "From photos": the photos become pages, one
+  each, written by Image to PDF's writer on a worker and inserted at the
+  chosen place. "From a scan" needs the scanner to hand its pages back:
+  follow-up DK-1082 (#1269).
+- O5. The + leaves while the selection bar shows (it did; the first golden
+  caught its exit animation).
+
+Approved:
+
+- The selection bar's Delete is `color.danger`, as in Files and the
+  components frame; organize-selected draws it neutral.
+- The pinch frame shows a hint toast, "Pinch to change thumbnail size";
+  neither the UI spec (§18) nor the copy deck has it, so there is none.
+- The insert sheet has no "From a scan" row until DK-1082.

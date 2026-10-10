@@ -15,12 +15,14 @@ import '../../components/dk_next_chip.dart';
 import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_page_thumb.dart';
 import '../../components/dk_result_card.dart';
+import '../../components/dk_tappable.dart';
 import '../../components/dk_text_field.dart';
 import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../patterns/dk_confirmations.dart';
+import '../../patterns/dk_file_actions.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
 import '../../providers/files_providers.dart';
@@ -79,8 +81,46 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
       widget.definition ?? ToolDefinitions.of(widget.toolId);
 
   /// Where Save puts it: next to the (first) input, or the user folder.
-  String? _subfolder(FileStore store) =>
-      store.subfolderOf(_result!.inputs.firstOrNull?.path ?? '');
+  String? _subfolder(FileStore store) => _chosen != null
+      ? _chosen!.subfolder
+      : store.subfolderOf(_result!.inputs.firstOrNull?.path ?? '');
+
+  /// The folder picked with Save to… (DK-0385); null: next to the input.
+  ({String? subfolder})? _chosen;
+
+  /// Picks where Save puts the result (the Move sheet's browser), and with
+  /// [save] saves there. "Outside Dokulo" hands a single file to the
+  /// system's save dialog instead.
+  Future<void> _saveTo({bool save = false}) async {
+    final result = _result!;
+    final l = AppLocalizations.of(context);
+    final pick = await pickFolder(
+      context,
+      title: l.common_save_to,
+      action: save ? l.t3_save_here : l.t3_use_folder,
+      elsewhere: save && result.files.length == 1 ? l.t3_save_elsewhere : null,
+    );
+    if (pick == null || !mounted) return;
+    if (pick.elsewhere) {
+      final output = result.files.single;
+      final saved = await ref.read(saveElsewhereProvider)(
+        output,
+        _fileName(output),
+      );
+      if (saved && mounted) showDkToast(context, l.toast_saved);
+      return;
+    }
+    final store = await ref.read(fileStoreProvider.future);
+    final dir = await store.folderDirectory(
+      ref.read(appDatabaseProvider),
+      pick.folder,
+    );
+    final subfolder = dir.path.length > store.userFolder.path.length
+        ? dir.path.substring(store.userFolder.path.length + 1)
+        : null;
+    setState(() => _chosen = (subfolder: subfolder));
+    if (save) await _save();
+  }
 
   Future<void> _save({bool open = false}) async {
     final result = _result!;
@@ -288,7 +328,8 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
       loading: _saving,
       onPressed: _saving ? null : (_savedId == null ? _save : _close),
       // The split: Save as copy · Replace original, until it's saved.
-      onMenu: _savedId == null && _canReplace
+      // The split: Save as copy · Replace original · Save to…, until saved.
+      onMenu: _savedId == null
           ? (anchor) => showDkMenu(
               anchor,
               groups: [
@@ -298,16 +339,22 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
                     label: l.common_save_copy,
                     onTap: _save,
                   ),
+                  if (_canReplace)
+                    DkAction(
+                      icon: DkIcons.replace,
+                      label: l.common_replace_original,
+                      onTap: _replace,
+                    ),
                   DkAction(
-                    icon: DkIcons.replace,
-                    label: l.common_replace_original,
-                    onTap: _replace,
+                    icon: DkIcons.move,
+                    label: l.common_save_to,
+                    onTap: () => _saveTo(save: true),
                   ),
                 ],
               ],
             )
           : null,
-      menuLabel: _savedId == null && _canReplace ? l.t3_save_menu : null,
+      menuLabel: _savedId == null ? l.t3_save_menu : null,
       secondaryLabel: l.common_open,
       onSecondary: _saving
           ? null
@@ -408,10 +455,32 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
                 ),
               ],
               SizedBox(height: t.space.s),
+              // "Save to: Files › Taxes" with a chevron: pick another folder.
               if (store != null)
-                Text(
-                  l.t3_save_to(_place(l, store)),
-                  style: t.text.bodyM.copyWith(color: t.color.textSecondary),
+                DkTappable(
+                  onTap: _savedId == null ? _saveTo : null,
+                  radius: t.radius.s,
+                  builder: (context, pressed) => Padding(
+                    padding: EdgeInsets.symmetric(vertical: t.space.s),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            l.t3_save_to(_place(l, store)),
+                            style: t.text.bodyM.copyWith(
+                              color: t.color.textSecondary,
+                            ),
+                          ),
+                        ),
+                        if (_savedId == null)
+                          DkIcon(
+                            DkIcons.chevronRight,
+                            size: DkIconSize.m,
+                            color: t.color.iconSecondary,
+                          ),
+                      ],
+                    ),
+                  ),
                 ),
               // What next (UI spec §20.4): the tools that take this result.
               if (nextTools.isNotEmpty) ...[
