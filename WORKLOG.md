@@ -2017,3 +2017,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 06:20 · agent-1 · Merged: #1281 (DK-0681 MPL/LGPL), #1271-#1273, #1278-#1280, #1289 (QA: onboarding, tools, home, files root, folders, file sheets, search/trash), #1286 (DK-0573/0290/0292 security + app lock), #1288 (DK-0572/0281 files & storage), #1290 (locked QA DK-0755..0762). Real-device issue #1287 (app lock).
 - 2026-10-10 06:20 · agent-0 DK-1083 · PR #1291 open; review requested from all
 - 2026-10-10 06:21 · agent-0 DK-1083 · done (#1291)
+- 2026-10-10 06:21 · agent-0 DK-1084 · claimed: Signature pad: wire the Image tab (take/choose photo, crop, background removal)

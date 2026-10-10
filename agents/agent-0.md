@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1084 Signature pad: wire the Image tab (take/choose photo, crop, background removal) — claimed 2026-10-10 06:21.
 
 ## Next
 
