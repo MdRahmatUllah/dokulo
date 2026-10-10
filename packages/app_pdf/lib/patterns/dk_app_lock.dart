@@ -36,16 +36,17 @@ class _DkAppLockState extends ConsumerState<DkAppLock> {
   void initState() {
     super.initState();
     _lifecycle = AppLifecycleListener(
-      // Covered on leaving, so no content shows on the way back before the
-      // lock is decided; the PIN pad (and its biometric prompt) only once
-      // the app is back.
-      onHide: () {
-        _hiddenAt = widget._now();
+      // Covered as the app starts to leave (no frames are drawn once it is
+      // hidden, and the app switcher's snapshot comes after), so no content
+      // shows on the way back before the lock is decided; the PIN pad (and
+      // its biometric prompt) only once the app is back.
+      onInactive: () {
         if (ref.read(securitySettingsProvider).appLock && _lock == _Lock.open) {
           setState(() => _lock = _Lock.covered);
         }
       },
-      onShow: _decide,
+      onHide: () => _hiddenAt = widget._now(),
+      onResume: _decide,
     );
   }
 
@@ -54,6 +55,7 @@ class _DkAppLockState extends ConsumerState<DkAppLock> {
     _hiddenAt = null;
     if (_lock != _Lock.covered) return;
     final s = ref.read(securitySettingsProvider);
+    // Never hidden (a system prompt, the notification shade): not due.
     final due =
         hidden != null &&
         widget._now().difference(hidden).inSeconds >= s.lockAfter;

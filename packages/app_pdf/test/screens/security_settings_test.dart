@@ -201,14 +201,21 @@ void main() {
       );
       final b = tester.binding;
       b.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
-      b.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
       await tester.pump();
       expect(find.byType(DkLogo), findsOneWidget);
       expect(find.byType(DkPinPad), findsNothing, reason: 'no prompt yet');
+      b.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
       b.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
       b.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
       await tester.pumpAndSettle();
       expect(find.byType(DkLogo), findsNothing, reason: '< 1 min');
+
+      // A system prompt: inactive and back, never hidden. Lifted at once.
+      b.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      await tester.pump();
+      b.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await tester.pumpAndSettle();
+      expect(find.byType(DkLogo), findsNothing);
     });
 
     testWidgets('no PIN (prefs restored without the keychain): no lock', (
