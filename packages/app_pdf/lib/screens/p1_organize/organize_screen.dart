@@ -397,7 +397,10 @@ class _OrganizeState extends ConsumerState<_Organize> {
           ToolInput.of('img2pdf')!,
           photos: true,
         ))
-          if (ToolInput.kindOf(p) == DkFileKind.image) p,
+          // HEIC needs the platform's decoder first (DK-1081).
+          if (ToolInput.kindOf(p) == DkFileKind.image &&
+              !RegExp(r'\.hei[cf]$', caseSensitive: false).hasMatch(p))
+            p,
       ];
       if (images.isEmpty || !mounted) return;
       final store = await ref.read(fileStoreProvider.future);
