@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1089 V1 night mode rendering (canvas and pages), without the chrome — claimed 2026-10-10 07:57.
 
 ## Next
 
