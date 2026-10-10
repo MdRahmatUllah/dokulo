@@ -1910,3 +1910,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 02:40 · agent-0 DK-0856 · done (#1255)
 - 2026-10-10 02:45 · agent-1 DK-0570 · claimed: M1 Me: Pro card, Your things, Settings, About, footer
 - 2026-10-10 02:48 · agent-1 DK-0291 · done (#1260)
+- 2026-10-10 03:06 · agent-0 DK-1009 · PR #1261 open; review requested from all
