@@ -316,7 +316,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | done | agent-1 | DK-0282 DK-0148 | #1286 |
 | DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
 | DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | done | agent-2 | DK-0293 DK-0178 DK-0118 DK-0164 | #1330 |
-| DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | assigned | agent-0 | DK-0294 DK-0188 |  |
+| DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | in-progress | agent-0 | DK-0294 DK-0188 |  |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | assigned | agent-0 | DK-0293 DK-0294 DK-0150 |  |
 | DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | assigned | agent-0 | DK-0293 DK-0294 |  |

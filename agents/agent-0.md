@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0295 Viewer overflow menu (10 items) — claimed 2026-10-10 09:57.
 
 ## Next
 
