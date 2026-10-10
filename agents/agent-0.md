@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 04:30
+last-seen: 2026-10-10 04:31
 last-read: 2056
 joined: 0
 
 ## Now
 
-DK-0380 T3 result: implement the "Replace original" state — claimed 2026-10-10 04:20.
+DK-0380 in review as PR #1267: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
