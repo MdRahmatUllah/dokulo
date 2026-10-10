@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:pdf/pdf.dart' as pw;
 import 'package:pdfrx_engine/pdfrx_engine.dart' show pdfrxInitialize;
 import 'package:test/test.dart';
 
@@ -77,6 +78,33 @@ void main() {
 
   test('the damaged-xref file opens (PDFium rebuilds the xref)', () async {
     expect((await PdfEngine.inspect(fixture('damaged-xref.pdf'))).pageCount, 1);
+  });
+
+  test('outline: the bookmarks as a tree, 0-based pages (DK-0309)', () async {
+    final doc = pw.PdfDocument();
+    final pages = [
+      for (var i = 0; i < 3; i++)
+        pw.PdfPage(doc, pageFormat: pw.PdfPageFormat.a4),
+    ];
+    final intro = pw.PdfOutline(doc, title: 'Intro', dest: pages[0]);
+    final terms = pw.PdfOutline(doc, title: 'Terms', dest: pages[1])
+      ..add(pw.PdfOutline(doc, title: '§ 3 Rent', dest: pages[2]));
+    doc.outline
+      ..add(intro)
+      ..add(terms);
+    final dir = Directory.systemTemp.createTempSync('dk_outline_');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    final path = '${dir.path}/outline.pdf';
+    File(path).writeAsBytesSync(await doc.save());
+
+    final outline = await PdfEngine.outline(path);
+    expect(
+      [for (final e in outline) (e.title, e.page)],
+      [('Intro', 0), ('Terms', 1)],
+    );
+    expect(outline[1].children.single.title, '§ 3 Rent');
+    expect(outline[1].children.single.page, 2);
+    expect(await PdfEngine.outline(fixture('Invoice INV-2026-014.pdf')), []);
   });
 
   test('pageTexts: every page in one open, the same text as pageText '
