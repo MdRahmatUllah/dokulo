@@ -256,17 +256,30 @@ Future<void> moveFiles(
   List<FileEntry> files,
 ) async {
   final l = AppLocalizations.of(context);
-  // The sheet answers with the chosen folder: (id,) for the root (null).
-  final target = await showDkSheet<(int?,)>(
+  final target = await pickFolder(
     context,
     title: l.file_move_title(files.length),
-    detent: DkSheetDetent.large,
-    body: const _MoveBrowser(),
+    action: l.file_move_here,
   );
   if (target == null || !context.mounted) return;
-  final (folder,) = target;
-  await moveFilesTo(context, ref, files, folder);
+  await moveFilesTo(context, ref, files, target.folder);
 }
+
+/// A folder from the Move sheet's browser (T3's Save to…, DK-0385): the
+/// folders with the breadcrumb and "New folder", and the sticky [action]
+/// ("Move here", "Save here"). With [elsewhere], a second button under it
+/// answers `elsewhere: true` (the system's save dialog). Null when closed.
+Future<({int? folder, bool elsewhere})?> pickFolder(
+  BuildContext context, {
+  required String title,
+  required String action,
+  String? elsewhere,
+}) => showDkSheet<({int? folder, bool elsewhere})>(
+  context,
+  title: title,
+  detent: DkSheetDetent.large,
+  body: _MoveBrowser(action: action, elsewhere: elsewhere),
+);
 
 /// Moves [files] into [folder] (null: the root), then "Moved to {folder}"
 /// with Undo putting each back (the Move sheet; a drop on a folder card,
@@ -302,7 +315,10 @@ Future<void> moveFilesTo(
 
 /// The folder browser inside the Move sheet.
 class _MoveBrowser extends ConsumerStatefulWidget {
-  const _MoveBrowser();
+  const _MoveBrowser({required this.action, this.elsewhere});
+
+  final String action;
+  final String? elsewhere;
 
   @override
   ConsumerState<_MoveBrowser> createState() => _MoveBrowserState();
@@ -365,11 +381,23 @@ class _MoveBrowserState extends ConsumerState<_MoveBrowser> {
         ),
         SizedBox(height: t.space.l),
         DkButton(
-          label: l.file_move_here,
+          label: widget.action,
           size: DkButtonSize.large,
           expand: true,
-          onPressed: () => Navigator.pop(context, (_at,)),
+          onPressed: () =>
+              Navigator.pop(context, (folder: _at, elsewhere: false)),
         ),
+        if (widget.elsewhere case final label?) ...[
+          SizedBox(height: t.space.s),
+          DkButton(
+            label: label,
+            variant: DkButtonVariant.tertiary,
+            size: DkButtonSize.large,
+            expand: true,
+            onPressed: () =>
+                Navigator.pop(context, (folder: null, elsewhere: true)),
+          ),
+        ],
       ],
     );
   }
