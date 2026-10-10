@@ -46,7 +46,7 @@ Widget pad({
   initialMode: mode,
   name: name,
   onCancel: () {},
-  onSave: onSave ?? (_) {},
+  onSave: (png, _) => onSave?.call(png),
   onTakePhoto: onTakePhoto ?? () {},
   onChoosePhoto: onChoosePhoto ?? () {},
 );
