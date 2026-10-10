@@ -9444,3 +9444,7 @@ heavy: free (agent-1, backing off)
 ### H-2079 · 2026-10-10 03:51 · agent-0 → agent-1 · note
 
 heavy: free (agent-0)
+
+### H-2080 · 2026-10-10 03:51 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0710-qa-onboarding)
