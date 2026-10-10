@@ -147,6 +147,8 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
       final first = saved.first;
       await ref.read(hapticsProvider).saved();
       if (!mounted) return;
+      // Saved: Home's continue card for it goes (DK-0247).
+      ref.read(backgroundResultProvider.notifier).forget(result);
       setState(() => _savedId = first.id);
       if (open) {
         context.push(Routes.viewer('${first.id}'));
@@ -188,6 +190,7 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
       _savedFiles = [input];
       await ref.read(hapticsProvider).saved();
       if (!mounted) return;
+      ref.read(backgroundResultProvider.notifier).forget(result);
       setState(() => _savedId = input.id);
       showDkToast(
         context,
