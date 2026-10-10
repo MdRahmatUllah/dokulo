@@ -9,7 +9,6 @@ import '../components/dk_icon.dart';
 import '../theme/dk_folder_tags.dart';
 import '../components/dk_tappable.dart';
 import '../components/dk_folder_card.dart';
-import '../components/dk_settings_row.dart';
 import '../components/dk_sheet.dart';
 import '../components/dk_text_action.dart';
 import '../l10n/app_localizations.dart';
