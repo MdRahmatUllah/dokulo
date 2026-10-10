@@ -2521,5 +2521,86 @@
   "edit_sign": "Sign",
   "@edit_sign": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
   "edit_eraser": "Eraser",
-  "@edit_eraser": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."}
+  "@edit_eraser": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "img2pdf_page_size": "Page size",
+  "@img2pdf_page_size": {
+    "description": "Image to PDF option (DK-0433; UI spec §21.7)."
+  },
+  "img2pdf_size_fit": "Fit image",
+  "@img2pdf_size_fit": {
+    "description": "Image to PDF page size: each page the image's proportions."
+  },
+  "img2pdf_size_letter": "Letter",
+  "@img2pdf_size_letter": {
+    "description": "Image to PDF page size: US Letter."
+  },
+  "img2pdf_margins": "Margins",
+  "@img2pdf_margins": {
+    "description": "Image to PDF option."
+  },
+  "img2pdf_margins_none": "None",
+  "@img2pdf_margins_none": {
+    "description": "Image to PDF margins: none."
+  },
+  "img2pdf_margins_small": "Small",
+  "@img2pdf_margins_small": {
+    "description": "Image to PDF margins: small (24 pt)."
+  },
+  "img2pdf_output": "Output",
+  "@img2pdf_output": {
+    "description": "Image to PDF option."
+  },
+  "img2pdf_output_one": "One PDF",
+  "@img2pdf_output_one": {
+    "description": "Image to PDF output: all images in one PDF."
+  },
+  "img2pdf_output_each": "One per image",
+  "@img2pdf_output_each": {
+    "description": "Image to PDF output: a PDF for each image."
+  },
+  "img2pdf_clean_up": "Clean up like a scan",
+  "@img2pdf_clean_up": {
+    "description": "Image to PDF switch."
+  },
+  "img2pdf_clean_up_help": "Crop to the document and improve contrast",
+  "@img2pdf_clean_up_help": {
+    "description": "Image to PDF switch's help line."
+  },
+  "img2pdf_action": "{n, plural, =1{Create PDF · 1 image} other{Create PDF · {n} images}}",
+  "@img2pdf_action": {
+    "description": "Image to PDF's button (§27.3).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "img2pdf_estimate": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 page} other{{pages} pages}} · about {size}",
+  "@img2pdf_estimate": {
+    "description": "Image to PDF's estimate above the button (the frame).",
+    "placeholders": {
+      "pdfs": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "t2_section_images": "Images ({n})",
+  "@t2_section_images": {
+    "description": "T2 input header for an images-only tool (Image to PDF, DK-0433).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "common_add": "Add",
+  "@common_add": {
+    "description": "A compact Add button (T2's image strip)."
+  }
 }
