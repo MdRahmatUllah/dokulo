@@ -540,7 +540,7 @@ Thumbnail for non-PDF files: images show the image; HTML shows a `language` icon
 
 #### DkFolderCard
 
-List row 64 tall: 40 folder icon (tinted with the folder colour tag, default `color.iconSecondary`), name `type.titleS`, meta "8 files" `type.caption`. Grid: 3:4 tile with a large folder glyph. Folder colour tags: Blue #2251E6, Green #13804F, Orange #B54708, Red #C8281E, Purple #6E4AD8, Grey #6B7380.
+List row 64 tall: 40 filled folder icon (tinted with the folder colour tag, default `color.iconSecondary`), name `type.titleS`, meta "8 files" `type.caption`. Grid: 3:4 tile with a large folder glyph. Folder colour tags: Blue #2251E6, Green #13804F, Orange #B54708, Red #C8281E, Purple #6E4AD8, Grey #6B7380.
 
 #### DkResultCard
 
@@ -557,7 +557,7 @@ Headline per tool is listed in section 21.
 
 #### DkLevelCard
 
-Row of 3 equal cards (stack vertically below 360 dp width or at ≥ 160 % text). Each: padding 12, `radius.m`, 1 dp `color.outline`; title `type.titleS` ("Recommended"), estimate `type.titleM` tabular ("≈ 1.9 MB"), description `type.caption` ("Good for email and uploads"). Selected: 2 dp `color.primary` border, 20 check circle top-right, background `color.primaryContainer` @ 50 %.
+Row of 3 equal cards (stack vertically below 360 dp width or at ≥ 160 % text). Each: padding 12, `radius.m`, 1 dp `color.outline`; title `type.labelM`, one line, ellipsis ("Recommended"; titleS doesn't fit a third of a phone, DK-0983), estimate `type.titleM` tabular ("≈ 1.9 MB"), description `type.caption` ("Good for email and uploads"). Selected: 2 dp `color.primary` border, 20 check circle on the top-right corner (−9 / −9, a 2 dp `color.surface` ring), background `color.primaryContainer` @ 50 %.
 
 #### DkModelCard
 
