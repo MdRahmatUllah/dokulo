@@ -32,6 +32,7 @@ void main() {
   late FileEntry input;
   late List<String> partFiles;
   var saves = 0;
+  final elsewhere = <(String, String)>[];
 
   setUp(() {
     root = Directory.systemTemp.createTempSync('dk_t3_');
@@ -41,6 +42,7 @@ void main() {
     );
     db = DokuloDatabase.memory();
     saves = 0;
+    elsewhere.clear();
   });
   tearDown(() async {
     await db.close();
@@ -91,6 +93,10 @@ void main() {
         hapticsProvider.overrideWithValue(
           DkHaptics(medium: () async => saves++),
         ),
+        saveElsewhereProvider.overrideWithValue((path, name) async {
+          elsewhere.add((path, name));
+          return true;
+        }),
       ],
     );
     addTearDown(container.dispose);
@@ -215,6 +221,86 @@ void main() {
     await settle(tester);
     expect(find.text('Start'), findsOneWidget);
     expect(output.existsSync(), isFalse, reason: 'nothing kept');
+  });
+
+  testWidgets('Replace original (DK-0380): the split menu, the dialog, the '
+      'output over the file, the original in Versions, Undo for 10 s', (
+    tester,
+  ) async {
+    await pumpT3(tester);
+    final original = File(input.path).readAsBytesSync();
+    // A different result, so a replace shows.
+    await tester.runAsync(
+      () => File(output.path).writeAsBytes([...original, 0x0A]),
+    );
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    expect(find.text('Save as copy'), findsOneWidget);
+    await tester.tap(find.text('Replace original'));
+    await settle(tester);
+    expect(find.text('Replace the original file?'), findsOneWidget);
+    expect(
+      find.text('The original will be kept in Versions for 30 days.'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Replace'));
+    await settle(tester);
+    expect(File(input.path).lengthSync(), original.length + 1);
+    final versions = await tester.runAsync(() => db.select(db.versions).get());
+    expect(versions, hasLength(1));
+    expect(File(versions!.single.path).readAsBytesSync(), original);
+    expect(find.text('Replaced'), findsOneWidget);
+    expect(bar(tester).label, 'Done');
+    expect(saves, 1);
+    final toast = tester.widget<SnackBar>(find.byType(SnackBar));
+    expect(toast.duration, const Duration(seconds: 10));
+
+    await tester.tap(find.text('Undo'));
+    await settle(tester);
+    expect(File(input.path).readAsBytesSync(), original);
+  });
+
+  testWidgets('a multi-file result: Save as copy and Save to…, no Replace', (
+    tester,
+  ) async {
+    await pumpT3(tester, parts: 3);
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    expect(find.text('Save to…'), findsOneWidget);
+    expect(find.text('Replace original'), findsNothing);
+  });
+
+  testWidgets('Save to… (DK-0385): the folder picker, then Save here saves '
+      'there; the row shows the folder', (tester) async {
+    await pumpT3(tester);
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    await tester.tap(find.text('Save to…'));
+    await settle(tester);
+    // From Taxes up to the root, then Save here.
+    await tester.tap(find.text('Files').last);
+    await settle(tester);
+    await tester.tap(find.text('Save here'));
+    await settle(tester);
+    final saved = File(
+      '${store.userFolder.path}${sep}Mietvertrag – compressed.pdf',
+    );
+    expect(saved.existsSync(), isTrue);
+    expect(find.text('Save to: Files'), findsOneWidget);
+    expect(bar(tester).label, 'Done');
+  });
+
+  testWidgets('Save to… › Save outside Dokulo…: the system dialog gets the '
+      'file and its name', (tester) async {
+    await pumpT3(tester);
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    await tester.tap(find.text('Save to…'));
+    await settle(tester);
+    await tester.tap(find.text('Save outside Dokulo…'));
+    await settle(tester);
+    expect(elsewhere, [(output.path, 'Mietvertrag – compressed.pdf')]);
+    expect(find.text('Saved'), findsOneWidget);
   });
 
   testWidgets('a short job closes silently', (tester) async {

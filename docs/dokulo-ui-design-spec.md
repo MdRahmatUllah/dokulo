@@ -540,7 +540,7 @@ Thumbnail for non-PDF files: images show the image; HTML shows a `language` icon
 
 #### DkFolderCard
 
-List row 64 tall: 40 folder icon (tinted with the folder colour tag, default `color.iconSecondary`), name `type.titleS`, meta "8 files" `type.caption`. Grid: 3:4 tile with a large folder glyph. Folder colour tags: Blue #2251E6, Green #13804F, Orange #B54708, Red #C8281E, Purple #6E4AD8, Grey #6B7380.
+List row 64 tall: 40 filled folder icon (tinted with the folder colour tag, default `color.iconSecondary`), name `type.titleS`, meta "8 files" `type.caption`. Grid: 3:4 tile with a large folder glyph. Folder colour tags: Blue #2251E6, Green #13804F, Orange #B54708, Red #C8281E, Purple #6E4AD8, Grey #6B7380.
 
 #### DkResultCard
 
@@ -557,7 +557,7 @@ Headline per tool is listed in section 21.
 
 #### DkLevelCard
 
-Row of 3 equal cards (stack vertically below 360 dp width or at ≥ 160 % text). Each: padding 12, `radius.m`, 1 dp `color.outline`; title `type.titleS` ("Recommended"), estimate `type.titleM` tabular ("≈ 1.9 MB"), description `type.caption` ("Good for email and uploads"). Selected: 2 dp `color.primary` border, 20 check circle top-right, background `color.primaryContainer` @ 50 %.
+Row of 3 equal cards (stack vertically below 360 dp width or at ≥ 160 % text). Each: padding 12, `radius.m`, 1 dp `color.outline`; title `type.labelM`, one line, ellipsis ("Recommended"; titleS doesn't fit a third of a phone, DK-0983), estimate `type.titleM` tabular ("≈ 1.9 MB"), description `type.caption` ("Good for email and uploads"). Selected: 2 dp `color.primary` border, 20 check circle on the top-right corner (−9 / −9, a 2 dp `color.surface` ring), background `color.primaryContainer` @ 50 %.
 
 #### DkModelCard
 
@@ -1249,7 +1249,7 @@ Each tool fills the shell from section 20. Format per tool: identity, input, opt
 
 - **Description:** Turn photos and images into a PDF. / Wandle Fotos und Bilder in eine PDF um.
 - **Input:** 1–500 images; shown in a `DkPageTray`-style horizontal strip with reorder.
-- **Options:** Page size · segmented · Fit image · A4 · Letter (Fit image); Margins · segmented · None · Small (None); Output · segmented · One PDF · One per image (One PDF); Clean up like a scan · switch · off (help: "Crop to the document and improve contrast").
+- **Options:** Page size · segmented · Fit image · A4 · Letter (Fit image; Fit image gives each page the image's proportions with A4's long side, A4 and Letter turn to a landscape image); Margins · segmented · None · Small (None; Small is 24 pt); Output · segmented · One PDF · One per image (One PDF); Clean up like a scan · switch · off (help: "Crop to the document and improve contrast").
 - **Button:** "Create PDF · 12 images" / "PDF erstellen · 12 Bilder".
 - **Result:** "1 PDF · 12 pages · 4.1 MB". Next: Compress · Make text searchable.
 - **Errors:** unsupported file → banner "2 files aren't images and were skipped."
