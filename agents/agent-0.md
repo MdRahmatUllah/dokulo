@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1095 Device check: the native channels (notifications, mail, links) on Android — claimed 2026-10-10 08:43.
 
 ## Next
 
