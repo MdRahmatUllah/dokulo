@@ -1,3 +1,5 @@
+import 'dart:ui' show ImageFilter;
+
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
@@ -51,6 +53,7 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
     this.titleIcon,
     this.titlePro = false,
     this.trailing,
+    this.translucent = false,
   }) : onCancel = null,
        onDone = null,
        onDoneLongPress = null,
@@ -76,6 +79,7 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
        titleIcon = null,
        titlePro = false,
        trailing = null,
+       translucent = false,
        _editing = true;
 
   final String? title;
@@ -85,6 +89,9 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
 
   /// The Pro badge after the title (T2 of a Pro tool).
   final bool titlePro;
+
+  /// `color.surface` at 94 % with the content blurred behind (V1, §17.1).
+  final bool translucent;
   final DkTopBarLeading leading;
 
   /// Back or close; `Navigator.maybePop` when null.
@@ -210,6 +217,7 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
     // Scaffold gives the bar its height plus the status bar's: pad for it.
     return _BarSurface(
       hairline: scrolledUnder,
+      translucent: widget.translucent,
       child: SafeArea(
         bottom: false,
         child: SizedBox(
@@ -461,16 +469,22 @@ class _LargeBar extends SliverPersistentHeaderDelegate {
 /// The bar's `surface`, with a 1 dp `outline` hairline at the bottom when
 /// content is under it.
 class _BarSurface extends StatelessWidget {
-  const _BarSurface({required this.hairline, required this.child});
-  final bool hairline;
+  const _BarSurface({
+    required this.hairline,
+    required this.child,
+    this.translucent = false,
+  });
+  final bool hairline, translucent;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    return DecoratedBox(
+    final bar = DecoratedBox(
       decoration: BoxDecoration(
-        color: t.color.surface,
+        color: translucent
+            ? t.color.surface.withValues(alpha: 0.94)
+            : t.color.surface,
         border: Border(
           bottom: BorderSide(
             color: hairline ? t.color.outline : t.color.surface,
@@ -479,6 +493,14 @@ class _BarSurface extends StatelessWidget {
       ),
       child: Material(type: MaterialType.transparency, child: child),
     );
+    return translucent
+        ? ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              child: bar,
+            ),
+          )
+        : bar;
   }
 }
 
