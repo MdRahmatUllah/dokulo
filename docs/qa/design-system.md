@@ -13,6 +13,7 @@
 | DK-0853, DK-0854, DK-0857 | `12-tool-shell/` savemenu, replace, replaced (Light, Dark; phone) | The same QA board: T3's split Save menu (Save as copy · Replace original · Save to…), then Replace original (the dialog), then Replace (the toast and Done) | Match, 2 approved, below |
 | DK-0799, DK-0800, DK-0801, DK-0802, DK-0803 | `09-organize-pages/` organize-drag, -selected, -insert, -deleted, -pinch (Light, Dark; phone) | Goldens in the gate, `organize_<state>_<theme>` in `packages/app_pdf/test/screens/organize_screen_test.dart`: P1 with 12 pages, page 5 long-pressed and held between 8 and 9, the navigator's overlay included; side by side with the frame in [organize/](organize/) | 5 deviations fixed, 3 approved, 1 follow-up, below |
 | DK-0804, DK-0805 | `09-organize-pages/` organize-large, organize-savemenu (Light, Dark; phone) | Goldens in the gate, `organize_large_<theme>` (300 pages scrolled to 142–150) and `organize_savemenu_<theme>` (Save long-pressed) | 2 deviations fixed, 1 spec gap filled, below |
+| DK-0967, DK-0968 | `24-tablet/` tablet-organize-landscape, -portrait (Light, Dark) | Goldens in the gate, `organize_tablet_<orientation>` (1366 × 1024, 820 × 1180; 16 pages, 3 and 6 selected) | Match after DK-0651, 1 approved, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
@@ -312,3 +313,13 @@ Large and the Save menu (DK-0804, DK-0805):
   §27.3); it was "{name} (2).pdf" with "Saved to Files › …".
 - The 300-page document matches: virtualised, skeletons with their numbers
   until a page renders.
+
+Tablets (DK-0651; QA DK-0967, DK-0968):
+
+- P1 on a tablet: 5 columns portrait, 8 landscape, 24 at the sides; the
+  title stays while selecting and the sub-bar says "16 pages · 2 selected";
+  one centred row of actions (icon and label side by side, `textPrimary`):
+  Rotate · Duplicate · Extract · Delete · Insert pages, which replaces the +
+  and the selection bar. Rotating keeps the edit, the selection and Undo.
+- Approved: the portrait frame (drawn mid-drag) shows no bottom row; the
+  actions stay, as in landscape.
