@@ -21,8 +21,9 @@ Future<GoRouter> pumpTools(
   int ram = 8 * _gib,
   Locale locale = const Locale('en'),
   DkTokens? tokens,
+  Size size = const Size(393, 852),
 }) async {
-  tester.view.physicalSize = const Size(393, 852);
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
   final router = GoRouter(

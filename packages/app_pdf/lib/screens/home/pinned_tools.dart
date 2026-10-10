@@ -16,6 +16,7 @@ import '../../patterns/dk_undo.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/files_providers.dart';
 import '../../routes/routes.dart';
+import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../../tools/tool_catalogue.dart';
 
@@ -135,16 +136,12 @@ class _PinnedState extends ConsumerState<PinnedToolsSection> {
           // (DK-0254); on tablets 6, or 8 from 840 dp (UI spec §30).
           sliver: SliverLayoutBuilder(
             builder: (context, box) => SliverGrid.count(
-              crossAxisCount: _columns(box.crossAxisExtent, large: large),
+              crossAxisCount: large ? 2 : toolColumns(box.crossAxisExtent),
               mainAxisSpacing: t.space.m,
               crossAxisSpacing: t.space.m,
-              // A phone's tile is 0.78 wide to tall; on a tablet, the same
-              // 108 dp of height in a wider column.
               childAspectRatio: large
                   ? 1.0
-                  : _columns(box.crossAxisExtent, large: false) == 4
-                  ? 0.78
-                  : _tileWidth(box.crossAxisExtent, t.space.m) / 108,
+                  : toolTileAspect(box.crossAxisExtent, t.space.m),
               children: [
                 for (final (i, id) in pinned.indexed)
                   if (_editing)
@@ -387,19 +384,4 @@ class _AddToolListState extends State<_AddToolList> {
       ],
     );
   }
-}
-
-/// 4 tiles across on a phone, 6 from 600 dp, 8 from 840 (UI spec §30); 2 at
-/// large text (DK-0254).
-int _columns(double width, {required bool large}) => large
-    ? 2
-    : width >= 840
-    ? 8
-    : width >= 600
-    ? 6
-    : 4;
-
-double _tileWidth(double width, double gap) {
-  final n = _columns(width, large: false);
-  return (width - (n - 1) * gap) / n;
 }
