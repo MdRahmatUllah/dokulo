@@ -9874,3 +9874,7 @@ heavy: free (agent-1, exit 0)
 ### H-2186 · 2026-10-10 04:57 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-2187 · 2026-10-10 04:57 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0733-qa-files)
