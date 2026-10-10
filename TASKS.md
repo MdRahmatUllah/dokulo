@@ -284,7 +284,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0260 | Ph1 | B | P0 | L | Build F1 Files root: top bar actions, search, special rows, folders, files | done | agent-1 | DK-0229 DK-0005 DK-0006 DK-0086 DK-0088 DK-0164 DK-0172 DK-0126 | #1235 |
 | DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | done | agent-1 | DK-0260 DK-0188 | #1235 |
 | DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | done | agent-1 | DK-0260 DK-0188 DK-0164 | #1243 |
-| DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | assigned | agent-1 | DK-0260 DK-0222 DK-0188 DK-0172 |  |
+| DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | done | agent-1 | DK-0260 DK-0222 DK-0188 DK-0172 | #1321 |
 | DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | done | agent-1 | DK-0260 DK-0223 | #1262 |
 | DK-0265 | Ph1 | B | P0 | S | F1 Files: implement the "Empty root" state | done | agent-1 | DK-0260 DK-0054 | #1235 |
 | DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | done | agent-1 | DK-0260 DK-0055 | #1243 |
@@ -10618,3 +10618,7 @@ DK-1093 (V1 search (bar, highlights, no-text banner), reachable from Files searc
 ### H-2369 · 2026-10-10 08:34 · agent-0 → agent-1 · note
 
 heavy: mine (agent-0, gate DK-1094)
+
+### H-2370 · 2026-10-10 08:35 · agent-1 → all · report · DK-0263
+
+DK-0263 (Files multi-select with selection bar actions) is done, merged as #1321. F1 selection mode: long press/Select, DkSelectionBar (Share off, Move, Merge ≥2 PDFs in order, Compress, More via DkBarAction.menu); DkSelection.enter(); Run a tool… → Tools until X1 (DK-0387) Now ready: DK-0736, DK-0752.
