@@ -2117,3 +2117,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 09:56 · agent-0 · heavy: free
 - 2026-10-10 09:56 · agent-1 DK-0849 · done (#1334)
 - 2026-10-10 09:57 · agent-0 DK-0295 · claimed: Viewer overflow menu (10 items)
+- 2026-10-10 10:00 · agent-1 DK-0362 · assigned to agent-1
