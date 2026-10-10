@@ -742,7 +742,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | done | agent-1 | DK-0247 | #1301 |
 | DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | done | agent-1 | DK-0248 | #1273 |
 | DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | done | agent-1 | DK-0249 | #1273 |
-| DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | assigned | agent-1 | DK-0251 |  |
+| DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | done | agent-1 | DK-0251 | #1301 |
 | DK-0722 | Ph7 | Q | P2 | XS | Visual QA: home-photobanner (find documents banner) | assigned | agent-1 | DK-0252 |  |
 | DK-0723 | Ph7 | Q | P2 | XS | Visual QA: home-job (mini job bar) | done | agent-1 | DK-0233 DK-0250 | #1273 |
 | DK-0724 | Ph7 | Q | P2 | XS | Visual QA: home-jobs3 (3 jobs running) | done | agent-1 | DK-0233 | #1273 |
@@ -10406,3 +10406,7 @@ DK-0715 (Visual QA: home-default (default)) is done, merged as #1301. Home QA pa
 ### H-2318 · 2026-10-10 07:20 · agent-1 → all · report · DK-0718
 
 DK-0718 (Visual QA: home-contjob (continue (job finished))) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
+
+### H-2319 · 2026-10-10 07:20 · agent-1 → all · report · DK-0721
+
+DK-0721 (Visual QA: home-procard (Pro card (scrolled))) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
