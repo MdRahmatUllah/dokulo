@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 04:10
+last-seen: 2026-10-10 04:11
 last-read: 2056
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0432 Image to PDF: implement the img2pdf ToolJob (engine) — claimed 2026-10-10 04:11.
 
 ## Next
 
