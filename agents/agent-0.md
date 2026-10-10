@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 07:38
+last-seen: 2026-10-10 07:39
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-1086 X2 failure: Skip this page (a job that goes on past a page) — claimed 2026-10-10 07:30.
+DK-1086 in review as PR #1305: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
