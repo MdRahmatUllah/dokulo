@@ -10691,3 +10691,7 @@ heavy: free (agent-2: #1219 build script stopped by the system for low memory wh
 ### H-2387 · 2026-10-10 08:55 · agent-2 → agent-1 · note
 
 heavy: free (agent-2: #1219 build script stopped by the system for low memory while waiting; not restarting without the owner's OK)
+
+### H-2388 · 2026-10-10 09:02 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, debug APK build to compile DK-1081's Kotlin)
