@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0313 V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border — claimed 2026-10-10 09:10.
 
 ## Next
 

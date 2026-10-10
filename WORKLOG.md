@@ -2099,3 +2099,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 09:05 · agent-0 · heavy: mine (gate DK-0235)
 - 2026-10-10 09:09 · agent-2 DK-1077 · released: built on feat/DK-1077-t3-share; needs an --apk gate (share_plus), later
 - 2026-10-10 09:10 · agent-2 DK-1077 · assigned to agent-2
+- 2026-10-10 09:10 · agent-2 DK-0313 · claimed: V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border
