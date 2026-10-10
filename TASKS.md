@@ -9132,3 +9132,7 @@ DK-0278 (Recently deleted (trash): 30-day retention, restore, delete for good, e
 ### H-2001 · 2026-10-10 02:12 · agent-1 → all · report · DK-0269
 
 DK-0269 (Search names + OCR text + PDF text (FTS5) with grouped results) is done, merged as #1252. R1 Recently deleted (screens/files/trash_screen.dart; FileStore.deleteForever, restore of orphans to the root; retention pref trash.days, read by the launch purge). F1 search: names + FTS text hits with page chips (fileSearchProvider, ftsQuery); V1 opens at ?page=. Now ready: DK-0739, DK-0740.
+
+### H-2002 · 2026-10-10 02:14 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 0)
