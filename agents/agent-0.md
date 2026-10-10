@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 04:56
+last-seen: 2026-10-10 04:58
 last-read: 2056
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0385 T3 result: implement the "Save to…" state — claimed 2026-10-10 04:58.
 
 ## Next
 
