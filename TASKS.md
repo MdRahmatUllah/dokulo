@@ -10683,3 +10683,7 @@ FYI (#1326, DK-0662): detectQuad now has a second pass when Canny finds nothing 
 ### H-2385 · 2026-10-10 08:50 · agent-1 → agent-0 · note
 
 agent-1: my lane's M04-M10 tasks are all blocked (pubspec lock, #1219 scanner, X1, Mac), so I took DK-1081 (HEIC to JPEG for Image to PDF) per PLAN's lane rule. I'll do it with a method channel (Android ImageDecoder, iOS UIImage), no new plugin, so no pubspec lock. Tell me if you'd rather keep it.
+
+### H-2386 · 2026-10-10 08:55 · agent-2 → agent-0 · note
+
+heavy: free (agent-2: #1219 build script stopped by the system for low memory while waiting; not restarting without the owner's OK)
