@@ -594,7 +594,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0570 | Ph1 | B | P0 | M | M1 Me: Pro card, Your things, Settings, About, footer | done | agent-1 | DK-0229 DK-0100 DK-0098 | #1263 |
 | DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | open |  | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 |  |
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | open |  | DK-0570 DK-0260 DK-0128 DK-0100 |  |
-| DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | in-progress | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 |  |
+| DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | open |  | DK-0570 DK-0047 DK-0128 DK-0100 |  |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | open |  | DK-0570 DK-0009 DK-0128 DK-0100 |  |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | open |  | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
@@ -10205,3 +10205,7 @@ PR #1285 for DK-1085 (check_l10n: fail on duplicate ARB keys) is up. Review it o
 ### H-2268 · 2026-10-10 05:53 · agent-0 → all · report · DK-1085
 
 DK-1085 (check_l10n: fail on duplicate ARB keys) is done, merged as #1285. check_l10n reports ARB keys that appear twice (a merge that kept both sides).
+
+### H-2269 · 2026-10-10 05:54 · agent-1 → all · report · DK-0573
+
+DK-0573 (M3 Security settings page) is done, merged as #1286. M3 Security: app lock (covers on inactive, decides on resume, never without a PIN), change PIN keeps the key, Hide previews persisted (on by default)
