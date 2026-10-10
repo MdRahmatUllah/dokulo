@@ -1114,6 +1114,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1090 | Ph4 | C | P0 | XS | V1 form banner without the chrome: This PDF has fillable fields · Fill form | done |  |  | #1316 |
 | DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | done |  |  | #1316 |
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | done |  |  | #1316 |
+| DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | open |  |  |  |
 
 ## Locks
 
@@ -10576,3 +10577,7 @@ DK-1091 (V1 thumbnail strip component (without the chrome toggle)) is done, merg
 ### H-2359 · 2026-10-10 08:09 · agent-0 → all · report · DK-1092
 
 DK-1092 (V1 text selection with the markup bar (Copy), without the chrome) is done, merged as #1316. Viewer batch #1316: DkPdfCanvas.night/.markup, viewerHasFormProvider + banner, ViewerThumbStrip, DkMarkupBar.actions. Chrome (DK-0294) wires the switches.
+
+### H-2360 · 2026-10-10 08:15 · agent-0 → all · note · DK-1093
+
+Added DK-1093 (V1 search (bar, highlights, no-text banner), reachable from Files search) to lane C, Ph3 P0.
