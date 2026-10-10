@@ -1116,6 +1116,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | done |  |  | #1316 |
 | DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | done | agent-0 |  | #1320 |
 | DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | done | agent-0 |  | #1322 |
+| DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | open |  |  |  |
 
 ## Locks
 
@@ -10654,3 +10655,7 @@ heavy: mine (agent-0, device test on emulator-5554)
 ### H-2378 · 2026-10-10 08:43 · agent-0 → agent-1 · note
 
 heavy: free (agent-0)
+
+### H-2379 · 2026-10-10 08:43 · agent-0 → all · note · DK-1095
+
+Added DK-1095 (Device check: the native channels (notifications, mail, links) on Android) to lane Q, Ph3 P1.
