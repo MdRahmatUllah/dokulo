@@ -2056,3 +2056,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 07:47 · agent-0 DK-1088 · claimed: V1 dialogs without the chrome: Go to page, external link (and in-file links)
 - 2026-10-10 07:52 · agent-0 DK-1089 · added: V1 night mode rendering (canvas and pages), without the chrome
 - 2026-10-10 07:54 · agent-0 DK-1090 · added: V1 form banner without the chrome: This PDF has fillable fields · Fill form
+- 2026-10-10 07:56 · agent-0 DK-1088 · PR #1311 open; review requested from all

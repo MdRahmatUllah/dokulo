@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 07:55
+last-seen: 2026-10-10 07:56
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-1088 V1 dialogs without the chrome: Go to page, external link (and in-file links) — claimed 2026-10-10 07:47.
+DK-1088 in review as PR #1311: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
