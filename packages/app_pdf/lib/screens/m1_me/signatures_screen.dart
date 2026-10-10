@@ -4,6 +4,7 @@ import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../components/dk_toast.dart';
 import '../../components/dk_banner.dart';
 import '../../components/dk_box_frame.dart';
 import '../../components/dk_icon.dart';
@@ -36,16 +37,27 @@ class SignaturesScreen extends ConsumerWidget {
     final saved = ref.watch(signaturesProvider).value ?? const [];
     final locale = Localizations.localeOf(context).toLanguageTag();
 
+    // The notifier is read before any await: the screen may be gone by
+    // then (DK-1083); a failure says so instead of losing the signature.
+    final signatures = ref.read(signaturesProvider.notifier);
+    Future<void> guarded(Future<void> Function() action) async {
+      try {
+        await action();
+      } catch (_) {
+        if (context.mounted) showDkToast(context, l.error_unexpected_short);
+      }
+    }
+
     Future<void> add(SignatureKind kind) async {
       final result = await addSignature(context);
       if (result == null) return;
       final (png, ink) = result;
-      await ref.read(signaturesProvider.notifier).add(kind, png, inkOf(ink));
+      await guarded(() => signatures.add(kind, png, inkOf(ink)));
     }
 
     Future<void> remove(int id) async {
       if (await confirmDk(context, DkConfirmation.removeSignature)) {
-        await ref.read(signaturesProvider.notifier).delete(id);
+        await guarded(() => signatures.delete(id));
       }
     }
 

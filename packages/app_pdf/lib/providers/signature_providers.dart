@@ -42,7 +42,8 @@ class Signatures extends _$Signatures {
   @override
   Future<List<(SavedSignature, Uint8List)>> build() async {
     final store = await ref.watch(signatureStoreProvider.future);
-    return [for (final s in await store.list()) (s, await store.image(s.id))];
+    // One that can't open is dropped, not the whole list (DK-1083).
+    return store.readable();
   }
 
   Future<void> add(SignatureKind kind, Uint8List png, SignatureInk ink) async {
