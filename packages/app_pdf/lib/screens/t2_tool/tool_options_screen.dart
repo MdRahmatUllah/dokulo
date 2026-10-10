@@ -34,6 +34,7 @@ import '../../crash/crash_log.dart';
 import '../../providers/crash_providers.dart';
 import '../../providers/device_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/image_providers.dart';
 import '../../providers/mail_providers.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../routes/routes.dart';
@@ -145,9 +146,21 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     ToolInput input, {
     required bool photos,
   }) async {
-    final paths = await ref.read(devicePickerProvider)(input, photos: photos);
-    if (paths.isEmpty) return;
+    final raw = await ref.read(devicePickerProvider)(input, photos: photos);
+    if (raw.isEmpty) return;
     final store = await ref.read(fileStoreProvider.future);
+    // HEIC photos as JPEGs (DK-1081); one the phone can't open is skipped.
+    final (:paths, :skipped) = await prepareImages(
+      raw,
+      store,
+      ref.read(heicDecoderProvider),
+    );
+    if (skipped > 0 && mounted) {
+      showDkToast(
+        context,
+        AppLocalizations.of(context).images_heic_skipped(skipped),
+      );
+    }
     final picked = <FileEntry>[];
     for (final path in paths) {
       if (!input.takes(path)) continue;

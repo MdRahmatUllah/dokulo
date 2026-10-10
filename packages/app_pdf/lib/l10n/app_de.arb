@@ -636,5 +636,6 @@
   "viewer_tools": "Werkzeuge",
   "x1_files": "{n, plural, one{1 Datei} other{{n} Dateien}}",
   "x1_pdfs": "{n, plural, one{1 PDF} other{{n} PDFs}}",
-  "x1_images": "{n, plural, one{1 Bild} other{{n} Bilder}}"
+  "x1_images": "{n, plural, one{1 Bild} other{{n} Bilder}}",
+  "images_heic_skipped": "{n, plural, one{1 HEIC-Foto lässt sich auf diesem Handy nicht öffnen und wurde übersprungen.} other{{n} HEIC-Fotos lassen sich auf diesem Handy nicht öffnen und wurden übersprungen.}}"
 }
