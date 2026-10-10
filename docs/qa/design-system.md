@@ -340,4 +340,7 @@ The failure state of an unexpected error has its tertiary "Send report by
 email" (tool-shell-failure): a draft in the user's mail app with the code,
 the device facts and the local crash log (`reportEmail`), through the
 `dokulo/mail` channel; "No email app found." when none takes it.
-"Skip this page" needs the engine's support: DK-1086.
+"Skip this page" (DK-1086): for a tool whose job can leave a failed page
+as it is (`ToolDefinition.canSkipPages`; Compress and Image to PDF's jobs
+take `skipPages`), it reruns with the page skipped; the failure now has the
+frame's three buttons.

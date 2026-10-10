@@ -33,6 +33,7 @@ import '../../providers/prefs_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_folder_tags.dart';
 import '../../theme/dk_tokens.dart';
+import 'file_preview_pane.dart';
 
 /// F1 · Files, the root (DK-0260; UI spec §16.1): the large top bar with the
 /// view toggle, sort and New folder; the search field; the Locked folder and
@@ -71,8 +72,11 @@ class FilesScreen extends ConsumerWidget {
 
     final loading = !folders.hasValue || !files.hasValue;
     final empty = !loading && folders.value!.isEmpty && files.value!.isEmpty;
+    // A large tablet: the list (360) and the preview pane (DK-0279, §30).
+    final wide = MediaQuery.sizeOf(context).width >= _twoPaneFrom;
+    final grid = view.grid && !wide;
 
-    return Scaffold(
+    final list = Scaffold(
       backgroundColor: t.color.background,
       body: DkRefresh(
         onRefresh: () async {
@@ -93,11 +97,14 @@ class FilesScreen extends ConsumerWidget {
               DkLargeTopBar(
                 title: l.shell_tab_files,
                 actions: [
-                  DkTopBarAction(
-                    icon: view.grid ? DkIcons.listView : DkIcons.gridView,
-                    tooltip: view.grid ? l.files_list_view : l.files_grid_view,
-                    onPressed: () => prefs.set('files.grid', !view.grid),
-                  ),
+                  if (!wide)
+                    DkTopBarAction(
+                      icon: view.grid ? DkIcons.listView : DkIcons.gridView,
+                      tooltip: view.grid
+                          ? l.files_list_view
+                          : l.files_grid_view,
+                      onPressed: () => prefs.set('files.grid', !view.grid),
+                    ),
                   DkTopBarAction.menu(
                     icon: DkIcons.sort,
                     tooltip: l.files_sort,
@@ -168,15 +175,15 @@ class FilesScreen extends ConsumerWidget {
                 // Favourites float to the top (DK-0280).
                 if (favourites.isNotEmpty) ...[
                   _Header(l.files_favourites),
-                  _FileList(files: favourites, grid: view.grid),
+                  _FileList(files: favourites, grid: grid),
                 ],
                 if (folders.value!.isNotEmpty) ...[
                   _Header(l.files_folders),
-                  _FolderList(folders: folders.value!, grid: view.grid),
+                  _FolderList(folders: folders.value!, grid: grid),
                 ],
                 if (files.value!.isNotEmpty) ...[
                   _Header(l.files_files),
-                  _FileList(files: files.value!, grid: view.grid),
+                  _FileList(files: files.value!, grid: grid),
                 ],
                 SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
               ],
@@ -185,6 +192,8 @@ class FilesScreen extends ConsumerWidget {
         ),
       ),
     );
+    if (!wide) return list;
+    return _TwoPanes(files: files.value ?? const [], list: list);
   }
 
   void _sortMenu(
@@ -549,10 +558,11 @@ class _Breadcrumb extends StatelessWidget {
   }
 }
 
-/// Two per row in the grid, so a card's height follows its text.
+/// Two per row in the grid on a phone, four from 600 dp (a tablet, UI spec
+/// §30); rows, so a card's height follows its text.
 Widget _rows(int count, Widget Function(int i) item, {required bool grid}) {
-  return Builder(
-    builder: (context) {
+  return SliverLayoutBuilder(
+    builder: (context, box) {
       final t = context.tokens;
       if (!grid) {
         return SliverList.builder(
@@ -560,22 +570,21 @@ Widget _rows(int count, Widget Function(int i) item, {required bool grid}) {
           itemBuilder: (_, i) => item(i),
         );
       }
+      final per = box.crossAxisExtent >= 600 ? 4 : 2;
       return SliverPadding(
         padding: EdgeInsets.symmetric(horizontal: t.space.l),
         sliver: SliverList.builder(
-          itemCount: (count + 1) ~/ 2,
+          itemCount: (count + per - 1) ~/ per,
           itemBuilder: (_, row) => Padding(
             padding: EdgeInsets.only(bottom: t.space.m),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: t.space.m,
               children: [
-                Expanded(child: item(row * 2)),
-                Expanded(
-                  child: row * 2 + 1 < count
-                      ? item(row * 2 + 1)
-                      : const SizedBox.shrink(),
-                ),
+                for (var i = row * per; i < row * per + per; i++)
+                  Expanded(
+                    child: i < count ? item(i) : const SizedBox.shrink(),
+                  ),
               ],
             ),
           ),
@@ -691,7 +700,9 @@ class FileEntryCard extends ConsumerWidget {
       context.push(Routes.viewer('${file.id}', page: page));
     }
 
-    return DkFileCard(
+    // A large tablet's list: a tap selects for the preview pane (DK-0279).
+    final pane = grid ? null : FilesPane.maybeOf(context);
+    final card = DkFileCard(
       name: file.name,
       // A text hit's meta leaves the date out: the sentence says more.
       meta: hit == null
@@ -733,7 +744,9 @@ class FileEntryCard extends ConsumerWidget {
         AsyncError() => ColoredBox(color: context.tokens.color.pageWhite),
         _ => null,
       },
-      onTap: () => open(page: hit?.page),
+      onTap: pane == null
+          ? () => open(page: hit?.page)
+          : () => pane.onSelect(file),
       onMore: () => showFileActions(context, ref, file),
       // Home: a long-press opens the same sheet (§15.1); F1's long-press
       // selects (DK-0263).
@@ -741,7 +754,120 @@ class FileEntryCard extends ConsumerWidget {
           ? () => showFileActions(context, ref, file)
           : null,
     );
+    if (pane == null || pane.selected != file.id) return card;
+    return Semantics(
+      selected: true,
+      child: ColoredBox(
+        color: t.color.primaryContainer.withValues(alpha: 0.6),
+        child: card,
+      ),
+    );
   }
+}
+
+/// From this width F1 is two panes (UI spec §30, Expanded).
+const _twoPaneFrom = 840.0;
+
+/// Two panes (DK-0279): F1's list at 360, the [FilePreviewPane] beside it.
+/// A tap on a file selects it (no navigation); the arrow keys move the
+/// selection. The first file is selected to start with.
+class _TwoPanes extends StatefulWidget {
+  const _TwoPanes({required this.files, required this.list});
+
+  final List<FileEntry> files;
+  final Widget list;
+
+  @override
+  State<_TwoPanes> createState() => _TwoPanesState();
+}
+
+class _TwoPanesState extends State<_TwoPanes> {
+  int? _selected;
+
+  /// The list pane's: the arrow keys work from the start and after a tap.
+  final _focus = FocusNode(debugLabel: 'files list');
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
+  }
+
+  FileEntry? get _file {
+    final files = widget.files;
+    if (files.isEmpty) return null;
+    return files.firstWhere(
+      (f) => f.id == _selected,
+      orElse: () => files.first,
+    );
+  }
+
+  KeyEventResult _key(FocusNode node, KeyEvent event) {
+    if (event is! KeyDownEvent && event is! KeyRepeatEvent) {
+      return KeyEventResult.ignored;
+    }
+    final step = switch (event.logicalKey) {
+      LogicalKeyboardKey.arrowDown => 1,
+      LogicalKeyboardKey.arrowUp => -1,
+      _ => 0,
+    };
+    final files = widget.files;
+    if (step == 0 || files.isEmpty) return KeyEventResult.ignored;
+    final at = files.indexOf(_file!);
+    setState(
+      () => _selected = files[(at + step).clamp(0, files.length - 1)].id,
+    );
+    return KeyEventResult.handled;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final file = _file;
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        SizedBox(
+          width: 360,
+          child: Focus(
+            focusNode: _focus,
+            autofocus: true,
+            onKeyEvent: _key,
+            child: FilesPane(
+              selected: file?.id,
+              onSelect: (f) {
+                setState(() => _selected = f.id);
+                _focus.requestFocus();
+              },
+              child: widget.list,
+            ),
+          ),
+        ),
+        VerticalDivider(width: 1, thickness: 1, color: t.color.outline),
+        Expanded(child: FilePreviewPane(file: file)),
+      ],
+    );
+  }
+}
+
+/// Inside the two panes: a file row selects instead of opening the viewer.
+class FilesPane extends InheritedWidget {
+  const FilesPane({
+    super.key,
+    required this.selected,
+    required this.onSelect,
+    required super.child,
+  });
+
+  final int? selected;
+  final ValueChanged<FileEntry> onSelect;
+
+  static FilesPane? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FilesPane>();
+
+  @override
+  bool updateShouldNotify(FilesPane oldWidget) =>
+      oldWidget.selected != selected;
 }
 
 /// "2.4 MB · 12 pages · Today 14:32" (UI spec §11.2).

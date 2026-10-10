@@ -37,15 +37,8 @@ class _FileInfo extends ConsumerWidget {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final locale = Localizations.localeOf(context).toLanguageTag();
-    final chain = file.folderId == null
-        ? const <Folder>[]
-        : ref.watch(folderChainProvider(file.folderId!)).value ?? const [];
-    final version = ref.watch(pdfVersionProvider(file.path)).value;
     final versions = ref.watch(fileVersionsProvider(file.id)).value ?? const [];
     final thumb = ref.watch(fileThumbnailProvider(file.path, 96));
-    String stamp(DateTime d) =>
-        '${formatDate(d, locale)}, '
-        '${DateFormat.Hm(locale).format(d)}';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisSize: MainAxisSize.min,
@@ -81,29 +74,7 @@ class _FileInfo extends ConsumerWidget {
           ],
         ),
         SizedBox(height: t.space.m),
-        _Row(
-          l.info_location,
-          [l.shell_tab_files, for (final f in chain) f.name].join(' › '),
-        ),
-        _Row(l.info_size, formatBytes(file.size, locale)),
-        if (file.pages > 0) _Row(l.info_pages, '${file.pages}'),
-        _Row(l.info_created, stamp(file.created)),
-        _Row(l.info_modified, formatWhen(file.modified, l, locale)),
-        if (version != null) _Row(l.info_pdf_version, version),
-        _Row(l.info_password, file.encrypted ? l.common_yes : l.common_no),
-        _Row(
-          l.info_searchable,
-          file.hasText ? l.common_yes : l.common_no,
-          action: file.hasText
-              ? null
-              : DkTextAction(
-                  label: l.banner_make_searchable,
-                  onTap: () {
-                    Navigator.pop(context);
-                    context.push(Routes.tool('ocr', files: ['${file.id}']));
-                  },
-                ),
-        ),
+        FileInfoRows(file, inSheet: true),
         SizedBox(height: t.space.l),
         Semantics(
           header: true,
@@ -126,6 +97,60 @@ class _FileInfo extends ConsumerWidget {
               },
             ),
           ),
+      ],
+    );
+  }
+}
+
+/// The Info rows (UI spec §16.4): Location, Size, Pages, Created, Modified,
+/// PDF version, Password, Searchable text (with Make searchable). The Info
+/// sheet and the tablet's preview pane (DK-0279) show them.
+class FileInfoRows extends ConsumerWidget {
+  const FileInfoRows(this.file, {super.key, this.inSheet = false});
+
+  final FileEntry file;
+
+  /// In the Info sheet, Make searchable closes it first.
+  final bool inSheet;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    final chain = file.folderId == null
+        ? const <Folder>[]
+        : ref.watch(folderChainProvider(file.folderId!)).value ?? const [];
+    final version = ref.watch(pdfVersionProvider(file.path)).value;
+    String stamp(DateTime d) =>
+        '${formatDate(d, locale)}, '
+        '${DateFormat.Hm(locale).format(d)}';
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _Row(
+          l.info_location,
+          [l.shell_tab_files, for (final f in chain) f.name].join(' › '),
+        ),
+        _Row(l.info_size, formatBytes(file.size, locale)),
+        if (file.pages > 0) _Row(l.info_pages, '${file.pages}'),
+        _Row(l.info_created, stamp(file.created)),
+        _Row(l.info_modified, formatWhen(file.modified, l, locale)),
+        if (version != null) _Row(l.info_pdf_version, version),
+        _Row(l.info_password, file.encrypted ? l.common_yes : l.common_no),
+        _Row(
+          l.info_searchable,
+          file.hasText ? l.common_yes : l.common_no,
+          action: file.hasText
+              ? null
+              : DkTextAction(
+                  label: l.banner_make_searchable,
+                  onTap: () {
+                    if (inSheet) Navigator.pop(context);
+                    context.push(Routes.tool('ocr', files: ['${file.id}']));
+                  },
+                ),
+        ),
       ],
     );
   }

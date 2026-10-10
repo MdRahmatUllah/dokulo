@@ -96,8 +96,9 @@ Future<GoRouter> pumpFiles(
   String location = Routes.files,
   List<Override> overrides = const [],
   bool settled = true, // false: a shimmering skeleton never settles
+  Size size = const Size(393, 852),
 }) async {
-  tester.view.physicalSize = const Size(393, 852);
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
   final router = buildRouter(initialLocation: location);
