@@ -408,7 +408,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0384 | Ph3 | C | P0 | S | T3 result: implement the "Multi-file result" state | done | agent-0 | DK-0379 | #1237 |
 | DK-0385 | Ph3 | C | P0 | S | T3 result: implement the "Save to…" state | done | agent-0 | DK-0379 | #1274 |
 | DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | done | agent-0 | DK-0379 | #1239 |
-| DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | assigned | agent-0 | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 |  |
+| DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | done | agent-0 | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 | #1332 |
 | DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | done | agent-0 | DK-0370 DK-0379 | #1246 |
 | DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | assigned | agent-0 | DK-0370 DK-0379 |  |
 | DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | done | agent-2 | DK-0007 | #576 |
@@ -10772,3 +10772,7 @@ PR #1332 for DK-0235 (Receive files from the share sheet / "Open with" (receive_
 ### H-2407 · 2026-10-10 09:31 · agent-0 → all · report · DK-0235
 
 DK-0235 (Receive files from the share sheet / "Open with" (receive_sharing_intent 1.9.0)) is done, merged as #1332. share/Open with: dokulo/incoming channel + DkIncomingFiles (patterns/dk_incoming_files.dart); X1 multi header; x1single DE golden. iOS Open with: DK-1096 Now ready: DK-0387, DK-0598, DK-0600, DK-1096.
+
+### H-2408 · 2026-10-10 09:32 · agent-0 → all · report · DK-0387
+
+DK-0387 (X1 tool picker (share sheet / viewer Tools)) is done, merged as #1332. share/Open with: dokulo/incoming channel + DkIncomingFiles (patterns/dk_incoming_files.dart); X1 multi header; x1single DE golden. iOS Open with: DK-1096 Now ready: DK-0255, DK-0848.
