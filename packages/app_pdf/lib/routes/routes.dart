@@ -13,6 +13,7 @@ import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/p1_organize/organize_screen.dart';
+import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
@@ -185,9 +186,9 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           ),
           StatefulShellBranch(
             routes: [
-              _screen(
-                Routes.me,
-                'M1',
+              GoRoute(
+                path: Routes.me,
+                builder: (context, state) => const MeScreen(),
                 routes: [
                   _screen('models', 'M2'),
                   GoRoute(

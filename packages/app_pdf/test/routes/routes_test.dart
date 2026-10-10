@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/files/files_screen.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
+import 'package:app_pdf/screens/me/me_screen.dart';
 import 'package:app_pdf/screens/onboarding/onboarding_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
@@ -101,7 +102,6 @@ void main() {
   // Every route from a cold start (what a deep link does): the screen, and
   // whether the tab bar shows.
   const coldStarts = {
-    Routes.me: ('M1', true),
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
     Routes.scan: ('S1', false),
@@ -127,6 +127,12 @@ void main() {
   testWidgets('cold start at /tools shows T1 with the tab bar', (tester) async {
     await pumpAt(tester, Routes.tools);
     expect(find.byType(ToolsScreen), findsOneWidget);
+    expect(tabBarShown(tester), isTrue);
+  });
+
+  testWidgets('cold start at /me shows M1 with the tab bar', (tester) async {
+    await pumpAt(tester, Routes.me);
+    expect(find.byType(MeScreen), findsOneWidget);
     expect(tabBarShown(tester), isTrue);
   });
 
