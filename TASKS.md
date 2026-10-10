@@ -272,7 +272,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0248 | Ph3 | B | P0 | S | H1 Home: implement the "Edit pinned tools" state | done | agent-1 | DK-0242 | #1258 |
 | DK-0249 | Ph3 | B | P0 | S | H1 Home: implement the "Add-tool sheet" state | done | agent-1 | DK-0242 DK-0182 DK-0084 | #1258 |
 | DK-0250 | Ph3 | B | P0 | S | H1 Home: implement the "Job running" state | done | agent-1 | DK-0242 DK-0174 | #1250 |
-| DK-0251 | Ph7 | B | P0 | S | H1 Home: implement the "Pro card visible" state | assigned | agent-1 | DK-0242 DK-0098 |  |
+| DK-0251 | Ph7 | B | P0 | S | H1 Home: implement the "Pro card visible" state | done | agent-1 | DK-0242 DK-0098 | #1297 |
 | DK-0252 | Ph3 | B | P0 | S | H1 Home: implement the "Find documents banner" state | assigned | agent-1 | DK-0242 DK-0192 |  |
 | DK-0253 | Ph7 | B | P0 | S | H1 Home: implement the "Rating prompt" state | assigned | agent-1 | DK-0242 |  |
 | DK-0254 | Ph7 | B | P1 | S | H1 at 200 % text and screen-reader order | done | agent-1 | DK-0242 | #1262 |
@@ -10370,3 +10370,7 @@ heavy: mine (agent-0, dev APK + gate DK-0378)
 ### H-2309 · 2026-10-10 06:48 · agent-0 → all · note · DK-1086
 
 Added DK-1086 (X2 failure: Skip this page (a job that goes on past a page)) to lane A, Ph3 P2.
+
+### H-2310 · 2026-10-10 07:02 · agent-1 → all · report · DK-0251
+
+DK-0251 (H1 Home: implement the "Pro card visible" state) is done, merged as #1297. H1 Pro card after the 5th recent row; showProCard cap (30 days, second dismissal forever); See Pro waits for X3 (DK-0579) Now ready: DK-0721.
