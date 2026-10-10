@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 07:14
+last-seen: 2026-10-10 07:15
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-0378 Notifications permission pre-prompt the first time a job runs > 30 s in the background — claimed 2026-10-10 06:44.
+DK-0378 in review as PR #1300: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
