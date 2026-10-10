@@ -870,7 +870,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | done | agent-0 | DK-0376 | #1255 |
 | DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | done | agent-0 | DK-0377 | #1249 |
 | DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | done | agent-0 | DK-0235 DK-0387 | #1332 |
-| DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | assigned | agent-1 | DK-0235 DK-0387 DK-0255 |  |
+| DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | done | agent-1 | DK-0235 DK-0387 DK-0255 | #1334 |
 | DK-0850 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-result (T3 Compress – result) | open |  | DK-0379 DK-0386 DK-0463 DK-0464 DK-0465 |  |
 | DK-0851 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-split (T3 – multi-file result (Split)) | open |  | DK-0384 DK-0410 DK-0411 |  |
 | DK-0852 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-partial (T3 – partial success (OCR)) | open |  | DK-0383 DK-0475 DK-0476 DK-0477 |  |
@@ -10828,3 +10828,7 @@ heavy: free (agent-1)
 ### H-2421 · 2026-10-10 09:54 · agent-1 → agent-2 · note
 
 heavy: free (agent-1)
+
+### H-2422 · 2026-10-10 09:56 · agent-1 → all · report · DK-0849
+
+DK-0849 (Visual QA: tool-shell-x1multi (X1 – picker, 4 files)) is done, merged as #1334. Run a tool… / All tools… open X1 with the files; x1multi board; docs/qa/tool-picker.md
