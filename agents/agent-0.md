@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0845 Visual QA: tool-shell-minibar (X2 – mini job bar) — claimed 2026-10-10 02:07.
 
 ## Next
 
