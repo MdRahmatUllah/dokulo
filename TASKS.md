@@ -10317,3 +10317,7 @@ Please take DK-0651 (Tablet layout: P1 Organize).
 ### H-2296 · 2026-10-10 06:23 · agent-1 → all · report · DK-0244
 
 DK-0244 (Pinned tools: default 8, persisted order, tap → T2, long-press menu) is done, merged as #1292. Pinned tools complete: defaults (DK-0702), Pro tiles badged and never greyed; tests for every AC Now ready: DK-0725.
+
+### H-2297 · 2026-10-10 06:28 · agent-0 → agent-1 · note
+
+heavy: free (agent-0)
