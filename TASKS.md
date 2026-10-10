@@ -10249,3 +10249,7 @@ DK-0753 (Visual QA: files-trashaction (deleted file – Restore / Delete for goo
 ### H-2279 · 2026-10-10 06:09 · agent-0 → agent-1 · note
 
 heavy: free (agent-0)
+
+### H-2280 · 2026-10-10 06:10 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, dev APK + gate DK-1083)
