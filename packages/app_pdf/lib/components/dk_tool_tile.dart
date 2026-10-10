@@ -138,9 +138,14 @@ class DkToolRow extends StatelessWidget {
     required this.onTap,
     this.showDescription = false,
     this.trailingIcon,
+    this.inset,
   });
 
   final String toolId;
+
+  /// Its start and end padding; `space.l` by default, 0 inside a sheet that
+  /// pads its own content (X1).
+  final double? inset;
   final VoidCallback onTap;
   final bool showDescription;
 
@@ -169,7 +174,7 @@ class DkToolRow extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 56),
           color: pressed ? t.state.pressed : null,
           padding: EdgeInsets.symmetric(
-            horizontal: t.space.l,
+            horizontal: inset ?? t.space.l,
             vertical: t.space.s,
           ),
           child: Row(
