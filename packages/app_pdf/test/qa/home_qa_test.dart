@@ -11,7 +11,7 @@ import '../screens/home_screen_test.dart' show pumpHome, settle;
 // Visual QA (DK-0716, DK-0719, DK-0720, DK-0723, DK-0724): the 02-home
 // frames first, edit, addtool, job and jobs3, rendered by the real H1 in the
 // shell at 393 × 852. The goldens sit next to the frames' screenshots in
-// docs/qa/home/; the findings are in docs/qa/home-files.md.
+// docs/qa/home/; the findings are in docs/qa/home.md.
 
 class _Jobs extends RunningJobs {
   _Jobs(this.count);
