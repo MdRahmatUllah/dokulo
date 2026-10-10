@@ -1106,7 +1106,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | open |  | DK-0325 |  |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | open |  | DK-0327 |  |
-| DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | open |  |  |  |
+| DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | in-progress | agent-0 |  |  |
 
 ## Locks
 
