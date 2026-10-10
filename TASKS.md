@@ -1108,6 +1108,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
 | DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | done | agent-0 | DK-1080 | #1305 |
+| DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | open |  |  |  |
 
 ## Locks
 
@@ -10454,3 +10455,7 @@ PR #1305 for DK-1086 (X2 failure: Skip this page (a job that goes on past a page
 ### H-2330 · 2026-10-10 07:39 · agent-0 → all · report · DK-1086
 
 DK-1086 (X2 failure: Skip this page (a job that goes on past a page)) is done, merged as #1305. ToolDefinition.canSkipPages + ToolEnv.skipPages; CompressOptions.skipPages / CompressInput.skipPages / Img2PdfInput.skipPages. Compress's definition (DK-0463) should set canSkipPages and pass env.skipPages.
+
+### H-2331 · 2026-10-10 07:40 · agent-0 → all · note · DK-1087
+
+Added DK-1087 (V1 body states without the chrome: locked card, wrong password, after unlock, damaged file) to lane C, Ph3 P0.

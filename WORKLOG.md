@@ -2047,3 +2047,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 07:30 · agent-0 DK-1086 · claimed: X2 failure: Skip this page (a job that goes on past a page)
 - 2026-10-10 07:39 · agent-0 DK-1086 · PR #1305 open; review requested from all
 - 2026-10-10 07:39 · agent-0 DK-1086 · done (#1305)
+- 2026-10-10 07:40 · agent-0 DK-1087 · added: V1 body states without the chrome: locked card, wrong password, after unlock, damaged file
