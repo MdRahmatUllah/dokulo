@@ -45,16 +45,22 @@ class SignatureStore {
     final part = File('${directory.path}${Platform.pathSeparator}$name.part');
     await part.writeAsBytes(await _cipher.seal(png), flush: true);
     await part.rename(_file(name).path);
-    return _db
-        .into(_db.signatures)
-        .insert(
-          SignaturesCompanion.insert(
-            kind: kind.name,
-            imageRef: name,
-            createdAt: now ?? DateTime.now(),
-            ink: Value(ink.name),
-          ),
-        );
+    try {
+      return await _db
+          .into(_db.signatures)
+          .insert(
+            SignaturesCompanion.insert(
+              kind: kind.name,
+              imageRef: name,
+              createdAt: now ?? DateTime.now(),
+              ink: Value(ink.name),
+            ),
+          );
+    } catch (_) {
+      // No row, no file: nothing points at it.
+      await _file(name).delete();
+      rethrow;
+    }
   }
 
   /// Every saved one, newest first.
@@ -78,15 +84,34 @@ class SignatureStore {
     return _cipher.open(await _file(row.imageRef).readAsBytes());
   }
 
-  /// Deletes [id]: its file, then its row.
+  /// Deletes [id]: its row, then its file (a file left behind points at
+  /// nothing; a row left behind would point at a missing file).
   Future<void> delete(int id) async {
     final row = await (_db.select(
       _db.signatures,
     )..where((r) => r.id.equals(id))).getSingleOrNull();
     if (row == null) return;
+    await (_db.delete(_db.signatures)..where((r) => r.id.equals(id))).go();
     final file = _file(row.imageRef);
     if (await file.exists()) await file.delete();
-    await (_db.delete(_db.signatures)..where((r) => r.id.equals(id))).go();
+  }
+
+  /// The saved ones that open, newest first, with their PNGs (DK-1083). One
+  /// that can never open again (its file gone, or sealed with a key that is
+  /// gone, as after a restore on a new phone) is deleted, so it can't hide
+  /// the others; any other error is passed on.
+  Future<List<(SavedSignature, Uint8List)>> readable() async {
+    final out = <(SavedSignature, Uint8List)>[];
+    for (final s in await list()) {
+      try {
+        out.add((s, await image(s.id)));
+      } on LockedDataException {
+        await delete(s.id);
+      } on PathNotFoundException {
+        await delete(s.id);
+      }
+    }
+    return out;
   }
 
   File _file(String name) =>

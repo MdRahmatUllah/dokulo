@@ -73,4 +73,27 @@ void main() {
     final other = SignatureStore(db, dir, LockedCipher(List.filled(32, 9)));
     expect(other.image(id), throwsA(isA<LockedDataException>()));
   });
+
+  test('readable: one with its file gone is dropped, the others stay '
+      '(DK-1083)', () async {
+    final keep = await store.add(SignatureKind.signature, png);
+    final gone = await store.add(SignatureKind.initials, png);
+    final row = await (db.select(
+      db.signatures,
+    )..where((r) => r.id.equals(gone))).getSingle();
+    await File('${dir.path}${Platform.pathSeparator}${row.imageRef}').delete();
+    final readable = await store.readable();
+    expect([for (final (s, _) in readable) s.id], [keep]);
+    expect([for (final s in await store.list()) s.id], [keep]);
+  });
+
+  test('readable: sealed with a key that is gone, all are dropped, files '
+      'and rows (a restore on a new phone)', () async {
+    await store.add(SignatureKind.signature, png);
+    await store.add(SignatureKind.initials, png);
+    final newKey = SignatureStore(db, dir, LockedCipher(List.filled(32, 9)));
+    expect(await newKey.readable(), isEmpty);
+    expect(await newKey.list(), isEmpty);
+    expect(dir.listSync().whereType<File>(), isEmpty);
+  });
 }

@@ -26,7 +26,8 @@ Future<bool> showDkConfirm(
   bool destructive = false,
   IconData? icon,
 }) async {
-  final chosen = await Navigator.of(context).push<bool>(
+  // Over the tab bar too, as showDialog does (the files-emptytrash frame).
+  final chosen = await Navigator.of(context, rootNavigator: true).push<bool>(
     DkDialogRoute.of(
       context,
       builder: (context) => DkConfirmDialog(

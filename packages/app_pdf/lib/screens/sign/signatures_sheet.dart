@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../components/dk_toast.dart';
 import '../../components/dk_box_frame.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_settings_row.dart';
@@ -124,12 +125,23 @@ class _SignaturesSheet extends ConsumerWidget {
     final initials = prefs[signInitialsKey] == true;
     final settings = ref.read(prefsProvider.notifier);
 
+    // Read before any await: the sheet may be gone by then (DK-1083).
+    final signatures = ref.read(signaturesProvider.notifier);
+    Future<void> guarded(Future<void> Function() action) async {
+      try {
+        await action();
+      } catch (_) {
+        if (context.mounted) showDkToast(context, l.error_unexpected_short);
+      }
+    }
+
     Future<void> add() async {
       final drawn = await openPad(context);
       if (drawn == null) return;
-      await ref
-          .read(signaturesProvider.notifier)
-          .add(SignatureKind.signature, drawn.$1, inkOf(drawn.$2));
+      await guarded(
+        () =>
+            signatures.add(SignatureKind.signature, drawn.$1, inkOf(drawn.$2)),
+      );
     }
 
     final toggles = DkSettingsGroup(
@@ -186,9 +198,7 @@ class _SignaturesSheet extends ConsumerWidget {
                           context,
                           DkConfirmation.removeSignature,
                         )) {
-                          await ref
-                              .read(signaturesProvider.notifier)
-                              .delete(s.$1.id);
+                          await guarded(() => signatures.delete(s.$1.id));
                         }
                       },
                     ),

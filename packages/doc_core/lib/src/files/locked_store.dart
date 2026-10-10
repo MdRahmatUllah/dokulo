@@ -85,7 +85,18 @@ class LockedStore {
     // Write then rename: a crash mid-write never leaves a torn manifest.
     final tmp = File('${_manifest.path}.tmp');
     await tmp.writeAsBytes(sealed, flush: true);
-    await tmp.rename(_manifest.path);
+    // Windows refuses to replace a file another reader has open (a list()
+    // while moving several in, a virus scanner); POSIX never does. A few
+    // short retries, then the error.
+    for (var attempt = 0; ; attempt++) {
+      try {
+        await tmp.rename(_manifest.path);
+        return;
+      } on PathAccessException {
+        if (attempt == 9) rethrow;
+        await Future<void>.delayed(const Duration(milliseconds: 50));
+      }
+    }
   }
 
   /// Moves file [fileId] in: sealed into the vault, checked by opening it
