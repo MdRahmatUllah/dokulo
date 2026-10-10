@@ -320,6 +320,7 @@ class DkPasswordField extends StatefulWidget {
   const DkPasswordField({
     super.key,
     this.label,
+    this.hint,
     this.controller,
     this.error,
     this.helper,
@@ -333,6 +334,9 @@ class DkPasswordField extends StatefulWidget {
   });
 
   final String? label;
+
+  /// The placeholder, when the field has no label above it.
+  final String? hint;
   final TextEditingController? controller;
   final String? error;
   final String? helper;
@@ -376,6 +380,7 @@ class _DkPasswordFieldState extends State<DkPasswordField> {
     };
     return DkTextField(
       label: widget.label,
+      hint: widget.hint,
       controller: _text,
       error: widget.error,
       helper: widget.helper,

@@ -17,6 +17,7 @@ import '../routes/routes.dart';
 import '../screens/files/files_screen.dart' show fileMeta, newFolder;
 import '../theme/dk_tokens.dart';
 import '../tools/tool_catalogue.dart';
+import 'dk_file_info.dart';
 import 'dk_text_dialog.dart';
 import 'dk_undo.dart';
 
@@ -48,6 +49,11 @@ Future<void> showFileActions(
   final l = AppLocalizations.of(context);
   final db = ref.read(appDatabaseProvider);
   final tools = await suggestedTools(db);
+  final favourite =
+      await (db.select(
+        db.favourites,
+      )..where((f) => f.fileId.equals(file.id))).getSingleOrNull() !=
+      null;
   if (!context.mounted) return;
   final locale = Localizations.localeOf(context).toLanguageTag();
   void open() {
@@ -117,6 +123,12 @@ Future<void> showFileActions(
       ],
       [
         DkAction(
+          icon: DkIcons.star,
+          filled: favourite,
+          label: favourite ? l.file_favourite_remove : l.file_favourite_add,
+          onTap: () => setFavourite(db, file.id, !favourite),
+        ),
+        DkAction(
           icon: DkIcons.rename,
           label: l.common_rename,
           onTap: () => renameFile(context, ref, file),
@@ -134,8 +146,13 @@ Future<void> showFileActions(
         DkAction(
           icon: DkIcons.lockedFolder,
           label: l.file_move_to_locked,
-          // The encrypt job comes with DK-0289; until then, the folder.
-          onTap: () => context.push(Routes.lockedFolder),
+          // F2 sets up or unlocks first, then seals it (DK-0289).
+          onTap: () => context.push(Routes.lockedFolder, extra: [file.id]),
+        ),
+        DkAction(
+          icon: DkIcons.info,
+          label: l.common_info,
+          onTap: () => showFileInfo(context, file),
         ),
       ],
       [

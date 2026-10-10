@@ -61,6 +61,7 @@ DkChip chip(WidgetTester tester, String label) => tester.widget<DkChip>(
 );
 
 void main() {
+  searchTests();
   testWidgets('sections in the spec order, each with its count', (
     tester,
   ) async {
@@ -163,5 +164,37 @@ void main() {
     expect(find.text('Werkzeuge suchen'), findsOneWidget);
     expect(find.text('Alle'), findsOneWidget);
     expect(find.text('6 Werkzeuge'), findsOneWidget);
+  });
+}
+
+void searchTests() {
+  testWidgets('search: rows with the count, About for the first', (
+    tester,
+  ) async {
+    await pumpTools(tester);
+    await tester.enterText(find.byType(EditableText), 'shrink');
+    await tester.pumpAndSettle();
+    expect(find.byType(DkToolRow), findsWidgets);
+    expect(find.text('Compress PDF'), findsOneWidget);
+    expect(find.text('About Compress PDF'), findsOneWidget);
+    expect(find.byType(DkChip), findsNothing, reason: 'the chips step aside');
+    await tester.tap(find.text('Cancel'));
+    await tester.pumpAndSettle();
+    expect(find.byType(DkChip), findsWidgets);
+  });
+
+  testWidgets('search: nothing found echoes the query', (tester) async {
+    await pumpTools(tester);
+    await tester.enterText(find.byType(EditableText), 'fax');
+    await tester.pumpAndSettle();
+    expect(find.text('No tool for “fax”'), findsOneWidget);
+    expect(find.text('Try “compress” or “sign”.'), findsOneWidget);
+  });
+
+  testWidgets('search, German: „…“', (tester) async {
+    await pumpTools(tester, locale: const Locale('de'));
+    await tester.enterText(find.byType(EditableText), 'fax');
+    await tester.pumpAndSettle();
+    expect(find.text('Kein Werkzeug für „fax“'), findsOneWidget);
   });
 }
