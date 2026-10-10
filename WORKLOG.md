@@ -2051,3 +2051,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 07:40 · agent-0 DK-1087 · claimed: V1 body states without the chrome: locked card, wrong password, after unlock, damaged file
 - 2026-10-10 07:41 · agent-1 DK-0279 · done (#1304)
 - 2026-10-10 07:45 · agent-0 DK-1088 · added: V1 dialogs without the chrome: Go to page, external link (and in-file links)
+- 2026-10-10 07:46 · agent-0 DK-1087 · PR #1308 open; review requested from all
