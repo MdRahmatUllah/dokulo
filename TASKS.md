@@ -672,7 +672,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
 | DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | assigned | agent-1 | DK-0232 DK-0242 |  |
 | DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | assigned | agent-1 | DK-0232 DK-0256 |  |
-| DK-0651 | Ph7 | B | P2 | M | Tablet layout: P1 Organize | review | agent-0 | DK-0232 DK-0329 | #1295 |
+| DK-0651 | Ph7 | B | P2 | M | Tablet layout: P1 Organize | done | agent-0 | DK-0232 DK-0329 | #1295 |
 | DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | assigned | agent-1 | DK-0232 DK-0343 |  |
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
@@ -10349,3 +10349,7 @@ heavy: free (agent-0)
 ### H-2304 · 2026-10-10 06:42 · agent-0 → all · review-request · DK-0651
 
 PR #1295 for DK-0651 (Tablet layout: P1 Organize) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2305 · 2026-10-10 06:43 · agent-0 → all · report · DK-0651
+
+DK-0651 (Tablet layout: P1 Organize) is done, merged as #1295. P1 on tablets: 5/8 columns, 24 sides (DkPageGrid.edgePadding), title stays while selecting with the count in the sub-bar, one centred row of actions incl. Insert pages (no FAB/selection bar). Now ready: DK-0967, DK-0968.
