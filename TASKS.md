@@ -876,7 +876,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0852 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-partial (T3 – partial success (OCR)) | open |  | DK-0383 DK-0475 DK-0476 DK-0477 |  |
 | DK-0853 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-savemenu (T3 – save menu) | assigned | agent-0 | DK-0379 DK-0385 |  |
 | DK-0854 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replace (T3 – replace original dialog) | assigned | agent-0 | DK-0380 |  |
-| DK-0855 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-discard (T3 – discard dialog) | assigned | agent-0 | DK-0382 |  |
+| DK-0855 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-discard (T3 – discard dialog) | in-progress | agent-0 | DK-0382 |  |
 | DK-0856 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-aftersave (T3 – after Save) | assigned | agent-0 | DK-0381 |  |
 | DK-0857 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replaced (T3 – replaced, Undo) | assigned | agent-0 | DK-0226 DK-0380 |  |
 | DK-0858 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergerange (T2 Merge – page-range sheet) | open |  | DK-0403 DK-0404 DK-0405 |  |
