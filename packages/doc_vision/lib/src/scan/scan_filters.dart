@@ -194,3 +194,71 @@ Uint8List cleanUpImageSync(Uint8List encoded) {
   if (!ok) throw StateError('could not encode .jpg');
   return bytes;
 }
+
+/// A signature from a photo of ink on paper (DK-1084, the pad's Image tab):
+/// the ink found with an adaptive threshold (so uneven light doesn't
+/// matter), cropped to it with a small margin, as a PNG with black ink on
+/// transparency. Throws [FormatException] for something that isn't an image
+/// or has no ink. Call it off the UI isolate.
+Uint8List signatureFromPhotoSync(Uint8List encoded) {
+  final src = cv.imdecode(encoded, cv.IMREAD_GRAYSCALE);
+  if (src.isEmpty) {
+    src.dispose();
+    throw const FormatException('not an image');
+  }
+  final owned = <cv.Mat>[src];
+  try {
+    // Photos are large: work at most 1600 px wide, plenty for a signature.
+    var grey = src;
+    if (src.cols > 1600) {
+      grey = cv.resize(src, (1600, (src.rows * 1600 / src.cols).round()));
+      owned.add(grey);
+    }
+    final blurred = cv.gaussianBlur(grey, (5, 5), 0);
+    owned.add(blurred);
+    final ink = cv.adaptiveThreshold(
+      blurred,
+      255,
+      cv.ADAPTIVE_THRESH_GAUSSIAN_C,
+      cv.THRESH_BINARY_INV,
+      31,
+      15,
+    );
+    owned.add(ink);
+    // Ink is also darker than most of the page: a shadow's edge is a local
+    // step, but far lighter than ink (70 % of the page's mean brightness).
+    final (_, dark) = cv.threshold(
+      blurred,
+      0.7 * cv.mean(blurred).val1,
+      255,
+      cv.THRESH_BINARY_INV,
+    );
+    owned.add(dark);
+    cv.bitwiseAND(ink, dark, dst: ink);
+    final points = cv.findNonZero(ink);
+    owned.add(points);
+    if (points.isEmpty) throw const FormatException('no ink');
+    final vec = cv.VecPoint.fromMat(points);
+    final box = cv.boundingRect(vec);
+    vec.dispose();
+    final margin = (0.04 * (box.width > box.height ? box.width : box.height))
+        .round();
+    final x = (box.x - margin).clamp(0, ink.cols - 1);
+    final y = (box.y - margin).clamp(0, ink.rows - 1);
+    final w = (box.x + box.width + margin).clamp(0, ink.cols) - x;
+    final h = (box.y + box.height + margin).clamp(0, ink.rows) - y;
+    final alpha = ink.region(cv.Rect(x, y, w, h)).clone();
+    owned.add(alpha);
+    final black = cv.Mat.zeros(h, w, cv.MatType.CV_8UC1);
+    owned.add(black);
+    final bgra = cv.merge(cv.VecMat.fromList([black, black, black, alpha]));
+    owned.add(bgra);
+    final (ok, png) = cv.imencode('.png', bgra);
+    if (!ok) throw StateError('could not encode .png');
+    return png;
+  } finally {
+    for (final m in owned) {
+      m.dispose();
+    }
+  }
+}

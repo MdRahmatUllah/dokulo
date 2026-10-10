@@ -1,4 +1,5 @@
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart' show signatureFromPhoto;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,17 +12,23 @@ import '../../components/dk_signature_card.dart';
 import '../../components/dk_signature_pad.dart';
 import '../../components/dk_switch.dart';
 import '../../components/dk_tappable.dart';
+import '../../components/dk_toast.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_empty_states.dart';
 import '../../providers/prefs_providers.dart';
 import '../../providers/signature_providers.dart';
 import '../../theme/dk_tokens.dart';
+import '../../tools/tool_inputs.dart';
+import '../t2_tool/tool_options_providers.dart';
 
 /// The signature pad, full screen and in landscape (DK-0327; UI spec
 /// §17.3). The phone's orientations come back when it closes. Returns the
 /// PNG and its ink, or null.
-Future<(Uint8List, Color)?> openSignaturePad(BuildContext context) async {
+Future<(Uint8List, Color)?> openSignaturePad(
+  BuildContext context, {
+  Future<Uint8List> Function(String path) fromPhoto = signatureFromPhoto,
+}) async {
   await SystemChrome.setPreferredOrientations(const [
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
@@ -36,6 +43,28 @@ Future<(Uint8List, Color)?> openSignaturePad(BuildContext context) async {
             child: DkSignaturePad(
               onCancel: () => Navigator.of(pad).pop(),
               onSave: (png, ink) => Navigator.of(pad).pop((png, ink)),
+              // Image tab (DK-1084): a photo of a signature on paper, its
+              // ink cut out (black). Take photo comes with the camera
+              // (the scanner's, #1219).
+              onChoosePhoto: () async {
+                final paths = await ProviderScope.containerOf(pad).read(
+                  devicePickerProvider,
+                )(ToolInput.of('img2pdf')!, photos: true);
+                if (paths.isEmpty) return;
+                try {
+                  final png = await fromPhoto(paths.first);
+                  if (pad.mounted) {
+                    Navigator.of(pad).pop((png, const Color(0xFF000000)));
+                  }
+                } on FormatException {
+                  if (pad.mounted) {
+                    showDkToast(
+                      pad,
+                      AppLocalizations.of(pad).sign_photo_no_ink,
+                    );
+                  }
+                }
+              },
             ),
           ),
         ),

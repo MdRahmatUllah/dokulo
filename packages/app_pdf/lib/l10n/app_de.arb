@@ -590,5 +590,6 @@
   "app_lock_title": "Dokulo ist gesperrt",
   "app_lock_reason": "Dokulo entsperren",
   "security_app_lock_body": "Beim Öffnen von Dokulo nach {method} oder PIN fragen",
-  "security_unlock_with": "Mit {method} entsperren"
+  "security_unlock_with": "Mit {method} entsperren",
+  "sign_photo_no_ink": "Auf diesem Foto ist keine Unterschrift zu sehen."
 }
