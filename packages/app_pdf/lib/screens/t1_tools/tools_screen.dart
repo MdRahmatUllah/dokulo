@@ -18,6 +18,7 @@ import '../../patterns/dk_about_tool.dart';
 import '../../patterns/dk_ai_not_eligible.dart';
 import '../../providers/device_providers.dart';
 import '../../routes/routes.dart';
+import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../../tools/tool_catalogue.dart';
 import '../../tools/tool_search.dart';
@@ -231,65 +232,74 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     final l = AppLocalizations.of(context);
     _ai = ref.watch(gemmaEligibilityProvider).value;
     final visible = _visible;
-    return Scaffold(
-      backgroundColor: t.color.background,
-      body: NotificationListener<ScrollNotification>(
-        // The page's own scroll, not the chip row's.
-        onNotification: (n) {
-          if (n.depth != 0) return false;
-          if (n is UserScrollNotification &&
-              n.direction != ScrollDirection.idle) {
-            _jumping = false; // the user scrolls: the chips follow again
-          }
-          if (n is ScrollUpdateNotification) _follow();
-          return false;
-        },
-        child: CustomScrollView(
-          controller: _scroll,
-          // Every section built, so a chip can find its section's offset.
-          // ponytail: fine for ~30 tiles; measure offsets instead if T1
-          // ever grows to hundreds.
-          scrollCacheExtent: const ScrollCacheExtent.pixels(10000),
-          slivers: [
-            // Searching, the field moves up in the title's place (the
-            // tools-search frame).
-            if (_query.isEmpty)
-              DkLargeTopBar(title: l.shell_tab_tools)
-            else
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: MediaQuery.paddingOf(context).top + t.space.xl,
-                ),
+    // A large tablet (UI spec §30): the categories as a 200 dp sidebar with
+    // the title, instead of the large title and the chips (DK-0650).
+    final wide = MediaQuery.sizeOf(context).width >= 840;
+    final page = NotificationListener<ScrollNotification>(
+      // The page's own scroll, not the chip row's.
+      onNotification: (n) {
+        if (n.depth != 0) return false;
+        if (n is UserScrollNotification &&
+            n.direction != ScrollDirection.idle) {
+          _jumping = false; // the user scrolls: the chips follow again
+        }
+        if (n is ScrollUpdateNotification) _follow();
+        return false;
+      },
+      child: CustomScrollView(
+        controller: _scroll,
+        // Every section built, so a chip can find its section's offset.
+        // ponytail: fine for ~30 tiles; measure offsets instead if T1
+        // ever grows to hundreds.
+        scrollCacheExtent: const ScrollCacheExtent.pixels(10000),
+        slivers: [
+          // Searching, the field moves up in the title's place (the
+          // tools-search frame).
+          if (_query.isEmpty && !wide)
+            DkLargeTopBar(title: l.shell_tab_tools)
+          else
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: MediaQuery.paddingOf(context).top + t.space.xl,
               ),
-            SliverPadding(
-              padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, 0),
-              sliver: SliverToBoxAdapter(
-                child: Row(
-                  spacing: t.space.xs,
-                  children: [
-                    Expanded(
-                      child: DkSearchField(
-                        hint: l.tools_search_hint,
-                        controller: _search,
-                        onChanged: (_) => setState(() {}),
+            ),
+          SliverPadding(
+            padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, 0),
+            sliver: SliverToBoxAdapter(
+              // Text columns are 640 at most (tablets, §30).
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 640),
+                  child: Row(
+                    spacing: t.space.xs,
+                    children: [
+                      Expanded(
+                        child: DkSearchField(
+                          hint: l.tools_search_hint,
+                          controller: _search,
+                          onChanged: (_) => setState(() {}),
+                        ),
                       ),
-                    ),
-                    if (_query.isNotEmpty)
-                      DkTextAction(
-                        label: l.common_cancel,
-                        onTap: () {
-                          _search.clear();
-                          FocusScope.of(context).unfocus();
-                          setState(() {});
-                        },
-                      ),
-                  ],
+                      if (_query.isNotEmpty)
+                        DkTextAction(
+                          label: l.common_cancel,
+                          onTap: () {
+                            _search.clear();
+                            FocusScope.of(context).unfocus();
+                            setState(() {});
+                          },
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            if (_query.isNotEmpty)
-              ..._results(context)
-            else ...[
+          ),
+          if (_query.isNotEmpty)
+            ..._results(context)
+          else ...[
+            if (!wide)
               SliverPersistentHeader(
                 pinned: true,
                 delegate: _ChipsBar(
@@ -315,60 +325,177 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                   ],
                 ),
               ),
-              for (final c in visible) ...[
-                SliverToBoxAdapter(
-                  child: Padding(
-                    key: _sections[c],
-                    padding: EdgeInsets.fromLTRB(
-                      t.space.l,
-                      t.space.l,
-                      t.space.l,
-                      t.space.s,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.baseline,
-                      textBaseline: TextBaseline.alphabetic,
-                      spacing: t.space.s,
-                      children: [
-                        // The count at the end, as the frames (QA, DK-0728).
-                        Expanded(
-                          child: Semantics(
-                            header: true,
-                            child: Text(
-                              c.label(l),
-                              style: t.text.titleS.copyWith(
-                                color: t.color.textPrimary,
-                              ),
+            for (final c in visible) ...[
+              SliverToBoxAdapter(
+                child: Padding(
+                  key: _sections[c],
+                  padding: EdgeInsets.fromLTRB(
+                    t.space.l,
+                    t.space.l,
+                    t.space.l,
+                    t.space.s,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    spacing: t.space.s,
+                    children: [
+                      // The count at the end, as the frames (QA, DK-0728).
+                      Expanded(
+                        child: Semantics(
+                          header: true,
+                          child: Text(
+                            c.label(l),
+                            style: t.text.titleS.copyWith(
+                              color: t.color.textPrimary,
                             ),
                           ),
                         ),
-                        Text(
-                          l.tools_count(ToolCatalogue.inCategory(c).length),
-                          style: t.text.caption.copyWith(
-                            color: t.color.textSecondary,
-                          ),
+                      ),
+                      Text(
+                        l.tools_count(ToolCatalogue.inCategory(c).length),
+                        style: t.text.caption.copyWith(
+                          color: t.color.textSecondary,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                SliverPadding(
-                  padding: EdgeInsets.symmetric(horizontal: t.space.l),
-                  sliver: SliverGrid.count(
-                    crossAxisCount: 4,
+              ),
+              SliverPadding(
+                padding: EdgeInsets.symmetric(horizontal: t.space.l),
+                // 4 across on a phone, 6 or 8 on a tablet (§30).
+                sliver: SliverLayoutBuilder(
+                  builder: (context, box) => SliverGrid.count(
+                    crossAxisCount: toolColumns(box.crossAxisExtent),
                     mainAxisSpacing: t.space.m,
                     crossAxisSpacing: t.space.m,
-                    childAspectRatio: 0.78,
+                    childAspectRatio: toolTileAspect(
+                      box.crossAxisExtent,
+                      t.space.m,
+                    ),
                     children: [
                       for (final tool in ToolCatalogue.inCategory(c))
                         DkToolTile(toolId: tool.id, onTap: () => _open(tool)),
                     ],
                   ),
                 ),
-              ],
+              ),
             ],
-            SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
           ],
+          SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
+        ],
+      ),
+    );
+    return Scaffold(
+      backgroundColor: t.color.background,
+      body: wide
+          ? Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _Sidebar(
+                  selected: _selected,
+                  categories: visible,
+                  onSelect: _jump,
+                ),
+                VerticalDivider(width: 1, thickness: 1, color: t.color.outline),
+                Expanded(child: page),
+              ],
+            )
+          : page,
+    );
+  }
+}
+
+/// T1's sidebar on a large tablet (DK-0650): the title, then All and the
+/// categories with their tool counts; the selected one tinted. A tap jumps
+/// to its section, as a chip does on a phone.
+class _Sidebar extends StatelessWidget {
+  const _Sidebar({
+    required this.selected,
+    required this.categories,
+    required this.onSelect,
+  });
+
+  final ToolCategory? selected;
+  final List<ToolCategory> categories;
+  final ValueChanged<ToolCategory?> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final c = t.color;
+    final l = AppLocalizations.of(context);
+    Widget row(ToolCategory? cat, String label, int count) {
+      final on = selected == cat;
+      return Semantics(
+        selected: on,
+        child: DkTappable(
+          radius: t.radius.m,
+          onTap: () => onSelect(cat),
+          builder: (context, pressed) => Container(
+            constraints: const BoxConstraints(minHeight: 48),
+            padding: EdgeInsets.symmetric(horizontal: t.space.m),
+            decoration: BoxDecoration(
+              color: on ? c.primaryContainer : null,
+              borderRadius: BorderRadius.circular(t.radius.m),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    label,
+                    style: t.text.bodyL.copyWith(
+                      color: on ? c.onPrimaryContainer : c.textPrimary,
+                    ),
+                  ),
+                ),
+                Text(
+                  '$count',
+                  style: t.text.caption.copyWith(color: c.textSecondary),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    return SizedBox(
+      width: 200,
+      child: ColoredBox(
+        color: c.surface,
+        child: SafeArea(
+          right: false,
+          bottom: false,
+          child: ListView(
+            padding: EdgeInsets.all(t.space.s),
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  t.space.s,
+                  t.space.l,
+                  t.space.s,
+                  t.space.m,
+                ),
+                child: Semantics(
+                  header: true,
+                  child: Text(
+                    l.shell_tab_tools,
+                    style: t.text.titleL.copyWith(color: c.textPrimary),
+                  ),
+                ),
+              ),
+              row(
+                null,
+                l.tools_all,
+                [for (final cat in categories) ...ToolCatalogue.inCategory(cat)]
+                    .length,
+              ),
+              for (final cat in categories)
+                row(cat, cat.label(l), ToolCatalogue.inCategory(cat).length),
+            ],
+          ),
         ),
       ),
     );
