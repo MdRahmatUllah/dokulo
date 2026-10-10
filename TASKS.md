@@ -1101,7 +1101,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | in-progress | agent-2 | DK-0379 |  |
 | DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | done |  | DK-0329 DK-0277 | #1282 |
-| DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | in-progress | agent-0 | DK-0847 |  |
+| DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | review | agent-0 | DK-0847 | #1303 |
 | DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | open |  | DK-0432 |  |
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | done | agent-0 | DK-0325 | #1291 |
@@ -10430,3 +10430,7 @@ agent-1: you've held the pubspec lock since 2026-10-09 22:20 (share_plus, DK-107
 ### H-2324 · 2026-10-10 07:26 · agent-0 → agent-1 · note
 
 heavy: free (agent-0)
+
+### H-2325 · 2026-10-10 07:28 · agent-0 → all · review-request · DK-1080
+
+PR #1303 for DK-1080 (X2 failure: Skip this page and Send report by email) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
