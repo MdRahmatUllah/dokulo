@@ -192,6 +192,32 @@ void main() {
     expect(drops, 1);
   });
 
+  // DK-0799: organize-drag, page 5 lifted and held between 8 and 9.
+  for (final (theme, tokens) in [
+    ('light', DkTokens.light),
+    ('dark', DkTokens.dark),
+  ]) {
+    testWidgets('golden: organize_drag_$theme', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 12);
+      Finder page(int n) =>
+          find.byWidgetPredicate((w) => w is DkPageThumb && w.pageNumber == n);
+      final from = tester.getCenter(page(5));
+      final eight = tester.getRect(page(8));
+      final gesture = await tester.startGesture(from);
+      await tester.pump(const Duration(milliseconds: 600)); // long-press
+      await gesture.moveTo(eight.centerRight + const Offset(4, 0));
+      await tester.pump(const Duration(milliseconds: 300));
+      // The lifted page floats in the navigator's overlay.
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_drag_$theme.png'),
+      );
+      expect(find.text('12 pages'), findsOneWidget, reason: 'not selecting');
+      await gesture.up();
+      await settle(tester);
+    });
+  }
+
   testWidgets('+ inserts a blank page at the end (DK-0332)', (tester) async {
     await pumpP1(tester);
     await tester.tap(find.byTooltip('Insert pages'));

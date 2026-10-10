@@ -281,8 +281,9 @@ class _DkPageGridState extends State<DkPageGrid> {
               ),
             ),
           ),
+          // Its place stays empty while it's lifted (organize-drag).
           childWhenDragging: Opacity(
-            opacity: t.state.disabledOpacity,
+            opacity: 0,
             child: thumb(interactive: false),
           ),
           child: cell,

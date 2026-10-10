@@ -248,9 +248,10 @@ class _OrganizeState extends ConsumerState<_Organize> {
                     child: DkPageGrid(
                       pageIds: edit.pages,
                       selected: _selected,
+                      // A tap selects; a long-press lifts the page only:
+                      // mid-drag the screen stays out of selection mode
+                      // (organize-drag, DK-0799).
                       onTap: _toggle,
-                      onLongPress: (i) =>
-                          setState(() => _selected = {..._selected, i}),
                       onReorder: (from, to) {
                         _do((e) => e.move(from, to));
                         setState(() => _selected = {});
