@@ -36,6 +36,22 @@ class LastToolResult extends _$LastToolResult {
   void set(ToolResult result) => state = result;
 }
 
+/// A run that finished while its T2 was out of sight (DK-0247): the user
+/// had left it, or was on another tab. Home's continue card offers it until
+/// it is opened, dismissed or saved.
+@Riverpod(keepAlive: true)
+class BackgroundResult extends _$BackgroundResult {
+  @override
+  ToolResult? build() => null;
+
+  void set(ToolResult? result) => state = result;
+
+  /// Drops [result] if it is the one waiting (T3 saved it).
+  void forget(ToolResult result) {
+    if (identical(state, result)) state = null;
+  }
+}
+
 /// A result on its way to the next tool (a Next chip, DK-0386): the files
 /// and the chain so far. T2 opened with `?chain=1` takes it.
 @Riverpod(keepAlive: true)

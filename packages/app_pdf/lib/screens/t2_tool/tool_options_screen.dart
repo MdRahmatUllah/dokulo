@@ -211,24 +211,31 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
         eta: p.etaSeconds == null ? shown : smoothEta(shown, p.etaSeconds!),
       );
     });
+    // Read now: after the run, this screen may be gone (DK-0247).
+    final background = ref.read(backgroundResultProvider.notifier);
+    final last = ref.read(lastToolResultProvider.notifier);
     try {
       final output = await run.result;
+      final result = output is JobOutput
+          ? ToolResult(
+              toolId: _def.id,
+              inputs: subject.files,
+              output: output,
+              took: DateTime.now().difference(started),
+              chain: [..._chain, _def.id],
+            )
+          : null;
+      // Finished out of sight (left, another tab, a screen over it): Home's
+      // continue card offers it.
+      final seen =
+          mounted &&
+          TickerMode.valuesOf(context).enabled &&
+          (ModalRoute.of(context)?.isCurrent ?? false);
+      if (!seen && result != null) background.set(result);
       _end();
       if (!mounted) return;
       _closeSheet();
-      if (output is JobOutput) {
-        ref
-            .read(lastToolResultProvider.notifier)
-            .set(
-              ToolResult(
-                toolId: _def.id,
-                inputs: subject.files,
-                output: output,
-                took: DateTime.now().difference(started),
-                chain: [..._chain, _def.id],
-              ),
-            );
-      }
+      if (result != null) last.set(result);
       // T3 takes T2's place: its Close returns to where the tool started.
       context.pushReplacement(Routes.toolResult(_def.id));
     } catch (e) {

@@ -168,6 +168,7 @@ class ToolDefinition {
     this.input,
     this.busyLabel,
     this.busyTitle,
+    this.doneTitle,
     this.stopTitle,
     this.summary,
     this.partLine,
@@ -198,6 +199,11 @@ class ToolDefinition {
   /// The progress sheet's title ("Compressing Mietvertrag.pdf"); null: the
   /// tool's name.
   final String Function(AppLocalizations, ToolSubject)? busyTitle;
+
+  /// Home's continue card for a run that finished in the background
+  /// ("Compressed Mietvertrag.pdf" / "Mietvertrag.pdf verkleinert", UI spec
+  /// §15.2, DK-0247); null: "Compress PDF · Mietvertrag.pdf".
+  final String Function(AppLocalizations, String file)? doneTitle;
 
   /// The cancel dialog's title ("Stop compressing?"); null: "Stop this job?".
   final String Function(AppLocalizations)? stopTitle;

@@ -2392,5 +2392,17 @@
         "type": "int"
       }
     }
+  },
+  "home_continue_job": "{tool} · {file}",
+  "@home_continue_job": {
+    "description": "H1 continue card: a job that finished in the background, for a tool without its own done title (DK-0247; Compress says \"Compressed {file}\").",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      },
+      "file": {
+        "type": "String"
+      }
+    }
   }
 }
