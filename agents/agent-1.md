@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0304 V1 Viewer: implement the "Night mode" state — claimed 2026-10-10 10:20.
 
 ## Next
 

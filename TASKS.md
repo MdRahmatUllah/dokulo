@@ -325,7 +325,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | in-progress | agent-0 | DK-0293 DK-0294 DK-0122 |  |
 | DK-0302 | Ph3 | C | P0 | S | V1 Viewer: implement the "Wrong password" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | assigned | agent-0 | DK-0293 DK-0294 |  |
-| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | assigned | agent-1 | DK-0293 DK-0294 |  |
+| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | in-progress | agent-1 | DK-0293 DK-0294 |  |
 | DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | assigned | agent-0 | DK-0293 DK-0294 DK-0063 |  |
 | DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-1 | DK-0293 DK-0294 |  |
