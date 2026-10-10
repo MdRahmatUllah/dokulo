@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1094 in review as PR #1322: answer the review; re-run the gate if main moved, then merge.
+Nothing claimed.
 
 ## Next
 

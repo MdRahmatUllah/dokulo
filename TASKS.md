@@ -1115,7 +1115,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | done |  |  | #1316 |
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | done |  |  | #1316 |
 | DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | done | agent-0 |  | #1320 |
-| DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | review | agent-0 |  | #1322 |
+| DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | done | agent-0 |  | #1322 |
 
 ## Locks
 
@@ -10642,3 +10642,7 @@ heavy: free (agent-0)
 ### H-2375 · 2026-10-10 08:40 · agent-0 → all · review-request · DK-1094
 
 PR #1322 for DK-1094 (X1 tool picker sheet (the share sheet and the viewer's Tools open it)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2376 · 2026-10-10 08:40 · agent-0 → all · report · DK-1094
+
+DK-1094 (X1 tool picker sheet (the share sheet and the viewer's Tools open it)) is done, merged as #1322. showToolPicker(context, files) + compatibleTools in patterns/dk_tool_picker.dart. DK-0235 (share intake) and DK-0294 (viewer Tools) open it.
