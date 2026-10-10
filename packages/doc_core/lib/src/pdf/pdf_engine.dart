@@ -106,6 +106,25 @@ abstract final class PdfEngine {
         );
       });
 
+  /// The document's outline (bookmarks), as a tree (DK-0309); empty when it
+  /// has none.
+  static Future<List<OutlineEntry>> outline(String path, {String? password}) =>
+      _withDocument(path, password, (doc) async {
+        List<OutlineEntry> map(List<PdfOutlineNode> nodes) => [
+          for (final n in nodes)
+            OutlineEntry(
+              title: n.title.trim(),
+              // 0-based, null when it points nowhere in this file.
+              page: switch (n.dest?.pageNumber) {
+                final p? when p >= 1 && p <= doc.pages.length => p - 1,
+                _ => null,
+              },
+              children: map(n.children),
+            ),
+        ];
+        return map(await doc.loadOutline());
+      });
+
   /// Every page's text, in one document open and without char boxes: what
   /// the search index reads (DK-1064). [pageText] opens the file per page.
   static Future<List<String>> pageTexts(String path, {String? password}) =>
@@ -590,4 +609,18 @@ class DocError implements Exception {
   @override
   String toString() =>
       'DocError(${kind.name}${page == null ? '' : ', page $page'}: $detail)';
+}
+
+/// One outline entry: its [title], the 0-based [page] it opens (null: none
+/// in this file) and its [children].
+class OutlineEntry {
+  const OutlineEntry({
+    required this.title,
+    required this.page,
+    this.children = const [],
+  });
+
+  final String title;
+  final int? page;
+  final List<OutlineEntry> children;
 }
