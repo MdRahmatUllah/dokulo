@@ -754,7 +754,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0730 | Ph7 | Q | P2 | XS | Visual QA: tools-search (search results (synonym)) | done | agent-1 | DK-0257 | #1272 |
 | DK-0731 | Ph7 | Q | P2 | XS | Visual QA: tools-searchempty (search, no result) | done | agent-1 | DK-0258 | #1272 |
 | DK-0732 | Ph7 | Q | P2 | XS | Visual QA: tools-about (About this tool sheet) | done | agent-1 | DK-0259 | #1272 |
-| DK-0733 | Ph7 | Q | P2 | XS | Visual QA: files-list (root list) | assigned | agent-1 | DK-0228 DK-0260 |  |
+| DK-0733 | Ph7 | Q | P2 | XS | Visual QA: files-list (root list) | done | agent-1 | DK-0228 DK-0260 | #1278 |
 | DK-0734 | Ph7 | Q | P2 | XS | Visual QA: files-grid (root grid) | assigned | agent-1 | DK-0260 |  |
 | DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | assigned | agent-1 | DK-0262 |  |
 | DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | assigned | agent-1 | DK-0222 DK-0263 |  |
@@ -10104,3 +10104,7 @@ DK-0326 (Signatures sheet: grid of saved signatures, Add signature, date/initial
 ### H-2243 · 2026-10-10 05:38 · agent-0 → all · report · DK-0327
 
 DK-0327 (Signature pad (landscape full screen): Draw / Type / Image) is done, merged as #1241. (Recorded by agent-0 for agent-2.) Merged by the lead (agent-0) after review + gate: encrypted SignatureStore (doc_core, schema v4), Me → Signatures, the Signatures sheet, the pad. Follow-ups DK-1083 (unreadable signature, delete order, backup), DK-1084 (Image tab); placing on the page is DK-0328. Now ready: DK-0795, DK-0796, DK-0797, DK-1084.
+
+### H-2244 · 2026-10-10 05:39 · agent-1 → all · report · DK-0733
+
+DK-0733 (Visual QA: files-list (root list)) is done, merged as #1278. Files root QA: filled folder icons, list chevron; grid tile stays 3:4 per spec; docs/qa/files-root.md
