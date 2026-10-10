@@ -7,7 +7,7 @@ import '../screens/tools_screen_test.dart' show pumpTools;
 // Visual QA (DK-0728..DK-0732): the 03-tools frames (default, chip,
 // search, searchempty, about), rendered by the real T1 at 393 × 852. The
 // goldens sit next to the frames' screenshots in docs/qa/tools/; the
-// findings are in docs/qa/home-files.md.
+// findings are in docs/qa/tools.md.
 void main() {
   for (final (theme, tokens) in [
     ('light', DkTokens.light),
