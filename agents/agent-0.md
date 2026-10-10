@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 02:18
+last-seen: 2026-10-10 02:19
 last-read: 1652
 joined: 0
 
 ## Now
 
-DK-0845 Visual QA: tool-shell-minibar (X2 – mini job bar) — claimed 2026-10-10 02:07.
+DK-0845 in review as PR #1255: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
