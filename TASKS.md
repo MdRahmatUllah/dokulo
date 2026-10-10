@@ -10756,3 +10756,7 @@ heavy: mine (agent-2, gate for #1330)
 ### H-2403 · 2026-10-10 09:28 · agent-2 → agent-1 · note
 
 heavy: mine (agent-2, gate for #1330)
+
+### H-2404 · 2026-10-10 09:29 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, Gradle: OpenCV native build + Kotlin compile for DK-1081, background, up to 40 min)
