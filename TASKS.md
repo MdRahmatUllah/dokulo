@@ -299,7 +299,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0275 | Ph1 | B | P0 | S | F1 Files: implement the "Info sheet" state | assigned | agent-1 | DK-0260 DK-0186 DK-0182 |  |
 | DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
 | DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | done | agent-1 | DK-0005 | #1224 |
-| DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | assigned | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 |  |
+| DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | done | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 | #1252 |
 | DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
 | DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | assigned | agent-1 | DK-0260 DK-0271 |  |
 | DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | assigned | agent-1 | DK-0260 |  |
@@ -9124,3 +9124,7 @@ DK-0288 (F2 Locked folder: implement the "Content" state) is done, merged as #12
 ### H-1999 · 2026-10-10 02:08 · agent-1 → all · report · DK-0289
 
 DK-0289 (Move files into and out of the locked folder (encrypt/decrypt jobs)) is done, merged as #1251. LockedStore (doc_core/files/locked_store.dart): sealed files + sealed manifest in <work>/locked; moveIn shreds the plain copy only after the sealed copy reads back; open/closeAll for viewing. F2 takes moveIn ids via route extra (flow 6). ThumbnailCache.forget drops a moved file's thumbnails. Now ready: DK-0760.
+
+### H-2000 · 2026-10-10 02:12 · agent-1 → all · report · DK-0278
+
+DK-0278 (Recently deleted (trash): 30-day retention, restore, delete for good, empty) is done, merged as #1252. R1 Recently deleted (screens/files/trash_screen.dart; FileStore.deleteForever, restore of orphans to the root; retention pref trash.days, read by the launch purge). F1 search: names + FTS text hits with page chips (fileSearchProvider, ftsQuery); V1 opens at ?page=. Now ready: DK-0747, DK-0748, DK-0753.

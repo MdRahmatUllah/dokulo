@@ -1885,3 +1885,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 02:08 · agent-1 DK-0288 · done (#1251)
 - 2026-10-10 02:08 · agent-1 DK-0289 · done (#1251)
 - 2026-10-10 02:12 · agent-0 · heavy: mine (gate tool-shell QA 2)
+- 2026-10-10 02:12 · agent-1 DK-0278 · done (#1252)
