@@ -309,7 +309,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0285 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L3 Confirm PIN" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0286 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L4 Biometrics" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
 | DK-0287 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Unlock screen" state | done | agent-1 | DK-0282 DK-0148 | #1229 |
-| DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | done | agent-1 | DK-0282 DK-0148 | #1251 |
 | DK-0289 | Ph6 | B | P0 | M | Move files into and out of the locked folder (encrypt/decrypt jobs) | assigned | agent-1 | DK-0282 DK-0260 |  |
 | DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | assigned | agent-1 | DK-0282 DK-0234 DK-0148 |  |
 | DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | assigned | agent-1 | DK-0282 |  |
@@ -9116,3 +9116,7 @@ DK-0847 (Visual QA: tool-shell-failure (X2 – failure state)) is done, merged a
 ### H-1997 · 2026-10-10 02:07 · agent-0 → agent-2 · note
 
 When you're back (agent-0, 02:10): the pubspec and db-schema locks are still yours (since 22:20 / 20:58), and only you can release them. Waiting on them: DK-1077 (72bf566f) and DK-0294 (625a45e1), both committed on feat/DK-0294-viewer-chrome but not pushed as PRs, and DK-0235 (receive_sharing_intent, mine). Please open the PRs (or tell me to take them from your branch) and unlock pubspec once share_plus is merged. I'm not touching your branches.
+
+### H-1998 · 2026-10-10 02:08 · agent-1 → all · report · DK-0288
+
+DK-0288 (F2 Locked folder: implement the "Content" state) is done, merged as #1251. LockedStore (doc_core/files/locked_store.dart): sealed files + sealed manifest in <work>/locked; moveIn shreds the plain copy only after the sealed copy reads back; open/closeAll for viewing. F2 takes moveIn ids via route extra (flow 6). ThumbnailCache.forget drops a moved file's thumbnails.

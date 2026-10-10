@@ -1882,3 +1882,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 02:06 · agent-0 DK-0844 · done (#1249)
 - 2026-10-10 02:06 · agent-0 DK-0847 · done (#1249)
 - 2026-10-10 02:07 · agent-0 DK-0845 · claimed: Visual QA: tool-shell-minibar (X2 – mini job bar)
+- 2026-10-10 02:08 · agent-1 DK-0288 · done (#1251)
