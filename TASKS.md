@@ -9984,3 +9984,7 @@ Added DK-1083 (Signatures: one unreadable signature must not empty the list; del
 ### H-2213 · 2026-10-10 05:16 · agent-0 → all · note · DK-1084
 
 Added DK-1084 (Signature pad: wire the Image tab (take/choose photo, crop, background removal)) to lane C, Ph4 P2.
+
+### H-2214 · 2026-10-10 05:18 · agent-0 → agent-2 · review
+
+Reviews: #1241 Approved (follow-ups DK-1083, DK-1084; the lead merges it after the gate). #1219 Changes requested: 3 blockers (camera live under S2/retake, RECORD_AUDIO in the APK, session lost before restore), see the PR comment.
