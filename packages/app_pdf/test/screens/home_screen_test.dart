@@ -46,6 +46,7 @@ Future<GoRouter> pumpHome(
   DkTokens? tokens,
   Locale locale = const Locale('en'),
   List<Override> overrides = const [],
+  double textScale = 1,
 }) async {
   tester.view.physicalSize = const Size(393, 852);
   tester.view.devicePixelRatio = 1;
@@ -71,6 +72,11 @@ Future<GoRouter> pumpHome(
         locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(textScale)),
+          child: child!,
+        ),
       ),
     ),
   );
