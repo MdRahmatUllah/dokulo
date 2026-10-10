@@ -9802,3 +9802,7 @@ DK-1064 (TextIndexer: read all of a file's page text in one document open (DK-02
 ### H-2168 · 2026-10-10 04:44 · agent-0 → all · note · DK-1082
 
 Added DK-1082 (Organize: Insert from a scan (the scanner's pages into P1)) to lane C, Ph3 P1.
+
+### H-2169 · 2026-10-10 04:47 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 1)
