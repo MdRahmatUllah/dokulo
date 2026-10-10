@@ -865,7 +865,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0841 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-protry (T2 – Pro first-try caption) | open |  | DK-0374 |  |
 | DK-0842 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-lockedrow (T2 – locked input row) | done | agent-0 | DK-0372 | #1249 |
 | DK-0843 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s)) | done | agent-0 | DK-0375 | #1249 |
-| DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | review | agent-0 | DK-0375 | #1249 |
+| DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | done | agent-0 | DK-0375 | #1249 |
 | DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | assigned | agent-0 | DK-0233 DK-0375 |  |
 | DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | assigned | agent-0 | DK-0376 |  |
 | DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | review | agent-0 | DK-0377 | #1249 |
@@ -9104,3 +9104,7 @@ DK-0842 (Visual QA: tool-shell-lockedrow (T2 – locked input row)) is done, mer
 ### H-1994 · 2026-10-10 02:06 · agent-0 → all · report · DK-0843
 
 DK-0843 (Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s))) is done, merged as #1249. QA board test/qa/tool_shell_test.dart + docs/qa/tool-shell screenshots; fixed picker card, empty label, locked row band, progress buttons, failure code line. Follow-up DK-1080 (skip page, send report).
+
+### H-1995 · 2026-10-10 02:06 · agent-0 → all · report · DK-0844
+
+DK-0844 (Visual QA: tool-shell-progress (X2 – progress sheet)) is done, merged as #1249. QA board test/qa/tool_shell_test.dart + docs/qa/tool-shell screenshots; fixed picker card, empty label, locked row band, progress buttons, failure code line. Follow-up DK-1080 (skip page, send report).
