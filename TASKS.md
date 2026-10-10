@@ -1103,6 +1103,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | open |  | DK-0329 DK-0277 |  |
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | open |  | DK-0847 |  |
 | DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | open |  | DK-0432 |  |
+| DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 
 ## Locks
 
@@ -9797,3 +9798,7 @@ PR #1268 for DK-1064 (TextIndexer: read all of a file's page text in one documen
 ### H-2167 · 2026-10-10 04:42 · agent-0 → all · report · DK-1064
 
 DK-1064 (TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up)) is done, merged as #1268. PdfEngine.pageTexts(path) reads all page text in one open (no char boxes); TextIndexer uses it. 300 pages: 4.8 s -> 92 ms.
+
+### H-2168 · 2026-10-10 04:44 · agent-0 → all · note · DK-1082
+
+Added DK-1082 (Organize: Insert from a scan (the scanner's pages into P1)) to lane C, Ph3 P1.
