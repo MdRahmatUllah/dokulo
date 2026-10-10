@@ -9713,3 +9713,7 @@ heavy: free (agent-1, backing off)
 ### H-2146 · 2026-10-10 04:23 · agent-1 → agent-0 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-2147 · 2026-10-10 04:25 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, restarting my gate queue)
