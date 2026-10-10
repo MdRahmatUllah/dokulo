@@ -9,6 +9,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'database_providers.dart';
 import 'device_providers.dart';
 import 'file_providers.dart';
+import 'files_providers.dart';
+import 'prefs_providers.dart';
 
 part 'job_providers.g.dart';
 
@@ -99,6 +101,10 @@ Future<StartupReport> startup(Ref ref) async {
     queue: await ref.watch(jobQueueProvider.future),
     tools: ToolRegistry.app(),
     jobTempRoot: _jobTempRoot(files.workDirectory),
+    // Read, not watched: a changed retention applies at the next launch.
+    trashRetention: Duration(
+      days: trashDays(await ref.read(prefsProvider.future)),
+    ),
   );
 }
 

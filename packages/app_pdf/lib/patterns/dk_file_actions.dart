@@ -48,6 +48,11 @@ Future<void> showFileActions(
   final l = AppLocalizations.of(context);
   final db = ref.read(appDatabaseProvider);
   final tools = await suggestedTools(db);
+  final favourite =
+      await (db.select(
+        db.favourites,
+      )..where((f) => f.fileId.equals(file.id))).getSingleOrNull() !=
+      null;
   if (!context.mounted) return;
   final locale = Localizations.localeOf(context).toLanguageTag();
   void open() {
@@ -116,6 +121,12 @@ Future<void> showFileActions(
         ),
       ],
       [
+        DkAction(
+          icon: DkIcons.star,
+          filled: favourite,
+          label: favourite ? l.file_favourite_remove : l.file_favourite_add,
+          onTap: () => setFavourite(db, file.id, !favourite),
+        ),
         DkAction(
           icon: DkIcons.rename,
           label: l.common_rename,

@@ -126,6 +126,10 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* keyboard_arrow_up */;
   static const delete = IconData(0xe92e, fontFamily: _font) /* delete */;
+  static const restoreFromTrash = IconData(
+    0xe938,
+    fontFamily: _font,
+  ) /* restore_from_trash */;
   static const deleteForever = IconData(
     0xe92b,
     fontFamily: _font,
@@ -148,6 +152,7 @@ abstract final class DkIcons {
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
   static const lock = IconData(0xe899, fontFamily: _font) /* lock */;
+  static const star = IconData(0xe838, fontFamily: _font) /* star */;
   static const lockOpen = IconData(0xe898, fontFamily: _font) /* lock_open */;
   static const backspace = IconData(0xe14a, fontFamily: _font) /* backspace */;
   static const fingerprint = IconData(
