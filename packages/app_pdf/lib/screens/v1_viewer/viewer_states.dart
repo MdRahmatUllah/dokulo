@@ -64,11 +64,8 @@ class _ViewerLockedCardState extends State<ViewerLockedCard> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  DkIcon(
-                    DkIcons.lock,
-                    size: DkIconSize.xl,
-                    color: t.color.iconPrimary,
-                  ),
+                  // 40, as UI spec §17.1 says (no DkIconSize that large).
+                  Icon(DkIcons.lock, size: 40, color: t.color.iconPrimary),
                   SizedBox(height: t.space.m),
                   Text(
                     l.viewer_locked_title,
