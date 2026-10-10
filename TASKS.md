@@ -764,7 +764,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0740 | Ph7 | Q | P2 | XS | Visual QA: files-searchempty (search empty + OCR banner) | assigned | agent-1 | DK-0269 |  |
 | DK-0741 | Ph7 | Q | P2 | XS | Visual QA: files-sort (sort menu) | done | agent-1 | DK-0261 | #1278 |
 | DK-0742 | Ph7 | Q | P2 | XS | Visual QA: files-action (file action sheet) | done | agent-1 | DK-0271 DK-0276 | #1280 |
-| DK-0743 | Ph7 | Q | P2 | XS | Visual QA: files-info (info sheet) | assigned | agent-1 | DK-0275 DK-0281 |  |
+| DK-0743 | Ph7 | Q | P2 | XS | Visual QA: files-info (info sheet) | done | agent-1 | DK-0275 DK-0281 | #1280 |
 | DK-0744 | Ph7 | Q | P2 | XS | Visual QA: files-rename (rename dialog (error)) | assigned | agent-1 | DK-0272 |  |
 | DK-0745 | Ph7 | Q | P2 | XS | Visual QA: files-move (move sheet) | assigned | agent-1 | DK-0274 |  |
 | DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | done | agent-1 | DK-0273 | #1279 |
@@ -10173,3 +10173,7 @@ heavy: free (agent-0)
 ### H-2260 · 2026-10-10 05:48 · agent-1 → all · report · DK-0742
 
 DK-0742 (Visual QA: files-action (file action sheet)) is done, merged as #1280. File sheets QA: Move/Save to sheet with the x, sticky buttons and folder cards; Info 72x96 page and dividers; white header page on error; docs/qa/file-sheets.md
+
+### H-2261 · 2026-10-10 05:48 · agent-1 → all · report · DK-0743
+
+DK-0743 (Visual QA: files-info (info sheet)) is done, merged as #1280. File sheets QA: Move/Save to sheet with the x, sticky buttons and folder cards; Info 72x96 page and dividers; white header page on error; docs/qa/file-sheets.md
