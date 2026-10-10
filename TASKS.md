@@ -772,7 +772,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | done | agent-1 | DK-0225 DK-0278 | #1289 |
 | DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | done | agent-1 | DK-0267 DK-0620 | #1278 |
 | DK-0750 | Ph7 | Q | P2 | XS | Visual QA: files-swipe (swipe actions) | assigned | agent-1 | DK-0224 DK-0268 |  |
-| DK-0751 | Ph7 | Q | P2 | XS | Visual QA: files-dragfolder (grid – drag file onto folder) | assigned | agent-1 | DK-0223 DK-0264 |  |
+| DK-0751 | Ph7 | Q | P2 | XS | Visual QA: files-dragfolder (grid – drag file onto folder) | done | agent-1 | DK-0223 DK-0264 | #1302 |
 | DK-0752 | Ph7 | Q | P2 | XS | Visual QA: files-selmore (selection – More menu) | assigned | agent-1 | DK-0263 DK-0289 |  |
 | DK-0753 | Ph7 | Q | P2 | XS | Visual QA: files-trashaction (deleted file – Restore / Delete for good) | done | agent-1 | DK-0278 | #1289 |
 | DK-0754 | Ph7 | Q | P2 | XS | Visual QA: files-foldermenu (folder overflow – rename, colour, delete) | done | agent-1 | DK-0262 | #1279 |
@@ -10418,3 +10418,7 @@ DK-0725 (Visual QA: home-tilemenu (tile long-press menu)) is done, merged as #13
 ### H-2321 · 2026-10-10 07:21 · agent-1 → all · report · DK-0726
 
 DK-0726 (Visual QA: home-scanmenu (Scan button long-press modes)) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
+
+### H-2322 · 2026-10-10 07:24 · agent-1 → all · report · DK-0751
+
+DK-0751 (Visual QA: files-dragfolder (grid – drag file onto folder)) is done, merged as #1302. files-dragfolder board; docs/qa/folders.md
