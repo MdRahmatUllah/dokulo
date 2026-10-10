@@ -781,7 +781,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0757 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l3 (L3 PIN mismatch) | done | agent-1 | DK-0285 DK-0292 | #1290 |
 | DK-0758 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l4 (L4 biometrics) | done | agent-1 | DK-0286 | #1290 |
 | DK-0759 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-unlock (unlock screen) | done | agent-1 | DK-0287 | #1290 |
-| DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | assigned | agent-1 | DK-0288 DK-0289 |  |
+| DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | done | agent-1 | DK-0288 DK-0289 | #1290 |
 | DK-0761 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-applock (app lock screen) | assigned | agent-1 | DK-0290 |  |
 | DK-0762 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-cover (app-switcher privacy cover) | assigned | agent-1 | DK-0234 |  |
 | DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | assigned | agent-0 | DK-0293 DK-0294 |  |
@@ -10281,3 +10281,7 @@ DK-0758 (Visual QA: locked-folder-l4 (L4 biometrics)) is done, merged as #1290. 
 ### H-2287 · 2026-10-10 06:19 · agent-1 → all · report · DK-0759
 
 DK-0759 (Visual QA: locked-folder-unlock (unlock screen)) is done, merged as #1290. Locked QA: PIN pages centred, L4 illustration 120, LockedStore index rename retry (Windows); docs/qa/locked.md
+
+### H-2288 · 2026-10-10 06:19 · agent-1 → all · report · DK-0760
+
+DK-0760 (Visual QA: locked-folder-content (content + move toast)) is done, merged as #1290. Locked QA: PIN pages centred, L4 illustration 120, LockedStore index rename retry (Windows); docs/qa/locked.md
