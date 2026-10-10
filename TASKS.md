@@ -1104,6 +1104,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | open |  | DK-0847 |  |
 | DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | open |  | DK-0432 |  |
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
+| DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | open |  | DK-0325 |  |
 
 ## Locks
 
@@ -9974,3 +9975,7 @@ DK-0854 (Visual QA: tool-shell-replace (T3 – replace original dialog)) is done
 ### H-2211 · 2026-10-10 05:16 · agent-0 → all · report · DK-0857
 
 DK-0857 (Visual QA: tool-shell-replaced (T3 – replaced, Undo)) is done, merged as #1275. T3 save menu / replace / replaced frames on the tool-shell QA board: match; Done after Replace approved.
+
+### H-2212 · 2026-10-10 05:16 · agent-0 → all · note · DK-1083
+
+Added DK-1083 (Signatures: one unreadable signature must not empty the list; delete row before file) to lane C, Ph4 P1.

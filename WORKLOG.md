@@ -1948,3 +1948,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 05:16 · agent-0 DK-0853 · done (#1275)
 - 2026-10-10 05:16 · agent-0 DK-0854 · done (#1275)
 - 2026-10-10 05:16 · agent-0 DK-0857 · done (#1275)
+- 2026-10-10 05:16 · agent-0 DK-1083 · added: Signatures: one unreadable signature must not empty the list; delete row before file
