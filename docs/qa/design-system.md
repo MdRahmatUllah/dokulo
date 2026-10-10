@@ -11,6 +11,7 @@
 | DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
 | DK-0845, DK-0846, DK-0855, DK-0856 | `12-tool-shell/` minibar, canceldlg, discard, aftersave (Light, Dark; phone) | The same QA board: the shell at Tools with a running job, T2 after 30 s with Cancel, T3 closed unsaved after a long job, T3 after Save | 2 deviations fixed, 2 approved, below |
 | DK-0853, DK-0854, DK-0857 | `12-tool-shell/` savemenu, replace, replaced (Light, Dark; phone) | The same QA board: T3's split Save menu (Save as copy · Replace original · Save to…), then Replace original (the dialog), then Replace (the toast and Done) | Match, 2 approved, below |
+| DK-0862 | `12-tool-shell/tool-shell-notifprompt` (Light, Dark; phone) | A golden in the gate, `tool_shell_notifprompt_<theme>` (`test/routes/bottom_chrome_test.dart`): Tools with a job 30 s in the background | Match, 1 approved, below |
 | DK-0799, DK-0800, DK-0801, DK-0802, DK-0803 | `09-organize-pages/` organize-drag, -selected, -insert, -deleted, -pinch (Light, Dark; phone) | Goldens in the gate, `organize_<state>_<theme>` in `packages/app_pdf/test/screens/organize_screen_test.dart`: P1 with 12 pages, page 5 long-pressed and held between 8 and 9, the navigator's overlay included; side by side with the frame in [organize/](organize/) | 5 deviations fixed, 3 approved, 1 follow-up, below |
 | DK-0804, DK-0805 | `09-organize-pages/` organize-large, organize-savemenu (Light, Dark; phone) | Goldens in the gate, `organize_large_<theme>` (300 pages scrolled to 142–150) and `organize_savemenu_<theme>` (Save long-pressed) | 2 deviations fixed, 1 spec gap filled, below |
 
@@ -312,3 +313,13 @@ Large and the Save menu (DK-0804, DK-0805):
   §27.3); it was "{name} (2).pdf" with "Saved to Files › …".
 - The 300-page document matches: virtualised, skeletons with their numbers
   until a page renders.
+
+### The notice pre-prompt (DK-0378; QA DK-0862)
+
+30 s into a job in the background (the mini bar showing), the screen on
+top asks once ever: "Get a notice when long jobs finish?" with the bell
+icon, Not now and Continue; Continue shows the system prompt (Android 13+
+POST_NOTIFICATIONS, iOS UNUserNotificationCenter; `dokulo/notifications`).
+Approved: the body says "Dokulo keeps working in the background" for every
+tool; the frame names the tool's verb ("keeps compressing"), which German
+can't do in one template.

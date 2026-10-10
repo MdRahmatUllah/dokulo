@@ -46,6 +46,7 @@ class RunningJob {
     required this.id,
     required this.toolId,
     required this.cancel,
+    this.started,
     this.progress,
   });
 
@@ -53,10 +54,19 @@ class RunningJob {
   final int id;
   final String toolId;
   final VoidCallback cancel;
+
+  /// When it started: 30 s into a job in the background, the app may ask
+  /// to send a notice when it ends (DK-0378). Null: not known.
+  final DateTime? started;
   final JobProgress? progress;
 
-  RunningJob withProgress(JobProgress p) =>
-      RunningJob(id: id, toolId: toolId, cancel: cancel, progress: p);
+  RunningJob withProgress(JobProgress p) => RunningJob(
+    id: id,
+    toolId: toolId,
+    cancel: cancel,
+    started: started,
+    progress: p,
+  );
 }
 
 /// The jobs running now, oldest first (DK-0233): the mini job bar shows them
@@ -70,7 +80,12 @@ class RunningJobs extends _$RunningJobs {
   void add(ToolRun run) {
     state = [
       ...state,
-      RunningJob(id: run.id, toolId: run.toolId, cancel: run.cancel),
+      RunningJob(
+        id: run.id,
+        toolId: run.toolId,
+        cancel: run.cancel,
+        started: DateTime.now(),
+      ),
     ];
     final updates = run.progress.listen(
       (p) => state = [

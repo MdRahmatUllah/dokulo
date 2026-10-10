@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../components/dk_confirm_dialog.dart';
+import '../components/dk_icon.dart';
 import '../components/dk_mini_job_bar.dart';
 import '../components/dk_progress_sheet.dart';
 import '../components/dk_sheet.dart';
@@ -8,6 +12,8 @@ import '../components/dk_toast.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/formats.dart';
 import '../providers/job_providers.dart';
+import '../providers/notification_permission.dart';
+import '../providers/prefs_providers.dart';
 import '../theme/dk_tokens.dart';
 import '../tools/tool_catalogue.dart';
 import '../tools/tool_definition.dart';
@@ -21,16 +27,74 @@ import '../tools/tool_definition.dart';
 ///
 /// [clearance] keeps it clear of something that rises above [child]: the
 /// raised Scan button over the tab bar.
-class DkBottomChrome extends ConsumerWidget {
+class DkBottomChrome extends ConsumerStatefulWidget {
   const DkBottomChrome({super.key, this.child, this.clearance = 0});
 
   final Widget? child;
   final double clearance;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DkBottomChrome> createState() => _DkBottomChromeState();
+}
+
+/// How long a job runs in the background before the app offers notices.
+const notificationPromptAfter = Duration(seconds: 30);
+
+/// The prefs key: the notice pre-prompt was shown (at most once, DK-0378).
+const notificationsAskedKey = 'notifications.asked';
+
+class _DkBottomChromeState extends ConsumerState<DkBottomChrome> {
+  Timer? _prompt;
+
+  @override
+  void dispose() {
+    _prompt?.cancel();
+    super.dispose();
+  }
+
+  /// DK-0378: a job runs in the background (the mini bar shows) 30 s after
+  /// it started: "Get a notice when long jobs finish?", once ever; Continue
+  /// asks the system. Only the screen on top asks.
+  void _schedulePrompt(List<RunningJob> jobs) {
+    if (_prompt != null) return;
+    final started = jobs.first.started;
+    if (started == null) return;
+    final wait = notificationPromptAfter - DateTime.now().difference(started);
+    _prompt = Timer(wait.isNegative ? Duration.zero : wait, () async {
+      _prompt = null;
+      if (!mounted || !(ModalRoute.of(context)?.isCurrent ?? true)) return;
+      if (ref.read(runningJobsProvider).isEmpty) return;
+      final prefs = await ref.read(prefsProvider.future);
+      if (prefs[notificationsAskedKey] == true || !mounted) return;
+      final permission = ref.read(notificationPermissionProvider);
+      if (await permission.status() != NotificationAccess.notAsked) return;
+      if (!mounted) return;
+      await ref.read(prefsProvider.notifier).set(notificationsAskedKey, true);
+      if (!mounted) return;
+      final l = AppLocalizations.of(context);
+      final yes = await showDkConfirm(
+        context,
+        title: l.notif_prompt_title,
+        body: l.notif_prompt_body,
+        action: l.common_continue,
+        cancel: l.common_not_now,
+        icon: DkIcons.notifications,
+      );
+      if (yes) await permission.request();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final child = widget.child;
+    final clearance = widget.clearance;
     final jobs = ref.watch(runningJobsProvider);
-    if (jobs.isEmpty) return child ?? const SizedBox.shrink();
+    if (jobs.isEmpty) {
+      _prompt?.cancel();
+      _prompt = null;
+      return child ?? const SizedBox.shrink();
+    }
+    _schedulePrompt(jobs);
     final t = context.tokens;
     final l10n = AppLocalizations.of(context);
     final job = jobs.last;
