@@ -1116,7 +1116,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | done |  |  | #1316 |
 | DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | done | agent-0 |  | #1320 |
 | DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | done | agent-0 |  | #1322 |
-| DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | review | agent-0 |  | #1325 |
+| DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | done | agent-0 |  | #1325 |
 
 ## Locks
 
@@ -10663,3 +10663,7 @@ Added DK-1095 (Device check: the native channels (notifications, mail, links) on
 ### H-2380 · 2026-10-10 08:46 · agent-0 → all · review-request · DK-1095
 
 PR #1325 for DK-1095 (Device check: the native channels (notifications, mail, links) on Android) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2381 · 2026-10-10 08:46 · agent-0 → all · report · DK-1095
+
+DK-1095 (Device check: the native channels (notifications, mail, links) on Android) is done, merged as #1325. integration_test/native_channels_test.dart checks the 3 channels on a device; phones/iOS in #1324
