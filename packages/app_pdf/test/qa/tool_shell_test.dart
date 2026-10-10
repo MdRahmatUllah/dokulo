@@ -5,6 +5,11 @@ import 'dart:io';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
+import 'package:app_pdf/providers/job_providers.dart';
+import 'package:app_pdf/routes/routes.dart';
+import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
+import 'package:app_pdf/screens/t3_result/tool_result_screen.dart';
+import 'package:app_pdf/theme/haptics.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_screen.dart';
 import 'package:app_pdf/screens/t2_tool/tool_run.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -17,9 +22,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pdfrx/pdfrx.dart';
 
-// Visual QA (DK-0838, DK-0842, DK-0843, DK-0844, DK-0847): the T2 and X2
-// frames of 12-tool-shell (t2empty, lockedrow, btnloading, progress,
-// failure), rendered by the real T2 in each state at 393 × 852. The goldens
+// Visual QA (DK-0838, DK-0842, DK-0843, DK-0844, DK-0847; DK-0845, DK-0846,
+// DK-0855, DK-0856): the T2, X2 and T3 frames of 12-tool-shell (t2empty,
+// lockedrow, btnloading, progress, failure; minibar, canceldlg, discard,
+// aftersave), rendered by the real screens in each state at 393 × 852. The goldens
 // sit next to the frames' screenshots in docs/qa/tool-shell/; the findings
 // are in docs/qa/design-system.md. A tool's own options (Compress's levels)
 // come with its task (DK-0463), so the boards show the shell.
@@ -46,6 +52,14 @@ final _png = base64Decode(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA'
   '60e6kgAAAABJRU5ErkJggg==',
 );
+
+class _Jobs extends RunningJobs {
+  _Jobs(this.jobs);
+  final List<RunningJob> jobs;
+
+  @override
+  List<RunningJob> build() => jobs;
+}
 
 class _Run {
   final progress = StreamController<JobProgress>.broadcast();
@@ -263,6 +277,150 @@ void main() {
       expect(find.text('Something went wrong on page 14.'), findsOneWidget);
       expect(find.text('Code DK-0190'), findsOneWidget);
       await golden(tester, 'failure_$theme');
+    });
+
+    testWidgets('minibar, $theme: a running job above the tab bar', (
+      tester,
+    ) async {
+      tester.view.physicalSize = const Size(393, 852);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      final router = buildRouter(initialLocation: Routes.tools);
+      addTearDown(router.dispose);
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            appDatabaseProvider.overrideWithValue(db),
+            runningJobsProvider.overrideWith(
+              () => _Jobs([
+                RunningJob(
+                  id: 1,
+                  toolId: 'compress',
+                  cancel: () {},
+                  progress: const JobProgress(
+                    'reading',
+                    pageIndex: 17,
+                    pageCount: 40,
+                  ),
+                ),
+              ]),
+            ),
+          ],
+          child: MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            routerConfig: router,
+            theme: dokuloTheme(tokens),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+          ),
+        ),
+      );
+      await settle(tester);
+      await golden(tester, 'minibar_$theme');
+    });
+
+    testWidgets('canceldlg, $theme: "Stop compressing?" after 30 s', (
+      tester,
+    ) async {
+      final id = await file(
+        tester,
+        'Mietvertrag Musterstraße 12.pdf',
+        size: 8400000,
+        pages: 12,
+      );
+      final run = _Run();
+      final def = ToolDefinition(
+        id: 'compress',
+        action: (l, s) => 'Compress ${s.pages} pages',
+        stopTitle: (l) => 'Stop compressing?',
+        input: (s, v, env) => v,
+      );
+      await pump(tester, tokens, def, [id], run: run);
+      await tester.tap(find.text('Compress 12 pages'));
+      for (var i = 0; i < 31; i++) {
+        await tester.pump(const Duration(seconds: 1));
+      }
+      await tester.tap(find.text('Cancel'));
+      for (var i = 0; i < 4; i++) {
+        await tester.pump(const Duration(milliseconds: 150));
+      }
+      expect(find.text('Stop compressing?'), findsOneWidget);
+      await golden(tester, 'canceldlg_$theme');
+      run.result.complete(null);
+      await tester.pump(const Duration(seconds: 1));
+    });
+
+    Future<void> pumpT3(WidgetTester tester, Duration took) async {
+      tester.view.physicalSize = const Size(393, 852);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      final id = await file(
+        tester,
+        'Mietvertrag Musterstraße 12.pdf',
+        size: 8400000,
+        pages: 12,
+      );
+      final out = (await tester.runAsync(() async {
+        final f = await store.newTempFile(
+          'Mietvertrag Musterstraße 12 – compressed.pdf',
+        );
+        await File(fixture('Invoice INV-2026-014.pdf')).copy(f.path);
+        return f.path;
+      }))!;
+      final input = (await tester.runAsync(
+        () => (db.select(db.files)..where((f) => f.id.equals(id))).getSingle(),
+      ))!;
+      final container = ProviderContainer(
+        overrides: [
+          appDatabaseProvider.overrideWithValue(db),
+          fileStoreProvider.overrideWith((ref) async => store),
+          hapticsProvider.overrideWithValue(DkHaptics(medium: () async {})),
+        ],
+      );
+      addTearDown(container.dispose);
+      container
+          .read(lastToolResultProvider.notifier)
+          .set(
+            ToolResult(
+              toolId: 'compress',
+              inputs: [input],
+              output: OneFile(out),
+              took: took,
+            ),
+          );
+      await tester.pumpWidget(
+        UncontrolledProviderScope(
+          container: container,
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: dokuloTheme(tokens),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: const ToolResultScreen(toolId: 'compress'),
+          ),
+        ),
+      );
+      await settle(tester);
+    }
+
+    testWidgets("discard, $theme: closing a long job's unsaved result", (
+      tester,
+    ) async {
+      await pumpT3(tester, const Duration(seconds: 15));
+      await tester.tap(find.byTooltip('Close'));
+      await settle(tester);
+      expect(find.text('Discard this result?'), findsOneWidget);
+      await golden(tester, 'discard_$theme');
+    });
+
+    testWidgets('aftersave, $theme: the toast and Done', (tester) async {
+      await pumpT3(tester, const Duration(seconds: 3));
+      await tester.tap(find.text('Save'));
+      for (var i = 0; i < 3; i++) {
+        await settle(tester);
+      }
+      expect(find.text('Done'), findsOneWidget);
+      await golden(tester, 'aftersave_$theme');
     });
   }
 }
