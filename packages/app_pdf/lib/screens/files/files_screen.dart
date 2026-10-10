@@ -1,5 +1,6 @@
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,6 +25,7 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../patterns/dk_empty_states.dart';
 import '../../patterns/dk_file_actions.dart';
+import '../../patterns/dk_swipe_actions.dart';
 import '../../patterns/dk_open_file.dart';
 import '../../patterns/dk_text_dialog.dart';
 import '../../providers/database_providers.dart';
@@ -709,8 +711,11 @@ class FileEntryCard extends ConsumerWidget {
 
     // A large tablet's list: a tap selects for the preview pane (DK-0279).
     final pane = grid ? null : FilesPane.maybeOf(context);
-    final card = DkFileCard(
+    Widget card([
+      Map<CustomSemanticsAction, VoidCallback>? actions,
+    ]) => DkFileCard(
       name: file.name,
+      semanticsActions: actions,
       // A text hit's meta leaves the date out: the sentence says more.
       meta: hit == null
           ? fileMeta(file, l, locale)
@@ -761,12 +766,22 @@ class FileEntryCard extends ConsumerWidget {
           ? () => showFileActions(context, ref, file)
           : null,
     );
-    if (pane == null || pane.selected != file.id) return card;
+    // A list row swipes left to Share and Delete (DK-0268, Home's recents
+    // DK-0243; §12.3); a search hit and the tablet's pane don't.
+    if (!grid && pane == null && hit == null) {
+      return DkSwipeActions(
+        // ponytail: Share waits for share_plus (DK-1077), as elsewhere.
+        onShare: null,
+        onDelete: () => deleteFiles(context, ref, [file]),
+        builder: (context, actions) => card(actions),
+      );
+    }
+    if (pane == null || pane.selected != file.id) return card();
     return Semantics(
       selected: true,
       child: ColoredBox(
         color: t.color.primaryContainer.withValues(alpha: 0.6),
-        child: card,
+        child: card(),
       ),
     );
   }
