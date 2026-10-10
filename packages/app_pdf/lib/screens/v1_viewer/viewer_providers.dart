@@ -27,3 +27,18 @@ Future<ViewerOpen> viewerOpen(Ref ref, String path, {String? password}) async {
         : ViewerOpen.damaged;
   }
 }
+
+/// Whether a PDF has fields to fill (V1's form banner, DK-1090): an
+/// AcroForm with at least one field (a flattened form keeps its empty
+/// dictionary; XFA can't be filled on phones).
+@riverpod
+Future<bool> viewerHasForm(Ref ref, String path, {String? password}) async {
+  try {
+    if (await PdfForms.kind(path, password: password) != PdfFormKind.acroForm) {
+      return false;
+    }
+    return (await PdfForms.fields(path, password: password)).isNotEmpty;
+  } on DocError {
+    return false;
+  }
+}

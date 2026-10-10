@@ -613,5 +613,7 @@
   "viewer_link_open": "Öffnen",
   "viewer_locked_title": "Diese PDF ist gesperrt",
   "viewer_damaged_body": "Sie ist möglicherweise beschädigt.",
-  "viewer_unlocked": "Zum Ansehen entsperrt"
+  "viewer_unlocked": "Zum Ansehen entsperrt",
+  "viewer_form_banner": "Diese PDF hat ausfüllbare Felder.",
+  "viewer_form_fill": "Formular ausfüllen"
 }

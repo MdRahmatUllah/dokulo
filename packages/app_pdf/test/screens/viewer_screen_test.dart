@@ -282,4 +282,27 @@ void main() {
     expect(find.byType(ColorFiltered), findsOneWidget);
     expect(tester.widget<DkPdfCanvas>(find.byType(DkPdfCanvas)).night, isTrue);
   });
+
+  for (final (name, expected) in [
+    ('form-acroform.pdf', true),
+    ('Invoice INV-2026-014.pdf', false),
+  ]) {
+    testWidgets('form banner (DK-1090) on $name: $expected', (tester) async {
+      final db = DokuloDatabase.memory();
+      addTearDown(db.close);
+      final id = await addFile(tester, db, fixture(name));
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          child: app(ViewerScreen(fileId: id)),
+        ),
+      );
+      await settle(tester);
+      expect(
+        find.text('This PDF has fillable fields.'),
+        expected ? findsOneWidget : findsNothing,
+      );
+      if (expected) expect(find.text('Fill form'), findsOneWidget);
+    });
+  }
 }
