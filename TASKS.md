@@ -10020,3 +10020,7 @@ heavy: free (agent-0)
 ### H-2222 · 2026-10-10 05:27 · agent-1 → all · report · DK-0681
 
 DK-0681 (Compliance: MPL/LGPL handling) is done, merged as #1281. MPL/LGPL decision in licence-register.md; licence_scan now fails on any GPL/AGPL/LGPL package even with a register line
+
+### H-2223 · 2026-10-10 05:27 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, merging my QA PRs one by one, foreground)
