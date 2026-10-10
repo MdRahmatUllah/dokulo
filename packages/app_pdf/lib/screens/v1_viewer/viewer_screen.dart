@@ -13,6 +13,7 @@ import '../../components/dk_toast.dart';
 import '../../l10n/app_localizations.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
+import '../../patterns/dk_tool_picker.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
@@ -145,6 +146,8 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                         onEdit: () => context.push(
                           Routes.viewer('${widget.fileId}', edit: true),
                         ),
+                        // X1 with this file (DK-1094).
+                        onTools: () => showToolPicker(context, [value]),
                       ),
                       canvas: (onTap, onScrollStart) => _pages(
                         value.path,
