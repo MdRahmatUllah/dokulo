@@ -9,6 +9,7 @@ import '../components/dk_icon.dart';
 import '../theme/dk_folder_tags.dart';
 import '../components/dk_tappable.dart';
 import '../components/dk_folder_card.dart';
+import '../components/dk_settings_row.dart';
 import '../components/dk_sheet.dart';
 import '../components/dk_text_action.dart';
 import '../l10n/app_localizations.dart';
@@ -259,28 +260,62 @@ Future<void> moveFiles(
   List<FileEntry> files,
 ) async {
   final l = AppLocalizations.of(context);
-  // The folder the sheet is in; it answers with it: (id,) for the root.
-  final at = ValueNotifier<int?>(null);
-  final target = await showDkSheet<(int?,)>(
+  final target = await pickFolder(
     context,
     title: l.file_move_title(files.length),
+    action: l.file_move_here,
+  );
+  if (target == null || !context.mounted) return;
+  await moveFilesTo(context, ref, files, target.folder);
+}
+
+/// A folder from the Move sheet's browser (T3's Save to…, DK-0385): the
+/// folders with the breadcrumb and "New folder", and the sticky [action]
+/// ("Move here", "Save here"). With [elsewhere], a second button under it
+/// answers `elsewhere: true` (the system's save dialog). Null when closed.
+Future<({int? folder, bool elsewhere})?> pickFolder(
+  BuildContext context, {
+  required String title,
+  required String action,
+  String? elsewhere,
+}) async {
+  // The folder the sheet is in; the buttons answer with it.
+  final at = ValueNotifier<int?>(null);
+  final picked = await showDkSheet<({int? folder, bool elsewhere})>(
+    context,
+    title: title,
     detent: DkSheetDetent.large,
     showClose: true,
     body: _MoveBrowser(at),
     // Sticky at the bottom, as the files-move frame.
     actions: Builder(
-      builder: (sheet) => DkButton(
-        label: l.file_move_here,
-        size: DkButtonSize.large,
-        expand: true,
-        onPressed: () => Navigator.pop(sheet, (at.value,)),
+      builder: (sheet) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: sheet.tokens.space.s,
+        children: [
+          DkButton(
+            label: action,
+            size: DkButtonSize.large,
+            expand: true,
+            onPressed: () =>
+                Navigator.pop(sheet, (folder: at.value, elsewhere: false)),
+          ),
+          if (elsewhere != null)
+            DkButton(
+              label: elsewhere,
+              variant: DkButtonVariant.tertiary,
+              size: DkButtonSize.large,
+              expand: true,
+              onPressed: () =>
+                  Navigator.pop(sheet, (folder: null, elsewhere: true)),
+            ),
+        ],
       ),
     ),
   );
   at.dispose();
-  if (target == null || !context.mounted) return;
-  final (folder,) = target;
-  await moveFilesTo(context, ref, files, folder);
+  return picked;
 }
 
 /// Moves [files] into [folder] (null: the root), then "Moved to {folder}"
@@ -319,7 +354,7 @@ Future<void> moveFilesTo(
 class _MoveBrowser extends ConsumerStatefulWidget {
   const _MoveBrowser(this.at);
 
-  /// The folder shown (null: the root); Move here moves into it.
+  /// The folder shown (null: the root); the sheet's buttons answer with it.
   final ValueNotifier<int?> at;
 
   @override

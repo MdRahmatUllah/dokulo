@@ -139,6 +139,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* drive_file_rename_outline */;
   static const move = IconData(0xe9a1, fontFamily: _font) /* drive_file_move */;
+  static const replace = IconData(0xe8d4, fontFamily: _font) /* swap_horiz */;
   static const duplicate = IconData(
     0xe14d,
     fontFamily: _font,
@@ -151,6 +152,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const addCircle = IconData(0xe147, fontFamily: _font) /* add_circle */;
   static const lock = IconData(0xe899, fontFamily: _font) /* lock */;
   static const star = IconData(0xe838, fontFamily: _font) /* star */;
   static const lockOpen = IconData(0xe898, fontFamily: _font) /* lock_open */;

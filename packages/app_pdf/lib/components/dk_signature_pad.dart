@@ -28,8 +28,8 @@ enum DkSignatureMode { draw, type, image }
 /// - **Image:** Take photo and Choose photo; the screen crops the photo and
 ///   removes the paper ([onTakePhoto], [onChoosePhoto]).
 ///
-/// Save hands [onSave] the signature as a PNG: transparent around the ink
-/// and trimmed to it. The canvas card is paper, white in both themes, so
+/// Save hands [onSave] the signature as a PNG, transparent around the ink
+/// and trimmed to it, and the ink (typed names are in blue ink). The canvas card is paper, white in both themes, so
 /// what sits on it is drawn in the light theme.
 class DkSignaturePad extends StatefulWidget {
   const DkSignaturePad({
@@ -43,7 +43,7 @@ class DkSignaturePad extends StatefulWidget {
   });
 
   final VoidCallback onCancel;
-  final ValueChanged<Uint8List> onSave;
+  final void Function(Uint8List png, Color ink) onSave;
   final VoidCallback? onTakePhoto, onChoosePhoto;
 
   /// The Type tab's name to start with (the user's, when known).
@@ -90,7 +90,10 @@ class _DkSignaturePadState extends State<DkSignaturePad> {
     final png = _mode == DkSignatureMode.draw
         ? await _drawing.toPng()
         : await _typed(_name.text.trim(), DkSignaturePad.fonts[_font]);
-    if (png != null && mounted) widget.onSave(png);
+    final ink = _mode == DkSignatureMode.draw
+        ? _drawing.ink
+        : const DkMarkup().ink;
+    if (png != null && mounted) widget.onSave(png, ink);
   }
 
   /// The typed name in [font] and blue ink, as a trimmed transparent PNG.

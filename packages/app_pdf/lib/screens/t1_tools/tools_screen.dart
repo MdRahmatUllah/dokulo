@@ -8,7 +8,7 @@ import '../../components/dk_chip.dart';
 import '../../components/dk_empty_state.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_illustration.dart';
-import '../../components/dk_settings_row.dart';
+import '../../components/dk_tappable.dart';
 import '../../components/dk_text_action.dart';
 import '../../components/dk_text_field.dart';
 import '../../components/dk_tool_tile.dart';
@@ -192,13 +192,32 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
               showDescription: true,
               onTap: () => _open(tool),
             ),
-          DkSettingsRow(
-            icon: DkIcons.info,
-            title: l.tools_about(found.first.name(l)),
+          // A text action, as the frame: the info icon and the words in
+          // color.primary, no chevron.
+          DkTappable(
+            radius: 0,
             onTap: () => showAboutTool(
               context,
               found.first,
               onOpen: () => _open(found.first),
+            ),
+            builder: (context, pressed) => Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: t.space.l,
+                vertical: t.space.m,
+              ),
+              child: Row(
+                spacing: t.space.m,
+                children: [
+                  DkIcon(DkIcons.info, color: t.color.primary),
+                  Expanded(
+                    child: Text(
+                      l.tools_about(found.first.name(l)),
+                      style: t.text.bodyL.copyWith(color: t.color.primary),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -232,7 +251,16 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
           // ever grows to hundreds.
           scrollCacheExtent: const ScrollCacheExtent.pixels(10000),
           slivers: [
-            DkLargeTopBar(title: l.shell_tab_tools),
+            // Searching, the field moves up in the title's place (the
+            // tools-search frame).
+            if (_query.isEmpty)
+              DkLargeTopBar(title: l.shell_tab_tools)
+            else
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: MediaQuery.paddingOf(context).top + t.space.xl,
+                ),
+              ),
             SliverPadding(
               padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, 0),
               sliver: SliverToBoxAdapter(
@@ -302,12 +330,15 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
                       textBaseline: TextBaseline.alphabetic,
                       spacing: t.space.s,
                       children: [
-                        Semantics(
-                          header: true,
-                          child: Text(
-                            c.label(l),
-                            style: t.text.titleS.copyWith(
-                              color: t.color.textPrimary,
+                        // The count at the end, as the frames (QA, DK-0728).
+                        Expanded(
+                          child: Semantics(
+                            header: true,
+                            child: Text(
+                              c.label(l),
+                              style: t.text.titleS.copyWith(
+                                color: t.color.textPrimary,
+                              ),
                             ),
                           ),
                         ),
@@ -365,9 +396,16 @@ class _ChipsBar extends SliverPersistentHeaderDelegate {
   @override
   Widget build(BuildContext context, double shrink, bool overlaps) {
     final t = context.tokens;
-    return ColoredBox(
+    // A hairline once content scrolls under the chips (the tools-chip
+    // frame), as the top bars have.
+    return DecoratedBox(
       key: key,
-      color: colour,
+      decoration: BoxDecoration(
+        color: colour,
+        border: overlaps
+            ? Border(bottom: BorderSide(color: t.color.outline))
+            : null,
+      ),
       // A Row, not a lazy list: every chip exists to scroll to.
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
