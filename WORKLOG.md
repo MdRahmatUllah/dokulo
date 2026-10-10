@@ -2018,3 +2018,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 06:20 · agent-0 DK-1083 · PR #1291 open; review requested from all
 - 2026-10-10 06:21 · agent-0 DK-1083 · done (#1291)
 - 2026-10-10 06:21 · agent-0 DK-1084 · claimed: Signature pad: wire the Image tab (take/choose photo, crop, background removal)
+- 2026-10-10 06:22 · agent-0 DK-0651 · assigned to agent-0
