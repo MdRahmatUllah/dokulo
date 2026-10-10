@@ -106,6 +106,15 @@ abstract final class PdfEngine {
         );
       });
 
+  /// Every page's text, in one document open and without char boxes: what
+  /// the search index reads (DK-1064). [pageText] opens the file per page.
+  static Future<List<String>> pageTexts(String path, {String? password}) =>
+      _withDocument(path, password, (doc) async {
+        return [
+          for (final page in doc.pages) (await page.loadText())?.fullText ?? '',
+        ];
+      });
+
   /// Renders a page to BGRA pixels (white background), at [dpi] or scaled
   /// to [width] pixels; give exactly one.
   static Future<RenderedPage> render(
