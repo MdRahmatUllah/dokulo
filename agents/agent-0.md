@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 06:43
+last-seen: 2026-10-10 06:44
 last-read: 2294
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0378 Notifications permission pre-prompt the first time a job runs > 30 s in the background — claimed 2026-10-10 06:44.
 
 ## Next
 
