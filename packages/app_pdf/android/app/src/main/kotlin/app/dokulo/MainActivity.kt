@@ -4,6 +4,8 @@ import android.Manifest
 import android.app.ActivityManager
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.StatFs
@@ -12,6 +14,8 @@ import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import java.io.File
+import java.io.FileOutputStream
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -164,6 +168,36 @@ class MainActivity : FlutterFragmentActivity() {
                     window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
                 }
                 result.success(null)
+            }
+        // HEIC/HEIF photos as JPEGs for the image tools (DK-1081;
+        // lib/providers/image_providers.dart): ImageDecoder (Android 9+)
+        // applies the EXIF orientation; off the main thread, a big photo
+        // takes a moment. False on Android 8 or when it doesn't decode.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/images")
+            .setMethodCallHandler { call, result ->
+                val from = call.argument<String>("from")
+                val to = call.argument<String>("to")
+                if (call.method != "heicToJpeg" || from == null || to == null) {
+                    result.notImplemented()
+                    return@setMethodCallHandler
+                }
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+                    result.success(false)
+                    return@setMethodCallHandler
+                }
+                Thread {
+                    val ok = try {
+                        val bitmap = ImageDecoder.decodeBitmap(
+                            ImageDecoder.createSource(File(from)),
+                        )
+                        FileOutputStream(to).use {
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 92, it)
+                        }
+                    } catch (e: Exception) {
+                        false
+                    }
+                    runOnUiThread { result.success(ok) }
+                }.start()
             }
         // What the phone can do (DK-0013; ai_core's DeviceCapabilities reads this map).
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/device")

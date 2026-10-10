@@ -2470,5 +2470,14 @@
   "files_run_tool": "Run a tool…",
   "@files_run_tool": {
     "description": "F1 selection bar's More menu: pick a tool for the selected files."
+  },
+  "images_heic_skipped": "{n, plural, one{1 HEIC photo can't be opened on this phone and was skipped.} other{{n} HEIC photos can't be opened on this phone and were skipped.}}",
+  "@images_heic_skipped": {
+    "description": "Toast: picked HEIC photos this phone can't decode (Android 8 and older) were left out (DK-1081).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }

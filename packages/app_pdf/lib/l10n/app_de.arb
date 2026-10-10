@@ -628,5 +628,6 @@
   "files_sel_merge": "Zusammenfügen",
   "files_sel_compress": "Verkleinern",
   "files_sel_more": "Mehr",
-  "files_run_tool": "Werkzeug ausführen…"
+  "files_run_tool": "Werkzeug ausführen…",
+  "images_heic_skipped": "{n, plural, one{1 HEIC-Foto lässt sich auf diesem Handy nicht öffnen und wurde übersprungen.} other{{n} HEIC-Fotos lassen sich auf diesem Handy nicht öffnen und wurden übersprungen.}}"
 }
