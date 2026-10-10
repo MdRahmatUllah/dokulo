@@ -145,8 +145,8 @@ Future<void> showFileActions(
         DkAction(
           icon: DkIcons.lockedFolder,
           label: l.file_move_to_locked,
-          // The encrypt job comes with DK-0289; until then, the folder.
-          onTap: () => context.push(Routes.lockedFolder),
+          // F2 sets up or unlocks first, then seals it (DK-0289).
+          onTap: () => context.push(Routes.lockedFolder, extra: [file.id]),
         ),
       ],
       [

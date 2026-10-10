@@ -3,12 +3,14 @@ import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_empty_state.dart';
 import 'package:app_pdf/components/dk_file_card.dart';
+import 'package:app_pdf/components/dk_mini_job_bar.dart';
 import 'package:app_pdf/components/dk_tool_tile.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/patterns/dk_open_file.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/providers/files_providers.dart';
+import 'package:app_pdf/providers/job_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
@@ -16,6 +18,7 @@ import 'package:app_pdf/screens/v1_viewer/viewer_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart' show JobProgress;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
@@ -157,6 +160,65 @@ void main() {
     expect(top!.fileId, older);
   });
 
+  testWidgets(
+    'a file added but not opened is in Recent; the empty state goes',
+    (tester) async {
+      await tester.runAsync(
+        () => db
+            .into(db.files)
+            .insert(
+              FilesCompanion.insert(
+                path: '/x/Scan.pdf',
+                name: 'Scan.pdf',
+                size: 1000,
+                created: DateTime(2026, 10, 9),
+                modified: DateTime(2026, 10, 9),
+              ),
+            ),
+      );
+      await pumpHome(tester, db);
+      expect(find.byType(DkEmptyState), findsNothing);
+      expect(find.text('Scan.pdf'), findsOneWidget);
+    },
+  );
+
+  testWidgets('Recent holds 20 at most', (tester) async {
+    await tester.runAsync(() async {
+      for (var i = 0; i < 25; i++) {
+        await addFile(db, 'f$i.pdf', opened: DateTime(2026, 10, 1, i));
+      }
+    });
+    await pumpHome(tester, db);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(HomeScreen)),
+    );
+    expect(container.read(recentFilesProvider).value, hasLength(20));
+    expect(container.read(recentFilesProvider).value!.first.name, 'f24.pdf');
+  });
+
+  testWidgets('a running job: the mini bar never covers the last row', (
+    tester,
+  ) async {
+    await tester.runAsync(() async {
+      for (var i = 0; i < 12; i++) {
+        await addFile(db, 'f$i.pdf', opened: DateTime(2026, 10, 1, i));
+      }
+    });
+    await pumpHome(
+      tester,
+      db,
+      overrides: [runningJobsProvider.overrideWith(_OneJob.new)],
+    );
+    expect(find.byType(DkMiniJobBar), findsOneWidget);
+    await tester.drag(find.byType(CustomScrollView), const Offset(0, -3000));
+    await settle(tester);
+    final last = tester.getRect(find.text('f0.pdf'));
+    expect(
+      last.bottom,
+      lessThanOrEqualTo(tester.getRect(find.byType(DkMiniJobBar)).top),
+    );
+  });
+
   testWidgets('Open a file: picked, copied into Dokulo, at the top, in V1', (
     tester,
   ) async {
@@ -268,4 +330,17 @@ void main() {
       );
     });
   });
+}
+
+/// One Compress job half done.
+class _OneJob extends RunningJobs {
+  @override
+  List<RunningJob> build() => [
+    RunningJob(
+      id: 1,
+      toolId: 'compress',
+      cancel: () {},
+      progress: const JobProgress('compress', pageIndex: 2, pageCount: 4),
+    ),
+  ];
 }

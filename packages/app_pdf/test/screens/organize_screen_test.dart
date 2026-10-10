@@ -198,9 +198,8 @@ void main() {
     await settle(tester);
     expect(find.text('From another PDF'), findsOneWidget);
     await tester.tap(find.text('Blank page'));
-    for (var i = 0; i < 3; i++) {
-      await settle(tester); // the neighbour's size, then the blank page
-    }
+    // The neighbour's size, then the blank page.
+    await settleUntil(tester, () => pageCount(tester) == 6);
     expect(tester.takeException(), isNull);
     expect(pageCount(tester), 6);
     expect(find.text('6 pages'), findsOneWidget);
@@ -213,12 +212,11 @@ void main() {
     await tapPage(tester, 2);
     await tapPage(tester, 3);
     await tester.tap(find.text('Extract'));
-    for (var i = 0; i < 3; i++) {
-      await settle(tester); // PDFium writes it, then reads it back
-    }
     final extracted = File(
       '${store.userFolder.path}${sep}Taxes${sep}Five – extracted.pdf',
     );
+    // PDFium writes it, then reads it back for the index.
+    await settleUntil(tester, extracted.existsSync);
     expect(extracted.existsSync(), isTrue);
     expect(
       (await tester.runAsync(() => PdfEngine.inspect(extracted.path)))!
@@ -230,9 +228,7 @@ void main() {
     await tester.tap(find.text('Delete'));
     await settle(tester);
     await tester.tap(find.text('Save'));
-    for (var i = 0; i < 3; i++) {
-      await settle(tester);
-    }
+    await settleUntil(tester, () => find.text('Viewer').evaluate().isNotEmpty);
     final copy = File('${store.userFolder.path}${sep}Taxes${sep}Five (2).pdf');
     expect(copy.existsSync(), isTrue);
     expect(
@@ -306,6 +302,18 @@ void main() {
     await settle(tester);
     expect(find.text('300'), findsWidgets);
   });
+}
+
+/// Frames and real time until [done] (PDFium and the disk are slower when
+/// the gate runs four suites at once), at most 15 s.
+Future<void> settleUntil(WidgetTester tester, bool Function() done) async {
+  for (var i = 0; i < 100 && !done(); i++) {
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 50)),
+    );
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+  await settle(tester);
 }
 
 /// PDFium and the file system between frames.
