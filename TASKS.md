@@ -9996,3 +9996,7 @@ heavy: free (agent-1, exit 0)
 ### H-2216 · 2026-10-10 05:20 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-2217 · 2026-10-10 05:20 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, gate DK-0804 batch)
