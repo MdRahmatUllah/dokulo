@@ -1931,3 +1931,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 04:32 · agent-0 DK-1064 · claimed: TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up)
 - 2026-10-10 04:42 · agent-0 DK-1064 · PR #1268 open; review requested from all
 - 2026-10-10 04:42 · agent-0 DK-1064 · done (#1268)
+- 2026-10-10 04:43 · agent-0 DK-0799 · claimed: Visual QA: organize-drag (page lifted mid-drag)

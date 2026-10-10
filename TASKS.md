@@ -820,7 +820,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | assigned | agent-2 | DK-0327 |  |
 | DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-2 | DK-0327 |  |
 | DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | open |  | DK-0329 DK-0516 |  |
-| DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | assigned | agent-0 | DK-0331 |  |
+| DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | in-progress | agent-0 | DK-0331 |  |
 | DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | assigned | agent-0 | DK-0329 |  |
 | DK-0801 | Ph7 | Q | P2 | XS | Visual QA: organize-insert (insert sheet) | assigned | agent-0 | DK-0332 |  |
 | DK-0802 | Ph7 | Q | P2 | XS | Visual QA: organize-deleted (after delete toast) | assigned | agent-0 | DK-0333 |  |
