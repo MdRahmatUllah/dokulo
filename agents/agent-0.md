@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 08:30
+last-seen: 2026-10-10 08:32
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-1093 V1 search (bar, highlights, no-text banner), reachable from Files search — claimed 2026-10-10 08:15.
+DK-1093 in review as PR #1320: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
