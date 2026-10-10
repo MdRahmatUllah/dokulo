@@ -7,7 +7,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_bar.dart';
 import '../../components/dk_button.dart';
+import '../../components/dk_action_sheet.dart';
 import '../../components/dk_file_card.dart';
+import '../../components/dk_icon.dart';
+import '../../components/dk_menu.dart';
 import '../../components/dk_next_chip.dart';
 import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_page_thumb.dart';
@@ -20,6 +23,7 @@ import '../../l10n/formats.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/files_providers.dart';
 import '../../routes/link_error.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
@@ -114,6 +118,44 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
           onAction: () => context.push(Routes.viewer('${first.id}')),
         );
       }
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  /// "Replace original" (§20.4): one indexed input and one output of its
+  /// type. A copy of the original stays in Versions.
+  bool get _canReplace {
+    final result = _result!;
+    if (result.inputs.length != 1 || result.files.length != 1) return false;
+    final input = result.inputs.single;
+    String ext(String path) => path.split('.').last.toLowerCase();
+    return input.id >= 0 && ext(input.path) == ext(result.files.single);
+  }
+
+  /// Asks, writes the output over the original (kept as a version), and
+  /// offers Undo for 10 s.
+  Future<void> _replace() async {
+    final result = _result!;
+    final l = AppLocalizations.of(context);
+    if (!await confirmDk(context, DkConfirmation.replaceOriginal)) return;
+    if (!mounted) return;
+    setState(() => _saving = true);
+    try {
+      final input = result.inputs.single;
+      final versions = await ref.read(versionStoreProvider.future);
+      final kept = await versions.replace(input.id, result.files.single);
+      _savedFiles = [input];
+      await ref.read(hapticsProvider).saved();
+      if (!mounted) return;
+      setState(() => _savedId = input.id);
+      showDkToast(
+        context,
+        l.toast_replaced,
+        action: l.common_undo,
+        onAction: () => versions.restore(kept),
+        duration: DkToastDuration.replaceUndo,
+      );
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -245,6 +287,27 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
       label: _savedId == null ? l.t3_save : l.common_done,
       loading: _saving,
       onPressed: _saving ? null : (_savedId == null ? _save : _close),
+      // The split: Save as copy · Replace original, until it's saved.
+      onMenu: _savedId == null && _canReplace
+          ? (anchor) => showDkMenu(
+              anchor,
+              groups: [
+                [
+                  DkAction(
+                    icon: DkIcons.copy,
+                    label: l.common_save_copy,
+                    onTap: _save,
+                  ),
+                  DkAction(
+                    icon: DkIcons.replace,
+                    label: l.common_replace_original,
+                    onTap: _replace,
+                  ),
+                ],
+              ],
+            )
+          : null,
+      menuLabel: _savedId == null && _canReplace ? l.t3_save_menu : null,
       secondaryLabel: l.common_open,
       onSecondary: _saving
           ? null

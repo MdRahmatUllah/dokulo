@@ -50,6 +50,7 @@ class DkButton extends StatefulWidget {
     this.autofocus = false,
     this.showPressed = false,
     this.showFocused = false,
+    this.borderRadius,
   });
 
   final String label;
@@ -67,6 +68,9 @@ class DkButton extends StatefulWidget {
   /// Draw the pressed or focused state without a finger or a keyboard: for
   /// the component catalogue and goldens only.
   final bool showPressed, showFocused;
+
+  /// Other corners than the size's: a split button's half (DkActionBar).
+  final BorderRadius? borderRadius;
 
   @override
   State<DkButton> createState() => _DkButtonState();
@@ -172,7 +176,7 @@ class _DkButtonState extends State<DkButton> {
             fill,
           )
         : fill;
-    final shape = BorderRadius.circular(radius);
+    final shape = widget.borderRadius ?? BorderRadius.circular(radius);
 
     // The spinner is 20 dp at every size (UI spec §11.1); beside a compact
     // 16 dp icon's place it takes the extra 4 dp from the gap, so the width

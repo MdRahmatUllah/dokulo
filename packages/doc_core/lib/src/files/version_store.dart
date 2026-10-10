@@ -53,6 +53,24 @@ class VersionStore {
     });
   }
 
+  /// "Replace original" (T3, DK-0380): [source] becomes file [fileId]'s
+  /// content, and what it was is kept as a version. Returns that version,
+  /// for Undo ([restore]).
+  Future<Version> replace(int fileId, String source) async {
+    final kept = await save(fileId);
+    final file = await (db.select(
+      db.files,
+    )..where((f) => f.id.equals(fileId))).getSingle();
+    final replaced = await File(source).copy(file.path);
+    await (db.update(db.files)..where((f) => f.id.equals(fileId))).write(
+      FilesCompanion(
+        size: Value(await replaced.length()),
+        modified: Value(_now()),
+      ),
+    );
+    return kept;
+  }
+
   /// The file's versions, newest first.
   Future<List<Version>> list(int fileId) => _newestFirst(fileId).get();
 

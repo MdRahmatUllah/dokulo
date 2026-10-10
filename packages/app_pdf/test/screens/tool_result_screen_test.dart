@@ -217,6 +217,48 @@ void main() {
     expect(output.existsSync(), isFalse, reason: 'nothing kept');
   });
 
+  testWidgets('Replace original (DK-0380): the split menu, the dialog, the '
+      'output over the file, the original in Versions, Undo for 10 s', (
+    tester,
+  ) async {
+    await pumpT3(tester);
+    final original = File(input.path).readAsBytesSync();
+    // A different result, so a replace shows.
+    await tester.runAsync(
+      () => File(output.path).writeAsBytes([...original, 0x0A]),
+    );
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    expect(find.text('Save as copy'), findsOneWidget);
+    await tester.tap(find.text('Replace original'));
+    await settle(tester);
+    expect(find.text('Replace the original file?'), findsOneWidget);
+    expect(
+      find.text('The original will be kept in Versions for 30 days.'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Replace'));
+    await settle(tester);
+    expect(File(input.path).lengthSync(), original.length + 1);
+    final versions = await tester.runAsync(() => db.select(db.versions).get());
+    expect(versions, hasLength(1));
+    expect(File(versions!.single.path).readAsBytesSync(), original);
+    expect(find.text('Replaced'), findsOneWidget);
+    expect(bar(tester).label, 'Done');
+    expect(saves, 1);
+    final toast = tester.widget<SnackBar>(find.byType(SnackBar));
+    expect(toast.duration, const Duration(seconds: 10));
+
+    await tester.tap(find.text('Undo'));
+    await settle(tester);
+    expect(File(input.path).readAsBytesSync(), original);
+  });
+
+  testWidgets('no split menu for a multi-file result', (tester) async {
+    await pumpT3(tester, parts: 3);
+    expect(bar(tester).onMenu, isNull);
+  });
+
   testWidgets('a short job closes silently', (tester) async {
     await pumpT3(tester);
     await tester.tap(find.byTooltip('Close'));
