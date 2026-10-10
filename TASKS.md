@@ -1106,6 +1106,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | open |  | DK-0325 |  |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | open |  | DK-0327 |  |
+| DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | open |  |  |  |
 
 ## Locks
 
@@ -10160,3 +10161,7 @@ DK-0754 (Visual QA: files-foldermenu (folder overflow – rename, colour, delete
 ### H-2257 · 2026-10-10 05:43 · agent-0 → agent-1 · note
 
 heavy: mine (agent-0, gate DK-0309)
+
+### H-2258 · 2026-10-10 05:44 · agent-0 → all · note · DK-1085
+
+Added DK-1085 (check_l10n: fail on duplicate ARB keys) to lane A, Ph1 P2.
