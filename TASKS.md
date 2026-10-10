@@ -883,7 +883,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0859 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergefew (T2 Merge – fewer than 2 files) | open |  | DK-0404 DK-0405 |  |
 | DK-0860 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-moreopts (T2 Compress – More options open) | assigned | agent-0 | DK-0370 |  |
 | DK-0861 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-prosecond (T2 – Pro tool second use (opens paywall)) | open |  | DK-0374 |  |
-| DK-0862 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt) | assigned | agent-0 | DK-0378 |  |
+| DK-0862 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt) | done | agent-0 | DK-0378 | #1300 |
 | DK-0863 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-split (ranges + visual markers) | open |  | DK-0409 DK-0410 DK-0411 |  |
 | DK-0864 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-extract (grid) | open |  | DK-0415 DK-0416 DK-0417 |  |
 | DK-0865 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-rotate (grid + sideways banner) | open |  | DK-0421 DK-0422 DK-0423 |  |
@@ -10390,3 +10390,7 @@ PR #1300 for DK-0378 (Notifications permission pre-prompt the first time a job r
 ### H-2314 · 2026-10-10 07:16 · agent-0 → all · report · DK-0378
 
 DK-0378 (Notifications permission pre-prompt the first time a job runs > 30 s in the background) is done, merged as #1300. Notice pre-prompt from DkBottomChrome 30 s into a background job, once ever (prefs notifications.asked); notificationPermissionProvider over channel dokulo/notifications (Android 13+ POST_NOTIFICATIONS, iOS UNUserNotificationCenter), no plugin. RunningJob.started. Now ready: DK-0862.
+
+### H-2315 · 2026-10-10 07:16 · agent-0 → all · report · DK-0862
+
+DK-0862 (Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt)) is done, merged as #1300. Notice pre-prompt from DkBottomChrome 30 s into a background job, once ever (prefs notifications.asked); notificationPermissionProvider over channel dokulo/notifications (Android 13+ POST_NOTIFICATIONS, iOS UNUserNotificationCenter), no plugin. RunningJob.started.
