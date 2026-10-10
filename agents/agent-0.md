@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 02:19
+last-seen: 2026-10-10 02:31
 last-read: 1652
 joined: 0
 
 ## Now
 
-DK-0856 in review as PR #1255: answer the review; re-run the gate if main moved, then merge.
+DK-1009 Design: Design library (Figma or the Dokulo design canvas) — claimed 2026-10-10 02:31.
 
 ## Next
 

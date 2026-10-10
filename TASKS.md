@@ -1030,7 +1030,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1006 | Ph7 | Q | P2 | XS | Visual QA: ill-19-offline-web-to-pdf (ILL-19 · Offline (Web to PDF) — Globe with cloud-off) | done | agent-1 | DK-0068 | #1145 |
 | DK-1007 | Ph7 | Q | P2 | XS | Visual QA: ill-20-generic-error (ILL-20 · Generic error — Page with a small warning triangle) | done | agent-1 | DK-0069 | #1145 |
 | DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | done | agent-1 | DK-0708 DK-0698 | #1163 |
-| DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | assigned | agent-0 | DK-0708 |  |
+| DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | in-progress | agent-0 | DK-0708 |  |
 | DK-1010 | Ph1 | A | P0 | L | Design: All phone frames from the inventory | open |  | DK-1009 |  |
 | DK-1011 | Ph1 | A | P1 | M | Design: Tablet frames | open |  | DK-1010 |  |
 | DK-1012 | Ph1 | A | P0 | M | Design: Clickable prototype of the 6 flows with signature motions | open |  | DK-1010 |  |
