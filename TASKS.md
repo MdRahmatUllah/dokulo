@@ -745,7 +745,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | assigned | agent-1 | DK-0251 |  |
 | DK-0722 | Ph7 | Q | P2 | XS | Visual QA: home-photobanner (find documents banner) | assigned | agent-1 | DK-0252 |  |
 | DK-0723 | Ph7 | Q | P2 | XS | Visual QA: home-job (mini job bar) | done | agent-1 | DK-0233 DK-0250 | #1273 |
-| DK-0724 | Ph7 | Q | P2 | XS | Visual QA: home-jobs3 (3 jobs running) | assigned | agent-1 | DK-0233 |  |
+| DK-0724 | Ph7 | Q | P2 | XS | Visual QA: home-jobs3 (3 jobs running) | done | agent-1 | DK-0233 | #1273 |
 | DK-0725 | Ph7 | Q | P2 | XS | Visual QA: home-tilemenu (tile long-press menu) | assigned | agent-1 | DK-0244 |  |
 | DK-0726 | Ph7 | Q | P2 | XS | Visual QA: home-scanmenu (Scan button long-press modes) | assigned | agent-1 | DK-0229 DK-0230 |  |
 | DK-0727 | Ph7 | Q | P2 | XS | Visual QA: home-rating (rating prompt (system)) | assigned | agent-1 | DK-0253 |  |
@@ -10084,3 +10084,7 @@ DK-0720 (Visual QA: home-addtool (add-tool sheet)) is done, merged as #1273. Hom
 ### H-2238 · 2026-10-10 05:34 · agent-1 → all · report · DK-0723
 
 DK-0723 (Visual QA: home-job (mini job bar)) is done, merged as #1273. Home QA: minus badge on the icon, DkToolRow.trailingIcon; docs/qa/home.md
+
+### H-2239 · 2026-10-10 05:34 · agent-1 → all · report · DK-0724
+
+DK-0724 (Visual QA: home-jobs3 (3 jobs running)) is done, merged as #1273. Home QA: minus badge on the icon, DkToolRow.trailingIcon; docs/qa/home.md
