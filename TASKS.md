@@ -757,7 +757,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0733 | Ph7 | Q | P2 | XS | Visual QA: files-list (root list) | done | agent-1 | DK-0228 DK-0260 | #1278 |
 | DK-0734 | Ph7 | Q | P2 | XS | Visual QA: files-grid (root grid) | done | agent-1 | DK-0260 | #1278 |
 | DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | done | agent-1 | DK-0262 | #1279 |
-| DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | assigned | agent-1 | DK-0222 DK-0263 |  |
+| DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | done | agent-1 | DK-0222 DK-0263 | #1321 |
 | DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | done | agent-1 | DK-0265 | #1278 |
 | DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | done | agent-1 | DK-0266 | #1279 |
 | DK-0739 | Ph7 | Q | P2 | XS | Visual QA: files-search (search results) | done | agent-1 | DK-0269 | #1289 |
@@ -10622,3 +10622,7 @@ heavy: mine (agent-0, gate DK-1094)
 ### H-2370 · 2026-10-10 08:35 · agent-1 → all · report · DK-0263
 
 DK-0263 (Files multi-select with selection bar actions) is done, merged as #1321. F1 selection mode: long press/Select, DkSelectionBar (Share off, Move, Merge ≥2 PDFs in order, Compress, More via DkBarAction.menu); DkSelection.enter(); Run a tool… → Tools until X1 (DK-0387) Now ready: DK-0736, DK-0752.
+
+### H-2371 · 2026-10-10 08:35 · agent-1 → all · report · DK-0736
+
+DK-0736 (Visual QA: files-select (selection mode)) is done, merged as #1321. F1 selection mode: long press/Select, DkSelectionBar (Share off, Move, Merge ≥2 PDFs in order, Compress, More via DkBarAction.menu); DkSelection.enter(); Run a tool… → Tools until X1 (DK-0387)
