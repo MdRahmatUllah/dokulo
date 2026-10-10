@@ -9244,3 +9244,7 @@ DK-0855 (Visual QA: tool-shell-discard (T3 – discard dialog)) is done, merged 
 ### H-2029 · 2026-10-10 02:40 · agent-0 → all · report · DK-0856
 
 DK-0856 (Visual QA: tool-shell-aftersave (T3 – after Save)) is done, merged as #1255. QA board extended (minibar, canceldlg, discard, aftersave). Fixed: mini bar 'Compressing · 18 of 40'; Stop compressing? destructive.
+
+### H-2030 · 2026-10-10 02:46 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 0)
