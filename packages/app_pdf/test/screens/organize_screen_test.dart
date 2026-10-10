@@ -6,6 +6,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/screens/p1_organize/organize_screen.dart';
+import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/theme/haptics.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image/image.dart' as img;
 import 'package:pdfrx/pdfrx.dart';
 
 String fixture(String name) =>
@@ -28,6 +30,7 @@ void main() {
   late DokuloDatabase db;
   late File original;
   var drops = 0;
+  var photosPicked = const <String>[];
 
   setUp(() {
     root = Directory.systemTemp.createTempSync('dk_p1_');
@@ -52,6 +55,7 @@ void main() {
     DkTokens? tokens,
     int pages = 5,
     Size size = const Size(393, 852),
+    List<String> photos = const [],
   }) async {
     // A phone: three columns, so the 5 pages fit on screen.
     tester.view.physicalSize = size;
@@ -100,6 +104,9 @@ void main() {
           hapticsProvider.overrideWithValue(
             DkHaptics(light: () async => drops++, medium: () async {}),
           ),
+          devicePickerProvider.overrideWithValue(
+            (input, {required photos}) async => photos ? photosPicked : [],
+          ),
         ],
         child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
@@ -110,6 +117,7 @@ void main() {
         ),
       ),
     );
+    photosPicked = photos;
     router.push('/organize/$id');
     await settle(tester);
   }
@@ -217,6 +225,99 @@ void main() {
       await settle(tester);
     });
   }
+
+  // DK-0800..DK-0803: the frames' states, side by side in docs/qa/organize/.
+  for (final (theme, tokens) in [
+    ('light', DkTokens.light),
+    ('dark', DkTokens.dark),
+  ]) {
+    Finder page(int n) =>
+        find.byWidgetPredicate((w) => w is DkPageThumb && w.pageNumber == n);
+
+    testWidgets('golden: organize_selected_$theme', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 12);
+      for (final n in [3, 6, 7]) {
+        await tester.tap(page(n));
+        await tester.pump();
+      }
+      await settle(tester); // the + leaves as the selection bar comes
+      expect(find.text('3 selected'), findsOneWidget);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_selected_$theme.png'),
+      );
+    });
+
+    testWidgets('golden: organize_insert_$theme', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 12);
+      await tester.tap(page(4));
+      await tester.tap(find.byTooltip('Insert pages'));
+      await settle(tester);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_insert_$theme.png'),
+      );
+    });
+
+    testWidgets('golden: organize_deleted_$theme', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 12);
+      await tester.tap(page(5));
+      await tester.tap(page(6));
+      await tester.pump();
+      await tester.tap(find.text('Delete'));
+      await settle(tester);
+      expect(find.text('2 pages deleted'), findsOneWidget);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_deleted_$theme.png'),
+      );
+    });
+
+    testWidgets('golden: organize_pinch_$theme', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 30);
+      const centre = Offset(196, 300);
+      final a = await tester.startGesture(centre - const Offset(100, 0));
+      final b = await tester.startGesture(centre + const Offset(100, 0));
+      for (var i = 1; i <= 10; i++) {
+        final d = 200 - 80 * i / 10;
+        await a.moveTo(centre - Offset(d / 2, 0));
+        await b.moveTo(centre + Offset(d / 2, 0));
+        await tester.pump();
+      }
+      await a.up();
+      await b.up();
+      await settle(tester);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_pinch_$theme.png'),
+      );
+    });
+  }
+
+  testWidgets('Insert › From photos: each photo a page, after the selected '
+      'one (DK-0801)', (tester) async {
+    final dir = Directory.systemTemp.createTempSync('dk_p1_photos_');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    final photos = [
+      for (final (i, w) in [300, 400].indexed)
+        (File('${dir.path}${sep}photo$i.jpg')..writeAsBytesSync(
+              img.encodeJpg(img.Image(width: w, height: 200)),
+            ))
+            .path,
+    ];
+    await pumpP1(tester, photos: photos);
+    await tapPage(tester, 2);
+    await tester.tap(find.byTooltip('Insert pages'));
+    await settle(tester);
+    await tester.tap(find.text('From photos'));
+    await settleUntil(tester, () => pageCount(tester) == 7);
+    expect(pageCount(tester), 7);
+    final ids = tester.widget<DkPageGrid>(find.byType(DkPageGrid)).pageIds;
+    expect(
+      [for (final id in ids) (id as PageSource).path.endsWith('photos.pdf')],
+      [false, false, true, true, false, false, false],
+    );
+  });
 
   testWidgets('+ inserts a blank page at the end (DK-0332)', (tester) async {
     await pumpP1(tester);

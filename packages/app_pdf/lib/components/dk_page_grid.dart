@@ -231,6 +231,7 @@ class _DkPageGridState extends State<DkPageGrid> {
       page: page,
       lifted: lifted,
       selected: widget.selected.contains(i),
+      selecting: widget.selected.isNotEmpty,
       onTap: interactive && widget.onTap != null
           ? () => widget.onTap!(i)
           : null,

@@ -2238,5 +2238,7 @@
     "description": "M1 About row; always visible."
   },
   "t3_save_menu": "More ways to save",
-  "@t3_save_menu": {"description": "T3's split Save: the chevron that opens Save as copy · Replace original (§20.4), for screen readers."}
+  "@t3_save_menu": {"description": "T3's split Save: the chevron that opens Save as copy · Replace original (§20.4), for screen readers."},
+  "organize_insert_photos": "From photos",
+  "@organize_insert_photos": {"description": "P1 insert sheet row (UI spec §18): photos become pages, one each."}
 }
