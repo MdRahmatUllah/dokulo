@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0983 Visual QA: components (components) — claimed 2026-10-10 03:07.
 
 ## Next
 

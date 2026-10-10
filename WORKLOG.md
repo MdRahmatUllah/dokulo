@@ -1912,3 +1912,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 02:48 · agent-1 DK-0291 · done (#1260)
 - 2026-10-10 03:06 · agent-0 DK-1009 · PR #1261 open; review requested from all
 - 2026-10-10 03:07 · agent-0 DK-1009 · done (#1261)
+- 2026-10-10 03:07 · agent-0 DK-0983 · claimed: Visual QA: components (components)
