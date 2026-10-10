@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:app_pdf/components/dk_file_card.dart';
 import 'package:app_pdf/components/dk_folder_card.dart';
 import 'package:doc_core/doc_core.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'files_screen_test.dart' show FilesFixture, pumpFiles, settle;
