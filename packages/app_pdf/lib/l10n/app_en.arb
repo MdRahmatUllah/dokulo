@@ -2244,5 +2244,7 @@
   "t3_use_folder": "Use this folder",
   "@t3_use_folder": {"description": "T3: the folder picker from the 'Save to' row; Save then saves there (DK-0385)."},
   "t3_save_elsewhere": "Save outside Dokulo…",
-  "@t3_save_elsewhere": {"description": "T3 Save to…: opens the system's save dialog (DK-0385)."}
+  "@t3_save_elsewhere": {"description": "T3 Save to…: opens the system's save dialog (DK-0385)."},
+  "organize_insert_photos": "From photos",
+  "@organize_insert_photos": {"description": "P1 insert sheet row (UI spec §18): photos become pages, one each."}
 }

@@ -560,5 +560,6 @@
   "t3_save_menu": "Weitere Optionen zum Speichern",
   "t3_save_here": "Hier speichern",
   "t3_use_folder": "Diesen Ordner verwenden",
-  "t3_save_elsewhere": "Außerhalb von Dokulo speichern…"
+  "t3_save_elsewhere": "Außerhalb von Dokulo speichern…",
+  "organize_insert_photos": "Aus Fotos"
 }
