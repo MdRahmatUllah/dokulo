@@ -761,7 +761,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | done | agent-1 | DK-0265 | #1278 |
 | DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | done | agent-1 | DK-0266 | #1279 |
 | DK-0739 | Ph7 | Q | P2 | XS | Visual QA: files-search (search results) | done | agent-1 | DK-0269 | #1289 |
-| DK-0740 | Ph7 | Q | P2 | XS | Visual QA: files-searchempty (search empty + OCR banner) | assigned | agent-1 | DK-0269 |  |
+| DK-0740 | Ph7 | Q | P2 | XS | Visual QA: files-searchempty (search empty + OCR banner) | done | agent-1 | DK-0269 | #1289 |
 | DK-0741 | Ph7 | Q | P2 | XS | Visual QA: files-sort (sort menu) | done | agent-1 | DK-0261 | #1278 |
 | DK-0742 | Ph7 | Q | P2 | XS | Visual QA: files-action (file action sheet) | done | agent-1 | DK-0271 DK-0276 | #1280 |
 | DK-0743 | Ph7 | Q | P2 | XS | Visual QA: files-info (info sheet) | done | agent-1 | DK-0275 DK-0281 | #1280 |
@@ -10233,3 +10233,7 @@ DK-0281 (Storage info: space used by files vs AI models (file info + Me → File
 ### H-2275 · 2026-10-10 06:05 · agent-1 → all · report · DK-0739
 
 DK-0739 (Visual QA: files-search (search results)) is done, merged as #1289. Search/trash QA: field in the title's place while searching, banner only with no results, confirm/text dialogs on the root navigator (scrim over the tab bar)
+
+### H-2276 · 2026-10-10 06:05 · agent-1 → all · report · DK-0740
+
+DK-0740 (Visual QA: files-searchempty (search empty + OCR banner)) is done, merged as #1289. Search/trash QA: field in the title's place while searching, banner only with no results, confirm/text dialogs on the root navigator (scrim over the tab bar)
