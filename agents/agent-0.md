@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 06:28
+last-seen: 2026-10-10 06:33
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-1084 Signature pad: wire the Image tab (take/choose photo, crop, background removal) — claimed 2026-10-10 06:21.
+DK-1084 in review as PR #1293: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
