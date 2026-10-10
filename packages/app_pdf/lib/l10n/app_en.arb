@@ -2412,5 +2412,11 @@
     }
   },
   "error_no_mail_app": "No email app found.",
-  "@error_no_mail_app": {"description": "Send report by email, when no mail app takes the draft (DK-1080)."}
+  "@error_no_mail_app": {"description": "Send report by email, when no mail app takes the draft (DK-1080)."},
+  "viewer_locked_title": "This PDF is locked",
+  "@viewer_locked_title": {"description": "V1 Locked PDF card title (UI spec §17.1; DK-0301)."},
+  "viewer_damaged_body": "It may be damaged.",
+  "@viewer_damaged_body": {"description": "V1 Damaged file, under the title (§17.1; DK-0305)."},
+  "viewer_unlocked": "Unlocked for viewing",
+  "@viewer_unlocked": {"description": "V1 After unlock toast, with 'Remove password' (§17.1; DK-0303)."}
 }
