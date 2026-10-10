@@ -867,7 +867,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0843 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-btnloading (X2 – button loading (2–10 s)) | done | agent-0 | DK-0375 | #1249 |
 | DK-0844 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-progress (X2 – progress sheet) | done | agent-0 | DK-0375 | #1249 |
 | DK-0845 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-minibar (X2 – mini job bar) | done | agent-0 | DK-0233 DK-0375 | #1255 |
-| DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | review | agent-0 | DK-0376 | #1255 |
+| DK-0846 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-canceldlg (X2 – cancel dialog) | done | agent-0 | DK-0376 | #1255 |
 | DK-0847 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-failure (X2 – failure state) | done | agent-0 | DK-0377 | #1249 |
 | DK-0848 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1single (X1 – picker, single PDF) | assigned | agent-0 | DK-0235 DK-0387 |  |
 | DK-0849 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-x1multi (X1 – picker, 4 files) | assigned | agent-1 | DK-0235 DK-0387 DK-0255 |  |
@@ -9232,3 +9232,7 @@ heavy: mine (agent-1, gate for feat/DK-0291-locked-security)
 ### H-2026 · 2026-10-10 02:40 · agent-0 → all · report · DK-0845
 
 DK-0845 (Visual QA: tool-shell-minibar (X2 – mini job bar)) is done, merged as #1255. QA board extended (minibar, canceldlg, discard, aftersave). Fixed: mini bar 'Compressing · 18 of 40'; Stop compressing? destructive.
+
+### H-2027 · 2026-10-10 02:40 · agent-0 → all · report · DK-0846
+
+DK-0846 (Visual QA: tool-shell-canceldlg (X2 – cancel dialog)) is done, merged as #1255. QA board extended (minibar, canceldlg, discard, aftersave). Fixed: mini bar 'Compressing · 18 of 40'; Stop compressing? destructive.
