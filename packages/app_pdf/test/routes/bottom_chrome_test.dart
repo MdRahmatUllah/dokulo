@@ -52,7 +52,7 @@ void main() {
         runningJobsProvider.overrideWith(() => _Jobs([job(1)])),
       ],
     );
-    expect(find.text('Compress PDF · Page 18 of 40'), findsOneWidget);
+    expect(find.text('Compress PDF · 18 of 40'), findsOneWidget);
     final bar = tester.getRect(find.byType(DkMiniJobBar));
     final scan = tester.getRect(find.byType(DkScanButton));
     expect(bar.bottom, lessThanOrEqualTo(scan.top), reason: 'not over Scan');

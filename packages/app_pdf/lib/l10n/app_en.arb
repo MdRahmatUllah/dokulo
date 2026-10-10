@@ -2003,5 +2003,7 @@
   "common_ok": "OK",
   "@common_ok": {
     "description": "Closes an information sheet."
-  }
+  },
+  "progress_of": "{i} of {n}",
+  "@progress_of": {"description": "The mini job bar's page count: Compressing · 18 of 40 (tool-shell-minibar).", "placeholders": {"i": {"type": "int"}, "n": {"type": "int"}}}
 }

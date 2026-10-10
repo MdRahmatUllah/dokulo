@@ -8,6 +8,7 @@
 | DK-0984 | `00-design-system/components-part-2.html` (Light, Dark; 1440 wide) | Side by side with the catalogue entries' goldens (layout, colour, spacing) and the code (type tokens, copy); `tools/device_checks/catalogue_shots.py` screenshots the same entries on a device with real fonts | 6 deviations fixed (DK-1072), 3 approved, below |
 | DK-0980 | `26-global-states/global-states.html` (Light, Dark; 1440 × 1700) | A QA board in the gate, `packages/app_pdf/test/qa/global_states_test.dart`: the frame's regions built from the real empty states, toasts, banners, error catalogue and skeleton, side by side with the frame's screenshots; the copy, icons and actions checked as values | 2 deviations fixed, 6 approved, below |
 | DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
+| DK-0845, DK-0846, DK-0855, DK-0856 | `12-tool-shell/` minibar, canceldlg, discard, aftersave (Light, Dark; phone) | The same QA board: the shell at Tools with a running job, T2 after 30 s with Cancel, T3 closed unsaved after a long job, T3 after Save | 2 deviations fixed, 2 approved, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
@@ -166,3 +167,29 @@ Approved:
 Follow-up: the failure state's Skip this page and Send report by email
 (DK-1080): sending needs `url_launcher` (the pubspec lock), skipping a job
 that can go on past a page.
+
+### The mini bar, the dialogs and after Save (DK-0845, DK-0846, DK-0855, DK-0856)
+
+Frames: `minibar`, `canceldlg`, `discard`, `aftersave` in
+[docs/qa/tool-shell/](tool-shell/); boards: `tool_shell_<frame>_<theme>.png`.
+
+Fixed:
+
+- M1. The mini job bar reads "Compressing · 18 of 40": the tool's busy verb
+  (its `busyLabel` without the ellipsis; the tool's name until its definition
+  has one) and "18 of 40" (`progress_of`); it read "Compress PDF · Page 18 of
+  40".
+- M2. "Stop compressing?" is destructive: Stop in `color.danger` beside Keep
+  going, as the frame (`DkConfirmation.cancelJob`); it was a primary button.
+
+Approved:
+
+- The mini bar sits above the raised Scan button, clear of it; the frame lets
+  it cover the button (decided in DK-0233: it never covers primary buttons).
+- With the test font the dialog's two buttons stack (they don't fit side by
+  side in Ahem); with the app's fonts they sit side by side as the frames
+  (the discard board shows it with shorter labels).
+
+The discard dialog and the after-Save state (the toast "Saved to Files › …"
+with Open, then Done) match. After Save's Share · Open row comes with DK-1077
+(Share).
