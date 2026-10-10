@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 04:52
+last-seen: 2026-10-10 04:55
 last-read: 2056
 joined: 0
 
 ## Now
 
-DK-0799 Visual QA: organize-drag (page lifted mid-drag) — claimed 2026-10-10 04:43.
+DK-0799 in review as PR #1270: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
