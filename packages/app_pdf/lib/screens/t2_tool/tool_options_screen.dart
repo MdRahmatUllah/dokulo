@@ -34,7 +34,6 @@ import '../../providers/file_providers.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
-import '../../theme/dk_layout.dart';
 import '../../tools/tool_catalogue.dart';
 import '../../tools/tool_definition.dart';
 import '../../tools/tool_inputs.dart';
@@ -287,8 +286,11 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                 error: error == null || error.actions.isEmpty
                     ? null
                     : DkProgressError(
-                        title: error.title(l),
+                        title: error.headline(l),
                         body: l.t2_failed_body,
+                        code: error.situation == DkErrorSituation.unexpected
+                            ? l.error_code_line(error.situation.code)
+                            : null,
                         action: error.actions.first.label(l),
                         onAction: () =>
                             _recover(error.actions.first, subject, values),
@@ -395,7 +397,8 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     final actions = DkBottomChrome(
       child: DkActionBar(
         label: _phase == X2Phase.quiet
-            ? _def.action?.call(l, subject) ?? tool.name(l)
+            ? (files.isEmpty ? null : _def.action?.call(l, subject)) ??
+                  tool.name(l)
             : _def.busyLabel?.call(l) ?? l.t2_busy,
         caption: caption,
         // Under 2 s only the press shows; then "Compressing…" (§20.2).
@@ -803,42 +806,60 @@ class _UnlockRowState extends State<_UnlockRow> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
-    return Padding(
-      padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, t.space.m),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: t.space.s,
-        children: [
-          Row(
-            spacing: t.space.xs,
-            children: [
-              DkIcon(DkIcons.lock, size: DkIconSize.s, color: t.color.warning),
-              Text(
-                l.t2_file_locked,
-                style: t.text.labelM.copyWith(color: t.color.textPrimary),
-              ),
-            ],
-          ),
-          DkPasswordField(
-            label: l.t2_password,
-            controller: _password,
-            error: _wrong ? l.t2_wrong_password : null,
-            onChanged: (_) {
-              if (_wrong) setState(() => _wrong = false);
-            },
-            onSubmitted: (_) => _unlock(),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: DkButton(
-              label: l.t2_unlock,
-              variant: DkButtonVariant.secondary,
-              size: DkButtonSize.compact,
-              loading: _checking,
-              onPressed: _checking ? null : _unlock,
+    // A warning band under the card, from the file name's edge (the 44
+    // thumbnail and its 12 gap), as tool-shell-lockedrow.
+    return ColoredBox(
+      color: t.color.warningContainer,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          t.space.l + 44 + t.space.m,
+          t.space.m,
+          t.space.l,
+          t.space.m,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: t.space.s,
+          children: [
+            Row(
+              spacing: t.space.xs,
+              children: [
+                DkIcon(
+                  DkIcons.lock,
+                  size: DkIconSize.s,
+                  color: t.color.warning,
+                ),
+                Text(
+                  l.t2_file_locked,
+                  style: t.text.bodyM.copyWith(color: t.color.warning),
+                ),
+              ],
             ),
-          ),
-        ],
+            Row(
+              spacing: t.space.s,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: DkPasswordField(
+                    hint: l.t2_password,
+                    controller: _password,
+                    error: _wrong ? l.t2_wrong_password : null,
+                    onChanged: (_) {
+                      if (_wrong) setState(() => _wrong = false);
+                    },
+                    onSubmitted: (_) => _unlock(),
+                  ),
+                ),
+                DkButton(
+                  label: l.t2_unlock,
+                  size: DkButtonSize.compact,
+                  loading: _checking,
+                  onPressed: _checking ? null : _unlock,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -887,9 +908,11 @@ class _PickerCard extends ConsumerWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
       padding: EdgeInsets.symmetric(vertical: t.space.m),
-      decoration: t.surfaceAt(
-        DkLevel.raised,
-        radius: BorderRadius.circular(t.radius.m),
+      // A 1 dp outlined card on surface (tool-shell-t2empty).
+      decoration: BoxDecoration(
+        color: t.color.surface,
+        border: Border.all(color: t.color.outline),
+        borderRadius: BorderRadius.circular(t.radius.m),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -913,7 +936,14 @@ class _PickerCard extends ConsumerWidget {
                 style: t.text.labelM.copyWith(color: t.color.textSecondary),
               ),
             ),
-          for (final f in rows)
+          for (final (i, f) in rows.indexed) ...[
+            if (i > 0)
+              Divider(
+                height: 1,
+                indent: t.space.l,
+                endIndent: t.space.l,
+                color: t.color.outline,
+              ),
             DkFileCard(
               name: f.name,
               meta: [
@@ -924,16 +954,19 @@ class _PickerCard extends ConsumerWidget {
               selected: checkboxes ? paths.contains(f.path) : null,
               onTap: () => onToggle(f),
             ),
+          ],
           Padding(
             padding: EdgeInsets.fromLTRB(t.space.l, t.space.s, t.space.l, 0),
-            child: Wrap(
+            // Full width, as the card's own action (tool-shell-t2empty).
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: t.space.s,
-              runSpacing: t.space.s,
               children: [
                 DkButton(
                   label: l.common_browse,
                   icon: DkIcons.folderOpen,
                   variant: DkButtonVariant.secondary,
+                  expand: true,
                   onPressed: onBrowse,
                 ),
                 if (onPhotos != null)
@@ -941,6 +974,7 @@ class _PickerCard extends ConsumerWidget {
                     label: l.t2_choose_photos,
                     icon: DkIcons.importPhotos,
                     variant: DkButtonVariant.secondary,
+                    expand: true,
                     onPressed: onPhotos,
                   ),
               ],
