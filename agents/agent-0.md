@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0380 T3 result: implement the "Replace original" state — claimed 2026-10-10 04:20.
 
 ## Next
 
