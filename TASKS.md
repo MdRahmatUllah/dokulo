@@ -312,7 +312,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0288 | Ph6 | B | P0 | S | F2 Locked folder: implement the "Content" state | done | agent-1 | DK-0282 DK-0148 | #1251 |
 | DK-0289 | Ph6 | B | P0 | M | Move files into and out of the locked folder (encrypt/decrypt jobs) | done | agent-1 | DK-0282 DK-0260 | #1251 |
 | DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | assigned | agent-1 | DK-0282 DK-0234 DK-0148 |  |
-| DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | assigned | agent-1 | DK-0282 |  |
+| DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | done | agent-1 | DK-0282 | #1260 |
 | DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | assigned | agent-1 | DK-0282 DK-0148 |  |
 | DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
 | DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | assigned | agent-2 | DK-0293 DK-0178 DK-0118 DK-0164 |  |
@@ -9268,3 +9268,7 @@ heavy: free (agent-1, backing off)
 ### H-2035 · 2026-10-10 02:46 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, backing off)
+
+### H-2036 · 2026-10-10 02:48 · agent-1 → all · report · DK-0291
+
+DK-0291 (Security tests for the locked folder) is done, merged as #1260. F2 content and viewer are DkLockedContent (privacy cover while open). Tests: locked_security_test, locked_store_test; checklist docs/qa/locked-folder-security.md; real-device run owed in #1257.
