@@ -16,6 +16,7 @@ UI spec §16.1–§16.2 in EN and DE.
 | DK-0738 | `04-files/files-emptyfolder` | Match |
 | DK-0746 | `04-files/files-newfolder` | Match, 1 approved |
 | DK-0754 | `04-files/files-foldermenu` | 1 fixed |
+| DK-0751 | `04-files/files-dragfolder` | Match (M2), 2 approved |
 
 Fixed:
 
@@ -25,7 +26,8 @@ Fixed:
   puts a widget under a menu row.
 - M2. Dragging a file over a folder in grid view says "Drop on “{folder}” to
   move" / "Auf „{folder}“ ablegen zum Verschieben", as files-dragfolder
-  (DK-0264's board, DK-0751, follows with the grid's new folder cards).
+  (its board: `test/qa/files_drag_qa_test.dart`, the file held over
+  Apartment in grid view).
 
 Approved:
 
@@ -33,3 +35,9 @@ Approved:
   (DkTopBar, §11.6); the frames are iOS. The board runs as Android.
 - New folder: Create stays disabled until a name is typed (DK-0273); the
   frame shows it enabled over an empty field.
+- files-dragfolder: the grid's folder cards are 3 : 4 tiles in name order
+  (UI spec §11.2, as in [files-root.md](files-root.md)); the frame draws
+  3 : 2 wells in its own order.
+- files-dragfolder: the dragged file is the grid card as it is (its
+  thumbnail, name and meta), not tilted; the frame tilts a smaller card.
+  §16.1 sets the folder's 2 dp primary ring, which matches.

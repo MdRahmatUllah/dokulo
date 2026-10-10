@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
+import 'dk_action_sheet.dart';
 import 'dk_icon.dart';
+import 'dk_menu.dart';
 
 /// What the scanner opens in (UI spec §19.1): the Scan button's long-press
 /// menu, in this order.
@@ -66,7 +68,6 @@ class DkScanButton extends StatefulWidget {
 }
 
 class _DkScanButtonState extends State<DkScanButton> {
-  final _menu = MenuController();
   var _down = false;
   var _keyFocus = false;
 
@@ -77,9 +78,27 @@ class _DkScanButtonState extends State<DkScanButton> {
     if (_down != down) setState(() => _down = down);
   }
 
+  /// The modes in a DkMenu (UI spec §11.7, the home-scanmenu frame): the
+  /// four camera modes, then Import photos in a group of its own.
   void _openMenu() {
     _press(false);
-    if (_enabled) _menu.open();
+    if (!_enabled) return;
+    final l = AppLocalizations.of(context);
+    DkAction action(DkScanMode mode) => DkAction(
+      icon: mode.icon,
+      label: mode.label(l),
+      onTap: () => widget.onMode(mode),
+    );
+    showDkMenu(
+      context,
+      groups: [
+        [
+          for (final mode in DkScanMode.values)
+            if (mode != DkScanMode.importPhotos) action(mode),
+        ],
+        [action(DkScanMode.importPhotos)],
+      ],
+    );
   }
 
   @override
@@ -163,36 +182,24 @@ class _DkScanButtonState extends State<DkScanButton> {
       ),
     );
 
-    return MenuAnchor(
-      controller: _menu,
-      // No room below at the bottom of the screen, so it opens above.
-      menuChildren: [
-        for (final mode in DkScanMode.values)
-          MenuItemButton(
-            leadingIcon: DkIcon(mode.icon, color: c.iconPrimary),
-            onPressed: () => widget.onMode(mode),
-            child: Text(mode.label(l), style: t.text.bodyL),
-          ),
-      ],
-      // Disabled: the circle and the label at 40 %.
-      child: Opacity(
-        opacity: _enabled ? 1 : t.state.disabledOpacity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            button,
-            if (widget.showLabel) ...[
-              SizedBox(height: t.space.xs),
-              // The button already says "Scan".
-              ExcludeSemantics(
-                child: Text(
-                  l.shell_button_scan,
-                  style: t.text.labelM.copyWith(color: c.primary),
-                ),
+    // Disabled: the circle and the label at 40 %.
+    return Opacity(
+      opacity: _enabled ? 1 : t.state.disabledOpacity,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          button,
+          if (widget.showLabel) ...[
+            SizedBox(height: t.space.xs),
+            // The button already says "Scan".
+            ExcludeSemantics(
+              child: Text(
+                l.shell_button_scan,
+                style: t.text.labelM.copyWith(color: c.primary),
               ),
-            ],
+            ),
           ],
-        ),
+        ],
       ),
     );
   }
