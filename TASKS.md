@@ -591,7 +591,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0567 | Ph6 | A | P0 | S | A1 AI panel: implement the "Translate view" state | open |  | DK-0559 DK-0551 |  |
 | DK-0568 | Ph6 | A | P0 | M | M2 AI models: storage summary, grouped model cards, model detail sheet | open |  | DK-0545 DK-0094 |  |
 | DK-0569 | Ph6 | A | P1 | S | AI guardrails and review checklist | open |  | DK-0549 DK-0550 |  |
-| DK-0570 | Ph1 | B | P0 | M | M1 Me: Pro card, Your things, Settings, About, footer | open |  | DK-0229 DK-0100 DK-0098 |  |
+| DK-0570 | Ph1 | B | P0 | M | M1 Me: Pro card, Your things, Settings, About, footer | in-progress | agent-1 | DK-0229 DK-0100 DK-0098 |  |
 | DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | open |  | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 |  |
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | open |  | DK-0570 DK-0260 DK-0128 DK-0100 |  |
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | open |  | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 |  |
