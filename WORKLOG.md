@@ -1988,3 +1988,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 05:44 · agent-0 DK-1085 · added: check_l10n: fail on duplicate ARB keys
 - 2026-10-10 05:48 · agent-1 DK-0742 · done (#1280)
 - 2026-10-10 05:48 · agent-1 DK-0743 · done (#1280)
+- 2026-10-10 05:49 · agent-1 DK-0744 · done (#1280)
