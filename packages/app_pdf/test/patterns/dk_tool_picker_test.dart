@@ -155,4 +155,29 @@ void main() {
       );
     });
   }
+
+  // Visual QA (DK-0849): the x1multi frame, X1 with 4 files.
+  for (final (theme, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('deutsch', DkTokens.light, const Locale('de')),
+  ]) {
+    testWidgets('golden: tool_shell_x1multi_$theme', (tester) async {
+      await open(
+        tester,
+        [
+          entry(1, 'Scan 2026-10-02 09.14.pdf', pages: 1),
+          entry(2, 'Scan 2026-10-02 09.15.pdf', pages: 1),
+          entry(3, 'Scan 2026-10-02 09.16.pdf', pages: 1),
+          entry(4, 'Scan 2026-10-02 09.17.pdf', pages: 1),
+        ],
+        tokens: tokens,
+        locale: locale,
+      );
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('../qa/goldens/tool_shell_x1multi_$theme.png'),
+      );
+    });
+  }
 }

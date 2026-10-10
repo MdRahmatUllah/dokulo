@@ -9,19 +9,25 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.OpenableColumns
+import android.os.CancellationSignal
+import android.os.ParcelFileDescriptor
 import android.os.StatFs
+import android.print.PageRange
+import android.print.PrintAttributes
+import android.print.PrintDocumentAdapter
+import android.print.PrintDocumentInfo
+import android.print.PrintManager
+import android.provider.OpenableColumns
 import android.provider.Settings
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import java.io.File
-import java.io.FileOutputStream
 import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
+import java.io.FileOutputStream
 import java.util.concurrent.Executors
 
 // A FragmentActivity: local_auth's biometric prompt needs one (DK-0282).
@@ -237,6 +243,20 @@ class MainActivity : FlutterFragmentActivity() {
                     result.success(false)
                 }
             }
+        // Print (DK-0295; lib/providers/print_providers.dart): the system's
+        // print dialog for one PDF.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/print")
+            .setMethodCallHandler { call, result ->
+                val path = call.argument<String>("path")
+                if (call.method != "pdf" || path == null) {
+                    result.notImplemented()
+                    return@setMethodCallHandler
+                }
+                val name = call.argument<String>("name") ?: File(path).name
+                (getSystemService(PRINT_SERVICE) as PrintManager)
+                    .print(name, PdfPrintAdapter(File(path), name), null)
+                result.success(true)
+            }
         // Shared and "Open with" files (DK-0235): Dart takes the batches
         // copied so far; "available" says another one is ready.
         incomingChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/incoming")
@@ -324,3 +344,42 @@ class MainActivity : FlutterFragmentActivity() {
 
 private const val CAMERA_REQUEST = 4201
 private const val NOTIFICATIONS_REQUEST = 4202
+
+/** Hands a PDF file to the print framework as it is. */
+private class PdfPrintAdapter(private val file: File, private val name: String) :
+    PrintDocumentAdapter() {
+    override fun onLayout(
+        oldAttributes: PrintAttributes?,
+        newAttributes: PrintAttributes,
+        cancellationSignal: CancellationSignal?,
+        callback: LayoutResultCallback,
+        extras: Bundle?,
+    ) {
+        if (cancellationSignal?.isCanceled == true) {
+            callback.onLayoutCancelled()
+            return
+        }
+        callback.onLayoutFinished(
+            PrintDocumentInfo.Builder(name)
+                .setContentType(PrintDocumentInfo.CONTENT_TYPE_DOCUMENT)
+                .build(),
+            true,
+        )
+    }
+
+    override fun onWrite(
+        pages: Array<out PageRange>,
+        destination: ParcelFileDescriptor,
+        cancellationSignal: CancellationSignal?,
+        callback: WriteResultCallback,
+    ) {
+        try {
+            file.inputStream().use { input ->
+                FileOutputStream(destination.fileDescriptor).use { input.copyTo(it) }
+            }
+            callback.onWriteFinished(arrayOf(PageRange.ALL_PAGES))
+        } catch (e: Exception) {
+            callback.onWriteFailed(e.message)
+        }
+    }
+}
