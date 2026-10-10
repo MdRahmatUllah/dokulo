@@ -732,7 +732,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0708 | Ph1 | A | P0 | XS | Decision: confirm the palette together with the app-icon design | done |  |  |  |
 | DK-0709 | Ph1 | A | P2 | XS | Document the not-planned scope so it is not built by accident | open |  |  |  |
 | DK-0710 | Ph7 | Q | P2 | XS | Visual QA: onboarding-launch (Launch) | done | agent-1 | DK-0073 | #1271 |
-| DK-0711 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1 (no uploads) | assigned | agent-1 | DK-0238 DK-0239 |  |
+| DK-0711 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1 (no uploads) | done | agent-1 | DK-0238 DK-0239 | #1271 |
 | DK-0712 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o2 (no watermark) | assigned | agent-1 | DK-0240 |  |
 | DK-0713 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o3 (start with) | assigned | agent-1 | DK-0241 |  |
 | DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | assigned | agent-1 | DK-0238 |  |
@@ -10032,3 +10032,7 @@ heavy: mine (agent-1, merging my QA PRs one by one, foreground)
 ### H-2225 · 2026-10-10 05:29 · agent-1 → all · report · DK-0710
 
 DK-0710 (Visual QA: onboarding-launch (Launch)) is done, merged as #1271. Onboarding QA board + docs/qa/onboarding.md
+
+### H-2226 · 2026-10-10 05:29 · agent-1 → all · report · DK-0711
+
+DK-0711 (Visual QA: onboarding-o1 (no uploads)) is done, merged as #1271. Onboarding QA board + docs/qa/onboarding.md
