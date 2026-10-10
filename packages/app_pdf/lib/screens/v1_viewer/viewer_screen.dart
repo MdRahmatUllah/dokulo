@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pdfrx/pdfrx.dart';
 
 import '../../components/dk_loading_spinner.dart';
 import '../../components/dk_banner.dart';
@@ -15,6 +16,7 @@ import '../../theme/dk_tokens.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
+import 'viewer_chrome.dart';
 import 'viewer_providers.dart';
 import 'viewer_search.dart';
 import 'viewer_states.dart';
@@ -22,7 +24,9 @@ import 'viewer_states.dart';
 /// V1, the viewer (UI spec §17.1). This is its core (DK-0293): the file's
 /// pages on [DkPdfCanvas]; while the file opens, the page skeleton (DK-0620).
 /// A locked PDF asks for its password, a damaged one says so (DK-0301..
-/// DK-0305). The top bar, page pill and bottom bar come with DK-0294.
+/// DK-0305). Around the pages, [ViewerChrome] (DK-0294): the top bar, the
+/// page pill and the bottom bar, hidden on a tap or after scrolling; while
+/// searching, the search bar takes the top bar's place.
 /// The prefs key of V1's night mode (UI spec §17.1; DK-1089).
 const viewerNightKey = 'viewer.night';
 
@@ -50,6 +54,11 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   /// Text search (DK-1093); [_searching] shows its bar.
   late final _search = DkPdfSearch()..search(widget.query ?? '');
   late var _searching = (widget.query ?? '').isNotEmpty;
+
+  /// The page pill's numbers (DK-0294).
+  int? _page;
+  var _pageCount = 0;
+  final _controller = PdfViewerController();
 
   @override
   void dispose() {
@@ -118,7 +127,32 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                   ),
                 ),
             ],
-            Expanded(child: _pages(value.path)),
+            Expanded(
+              child: _searching
+                  ? _pages(value.path)
+                  : ViewerChrome(
+                      name: value.name,
+                      page: _page,
+                      pageCount: _pageCount,
+                      actions: ViewerActions(
+                        onSearch: () => setState(() => _searching = true),
+                        onSign: () => context.push(
+                          Routes.tool('sign', files: ['${widget.fileId}']),
+                        ),
+                        onAi: () => context.push(
+                          Routes.tool('summarize', files: ['${widget.fileId}']),
+                        ),
+                        onEdit: () => context.push(
+                          Routes.viewer('${widget.fileId}', edit: true),
+                        ),
+                      ),
+                      canvas: (onTap, onScrollStart) => _pages(
+                        value.path,
+                        onTap: onTap,
+                        onScrollStart: onScrollStart,
+                      ),
+                    ),
+            ),
           ],
         ),
         // The file's row is gone (deleted, or a stale link).
@@ -167,7 +201,11 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   }
 
   /// The pages, or the locked card or the damaged state (DK-0301, DK-0305).
-  Widget _pages(String path) {
+  Widget _pages(
+    String path, {
+    VoidCallback? onTap,
+    VoidCallback? onScrollStart,
+  }) {
     final open = ref.watch(viewerOpenProvider(path, password: _password));
     return switch (open.value) {
       ViewerOpen.ok => _withFormBanner(
@@ -175,6 +213,14 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         DkPdfCanvas(
           path: path,
           password: _password,
+          controller: _controller,
+          onTap: onTap,
+          onScrollStart: onScrollStart,
+          onReady: () => setState(() {
+            _pageCount = _controller.pageCount;
+            _page = _controller.pageNumber ?? 1;
+          }),
+          onPageChanged: (p) => setState(() => _page = p ?? _page),
           // Night mode (DK-1089), switched in the overflow menu (DK-0295).
           night: ref.watch(prefsProvider).value?[viewerNightKey] == true,
           // Copy for now; Highlight, Underline, Strike come with the

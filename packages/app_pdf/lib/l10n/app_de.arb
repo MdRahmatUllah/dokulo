@@ -628,5 +628,10 @@
   "files_sel_merge": "Zusammenfügen",
   "files_sel_compress": "Verkleinern",
   "files_sel_more": "Mehr",
-  "files_run_tool": "Werkzeug ausführen…"
+  "files_run_tool": "Werkzeug ausführen…",
+  "viewer_search": "Suchen",
+  "viewer_edit": "Bearbeiten",
+  "viewer_sign": "Unterschreiben",
+  "viewer_ai": "KI",
+  "viewer_tools": "Werkzeuge"
 }

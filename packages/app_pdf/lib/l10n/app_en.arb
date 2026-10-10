@@ -2470,5 +2470,15 @@
   "files_run_tool": "Run a tool…",
   "@files_run_tool": {
     "description": "F1 selection bar's More menu: pick a tool for the selected files."
-  }
+  },
+  "viewer_search": "Search",
+  "@viewer_search": {"description": "V1's chrome (DK-0294)."},
+  "viewer_edit": "Edit",
+  "@viewer_edit": {"description": "V1's chrome (DK-0294)."},
+  "viewer_sign": "Sign",
+  "@viewer_sign": {"description": "V1's chrome (DK-0294)."},
+  "viewer_ai": "AI",
+  "@viewer_ai": {"description": "V1's chrome (DK-0294)."},
+  "viewer_tools": "Tools",
+  "@viewer_tools": {"description": "V1's chrome (DK-0294)."}
 }
