@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 05:15
+last-seen: 2026-10-10 05:16
 last-read: 2056
 joined: 0
 
 ## Now
 
-DK-0853 Visual QA: tool-shell-savemenu (T3 – save menu) — claimed 2026-10-10 05:15.
+DK-0853 in review as PR #1275: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
