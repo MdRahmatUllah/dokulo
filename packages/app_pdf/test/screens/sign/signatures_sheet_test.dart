@@ -5,6 +5,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/signature_providers.dart';
 import 'package:app_pdf/screens/sign/signatures_sheet.dart';
+import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
@@ -181,6 +182,82 @@ void main() {
     await tester.tap(find.text('Cancel'));
     await tester.pumpAndSettle();
     expect(calls.last, isEmpty);
+  });
+
+  Future<(Uint8List, Color)?> Function() padWithPhoto(
+    WidgetTester tester,
+    Future<Uint8List> Function(String) fromPhoto,
+  ) {
+    (Uint8List, Color)? result;
+    return () async {
+      // The pad turns the phone to landscape and back.
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        SystemChannels.platform,
+        (call) async => null,
+      );
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          null,
+        ),
+      );
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            devicePickerProvider.overrideWithValue(
+              (input, {required photos}) async => ['signature.jpg'],
+            ),
+          ],
+          child: MaterialApp(
+            theme: dokuloTheme(DkTokens.light),
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Scaffold(
+              body: Builder(
+                builder: (context) => TextButton(
+                  onPressed: () async => result = await openSignaturePad(
+                    context,
+                    fromPhoto: fromPhoto,
+                  ),
+                  child: const Text('pad'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('pad'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Image'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Choose photo'));
+      await tester.pumpAndSettle();
+      return result;
+    };
+  }
+
+  testWidgets('Image tab (DK-1084): a chosen photo becomes the signature, '
+      'black ink', (tester) async {
+    final png = Uint8List.fromList([137, 80, 78, 71]);
+    final picked = <String>[];
+    final result = await padWithPhoto(tester, (path) async {
+      picked.add(path);
+      return png;
+    })();
+    expect(picked, ['signature.jpg']);
+    expect(result?.$1, png);
+    expect(result?.$2, const DkMarkup().black);
+  });
+
+  testWidgets('Image tab: a photo without ink says so and stays open', (
+    tester,
+  ) async {
+    await padWithPhoto(
+      tester,
+      (path) async => throw const FormatException('no ink'),
+    )();
+    expect(find.text('No signature found in this photo.'), findsOneWidget);
+    expect(find.text('Choose photo'), findsOneWidget);
   });
 
   for (final (name, tokens, locale) in [
