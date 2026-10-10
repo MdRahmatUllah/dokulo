@@ -185,7 +185,8 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
               onPressed: widget.onLeading ?? () => Navigator.maybePop(context),
             ),
           };
-    final done = DkTextAction(
+    // Editing only: the other bars may sit outside the app's localizations.
+    Widget done() => DkTextAction(
       label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
       onTap: widget.onDone,
       bold: true,
@@ -193,13 +194,13 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
     final menu = widget.onDone == null ? null : widget.onDoneLongPress;
     final Widget trailing = editing
         ? menu == null
-              ? done
+              ? done()
               : Builder(
                   builder: (anchor) => Semantics(
                     onLongPress: () => menu(anchor),
                     child: GestureDetector(
                       onLongPress: () => menu(anchor),
-                      child: done,
+                      child: done(),
                     ),
                   ),
                 )
