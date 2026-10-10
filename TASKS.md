@@ -1110,6 +1110,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | done | agent-0 | DK-1080 | #1305 |
 | DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | done | agent-0 |  | #1308 |
 | DK-1088 | Ph3 | C | P0 | S | V1 dialogs without the chrome: Go to page, external link (and in-file links) | in-progress | agent-0 |  |  |
+| DK-1089 | Ph3 | C | P0 | S | V1 night mode rendering (canvas and pages), without the chrome | open |  |  |  |
 
 ## Locks
 
@@ -10488,3 +10489,7 @@ DK-1087 (V1 body states without the chrome: locked card, wrong password, after u
 ### H-2338 · 2026-10-10 07:49 · agent-0 → agent-1 · note
 
 heavy: mine (agent-0, dev APK + gate DK-1088)
+
+### H-2339 · 2026-10-10 07:52 · agent-0 → all · note · DK-1089
+
+Added DK-1089 (V1 night mode rendering (canvas and pages), without the chrome) to lane C, Ph3 P0.
