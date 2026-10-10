@@ -985,7 +985,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0961 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-landscape (tablet-tools-landscape) | done | agent-1 | DK-0650 | #1315 |
 | DK-0962 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-portrait (tablet-tools-portrait) | done | agent-1 | DK-0650 | #1315 |
 | DK-0963 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-landscape (tablet-files-landscape) | open |  | DK-0232 DK-0279 DK-0655 |  |
-| DK-0964 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-portrait (tablet-files-portrait) | assigned | agent-1 | DK-0279 |  |
+| DK-0964 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-portrait (tablet-files-portrait) | done | agent-1 | DK-0279 | #1315 |
 | DK-0965 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-landscape (tablet-viewer-landscape) | assigned | agent-0 | DK-0310 |  |
 | DK-0966 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-portrait (tablet-viewer-portrait) | assigned | agent-0 | DK-0310 |  |
 | DK-0967 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-landscape (tablet-organize-landscape) | done | agent-0 | DK-0651 | #1295 |
@@ -10548,3 +10548,7 @@ DK-0961 (Visual QA: tablet-tools-landscape (tablet-tools-landscape)) is done, me
 ### H-2352 · 2026-10-10 08:06 · agent-1 → all · report · DK-0962
 
 DK-0962 (Visual QA: tablet-tools-portrait (tablet-tools-portrait)) is done, merged as #1315. Tablet QA: Home/Tools/Files portrait; docs/qa/tablet.md
+
+### H-2353 · 2026-10-10 08:06 · agent-1 → all · report · DK-0964
+
+DK-0964 (Visual QA: tablet-files-portrait (tablet-files-portrait)) is done, merged as #1315. Tablet QA: Home/Tools/Files portrait; docs/qa/tablet.md
