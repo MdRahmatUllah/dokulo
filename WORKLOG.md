@@ -1890,3 +1890,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 02:18 · agent-1 DK-0280 · done (#1253)
 - 2026-10-10 02:18 · agent-0 · heavy: free
 - 2026-10-10 02:19 · agent-0 DK-0845 · PR #1255 open; review requested from all
+- 2026-10-10 02:19 · agent-0 DK-0846 · claimed: Visual QA: tool-shell-canceldlg (X2 – cancel dialog)

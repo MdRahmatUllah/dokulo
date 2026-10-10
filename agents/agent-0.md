@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0845 in review as PR #1255: answer the review; re-run the gate if main moved, then merge.
+DK-0846 Visual QA: tool-shell-canceldlg (X2 – cancel dialog) — claimed 2026-10-10 02:19.
 
 ## Next
 
