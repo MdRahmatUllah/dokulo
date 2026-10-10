@@ -1108,7 +1108,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
 | DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | done | agent-0 | DK-1080 | #1305 |
-| DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | open |  |  |  |
+| DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | in-progress | agent-0 |  |  |
 
 ## Locks
 

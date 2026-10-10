@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1087 V1 body states without the chrome: locked card, wrong password, after unlock, damaged file — claimed 2026-10-10 07:40.
 
 ## Next
 
