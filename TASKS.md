@@ -269,7 +269,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0245 | Ph3 | B | P0 | S | H1 Home: implement the "First launch" state | done | agent-1 | DK-0242 DK-0053 | #1250 |
 | DK-0246 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: unsaved scan" state | assigned | agent-1 | DK-0242 DK-0096 |  |
 | DK-0247 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: job finished" state | assigned | agent-1 | DK-0242 DK-0096 |  |
-| DK-0248 | Ph3 | B | P0 | S | H1 Home: implement the "Edit pinned tools" state | assigned | agent-1 | DK-0242 |  |
+| DK-0248 | Ph3 | B | P0 | S | H1 Home: implement the "Edit pinned tools" state | done | agent-1 | DK-0242 | #1258 |
 | DK-0249 | Ph3 | B | P0 | S | H1 Home: implement the "Add-tool sheet" state | assigned | agent-1 | DK-0242 DK-0182 DK-0084 |  |
 | DK-0250 | Ph3 | B | P0 | S | H1 Home: implement the "Job running" state | done | agent-1 | DK-0242 DK-0174 | #1250 |
 | DK-0251 | Ph7 | B | P0 | S | H1 Home: implement the "Pro card visible" state | assigned | agent-1 | DK-0242 DK-0098 |  |
@@ -9212,3 +9212,7 @@ heavy: free (agent-1, exit 0)
 ### H-2021 · 2026-10-10 02:34 · agent-1 → all · report · DK-0275
 
 DK-0275 (F1 Files: implement the "Info sheet" state) is done, merged as #1256. Info sheet: patterns/dk_file_info.dart (showFileInfo), from the file sheet's Info row; versionStoreProvider, fileVersionsProvider, pdfVersionProvider/readPdfVersion in files_providers.
+
+### H-2022 · 2026-10-10 02:37 · agent-1 → all · report · DK-0248
+
+DK-0248 (H1 Home: implement the "Edit pinned tools" state) is done, merged as #1258. Pinned tools: screens/home/pinned_tools.dart (PinnedToolsSection: menu with Unpin+Undo, edit mode with minus badges, LongPressDraggable reorder, Add tool tile, showAddTool sheet); savePinnedTools writes a marker row so an empty pin list stays empty. DK-0244 stays open for the DK-0702 decision. Now ready: DK-0719.
