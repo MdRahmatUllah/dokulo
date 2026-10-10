@@ -21,6 +21,7 @@ import os
       registerNotificationsChannel(registrar.messenger())
       registerMailChannel(registrar.messenger())
       registerLinksChannel(registrar.messenger())
+      registerImagesChannel(registrar.messenger())
     }
   }
 
@@ -85,6 +86,35 @@ import os
           return
         }
         UIApplication.shared.open(url) { ok in result(ok) }
+      }
+  }
+
+  /// HEIC/HEIF photos as JPEGs for the image tools (DK-1081;
+  /// lib/providers/image_providers.dart): UIImage reads HEIC; drawn upright
+  /// first, so the JPEG needs no orientation tag. Off the main thread.
+  private func registerImagesChannel(_ messenger: FlutterBinaryMessenger) {
+    FlutterMethodChannel(name: "dokulo/images", binaryMessenger: messenger)
+      .setMethodCallHandler { call, result in
+        guard call.method == "heicToJpeg",
+          let args = call.arguments as? [String: String],
+          let from = args["from"], let to = args["to"]
+        else {
+          result(FlutterMethodNotImplemented)
+          return
+        }
+        DispatchQueue.global(qos: .userInitiated).async {
+          var ok = false
+          if let image = UIImage(contentsOfFile: from) {
+            let format = UIGraphicsImageRendererFormat.default()
+            format.scale = 1
+            let upright = UIGraphicsImageRenderer(size: image.size, format: format)
+              .image { _ in image.draw(in: CGRect(origin: .zero, size: image.size)) }
+            if let data = upright.jpegData(compressionQuality: 0.92) {
+              ok = (try? data.write(to: URL(fileURLWithPath: to))) != nil
+            }
+          }
+          DispatchQueue.main.async { result(ok) }
+        }
       }
   }
 

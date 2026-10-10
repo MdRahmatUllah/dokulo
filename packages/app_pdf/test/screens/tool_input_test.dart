@@ -5,6 +5,7 @@ import 'package:app_pdf/components/dk_file_card.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
+import 'package:app_pdf/providers/image_providers.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -27,6 +28,7 @@ void main() {
   late FileStore store;
   late DokuloDatabase db;
   late List<String> devicePicks;
+  var heicDecodes = true;
   ToolSubject? lastSubject;
 
   setUp(() {
@@ -96,6 +98,13 @@ void main() {
           devicePickerProvider.overrideWithValue(
             (input, {required photos}) async => devicePicks,
           ),
+          // The platform's HEIC decoder (DK-1081): a JPEG, or this phone
+          // can't (heicDecodes false).
+          heicDecoderProvider.overrideWithValue((from, to) async {
+            if (!heicDecodes) return false;
+            File(to).writeAsStringSync('jpeg');
+            return true;
+          }),
         ],
         child: MaterialApp(
           theme: dokuloTheme(DkTokens.light),
@@ -152,6 +161,40 @@ void main() {
     expect(photo.existsSync(), isTrue, reason: 'the original stays');
     // Let go of the image file (Windows can't delete an open one).
     await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('a HEIC photo reaches the tool as a JPEG (DK-1081)', (
+    tester,
+  ) async {
+    final photo = File('${root.path}${sep}IMG_0002.HEIC')
+      ..writeAsStringSync('heic');
+    devicePicks = [photo.path];
+    heicDecodes = true;
+    await pumpT2(tester, def('img2pdf'));
+    await tester.tap(find.text('Choose photos'));
+    await settle(tester);
+    expect(find.text('IMG_0002.jpg'), findsOneWidget);
+    expect(lastSubject!.files.single.path, endsWith('.jpg'));
+    expect(lastSubject!.files.single.path, startsWith(store.inbox.path));
+    expect(photo.existsSync(), isTrue, reason: 'the original stays');
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets("a HEIC this phone can't open is skipped, and it says so", (
+    tester,
+  ) async {
+    devicePicks = [
+      (File('${root.path}${sep}IMG_0003.heic')..writeAsStringSync('heic')).path,
+    ];
+    heicDecodes = false;
+    await pumpT2(tester, def('img2pdf'));
+    await tester.tap(find.text('Choose photos'));
+    await settle(tester);
+    expect(
+      find.text("1 HEIC photo can't be opened on this phone and was skipped."),
+      findsOneWidget,
+    );
+    expect(find.text('Choose images'), findsOneWidget, reason: 'nothing added');
   });
 
   testWidgets('Merge needs two: checkboxes until two are chosen', (
