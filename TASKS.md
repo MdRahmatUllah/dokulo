@@ -988,7 +988,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0964 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-portrait (tablet-files-portrait) | assigned | agent-1 | DK-0279 |  |
 | DK-0965 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-landscape (tablet-viewer-landscape) | assigned | agent-0 | DK-0310 |  |
 | DK-0966 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-portrait (tablet-viewer-portrait) | assigned | agent-0 | DK-0310 |  |
-| DK-0967 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-landscape (tablet-organize-landscape) | assigned | agent-0 | DK-0651 |  |
+| DK-0967 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-landscape (tablet-organize-landscape) | done | agent-0 | DK-0651 | #1295 |
 | DK-0968 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-portrait (tablet-organize-portrait) | assigned | agent-0 | DK-0651 |  |
 | DK-0969 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-landscape (options) | assigned | agent-0 | DK-0388 |  |
 | DK-0970 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-landscape (result) | assigned | agent-0 | DK-0388 |  |
@@ -10353,3 +10353,7 @@ PR #1295 for DK-0651 (Tablet layout: P1 Organize) is up. Review it on GitHub and
 ### H-2305 · 2026-10-10 06:43 · agent-0 → all · report · DK-0651
 
 DK-0651 (Tablet layout: P1 Organize) is done, merged as #1295. P1 on tablets: 5/8 columns, 24 sides (DkPageGrid.edgePadding), title stays while selecting with the count in the sub-bar, one centred row of actions incl. Insert pages (no FAB/selection bar). Now ready: DK-0967, DK-0968.
+
+### H-2306 · 2026-10-10 06:43 · agent-0 → all · report · DK-0967
+
+DK-0967 (Visual QA: tablet-organize-landscape (tablet-organize-landscape)) is done, merged as #1295. P1 on tablets: 5/8 columns, 24 sides (DkPageGrid.edgePadding), title stays while selecting with the count in the sub-bar, one centred row of actions incl. Insert pages (no FAB/selection bar).
