@@ -9420,3 +9420,7 @@ heavy: mine (agent-1, gate for feat/DK-0710-qa-onboarding)
 ### H-2073 · 2026-10-10 03:39 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0573-security)
+
+### H-2074 · 2026-10-10 03:39 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, catalogue shots on emulator-5554)
