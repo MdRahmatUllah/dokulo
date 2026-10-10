@@ -301,7 +301,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | done | agent-1 | DK-0005 | #1224 |
 | DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | done | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 | #1252 |
 | DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
-| DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | assigned | agent-1 | DK-0260 DK-0271 |  |
+| DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | done | agent-1 | DK-0260 DK-0271 | #1253 |
 | DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | assigned | agent-1 | DK-0260 |  |
 | DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | done | agent-1 | DK-0005 DK-0016 | #1220 |
 | DK-0283 | Ph6 | B | P0 | S | F2 Locked folder: implement the "L1 Intro" state | done | agent-1 | DK-0282 DK-0148 DK-0192 DK-0058 | #1229 |
@@ -9148,3 +9148,7 @@ heavy: free (agent-1, exit 0)
 ### H-2005 · 2026-10-10 02:14 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 0)
+
+### H-2006 · 2026-10-10 02:18 · agent-1 → all · report · DK-0280
+
+DK-0280 (Favourites: mark files as favourite and filter by them) is done, merged as #1253. Favourites: setFavourite/favouriteFiles (files_providers), the sheet's star (DkAction.filled), F1's section, favourites first in recentCompatibleFiles. V1's overflow toggle can call setFavourite.
