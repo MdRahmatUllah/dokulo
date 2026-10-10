@@ -2236,5 +2236,14 @@
   "me_restore_purchase": "Restore purchase",
   "@me_restore_purchase": {
     "description": "M1 About row; always visible."
+  },
+  "files_drop_hint": "Drop on “{folder}” to move",
+  "@files_drop_hint": {
+    "description": "F1 grid: a file dragged over a folder (DK-0264).",
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
   }
 }

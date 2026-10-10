@@ -17,7 +17,11 @@ class DkAction {
     this.checked = false,
     this.trailing,
     this.filled = false,
+    this.below,
   });
+
+  /// Under the row, in its padding: the folder menu's colour swatches.
+  final Widget? below;
 
   /// The icon filled: a state that is on (a favourite's star, DK-0280).
   final bool filled;
@@ -188,7 +192,7 @@ class _DkActionRowState extends State<DkActionRow> {
           : t.color.iconPrimary,
     );
     // InkWell gives the tap; screen readers also need to hear "button".
-    return Semantics(
+    final row = Semantics(
       button: true,
       // A chosen sort order reads as "checked", as Material's
       // CheckedPopupMenuItem does; other rows have no checked state.
@@ -249,6 +253,19 @@ class _DkActionRowState extends State<DkActionRow> {
           ),
         ),
       ),
+    );
+    final below = a.below;
+    if (below == null) return row;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        row,
+        Padding(
+          padding: widget.padding.add(EdgeInsets.only(bottom: t.space.s)),
+          child: below,
+        ),
+      ],
     );
   }
 }

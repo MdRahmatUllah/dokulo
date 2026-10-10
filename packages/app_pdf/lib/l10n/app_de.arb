@@ -556,5 +556,6 @@
   "me_replay_intro": "Einführung erneut ansehen",
   "me_contact": "Kontakt",
   "me_rate": "Dokulo bewerten",
-  "me_restore_purchase": "Kauf wiederherstellen"
+  "me_restore_purchase": "Kauf wiederherstellen",
+  "files_drop_hint": "Auf „{folder}“ ablegen zum Verschieben"
 }
