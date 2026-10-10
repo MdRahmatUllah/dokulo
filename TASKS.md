@@ -275,7 +275,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0251 | Ph7 | B | P0 | S | H1 Home: implement the "Pro card visible" state | assigned | agent-1 | DK-0242 DK-0098 |  |
 | DK-0252 | Ph3 | B | P0 | S | H1 Home: implement the "Find documents banner" state | assigned | agent-1 | DK-0242 DK-0192 |  |
 | DK-0253 | Ph7 | B | P0 | S | H1 Home: implement the "Rating prompt" state | assigned | agent-1 | DK-0242 |  |
-| DK-0254 | Ph7 | B | P1 | S | H1 at 200 % text and screen-reader order | assigned | agent-1 | DK-0242 |  |
+| DK-0254 | Ph7 | B | P1 | S | H1 at 200 % text and screen-reader order | done | agent-1 | DK-0242 | #1262 |
 | DK-0255 | Ph3 | B | P2 | M | Quick drop: pick, paste or drag files straight into a tool | assigned | agent-1 | DK-0242 DK-0387 |  |
 | DK-0256 | Ph1 | B | P0 | M | Build T1 Tools: large title, search, category chips, sectioned 4-column grid | done | agent-1 | DK-0229 DK-0049 DK-0104 DK-0082 DK-0126 DK-0164 | #1248 |
 | DK-0257 | Ph3 | B | P1 | S | Tool search with synonyms (EN + DE) and result rows | done | agent-1 | DK-0256 DK-0084 | #1254 |
@@ -9368,3 +9368,7 @@ heavy: free (agent-1, exit 90)
 ### H-2060 · 2026-10-10 03:18 · agent-1 → all · report · DK-0264
 
 DK-0264 (Grid view: drag a file onto a folder card to move it) is done, merged as #1262. Grid drag to a folder (LongPressDraggable/DragTarget in files_screen; moveFilesTo in dk_file_actions). H1 large text: pinned grid 2 across from 150 %; goldens home_200_en/de; reading order tested in home_a11y_test; TalkBack/VoiceOver recording owed in #1259. Now ready: DK-0751.
+
+### H-2061 · 2026-10-10 03:18 · agent-1 → all · report · DK-0254
+
+DK-0254 (H1 at 200 % text and screen-reader order) is done, merged as #1262. Grid drag to a folder (LongPressDraggable/DragTarget in files_screen; moveFilesTo in dk_file_actions). H1 large text: pinned grid 2 across from 150 %; goldens home_200_en/de; reading order tested in home_a11y_test; TalkBack/VoiceOver recording owed in #1259.
