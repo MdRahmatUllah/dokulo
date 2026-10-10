@@ -43,3 +43,11 @@ def test_catalogue_is_skipped(tmp_path: Path) -> None:
     (root / check_l10n.LIB / "catalogue").mkdir()
     (root / check_l10n.LIB / "catalogue" / "catalogue.dart").write_text("Text('DkPageThumb')", encoding="utf-8")
     assert check_l10n.check_strings(root) == []
+
+
+def test_duplicate_keys(tmp_path: Path) -> None:
+    # A merge that kept both sides: JSON would keep the last silently.
+    root = repo(tmp_path, {"a": "Saved"}, {"a": "Gespeichert"}, "")
+    en = root / check_l10n.ARB_DIR / "app_en.arb"
+    en.write_text('{"a": "Saved", "@a": {}, "a": "Saved"}', encoding="utf-8")
+    assert check_l10n.check_arb(root) == ["app_en.arb: a appears twice"]

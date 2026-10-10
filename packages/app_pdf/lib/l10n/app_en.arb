@@ -1356,8 +1356,6 @@
   "@onb_look_sub": {
     "description": "O3 card 3 sub line."
   },
-  "me_signatures": "Signatures",
-  "@me_signatures": {"description": "Me → Signatures (DK-0325)."},
   "me_initials": "Initials",
   "@me_initials": {"description": "Me → Signatures (DK-0325)."},
   "me_add_initials": "Add initials",
