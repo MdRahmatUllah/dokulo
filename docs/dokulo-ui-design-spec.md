@@ -1249,7 +1249,7 @@ Each tool fills the shell from section 20. Format per tool: identity, input, opt
 
 - **Description:** Turn photos and images into a PDF. / Wandle Fotos und Bilder in eine PDF um.
 - **Input:** 1–500 images; shown in a `DkPageTray`-style horizontal strip with reorder.
-- **Options:** Page size · segmented · Fit image · A4 · Letter (Fit image); Margins · segmented · None · Small (None); Output · segmented · One PDF · One per image (One PDF); Clean up like a scan · switch · off (help: "Crop to the document and improve contrast").
+- **Options:** Page size · segmented · Fit image · A4 · Letter (Fit image; Fit image gives each page the image's proportions with A4's long side, A4 and Letter turn to a landscape image); Margins · segmented · None · Small (None; Small is 24 pt); Output · segmented · One PDF · One per image (One PDF); Clean up like a scan · switch · off (help: "Crop to the document and improve contrast").
 - **Button:** "Create PDF · 12 images" / "PDF erstellen · 12 Bilder".
 - **Result:** "1 PDF · 12 pages · 4.1 MB". Next: Compress · Make text searchable.
 - **Errors:** unsupported file → banner "2 files aren't images and were skipped."
