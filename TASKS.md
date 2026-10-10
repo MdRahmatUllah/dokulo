@@ -383,7 +383,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0359 | Ph2 | C | P0 | M | Save sheet: name, format, page size, quality, folder, Make text searchable | assigned | agent-2 | DK-0352 DK-0092 DK-0120 DK-0182 DK-0102 DK-0128 DK-0130 |  |
 | DK-0360 | Ph2 | C | P0 | S | Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share) | assigned | agent-2 | DK-0359 |  |
 | DK-0361 | Ph2 | C | P1 | S | Scanning defaults: filter, crop mode, page size, file-name pattern ("Save as default") | assigned | agent-2 | DK-0352 |  |
-| DK-0362 | Ph6 | C | P1 | L | Find documents in photos: on-device scoring (text-area ratio + quad + aspect), background, cached | assigned | agent-1 | DK-0007 DK-0005 DK-0016 |  |
+| DK-0362 | Ph6 | C | P1 | L | Find documents in photos: on-device scoring (text-area ratio + quad + aspect), background, cached | in-progress | agent-1 | DK-0007 DK-0005 DK-0016 |  |
 | DK-0363 | Ph6 | C | P0 | S | Photo finder: implement the "Intro sheet" state | assigned | agent-2 | DK-0362 DK-0066 |  |
 | DK-0364 | Ph6 | C | P0 | S | Photo finder: implement the "Scanning card" state | assigned | agent-2 | DK-0362 |  |
 | DK-0365 | Ph6 | C | P0 | S | Photo finder: implement the "Results grid" state | assigned | agent-2 | DK-0362 |  |

@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0362 Find documents in photos: on-device scoring (text-area ratio + quad + aspect), background, cached — claimed 2026-10-10 10:00.
 
 ## Next
 
