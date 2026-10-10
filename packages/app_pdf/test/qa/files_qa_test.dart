@@ -12,7 +12,7 @@ import '../screens/files_screen_test.dart' show FilesFixture, pumpFiles, settle;
 // root frames list, grid, empty, sort and loading, rendered by the real F1
 // in the shell at 393 × 852 with the frames' folders and files. The goldens
 // sit next to the frames' screenshots in docs/qa/files/; the findings are in
-// docs/qa/home-files.md.
+// docs/qa/files-root.md.
 
 /// The frames' library: four tagged folders with their counts, three files
 /// at the root (today), three in Recently deleted.
