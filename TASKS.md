@@ -826,7 +826,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0802 | Ph7 | Q | P2 | XS | Visual QA: organize-deleted (after delete toast) | done | agent-0 | DK-0333 | #1270 |
 | DK-0803 | Ph7 | Q | P2 | XS | Visual QA: organize-pinch (pinch to 5 columns) | done | agent-0 | DK-0334 | #1270 |
 | DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | done | agent-0 | DK-0335 | #1282 |
-| DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | assigned | agent-0 | DK-0329 |  |
+| DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | done | agent-0 | DK-0329 | #1282 |
 | DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-2 | DK-0342 |  |
 | DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-2 | DK-0342 DK-0621 |  |
 | DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | assigned | agent-2 | DK-0343 DK-0344 |  |
@@ -10132,3 +10132,7 @@ PR #1282 for DK-0804 (Visual QA: organize-large (300-page document, thumbnails l
 ### H-2250 · 2026-10-10 05:42 · agent-0 → all · report · DK-0804
 
 DK-0804 (Visual QA: organize-large (300-page document, thumbnails loading)) is done, merged as #1282. Organize Save menu (DkTopBar.editing onDoneLongPress): Save as copy · Replace original (VersionStore.replace); copy named '– organized' with 'Saved as'. From a scan: DK-1082.
+
+### H-2251 · 2026-10-10 05:42 · agent-0 → all · report · DK-0805
+
+DK-0805 (Visual QA: organize-savemenu (Save menu – copy or replace)) is done, merged as #1282. Organize Save menu (DkTopBar.editing onDoneLongPress): Save as copy · Replace original (VersionStore.replace); copy named '– organized' with 'Saved as'. From a scan: DK-1082.
