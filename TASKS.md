@@ -741,7 +741,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | assigned | agent-1 | DK-0246 |  |
 | DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | assigned | agent-1 | DK-0247 |  |
 | DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | done | agent-1 | DK-0248 | #1273 |
-| DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | assigned | agent-1 | DK-0249 |  |
+| DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | done | agent-1 | DK-0249 | #1273 |
 | DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | assigned | agent-1 | DK-0251 |  |
 | DK-0722 | Ph7 | Q | P2 | XS | Visual QA: home-photobanner (find documents banner) | assigned | agent-1 | DK-0252 |  |
 | DK-0723 | Ph7 | Q | P2 | XS | Visual QA: home-job (mini job bar) | assigned | agent-1 | DK-0233 DK-0250 |  |
@@ -10076,3 +10076,7 @@ DK-0716 (Visual QA: home-first (first launch)) is done, merged as #1273. Home QA
 ### H-2236 · 2026-10-10 05:33 · agent-1 → all · report · DK-0719
 
 DK-0719 (Visual QA: home-edit (edit pinned tools)) is done, merged as #1273. Home QA: minus badge on the icon, DkToolRow.trailingIcon; docs/qa/home.md
+
+### H-2237 · 2026-10-10 05:33 · agent-1 → all · report · DK-0720
+
+DK-0720 (Visual QA: home-addtool (add-tool sheet)) is done, merged as #1273. Home QA: minus badge on the icon, DkToolRow.trailingIcon; docs/qa/home.md
