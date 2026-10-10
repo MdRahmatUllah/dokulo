@@ -1928,3 +1928,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 04:27 · agent-1 · a1l search/trash QA committed (DK-0739/0740/0748/0753): field in the title's place while searching, banner only with no results, confirm/text dialogs on the root navigator. a1d merged main; self-review fixes: app lock covers on leave, never locks without a PIN. Gate queue restarted with a lock dir (a1f a1g a1h a1i a1j a1k a1l).
 - 2026-10-10 04:31 · agent-0 DK-0380 · PR #1267 open; review requested from all
 - 2026-10-10 04:31 · agent-0 DK-0380 · done (#1267)
+- 2026-10-10 04:32 · agent-0 DK-1064 · claimed: TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up)

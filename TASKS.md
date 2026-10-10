@@ -1085,7 +1085,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1061 | Ph4 | Q | P1 | S | Device check: redaction on every target ABI; timings per page on the 4 test devices (DK-0393) | done | agent-0 | DK-0668 | #1172 |
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | done | agent-0 | DK-0392 DK-0668 | #1180 |
-| DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | assigned | agent-0 | DK-0270 |  |
+| DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | in-progress | agent-0 | DK-0270 |  |
 | DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | open |  | DK-0474 |  |
 | DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
 | DK-1067 | Ph7 | Q | P1 | XS | Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073) | open |  | DK-1066 |  |

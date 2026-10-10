@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 04:31
+last-seen: 2026-10-10 04:32
 last-read: 2056
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1064 TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) — claimed 2026-10-10 04:32.
 
 ## Next
 
