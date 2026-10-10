@@ -1,7 +1,11 @@
+import 'package:app_pdf/components/dk_pro_badge.dart';
 import 'package:app_pdf/components/dk_sheet.dart';
 import 'package:app_pdf/components/dk_tool_tile.dart';
 import 'package:app_pdf/providers/files_providers.dart';
+import 'package:app_pdf/routes/routes.dart';
+import 'package:app_pdf/tools/tool_catalogue.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'home_screen_test.dart' show pumpHome, settle;
@@ -24,6 +28,40 @@ void main() {
     });
     await settle(tester);
   }
+
+  testWidgets('first launch: the eight defaults, in order; never Scan', (
+    tester,
+  ) async {
+    await pumpHome(tester, db);
+    expect(tiles(tester), defaultPinnedTools);
+    expect(tiles(tester), isNot(contains('scan')));
+  });
+
+  testWidgets('a Pro tile has the badge, is never greyed, and opens T2', (
+    tester,
+  ) async {
+    final router = await pumpHome(tester, db);
+    final pro = [
+      for (final id in defaultPinnedTools)
+        if (ToolCatalogue.of(id).isPro) id,
+    ];
+    expect(pro, isNotEmpty);
+    final tile = find.byWidgetPredicate(
+      (w) => w is DkToolTile && w.toolId == pro.first,
+    );
+    expect(
+      find.descendant(of: tile, matching: find.byType(DkProBadge)),
+      findsOneWidget,
+    );
+    expect(
+      find.ancestor(of: tile, matching: find.byType(Opacity)),
+      findsNothing,
+      reason: 'never greyed',
+    );
+    await tester.tap(tile);
+    await tester.pumpAndSettle();
+    expect(router.state.uri.toString(), Routes.tool(pro.first));
+  });
 
   testWidgets('long-press: Unpin, and Undo puts it back in its place', (
     tester,

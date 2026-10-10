@@ -2356,6 +2356,8 @@
       }
     }
   },
+  "sign_photo_no_ink": "No signature found in this photo.",
+  "@sign_photo_no_ink": {"description": "Signature pad, Image tab: the chosen photo has no ink (DK-1084)."},
   "files_settings_save_folder": "Default save folder",
   "@files_settings_save_folder": {
     "description": "M3 Files & storage (DK-0572)."
