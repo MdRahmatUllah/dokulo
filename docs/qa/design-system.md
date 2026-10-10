@@ -10,6 +10,7 @@
 | DK-0980 | `26-global-states/global-states.html` (Light, Dark; 1440 × 1700) | A QA board in the gate, `packages/app_pdf/test/qa/global_states_test.dart`: the frame's regions built from the real empty states, toasts, banners, error catalogue and skeleton, side by side with the frame's screenshots; the copy, icons and actions checked as values | 2 deviations fixed, 6 approved, below |
 | DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
 | DK-0845, DK-0846, DK-0855, DK-0856 | `12-tool-shell/` minibar, canceldlg, discard, aftersave (Light, Dark; phone) | The same QA board: the shell at Tools with a running job, T2 after 30 s with Cancel, T3 closed unsaved after a long job, T3 after Save | 2 deviations fixed, 2 approved, below |
+| DK-0853, DK-0854, DK-0857 | `12-tool-shell/` savemenu, replace, replaced (Light, Dark; phone) | The same QA board: T3's split Save menu (Save as copy · Replace original · Save to…), then Replace original (the dialog), then Replace (the toast and Done) | Match, 2 approved, below |
 | DK-0799, DK-0800, DK-0801, DK-0802, DK-0803 | `09-organize-pages/` organize-drag, -selected, -insert, -deleted, -pinch (Light, Dark; phone) | Goldens in the gate, `organize_<state>_<theme>` in `packages/app_pdf/test/screens/organize_screen_test.dart`: P1 with 12 pages, page 5 long-pressed and held between 8 and 9, the navigator's overlay included; side by side with the frame in [organize/](organize/) | 5 deviations fixed, 3 approved, 1 follow-up, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
@@ -248,6 +249,20 @@ The discard dialog and the after-Save state (the toast "Saved to Files › …"
 with Open, then Done) match. After Save's Share · Open row comes with DK-1077
 (Share).
 
+### The Save menu and Replace original (DK-0853, DK-0854, DK-0857)
+
+The menu (Save as copy · Replace original · Save to…, above the chevron),
+the dialog (danger icon circle with `swap_horiz`, "Replace the original
+file?", the Versions line, Cancel and a danger Replace) and the toast
+("Replaced · Undo", 10 s) match the frames. Approved:
+
+- After Replace the bar shows Done, as after Save (§20.4 "After Save"); the
+  replaced frame still shows the split Save. A replace is a save.
+- In the goldens the dialog's buttons stack: the test font (Ahem) is too
+  wide for them side by side; with real fonts they sit side by side as in
+  the frame (DkConfirmDialog stacks only when the labels don't fit).
+
+Share, beside Open, comes with DK-1077.
 ## Organize pages: drag, selected, insert, deleted, pinch (DK-0799..DK-0803)
 
 The frame: the sub-bar still says "12 pages", the lifted page floats over
