@@ -9084,3 +9084,7 @@ heavy: mine (agent-1, gate for feat/DK-0257-tool-search)
 ### H-1989 · 2026-10-10 02:05 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0257-tool-search)
+
+### H-1990 · 2026-10-10 02:05 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0280-favourites)
