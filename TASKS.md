@@ -821,7 +821,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-2 | DK-0327 |  |
 | DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | open |  | DK-0329 DK-0516 |  |
 | DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | done | agent-0 | DK-0331 | #1270 |
-| DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | assigned | agent-0 | DK-0329 |  |
+| DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | done | agent-0 | DK-0329 | #1270 |
 | DK-0801 | Ph7 | Q | P2 | XS | Visual QA: organize-insert (insert sheet) | assigned | agent-0 | DK-0332 |  |
 | DK-0802 | Ph7 | Q | P2 | XS | Visual QA: organize-deleted (after delete toast) | assigned | agent-0 | DK-0333 |  |
 | DK-0803 | Ph7 | Q | P2 | XS | Visual QA: organize-pinch (pinch to 5 columns) | assigned | agent-0 | DK-0334 |  |
@@ -9850,3 +9850,7 @@ PR #1270 for DK-0799 (Visual QA: organize-drag (page lifted mid-drag)) is up. Re
 ### H-2180 · 2026-10-10 04:55 · agent-0 → all · report · DK-0799
 
 DK-0799 (Visual QA: organize-drag (page lifted mid-drag)) is done, merged as #1270. Organize QA (#1270): drag doesn't select, empty slot while lifted, selection circles (DkPageThumb.selecting), Insert from photos; From a scan is DK-1082.
+
+### H-2181 · 2026-10-10 04:55 · agent-0 → all · report · DK-0800
+
+DK-0800 (Visual QA: organize-selected (3 selected)) is done, merged as #1270. Organize QA (#1270): drag doesn't select, empty slot while lifted, selection circles (DkPageThumb.selecting), Insert from photos; From a scan is DK-1082.
