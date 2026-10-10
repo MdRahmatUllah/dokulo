@@ -11,13 +11,18 @@ spec's tables.
 
 | Task | Frame | Result |
 | --- | --- | --- |
+| DK-0715 | `02-home/home-default` | Match |
 | DK-0716 | `02-home/home-first` | Match |
+| DK-0718 | `02-home/home-contjob` | Match, 2 approved |
 | DK-0719 | `02-home/home-edit` | 1 fixed, 1 approved |
 | DK-0720 | `02-home/home-addtool` | 1 fixed, 1 approved |
+| DK-0721 | `02-home/home-procard` | Match |
 | DK-0723 | `02-home/home-job` | Match |
 | DK-0724 | `02-home/home-jobs3` | Match |
+| DK-0725 | `02-home/home-tilemenu` | Match, 2 approved |
+| DK-0726 | `02-home/home-scanmenu` | 1 fixed, 1 approved |
 
-## Home (DK-0716, DK-0719, DK-0720, DK-0723, DK-0724)
+## Home (DK-0715, DK-0716, DK-0718 to DK-0721, DK-0723 to DK-0726)
 
 Board: `test/qa/home_qa_test.dart` (the real H1 in the shell, through
 `pumpHome`, with the frames' recent files); frames: [home/](home/). Copy: Your
@@ -32,6 +37,10 @@ Fixed:
 - H2. Add a tool: each row ends in `add_circle` in `color.primary` (with the
   Pro badge before it), as home-addtool; the rows had DkToolRow's chevron
   (`DkToolRow.trailingIcon`).
+- H3. The Scan button's long-press opens a DkMenu (UI spec §11.7): the four
+  modes, a divider, then Import photos, on `color.surfaceRaised` with
+  `radius.m`, as home-scanmenu. It was Material's MenuAnchor: no divider, a
+  dark outline, and the menu ran into the screen's edge.
 
 Approved:
 
@@ -40,3 +49,14 @@ Approved:
 - Add a tool opens at the large detent (92 %): it lists every tool not
   pinned (20+). The frame's sheet is about 69 % high, between our two
   detents.
+- home-contjob: the title is "{tool} · {file}" until the tool's definition
+  gives its own (`ToolDefinition.doneTitle`, DK-0247; Compress's says
+  "Compressed Mietvertrag.pdf" when agent-2's DK-0463 registers it); the
+  sub is `color.textSecondary` throughout, where the frame tints the delta
+  green (§11.4 gives the card's sub one colour).
+- home-tilemenu and home-scanmenu: DkMenu draws no scrim (§11.7); the
+  frames dim the screen behind the menu. home-tilemenu's "Hold and drag to
+  reorder" toast is not in the spec: dragging starts from Edit (DK-0249).
+- home-scanmenu: the menu keeps DkMenu's placement (beside the anchor, on
+  screen); the frame centres it over the button.
+- home-procard: See Pro waits for the X3 paywall (DK-0579).
