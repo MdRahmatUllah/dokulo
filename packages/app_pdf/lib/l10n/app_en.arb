@@ -2436,5 +2436,11 @@
   "viewer_form_banner": "This PDF has fillable fields.",
   "@viewer_form_banner": {"description": "V1 Form detected banner (UI spec §17.1; DK-1090)."},
   "viewer_form_fill": "Fill form",
-  "@viewer_form_fill": {"description": "V1 Form detected banner's action."}
+  "@viewer_form_fill": {"description": "V1 Form detected banner's action."},
+  "x1_open_in_viewer": "Open in viewer",
+  "@x1_open_in_viewer": {"description": "X1 tool picker, first row for one PDF (UI spec §20.6; DK-1094)."},
+  "x1_suggested": "Suggested",
+  "@x1_suggested": {"description": "X1 section header."},
+  "x1_all_tools": "All tools",
+  "@x1_all_tools": {"description": "X1 section header."}
 }
