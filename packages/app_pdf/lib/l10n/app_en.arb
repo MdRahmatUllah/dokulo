@@ -1961,6 +1961,12 @@
   },
   "t2_about_tool": "About this tool",
   "@t2_about_tool": {"description": "T2's overflow menu: opens About this tool (UI spec §20.1, §20.5)."},
+  "error_unexpected_short": "Something went wrong.",
+  "@error_unexpected_short": {"description": "Unexpected, no page known, without the code: the progress sheet shows the code on its own line (tool-shell-failure)."},
+  "error_unexpected_page_short": "Something went wrong on page {page}.",
+  "@error_unexpected_page_short": {"description": "Unexpected on a page, without the code (tool-shell-failure).", "placeholders": {"page": {"type": "int"}}},
+  "error_code_line": "Code {code}",
+  "@error_code_line": {"description": "The error code on its own line under a failure (tool-shell-failure).", "placeholders": {"code": {"type": "String"}}},
   "tools_search_hint": "Search tools",
   "@tools_search_hint": {
     "description": "T1's search field (DK-0256)."
@@ -1997,6 +2003,61 @@
   "common_ok": "OK",
   "@common_ok": {
     "description": "Closes an information sheet."
+  },
+  "locked_moved_in": "{n, plural, one{Moved 1 file to Locked folder} other{Moved {n} files to Locked folder}}",
+  "@locked_moved_in": {
+    "description": "Toast after Move to locked folder, with Undo (DK-0289).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "locked_move_out": "Move out of locked folder",
+  "@locked_move_out": {
+    "description": "F2 file sheet: decrypts it back to its folder."
+  },
+  "trash_empty": "Empty",
+  "@trash_empty": {
+    "description": "R1 top bar: empties Recently deleted (DK-0278)."
+  },
+  "trash_banner": "Files are deleted for good after {n} days.",
+  "@trash_banner": {
+    "description": "R1's info banner; n is the retention, 30 or 7.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "meta_days_left": "{n, plural, one{1 day left} other{{n} days left}}",
+  "@meta_days_left": {
+    "description": "R1 row meta, after the size.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "search_names": "Names",
+  "@search_names": {
+    "description": "F1 search: the group of files whose name matches (DK-0269)."
+  },
+  "search_text": "Text inside files",
+  "@search_text": {
+    "description": "F1 search: the group of pages whose text matches."
+  },
+  "file_favourite_add": "Add to favourites",
+  "@file_favourite_add": {
+    "description": "File action sheet (DK-0280)."
+  },
+  "file_favourite_remove": "Remove from favourites",
+  "@file_favourite_remove": {
+    "description": "File action sheet, on a favourite."
+  },
+  "files_favourites": "Favourites",
+  "@files_favourites": {
+    "description": "F1: the favourites' section, above the folders."
   },
   "tools_search_empty_title": "No tool for “{query}”",
   "@tools_search_empty_title": {

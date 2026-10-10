@@ -5,13 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../components/dk_action_sheet.dart';
 import '../../components/dk_banner.dart';
 import '../../components/dk_button.dart';
 import '../../components/dk_icon.dart';
+import '../../components/dk_file_card.dart';
 import '../../components/dk_illustration.dart';
+import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_pin_pad.dart';
+import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
+import '../../l10n/formats.dart';
+import '../../patterns/dk_undo.dart';
+import '../../providers/database_providers.dart';
+import '../../providers/file_providers.dart';
+import '../../providers/files_providers.dart';
 import '../../providers/locked_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
@@ -32,7 +41,11 @@ enum LockedStep {
 /// the biometric prompt on open. Unlocked, the folder's content; leaving it,
 /// "Lock now" or a minute in the background locks it again.
 class LockedFolderScreen extends ConsumerStatefulWidget {
-  const LockedFolderScreen({super.key});
+  const LockedFolderScreen({super.key, this.moveIn = const []});
+
+  /// Files to move in once the folder is open (DK-0289): "Move to locked
+  /// folder" runs the setup or the unlock first, then the move (flow 6).
+  final List<int> moveIn;
 
   /// How long the folder stays open in the background (DK-0288).
   static const autoLock = Duration(minutes: 1);
@@ -45,6 +58,7 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
   var _step = LockedStep.loading;
   String? _firstPin, _error;
   var _errors = 0;
+  var _moved = false;
   DateTime? _hiddenAt;
   late final AppLifecycleListener _lifecycle;
 
@@ -86,7 +100,46 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
   }
 
   void _go(LockedStep step) {
-    if (mounted) setState(() => _step = step);
+    if (!mounted) return;
+    setState(() => _step = step);
+    if (step == LockedStep.open && !_moved && widget.moveIn.isNotEmpty) {
+      _moved = true;
+      _moveIn();
+    }
+  }
+
+  /// Seals [LockedFolderScreen.moveIn] into the vault, with Undo.
+  Future<void> _moveIn() async {
+    final l = AppLocalizations.of(context);
+    final cipher = ref.read(lockedSessionProvider);
+    if (cipher == null) return;
+    final db = ref.read(appDatabaseProvider);
+    final store = await ref.read(lockedStoreProvider.future);
+    final thumbs = await ref.read(thumbnailCacheProvider.future);
+    final moved = <LockedEntry>[];
+    for (final id in widget.moveIn) {
+      final row = await (db.select(
+        db.files,
+      )..where((f) => f.id.equals(id))).getSingleOrNull();
+      if (row == null) continue;
+      // No picture of it may stay in the plain cache.
+      await thumbs.forget(row.path, pages: row.pages);
+      moved.add(await store.moveIn(db, id, cipher));
+    }
+    ref.invalidate(lockedFilesProvider);
+    if (!mounted || moved.isEmpty) return;
+    await showDkUndo(
+      context,
+      DkUndo.move,
+      l.locked_moved_in(moved.length),
+      onUndo: () async {
+        final files = await ref.read(fileStoreProvider.future);
+        for (final e in moved) {
+          await store.moveOut(db, files, e.id, cipher, folder: e.fromFolder);
+        }
+        ref.invalidate(lockedFilesProvider);
+      },
+    );
   }
 
   void _fail(String message) => setState(() {
@@ -469,19 +522,21 @@ class _Biometrics extends StatelessWidget {
 }
 
 /// Unlocked: the folder (its files come with DK-0289), "Lock now".
-class _Content extends StatelessWidget {
+class _Content extends ConsumerWidget {
   const _Content({required this.onLock, required this.onBack});
 
   final VoidCallback onLock, onBack;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
+    final entries = ref.watch(lockedFilesProvider).value;
     return Scaffold(
       backgroundColor: t.color.background,
       appBar: DkTopBar(
         title: l.locked_title,
+        titleIcon: DkIcons.lock,
         onLeading: onBack,
         actions: [
           DkTopBarAction(
@@ -491,16 +546,155 @@ class _Content extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(t.space.xl),
-          child: Text(
-            l.locked_empty,
-            textAlign: TextAlign.center,
-            style: t.text.bodyL.copyWith(color: t.color.textSecondary),
+      body: switch (entries) {
+        null => const SizedBox.shrink(),
+        [] => Center(
+          child: Padding(
+            padding: EdgeInsets.all(t.space.xl),
+            child: Text(
+              l.locked_empty,
+              textAlign: TextAlign.center,
+              style: t.text.bodyL.copyWith(color: t.color.textSecondary),
+            ),
           ),
         ),
+        final list => ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                t.space.l,
+                t.space.l,
+                t.space.l,
+                t.space.s,
+              ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Semantics(
+                      header: true,
+                      child: Text(
+                        l.files_files,
+                        style: t.text.titleS.copyWith(
+                          color: t.color.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    l.meta_files(list.length),
+                    style: t.text.caption.copyWith(
+                      color: t.color.textSecondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            for (final e in list) _LockedRow(e),
+          ],
+        ),
+      },
+    );
+  }
+}
+
+/// A locked file: no thumbnail (nothing of it is rendered or cached while
+/// it is sealed); a tap decrypts it for viewing, More moves it out.
+class _LockedRow extends ConsumerWidget {
+  const _LockedRow(this.entry);
+
+  final LockedEntry entry;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    final meta = [
+      formatBytes(entry.size, locale),
+      if (entry.pages > 0) l.meta_pages(entry.pages),
+      formatWhen(entry.added, l, locale),
+    ].join(' · ');
+    final page = ColoredBox(color: context.tokens.color.pageWhite);
+    return DkFileCard(
+      name: entry.name,
+      meta: meta,
+      thumbnail: page,
+      onTap: () => _view(context, ref),
+      onMore: () => showDkActionSheet(
+        context,
+        header: DkActionSheetHeader(
+          thumbnail: page,
+          name: entry.name,
+          meta: meta,
+        ),
+        groups: [
+          [
+            DkAction(
+              icon: DkIcons.lockOpen,
+              label: l.locked_move_out,
+              onTap: () => _moveOut(context, ref),
+            ),
+          ],
+        ],
       ),
     );
   }
+
+  Future<void> _view(BuildContext context, WidgetRef ref) async {
+    final cipher = ref.read(lockedSessionProvider);
+    if (cipher == null) return;
+    final store = await ref.read(lockedStoreProvider.future);
+    final clear = await store.open(entry.id, cipher);
+    if (!context.mounted) return;
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (_) => _LockedViewer(name: entry.name, path: clear.path),
+      ),
+    );
+    // Back from it: the decrypted copy goes at once.
+    await store.closeAll();
+  }
+
+  Future<void> _moveOut(BuildContext context, WidgetRef ref) async {
+    final l = AppLocalizations.of(context);
+    final cipher = ref.read(lockedSessionProvider);
+    if (cipher == null) return;
+    final db = ref.read(appDatabaseProvider);
+    final store = await ref.read(lockedStoreProvider.future);
+    final files = await ref.read(fileStoreProvider.future);
+    // ponytail: back to the folder it came from; a folder picker when users
+    // want another place.
+    final id = await store.moveOut(
+      db,
+      files,
+      entry.id,
+      cipher,
+      folder: entry.fromFolder,
+    );
+    ref.invalidate(lockedFilesProvider);
+    final row = await (db.select(
+      db.files,
+    )..where((f) => f.id.equals(id))).getSingle();
+    final folder = row.folderId == null
+        ? null
+        : await (db.select(
+            db.folders,
+          )..where((f) => f.id.equals(row.folderId!))).getSingleOrNull();
+    if (!context.mounted) return;
+    showDkToast(context, l.toast_moved(folder?.name ?? l.shell_tab_files));
+  }
+}
+
+/// A decrypted file on screen: its pages, nothing else (the viewer's tools
+/// would write copies outside the vault).
+class _LockedViewer extends StatelessWidget {
+  const _LockedViewer({required this.name, required this.path});
+
+  final String name, path;
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    backgroundColor: context.tokens.color.surfaceSunken,
+    appBar: DkTopBar(title: name),
+    body: DkPdfCanvas(path: path),
+  );
 }

@@ -7,6 +7,7 @@
 | DK-0985, DK-0988..DK-1007 | `00-design-system/illustrations/` | `tools/qa_illustrations.py`, see [illustrations/](illustrations/README.md) | 40/40 match |
 | DK-0984 | `00-design-system/components-part-2.html` (Light, Dark; 1440 wide) | Side by side with the catalogue entries' goldens (layout, colour, spacing) and the code (type tokens, copy); `tools/device_checks/catalogue_shots.py` screenshots the same entries on a device with real fonts | 6 deviations fixed (DK-1072), 3 approved, below |
 | DK-0980 | `26-global-states/global-states.html` (Light, Dark; 1440 × 1700) | A QA board in the gate, `packages/app_pdf/test/qa/global_states_test.dart`: the frame's regions built from the real empty states, toasts, banners, error catalogue and skeleton, side by side with the frame's screenshots; the copy, icons and actions checked as values | 2 deviations fixed, 6 approved, below |
+| DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
@@ -122,3 +123,46 @@ Approved:
   (DK-0190); the frame and §26.3 show an example code.
 - The frame's "2 pages deleted" toast is the plural of the copy deck's
   `toast_page_deleted`; P1's multi-delete task adds the plural with its copy.
+
+## Tool shell: T2 and X2 (DK-0838, DK-0842, DK-0843, DK-0844, DK-0847)
+
+Side by side: the frames in [docs/qa/tool-shell/](tool-shell/) (`<frame>-light.png`,
+`<frame>-dark.png`, taken with `--virtual-time-budget` so the sheets have
+slid in) and the board's goldens,
+`packages/app_pdf/test/qa/goldens/tool_shell_<frame>_<theme>.png`, rendered by
+the real T2 with the frames' file names and a simulated job. The options
+region is each tool's own (Compress's levels come with DK-0463), so the boards
+show the shell.
+
+Fixed:
+
+- T1. t2empty: Browse device (and Choose photos) are full width in the picker
+  card, which is a 1 dp outlined `color.surface` card with dividers between
+  the recent files; it was a raised card with a content-wide button.
+- T2. t2empty: with no input the main button says the tool's name ("Compress
+  PDF"); it said "Compress 0 pages".
+- T3. lockedrow: the locked file's row is a `color.warningContainer` band
+  under the card from the file name's edge: the lock and "This file is
+  locked" in `color.warning`, then the password field (placeholder
+  "Password"; `DkPasswordField.hint`) and a primary compact Unlock on one
+  line. It was a label, a full-width field and a secondary button below.
+- T4. progress: Cancel and Keep working are sized to their labels from the
+  start (they wrap on a narrow sheet); they were two equal halves.
+- T5. failure: the title has no code; "Code DK-0190" is its own monospace
+  line under "Your original file wasn't changed." (`DokuloError.headline`,
+  `DkProgressError.code`, `error_code_line`).
+- T6. btnloading: as the frame ("Compressing…" in the button from 2 s).
+
+Approved:
+
+- The failure state's illustration is ILL-20 as the illustration board draws
+  it (QA'd in DK-0985/DK-1007) and centred like its text; the frame tints its
+  circle danger and sets it to the left.
+- A file's meta reads "8.4 MB · 12 pages" in every tool; Merge's "Pages: All"
+  link is Merge's own (its task).
+- The code is the situation's own (DK-0190 for Unexpected); the frame shows
+  the spec's example.
+
+Follow-up: the failure state's Skip this page and Send report by email
+(DK-1080): sending needs `url_launcher` (the pubspec lock), skipping a job
+that can go on past a page.
