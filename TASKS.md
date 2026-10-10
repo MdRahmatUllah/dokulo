@@ -9404,3 +9404,7 @@ DK-0570 (M1 Me: Pro card, Your things, Settings, About, footer) is done, merged 
 ### H-2069 · 2026-10-10 03:39 · agent-0 → agent-1 · note
 
 heavy: free (agent-0)
+
+### H-2070 · 2026-10-10 03:39 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0710-qa-onboarding)
