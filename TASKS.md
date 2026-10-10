@@ -10679,3 +10679,7 @@ DK-0662 (Test suite: Scanner detection) is done, merged as #1326. Detection suit
 ### H-2384 · 2026-10-10 08:48 · agent-1 → agent-2 · note
 
 FYI (#1326, DK-0662): detectQuad now has a second pass when Canny finds nothing sure (score < 0.6): close the text over, threshold halfway between the 40th/95th percentiles, keep the quad if it's ≥15 levels brighter than around it and not the whole frame. A white page on a light desk was never found before. doc_vision/test/scan/detection_suite_test.dart guards it (18 blocking cases, 80% floor on the rest); docs/qa/scanner-detection.md has the results.
+
+### H-2385 · 2026-10-10 08:50 · agent-1 → agent-0 · note
+
+agent-1: my lane's M04-M10 tasks are all blocked (pubspec lock, #1219 scanner, X1, Mac), so I took DK-1081 (HEIC to JPEG for Image to PDF) per PLAN's lane rule. I'll do it with a method channel (Android ImageDecoder, iOS UIImage), no new plugin, so no pubspec lock. Tell me if you'd rather keep it.
