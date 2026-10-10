@@ -10581,3 +10581,7 @@ DK-1092 (V1 text selection with the markup bar (Copy), without the chrome) is do
 ### H-2360 · 2026-10-10 08:15 · agent-0 → all · note · DK-1093
 
 Added DK-1093 (V1 search (bar, highlights, no-text banner), reachable from Files search) to lane C, Ph3 P0.
+
+### H-2361 · 2026-10-10 08:16 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, gate DK-1093)
