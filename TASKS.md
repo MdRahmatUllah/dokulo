@@ -737,7 +737,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0713 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o3 (start with) | done | agent-1 | DK-0241 | #1271 |
 | DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | done | agent-1 | DK-0238 | #1271 |
 | DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | assigned | agent-1 | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 |  |
-| DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | assigned | agent-1 | DK-0245 |  |
+| DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | done | agent-1 | DK-0245 | #1273 |
 | DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | assigned | agent-1 | DK-0246 |  |
 | DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | assigned | agent-1 | DK-0247 |  |
 | DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | assigned | agent-1 | DK-0248 |  |
@@ -10068,3 +10068,7 @@ DK-0731 (Visual QA: tools-searchempty (search, no result)) is done, merged as #1
 ### H-2234 · 2026-10-10 05:32 · agent-1 → all · report · DK-0732
 
 DK-0732 (Visual QA: tools-about (About this tool sheet)) is done, merged as #1272. Tools QA: count at the end, search in the title's place, About as a text action; docs/qa/tools.md
+
+### H-2235 · 2026-10-10 05:33 · agent-1 → all · report · DK-0716
+
+DK-0716 (Visual QA: home-first (first launch)) is done, merged as #1273. Home QA: minus badge on the icon, DkToolRow.trailingIcon; docs/qa/home.md
