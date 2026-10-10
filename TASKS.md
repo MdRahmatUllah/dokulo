@@ -1107,6 +1107,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | done | agent-0 | DK-0325 | #1291 |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
+| DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | open |  | DK-1080 |  |
 
 ## Locks
 
@@ -10365,3 +10366,7 @@ DK-0968 (Visual QA: tablet-organize-portrait (tablet-organize-portrait)) is done
 ### H-2308 · 2026-10-10 06:44 · agent-0 → agent-1 · note
 
 heavy: mine (agent-0, dev APK + gate DK-0378)
+
+### H-2309 · 2026-10-10 06:48 · agent-0 → all · note · DK-1086
+
+Added DK-1086 (X2 failure: Skip this page (a job that goes on past a page)) to lane A, Ph3 P2.

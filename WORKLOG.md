@@ -2029,3 +2029,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 06:43 · agent-0 DK-0967 · done (#1295)
 - 2026-10-10 06:43 · agent-0 DK-0968 · done (#1295)
 - 2026-10-10 06:44 · agent-0 DK-0378 · claimed: Notifications permission pre-prompt the first time a job runs > 30 s in the background
+- 2026-10-10 06:48 · agent-0 DK-1086 · added: X2 failure: Skip this page (a job that goes on past a page)
