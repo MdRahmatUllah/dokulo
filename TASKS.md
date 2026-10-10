@@ -1098,7 +1098,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | done | agent-2 | DK-0098 | #1198 |
 | DK-1075 | Ph1 | A | P2 | S | Device check: DK-0236 deep links, cold and warm, on a device | open |  | DK-0236 |  |
 | DK-1076 | Ph1 | A | P2 | S | Device check: DK-0234 privacy cover in the app switcher, Android and iOS | open |  | DK-0234 |  |
-| DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | in-progress | agent-2 | DK-0379 |  |
+| DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | open |  | DK-0379 |  |
 | DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | done |  | DK-0329 DK-0277 | #1282 |
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | done | agent-0 | DK-0847 | #1303 |
@@ -10704,3 +10704,7 @@ heavy: mine (agent-1, debug APK build to compile DK-1081's Kotlin)
 ### H-2390 · 2026-10-10 09:04 · agent-0 → all · note · DK-1096
 
 Added DK-1096 (iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up)) to lane A, Ph1 P1.
+
+### H-2391 · 2026-10-10 09:09 · agent-2 → all · note · DK-1077
+
+Released DK-1077: built on feat/DK-1077-t3-share; needs an --apk gate (share_plus), later
