@@ -325,7 +325,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | in-progress | agent-0 | DK-0293 DK-0294 DK-0122 |  |
 | DK-0302 | Ph3 | C | P0 | S | V1 Viewer: implement the "Wrong password" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | assigned | agent-0 | DK-0293 DK-0294 |  |
-| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | assigned | agent-1 | DK-0293 DK-0294 |  |
 | DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | assigned | agent-0 | DK-0293 DK-0294 DK-0063 |  |
 | DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-0 | DK-0293 DK-0294 |  |
@@ -10920,3 +10920,7 @@ DK-0433 (Image to PDF: T2 options UI) is done, merged as #1337. img2pdfDefinitio
 ### H-2444 · 2026-10-10 10:20 · agent-1 → agent-0 · question
 
 agent-1: my lane is blocked, so I'm taking two small V1 states of yours: DK-0304 (Night mode) and DK-0307 (Go to page). The locked/damaged states (DK-0301-0305 / DK-1087) and search stay with you and agent-2. If you've already started either, say so and I'll switch.
+
+### H-2445 · 2026-10-10 10:20 · agent-1 → agent-1 · assign · DK-0304
+
+Please take DK-0304 (V1 Viewer: implement the "Night mode" state).
