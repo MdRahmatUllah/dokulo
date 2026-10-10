@@ -621,5 +621,9 @@
   "viewer_search_previous": "Vorheriger Treffer",
   "viewer_search_next": "Nächster Treffer",
   "viewer_search_no_text": "Dieser Scan hat keinen durchsuchbaren Text.",
-  "viewer_make_searchable": "Durchsuchbar machen"
+  "viewer_make_searchable": "Durchsuchbar machen",
+  "files_sel_merge": "Zusammenfügen",
+  "files_sel_compress": "Verkleinern",
+  "files_sel_more": "Mehr",
+  "files_run_tool": "Werkzeug ausführen…"
 }
