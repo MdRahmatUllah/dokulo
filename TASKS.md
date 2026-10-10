@@ -300,7 +300,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0276 | Ph1 | B | P0 | S | F1 Files: implement the "Duplicate" state | done | agent-1 | DK-0260 DK-0186 DK-0182 | #1243 |
 | DK-0277 | Ph3 | B | P1 | M | Version history: keep last 5 versions per file (edits, replace original) | done | agent-1 | DK-0005 | #1224 |
 | DK-0278 | Ph1 | B | P0 | M | Recently deleted (trash): 30-day retention, restore, delete for good, empty | done | agent-1 | DK-0260 DK-0186 DK-0196 DK-0192 DK-0057 | #1252 |
-| DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | assigned | agent-1 | DK-0260 DK-0232 |  |
+| DK-0279 | Ph7 | B | P2 | M | Files two-pane on tablets: list (360) + preview pane | done | agent-1 | DK-0260 DK-0232 | #1304 |
 | DK-0280 | Ph3 | B | P2 | S | Favourites: mark files as favourite and filter by them | done | agent-1 | DK-0260 DK-0271 | #1253 |
 | DK-0281 | Ph3 | B | P2 | S | Storage info: space used by files vs AI models (file info + Me → Files & storage bar chart) | done | agent-1 | DK-0260 | #1288 |
 | DK-0282 | Ph4 | B | P0 | L | Encrypt locked files at rest with AES-256-GCM; keys in Keychain/Keystore released by biometrics/PIN | done | agent-1 | DK-0005 DK-0016 | #1220 |
@@ -10459,3 +10459,7 @@ DK-1086 (X2 failure: Skip this page (a job that goes on past a page)) is done, m
 ### H-2331 · 2026-10-10 07:40 · agent-0 → all · note · DK-1087
 
 Added DK-1087 (V1 body states without the chrome: locked card, wrong password, after unlock, damaged file) to lane C, Ph3 P0.
+
+### H-2332 · 2026-10-10 07:41 · agent-1 → all · report · DK-0279
+
+DK-0279 (Files two-pane on tablets: list (360) + preview pane) is done, merged as #1304. F1 two panes from 840 (FilePreviewPane, FilesPane selection, arrow keys), grid 4 columns from 600; FileInfoRows shared; pumpFiles(size:) Now ready: DK-0964.
