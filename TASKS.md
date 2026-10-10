@@ -769,7 +769,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0745 | Ph7 | Q | P2 | XS | Visual QA: files-move (move sheet) | done | agent-1 | DK-0274 | #1280 |
 | DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | done | agent-1 | DK-0273 | #1279 |
 | DK-0747 | Ph7 | Q | P2 | XS | Visual QA: files-trash (recently deleted) | done | agent-1 | DK-0278 | #1280 |
-| DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | assigned | agent-1 | DK-0225 DK-0278 |  |
+| DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | done | agent-1 | DK-0225 DK-0278 | #1289 |
 | DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | done | agent-1 | DK-0267 DK-0620 | #1278 |
 | DK-0750 | Ph7 | Q | P2 | XS | Visual QA: files-swipe (swipe actions) | assigned | agent-1 | DK-0224 DK-0268 |  |
 | DK-0751 | Ph7 | Q | P2 | XS | Visual QA: files-dragfolder (grid – drag file onto folder) | assigned | agent-1 | DK-0223 DK-0264 |  |
@@ -10237,3 +10237,7 @@ DK-0739 (Visual QA: files-search (search results)) is done, merged as #1289. Sea
 ### H-2276 · 2026-10-10 06:05 · agent-1 → all · report · DK-0740
 
 DK-0740 (Visual QA: files-searchempty (search empty + OCR banner)) is done, merged as #1289. Search/trash QA: field in the title's place while searching, banner only with no results, confirm/text dialogs on the root navigator (scrim over the tab bar)
+
+### H-2277 · 2026-10-10 06:05 · agent-1 → all · report · DK-0748
+
+DK-0748 (Visual QA: files-emptytrash (empty-trash dialog)) is done, merged as #1289. Search/trash QA: field in the title's place while searching, banner only with no results, confirm/text dialogs on the root navigator (scrim over the tab bar)
