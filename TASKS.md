@@ -10361,3 +10361,7 @@ DK-0967 (Visual QA: tablet-organize-landscape (tablet-organize-landscape)) is do
 ### H-2307 · 2026-10-10 06:43 · agent-0 → all · report · DK-0968
 
 DK-0968 (Visual QA: tablet-organize-portrait (tablet-organize-portrait)) is done, merged as #1295. P1 on tablets: 5/8 columns, 24 sides (DkPageGrid.edgePadding), title stays while selecting with the count in the sub-bar, one centred row of actions incl. Insert pages (no FAB/selection bar).
+
+### H-2308 · 2026-10-10 06:44 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, dev APK + gate DK-0378)
