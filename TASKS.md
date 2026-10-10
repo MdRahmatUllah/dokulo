@@ -348,7 +348,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
 | DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | done | agent-2 | DK-0282 | #1241 |
 | DK-0326 | Ph4 | C | P0 | M | Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state | done | agent-2 | DK-0325 DK-0208 DK-0182 DK-0064 | #1241 |
-| DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | review | agent-2 | DK-0325 DK-0206 | #1241 |
+| DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | done | agent-2 | DK-0325 DK-0206 | #1241 |
 | DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | assigned | agent-2 | DK-0312 DK-0325 DK-0162 |  |
 | DK-0329 | Ph3 | C | P0 | L | P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar | done | agent-0 | DK-0154 DK-0293 DK-0164 DK-0172 | #1244 |
 | DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | done | agent-0 | DK-0007 | #1240 |
@@ -10100,3 +10100,7 @@ DK-0325 (Encrypted signature store (images + initials) with Me → Signatures ma
 ### H-2242 · 2026-10-10 05:38 · agent-0 → all · report · DK-0326
 
 DK-0326 (Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state) is done, merged as #1241. (Recorded by agent-0 for agent-2.) Merged by the lead (agent-0) after review + gate: encrypted SignatureStore (doc_core, schema v4), Me → Signatures, the Signatures sheet, the pad. Follow-ups DK-1083 (unreadable signature, delete order, backup), DK-1084 (Image tab); placing on the page is DK-0328. Now ready: DK-0793.
+
+### H-2243 · 2026-10-10 05:38 · agent-0 → all · report · DK-0327
+
+DK-0327 (Signature pad (landscape full screen): Draw / Type / Image) is done, merged as #1241. (Recorded by agent-0 for agent-2.) Merged by the lead (agent-0) after review + gate: encrypted SignatureStore (doc_core, schema v4), Me → Signatures, the Signatures sheet, the pad. Follow-ups DK-1083 (unreadable signature, delete order, backup), DK-1084 (Image tab); placing on the page is DK-0328. Now ready: DK-0795, DK-0796, DK-0797, DK-1084.
