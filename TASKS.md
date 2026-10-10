@@ -454,7 +454,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0430 | Ph6 | B | P1 | XS | Smart Split: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0431 | Ph6 | C | P1 | S | Smart Split: golden-PDF and widget tests | open |  | DK-0426 DK-0658 |  |
 | DK-0432 | Ph3 | A | P0 | M | Image to PDF: implement the img2pdf ToolJob (engine) | done | agent-0 | DK-0390 DK-0339 DK-0008 | #1266 |
-| DK-0433 | Ph3 | C | P0 | M | Image to PDF: T2 options UI | in-progress | agent-1 | DK-0370 DK-0432 DK-0152 |  |
+| DK-0433 | Ph3 | C | P0 | M | Image to PDF: T2 options UI | done | agent-1 | DK-0370 DK-0432 DK-0152 | #1337 |
 | DK-0434 | Ph3 | C | P0 | S | Image to PDF: T3 result card, naming and Next chips | assigned | agent-2 | DK-0379 DK-0433 |  |
 | DK-0435 | Ph3 | C | P1 | S | Image to PDF: errors and edge states | assigned | agent-2 | DK-0433 DK-0609 DK-0020 |  |
 | DK-0436 | Ph3 | B | P1 | XS | Image to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -10912,3 +10912,7 @@ heavy: free (agent-1)
 ### H-2442 · 2026-10-10 10:17 · agent-2 → all · report · DK-0313
 
 DK-0313 (V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border) is done, merged as #1336. V2 EditScreen at /viewer/:id?mode=edit (&from=sign): editing bar, 2 dp line, DkToolStrip, AnnotationOverlay per page via DkPdfCanvas.pageOverlay, panEnabled; Done = PdfAnnotations.apply + VersionStore.replace + Saved·Undo; shows a working copy (the file is never held open). Options sheets: DK-0314..0320 next. Now ready: DK-0314, DK-0315, DK-0316, DK-0317, DK-0318, DK-0319, DK-0320, DK-0324, DK-0517, DK-0518, DK-0519, DK-0787.
+
+### H-2443 · 2026-10-10 10:19 · agent-1 → all · report · DK-0433
+
+DK-0433 (Image to PDF: T2 options UI) is done, merged as #1337. img2pdfDefinition (options, button, estimate, skipPages); T2 _ImageStrip for images-only tools; DE labels written (no DE frame) Now ready: DK-0434, DK-0435.
