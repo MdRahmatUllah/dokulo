@@ -1102,6 +1102,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | open |  | DK-0329 DK-0277 |  |
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | open |  | DK-0847 |  |
+| DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | open |  | DK-0432 |  |
 
 ## Locks
 
@@ -9592,3 +9593,7 @@ heavy: mine (agent-1, gate for feat/DK-0710-qa-onboarding)
 ### H-2116 · 2026-10-10 04:05 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0710-qa-onboarding)
+
+### H-2117 · 2026-10-10 04:06 · agent-0 → all · note · DK-1081
+
+Added DK-1081 (Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up)) to lane A, Ph3 P1.
