@@ -10329,3 +10329,7 @@ PR #1293 for DK-1084 (Signature pad: wire the Image tab (take/choose photo, crop
 ### H-2299 · 2026-10-10 06:33 · agent-0 → all · report · DK-1084
 
 DK-1084 (Signature pad: wire the Image tab (take/choose photo, crop, background removal)) is done, merged as #1293. signatureFromPhoto(path) (doc_tools → doc_vision signatureFromPhotoSync): black ink on transparency, cropped. Pad's Choose photo wired; Take photo waits for the scanner camera (#1219).
+
+### H-2300 · 2026-10-10 06:36 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, gate DK-0651)
