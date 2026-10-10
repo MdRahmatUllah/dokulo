@@ -20,6 +20,7 @@ import os
       registerCameraChannel(registrar.messenger())
       registerNotificationsChannel(registrar.messenger())
       registerMailChannel(registrar.messenger())
+      registerLinksChannel(registrar.messenger())
     }
   }
 
@@ -64,6 +65,20 @@ import os
     FlutterMethodChannel(name: "dokulo/mail", binaryMessenger: messenger)
       .setMethodCallHandler { call, result in
         guard call.method == "compose", let s = call.arguments as? String,
+          let url = URL(string: s)
+        else {
+          result(FlutterMethodNotImplemented)
+          return
+        }
+        UIApplication.shared.open(url) { ok in result(ok) }
+      }
+  }
+
+  /// A web link in a PDF, after V1 asked (DK-1088; lib/providers/link_providers.dart).
+  private func registerLinksChannel(_ messenger: FlutterBinaryMessenger) {
+    FlutterMethodChannel(name: "dokulo/links", binaryMessenger: messenger)
+      .setMethodCallHandler { call, result in
+        guard call.method == "open", let s = call.arguments as? String,
           let url = URL(string: s)
         else {
           result(FlutterMethodNotImplemented)

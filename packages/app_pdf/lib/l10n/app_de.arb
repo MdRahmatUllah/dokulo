@@ -603,5 +603,12 @@
   "home_continue_job": "{tool} · {file}",
   "error_no_mail_app": "Keine E-Mail-App gefunden.",
   "notif_prompt_title": "Mitteilung, wenn lange Aufgaben fertig sind?",
-  "notif_prompt_body": "Dokulo arbeitet im Hintergrund weiter. Eine Mitteilung sagt dir, wenn es fertig ist. Sonst wird nichts gesendet."
+  "notif_prompt_body": "Dokulo arbeitet im Hintergrund weiter. Eine Mitteilung sagt dir, wenn es fertig ist. Sonst wird nichts gesendet.",
+  "viewer_goto_title": "Gehe zu Seite",
+  "viewer_goto_range": "1–{n}",
+  "viewer_goto_invalid": "Wähle eine Seite von 1 bis {n}.",
+  "viewer_goto_action": "Los",
+  "viewer_link_title": "{host} im Browser öffnen?",
+  "viewer_link_body": "Das ist der einzige Schritt, der Dokulo verlässt.",
+  "viewer_link_open": "Öffnen"
 }

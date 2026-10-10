@@ -13,7 +13,7 @@ import '../theme/dk_tokens.dart';
 /// 1 dp `color.outline` and `elevation.raised`; 8 between pages and at the
 /// sides. Give a [controller] to jump to a page
 /// (`controller.goToPage(pageNumber: n)`, 1-based).
-class DkPdfCanvas extends StatelessWidget {
+class DkPdfCanvas extends StatefulWidget {
   const DkPdfCanvas({
     super.key,
     required this.path,
@@ -22,6 +22,7 @@ class DkPdfCanvas extends StatelessWidget {
     this.initialPage = 1,
     this.onPageChanged,
     this.onReady,
+    this.onLink,
   });
 
   final String path;
@@ -37,21 +38,36 @@ class DkPdfCanvas extends StatelessWidget {
   final ValueChanged<int?>? onPageChanged;
   final VoidCallback? onReady;
 
+  /// A link to a web address was tapped (V1 asks first, DK-1088); a link to
+  /// a page in the file jumps there. Null: links do nothing.
+  final ValueChanged<Uri>? onLink;
+
   /// Between pages and at the sides (§17.1).
   static const gap = 8.0;
+
+  @override
+  State<DkPdfCanvas> createState() => _DkPdfCanvasState();
+}
+
+class _DkPdfCanvasState extends State<DkPdfCanvas> {
+  /// For in-file links when the screen gave no controller.
+  late final _own = PdfViewerController();
+
+  PdfViewerController get _controller => widget.controller ?? _own;
 
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final shadows = t.elevation.raised;
+    final onLink = widget.onLink;
     return PdfViewer.file(
-      path,
-      controller: controller,
-      initialPageNumber: initialPage,
-      passwordProvider: password == null ? null : () => password,
+      widget.path,
+      controller: _controller,
+      initialPageNumber: widget.initialPage,
+      passwordProvider: widget.password == null ? null : () => widget.password,
       params: PdfViewerParams(
         backgroundColor: t.color.surfaceSunken,
-        margin: gap,
+        margin: DkPdfCanvas.gap,
         // Light shows the shadow; dark has none (elevation is a lighter
         // surface there), which the outline makes up for.
         pageDropShadow: shadows.isEmpty ? null : shadows.first,
@@ -77,8 +93,21 @@ class DkPdfCanvas extends StatelessWidget {
           _fitWidth(controller, details.documentPosition);
           return true;
         },
-        onPageChanged: onPageChanged,
-        onViewerReady: onReady == null ? null : (_, _) => onReady!(),
+        onPageChanged: widget.onPageChanged,
+        onViewerReady: widget.onReady == null
+            ? null
+            : (_, _) => widget.onReady!(),
+        linkHandlerParams: onLink == null
+            ? null
+            : PdfLinkHandlerParams(
+                onLinkTap: (link) {
+                  if (link.url case final url?) {
+                    onLink(url);
+                  } else {
+                    _controller.goToDest(link.dest);
+                  }
+                },
+              ),
       ),
     );
   }

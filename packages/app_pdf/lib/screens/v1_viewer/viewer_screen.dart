@@ -6,6 +6,8 @@ import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_skeleton.dart';
 import '../../l10n/app_localizations.dart';
 import '../../theme/dk_tokens.dart';
+import '../../patterns/dk_viewer_dialogs.dart';
+import '../../providers/link_providers.dart';
 import 'viewer_providers.dart';
 
 /// V1, the viewer (UI spec §17.1). This is its core (DK-0293): the file's
@@ -31,6 +33,13 @@ class ViewerScreen extends ConsumerWidget {
         AsyncData(:final value) => DkPdfCanvas(
           path: value.path,
           initialPage: page ?? 1,
+          // A web link asks first; it's the only step that leaves Dokulo
+          // (DK-1088).
+          onLink: (url) async {
+            if (await confirmOpenLink(context, url)) {
+              await ref.read(linkOpenerProvider)(url);
+            }
+          },
         ),
         // The file's row is gone (deleted, or a stale link).
         AsyncError() => Center(
