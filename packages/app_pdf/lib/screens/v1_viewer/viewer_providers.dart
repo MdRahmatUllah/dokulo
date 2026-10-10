@@ -11,3 +11,19 @@ Future<FileEntry> viewerFile(Ref ref, int fileId) {
   final db = ref.watch(appDatabaseProvider);
   return (db.select(db.files)..where((f) => f.id.equals(fileId))).getSingle();
 }
+
+/// Whether a PDF opens (V1's locked and damaged states, DK-0301, DK-0305).
+enum ViewerOpen { ok, locked, damaged }
+
+/// Opens [path] once with [password] to see whether V1 can show it.
+@riverpod
+Future<ViewerOpen> viewerOpen(Ref ref, String path, {String? password}) async {
+  try {
+    await PdfEngine.inspect(path, password: password);
+    return ViewerOpen.ok;
+  } on DocError catch (e) {
+    return e.kind == DocErrorKind.locked
+        ? ViewerOpen.locked
+        : ViewerOpen.damaged;
+  }
+}
