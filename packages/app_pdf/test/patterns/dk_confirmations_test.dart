@@ -96,7 +96,7 @@ void main() {
         'Your original file stays unchanged.',
         'Keep going',
         'Stop',
-        false,
+        true, // destructive, as tool-shell-canceldlg
       ),
       (
         DkConfirmation.removeSignature,

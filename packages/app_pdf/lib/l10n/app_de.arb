@@ -507,6 +507,7 @@
   "ai_not_eligible_title": "KI ist auf diesem Handy nicht verfügbar",
   "ai_not_eligible_body": "Dafür braucht es mindestens {need} GB Arbeitsspeicher. Dieses Handy hat {have} GB.",
   "common_ok": "OK",
+  "progress_of": "{i} von {n}",
   "locked_moved_in": "{n, plural, one{1 Datei in den geschützten Ordner verschoben} other{{n} Dateien in den geschützten Ordner verschoben}}",
   "locked_move_out": "Aus dem geschützten Ordner holen",
   "trash_empty": "Leeren",
