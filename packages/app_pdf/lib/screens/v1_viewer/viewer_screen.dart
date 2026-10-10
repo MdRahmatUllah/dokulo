@@ -5,7 +5,7 @@ import 'package:pdfrx/pdfrx.dart';
 
 import 'dart:async';
 
-import 'package:doc_core/doc_core.dart' show FileEntry;
+import 'package:doc_core/doc_core.dart';
 
 import '../../components/dk_action_sheet.dart';
 import '../../components/dk_icon.dart';
@@ -25,6 +25,8 @@ import '../../patterns/dk_file_actions.dart';
 import '../../patterns/dk_file_info.dart';
 import '../../patterns/dk_tool_picker.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
+import '../../providers/file_providers.dart';
+import '../../providers/files_providers.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
 import '../../providers/print_providers.dart';
@@ -102,6 +104,36 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
       },
     );
     return true;
+  }
+
+  /// Highlight, Underline or Strike from the selection (DK-0321): the
+  /// annotations go straight into a new copy of the file (edit mode,
+  /// unseen), the old content is kept as a version, and "Saved · Undo"
+  /// puts it back. The colour is the highlighter's last-used one.
+  Future<void> _markup(
+    String path,
+    DkMarkupAction action,
+    List<SelectionLines> selected,
+  ) async {
+    final l = AppLocalizations.of(context);
+    final saved = ref.read(prefsProvider).value?['edit.options.highlighter'];
+    final colour = saved is Map && saved['color'] is int
+        ? Color(saved['color'] as int)
+        : context.tokens.markup.yellow;
+    final edits = markupEdits(action, selected, colour);
+    if (edits.isEmpty) return;
+    final out = await (await ref.read(fileStoreProvider.future))
+        .newTempFile(path.split(RegExp(r'[\\/]')).last);
+    await PdfAnnotations.apply(path, out.path, edits, password: _password);
+    final versions = await ref.read(versionStoreProvider.future);
+    final before = await versions.replace(widget.fileId, out.path);
+    if (!mounted) return;
+    showDkToast(
+      context,
+      l.toast_saved,
+      action: l.common_undo,
+      onAction: () => versions.restore(before),
+    );
   }
 
   @override
@@ -341,7 +373,13 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           night: ref.watch(prefsProvider).value?[viewerNightKey] == true,
           // Copy for now; Highlight, Underline, Strike come with the
           // annotations (DK-0321), Ask AI with the AI pane (M13).
-          markup: const [DkMarkupAction.copy],
+          markup: const [
+            DkMarkupAction.copy,
+            DkMarkupAction.highlight,
+            DkMarkupAction.underline,
+            DkMarkupAction.strike,
+          ],
+          onMarkup: (action, lines) => _markup(path, action, lines),
           search: _search,
           initialPage: widget.page ?? 1,
           // A web link asks first; it's the only step that leaves Dokulo
@@ -407,4 +445,41 @@ class ViewerPageSkeleton extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The annotations for [action] on [selected] (DK-0321): one markup per
+/// page, a quad per line. A highlight at 40 % (or the colour's own alpha);
+/// Underline and Strike opaque.
+Map<int, PageAnnotEdits> markupEdits(
+  DkMarkupAction action,
+  List<SelectionLines> selected,
+  Color colour,
+) {
+  final kind = switch (action) {
+    DkMarkupAction.highlight => MarkupKind.highlight,
+    DkMarkupAction.underline => MarkupKind.underline,
+    DkMarkupAction.strike => MarkupKind.strikeOut,
+    _ => null,
+  };
+  if (kind == null) return const {};
+  final argb = kind == MarkupKind.highlight
+      ? (colour.a < 1 ? colour : colour.withValues(alpha: 0.4)).toARGB32()
+      : colour.withValues(alpha: 1).toARGB32();
+  return {
+    for (final s in selected)
+      if (s.lines.isNotEmpty)
+        s.page: PageAnnotEdits(
+          add: [
+            MarkupAnnot(kind, [
+              for (final b in s.lines)
+                (
+                  (x: b.left, y: b.top),
+                  (x: b.right, y: b.top),
+                  (x: b.left, y: b.bottom),
+                  (x: b.right, y: b.bottom),
+                ),
+            ], color: argb),
+          ],
+        ),
+  };
 }

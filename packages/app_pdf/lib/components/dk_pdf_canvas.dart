@@ -1,3 +1,4 @@
+import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pdfrx/pdfrx.dart';
 
@@ -29,6 +30,7 @@ class DkPdfCanvas extends StatefulWidget {
     this.onLink,
     this.night = false,
     this.markup,
+    this.onMarkup,
     this.search,
   });
 
@@ -59,6 +61,12 @@ class DkPdfCanvas extends StatefulWidget {
   /// in `color.primary` at 25 %, primary handles, and DkMarkupBar beside it
   /// with these actions; Copy copies. Null: no selection.
   final List<DkMarkupAction>? markup;
+
+  /// Highlight, Underline or Strike on the selection (DK-0321): the
+  /// selected text as one box per line on each page it spans (page space,
+  /// origin bottom-left), for the annotations. The selection then clears.
+  final void Function(DkMarkupAction action, List<SelectionLines> lines)?
+  onMarkup;
 
   /// Text search (DK-1093): the matches in `markup.yellow` at 60 %, the
   /// current one outlined 2 dp in `color.primary` (UI spec §17.1).
@@ -175,6 +183,13 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
                   onAction: (action) async {
                     if (action == DkMarkupAction.copy) {
                       await d.copyTextSelection();
+                    } else if (widget.onMarkup case final onMarkup?
+                        when action != DkMarkupAction.ask) {
+                      final lines = selectionLines(
+                        await d.getSelectedTextRanges(),
+                      );
+                      await d.clearTextSelection();
+                      onMarkup(action, lines);
                     }
                     params.dismissContextMenu();
                   },
@@ -240,3 +255,23 @@ const _night = ColorFilter.matrix([
 /// grey, the hue turn barely moves it, so a plain inversion is enough.
 Color _invert(Color c) =>
     Color.from(alpha: 1, red: 1 - c.r, green: 1 - c.g, blue: 1 - c.b);
+
+/// The selected text on one page, one box per line (page space).
+typedef SelectionLines = ({int page, List<Box> lines});
+
+/// pdfrx's selection as lines per page: each range's characters grouped
+/// into lines the way the redaction boxes are ([PdfRedactor.lineBoxes]).
+List<SelectionLines> selectionLines(List<PdfPageTextRange> ranges) => [
+  for (final r in ranges)
+    (
+      page: r.pageNumber - 1,
+      lines: PdfRedactor.lineBoxes(
+        [
+          for (final c in r.pageText.charRects)
+            (left: c.left, top: c.top, right: c.right, bottom: c.bottom),
+        ],
+        r.start,
+        r.end,
+      ),
+    ),
+];
