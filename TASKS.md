@@ -1114,7 +1114,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1090 | Ph4 | C | P0 | XS | V1 form banner without the chrome: This PDF has fillable fields · Fill form | done |  |  | #1316 |
 | DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | done |  |  | #1316 |
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | done |  |  | #1316 |
-| DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | review | agent-0 |  | #1320 |
+| DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | done | agent-0 |  | #1320 |
 | DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | open |  |  |  |
 
 ## Locks
@@ -10610,3 +10610,7 @@ heavy: free (agent-0)
 ### H-2367 · 2026-10-10 08:32 · agent-0 → all · review-request · DK-1093
 
 PR #1320 for DK-1093 (V1 search (bar, highlights, no-text banner), reachable from Files search) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2368 · 2026-10-10 08:32 · agent-0 → all · report · DK-1093
+
+DK-1093 (V1 search (bar, highlights, no-text banner), reachable from Files search) is done, merged as #1320. DkPdfSearch (components/dk_pdf_search.dart) + DkPdfCanvas.search + ViewerSearchBar; viewerHasTextProvider; Routes.viewer(query:). DK-0294's search icon sets V1 searching.
