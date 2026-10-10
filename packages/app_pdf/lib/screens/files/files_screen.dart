@@ -79,26 +79,35 @@ class FilesScreen extends ConsumerWidget {
         },
         child: CustomScrollView(
           slivers: [
-            DkLargeTopBar(
-              title: l.shell_tab_files,
-              actions: [
-                DkTopBarAction(
-                  icon: view.grid ? DkIcons.listView : DkIcons.gridView,
-                  tooltip: view.grid ? l.files_list_view : l.files_grid_view,
-                  onPressed: () => prefs.set('files.grid', !view.grid),
+            // Searching, the field moves up in the title's place (the
+            // files-search frame; §16.2 "Search field focused at top").
+            if (query.isNotEmpty)
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  height: MediaQuery.paddingOf(context).top + t.space.xl,
                 ),
-                DkTopBarAction.menu(
-                  icon: DkIcons.sort,
-                  tooltip: l.files_sort,
-                  onMenu: (anchor) => _sortMenu(anchor, l, view, prefs),
-                ),
-                DkTopBarAction(
-                  icon: DkIcons.newFolder,
-                  tooltip: l.files_new_folder,
-                  onPressed: () => newFolder(context, ref),
-                ),
-              ],
-            ),
+              )
+            else
+              DkLargeTopBar(
+                title: l.shell_tab_files,
+                actions: [
+                  DkTopBarAction(
+                    icon: view.grid ? DkIcons.listView : DkIcons.gridView,
+                    tooltip: view.grid ? l.files_list_view : l.files_grid_view,
+                    onPressed: () => prefs.set('files.grid', !view.grid),
+                  ),
+                  DkTopBarAction.menu(
+                    icon: DkIcons.sort,
+                    tooltip: l.files_sort,
+                    onMenu: (anchor) => _sortMenu(anchor, l, view, prefs),
+                  ),
+                  DkTopBarAction(
+                    icon: DkIcons.newFolder,
+                    tooltip: l.files_new_folder,
+                    onPressed: () => newFolder(context, ref),
+                  ),
+                ],
+              ),
             SliverPadding(
               padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, t.space.s),
               sliver: SliverToBoxAdapter(
@@ -797,8 +806,8 @@ class _SearchBarState extends ConsumerState<_SearchBar> {
   }
 }
 
-/// Search results (DK-0269; UI spec §16.1): the no-text banner when some
-/// files have no text layer; "Names" with the match in bold; "Text inside
+/// Search results (DK-0269; UI spec §16.2): the no-text banner when nothing
+/// matches and some files have no text layer; "Names" with the match in bold; "Text inside
 /// files" with the sentence and its page; ILL-07 when nothing matches.
 class _SearchResults extends ConsumerWidget {
   const _SearchResults(this.query);
@@ -831,6 +840,7 @@ class _SearchResults extends ConsumerWidget {
               ),
             ),
           );
+    // The banner comes with no results only (§16.2, files-searchempty).
     if (found.names.isEmpty && found.text.isEmpty) {
       return SliverMainAxisGroup(
         slivers: [
@@ -844,7 +854,6 @@ class _SearchResults extends ConsumerWidget {
     }
     return SliverMainAxisGroup(
       slivers: [
-        ?banner,
         if (found.names.isNotEmpty) ...[
           _Header(l.search_names),
           SliverList.builder(

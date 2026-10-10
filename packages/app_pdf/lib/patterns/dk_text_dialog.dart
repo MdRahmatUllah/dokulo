@@ -19,7 +19,7 @@ Future<String?> showDkTextDialog(
   String? suffix,
   TextSelection? selection,
   Future<String?> Function(String name)? validate,
-}) => Navigator.of(context).push<String>(
+}) => Navigator.of(context, rootNavigator: true).push<String>(
   DkDialogRoute.of(
     context,
     builder: (context) => _TextDialog(
