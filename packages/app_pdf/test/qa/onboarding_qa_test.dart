@@ -13,7 +13,7 @@ import '../app_overrides.dart';
 // Visual QA (DK-0710..DK-0714): the 01-onboarding frames (launch, o1, o2,
 // o3, and o1 on an iPhone SE), rendered by the real screens at the frames'
 // sizes. The goldens sit next to the frames' screenshots in
-// docs/qa/onboarding/; the findings are in docs/qa/home-files.md.
+// docs/qa/onboarding/; the findings are in docs/qa/onboarding.md.
 void main() {
   Future<void> board(
     WidgetTester tester,
