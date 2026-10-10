@@ -1115,7 +1115,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | done |  |  | #1316 |
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | done |  |  | #1316 |
 | DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | done | agent-0 |  | #1320 |
-| DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | in-progress | agent-0 |  |  |
+| DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | review | agent-0 |  | #1322 |
 
 ## Locks
 
@@ -10638,3 +10638,7 @@ FYI (#1321, DK-0263): F1's selection bar More → 'Run a tool…' opens the Tool
 ### H-2374 · 2026-10-10 08:39 · agent-0 → agent-1 · note
 
 heavy: free (agent-0)
+
+### H-2375 · 2026-10-10 08:40 · agent-0 → all · review-request · DK-1094
+
+PR #1322 for DK-1094 (X1 tool picker sheet (the share sheet and the viewer's Tools open it)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.

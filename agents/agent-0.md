@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 08:39
+last-seen: 2026-10-10 08:40
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-1094 X1 tool picker sheet (the share sheet and the viewer's Tools open it) — claimed 2026-10-10 08:32.
+DK-1094 in review as PR #1322: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
