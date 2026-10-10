@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../components/dk_toast.dart';
 import '../../components/dk_box_frame.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_settings_row.dart';
@@ -55,7 +54,7 @@ Future<(Uint8List, Color)?> openSignaturePad(
                 try {
                   final png = await fromPhoto(paths.first);
                   if (pad.mounted) {
-                    Navigator.of(pad).pop((png, const Color(0xFF000000)));
+                    Navigator.of(pad).pop((png, const DkMarkup().black));
                   }
                 } on FormatException {
                   if (pad.mounted) {

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_signature_card.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
@@ -247,7 +246,7 @@ void main() {
     })();
     expect(picked, ['signature.jpg']);
     expect(result?.$1, png);
-    expect(result?.$2, const Color(0xFF000000));
+    expect(result?.$2, const DkMarkup().black);
   });
 
   testWidgets('Image tab: a photo without ink says so and stays open', (
