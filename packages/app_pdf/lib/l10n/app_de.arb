@@ -503,5 +503,12 @@
   "tools_count": "{n, plural, one{1 Werkzeug} other{{n} Werkzeuge}}",
   "ai_not_eligible_title": "KI ist auf diesem Handy nicht verfügbar",
   "ai_not_eligible_body": "Dafür braucht es mindestens {need} GB Arbeitsspeicher. Dieses Handy hat {have} GB.",
-  "common_ok": "OK"
+  "common_ok": "OK",
+  "home_edit": "Bearbeiten",
+  "home_add_tool": "Werkzeug hinzufügen",
+  "home_add_tool_title": "Werkzeug hinzufügen",
+  "home_unpin": "Lösen",
+  "home_about_tool": "Über dieses Werkzeug",
+  "home_unpinned": "{tool} gelöst",
+  "home_unpin_named": "{tool} lösen"
 }

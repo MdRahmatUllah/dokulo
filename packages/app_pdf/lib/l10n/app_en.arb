@@ -1997,5 +1997,43 @@
   "common_ok": "OK",
   "@common_ok": {
     "description": "Closes an information sheet."
+  },
+  "home_edit": "Edit",
+  "@home_edit": {
+    "description": "H1: edits the pinned tools (DK-0248)."
+  },
+  "home_add_tool": "Add tool",
+  "@home_add_tool": {
+    "description": "H1 edit mode: the tile that opens the add sheet."
+  },
+  "home_add_tool_title": "Add a tool",
+  "@home_add_tool_title": {
+    "description": "The add sheet's title (DK-0249)."
+  },
+  "home_unpin": "Unpin",
+  "@home_unpin": {
+    "description": "A pinned tile's long-press menu (DK-0244)."
+  },
+  "home_about_tool": "About this tool",
+  "@home_about_tool": {
+    "description": "A pinned tile's long-press menu."
+  },
+  "home_unpinned": "Unpinned {tool}",
+  "@home_unpinned": {
+    "description": "Toast after Unpin, with Undo.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "home_unpin_named": "Unpin {tool}",
+  "@home_unpin_named": {
+    "description": "Edit mode: the minus badge, for screen readers.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
   }
 }
