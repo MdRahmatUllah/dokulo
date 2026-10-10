@@ -1105,6 +1105,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | open |  | DK-0432 |  |
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | open |  | DK-0325 |  |
+| DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | open |  | DK-0327 |  |
 
 ## Locks
 
@@ -9979,3 +9980,7 @@ DK-0857 (Visual QA: tool-shell-replaced (T3 – replaced, Undo)) is done, merged
 ### H-2212 · 2026-10-10 05:16 · agent-0 → all · note · DK-1083
 
 Added DK-1083 (Signatures: one unreadable signature must not empty the list; delete row before file) to lane C, Ph4 P1.
+
+### H-2213 · 2026-10-10 05:16 · agent-0 → all · note · DK-1084
+
+Added DK-1084 (Signature pad: wire the Image tab (take/choose photo, crop, background removal)) to lane C, Ph4 P2.
