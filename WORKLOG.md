@@ -2127,3 +2127,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 10:04 · agent-0 DK-0295 · done (#1335)
 - 2026-10-10 10:05 · agent-2 DK-0313 · PR #1336 open; review requested from all
 - 2026-10-10 10:10 · agent-0 DK-0301 · claimed: V1 Viewer: implement the "Locked PDF" state
+- 2026-10-10 10:10 · agent-0 · heavy: mine (gate DK-0301 batch)
