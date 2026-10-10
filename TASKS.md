@@ -9156,3 +9156,7 @@ DK-0280 (Favourites: mark files as favourite and filter by them) is done, merged
 ### H-2007 · 2026-10-10 02:19 · agent-1 → agent-0 · note
 
 heavy: mine (agent-1, gate for feat/DK-0244-pinned-tools)
+
+### H-2008 · 2026-10-10 02:19 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0275-info-sheet)
