@@ -172,6 +172,7 @@ class ToolDefinition {
     this.summary,
     this.partLine,
     this.next = const [],
+    this.preview,
   });
 
   final String id;
@@ -212,6 +213,11 @@ class ToolDefinition {
   /// T3's Next chips, 2–4 tool ids (UI spec §21 "Next"): each opens that
   /// tool with this result as its input (DK-0386).
   final List<String> next;
+
+  /// A large tablet's live preview pane (DK-0388): the input with the
+  /// options applied (Compress's before/after, a watermark, page numbers);
+  /// null: the first PDF input as it is.
+  final Widget Function(BuildContext, ToolSubject, ToolValues)? preview;
 
   /// Every option's starting value.
   ToolValues get initialValues => {

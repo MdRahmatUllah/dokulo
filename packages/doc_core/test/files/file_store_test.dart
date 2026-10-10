@@ -145,6 +145,226 @@ void main() {
     },
   );
 
+  group('renameFolder and deleteFolder (DK-0262)', () {
+    Future<int> fileIn(int folder, String relative) async {
+      final f = File('${store.userFolder.path}$sep$relative')
+        ..createSync(recursive: true)
+        ..writeAsStringSync('%PDF');
+      return db
+          .into(db.files)
+          .insert(
+            FilesCompanion.insert(
+              path: f.path,
+              name: relative.split('/').last,
+              size: 4,
+              created: DateTime(2026),
+              modified: DateTime(2026),
+              folderId: Value(folder),
+            ),
+          );
+    }
+
+    test('rename moves the directory and every path under it', () async {
+      final taxes = await store.createFolder(db, 'Taxes');
+      final year = await store.createFolder(db, '2026', parent: taxes);
+      final a = await fileIn(year, 'Taxes${sep}2026${sep}Bescheid.pdf');
+      await store.renameFolder(db, taxes, 'Steuern');
+      expect(
+        Directory('${store.userFolder.path}${sep}Steuern${sep}2026')
+            .existsSync(),
+        isTrue,
+      );
+      expect(
+        Directory('${store.userFolder.path}${sep}Taxes').existsSync(),
+        isFalse,
+      );
+      final row = await (db.select(
+        db.files,
+      )..where((f) => f.id.equals(a))).getSingle();
+      expect(
+        row.path,
+        '${store.userFolder.path}${sep}Steuern${sep}2026${sep}Bescheid.pdf',
+      );
+      expect(File(row.path).existsSync(), isTrue);
+      // Index and disk agree: reconcile changes nothing.
+      await store.reconcile(db);
+      expect(await db.select(db.files).get(), hasLength(1));
+      expect(await db.select(db.folders).get(), hasLength(2));
+    });
+
+    test(
+      'rename: a taken name is refused; only a case change is fine',
+      () async {
+        final taxes = await store.createFolder(db, 'Taxes');
+        await store.createFolder(db, 'Work');
+        expect(
+          () => store.renameFolder(db, taxes, 'work'),
+          throwsA(isA<FolderNameException>()),
+        );
+        await store.renameFolder(db, taxes, 'TAXES');
+        final row = await (db.select(
+          db.folders,
+        )..where((f) => f.id.equals(taxes))).getSingle();
+        expect(row.name, 'TAXES');
+      },
+    );
+
+    test('delete sends the files to the trash, subfolders too', () async {
+      final taxes = await store.createFolder(db, 'Taxes');
+      final year = await store.createFolder(db, '2026', parent: taxes);
+      final a = await fileIn(taxes, 'Taxes${sep}a.pdf');
+      final b = await fileIn(year, 'Taxes${sep}2026${sep}b.pdf');
+      expect(await store.deleteFolder(db, taxes), 2);
+      expect(await db.select(db.folders).get(), isEmpty);
+      final trashed = {
+        for (final t in await db.select(db.trash).get()) t.fileId,
+      };
+      expect(trashed, {a, b});
+      // Still on disk until the trash lets them go.
+      expect(
+        File('${store.userFolder.path}${sep}Taxes${sep}a.pdf').existsSync(),
+        isTrue,
+      );
+    });
+
+    test('an empty folder goes at once, its directory too', () async {
+      final empty = await store.createFolder(db, 'Empty');
+      expect(await store.deleteFolder(db, empty), 0);
+      expect(
+        Directory('${store.userFolder.path}${sep}Empty').existsSync(),
+        isFalse,
+      );
+    });
+  });
+
+  group('file actions (DK-0271, DK-0272, DK-0274, DK-0276)', () {
+    Future<int> addFile(String relative, {int? folder}) async {
+      final f = File('${store.userFolder.path}$sep$relative')
+        ..createSync(recursive: true)
+        ..writeAsStringSync('%PDF $relative');
+      return db
+          .into(db.files)
+          .insert(
+            FilesCompanion.insert(
+              path: f.path,
+              name: relative.split(sep).last,
+              size: 9,
+              created: DateTime(2026),
+              modified: DateTime(2026),
+              folderId: Value(folder),
+            ),
+          );
+    }
+
+    Future<FileEntry> row(int id) =>
+        (db.select(db.files)..where((f) => f.id.equals(id))).getSingle();
+
+    test('rename keeps the extension and drops bad characters', () async {
+      final id = await addFile('Vertrag.pdf');
+      await store.renameFile(db, id, ' Miet:vertrag 2026? ');
+      final r = await row(id);
+      expect(r.name, 'Mietvertrag 2026.pdf');
+      expect(File(r.path).existsSync(), isTrue);
+      expect(
+        File('${store.userFolder.path}${sep}Vertrag.pdf').existsSync(),
+        isFalse,
+      );
+    });
+
+    test('rename to a taken name is refused; a case change is fine', () async {
+      final a = await addFile('a.pdf');
+      await addFile('b.pdf');
+      expect(
+        () => store.renameFile(db, a, 'b'),
+        throwsA(isA<FileNameException>()),
+      );
+      await store.renameFile(db, a, 'A');
+      expect((await row(a)).name, 'A.pdf');
+      expect(
+        () => store.renameFile(db, a, '  '),
+        throwsA(isA<FileNameException>()),
+      );
+    });
+
+    test(
+      'duplicate numbers without collisions; Undo removes the copy',
+      () async {
+        final id = await addFile('Vertrag.pdf');
+        final copy1 = await store.duplicateFile(db, id);
+        final copy2 = await store.duplicateFile(db, id);
+        expect((await row(copy1)).name, 'Vertrag (2).pdf');
+        expect((await row(copy2)).name, 'Vertrag (3).pdf');
+        await store.deleteCopy(db, copy2);
+        expect(
+          File('${store.userFolder.path}${sep}Vertrag (3).pdf').existsSync(),
+          isFalse,
+        );
+        expect(await db.select(db.files).get(), hasLength(2));
+      },
+    );
+
+    test('move into a folder and back (Undo)', () async {
+      final taxes = await store.createFolder(db, 'Taxes');
+      final id = await addFile('Bescheid.pdf');
+      final was = await store.moveFile(db, id, taxes);
+      expect(was, isNull);
+      final moved = await row(id);
+      expect(moved.folderId, taxes);
+      expect(
+        moved.path,
+        '${store.userFolder.path}${sep}Taxes${sep}Bescheid.pdf',
+      );
+      expect(File(moved.path).existsSync(), isTrue);
+      await store.moveFile(db, id, was);
+      expect(
+        (await row(id)).path,
+        '${store.userFolder.path}${sep}Bescheid.pdf',
+      );
+      await store.reconcile(db);
+      expect(await db.select(db.files).get(), hasLength(1));
+    });
+
+    test('move onto a taken name takes the next free one', () async {
+      final taxes = await store.createFolder(db, 'Taxes');
+      await addFile('Taxes${sep}x.pdf', folder: taxes);
+      final id = await addFile('x.pdf');
+      await store.moveFile(db, id, taxes);
+      expect((await row(id)).name, 'x (2).pdf');
+    });
+
+    test('trash and restore', () async {
+      final id = await addFile('t.pdf');
+      await store.trashFile(db, id);
+      expect(await db.select(db.trash).get(), hasLength(1));
+      await store.restoreFromTrash(db, id);
+      expect(await db.select(db.trash).get(), isEmpty);
+    });
+
+    test('restore: a file whose folder went comes back to the root', () async {
+      final taxes = await store.createFolder(db, 'Taxes');
+      final id = await addFile('Taxes${sep}x.pdf', folder: taxes);
+      await store.deleteFolder(db, taxes);
+      await store.restoreFromTrash(db, id);
+      final r = await row(id);
+      expect(r.folderId, isNull);
+      expect(r.path, '${store.userFolder.path}${sep}x.pdf');
+      expect(File(r.path).existsSync(), isTrue);
+      expect(await db.select(db.trash).get(), isEmpty);
+    });
+
+    test('deleteForever removes the file, its row and its trash row', () async {
+      final id = await addFile('gone.pdf');
+      await store.trashFile(db, id);
+      await store.deleteForever(db, id);
+      expect(
+        File('${store.userFolder.path}${sep}gone.pdf').existsSync(),
+        isFalse,
+      );
+      expect(await db.select(db.files).get(), isEmpty);
+      expect(await db.select(db.trash).get(), isEmpty);
+    });
+  });
+
   group('createFolder (DK-0273)', () {
     test('makes the directory and its row, nested too', () async {
       final taxes = await store.createFolder(db, 'Taxes');

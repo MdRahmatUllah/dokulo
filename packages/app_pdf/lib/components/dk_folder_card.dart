@@ -92,7 +92,12 @@ class DkFolderCard extends StatelessWidget {
                   AspectRatio(
                     aspectRatio: 3 / 4,
                     child: Center(
-                      child: Icon(DkIcons.folder, size: 64, color: ink),
+                      child: Icon(
+                        DkIcons.folder,
+                        size: 64,
+                        fill: 1,
+                        color: ink,
+                      ),
                     ),
                   ),
                   title,
@@ -107,7 +112,7 @@ class DkFolderCard extends StatelessWidget {
             child: Row(
               spacing: t.space.m,
               children: [
-                Icon(DkIcons.folder, size: 40, color: ink),
+                Icon(DkIcons.folder, size: 40, fill: 1, color: ink),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

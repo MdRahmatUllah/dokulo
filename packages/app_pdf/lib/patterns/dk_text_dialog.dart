@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../components/dk_confirm_dialog.dart';
 import '../components/dk_text_field.dart';
 import '../components/motion/dk_transition_motion.dart';
+import '../theme/dk_tokens.dart';
 
 /// Asks for a name (UI spec §16.4: New folder, Rename): DkConfirmDialog with
 /// a focused DkTextField, the action disabled while it's empty. [validate]
@@ -15,6 +16,7 @@ Future<String?> showDkTextDialog(
   required String action,
   String? hint,
   String initial = '',
+  String? suffix,
   TextSelection? selection,
   Future<String?> Function(String name)? validate,
 }) => Navigator.of(context).push<String>(
@@ -25,6 +27,7 @@ Future<String?> showDkTextDialog(
       action: action,
       hint: hint,
       initial: initial,
+      suffix: suffix,
       selection: selection,
       validate: validate,
     ),
@@ -37,12 +40,16 @@ class _TextDialog extends StatefulWidget {
     required this.action,
     required this.hint,
     required this.initial,
+    required this.suffix,
     required this.selection,
     required this.validate,
   });
 
   final String title, action, initial;
   final String? hint;
+
+  /// Shown after the field and kept out of the name (a file's ".pdf").
+  final String? suffix;
   final TextSelection? selection;
   final Future<String?> Function(String name)? validate;
 
@@ -87,6 +94,17 @@ class _TextDialogState extends State<_TextDialog> {
       textInputAction: TextInputAction.done,
       onChanged: (_) => setState(() => _error = null),
       onSubmitted: (_) => _submit(),
+      trailing: widget.suffix == null
+          ? null
+          : Padding(
+              padding: EdgeInsetsDirectional.only(end: context.tokens.space.m),
+              child: Text(
+                widget.suffix!,
+                style: context.tokens.text.bodyL.copyWith(
+                  color: context.tokens.color.textSecondary,
+                ),
+              ),
+            ),
     ),
   );
 }

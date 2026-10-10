@@ -79,6 +79,16 @@ void main() {
     expect((await PdfEngine.inspect(fixture('damaged-xref.pdf'))).pageCount, 1);
   });
 
+  test('pageTexts: every page in one open, the same text as pageText '
+      '(DK-1064)', () async {
+    final path = fixture('scanned-letters-bundle.pdf');
+    final all = await PdfEngine.pageTexts(path);
+    expect(all, hasLength((await PdfEngine.inspect(path)).pageCount));
+    for (final (p, text) in all.indexed) {
+      expect(text, (await PdfEngine.pageText(path, p)).text);
+    }
+  });
+
   test('text comes with one box per character, on the page', () async {
     final text = await PdfEngine.pageText(
       fixture('Invoice INV-2026-014.pdf'),

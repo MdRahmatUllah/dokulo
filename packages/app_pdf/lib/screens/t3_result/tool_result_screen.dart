@@ -7,18 +7,25 @@ import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_bar.dart';
 import '../../components/dk_button.dart';
+import '../../components/dk_action_sheet.dart';
 import '../../components/dk_file_card.dart';
+import '../../components/dk_icon.dart';
+import '../../components/dk_menu.dart';
 import '../../components/dk_next_chip.dart';
+import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_page_thumb.dart';
 import '../../components/dk_result_card.dart';
+import '../../components/dk_tappable.dart';
 import '../../components/dk_text_field.dart';
 import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../patterns/dk_confirmations.dart';
+import '../../patterns/dk_file_actions.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/files_providers.dart';
 import '../../routes/link_error.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
@@ -26,6 +33,7 @@ import '../../theme/haptics.dart';
 import '../../tools/tool_catalogue.dart';
 import '../../tools/tool_definition.dart';
 import '../../tools/tool_inputs.dart';
+import '../t2_tool/tool_layout.dart';
 import '../t2_tool/tool_options_providers.dart';
 
 /// T3, a tool's result (UI spec §20.4; DK-0379): the result card with the
@@ -73,8 +81,46 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
       widget.definition ?? ToolDefinitions.of(widget.toolId);
 
   /// Where Save puts it: next to the (first) input, or the user folder.
-  String? _subfolder(FileStore store) =>
-      store.subfolderOf(_result!.inputs.firstOrNull?.path ?? '');
+  String? _subfolder(FileStore store) => _chosen != null
+      ? _chosen!.subfolder
+      : store.subfolderOf(_result!.inputs.firstOrNull?.path ?? '');
+
+  /// The folder picked with Save to… (DK-0385); null: next to the input.
+  ({String? subfolder})? _chosen;
+
+  /// Picks where Save puts the result (the Move sheet's browser), and with
+  /// [save] saves there. "Outside Dokulo" hands a single file to the
+  /// system's save dialog instead.
+  Future<void> _saveTo({bool save = false}) async {
+    final result = _result!;
+    final l = AppLocalizations.of(context);
+    final pick = await pickFolder(
+      context,
+      title: l.common_save_to,
+      action: save ? l.t3_save_here : l.t3_use_folder,
+      elsewhere: save && result.files.length == 1 ? l.t3_save_elsewhere : null,
+    );
+    if (pick == null || !mounted) return;
+    if (pick.elsewhere) {
+      final output = result.files.single;
+      final saved = await ref.read(saveElsewhereProvider)(
+        output,
+        _fileName(output),
+      );
+      if (saved && mounted) showDkToast(context, l.toast_saved);
+      return;
+    }
+    final store = await ref.read(fileStoreProvider.future);
+    final dir = await store.folderDirectory(
+      ref.read(appDatabaseProvider),
+      pick.folder,
+    );
+    final subfolder = dir.path.length > store.userFolder.path.length
+        ? dir.path.substring(store.userFolder.path.length + 1)
+        : null;
+    setState(() => _chosen = (subfolder: subfolder));
+    if (save) await _save();
+  }
 
   Future<void> _save({bool open = false}) async {
     final result = _result!;
@@ -112,6 +158,44 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
           onAction: () => context.push(Routes.viewer('${first.id}')),
         );
       }
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
+  }
+
+  /// "Replace original" (§20.4): one indexed input and one output of its
+  /// type. A copy of the original stays in Versions.
+  bool get _canReplace {
+    final result = _result!;
+    if (result.inputs.length != 1 || result.files.length != 1) return false;
+    final input = result.inputs.single;
+    String ext(String path) => path.split('.').last.toLowerCase();
+    return input.id >= 0 && ext(input.path) == ext(result.files.single);
+  }
+
+  /// Asks, writes the output over the original (kept as a version), and
+  /// offers Undo for 10 s.
+  Future<void> _replace() async {
+    final result = _result!;
+    final l = AppLocalizations.of(context);
+    if (!await confirmDk(context, DkConfirmation.replaceOriginal)) return;
+    if (!mounted) return;
+    setState(() => _saving = true);
+    try {
+      final input = result.inputs.single;
+      final versions = await ref.read(versionStoreProvider.future);
+      final kept = await versions.replace(input.id, result.files.single);
+      _savedFiles = [input];
+      await ref.read(hapticsProvider).saved();
+      if (!mounted) return;
+      setState(() => _savedId = input.id);
+      showDkToast(
+        context,
+        l.toast_replaced,
+        action: l.common_undo,
+        onAction: () => versions.restore(kept),
+        duration: DkToastDuration.replaceUndo,
+      );
     } finally {
       if (mounted) setState(() => _saving = false);
     }
@@ -239,6 +323,47 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
               : formatBytes(size, locale),
           sub: _from(l, result),
         );
+    final actions = DkActionBar(
+      label: _savedId == null ? l.t3_save : l.common_done,
+      loading: _saving,
+      onPressed: _saving ? null : (_savedId == null ? _save : _close),
+      // The split: Save as copy · Replace original, until it's saved.
+      // The split: Save as copy · Replace original · Save to…, until saved.
+      onMenu: _savedId == null
+          ? (anchor) => showDkMenu(
+              anchor,
+              groups: [
+                [
+                  DkAction(
+                    icon: DkIcons.copy,
+                    label: l.common_save_copy,
+                    onTap: _save,
+                  ),
+                  if (_canReplace)
+                    DkAction(
+                      icon: DkIcons.replace,
+                      label: l.common_replace_original,
+                      onTap: _replace,
+                    ),
+                  DkAction(
+                    icon: DkIcons.move,
+                    label: l.common_save_to,
+                    onTap: () => _saveTo(save: true),
+                  ),
+                ],
+              ],
+            )
+          : null,
+      menuLabel: _savedId == null ? l.t3_save_menu : null,
+      secondaryLabel: l.common_open,
+      onSecondary: _saving
+          ? null
+          : () => _savedId == null
+                ? _save(open: true)
+                : context.push(Routes.viewer('$_savedId')),
+    );
+    // A large tablet's preview pane (DK-0388): the result.
+    final Widget? preview = isPdf ? DkPdfCanvas(path: output.path) : null;
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -254,120 +379,141 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
             onLeading: _close,
           ),
         ),
-        body: ListView(
-          padding: EdgeInsets.all(t.space.l),
-          children: [
-            DkResultCard(
-              headline: summary.headline,
-              delta: summary.delta,
-              sub: summary.sub,
-              partial: summary.partial,
-              action: summary.action == null
-                  ? null
-                  : DkButton(
-                      label: summary.action!,
-                      variant: DkButtonVariant.secondary,
-                      size: DkButtonSize.compact,
-                      onPressed: () => summary.onAction!(context),
-                    ),
-              // Decoration: the headline and the name say what it is.
-              preview: isPdf && !many
-                  ? ExcludeSemantics(
-                      child: Row(
-                        spacing: t.space.s,
-                        children: [
-                          for (var page = 1; page <= 4; page++)
-                            SizedBox(
-                              width: 48,
-                              child: _PreviewPage(
-                                path: output.path,
-                                page: page,
-                              ),
-                            ),
-                        ],
+        body: ToolLayout(
+          content: ListView(
+            padding: EdgeInsets.all(t.space.l),
+            children: [
+              DkResultCard(
+                headline: summary.headline,
+                delta: summary.delta,
+                sub: summary.sub,
+                partial: summary.partial,
+                action: summary.action == null
+                    ? null
+                    : DkButton(
+                        label: summary.action!,
+                        variant: DkButtonVariant.secondary,
+                        size: DkButtonSize.compact,
+                        onPressed: () => summary.onAction!(context),
                       ),
-                    )
-                  : null,
-            ),
-            if (many) ...[
-              Padding(
-                padding: EdgeInsets.only(top: t.space.xl, bottom: t.space.s),
-                child: Semantics(
-                  container: true,
-                  header: true,
-                  child: Text(
-                    l.t3_files(result.files.length),
-                    style: t.text.titleS.copyWith(color: t.color.textPrimary),
-                  ),
-                ),
+                // Decoration: the headline and the name say what it is.
+                preview: isPdf && !many
+                    ? ExcludeSemantics(
+                        child: Row(
+                          spacing: t.space.s,
+                          children: [
+                            for (var page = 1; page <= 4; page++)
+                              SizedBox(
+                                width: 48,
+                                child: _PreviewPage(
+                                  path: output.path,
+                                  page: page,
+                                ),
+                              ),
+                          ],
+                        ),
+                      )
+                    : null,
               ),
-              // The parts (DK-0384): edge to edge, as file rows are.
-              for (final (i, f) in result.files.indexed)
-                Transform.translate(
-                  offset: Offset(-t.space.l, 0),
-                  child: SizedBox(
-                    width: MediaQuery.sizeOf(context).width,
-                    child: DkFileCard(
-                      name: File(f).uri.pathSegments.last,
-                      meta:
-                          _def.partLine?.call(l, result, i) ??
-                          formatBytes(
-                            File(f).existsSync() ? File(f).lengthSync() : 0,
-                            locale,
-                          ),
-                      onTap: () {},
+              if (many) ...[
+                Padding(
+                  padding: EdgeInsets.only(top: t.space.xl, bottom: t.space.s),
+                  child: Semantics(
+                    container: true,
+                    header: true,
+                    child: Text(
+                      l.t3_files(result.files.length),
+                      style: t.text.titleS.copyWith(color: t.color.textPrimary),
                     ),
                   ),
                 ),
-            ],
-            if (!many) ...[
-              SizedBox(height: t.space.xl),
-              DkTextField(
-                label: l.t3_file_name,
-                controller: _name,
-                enabled: _savedId == null,
-              ),
-            ],
-            SizedBox(height: t.space.s),
-            if (store != null)
-              Text(
-                l.t3_save_to(_place(l, store)),
-                style: t.text.bodyM.copyWith(color: t.color.textSecondary),
-              ),
-            // What next (UI spec §20.4): the tools that take this result.
-            if (nextTools.isNotEmpty) ...[
-              Padding(
-                padding: EdgeInsets.only(top: t.space.l, bottom: t.space.s),
-                child: Semantics(
-                  container: true,
-                  header: true,
-                  child: Text(
-                    l.common_next,
-                    style: t.text.titleS.copyWith(color: t.color.textPrimary),
+                // The parts (DK-0384): edge to edge, as file rows are.
+                for (final (i, f) in result.files.indexed)
+                  Transform.translate(
+                    offset: Offset(-t.space.l, 0),
+                    child: SizedBox(
+                      width: MediaQuery.sizeOf(context).width,
+                      child: DkFileCard(
+                        name: File(f).uri.pathSegments.last,
+                        meta:
+                            _def.partLine?.call(l, result, i) ??
+                            formatBytes(
+                              File(f).existsSync() ? File(f).lengthSync() : 0,
+                              locale,
+                            ),
+                        onTap: () {},
+                      ),
+                    ),
+                  ),
+              ],
+              if (!many) ...[
+                SizedBox(height: t.space.xl),
+                DkTextField(
+                  label: l.t3_file_name,
+                  controller: _name,
+                  enabled: _savedId == null,
+                ),
+              ],
+              SizedBox(height: t.space.s),
+              // "Save to: Files › Taxes" with a chevron: pick another folder.
+              if (store != null)
+                DkTappable(
+                  onTap: _savedId == null ? _saveTo : null,
+                  radius: t.radius.s,
+                  builder: (context, pressed) => Padding(
+                    padding: EdgeInsets.symmetric(vertical: t.space.s),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            l.t3_save_to(_place(l, store)),
+                            style: t.text.bodyM.copyWith(
+                              color: t.color.textSecondary,
+                            ),
+                          ),
+                        ),
+                        if (_savedId == null)
+                          DkIcon(
+                            DkIcons.chevronRight,
+                            size: DkIconSize.m,
+                            color: t.color.iconSecondary,
+                          ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Wrap(
-                spacing: t.space.s,
-                runSpacing: t.space.s,
-                children: [
-                  for (final id in nextTools)
-                    DkNextChip(toolId: id, onTap: () => _chainTo(id)),
-                ],
-              ),
+              // What next (UI spec §20.4): the tools that take this result.
+              if (nextTools.isNotEmpty) ...[
+                Padding(
+                  padding: EdgeInsets.only(top: t.space.l, bottom: t.space.s),
+                  child: Semantics(
+                    container: true,
+                    header: true,
+                    child: Text(
+                      l.common_next,
+                      style: t.text.titleS.copyWith(color: t.color.textPrimary),
+                    ),
+                  ),
+                ),
+                Wrap(
+                  spacing: t.space.s,
+                  runSpacing: t.space.s,
+                  children: [
+                    for (final id in nextTools)
+                      DkNextChip(toolId: id, onTap: () => _chainTo(id)),
+                  ],
+                ),
+              ],
             ],
-          ],
+          ),
+          actions: actions,
+          preview: preview,
+          previewTitle: l.t3_result_preview,
         ),
-        bottomNavigationBar: DkActionBar(
-          label: _savedId == null ? l.t3_save : l.common_done,
-          loading: _saving,
-          onPressed: _saving ? null : (_savedId == null ? _save : _close),
-          secondaryLabel: l.common_open,
-          onSecondary: _saving
-              ? null
-              : () => _savedId == null
-                    ? _save(open: true)
-                    : context.push(Routes.viewer('$_savedId')),
+        bottomNavigationBar: ToolLayout.bottom(
+          context,
+          actions,
+          preview: preview != null,
         ),
       ),
     );

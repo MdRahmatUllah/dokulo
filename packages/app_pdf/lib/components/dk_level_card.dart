@@ -10,11 +10,11 @@ typedef DkLevelOption = ({String title, String estimate, String description});
 
 /// The level cards (DK-0092; UI spec §11.2): a row of equal cards, stacked
 /// below 360 dp width or at 160 % text and above. Each: 12 padding,
-/// `radius.m`, a 1 dp `color.outline`; the title in `type.titleS`, the
-/// estimate in `type.titleM` with tabular figures ("≈ 1.9 MB"), the
-/// description in `type.caption`. The selected card has a 2 dp
+/// `radius.m`, a 1 dp `color.outline`; the title in `type.labelM` (one
+/// line), the estimate in `type.titleM` with tabular figures ("≈ 1.9 MB"),
+/// the description in `type.caption`. The selected card has a 2 dp
 /// `color.primary` border, a 20 dp check circle top-right and
-/// `primaryContainer` at 50 %. Titles wrap and never run under the check.
+/// `primaryContainer` at 50 %. The check sits on the corner, off the title.
 class DkLevelCards<T> extends StatelessWidget {
   const DkLevelCards({
     super.key,
@@ -83,35 +83,39 @@ class _LevelCard extends StatelessWidget {
       label: [level.title, level.estimate, level.description].join('\n'),
       excludeSemantics: true,
       onTap: onTap,
-      child: DkTappable(
-        onTap: onTap,
-        radius: t.radius.m,
-        builder: (context, pressed) => Container(
-          padding: EdgeInsets.all(selected ? t.space.m - 1 : t.space.m),
-          decoration: BoxDecoration(
-            color: selected
-                ? c.primaryContainer.withValues(alpha: 0.5)
-                : (pressed ? t.state.pressed : null),
-            borderRadius: BorderRadius.circular(t.radius.m),
-            border: Border.all(
-              color: selected ? c.primary : c.outline,
-              width: selected ? 2 : 1,
-            ),
-          ),
-          child: Stack(
-            children: [
-              Column(
+      // The check sits on the card's top-right corner, ringed in the
+      // surface colour (the export's `.lv .ck`): the title keeps the width.
+      child: Stack(
+        clipBehavior: Clip.none,
+        fit: StackFit.passthrough,
+        children: [
+          DkTappable(
+            onTap: onTap,
+            radius: t.radius.m,
+            builder: (context, pressed) => Container(
+              padding: EdgeInsets.all(selected ? t.space.m - 1 : t.space.m),
+              decoration: BoxDecoration(
+                color: selected
+                    ? c.primaryContainer.withValues(alpha: 0.5)
+                    : (pressed ? t.state.pressed : null),
+                borderRadius: BorderRadius.circular(t.radius.m),
+                border: Border.all(
+                  color: selected ? c.primary : c.outline,
+                  width: selected ? 2 : 1,
+                ),
+              ),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 spacing: t.space.xxs,
                 children: [
-                  // Room for the check circle: the title wraps before it.
-                  Padding(
-                    padding: const EdgeInsets.only(right: 24),
-                    child: Text(
-                      level.title,
-                      style: t.text.titleS.copyWith(color: c.textPrimary),
-                    ),
+                  // labelM on one line, as every frame draws it: titleS
+                  // can't fit "Recommended" in a third of a phone.
+                  Text(
+                    level.title,
+                    style: t.text.labelM.copyWith(color: c.textPrimary),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   DkNumberText(
                     level.estimate,
@@ -123,27 +127,28 @@ class _LevelCard extends StatelessWidget {
                   ),
                 ],
               ),
-              if (selected)
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Container(
-                    width: 20,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      color: c.primary,
-                      shape: BoxShape.circle,
-                    ),
-                    child: DkIcon(
-                      DkIcons.check,
-                      size: DkIconSize.s,
-                      color: c.onPrimary,
-                    ),
-                  ),
-                ),
-            ],
+            ),
           ),
-        ),
+          if (selected)
+            Positioned(
+              top: -9,
+              right: -9,
+              child: Container(
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(
+                  color: c.primary,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: c.surface, width: 2),
+                ),
+                child: DkIcon(
+                  DkIcons.check,
+                  size: DkIconSize.s,
+                  color: c.onPrimary,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }

@@ -6,7 +6,6 @@ import '../../components/dk_button.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_privacy_line.dart';
 import '../../components/dk_refresh.dart';
-import '../../components/dk_tool_tile.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_empty_states.dart';
@@ -17,6 +16,7 @@ import '../../providers/files_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../files/files_screen.dart';
+import 'pinned_tools.dart';
 
 /// H1 · Home (DK-0242; UI spec §15.1): the large top bar "Dokulo" with
 /// search and settings; the privacy line; "Your tools", the pinned tools
@@ -29,7 +29,6 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
-    final pinned = ref.watch(pinnedToolsProvider).value ?? defaultPinnedTools;
     final recent = ref.watch(recentFilesProvider);
 
     return Scaffold(
@@ -63,23 +62,7 @@ class HomeScreen extends ConsumerWidget {
                 child: DkPrivacyLine(where: DkPrivacyContext.home),
               ),
             ),
-            _Header(l.home_your_tools),
-            SliverPadding(
-              padding: EdgeInsets.symmetric(horizontal: t.space.l),
-              sliver: SliverGrid.count(
-                crossAxisCount: 4,
-                mainAxisSpacing: t.space.m,
-                crossAxisSpacing: t.space.m,
-                childAspectRatio: 0.78,
-                children: [
-                  for (final id in pinned.take(8))
-                    DkToolTile(
-                      toolId: id,
-                      onTap: () => context.push(Routes.tool(id)),
-                    ),
-                ],
-              ),
-            ),
+            const PinnedToolsSection(),
             SliverPadding(
               padding: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
               sliver: SliverToBoxAdapter(
@@ -111,7 +94,8 @@ class HomeScreen extends ConsumerWidget {
                   ),
                   SliverList.builder(
                     itemCount: value.length,
-                    itemBuilder: (_, i) => FileEntryCard(value[i]),
+                    itemBuilder: (_, i) =>
+                        FileEntryCard(value[i], longPressActions: true),
                   ),
                 ],
               ),

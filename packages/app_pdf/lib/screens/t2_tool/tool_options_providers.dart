@@ -104,6 +104,23 @@ DevicePicker devicePicker(Ref ref) => (input, {required photos}) async {
   return input.many ? paths : paths.take(1).toList();
 };
 
+/// Saves a copy of [path] as [name] where the user picks, outside Dokulo:
+/// the system's save dialog (T3's Save to…, DK-0385). False when cancelled.
+/// Tests override it.
+typedef SaveElsewhere = Future<bool> Function(String path, String name);
+
+@Riverpod(keepAlive: true)
+SaveElsewhere saveElsewhere(Ref ref) =>
+    (path, name) async =>
+        await FilePicker.saveFile(
+          fileName: name,
+          bytes: await File(path).readAsBytes(),
+          mimeType: name.toLowerCase().endsWith('.pdf')
+              ? 'application/pdf'
+              : 'application/octet-stream',
+        ) !=
+        null;
+
 /// The 5 most recent files [toolId] can take, for T2's picker card
 /// (DK-0371).
 @riverpod
@@ -113,8 +130,17 @@ Future<List<FileEntry>> recentCompatibleFiles(Ref ref, String toolId) async {
   final db = ref.watch(appDatabaseProvider);
   // ponytail: sorts the whole index in Dart; a recentFiles query in
   // schema.drift when people keep thousands of files.
+  // Favourites first (DK-0280), then the newest.
+  final favourites = {
+    for (final f in await db.select(db.favourites).get()) f.fileId,
+  };
   final all = await db.select(db.files).get()
-    ..sort((a, b) => b.modified.compareTo(a.modified));
+    ..sort((a, b) {
+      final fav =
+          (favourites.contains(b.id) ? 1 : 0) -
+          (favourites.contains(a.id) ? 1 : 0);
+      return fav != 0 ? fav : b.modified.compareTo(a.modified);
+    });
   return all.where((f) => input.takes(f.name)).take(5).toList();
 }
 

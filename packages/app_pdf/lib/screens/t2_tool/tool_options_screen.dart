@@ -15,6 +15,7 @@ import '../../components/dk_icon.dart';
 import '../../components/dk_icon_button.dart';
 import '../../components/dk_menu.dart';
 import '../../components/dk_option_row.dart';
+import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_privacy_line.dart';
 import '../../components/dk_progress_sheet.dart';
 import '../../components/dk_segmented.dart';
@@ -27,17 +28,18 @@ import '../../components/dk_top_bar.dart';
 import '../../errors/dokulo_error.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
+import '../../patterns/dk_about_tool.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../providers/file_providers.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
-import '../../theme/dk_layout.dart';
 import '../../tools/tool_catalogue.dart';
 import '../../tools/tool_definition.dart';
 import '../../tools/tool_inputs.dart';
 import '../v1_viewer/viewer_providers.dart';
 import 'tool_options_providers.dart';
+import 'tool_layout.dart';
 import 'tool_run.dart';
 
 /// T2, the tool options screen (UI spec §20.1; DK-0370): one shell for every
@@ -284,8 +286,11 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                 error: error == null || error.actions.isEmpty
                     ? null
                     : DkProgressError(
-                        title: error.title(l),
+                        title: error.headline(l),
                         body: l.t2_failed_body,
+                        code: error.situation == DkErrorSituation.unexpected
+                            ? l.error_code_line(error.situation.code)
+                            : null,
                         action: error.actions.first.label(l),
                         onAction: () =>
                             _recover(error.actions.first, subject, values),
@@ -389,6 +394,34 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     void set(String key, Object? value) =>
         ref.read(toolOptionValuesProvider(_def.id).notifier).set(key, value);
 
+    final actions = DkBottomChrome(
+      child: DkActionBar(
+        label: _phase == X2Phase.quiet
+            ? (files.isEmpty ? null : _def.action?.call(l, subject)) ??
+                  tool.name(l)
+            : _def.busyLabel?.call(l) ?? l.t2_busy,
+        caption: caption,
+        // Under 2 s only the press shows; then "Compressing…" (§20.2).
+        loading: _phase != X2Phase.quiet,
+        onPressed: canRun
+            ? () {
+                if (_handle == null) _run(subject, values);
+              }
+            : null,
+      ),
+    );
+    // A large tablet's preview pane (DK-0388): the tool's own, or the
+    // first PDF input as it is (once it is open).
+    final first = files.firstOrNull;
+    final Widget? preview = !ready || first == null || locked.contains(first)
+        ? null
+        : _def.preview?.call(context, subject, values) ??
+              (ToolInput.kindOf(first.name) == DkFileKind.pdf
+                  ? DkPdfCanvas(
+                      path: first.path,
+                      password: subject.passwordOf(first),
+                    )
+                  : null);
     return Scaffold(
       backgroundColor: t.color.background,
       appBar: PreferredSize(
@@ -402,6 +435,11 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
             groups: [
               [
                 DkAction(
+                  icon: DkIcons.info,
+                  label: l.t2_about_tool,
+                  onTap: () => showAboutTool(context, tool),
+                ),
+                DkAction(
                   icon: DkIcons.undo,
                   label: l.t2_reset_options,
                   onTap: ref
@@ -414,144 +452,140 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
         ),
       ),
       // File cards bring their own 16 inset; the rest gets it here.
-      body: ListView(
-        padding: EdgeInsets.only(top: t.space.xs),
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: t.space.l),
-            child: const Align(
-              alignment: Alignment.centerLeft,
-              child: DkPrivacyLine(),
-            ),
-          ),
-          if (choosing)
-            _PickerCard(
-              toolId: _def.id,
-              input: input,
-              selected: files,
-              onToggle: (f) => files.any((x) => x.path == f.path)
-                  ? _setInput([
-                      for (final x in files)
-                        if (x.path != f.path) x,
-                    ])
-                  : _add(files, [f], input),
-              onBrowse: () => _browse(files, input, photos: false),
-              onPhotos: input.images
-                  ? () => _browse(files, input, photos: true)
-                  : null,
-            )
-          else ...[
+      body: ToolLayout(
+        content: ListView(
+          padding: EdgeInsets.only(top: t.space.xs),
+          children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: t.space.l),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: _Header(
-                      files.length == 1
-                          ? l.t2_section_file
-                          : l.t2_section_files(files.length),
-                    ),
-                  ),
-                  if (input.many && ready)
-                    Padding(
-                      padding: EdgeInsets.only(top: t.space.l),
-                      child: DkButton(
-                        label: l.common_add_files,
-                        icon: DkIcons.add,
-                        variant: DkButtonVariant.tertiary,
-                        size: DkButtonSize.compact,
-                        onPressed: () => _browse(files, input, photos: false),
-                      ),
-                    ),
-                ],
+              child: const Align(
+                alignment: Alignment.centerLeft,
+                child: DkPrivacyLine(),
               ),
             ),
-            if (!ready)
-              DkSkeleton.fileRows(count: widget.fileIds.length.clamp(1, 4))
-            else if (files.length == 1)
-              _InputFile(
-                file: files.single,
-                locked: locked.contains(files.single),
-                onUnlock: (pw) =>
-                    setState(() => _passwords[files.single.path] = pw),
-              )
-            else
-              ReorderableListView(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                buildDefaultDragHandles: false,
-                onReorderItem: (from, to) {
-                  final order = [...files];
-                  order.insert(to, order.removeAt(from));
-                  _setInput(order);
-                },
-                children: [
-                  for (final (i, f) in files.indexed)
-                    _InputFile(
-                      key: ValueKey(f.path),
-                      file: f,
-                      index: i,
-                      locked: locked.contains(f),
-                      onUnlock: (pw) => setState(() => _passwords[f.path] = pw),
-                      onRemove: () => _setInput([
+            if (choosing)
+              _PickerCard(
+                toolId: _def.id,
+                input: input,
+                selected: files,
+                onToggle: (f) => files.any((x) => x.path == f.path)
+                    ? _setInput([
                         for (final x in files)
                           if (x.path != f.path) x,
-                      ]),
+                      ])
+                    : _add(files, [f], input),
+                onBrowse: () => _browse(files, input, photos: false),
+                onPhotos: input.images
+                    ? () => _browse(files, input, photos: true)
+                    : null,
+              )
+            else ...[
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: t.space.l),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: _Header(
+                        files.length == 1
+                            ? l.t2_section_file
+                            : l.t2_section_files(files.length),
+                      ),
                     ),
-                ],
+                    if (input.many && ready)
+                      Padding(
+                        padding: EdgeInsets.only(top: t.space.l),
+                        child: DkButton(
+                          label: l.common_add_files,
+                          icon: DkIcons.add,
+                          variant: DkButtonVariant.tertiary,
+                          size: DkButtonSize.compact,
+                          onPressed: () => _browse(files, input, photos: false),
+                        ),
+                      ),
+                  ],
+                ),
               ),
+              if (!ready)
+                DkSkeleton.fileRows(count: widget.fileIds.length.clamp(1, 4))
+              else if (files.length == 1)
+                _InputFile(
+                  file: files.single,
+                  locked: locked.contains(files.single),
+                  onUnlock: (pw) =>
+                      setState(() => _passwords[files.single.path] = pw),
+                )
+              else
+                ReorderableListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  buildDefaultDragHandles: false,
+                  onReorderItem: (from, to) {
+                    final order = [...files];
+                    order.insert(to, order.removeAt(from));
+                    _setInput(order);
+                  },
+                  children: [
+                    for (final (i, f) in files.indexed)
+                      _InputFile(
+                        key: ValueKey(f.path),
+                        file: f,
+                        index: i,
+                        locked: locked.contains(f),
+                        onUnlock: (pw) =>
+                            setState(() => _passwords[f.path] = pw),
+                        onRemove: () => _setInput([
+                          for (final x in files)
+                            if (x.path != f.path) x,
+                        ]),
+                      ),
+                  ],
+                ),
+            ],
+            if (_def.options.isNotEmpty || _def.moreOptions.isNotEmpty)
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: t.space.l),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _Header(l.t2_section_options),
+                    for (final (i, o) in _def.options.indexed)
+                      _OptionRow(
+                        option: o,
+                        subject: subject,
+                        value: values[o.key],
+                        onChanged: (v) => set(o.key, v),
+                        last:
+                            i == _def.options.length - 1 &&
+                            _def.moreOptions.isEmpty,
+                      ),
+                    if (_def.moreOptions.isNotEmpty)
+                      DkMoreOptions(
+                        children: [
+                          for (final (i, o) in _def.moreOptions.indexed)
+                            _OptionRow(
+                              option: o,
+                              subject: subject,
+                              value: values[o.key],
+                              onChanged: (v) => set(o.key, v),
+                              last: i == _def.moreOptions.length - 1,
+                            ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+            SizedBox(height: t.space.xl),
           ],
-          if (_def.options.isNotEmpty || _def.moreOptions.isNotEmpty)
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: t.space.l),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  _Header(l.t2_section_options),
-                  for (final (i, o) in _def.options.indexed)
-                    _OptionRow(
-                      option: o,
-                      subject: subject,
-                      value: values[o.key],
-                      onChanged: (v) => set(o.key, v),
-                      last:
-                          i == _def.options.length - 1 &&
-                          _def.moreOptions.isEmpty,
-                    ),
-                  if (_def.moreOptions.isNotEmpty)
-                    DkMoreOptions(
-                      children: [
-                        for (final (i, o) in _def.moreOptions.indexed)
-                          _OptionRow(
-                            option: o,
-                            subject: subject,
-                            value: values[o.key],
-                            onChanged: (v) => set(o.key, v),
-                            last: i == _def.moreOptions.length - 1,
-                          ),
-                      ],
-                    ),
-                ],
-              ),
-            ),
-          SizedBox(height: t.space.xl),
-        ],
+        ),
+        actions: actions,
+        preview: preview,
+        previewTitle: l.t2_live_preview,
       ),
       // The main action is the last thing a screen reader reaches.
-      bottomNavigationBar: DkBottomChrome(
-        child: DkActionBar(
-          label: _phase == X2Phase.quiet
-              ? _def.action?.call(l, subject) ?? tool.name(l)
-              : _def.busyLabel?.call(l) ?? l.t2_busy,
-          caption: caption,
-          // Under 2 s only the press shows; then "Compressing…" (§20.2).
-          loading: _phase != X2Phase.quiet,
-          onPressed: canRun
-              ? () {
-                  if (_handle == null) _run(subject, values);
-                }
-              : null,
-        ),
+      bottomNavigationBar: ToolLayout.bottom(
+        context,
+        actions,
+        preview: preview != null,
       ),
     );
   }
@@ -772,42 +806,60 @@ class _UnlockRowState extends State<_UnlockRow> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
-    return Padding(
-      padding: EdgeInsets.fromLTRB(t.space.l, 0, t.space.l, t.space.m),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        spacing: t.space.s,
-        children: [
-          Row(
-            spacing: t.space.xs,
-            children: [
-              DkIcon(DkIcons.lock, size: DkIconSize.s, color: t.color.warning),
-              Text(
-                l.t2_file_locked,
-                style: t.text.labelM.copyWith(color: t.color.textPrimary),
-              ),
-            ],
-          ),
-          DkPasswordField(
-            label: l.t2_password,
-            controller: _password,
-            error: _wrong ? l.t2_wrong_password : null,
-            onChanged: (_) {
-              if (_wrong) setState(() => _wrong = false);
-            },
-            onSubmitted: (_) => _unlock(),
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: DkButton(
-              label: l.t2_unlock,
-              variant: DkButtonVariant.secondary,
-              size: DkButtonSize.compact,
-              loading: _checking,
-              onPressed: _checking ? null : _unlock,
+    // A warning band under the card, from the file name's edge (the 44
+    // thumbnail and its 12 gap), as tool-shell-lockedrow.
+    return ColoredBox(
+      color: t.color.warningContainer,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          t.space.l + 44 + t.space.m,
+          t.space.m,
+          t.space.l,
+          t.space.m,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: t.space.s,
+          children: [
+            Row(
+              spacing: t.space.xs,
+              children: [
+                DkIcon(
+                  DkIcons.lock,
+                  size: DkIconSize.s,
+                  color: t.color.warning,
+                ),
+                Text(
+                  l.t2_file_locked,
+                  style: t.text.bodyM.copyWith(color: t.color.warning),
+                ),
+              ],
             ),
-          ),
-        ],
+            Row(
+              spacing: t.space.s,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: DkPasswordField(
+                    hint: l.t2_password,
+                    controller: _password,
+                    error: _wrong ? l.t2_wrong_password : null,
+                    onChanged: (_) {
+                      if (_wrong) setState(() => _wrong = false);
+                    },
+                    onSubmitted: (_) => _unlock(),
+                  ),
+                ),
+                DkButton(
+                  label: l.t2_unlock,
+                  size: DkButtonSize.compact,
+                  loading: _checking,
+                  onPressed: _checking ? null : _unlock,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -856,9 +908,11 @@ class _PickerCard extends ConsumerWidget {
     return Container(
       margin: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
       padding: EdgeInsets.symmetric(vertical: t.space.m),
-      decoration: t.surfaceAt(
-        DkLevel.raised,
-        radius: BorderRadius.circular(t.radius.m),
+      // A 1 dp outlined card on surface (tool-shell-t2empty).
+      decoration: BoxDecoration(
+        color: t.color.surface,
+        border: Border.all(color: t.color.outline),
+        borderRadius: BorderRadius.circular(t.radius.m),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -882,7 +936,14 @@ class _PickerCard extends ConsumerWidget {
                 style: t.text.labelM.copyWith(color: t.color.textSecondary),
               ),
             ),
-          for (final f in rows)
+          for (final (i, f) in rows.indexed) ...[
+            if (i > 0)
+              Divider(
+                height: 1,
+                indent: t.space.l,
+                endIndent: t.space.l,
+                color: t.color.outline,
+              ),
             DkFileCard(
               name: f.name,
               meta: [
@@ -893,16 +954,19 @@ class _PickerCard extends ConsumerWidget {
               selected: checkboxes ? paths.contains(f.path) : null,
               onTap: () => onToggle(f),
             ),
+          ],
           Padding(
             padding: EdgeInsets.fromLTRB(t.space.l, t.space.s, t.space.l, 0),
-            child: Wrap(
+            // Full width, as the card's own action (tool-shell-t2empty).
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: t.space.s,
-              runSpacing: t.space.s,
               children: [
                 DkButton(
                   label: l.common_browse,
                   icon: DkIcons.folderOpen,
                   variant: DkButtonVariant.secondary,
+                  expand: true,
                   onPressed: onBrowse,
                 ),
                 if (onPhotos != null)
@@ -910,6 +974,7 @@ class _PickerCard extends ConsumerWidget {
                     label: l.t2_choose_photos,
                     icon: DkIcons.importPhotos,
                     variant: DkButtonVariant.secondary,
+                    expand: true,
                     onPressed: onPhotos,
                   ),
               ],
