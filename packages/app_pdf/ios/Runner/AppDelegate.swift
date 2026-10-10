@@ -17,7 +17,23 @@ import os
     if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "DokuloDevice") {
       registerDeviceChannel(registrar.messenger())
       registerCameraChannel(registrar.messenger())
+      registerMailChannel(registrar.messenger())
     }
+  }
+
+  /// "Send report by email" (DK-1080; lib/providers/mail_providers.dart):
+  /// the mailto draft opens in the user's mail app.
+  private func registerMailChannel(_ messenger: FlutterBinaryMessenger) {
+    FlutterMethodChannel(name: "dokulo/mail", binaryMessenger: messenger)
+      .setMethodCallHandler { call, result in
+        guard call.method == "compose", let s = call.arguments as? String,
+          let url = URL(string: s)
+        else {
+          result(FlutterMethodNotImplemented)
+          return
+        }
+        UIApplication.shared.open(url) { ok in result(ok) }
+      }
   }
 
   /// The camera permission (DK-0342; lib/providers/camera_permission.dart):

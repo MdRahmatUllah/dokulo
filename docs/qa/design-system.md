@@ -323,3 +323,11 @@ Tablets (DK-0651; QA DK-0967, DK-0968):
   and the selection bar. Rotating keeps the edit, the selection and Undo.
 - Approved: the portrait frame (drawn mid-drag) shows no bottom row; the
   actions stay, as in landscape.
+
+### Send report by email (DK-1080)
+
+The failure state of an unexpected error has its tertiary "Send report by
+email" (tool-shell-failure): a draft in the user's mail app with the code,
+the device facts and the local crash log (`reportEmail`), through the
+`dokulo/mail` channel; "No email app found." when none takes it.
+"Skip this page" needs the engine's support: DK-1086.

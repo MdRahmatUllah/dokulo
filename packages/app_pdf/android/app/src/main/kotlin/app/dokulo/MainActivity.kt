@@ -74,6 +74,23 @@ class MainActivity : FlutterFragmentActivity() {
                     else -> result.notImplemented()
                 }
             }
+        // "Send report by email" (DK-1080; lib/providers/mail_providers.dart):
+        // the draft goes to the user's mail app; nothing is sent by the app.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/mail")
+            .setMethodCallHandler { call, result ->
+                if (call.method != "compose") {
+                    result.notImplemented()
+                    return@setMethodCallHandler
+                }
+                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(call.arguments as String))
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                try {
+                    startActivity(intent)
+                    result.success(true)
+                } catch (e: android.content.ActivityNotFoundException) {
+                    result.success(false)
+                }
+            }
         // The privacy cover (DK-0234; lib/providers/privacy_providers.dart):
         // FLAG_SECURE blanks the recents card and blocks screenshots, only
         // while locked content is open or Hide previews is on.

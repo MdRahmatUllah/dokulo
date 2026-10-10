@@ -2406,5 +2406,7 @@
         "type": "String"
       }
     }
-  }
+  },
+  "error_no_mail_app": "No email app found.",
+  "@error_no_mail_app": {"description": "Send report by email, when no mail app takes the draft (DK-1080)."}
 }
