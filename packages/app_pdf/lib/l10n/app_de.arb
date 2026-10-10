@@ -508,5 +508,10 @@
   "ai_not_eligible_body": "Dafür braucht es mindestens {need} GB Arbeitsspeicher. Dieses Handy hat {have} GB.",
   "common_ok": "OK",
   "locked_moved_in": "{n, plural, one{1 Datei in den geschützten Ordner verschoben} other{{n} Dateien in den geschützten Ordner verschoben}}",
-  "locked_move_out": "Aus dem geschützten Ordner holen"
+  "locked_move_out": "Aus dem geschützten Ordner holen",
+  "trash_empty": "Leeren",
+  "trash_banner": "Dateien werden nach {n} Tagen endgültig gelöscht.",
+  "meta_days_left": "{n, plural, one{noch 1 Tag} other{noch {n} Tage}}",
+  "search_names": "Namen",
+  "search_text": "Text in Dateien"
 }

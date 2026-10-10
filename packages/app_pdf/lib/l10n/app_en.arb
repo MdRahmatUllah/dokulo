@@ -2016,5 +2016,35 @@
   "locked_move_out": "Move out of locked folder",
   "@locked_move_out": {
     "description": "F2 file sheet: decrypts it back to its folder."
+  },
+  "trash_empty": "Empty",
+  "@trash_empty": {
+    "description": "R1 top bar: empties Recently deleted (DK-0278)."
+  },
+  "trash_banner": "Files are deleted for good after {n} days.",
+  "@trash_banner": {
+    "description": "R1's info banner; n is the retention, 30 or 7.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "meta_days_left": "{n, plural, one{1 day left} other{{n} days left}}",
+  "@meta_days_left": {
+    "description": "R1 row meta, after the size.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "search_names": "Names",
+  "@search_names": {
+    "description": "F1 search: the group of files whose name matches (DK-0269)."
+  },
+  "search_text": "Text inside files",
+  "@search_text": {
+    "description": "F1 search: the group of pages whose text matches."
   }
 }
