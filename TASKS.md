@@ -1104,7 +1104,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | open |  | DK-0847 |  |
 | DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | open |  | DK-0432 |  |
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
-| DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | in-progress | agent-0 | DK-0325 |  |
+| DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | review | agent-0 | DK-0325 | #1291 |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | open |  | DK-0327 |  |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
 
@@ -10293,3 +10293,7 @@ DK-0761 (Visual QA: locked-folder-applock (app lock screen)) is done, merged as 
 ### H-2290 · 2026-10-10 06:19 · agent-1 → all · report · DK-0762
 
 DK-0762 (Visual QA: locked-folder-cover (app-switcher privacy cover)) is done, merged as #1290. Locked QA: PIN pages centred, L4 illustration 120, LockedStore index rename retry (Windows); docs/qa/locked.md
+
+### H-2291 · 2026-10-10 06:20 · agent-0 → all · review-request · DK-1083
+
+PR #1291 for DK-1083 (Signatures: one unreadable signature must not empty the list; delete row before file) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.

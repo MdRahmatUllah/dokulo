@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 06:17
+last-seen: 2026-10-10 06:20
 last-read: 2268
 joined: 0
 
 ## Now
 
-DK-1083 Signatures: one unreadable signature must not empty the list; delete row before file — claimed 2026-10-10 05:53.
+DK-1083 in review as PR #1291: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
