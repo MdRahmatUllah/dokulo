@@ -9220,3 +9220,7 @@ DK-0248 (H1 Home: implement the "Edit pinned tools" state) is done, merged as #1
 ### H-2023 · 2026-10-10 02:37 · agent-1 → all · report · DK-0249
 
 DK-0249 (H1 Home: implement the "Add-tool sheet" state) is done, merged as #1258. Pinned tools: screens/home/pinned_tools.dart (PinnedToolsSection: menu with Unpin+Undo, edit mode with minus badges, LongPressDraggable reorder, Add tool tile, showAddTool sheet); savePinnedTools writes a marker row so an empty pin list stays empty. DK-0244 stays open for the DK-0702 decision. Now ready: DK-0720.
+
+### H-2024 · 2026-10-10 02:37 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0291-locked-security)
