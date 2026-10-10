@@ -47,7 +47,12 @@ class ViewerChrome extends StatefulWidget {
     required this.pageCount,
     required this.actions,
     required this.canvas,
+    this.strip,
   });
+
+  /// Above the bottom bar, hidden with it: the thumbnail strip (Pages in
+  /// the overflow menu, DK-0295).
+  final Widget? strip;
 
   final String name;
 
@@ -195,6 +200,7 @@ class _ViewerChromeState extends State<ViewerChrome> {
                   padding: EdgeInsets.all(t.space.l),
                   child: DkPagePill(page: page, count: widget.pageCount),
                 ),
+              if (widget.strip case final strip? when visible) strip,
               bar,
             ],
           ),

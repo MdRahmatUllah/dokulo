@@ -3,7 +3,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pdfrx/pdfrx.dart';
 
+import 'dart:async';
+
+import 'package:doc_core/doc_core.dart' show FileEntry;
+
+import '../../components/dk_action_sheet.dart';
+import '../../components/dk_icon.dart';
 import '../../components/dk_loading_spinner.dart';
+import '../../components/dk_menu.dart';
+import '../../components/dk_switch.dart';
 import '../../components/dk_banner.dart';
 import '../../components/dk_editor_bars.dart';
 import '../../components/dk_pdf_canvas.dart';
@@ -13,14 +21,18 @@ import '../../components/dk_toast.dart';
 import '../../l10n/app_localizations.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
+import '../../patterns/dk_file_actions.dart';
+import '../../patterns/dk_file_info.dart';
 import '../../patterns/dk_tool_picker.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
+import '../../providers/print_providers.dart';
 import 'viewer_chrome.dart';
 import 'viewer_providers.dart';
 import 'viewer_search.dart';
 import 'viewer_states.dart';
+import 'viewer_thumb_strip.dart';
 
 /// V1, the viewer (UI spec §17.1). This is its core (DK-0293): the file's
 /// pages on [DkPdfCanvas]; while the file opens, the page skeleton (DK-0620).
@@ -60,6 +72,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   int? _page;
   var _pageCount = 0;
   final _controller = PdfViewerController();
+
+  /// The thumbnail strip, from Pages in the overflow menu (DK-0295).
+  var _thumbs = false;
 
   @override
   void dispose() {
@@ -146,9 +161,20 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                         onEdit: () => context.push(
                           Routes.viewer('${widget.fileId}', edit: true),
                         ),
+                        onRename: () => renameFile(context, ref, value),
                         // X1 with this file (DK-1094).
                         onTools: () => showToolPicker(context, [value]),
+                        onOverflow: (anchor) => _menu(anchor, value),
                       ),
+                      strip: _thumbs && _pageCount > 0
+                          ? ViewerThumbStrip(
+                              path: value.path,
+                              pageCount: _pageCount,
+                              current: _page ?? 1,
+                              onPage: (p) =>
+                                  _controller.goToPage(pageNumber: p),
+                            )
+                          : null,
                       canvas: (onTap, onScrollStart) => _pages(
                         value.path,
                         onTap: onTap,
@@ -173,6 +199,93 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         ),
         _ => const ViewerPageSkeleton(),
       },
+    );
+  }
+
+  /// The overflow menu (DK-0295; UI spec §17.1, viewer-menu): Info · Go to
+  /// page · Pages · Night mode · Organize pages · Print · Move to locked
+  /// folder, then Delete (to Recently deleted with Undo; the viewer closes).
+  // ponytail: Share as images and Share text join with share_plus (DK-0311).
+  void _menu(BuildContext anchor, FileEntry file) {
+    final l = AppLocalizations.of(context);
+    final night = ref.read(prefsProvider).value?[viewerNightKey] == true;
+    showDkMenu(
+      anchor,
+      groups: [
+        [
+          DkAction(
+            icon: DkIcons.info,
+            label: l.common_info,
+            onTap: () => showFileInfo(context, file),
+          ),
+          DkAction(
+            icon: DkIcons.goToPage,
+            label: l.viewer_goto_title,
+            onTap: () async {
+              final page = await showGoToPage(
+                context,
+                pageCount: _pageCount,
+                current: _page,
+              );
+              if (page != null) await _controller.goToPage(pageNumber: page);
+            },
+          ),
+          DkAction(
+            icon: DkIcons.pages,
+            label: l.viewer_menu_pages,
+            onTap: () => setState(() => _thumbs = !_thumbs),
+          ),
+          DkAction(
+            icon: DkIcons.nightMode,
+            label: l.viewer_menu_night,
+            // The row toggles it; the switch only shows the state.
+            trailing: IgnorePointer(
+              child: ExcludeSemantics(
+                child: DkSwitch(value: night, onChanged: (_) {}),
+              ),
+            ),
+            onTap: () =>
+                ref.read(prefsProvider.notifier).set(viewerNightKey, !night),
+          ),
+          DkAction(
+            icon: DkIcons.gridView,
+            label: l.tool_organize_name,
+            onTap: () => context.push(Routes.organize('${file.id}')),
+          ),
+          DkAction(
+            icon: DkIcons.print,
+            label: l.viewer_menu_print,
+            onTap: () async {
+              final opened = await ref.read(pdfPrinterProvider)(
+                file.path,
+                file.name,
+              );
+              if (!opened && mounted) {
+                showDkToast(context, l.viewer_print_failed);
+              }
+            },
+          ),
+          DkAction(
+            icon: DkIcons.lockedFolder,
+            label: l.file_move_to_locked,
+            onTap: () => context.push(Routes.lockedFolder, extra: [file.id]),
+          ),
+        ],
+        [
+          DkAction(
+            icon: DkIcons.delete,
+            label: l.common_delete,
+            destructive: true,
+            onTap: () {
+              // The toast outlives the viewer: it goes on the app's
+              // messenger, from above this route.
+              final root = Navigator.of(context, rootNavigator: true).context;
+              unawaited(deleteFiles(root, ref, [file]));
+              Navigator.of(context).maybePop();
+            },
+          ),
+        ],
+      ],
     );
   }
 

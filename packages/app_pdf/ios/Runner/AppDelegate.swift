@@ -21,6 +21,7 @@ import os
       registerNotificationsChannel(registrar.messenger())
       registerMailChannel(registrar.messenger())
       registerLinksChannel(registrar.messenger())
+      registerPrintChannel(registrar.messenger())
       registerImagesChannel(registrar.messenger())
     }
   }
@@ -72,6 +73,27 @@ import os
           return
         }
         UIApplication.shared.open(url) { ok in result(ok) }
+      }
+  }
+
+  /// Print (DK-0295; lib/providers/print_providers.dart): the system's
+  /// print dialog for one PDF.
+  private func registerPrintChannel(_ messenger: FlutterBinaryMessenger) {
+    FlutterMethodChannel(name: "dokulo/print", binaryMessenger: messenger)
+      .setMethodCallHandler { call, result in
+        guard call.method == "pdf", let args = call.arguments as? [String: Any],
+          let path = args["path"] as? String
+        else {
+          result(FlutterMethodNotImplemented)
+          return
+        }
+        let info = UIPrintInfo(dictionary: nil)
+        info.outputType = .general
+        info.jobName = args["name"] as? String ?? "Dokulo"
+        let printer = UIPrintInteractionController.shared
+        printer.printInfo = info
+        printer.printingItem = URL(fileURLWithPath: path)
+        printer.present(animated: true) { _, completed, _ in result(completed) }
       }
   }
 
