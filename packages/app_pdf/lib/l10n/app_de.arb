@@ -633,5 +633,8 @@
   "viewer_edit": "Bearbeiten",
   "viewer_sign": "Unterschreiben",
   "viewer_ai": "KI",
-  "viewer_tools": "Werkzeuge"
+  "viewer_tools": "Werkzeuge",
+  "x1_files": "{n, plural, one{1 Datei} other{{n} Dateien}}",
+  "x1_pdfs": "{n, plural, one{1 PDF} other{{n} PDFs}}",
+  "x1_images": "{n, plural, one{1 Bild} other{{n} Bilder}}"
 }
