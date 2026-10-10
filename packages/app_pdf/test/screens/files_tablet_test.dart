@@ -99,6 +99,23 @@ void main() {
     ('light', DkTokens.light),
     ('dark', DkTokens.dark),
   ]) {
+    testWidgets('golden: portrait grid, $theme', (tester) async {
+      await tester.runAsync(() async {
+        for (final name in ['Taxes', 'Apartment', 'Work', 'Receipts']) {
+          await f.store.createFolder(f.db, name);
+        }
+        for (var i = 0; i < 8; i++) {
+          await f.file('File $i.pdf', pages: i + 1);
+        }
+      });
+      f.prefs['files.grid'] = true;
+      await pumpFiles(tester, f, tokens: tokens, size: const Size(820, 1180));
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/files_tablet_portrait_$theme.png'),
+      );
+    });
+
     testWidgets('golden: two panes, $theme', (tester) async {
       await tester.runAsync(() async {
         for (final name in ['Taxes', 'Apartment', 'Work']) {
