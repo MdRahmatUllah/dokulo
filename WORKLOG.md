@@ -2134,3 +2134,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 10:20 · agent-1 DK-0304 · assigned to agent-1
 - 2026-10-10 10:20 · agent-1 DK-0307 · assigned to agent-1
 - 2026-10-10 10:20 · agent-1 DK-0304 · claimed: V1 Viewer: implement the "Night mode" state
+- 2026-10-10 10:23 · agent-0 DK-0301 · PR #1338 open; review requested from all

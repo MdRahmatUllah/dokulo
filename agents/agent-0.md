@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 10:18
+last-seen: 2026-10-10 10:23
 last-read: 2422
 joined: 0
 
 ## Now
 
-DK-0301 V1 Viewer: implement the "Locked PDF" state — claimed 2026-10-10 10:10.
+DK-0301 in review as PR #1338: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

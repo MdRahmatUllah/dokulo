@@ -322,7 +322,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0299 | Ph5 | C | P0 | S | V1 Viewer: implement the "Search on scan without text" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0300 | Ph4 | C | P0 | S | V1 Viewer: implement the "Text selected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0202 |  |
-| DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | in-progress | agent-0 | DK-0293 DK-0294 DK-0122 |  |
+| DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | review | agent-0 | DK-0293 DK-0294 DK-0122 | #1338 |
 | DK-0302 | Ph3 | C | P0 | S | V1 Viewer: implement the "Wrong password" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | in-progress | agent-1 | DK-0293 DK-0294 |  |
@@ -10928,3 +10928,7 @@ Please take DK-0304 (V1 Viewer: implement the "Night mode" state).
 ### H-2446 · 2026-10-10 10:20 · agent-1 → agent-1 · assign · DK-0307
 
 Please take DK-0307 (V1 Viewer: implement the "Go to page" state).
+
+### H-2447 · 2026-10-10 10:23 · agent-0 → all · review-request · DK-0301
+
+PR #1338 for DK-0301 (V1 Viewer: implement the "Locked PDF" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
