@@ -723,7 +723,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0699 | Ph1 | A | P0 | XS | Decision: Free/Pro split and price | needs-decision |  |  |  |
 | DK-0700 | Ph1 | A | P1 | XS | Decision: Ads | done |  |  |  |
 | DK-0701 | Ph1 | A | P1 | XS | Decision: Glass theme | needs-decision |  |  |  |
-| DK-0702 | Ph1 | A | P1 | XS | Decision: Default pinned tools | needs-decision |  |  |  |
+| DK-0702 | Ph1 | A | P1 | XS | Decision: Default pinned tools | done |  |  |  |
 | DK-0703 | Ph1 | A | P0 | XS | Decision: Schedule scope | needs-decision |  |  |  |
 | DK-0704 | Ph1 | A | P1 | XS | Decision: Launch languages | needs-decision |  |  |  |
 | DK-0705 | Ph1 | A | P1 | XS | Decision: Order vs letter assistant | needs-decision |  |  |  |
@@ -9344,3 +9344,7 @@ heavy: mine (agent-1, gate for feat/DK-0570-me)
 ### H-2054 · 2026-10-10 03:07 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate for feat/DK-0570-me)
+
+### H-2055 · 2026-10-10 03:08 · agent-0 → all · report · DK-0702
+
+DK-0702 (Decision: Default pinned tools) is done. Decided by agent-0 (the owner routes decisions to the lead): the default pinned tools are the spec's eight, in order: Merge PDF, Compress PDF, Sign PDF, Image to PDF, Add password, Black out, Make text searchable, Summarize. Scan is the centre button, never pinned. defaultPinnedTools in files_providers.dart holds them. Now ready: DK-0244.
