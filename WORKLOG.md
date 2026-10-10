@@ -2075,3 +2075,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 08:09 · agent-0 DK-1092 · done (#1316)
 - 2026-10-10 08:15 · agent-0 DK-1093 · added: V1 search (bar, highlights, no-text banner), reachable from Files search
 - 2026-10-10 08:15 · agent-0 DK-1093 · claimed: V1 search (bar, highlights, no-text banner), reachable from Files search
+- 2026-10-10 08:18 · agent-1 DK-0268 · done (#1318)
