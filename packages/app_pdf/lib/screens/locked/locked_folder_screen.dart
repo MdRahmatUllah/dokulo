@@ -370,7 +370,12 @@ class _PinStep extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, box) => SingleChildScrollView(
         child: ConstrainedBox(
-          constraints: BoxConstraints(minHeight: box.maxHeight),
+          // The full width too: a scroll view hands its child a loose width,
+          // and the column would shrink to the pad and sit at the start.
+          constraints: BoxConstraints(
+            minHeight: box.maxHeight,
+            minWidth: box.maxWidth,
+          ),
           child: IntrinsicHeight(
             child: Padding(
               padding: EdgeInsets.fromLTRB(
@@ -467,17 +472,18 @@ class _Biometrics extends StatelessWidget {
             ),
             child: Column(
               children: [
+                // 120 with the glyph in color.iconPrimary, as locked-folder-l4.
                 Container(
-                  width: 80,
-                  height: 80,
+                  width: 120,
+                  height: 120,
                   decoration: BoxDecoration(
                     color: c.primaryContainer,
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
                     face ? DkIcons.faceId : DkIcons.fingerprint,
-                    size: 40,
-                    color: c.onPrimaryContainer,
+                    size: 48,
+                    color: c.iconPrimary,
                   ),
                 ),
                 SizedBox(height: t.space.xl),
