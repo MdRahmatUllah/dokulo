@@ -11,10 +11,13 @@ import '../screens/files/trash_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
+import '../screens/m1_me/signatures_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/p1_organize/organize_screen.dart';
 import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/settings/files_settings_screen.dart';
+import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
@@ -42,6 +45,7 @@ abstract final class Routes {
   static const trash = '/files/trash'; // Recently deleted
   static const me = '/me'; // M1
   static const models = '/me/models'; // M2
+  static const signatures = '/me/signatures'; // Me → Signatures
   static String settings(String page) => '/me/settings/$page'; // M3
   static const scan = '/scan'; // S1
 
@@ -192,13 +196,21 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 routes: [
                   _screen('models', 'M2'),
                   GoRoute(
+                    path: 'signatures',
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: const SignaturesScreen(),
+                    ),
+                  ),
+                  GoRoute(
                     path: 'settings/:page',
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
-                      child: PlaceholderScreen(
-                        'M3',
-                        detail: state.pathParameters['page']!,
-                      ),
+                      child: switch (state.pathParameters['page']!) {
+                        'security' => const SecuritySettingsScreen(),
+                        'files' => const FilesSettingsScreen(),
+                        final page => PlaceholderScreen('M3', detail: page),
+                      },
                     ),
                   ),
                 ],

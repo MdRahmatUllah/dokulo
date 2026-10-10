@@ -53,9 +53,14 @@ class _FileInfo extends ConsumerWidget {
         Row(
           spacing: t.space.m,
           children: [
-            SizedBox(
-              width: 40,
-              height: 52,
+            // The page at 72 × 96 with its outline, as the files-info frame.
+            Container(
+              width: 72,
+              height: 96,
+              decoration: BoxDecoration(
+                border: Border.all(color: t.color.outline),
+                borderRadius: BorderRadius.circular(t.radius.xs),
+              ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(t.radius.xs),
                 child: switch (thumb) {
@@ -137,9 +142,13 @@ class _Row extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
+    // A hairline under each row, as the frame.
     return MergeSemantics(
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: t.space.xs),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(color: t.color.outline)),
+        ),
+        padding: EdgeInsets.symmetric(vertical: t.space.m),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: t.space.m,

@@ -104,6 +104,23 @@ DevicePicker devicePicker(Ref ref) => (input, {required photos}) async {
   return input.many ? paths : paths.take(1).toList();
 };
 
+/// Saves a copy of [path] as [name] where the user picks, outside Dokulo:
+/// the system's save dialog (T3's Save to…, DK-0385). False when cancelled.
+/// Tests override it.
+typedef SaveElsewhere = Future<bool> Function(String path, String name);
+
+@Riverpod(keepAlive: true)
+SaveElsewhere saveElsewhere(Ref ref) =>
+    (path, name) async =>
+        await FilePicker.saveFile(
+          fileName: name,
+          bytes: await File(path).readAsBytes(),
+          mimeType: name.toLowerCase().endsWith('.pdf')
+              ? 'application/pdf'
+              : 'application/octet-stream',
+        ) !=
+        null;
+
 /// The 5 most recent files [toolId] can take, for T2's picker card
 /// (DK-0371).
 @riverpod

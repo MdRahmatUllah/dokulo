@@ -137,11 +137,15 @@ class DkToolRow extends StatelessWidget {
     required this.toolId,
     required this.onTap,
     this.showDescription = false,
+    this.trailingIcon,
   });
 
   final String toolId;
   final VoidCallback onTap;
   final bool showDescription;
+
+  /// In place of the chevron, in `color.primary`: the add sheet's add.
+  final IconData? trailingIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +206,10 @@ class DkToolRow extends StatelessWidget {
                 ),
               ),
               if (tool.isPro) const _CornerBadge(small: false),
-              DkIcon(DkIcons.chevronRight, color: c.iconSecondary),
+              DkIcon(
+                trailingIcon ?? DkIcons.chevronRight,
+                color: trailingIcon == null ? c.iconSecondary : c.primary,
+              ),
             ],
           ),
         ),

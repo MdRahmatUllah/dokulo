@@ -6,7 +6,9 @@ import 'package:go_router/go_router.dart';
 import '../components/dk_action_sheet.dart';
 import '../components/dk_button.dart';
 import '../components/dk_icon.dart';
-import '../components/dk_settings_row.dart';
+import '../theme/dk_folder_tags.dart';
+import '../components/dk_tappable.dart';
+import '../components/dk_folder_card.dart';
 import '../components/dk_sheet.dart';
 import '../components/dk_text_action.dart';
 import '../l10n/app_localizations.dart';
@@ -69,6 +71,7 @@ Future<void> showFileActions(
           fileThumbnailProvider(file.path, 96),
         )) {
           AsyncData(:final value) => RawImage(image: value, fit: BoxFit.cover),
+          AsyncError() => ColoredBox(color: context.tokens.color.pageWhite),
           _ => const SizedBox.shrink(),
         },
       ),
@@ -256,16 +259,62 @@ Future<void> moveFiles(
   List<FileEntry> files,
 ) async {
   final l = AppLocalizations.of(context);
-  // The sheet answers with the chosen folder: (id,) for the root (null).
-  final target = await showDkSheet<(int?,)>(
+  final target = await pickFolder(
     context,
     title: l.file_move_title(files.length),
-    detent: DkSheetDetent.large,
-    body: const _MoveBrowser(),
+    action: l.file_move_here,
   );
   if (target == null || !context.mounted) return;
-  final (folder,) = target;
-  await moveFilesTo(context, ref, files, folder);
+  await moveFilesTo(context, ref, files, target.folder);
+}
+
+/// A folder from the Move sheet's browser (T3's Save to…, DK-0385): the
+/// folders with the breadcrumb and "New folder", and the sticky [action]
+/// ("Move here", "Save here"). With [elsewhere], a second button under it
+/// answers `elsewhere: true` (the system's save dialog). Null when closed.
+Future<({int? folder, bool elsewhere})?> pickFolder(
+  BuildContext context, {
+  required String title,
+  required String action,
+  String? elsewhere,
+}) async {
+  // The folder the sheet is in; the buttons answer with it.
+  final at = ValueNotifier<int?>(null);
+  final picked = await showDkSheet<({int? folder, bool elsewhere})>(
+    context,
+    title: title,
+    detent: DkSheetDetent.large,
+    showClose: true,
+    body: _MoveBrowser(at),
+    // Sticky at the bottom, as the files-move frame.
+    actions: Builder(
+      builder: (sheet) => Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: sheet.tokens.space.s,
+        children: [
+          DkButton(
+            label: action,
+            size: DkButtonSize.large,
+            expand: true,
+            onPressed: () =>
+                Navigator.pop(sheet, (folder: at.value, elsewhere: false)),
+          ),
+          if (elsewhere != null)
+            DkButton(
+              label: elsewhere,
+              variant: DkButtonVariant.tertiary,
+              size: DkButtonSize.large,
+              expand: true,
+              onPressed: () =>
+                  Navigator.pop(sheet, (folder: null, elsewhere: true)),
+            ),
+        ],
+      ),
+    ),
+  );
+  at.dispose();
+  return picked;
 }
 
 /// Moves [files] into [folder] (null: the root), then "Moved to {folder}"
@@ -302,14 +351,18 @@ Future<void> moveFilesTo(
 
 /// The folder browser inside the Move sheet.
 class _MoveBrowser extends ConsumerStatefulWidget {
-  const _MoveBrowser();
+  const _MoveBrowser(this.at);
+
+  /// The folder shown (null: the root); the sheet's buttons answer with it.
+  final ValueNotifier<int?> at;
 
   @override
   ConsumerState<_MoveBrowser> createState() => _MoveBrowserState();
 }
 
 class _MoveBrowserState extends ConsumerState<_MoveBrowser> {
-  int? _at; // null: the root
+  int? get _at => widget.at.value;
+  void _go(int? folder) => setState(() => widget.at.value = folder);
 
   @override
   Widget build(BuildContext context) {
@@ -329,7 +382,7 @@ class _MoveBrowserState extends ConsumerState<_MoveBrowser> {
           children: [
             DkTextAction(
               label: l.shell_tab_files,
-              onTap: _at == null ? null : () => setState(() => _at = null),
+              onTap: _at == null ? null : () => _go(null),
             ),
             for (final (i, f) in chain.indexed) ...[
               ExcludeSemantics(
@@ -340,36 +393,37 @@ class _MoveBrowserState extends ConsumerState<_MoveBrowser> {
               ),
               DkTextAction(
                 label: f.name,
-                onTap: i == chain.length - 1
-                    ? null
-                    : () => setState(() => _at = f.id),
+                onTap: i == chain.length - 1 ? null : () => _go(f.id),
               ),
             ],
           ],
         ),
-        DkSettingsGroup(
-          children: [
-            DkSettingsRow(
-              icon: DkIcons.newFolder,
-              title: l.files_new_folder,
-              onTap: () => newFolder(context, ref, parent: _at),
+        // New folder in color.primary, as the frame; then the folders as
+        // Files lists them (the tag colour, the count, the chevron).
+        DkTappable(
+          radius: 0,
+          onTap: () => newFolder(context, ref, parent: _at),
+          builder: (context, pressed) => Padding(
+            padding: EdgeInsets.symmetric(vertical: t.space.m),
+            child: Row(
+              spacing: t.space.m,
+              children: [
+                DkIcon(DkIcons.newFolder, color: t.color.primary),
+                Text(
+                  l.files_new_folder,
+                  style: t.text.titleS.copyWith(color: t.color.primary),
+                ),
+              ],
             ),
-            for (final (:folder, :files) in folders)
-              DkSettingsRow(
-                icon: DkIcons.folder,
-                title: folder.name,
-                value: l.meta_files(files),
-                onTap: () => setState(() => _at = folder.id),
-              ),
-          ],
+          ),
         ),
-        SizedBox(height: t.space.l),
-        DkButton(
-          label: l.file_move_here,
-          size: DkButtonSize.large,
-          expand: true,
-          onPressed: () => Navigator.pop(context, (_at,)),
-        ),
+        for (final (:folder, :files) in folders)
+          DkFolderCard(
+            name: folder.name,
+            files: files,
+            tag: DkFolderTag.values.asNameMap()[folder.colourTag],
+            onTap: () => _go(folder.id),
+          ),
       ],
     );
   }

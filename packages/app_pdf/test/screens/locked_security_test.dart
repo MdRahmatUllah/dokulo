@@ -1,5 +1,6 @@
 import 'package:app_pdf/components/dk_pin_pad.dart';
 import 'package:app_pdf/providers/locked_providers.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/privacy_providers.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -17,6 +18,10 @@ void main() {
     final setup = LockedSetup();
     await setup.vault.setPin('482915');
     final container = await pumpLocked(tester, setup);
+    // Hide previews off (it is on by default): the folder alone asks for
+    // the cover.
+    await container.read(prefsProvider.future); // loaded, or it resets
+    container.read(hidePreviewsProvider.notifier).set(false);
     // The unlock screen shows nothing of the folder: no cover needed.
     expect(container.read(privacyCoverProvider), isFalse);
     await typePin(tester, '482915');
@@ -33,6 +38,8 @@ void main() {
     final setup = LockedSetup();
     await setup.vault.setPin('482915');
     final container = await pumpLocked(tester, setup);
+    await container.read(prefsProvider.future); // loaded, or it resets
+    container.read(hidePreviewsProvider.notifier).set(false);
     await typePin(tester, '482915');
     expect(container.read(privacyCoverProvider), isTrue);
     await tester.binding.handlePopRoute();

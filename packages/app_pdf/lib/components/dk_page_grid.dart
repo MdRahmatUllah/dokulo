@@ -231,6 +231,7 @@ class _DkPageGridState extends State<DkPageGrid> {
       page: page,
       lifted: lifted,
       selected: widget.selected.contains(i),
+      selecting: widget.selected.isNotEmpty,
       onTap: interactive && widget.onTap != null
           ? () => widget.onTap!(i)
           : null,
@@ -281,8 +282,9 @@ class _DkPageGridState extends State<DkPageGrid> {
               ),
             ),
           ),
+          // Its place stays empty while it's lifted (organize-drag).
           childWhenDragging: Opacity(
-            opacity: t.state.disabledOpacity,
+            opacity: 0,
             child: thumb(interactive: false),
           ),
           child: cell,

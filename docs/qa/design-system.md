@@ -5,15 +5,71 @@
 | DK-0982 | `00-design-system/foundations.html` | `packages/app_pdf/test/qa/design_parity_test.dart` (in the gate): the export's 27 colour variables in Light and Dark and its 9 type classes against `DkTokens` | Match, except 3 approved colour changes |
 | DK-0986 | `00-design-system/motion.html` | The same test: the legend's durations (fast, standard, emphasis, reduced, capture flash) and the three easing curves | Match, except 2 approved curve changes |
 | DK-0985, DK-0988..DK-1007 | `00-design-system/illustrations/` | `tools/qa_illustrations.py`, see [illustrations/](illustrations/README.md) | 40/40 match |
+| DK-0983 | `00-design-system/components.html` (Light, Dark; 1440 × 2800) | Each of the frame's 12 panels next to the device screenshots of its catalogue entries (`tools/device_checks/catalogue_shots.py` on emulator-5554, real fonts), in [components/](components/) | 5 deviations fixed, 6 approved, below |
 | DK-0984 | `00-design-system/components-part-2.html` (Light, Dark; 1440 wide) | Side by side with the catalogue entries' goldens (layout, colour, spacing) and the code (type tokens, copy); `tools/device_checks/catalogue_shots.py` screenshots the same entries on a device with real fonts | 6 deviations fixed (DK-1072), 3 approved, below |
 | DK-0980 | `26-global-states/global-states.html` (Light, Dark; 1440 × 1700) | A QA board in the gate, `packages/app_pdf/test/qa/global_states_test.dart`: the frame's regions built from the real empty states, toasts, banners, error catalogue and skeleton, side by side with the frame's screenshots; the copy, icons and actions checked as values | 2 deviations fixed, 6 approved, below |
 | DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
 | DK-0845, DK-0846, DK-0855, DK-0856 | `12-tool-shell/` minibar, canceldlg, discard, aftersave (Light, Dark; phone) | The same QA board: the shell at Tools with a running job, T2 after 30 s with Cancel, T3 closed unsaved after a long job, T3 after Save | 2 deviations fixed, 2 approved, below |
+| DK-0853, DK-0854, DK-0857 | `12-tool-shell/` savemenu, replace, replaced (Light, Dark; phone) | The same QA board: T3's split Save menu (Save as copy · Replace original · Save to…), then Replace original (the dialog), then Replace (the toast and Done) | Match, 2 approved, below |
+| DK-0799, DK-0800, DK-0801, DK-0802, DK-0803 | `09-organize-pages/` organize-drag, -selected, -insert, -deleted, -pinch (Light, Dark; phone) | Goldens in the gate, `organize_<state>_<theme>` in `packages/app_pdf/test/screens/organize_screen_test.dart`: P1 with 12 pages, page 5 long-pressed and held between 8 and 9, the navigator's overlay included; side by side with the frame in [organize/](organize/) | 5 deviations fixed, 3 approved, 1 follow-up, below |
+| DK-0804, DK-0805 | `09-organize-pages/` organize-large, organize-savemenu (Light, Dark; phone) | Goldens in the gate, `organize_large_<theme>` (300 pages scrolled to 142–150) and `organize_savemenu_<theme>` (Save long-pressed) | 2 deviations fixed, 1 spec gap filled, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
 - `color.success` (light) #117A4B, and `color.outlineStrong` #828C9B light / #666E7B dark: WCAG contrast fixes in PR #1116. The UI spec and Overview & foundations agree; the export predates them.
 - `motion.fast` uses `Curves.easeOut` and `motion.standard` uses `Curves.easeInOutCubic`, as Overview & foundations names them. The export's CSS has other `cubic-bezier`s: `0,0,.2,1` decelerates harder than CSS's own `ease-out` (`0,0,.58,1`, which is `Curves.easeOut`), up to 0.20 in value; `.65,0,.35,1` is within 0.025. Docs win; the test bounds both gaps.
+
+## Components (DK-0983)
+
+Every panel of the frame has its components in code and in the catalogue
+(the §11 coverage is in `docs/design-library.md`). Each panel was put next
+to the device screenshots of its entries, in both themes:
+[components/](components/) holds the frame (`components-light.png`,
+`components-dark.png`) and one image per panel, `<panel>-<theme>.png`, the
+frame's panel on the left. Order, tokens and copy match, except:
+
+Fixed:
+
+- C1. DkModelCard's quality pill is tinted as every frame draws it:
+  "Best quality" `color.successContainer` / `color.success` (`best: true`),
+  "Fast" and "Small" `color.primaryContainer` / `color.onPrimaryContainer`;
+  it was grey for all. The catalogue's first card is Gemma 4 E2B.
+- C2. A DkToolStrip item is at least 56 wide and grows to its label: with
+  real fonts "Highlight" (and "Textmarker") was cut to "Highligh…". The
+  strip scrolls, so a label is never cut.
+- C3. DkLevelCards' title is `type.labelM` on one line, as every frame
+  draws it (`.l-m`, nowrap): in `type.titleS` "Recommended" broke mid-word
+  ("Recomm / ended") in a third of a 393 dp phone. The UI spec §11.2 says
+  so now.
+- C4. The selected DkLevelCard's check sits on the card's top-right corner
+  (−9 / −9, a 2 dp `color.surface` ring), as the export's `.lv .ck`; it
+  took 24 dp from the title.
+- C5. DkFolderCard's folder glyph is filled, as every frame draws it
+  (`FILL 1`); it was outlined. §11.2 says "filled".
+
+Also fixed, in the screenshot tool: `catalogue_shots_test.dart` pumps twice
+before each shot. MaterialApp's theme blends in from the last entry's
+theme, and an implicit animation (DkIconButton's tonal fill, DkSegmented's
+thumb) started from that blend: the first shots showed a dark navy tonal
+button in Light.
+
+Approved (the UI spec decides; the frame is a sketch there):
+
+- DkModelCard's Download is a compact secondary button on the right
+  (§11.2 "Action"); the frame shows a text link under the progress bar,
+  mixing the available and downloading states in one card.
+- DkContinueCard and DkProCard have a close × (§11.2: "close × top-right
+  (dismiss)"); the frame leaves it out. The Me tab's Pro card has none
+  (§ Me, "no close button here").
+- The tool tile's Pro badge is `DkProBadge` small, top-right of the icon
+  container (§11.2); the frame draws a medal over the icon.
+- The tool strip has Undo and Redo as icon buttons after a divider at the
+  far right (§11.8: "Undo/Redo at the far right separated by a divider");
+  the frame draws Undo as a sixth labelled tool.
+- The camera top bar's flash shows its mode under the icon (S1: "icon +
+  tiny label"); the frame shows only the crossed-out flash.
+- The skeleton panel's spinner on a `color.primary` square is the
+  catalogue's on-primary sample, not a layout.
 
 ## Components, part 2 (DK-0984)
 
@@ -193,3 +249,66 @@ Approved:
 The discard dialog and the after-Save state (the toast "Saved to Files › …"
 with Open, then Done) match. After Save's Share · Open row comes with DK-1077
 (Share).
+
+### The Save menu and Replace original (DK-0853, DK-0854, DK-0857)
+
+The menu (Save as copy · Replace original · Save to…, above the chevron),
+the dialog (danger icon circle with `swap_horiz`, "Replace the original
+file?", the Versions line, Cancel and a danger Replace) and the toast
+("Replaced · Undo", 10 s) match the frames. Approved:
+
+- After Replace the bar shows Done, as after Save (§20.4 "After Save"); the
+  replaced frame still shows the split Save. A replace is a save.
+- In the goldens the dialog's buttons stack: the test font (Ahem) is too
+  wide for them side by side; with real fonts they sit side by side as in
+  the frame (DkConfirmDialog stacks only when the labels don't fit).
+
+Share, beside Open, comes with DK-1077.
+## Organize pages: drag, selected, insert, deleted, pinch (DK-0799..DK-0803)
+
+The frame: the sub-bar still says "12 pages", the lifted page floats over
+the grid just above the finger, its place stays empty, and a 2 dp
+`color.primary` insertion line with end caps shows where it lands. Fixed:
+
+- O1. Lifting a page no longer selects it: P1 selects by tap, and the
+  long-press only lifts, so mid-drag the screen stays out of selection mode
+  (it showed "1 selected" and the selection bar).
+- O2. DkPageGrid leaves the lifted page's place empty while it's dragged;
+  it showed the page at 40 %.
+
+Thumbnails are skeletons in the goldens (PDFium doesn't render in widget
+tests); the layout, the line and the bars are what the golden checks.
+
+Selected, insert, deleted and pinch (DK-0800..DK-0803), the goldens beside
+the frames in [organize/](organize/):
+
+- O3. In selection mode an unselected page shows an empty 20 dp circle
+  (`color.surface`, 2 dp `color.outlineStrong`) where the check goes
+  (`DkPageThumb.selecting`, from DkPageGrid when anything is selected); it
+  showed nothing.
+- O4. The insert sheet has "From photos": the photos become pages, one
+  each, written by Image to PDF's writer on a worker and inserted at the
+  chosen place. "From a scan" needs the scanner to hand its pages back:
+  follow-up DK-1082 (#1269).
+- O5. The + leaves while the selection bar shows (it did; the first golden
+  caught its exit animation).
+
+Approved:
+
+- The selection bar's Delete is `color.danger`, as in Files and the
+  components frame; organize-selected draws it neutral.
+- The pinch frame shows a hint toast, "Pinch to change thumbnail size";
+  neither the UI spec (§18) nor the copy deck has it, so there is none.
+- The insert sheet has no "From a scan" row until DK-1082.
+
+Large and the Save menu (DK-0804, DK-0805):
+
+- O6. Save has its long-press menu (UI spec §18, organize-savemenu): Save
+  as copy · Replace original. Replace asks (the destructive dialog), writes
+  the pages over the file with `VersionStore.replace` (the original in
+  Versions for 30 days) and says "Saved". `DkTopBar.editing` takes
+  `onDoneLongPress`.
+- O7. Save's copy is "{name} – organized.pdf" with "Saved as “…”" (§18,
+  §27.3); it was "{name} (2).pdf" with "Saved to Files › …".
+- The 300-page document matches: virtualised, skeletons with their numbers
+  until a page renders.

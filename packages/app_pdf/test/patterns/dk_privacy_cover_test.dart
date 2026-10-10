@@ -1,5 +1,6 @@
 import 'package:app_pdf/components/dk_logo.dart';
 import 'package:app_pdf/patterns/dk_privacy_cover.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/privacy_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -24,7 +25,14 @@ void main() {
   });
 
   Future<ProviderContainer> pump(WidgetTester tester, {Widget? body}) async {
-    final container = ProviderContainer();
+    // Hide previews is on by default (DK-0573); these start with it off.
+    final container = ProviderContainer(
+      overrides: [
+        prefsProvider.overrideWith(
+          () => Prefs.memory({'security.hidePreviews': false}),
+        ),
+      ],
+    );
     addTearDown(container.dispose);
     await tester.pumpWidget(
       UncontrolledProviderScope(
@@ -69,13 +77,16 @@ void main() {
     await pump(tester);
     await lifecycle(tester, AppLifecycleState.inactive);
     expect(find.byType(DkLogo), findsNothing);
-    expect(secure, [false]);
+    // While the prefs load, Hide previews reads on (privacy first); once
+    // loaded (off here), FLAG_SECURE is off.
+    expect(secure.last, isFalse);
     await lifecycle(tester, AppLifecycleState.resumed);
   });
 
   testWidgets('FLAG_SECURE only while locked content is open', (tester) async {
     final container = await pump(tester);
-    expect(secure, [false]);
+    await tester.pump();
+    expect(secure.last, isFalse);
     final locked = GlobalKey<NavigatorState>();
     await tester.pumpWidget(
       UncontrolledProviderScope(

@@ -14,18 +14,22 @@ import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/files/files_screen.dart';
+import 'package:app_pdf/screens/settings/files_settings_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 /// No PDFium in widget tests: every thumbnail is a small white page.
 class _WhitePages extends ThumbnailCache {
-  _WhitePages() : super(Directory.systemTemp);
+  // Never the system temp itself: Clear cache deletes this folder.
+  _WhitePages()
+    : super(Directory('${Directory.systemTemp.path}/dk_test_thumbs'));
 
   @override
   Future<RenderedPage> thumbnail(
@@ -90,6 +94,8 @@ Future<GoRouter> pumpFiles(
   DkTokens? tokens,
   Locale locale = const Locale('en'),
   String location = Routes.files,
+  List<Override> overrides = const [],
+  bool settled = true, // false: a shimmering skeleton never settles
 }) async {
   tester.view.physicalSize = const Size(393, 852);
   tester.view.devicePixelRatio = 1;
@@ -103,10 +109,14 @@ Future<GoRouter> pumpFiles(
         prefsProvider.overrideWith(() => Prefs.memory(f.prefs)),
         fileStoreProvider.overrideWith((ref) async => f.store),
         thumbnailCacheProvider.overrideWith((ref) async => _WhitePages()),
+        modelsDirectoryProvider.overrideWith(
+          (ref) async => Directory('${f.root.path}/models'),
+        ),
         // V1 without PDFium: the file reads as missing, so no canvas opens.
         viewerFileProvider.overrideWith(
           (ref, fileId) async => throw StateError('no PDFium in tests'),
         ),
+        ...overrides,
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -118,7 +128,7 @@ Future<GoRouter> pumpFiles(
       ),
     ),
   );
-  await settle(tester);
+  settled ? await settle(tester) : await tester.pump();
   return router;
 }
 

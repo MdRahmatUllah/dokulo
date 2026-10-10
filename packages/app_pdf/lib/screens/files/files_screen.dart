@@ -16,7 +16,9 @@ import '../../components/dk_settings_row.dart';
 import '../../components/dk_skeleton.dart';
 import '../../components/dk_text_field.dart';
 import '../../components/dk_confirm_dialog.dart';
+import '../../components/dk_tappable.dart';
 import '../../components/dk_text_action.dart';
+import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
@@ -383,10 +385,16 @@ class _FolderScreen extends ConsumerWidget {
             label: l.folder_rename,
             onTap: () => _rename(anchor, ref, folder),
           ),
+          // The colours right in the menu, as the files-foldermenu frame;
+          // the row itself opens the named list (with No colour).
           DkAction(
             icon: DkIcons.palette,
             label: l.folder_colour,
             onTap: () => _colour(anchor, ref, folder),
+            below: _Swatches(
+              selected: DkFolderTag.values.asNameMap()[folder.colourTag],
+              onPick: (tag) => _setTag(ref, folder, tag),
+            ),
           ),
         ],
         [
@@ -430,13 +438,16 @@ class _FolderScreen extends ConsumerWidget {
     );
   }
 
+  Future<void> _setTag(WidgetRef ref, Folder folder, DkFolderTag? tag) {
+    final db = ref.read(appDatabaseProvider);
+    return (db.update(db.folders)..where((f) => f.id.equals(folder.id))).write(
+      FoldersCompanion(colourTag: Value(tag?.name)),
+    );
+  }
+
   void _colour(BuildContext anchor, WidgetRef ref, Folder folder) {
     final l = AppLocalizations.of(anchor);
-    final db = ref.read(appDatabaseProvider);
-    Future<void> set(DkFolderTag? tag) =>
-        (db.update(db.folders)..where((f) => f.id.equals(folder.id))).write(
-          FoldersCompanion(colourTag: Value(tag?.name)),
-        );
+    Future<void> set(DkFolderTag? tag) => _setTag(ref, folder, tag);
     showDkMenu(
       anchor,
       groups: [
@@ -596,8 +607,20 @@ class _FolderList extends ConsumerWidget {
         // Grid: a file card dropped here moves into it (DK-0264); the
         // card shows the 2 dp ring while one hovers.
         return DragTarget<FileEntry>(
-          onWillAcceptWithDetails: (d) => d.data.folderId != folder.id,
+          onWillAcceptWithDetails: (d) {
+            final ok = d.data.folderId != folder.id;
+            // "Drop on “Apartment” to move" while over it (files-dragfolder).
+            if (ok) {
+              showDkToast(
+                context,
+                AppLocalizations.of(context).files_drop_hint(folder.name),
+              );
+            }
+            return ok;
+          },
+          onLeave: (_) => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
           onAcceptWithDetails: (d) {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
             HapticFeedback.lightImpact();
             moveFilesTo(context, ref, [d.data], folder.id);
           },
@@ -871,6 +894,66 @@ class _SearchResults extends ConsumerWidget {
           ),
         ],
         SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
+      ],
+    );
+  }
+}
+
+/// The six folder colours in a row (the folder menu): a tap picks one and
+/// closes the menu; the chosen one has a ring.
+class _Swatches extends StatelessWidget {
+  const _Swatches({required this.selected, required this.onPick});
+
+  final DkFolderTag? selected;
+  final ValueChanged<DkFolderTag> onPick;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    final names = {
+      DkFolderTag.blue: l.folder_tag_blue,
+      DkFolderTag.green: l.folder_tag_green,
+      DkFolderTag.orange: l.folder_tag_orange,
+      DkFolderTag.red: l.folder_tag_red,
+      DkFolderTag.purple: l.folder_tag_purple,
+      DkFolderTag.grey: l.folder_tag_grey,
+    };
+    return Row(
+      spacing: t.space.s,
+      children: [
+        for (final MapEntry(key: tag, value: name) in names.entries)
+          Semantics(
+            button: true,
+            selected: tag == selected,
+            label: name,
+            excludeSemantics: true,
+            onTap: () {
+              Navigator.pop(context);
+              onPick(tag);
+            },
+            child: DkTappable(
+              radius: 20,
+              onTap: () {
+                Navigator.pop(context);
+                onPick(tag);
+              },
+              builder: (context, pressed) => Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: tag.colour,
+                  border: tag == selected
+                      ? Border.all(color: t.color.surface, width: 2)
+                      : null,
+                  boxShadow: tag == selected
+                      ? [BoxShadow(color: tag.colour, spreadRadius: 2)]
+                      : null,
+                ),
+              ),
+            ),
+          ),
       ],
     );
   }

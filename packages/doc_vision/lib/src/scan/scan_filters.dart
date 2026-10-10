@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 import 'package:opencv_dart/opencv_dart.dart' as cv;
 
+import 'quad_detector.dart';
+
 /// The scanner's page filters (DK-0339; UI spec S2 filter strip). The same
 /// OpenCV code runs on Android and iOS.
 enum ScanFilter {
@@ -168,5 +170,27 @@ Uint8List filterImageSync(
   src.dispose();
   out.dispose();
   if (!ok) throw StateError('could not encode $ext');
+  return bytes;
+}
+
+/// "Clean up like a scan" (Image to PDF, UI spec §21.7: "Crop to the
+/// document and improve contrast"): finds the page in a photo, warps it
+/// flat and applies [ScanFilter.autoColour]. A photo with no page found
+/// keeps its frame and only gets the colour fix. Returns a JPEG; turned by
+/// its EXIF orientation, as OpenCV decodes it. Call it off the UI isolate.
+Uint8List cleanUpImageSync(Uint8List encoded) {
+  final src = cv.imdecode(encoded, cv.IMREAD_COLOR);
+  if (src.isEmpty) {
+    src.dispose();
+    throw const FormatException('not an image');
+  }
+  final found = detectQuad(src);
+  final page = found == null ? src : warpQuad(src, found.quad);
+  final out = applyScanFilter(page, ScanFilter.autoColour);
+  final (ok, bytes) = cv.imencode('.jpg', out);
+  for (final m in {src, page, out}) {
+    m.dispose();
+  }
+  if (!ok) throw StateError('could not encode .jpg');
   return bytes;
 }

@@ -1356,6 +1356,20 @@
   "@onb_look_sub": {
     "description": "O3 card 3 sub line."
   },
+  "me_initials": "Initials",
+  "@me_initials": {"description": "Me → Signatures (DK-0325)."},
+  "me_add_initials": "Add initials",
+  "@me_add_initials": {"description": "Me → Signatures (DK-0325)."},
+  "me_signatures_banner": "Signatures are stored encrypted on this phone. Long-press one to delete it.",
+  "@me_signatures_banner": {"description": "Me → Signatures (DK-0325)."},
+  "me_signature_meta": "{ink} · added {date}",
+  "@me_signature_meta": {"description": "Me → Signatures (DK-0325).", "placeholders": {"ink": {"type": "String"}, "date": {"type": "String"}}},
+  "sign_sheet_title": "Your signatures",
+  "@sign_sheet_title": {"description": "The Signatures sheet (DK-0326)."},
+  "sign_add_date": "Add date next to signature",
+  "@sign_add_date": {"description": "The Signatures sheet (DK-0326)."},
+  "sign_initials_every_page": "Initials on every page",
+  "@sign_initials_every_page": {"description": "The Signatures sheet (DK-0326)."},
   "t2_section_file": "File",
   "@t2_section_file": {"description": "T2's input header, one file (UI spec §20.1)."},
   "t2_section_files": "Files ({n})",
@@ -2236,5 +2250,147 @@
   "me_restore_purchase": "Restore purchase",
   "@me_restore_purchase": {
     "description": "M1 About row; always visible."
+  },
+  "t3_save_menu": "More ways to save",
+  "@t3_save_menu": {"description": "T3's split Save: the chevron that opens Save as copy · Replace original (§20.4), for screen readers."},
+  "t3_save_here": "Save here",
+  "@t3_save_here": {"description": "T3 Save to…: the folder picker's button (DK-0385)."},
+  "t3_use_folder": "Use this folder",
+  "@t3_use_folder": {"description": "T3: the folder picker from the 'Save to' row; Save then saves there (DK-0385)."},
+  "t3_save_elsewhere": "Save outside Dokulo…",
+  "@t3_save_elsewhere": {"description": "T3 Save to…: opens the system's save dialog (DK-0385)."},
+  "organize_insert_photos": "From photos",
+  "@organize_insert_photos": {"description": "P1 insert sheet row (UI spec §18): photos become pages, one each."},
+  "viewer_outline_title": "Contents",
+  "@viewer_outline_title": {"description": "The viewer's outline (bookmarks) sheet title (DK-0309)."},
+  "viewer_outline_empty": "This PDF has no table of contents.",
+  "@viewer_outline_empty": {"description": "The outline sheet when the PDF has no bookmarks (DK-0309)."},
+  "organize_suffix": "organized",
+  "@organize_suffix": {"description": "The suffix of Organize's saved copy: Name – organized.pdf (UI spec §27.3)."},
+  "toast_saved_as": "Saved as “{name}”",
+  "@toast_saved_as": {"description": "After Organize's Save (UI spec §18).", "placeholders": {"name": {"type": "String"}}},
+  "files_drop_hint": "Drop on “{folder}” to move",
+  "@files_drop_hint": {
+    "description": "F1 grid: a file dragged over a folder (DK-0264).",
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "security_app_lock": "App lock",
+  "@security_app_lock": {
+    "description": "M3 Security (DK-0573)."
+  },
+  "security_needs_pin": "Set a locked folder PIN first.",
+  "@security_needs_pin": {
+    "description": "M3 Security: App lock and Change PIN need the folder's PIN."
+  },
+  "security_bio_face": "Face ID",
+  "@security_bio_face": {
+    "description": "Apple's name."
+  },
+  "security_bio_touch": "Touch ID",
+  "@security_bio_touch": {
+    "description": "Apple's name."
+  },
+  "security_bio_fingerprint": "fingerprint",
+  "@security_bio_fingerprint": {
+    "description": "Android's biometric, inside a sentence."
+  },
+  "security_lock_after": "Lock after",
+  "@security_lock_after": {
+    "description": "M3 Security row."
+  },
+  "security_after_now": "Immediately",
+  "@security_after_now": {
+    "description": "Lock after: at once."
+  },
+  "security_after_1min": "1 min",
+  "@security_after_1min": {
+    "description": "Lock after: one minute (the default)."
+  },
+  "security_after_5min": "5 min",
+  "@security_after_5min": {
+    "description": "Lock after: five minutes."
+  },
+  "security_hide_previews": "Hide previews in app switcher",
+  "@security_hide_previews": {
+    "description": "M3 Security row (on by default)."
+  },
+  "security_change_pin": "Change locked folder PIN",
+  "@security_change_pin": {
+    "description": "M3 Security row (DK-0292)."
+  },
+  "security_current_pin": "Enter your current PIN",
+  "@security_current_pin": {
+    "description": "Change PIN, step 1."
+  },
+  "security_pin_changed": "PIN changed",
+  "@security_pin_changed": {
+    "description": "Toast after Change PIN."
+  },
+  "app_lock_title": "Dokulo is locked",
+  "@app_lock_title": {
+    "description": "The app lock screen (DK-0290)."
+  },
+  "app_lock_reason": "Unlock Dokulo",
+  "@app_lock_reason": {
+    "description": "The biometric prompt's reason on the app lock."
+  },
+  "security_app_lock_body": "Ask for {method} or PIN when opening Dokulo",
+  "@security_app_lock_body": {
+    "description": "M3 Security: App lock's description.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "security_unlock_with": "Unlock with {method}",
+  "@security_unlock_with": {
+    "description": "M3 Security row.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "files_settings_save_folder": "Default save folder",
+  "@files_settings_save_folder": {
+    "description": "M3 Files & storage (DK-0572)."
+  },
+  "files_settings_keep": "Keep deleted files",
+  "@files_settings_keep": {
+    "description": "M3 Files & storage: the trash retention."
+  },
+  "storage_title": "Storage",
+  "@storage_title": {
+    "description": "M3 Files & storage: the storage bar's group (DK-0281)."
+  },
+  "storage_cache": "Cache",
+  "@storage_cache": {
+    "description": "Storage bar: thumbnails and temporary files."
+  },
+  "storage_clear": "Clear cache",
+  "@storage_clear": {
+    "description": "Storage bar's button."
+  },
+  "storage_cleared": "Cache cleared",
+  "@storage_cleared": {
+    "description": "Toast after Clear cache."
+  },
+  "files_settings_export": "Export all files",
+  "@files_settings_export": {
+    "description": "M3 Files & storage row."
+  },
+  "files_settings_days": "{n, plural, one{1 day} other{{n} days}}",
+  "@files_settings_days": {
+    "description": "Keep deleted files: 7 or 30.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }
