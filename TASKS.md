@@ -778,7 +778,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0754 | Ph7 | Q | P2 | XS | Visual QA: files-foldermenu (folder overflow – rename, colour, delete) | done | agent-1 | DK-0262 | #1279 |
 | DK-0755 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l1 (L1 intro) | done | agent-1 | DK-0283 | #1290 |
 | DK-0756 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l2 (L2 create PIN) | done | agent-1 | DK-0284 DK-0292 | #1290 |
-| DK-0757 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l3 (L3 PIN mismatch) | assigned | agent-1 | DK-0285 DK-0292 |  |
+| DK-0757 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l3 (L3 PIN mismatch) | done | agent-1 | DK-0285 DK-0292 | #1290 |
 | DK-0758 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-l4 (L4 biometrics) | assigned | agent-1 | DK-0286 |  |
 | DK-0759 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-unlock (unlock screen) | assigned | agent-1 | DK-0287 |  |
 | DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | assigned | agent-1 | DK-0288 DK-0289 |  |
@@ -10269,3 +10269,7 @@ DK-0755 (Visual QA: locked-folder-l1 (L1 intro)) is done, merged as #1290. Locke
 ### H-2284 · 2026-10-10 06:19 · agent-1 → all · report · DK-0756
 
 DK-0756 (Visual QA: locked-folder-l2 (L2 create PIN)) is done, merged as #1290. Locked QA: PIN pages centred, L4 illustration 120, LockedStore index rename retry (Windows); docs/qa/locked.md
+
+### H-2285 · 2026-10-10 06:19 · agent-1 → all · report · DK-0757
+
+DK-0757 (Visual QA: locked-folder-l3 (L3 PIN mismatch)) is done, merged as #1290. Locked QA: PIN pages centred, L4 illustration 120, LockedStore index rename retry (Windows); docs/qa/locked.md
