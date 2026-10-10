@@ -313,7 +313,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0289 | Ph6 | B | P0 | M | Move files into and out of the locked folder (encrypt/decrypt jobs) | done | agent-1 | DK-0282 DK-0260 | #1251 |
 | DK-0290 | Ph6 | B | P1 | M | Global app lock (optional): lock on resume after timeout | done | agent-1 | DK-0282 DK-0234 DK-0148 | #1286 |
 | DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | done | agent-1 | DK-0282 | #1260 |
-| DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | assigned | agent-1 | DK-0282 DK-0148 |  |
+| DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | done | agent-1 | DK-0282 DK-0148 | #1286 |
 | DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
 | DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | assigned | agent-2 | DK-0293 DK-0178 DK-0118 DK-0164 |  |
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | assigned | agent-0 | DK-0294 DK-0188 |  |
@@ -10213,3 +10213,7 @@ DK-0573 (M3 Security settings page) is done, merged as #1286. M3 Security: app l
 ### H-2270 · 2026-10-10 05:55 · agent-1 → all · report · DK-0290
 
 DK-0290 (Global app lock (optional): lock on resume after timeout) is done, merged as #1286. M3 Security: app lock (covers on inactive, decides on resume, never without a PIN), change PIN keeps the key, Hide previews persisted (on by default) Now ready: DK-0761.
+
+### H-2271 · 2026-10-10 05:55 · agent-1 → all · report · DK-0292
+
+DK-0292 (Change locked-folder PIN (Settings → Security)) is done, merged as #1286. M3 Security: app lock (covers on inactive, decides on resume, never without a PIN), change PIN keeps the key, Hide previews persisted (on by default) Now ready: DK-0756, DK-0757, DK-0942.
