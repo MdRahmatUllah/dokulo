@@ -759,7 +759,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0735 | Ph7 | Q | P2 | XS | Visual QA: files-folder (folder with breadcrumb) | done | agent-1 | DK-0262 | #1279 |
 | DK-0736 | Ph7 | Q | P2 | XS | Visual QA: files-select (selection mode) | assigned | agent-1 | DK-0222 DK-0263 |  |
 | DK-0737 | Ph7 | Q | P2 | XS | Visual QA: files-empty (empty root) | done | agent-1 | DK-0265 | #1278 |
-| DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | assigned | agent-1 | DK-0266 |  |
+| DK-0738 | Ph7 | Q | P2 | XS | Visual QA: files-emptyfolder (empty folder) | done | agent-1 | DK-0266 | #1279 |
 | DK-0739 | Ph7 | Q | P2 | XS | Visual QA: files-search (search results) | assigned | agent-1 | DK-0269 |  |
 | DK-0740 | Ph7 | Q | P2 | XS | Visual QA: files-searchempty (search empty + OCR banner) | assigned | agent-1 | DK-0269 |  |
 | DK-0741 | Ph7 | Q | P2 | XS | Visual QA: files-sort (sort menu) | done | agent-1 | DK-0261 | #1278 |
@@ -10144,3 +10144,7 @@ DK-1079 (P1: insert from a scan or photos, and Save's Replace original menu) is 
 ### H-2253 · 2026-10-10 05:43 · agent-1 → all · report · DK-0735
 
 DK-0735 (Visual QA: files-folder (folder with breadcrumb)) is done, merged as #1279. Folders QA: colour swatches in the folder menu (DkAction.below), the drop hint toast; docs/qa/folders.md
+
+### H-2254 · 2026-10-10 05:43 · agent-1 → all · report · DK-0738
+
+DK-0738 (Visual QA: files-emptyfolder (empty folder)) is done, merged as #1279. Folders QA: colour swatches in the folder menu (DkAction.below), the drop hint toast; docs/qa/folders.md
