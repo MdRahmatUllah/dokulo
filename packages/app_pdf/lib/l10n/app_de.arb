@@ -591,6 +591,7 @@
   "app_lock_reason": "Dokulo entsperren",
   "security_app_lock_body": "Beim Öffnen von Dokulo nach {method} oder PIN fragen",
   "security_unlock_with": "Mit {method} entsperren",
+  "sign_photo_no_ink": "Auf diesem Foto ist keine Unterschrift zu sehen.",
   "files_settings_save_folder": "Standardordner zum Speichern",
   "files_settings_keep": "Gelöschte Dateien behalten",
   "storage_title": "Speicher",
