@@ -875,7 +875,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0851 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-split (T3 – multi-file result (Split)) | open |  | DK-0384 DK-0410 DK-0411 |  |
 | DK-0852 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-partial (T3 – partial success (OCR)) | open |  | DK-0383 DK-0475 DK-0476 DK-0477 |  |
 | DK-0853 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-savemenu (T3 – save menu) | done | agent-0 | DK-0379 DK-0385 | #1275 |
-| DK-0854 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replace (T3 – replace original dialog) | assigned | agent-0 | DK-0380 |  |
+| DK-0854 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replace (T3 – replace original dialog) | done | agent-0 | DK-0380 | #1275 |
 | DK-0855 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-discard (T3 – discard dialog) | done | agent-0 | DK-0382 | #1255 |
 | DK-0856 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-aftersave (T3 – after Save) | done | agent-0 | DK-0381 | #1255 |
 | DK-0857 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replaced (T3 – replaced, Undo) | assigned | agent-0 | DK-0226 DK-0380 |  |
@@ -9966,3 +9966,7 @@ PR #1275 for DK-0853 (Visual QA: tool-shell-savemenu (T3 – save menu)) is up. 
 ### H-2209 · 2026-10-10 05:16 · agent-0 → all · report · DK-0853
 
 DK-0853 (Visual QA: tool-shell-savemenu (T3 – save menu)) is done, merged as #1275. T3 save menu / replace / replaced frames on the tool-shell QA board: match; Done after Replace approved.
+
+### H-2210 · 2026-10-10 05:16 · agent-0 → all · report · DK-0854
+
+DK-0854 (Visual QA: tool-shell-replace (T3 – replace original dialog)) is done, merged as #1275. T3 save menu / replace / replaced frames on the tool-shell QA board: match; Done after Replace approved.
