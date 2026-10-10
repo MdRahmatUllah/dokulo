@@ -17,6 +17,8 @@ spec's tables.
 | DK-0741 | `04-files/files-sort` | Match |
 | DK-0749 | `04-files/files-loading` | Match, 2 approved |
 | DK-0750 | `04-files/files-swipe` | Match, 1 approved |
+| DK-0736 | `04-files/files-select` | Match, 1 approved |
+| DK-0752 | `04-files/files-selmore` | Match, 1 approved |
 
 ## Files: the root (DK-0733, DK-0734, DK-0737, DK-0741, DK-0749)
 
@@ -37,6 +39,11 @@ Fixed:
 
 Approved:
 
+- files-select and files-selmore (board: `test/screens/files_select_test.dart`):
+  the selection bar's Share is dimmed until share_plus (DK-1077); More's
+  "Run a tool…" opens the Tools tab until X1 lands (agent-0's DK-0387).
+  The Files header's Select (as the frames) makes the header 48 tall, its
+  touch target, so the rows below sit a little lower than in the frames.
 - files-swipe (board: `test/screens/files_swipe_test.dart`): Share shows
   dimmed and does nothing until share_plus lands (DK-1077), as the file
   action sheet's Share; Delete and the full swipe ("Moved to Recently
