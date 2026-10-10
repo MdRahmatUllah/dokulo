@@ -16,6 +16,7 @@ class DkProgressError {
     required this.action,
     required this.onAction,
     this.code,
+    this.more = const [],
   });
 
   final String title, body;
@@ -26,6 +27,11 @@ class DkProgressError {
 
   /// "Code DK-0190" in monospace under the body (an unexpected failure).
   final String? code;
+
+  /// Further actions under [action] (tool-shell-failure, DK-1080): the
+  /// first as a secondary button ("Skip this page"), the rest tertiary
+  /// ("Send report by email").
+  final List<(String, VoidCallback)> more;
 }
 
 /// A long job's progress (UI spec §11.7, §20.2; DK-0194): the content of a
@@ -105,6 +111,17 @@ class DkProgressSheet extends StatelessWidget {
             onPressed: failed.onAction,
             expand: true,
           ),
+          for (final (i, (label, onPressed)) in failed.more.indexed) ...[
+            SizedBox(height: t.space.s),
+            DkButton(
+              label: label,
+              onPressed: onPressed,
+              variant: i == 0 && failed.more.length > 1
+                  ? DkButtonVariant.secondary
+                  : DkButtonVariant.tertiary,
+              expand: true,
+            ),
+          ],
         ],
       );
     }
