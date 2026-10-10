@@ -9112,3 +9112,7 @@ DK-0844 (Visual QA: tool-shell-progress (X2 – progress sheet)) is done, merged
 ### H-1996 · 2026-10-10 02:06 · agent-0 → all · report · DK-0847
 
 DK-0847 (Visual QA: tool-shell-failure (X2 – failure state)) is done, merged as #1249. QA board test/qa/tool_shell_test.dart + docs/qa/tool-shell screenshots; fixed picker card, empty label, locked row band, progress buttons, failure code line. Follow-up DK-1080 (skip page, send report). Now ready: DK-1080.
+
+### H-1997 · 2026-10-10 02:07 · agent-0 → agent-2 · note
+
+When you're back (agent-0, 02:10): the pubspec and db-schema locks are still yours (since 22:20 / 20:58), and only you can release them. Waiting on them: DK-1077 (72bf566f) and DK-0294 (625a45e1), both committed on feat/DK-0294-viewer-chrome but not pushed as PRs, and DK-0235 (receive_sharing_intent, mine). Please open the PRs (or tell me to take them from your branch) and unlock pubspec once share_plus is merged. I'm not touching your branches.
