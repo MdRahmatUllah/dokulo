@@ -356,7 +356,10 @@ void main() {
     await settle(tester);
     await tester.tap(find.text('Save'));
     await settleUntil(tester, () => find.text('Viewer').evaluate().isNotEmpty);
-    final copy = File('${store.userFolder.path}${sep}Taxes${sep}Five (2).pdf');
+    // "{name} – organized.pdf" (UI spec §18, §27.3).
+    final copy = File(
+      '${store.userFolder.path}${sep}Taxes${sep}Five – organized.pdf',
+    );
     expect(copy.existsSync(), isTrue);
     expect(
       (await tester.runAsync(() => PdfEngine.inspect(copy.path)))!.pageCount,
@@ -413,6 +416,59 @@ void main() {
       5,
     );
   });
+
+  testWidgets("Save's long-press menu › Replace original (DK-0805): asks, "
+      'writes the pages over the file, keeps the original in Versions', (
+    tester,
+  ) async {
+    await pumpP1(tester);
+    final before = await tester.runAsync(original.readAsBytes);
+    await tapPage(tester, 1);
+    await tester.tap(find.text('Delete'));
+    await settle(tester);
+    await tester.longPress(find.text('Save'));
+    await settle(tester);
+    expect(find.text('Save as copy'), findsOneWidget);
+    await tester.tap(find.text('Replace original'));
+    await settle(tester);
+    expect(find.text('Replace the original file?'), findsOneWidget);
+    await tester.tap(find.text('Replace'));
+    await settleUntil(tester, () => find.text('Viewer').evaluate().isNotEmpty);
+    expect(
+      (await tester.runAsync(() => PdfEngine.inspect(original.path)))!
+          .pageCount,
+      4,
+    );
+    final kept = await tester.runAsync(() => db.select(db.versions).get());
+    expect(kept, hasLength(1));
+    expect(await tester.runAsync(File(kept!.single.path).readAsBytes), before);
+  });
+
+  for (final (theme, tokens) in [
+    ('light', DkTokens.light),
+    ('dark', DkTokens.dark),
+  ]) {
+    testWidgets('golden: organize_savemenu_$theme (DK-0805)', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 12);
+      await tester.longPress(find.text('Save'));
+      await settle(tester);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_savemenu_$theme.png'),
+      );
+    });
+
+    testWidgets('golden: organize_large_$theme (DK-0804)', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 300);
+      // Scrolled to pages 142–150, as the frame.
+      await tester.drag(find.byType(DkPageGrid), const Offset(0, -8580));
+      await settle(tester);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_large_$theme.png'),
+      );
+    });
+  }
 
   testWidgets('300 pages: only the visible ones are built, as skeletons '
       'with their numbers until they render (DK-0335)', (tester) async {

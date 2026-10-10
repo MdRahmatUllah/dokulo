@@ -53,6 +53,7 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
     this.trailing,
   }) : onCancel = null,
        onDone = null,
+       onDoneLongPress = null,
        cancelLabel = null,
        doneLabel = null,
        _editing = false;
@@ -67,6 +68,7 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
     required this.onDone,
     this.cancelLabel,
     this.doneLabel,
+    this.onDoneLongPress,
   }) : leading = DkTopBarLeading.none,
        onLeading = null,
        actions = const [],
@@ -98,6 +100,10 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
   final Widget? trailing;
 
   final VoidCallback? onCancel, onDone;
+
+  /// Editing: a long-press on Done opens a menu anchored to it (P1's Save:
+  /// Save as copy · Replace original, UI spec §18).
+  final void Function(BuildContext anchor)? onDoneLongPress;
   final bool _editing;
 
   /// Cancel and Done, when a screen says something more specific.
@@ -179,12 +185,25 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
               onPressed: widget.onLeading ?? () => Navigator.maybePop(context),
             ),
           };
+    // Editing only: the other bars may sit outside the app's localizations.
+    Widget done() => DkTextAction(
+      label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
+      onTap: widget.onDone,
+      bold: true,
+    );
+    final menu = widget.onDone == null ? null : widget.onDoneLongPress;
     final Widget trailing = editing
-        ? DkTextAction(
-            label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
-            onTap: widget.onDone,
-            bold: true,
-          )
+        ? menu == null
+              ? done()
+              : Builder(
+                  builder: (anchor) => Semantics(
+                    onLongPress: () => menu(anchor),
+                    child: GestureDetector(
+                      onLongPress: () => menu(anchor),
+                      child: done(),
+                    ),
+                  ),
+                )
         : widget.trailing ??
               _Actions(actions: widget.actions, onOverflow: widget.onOverflow);
 

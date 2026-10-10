@@ -18,6 +18,7 @@ export 'package:drift/drift.dart'
 export 'src/files/file_store.dart';
 export 'src/files/locked_crypto.dart';
 export 'src/files/locked_store.dart';
+export 'src/files/signature_store.dart';
 export 'src/files/text_indexer.dart';
 export 'src/files/version_store.dart';
 export 'src/pdf/pdf_annotations.dart';
