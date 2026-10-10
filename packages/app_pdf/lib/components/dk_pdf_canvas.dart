@@ -24,6 +24,8 @@ class DkPdfCanvas extends StatefulWidget {
     this.initialPage = 1,
     this.onPageChanged,
     this.onReady,
+    this.onTap,
+    this.onScrollStart,
     this.onLink,
     this.night = false,
     this.markup,
@@ -42,6 +44,12 @@ class DkPdfCanvas extends StatefulWidget {
   /// The page mostly in view (1-based), for the page pill.
   final ValueChanged<int?>? onPageChanged;
   final VoidCallback? onReady;
+
+  /// A single tap on the pages (V1 shows or hides its chrome, DK-0294).
+  final VoidCallback? onTap;
+
+  /// The user started to scroll or zoom.
+  final VoidCallback? onScrollStart;
 
   /// A link to a web address was tapped (V1 asks first, DK-1088); a link to
   /// a page in the file jumps there. Null: links do nothing.
@@ -133,11 +141,19 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
         // centres.
         sizeDelegateProvider: const PdfViewerSizeDelegateProviderSmart(),
         onGeneralTap: (context, controller, details) {
+          if (details.type == PdfViewerGeneralTapType.tap &&
+              widget.onTap != null) {
+            widget.onTap!();
+            return false; // links and selection still see the tap
+          }
           if (details.type != PdfViewerGeneralTapType.doubleTap) return false;
           _fitWidth(controller, details.documentPosition);
           return true;
         },
         onPageChanged: widget.onPageChanged,
+        onInteractionStart: widget.onScrollStart == null
+            ? null
+            : (_) => widget.onScrollStart!(),
         // The search attaches once the viewer has its document.
         onViewerReady: (_, controller) {
           widget.search?.attach(controller);
