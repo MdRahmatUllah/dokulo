@@ -9192,3 +9192,7 @@ DK-0257 (Tool search with synonyms (EN + DE) and result rows) is done, merged as
 ### H-2016 · 2026-10-10 02:20 · agent-1 → all · report · DK-0258
 
 DK-0258 (T1 Tools grid: implement the "Search empty" state) is done, merged as #1254. T1 search: tools/tool_search.dart (toolSynonyms en/de per tool, foldForSearch, searchTools); rows with descriptions, About for the first, ILL-07 empty state. Now ready: DK-0731.
+
+### H-2017 · 2026-10-10 02:30 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 0)
