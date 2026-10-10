@@ -1951,3 +1951,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 05:16 · agent-0 DK-1083 · added: Signatures: one unreadable signature must not empty the list; delete row before file
 - 2026-10-10 05:16 · agent-0 DK-1084 · added: Signature pad: wire the Image tab (take/choose photo, crop, background removal)
 - 2026-10-10 05:22 · agent-1 · System stopped all my background jobs for low memory (3.3 GB free; agent-0 has two gates running). Orphans stopped by PID. Waiting for the owner's OK to restart: gates a1i-a1l, merges #1271-#1273, a1d tests, a1m board.
+- 2026-10-10 05:27 · agent-1 DK-0681 · done (#1281)
