@@ -131,6 +131,24 @@ void main() {
     expect(router.state.extra, [ids[0]]);
   });
 
+  testWidgets('More → Run a tool… opens X1 with the selected files', (
+    tester,
+  ) async {
+    await three(tester);
+    await pumpFiles(tester, f);
+    await tester.longPress(find.text('A.pdf'));
+    await settle(tester);
+    await tester.tap(find.text('B.pdf'));
+    await settle(tester);
+    await tester.tap(find.text('More'));
+    await settle(tester);
+    await tester.tap(find.text('Run a tool…'));
+    await settle(tester);
+    expect(find.text('2 files'), findsOneWidget);
+    expect(find.text('Merge PDF'), findsWidgets);
+    expect(find.byType(DkSelectionBar), findsNothing);
+  });
+
   testWidgets('back ends selection mode', (tester) async {
     await three(tester);
     await pumpFiles(tester, f);

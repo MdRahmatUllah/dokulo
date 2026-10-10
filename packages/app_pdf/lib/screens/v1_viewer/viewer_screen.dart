@@ -162,6 +162,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                           Routes.viewer('${widget.fileId}', edit: true),
                         ),
                         onRename: () => renameFile(context, ref, value),
+                        // X1 with this file (DK-1094).
                         onTools: () => showToolPicker(context, [value]),
                         onOverflow: (anchor) => _menu(anchor, value),
                       ),
