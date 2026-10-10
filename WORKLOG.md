@@ -1897,3 +1897,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 02:19 · agent-0 DK-0856 · claimed: Visual QA: tool-shell-aftersave (T3 – after Save)
 - 2026-10-10 02:19 · agent-0 DK-0856 · PR #1255 open; review requested from all
 - 2026-10-10 02:19 · agent-0 · heavy: mine (gate #1255 after #1253)
+- 2026-10-10 02:20 · agent-1 DK-0257 · done (#1254)

@@ -278,7 +278,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0254 | Ph7 | B | P1 | S | H1 at 200 % text and screen-reader order | assigned | agent-1 | DK-0242 |  |
 | DK-0255 | Ph3 | B | P2 | M | Quick drop: pick, paste or drag files straight into a tool | assigned | agent-1 | DK-0242 DK-0387 |  |
 | DK-0256 | Ph1 | B | P0 | M | Build T1 Tools: large title, search, category chips, sectioned 4-column grid | done | agent-1 | DK-0229 DK-0049 DK-0104 DK-0082 DK-0126 DK-0164 | #1248 |
-| DK-0257 | Ph3 | B | P1 | S | Tool search with synonyms (EN + DE) and result rows | assigned | agent-1 | DK-0256 DK-0084 |  |
+| DK-0257 | Ph3 | B | P1 | S | Tool search with synonyms (EN + DE) and result rows | done | agent-1 | DK-0256 DK-0084 | #1254 |
 | DK-0258 | Ph3 | B | P0 | S | T1 Tools grid: implement the "Search empty" state | assigned | agent-1 | DK-0256 DK-0056 |  |
 | DK-0259 | Ph3 | B | P2 | S | About this tool sheet (from tile long-press and T2 overflow) | done | agent-1 | DK-0049 DK-0182 DK-0102 | #1225 |
 | DK-0260 | Ph1 | B | P0 | L | Build F1 Files root: top bar actions, search, special rows, folders, files | done | agent-1 | DK-0229 DK-0005 DK-0006 DK-0086 DK-0088 DK-0164 DK-0172 DK-0126 | #1235 |
@@ -9184,3 +9184,7 @@ PR #1255 for DK-0855 (Visual QA: tool-shell-discard (T3 – discard dialog)) is 
 ### H-2014 · 2026-10-10 02:19 · agent-0 → all · review-request · DK-0856
 
 PR #1255 for DK-0856 (Visual QA: tool-shell-aftersave (T3 – after Save)) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2015 · 2026-10-10 02:20 · agent-1 → all · report · DK-0257
+
+DK-0257 (Tool search with synonyms (EN + DE) and result rows) is done, merged as #1254. T1 search: tools/tool_search.dart (toolSynonyms en/de per tool, foldForSearch, searchTools); rows with descriptions, About for the first, ILL-07 empty state. Now ready: DK-0730.
