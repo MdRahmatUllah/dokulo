@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app_pdf/components/dk_logo.dart';
 import 'package:app_pdf/components/dk_pin_pad.dart';
 import 'package:app_pdf/components/dk_switch.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
@@ -184,6 +185,46 @@ void main() {
       // drawn while hidden), so the first frame back is the lock.
       await background(tester, Duration.zero);
       expect(find.text('Dokulo is locked'), findsOneWidget);
+    });
+
+    testWidgets('covered from leaving until the lock is decided', (
+      tester,
+    ) async {
+      final setup = LockedSetup();
+      await setup.vault.setPin('482915');
+      await pump(
+        tester,
+        setup,
+        app(),
+        prefs: {'security.appLock': true},
+        kind: null,
+      );
+      final b = tester.binding;
+      b.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      b.handleAppLifecycleStateChanged(AppLifecycleState.hidden);
+      await tester.pump();
+      expect(find.byType(DkLogo), findsOneWidget);
+      expect(find.byType(DkPinPad), findsNothing, reason: 'no prompt yet');
+      b.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+      b.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      await tester.pumpAndSettle();
+      expect(find.byType(DkLogo), findsNothing, reason: '< 1 min');
+    });
+
+    testWidgets('no PIN (prefs restored without the keychain): no lock', (
+      tester,
+    ) async {
+      final setup = LockedSetup();
+      await pump(
+        tester,
+        setup,
+        app(),
+        prefs: {'security.appLock': true, 'security.lockAfter': 0},
+        kind: null,
+      );
+      await background(tester, const Duration(minutes: 5));
+      expect(find.text('Dokulo is locked'), findsNothing);
+      expect(find.byType(DkLogo), findsNothing);
     });
 
     testWidgets('off: never locks', (tester) async {

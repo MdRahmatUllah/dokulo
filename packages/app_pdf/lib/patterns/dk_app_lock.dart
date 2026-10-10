@@ -25,32 +25,43 @@ class DkAppLock extends ConsumerStatefulWidget {
   ConsumerState<DkAppLock> createState() => _DkAppLockState();
 }
 
+enum _Lock { open, covered, locked }
+
 class _DkAppLockState extends ConsumerState<DkAppLock> {
   late final AppLifecycleListener _lifecycle;
   DateTime? _hiddenAt;
-  var _locked = false;
+  var _lock = _Lock.open;
 
   @override
   void initState() {
     super.initState();
     _lifecycle = AppLifecycleListener(
+      // Covered on leaving, so no content shows on the way back before the
+      // lock is decided; the PIN pad (and its biometric prompt) only once
+      // the app is back.
       onHide: () {
         _hiddenAt = widget._now();
-        // "Immediately": locked before anything shows again.
-        final s = ref.read(securitySettingsProvider);
-        if (s.appLock && s.lockAfter == 0) _lock();
-      },
-      onShow: () {
-        final s = ref.read(securitySettingsProvider);
-        final hidden = _hiddenAt;
-        _hiddenAt = null;
-        if (s.appLock &&
-            hidden != null &&
-            widget._now().difference(hidden).inSeconds >= s.lockAfter) {
-          _lock();
+        if (ref.read(securitySettingsProvider).appLock && _lock == _Lock.open) {
+          setState(() => _lock = _Lock.covered);
         }
       },
+      onShow: _decide,
     );
+  }
+
+  Future<void> _decide() async {
+    final hidden = _hiddenAt;
+    _hiddenAt = null;
+    if (_lock != _Lock.covered) return;
+    final s = ref.read(securitySettingsProvider);
+    final due =
+        hidden != null &&
+        widget._now().difference(hidden).inSeconds >= s.lockAfter;
+    // Without a PIN nothing could open the lock: prefs restored from a
+    // backup that the keychain didn't come with.
+    final pin = due && await ref.read(lockedVaultProvider).hasPin;
+    if (!mounted) return;
+    setState(() => _lock = pin ? _Lock.locked : _Lock.open);
   }
 
   @override
@@ -59,27 +70,30 @@ class _DkAppLockState extends ConsumerState<DkAppLock> {
     super.dispose();
   }
 
-  void _lock() {
-    if (!mounted || _locked) return;
-    setState(() => _locked = true);
-  }
-
   @override
   Widget build(BuildContext context) {
     // Watched, so the settings (and the prefs under them) are loaded before
     // the app first leaves: a read in onHide alone would see the defaults.
     ref.watch(securitySettingsProvider);
+    final shut = _lock != _Lock.open;
     return Stack(
       children: [
         // Under the lock, the app keeps its state but takes no input.
         ExcludeSemantics(
-          excluding: _locked,
-          child: IgnorePointer(ignoring: _locked, child: widget.child),
+          excluding: shut,
+          child: IgnorePointer(ignoring: shut, child: widget.child),
         ),
-        if (_locked)
+        if (_lock == _Lock.covered)
+          Positioned.fill(
+            child: ColoredBox(
+              color: context.tokens.color.background,
+              child: const Center(child: DkLogo.symbol(size: 56)),
+            ),
+          ),
+        if (_lock == _Lock.locked)
           Positioned.fill(
             child: _LockScreen(
-              onUnlocked: () => setState(() => _locked = false),
+              onUnlocked: () => setState(() => _lock = _Lock.open),
             ),
           ),
       ],
