@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 08:43
+last-seen: 2026-10-10 08:46
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-1095 Device check: the native channels (notifications, mail, links) on Android — claimed 2026-10-10 08:43.
+DK-1095 in review as PR #1325: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
