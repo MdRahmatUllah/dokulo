@@ -16,6 +16,7 @@ import '../../providers/files_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../files/files_screen.dart';
+import 'continue_card.dart';
 import 'pinned_tools.dart';
 
 /// H1 · Home (DK-0242; UI spec §15.1): the large top bar "Dokulo" with
@@ -62,6 +63,7 @@ class HomeScreen extends ConsumerWidget {
                 child: DkPrivacyLine(where: DkPrivacyContext.home),
               ),
             ),
+            const HomeContinueCard(),
             const PinnedToolsSection(),
             SliverPadding(
               padding: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),

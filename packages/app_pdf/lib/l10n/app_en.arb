@@ -2398,5 +2398,17 @@
   "notif_prompt_title": "Get a notice when long jobs finish?",
   "@notif_prompt_title": {"description": "The notice pre-prompt, 30 s into a job in the background (DK-0378, tool-shell-notifprompt)."},
   "notif_prompt_body": "Dokulo keeps working in the background. A notice tells you when it's done. Nothing else is sent.",
-  "@notif_prompt_body": {"description": "The notice pre-prompt's body (DK-0378)."}
+  "@notif_prompt_body": {"description": "The notice pre-prompt's body (DK-0378)."},
+  "home_continue_job": "{tool} · {file}",
+  "@home_continue_job": {
+    "description": "H1 continue card: a job that finished in the background, for a tool without its own done title (DK-0247; Compress says \"Compressed {file}\").",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      },
+      "file": {
+        "type": "String"
+      }
+    }
+  }
 }

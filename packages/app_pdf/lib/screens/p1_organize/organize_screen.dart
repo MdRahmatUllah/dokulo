@@ -19,6 +19,7 @@ import '../../components/dk_menu.dart';
 import '../../components/dk_page_grid.dart';
 import '../../components/dk_segmented.dart';
 import '../../components/dk_sheet.dart';
+import '../../components/dk_tappable.dart';
 import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
@@ -258,6 +259,13 @@ class _OrganizeState extends ConsumerState<_Organize> {
     final l = AppLocalizations.of(context);
     final edit = _edit;
     final selecting = _selected.isNotEmpty;
+    // Tablets (DK-0651, 24-tablet/tablet-organize-*): 24 at the sides, the
+    // title stays while selecting (the count goes in the sub-bar), and one
+    // centred row of actions with Insert pages replaces the + and the
+    // selection bar.
+    final grid = DkGrid.forWidth(MediaQuery.sizeOf(context).width);
+    final tablet = grid != DkGrid.phone;
+    final side = tablet ? t.space.xl : t.space.l;
     return PopScope(
       canPop: !(edit?.changed ?? false) && !selecting,
       onPopInvokedWithResult: (didPop, _) {
@@ -268,7 +276,7 @@ class _OrganizeState extends ConsumerState<_Organize> {
         backgroundColor: t.color.background,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(DkTopBar.height),
-          child: selecting
+          child: selecting && !tablet
               ? DkTopBar.editing(
                   title: l.common_selected(_selected.length),
                   onCancel: () => setState(() => _selected = {}),
@@ -293,6 +301,8 @@ class _OrganizeState extends ConsumerState<_Organize> {
                 children: [
                   _SubBar(
                     count: edit.pages.length,
+                    selected: tablet ? _selected.length : 0,
+                    side: side,
                     onUndo: edit.canUndo ? () => _do((e) => e.undo()) : null,
                     onRedo: edit.canRedo ? () => _do((e) => e.redo()) : null,
                   ),
@@ -300,6 +310,7 @@ class _OrganizeState extends ConsumerState<_Organize> {
                     child: DkPageGrid(
                       pageIds: edit.pages,
                       selected: _selected,
+                      edgePadding: side,
                       // A tap selects; a long-press lifts the page only:
                       // mid-drag the screen stays out of selection mode
                       // (organize-drag, DK-0799).
@@ -311,9 +322,7 @@ class _OrganizeState extends ConsumerState<_Organize> {
                       },
                       // Phones 3 columns, tablets 5 and 8; pinch for 2–6
                       // (DK-0334).
-                      initialColumns: switch (DkGrid.forWidth(
-                        MediaQuery.sizeOf(context).width,
-                      )) {
+                      initialColumns: switch (grid) {
                         DkGrid.phone => 3,
                         DkGrid.smallTablet => 5,
                         _ => 8,
@@ -323,7 +332,7 @@ class _OrganizeState extends ConsumerState<_Organize> {
                   ),
                 ],
               ),
-        floatingActionButton: selecting || edit == null
+        floatingActionButton: selecting || edit == null || tablet
             ? null
             // A 56 primary circle with the add icon and the floating shadow
             // (the artboard's FAB, as the Scan button).
@@ -349,7 +358,44 @@ class _OrganizeState extends ConsumerState<_Organize> {
                   ),
                 ),
               ),
-        bottomNavigationBar: selecting
+        bottomNavigationBar: tablet && edit != null
+            ? _TabletActions(
+                actions: [
+                  (
+                    DkIcons.tool('rotate'),
+                    l.organize_rotate,
+                    selecting ? () => _do((e) => e.rotate(_selected, 1)) : null,
+                  ),
+                  (
+                    DkIcons.duplicate,
+                    l.common_duplicate,
+                    selecting
+                        ? () {
+                            _do((e) => e.duplicate(_selected));
+                            setState(() => _selected = {});
+                          }
+                        : null,
+                  ),
+                  (
+                    DkIcons.tool('extract'),
+                    l.organize_extract,
+                    selecting && !_saving ? _extract : null,
+                  ),
+                  (
+                    DkIcons.delete,
+                    l.common_delete,
+                    selecting && _selected.length < edit.pages.length
+                        ? _delete
+                        : null,
+                  ),
+                  (
+                    DkIcons.add,
+                    l.organize_insert_title,
+                    () => _showInsert(edit),
+                  ),
+                ],
+              )
+            : selecting
             ? DkSelectionBar(
                 actions: [
                   DkBarAction(
@@ -477,9 +523,19 @@ class _OrganizeState extends ConsumerState<_Organize> {
 
 /// "12 pages" with Undo and Redo (UI spec §18).
 class _SubBar extends StatelessWidget {
-  const _SubBar({required this.count, this.onUndo, this.onRedo});
+  const _SubBar({
+    required this.count,
+    required this.side,
+    this.selected = 0,
+    this.onUndo,
+    this.onRedo,
+  });
 
   final int count;
+
+  /// Tablets: "12 pages · 2 selected".
+  final int selected;
+  final double side;
   final VoidCallback? onUndo, onRedo;
 
   @override
@@ -487,12 +543,15 @@ class _SubBar extends StatelessWidget {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: t.space.l),
+      padding: EdgeInsets.symmetric(horizontal: side),
       child: Row(
         children: [
           Expanded(
             child: Text(
-              l.meta_pages(count),
+              [
+                l.meta_pages(count),
+                if (selected > 0) l.common_selected(selected),
+              ].join(' · '),
               style: t.text.labelM.copyWith(color: t.color.textSecondary),
             ),
           ),
@@ -507,6 +566,71 @@ class _SubBar extends StatelessWidget {
             onPressed: onRedo,
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// A tablet's bottom row (24-tablet/tablet-organize-*): icon and label side
+/// by side, centred, in `textPrimary`; a null action is disabled.
+class _TabletActions extends StatelessWidget {
+  const _TabletActions({required this.actions});
+
+  final List<(IconData, String, VoidCallback?)> actions;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: t.color.surface,
+        border: Border(top: t.divider),
+      ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: t.space.s),
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: t.space.s,
+            children: [
+              for (final (icon, label, onTap) in actions)
+                Semantics(
+                  button: true,
+                  enabled: onTap != null,
+                  label: label,
+                  excludeSemantics: true,
+                  onTap: onTap,
+                  child: DkTappable(
+                    onTap: onTap,
+                    radius: t.radius.m,
+                    builder: (context, pressed) => Opacity(
+                      opacity: onTap == null ? 0.4 : 1,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(minHeight: 48),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: t.space.m),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            spacing: t.space.s,
+                            children: [
+                              DkIcon(icon, color: t.color.iconPrimary),
+                              Text(
+                                label,
+                                style: t.text.bodyL.copyWith(
+                                  color: t.color.textPrimary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }
