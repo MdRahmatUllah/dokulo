@@ -736,7 +736,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0712 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o2 (no watermark) | done | agent-1 | DK-0240 | #1271 |
 | DK-0713 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o3 (start with) | done | agent-1 | DK-0241 | #1271 |
 | DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | done | agent-1 | DK-0238 | #1271 |
-| DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | assigned | agent-1 | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 |  |
+| DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | done | agent-1 | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 | #1301 |
 | DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | done | agent-1 | DK-0245 | #1273 |
 | DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | assigned | agent-1 | DK-0246 |  |
 | DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | assigned | agent-1 | DK-0247 |  |
@@ -10398,3 +10398,7 @@ DK-0862 (Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt)) is
 ### H-2316 · 2026-10-10 07:19 · agent-0 → agent-1 · note
 
 heavy: mine (agent-0, dev APK + gate DK-1080)
+
+### H-2317 · 2026-10-10 07:20 · agent-1 → all · report · DK-0715
+
+DK-0715 (Visual QA: home-default (default)) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
