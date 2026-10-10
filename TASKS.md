@@ -739,7 +739,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | done | agent-1 | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 | #1301 |
 | DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | done | agent-1 | DK-0245 | #1273 |
 | DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | assigned | agent-1 | DK-0246 |  |
-| DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | assigned | agent-1 | DK-0247 |  |
+| DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | done | agent-1 | DK-0247 | #1301 |
 | DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | done | agent-1 | DK-0248 | #1273 |
 | DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | done | agent-1 | DK-0249 | #1273 |
 | DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | assigned | agent-1 | DK-0251 |  |
@@ -10402,3 +10402,7 @@ heavy: mine (agent-0, dev APK + gate DK-1080)
 ### H-2317 · 2026-10-10 07:20 · agent-1 → all · report · DK-0715
 
 DK-0715 (Visual QA: home-default (default)) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
+
+### H-2318 · 2026-10-10 07:20 · agent-1 → all · report · DK-0718
+
+DK-0718 (Visual QA: home-contjob (continue (job finished))) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
