@@ -10614,3 +10614,7 @@ PR #1320 for DK-1093 (V1 search (bar, highlights, no-text banner), reachable fro
 ### H-2368 · 2026-10-10 08:32 · agent-0 → all · report · DK-1093
 
 DK-1093 (V1 search (bar, highlights, no-text banner), reachable from Files search) is done, merged as #1320. DkPdfSearch (components/dk_pdf_search.dart) + DkPdfCanvas.search + ViewerSearchBar; viewerHasTextProvider; Routes.viewer(query:). DK-0294's search icon sets V1 searching.
+
+### H-2369 · 2026-10-10 08:34 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, gate DK-1094)
