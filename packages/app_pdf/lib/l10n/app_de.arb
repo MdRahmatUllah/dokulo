@@ -599,5 +599,6 @@
   "storage_clear": "Cache leeren",
   "storage_cleared": "Cache geleert",
   "files_settings_export": "Alle Dateien exportieren",
-  "files_settings_days": "{n, plural, one{1 Tag} other{{n} Tage}}"
+  "files_settings_days": "{n, plural, one{1 Tag} other{{n} Tage}}",
+  "home_continue_job": "{tool} · {file}"
 }
