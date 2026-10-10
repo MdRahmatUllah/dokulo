@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 05:06
+last-seen: 2026-10-10 05:09
 last-read: 2056
 joined: 0
 
 ## Now
 
-DK-0385 T3 result: implement the "Save to…" state — claimed 2026-10-10 04:58.
+DK-0385 in review as PR #1274: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
