@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 import '../theme/dk_tokens.dart';
+import 'dk_editor_bars.dart';
 
 /// The viewer's canvas (V1, UI spec §17.1 region 2; DK-0293): pdfrx's
 /// [PdfViewer] on PDFium, pages in one continuous vertical scroll at fit
@@ -24,6 +25,7 @@ class DkPdfCanvas extends StatefulWidget {
     this.onReady,
     this.onLink,
     this.night = false,
+    this.markup,
   });
 
   final String path;
@@ -42,6 +44,11 @@ class DkPdfCanvas extends StatefulWidget {
   /// A link to a web address was tapped (V1 asks first, DK-1088); a link to
   /// a page in the file jumps there. Null: links do nothing.
   final ValueChanged<Uri>? onLink;
+
+  /// Selecting text (UI spec §17.1 Text selected; DK-1092): the selection
+  /// in `color.primary` at 25 %, primary handles, and DkMarkupBar beside it
+  /// with these actions; Copy copies. Null: no selection.
+  final List<DkMarkupAction>? markup;
 
   /// Night mode (UI spec §17.1; DK-1089): the pages inverted, dark with
   /// light text, on `color.nightCanvas`.
@@ -106,6 +113,27 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
         onViewerReady: widget.onReady == null
             ? null
             : (_, _) => widget.onReady!(),
+        textSelectionParams: PdfTextSelectionParams(
+          enabled: widget.markup != null,
+        ),
+        buildContextMenu: widget.markup == null
+            ? null
+            : (context, params) {
+                final d = params.textSelectionDelegate;
+                if (params.contextMenuFor != PdfViewerPart.selectedText ||
+                    !d.hasSelectedText) {
+                  return null;
+                }
+                return DkMarkupBar(
+                  actions: widget.markup!,
+                  onAction: (action) async {
+                    if (action == DkMarkupAction.copy) {
+                      await d.copyTextSelection();
+                    }
+                    params.dismissContextMenu();
+                  },
+                );
+              },
         linkHandlerParams: onLink == null
             ? null
             : PdfLinkHandlerParams(
@@ -119,9 +147,20 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
               ),
       ),
     );
+    // The selection in `color.primary` at 25 %, its handles in primary
+    // (§17.1): pdfrx reads them from the theme.
+    final themed = Theme(
+      data: Theme.of(context).copyWith(
+        textSelectionTheme: TextSelectionThemeData(
+          selectionColor: t.color.primary.withValues(alpha: 0.25),
+          selectionHandleColor: t.color.primary,
+        ),
+      ),
+      child: viewer,
+    );
     return widget.night
-        ? ColorFiltered(colorFilter: _night, child: viewer)
-        : viewer;
+        ? ColorFiltered(colorFilter: _night, child: themed)
+        : themed;
   }
 
   /// Fits the page under [documentPosition] (or the current one) to the

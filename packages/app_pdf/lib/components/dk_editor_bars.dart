@@ -183,9 +183,17 @@ enum DkMarkupAction { copy, highlight, underline, strike, ask }
 /// Strike are icon-only with a screen-reader label). [DkMarkupBar.over]
 /// places it 8 above the selection, or below near the top.
 class DkMarkupBar extends StatelessWidget {
-  const DkMarkupBar({super.key, required this.onAction});
+  const DkMarkupBar({
+    super.key,
+    required this.onAction,
+    this.actions = DkMarkupAction.values,
+  });
 
   final ValueChanged<DkMarkupAction> onAction;
+
+  /// The actions it offers, in this order (a screen shows only the ones it
+  /// can do yet).
+  final List<DkMarkupAction> actions;
 
   /// Places the bar for a selection [selection] (in the coordinates of the
   /// Stack it is put in): centred on it, 8 above, or 8 below when there is
@@ -256,30 +264,35 @@ class DkMarkupBar extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                item(DkMarkupAction.copy, DkIcons.copy, l.markup_copy),
-                item(
-                  DkMarkupAction.highlight,
-                  DkIcons.highlighter,
-                  l.markup_highlight,
-                ),
-                item(
-                  DkMarkupAction.underline,
-                  DkIcons.underline,
-                  l.markup_underline,
-                  iconOnly: true,
-                ),
-                item(
-                  DkMarkupAction.strike,
-                  DkIcons.strike,
-                  l.markup_strike,
-                  iconOnly: true,
-                ),
-                item(
-                  DkMarkupAction.ask,
-                  DkIcons.tool('ask'),
-                  l.markup_ask,
-                  accent: true,
-                ),
+                if (actions.contains(DkMarkupAction.copy))
+                  item(DkMarkupAction.copy, DkIcons.copy, l.markup_copy),
+                if (actions.contains(DkMarkupAction.highlight))
+                  item(
+                    DkMarkupAction.highlight,
+                    DkIcons.highlighter,
+                    l.markup_highlight,
+                  ),
+                if (actions.contains(DkMarkupAction.underline))
+                  item(
+                    DkMarkupAction.underline,
+                    DkIcons.underline,
+                    l.markup_underline,
+                    iconOnly: true,
+                  ),
+                if (actions.contains(DkMarkupAction.strike))
+                  item(
+                    DkMarkupAction.strike,
+                    DkIcons.strike,
+                    l.markup_strike,
+                    iconOnly: true,
+                  ),
+                if (actions.contains(DkMarkupAction.ask))
+                  item(
+                    DkMarkupAction.ask,
+                    DkIcons.tool('ask'),
+                    l.markup_ask,
+                    accent: true,
+                  ),
               ],
             ),
           ),

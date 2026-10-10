@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../components/dk_loading_spinner.dart';
 import '../../components/dk_banner.dart';
+import '../../components/dk_editor_bars.dart';
 import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_skeleton.dart';
 import '../../components/dk_toast.dart';
@@ -126,6 +127,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           password: _password,
           // Night mode (DK-1089), switched in the overflow menu (DK-0295).
           night: ref.watch(prefsProvider).value?[viewerNightKey] == true,
+          // Copy for now; Highlight, Underline, Strike come with the
+          // annotations (DK-0321), Ask AI with the AI pane (M13).
+          markup: const [DkMarkupAction.copy],
           initialPage: widget.page ?? 1,
           // A web link asks first; it's the only step that leaves Dokulo
           // (DK-1088).
