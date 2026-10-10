@@ -571,5 +571,7 @@
   "t3_save_here": "Hier speichern",
   "t3_use_folder": "Diesen Ordner verwenden",
   "t3_save_elsewhere": "Außerhalb von Dokulo speichern…",
+  "viewer_outline_title": "Inhalt",
+  "viewer_outline_empty": "Diese PDF hat kein Inhaltsverzeichnis.",
   "files_drop_hint": "Auf „{folder}“ ablegen zum Verschieben"
 }
