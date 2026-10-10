@@ -120,7 +120,16 @@ class DkFolderCard extends StatelessWidget {
                     children: [title, caption],
                   ),
                 ),
-                ?more,
+                // Without a menu, the chevron of a row that opens (the
+                // files-list frame).
+                more ??
+                    Padding(
+                      padding: EdgeInsets.only(right: t.space.l),
+                      child: DkIcon(
+                        DkIcons.chevronRight,
+                        color: c.iconSecondary,
+                      ),
+                    ),
               ],
             ),
           );

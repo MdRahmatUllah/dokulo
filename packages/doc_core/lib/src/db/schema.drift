@@ -103,7 +103,9 @@ CREATE TABLE signatures (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   kind TEXT NOT NULL CHECK (kind IN ('signature', 'initials')),
   image_ref TEXT NOT NULL,
-  created_at DATETIME NOT NULL
+  created_at DATETIME NOT NULL,
+  -- The ink it was drawn in, for "Blue ink · added 2 Oct" (DK-0325).
+  ink TEXT NOT NULL DEFAULT 'black' CHECK (ink IN ('black', 'blue'))
 );
 
 -- "Find documents in photos": a photo's score, so it isn't scored twice.

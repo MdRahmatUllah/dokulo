@@ -1,5 +1,8 @@
 import 'dart:io';
+import 'dart:isolate';
 import 'dart:ui' as ui;
+
+import 'package:ai_core/ai_core.dart' show IsolatePool;
 
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
@@ -8,9 +11,11 @@ import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_sheet.dart';
 import '../../components/dk_bottom_bars.dart';
+import '../../components/dk_file_card.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_icon_button.dart';
 import '../../components/dk_loading_spinner.dart';
+import '../../components/dk_menu.dart';
 import '../../components/dk_page_grid.dart';
 import '../../components/dk_segmented.dart';
 import '../../components/dk_sheet.dart';
@@ -21,12 +26,14 @@ import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_open_file.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/files_providers.dart';
 import '../../routes/link_error.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../../theme/haptics.dart';
 import '../../tools/tool_catalogue.dart';
+import '../../tools/tool_inputs.dart';
 import '../t2_tool/tool_options_providers.dart';
 import '../v1_viewer/viewer_providers.dart';
 
@@ -142,12 +149,60 @@ class _OrganizeState extends ConsumerState<_Organize> {
     );
   }
 
+  /// Save (UI spec §18): a copy next to the original, "{name} –
+  /// organized.pdf", with "Saved as “…”"; the original stays as it is.
   Future<void> _save() async {
     if (_edit!.changed) {
-      await _write(_edit!.save);
+      await _write(
+        _edit!.save,
+        suffix: AppLocalizations.of(context).organize_suffix,
+      );
       if (mounted) context.pop();
     } else {
       context.pop();
+    }
+  }
+
+  /// Save's long-press menu (organize-savemenu): Save as copy · Replace
+  /// original.
+  void _saveMenu(BuildContext anchor) {
+    final l = AppLocalizations.of(context);
+    showDkMenu(
+      anchor,
+      groups: [
+        [
+          DkAction(icon: DkIcons.copy, label: l.common_save_copy, onTap: _save),
+          DkAction(
+            icon: DkIcons.replace,
+            label: l.common_replace_original,
+            onTap: _replace,
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// Replace original: asks, writes the pages over the file (the original
+  /// kept in Versions for 30 days), "Saved".
+  Future<void> _replace() async {
+    final l = AppLocalizations.of(context);
+    if (!_edit!.changed) return context.pop();
+    if (!await confirmDk(context, DkConfirmation.replaceOriginal)) return;
+    if (!mounted) return;
+    setState(() => _saving = true);
+    try {
+      final store = await ref.read(fileStoreProvider.future);
+      final out = await store.newTempFile(widget.file.name);
+      await _edit!.save(out.path);
+      final versions = await ref.read(versionStoreProvider.future);
+      await versions.replace(widget.file.id, out.path);
+      await out.delete();
+      await ref.read(hapticsProvider).saved();
+      if (!mounted) return;
+      showDkToast(context, l.toast_saved);
+      context.pop();
+    } finally {
+      if (mounted) setState(() => _saving = false);
     }
   }
 
@@ -178,14 +233,10 @@ class _OrganizeState extends ConsumerState<_Organize> {
       );
       await ref.read(hapticsProvider).saved();
       if (!mounted) return;
-      final place = [
-        l.shell_tab_files,
-        ...?sub?.split(Platform.pathSeparator),
-      ].join(' › ');
       final router = GoRouter.of(context);
       showDkToast(
         context,
-        l.toast_saved_to(place),
+        l.toast_saved_as(saved.name),
         action: l.common_open,
         onAction: () => router.push(Routes.viewer('${saved.id}')),
       );
@@ -232,6 +283,7 @@ class _OrganizeState extends ConsumerState<_Organize> {
                   title: ToolCatalogue.of('organize').name(l),
                   onCancel: _cancel,
                   onDone: edit == null || _saving ? null : _save,
+                  onDoneLongPress: _saveMenu,
                   doneLabel: l.t3_save,
                 ),
         ),
@@ -248,9 +300,10 @@ class _OrganizeState extends ConsumerState<_Organize> {
                     child: DkPageGrid(
                       pageIds: edit.pages,
                       selected: _selected,
+                      // A tap selects; a long-press lifts the page only:
+                      // mid-drag the screen stays out of selection mode
+                      // (organize-drag, DK-0799).
                       onTap: _toggle,
-                      onLongPress: (i) =>
-                          setState(() => _selected = {..._selected, i}),
                       onReorder: (from, to) {
                         _do((e) => e.move(from, to));
                         setState(() => _selected = {});
@@ -356,6 +409,8 @@ class _OrganizeState extends ConsumerState<_Organize> {
             children: [
               row('blank', DkIcons.blankPage, l.organize_insert_blank),
               row('pdf', DkIcons.pdf, l.organize_insert_pdf),
+              // From a scan comes with the scanner's review (DK-1082).
+              row('photos', DkIcons.importPhotos, l.organize_insert_photos),
               if (after != null) ...[
                 SizedBox(height: t.space.m),
                 Text(
@@ -383,6 +438,28 @@ class _OrganizeState extends ConsumerState<_Organize> {
       final store = await ref.read(fileStoreProvider.future);
       await edit.insertBlank(at, store.temp);
       setState(() {});
+    } else if (choice == 'photos') {
+      final images = [
+        for (final p in await ref.read(devicePickerProvider)(
+          ToolInput.of('img2pdf')!,
+          photos: true,
+        ))
+          // HEIC needs the platform's decoder first (DK-1081).
+          if (ToolInput.kindOf(p) == DkFileKind.image &&
+              !RegExp(r'\.hei[cf]$', caseSensitive: false).hasMatch(p))
+            p,
+      ];
+      if (images.isEmpty || !mounted) return;
+      final store = await ref.read(fileStoreProvider.future);
+      final pdf = await store.newTempFile('photos.pdf');
+      // One page per photo, as Image to PDF makes them, off the UI isolate.
+      await Isolate.run(() => _photosPdf(images, pdf.path));
+      final info = await PdfEngine.inspect(pdf.path);
+      _do(
+        (e) => e.insert(at, [
+          for (var i = 0; i < info.pageCount; i++) PageSource(pdf.path, i),
+        ]),
+      );
     } else {
       final path = await ref.read(pickPdfProvider)();
       if (path == null || !mounted) return;
@@ -432,5 +509,19 @@ class _SubBar extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+/// [images] as a PDF at [output] (Fit image, no margins), on a worker.
+Future<void> _photosPdf(List<String> images, String output) async {
+  final work = Directory.systemTemp.createTempSync('dk_photos_');
+  try {
+    final writer = ImagesPdfWriter(output, workDir: work);
+    for (final image in images) {
+      await writer.add(File(image).readAsBytesSync());
+    }
+    await writer.close(IsolatePool(tempRoot: work));
+  } finally {
+    work.deleteSync(recursive: true);
   }
 }
