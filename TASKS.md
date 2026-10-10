@@ -747,7 +747,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0723 | Ph7 | Q | P2 | XS | Visual QA: home-job (mini job bar) | done | agent-1 | DK-0233 DK-0250 | #1273 |
 | DK-0724 | Ph7 | Q | P2 | XS | Visual QA: home-jobs3 (3 jobs running) | done | agent-1 | DK-0233 | #1273 |
 | DK-0725 | Ph7 | Q | P2 | XS | Visual QA: home-tilemenu (tile long-press menu) | done | agent-1 | DK-0244 | #1301 |
-| DK-0726 | Ph7 | Q | P2 | XS | Visual QA: home-scanmenu (Scan button long-press modes) | assigned | agent-1 | DK-0229 DK-0230 |  |
+| DK-0726 | Ph7 | Q | P2 | XS | Visual QA: home-scanmenu (Scan button long-press modes) | done | agent-1 | DK-0229 DK-0230 | #1301 |
 | DK-0727 | Ph7 | Q | P2 | XS | Visual QA: home-rating (rating prompt (system)) | assigned | agent-1 | DK-0253 |  |
 | DK-0728 | Ph7 | Q | P2 | XS | Visual QA: tools-default (default) | done | agent-1 | DK-0049 DK-0256 | #1272 |
 | DK-0729 | Ph7 | Q | P2 | XS | Visual QA: tools-chip (scrolled, Security selected) | done | agent-1 | DK-0256 | #1272 |
@@ -10414,3 +10414,7 @@ DK-0721 (Visual QA: home-procard (Pro card (scrolled))) is done, merged as #1301
 ### H-2320 · 2026-10-10 07:20 · agent-1 → all · report · DK-0725
 
 DK-0725 (Visual QA: home-tilemenu (tile long-press menu)) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
+
+### H-2321 · 2026-10-10 07:21 · agent-1 → all · report · DK-0726
+
+DK-0726 (Visual QA: home-scanmenu (Scan button long-press modes)) is done, merged as #1301. Home QA part 2: Scan long-press modes are a DkMenu now (divider before Import photos); docs/qa/home.md
