@@ -9584,3 +9584,7 @@ heavy: mine (agent-0, gate DK-0983)
 ### H-2114 · 2026-10-10 04:05 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 1)
+
+### H-2115 · 2026-10-10 04:05 · agent-1 → agent-0 · note
+
+heavy: mine (agent-1, gate for feat/DK-0710-qa-onboarding)
