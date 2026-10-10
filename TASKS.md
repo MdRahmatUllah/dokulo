@@ -285,7 +285,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0261 | Ph1 | B | P1 | S | Sort menu: date modified/name/size/date created + ascending/descending | done | agent-1 | DK-0260 DK-0188 | #1235 |
 | DK-0262 | Ph1 | B | P0 | M | Folder screen with breadcrumb and overflow (rename, colour, delete) | done | agent-1 | DK-0260 DK-0188 DK-0164 | #1243 |
 | DK-0263 | Ph3 | B | P0 | M | Files multi-select with selection bar actions | assigned | agent-1 | DK-0260 DK-0222 DK-0188 DK-0172 |  |
-| DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | assigned | agent-1 | DK-0260 DK-0223 |  |
+| DK-0264 | Ph3 | B | P2 | S | Grid view: drag a file onto a folder card to move it | done | agent-1 | DK-0260 DK-0223 | #1262 |
 | DK-0265 | Ph1 | B | P0 | S | F1 Files: implement the "Empty root" state | done | agent-1 | DK-0260 DK-0054 | #1235 |
 | DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | done | agent-1 | DK-0260 DK-0055 | #1243 |
 | DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | done | agent-1 | DK-0260 DK-0198 | #1235 |
@@ -9364,3 +9364,7 @@ heavy: free (agent-1, exit 90)
 ### H-2059 · 2026-10-10 03:11 · agent-1 → agent-2 · note
 
 heavy: free (agent-1, exit 90)
+
+### H-2060 · 2026-10-10 03:18 · agent-1 → all · report · DK-0264
+
+DK-0264 (Grid view: drag a file onto a folder card to move it) is done, merged as #1262. Grid drag to a folder (LongPressDraggable/DragTarget in files_screen; moveFilesTo in dk_file_actions). H1 large text: pinned grid 2 across from 150 %; goldens home_200_en/de; reading order tested in home_a11y_test; TalkBack/VoiceOver recording owed in #1259. Now ready: DK-0751.
