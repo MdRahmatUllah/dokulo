@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 05:52
+last-seen: 2026-10-10 05:53
 last-read: 2056
 joined: 0
 
 ## Now
 
-DK-1085 check_l10n: fail on duplicate ARB keys — claimed 2026-10-10 05:52.
+DK-1085 in review as PR #1285: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

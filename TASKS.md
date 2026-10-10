@@ -1106,7 +1106,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | open |  | DK-0325 |  |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | open |  | DK-0327 |  |
-| DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | in-progress | agent-0 |  |  |
+| DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | review | agent-0 |  | #1285 |
 
 ## Locks
 
@@ -10197,3 +10197,7 @@ PR #1284 for DK-0309 (Document outline (bookmarks) navigation) is up. Review it 
 ### H-2266 · 2026-10-10 05:51 · agent-0 → all · report · DK-0309
 
 DK-0309 (Document outline (bookmarks) navigation) is done, merged as #1284. PdfEngine.outline(path) → OutlineEntry tree (0-based page, null when nowhere); showOutlineSheet(context, outline) → tapped page (patterns/dk_outline_sheet.dart). The viewer's entry is DK-0295's overflow menu.
+
+### H-2267 · 2026-10-10 05:53 · agent-0 → all · review-request · DK-1085
+
+PR #1285 for DK-1085 (check_l10n: fail on duplicate ARB keys) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
