@@ -2,23 +2,29 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ai_core/ai_core.dart' show DeviceCapabilities;
+import 'package:app_pdf/crash/crash_log.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
+import 'package:app_pdf/providers/crash_providers.dart';
 import 'package:app_pdf/providers/database_providers.dart';
+import 'package:app_pdf/providers/device_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/providers/job_providers.dart';
+import 'package:app_pdf/providers/mail_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
-import 'package:app_pdf/screens/t3_result/tool_result_screen.dart';
-import 'package:app_pdf/theme/haptics.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_screen.dart';
 import 'package:app_pdf/screens/t2_tool/tool_run.dart';
+import 'package:app_pdf/screens/t3_result/tool_result_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
+import 'package:app_pdf/theme/haptics.dart';
 import 'package:app_pdf/tools/tool_definition.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pdfrx/pdfrx.dart';
 
@@ -139,6 +145,7 @@ void main() {
     ToolDefinition def,
     List<int> ids, {
     _Run? run,
+    List<Override> extra = const [],
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
@@ -152,6 +159,7 @@ void main() {
             toolRunnerProvider.overrideWithValue(
               (id, input) async => run.handle,
             ),
+          ...extra,
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -279,6 +287,55 @@ void main() {
       expect(find.text('Code DK-0190'), findsOneWidget);
       await golden(tester, 'failure_$theme');
     });
+
+    if (theme == 'light') {
+      testWidgets('Send report by email (DK-1080): a draft with the code, '
+          'the device and the log in the mail app', (tester) async {
+        final id = await file(tester, 'Mietvertrag.pdf', pages: 12);
+        final mails = <Uri>[];
+        final log = CrashLog(
+          File('${Directory.systemTemp.createTempSync('dk_log_').path}/l'),
+        );
+        final run = _Run();
+        await pump(
+          tester,
+          tokens,
+          _compress,
+          [id],
+          run: run,
+          extra: [
+            mailComposerProvider.overrideWithValue((uri) async {
+              mails.add(uri);
+              return true;
+            }),
+            crashLogProvider.overrideWith((ref) async => log),
+            deviceCapabilitiesProvider.overrideWith(
+              (ref) async => const DeviceCapabilities(
+                totalRam: 6000000000,
+                abis: ['arm64-v8a'],
+                os: 'android',
+                osVersion: '15',
+              ),
+            ),
+          ],
+        );
+        await tester.tap(find.text('Compress 12 pages'));
+        await tester.pump();
+        run.result.completeError(const DocError(DocErrorKind.unexpected));
+        for (var i = 0; i < 6; i++) {
+          await tester.pump(const Duration(milliseconds: 150));
+        }
+        await tester.tap(find.text('Send report by email'));
+        await settle(tester);
+        expect(mails, hasLength(1));
+        expect(mails.single.scheme, 'mailto');
+        expect(mails.single.toString(), contains('DK-0190'));
+        expect(
+          Uri.decodeComponent(mails.single.toString()),
+          contains('android 15'),
+        );
+      });
+    }
 
     testWidgets('minibar, $theme: a running job above the tab bar', (
       tester,

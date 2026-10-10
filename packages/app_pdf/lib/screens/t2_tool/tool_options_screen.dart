@@ -30,7 +30,11 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../patterns/dk_about_tool.dart';
 import '../../patterns/dk_confirmations.dart';
+import '../../crash/crash_log.dart';
+import '../../providers/crash_providers.dart';
+import '../../providers/device_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/mail_providers.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
@@ -301,6 +305,16 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                         action: error.actions.first.label(l),
                         onAction: () =>
                             _recover(error.actions.first, subject, values),
+                        // Skip this page needs the tool's support (a job
+                        // that can go on past a page); none has it yet.
+                        more: [
+                          for (final a in error.actions.skip(1))
+                            if (a == DkRecovery.sendReport)
+                              (
+                                a.label(l),
+                                () => _sendReport(error.situation.code),
+                              ),
+                        ],
                       ),
               );
             },
@@ -330,6 +344,29 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
       if (!stop) return;
     }
     run.cancel();
+  }
+
+  /// "Send report by email" (DK-1080): a draft in the user's mail app with
+  /// the code, the device facts and the local crash log, nothing else; the
+  /// user sends it or not.
+  Future<void> _sendReport(String code) async {
+    _closeSheet();
+    final l = AppLocalizations.of(context);
+    final device = await ref.read(deviceCapabilitiesProvider.future);
+    final entries = await (await ref.read(crashLogProvider.future)).entries();
+    final sent = await ref.read(mailComposerProvider)(
+      reportEmail(
+        code: code,
+        device: {
+          'os': '${device.os} ${device.osVersion}',
+          'abis': device.abis.join(', '),
+          if (device.totalRam case final ram?)
+            'ram': '${(ram / 1e9).toStringAsFixed(1)} GB',
+        },
+        entries: entries,
+      ),
+    );
+    if (!sent && mounted) showDkToast(context, l.error_no_mail_app);
   }
 
   /// The error's recovery action (UI spec §26.3).
