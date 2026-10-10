@@ -132,35 +132,43 @@ class _PinnedState extends ConsumerState<PinnedToolsSection> {
         SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: t.space.l),
           // At large text (200 %) 2 across, taller, so names wrap whole
-          // (DK-0254).
-          sliver: SliverGrid.count(
-            crossAxisCount: large ? 2 : 4,
-            mainAxisSpacing: t.space.m,
-            crossAxisSpacing: t.space.m,
-            childAspectRatio: large ? 1.0 : 0.78,
-            children: [
-              for (final (i, id) in pinned.indexed)
-                if (_editing)
-                  _EditTile(
-                    id: id,
-                    onRemove: () => _unpin(id),
-                    onDrop: (dragged) => _move(dragged, i),
-                  )
-                else
-                  Builder(
-                    builder: (anchor) => DkToolTile(
-                      toolId: id,
-                      onTap: () => context.push(Routes.tool(id)),
-                      onLongPress: () => _menu(anchor, id),
+          // (DK-0254); on tablets 6, or 8 from 840 dp (UI spec §30).
+          sliver: SliverLayoutBuilder(
+            builder: (context, box) => SliverGrid.count(
+              crossAxisCount: _columns(box.crossAxisExtent, large: large),
+              mainAxisSpacing: t.space.m,
+              crossAxisSpacing: t.space.m,
+              // A phone's tile is 0.78 wide to tall; on a tablet, the same
+              // 108 dp of height in a wider column.
+              childAspectRatio: large
+                  ? 1.0
+                  : _columns(box.crossAxisExtent, large: false) == 4
+                  ? 0.78
+                  : _tileWidth(box.crossAxisExtent, t.space.m) / 108,
+              children: [
+                for (final (i, id) in pinned.indexed)
+                  if (_editing)
+                    _EditTile(
+                      id: id,
+                      onRemove: () => _unpin(id),
+                      onDrop: (dragged) => _move(dragged, i),
+                    )
+                  else
+                    Builder(
+                      builder: (anchor) => DkToolTile(
+                        toolId: id,
+                        onTap: () => context.push(Routes.tool(id)),
+                        onLongPress: () => _menu(anchor, id),
+                      ),
                     ),
+                if (_editing && pinned.length < PinnedToolsSection.max)
+                  _AddTile(
+                    onTap: () => showAddTool(context, pinned, (id) {
+                      _save([...pinned, id]);
+                    }),
                   ),
-              if (_editing && pinned.length < PinnedToolsSection.max)
-                _AddTile(
-                  onTap: () => showAddTool(context, pinned, (id) {
-                    _save([...pinned, id]);
-                  }),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
@@ -379,4 +387,19 @@ class _AddToolListState extends State<_AddToolList> {
       ],
     );
   }
+}
+
+/// 4 tiles across on a phone, 6 from 600 dp, 8 from 840 (UI spec §30); 2 at
+/// large text (DK-0254).
+int _columns(double width, {required bool large}) => large
+    ? 2
+    : width >= 840
+    ? 8
+    : width >= 600
+    ? 6
+    : 4;
+
+double _tileWidth(double width, double gap) {
+  final n = _columns(width, large: false);
+  return (width - (n - 1) * gap) / n;
 }
