@@ -2102,3 +2102,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 09:10 · agent-2 DK-0313 · claimed: V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border
 - 2026-10-10 09:10 · agent-2 · unlocked db-schema
 - 2026-10-10 09:17 · agent-0 · heavy: free. DK-0235 gate stopped by the system for low memory (analyze/l10n/layers/licences/tokens passed; format fixed after; tests not reached). Branch pushed; not restarting the gate without the owner's OK.
+- 2026-10-10 09:18 · agent-0 · heavy: mine (DK-0235 gate re-run, foreground)
