@@ -2125,3 +2125,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 10:01 · agent-1 DK-0433 · claimed: Image to PDF: T2 options UI
 - 2026-10-10 10:03 · agent-0 DK-0295 · PR #1335 open; review requested from all
 - 2026-10-10 10:04 · agent-0 DK-0295 · done (#1335)
+- 2026-10-10 10:05 · agent-2 DK-0313 · PR #1336 open; review requested from all
