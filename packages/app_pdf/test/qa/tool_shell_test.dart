@@ -23,10 +23,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 // Visual QA (DK-0838, DK-0842, DK-0843, DK-0844, DK-0847; DK-0845, DK-0846,
-// DK-0855, DK-0856; DK-0854, DK-0857): the T2, X2 and T3 frames of
+// DK-0855, DK-0856; DK-0853, DK-0854, DK-0857): the T2, X2 and T3 frames of
 // 12-tool-shell (t2empty, lockedrow, btnloading, progress, failure;
-// minibar, canceldlg, discard, aftersave; replace, replaced), rendered by
-// the real screens in each state at 393 × 852. The goldens
+// minibar, canceldlg, discard, aftersave; savemenu, replace, replaced),
+// rendered by the real screens in each state at 393 × 852. The goldens
 // sit next to the frames' screenshots in docs/qa/tool-shell/; the findings
 // are in docs/qa/design-system.md. A tool's own options (Compress's levels)
 // come with its task (DK-0463), so the boards show the shell.
@@ -423,6 +423,15 @@ void main() {
       await settle(tester);
     }
 
+    testWidgets('savemenu, $theme: Save as copy · Replace original · Save '
+        'to…', (tester) async {
+      await pumpT3(tester, const Duration(seconds: 3));
+      await tester.tap(find.bySemanticsLabel('More ways to save'));
+      await settle(tester);
+      expect(find.text('Save to…'), findsOneWidget);
+      await golden(tester, 'savemenu_$theme');
+    });
+
     testWidgets('replace, $theme: "Replace the original file?"', (
       tester,
     ) async {
@@ -431,9 +440,7 @@ void main() {
       await golden(tester, 'replace_$theme');
     });
 
-    testWidgets('replaced, $theme: "Replaced · Undo" and Done', (
-      tester,
-    ) async {
+    testWidgets('replaced, $theme: "Replaced · Undo" and Done', (tester) async {
       await replaceDialog(tester);
       await tester.tap(find.text('Replace'));
       for (var i = 0; i < 3; i++) {
