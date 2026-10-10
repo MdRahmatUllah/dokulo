@@ -2236,5 +2236,83 @@
   "me_restore_purchase": "Restore purchase",
   "@me_restore_purchase": {
     "description": "M1 About row; always visible."
+  },
+  "security_app_lock": "App lock",
+  "@security_app_lock": {
+    "description": "M3 Security (DK-0573)."
+  },
+  "security_needs_pin": "Set a locked folder PIN first.",
+  "@security_needs_pin": {
+    "description": "M3 Security: App lock and Change PIN need the folder's PIN."
+  },
+  "security_bio_face": "Face ID",
+  "@security_bio_face": {
+    "description": "Apple's name."
+  },
+  "security_bio_touch": "Touch ID",
+  "@security_bio_touch": {
+    "description": "Apple's name."
+  },
+  "security_bio_fingerprint": "fingerprint",
+  "@security_bio_fingerprint": {
+    "description": "Android's biometric, inside a sentence."
+  },
+  "security_lock_after": "Lock after",
+  "@security_lock_after": {
+    "description": "M3 Security row."
+  },
+  "security_after_now": "Immediately",
+  "@security_after_now": {
+    "description": "Lock after: at once."
+  },
+  "security_after_1min": "1 min",
+  "@security_after_1min": {
+    "description": "Lock after: one minute (the default)."
+  },
+  "security_after_5min": "5 min",
+  "@security_after_5min": {
+    "description": "Lock after: five minutes."
+  },
+  "security_hide_previews": "Hide previews in app switcher",
+  "@security_hide_previews": {
+    "description": "M3 Security row (on by default)."
+  },
+  "security_change_pin": "Change locked folder PIN",
+  "@security_change_pin": {
+    "description": "M3 Security row (DK-0292)."
+  },
+  "security_current_pin": "Enter your current PIN",
+  "@security_current_pin": {
+    "description": "Change PIN, step 1."
+  },
+  "security_pin_changed": "PIN changed",
+  "@security_pin_changed": {
+    "description": "Toast after Change PIN."
+  },
+  "app_lock_title": "Dokulo is locked",
+  "@app_lock_title": {
+    "description": "The app lock screen (DK-0290)."
+  },
+  "app_lock_reason": "Unlock Dokulo",
+  "@app_lock_reason": {
+    "description": "The biometric prompt's reason on the app lock."
+  },
+  "security_app_lock_body": "Ask for {method} or PIN when opening Dokulo",
+  "@security_app_lock_body": {
+    "description": "M3 Security: App lock's description.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "security_unlock_with": "Unlock with {method}",
+  "@security_unlock_with": {
+    "description": "M3 Security row.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
   }
 }

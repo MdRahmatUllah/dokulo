@@ -15,6 +15,7 @@ import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/p1_organize/organize_screen.dart';
 import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
@@ -195,10 +196,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                     path: 'settings/:page',
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
-                      child: PlaceholderScreen(
-                        'M3',
-                        detail: state.pathParameters['page']!,
-                      ),
+                      child: switch (state.pathParameters['page']!) {
+                        'security' => const SecuritySettingsScreen(),
+                        final page => PlaceholderScreen('M3', detail: page),
+                      },
                     ),
                   ),
                 ],

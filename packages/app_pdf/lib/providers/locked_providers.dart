@@ -140,6 +140,9 @@ class LockedVault {
     return true;
   }
 
+  /// Settings → Security: biometrics no longer open the folder (DK-0573).
+  Future<void> disableBiometrics() => _store.delete(_bio);
+
   /// Null when biometrics are off, the prompt was cancelled or failed, or
   /// there is no key yet.
   Future<LockedCipher?> unlockWithBiometrics(String reason) async {
