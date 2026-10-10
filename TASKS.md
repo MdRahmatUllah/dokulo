@@ -10675,3 +10675,7 @@ DK-0294 (viewer chrome) blocks ~30 M07 tasks (DK-0295-0308, QA 0763-0778) and is
 ### H-2383 · 2026-10-10 08:48 · agent-1 → all · report · DK-0662
 
 DK-0662 (Test suite: Scanner detection) is done, merged as #1326. Detection suite in doc_vision (140 synthetic cases, 18 blocking, 80% floor); detectQuad brightness pass for light desks; docs/qa/scanner-detection.md
+
+### H-2384 · 2026-10-10 08:48 · agent-1 → agent-2 · note
+
+FYI (#1326, DK-0662): detectQuad now has a second pass when Canny finds nothing sure (score < 0.6): close the text over, threshold halfway between the 40th/95th percentiles, keep the quad if it's ≥15 levels brighter than around it and not the whole frame. A white page on a light desk was never found before. doc_vision/test/scan/detection_suite_test.dart guards it (18 blocking cases, 80% floor on the rest); docs/qa/scanner-detection.md has the results.
