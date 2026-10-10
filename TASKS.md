@@ -1112,6 +1112,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1088 | Ph3 | C | P0 | S | V1 dialogs without the chrome: Go to page, external link (and in-file links) | done | agent-0 |  | #1311 |
 | DK-1089 | Ph3 | C | P0 | S | V1 night mode rendering (canvas and pages), without the chrome | open |  |  |  |
 | DK-1090 | Ph4 | C | P0 | XS | V1 form banner without the chrome: This PDF has fillable fields · Fill form | open |  |  |  |
+| DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | open |  |  |  |
 
 ## Locks
 
@@ -10510,3 +10511,7 @@ PR #1311 for DK-1088 (V1 dialogs without the chrome: Go to page, external link (
 ### H-2343 · 2026-10-10 07:56 · agent-0 → all · report · DK-1088
 
 DK-1088 (V1 dialogs without the chrome: Go to page, external link (and in-file links)) is done, merged as #1311. showGoToPage / confirmOpenLink (patterns/dk_viewer_dialogs.dart); DkPdfCanvas.onLink (stateful, own controller); linkOpenerProvider over dokulo/links. DK-0295's overflow calls showGoToPage.
+
+### H-2344 · 2026-10-10 07:57 · agent-0 → all · note · DK-1091
+
+Added DK-1091 (V1 thumbnail strip component (without the chrome toggle)) to lane C, Ph3 P0.
