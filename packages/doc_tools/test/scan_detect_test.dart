@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:doc_tools/doc_tools.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 
 /// A 480 × 640 grey frame: a dark desk with a bright page from (80, 60) to
 /// (400, 580), rows padded to [stride].
