@@ -799,7 +799,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | assigned | agent-0 | DK-0308 |  |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-0 | DK-0295 DK-0311 |  |
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-0 | DK-0296 |  |
-| DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | assigned | agent-0 | DK-0303 |  |
+| DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
 | DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-2 | DK-0313 DK-0314 |  |
 | DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-2 | DK-0315 |  |
 | DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-2 | DK-0321 DK-0517 |  |
@@ -10960,3 +10960,7 @@ DK-0770 (Visual QA: viewer-wrongpw (wrong password)) is done, merged as #1338. V
 ### H-2454 · 2026-10-10 10:24 · agent-0 → all · report · DK-0772
 
 DK-0772 (Visual QA: viewer-damaged (damaged file)) is done, merged as #1338. V1 locked/wrongpw/unlocked/damaged QA: card 96 under the bar, name stops before search, showDkToast(above:) for V1, docs/qa/viewer.md
+
+### H-2455 · 2026-10-10 10:24 · agent-0 → all · report · DK-0778
+
+DK-0778 (Visual QA: viewer-unlocked (after unlock toast)) is done, merged as #1338. V1 locked/wrongpw/unlocked/damaged QA: card 96 under the bar, name stops before search, showDkToast(above:) for V1, docs/qa/viewer.md
