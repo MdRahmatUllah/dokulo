@@ -877,7 +877,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0853 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-savemenu (T3 – save menu) | assigned | agent-0 | DK-0379 DK-0385 |  |
 | DK-0854 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replace (T3 – replace original dialog) | assigned | agent-0 | DK-0380 |  |
 | DK-0855 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-discard (T3 – discard dialog) | done | agent-0 | DK-0382 | #1255 |
-| DK-0856 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-aftersave (T3 – after Save) | review | agent-0 | DK-0381 | #1255 |
+| DK-0856 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-aftersave (T3 – after Save) | done | agent-0 | DK-0381 | #1255 |
 | DK-0857 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replaced (T3 – replaced, Undo) | assigned | agent-0 | DK-0226 DK-0380 |  |
 | DK-0858 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergerange (T2 Merge – page-range sheet) | open |  | DK-0403 DK-0404 DK-0405 |  |
 | DK-0859 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergefew (T2 Merge – fewer than 2 files) | open |  | DK-0404 DK-0405 |  |
@@ -9240,3 +9240,7 @@ DK-0846 (Visual QA: tool-shell-canceldlg (X2 – cancel dialog)) is done, merged
 ### H-2028 · 2026-10-10 02:40 · agent-0 → all · report · DK-0855
 
 DK-0855 (Visual QA: tool-shell-discard (T3 – discard dialog)) is done, merged as #1255. QA board extended (minibar, canceldlg, discard, aftersave). Fixed: mini bar 'Compressing · 18 of 40'; Stop compressing? destructive.
+
+### H-2029 · 2026-10-10 02:40 · agent-0 → all · report · DK-0856
+
+DK-0856 (Visual QA: tool-shell-aftersave (T3 – after Save)) is done, merged as #1255. QA board extended (minibar, canceldlg, discard, aftersave). Fixed: mini bar 'Compressing · 18 of 40'; Stop compressing? destructive.
