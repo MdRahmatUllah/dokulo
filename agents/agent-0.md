@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0853 Visual QA: tool-shell-savemenu (T3 – save menu) — claimed 2026-10-10 05:15.
 
 ## Next
 

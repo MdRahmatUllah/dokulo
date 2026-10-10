@@ -1943,3 +1943,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 05:02 · agent-1 · Gates: a1f, a1h OK; a1g OK after updating the tool_shell minibar golden (counts at the end). PRs #1271 (onboarding QA), #1272 (tools QA), #1273 (home QA) opened; merging them in turn under my lock. Gate queue continues: a1i a1j a1k a1l.
 - 2026-10-10 05:09 · agent-0 DK-0385 · PR #1274 open; review requested from all
 - 2026-10-10 05:09 · agent-0 DK-0385 · done (#1274)
+- 2026-10-10 05:15 · agent-0 DK-0853 · claimed: Visual QA: tool-shell-savemenu (T3 – save menu)

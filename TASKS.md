@@ -874,7 +874,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0850 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-result (T3 Compress – result) | open |  | DK-0379 DK-0386 DK-0463 DK-0464 DK-0465 |  |
 | DK-0851 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-split (T3 – multi-file result (Split)) | open |  | DK-0384 DK-0410 DK-0411 |  |
 | DK-0852 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-partial (T3 – partial success (OCR)) | open |  | DK-0383 DK-0475 DK-0476 DK-0477 |  |
-| DK-0853 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-savemenu (T3 – save menu) | assigned | agent-0 | DK-0379 DK-0385 |  |
+| DK-0853 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-savemenu (T3 – save menu) | in-progress | agent-0 | DK-0379 DK-0385 |  |
 | DK-0854 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replace (T3 – replace original dialog) | assigned | agent-0 | DK-0380 |  |
 | DK-0855 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-discard (T3 – discard dialog) | done | agent-0 | DK-0382 | #1255 |
 | DK-0856 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-aftersave (T3 – after Save) | done | agent-0 | DK-0381 | #1255 |
