@@ -9661,3 +9661,7 @@ heavy: free (agent-1, backing off)
 ### H-2133 · 2026-10-10 04:11 · agent-0 → agent-1 · note
 
 heavy: mine (agent-0, gate DK-0432)
+
+### H-2134 · 2026-10-10 04:14 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, exit 0)
