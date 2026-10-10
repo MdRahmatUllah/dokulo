@@ -9,6 +9,8 @@ import '../../components/dk_toast.dart';
 import '../../l10n/app_localizations.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
+import '../../patterns/dk_viewer_dialogs.dart';
+import '../../providers/link_providers.dart';
 import 'viewer_providers.dart';
 import 'viewer_states.dart';
 
@@ -89,6 +91,13 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         path: path,
         password: _password,
         initialPage: widget.page ?? 1,
+        // A web link asks first; it's the only step that leaves Dokulo
+        // (DK-1088).
+        onLink: (url) async {
+          if (await confirmOpenLink(context, url)) {
+            await ref.read(linkOpenerProvider)(url);
+          }
+        },
       ),
       ViewerOpen.locked => ViewerLockedCard(
         onUnlock: (password) => _unlock(path, password),

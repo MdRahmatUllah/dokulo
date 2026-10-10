@@ -131,6 +131,24 @@ class MainActivity : FlutterFragmentActivity() {
                     result.success(false)
                 }
             }
+        // A web link in a PDF, after V1 asked (DK-1088; lib/providers/link_providers.dart).
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/links")
+            .setMethodCallHandler { call, result ->
+                val url = call.arguments as? String
+                if (call.method != "open" || url == null) {
+                    result.notImplemented()
+                    return@setMethodCallHandler
+                }
+                try {
+                    startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    )
+                    result.success(true)
+                } catch (e: android.content.ActivityNotFoundException) {
+                    result.success(false)
+                }
+            }
         // The privacy cover (DK-0234; lib/providers/privacy_providers.dart):
         // FLAG_SECURE blanks the recents card and blocks screenshots, only
         // while locked content is open or Hide previews is on.
