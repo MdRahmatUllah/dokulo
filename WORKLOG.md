@@ -1945,3 +1945,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 05:09 · agent-0 DK-0385 · done (#1274)
 - 2026-10-10 05:15 · agent-0 DK-0853 · claimed: Visual QA: tool-shell-savemenu (T3 – save menu)
 - 2026-10-10 05:16 · agent-0 DK-0853 · PR #1275 open; review requested from all
+- 2026-10-10 05:16 · agent-0 DK-0853 · done (#1275)
