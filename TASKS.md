@@ -1108,7 +1108,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
 | DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | done | agent-0 | DK-1080 | #1305 |
-| DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | review | agent-0 |  | #1308 |
+| DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | done | agent-0 |  | #1308 |
 | DK-1088 | Ph3 | C | P0 | S | V1 dialogs without the chrome: Go to page, external link (and in-file links) | open |  |  |  |
 
 ## Locks
@@ -10480,3 +10480,7 @@ heavy: free (agent-0)
 ### H-2336 · 2026-10-10 07:46 · agent-0 → all · review-request · DK-1087
 
 PR #1308 for DK-1087 (V1 body states without the chrome: locked card, wrong password, after unlock, damaged file) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2337 · 2026-10-10 07:46 · agent-0 → all · report · DK-1087
+
+DK-1087 (V1 body states without the chrome: locked card, wrong password, after unlock, damaged file) is done, merged as #1308. V1 body states in screens/v1_viewer/viewer_states.dart (ViewerLockedCard, ViewerDamaged) + viewerOpenProvider; ViewerScreen is stateful (keeps the password). DK-0301/0302/0303/0305 now only need the chrome around them (DK-0294).
