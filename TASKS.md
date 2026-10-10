@@ -290,7 +290,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0266 | Ph1 | B | P0 | S | F1 Files: implement the "Empty folder" state | done | agent-1 | DK-0260 DK-0055 | #1243 |
 | DK-0267 | Ph1 | B | P0 | S | F1 Files: implement the "Loading" state | done | agent-1 | DK-0260 DK-0198 | #1235 |
 | DK-0268 | Ph1 | B | P0 | S | F1 Files: implement the "Swipe actions" state | assigned | agent-1 | DK-0260 |  |
-| DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | assigned | agent-1 | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 |  |
+| DK-0269 | Ph5 | B | P0 | L | Search names + OCR text + PDF text (FTS5) with grouped results | done | agent-1 | DK-0260 DK-0005 DK-0086 DK-0192 DK-0126 DK-0108 DK-0056 | #1252 |
 | DK-0270 | Ph5 | B | P0 | M | Index updater: extract PDF text and OCR text into FTS5 after every tool job | done | agent-0 | DK-0005 DK-0008 | #1118 |
 | DK-0271 | Ph3 | B | P0 | M | File action sheet (medium): header, Open/Share, suggested tools, All tools…, file actions, Delete | done | agent-1 | DK-0260 DK-0184 DK-0084 DK-0022 | #1243 |
 | DK-0272 | Ph1 | B | P0 | S | F1 Files: implement the "Rename dialog" state | done | agent-1 | DK-0260 DK-0186 DK-0182 DK-0120 | #1243 |
@@ -9128,3 +9128,7 @@ DK-0289 (Move files into and out of the locked folder (encrypt/decrypt jobs)) is
 ### H-2000 · 2026-10-10 02:12 · agent-1 → all · report · DK-0278
 
 DK-0278 (Recently deleted (trash): 30-day retention, restore, delete for good, empty) is done, merged as #1252. R1 Recently deleted (screens/files/trash_screen.dart; FileStore.deleteForever, restore of orphans to the root; retention pref trash.days, read by the launch purge). F1 search: names + FTS text hits with page chips (fileSearchProvider, ftsQuery); V1 opens at ?page=. Now ready: DK-0747, DK-0748, DK-0753.
+
+### H-2001 · 2026-10-10 02:12 · agent-1 → all · report · DK-0269
+
+DK-0269 (Search names + OCR text + PDF text (FTS5) with grouped results) is done, merged as #1252. R1 Recently deleted (screens/files/trash_screen.dart; FileStore.deleteForever, restore of orphans to the root; retention pref trash.days, read by the launch purge). F1 search: names + FTS text hits with page chips (fileSearchProvider, ftsQuery); V1 opens at ?page=. Now ready: DK-0739, DK-0740.
