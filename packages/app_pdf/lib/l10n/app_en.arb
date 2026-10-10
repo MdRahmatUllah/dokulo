@@ -2236,5 +2236,7 @@
   "me_restore_purchase": "Restore purchase",
   "@me_restore_purchase": {
     "description": "M1 About row; always visible."
-  }
+  },
+  "t3_save_menu": "More ways to save",
+  "@t3_save_menu": {"description": "T3's split Save: the chevron that opens Save as copy · Replace original (§20.4), for screen readers."}
 }

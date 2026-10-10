@@ -139,6 +139,7 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* drive_file_rename_outline */;
   static const move = IconData(0xe9a1, fontFamily: _font) /* drive_file_move */;
+  static const replace = IconData(0xe8d4, fontFamily: _font) /* swap_horiz */;
   static const duplicate = IconData(
     0xe14d,
     fontFamily: _font,
