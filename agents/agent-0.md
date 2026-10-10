@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-DK-1083 (signature robustness + Android backup off) gating with --apk in agent-0 (feat/DK-1083-signature-robust); then DK-1084 (pad Image tab, committed in a0b feat/DK-1084-signature-image) gate + PR. Blocked on agent-2 (idle since 23:45; H-2204/H-2214 sent): DK-0294 viewer chrome, DK-0463 compress T2, DK-1077 share (all committed locally, unpushed); #1219 scanner has 3 blockers (changes requested). My blocked list: DK-0295..0311 viewer states, DK-0389/0860/0969-0971 (DK-0463), DK-0378/DK-0235/DK-1080 (pubspec lock), DK-1082 (scanner). a0c worktree to remove (locked).
+Blocked on agent-2 (idle since 2026-10-09 23:45; H-2204, H-2214 unanswered): DK-0294 viewer chrome + DK-1077 share (local, unpushed; DK-1077 needs the pubspec lock and conflicts with main's split Save), DK-0463 compress T2 (local), #1219 scanner (changes requested). Those block my DK-0295..0311, DK-0310, DK-0389, DK-0860, DK-0969..0971, DK-1082, and DK-0235 (pubspec lock). Next free: DK-1086 (skip page, engine).
 
 ## Memory
 
