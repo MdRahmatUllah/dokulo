@@ -531,5 +531,12 @@
   "info_versions": "Versionen",
   "info_current": "aktuell",
   "common_yes": "Ja",
-  "common_no": "Nein"
+  "common_no": "Nein",
+  "home_edit": "Bearbeiten",
+  "home_add_tool": "Werkzeug hinzufügen",
+  "home_add_tool_title": "Werkzeug hinzufügen",
+  "home_unpin": "Lösen",
+  "home_about_tool": "Über dieses Werkzeug",
+  "home_unpinned": "{tool} gelöst",
+  "home_unpin_named": "{tool} lösen"
 }

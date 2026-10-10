@@ -161,10 +161,32 @@ Stream<List<String>> pinnedTools(Ref ref) {
   return (db.select(
     db.pinnedTools,
   )..orderBy([(p) => OrderingTerm.asc(p.position)])).watch().map(
-    (rows) =>
-        rows.isEmpty ? defaultPinnedTools : [for (final r in rows) r.toolId],
+    (rows) => rows.isEmpty
+        ? defaultPinnedTools
+        : [
+            for (final r in rows)
+              if (r.toolId != _edited) r.toolId,
+          ],
   );
 }
+
+/// The row that says "the user has edited the pins": without it, unpinning
+/// every tool would bring the defaults back.
+const _edited = '';
+
+/// Home's pins, in this order (DK-0244), from now on the user's own.
+Future<void> savePinnedTools(DokuloDatabase db, List<String> ids) =>
+    db.transaction(() async {
+      await db.delete(db.pinnedTools).go();
+      await db
+          .into(db.pinnedTools)
+          .insert(PinnedToolsCompanion.insert(toolId: _edited, position: -1));
+      for (final (i, id) in ids.indexed) {
+        await db
+            .into(db.pinnedTools)
+            .insert(PinnedToolsCompanion.insert(toolId: id, position: i));
+      }
+    });
 
 /// The files opened or added last, newest first, at most 20 (DK-0243);
 /// not deleted. Home's Recent list.
