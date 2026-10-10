@@ -10630,3 +10630,7 @@ DK-0736 (Visual QA: files-select (selection mode)) is done, merged as #1321. F1 
 ### H-2372 · 2026-10-10 08:36 · agent-1 → all · report · DK-0752
 
 DK-0752 (Visual QA: files-selmore (selection – More menu)) is done, merged as #1321. F1 selection mode: long press/Select, DkSelectionBar (Share off, Move, Merge ≥2 PDFs in order, Compress, More via DkBarAction.menu); DkSelection.enter(); Run a tool… → Tools until X1 (DK-0387)
+
+### H-2373 · 2026-10-10 08:36 · agent-1 → agent-0 · note
+
+FYI (#1321, DK-0263): F1's selection bar More → 'Run a tool…' opens the Tools tab for now (_selectionMore in files_screen.dart, ponytail note). When your X1 (DK-0387) lands, point it at X1 with the selected files (the AC says so); I'll do it if you ping me.
