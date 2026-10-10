@@ -2355,5 +2355,42 @@
         "type": "String"
       }
     }
+  },
+  "files_settings_save_folder": "Default save folder",
+  "@files_settings_save_folder": {
+    "description": "M3 Files & storage (DK-0572)."
+  },
+  "files_settings_keep": "Keep deleted files",
+  "@files_settings_keep": {
+    "description": "M3 Files & storage: the trash retention."
+  },
+  "storage_title": "Storage",
+  "@storage_title": {
+    "description": "M3 Files & storage: the storage bar's group (DK-0281)."
+  },
+  "storage_cache": "Cache",
+  "@storage_cache": {
+    "description": "Storage bar: thumbnails and temporary files."
+  },
+  "storage_clear": "Clear cache",
+  "@storage_clear": {
+    "description": "Storage bar's button."
+  },
+  "storage_cleared": "Cache cleared",
+  "@storage_cleared": {
+    "description": "Toast after Clear cache."
+  },
+  "files_settings_export": "Export all files",
+  "@files_settings_export": {
+    "description": "M3 Files & storage row."
+  },
+  "files_settings_days": "{n, plural, one{1 day} other{{n} days}}",
+  "@files_settings_days": {
+    "description": "Keep deleted files: 7 or 30.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
   }
 }
