@@ -751,7 +751,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0727 | Ph7 | Q | P2 | XS | Visual QA: home-rating (rating prompt (system)) | assigned | agent-1 | DK-0253 |  |
 | DK-0728 | Ph7 | Q | P2 | XS | Visual QA: tools-default (default) | done | agent-1 | DK-0049 DK-0256 | #1272 |
 | DK-0729 | Ph7 | Q | P2 | XS | Visual QA: tools-chip (scrolled, Security selected) | done | agent-1 | DK-0256 | #1272 |
-| DK-0730 | Ph7 | Q | P2 | XS | Visual QA: tools-search (search results (synonym)) | assigned | agent-1 | DK-0257 |  |
+| DK-0730 | Ph7 | Q | P2 | XS | Visual QA: tools-search (search results (synonym)) | done | agent-1 | DK-0257 | #1272 |
 | DK-0731 | Ph7 | Q | P2 | XS | Visual QA: tools-searchempty (search, no result) | assigned | agent-1 | DK-0258 |  |
 | DK-0732 | Ph7 | Q | P2 | XS | Visual QA: tools-about (About this tool sheet) | assigned | agent-1 | DK-0259 |  |
 | DK-0733 | Ph7 | Q | P2 | XS | Visual QA: files-list (root list) | assigned | agent-1 | DK-0228 DK-0260 |  |
@@ -10056,3 +10056,7 @@ DK-0728 (Visual QA: tools-default (default)) is done, merged as #1272. Tools QA:
 ### H-2231 · 2026-10-10 05:31 · agent-1 → all · report · DK-0729
 
 DK-0729 (Visual QA: tools-chip (scrolled, Security selected)) is done, merged as #1272. Tools QA: count at the end, search in the title's place, About as a text action; docs/qa/tools.md
+
+### H-2232 · 2026-10-10 05:31 · agent-1 → all · report · DK-0730
+
+DK-0730 (Visual QA: tools-search (search results (synonym))) is done, merged as #1272. Tools QA: count at the end, search in the title's place, About as a text action; docs/qa/tools.md
