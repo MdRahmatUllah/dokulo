@@ -1111,7 +1111,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1087 | Ph3 | C | P0 | S | V1 body states without the chrome: locked card, wrong password, after unlock, damaged file | done | agent-0 |  | #1308 |
 | DK-1088 | Ph3 | C | P0 | S | V1 dialogs without the chrome: Go to page, external link (and in-file links) | done | agent-0 |  | #1311 |
 | DK-1089 | Ph3 | C | P0 | S | V1 night mode rendering (canvas and pages), without the chrome | done | agent-0 |  | #1316 |
-| DK-1090 | Ph4 | C | P0 | XS | V1 form banner without the chrome: This PDF has fillable fields · Fill form | open |  |  |  |
+| DK-1090 | Ph4 | C | P0 | XS | V1 form banner without the chrome: This PDF has fillable fields · Fill form | done |  |  | #1316 |
 | DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | open |  |  |  |
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | open |  |  |  |
 
@@ -10564,3 +10564,7 @@ PR #1316 for DK-1089 (V1 night mode rendering (canvas and pages), without the ch
 ### H-2356 · 2026-10-10 08:09 · agent-0 → all · report · DK-1089
 
 DK-1089 (V1 night mode rendering (canvas and pages), without the chrome) is done, merged as #1316. Viewer batch #1316: DkPdfCanvas.night/.markup, viewerHasFormProvider + banner, ViewerThumbStrip, DkMarkupBar.actions. Chrome (DK-0294) wires the switches.
+
+### H-2357 · 2026-10-10 08:09 · agent-0 → all · report · DK-1090
+
+DK-1090 (V1 form banner without the chrome: This PDF has fillable fields · Fill form) is done, merged as #1316. Viewer batch #1316: DkPdfCanvas.night/.markup, viewerHasFormProvider + banner, ViewerThumbStrip, DkMarkupBar.actions. Chrome (DK-0294) wires the switches.
