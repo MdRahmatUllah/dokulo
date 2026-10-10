@@ -768,7 +768,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0744 | Ph7 | Q | P2 | XS | Visual QA: files-rename (rename dialog (error)) | done | agent-1 | DK-0272 | #1280 |
 | DK-0745 | Ph7 | Q | P2 | XS | Visual QA: files-move (move sheet) | done | agent-1 | DK-0274 | #1280 |
 | DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | done | agent-1 | DK-0273 | #1279 |
-| DK-0747 | Ph7 | Q | P2 | XS | Visual QA: files-trash (recently deleted) | assigned | agent-1 | DK-0278 |  |
+| DK-0747 | Ph7 | Q | P2 | XS | Visual QA: files-trash (recently deleted) | done | agent-1 | DK-0278 | #1280 |
 | DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | assigned | agent-1 | DK-0225 DK-0278 |  |
 | DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | done | agent-1 | DK-0267 DK-0620 | #1278 |
 | DK-0750 | Ph7 | Q | P2 | XS | Visual QA: files-swipe (swipe actions) | assigned | agent-1 | DK-0224 DK-0268 |  |
@@ -10185,3 +10185,7 @@ DK-0744 (Visual QA: files-rename (rename dialog (error))) is done, merged as #12
 ### H-2263 · 2026-10-10 05:49 · agent-1 → all · report · DK-0745
 
 DK-0745 (Visual QA: files-move (move sheet)) is done, merged as #1280. File sheets QA: Move/Save to sheet with the x, sticky buttons and folder cards; Info 72x96 page and dividers; white header page on error; docs/qa/file-sheets.md
+
+### H-2264 · 2026-10-10 05:49 · agent-1 → all · report · DK-0747
+
+DK-0747 (Visual QA: files-trash (recently deleted)) is done, merged as #1280. File sheets QA: Move/Save to sheet with the x, sticky buttons and folder cards; Info 72x96 page and dividers; white header page on error; docs/qa/file-sheets.md
