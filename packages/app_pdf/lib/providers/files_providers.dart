@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'database_providers.dart';
+import 'file_providers.dart';
 import 'prefs_providers.dart';
 
 part 'files_providers.g.dart';
@@ -160,10 +161,32 @@ Stream<List<String>> pinnedTools(Ref ref) {
   return (db.select(
     db.pinnedTools,
   )..orderBy([(p) => OrderingTerm.asc(p.position)])).watch().map(
-    (rows) =>
-        rows.isEmpty ? defaultPinnedTools : [for (final r in rows) r.toolId],
+    (rows) => rows.isEmpty
+        ? defaultPinnedTools
+        : [
+            for (final r in rows)
+              if (r.toolId != _edited) r.toolId,
+          ],
   );
 }
+
+/// The row that says "the user has edited the pins": without it, unpinning
+/// every tool would bring the defaults back.
+const _edited = '';
+
+/// Home's pins, in this order (DK-0244), from now on the user's own.
+Future<void> savePinnedTools(DokuloDatabase db, List<String> ids) =>
+    db.transaction(() async {
+      await db.delete(db.pinnedTools).go();
+      await db
+          .into(db.pinnedTools)
+          .insert(PinnedToolsCompanion.insert(toolId: _edited, position: -1));
+      for (final (i, id) in ids.indexed) {
+        await db
+            .into(db.pinnedTools)
+            .insert(PinnedToolsCompanion.insert(toolId: id, position: i));
+      }
+    });
 
 /// The files opened or added last, newest first, at most 20 (DK-0243);
 /// not deleted. Home's Recent list.
@@ -194,6 +217,41 @@ Future<void> recordOpened(DokuloDatabase db, int fileId) => db
     .insertOnConflictUpdate(
       RecentsCompanion.insert(fileId: Value(fileId), openedAt: DateTime.now()),
     );
+
+/// Version history (DK-0277), in the sandbox next to the inbox.
+@Riverpod(keepAlive: true)
+Future<VersionStore> versionStore(Ref ref) async {
+  final files = await ref.watch(fileStoreProvider.future);
+  return VersionStore(
+    ref.watch(appDatabaseProvider),
+    Directory('${files.workDirectory.path}${Platform.pathSeparator}versions'),
+  );
+}
+
+/// File [fileId]'s versions, newest first (Info, DK-0275).
+@riverpod
+Future<List<Version>> fileVersions(Ref ref, int fileId) async =>
+    (await ref.watch(versionStoreProvider.future)).list(fileId);
+
+/// The PDF version Info shows (DK-0275).
+@riverpod
+Future<String?> pdfVersion(Ref ref, String path) => readPdfVersion(path);
+
+/// The version in a PDF's header ("%PDF-1.7" → "1.7"), from its first
+/// bytes; null for anything else.
+Future<String?> readPdfVersion(String path) async {
+  try {
+    final raf = await File(path).open();
+    try {
+      final head = String.fromCharCodes(await raf.read(16));
+      return RegExp(r'%PDF-(\d\.\d)').firstMatch(head)?.group(1);
+    } finally {
+      await raf.close();
+    }
+  } on FileSystemException {
+    return null;
+  }
+}
 
 /// How long Recently deleted keeps a file: 30 days, or 7 (DK-0278). The
 /// launch purge and R1's banner read it.
@@ -280,3 +338,34 @@ String ftsQuery(String query) => [
   for (final w in query.split(RegExp(r'\s+')))
     if (w.isNotEmpty) '"${w.replaceAll('"', '""')}"*',
 ].join(' ');
+
+/// The favourites (DK-0280), the last marked first, deleted ones left out.
+@riverpod
+Stream<List<FileEntry>> favouriteFiles(Ref ref) {
+  final db = ref.watch(appDatabaseProvider);
+  final query =
+      db.select(db.files).join([
+          innerJoin(db.favourites, db.favourites.fileId.equalsExp(db.files.id)),
+        ])
+        ..where(
+          db.files.id.isNotInQuery(
+            db.selectOnly(db.trash)..addColumns([db.trash.fileId]),
+          ),
+        )
+        ..orderBy([OrderingTerm.desc(db.favourites.addedAt)]);
+  return query.watch().map(
+    (rows) => [for (final r in rows) r.readTable(db.files)],
+  );
+}
+
+/// Marks file [id] a favourite, or not.
+Future<void> setFavourite(DokuloDatabase db, int id, bool on) => on
+    ? db
+          .into(db.favourites)
+          .insertOnConflictUpdate(
+            FavouritesCompanion.insert(
+              fileId: Value(id),
+              addedAt: DateTime.now(),
+            ),
+          )
+    : (db.delete(db.favourites)..where((f) => f.fileId.equals(id))).go();

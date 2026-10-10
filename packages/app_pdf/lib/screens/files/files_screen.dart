@@ -63,6 +63,7 @@ class FilesScreen extends ConsumerWidget {
     }
     final trash = ref.watch(trashCountProvider).value ?? 0;
     final query = ref.watch(filesQueryProvider);
+    final favourites = ref.watch(favouriteFilesProvider).value ?? const [];
     final prefs = ref.read(prefsProvider.notifier);
 
     final loading = !folders.hasValue || !files.hasValue;
@@ -152,6 +153,11 @@ class FilesScreen extends ConsumerWidget {
                   ),
                 )
               else ...[
+                // Favourites float to the top (DK-0280).
+                if (favourites.isNotEmpty) ...[
+                  _Header(l.files_favourites),
+                  _FileList(files: favourites, grid: view.grid),
+                ],
                 if (folders.value!.isNotEmpty) ...[
                   _Header(l.files_folders),
                   _FolderList(folders: folders.value!, grid: view.grid),
