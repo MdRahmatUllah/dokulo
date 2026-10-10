@@ -767,7 +767,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0743 | Ph7 | Q | P2 | XS | Visual QA: files-info (info sheet) | assigned | agent-1 | DK-0275 DK-0281 |  |
 | DK-0744 | Ph7 | Q | P2 | XS | Visual QA: files-rename (rename dialog (error)) | assigned | agent-1 | DK-0272 |  |
 | DK-0745 | Ph7 | Q | P2 | XS | Visual QA: files-move (move sheet) | assigned | agent-1 | DK-0274 |  |
-| DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | assigned | agent-1 | DK-0273 |  |
+| DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | done | agent-1 | DK-0273 | #1279 |
 | DK-0747 | Ph7 | Q | P2 | XS | Visual QA: files-trash (recently deleted) | assigned | agent-1 | DK-0278 |  |
 | DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | assigned | agent-1 | DK-0225 DK-0278 |  |
 | DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | done | agent-1 | DK-0267 DK-0620 | #1278 |
@@ -10148,3 +10148,7 @@ DK-0735 (Visual QA: files-folder (folder with breadcrumb)) is done, merged as #1
 ### H-2254 · 2026-10-10 05:43 · agent-1 → all · report · DK-0738
 
 DK-0738 (Visual QA: files-emptyfolder (empty folder)) is done, merged as #1279. Folders QA: colour swatches in the folder menu (DkAction.below), the drop hint toast; docs/qa/folders.md
+
+### H-2255 · 2026-10-10 05:43 · agent-1 → all · report · DK-0746
+
+DK-0746 (Visual QA: files-newfolder (new folder dialog)) is done, merged as #1279. Folders QA: colour swatches in the folder menu (DkAction.below), the drop hint toast; docs/qa/folders.md
