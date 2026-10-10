@@ -32,9 +32,14 @@ class CompressOptions {
     this.greyscale = false,
     this.removeMetadata = false,
     this.targetBytes,
+    this.skipPages = const {},
   });
 
   final CompressPreset preset;
+
+  /// 0-based pages left as they are: "Skip this page" after a page failed
+  /// (DK-1086).
+  final Set<int> skipPages;
 
   /// Images in shades of grey (text and drawings keep their colour).
   final bool greyscale;
@@ -236,38 +241,48 @@ class PdfCompress {
         if (isCancelled?.call() ?? false) {
           throw const DocError(DocErrorKind.cancelled);
         }
-        final (raws, seen, scanLeftOver) = await _call(
-          () => compute(_extractOnWorker, (
-            handle,
-            page,
-            level.dpi,
-            encoded.keys.toSet(),
-          )),
-        );
-        if (scanLeftOver) rasterise.add(page);
-        if (raws.isNotEmpty) {
-          final jpegs = await _job(
-            pool.run(Lane.opencv, _encode, (
-              raws,
-              {for (final raw in raws) raw.key: uses[raw.key] ?? 1},
-              level.quality,
-              options.greyscale,
-            )).result,
-          );
-          for (var i = 0; i < raws.length; i++) {
-            encoded[raws[i].key] = jpegs[i];
-          }
+        if (options.skipPages.contains(page)) {
+          onPage?.call(page + 1, pages);
+          continue;
         }
-        final keep = [
-          for (final (index, key) in [
-            for (final raw in raws) (raw.index, raw.key),
-            ...seen,
-          ])
-            if (encoded[key] case final jpeg?) (index, jpeg),
-        ];
-        if (keep.isNotEmpty) {
-          await _call(() => compute(_replaceOnWorker, (handle, page, keep)));
-          images += keep.length;
+        try {
+          final (raws, seen, scanLeftOver) = await _call(
+            () => compute(_extractOnWorker, (
+              handle,
+              page,
+              level.dpi,
+              encoded.keys.toSet(),
+            )),
+          );
+          if (scanLeftOver) rasterise.add(page);
+          if (raws.isNotEmpty) {
+            final jpegs = await _job(
+              pool.run(Lane.opencv, _encode, (
+                raws,
+                {for (final raw in raws) raw.key: uses[raw.key] ?? 1},
+                level.quality,
+                options.greyscale,
+              )).result,
+            );
+            for (var i = 0; i < raws.length; i++) {
+              encoded[raws[i].key] = jpegs[i];
+            }
+          }
+          final keep = [
+            for (final (index, key) in [
+              for (final raw in raws) (raw.index, raw.key),
+              ...seen,
+            ])
+              if (encoded[key] case final jpeg?) (index, jpeg),
+          ];
+          if (keep.isNotEmpty) {
+            await _call(() => compute(_replaceOnWorker, (handle, page, keep)));
+            images += keep.length;
+          }
+        } on DocError catch (e) {
+          // The page it failed on, for "Skip this page".
+          if (e.page != null || e.kind == DocErrorKind.cancelled) rethrow;
+          throw DocError(e.kind, page: page, detail: e.detail, code: e.code);
         }
         onPage?.call(page + 1, pages);
       }

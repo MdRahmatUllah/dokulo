@@ -169,6 +169,21 @@ void main() {
     expect(page.width / page.height, closeTo(400 / 560, 0.05));
   });
 
+  test('Skip this page (DK-1086): a skipped image is left out', () async {
+    final a = write('a.jpg', photo(100, 120));
+    final run = await queue.start(
+      'img2pdf',
+      Img2PdfInput(
+        files: [a, a, a],
+        outputDir: outDir.path,
+        suffix: '',
+        skipPages: const [1],
+      ),
+    );
+    final output = await run.result as OneFile;
+    expect((await PdfEngine.inspect(output.path)).pageCount, 2);
+  });
+
   test("in a chain it takes the previous step's files", () {
     final chained = const Img2PdfJob().chain(
       const ManyFiles(['a.jpg', 'b.png']),

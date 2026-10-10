@@ -178,6 +178,10 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     if (mounted && picked.isNotEmpty) _add(current, picked, input);
   }
 
+  /// Pages the user skipped after they failed, kept for this screen's
+  /// runs (DK-1086).
+  final _skipPages = <int>{};
+
   /// Starts the tool and follows it: nothing under 2 s, the button's
   /// loading state to 10 s, then the progress sheet (DK-0375). It ends in T3,
   /// a "Cancelled" toast (DK-0376) or the sheet's error state (DK-0377).
@@ -188,7 +192,11 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     try {
       run = await ref.read(toolRunnerProvider)(
         _def.id,
-        (out) => _def.input!(subject, values, ToolEnv(outputDir: out, l10n: l)),
+        (out) => _def.input!(
+          subject,
+          values,
+          ToolEnv(outputDir: out, l10n: l, skipPages: _skipPages),
+        ),
       );
     } catch (e) {
       // The preflight refused it (no space, too large, locked).
@@ -305,14 +313,28 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                         action: error.actions.first.label(l),
                         onAction: () =>
                             _recover(error.actions.first, subject, values),
-                        // Skip this page needs the tool's support (a job
-                        // that can go on past a page); none has it yet.
+                        // Skip this page only for a tool whose job can go
+                        // on past a page (DK-1086).
                         more: [
                           for (final a in error.actions.skip(1))
                             if (a == DkRecovery.sendReport)
                               (
                                 a.label(l),
                                 () => _sendReport(error.situation.code),
+                              )
+                            else if (a == DkRecovery.skipPage &&
+                                _def.canSkipPages &&
+                                error.page != null)
+                              (
+                                a.label(l),
+                                () {
+                                  _skipPages.add(error.page!);
+                                  _recover(
+                                    DkRecovery.tryAgain,
+                                    subject,
+                                    values,
+                                  );
+                                },
                               ),
                         ],
                       ),

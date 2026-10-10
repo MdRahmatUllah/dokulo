@@ -45,7 +45,8 @@ final _compress = ToolDefinition(
   action: (l, s) => 'Compress ${s.pages} pages',
   busyLabel: (l) => 'Compressing…',
   busyTitle: (l, s) => 'Compressing ${s.files.first.name}',
-  input: (s, v, env) => v,
+  input: (s, v, env) => {...v, 'skipPages': env.skipPages},
+  canSkipPages: true,
 );
 
 final _merge = ToolDefinition(
@@ -334,6 +335,51 @@ void main() {
           Uri.decodeComponent(mails.single.toString()),
           contains('android 15'),
         );
+      });
+    }
+
+    if (theme == 'light') {
+      testWidgets('Skip this page (DK-1086): reruns with the failed page '
+          'skipped', (tester) async {
+        final id = await file(tester, 'Mietvertrag.pdf', pages: 20);
+        final inputs = <Object>[];
+        final runs = [_Run(), _Run()];
+        tester.view.physicalSize = const Size(393, 852);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              appDatabaseProvider.overrideWithValue(db),
+              fileStoreProvider.overrideWith((ref) async => store),
+              toolRunnerProvider.overrideWithValue((id, input) async {
+                inputs.add(input('out'));
+                return runs[inputs.length - 1].handle;
+              }),
+            ],
+            child: MaterialApp(
+              theme: dokuloTheme(tokens),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: ToolOptionsScreen(definition: _compress, fileIds: [id]),
+            ),
+          ),
+        );
+        await settle(tester);
+        await tester.tap(find.text('Compress 20 pages'));
+        await tester.pump();
+        runs[0].result.completeError(
+          const DocError(DocErrorKind.unexpected, page: 13),
+        );
+        for (var i = 0; i < 6; i++) {
+          await tester.pump(const Duration(milliseconds: 150));
+        }
+        await tester.tap(find.text('Skip this page'));
+        await tester.pump();
+        expect(inputs, hasLength(2));
+        expect((inputs.last as Map)['skipPages'], {13});
+        runs[1].result.complete(null);
+        await tester.pump(const Duration(seconds: 1));
       });
     }
 
