@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-DK-0751 dragfolder QA; DK-0253 rating prompt (in_app_review plugin, licence + privacy manifest); DK-0279 Files two-pane on tablets; then DK-0246/0252 when agent-2's scanner/photo finder land.
+When agent-2 frees the pubspec lock: DK-0253 (in_app_review) and DK-0255 (clipboard/drop). When #1219 merges: DK-0246 + DK-0717, DK-0644, DK-0652. Photo finder: DK-0252 + DK-0722.
 
 ## Memory
 
