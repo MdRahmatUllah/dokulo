@@ -27,14 +27,120 @@ import 'pinned_tools.dart';
 /// search and settings; the privacy line; "Your tools", the pinned tools
 /// 4 × 2; "Open a file"; "Recent", up to 20 files. The first launch shows
 /// the empty state instead of Recent. Pull to refresh re-scans the folder.
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  /// Keeps the pinned tools' state (edit mode) when a tablet turns and the
+  /// layout changes between one scroll view and two (DK-0649).
+  final _pinned = GlobalKey();
+
+  @override
+  Widget build(BuildContext context) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final recent = ref.watch(recentFilesProvider);
+
+    // Tablets (UI spec §30): from 600 dp the tools 6 across and Recent in
+    // 2 columns; from 840 Recent moves to a 360 column on the right. The
+    // content's side padding grows to 24 there.
+    final width = MediaQuery.sizeOf(context).width;
+    final tablet = width >= 600;
+    final wide = width >= 840;
+    final top = <Widget>[
+      SliverPadding(
+        padding: EdgeInsets.fromLTRB(t.space.l, t.space.xs, t.space.l, 0),
+        sliver: const SliverToBoxAdapter(
+          child: DkPrivacyLine(where: DkPrivacyContext.home),
+        ),
+      ),
+      const HomeContinueCard(),
+      PinnedToolsSection(key: _pinned),
+      SliverPadding(
+        padding: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
+        sliver: SliverToBoxAdapter(
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: DkButton(
+              label: l.home_open_file,
+              icon: DkIcons.folderOpen,
+              variant: DkButtonVariant.secondary,
+              // Full width on a phone; its own width on a tablet.
+              expand: !tablet,
+              onPressed: () => openFileFromDevice(context, ref),
+            ),
+          ),
+        ),
+      ),
+    ];
+    final recents = <Widget>[
+      switch (recent) {
+        AsyncData(:final value) when value.isEmpty => SliverPadding(
+          padding: EdgeInsets.only(top: t.space.xl),
+          sliver: SliverToBoxAdapter(
+            child: DkEmptyStates.homeRecents(
+              context,
+              onScan: () => context.push(Routes.scan),
+            ),
+          ),
+        ),
+        AsyncData(:final value) => SliverMainAxisGroup(
+          slivers: [
+            _Header(
+              l.home_recent,
+              action: l.home_see_all,
+              onAction: () => context.go(Routes.files),
+            ),
+            _recentWithProCard(
+              context,
+              ref,
+              value,
+              columns: tablet && !wide ? 2 : 1,
+            ),
+          ],
+        ),
+        _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
+      },
+    ];
+    final edge = tablet ? t.space.s : 0.0;
+    Widget scroll(
+      List<Widget> slivers, {
+      bool topBar = true,
+      double edge = 0,
+    }) => CustomScrollView(
+      slivers: [
+        if (topBar)
+          DkLargeTopBar(
+            title: 'Dokulo', // l10n-ignore: the brand name, in every language
+            actions: [
+              DkTopBarAction(
+                icon: DkIcons.search,
+                tooltip: l.home_search,
+                onPressed: () => context.go(Routes.filesSearch),
+              ),
+              DkTopBarAction(
+                icon: DkIcons.settings,
+                tooltip: l.home_settings,
+                // The settings pages are listed in Me (§23.1, row 4).
+                onPressed: () => context.go(Routes.me),
+              ),
+            ],
+          ),
+        // A phone: the slivers as they are; a tablet: 8 more each side.
+        if (edge == 0)
+          ...slivers
+        else
+          SliverPadding(
+            padding: EdgeInsets.symmetric(horizontal: edge),
+            sliver: SliverMainAxisGroup(slivers: slivers),
+          ),
+        SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
+      ],
+    );
 
     return Scaffold(
       backgroundColor: t.color.background,
@@ -43,69 +149,31 @@ class HomeScreen extends ConsumerWidget {
           final store = await ref.read(fileStoreProvider.future);
           await store.reconcile(ref.read(appDatabaseProvider));
         },
-        child: CustomScrollView(
-          slivers: [
-            DkLargeTopBar(
-              title: 'Dokulo', // l10n-ignore: the brand name, in every language
-              actions: [
-                DkTopBarAction(
-                  icon: DkIcons.search,
-                  tooltip: l.home_search,
-                  onPressed: () => context.go(Routes.filesSearch),
-                ),
-                DkTopBarAction(
-                  icon: DkIcons.settings,
-                  tooltip: l.home_settings,
-                  // The settings pages are listed in Me (§23.1, row 4).
-                  onPressed: () => context.go(Routes.me),
-                ),
-              ],
-            ),
-            SliverPadding(
-              padding: EdgeInsets.fromLTRB(t.space.l, t.space.xs, t.space.l, 0),
-              sliver: const SliverToBoxAdapter(
-                child: DkPrivacyLine(where: DkPrivacyContext.home),
-              ),
-            ),
-            const HomeContinueCard(),
-            const PinnedToolsSection(),
-            SliverPadding(
-              padding: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
-              sliver: SliverToBoxAdapter(
-                child: DkButton(
-                  label: l.home_open_file,
-                  icon: DkIcons.folderOpen,
-                  variant: DkButtonVariant.secondary,
-                  expand: true,
-                  onPressed: () => openFileFromDevice(context, ref),
-                ),
-              ),
-            ),
-            switch (recent) {
-              AsyncData(:final value) when value.isEmpty => SliverPadding(
-                padding: EdgeInsets.only(top: t.space.xl),
-                sliver: SliverToBoxAdapter(
-                  child: DkEmptyStates.homeRecents(
-                    context,
-                    onScan: () => context.push(Routes.scan),
+        child: wide
+            ? Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(child: scroll(top, edge: edge)),
+                  VerticalDivider(
+                    width: 1,
+                    thickness: 1,
+                    color: t.color.outline,
                   ),
-                ),
-              ),
-              AsyncData(:final value) => SliverMainAxisGroup(
-                slivers: [
-                  _Header(
-                    l.home_recent,
-                    action: l.home_see_all,
-                    onAction: () => context.go(Routes.files),
+                  SizedBox(
+                    width: 360,
+                    child: ColoredBox(
+                      color: t.color.surface,
+                      child: SafeArea(
+                        left: false,
+                        right: false,
+                        bottom: false,
+                        child: scroll(recents, topBar: false),
+                      ),
+                    ),
                   ),
-                  ..._recentWithProCard(context, ref, value),
                 ],
-              ),
-              _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
-            },
-            SliverToBoxAdapter(child: SizedBox(height: t.space.xl)),
-          ],
-        ),
+              )
+            : scroll([...top, ...recents], edge: edge),
       ),
     );
   }
@@ -113,13 +181,15 @@ class HomeScreen extends ConsumerWidget {
 
 /// A section header: `titleS` on the left, an optional compact tertiary
 /// button on the right; 24 above.
-/// The recent rows, with the Pro card after the 5th (UI spec §15.2 row 9,
-/// DK-0251) when [showProCard] says so.
-List<Widget> _recentWithProCard(
+/// The recent rows, in [columns] (2 on a portrait tablet), with the Pro
+/// card after the 5th row (UI spec §15.2 row 9, DK-0251) when
+/// [showProCard] says so.
+Widget _recentWithProCard(
   BuildContext context,
   WidgetRef ref,
-  List<FileEntry> recent,
-) {
+  List<FileEntry> recent, {
+  int columns = 1,
+}) {
   final t = context.tokens;
   final prefs = ref.watch(prefsProvider).value ?? const {};
   final dismissals = prefs[proCardDismissals] as int? ?? 0;
@@ -131,20 +201,34 @@ List<Widget> _recentWithProCard(
     now: DateTime.now(),
   );
   Widget row(FileEntry f) => FileEntryCard(f, longPressActions: true);
-  if (!show) {
-    return [
-      SliverList.builder(
-        itemCount: recent.length,
-        itemBuilder: (_, i) => row(recent[i]),
-      ),
-    ];
-  }
-  final store = ref.read(prefsProvider.notifier);
-  return [
-    SliverList.builder(itemCount: 5, itemBuilder: (_, i) => row(recent[i])),
-    SliverPadding(
-      padding: EdgeInsets.fromLTRB(t.space.l, t.space.s, t.space.l, t.space.s),
-      sliver: SliverToBoxAdapter(
+  final rows = <Widget>[
+    for (var i = 0; i < recent.length; i += columns)
+      columns == 1
+          ? row(recent[i])
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: t.space.l,
+              children: [
+                for (var j = i; j < i + columns; j++)
+                  Expanded(
+                    child: j < recent.length
+                        ? row(recent[j])
+                        : const SizedBox.shrink(),
+                  ),
+              ],
+            ),
+  ];
+  if (show) {
+    final store = ref.read(prefsProvider.notifier);
+    rows.insert(
+      rows.length < 5 ? rows.length : 5,
+      Padding(
+        padding: EdgeInsets.fromLTRB(
+          t.space.l,
+          t.space.s,
+          t.space.l,
+          t.space.s,
+        ),
         child: DkProCard(
           // ponytail: X3, the paywall sheet, comes with DK-0579 (as on Me).
           onOpen: () {},
@@ -157,12 +241,9 @@ List<Widget> _recentWithProCard(
           },
         ),
       ),
-    ),
-    SliverList.builder(
-      itemCount: recent.length - 5,
-      itemBuilder: (_, i) => row(recent[i + 5]),
-    ),
-  ];
+    );
+  }
+  return SliverList.list(children: rows);
 }
 
 /// Prefs keys of the Pro card's dismissals.

@@ -49,8 +49,9 @@ Future<GoRouter> pumpHome(
   Locale locale = const Locale('en'),
   List<Override> overrides = const [],
   double textScale = 1,
+  Size size = const Size(393, 852),
 }) async {
-  tester.view.physicalSize = const Size(393, 852);
+  tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
   addTearDown(tester.view.reset);
   final router = buildRouter(initialLocation: Routes.home);
@@ -218,8 +219,14 @@ void main() {
       overrides: [runningJobsProvider.overrideWith(_OneJob.new)],
     );
     expect(find.byType(DkMiniJobBar), findsOneWidget);
-    await tester.drag(find.byType(CustomScrollView), const Offset(0, -3000));
-    await settle(tester);
+    // To the end: the list's extent grows as its rows are built.
+    final pos = tester
+        .state<ScrollableState>(find.byType(Scrollable).first)
+        .position;
+    for (var k = 0; k < 5 && pos.pixels < pos.maxScrollExtent; k++) {
+      await tester.drag(find.byType(CustomScrollView), const Offset(0, -3000));
+      await settle(tester);
+    }
     final last = tester.getRect(find.text('f0.pdf'));
     expect(
       last.bottom,

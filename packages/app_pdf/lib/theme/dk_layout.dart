@@ -96,3 +96,18 @@ class DkGrid {
       ? smallTablet
       : largeTablet;
 }
+
+/// Tool tiles across (UI spec §30): 4 on a phone, 6 from 600 dp of width, 8
+/// from 840 (Home's pinned tools, T1).
+int toolColumns(double width) => width >= 840
+    ? 8
+    : width >= 600
+    ? 6
+    : 4;
+
+/// A tool tile's width to height: a phone's 0.78; on a tablet the same
+/// 108 dp of height in a wider column.
+double toolTileAspect(double width, double gap) {
+  final n = toolColumns(width);
+  return n == 4 ? 0.78 : (width - (n - 1) * gap) / n / 108;
+}

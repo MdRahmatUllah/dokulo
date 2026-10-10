@@ -1,4 +1,5 @@
 import 'package:app_pdf/components/dk_file_card.dart';
+import 'package:app_pdf/components/dk_icon.dart';
 import 'package:app_pdf/components/dk_promo_cards.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
@@ -77,15 +78,18 @@ void main() {
     final container = ProviderScope.containerOf(
       tester.element(find.byType(HomeScreen)),
     );
-    // Clear of the tab bar.
-    await tester.drag(find.byType(CustomScrollView), const Offset(0, -300));
-    await tester.pump(const Duration(milliseconds: 500));
-    await tester.tap(
-      find.descendant(
-        of: find.byType(DkProCard),
-        matching: find.bySemanticsLabel('Close'),
+    // Clear of the tab bar (the list's extent grows as rows are built).
+    final close = find.descendant(
+      of: find.byType(DkProCard),
+      matching: find.byWidgetPredicate(
+        (w) => w is DkIcon && w.icon == DkIcons.close,
       ),
     );
+    await tester.runAsync(
+      () => Scrollable.ensureVisible(tester.element(close), alignment: 0.3),
+    );
+    await tester.pump(const Duration(milliseconds: 300));
+    await tester.tap(close);
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 300));
     expect(find.byType(DkProCard), findsNothing);
