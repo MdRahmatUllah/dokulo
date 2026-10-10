@@ -53,6 +53,23 @@ def test_scan(tmp_path: Path) -> None:
     assert "unrecognised" in problems[2] and "excluded" in problems[3]
 
 
+LGPL = "GNU LESSER GENERAL PUBLIC LICENSE\n Version 3, 29 June 2007"
+
+
+def test_lgpl_fails_even_with_a_register_line(tmp_path: Path) -> None:
+    root, cache = tmp_path / "repo", tmp_path / "cache"
+    (root / "docs" / "compliance").mkdir(parents=True)
+    (root / licence_scan.REGISTER).write_text("| `lgpl_thing` | LGPL-3.0 |\n", encoding="utf-8")
+    (cache / "hosted" / "pub.dev" / "lgpl_thing-1.0.0").mkdir(parents=True)
+    (cache / "hosted" / "pub.dev" / "lgpl_thing-1.0.0" / "LICENSE").write_text(LGPL, encoding="utf-8")
+    (root / "pubspec.lock").write_text("packages:\n" + package("lgpl_thing", "transitive"),
+                                       encoding="utf-8")
+
+    problems = licence_scan.scan(root, cache)
+
+    assert len(problems) == 1 and "never in the app" in problems[0]
+
+
 def test_classify_prefers_the_licence_named_first(tmp_path: Path) -> None:
     (tmp_path / "LICENSE").write_text(MPL, encoding="utf-8")
     assert licence_scan.classify(tmp_path) == "MPL"
