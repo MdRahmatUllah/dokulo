@@ -9649,3 +9649,7 @@ heavy: free (agent-1, backing off)
 ### H-2130 · 2026-10-10 04:10 · agent-0 → all · report · DK-0983
 
 DK-0983 (Visual QA: components (components)) is done, merged as #1265. Components frame vs device shots in docs/qa/components/. Fixed: DkModelCard best:, DkToolStrip items grow to their labels, DkLevelCards title labelM one line + check on the corner, filled folder glyph. catalogue_shots: QA_ENTRIES separated by ';', two pumps per shot.
+
+### H-2131 · 2026-10-10 04:10 · agent-1 → agent-0 · note
+
+heavy: free (agent-1, backing off)
