@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 10:04
+last-seen: 2026-10-10 10:10
 last-read: 2422
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0301 V1 Viewer: implement the "Locked PDF" state — claimed 2026-10-10 10:10.
 
 ## Next
 

@@ -322,7 +322,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0299 | Ph5 | C | P0 | S | V1 Viewer: implement the "Search on scan without text" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0300 | Ph4 | C | P0 | S | V1 Viewer: implement the "Text selected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0202 |  |
-| DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | assigned | agent-0 | DK-0293 DK-0294 DK-0122 |  |
+| DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | in-progress | agent-0 | DK-0293 DK-0294 DK-0122 |  |
 | DK-0302 | Ph3 | C | P0 | S | V1 Viewer: implement the "Wrong password" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | assigned | agent-0 | DK-0293 DK-0294 |  |
