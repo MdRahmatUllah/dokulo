@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0856 Visual QA: tool-shell-aftersave (T3 – after Save) — claimed 2026-10-10 02:19.
+DK-0856 in review as PR #1255: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
