@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1093 V1 search (bar, highlights, no-text banner), reachable from Files search — claimed 2026-10-10 08:15.
 
 ## Next
 
