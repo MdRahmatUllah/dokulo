@@ -15,6 +15,7 @@ import '../../components/dk_file_card.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_icon_button.dart';
 import '../../components/dk_loading_spinner.dart';
+import '../../components/dk_menu.dart';
 import '../../components/dk_page_grid.dart';
 import '../../components/dk_segmented.dart';
 import '../../components/dk_sheet.dart';
@@ -25,6 +26,7 @@ import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_open_file.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/files_providers.dart';
 import '../../routes/link_error.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_layout.dart';
@@ -147,12 +149,60 @@ class _OrganizeState extends ConsumerState<_Organize> {
     );
   }
 
+  /// Save (UI spec §18): a copy next to the original, "{name} –
+  /// organized.pdf", with "Saved as “…”"; the original stays as it is.
   Future<void> _save() async {
     if (_edit!.changed) {
-      await _write(_edit!.save);
+      await _write(
+        _edit!.save,
+        suffix: AppLocalizations.of(context).organize_suffix,
+      );
       if (mounted) context.pop();
     } else {
       context.pop();
+    }
+  }
+
+  /// Save's long-press menu (organize-savemenu): Save as copy · Replace
+  /// original.
+  void _saveMenu(BuildContext anchor) {
+    final l = AppLocalizations.of(context);
+    showDkMenu(
+      anchor,
+      groups: [
+        [
+          DkAction(icon: DkIcons.copy, label: l.common_save_copy, onTap: _save),
+          DkAction(
+            icon: DkIcons.replace,
+            label: l.common_replace_original,
+            onTap: _replace,
+          ),
+        ],
+      ],
+    );
+  }
+
+  /// Replace original: asks, writes the pages over the file (the original
+  /// kept in Versions for 30 days), "Saved".
+  Future<void> _replace() async {
+    final l = AppLocalizations.of(context);
+    if (!_edit!.changed) return context.pop();
+    if (!await confirmDk(context, DkConfirmation.replaceOriginal)) return;
+    if (!mounted) return;
+    setState(() => _saving = true);
+    try {
+      final store = await ref.read(fileStoreProvider.future);
+      final out = await store.newTempFile(widget.file.name);
+      await _edit!.save(out.path);
+      final versions = await ref.read(versionStoreProvider.future);
+      await versions.replace(widget.file.id, out.path);
+      await out.delete();
+      await ref.read(hapticsProvider).saved();
+      if (!mounted) return;
+      showDkToast(context, l.toast_saved);
+      context.pop();
+    } finally {
+      if (mounted) setState(() => _saving = false);
     }
   }
 
@@ -183,14 +233,10 @@ class _OrganizeState extends ConsumerState<_Organize> {
       );
       await ref.read(hapticsProvider).saved();
       if (!mounted) return;
-      final place = [
-        l.shell_tab_files,
-        ...?sub?.split(Platform.pathSeparator),
-      ].join(' › ');
       final router = GoRouter.of(context);
       showDkToast(
         context,
-        l.toast_saved_to(place),
+        l.toast_saved_as(saved.name),
         action: l.common_open,
         onAction: () => router.push(Routes.viewer('${saved.id}')),
       );
@@ -237,6 +283,7 @@ class _OrganizeState extends ConsumerState<_Organize> {
                   title: ToolCatalogue.of('organize').name(l),
                   onCancel: _cancel,
                   onDone: edit == null || _saving ? null : _save,
+                  onDoneLongPress: _saveMenu,
                   doneLabel: l.t3_save,
                 ),
         ),

@@ -566,8 +566,10 @@
   "me_rate": "Dokulo bewerten",
   "me_restore_purchase": "Kauf wiederherstellen",
   "t3_save_menu": "Weitere Optionen zum Speichern",
+  "organize_insert_photos": "Aus Fotos",
+  "organize_suffix": "geordnet",
+  "toast_saved_as": "Gespeichert als „{name}“",
   "t3_save_here": "Hier speichern",
   "t3_use_folder": "Diesen Ordner verwenden",
-  "t3_save_elsewhere": "Außerhalb von Dokulo speichern…",
-  "organize_insert_photos": "Aus Fotos"
+  "t3_save_elsewhere": "Außerhalb von Dokulo speichern…"
 }

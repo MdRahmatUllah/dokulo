@@ -2262,5 +2262,9 @@
   "t3_save_elsewhere": "Save outside Dokulo…",
   "@t3_save_elsewhere": {"description": "T3 Save to…: opens the system's save dialog (DK-0385)."},
   "organize_insert_photos": "From photos",
-  "@organize_insert_photos": {"description": "P1 insert sheet row (UI spec §18): photos become pages, one each."}
+  "@organize_insert_photos": {"description": "P1 insert sheet row (UI spec §18): photos become pages, one each."},
+  "organize_suffix": "organized",
+  "@organize_suffix": {"description": "The suffix of Organize's saved copy: Name – organized.pdf (UI spec §27.3)."},
+  "toast_saved_as": "Saved as “{name}”",
+  "@toast_saved_as": {"description": "After Organize's Save (UI spec §18).", "placeholders": {"name": {"type": "String"}}}
 }
