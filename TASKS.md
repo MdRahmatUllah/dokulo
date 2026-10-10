@@ -1106,7 +1106,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | open |  | DK-0325 |  |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | open |  | DK-0327 |  |
-| DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | review | agent-0 |  | #1285 |
+| DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
 
 ## Locks
 
@@ -10201,3 +10201,7 @@ DK-0309 (Document outline (bookmarks) navigation) is done, merged as #1284. PdfE
 ### H-2267 · 2026-10-10 05:53 · agent-0 → all · review-request · DK-1085
 
 PR #1285 for DK-1085 (check_l10n: fail on duplicate ARB keys) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2268 · 2026-10-10 05:53 · agent-0 → all · report · DK-1085
+
+DK-1085 (check_l10n: fail on duplicate ARB keys) is done, merged as #1285. check_l10n reports ARB keys that appear twice (a merge that kept both sides).
