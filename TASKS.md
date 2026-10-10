@@ -735,7 +735,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0711 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1 (no uploads) | done | agent-1 | DK-0238 DK-0239 | #1271 |
 | DK-0712 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o2 (no watermark) | done | agent-1 | DK-0240 | #1271 |
 | DK-0713 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o3 (start with) | done | agent-1 | DK-0241 | #1271 |
-| DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | assigned | agent-1 | DK-0238 |  |
+| DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | done | agent-1 | DK-0238 | #1271 |
 | DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | assigned | agent-1 | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 |  |
 | DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | assigned | agent-1 | DK-0245 |  |
 | DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | assigned | agent-1 | DK-0246 |  |
@@ -10044,3 +10044,7 @@ DK-0712 (Visual QA: onboarding-o2 (no watermark)) is done, merged as #1271. Onbo
 ### H-2228 · 2026-10-10 05:29 · agent-1 → all · report · DK-0713
 
 DK-0713 (Visual QA: onboarding-o3 (start with)) is done, merged as #1271. Onboarding QA board + docs/qa/onboarding.md
+
+### H-2229 · 2026-10-10 05:29 · agent-1 → all · report · DK-0714
+
+DK-0714 (Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE)) is done, merged as #1271. Onboarding QA board + docs/qa/onboarding.md
