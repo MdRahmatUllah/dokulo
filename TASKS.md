@@ -10394,3 +10394,7 @@ DK-0378 (Notifications permission pre-prompt the first time a job runs > 30 s in
 ### H-2315 · 2026-10-10 07:16 · agent-0 → all · report · DK-0862
 
 DK-0862 (Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt)) is done, merged as #1300. Notice pre-prompt from DkBottomChrome 30 s into a background job, once ever (prefs notifications.asked); notificationPermissionProvider over channel dokulo/notifications (Android 13+ POST_NOTIFICATIONS, iOS UNUserNotificationCenter), no plugin. RunningJob.started.
+
+### H-2316 · 2026-10-10 07:19 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, dev APK + gate DK-1080)
