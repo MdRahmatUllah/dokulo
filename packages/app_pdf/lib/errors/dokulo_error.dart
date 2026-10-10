@@ -186,6 +186,16 @@ class DokuloError implements Exception {
           : l.error_unexpected_page(page! + 1, code),
   };
 
+  /// The title where the code has its own line (the progress sheet's error
+  /// state, tool-shell-failure): an unexpected failure without "(code …)".
+  String headline(AppLocalizations l) => switch (situation) {
+    DkErrorSituation.unexpected =>
+      page == null
+          ? l.error_unexpected_short
+          : l.error_unexpected_page_short(page! + 1),
+    _ => title(l),
+  };
+
   /// The recovery actions, in order (§26.3). Skip this page only where a
   /// page is known.
   List<DkRecovery> get actions => switch (situation) {
