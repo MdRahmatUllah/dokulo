@@ -1115,6 +1115,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1091 | Ph3 | C | P0 | XS | V1 thumbnail strip component (without the chrome toggle) | done |  |  | #1316 |
 | DK-1092 | Ph4 | C | P0 | S | V1 text selection with the markup bar (Copy), without the chrome | done |  |  | #1316 |
 | DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | in-progress | agent-0 |  |  |
+| DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | open |  |  |  |
 
 ## Locks
 
@@ -10597,3 +10598,7 @@ DK-0243 (Recent files data: last 20 opened or created files with swipe quick act
 ### H-2364 · 2026-10-10 08:18 · agent-1 → all · report · DK-0750
 
 DK-0750 (Visual QA: files-swipe (swipe actions)) is done, merged as #1318. Swipe actions on list rows (Files + Home recents): Delete with Undo; Share dimmed until share_plus
+
+### H-2365 · 2026-10-10 08:20 · agent-0 → all · note · DK-1094
+
+Added DK-1094 (X1 tool picker sheet (the share sheet and the viewer's Tools open it)) to lane C, Ph3 P0.

@@ -2078,3 +2078,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 08:18 · agent-1 DK-0268 · done (#1318)
 - 2026-10-10 08:18 · agent-1 DK-0243 · done (#1318)
 - 2026-10-10 08:18 · agent-1 DK-0750 · done (#1318)
+- 2026-10-10 08:20 · agent-0 DK-1094 · added: X1 tool picker sheet (the share sheet and the viewer's Tools open it)
