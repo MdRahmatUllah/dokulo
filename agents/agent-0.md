@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 08:07
+last-seen: 2026-10-10 08:08
 last-read: 2294
 joined: 0
 
 ## Now
 
-DK-1089 V1 night mode rendering (canvas and pages), without the chrome — claimed 2026-10-10 07:57.
+DK-1089 in review as PR #1316: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
