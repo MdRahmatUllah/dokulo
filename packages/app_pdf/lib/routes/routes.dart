@@ -7,12 +7,14 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/files/files_screen.dart';
+import '../screens/files/trash_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/p1_organize/organize_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
@@ -69,8 +71,13 @@ abstract final class Routes {
 
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
-  static String viewer(String fileId, {bool edit = false}) =>
-      '/viewer/$fileId${edit ? '?mode=edit' : ''}';
+  /// [page] (1-based) opens it there (a search hit, DK-0269).
+  static String viewer(String fileId, {bool edit = false, int? page}) =>
+      '/viewer/$fileId${edit
+          ? '?mode=edit'
+          : page != null
+          ? '?page=$page'
+          : ''}';
   static String organize(String fileId) => '/organize/$fileId'; // P1
 
   /// A running job's progress (X2) over Home: a notification's tap.
@@ -146,14 +153,21 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               ),
             ],
           ),
-          StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.tools,
+                builder: (context, state) => const ToolsScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: Routes.files,
                 builder: (context, state) => const FilesScreen(),
                 routes: [
-                  // The folder screen (DK-0262) and the trash (DK-0278).
+                  // The folder screen (DK-0262).
                   GoRoute(
                     path: 'folder/:id',
                     builder: (context, state) => FilesScreen(
@@ -161,7 +175,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                       folder: int.tryParse(state.pathParameters['id']!) ?? -1,
                     ),
                   ),
-                  _screen('trash', 'Recently deleted'),
+                  GoRoute(
+                    path: 'trash',
+                    builder: (context, state) => const TrashScreen(),
+                  ),
                 ],
               ),
             ],
@@ -190,7 +207,13 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
-      fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
+      fullScreen(
+        Routes.lockedFolder,
+        // "Move to locked folder" hands over the file ids (DK-0289).
+        (s) => LockedFolderScreen(
+          moveIn: s.extra is List<int> ? s.extra! as List<int> : const [],
+        ),
+      ),
       fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
@@ -259,6 +282,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(
                     fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+                    page: int.tryParse(s.uri.queryParameters['page'] ?? ''),
                   ),
           ),
         ),
