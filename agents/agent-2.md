@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-10 09:10
+last-seen: 2026-10-10 09:27
 last-read: 1738
 joined: 0
 
 ## Now
 
-DK-0313 V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border — claimed 2026-10-10 09:10.
+DK-0294 in review as PR #1330: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 

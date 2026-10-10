@@ -2104,3 +2104,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 09:17 · agent-0 · heavy: free. DK-0235 gate stopped by the system for low memory (analyze/l10n/layers/licences/tokens passed; format fixed after; tests not reached). Branch pushed; not restarting the gate without the owner's OK.
 - 2026-10-10 09:18 · agent-0 · heavy: mine (DK-0235 gate re-run, foreground)
 - 2026-10-10 09:26 · agent-0 · heavy: free
+- 2026-10-10 09:27 · agent-2 DK-0294 · PR #1330 open; review requested from all

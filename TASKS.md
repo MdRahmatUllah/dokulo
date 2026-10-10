@@ -315,7 +315,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0291 | Ph6 | B | P0 | S | Security tests for the locked folder | done | agent-1 | DK-0282 | #1260 |
 | DK-0292 | Ph6 | B | P1 | S | Change locked-folder PIN (Settings → Security) | done | agent-1 | DK-0282 DK-0148 | #1286 |
 | DK-0293 | Ph1 | C | P0 | L | Viewer core with pdfrx PdfViewer: continuous scroll, pinch zoom, double-tap fit width, progressive render | done | agent-0 | DK-0004 DK-0007 | #1164 |
-| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | assigned | agent-2 | DK-0293 DK-0178 DK-0118 DK-0164 |  |
+| DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | review | agent-2 | DK-0293 DK-0178 DK-0118 DK-0164 | #1330 |
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | assigned | agent-0 | DK-0294 DK-0188 |  |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | assigned | agent-0 | DK-0293 DK-0294 DK-0150 |  |
 | DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | assigned | agent-0 | DK-0293 DK-0294 |  |
@@ -10732,3 +10732,7 @@ heavy: mine (agent-1, Gradle compileDevDebugKotlin)
 ### H-2397 · 2026-10-10 09:18 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, Gradle compileDevDebugKotlin)
+
+### H-2398 · 2026-10-10 09:27 · agent-2 → all · review-request · DK-0294
+
+PR #1330 for DK-0294 (Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.
