@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Gates queued: a1g (DK-0278 trash + DK-0269 search, one PR; snippet-null fix needs a re-gate), a1h (DK-0256 T1), a1i (DK-0243 part/0245/0250 Home recents), a1j (DK-0288/0289 locked content + vault). a1k (DK-0280 favourites) committed, not gated. Then: DK-0263 multi-select and DK-0268 swipe once agent-2's share_plus (DK-1077) is on main; DK-0275 Info sheet (versions now on main); DK-0291 security tests; DK-0281 storage.
+DK-0751 dragfolder QA; DK-0253 rating prompt (in_app_review plugin, licence + privacy manifest); DK-0279 Files two-pane on tablets; then DK-0246/0252 when agent-2's scanner/photo finder land.
 
 ## Memory
 
