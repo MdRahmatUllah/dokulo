@@ -42,3 +42,16 @@ Future<bool> viewerHasForm(Ref ref, String path, {String? password}) async {
     return false;
   }
 }
+
+/// Whether a PDF has any text to search (V1's "This scan has no searchable
+/// text.", DK-1093): read from the file, not the index, which may not have
+/// seen it yet.
+@riverpod
+Future<bool> viewerHasText(Ref ref, String path, {String? password}) async {
+  try {
+    final texts = await PdfEngine.pageTexts(path, password: password);
+    return texts.any((t) => t.trim().isNotEmpty);
+  } on DocError {
+    return true; // locked or damaged: its own state says so
+  }
+}

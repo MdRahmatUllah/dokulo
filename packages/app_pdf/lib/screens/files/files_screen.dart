@@ -697,7 +697,14 @@ class FileEntryCard extends ConsumerWidget {
     final hit = this.hit;
     void open({int? page}) {
       recordOpened(ref.read(appDatabaseProvider), file.id);
-      context.push(Routes.viewer('${file.id}', page: page));
+      // A text hit opens V1 searching the same words (DK-1093).
+      context.push(
+        Routes.viewer(
+          '${file.id}',
+          page: page,
+          query: hit == null ? null : ref.read(filesQueryProvider),
+        ),
+      );
     }
 
     // A large tablet's list: a tap selects for the preview pane (DK-0279).

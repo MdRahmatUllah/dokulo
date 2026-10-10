@@ -3,6 +3,7 @@ import 'package:pdfrx/pdfrx.dart';
 
 import '../theme/dk_tokens.dart';
 import 'dk_editor_bars.dart';
+import 'dk_pdf_search.dart';
 
 /// The viewer's canvas (V1, UI spec §17.1 region 2; DK-0293): pdfrx's
 /// [PdfViewer] on PDFium, pages in one continuous vertical scroll at fit
@@ -26,6 +27,7 @@ class DkPdfCanvas extends StatefulWidget {
     this.onLink,
     this.night = false,
     this.markup,
+    this.search,
   });
 
   final String path;
@@ -49,6 +51,10 @@ class DkPdfCanvas extends StatefulWidget {
   /// in `color.primary` at 25 %, primary handles, and DkMarkupBar beside it
   /// with these actions; Copy copies. Null: no selection.
   final List<DkMarkupAction>? markup;
+
+  /// Text search (DK-1093): the matches in `markup.yellow` at 60 %, the
+  /// current one outlined 2 dp in `color.primary` (UI spec §17.1).
+  final DkPdfSearch? search;
 
   /// Night mode (UI spec §17.1; DK-1089): the pages inverted, dark with
   /// light text, on `color.nightCanvas`.
@@ -92,6 +98,28 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
               canvas.drawRect(rect, Paint()..color = t.color.pageWhite),
         ],
         pagePaintCallbacks: [
+          if (widget.search case final search?)
+            (canvas, rect, page) {
+              for (final (match, current) in search.on(page.pageNumber)) {
+                final box = match.bounds
+                    .toRect(page: page, scaledPageSize: rect.size)
+                    .translate(rect.left, rect.top);
+                canvas.drawRect(
+                  box,
+                  Paint()
+                    ..color = const DkMarkup().yellow.withValues(alpha: 0.6),
+                );
+                if (current) {
+                  canvas.drawRect(
+                    box.inflate(1),
+                    Paint()
+                      ..style = PaintingStyle.stroke
+                      ..strokeWidth = 2
+                      ..color = t.color.primary,
+                  );
+                }
+              }
+            },
           (canvas, rect, _) => canvas.drawRect(
             rect.deflate(0.5),
             Paint()
@@ -110,9 +138,11 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
           return true;
         },
         onPageChanged: widget.onPageChanged,
-        onViewerReady: widget.onReady == null
-            ? null
-            : (_, _) => widget.onReady!(),
+        // The search attaches once the viewer has its document.
+        onViewerReady: (_, controller) {
+          widget.search?.attach(controller);
+          widget.onReady?.call();
+        },
         textSelectionParams: PdfTextSelectionParams(
           enabled: widget.markup != null,
         ),

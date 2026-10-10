@@ -2436,5 +2436,17 @@
   "viewer_form_banner": "This PDF has fillable fields.",
   "@viewer_form_banner": {"description": "V1 Form detected banner (UI spec §17.1; DK-1090)."},
   "viewer_form_fill": "Fill form",
-  "@viewer_form_fill": {"description": "V1 Form detected banner's action."}
+  "@viewer_form_fill": {"description": "V1 Form detected banner's action."},
+  "viewer_search_of": "{i} of {n}",
+  "@viewer_search_of": {"description": "V1 search counter (UI spec §17.1; DK-1093).", "placeholders": {"i": {"type": "int"}, "n": {"type": "int"}}},
+  "viewer_search_none": "0 results",
+  "@viewer_search_none": {"description": "V1 search counter with no match."},
+  "viewer_search_previous": "Previous match",
+  "@viewer_search_previous": {"description": "V1 search: the up arrow, for screen readers."},
+  "viewer_search_next": "Next match",
+  "@viewer_search_next": {"description": "V1 search: the down arrow, for screen readers."},
+  "viewer_search_no_text": "This scan has no searchable text.",
+  "@viewer_search_no_text": {"description": "V1 search on a scan without text (§17.1; DK-1093)."},
+  "viewer_make_searchable": "Make searchable",
+  "@viewer_make_searchable": {"description": "The banner's action: Make text searchable on this file."}
 }

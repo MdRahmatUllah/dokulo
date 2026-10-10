@@ -77,12 +77,23 @@ abstract final class Routes {
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
   /// [page] (1-based) opens it there (a search hit, DK-0269).
-  static String viewer(String fileId, {bool edit = false, int? page}) =>
-      '/viewer/$fileId${edit
-          ? '?mode=edit'
-          : page != null
-          ? '?page=$page'
-          : ''}';
+  static String viewer(
+    String fileId, {
+    bool edit = false,
+    int? page,
+    String? query,
+  }) {
+    if (edit) return '/viewer/$fileId?mode=edit';
+    final params = {
+      if (page != null) 'page': '$page',
+      if (query != null && query.isNotEmpty) 'q': query, // V1 search
+    };
+    return Uri(
+      path: '/viewer/$fileId',
+      queryParameters: params.isEmpty ? null : params,
+    ).toString();
+  }
+
   static String organize(String fileId) => '/organize/$fileId'; // P1
 
   /// A running job's progress (X2) over Home: a notification's tap.
@@ -296,6 +307,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 : ViewerScreen(
                     fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
                     page: int.tryParse(s.uri.queryParameters['page'] ?? ''),
+                    query: s.uri.queryParameters['q'],
                   ),
           ),
         ),

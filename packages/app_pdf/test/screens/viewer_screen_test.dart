@@ -6,6 +6,7 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
+import 'package:app_pdf/screens/v1_viewer/viewer_search.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
@@ -305,4 +306,45 @@ void main() {
       if (expected) expect(find.text('Fill form'), findsOneWidget);
     });
   }
+
+  testWidgets('search (DK-1093): opened with words, the bar counts the '
+      'matches and Done closes it', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(
+      tester,
+      db,
+      fixture('Mietvertrag Musterstraße 12.pdf'),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id, query: 'Mieter')),
+      ),
+    );
+    await settle(tester, rounds: 60);
+    expect(find.byType(ViewerSearchBar), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^\d+ of \d+$')), findsOneWidget);
+    expect(find.text('This scan has no searchable text.'), findsNothing);
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    expect(find.byType(ViewerSearchBar), findsNothing);
+  });
+
+  testWidgets('search on a scan without text: the banner with Make '
+      'searchable', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(tester, db, fixture('scanned-letters-bundle.pdf'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id, query: 'Rechnung')),
+      ),
+    );
+    await settle(tester, rounds: 60);
+    expect(find.text('This scan has no searchable text.'), findsOneWidget);
+    expect(find.text('Make searchable'), findsOneWidget);
+    expect(find.text('0 results'), findsOneWidget);
+  });
 }
