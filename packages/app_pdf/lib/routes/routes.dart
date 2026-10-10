@@ -23,6 +23,7 @@ import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
+import '../screens/v2_edit/edit_screen.dart';
 import '../tools/tool_catalogue.dart';
 import '../tools/tool_definition.dart';
 import 'app_shell.dart';
@@ -80,10 +81,13 @@ abstract final class Routes {
   static String viewer(
     String fileId, {
     bool edit = false,
+    bool sign = false,
     int? page,
     String? query,
   }) {
-    if (edit) return '/viewer/$fileId?mode=edit';
+    if (edit || sign) {
+      return '/viewer/$fileId?mode=edit${sign ? '&from=sign' : ''}';
+    }
     final params = {
       if (page != null) 'page': '$page',
       if (query != null && query.isNotEmpty) 'q': query, // V1 search
@@ -302,7 +306,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           key: s.pageKey,
           child: _HomeUnderneath(
             child: s.uri.queryParameters['mode'] == 'edit'
-                ? PlaceholderScreen('V2', detail: s.pathParameters['fileId']!)
+                ? EditScreen(
+                    fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+                    fromSign: s.uri.queryParameters['from'] == 'sign',
+                  )
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(
                     fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,

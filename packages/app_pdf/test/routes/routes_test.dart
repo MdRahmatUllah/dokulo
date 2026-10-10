@@ -6,6 +6,7 @@ import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:app_pdf/providers/prefs_providers.dart';
+import 'package:app_pdf/screens/v2_edit/edit_screen.dart';
 import 'package:app_pdf/screens/files/files_screen.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
@@ -111,7 +112,6 @@ void main() {
     Routes.scan: ('S1', false),
     Routes.scanReview: ('S2', false),
     '/tool/compress': ('Compress PDF', false),
-    '/viewer/f42?mode=edit': ('V2 f42', false),
   };
   for (final MapEntry(key: location, value: (screen, tabs))
       in coldStarts.entries) {
@@ -166,6 +166,31 @@ void main() {
     expect(tabBarShown(tester), isFalse);
   });
 
+  testWidgets('cold start at /viewer/42?mode=edit shows V2, no tab bar', (
+    tester,
+  ) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final router = buildRouter(
+      initialLocation: Routes.viewer('42', edit: true),
+    );
+    addTearDown(router.dispose);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: MaterialApp.router(
+          routerConfig: router,
+          theme: dokuloTheme(DkTokens.light),
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+        ),
+      ),
+    );
+    await tester.pump(const Duration(milliseconds: 500));
+    expect(tester.widget<EditScreen>(find.byType(EditScreen)).fileId, 42);
+    expect(tabBarShown(tester), false);
+  });
+
   testWidgets('cold start at /viewer/42 shows the V1 viewer, no tab bar', (
     tester,
   ) async {
@@ -198,6 +223,7 @@ void main() {
     expect(Routes.toolResult('merge'), '/tool/merge/result');
     expect(Routes.viewer('f1'), '/viewer/f1');
     expect(Routes.viewer('f1', edit: true), '/viewer/f1?mode=edit');
+    expect(Routes.viewer('f1', sign: true), '/viewer/f1?mode=edit&from=sign');
     expect(Routes.organize('f1'), '/organize/f1');
   });
 

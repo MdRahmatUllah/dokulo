@@ -2495,5 +2495,23 @@
         "type": "int"
       }
     }
-  }
+  },
+  "edit_title": "Editing",
+  "@edit_title": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_pan": "Pan",
+  "@edit_pan": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_pen": "Pen",
+  "@edit_pen": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_highlighter": "Highlighter",
+  "@edit_highlighter": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_text": "Text",
+  "@edit_text": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_shapes": "Shapes",
+  "@edit_shapes": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_note": "Note",
+  "@edit_note": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_sign": "Sign",
+  "@edit_sign": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_eraser": "Eraser",
+  "@edit_eraser": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."}
 }

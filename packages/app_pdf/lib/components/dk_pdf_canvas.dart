@@ -26,6 +26,8 @@ class DkPdfCanvas extends StatefulWidget {
     this.onReady,
     this.onTap,
     this.onScrollStart,
+    this.pageOverlay,
+    this.panEnabled = true,
     this.onLink,
     this.night = false,
     this.markup,
@@ -50,6 +52,13 @@ class DkPdfCanvas extends StatefulWidget {
 
   /// The user started to scroll or zoom.
   final VoidCallback? onScrollStart;
+
+  /// Over each page, sized to it on screen: V2's annotation layer
+  /// (DK-0313). [page] is 0-based; [size] the page's size in points.
+  final Widget Function(int page, Size size)? pageOverlay;
+
+  /// False while V2 draws: the pages stay put under the finger.
+  final bool panEnabled;
 
   /// A link to a web address was tapped (V1 asks first, DK-1088); a link to
   /// a page in the file jumps there. Null: links do nothing.
@@ -151,6 +160,19 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
           return true;
         },
         onPageChanged: widget.onPageChanged,
+        panEnabled: widget.panEnabled,
+        scaleEnabled: widget.panEnabled,
+        pageOverlaysBuilder: widget.pageOverlay == null
+            ? null
+            : (context, rect, page) => [
+                Positioned.fromRect(
+                  rect: rect,
+                  child: widget.pageOverlay!(
+                    page.pageNumber - 1,
+                    Size(page.width, page.height),
+                  ),
+                ),
+              ],
         onInteractionStart: widget.onScrollStart == null
             ? null
             : (_) => widget.onScrollStart!(),
