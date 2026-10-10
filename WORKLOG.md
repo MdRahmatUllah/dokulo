@@ -2114,3 +2114,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 09:47 · agent-0 · heavy: free. DK-0295 Print on emulator-5554: V1 menu -> Print opens the system print dialog with the PDF (1/1)
 - 2026-10-10 09:48 · agent-0 · heavy: mine (gate DK-0295, foreground)
 - 2026-10-10 09:49 · agent-2 DK-0294 · done (#1330)
+- 2026-10-10 09:56 · agent-0 · heavy: free
