@@ -168,4 +168,92 @@ void main() {
       );
     });
   }
+
+  Future<int> addFile(
+    WidgetTester tester,
+    DokuloDatabase db,
+    String path,
+  ) async => (await tester.runAsync(
+    () => db
+        .into(db.files)
+        .insert(
+          FilesCompanion.insert(
+            path: path,
+            name: path.split(RegExp(r'[\/]')).last,
+            size: 1,
+            created: DateTime(2026),
+            modified: DateTime(2026),
+          ),
+        ),
+  ))!;
+
+  for (final (theme, tokens) in [
+    ('light', DkTokens.light),
+    ('dark', DkTokens.dark),
+  ]) {
+    testWidgets('locked (DK-0301, DK-0302, DK-0303): the card, a wrong '
+        'password, then the pages and "Unlocked for viewing" ($theme)', (
+      tester,
+    ) async {
+      final db = DokuloDatabase.memory();
+      addTearDown(db.close);
+      final id = await addFile(tester, db, fixture('encrypted-aes256.pdf'));
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          child: app(
+            Scaffold(body: ViewerScreen(fileId: id)),
+            tokens: tokens,
+          ),
+        ),
+      );
+      await settle(tester);
+      expect(find.text('This PDF is locked'), findsOneWidget);
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_locked_$theme.png'),
+      );
+      await tester.enterText(find.byType(TextField), 'wrong');
+      await tester.tap(find.text('Unlock'));
+      await settle(tester);
+      expect(
+        find.text("That password doesn't open this file."),
+        findsOneWidget,
+      );
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_wrongpw_$theme.png'),
+      );
+      await tester.enterText(find.byType(TextField), 'dokulo');
+      await tester.tap(find.text('Unlock'));
+      await settle(tester);
+      expect(find.byType(PdfViewer), findsOneWidget);
+      expect(find.text('Unlocked for viewing'), findsOneWidget);
+      expect(find.text('Remove password'), findsOneWidget);
+    });
+
+    testWidgets('damaged (DK-0305): "This file cannot be opened", Close and '
+        'Try Repair ($theme)', (tester) async {
+      final dir = Directory.systemTemp.createTempSync('dk_v1_bad_');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final bad = File('${dir.path}/broken.pdf')
+        ..writeAsStringSync('%PDF-1.7 not really a pdf');
+      final db = DokuloDatabase.memory();
+      addTearDown(db.close);
+      final id = await addFile(tester, db, bad.path);
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          child: app(ViewerScreen(fileId: id), tokens: tokens),
+        ),
+      );
+      await settle(tester);
+      expect(find.text("This file can't be opened."), findsOneWidget);
+      expect(find.text('Try Repair'), findsOneWidget);
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_damaged_$theme.png'),
+      );
+    });
+  }
 }
