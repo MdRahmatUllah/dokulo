@@ -2044,3 +2044,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 07:24 · agent-1 DK-0751 · done (#1302)
 - 2026-10-10 07:28 · agent-0 DK-1080 · PR #1303 open; review requested from all
 - 2026-10-10 07:28 · agent-0 DK-1080 · done (#1303)
+- 2026-10-10 07:30 · agent-0 DK-1086 · claimed: X2 failure: Skip this page (a job that goes on past a page)

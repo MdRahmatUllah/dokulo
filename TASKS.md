@@ -1107,7 +1107,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | done | agent-0 | DK-0325 | #1291 |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
-| DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | open |  | DK-1080 |  |
+| DK-1086 | Ph3 | A | P2 | S | X2 failure: Skip this page (a job that goes on past a page) | in-progress | agent-0 | DK-1080 |  |
 
 ## Locks
 
