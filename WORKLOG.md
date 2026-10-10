@@ -2122,3 +2122,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 10:00 · agent-1 DK-0362 · released: agent-2 already built it (feat/DK-0362-photo-finder, a2g, f23f0468); back to agent-2
 - 2026-10-10 10:00 · agent-1 DK-0362 · assigned to agent-2
 - 2026-10-10 10:00 · agent-1 DK-0433 · assigned to agent-1
+- 2026-10-10 10:01 · agent-1 DK-0433 · claimed: Image to PDF: T2 options UI

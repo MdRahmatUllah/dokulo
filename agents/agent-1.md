@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-10 10:00
+last-seen: 2026-10-10 10:01
 last-read: 2333
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0433 Image to PDF: T2 options UI — claimed 2026-10-10 10:01.
 
 ## Next
 
