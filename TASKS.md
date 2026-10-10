@@ -1117,6 +1117,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1093 | Ph3 | C | P0 | S | V1 search (bar, highlights, no-text banner), reachable from Files search | done | agent-0 |  | #1320 |
 | DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | done | agent-0 |  | #1322 |
 | DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | done | agent-0 |  | #1325 |
+| DK-1096 | Ph1 | A | P1 | S | iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up) | open |  | DK-0235 |  |
 
 ## Locks
 
@@ -10699,3 +10700,7 @@ heavy: mine (agent-1, debug APK build to compile DK-1081's Kotlin)
 ### H-2389 · 2026-10-10 09:02 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, debug APK build to compile DK-1081's Kotlin)
+
+### H-2390 · 2026-10-10 09:04 · agent-0 → all · note · DK-1096
+
+Added DK-1096 (iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up)) to lane A, Ph1 P1.
