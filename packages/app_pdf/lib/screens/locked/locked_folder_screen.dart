@@ -17,6 +17,7 @@ import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
+import '../../patterns/dk_privacy_cover.dart';
 import '../../patterns/dk_undo.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
@@ -532,67 +533,70 @@ class _Content extends ConsumerWidget {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final entries = ref.watch(lockedFilesProvider).value;
-    return Scaffold(
-      backgroundColor: t.color.background,
-      appBar: DkTopBar(
-        title: l.locked_title,
-        titleIcon: DkIcons.lock,
-        onLeading: onBack,
-        actions: [
-          DkTopBarAction(
-            icon: DkIcons.lock,
-            tooltip: l.locked_lock_now,
-            onPressed: onLock,
-          ),
-        ],
-      ),
-      body: switch (entries) {
-        null => const SizedBox.shrink(),
-        [] => Center(
-          child: Padding(
-            padding: EdgeInsets.all(t.space.xl),
-            child: Text(
-              l.locked_empty,
-              textAlign: TextAlign.center,
-              style: t.text.bodyL.copyWith(color: t.color.textSecondary),
+    // Open: the app switcher shows the privacy cover (DK-0291).
+    return DkLockedContent(
+      child: Scaffold(
+        backgroundColor: t.color.background,
+        appBar: DkTopBar(
+          title: l.locked_title,
+          titleIcon: DkIcons.lock,
+          onLeading: onBack,
+          actions: [
+            DkTopBarAction(
+              icon: DkIcons.lock,
+              tooltip: l.locked_lock_now,
+              onPressed: onLock,
+            ),
+          ],
+        ),
+        body: switch (entries) {
+          null => const SizedBox.shrink(),
+          [] => Center(
+            child: Padding(
+              padding: EdgeInsets.all(t.space.xl),
+              child: Text(
+                l.locked_empty,
+                textAlign: TextAlign.center,
+                style: t.text.bodyL.copyWith(color: t.color.textSecondary),
+              ),
             ),
           ),
-        ),
-        final list => ListView(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                t.space.l,
-                t.space.l,
-                t.space.l,
-                t.space.s,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Semantics(
-                      header: true,
-                      child: Text(
-                        l.files_files,
-                        style: t.text.titleS.copyWith(
-                          color: t.color.textPrimary,
+          final list => ListView(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  t.space.l,
+                  t.space.l,
+                  t.space.l,
+                  t.space.s,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Semantics(
+                        header: true,
+                        child: Text(
+                          l.files_files,
+                          style: t.text.titleS.copyWith(
+                            color: t.color.textPrimary,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Text(
-                    l.meta_files(list.length),
-                    style: t.text.caption.copyWith(
-                      color: t.color.textSecondary,
+                    Text(
+                      l.meta_files(list.length),
+                      style: t.text.caption.copyWith(
+                        color: t.color.textSecondary,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            for (final e in list) _LockedRow(e),
-          ],
-        ),
-      },
+              for (final e in list) _LockedRow(e),
+            ],
+          ),
+        },
+      ),
     );
   }
 }
@@ -692,9 +696,11 @@ class _LockedViewer extends StatelessWidget {
   final String name, path;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: context.tokens.color.surfaceSunken,
-    appBar: DkTopBar(title: name),
-    body: DkPdfCanvas(path: path),
+  Widget build(BuildContext context) => DkLockedContent(
+    child: Scaffold(
+      backgroundColor: context.tokens.color.surfaceSunken,
+      appBar: DkTopBar(title: name),
+      body: DkPdfCanvas(path: path),
+    ),
   );
 }
