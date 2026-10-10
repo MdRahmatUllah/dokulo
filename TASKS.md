@@ -666,7 +666,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | open |  | DK-0024 DK-0039 |  |
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | assigned | agent-1 | DK-0024 DK-0343 |  |
-| DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | assigned | agent-1 | DK-0024 DK-0375 |  |
+| DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
 | DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | open |  | DK-0024 |  |
 | DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | open |  | DK-0024 DK-0120 |  |
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
@@ -10374,3 +10374,7 @@ Added DK-1086 (X2 failure: Skip this page (a job that goes on past a page)) to l
 ### H-2310 · 2026-10-10 07:02 · agent-1 → all · report · DK-0251
 
 DK-0251 (H1 Home: implement the "Pro card visible" state) is done, merged as #1297. H1 Pro card after the 5th recent row; showProCard cap (30 days, second dismissal forever); See Pro waits for X3 (DK-0579) Now ready: DK-0721.
+
+### H-2311 · 2026-10-10 07:11 · agent-1 → all · report · DK-0645
+
+DK-0645 (Accessibility: progress announcements) is done, merged as #1299. Mini bar speaks 25 % steps; T2 headings + main action last tested; VoiceOver/TalkBack on phones: #1298
