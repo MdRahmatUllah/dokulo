@@ -10,6 +10,7 @@
 | DK-0980 | `26-global-states/global-states.html` (Light, Dark; 1440 × 1700) | A QA board in the gate, `packages/app_pdf/test/qa/global_states_test.dart`: the frame's regions built from the real empty states, toasts, banners, error catalogue and skeleton, side by side with the frame's screenshots; the copy, icons and actions checked as values | 2 deviations fixed, 6 approved, below |
 | DK-0838, DK-0842, DK-0843, DK-0844, DK-0847 | `12-tool-shell/` t2empty, lockedrow, btnloading, progress, failure (Light, Dark; phone) | A QA board in the gate, `packages/app_pdf/test/qa/tool_shell_test.dart`: the real T2 in each state at 393 × 852, side by side with the frames' screenshots | 6 deviations fixed, 3 approved, 1 follow-up, below |
 | DK-0845, DK-0846, DK-0855, DK-0856 | `12-tool-shell/` minibar, canceldlg, discard, aftersave (Light, Dark; phone) | The same QA board: the shell at Tools with a running job, T2 after 30 s with Cancel, T3 closed unsaved after a long job, T3 after Save | 2 deviations fixed, 2 approved, below |
+| DK-0854, DK-0857 | `12-tool-shell/` replace, replaced (Light, Dark; phone) | The same QA board: T3 → the split Save's menu → Replace original (the dialog), then Replace (the toast and Done) | Match, 2 approved, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
@@ -246,3 +247,17 @@ Approved:
 The discard dialog and the after-Save state (the toast "Saved to Files › …"
 with Open, then Done) match. After Save's Share · Open row comes with DK-1077
 (Share).
+
+### Replace original (DK-0854, DK-0857)
+
+The dialog (danger icon circle with `swap_horiz`, "Replace the original
+file?", the Versions line, Cancel and a danger Replace) and the toast
+("Replaced · Undo", 10 s) match the frames. Approved:
+
+- After Replace the bar shows Done, as after Save (§20.4 "After Save"); the
+  replaced frame still shows the split Save. A replace is a save.
+- In the goldens the dialog's buttons stack: the test font (Ahem) is too
+  wide for them side by side; with real fonts they sit side by side as in
+  the frame (DkConfirmDialog stacks only when the labels don't fit).
+
+Share, beside Open, comes with DK-1077.
