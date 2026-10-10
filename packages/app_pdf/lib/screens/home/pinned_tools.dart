@@ -94,6 +94,7 @@ class _PinnedState extends ConsumerState<PinnedToolsSection> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
+    final large = MediaQuery.textScalerOf(context).scale(1) >= 1.5;
     final pinned = (ref.watch(pinnedToolsProvider).value ?? defaultPinnedTools)
         .take(PinnedToolsSection.max)
         .toList();
@@ -130,11 +131,13 @@ class _PinnedState extends ConsumerState<PinnedToolsSection> {
         ),
         SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: t.space.l),
+          // At large text (200 %) 2 across, taller, so names wrap whole
+          // (DK-0254).
           sliver: SliverGrid.count(
-            crossAxisCount: 4,
+            crossAxisCount: large ? 2 : 4,
             mainAxisSpacing: t.space.m,
             crossAxisSpacing: t.space.m,
-            childAspectRatio: 0.78,
+            childAspectRatio: large ? 1.0 : 0.78,
             children: [
               for (final (i, id) in pinned.indexed)
                 if (_editing)

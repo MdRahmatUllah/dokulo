@@ -1,5 +1,6 @@
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -564,23 +565,36 @@ Widget _rows(int count, Widget Function(int i) item, {required bool grid}) {
   );
 }
 
-class _FolderList extends StatelessWidget {
+class _FolderList extends ConsumerWidget {
   const _FolderList({required this.folders, required this.grid});
 
   final List<FolderCount> folders;
   final bool grid;
 
   @override
-  Widget build(BuildContext context) => _rows(folders.length, (i) {
-    final (:folder, :files) = folders[i];
-    return DkFolderCard(
-      name: folder.name,
-      files: files,
-      grid: grid,
-      tag: DkFolderTag.values.asNameMap()[folder.colourTag],
-      onTap: () => context.push(Routes.folder(folder.id)),
-    );
-  }, grid: grid);
+  Widget build(BuildContext context, WidgetRef ref) =>
+      _rows(folders.length, (i) {
+        final (:folder, :files) = folders[i];
+        Widget card({bool hovered = false}) => DkFolderCard(
+          name: folder.name,
+          files: files,
+          grid: grid,
+          dropTarget: hovered,
+          tag: DkFolderTag.values.asNameMap()[folder.colourTag],
+          onTap: () => context.push(Routes.folder(folder.id)),
+        );
+        if (!grid) return card();
+        // Grid: a file card dropped here moves into it (DK-0264); the
+        // card shows the 2 dp ring while one hovers.
+        return DragTarget<FileEntry>(
+          onWillAcceptWithDetails: (d) => d.data.folderId != folder.id,
+          onAcceptWithDetails: (d) {
+            HapticFeedback.lightImpact();
+            moveFilesTo(context, ref, [d.data], folder.id);
+          },
+          builder: (context, hovering, _) => card(hovered: hovering.isNotEmpty),
+        );
+      }, grid: grid);
 }
 
 class _FileList extends StatelessWidget {
@@ -590,11 +604,23 @@ class _FileList extends StatelessWidget {
   final bool grid;
 
   @override
-  Widget build(BuildContext context) => _rows(
-    files.length,
-    (i) => FileEntryCard(files[i], grid: grid),
-    grid: grid,
-  );
+  Widget build(BuildContext context) => _rows(files.length, (i) {
+    final card = FileEntryCard(files[i], grid: grid);
+    if (!grid) return card;
+    // Grid: long-press and drag onto a folder card (DK-0264).
+    return LayoutBuilder(
+      builder: (context, box) => LongPressDraggable<FileEntry>(
+        data: files[i],
+        // The card's own width; its height is its own (rows are unbounded).
+        feedback: SizedBox(
+          width: box.maxWidth,
+          child: Material(type: MaterialType.transparency, child: card),
+        ),
+        childWhenDragging: Opacity(opacity: 0.4, child: card),
+        child: card,
+      ),
+    );
+  }, grid: grid);
 }
 
 /// A file's card in F1 and Home: its first page, name and meta; a tap

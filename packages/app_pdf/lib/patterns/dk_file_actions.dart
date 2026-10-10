@@ -256,9 +256,6 @@ Future<void> moveFiles(
   List<FileEntry> files,
 ) async {
   final l = AppLocalizations.of(context);
-  final db = ref.read(appDatabaseProvider);
-  final store = await ref.read(fileStoreProvider.future);
-  if (!context.mounted) return;
   // The sheet answers with the chosen folder: (id,) for the root (null).
   final target = await showDkSheet<(int?,)>(
     context,
@@ -266,8 +263,23 @@ Future<void> moveFiles(
     detent: DkSheetDetent.large,
     body: const _MoveBrowser(),
   );
-  if (target == null) return;
+  if (target == null || !context.mounted) return;
   final (folder,) = target;
+  await moveFilesTo(context, ref, files, folder);
+}
+
+/// Moves [files] into [folder] (null: the root), then "Moved to {folder}"
+/// with Undo putting each back (the Move sheet; a drop on a folder card,
+/// DK-0264).
+Future<void> moveFilesTo(
+  BuildContext context,
+  WidgetRef ref,
+  List<FileEntry> files,
+  int? folder,
+) async {
+  final l = AppLocalizations.of(context);
+  final db = ref.read(appDatabaseProvider);
+  final store = await ref.read(fileStoreProvider.future);
   final was = <int, int?>{};
   for (final f in files) {
     was[f.id] = await store.moveFile(db, f.id, folder);

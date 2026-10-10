@@ -539,5 +539,22 @@
   "home_unpin": "Lösen",
   "home_about_tool": "Über dieses Werkzeug",
   "home_unpinned": "{tool} gelöst",
-  "home_unpin_named": "{tool} lösen"
+  "home_unpin_named": "{tool} lösen",
+  "me_pro_owned": "Pro – für immer deins",
+  "me_pro_thanks": "Danke",
+  "me_your_things": "Deine Sachen",
+  "me_signatures": "Unterschriften",
+  "me_ai_models": "KI-Modelle",
+  "me_scanning": "Scannen",
+  "me_files_storage": "Dateien & Speicher",
+  "me_appearance": "Darstellung",
+  "me_theme_light": "Hell",
+  "me_theme_dark": "Dunkel",
+  "me_about": "Info",
+  "me_privacy": "Datenschutz",
+  "me_licences": "Open-Source-Lizenzen",
+  "me_replay_intro": "Einführung erneut ansehen",
+  "me_contact": "Kontakt",
+  "me_rate": "Dokulo bewerten",
+  "me_restore_purchase": "Kauf wiederherstellen"
 }
