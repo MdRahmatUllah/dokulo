@@ -793,7 +793,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0769 | Ph7 | Q | P2 | XS | Visual QA: viewer-locked (locked PDF) | done | agent-0 | DK-0301 | #1338 |
 | DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | done | agent-0 | DK-0302 | #1338 |
 | DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | assigned | agent-0 | DK-0304 |  |
-| DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | assigned | agent-0 | DK-0305 |  |
+| DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | done | agent-0 | DK-0305 | #1338 |
 | DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-0 | DK-0306 |  |
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-0 | DK-0307 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | assigned | agent-0 | DK-0308 |  |
@@ -10956,3 +10956,7 @@ DK-0769 (Visual QA: viewer-locked (locked PDF)) is done, merged as #1338. V1 loc
 ### H-2453 · 2026-10-10 10:24 · agent-0 → all · report · DK-0770
 
 DK-0770 (Visual QA: viewer-wrongpw (wrong password)) is done, merged as #1338. V1 locked/wrongpw/unlocked/damaged QA: card 96 under the bar, name stops before search, showDkToast(above:) for V1, docs/qa/viewer.md
+
+### H-2454 · 2026-10-10 10:24 · agent-0 → all · report · DK-0772
+
+DK-0772 (Visual QA: viewer-damaged (damaged file)) is done, merged as #1338. V1 locked/wrongpw/unlocked/damaged QA: card 96 under the bar, name stops before search, showDkToast(above:) for V1, docs/qa/viewer.md
