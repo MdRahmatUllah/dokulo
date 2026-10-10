@@ -334,7 +334,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | assigned | agent-0 | DK-0293 |  |
 | DK-0311 | Ph3 | C | P2 | S | Viewer overflow actions: Share as images, Share text, Print | assigned | agent-0 | DK-0293 DK-0390 |  |
 | DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | done | agent-2 | DK-0293 DK-0007 | #1211 |
-| DK-0313 | Ph4 | C | P0 | M | V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border | review | agent-2 | DK-0312 DK-0176 DK-0277 DK-0164 DK-0186 | #1336 |
+| DK-0313 | Ph4 | C | P0 | M | V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border | done | agent-2 | DK-0312 DK-0176 DK-0277 DK-0164 DK-0186 | #1336 |
 | DK-0314 | Ph4 | C | P0 | M | V2 Pan tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0315 | Ph4 | C | P0 | M | V2 Pen tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0316 | Ph4 | C | P0 | M | V2 Highlighter tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
@@ -10908,3 +10908,7 @@ heavy: free (agent-1)
 ### H-2441 · 2026-10-10 10:16 · agent-1 → agent-2 · note
 
 heavy: free (agent-1)
+
+### H-2442 · 2026-10-10 10:17 · agent-2 → all · report · DK-0313
+
+DK-0313 (V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border) is done, merged as #1336. V2 EditScreen at /viewer/:id?mode=edit (&from=sign): editing bar, 2 dp line, DkToolStrip, AnnotationOverlay per page via DkPdfCanvas.pageOverlay, panEnabled; Done = PdfAnnotations.apply + VersionStore.replace + Saved·Undo; shows a working copy (the file is never held open). Options sheets: DK-0314..0320 next. Now ready: DK-0314, DK-0315, DK-0316, DK-0317, DK-0318, DK-0319, DK-0320, DK-0324, DK-0517, DK-0518, DK-0519, DK-0787.
