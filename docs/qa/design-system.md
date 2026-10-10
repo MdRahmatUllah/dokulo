@@ -12,6 +12,7 @@
 | DK-0845, DK-0846, DK-0855, DK-0856 | `12-tool-shell/` minibar, canceldlg, discard, aftersave (Light, Dark; phone) | The same QA board: the shell at Tools with a running job, T2 after 30 s with Cancel, T3 closed unsaved after a long job, T3 after Save | 2 deviations fixed, 2 approved, below |
 | DK-0853, DK-0854, DK-0857 | `12-tool-shell/` savemenu, replace, replaced (Light, Dark; phone) | The same QA board: T3's split Save menu (Save as copy · Replace original · Save to…), then Replace original (the dialog), then Replace (the toast and Done) | Match, 2 approved, below |
 | DK-0799, DK-0800, DK-0801, DK-0802, DK-0803 | `09-organize-pages/` organize-drag, -selected, -insert, -deleted, -pinch (Light, Dark; phone) | Goldens in the gate, `organize_<state>_<theme>` in `packages/app_pdf/test/screens/organize_screen_test.dart`: P1 with 12 pages, page 5 long-pressed and held between 8 and 9, the navigator's overlay included; side by side with the frame in [organize/](organize/) | 5 deviations fixed, 3 approved, 1 follow-up, below |
+| DK-0804, DK-0805 | `09-organize-pages/` organize-large, organize-savemenu (Light, Dark; phone) | Goldens in the gate, `organize_large_<theme>` (300 pages scrolled to 142–150) and `organize_savemenu_<theme>` (Save long-pressed) | 2 deviations fixed, 1 spec gap filled, below |
 
 The approved changes (the test lists them in `approved`, so a new difference fails the gate):
 
@@ -299,3 +300,15 @@ Approved:
 - The pinch frame shows a hint toast, "Pinch to change thumbnail size";
   neither the UI spec (§18) nor the copy deck has it, so there is none.
 - The insert sheet has no "From a scan" row until DK-1082.
+
+Large and the Save menu (DK-0804, DK-0805):
+
+- O6. Save has its long-press menu (UI spec §18, organize-savemenu): Save
+  as copy · Replace original. Replace asks (the destructive dialog), writes
+  the pages over the file with `VersionStore.replace` (the original in
+  Versions for 30 days) and says "Saved". `DkTopBar.editing` takes
+  `onDoneLongPress`.
+- O7. Save's copy is "{name} – organized.pdf" with "Saved as “…”" (§18,
+  §27.3); it was "{name} (2).pdf" with "Saved to Files › …".
+- The 300-page document matches: virtualised, skeletons with their numbers
+  until a page renders.
