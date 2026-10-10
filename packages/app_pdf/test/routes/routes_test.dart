@@ -39,6 +39,7 @@ Future<GoRouter> pumpAt(
   bool reduceMotion = false,
   List<Override> overrides = const [],
   DokuloDatabase? database,
+  DkTokens? tokens,
 }) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
@@ -56,8 +57,11 @@ Future<GoRouter> pumpAt(
         ...overrides,
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: router,
-        theme: dokuloTheme(DkTokens.light), // components read the tokens
+        theme: dokuloTheme(
+          tokens ?? DkTokens.light,
+        ), // components read the tokens
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, child) => MediaQuery(
