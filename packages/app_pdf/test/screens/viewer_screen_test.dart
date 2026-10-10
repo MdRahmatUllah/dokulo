@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:app_pdf/components/dk_pdf_canvas.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -256,4 +257,29 @@ void main() {
       );
     });
   }
+
+  testWidgets('night mode (DK-1089): the pages through the night filter on '
+      'the night canvas', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(
+      tester,
+      db,
+      fixture('Mietvertrag Musterstraße 12.pdf'),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appDatabaseProvider.overrideWithValue(db),
+          prefsProvider.overrideWith(
+            () => Prefs.memory({viewerNightKey: true}),
+          ),
+        ],
+        child: app(ViewerScreen(fileId: id)),
+      ),
+    );
+    await settle(tester);
+    expect(find.byType(ColorFiltered), findsOneWidget);
+    expect(tester.widget<DkPdfCanvas>(find.byType(DkPdfCanvas)).night, isTrue);
+  });
 }

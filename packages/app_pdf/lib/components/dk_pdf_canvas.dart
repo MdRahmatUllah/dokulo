@@ -23,6 +23,7 @@ class DkPdfCanvas extends StatefulWidget {
     this.onPageChanged,
     this.onReady,
     this.onLink,
+    this.night = false,
   });
 
   final String path;
@@ -42,6 +43,10 @@ class DkPdfCanvas extends StatefulWidget {
   /// a page in the file jumps there. Null: links do nothing.
   final ValueChanged<Uri>? onLink;
 
+  /// Night mode (UI spec §17.1; DK-1089): the pages inverted, dark with
+  /// light text, on `color.nightCanvas`.
+  final bool night;
+
   /// Between pages and at the sides (§17.1).
   static const gap = 8.0;
 
@@ -60,13 +65,17 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
     final t = context.tokens;
     final shadows = t.elevation.raised;
     final onLink = widget.onLink;
-    return PdfViewer.file(
+    final viewer = PdfViewer.file(
       widget.path,
       controller: _controller,
       initialPageNumber: widget.initialPage,
       passwordProvider: widget.password == null ? null : () => widget.password,
       params: PdfViewerParams(
-        backgroundColor: t.color.surfaceSunken,
+        // In night mode the whole viewer goes through [_night]: its
+        // background is the colour that comes out as `color.nightCanvas`.
+        backgroundColor: widget.night
+            ? _invert(t.color.nightCanvas)
+            : t.color.surfaceSunken,
         margin: DkPdfCanvas.gap,
         // Light shows the shadow; dark has none (elevation is a lighter
         // surface there), which the outline makes up for.
@@ -110,6 +119,9 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
               ),
       ),
     );
+    return widget.night
+        ? ColorFiltered(colorFilter: _night, child: viewer)
+        : viewer;
   }
 
   /// Fits the page under [documentPosition] (or the current one) to the
@@ -124,3 +136,22 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
     controller.goTo(controller.calcMatrixFitWidthForPage(pageNumber: page));
   }
 }
+
+/// Night mode's filter: each colour inverted, then turned 180° in hue, so
+/// white pages go dark and black text light while colours (a photo, a blue
+/// link) keep roughly their hue.
+// ponytail: one filter over the page; leaving images un-inverted (§17.1)
+// needs PDFium's per-object rendering, worth it when someone reads photo
+// books at night.
+const _night = ColorFilter.matrix([
+  // -(180° luminance-preserving hue rotation) + 255: inverted, hue kept.
+  0.574, -1.43, -0.144, 0, 255, //
+  -0.426, -0.43, -0.144, 0, 255,
+  -0.426, -1.43, 0.856, 0, 255,
+  0, 0, 0, 1, 0,
+]);
+
+/// The colour [_night] turns into [c]: the canvas around the pages. Near
+/// grey, the hue turn barely moves it, so a plain inversion is enough.
+Color _invert(Color c) =>
+    Color.from(alpha: 1, red: 1 - c.r, green: 1 - c.g, blue: 1 - c.b);

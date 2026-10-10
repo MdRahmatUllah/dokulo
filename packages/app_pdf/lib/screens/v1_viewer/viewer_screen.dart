@@ -11,6 +11,7 @@ import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
 import '../../providers/link_providers.dart';
+import '../../providers/prefs_providers.dart';
 import 'viewer_providers.dart';
 import 'viewer_states.dart';
 
@@ -18,6 +19,9 @@ import 'viewer_states.dart';
 /// pages on [DkPdfCanvas]; while the file opens, the page skeleton (DK-0620).
 /// A locked PDF asks for its password, a damaged one says so (DK-0301..
 /// DK-0305). The top bar, page pill and bottom bar come with DK-0294.
+/// The prefs key of V1's night mode (UI spec §17.1; DK-1089).
+const viewerNightKey = 'viewer.night';
+
 class ViewerScreen extends ConsumerStatefulWidget {
   const ViewerScreen({super.key, required this.fileId, this.page});
 
@@ -90,6 +94,8 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
       ViewerOpen.ok => DkPdfCanvas(
         path: path,
         password: _password,
+        // Night mode (DK-1089), switched in the overflow menu (DK-0295).
+        night: ref.watch(prefsProvider).value?[viewerNightKey] == true,
         initialPage: widget.page ?? 1,
         // A web link asks first; it's the only step that leaves Dokulo
         // (DK-1088).
