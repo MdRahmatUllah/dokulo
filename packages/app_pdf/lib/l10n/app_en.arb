@@ -2488,5 +2488,20 @@
   "viewer_menu_print": "Print",
   "@viewer_menu_print": {"description": "V1 overflow menu: the system print dialog."},
   "viewer_print_failed": "Couldn't open printing.",
-  "@viewer_print_failed": {"description": "Toast when the system print dialog didn't open."}
+  "@viewer_print_failed": {"description": "Toast when the system print dialog didn't open."},
+  "x1_files": "{n, plural, one{1 file} other{{n} files}}",
+  "@x1_files": {"description": "X1 header for several files (UI spec §20.6; DK-0387).", "placeholders": {"n": {"type": "int"}}},
+  "x1_pdfs": "{n, plural, one{1 PDF} other{{n} PDFs}}",
+  "@x1_pdfs": {"description": "X1 header's line for several files: the PDFs among them.", "placeholders": {"n": {"type": "int"}}},
+  "x1_images": "{n, plural, one{1 image} other{{n} images}}",
+  "@x1_images": {"description": "X1 header's line for several files: the images among them.", "placeholders": {"n": {"type": "int"}}},
+  "images_heic_skipped": "{n, plural, one{1 HEIC photo can't be opened on this phone and was skipped.} other{{n} HEIC photos can't be opened on this phone and were skipped.}}",
+  "@images_heic_skipped": {
+    "description": "Toast: picked HEIC photos this phone can't decode (Android 8 and older) were left out (DK-1081).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
 }
