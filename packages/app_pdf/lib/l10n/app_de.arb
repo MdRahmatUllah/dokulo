@@ -513,5 +513,8 @@
   "trash_banner": "Dateien werden nach {n} Tagen endgültig gelöscht.",
   "meta_days_left": "{n, plural, one{noch 1 Tag} other{noch {n} Tage}}",
   "search_names": "Namen",
-  "search_text": "Text in Dateien"
+  "search_text": "Text in Dateien",
+  "file_favourite_add": "Zu Favoriten hinzufügen",
+  "file_favourite_remove": "Aus Favoriten entfernen",
+  "files_favourites": "Favoriten"
 }
