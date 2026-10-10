@@ -255,7 +255,8 @@ Future<String?> readPdfVersion(String path) async {
 
 /// How long Recently deleted keeps a file: 30 days, or 7 (DK-0278). The
 /// launch purge and R1's banner read it.
-// M3's "Keep deleted files" row (DK-0572) writes `trash.days`.
+// M3's "Keep deleted files" row (FilesSettingsScreen, DK-0572) writes
+// `trash.days`.
 @riverpod
 int trashRetentionDays(Ref ref) =>
     trashDays(ref.watch(prefsProvider).value ?? const {});

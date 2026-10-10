@@ -14,6 +14,7 @@ import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/files/files_screen.dart';
+import 'package:app_pdf/screens/settings/files_settings_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -26,7 +27,9 @@ import 'package:go_router/go_router.dart';
 
 /// No PDFium in widget tests: every thumbnail is a small white page.
 class _WhitePages extends ThumbnailCache {
-  _WhitePages() : super(Directory.systemTemp);
+  // Never the system temp itself: Clear cache deletes this folder.
+  _WhitePages()
+    : super(Directory('${Directory.systemTemp.path}/dk_test_thumbs'));
 
   @override
   Future<RenderedPage> thumbnail(
@@ -106,6 +109,9 @@ Future<GoRouter> pumpFiles(
         prefsProvider.overrideWith(() => Prefs.memory(f.prefs)),
         fileStoreProvider.overrideWith((ref) async => f.store),
         thumbnailCacheProvider.overrideWith((ref) async => _WhitePages()),
+        modelsDirectoryProvider.overrideWith(
+          (ref) async => Directory('${f.root.path}/models'),
+        ),
         // V1 without PDFium: the file reads as missing, so no canvas opens.
         viewerFileProvider.overrideWith(
           (ref, fileId) async => throw StateError('no PDFium in tests'),

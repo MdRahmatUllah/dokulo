@@ -49,8 +49,8 @@ void main() {
     expect(find.text('Recently deleted'), findsNothing);
     final chip = tester.widget<DkPageChip>(find.byType(DkPageChip));
     expect(chip.page, 2);
-    // Two files have no text layer (Mietvertrag's and Scan.pdf).
-    expect(find.text('2 scans have no searchable text yet.'), findsOneWidget);
+    // The no-text banner waits for an empty result (§16.2).
+    expect(find.textContaining('no searchable text'), findsNothing);
   });
 
   testWidgets('a text hit opens V1 at its page', (tester) async {
@@ -69,6 +69,10 @@ void main() {
     await pumpFiles(tester, f);
     await type(tester, 'Kaution');
     expect(find.text('Nothing found for “Kaution”'), findsOneWidget);
+    // Two files have no text layer (Mietvertrag's and Scan.pdf).
+    expect(find.text('2 scans have no searchable text yet.'), findsOneWidget);
+    // The field is at the top, in the title's place: "Files" is the tab's.
+    expect(find.text('Files'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
     await settle(tester);
     expect(find.text('Recently deleted'), findsOneWidget);

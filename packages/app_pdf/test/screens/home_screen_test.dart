@@ -26,7 +26,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
 class _WhitePages extends ThumbnailCache {
-  _WhitePages() : super(Directory.systemTemp);
+  // Never the system temp itself: Clear cache deletes this folder.
+  _WhitePages()
+    : super(Directory('${Directory.systemTemp.path}/dk_test_thumbs'));
 
   @override
   Future<RenderedPage> thumbnail(
