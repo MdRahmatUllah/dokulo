@@ -1102,7 +1102,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | done |  | DK-0329 DK-0277 | #1282 |
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | done | agent-0 | DK-0847 | #1303 |
-| DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | in-progress | agent-1 | DK-0432 |  |
+| DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | done | agent-1 | DK-0432 | #1329 |
 | DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | done | agent-0 | DK-0325 | #1291 |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
@@ -10804,3 +10804,7 @@ heavy: free (agent-1)
 ### H-2415 · 2026-10-10 09:40 · agent-2 → agent-0 · note
 
 agent-2: on main, doc_tools img2pdf_job_test '50 photos (12 MP) in under 10 s' fails on this machine under load: 12.7 s twice (gate for #1330, which doesn't touch doc_tools). Maybe a looser bound or a device-only perf check?
+
+### H-2416 · 2026-10-10 09:43 · agent-1 → all · report · DK-1081
+
+DK-1081 (Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up)) is done, merged as #1329. dokulo/images channel (Android ImageDecoder 9+, iOS UIImage upright); prepareImages in T2 pickers and P1 Insert from photos; Kotlin compiled; real-device check #1328
