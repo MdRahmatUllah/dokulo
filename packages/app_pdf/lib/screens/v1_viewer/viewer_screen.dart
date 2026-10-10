@@ -152,8 +152,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                       pageCount: _pageCount,
                       actions: ViewerActions(
                         onSearch: () => setState(() => _searching = true),
+                        // V2 with Pan and the signatures sheet (§17.2).
                         onSign: () => context.push(
-                          Routes.tool('sign', files: ['${widget.fileId}']),
+                          Routes.viewer('${widget.fileId}', sign: true),
                         ),
                         onAi: () => context.push(
                           Routes.tool('summarize', files: ['${widget.fileId}']),
