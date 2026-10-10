@@ -53,13 +53,14 @@ void main() {
     expect(find.textContaining('no searchable text'), findsNothing);
   });
 
-  testWidgets('a text hit opens V1 at its page', (tester) async {
+  testWidgets('a text hit opens V1 at its page, searching the same words '
+      '(DK-1093)', (tester) async {
     await seed(tester);
     final router = await pumpFiles(tester, f);
     await type(tester, 'anerkannt');
     await tester.tap(find.byType(DkPageChip));
     await settle(tester);
-    expect(router.state.uri.toString(), endsWith('?page=2'));
+    expect(router.state.uri.queryParameters, {'page': '2', 'q': 'anerkannt'});
   });
 
   testWidgets('nothing found: ILL-07 with the query; Cancel clears', (

@@ -615,5 +615,11 @@
   "viewer_damaged_body": "Sie ist möglicherweise beschädigt.",
   "viewer_unlocked": "Zum Ansehen entsperrt",
   "viewer_form_banner": "Diese PDF hat ausfüllbare Felder.",
-  "viewer_form_fill": "Formular ausfüllen"
+  "viewer_form_fill": "Formular ausfüllen",
+  "viewer_search_of": "{i} von {n}",
+  "viewer_search_none": "0 Treffer",
+  "viewer_search_previous": "Vorheriger Treffer",
+  "viewer_search_next": "Nächster Treffer",
+  "viewer_search_no_text": "Dieser Scan hat keinen durchsuchbaren Text.",
+  "viewer_make_searchable": "Durchsuchbar machen"
 }
