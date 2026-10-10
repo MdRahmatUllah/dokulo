@@ -1920,3 +1920,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 03:38 · agent-1 DK-0573 · claimed: M3 Security settings page
 - 2026-10-10 04:06 · agent-0 DK-1081 · added: Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up)
 - 2026-10-10 04:10 · agent-0 DK-0983 · PR #1265 open; review requested from all
+- 2026-10-10 04:10 · agent-0 DK-0983 · done (#1265)
