@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0432 Image to PDF: implement the img2pdf ToolJob (engine) — claimed 2026-10-10 04:11.
+DK-0432 in review as PR #1266: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
