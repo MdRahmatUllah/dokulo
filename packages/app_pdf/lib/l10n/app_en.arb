@@ -2266,5 +2266,14 @@
   "organize_suffix": "organized",
   "@organize_suffix": {"description": "The suffix of Organize's saved copy: Name – organized.pdf (UI spec §27.3)."},
   "toast_saved_as": "Saved as “{name}”",
-  "@toast_saved_as": {"description": "After Organize's Save (UI spec §18).", "placeholders": {"name": {"type": "String"}}}
+  "@toast_saved_as": {"description": "After Organize's Save (UI spec §18).", "placeholders": {"name": {"type": "String"}}},
+  "files_drop_hint": "Drop on “{folder}” to move",
+  "@files_drop_hint": {
+    "description": "F1 grid: a file dragged over a folder (DK-0264).",
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  }
 }
