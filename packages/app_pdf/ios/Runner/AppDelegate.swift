@@ -1,6 +1,7 @@
 import AVFoundation
 import Flutter
 import UIKit
+import UserNotifications
 import os
 
 @main
@@ -17,8 +18,44 @@ import os
     if let registrar = engineBridge.pluginRegistry.registrar(forPlugin: "DokuloDevice") {
       registerDeviceChannel(registrar.messenger())
       registerCameraChannel(registrar.messenger())
+      registerNotificationsChannel(registrar.messenger())
       registerMailChannel(registrar.messenger())
     }
+  }
+
+  /// Notices for long jobs (DK-0378; lib/providers/notification_permission.dart):
+  /// granted, notAsked (show the pre-prompt) or denied. The app asks once.
+  private func registerNotificationsChannel(_ messenger: FlutterBinaryMessenger) {
+    func status(_ done: @escaping (String) -> Void) {
+      UNUserNotificationCenter.current().getNotificationSettings { settings in
+        let s: String
+        switch settings.authorizationStatus {
+        case .authorized, .provisional, .ephemeral: s = "granted"
+        case .notDetermined: s = "notAsked"
+        default: s = "denied"
+        }
+        DispatchQueue.main.async { done(s) }
+      }
+    }
+    FlutterMethodChannel(name: "dokulo/notifications", binaryMessenger: messenger)
+      .setMethodCallHandler { call, result in
+        switch call.method {
+        case "status":
+          status { result($0) }
+        case "request":
+          status { current in
+            guard current == "notAsked" else {
+              result(current)
+              return
+            }
+            UNUserNotificationCenter.current().requestAuthorization(
+              options: [.alert, .sound]
+            ) { _, _ in status { result($0) } }
+          }
+        default:
+          result(FlutterMethodNotImplemented)
+        }
+      }
   }
 
   /// "Send report by email" (DK-1080; lib/providers/mail_providers.dart):
