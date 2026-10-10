@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0573 M3 Security settings page — claimed 2026-10-10 03:38.
 
 ## Next
 

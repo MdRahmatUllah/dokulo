@@ -594,7 +594,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0570 | Ph1 | B | P0 | M | M1 Me: Pro card, Your things, Settings, About, footer | done | agent-1 | DK-0229 DK-0100 DK-0098 | #1263 |
 | DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | open |  | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 |  |
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | open |  | DK-0570 DK-0260 DK-0128 DK-0100 |  |
-| DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | open |  | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 |  |
+| DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | in-progress | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 |  |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | open |  | DK-0570 DK-0047 DK-0128 DK-0100 |  |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | open |  | DK-0570 DK-0009 DK-0128 DK-0100 |  |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | open |  | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
