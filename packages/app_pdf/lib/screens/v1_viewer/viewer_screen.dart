@@ -73,6 +73,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   var _pageCount = 0;
   final _controller = PdfViewerController();
 
+  /// V1's bottom bar, drawn in the body: toasts go above it.
+  double get _barHeight => 64 + MediaQuery.paddingOf(context).bottom;
+
   /// The thumbnail strip, from Pages in the overflow menu (DK-0295).
   var _thumbs = false;
 
@@ -94,6 +97,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
     showDkToast(
       context,
       l.viewer_unlocked,
+      above: _barHeight,
       action: l.tool_unlock_name,
       onAction: () {
         if (mounted) {
@@ -262,7 +266,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                 file.name,
               );
               if (!opened && mounted) {
-                showDkToast(context, l.viewer_print_failed);
+                showDkToast(context, l.viewer_print_failed, above: _barHeight);
               }
             },
           ),

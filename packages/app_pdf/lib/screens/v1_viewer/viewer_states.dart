@@ -9,7 +9,7 @@ import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 
 /// V1 Locked PDF (UI spec §17.1; DK-0301, DK-0302): in place of the pages a
-/// centred card, at most 360 wide: a 40 lock, "This PDF is locked", the
+/// card near the top, the field focused, at most 360 wide: a 40 lock, "This PDF is locked", the
 /// password and Unlock; a wrong one says "That password doesn't open this
 /// file." under the field. [onUnlock] answers whether the password opens it.
 class ViewerLockedCard extends StatefulWidget {
@@ -48,9 +48,12 @@ class _ViewerLockedCardState extends State<ViewerLockedCard> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
-    return Center(
+    // 96 under the top bar and 24 at the sides, as the frame (viewer-locked)
+    // draws it: the keyboard opens below.
+    return Align(
+      alignment: Alignment.topCenter,
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(t.space.l),
+        padding: EdgeInsets.fromLTRB(t.space.xl, 96, t.space.xl, t.space.xl),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 360),
           child: DecoratedBox(
@@ -72,10 +75,11 @@ class _ViewerLockedCardState extends State<ViewerLockedCard> {
                     style: t.text.titleM.copyWith(color: t.color.textPrimary),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: t.space.l),
+                  SizedBox(height: t.space.m),
                   DkPasswordField(
                     label: l.t2_password,
                     controller: _password,
+                    autofocus: true,
                     error: _wrong ? l.t2_wrong_password : null,
                     onChanged: (_) {
                       if (_wrong) setState(() => _wrong = false);
@@ -135,8 +139,8 @@ class ViewerDamaged extends StatelessWidget {
             ),
             SizedBox(height: t.space.xl),
             Wrap(
-              spacing: t.space.s,
-              runSpacing: t.space.s,
+              spacing: t.space.m,
+              runSpacing: t.space.m,
               alignment: WrapAlignment.center,
               children: [
                 DkButton(
