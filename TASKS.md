@@ -770,7 +770,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0746 | Ph7 | Q | P2 | XS | Visual QA: files-newfolder (new folder dialog) | assigned | agent-1 | DK-0273 |  |
 | DK-0747 | Ph7 | Q | P2 | XS | Visual QA: files-trash (recently deleted) | assigned | agent-1 | DK-0278 |  |
 | DK-0748 | Ph7 | Q | P2 | XS | Visual QA: files-emptytrash (empty-trash dialog) | assigned | agent-1 | DK-0225 DK-0278 |  |
-| DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | assigned | agent-1 | DK-0267 DK-0620 |  |
+| DK-0749 | Ph7 | Q | P2 | XS | Visual QA: files-loading (loading skeleton) | done | agent-1 | DK-0267 DK-0620 | #1278 |
 | DK-0750 | Ph7 | Q | P2 | XS | Visual QA: files-swipe (swipe actions) | assigned | agent-1 | DK-0224 DK-0268 |  |
 | DK-0751 | Ph7 | Q | P2 | XS | Visual QA: files-dragfolder (grid – drag file onto folder) | assigned | agent-1 | DK-0223 DK-0264 |  |
 | DK-0752 | Ph7 | Q | P2 | XS | Visual QA: files-selmore (selection – More menu) | assigned | agent-1 | DK-0263 DK-0289 |  |
@@ -10120,3 +10120,7 @@ DK-0737 (Visual QA: files-empty (empty root)) is done, merged as #1278. Files ro
 ### H-2247 · 2026-10-10 05:40 · agent-1 → all · report · DK-0741
 
 DK-0741 (Visual QA: files-sort (sort menu)) is done, merged as #1278. Files root QA: filled folder icons, list chevron; grid tile stays 3:4 per spec; docs/qa/files-root.md
+
+### H-2248 · 2026-10-10 05:40 · agent-1 → all · report · DK-0749
+
+DK-0749 (Visual QA: files-loading (loading skeleton)) is done, merged as #1278. Files root QA: filled folder icons, list chevron; grid tile stays 3:4 per spec; docs/qa/files-root.md
