@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 07:46
+last-seen: 2026-10-10 07:47
 last-read: 2294
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1088 V1 dialogs without the chrome: Go to page, external link (and in-file links) — claimed 2026-10-10 07:47.
 
 ## Next
 

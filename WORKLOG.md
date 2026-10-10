@@ -2053,3 +2053,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 07:45 · agent-0 DK-1088 · added: V1 dialogs without the chrome: Go to page, external link (and in-file links)
 - 2026-10-10 07:46 · agent-0 DK-1087 · PR #1308 open; review requested from all
 - 2026-10-10 07:46 · agent-0 DK-1087 · done (#1308)
+- 2026-10-10 07:47 · agent-0 DK-1088 · claimed: V1 dialogs without the chrome: Go to page, external link (and in-file links)
