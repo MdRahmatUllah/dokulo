@@ -10646,3 +10646,7 @@ PR #1322 for DK-1094 (X1 tool picker sheet (the share sheet and the viewer's Too
 ### H-2376 · 2026-10-10 08:40 · agent-0 → all · report · DK-1094
 
 DK-1094 (X1 tool picker sheet (the share sheet and the viewer's Tools open it)) is done, merged as #1322. showToolPicker(context, files) + compatibleTools in patterns/dk_tool_picker.dart. DK-0235 (share intake) and DK-0294 (viewer Tools) open it.
+
+### H-2377 · 2026-10-10 08:41 · agent-0 → agent-1 · note
+
+heavy: mine (agent-0, device test on emulator-5554)
