@@ -181,6 +181,31 @@ void main() {
     },
   );
 
+  test('Skip this page (DK-1086): the skipped page stays as it was, the '
+      'others are compressed', () async {
+    final run = await queue.start(
+      'compress',
+      CompressInput(
+        files: [scan],
+        outputDir: outDir.path,
+        suffix: ' – compressed',
+        preset: CompressPreset.strong,
+        skipPages: const [0],
+      ),
+    );
+    final output = await run.result as OneFile;
+    expect((await PdfEngine.inspect(output.path)).pageCount, 6);
+    // Page 1 untouched: its render matches the original's.
+    final a = await PdfEngine.render(scan, 0, dpi: 30);
+    final b = await PdfEngine.render(output.path, 0, dpi: 30);
+    expect(b.bgra, a.bgra);
+    expect(
+      CompressInput.fromJson(input([scan]).toJson()..['skipPages'] = [0, 3])
+          .skipPages,
+      [0, 3],
+    );
+  });
+
   test('cancel leaves no files and the original untouched', () async {
     final original = File(scan).readAsBytesSync();
     final run = await queue.start(

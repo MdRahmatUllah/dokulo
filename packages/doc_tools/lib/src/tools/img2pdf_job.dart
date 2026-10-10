@@ -18,6 +18,7 @@ class Img2PdfInput {
     this.margins = false,
     this.onePerImage = false,
     this.cleanUp = false,
+    this.skipPages = const [],
   });
 
   factory Img2PdfInput.fromJson(Map<String, Object?> json) => Img2PdfInput(
@@ -28,6 +29,7 @@ class Img2PdfInput {
     margins: json['margins'] as bool? ?? false,
     onePerImage: json['onePerImage'] as bool? ?? false,
     cleanUp: json['cleanUp'] as bool? ?? false,
+    skipPages: (json['skipPages'] as List? ?? const []).cast<int>(),
   );
 
   /// 1 to 500 images: JPG, PNG, WebP (and GIF, BMP, TIFF).
@@ -49,6 +51,10 @@ class Img2PdfInput {
   /// "Clean up like a scan": crop to the document, improve contrast.
   final bool cleanUp;
 
+  /// Images (0-based, in the strip's order) left out: "Skip this page"
+  /// after one failed (DK-1086).
+  final List<int> skipPages;
+
   Map<String, Object?> toJson() => {
     'files': files,
     'outputDir': outputDir,
@@ -57,6 +63,7 @@ class Img2PdfInput {
     'margins': margins,
     'onePerImage': onePerImage,
     'cleanUp': cleanUp,
+    if (skipPages.isNotEmpty) 'skipPages': skipPages,
   };
 }
 
@@ -128,6 +135,7 @@ class Img2PdfJob extends ToolJob<Img2PdfInput> {
       ImagesPdfWriter? one;
       for (final (i, file) in files.indexed) {
         await context.checkCancelled();
+        if (input.skipPages.contains(i)) continue;
         context.report(
           JobProgress('converting', pageIndex: i, pageCount: files.length),
         );
