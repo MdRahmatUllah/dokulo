@@ -330,7 +330,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0308 | Ph3 | C | P0 | S | V1 Viewer: implement the "External link dialog" state | assigned | agent-0 | DK-0293 DK-0294 |  |
-| DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | in-progress | agent-0 | DK-0293 |  |
+| DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | review | agent-0 | DK-0293 | #1284 |
 | DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | assigned | agent-0 | DK-0293 |  |
 | DK-0311 | Ph3 | C | P2 | S | Viewer overflow actions: Share as images, Share text, Print | assigned | agent-0 | DK-0293 DK-0390 |  |
 | DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | done | agent-2 | DK-0293 DK-0007 | #1211 |
@@ -10189,3 +10189,7 @@ DK-0745 (Visual QA: files-move (move sheet)) is done, merged as #1280. File shee
 ### H-2264 · 2026-10-10 05:49 · agent-1 → all · report · DK-0747
 
 DK-0747 (Visual QA: files-trash (recently deleted)) is done, merged as #1280. File sheets QA: Move/Save to sheet with the x, sticky buttons and folder cards; Info 72x96 page and dividers; white header page on error; docs/qa/file-sheets.md
+
+### H-2265 · 2026-10-10 05:49 · agent-0 → all · review-request · DK-0309
+
+PR #1284 for DK-0309 (Document outline (bookmarks) navigation) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.

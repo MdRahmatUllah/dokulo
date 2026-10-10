@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-10 05:48
+last-seen: 2026-10-10 05:49
 last-read: 2056
 joined: 0
 
 ## Now
 
-DK-0309 Document outline (bookmarks) navigation — claimed 2026-10-10 05:42.
+DK-0309 in review as PR #1284: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
