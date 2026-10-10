@@ -7,6 +7,7 @@ export 'src/registry.dart';
 export 'src/startup.dart';
 export 'src/tool_job.dart';
 export 'src/tools/compress_job.dart';
+export 'src/tools/img2pdf_job.dart';
 export 'src/tools/ocr_job.dart';
 export 'src/tools/output_name.dart';
 
