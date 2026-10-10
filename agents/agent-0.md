@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1083 Signatures: one unreadable signature must not empty the list; delete row before file — claimed 2026-10-10 05:53.
 
 ## Next
 

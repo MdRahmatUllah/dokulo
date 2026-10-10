@@ -1996,3 +1996,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 05:52 · agent-0 DK-1085 · claimed: check_l10n: fail on duplicate ARB keys
 - 2026-10-10 05:53 · agent-0 DK-1085 · PR #1285 open; review requested from all
 - 2026-10-10 05:53 · agent-0 DK-1085 · done (#1285)
+- 2026-10-10 05:53 · agent-0 DK-1083 · claimed: Signatures: one unreadable signature must not empty the list; delete row before file
