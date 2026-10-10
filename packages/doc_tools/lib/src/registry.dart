@@ -1,5 +1,6 @@
 import 'tool_job.dart';
 import 'tools/compress_job.dart';
+import 'tools/img2pdf_job.dart';
 import 'tools/ocr_job.dart';
 
 /// The tools that run as a ToolJob: one engine task each in the plan
@@ -12,7 +13,11 @@ const toolJobIds = [
 ];
 
 /// Every ToolJob the app has. A tool's engine task adds its job here.
-const List<ToolJob<Object?>> allToolJobs = [CompressJob(), OcrJob()];
+const List<ToolJob<Object?>> allToolJobs = [
+  CompressJob(),
+  Img2PdfJob(),
+  OcrJob(),
+];
 
 /// ToolJobs by id.
 class ToolRegistry {

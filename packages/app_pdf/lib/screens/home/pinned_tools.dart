@@ -204,9 +204,11 @@ class _EditTile extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Positioned.fill(child: tile),
+              // On the icon square's top-left corner (48 dp, centred; the
+              // home-edit frame), its 44 dp target around it.
               Positioned(
-                top: -4,
-                left: 0,
+                top: -18,
+                left: box.maxWidth / 2 - 24 - 22,
                 child: Semantics(
                   button: true,
                   label: l.home_unpin_named(ToolCatalogue.of(id).name(l)),
@@ -218,7 +220,6 @@ class _EditTile extends StatelessWidget {
                     builder: (context, pressed) => SizedBox.square(
                       dimension: 44,
                       child: Align(
-                        alignment: Alignment.topLeft,
                         child: Container(
                           width: 20,
                           height: 20,
@@ -369,6 +370,7 @@ class _AddToolListState extends State<_AddToolList> {
           DkToolRow(
             toolId: tool.id,
             showDescription: true,
+            trailingIcon: DkIcons.addCircle,
             onTap: () {
               Navigator.pop(context);
               widget.onAdd(tool.id);

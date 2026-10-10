@@ -72,7 +72,7 @@ void main() {
         'The original will be kept in Versions for 30 days.',
         'Cancel',
         'Replace',
-        false,
+        true, // destructive, as tool-shell-replace
       ),
       (
         DkConfirmation.discardScan,
