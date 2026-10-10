@@ -2093,3 +2093,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 08:46 · agent-0 DK-1095 · done (#1325)
 - 2026-10-10 08:48 · agent-1 DK-0662 · done (#1326)
 - 2026-10-10 08:50 · agent-1 DK-1081 · claimed: Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up)
+- 2026-10-10 08:57 · agent-0 · heavy: mine (DK-0235 dev APK build + emulator check)
