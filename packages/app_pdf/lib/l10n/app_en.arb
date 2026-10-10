@@ -2060,5 +2060,113 @@
   "files_favourites": "Favourites",
   "@files_favourites": {
     "description": "F1: the favourites' section, above the folders."
+  },
+  "tools_search_empty_title": "No tool for “{query}”",
+  "@tools_search_empty_title": {
+    "description": "T1 search, no result (DK-0258): the query in typographic quotes.",
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "tools_search_empty_body": "Try “compress” or “sign”.",
+  "@tools_search_empty_body": {
+    "description": "T1 search, no result."
+  },
+  "tools_about": "About {tool}",
+  "@tools_about": {
+    "description": "T1 search: the row under the results that opens About this tool for the first.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "info_location": "Location",
+  "@info_location": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_size": "Size",
+  "@info_size": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_pages": "Pages",
+  "@info_pages": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_created": "Created",
+  "@info_created": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_modified": "Modified",
+  "@info_modified": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_pdf_version": "PDF version",
+  "@info_pdf_version": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_password": "Password",
+  "@info_password": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_searchable": "Searchable text",
+  "@info_searchable": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_versions": "Versions",
+  "@info_versions": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_current": "current",
+  "@info_current": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "common_yes": "Yes",
+  "@common_yes": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "common_no": "No",
+  "@common_no": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "home_edit": "Edit",
+  "@home_edit": {
+    "description": "H1: edits the pinned tools (DK-0248)."
+  },
+  "home_add_tool": "Add tool",
+  "@home_add_tool": {
+    "description": "H1 edit mode: the tile that opens the add sheet."
+  },
+  "home_add_tool_title": "Add a tool",
+  "@home_add_tool_title": {
+    "description": "The add sheet's title (DK-0249)."
+  },
+  "home_unpin": "Unpin",
+  "@home_unpin": {
+    "description": "A pinned tile's long-press menu (DK-0244)."
+  },
+  "home_about_tool": "About this tool",
+  "@home_about_tool": {
+    "description": "A pinned tile's long-press menu."
+  },
+  "home_unpinned": "Unpinned {tool}",
+  "@home_unpinned": {
+    "description": "Toast after Unpin, with Undo.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "home_unpin_named": "Unpin {tool}",
+  "@home_unpin_named": {
+    "description": "Edit mode: the minus badge, for screen readers.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
   }
 }
