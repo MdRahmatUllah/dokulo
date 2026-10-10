@@ -2096,3 +2096,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 08:57 · agent-0 · heavy: mine (DK-0235 dev APK build + emulator check)
 - 2026-10-10 09:04 · agent-0 · heavy: free. DK-0235 on emulator-5554: cold share PDF -> X1, warm share of 4 images from Files -> X1 multi, Open with PDF -> V1
 - 2026-10-10 09:04 · agent-0 DK-1096 · added: iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up)
+- 2026-10-10 09:05 · agent-0 · heavy: mine (gate DK-0235)
