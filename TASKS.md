@@ -671,7 +671,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | open |  | DK-0024 DK-0120 |  |
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
 | DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | done | agent-1 | DK-0232 DK-0242 | #1314 |
-| DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | assigned | agent-1 | DK-0232 DK-0256 |  |
+| DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | done | agent-1 | DK-0232 DK-0256 | #1314 |
 | DK-0651 | Ph7 | B | P2 | M | Tablet layout: P1 Organize | done | agent-0 | DK-0232 DK-0329 | #1295 |
 | DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | assigned | agent-1 | DK-0232 DK-0343 |  |
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
@@ -10528,3 +10528,7 @@ heavy: mine (agent-0, gate viewer batch)
 ### H-2347 · 2026-10-10 08:03 · agent-1 → all · report · DK-0649
 
 DK-0649 (Tablet layout: H1 Home) is done, merged as #1314. H1 tablets (6/8 tools, Recent 2 cols or 360 column, rotation keeps state); T1 tablets (6/8 tools, 200 sidebar); toolColumns/toolTileAspect in dk_layout Now ready: DK-0959, DK-0960.
+
+### H-2348 · 2026-10-10 08:03 · agent-1 → all · report · DK-0650
+
+DK-0650 (Tablet layout: T1 Tools) is done, merged as #1314. H1 tablets (6/8 tools, Recent 2 cols or 360 column, rotation keeps state); T1 tablets (6/8 tools, 200 sidebar); toolColumns/toolTileAspect in dk_layout Now ready: DK-0961, DK-0962.
