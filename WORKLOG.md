@@ -2081,3 +2081,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-10 08:20 · agent-0 DK-1094 · added: X1 tool picker sheet (the share sheet and the viewer's Tools open it)
 - 2026-10-10 08:32 · agent-0 DK-1093 · PR #1320 open; review requested from all
 - 2026-10-10 08:32 · agent-0 DK-1093 · done (#1320)
+- 2026-10-10 08:32 · agent-0 DK-1094 · claimed: X1 tool picker sheet (the share sheet and the viewer's Tools open it)
