@@ -2503,3 +2503,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 00:05 · agent-0 DK-1128 · added: Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up)
 - 2026-10-16 00:06 · agent-2 DK-0324 · PR #1408 open; review requested from all
 - 2026-10-16 00:06 · agent-2 DK-0518 · PR #1408 open; review requested from all
+- 2026-10-16 00:10 · agent-2 DK-0324 · done (#1408)
