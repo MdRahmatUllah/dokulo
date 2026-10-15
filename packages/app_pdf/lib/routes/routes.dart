@@ -18,6 +18,7 @@ import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/settings/files_settings_screen.dart';
 import '../screens/settings/language_settings_screen.dart';
+import '../screens/settings/scanning_settings_screen.dart';
 import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
@@ -228,6 +229,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
                       child: switch (state.pathParameters['page']!) {
+                        'scanning' => const ScanningSettingsScreen(),
                         'security' => const SecuritySettingsScreen(),
                         'files' => const FilesSettingsScreen(),
                         'language' => const LanguageSettingsScreen(),
@@ -267,17 +269,16 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         routes: [
           fullScreen(
             'review',
-            (s) => s.uri.queryParameters['source'] == 'photos'
-                // The photo picker: DK-0351.
-                ? const PlaceholderScreen('S2', detail: 'photos')
-                : Builder(
-                    builder: (context) => S2Screen(
-                      onAddPages: () => context.canPop()
-                          ? context.pop()
-                          : context.go(Routes.scan),
-                      onRetake: (i) => context.push(Routes.scanRetake(i)),
-                    ),
-                  ),
+            (s) => Builder(
+              builder: (context) => S2Screen(
+                // The photo picker first (DK-0351).
+                importOnOpen: s.uri.queryParameters['source'] == 'photos',
+                onAddPages: () =>
+                    context.canPop() ? context.pop() : context.go(Routes.scan),
+                onDiscard: () => context.go(Routes.home),
+                onRetake: (i) => context.push(Routes.scanRetake(i)),
+              ),
+            ),
           ),
         ],
       ),
