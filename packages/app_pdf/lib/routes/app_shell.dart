@@ -61,8 +61,7 @@ class _AppShellState extends State<AppShell> {
         shell.goBranch(i, initialLocation: i == shell.currentIndex);
     void scan() => context.push(Routes.scan);
 
-    if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) ==
-        DkGrid.largeTablet) {
+    if (DkGrid.of(context) == DkGrid.largeTablet) {
       return Scaffold(
         bottomNavigationBar: const DkBottomChrome(),
         body: Row(
