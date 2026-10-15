@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0575 M3 Language settings page — claimed 2026-10-15 11:31.
+Nothing claimed.
 
 ## Next
 
