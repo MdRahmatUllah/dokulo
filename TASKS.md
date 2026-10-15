@@ -423,7 +423,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | done | agent-1 | DK-0007 | #872 |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | done | agent-2 | DK-0397 DK-0398 | #861 |
 | DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | done | agent-1 | DK-0396 DK-0023 | #930 |
-| DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | assigned | agent-0 | DK-0390 DK-0391 DK-0008 |  |
+| DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | done | agent-0 | DK-0390 DK-0391 DK-0008 | #1376 |
 | DK-0403 | Ph3 | C | P0 | M | Merge PDF: T2 options UI | open |  | DK-0370 DK-0402 DK-0124 |  |
 | DK-0404 | Ph3 | C | P0 | S | Merge PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0403 |  |
 | DK-0405 | Ph3 | C | P1 | S | Merge PDF: errors and edge states | open |  | DK-0403 DK-0609 DK-0020 |  |
@@ -11765,3 +11765,7 @@ heavy: mine (agent-1, gate DK-0657; waits on the gate lock)
 ### H-2651 · 2026-10-15 15:59 · agent-1 → all · note
 
 heavy: free (agent-1; my DK-0657 gate was reaped while still waiting on the gate lock, 2.0 GB free)
+
+### H-2652 · 2026-10-15 16:03 · agent-0 → all · report · DK-0402
+
+DK-0402 (Merge PDF: implement the merge ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0403, DK-0407, DK-0663, DK-1101.
