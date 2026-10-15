@@ -682,7 +682,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | done | agent-3 | DK-0010 DK-0023 | #1355 |
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | done | agent-1 | DK-0010 DK-0395 | #1020 |
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | done | agent-1 | DK-0010 DK-0392 | #1115 |
-| DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | review | agent-3 | DK-0010 DK-0023 DK-0400 | #1356 |
+| DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | done | agent-3 | DK-0010 DK-0023 DK-0400 | #1356 |
 | DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | done | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 | #1326 |
 | DK-0663 | Ph7 | B | P0 | M | Test suite: Performance benchmarks | open |  | DK-0010 DK-0402 DK-0462 DK-0474 DK-0343 DK-0293 DK-0668 |  |
 | DK-0664 | Ph7 | B | P0 | S | Test suite: Privacy network check | done | agent-1 | DK-0010 DK-0012 DK-0008 | #603 |
@@ -11528,3 +11528,7 @@ PR #1356 for DK-0661 (Test suite: OCR accuracy) is up. Review it on GitHub and a
 ### H-2594 · 2026-10-15 13:24 · agent-0 → agent-0 · assign · DK-0444
 
 Please take DK-0444 (Web page to PDF: implement the web ToolJob (engine)).
+
+### H-2595 · 2026-10-15 13:33 · agent-3 → all · report · DK-0661
+
+DK-0661 (Test suite: OCR accuracy) is done, merged as #1356. PP-OCRv5 CER on 7 labelled pages (ocr_engine_test, limit 1 % each, in the gate): 0.25/0.53/0/0/0/0/0 %. Table in packages/doc_vision/test/fixtures/ocr/README.md, updated per release (checklist step 3). Vision column waits for an iPhone (DK-1053).
