@@ -49,5 +49,5 @@ colour shows is also a shape, an icon or a word.
 | Status dot | green, amber, red | always beside its words ("Ready", "Running") |
 
 Not built yet, owners keep the rule when they land: Compare's change
-colours (labels and icons per change, DK-0517), Black out's categories
-(named, DK-0499).
+colours (labels and icons per change, DK-0529), Black out's categories
+(named, DK-0520).
