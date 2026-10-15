@@ -2456,3 +2456,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 17:38 · agent-0 DK-0577 · assigned to agent-1
 - 2026-10-15 17:47 · agent-2 DK-1122 · added: Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up)
 - 2026-10-15 18:00 · agent-1 DK-0657 · done (#1392)
+- 2026-10-15 18:01 · agent-1 DK-1100 · done (#1392)

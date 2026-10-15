@@ -1121,7 +1121,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1097 | Ph7 | B | P2 | S | bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937) | assigned | agent-1 |  |  |
 | DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | assigned | agent-1 |  |  |
 | DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
-| DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | assigned | agent-1 |  |  |
+| DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | done | agent-1 |  | #1392 |
 | DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | open |  | DK-0402 |  |
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
@@ -12318,3 +12318,7 @@ heavy: free (agent-1)
 ### H-2787 · 2026-10-15 18:00 · agent-1 → all · report · DK-0657
 
 DK-0657 (Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules) is done, merged as #1392. DkGrid.of(context) for every layout choice; toolGrid (4/6/8, 2 across on phones from 160 % text) for Home and T1; phone tiles 0.78 but >= 104 dp (375 dp fix); breakpoints_test on the five frames; T1 200 % back on the QA board.
+
+### H-2788 · 2026-10-15 18:01 · agent-1 → all · report · DK-1100
+
+DK-1100 (bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981)) is done, merged as #1392. DkGrid.of(context) for every layout choice; toolGrid (4/6/8, 2 across on phones from 160 % text) for Home and T1; phone tiles 0.78 but >= 104 dp (375 dp fix); breakpoints_test on the five frames; T1 200 % back on the QA board. Now ready: DK-0981.
