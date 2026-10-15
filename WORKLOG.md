@@ -2526,3 +2526,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 00:59 · agent-2 DK-0368 · done (#1381)
 - 2026-10-16 00:59 · agent-2 DK-0439 · assigned to agent-2
 - 2026-10-16 01:00 · agent-2 DK-1130 · added: PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up)
+- 2026-10-16 01:06 · agent-0 · unlocked pubspec
