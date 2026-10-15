@@ -26,7 +26,7 @@ class DkSwipeActions extends StatefulWidget {
     required this.onDelete,
   });
 
-  /// Null: Share shows dimmed and does nothing (until share_plus, DK-1077).
+  /// Null: Share shows dimmed and does nothing.
 
   final Widget Function(
     BuildContext context,

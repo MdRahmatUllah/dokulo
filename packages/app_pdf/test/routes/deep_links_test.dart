@@ -2,6 +2,10 @@ import 'package:app_pdf/components/dk_progress_sheet.dart';
 import 'package:app_pdf/providers/job_providers.dart';
 import 'package:app_pdf/routes/link_error.dart';
 import 'package:app_pdf/routes/routes.dart';
+import 'package:app_pdf/components/dk_scan_button.dart';
+import 'package:app_pdf/screens/s1_scanner/s1_screen.dart';
+import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/services.dart';
@@ -42,7 +46,11 @@ void main() {
     await openLink(tester, 'dokulo://open/tool/compress');
     expect(title(tester), 'Compress PDF');
     await openLink(tester, 'dokulo://open/scan?mode=idCard');
-    expect(title(tester), 'S1 idCard');
+    expect(
+      ProviderScope.containerOf(tester.element(find.byType(S1Screen)))
+          .read(scanModeStateProvider),
+      DkScanMode.idCard,
+    );
     await openLink(tester, 'dokulo://open/me/models');
     expect(title(tester), 'M2');
     await openLink(tester, 'dokulo://open/tool/teleport');

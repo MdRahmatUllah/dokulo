@@ -1,3 +1,4 @@
+import 'package:app_pdf/providers/share_providers.dart';
 import 'package:app_pdf/components/dk_file_card.dart';
 import 'package:app_pdf/patterns/dk_swipe_actions.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -19,10 +20,19 @@ void main() {
   Future<void> one(WidgetTester tester) =>
       tester.runAsync(() => f.file('Invoice.pdf'));
 
-  testWidgets('a short swipe opens Share and Delete; Share waits for '
-      'share_plus', (tester) async {
+  testWidgets('a short swipe opens Share and Delete; Share sends the file '
+      '(DK-1077)', (tester) async {
     await one(tester);
-    await pumpFiles(tester, f);
+    final shared = <List<String>>[];
+    await pumpFiles(
+      tester,
+      f,
+      overrides: [
+        fileSharerProvider.overrideWithValue(
+          (paths) async => shared.add(paths),
+        ),
+      ],
+    );
     expect(find.byType(DkSwipeActions), findsOneWidget);
     await tester.drag(find.text('Invoice.pdf'), const Offset(-140, 0));
     await settle(tester);
@@ -31,7 +41,8 @@ void main() {
     final share = tester.widget<InkWell>(
       find.ancestor(of: find.text('Share'), matching: find.byType(InkWell)),
     );
-    expect(share.onTap, isNull);
+    share.onTap!();
+    expect(shared.single.single, endsWith('Invoice.pdf'));
   });
 
   testWidgets('a full swipe deletes, with Undo', (tester) async {
