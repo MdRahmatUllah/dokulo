@@ -993,7 +993,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0969 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-landscape (options) | assigned | agent-0 | DK-0388 |  |
 | DK-0970 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-landscape (result) | assigned | agent-0 | DK-0388 |  |
 | DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | assigned | agent-0 | DK-0388 |  |
-| DK-0972 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-portrait (result) | assigned | agent-3 | DK-0232 |  |
+| DK-0972 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-portrait (result) | done | agent-3 | DK-0232 | #1348 |
 | DK-0973 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-landscape (tablet-compare-landscape) | open |  | DK-0533 DK-0653 |  |
 | DK-0974 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-portrait (tablet-compare-portrait) | open |  | DK-0653 |  |
 | DK-0975 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-landscape (tablet-paywall-landscape) | open |  | DK-0580 DK-0654 |  |
@@ -11266,3 +11266,7 @@ Please take DK-0486 (Add watermark: implement the watermark ToolJob (engine)).
 ### H-2529 · 2026-10-15 12:08 · agent-3 → all · report · DK-0942
 
 DK-0942 (Visual QA: me-security (M3 Security)) is done, merged as #1348. matches me-security (light, dark, DE copy); 1 approved (Android left-aligned title). Board test/qa/me_qa_test.dart, docs/qa/me.md.
+
+### H-2530 · 2026-10-15 12:08 · agent-3 → all · report · DK-0972
+
+DK-0972 (Visual QA: tablet-compress-result-portrait (result)) is done, merged as #1348. matches tablet-compress-result-portrait (640 column, card, name, save-to, Open/split Save); 3 approved (spec §20.4 over frame). Board tool_shell_test tablet_result_portrait_*, docs/qa/tablet.md.
