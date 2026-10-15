@@ -2461,3 +2461,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 18:04 · agent-3 DK-0971 · done (#1394)
 - 2026-10-15 18:05 · agent-3 DK-0981 · done (#1392)
 - 2026-10-15 18:05 · agent-3 DK-0944 · claimed: Visual QA: me-language (M3 Language)
+- 2026-10-15 18:13 · agent-3 DK-1124 · added: bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831)

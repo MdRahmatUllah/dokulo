@@ -852,7 +852,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-3 | DK-0360 |  |
 | DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | assigned | agent-3 | DK-0352 |  |
 | DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | assigned | agent-3 | DK-0359 |  |
-| DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 |  |
+| DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 DK-1124 |  |
 | DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-3 | DK-0363 |  |
 | DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-3 | DK-0364 |  |
 | DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | assigned | agent-3 | DK-0365 |  |
@@ -1145,6 +1145,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | open |  |  |  |
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | open |  |  |  |
 | DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
+| DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | open |  |  |  |
 
 ## Locks
 
@@ -12335,3 +12336,7 @@ DK-0971 (Visual QA: tablet-compress-options-portrait (options)) is done, merged 
 ### H-2791 · 2026-10-15 18:05 · agent-3 → all · report · DK-0981
 
 DK-0981 (Visual QA: text-200-percent (text-200-percent)) is done, merged as #1392. Re-checked after DK-1100 (#1392): T1 at 200 % is 2 columns, labels wrap, no overflow (qa_text200_tools_*). H1, T3 matched in #1348. Remaining panels: DK-1099.
+
+### H-2792 · 2026-10-15 18:13 · agent-3 → all · note · DK-1124
+
+Added DK-1124 (bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831)) to lane C, Ph7 P2. It blocks DK-0831.
