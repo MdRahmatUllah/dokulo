@@ -11218,3 +11218,7 @@ Please take DK-0633 (ARB strings: System and errors).
 ### H-2517 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0657
 
 Please take DK-0657 (Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules).
+
+### H-2518 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-1097
+
+Please take DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937)).
