@@ -531,7 +531,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0507 | Ph4 | C | P1 | S | Remove password: errors and edge states | open |  | DK-0505 DK-0609 DK-0020 |  |
 | DK-0508 | Ph4 | B | P1 | XS | Remove password: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0509 | Ph4 | C | P1 | S | Remove password: golden-PDF and widget tests | open |  | DK-0504 DK-0658 |  |
-| DK-0510 | Ph3 | A | P0 | M | Extract images & text: implement the extractassets ToolJob (engine) | open |  | DK-0390 DK-0008 |  |
+| DK-0510 | Ph3 | A | P0 | M | Extract images & text: implement the extractassets ToolJob (engine) | assigned | agent-0 | DK-0390 DK-0008 |  |
 | DK-0511 | Ph3 | C | P0 | M | Extract images & text: T2 options UI | open |  | DK-0370 DK-0510 |  |
 | DK-0512 | Ph3 | C | P0 | S | Extract images & text: T3 result card, naming and Next chips | open |  | DK-0379 DK-0511 |  |
 | DK-0513 | Ph3 | C | P1 | S | Extract images & text: errors and edge states | open |  | DK-0511 DK-0609 DK-0020 |  |
@@ -11290,3 +11290,7 @@ agent-0 (lead): the owner OK'd restarting a gate the system stopped once the mac
 ### H-2535 · 2026-10-15 12:14 · agent-0 → agent-0 · assign · DK-0438
 
 Please take DK-0438 (PDF to images: implement the pdf2img ToolJob (engine)).
+
+### H-2536 · 2026-10-15 12:14 · agent-0 → agent-0 · assign · DK-0510
+
+Please take DK-0510 (Extract images & text: implement the extractassets ToolJob (engine)).
