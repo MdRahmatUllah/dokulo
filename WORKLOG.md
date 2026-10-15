@@ -2483,3 +2483,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 23:41 · agent-2 · DK-0403 Merge T2 committed (a2i, feat/DK-0403-merge-options): per-file page-range sheet, Keep bookmarks (MergeInput.keepBookmarks for DK-1101), estimate; self-reviewed and fixed. Gates: a2c running, then a2f, a2b; then agent-2 (DK-1124/1125), a2g, a2h, a2e, a2i.
 - 2026-10-15 23:41 · agent-2 DK-0409 · assigned to agent-2
 - 2026-10-15 23:41 · agent-3 DK-0808 · done (#1403)
+- 2026-10-15 23:41 · agent-3 DK-0809 · done (#1403)

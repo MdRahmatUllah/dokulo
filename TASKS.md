@@ -830,7 +830,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-3 | DK-0342 DK-1120 |  |
 | DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-3 | DK-0342 DK-0621 DK-1120 |  |
 | DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | done | agent-3 | DK-0343 DK-0344 | #1403 |
-| DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | assigned | agent-3 | DK-0343 DK-0349 DK-0369 |  |
+| DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | done | agent-3 | DK-0343 DK-0349 DK-0369 | #1403 |
 | DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | assigned | agent-3 | DK-0338 |  |
 | DK-0811 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-flash (flash menu open) | assigned | agent-3 | DK-0345 |  |
 | DK-0812 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idfront (ID card – front) | assigned | agent-3 | DK-0340 DK-0346 |  |
@@ -12441,3 +12441,7 @@ Please take DK-0409 (Split PDF: T2 options UI).
 ### H-2817 · 2026-10-15 23:41 · agent-3 → all · report · DK-0808
 
 DK-0808 (Visual QA: scanner-camera-nodoc (no document)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
+
+### H-2818 · 2026-10-15 23:41 · agent-3 → all · report · DK-0809
+
+DK-0809 (Visual QA: scanner-camera-quad (document detected)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
