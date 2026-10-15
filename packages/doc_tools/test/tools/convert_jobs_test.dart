@@ -49,7 +49,7 @@ void main() {
     );
     final job = ToolRegistry.app()['pdfa'];
     expect(job.encode(job.decode(job.encode(input))), job.encode(input));
-    expect(job.encode(input).toString(), isNot(contains('dokulo')));
+    expect(job.encode(input).keys, isNot(contains('passwords')));
 
     final out = await (await queue.start('pdfa', input)).result as ManyFiles;
     expect(out.paths, [
