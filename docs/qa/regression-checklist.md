@@ -16,7 +16,11 @@ accepts for that build; the sign-off goes in the log at the bottom.
 3. The golden PDF corpus, full (DK-0658; the gate runs the quick one):
    `DK_CORPUS=full DK_CORPUS_REPORT=<file.md> flutter test test/corpus` in
    `packages/doc_tools` (about 5 minutes). Every tool's row must read
-   "0 failed"; paste the table into the log below.
+   "0 failed"; paste the table into the log below. The OCR rates: run
+   `flutter test test/ocr/ocr_engine_test.dart --plain-name PP-OCRv5` in
+   `packages/doc_vision` (needs `pip install onnxruntime numpy`; skipped,
+   not failed, without it) and update the table in
+   `packages/doc_vision/test/fixtures/ocr/README.md` (DK-0661).
 4. Hold `team.py device`, uninstall the old build, install, and confirm it with
    `adb -s emulator-555x shell dumpsys package app.dokulo | grep lastUpdateTime`.
 5. Push the sample documents of `test/fixtures/` (DK-0023, all fictional;
