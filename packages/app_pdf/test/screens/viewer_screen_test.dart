@@ -284,6 +284,54 @@ void main() {
     expect(tester.widget<DkPdfCanvas>(find.byType(DkPdfCanvas)).night, isTrue);
   });
 
+  testWidgets('night mode keeps images as they are (DK-0304): the night '
+      'filter again over each image on a scanned page', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(tester, db, fixture('scanned-letters-bundle.pdf'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appDatabaseProvider.overrideWithValue(db),
+          prefsProvider.overrideWith(
+            () => Prefs.memory({viewerNightKey: true}),
+          ),
+        ],
+        child: app(ViewerScreen(fileId: id)),
+      ),
+    );
+    await settle(tester);
+    // The night filter as a backdrop (the chrome's bars blur instead).
+    final kept = find.byWidgetPredicate(
+      (w) => w is BackdropFilter && w.filter is ColorFilter,
+    );
+    expect(kept, findsWidgets);
+    // Each covers its image, inside its page (not the whole canvas).
+    final screen = tester.getSize(find.byType(DkPdfCanvas));
+    final box = tester.getRect(kept.first);
+    expect(box.width, greaterThan(50));
+    expect(box.width, lessThanOrEqualTo(screen.width));
+  });
+
+  testWidgets('night mode off: no image overlays', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(tester, db, fixture('scanned-letters-bundle.pdf'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id)),
+      ),
+    );
+    await settle(tester);
+    expect(
+      find.byWidgetPredicate(
+        (w) => w is BackdropFilter && w.filter is ColorFilter,
+      ),
+      findsNothing,
+    );
+  });
+
   for (final (name, expected) in [
     ('form-acroform.pdf', true),
     ('Invoice INV-2026-014.pdf', false),
