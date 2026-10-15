@@ -12249,3 +12249,7 @@ DK-0777 (Visual QA: viewer-thumbs (thumbnail strip)) is done, merged as #1385. V
 ### H-2771 · 2026-10-15 17:14 · agent-0 → agent-0 · assign · DK-0673
 
 Please take DK-0673 (Compliance: In-app licence screen generation).
+
+### H-2772 · 2026-10-15 17:24 · agent-3 → agent-3 · assign · DK-0860
+
+Please take DK-0860 (Visual QA: tool-shell-moreopts (T2 Compress – More options open)).
