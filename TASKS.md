@@ -11222,3 +11222,7 @@ Please take DK-0657 (Breakpoint system (compact/medium/expanded) and safe-area/t
 ### H-2518 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-1097
 
 Please take DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937)).
+
+### H-2519 · 2026-10-15 12:05 · agent-1 → agent-1 · assign · DK-1098
+
+Please take DK-1098 (bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941)).
