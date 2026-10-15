@@ -818,7 +818,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-3 | DK-0328 DK-0519 |  |
 | DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | assigned | agent-3 | DK-0327 |  |
 | DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | assigned | agent-3 | DK-0327 |  |
-| DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-2 | DK-0327 |  |
+| DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-3 | DK-0327 |  |
 | DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | open |  | DK-0329 DK-0516 |  |
 | DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | done | agent-0 | DK-0331 | #1270 |
 | DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | done | agent-0 | DK-0329 | #1270 |
@@ -12005,3 +12005,7 @@ Please take DK-0795 (Visual QA: signature-pad-draw (Draw)).
 ### H-2710 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0796
 
 Please take DK-0796 (Visual QA: signature-pad-type (Type)).
+
+### H-2711 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0797
+
+Please take DK-0797 (Visual QA: signature-pad-image (Image)).
