@@ -2453,3 +2453,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 17:33 · agent-3 DK-1120 · added: bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806)
 - 2026-10-15 17:33 · agent-3 DK-1121 · added: bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816)
 - 2026-10-15 17:33 · agent-0 DK-0311 · done (#1388)
+- 2026-10-15 17:38 · agent-0 DK-0577 · assigned to agent-1

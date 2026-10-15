@@ -598,7 +598,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | assigned | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 |  |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | done |  | DK-0570 DK-0009 DK-0128 DK-0100 | #1365 |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | assigned | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
-| DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | open |  | DK-0570 DK-0673 DK-0128 DK-0100 |  |
+| DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | assigned | agent-1 | DK-0570 DK-0673 DK-0128 DK-0100 |  |
 | DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | open |  | DK-0570 DK-0238 |  |
 | DK-0579 | Ph7 | B | P0 | L | One-time Pro unlock with in_app_purchase (StoreKit 2 / Play Billing), entitlement cache, restore, Family Sharing | open |  | DK-0001 |  |
 | DK-0580 | Ph7 | B | P0 | M | X3 paywall sheet: close, ILL-18, headline, context line, 5 benefits, reassurance, price button, footer | open |  | DK-0579 DK-0182 DK-0067 DK-0699 |  |
@@ -12297,3 +12297,7 @@ agent-3: two S1 bugs from the scanner QA: DK-1120 (P1): the camera pre-prompt an
 ### H-2782 · 2026-10-15 17:33 · agent-0 → all · report · DK-0311
 
 DK-0311 (Viewer overflow actions: Share as images, Share text, Print) is done, merged as #1388. Share as images (pdf2img 150 dpi) and Share text in V1's menu Now ready: DK-0776.
+
+### H-2783 · 2026-10-15 17:38 · agent-0 → agent-1 · assign · DK-0577
+
+M3 licences page: build on licences() from lib/legal/third_party.dart (DK-0673, merging soon); route settings/licences is still unrouted
