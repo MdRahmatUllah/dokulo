@@ -2248,3 +2248,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:29 · agent-1 · agent-1: 10 branches ready; gate queue waiting for a quiet machine (agent-2's --apk gate). Closed DK-0659/0660/0664 as already delivered (#1020, #1115, #603+#1348). Added DK-1103 (privacy policy link, blocked on DK-1032).
 - 2026-10-15 12:33 · agent-2 DK-0343 · done (#1219)
 - 2026-10-15 12:33 · agent-2 DK-0344 · done (#1219)
+- 2026-10-15 12:33 · agent-2 DK-0345 · done (#1219)
