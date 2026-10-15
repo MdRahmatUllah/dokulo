@@ -2281,3 +2281,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 13:35 · agent-3 DK-0637 · claimed: Accessibility: screen-reader labels
 - 2026-10-15 13:40 · agent-3 DK-1105 · added: bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637)
 - 2026-10-15 13:41 · agent-3 DK-1106 · added: Device check: TalkBack and VoiceOver pass over H1, T1, T2, T3, S1, V1, F1, M1 (DK-0637 follow-up)
+- 2026-10-15 13:43 · agent-3 · heavy: mine (gate for feat/DK-0637-screen-reader-sweep)
