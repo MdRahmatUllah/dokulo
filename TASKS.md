@@ -319,7 +319,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | done | agent-0 | DK-0294 DK-0188 | #1335 |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | done | agent-0 | DK-0293 DK-0294 DK-0150 | #1341 |
 | DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | done | agent-0 | DK-0293 DK-0294 | #1341 |
-| DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | in-progress | agent-0 | DK-0293 DK-0294 |  |
 | DK-0299 | Ph5 | C | P0 | S | V1 Viewer: implement the "Search on scan without text" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0300 | Ph4 | C | P0 | S | V1 Viewer: implement the "Text selected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0202 |  |
 | DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | done | agent-0 | DK-0293 DK-0294 DK-0122 | #1338 |

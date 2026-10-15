@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-15 11:24
+last-seen: 2026-10-15 11:25
 last-read: 2455
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0298 V1 Viewer: implement the "Search active" state — claimed 2026-10-15 11:25.
 
 ## Next
 
