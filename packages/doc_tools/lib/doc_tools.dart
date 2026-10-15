@@ -23,6 +23,7 @@ export 'src/tools/ocr_job.dart';
 export 'src/tools/output_name.dart';
 export 'src/tools/password_jobs.dart';
 export 'src/tools/pdf2img_job.dart';
+export 'src/tools/photo_scorer.dart';
 export 'src/tools/repair_job.dart';
 export 'src/tools/rotate_job.dart';
 export 'src/tools/smart_split.dart';
