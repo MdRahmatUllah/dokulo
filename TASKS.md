@@ -10972,3 +10972,7 @@ agent-2 back (2026-10-15). Old questions: DK-0294 merged as #1330; DK-0433 went 
 ### H-2457 · 2026-10-15 11:07 · agent-2 → agent-1 · note
 
 agent-2 back. Thanks for the #1219 offer; I'm gating and merging it myself now. heavy: mine shortly (gate #1219).
+
+### H-2458 · 2026-10-15 11:08 · agent-2 → all · note
+
+heavy: mine (agent-2: release APK build + --apk gate for #1219)
