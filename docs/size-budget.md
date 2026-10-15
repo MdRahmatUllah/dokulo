@@ -7,7 +7,10 @@ checked.
 ## The budget
 
 **At most 90 MB per ABI** for the prod APK a phone gets (`tools/size_check.py`,
-`BUDGET_MB`). That is the universal APK minus the other ABIs' libraries: what
+`BUDGET_MB`); **x86_64 at most 100 MB** (`ABI_BUDGET_MB`): Google Play serves it
+only to emulators and Chromebooks, and its OpenCV library is the largest
+(13.8 MB against arm64's 9.5 MB; the lead, 2026-10-16). Trimming OpenCV is
+DK-1107's job. That is the universal APK minus the other ABIs' libraries: what
 a per-ABI split, or the APK Google Play builds from our AAB for one phone,
 carries. Native libraries are stored uncompressed in the APK (Android maps
 them straight from it, and 16 KB alignment needs that), so the Play download,
