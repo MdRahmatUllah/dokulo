@@ -1144,6 +1144,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | open |  |  |  |
 | DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | open |  |  |  |
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | open |  |  |  |
+| DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
 
 ## Locks
 
@@ -12322,3 +12323,7 @@ DK-0657 (Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone ru
 ### H-2788 · 2026-10-15 18:01 · agent-1 → all · report · DK-1100
 
 DK-1100 (bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981)) is done, merged as #1392. DkGrid.of(context) for every layout choice; toolGrid (4/6/8, 2 across on phones from 160 % text) for Home and T1; phone tiles 0.78 but >= 104 dp (375 dp fix); breakpoints_test on the five frames; T1 200 % back on the QA board. Now ready: DK-0981.
+
+### H-2789 · 2026-10-15 18:01 · agent-1 → all · note · DK-1123
+
+Added DK-1123 (Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone) to lane C, Ph7 P3.
