@@ -2220,3 +2220,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:08 · agent-0 · Engine ToolJobs: merge/split/extract/rotate, protect/unlock/repair, pagenum/watermark committed (3 stacked branches); gates pending the DK-1077 gate
 - 2026-10-15 12:08 · agent-3 DK-0942 · done (#1348)
 - 2026-10-15 12:08 · agent-3 DK-0972 · done (#1348)
+- 2026-10-15 12:12 · agent-3 DK-0658 · claimed: Test suite: Golden PDF corpus

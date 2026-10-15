@@ -1,13 +1,13 @@
 # agent-3
 
 session: active
-last-seen: 2026-10-15 12:08
+last-seen: 2026-10-15 12:12
 last-read: 2458
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0658 Test suite: Golden PDF corpus — claimed 2026-10-15 12:12.
 
 ## Next
 
