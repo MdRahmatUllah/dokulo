@@ -664,7 +664,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | assigned | agent-1 | DK-0024 DK-0036 |  |
 | DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | assigned | agent-1 | DK-0024 |  |
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
-| DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | open |  | DK-0024 DK-0039 |  |
+| DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | assigned | agent-1 | DK-0024 DK-0039 |  |
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | assigned | agent-1 | DK-0024 DK-0343 |  |
 | DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
 | DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | open |  | DK-0024 |  |
@@ -11342,3 +11342,7 @@ Please take DK-0640 (Accessibility: text size 200 %).
 ### H-2548 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0641
 
 Please take DK-0641 (Accessibility: touch targets).
+
+### H-2549 · 2026-10-15 12:25 · agent-1 → agent-1 · assign · DK-0643
+
+Please take DK-0643 (Accessibility: reduce motion).
