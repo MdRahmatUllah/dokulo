@@ -13,18 +13,23 @@ accepts for that build; the sign-off goes in the log at the bottom.
    Note the short sha.
 2. `python tools/check.py --apk <apk>`: the gate, plus the native-library and
    size checks on that APK.
-3. Hold `team.py device`, uninstall the old build, install, and confirm it with
+3. The golden PDF corpus, full (DK-0658; the gate runs the quick one):
+   `DK_CORPUS=full DK_CORPUS_REPORT=<file.md> flutter test test/corpus` in
+   `packages/doc_tools` (about 5 minutes). Every tool's row must read
+   "0 failed"; paste the table into the log below.
+4. Hold `team.py device`, uninstall the old build, install, and confirm it with
    `adb -s emulator-555x shell dumpsys package app.dokulo | grep lastUpdateTime`.
-4. Push the sample documents of `test/fixtures/` (DK-0023, all fictional;
+5. Push the sample documents of `test/fixtures/` (DK-0023, all fictional;
    see its README) to the device:
-   `MSYS_NO_PATHCONV=1 adb -s emulator-555x push test/fixtures/. /sdcard/Download/`.
+   `MSYS_NO_PATHCONV=1 adb -s emulator-555x push test/fixtures/. /sdcard/Download/` (the
+   `corpus/` folder too).
    They cover the passes below: a text contract (Mietvertrag), an invoice, a
    CV, the scanned letters bundle, an AcroForm and an XFA form, the
    AES-256-locked invoice (password `dokulo`), the damaged xref, the
    300-page file. Compare PDFs needs two versions of one file: run Add page
    numbers on the Mietvertrag first and compare the two. Photos for Image to
    PDF and the photo finder: take them with the emulator's virtual camera.
-5. Leave the emulator as found afterwards: language, theme, font scale,
+6. Leave the emulator as found afterwards: language, theme, font scale,
    animations, airplane mode.
 
 ## The pass
