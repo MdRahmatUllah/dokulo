@@ -847,7 +847,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-3 | DK-0339 DK-0354 |  |
 | DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | assigned | agent-3 | DK-0355 |  |
 | DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | assigned | agent-3 | DK-0357 |  |
-| DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-2 | DK-0358 |  |
+| DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-3 | DK-0358 |  |
 | DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-2 | DK-0359 |  |
 | DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-2 | DK-0360 |  |
 | DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | assigned | agent-2 | DK-0352 |  |
@@ -12045,3 +12045,7 @@ Please take DK-0824 (Visual QA: scanner-review-applyall (S2 – apply-to-all chi
 ### H-2720 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0825
 
 Please take DK-0825 (Visual QA: scanner-review-deleted (S2 – page deleted toast)).
+
+### H-2721 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0826
+
+Please take DK-0826 (Visual QA: scanner-review-discard (S2 – discard dialog)).
