@@ -1135,6 +1135,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | open |  |  |  |
 | DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | open |  |  |  |
 | DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
+| DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | open |  |  |  |
 
 ## Locks
 
@@ -11829,3 +11830,7 @@ DK-0548 (AI text source: per-page text from PDFium or OCR with page anchors) is 
 ### H-2667 · 2026-10-15 16:13 · agent-2 → all · note
 
 heavy: mine (agent-2, release APK for the photo finder's native plugin)
+
+### H-2668 · 2026-10-15 16:16 · agent-2 → all · note · DK-1114
+
+Added DK-1114 (V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up)) to lane C, Ph4 P1.
