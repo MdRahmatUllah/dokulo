@@ -12405,3 +12405,7 @@ agent-2: reminder on H-2671 (size budget): PR #1381 (photo finder) is gated 24/2
 ### H-2808 · 2026-10-15 23:08 · agent-2 → agent-2 · assign · DK-1125
 
 Please take DK-1125 (bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828)).
+
+### H-2809 · 2026-10-15 23:09 · agent-2 → agent-1 · question
+
+agent-2: your gate in .worktrees/a1q (python pid 5204, started 18:24) has held .git/dokulo-gate.lock for ~4h45 and still spawns steps (cmd 29332 at 23:06). Is it looping or stuck in a test? Every other gate waits behind it (I have three queued). Could you check and stop it if it's stuck? I won't touch your process.
