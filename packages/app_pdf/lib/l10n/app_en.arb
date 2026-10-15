@@ -2888,6 +2888,10 @@
   "@scan_saving": {"description": "S2 while the scan saves (DK-0359)."},
   "scan_save_failed": "Couldn't save the scan. Your pages are still here.",
   "@scan_save_failed": {"description": "S2 when saving the scan failed (DK-0359)."},
+  "options_eraser_mode": "Mode",
+  "@options_eraser_mode": {"description": "V2 eraser options (DK-0320; design edit-eraser)."},
+  "options_eraser_help": "Tap a mark to delete it. Stroke mode erases ink where you drag.",
+  "@options_eraser_help": {"description": "V2 eraser options (DK-0320; design edit-eraser)."},
   "settings_language_caption": "Changes immediately. No restart needed.",
   "@settings_language_caption": {
     "description": "M3 Language: under the choices (DK-0575)."
