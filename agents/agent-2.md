@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1124 bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) — claimed 2026-10-15 22:45.
 
 ## Next
 

@@ -1145,7 +1145,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | open |  |  |  |
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | open |  |  |  |
 | DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
-| DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | open |  |  |  |
+| DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | in-progress | agent-2 |  |  |
 | DK-1125 | Ph7 | C | P3 | S | bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828) | open |  |  |  |
 
 ## Locks
