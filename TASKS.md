@@ -838,7 +838,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | assigned | agent-2 | DK-0341 DK-0347 |  |
 | DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | assigned | agent-2 | DK-0348 |  |
 | DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 |  |
-| DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | assigned | agent-2 | DK-0344 |  |
+| DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | assigned | agent-3 | DK-0344 |  |
 | DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | assigned | agent-2 | DK-0344 |  |
 | DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | assigned | agent-2 | DK-0344 |  |
 | DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | assigned | agent-2 | DK-0343 |  |
@@ -11896,3 +11896,7 @@ Please take DK-0813 (Visual QA: scanner-camera-idback (ID card – turn over)).
 ### H-2683 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0816
 
 Please take DK-0816 (Visual QA: scanner-camera-retake (retake page 3)).
+
+### H-2684 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0817
+
+Please take DK-0817 (Visual QA: scanner-camera-far (hint – move closer)).
