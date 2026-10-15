@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-16 00:32
+last-seen: 2026-10-16 00:36
 last-read: 2847
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-1109 bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) — claimed 2026-10-16 00:36.
 
 ## Next
 
