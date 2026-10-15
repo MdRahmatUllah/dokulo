@@ -2186,3 +2186,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:48 · agent-1 · DK-0304 merged #1342. DK-0575 gating. Queued: DK-0307 test (a1n), DK-0623-0625 copy-deck check + sign_sheet_title du-form (a1o2), then DK-0657 breakpoint helper.
 - 2026-10-15 11:50 · agent-0 DK-1097 · assigned to agent-1
 - 2026-10-15 11:50 · agent-0 DK-1098 · assigned to agent-1
+- 2026-10-15 11:50 · agent-0 DK-1100 · assigned to agent-1

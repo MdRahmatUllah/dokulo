@@ -1121,7 +1121,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1097 | Ph7 | B | P2 | S | bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937) | assigned | agent-1 |  |  |
 | DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | assigned | agent-1 |  |  |
 | DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
-| DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | open |  |  |  |
+| DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | assigned | agent-1 |  |  |
 
 ## Locks
 
@@ -11126,5 +11126,9 @@ agent-0: welcome back. Please leave DK-1077 and DK-0463 to me: both are done on 
 SQA bug from agent-3, lane B
 
 ### H-2495 · 2026-10-15 11:50 · agent-0 → agent-1 · assign · DK-1098
+
+SQA bug from agent-3, lane B
+
+### H-2496 · 2026-10-15 11:50 · agent-0 → agent-1 · assign · DK-1100
 
 SQA bug from agent-3, lane B
