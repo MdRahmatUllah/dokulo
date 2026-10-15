@@ -33,8 +33,7 @@ class ToolLayout extends StatelessWidget {
   static const columnWidth = 480.0, maxWidth = 640.0;
 
   static bool _beside(BuildContext context, bool preview) =>
-      preview &&
-      DkGrid.forWidth(MediaQuery.sizeOf(context).width) == DkGrid.largeTablet;
+      preview && DkGrid.of(context) == DkGrid.largeTablet;
 
   /// The Scaffold's bottom bar: [actions], 640 wide on a small tablet; null
   /// on a large one, where they sit in the column.
@@ -44,7 +43,7 @@ class ToolLayout extends StatelessWidget {
     required bool preview,
   }) {
     if (_beside(context, preview)) return null;
-    if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) == DkGrid.phone) {
+    if (DkGrid.of(context) == DkGrid.phone) {
       return actions;
     }
     return Center(
@@ -101,7 +100,7 @@ class ToolLayout extends StatelessWidget {
         ],
       );
     }
-    if (DkGrid.forWidth(MediaQuery.sizeOf(context).width) != DkGrid.phone) {
+    if (DkGrid.of(context) != DkGrid.phone) {
       return Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: maxWidth),

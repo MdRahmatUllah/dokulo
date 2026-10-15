@@ -135,7 +135,7 @@ void main() {
       ]),
     );
     semantics.dispose();
-  }, skip: true); // DK-1105: the pages come before the bar.
+  });
 
   testWidgets('V1 says so when the file is gone, instead of spinning', (
     tester,

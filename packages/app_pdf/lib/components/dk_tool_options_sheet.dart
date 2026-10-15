@@ -9,8 +9,8 @@ import 'dk_segmented.dart';
 import 'dk_slider.dart';
 import 'dk_stepper.dart';
 
-/// The markup tools that have options.
-enum DkMarkupKind { pen, highlighter, text, shape, eraser }
+/// The markup tools that have options. Note: its colour only.
+enum DkMarkupKind { pen, highlighter, text, shape, eraser, note }
 
 /// What a shape tool draws.
 enum DkShapeKind { rectangle, ellipse, line, arrow }
@@ -176,7 +176,12 @@ class DkToolOptionsSheet extends StatelessWidget {
             selected: o.shape,
             onChanged: (v) => onChanged(o.copyWith(shape: v)),
           ),
-        if (kind == DkMarkupKind.eraser)
+        if (kind == DkMarkupKind.eraser) ...[
+          // Design edit-eraser: "Mode", the two segments, what each does.
+          Text(
+            l.options_eraser_mode,
+            style: t.text.labelM.copyWith(color: t.color.textSecondary),
+          ),
           DkSegmented<DkEraserMode>(
             segments: [
               (DkEraserMode.object, l.options_eraser_object),
@@ -185,6 +190,11 @@ class DkToolOptionsSheet extends StatelessWidget {
             selected: o.eraser,
             onChanged: (v) => onChanged(o.copyWith(eraser: v)),
           ),
+          Text(
+            l.options_eraser_help,
+            style: t.text.caption.copyWith(color: t.color.textSecondary),
+          ),
+        ],
       ],
     );
   }

@@ -78,15 +78,16 @@ abstract final class PdfRedactor {
   }
 
   /// The boxes of characters [start]..[end], one per line (a new line where
-  /// a character lies wholly below the box so far: a full stop or a hyphen
-  /// sits low but on the same line).
+  /// a character lies wholly below the box so far, or wholly above it: the
+  /// next column; a full stop or a hyphen sits low but on the same line).
   static List<Box> lineBoxes(List<Box> chars, int start, int end) {
     final out = <Box>[];
     Box? current;
     for (var i = start; i < end && i < chars.length; i++) {
       final c = chars[i];
       if (c.right <= c.left || c.top <= c.bottom) continue; // a generated space
-      if (current != null && c.top < current.bottom) {
+      if (current != null &&
+          (c.top < current.bottom || c.bottom > current.top)) {
         out.add(current);
         current = null;
       }
