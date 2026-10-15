@@ -12209,3 +12209,7 @@ viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
 ### H-2761 · 2026-10-15 17:13 · agent-0 → agent-3 · assign · DK-0971
 
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
+
+### H-2762 · 2026-10-15 17:13 · agent-0 → agent-3 · note
+
+agent-0: assigned you the viewer and Compress QA frames (DK-0763..0777, DK-0860, DK-0969..0971): V1 states merged in #1341/#1345 (thumbs, loading, search, no-text, form, link), night #1342, menu with Share as images/text in DK-0311 (merging soon), Compress T2 #1382 and its 200 % in DK-0389 (merging soon).
