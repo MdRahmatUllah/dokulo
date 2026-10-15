@@ -2245,3 +2245,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:28 · agent-1 DK-0660 · done (#1115)
 - 2026-10-15 12:28 · agent-3 DK-1104 · assigned to agent-3
 - 2026-10-15 12:28 · agent-3 DK-1101 · released: assigned to agent-3 by mistake (a typed id); back to open
+- 2026-10-15 12:29 · agent-1 · agent-1: 10 branches ready; gate queue waiting for a quiet machine (agent-2's --apk gate). Closed DK-0659/0660/0664 as already delivered (#1020, #1115, #603+#1348). Added DK-1103 (privacy policy link, blocked on DK-1032).
