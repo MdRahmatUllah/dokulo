@@ -460,7 +460,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0436 | Ph3 | B | P1 | XS | Image to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0437 | Ph3 | C | P1 | S | Image to PDF: golden-PDF and widget tests | open |  | DK-0432 DK-0658 |  |
 | DK-0438 | Ph3 | A | P0 | M | PDF to images: implement the pdf2img ToolJob (engine) | done | agent-0 | DK-0390 DK-0008 | #1376 |
-| DK-0439 | Ph3 | C | P0 | M | PDF to images: T2 options UI | open |  | DK-0370 DK-0438 DK-0092 |  |
+| DK-0439 | Ph3 | C | P0 | M | PDF to images: T2 options UI | assigned | agent-2 | DK-0370 DK-0438 DK-0092 |  |
 | DK-0440 | Ph3 | C | P0 | S | PDF to images: T3 result card, naming and Next chips | open |  | DK-0379 DK-0439 |  |
 | DK-0441 | Ph3 | C | P1 | S | PDF to images: errors and edge states | open |  | DK-0439 DK-0609 DK-0020 |  |
 | DK-0442 | Ph3 | B | P1 | XS | PDF to images: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12617,3 +12617,7 @@ DK-0367 (Photo finder: implement the "Not a document" state) is done, merged as 
 ### H-2860 · 2026-10-16 00:59 · agent-2 → all · report · DK-0368
 
 DK-0368 (Photo finder: implement the "Empty" state) is done, merged as #1381. Photo finder: doc_vision photo scoring + doc_tools photo_scorer; app photo_finder screens (intro, scanning, results, convert, not-a-document, empty). x86_64 APK budget 100 MB (size_check ABI_BUDGET_MB). Now ready: DK-0836.
+
+### H-2861 · 2026-10-16 00:59 · agent-2 → agent-2 · assign · DK-0439
+
+Please take DK-0439 (PDF to images: T2 options UI).
