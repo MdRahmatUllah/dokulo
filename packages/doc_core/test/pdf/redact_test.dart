@@ -23,6 +23,22 @@ List<String> kinds(String text) => [
 ];
 
 void main() {
+  test('lineBoxes: one box per line, and a new one at the next column', () {
+    Box c(double l, double b) =>
+        (left: l, top: b + 10, right: l + 6, bottom: b);
+    final boxes = PdfRedactor.lineBoxes(
+      [
+        c(50, 700), c(56, 700), // column 1, line 1
+        c(50, 686), c(56, 686), // column 1, line 2
+        c(300, 760), c(306, 760), // column 2, line 1: above, to the right
+      ],
+      0,
+      6,
+    );
+    expect(boxes, hasLength(3));
+    expect(boxes.last, (left: 300.0, top: 770.0, right: 312.0, bottom: 760.0));
+  });
+
   group('detectors', () {
     test(
       'IBANs: checked by mod 97, the fictional one found but not verified',

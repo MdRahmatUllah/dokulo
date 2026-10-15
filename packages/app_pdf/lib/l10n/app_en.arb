@@ -2896,6 +2896,8 @@
   "@settings_language_caption": {
     "description": "M3 Language: under the choices (DK-0575)."
   },
+  "viewer_markup_failed": "Couldn't add that mark. The file is as it was.",
+  "@viewer_markup_failed": {"description": "V1 when a Highlight/Underline/Strike could not be written (DK-0321)."},
   "viewer_menu_share_images": "Share as images",
   "@viewer_menu_share_images": {"description": "V1 overflow menu: every page as a JPG to the share sheet (UI spec §17.1; DK-0311)."},
   "viewer_menu_share_text": "Share text",
