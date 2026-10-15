@@ -808,7 +808,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0784 | Ph7 | Q | P2 | XS | Visual QA: edit-note (note sheet) | assigned | agent-3 | DK-0319 |  |
 | DK-0785 | Ph7 | Q | P2 | XS | Visual QA: edit-annsel (annotation selected) | assigned | agent-3 | DK-0322 |  |
 | DK-0786 | Ph7 | Q | P2 | XS | Visual QA: edit-form (form filling + accessory bar) | assigned | agent-3 | DK-0227 DK-0324 |  |
-| DK-0787 | Ph7 | Q | P2 | XS | Visual QA: edit-discard (discard dialog) | assigned | agent-2 | DK-0313 |  |
+| DK-0787 | Ph7 | Q | P2 | XS | Visual QA: edit-discard (discard dialog) | assigned | agent-3 | DK-0313 |  |
 | DK-0788 | Ph7 | Q | P2 | XS | Visual QA: edit-hiopts (highlighter options) | assigned | agent-2 | DK-0316 |  |
 | DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | assigned | agent-2 | DK-0317 |  |
 | DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | assigned | agent-2 | DK-0318 |  |
@@ -11965,3 +11965,7 @@ Please take DK-0785 (Visual QA: edit-annsel (annotation selected)).
 ### H-2700 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0786
 
 Please take DK-0786 (Visual QA: edit-form (form filling + accessory bar)).
+
+### H-2701 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0787
+
+Please take DK-0787 (Visual QA: edit-discard (discard dialog)).
