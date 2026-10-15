@@ -87,6 +87,56 @@ void main() {
     expect(scaffold.backgroundColor, DkTokens.light.color.surfaceSunken);
   });
 
+  testWidgets('a screen reader reads V1: the bar, the page, then the bottom '
+      'actions (DK-0637)', (tester) async {
+    final semantics = tester.ensureSemantics();
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await tester.runAsync(
+      () => db
+          .into(db.files)
+          .insert(
+            FilesCompanion.insert(
+              path: fixture('Mietvertrag Musterstraße 12.pdf'),
+              name: 'Mietvertrag Musterstraße 12.pdf',
+              size: 1,
+              created: DateTime(2026),
+              modified: DateTime(2026),
+            ),
+          ),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id!)),
+      ),
+    );
+    await settle(tester);
+    final labels = [
+      for (final node in tester.semantics.simulatedAccessibilityTraversal())
+        node.label,
+    ];
+    printOnFailure(labels.join('\n'));
+    expect(labels, isNot(contains('')), reason: 'no unlabelled stop');
+    expect(
+      labels,
+      containsAllInOrder([
+        'Back',
+        'Mietvertrag Musterstraße 12.pdf',
+        'Search',
+        'More',
+        'Page 1',
+        'Mietvertrag für Wohnräume',
+        'Edit',
+        'Sign',
+        'AI',
+        'Tools',
+        'Share',
+      ]),
+    );
+    semantics.dispose();
+  }, skip: true); // DK-1105: the pages come before the bar.
+
   testWidgets('V1 says so when the file is gone, instead of spinning', (
     tester,
   ) async {

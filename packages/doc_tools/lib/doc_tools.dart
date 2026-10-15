@@ -6,6 +6,7 @@ export 'package:doc_vision/doc_vision.dart' show Pt, ScanFilter;
 export 'src/job_queue.dart';
 export 'src/preflight.dart';
 export 'src/registry.dart';
+export 'src/scan_detect.dart';
 export 'src/scan_save.dart';
 export 'src/signature_photo.dart';
 export 'src/startup.dart';

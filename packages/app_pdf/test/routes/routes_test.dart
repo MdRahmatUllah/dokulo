@@ -346,7 +346,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Import photos'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'S2 photos');
+    expect(tester.widget<S2Screen>(find.byType(S2Screen)).importOnOpen, isTrue);
     expect(tabBarShown(tester), isFalse);
   });
 
