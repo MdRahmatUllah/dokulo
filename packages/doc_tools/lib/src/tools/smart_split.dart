@@ -8,7 +8,7 @@ enum SplitReason { blankPage, pageOneOf, newLetterhead, differentDate }
 class PageSignals {
   const PageSignals({
     required this.blank,
-    required this.topInk,
+    required this.topTint,
     required this.topHash,
     this.text = '',
   });
@@ -16,8 +16,10 @@ class PageSignals {
   /// Next to no ink: a separator sheet.
   final bool blank;
 
-  /// The share of dark pixels in the top band (where a letterhead sits).
-  final double topInk;
+  /// The share of tinted (mid-grey or coloured) pixels in the top band: a
+  /// letterhead's bar or logo; a continuation page's lines of text barely
+  /// count.
+  final double topTint;
 
   /// A 64-bit difference hash of the top band.
   final int topHash;
@@ -40,7 +42,10 @@ class FoundDocument {
 
 /// The smart_split rules engine (DK-0552; UI spec §21.6), rules only: every
 /// page boundary scored on blank separator pages, a "Page 1 of N" reset, a
-/// letterhead unlike the current document's, and a new date. The optional
+/// new letterhead, and a new date. A page with a letterhead starts a
+/// document when the page before had none (a letter's first page after the
+/// last one's continuation pages), or when its letterhead isn't the current
+/// one; a letterhead repeated on every page stays one document. The optional
 /// Gemma check on ambiguous boundaries joins with ai_core (DK-0545).
 abstract final class SmartSplitRules {
   /// Darker than this (0–255 grey) is ink.
@@ -49,8 +54,9 @@ abstract final class SmartSplitRules {
   /// Below this share of ink a page is blank.
   static const blankInk = 0.002;
 
-  /// Above this a top band carries a letterhead, not just a running line.
-  static const letterheadInk = 0.012;
+  /// Above this share of tint a top band carries a letterhead (measured:
+  /// 0.25 on the fixture's letterheads, 0.035 on its continuation pages).
+  static const letterheadTint = 0.12;
 
   /// Hamming distance of the top bands' hashes from which a letterhead is
   /// another one.
@@ -67,21 +73,19 @@ abstract final class SmartSplitRules {
 
   /// [page]'s signals from its render (any dpi) and text.
   static PageSignals signals(RenderedPage page, String text) {
-    var dark = 0, darkTop = 0;
+    var dark = 0, tintTop = 0;
     final top = (page.height * band).round();
     for (var y = 0; y < page.height; y++) {
       for (var x = 0; x < page.width; x++) {
         final i = (y * page.width + x) * 4;
-        if ((page.bgra[i] + page.bgra[i + 1] + page.bgra[i + 2]) / 3 <
-            inkLevel) {
-          dark++;
-          if (y < top) darkTop++;
-        }
+        final grey = (page.bgra[i] + page.bgra[i + 1] + page.bgra[i + 2]) / 3;
+        if (grey < inkLevel) dark++;
+        if (y < top && grey > 120 && grey < 225) tintTop++;
       }
     }
     return PageSignals(
       blank: dark / (page.width * page.height) < blankInk,
-      topInk: darkTop / (page.width * top),
+      topTint: tintTop / (page.width * top),
       topHash: _dhash(page, top),
       text: text,
     );
@@ -93,6 +97,7 @@ abstract final class SmartSplitRules {
     var current = <int>[];
     SplitReason? startedBy;
     int? letterhead;
+    var previousHeaded = false;
     String? date;
     SplitReason? pending; // a blank sheet ends the document before it
     void close() {
@@ -115,15 +120,17 @@ abstract final class SmartSplitRules {
         if (current.isNotEmpty) pending = SplitReason.blankPage;
         continue;
       }
-      final headed = p.topInk >= letterheadInk;
+      final headed = p.topTint >= letterheadTint;
       final pageDate = _date.firstMatch(p.text)?[0];
       final reason =
           pending ??
           (_pageOne.hasMatch(p.text) && current.isNotEmpty
               ? SplitReason.pageOneOf
               : headed &&
-                    letterhead != null &&
-                    _distance(letterhead!, p.topHash) >= newLetterhead
+                    current.isNotEmpty &&
+                    (!previousHeaded ||
+                        letterhead == null ||
+                        _distance(letterhead!, p.topHash) >= newLetterhead)
               ? SplitReason.newLetterhead
               : pageDate != null && date != null && pageDate != date
               ? SplitReason.differentDate
@@ -134,6 +141,7 @@ abstract final class SmartSplitRules {
       }
       pending = null;
       current.add(i);
+      previousHeaded = headed;
       if (headed) letterhead ??= p.topHash;
       date ??= pageDate;
     }

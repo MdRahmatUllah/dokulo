@@ -16,10 +16,11 @@ void main() {
 
   PageSignals page({
     bool blank = false,
-    double topInk = 0.02,
+    double topTint = 0.25,
     int topHash = 0,
     String text = '',
-  }) => PageSignals(blank: blank, topInk: topInk, topHash: topHash, text: text);
+  }) =>
+      PageSignals(blank: blank, topTint: topTint, topHash: topHash, text: text);
 
   List<List<int>> pagesOf(List<FoundDocument> docs) => [
     for (final d in docs) d.pages,
@@ -49,22 +50,32 @@ void main() {
       expect(docs.map((d) => d.name), ['Brief', 'Rechnung']);
     });
 
-    test(
-      'another letterhead starts one; the same, or a bare top, does not',
-      () {
-        final docs = SmartSplitRules.split([
-          page(topHash: 0x0F0F0F0F0F0F0F0F),
-          page(topInk: 0.001, topHash: 0x7FFFFFFFFFFFFFFF), // no letterhead
-          page(topHash: 0x0F0F0F0F0F0F0F0E), // the same, near enough
-          page(topHash: 0x70F0F0F0F0F0F0F0), // another
-        ]);
-        expect(pagesOf(docs), [
-          [0, 1, 2],
-          [3],
-        ]);
-        expect(docs[1].reason, SplitReason.newLetterhead);
-      },
-    );
+    test('a letterhead repeated on every page stays one document; another '
+        'one, or one after a page without, starts the next', () {
+      final repeated = SmartSplitRules.split([
+        page(topHash: 0x0F0F0F0F0F0F0F0F),
+        page(topHash: 0x0F0F0F0F0F0F0F0E), // the same, near enough
+        page(topHash: 0x70F0F0F0F0F0F0F0), // another
+      ]);
+      expect(pagesOf(repeated), [
+        [0, 1],
+        [2],
+      ]);
+      expect(repeated[1].reason, SplitReason.newLetterhead);
+
+      // A letter's first page, its continuation, the next letter's first
+      // page on the same template (the scanned bundle's case).
+      final letters = SmartSplitRules.split([
+        page(topHash: 7),
+        page(topTint: 0.03, topHash: 0x7FFFFFFFFFFFFFFF),
+        page(topHash: 7),
+      ]);
+      expect(pagesOf(letters), [
+        [0, 1],
+        [2],
+      ]);
+      expect(letters[1].reason, SplitReason.newLetterhead);
+    });
 
     test('a new date starts one', () {
       final docs = SmartSplitRules.split([
@@ -131,4 +142,29 @@ void main() {
       expect(File(bundle).readAsBytesSync(), before);
     },
   );
+
+  test('a 50-page bundle is analysed in under 20 s (rules only)', () async {
+    final dir = Directory.systemTemp.createTempSync('dk_smartsplit50_');
+    final db = DokuloDatabase.memory();
+    addTearDown(() async {
+      await db.close();
+      dir.deleteSync(recursive: true);
+    });
+    final bundle = fixture('scanned-letters-bundle.pdf');
+    final fifty = '${dir.path}/fifty.pdf';
+    await PdfEngine.assemble([
+      for (var i = 0; i < 50; i++) PageSource(bundle, i % 6),
+    ], fifty);
+    final queue = JobQueue(IsolatePool(tempRoot: dir), db, ToolRegistry.app());
+    final watch = Stopwatch()..start();
+    final out =
+        await (await queue.start(
+              'smartsplit',
+              SmartSplitInput(file: fifty),
+            )).result
+            as OneFile;
+    watch.stop();
+    expect(out.facts['documents'], hasLength(greaterThan(10)));
+    expect(watch.elapsed, lessThan(const Duration(seconds: 20)));
+  });
 }
