@@ -99,6 +99,15 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
         return <Box>[];
       });
 
+  @override
+  void didUpdateWidget(DkPdfCanvas old) {
+    super.didUpdateWidget(old);
+    // Another file (or a new version saved under a new path): read again.
+    if (old.path != widget.path || old.password != widget.password) {
+      _images.clear();
+    }
+  }
+
   /// For in-file links when the screen gave no controller.
   late final _own = PdfViewerController();
 
