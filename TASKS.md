@@ -836,7 +836,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0812 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idfront (ID card – front) | assigned | agent-3 | DK-0340 DK-0346 |  |
 | DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | assigned | agent-3 | DK-0340 |  |
 | DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | assigned | agent-3 | DK-0341 DK-0347 |  |
-| DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | assigned | agent-2 | DK-0348 |  |
+| DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | assigned | agent-3 | DK-0348 |  |
 | DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 |  |
 | DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | assigned | agent-3 | DK-0344 |  |
 | DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | assigned | agent-3 | DK-0344 |  |
@@ -12021,3 +12021,7 @@ Please take DK-0812 (Visual QA: scanner-camera-idfront (ID card – front)).
 ### H-2714 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0814
 
 Please take DK-0814 (Visual QA: scanner-camera-book (Book mode)).
+
+### H-2715 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0815
+
+Please take DK-0815 (Visual QA: scanner-camera-batch (Batch – 12 pages)).
