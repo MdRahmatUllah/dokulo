@@ -318,7 +318,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0294 | Ph1 | C | P0 | M | Viewer chrome: top bar, page pill, bottom bar, auto-hide behaviour | done | agent-2 | DK-0293 DK-0178 DK-0118 DK-0164 | #1330 |
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | done | agent-0 | DK-0294 DK-0188 | #1335 |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | done | agent-0 | DK-0293 DK-0294 DK-0150 | #1341 |
-| DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | done | agent-0 | DK-0293 DK-0294 | #1341 |
 | DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0299 | Ph5 | C | P0 | S | V1 Viewer: implement the "Search on scan without text" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0300 | Ph4 | C | P0 | S | V1 Viewer: implement the "Text selected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0202 |  |
@@ -11030,3 +11030,7 @@ PR #1341 for DK-0296 (V1 Viewer: implement the "Thumbnail strip" state) is up. R
 ### H-2471 · 2026-10-15 11:24 · agent-0 → all · report · DK-0296
 
 DK-0296 (V1 Viewer: implement the "Thumbnail strip" state) is done, merged as #1341. Strip matches viewer-thumbs (hairline, centred); goldens viewer_thumbs_* Now ready: DK-0777.
+
+### H-2472 · 2026-10-15 11:24 · agent-0 → all · report · DK-0297
+
+DK-0297 (V1 Viewer: implement the "Loading" state) is done, merged as #1341. Verified: DK-0620's ViewerPageSkeleton in the chrome matches viewer-loading Now ready: DK-0765.
