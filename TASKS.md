@@ -1002,7 +1002,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0978 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-portrait (tablet-scanner-portrait) | assigned | agent-2 | DK-0652 |  |
 | DK-0979 | Ph7 | Q | P2 | XS | Visual QA: system-surfaces (system-surfaces) | open |  | DK-0072 DK-0587 DK-0588 DK-0589 DK-0590 DK-0591 DK-0592 DK-0593 |  |
 | DK-0980 | Ph7 | Q | P2 | XS | Visual QA: global-states (global-states) | done | agent-0 | DK-0601 DK-0602 DK-0603 DK-0604 DK-0605 DK-0606 DK-0607 DK-0608 | #1230 |
-| DK-0981 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent (text-200-percent) | open |  | DK-0037 |  |
+| DK-0981 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent (text-200-percent) | assigned | agent-3 | DK-0037 |  |
 | DK-0982 | Ph7 | Q | P2 | XS | Visual QA: foundations (foundations) | done | agent-1 | DK-0024 DK-0025 DK-0026 DK-0027 DK-0028 DK-0029 DK-0030 DK-0031 DK-0032 DK-0033 DK-0034 DK-0036 DK-0038 DK-0047 DK-0048 DK-1009 | #1151 |
 | DK-0983 | Ph7 | Q | P2 | XS | Visual QA: components (components) | done | agent-0 | DK-0048 DK-0049 DK-0074 DK-0076 DK-0078 DK-0080 DK-0082 DK-0084 DK-0086 DK-0088 DK-0090 DK-0092 DK-0096 DK-0098 DK-0102 DK-0104 DK-0106 DK-0108 DK-0110 DK-0112 DK-0114 DK-0116 DK-0118 DK-0120 DK-0122 DK-0124 DK-0126 DK-0128 DK-0130 DK-0132 DK-0134 DK-0136 DK-0138 DK-0144 DK-0146 DK-0164 DK-0166 DK-0168 DK-0170 DK-0172 DK-0174 DK-0178 DK-0182 DK-0184 DK-0186 DK-0188 DK-0190 DK-0192 DK-0194 DK-0196 DK-0198 DK-0200 DK-0231 DK-1009 | #1265 |
 | DK-0984 | Ph7 | Q | P2 | XS | Visual QA: components-part-2 (components-part-2) | done | agent-0 | DK-0094 DK-0100 DK-0140 DK-0142 DK-0148 DK-0150 DK-0152 DK-0154 DK-0156 DK-0158 DK-0160 DK-0162 DK-0176 DK-0180 DK-0202 DK-0204 DK-0206 DK-0208 DK-0210 DK-0212 DK-0214 DK-0216 DK-0218 DK-0220 | #1193 |
@@ -11034,3 +11034,7 @@ DK-0296 (V1 Viewer: implement the "Thumbnail strip" state) is done, merged as #1
 ### H-2472 · 2026-10-15 11:24 · agent-0 → all · report · DK-0297
 
 DK-0297 (V1 Viewer: implement the "Loading" state) is done, merged as #1341. Verified: DK-0620's ViewerPageSkeleton in the chrome matches viewer-loading Now ready: DK-0765.
+
+### H-2473 · 2026-10-15 11:24 · agent-3 → agent-3 · assign · DK-0981
+
+Please take DK-0981 (Visual QA: text-200-percent (text-200-percent)).
