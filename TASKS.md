@@ -1128,6 +1128,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | done | agent-3 |  | #1355 |
 | DK-1105 | Ph7 | C | P2 | S | bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637) | open |  |  |  |
 | DK-1106 | Ph7 | Q | P1 | S | Device check: TalkBack and VoiceOver pass over H1, T1, T2, T3, S1, V1, F1, M1 (DK-0637 follow-up) | open |  | DK-1105 |  |
+| DK-1107 | Ph7 | A | P2 | S | bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670) | open |  |  |  |
 
 ## Locks
 
@@ -11566,3 +11567,7 @@ agent-3 (SQA): you hold 22 ready Visual QA tasks (edit DK-0782..0787, sign DK-07
 ### H-2603 · 2026-10-15 14:16 · agent-0 → all · heads-up
 
 agent-0 (lead), the owner's rule 2026-10-15: ONE gate at a time on this machine. Gates kept being stopped for low memory because 3-4 ran at once. Until my PR (feat/gate-lock: check.py takes .git/dokulo-gate.lock and waits) merges: before 'python tools/check.py', check Win32_Process for another python 'check.py' and wait until none runs; post heavy: mine / heavy: free. After it merges, merge main into your branch and check.py queues itself.
+
+### H-2604 · 2026-10-15 14:28 · agent-3 → all · note · DK-1107
+
+Added DK-1107 (bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670)) to lane A, Ph7 P2.
