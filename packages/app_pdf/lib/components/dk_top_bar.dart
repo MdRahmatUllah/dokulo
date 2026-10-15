@@ -1,9 +1,12 @@
+import 'dart:ui' show ImageFilter;
+
 import 'package:flutter/material.dart';
 
 import '../l10n/app_localizations.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_icon_button.dart';
+import 'dk_pro_badge.dart';
 import 'dk_text_action.dart';
 
 /// What sits at the left of a [DkTopBar].
@@ -15,11 +18,20 @@ class DkTopBarAction {
     required this.icon,
     required this.tooltip,
     required this.onPressed,
-  });
+  }) : onMenu = null;
+
+  /// An action that opens a menu under itself (F1's sort): [onMenu] gets the
+  /// button's context as the menu's anchor.
+  const DkTopBarAction.menu({
+    required this.icon,
+    required this.tooltip,
+    required void Function(BuildContext anchor) this.onMenu,
+  }) : onPressed = null;
 
   final IconData icon;
   final String tooltip;
   final VoidCallback? onPressed;
+  final void Function(BuildContext anchor)? onMenu;
 }
 
 /// The small top bar (UI spec §11.6; DK-0164): 56 tall below the status
@@ -38,8 +50,13 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
     this.onLeading,
     this.actions = const [],
     this.onOverflow,
+    this.titleIcon,
+    this.titlePro = false,
+    this.trailing,
+    this.translucent = false,
   }) : onCancel = null,
        onDone = null,
+       onDoneLongPress = null,
        cancelLabel = null,
        doneLabel = null,
        _editing = false;
@@ -54,13 +71,27 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
     required this.onDone,
     this.cancelLabel,
     this.doneLabel,
+    this.onDoneLongPress,
   }) : leading = DkTopBarLeading.none,
        onLeading = null,
        actions = const [],
        onOverflow = null,
+       titleIcon = null,
+       titlePro = false,
+       trailing = null,
+       translucent = false,
        _editing = true;
 
   final String? title;
+
+  /// A 20 dp icon before the title (T2: the tool's icon).
+  final IconData? titleIcon;
+
+  /// The Pro badge after the title (T2 of a Pro tool).
+  final bool titlePro;
+
+  /// `color.surface` at 94 % with the content blurred behind (V1, §17.1).
+  final bool translucent;
   final DkTopBarLeading leading;
 
   /// Back or close; `Navigator.maybePop` when null.
@@ -72,7 +103,14 @@ class DkTopBar extends StatefulWidget implements PreferredSizeWidget {
   /// Opens the overflow menu, anchored to the given context (DkMenu).
   final void Function(BuildContext anchor)? onOverflow;
 
+  /// In place of [actions]: a text action (R1's Empty).
+  final Widget? trailing;
+
   final VoidCallback? onCancel, onDone;
+
+  /// Editing: a long-press on Done opens a menu anchored to it (P1's Save:
+  /// Save as copy · Replace original, UI spec §18).
+  final void Function(BuildContext anchor)? onDoneLongPress;
   final bool _editing;
 
   /// Cancel and Done, when a screen says something more specific.
@@ -105,7 +143,7 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
     final l10n = MaterialLocalizations.of(context);
     final editing = widget._editing;
     final centred = _isIos(context) || editing;
-    final title = widget.title == null
+    Widget? title = widget.title == null
         ? null
         : Semantics(
             header: true,
@@ -117,6 +155,22 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
               textAlign: centred ? TextAlign.center : TextAlign.start,
             ),
           );
+    if (title != null && (widget.titleIcon != null || widget.titlePro)) {
+      title = Row(
+        mainAxisSize: MainAxisSize.min,
+        spacing: t.space.s,
+        children: [
+          if (widget.titleIcon != null)
+            DkIcon(
+              widget.titleIcon!,
+              size: DkIconSize.m,
+              color: t.color.iconPrimary,
+            ),
+          Flexible(child: title),
+          if (widget.titlePro) const DkProBadge(small: true),
+        ],
+      );
+    }
 
     final Widget? leading = editing
         ? DkTextAction(
@@ -138,17 +192,32 @@ class _DkTopBarState extends State<DkTopBar> with _ScrolledUnder<DkTopBar> {
               onPressed: widget.onLeading ?? () => Navigator.maybePop(context),
             ),
           };
+    // Editing only: the other bars may sit outside the app's localizations.
+    Widget done() => DkTextAction(
+      label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
+      onTap: widget.onDone,
+      bold: true,
+    );
+    final menu = widget.onDone == null ? null : widget.onDoneLongPress;
     final Widget trailing = editing
-        ? DkTextAction(
-            label: widget.doneLabel ?? AppLocalizations.of(context).common_done,
-            onTap: widget.onDone,
-            bold: true,
-          )
-        : _Actions(actions: widget.actions, onOverflow: widget.onOverflow);
+        ? menu == null
+              ? done()
+              : Builder(
+                  builder: (anchor) => Semantics(
+                    onLongPress: () => menu(anchor),
+                    child: GestureDetector(
+                      onLongPress: () => menu(anchor),
+                      child: done(),
+                    ),
+                  ),
+                )
+        : widget.trailing ??
+              _Actions(actions: widget.actions, onOverflow: widget.onOverflow);
 
     // Scaffold gives the bar its height plus the status bar's: pad for it.
     return _BarSurface(
       hairline: scrolledUnder,
+      translucent: widget.translucent,
       child: SafeArea(
         bottom: false,
         child: SizedBox(
@@ -231,7 +300,20 @@ class _Actions extends StatelessWidget {
     mainAxisSize: MainAxisSize.min,
     children: [
       for (final a in actions)
-        DkIconButton(icon: a.icon, tooltip: a.tooltip, onPressed: a.onPressed),
+        if (a.onMenu case final onMenu?)
+          Builder(
+            builder: (anchor) => DkIconButton(
+              icon: a.icon,
+              tooltip: a.tooltip,
+              onPressed: () => onMenu(anchor),
+            ),
+          )
+        else
+          DkIconButton(
+            icon: a.icon,
+            tooltip: a.tooltip,
+            onPressed: a.onPressed,
+          ),
       if (onOverflow != null)
         Builder(
           builder: (anchor) => DkIconButton(
@@ -387,16 +469,22 @@ class _LargeBar extends SliverPersistentHeaderDelegate {
 /// The bar's `surface`, with a 1 dp `outline` hairline at the bottom when
 /// content is under it.
 class _BarSurface extends StatelessWidget {
-  const _BarSurface({required this.hairline, required this.child});
-  final bool hairline;
+  const _BarSurface({
+    required this.hairline,
+    required this.child,
+    this.translucent = false,
+  });
+  final bool hairline, translucent;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     final t = context.tokens;
-    return DecoratedBox(
+    final bar = DecoratedBox(
       decoration: BoxDecoration(
-        color: t.color.surface,
+        color: translucent
+            ? t.color.surface.withValues(alpha: 0.94)
+            : t.color.surface,
         border: Border(
           bottom: BorderSide(
             color: hairline ? t.color.outline : t.color.surface,
@@ -405,6 +493,14 @@ class _BarSurface extends StatelessWidget {
       ),
       child: Material(type: MaterialType.transparency, child: child),
     );
+    return translucent
+        ? ClipRect(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+              child: bar,
+            ),
+          )
+        : bar;
   }
 }
 

@@ -19,6 +19,13 @@ class DkSelection<T> extends ChangeNotifier {
   Set<T> get selected => Set.unmodifiable(_selected);
   bool isSelected(T item) => _selected.contains(item);
 
+  /// Turns selection mode on with nothing selected yet (a Select button).
+  void enter() {
+    if (_active) return;
+    _active = true;
+    notifyListeners();
+  }
+
   /// Turns selection mode on with [item] selected.
   void start(T item) {
     _active = true;

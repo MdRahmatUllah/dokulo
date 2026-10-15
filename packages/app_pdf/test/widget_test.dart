@@ -6,13 +6,23 @@ import 'package:app_pdf/providers/language_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+
+import 'app_overrides.dart';
+
+import 'onboarding_seen.dart';
+
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   testWidgets('the app follows the system language by default', (tester) async {
     tester.platformDispatcher.localesTestValue = const [Locale('de', 'DE')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
-    await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [onboardingSeen, ...homeOverrides()],
+        child: const DokuloApp(),
+      ),
+    );
     await tester.pumpAndSettle(); // past the launch screen (DK-0073)
     expect(find.text('Start'), findsOneWidget); // the Home tab
   });
@@ -22,7 +32,12 @@ void main() {
   ) async {
     tester.platformDispatcher.localesTestValue = const [Locale('en', 'US')];
     addTearDown(tester.platformDispatcher.clearLocalesTestValue);
-    await tester.pumpWidget(const ProviderScope(child: DokuloApp()));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [onboardingSeen, ...homeOverrides()],
+        child: const DokuloApp(),
+      ),
+    );
     await tester.pumpAndSettle(); // past the launch screen (DK-0073)
     final language = ProviderScope.containerOf(
       tester.element(find.byType(DokuloApp)),

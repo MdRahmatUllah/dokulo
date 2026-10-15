@@ -5,12 +5,14 @@ import '../theme/dk_layout.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_icon.dart';
 import 'dk_ring.dart';
+import 'motion/dk_transition_motion.dart';
 
 /// A page as a thumbnail (UI spec §11.5; DK-0150): the page on
 /// `color.pageWhite` with a 1 dp outline, its number below. Selected: a 2 dp
 /// primary ring and a check circle; [current] (the page shown in the editor,
 /// DkPageTray): the ring alone. The same ring shows keyboard focus.
-/// Loading ([page] null): a `color.surfaceSunken` block with the number.
+/// Loading ([page] null): a `color.surfaceSunken` block with the number;
+/// the page fades in over it (DkThumbFade).
 ///
 /// The parent sets the width (3 columns in DkPageGrid, 56 in DkPageTray);
 /// the page keeps [aspectRatio]. [page] is the rendered page: a `RawImage`
@@ -23,6 +25,7 @@ class DkPageThumb extends StatefulWidget {
     required this.pageCount,
     this.page,
     this.selected = false,
+    this.selecting = false,
     this.current = false,
     this.lifted = false,
     this.quarterTurns = 0,
@@ -37,6 +40,10 @@ class DkPageThumb extends StatefulWidget {
   final int pageCount;
   final Widget? page;
   final bool selected;
+
+  /// Selection mode: an unselected page shows an empty circle where the
+  /// check goes (organize-selected).
+  final bool selecting;
   final bool current;
 
   /// Being dragged: `elevation.raised` instead of flat (UI spec §4.4).
@@ -130,7 +137,10 @@ class _DkPageThumbState extends State<DkPageThumb> {
                     radius: t.radius.xs,
                     child: AspectRatio(
                       aspectRatio: widget.aspectRatio,
-                      child: page,
+                      child: DkThumbFade(
+                        loaded: widget.page != null,
+                        child: page,
+                      ),
                     ),
                   ),
                   if (overlay != null)
@@ -142,7 +152,7 @@ class _DkPageThumbState extends State<DkPageThumb> {
                         ),
                       ),
                     ),
-                  if (widget.selected)
+                  if (widget.selected || widget.selecting)
                     Positioned(
                       top: -6,
                       right: -6,
@@ -150,14 +160,19 @@ class _DkPageThumbState extends State<DkPageThumb> {
                         width: 20,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: c.primary,
+                          color: widget.selected ? c.primary : c.surface,
                           shape: BoxShape.circle,
+                          border: widget.selected
+                              ? null
+                              : Border.all(color: c.outlineStrong, width: 2),
                         ),
-                        child: DkIcon(
-                          DkIcons.check,
-                          size: DkIconSize.s,
-                          color: c.onPrimary,
-                        ),
+                        child: widget.selected
+                            ? DkIcon(
+                                DkIcons.check,
+                                size: DkIconSize.s,
+                                color: c.onPrimary,
+                              )
+                            : null,
                       ),
                     ),
                 ],

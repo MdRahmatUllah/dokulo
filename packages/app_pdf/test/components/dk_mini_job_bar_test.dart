@@ -92,6 +92,39 @@ void main() {
     expect(line.bottom, box.bottom);
   });
 
+  testWidgets('screen readers hear the progress in 25 % steps (DK-0645)', (
+    tester,
+  ) async {
+    phone(tester, const Size(393, 300));
+    final handle = tester.ensureSemantics();
+    for (final (progress, value) in [
+      (0.0, '0 %'),
+      (0.24, '0 %'),
+      (0.25, '25 %'),
+      (0.74, '50 %'),
+      (1.0, '100 %'),
+    ]) {
+      await tester.pumpWidget(
+        app(
+          Center(
+            child: DkMiniJobBar(
+              icon: DkIcons.tool('compress'),
+              label: 'Compressing',
+              progress: progress,
+              onTap: () {},
+            ),
+          ),
+        ),
+      );
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Compressing')),
+        isSemantics(value: value),
+        reason: '$progress',
+      );
+    }
+    handle.dispose();
+  });
+
   testWidgets('one button for screen readers: the job and its percent; a '
       'tap or Enter opens the sheet', (tester) async {
     phone(tester, const Size(393, 300));
@@ -103,7 +136,7 @@ void main() {
       isSemantics(
         isButton: true,
         label: 'Compressing · 18 of 40',
-        value: '45 %',
+        value: '25 %', // 45 % in 25 % steps
         hasTapAction: true,
       ),
     );

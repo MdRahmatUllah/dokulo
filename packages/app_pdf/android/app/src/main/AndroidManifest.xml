@@ -1,4 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <!-- Platform capabilities (DK-0016). Only these permissions: tools/check_permissions.py
          fails on any other, in this file and in a built APK's merged manifest. -->
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -19,9 +20,20 @@
     <!-- Documents/Dokulo (DK-0006): Android 8-9 need this to write there;
          10 uses requestLegacyExternalStorage; 11+ need nothing. -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
+    <!-- The camera plugin (CameraX) declares these for video and its network
+         checks; the scanner takes photos only, and a tool run is offline. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove"/>
     <!-- Phones without a camera can install Dokulo: everything but the scanner works. -->
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <!-- No backup (DK-1083): the user's files are in Documents/Dokulo, outside the
+         app's backup; what the app keeps (the index, the sealed signatures and
+         locked files) is useless without Keystore keys, which are never backed
+         up, so a restore would only leave files that can't be opened. -->
     <application
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:requestLegacyExternalStorage="true"
         android:label="@string/app_name"
         android:name="${applicationName}"

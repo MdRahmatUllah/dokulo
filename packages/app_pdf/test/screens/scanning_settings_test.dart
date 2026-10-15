@@ -1,5 +1,5 @@
 import 'package:app_pdf/l10n/app_localizations.dart';
-import 'package:app_pdf/screens/m3_settings/scanning_settings_screen.dart';
+import 'package:app_pdf/screens/settings/scanning_settings_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/screens/s2_review/save_sheet.dart';
 import 'package:app_pdf/theme/app_theme.dart';

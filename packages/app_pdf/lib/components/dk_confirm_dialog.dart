@@ -26,7 +26,8 @@ Future<bool> showDkConfirm(
   bool destructive = false,
   IconData? icon,
 }) async {
-  final chosen = await Navigator.of(context).push<bool>(
+  // Over the tab bar too, as showDialog does (the files-emptytrash frame).
+  final chosen = await Navigator.of(context, rootNavigator: true).push<bool>(
     DkDialogRoute.of(
       context,
       builder: (context) => DkConfirmDialog(
@@ -60,6 +61,7 @@ class DkConfirmDialog extends StatelessWidget {
     this.cancel,
     this.destructive = false,
     this.icon,
+    this.content,
   });
 
   final String title;
@@ -72,7 +74,13 @@ class DkConfirmDialog extends StatelessWidget {
   final String? cancel;
   final bool destructive;
   final IconData? icon;
-  final VoidCallback onCancel, onAction;
+  final VoidCallback onCancel;
+
+  /// Null disables the action (a name field still empty).
+  final VoidCallback? onAction;
+
+  /// Under the body: a text field (New folder, Rename; [showDkTextDialog]).
+  final Widget? content;
 
   @override
   Widget build(BuildContext context) {
@@ -137,6 +145,7 @@ class DkConfirmDialog extends StatelessWidget {
         Text(title, style: t.text.titleM.copyWith(color: c.textPrimary)),
         if (body != null)
           Text(body!, style: t.text.bodyM.copyWith(color: c.textSecondary)),
+        if (content != null) ...[SizedBox(height: t.space.s), content!],
       ],
     );
     final screen = MediaQuery.sizeOf(context);

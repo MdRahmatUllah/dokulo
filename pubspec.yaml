@@ -16,3 +16,33 @@ workspace:
   - packages/web_to_pdf
   - packages/vision_ocr
   - packages/qpdf_ffi
+
+# OpenCV through opencv_dart/dartcv4 (DK-0339): core, imgproc and imgcodecs
+# only; every other module excluded, explicitly (docs/compliance/opencv-modules.md).
+hooks:
+  user_defines:
+    dartcv4:
+      # ponytail: 2 compile jobs, so the from-source build fits next to the
+      # other agents' gates (the default is one per core: 28 here, ~10 GB).
+      parallel_jobs: 2
+      include_modules: # `core` is always built
+        - imgproc
+        - imgcodecs
+      exclude_modules: # all the others, explicitly (DK-0680)
+        - highgui
+        - videoio
+        - video
+        - dnn
+        - calib3d
+        - features2d
+        - flann
+        - freetype
+        - objdetect
+        - photo
+        - stitching
+        - aruco
+        - img_hash
+        - quality
+        - wechat_qrcode
+        - ximgproc
+        - xobjdetect

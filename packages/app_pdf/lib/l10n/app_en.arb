@@ -1532,5 +1532,1304 @@
   "scan_file_name": "File name",
   "@scan_file_name": {"description": "The scan's result screen (DK-0360)."},
   "scan_next": "Next",
-  "@scan_next": {"description": "The scan's result screen (DK-0360)."}
+  "@scan_next": {"description": "The scan's result screen (DK-0360)."},
+  "link_broken_title": "This link doesn't work any more",
+  "@link_broken_title": {"description": "A deep link to no route or tool (DK-0236)."},
+  "link_broken_body": "What it pointed to may have been moved or deleted.",
+  "@link_broken_body": {"description": "Under a broken deep link's title (DK-0236)."},
+  "link_action_home": "Go to Home",
+  "@link_action_home": {"description": "Button on a broken deep link (DK-0236)."},
+  "link_job_finished": "This job has already finished.",
+  "@link_job_finished": {"description": "Toast: a job link (a notification) after the job ended (DK-0236)."},
+  "onb_1_title": "All your PDF tools. Nothing uploaded.",
+  "@onb_1_title": {
+    "description": "O1 headline (UI spec §14.2)."
+  },
+  "onb_1_body": "Scan, merge, compress, sign and more – right on this phone.",
+  "@onb_1_body": {
+    "description": "O1 body (UI spec §14.2)."
+  },
+  "onb_2_title": "No watermark. No subscription.",
+  "@onb_2_title": {
+    "description": "O2 headline (UI spec §14.2)."
+  },
+  "onb_2_body": "Most tools are free with no limits. Pro is a one-time unlock.",
+  "@onb_2_body": {
+    "description": "O2 body (UI spec §14.2)."
+  },
+  "onb_3_title": "What do you want to do first?",
+  "@onb_3_title": {
+    "description": "O3 headline (UI spec §14.2)."
+  },
+  "onb_scan_title": "Scan a document",
+  "@onb_scan_title": {
+    "description": "O3 card 1 title: opens the scanner (S1)."
+  },
+  "onb_scan_sub": "Use the camera",
+  "@onb_scan_sub": {
+    "description": "O3 card 1 sub line."
+  },
+  "onb_open_title": "Open a PDF",
+  "@onb_open_title": {
+    "description": "O3 card 2 title: the system file picker, then the viewer (V1)."
+  },
+  "onb_open_sub": "From Files or another app",
+  "@onb_open_sub": {
+    "description": "O3 card 2 sub line."
+  },
+  "onb_look_title": "Look around",
+  "@onb_look_title": {
+    "description": "O3 card 3 title: goes to Home (H1)."
+  },
+  "onb_look_sub": "See all tools",
+  "@onb_look_sub": {
+    "description": "O3 card 3 sub line."
+  },
+  "me_initials": "Initials",
+  "@me_initials": {"description": "Me → Signatures (DK-0325)."},
+  "me_add_initials": "Add initials",
+  "@me_add_initials": {"description": "Me → Signatures (DK-0325)."},
+  "me_signatures_banner": "Signatures are stored encrypted on this phone. Long-press one to delete it.",
+  "@me_signatures_banner": {"description": "Me → Signatures (DK-0325)."},
+  "me_signature_meta": "{ink} · added {date}",
+  "@me_signature_meta": {"description": "Me → Signatures (DK-0325).", "placeholders": {"ink": {"type": "String"}, "date": {"type": "String"}}},
+  "sign_sheet_title": "Your signatures",
+  "@sign_sheet_title": {"description": "The Signatures sheet (DK-0326)."},
+  "sign_add_date": "Add date next to signature",
+  "@sign_add_date": {"description": "The Signatures sheet (DK-0326)."},
+  "sign_initials_every_page": "Initials on every page",
+  "@sign_initials_every_page": {"description": "The Signatures sheet (DK-0326)."},
+  "t2_section_file": "File",
+  "@t2_section_file": {"description": "T2's input header, one file (UI spec §20.1)."},
+  "t2_section_files": "Files ({n})",
+  "@t2_section_files": {"description": "T2's input header, several files (§20.1).", "placeholders": {"n": {"type": "int"}}},
+  "t2_section_options": "Options",
+  "@t2_section_options": {"description": "T2's options header (§20.1)."},
+  "t2_reset_options": "Reset options",
+  "@t2_reset_options": {"description": "T2's overflow menu (§20.1)."},
+  "t2_remove_file": "Remove",
+  "@t2_remove_file": {"description": "The × on a T2 input file (§20.1)."},
+  "t2_busy": "Working…",
+  "@t2_busy": {"description": "T2's main button while a tool runs 2–10 s, for a tool without its own verb (UI spec §20.2)."},
+  "t2_failed_body": "Your original file wasn't changed.",
+  "@t2_failed_body": {"description": "Under the error title in the progress sheet's error state (§20.2, DK-0377)."},
+  "t3_file_name": "File name",
+  "@t3_file_name": {"description": "T3's file name field (UI spec §20.4)."},
+  "t3_save_to": "Save to: {place}",
+  "@t3_save_to": {"description": "T3's save location, e.g. Save to: Files › Taxes (§20.4).", "placeholders": {"place": {"type": "String"}}},
+  "t3_save": "Save",
+  "@t3_save": {"description": "T3's main button (§20.4)."},
+  "t3_discard_title": "Discard this result?",
+  "@t3_discard_title": {"description": "Closing an unsaved result after a long job (§20.4, DK-0382)."},
+  "t3_discard_body": "You'll need to run the tool again to get it back.",
+  "@t3_discard_body": {"description": "Body of the discard result dialog (DK-0382)."},
+  "t2_choose_pdf": "Choose a PDF",
+  "@t2_choose_pdf": {"description": "T2's picker card title, a PDF tool (UI spec §20.1, DK-0371)."},
+  "t2_choose_images": "Choose images",
+  "@t2_choose_images": {"description": "T2's picker card title, an image tool (§20.1)."},
+  "t2_choose_files": "Choose files",
+  "@t2_choose_files": {"description": "T2's picker card title, a tool for PDFs and images (§20.1)."},
+  "t2_recent": "Recent",
+  "@t2_recent": {"description": "Header of the recent files in T2's picker card."},
+  "t2_choose_photos": "Choose photos",
+  "@t2_choose_photos": {"description": "T2's picker card, image tools (§20.1)."},
+  "t2_choose_to_continue": "Choose a file to continue",
+  "@t2_choose_to_continue": {"description": "Caption over T2's disabled button with no input (§20.1)."},
+  "t2_file_locked": "This file is locked",
+  "@t2_file_locked": {"description": "Under a locked input in T2 (DK-0372)."},
+  "t2_password": "Password",
+  "@t2_password": {"description": "The password field of a locked input (DK-0372)."},
+  "t2_unlock": "Unlock",
+  "@t2_unlock": {"description": "Unlocks a locked input in T2 (DK-0372)."},
+  "t2_wrong_password": "That password doesn't open this file.",
+  "@t2_wrong_password": {"description": "A wrong password for a locked input (DK-0372, UI spec §17.1)."},
+  "t2_unlock_to_continue": "Unlock {name} to continue",
+  "@t2_unlock_to_continue": {"description": "Caption over T2's disabled button while an input is locked (DK-0372).", "placeholders": {"name": {"type": "String"}}},
+  "files_search_hint": "Search names and text",
+  "@files_search_hint": {
+    "description": "F1 search field."
+  },
+  "files_locked_folder": "Locked folder",
+  "@files_locked_folder": {
+    "description": "F1 special row: opens F2."
+  },
+  "files_recently_deleted": "Recently deleted",
+  "@files_recently_deleted": {
+    "description": "F1 special row: the trash."
+  },
+  "files_folders": "Folders",
+  "@files_folders": {
+    "description": "F1 section header."
+  },
+  "files_files": "Files",
+  "@files_files": {
+    "description": "F1 section header."
+  },
+  "files_grid_view": "Grid view",
+  "@files_grid_view": {
+    "description": "F1 action: switch to the grid."
+  },
+  "files_list_view": "List view",
+  "@files_list_view": {
+    "description": "F1 action: switch to the list."
+  },
+  "files_sort": "Sort",
+  "@files_sort": {
+    "description": "F1 action: the sort menu."
+  },
+  "files_new_folder": "New folder",
+  "@files_new_folder": {
+    "description": "F1 action and the new folder dialog's title."
+  },
+  "files_folder_name": "Folder name",
+  "@files_folder_name": {
+    "description": "New folder dialog: the field's placeholder."
+  },
+  "files_create": "Create",
+  "@files_create": {
+    "description": "New folder dialog: the action."
+  },
+  "files_folder_exists": "A folder with this name already exists.",
+  "@files_folder_exists": {
+    "description": "New folder dialog: the name is taken."
+  },
+  "files_sort_modified": "Date modified",
+  "@files_sort_modified": {
+    "description": "Sort menu."
+  },
+  "files_sort_name": "Name",
+  "@files_sort_name": {
+    "description": "Sort menu."
+  },
+  "files_sort_size": "Size",
+  "@files_sort_size": {
+    "description": "Sort menu."
+  },
+  "files_sort_created": "Date created",
+  "@files_sort_created": {
+    "description": "Sort menu."
+  },
+  "files_sort_ascending": "Ascending",
+  "@files_sort_ascending": {
+    "description": "Sort menu, second group."
+  },
+  "files_sort_descending": "Descending",
+  "@files_sort_descending": {
+    "description": "Sort menu, second group."
+  },
+  "files_more_actions": "More actions",
+  "@files_more_actions": {
+    "description": "A file row's more button."
+  },
+  "home_your_tools": "Your tools",
+  "@home_your_tools": {
+    "description": "H1 section header over the pinned tools."
+  },
+  "home_recent": "Recent",
+  "@home_recent": {
+    "description": "H1 section header over the recent files."
+  },
+  "home_see_all": "See all",
+  "@home_see_all": {
+    "description": "H1: opens Files."
+  },
+  "home_open_file": "Open a file",
+  "@home_open_file": {
+    "description": "H1: the system picker, then V1."
+  },
+  "home_search": "Search files",
+  "@home_search": {
+    "description": "H1 top bar action: Files with the search field focused."
+  },
+  "home_settings": "Settings",
+  "@home_settings": {
+    "description": "H1 top bar action."
+  },
+  "t3_files": "{n, plural, =1{1 file} other{{n} files}}",
+  "@t3_files": {"description": "T3's headline and list header for a multi-file result (UI spec §20.4, DK-0384).", "placeholders": {"n": {"type": "int"}}},
+  "t3_from": "From {source}",
+  "@t3_from": {"description": "T3's line under the headline: From Zeugnisse.pdf · 34 pages (DK-0384).", "placeholders": {"source": {"type": "String"}}},
+  "locked_title": "Locked folder",
+  "@locked_title": {
+    "description": "F2's title (§16.6)."
+  },
+  "locked_intro_title": "Keep files private",
+  "@locked_intro_title": {
+    "description": "L1 headline."
+  },
+  "locked_intro_body": "Files here are encrypted on this phone and need {method} or your PIN to open.",
+  "@locked_intro_body": {
+    "description": "L1 body; {method} is Face ID or Touch ID.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "locked_intro_body_fingerprint": "Files here are encrypted on this phone and need your fingerprint or your PIN to open.",
+  "@locked_intro_body_fingerprint": {
+    "description": "L1 body on phones that unlock by fingerprint."
+  },
+  "locked_intro_body_pin": "Files here are encrypted on this phone and need your PIN to open.",
+  "@locked_intro_body_pin": {
+    "description": "L1 body on phones without biometrics."
+  },
+  "locked_intro_warning": "If you forget the PIN and biometrics stop working, these files can't be recovered.",
+  "@locked_intro_warning": {
+    "description": "L1 warning banner."
+  },
+  "locked_set_up": "Set up",
+  "@locked_set_up": {
+    "description": "L1 button."
+  },
+  "locked_create_pin": "Create a 6-digit PIN",
+  "@locked_create_pin": {
+    "description": "L2 title."
+  },
+  "locked_confirm_pin": "Enter the PIN again",
+  "@locked_confirm_pin": {
+    "description": "L3 title."
+  },
+  "locked_pin_mismatch": "PINs don't match. Try again.",
+  "@locked_pin_mismatch": {
+    "description": "L3 → L2 when the two PINs differ."
+  },
+  "locked_bio_title": "Use {method}?",
+  "@locked_bio_title": {
+    "description": "L4 title; {method} is Face ID or Touch ID.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "locked_bio_title_fingerprint": "Use fingerprint?",
+  "@locked_bio_title_fingerprint": {
+    "description": "L4 title on phones that unlock by fingerprint."
+  },
+  "locked_bio_body_face": "Open the locked folder with a glance. Your PIN still works as a backup.",
+  "@locked_bio_body_face": {
+    "description": "L4 body (Face ID)."
+  },
+  "locked_bio_body_touch": "Open the locked folder with a touch. Your PIN still works as a backup.",
+  "@locked_bio_body_touch": {
+    "description": "L4 body (Touch ID, fingerprint)."
+  },
+  "locked_bio_use": "Use {method}",
+  "@locked_bio_use": {
+    "description": "L4 button and the unlock pad's biometric key; {method} is Face ID or Touch ID.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "locked_bio_use_fingerprint": "Use fingerprint",
+  "@locked_bio_use_fingerprint": {
+    "description": "L4 button and the pad's key on fingerprint phones."
+  },
+  "locked_bio_reason": "Unlock the locked folder",
+  "@locked_bio_reason": {
+    "description": "The system biometric prompt's reason."
+  },
+  "locked_pin_wrong": "Wrong PIN.",
+  "@locked_pin_wrong": {
+    "description": "Unlock: a wrong PIN."
+  },
+  "locked_pin_wait": "Too many tries. Try again in {seconds} s.",
+  "@locked_pin_wait": {
+    "description": "Unlock: after 5 wrong PINs, the wait.",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "locked_lock_now": "Lock now",
+  "@locked_lock_now": {
+    "description": "F2 content: the top bar action."
+  },
+  "locked_back_to_files": "Back to Files",
+  "@locked_back_to_files": {
+    "description": "F2 content: back, for screen readers."
+  },
+  "locked_empty": "Move files here from Files: they're encrypted on this phone.",
+  "@locked_empty": {
+    "description": "F2 content with no files yet."
+  },
+  "toast_pages_deleted": "{n, plural, =1{Page deleted} other{{n} pages deleted}}",
+  "@toast_pages_deleted": {"description": "Toast after deleting pages, with Undo (P1 After delete, DK-0333).", "placeholders": {"n": {"type": "int"}}},
+  "organize_rotate": "Rotate",
+  "@organize_rotate": {"description": "P1 selection bar (UI spec §18)."},
+  "organize_extract": "Extract",
+  "@organize_extract": {"description": "P1 selection bar: the selected pages as a new file."},
+  "organize_extracted": "extracted",
+  "@organize_extracted": {"description": "The file name suffix of extracted pages: Name – extracted.pdf."},
+  "organize_insert_title": "Insert pages",
+  "@organize_insert_title": {"description": "P1's insert sheet and FAB (DK-0332)."},
+  "organize_insert_blank": "Blank page",
+  "@organize_insert_blank": {"description": "P1 insert sheet row."},
+  "organize_insert_pdf": "From another PDF",
+  "@organize_insert_pdf": {"description": "P1 insert sheet row."},
+  "organize_insert_position": "Position",
+  "@organize_insert_position": {"description": "P1 insert sheet: where the pages go."},
+  "organize_insert_after": "After page {n}",
+  "@organize_insert_after": {"description": "P1 insert sheet position.", "placeholders": {"n": {"type": "int"}}},
+  "organize_insert_end": "At the end",
+  "@organize_insert_end": {"description": "P1 insert sheet position."},
+  "folder_back": "Back to Files",
+  "@folder_back": {
+    "description": "Folder screen: back, for screen readers."
+  },
+  "folder_rename": "Rename folder",
+  "@folder_rename": {
+    "description": "Folder menu (DK-0262)."
+  },
+  "folder_colour": "Colour",
+  "@folder_colour": {
+    "description": "Folder menu: the colour tag."
+  },
+  "folder_delete": "Delete folder",
+  "@folder_delete": {
+    "description": "Folder menu."
+  },
+  "folder_delete_title": "Delete “{name}”?",
+  "@folder_delete_title": {
+    "description": "Delete folder: the confirmation's title.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "folder_delete_body": "{n, plural, one{Its file moves} other{Its {n} files move}} to Recently deleted.",
+  "@folder_delete_body": {
+    "description": "Delete folder: what happens to its files.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "folder_tag_none": "No colour",
+  "@folder_tag_none": {
+    "description": "Folder colour menu."
+  },
+  "folder_tag_blue": "Blue",
+  "@folder_tag_blue": {
+    "description": "Folder colour."
+  },
+  "folder_tag_green": "Green",
+  "@folder_tag_green": {
+    "description": "Folder colour."
+  },
+  "folder_tag_orange": "Orange",
+  "@folder_tag_orange": {
+    "description": "Folder colour."
+  },
+  "folder_tag_red": "Red",
+  "@folder_tag_red": {
+    "description": "Folder colour."
+  },
+  "folder_tag_purple": "Purple",
+  "@folder_tag_purple": {
+    "description": "Folder colour."
+  },
+  "folder_tag_grey": "Grey",
+  "@folder_tag_grey": {
+    "description": "Folder colour."
+  },
+  "file_name_taken": "A file with this name already exists.",
+  "@file_name_taken": {
+    "description": "Rename dialog: the name is taken (DK-0272)."
+  },
+  "file_name_invalid": "That name can't be used.",
+  "@file_name_invalid": {
+    "description": "Rename dialog: nothing usable is left of the name."
+  },
+  "file_move_to_locked": "Move to locked folder",
+  "@file_move_to_locked": {
+    "description": "File action sheet (DK-0271)."
+  },
+  "file_all_tools": "All tools…",
+  "@file_all_tools": {
+    "description": "File action sheet: opens the tool picker."
+  },
+  "file_move_title": "{n, plural, one{Move 1 file} other{Move {n} files}}",
+  "@file_move_title": {
+    "description": "Move sheet's title (DK-0274).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "file_move_here": "Move here",
+  "@file_move_here": {
+    "description": "Move sheet: the sticky button."
+  },
+  "toast_duplicated": "Duplicated as {name}",
+  "@toast_duplicated": {
+    "description": "Toast after Duplicate, with Undo (DK-0276).",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "privacy_line_tool_tablet": "Processed on this tablet",
+  "@privacy_line_tool_tablet": {"description": "The privacy line under a tool's title on a tablet (24-tablet artboards)."},
+  "privacy_line_home_tablet": "Everything stays on this tablet",
+  "@privacy_line_home_tablet": {"description": "The privacy line on Home on a tablet."},
+  "t2_live_preview": "Live preview",
+  "@t2_live_preview": {"description": "T2's preview pane on a tablet in landscape (DK-0388)."},
+  "t3_result_preview": "Result preview",
+  "@t3_result_preview": {"description": "T3's preview pane on a tablet in landscape (DK-0388)."},
+  "about_tool_need": "What you need",
+  "@about_tool_need": {
+    "description": "About this tool (§20.5): the input heading."
+  },
+  "about_tool_get": "What you get",
+  "@about_tool_get": {
+    "description": "About this tool: the output heading."
+  },
+  "about_tool_offline": "Works offline",
+  "@about_tool_offline": {
+    "description": "About this tool: the offline line's heading."
+  },
+  "about_tool_offline_sub": "Processed on this phone",
+  "@about_tool_offline_sub": {
+    "description": "About this tool: under Works offline."
+  },
+  "about_tool_online": "Needs the internet",
+  "@about_tool_online": {
+    "description": "About this tool, Web page to PDF only: the heading instead of Works offline."
+  },
+  "about_tool_online_sub": "Loads the page from the internet; the PDF is made on this phone",
+  "@about_tool_online_sub": {
+    "description": "About this tool, Web page to PDF only."
+  },
+  "about_tool_open": "Open {tool}",
+  "@about_tool_open": {
+    "description": "About this tool: the button that opens the tool.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "tool_tier_free": "Free",
+  "@tool_tier_free": {
+    "description": "A tool's tier under its name (About this tool); Pro tools show the Pro badge instead."
+  },
+  "about_need_one_pdf": "One PDF",
+  "@about_need_one_pdf": {
+    "description": "What you need: one PDF (most tools)."
+  },
+  "tool_scan_need": "The camera, or photos of documents",
+  "@tool_scan_need": {
+    "description": "About this tool, scan: what you need."
+  },
+  "tool_scan_get": "A clean PDF of your pages",
+  "@tool_scan_get": {
+    "description": "About this tool, scan: what you get."
+  },
+  "tool_merge_need": "2 or more PDFs or images",
+  "@tool_merge_need": {
+    "description": "About this tool, merge: what you need."
+  },
+  "tool_merge_get": "One PDF with all the pages, in your order",
+  "@tool_merge_get": {
+    "description": "About this tool, merge: what you get."
+  },
+  "tool_split_get": "Several smaller PDFs",
+  "@tool_split_get": {
+    "description": "About this tool, split: what you get."
+  },
+  "tool_extract_get": "A new PDF with the pages you pick",
+  "@tool_extract_get": {
+    "description": "About this tool, extract: what you get."
+  },
+  "tool_organize_get": "Your pages reordered, rotated or removed",
+  "@tool_organize_get": {
+    "description": "About this tool, organize: what you get."
+  },
+  "tool_rotate_get": "A copy with the pages turned the right way",
+  "@tool_rotate_get": {
+    "description": "About this tool, rotate: what you get."
+  },
+  "tool_smartsplit_need": "A PDF with several documents in it",
+  "@tool_smartsplit_need": {
+    "description": "About this tool, smartsplit: what you need."
+  },
+  "tool_smartsplit_get": "One PDF per document",
+  "@tool_smartsplit_get": {
+    "description": "About this tool, smartsplit: what you get."
+  },
+  "tool_img2pdf_need": "One or more images",
+  "@tool_img2pdf_need": {
+    "description": "About this tool, img2pdf: what you need."
+  },
+  "tool_img2pdf_get": "One PDF, a page for each image",
+  "@tool_img2pdf_get": {
+    "description": "About this tool, img2pdf: what you get."
+  },
+  "tool_pdf2img_get": "A JPG image for each page",
+  "@tool_pdf2img_get": {
+    "description": "About this tool, pdf2img: what you get."
+  },
+  "tool_web_need": "A web address or an HTML file",
+  "@tool_web_need": {
+    "description": "About this tool, web: what you need."
+  },
+  "tool_web_get": "A PDF of the page",
+  "@tool_web_get": {
+    "description": "About this tool, web: what you get."
+  },
+  "tool_pdfa_get": "A PDF/A copy for long-term archiving",
+  "@tool_pdfa_get": {
+    "description": "About this tool, pdfa: what you get."
+  },
+  "tool_text_get": "Its text, ready to copy or share",
+  "@tool_text_get": {
+    "description": "About this tool, text: what you get."
+  },
+  "tool_compress_need": "One or more PDFs",
+  "@tool_compress_need": {
+    "description": "About this tool, compress: what you need."
+  },
+  "tool_compress_get": "A smaller copy. Your original stays unchanged.",
+  "@tool_compress_get": {
+    "description": "About this tool, compress: what you get."
+  },
+  "tool_repair_need": "A damaged PDF",
+  "@tool_repair_need": {
+    "description": "About this tool, repair: what you need."
+  },
+  "tool_repair_get": "A copy that opens again",
+  "@tool_repair_get": {
+    "description": "About this tool, repair: what you get."
+  },
+  "tool_ocr_need": "A scanned PDF",
+  "@tool_ocr_need": {
+    "description": "About this tool, ocr: what you need."
+  },
+  "tool_ocr_get": "A copy whose text you can search and copy",
+  "@tool_ocr_get": {
+    "description": "About this tool, ocr: what you get."
+  },
+  "tool_pagenum_get": "A copy with page numbers",
+  "@tool_pagenum_get": {
+    "description": "About this tool, pagenum: what you get."
+  },
+  "tool_watermark_get": "A copy with your text or image on its pages",
+  "@tool_watermark_get": {
+    "description": "About this tool, watermark: what you get."
+  },
+  "tool_crop_get": "A copy with the margins trimmed",
+  "@tool_crop_get": {
+    "description": "About this tool, crop: what you get."
+  },
+  "tool_markup_get": "Your PDF with highlights, notes and drawings",
+  "@tool_markup_get": {
+    "description": "About this tool, markup: what you get."
+  },
+  "tool_form_need": "A PDF with a form",
+  "@tool_form_need": {
+    "description": "About this tool, form: what you need."
+  },
+  "tool_form_get": "The form, filled in",
+  "@tool_form_get": {
+    "description": "About this tool, form: what you get."
+  },
+  "tool_sign_get": "A copy with your signature",
+  "@tool_sign_get": {
+    "description": "About this tool, sign: what you get."
+  },
+  "tool_protect_get": "A copy that opens only with your password",
+  "@tool_protect_get": {
+    "description": "About this tool, protect: what you get."
+  },
+  "tool_unlock_need": "A PDF with a password, and the password",
+  "@tool_unlock_need": {
+    "description": "About this tool, unlock: what you need."
+  },
+  "tool_unlock_get": "A copy without the password",
+  "@tool_unlock_get": {
+    "description": "About this tool, unlock: what you get."
+  },
+  "tool_redact_get": "A copy with what you chose removed for good",
+  "@tool_redact_get": {
+    "description": "About this tool, redact: what you get."
+  },
+  "tool_compare_need": "Two versions of a PDF",
+  "@tool_compare_need": {
+    "description": "About this tool, compare: what you need."
+  },
+  "tool_compare_get": "What changed, page by page",
+  "@tool_compare_get": {
+    "description": "About this tool, compare: what you get."
+  },
+  "tool_summarize_get": "A short summary of it",
+  "@tool_summarize_get": {
+    "description": "About this tool, summarize: what you get."
+  },
+  "tool_ask_get": "Answers, with the pages they come from",
+  "@tool_ask_get": {
+    "description": "About this tool, ask: what you get."
+  },
+  "tool_translate_get": "Its text in another language",
+  "@tool_translate_get": {
+    "description": "About this tool, translate: what you get."
+  },
+  "tool_extractassets_get": "Its images and text, to save or share",
+  "@tool_extractassets_get": {
+    "description": "About this tool, extractassets: what you get."
+  },
+  "tool_batch_need": "Many PDFs",
+  "@tool_batch_need": {
+    "description": "About this tool, batch: what you need."
+  },
+  "tool_batch_get": "Every file done by the same tool, in a new folder",
+  "@tool_batch_get": {
+    "description": "About this tool, batch: what you get."
+  },
+  "tool_workflows_need": "One or more PDFs",
+  "@tool_workflows_need": {
+    "description": "About this tool, workflows: what you need."
+  },
+  "tool_workflows_get": "The result of several tools in a row",
+  "@tool_workflows_get": {
+    "description": "About this tool, workflows: what you get."
+  },
+  "t2_about_tool": "About this tool",
+  "@t2_about_tool": {"description": "T2's overflow menu: opens About this tool (UI spec §20.1, §20.5)."},
+  "error_unexpected_short": "Something went wrong.",
+  "@error_unexpected_short": {"description": "Unexpected, no page known, without the code: the progress sheet shows the code on its own line (tool-shell-failure)."},
+  "error_unexpected_page_short": "Something went wrong on page {page}.",
+  "@error_unexpected_page_short": {"description": "Unexpected on a page, without the code (tool-shell-failure).", "placeholders": {"page": {"type": "int"}}},
+  "error_code_line": "Code {code}",
+  "@error_code_line": {"description": "The error code on its own line under a failure (tool-shell-failure).", "placeholders": {"code": {"type": "String"}}},
+  "tools_search_hint": "Search tools",
+  "@tools_search_hint": {
+    "description": "T1's search field (DK-0256)."
+  },
+  "tools_all": "All",
+  "@tools_all": {
+    "description": "T1's first category chip: back to the top."
+  },
+  "tools_count": "{n, plural, one{1 tool} other{{n} tools}}",
+  "@tools_count": {
+    "description": "T1 section header: how many tools the section has.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "ai_not_eligible_title": "AI isn't available on this phone",
+  "@ai_not_eligible_title": {
+    "description": "The device-not-eligible sheet (ILL-13), from V1's AI button and T1's AI tools."
+  },
+  "ai_not_eligible_body": "It needs at least {need} GB of memory. This phone has {have} GB.",
+  "@ai_not_eligible_body": {
+    "description": "The device-not-eligible sheet's text.",
+    "placeholders": {
+      "need": {
+        "type": "int"
+      },
+      "have": {
+        "type": "int"
+      }
+    }
+  },
+  "common_ok": "OK",
+  "@common_ok": {
+    "description": "Closes an information sheet."
+  },
+  "progress_of": "{i} of {n}",
+  "@progress_of": {"description": "The mini job bar's page count: Compressing · 18 of 40 (tool-shell-minibar).", "placeholders": {"i": {"type": "int"}, "n": {"type": "int"}}},
+  "locked_moved_in": "{n, plural, one{Moved 1 file to Locked folder} other{Moved {n} files to Locked folder}}",
+  "@locked_moved_in": {
+    "description": "Toast after Move to locked folder, with Undo (DK-0289).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "locked_move_out": "Move out of locked folder",
+  "@locked_move_out": {
+    "description": "F2 file sheet: decrypts it back to its folder."
+  },
+  "trash_empty": "Empty",
+  "@trash_empty": {
+    "description": "R1 top bar: empties Recently deleted (DK-0278)."
+  },
+  "trash_banner": "Files are deleted for good after {n} days.",
+  "@trash_banner": {
+    "description": "R1's info banner; n is the retention, 30 or 7.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "meta_days_left": "{n, plural, one{1 day left} other{{n} days left}}",
+  "@meta_days_left": {
+    "description": "R1 row meta, after the size.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "search_names": "Names",
+  "@search_names": {
+    "description": "F1 search: the group of files whose name matches (DK-0269)."
+  },
+  "search_text": "Text inside files",
+  "@search_text": {
+    "description": "F1 search: the group of pages whose text matches."
+  },
+  "file_favourite_add": "Add to favourites",
+  "@file_favourite_add": {
+    "description": "File action sheet (DK-0280)."
+  },
+  "file_favourite_remove": "Remove from favourites",
+  "@file_favourite_remove": {
+    "description": "File action sheet, on a favourite."
+  },
+  "files_favourites": "Favourites",
+  "@files_favourites": {
+    "description": "F1: the favourites' section, above the folders."
+  },
+  "tools_search_empty_title": "No tool for “{query}”",
+  "@tools_search_empty_title": {
+    "description": "T1 search, no result (DK-0258): the query in typographic quotes.",
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "tools_search_empty_body": "Try “compress” or “sign”.",
+  "@tools_search_empty_body": {
+    "description": "T1 search, no result."
+  },
+  "tools_about": "About {tool}",
+  "@tools_about": {
+    "description": "T1 search: the row under the results that opens About this tool for the first.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "info_location": "Location",
+  "@info_location": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_size": "Size",
+  "@info_size": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_pages": "Pages",
+  "@info_pages": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_created": "Created",
+  "@info_created": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_modified": "Modified",
+  "@info_modified": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_pdf_version": "PDF version",
+  "@info_pdf_version": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_password": "Password",
+  "@info_password": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_searchable": "Searchable text",
+  "@info_searchable": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_versions": "Versions",
+  "@info_versions": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "info_current": "current",
+  "@info_current": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "common_yes": "Yes",
+  "@common_yes": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "common_no": "No",
+  "@common_no": {
+    "description": "The file Info sheet (DK-0275)."
+  },
+  "home_edit": "Edit",
+  "@home_edit": {
+    "description": "H1: edits the pinned tools (DK-0248)."
+  },
+  "home_add_tool": "Add tool",
+  "@home_add_tool": {
+    "description": "H1 edit mode: the tile that opens the add sheet."
+  },
+  "home_add_tool_title": "Add a tool",
+  "@home_add_tool_title": {
+    "description": "The add sheet's title (DK-0249)."
+  },
+  "home_unpin": "Unpin",
+  "@home_unpin": {
+    "description": "A pinned tile's long-press menu (DK-0244)."
+  },
+  "home_about_tool": "About this tool",
+  "@home_about_tool": {
+    "description": "A pinned tile's long-press menu."
+  },
+  "home_unpinned": "Unpinned {tool}",
+  "@home_unpinned": {
+    "description": "Toast after Unpin, with Undo.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "home_unpin_named": "Unpin {tool}",
+  "@home_unpin_named": {
+    "description": "Edit mode: the minus badge, for screen readers.",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      }
+    }
+  },
+  "me_pro_owned": "Pro – yours for good",
+  "@me_pro_owned": {
+    "description": "M1, for Pro users (DK-0570)."
+  },
+  "me_pro_thanks": "Thank you",
+  "@me_pro_thanks": {
+    "description": "M1, for Pro users: the row's value."
+  },
+  "me_your_things": "Your things",
+  "@me_your_things": {
+    "description": "M1 section."
+  },
+  "me_signatures": "Signatures",
+  "@me_signatures": {
+    "description": "M1 row: saved signatures."
+  },
+  "me_ai_models": "AI models",
+  "@me_ai_models": {
+    "description": "M1 row: M2."
+  },
+  "me_scanning": "Scanning",
+  "@me_scanning": {
+    "description": "M1 Settings row."
+  },
+  "me_files_storage": "Files & storage",
+  "@me_files_storage": {
+    "description": "M1 Settings row."
+  },
+  "me_appearance": "Appearance",
+  "@me_appearance": {
+    "description": "M1 Settings row."
+  },
+  "me_theme_light": "Light",
+  "@me_theme_light": {
+    "description": "Appearance: light."
+  },
+  "me_theme_dark": "Dark",
+  "@me_theme_dark": {
+    "description": "Appearance: dark."
+  },
+  "me_about": "About",
+  "@me_about": {
+    "description": "M1 section."
+  },
+  "me_privacy": "Privacy",
+  "@me_privacy": {
+    "description": "M1 About row."
+  },
+  "me_licences": "Open-source licences",
+  "@me_licences": {
+    "description": "M1 About row."
+  },
+  "me_replay_intro": "Replay intro",
+  "@me_replay_intro": {
+    "description": "M1 About row: the onboarding again."
+  },
+  "me_contact": "Contact",
+  "@me_contact": {
+    "description": "M1 About row: an email to support."
+  },
+  "me_rate": "Rate Dokulo",
+  "@me_rate": {
+    "description": "M1 About row: the store's review."
+  },
+  "me_restore_purchase": "Restore purchase",
+  "@me_restore_purchase": {
+    "description": "M1 About row; always visible."
+  },
+  "t3_save_menu": "More ways to save",
+  "@t3_save_menu": {"description": "T3's split Save: the chevron that opens Save as copy · Replace original (§20.4), for screen readers."},
+  "t3_save_here": "Save here",
+  "@t3_save_here": {"description": "T3 Save to…: the folder picker's button (DK-0385)."},
+  "t3_use_folder": "Use this folder",
+  "@t3_use_folder": {"description": "T3: the folder picker from the 'Save to' row; Save then saves there (DK-0385)."},
+  "t3_save_elsewhere": "Save outside Dokulo…",
+  "@t3_save_elsewhere": {"description": "T3 Save to…: opens the system's save dialog (DK-0385)."},
+  "organize_insert_photos": "From photos",
+  "@organize_insert_photos": {"description": "P1 insert sheet row (UI spec §18): photos become pages, one each."},
+  "viewer_outline_title": "Contents",
+  "@viewer_outline_title": {"description": "The viewer's outline (bookmarks) sheet title (DK-0309)."},
+  "viewer_outline_empty": "This PDF has no table of contents.",
+  "@viewer_outline_empty": {"description": "The outline sheet when the PDF has no bookmarks (DK-0309)."},
+  "organize_suffix": "organized",
+  "@organize_suffix": {"description": "The suffix of Organize's saved copy: Name – organized.pdf (UI spec §27.3)."},
+  "toast_saved_as": "Saved as “{name}”",
+  "@toast_saved_as": {"description": "After Organize's Save (UI spec §18).", "placeholders": {"name": {"type": "String"}}},
+  "files_drop_hint": "Drop on “{folder}” to move",
+  "@files_drop_hint": {
+    "description": "F1 grid: a file dragged over a folder (DK-0264).",
+    "placeholders": {
+      "folder": {
+        "type": "String"
+      }
+    }
+  },
+  "security_app_lock": "App lock",
+  "@security_app_lock": {
+    "description": "M3 Security (DK-0573)."
+  },
+  "security_needs_pin": "Set a locked folder PIN first.",
+  "@security_needs_pin": {
+    "description": "M3 Security: App lock and Change PIN need the folder's PIN."
+  },
+  "security_bio_face": "Face ID",
+  "@security_bio_face": {
+    "description": "Apple's name."
+  },
+  "security_bio_touch": "Touch ID",
+  "@security_bio_touch": {
+    "description": "Apple's name."
+  },
+  "security_bio_fingerprint": "fingerprint",
+  "@security_bio_fingerprint": {
+    "description": "Android's biometric, inside a sentence."
+  },
+  "security_lock_after": "Lock after",
+  "@security_lock_after": {
+    "description": "M3 Security row."
+  },
+  "security_after_now": "Immediately",
+  "@security_after_now": {
+    "description": "Lock after: at once."
+  },
+  "security_after_1min": "1 min",
+  "@security_after_1min": {
+    "description": "Lock after: one minute (the default)."
+  },
+  "security_after_5min": "5 min",
+  "@security_after_5min": {
+    "description": "Lock after: five minutes."
+  },
+  "security_hide_previews": "Hide previews in app switcher",
+  "@security_hide_previews": {
+    "description": "M3 Security row (on by default)."
+  },
+  "security_change_pin": "Change locked folder PIN",
+  "@security_change_pin": {
+    "description": "M3 Security row (DK-0292)."
+  },
+  "security_current_pin": "Enter your current PIN",
+  "@security_current_pin": {
+    "description": "Change PIN, step 1."
+  },
+  "security_pin_changed": "PIN changed",
+  "@security_pin_changed": {
+    "description": "Toast after Change PIN."
+  },
+  "app_lock_title": "Dokulo is locked",
+  "@app_lock_title": {
+    "description": "The app lock screen (DK-0290)."
+  },
+  "app_lock_reason": "Unlock Dokulo",
+  "@app_lock_reason": {
+    "description": "The biometric prompt's reason on the app lock."
+  },
+  "security_app_lock_body": "Ask for {method} or PIN when opening Dokulo",
+  "@security_app_lock_body": {
+    "description": "M3 Security: App lock's description.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "security_unlock_with": "Unlock with {method}",
+  "@security_unlock_with": {
+    "description": "M3 Security row.",
+    "placeholders": {
+      "method": {
+        "type": "String"
+      }
+    }
+  },
+  "sign_photo_no_ink": "No signature found in this photo.",
+  "@sign_photo_no_ink": {"description": "Signature pad, Image tab: the chosen photo has no ink (DK-1084)."},
+  "files_settings_save_folder": "Default save folder",
+  "@files_settings_save_folder": {
+    "description": "M3 Files & storage (DK-0572)."
+  },
+  "files_settings_keep": "Keep deleted files",
+  "@files_settings_keep": {
+    "description": "M3 Files & storage: the trash retention."
+  },
+  "storage_title": "Storage",
+  "@storage_title": {
+    "description": "M3 Files & storage: the storage bar's group (DK-0281)."
+  },
+  "storage_cache": "Cache",
+  "@storage_cache": {
+    "description": "Storage bar: thumbnails and temporary files."
+  },
+  "storage_clear": "Clear cache",
+  "@storage_clear": {
+    "description": "Storage bar's button."
+  },
+  "storage_cleared": "Cache cleared",
+  "@storage_cleared": {
+    "description": "Toast after Clear cache."
+  },
+  "files_settings_export": "Export all files",
+  "@files_settings_export": {
+    "description": "M3 Files & storage row."
+  },
+  "files_settings_days": "{n, plural, one{1 day} other{{n} days}}",
+  "@files_settings_days": {
+    "description": "Keep deleted files: 7 or 30.",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "notif_prompt_title": "Get a notice when long jobs finish?",
+  "@notif_prompt_title": {"description": "The notice pre-prompt, 30 s into a job in the background (DK-0378, tool-shell-notifprompt)."},
+  "notif_prompt_body": "Dokulo keeps working in the background. A notice tells you when it's done. Nothing else is sent.",
+  "@notif_prompt_body": {"description": "The notice pre-prompt's body (DK-0378)."},
+  "home_continue_job": "{tool} · {file}",
+  "@home_continue_job": {
+    "description": "H1 continue card: a job that finished in the background, for a tool without its own done title (DK-0247; Compress says \"Compressed {file}\").",
+    "placeholders": {
+      "tool": {
+        "type": "String"
+      },
+      "file": {
+        "type": "String"
+      }
+    }
+  },
+  "error_no_mail_app": "No email app found.",
+  "@error_no_mail_app": {"description": "Send report by email, when no mail app takes the draft (DK-1080)."},
+  "viewer_goto_title": "Go to page",
+  "@viewer_goto_title": {"description": "V1 Go to page dialog (UI spec §17.1; DK-0307)."},
+  "viewer_goto_range": "1–{n}",
+  "@viewer_goto_range": {"description": "Go to page helper: the file's pages.", "placeholders": {"n": {"type": "int"}}},
+  "viewer_goto_invalid": "Choose a page from 1 to {n}.",
+  "@viewer_goto_invalid": {"description": "Go to page: a number outside the file.", "placeholders": {"n": {"type": "int"}}},
+  "viewer_goto_action": "Go",
+  "@viewer_goto_action": {"description": "Go to page's button."},
+  "viewer_link_title": "Open {host} in your browser?",
+  "@viewer_link_title": {"description": "V1 external link dialog (§17.1; DK-0308).", "placeholders": {"host": {"type": "String"}}},
+  "viewer_link_body": "This is the only step that leaves Dokulo.",
+  "@viewer_link_body": {"description": "V1 external link dialog body."},
+  "viewer_link_open": "Open",
+  "@viewer_link_open": {"description": "V1 external link dialog button."},
+  "viewer_locked_title": "This PDF is locked",
+  "@viewer_locked_title": {"description": "V1 Locked PDF card title (UI spec §17.1; DK-0301)."},
+  "viewer_damaged_body": "It may be damaged.",
+  "@viewer_damaged_body": {"description": "V1 Damaged file, under the title (§17.1; DK-0305)."},
+  "viewer_unlocked": "Unlocked for viewing",
+  "@viewer_unlocked": {"description": "V1 After unlock toast, with 'Remove password' (§17.1; DK-0303)."},
+  "viewer_form_banner": "This PDF has fillable fields.",
+  "@viewer_form_banner": {"description": "V1 Form detected banner (UI spec §17.1; DK-1090)."},
+  "viewer_form_fill": "Fill form",
+  "@viewer_form_fill": {"description": "V1 Form detected banner's action."},
+  "x1_open_in_viewer": "Open in viewer",
+  "@x1_open_in_viewer": {"description": "X1 tool picker, first row for one PDF (UI spec §20.6; DK-1094)."},
+  "x1_suggested": "Suggested",
+  "@x1_suggested": {"description": "X1 section header."},
+  "x1_all_tools": "All tools",
+  "@x1_all_tools": {"description": "X1 section header."},
+  "viewer_search_of": "{i} of {n}",
+  "@viewer_search_of": {"description": "V1 search counter (UI spec §17.1; DK-1093).", "placeholders": {"i": {"type": "int"}, "n": {"type": "int"}}},
+  "viewer_search_none": "0 results",
+  "@viewer_search_none": {"description": "V1 search counter with no match."},
+  "viewer_search_previous": "Previous match",
+  "@viewer_search_previous": {"description": "V1 search: the up arrow, for screen readers."},
+  "viewer_search_next": "Next match",
+  "@viewer_search_next": {"description": "V1 search: the down arrow, for screen readers."},
+  "viewer_search_no_text": "This scan has no searchable text.",
+  "@viewer_search_no_text": {"description": "V1 search on a scan without text (§17.1; DK-1093)."},
+  "viewer_make_searchable": "Make searchable",
+  "@viewer_make_searchable": {"description": "The banner's action: Make text searchable on this file."},
+  "files_sel_merge": "Merge",
+  "@files_sel_merge": {
+    "description": "F1 selection bar (DK-0263): opens Merge PDF with the selected files."
+  },
+  "files_sel_compress": "Compress",
+  "@files_sel_compress": {
+    "description": "F1 selection bar: opens Compress PDF with the selected files."
+  },
+  "files_sel_more": "More",
+  "@files_sel_more": {
+    "description": "F1 selection bar: the menu with more actions."
+  },
+  "files_run_tool": "Run a tool…",
+  "@files_run_tool": {
+    "description": "F1 selection bar's More menu: pick a tool for the selected files."
+  },
+  "viewer_search": "Search",
+  "@viewer_search": {"description": "V1's chrome (DK-0294)."},
+  "viewer_edit": "Edit",
+  "@viewer_edit": {"description": "V1's chrome (DK-0294)."},
+  "viewer_sign": "Sign",
+  "@viewer_sign": {"description": "V1's chrome (DK-0294)."},
+  "viewer_ai": "AI",
+  "@viewer_ai": {"description": "V1's chrome (DK-0294)."},
+  "viewer_tools": "Tools",
+  "@viewer_tools": {"description": "V1's chrome (DK-0294)."},
+  "viewer_menu_pages": "Pages",
+  "@viewer_menu_pages": {"description": "V1 overflow menu: shows the thumbnail strip (UI spec §17.1; DK-0295)."},
+  "viewer_menu_night": "Night mode",
+  "@viewer_menu_night": {"description": "V1 overflow menu: the night mode switch."},
+  "viewer_menu_print": "Print",
+  "@viewer_menu_print": {"description": "V1 overflow menu: the system print dialog."},
+  "viewer_print_failed": "Couldn't open printing.",
+  "@viewer_print_failed": {"description": "Toast when the system print dialog didn't open."},
+  "x1_files": "{n, plural, one{1 file} other{{n} files}}",
+  "@x1_files": {"description": "X1 header for several files (UI spec §20.6; DK-0387).", "placeholders": {"n": {"type": "int"}}},
+  "x1_pdfs": "{n, plural, one{1 PDF} other{{n} PDFs}}",
+  "@x1_pdfs": {"description": "X1 header's line for several files: the PDFs among them.", "placeholders": {"n": {"type": "int"}}},
+  "x1_images": "{n, plural, one{1 image} other{{n} images}}",
+  "@x1_images": {"description": "X1 header's line for several files: the images among them.", "placeholders": {"n": {"type": "int"}}},
+  "images_heic_skipped": "{n, plural, one{1 HEIC photo can't be opened on this phone and was skipped.} other{{n} HEIC photos can't be opened on this phone and were skipped.}}",
+  "@images_heic_skipped": {
+    "description": "Toast: picked HEIC photos this phone can't decode (Android 8 and older) were left out (DK-1081).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "edit_title": "Editing",
+  "@edit_title": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_pan": "Pan",
+  "@edit_pan": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_pen": "Pen",
+  "@edit_pen": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_highlighter": "Highlighter",
+  "@edit_highlighter": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_text": "Text",
+  "@edit_text": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_shapes": "Shapes",
+  "@edit_shapes": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_note": "Note",
+  "@edit_note": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_sign": "Sign",
+  "@edit_sign": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_eraser": "Eraser",
+  "@edit_eraser": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "img2pdf_page_size": "Page size",
+  "@img2pdf_page_size": {
+    "description": "Image to PDF option (DK-0433; UI spec §21.7)."
+  },
+  "img2pdf_size_fit": "Fit image",
+  "@img2pdf_size_fit": {
+    "description": "Image to PDF page size: each page the image's proportions."
+  },
+  "img2pdf_size_letter": "Letter",
+  "@img2pdf_size_letter": {
+    "description": "Image to PDF page size: US Letter."
+  },
+  "img2pdf_margins": "Margins",
+  "@img2pdf_margins": {
+    "description": "Image to PDF option."
+  },
+  "img2pdf_margins_none": "None",
+  "@img2pdf_margins_none": {
+    "description": "Image to PDF margins: none."
+  },
+  "img2pdf_margins_small": "Small",
+  "@img2pdf_margins_small": {
+    "description": "Image to PDF margins: small (24 pt)."
+  },
+  "img2pdf_output": "Output",
+  "@img2pdf_output": {
+    "description": "Image to PDF option."
+  },
+  "img2pdf_output_one": "One PDF",
+  "@img2pdf_output_one": {
+    "description": "Image to PDF output: all images in one PDF."
+  },
+  "img2pdf_output_each": "One per image",
+  "@img2pdf_output_each": {
+    "description": "Image to PDF output: a PDF for each image."
+  },
+  "img2pdf_clean_up": "Clean up like a scan",
+  "@img2pdf_clean_up": {
+    "description": "Image to PDF switch."
+  },
+  "img2pdf_clean_up_help": "Crop to the document and improve contrast",
+  "@img2pdf_clean_up_help": {
+    "description": "Image to PDF switch's help line."
+  },
+  "img2pdf_action": "{n, plural, =1{Create PDF · 1 image} other{Create PDF · {n} images}}",
+  "@img2pdf_action": {
+    "description": "Image to PDF's button (§27.3).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "img2pdf_estimate": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 page} other{{pages} pages}} · about {size}",
+  "@img2pdf_estimate": {
+    "description": "Image to PDF's estimate above the button (the frame).",
+    "placeholders": {
+      "pdfs": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "t2_section_images": "Images ({n})",
+  "@t2_section_images": {
+    "description": "T2 input header for an images-only tool (Image to PDF, DK-0433).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "common_add": "Add",
+  "@common_add": {
+    "description": "A compact Add button (T2's image strip)."
+  }
 }

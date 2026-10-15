@@ -137,11 +137,20 @@ class DkToolRow extends StatelessWidget {
     required this.toolId,
     required this.onTap,
     this.showDescription = false,
+    this.trailingIcon,
+    this.inset,
   });
 
   final String toolId;
+
+  /// Its start and end padding; `space.l` by default, 0 inside a sheet that
+  /// pads its own content (X1).
+  final double? inset;
   final VoidCallback onTap;
   final bool showDescription;
+
+  /// In place of the chevron, in `color.primary`: the add sheet's add.
+  final IconData? trailingIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +174,7 @@ class DkToolRow extends StatelessWidget {
           constraints: const BoxConstraints(minHeight: 56),
           color: pressed ? t.state.pressed : null,
           padding: EdgeInsets.symmetric(
-            horizontal: t.space.l,
+            horizontal: inset ?? t.space.l,
             vertical: t.space.s,
           ),
           child: Row(
@@ -202,7 +211,10 @@ class DkToolRow extends StatelessWidget {
                 ),
               ),
               if (tool.isPro) const _CornerBadge(small: false),
-              DkIcon(DkIcons.chevronRight, color: c.iconSecondary),
+              DkIcon(
+                trailingIcon ?? DkIcons.chevronRight,
+                color: trailingIcon == null ? c.iconSecondary : c.primary,
+              ),
             ],
           ),
         ),

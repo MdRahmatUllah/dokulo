@@ -49,13 +49,15 @@ class DkMiniJobBar extends StatelessWidget {
         ? AppLocalizations.of(context).job_running_many(jobs)
         : label;
     final radius = BorderRadius.circular(t.radius.m);
-    final percent = (progress.clamp(0.0, 1.0) * 100).round();
+    // Screen readers hear it in 25 % steps (DK-0645), as the progress
+    // sheet: a focused bar would otherwise speak at every percent.
+    final step = (progress.clamp(0.0, 1.0) * 4).floor() * 25;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: t.space.s),
       child: Semantics(
         button: true,
         label: text,
-        value: '$percent %',
+        value: '$step %',
         // The children are excluded, the tap with them: give it back.
         excludeSemantics: true,
         onTap: onTap,

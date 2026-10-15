@@ -113,3 +113,13 @@ highgui or dnn. It contains no FFmpeg strings. `native_libs_check.py`: clean.
 than 260 characters" when the app sits deep (the probe failed at a 112-character
 project path). It builds at `F:/appDevs/dokulo/.worktrees/agent-1/<52-char app
 path>`. Keep the monorepo's app package paths short (DK-0001).
+
+## Building it (DK-0339)
+
+`dartcv4`'s build hook compiles OpenCV from source the first time a
+worktree builds or tests `doc_vision` (CMake; Visual Studio on Windows, Ninja
+for Android). The root `pubspec.yaml` caps it at `parallel_jobs: 2`, so it
+fits beside the other agents' work on one machine: the first build takes
+about 20 minutes and a few GB; every later run reuses the build in
+`.dart_tool/hooks_runner/shared/dartcv4/`. Start that first run when more
+than 5 GB is free (it is a heavy job: `heavy: mine` / `heavy: free`).

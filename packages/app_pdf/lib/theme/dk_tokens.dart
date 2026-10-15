@@ -174,6 +174,7 @@ class DkColors {
     required this.onInverseSurface,
     required this.inversePrimary,
     required this.pageWhite,
+    required this.nightCanvas,
     required this.redactBox,
   });
 
@@ -215,6 +216,7 @@ class DkColors {
     onInverseSurface: Color(0xFFFFFFFF),
     inversePrimary: Color(0xFF8AA8FF),
     pageWhite: Color(0xFFFFFFFF),
+    nightCanvas: Color(0xFF0B0D10),
     redactBox: Color(0xFF000000),
   );
 
@@ -254,6 +256,7 @@ class DkColors {
     onInverseSurface: Color(0xFF14171C),
     inversePrimary: Color(0xFF2251E6),
     pageWhite: Color(0xFFFFFFFF),
+    nightCanvas: Color(0xFF0B0D10),
     redactBox: Color(0xFF000000),
   );
 
@@ -371,6 +374,10 @@ class DkColors {
   /// PDF page background: pages stay white in dark mode unless the viewer's night mode is on.
   final Color pageWhite;
 
+  /// The viewer's canvas in night mode (UI spec §17.1): the same in both
+  /// themes.
+  final Color nightCanvas;
+
   /// Redaction boxes: always pure black, in every theme.
   final Color redactBox;
 
@@ -412,6 +419,7 @@ class DkColors {
       onInverseSurface: c(onInverseSurface, o.onInverseSurface),
       inversePrimary: c(inversePrimary, o.inversePrimary),
       pageWhite: c(pageWhite, o.pageWhite),
+      nightCanvas: c(nightCanvas, o.nightCanvas),
       redactBox: c(redactBox, o.redactBox),
     );
   }
