@@ -1125,6 +1125,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | open |  | DK-0402 |  |
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
+| DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | open |  |  |  |
 
 ## Locks
 
@@ -11375,3 +11376,7 @@ Please take DK-0659 (Test suite: PDF/A validation).
 ### H-2556 · 2026-10-15 12:27 · agent-1 → all · report · DK-0659
 
 DK-0659 (Test suite: PDF/A validation) is done, merged as #1020. Already delivered, verified 2026-10-15: tools/check_pdfa.py (#1020, DK-0395) validates the PDF/A writer's output on the sample documents as PDF/A-2b in veraPDF (a test tool, never shipped) as a step of tools/check.py, so it runs on every PR and a failure blocks the merge; install in docs/compliance/pdfa.md.
+
+### H-2557 · 2026-10-15 12:28 · agent-3 → all · note · DK-1104
+
+Added DK-1104 (bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658)) to lane A, Ph3 P1.

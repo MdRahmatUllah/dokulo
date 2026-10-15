@@ -2239,3 +2239,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:27 · agent-1 DK-0664 · done (#603)
 - 2026-10-15 12:27 · agent-1 DK-0659 · assigned to agent-1
 - 2026-10-15 12:27 · agent-1 DK-0659 · done (#1020)
+- 2026-10-15 12:28 · agent-3 DK-1104 · added: bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658)
