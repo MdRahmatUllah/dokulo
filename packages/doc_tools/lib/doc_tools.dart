@@ -4,9 +4,11 @@ library;
 export 'src/job_queue.dart';
 export 'src/preflight.dart';
 export 'src/registry.dart';
+export 'src/signature_photo.dart';
 export 'src/startup.dart';
 export 'src/tool_job.dart';
 export 'src/tools/compress_job.dart';
+export 'src/tools/img2pdf_job.dart';
 export 'src/tools/ocr_job.dart';
 export 'src/tools/output_name.dart';
 

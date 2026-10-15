@@ -17,6 +17,7 @@ class DkPrivacyLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tablet = MediaQuery.sizeOf(context).shortestSide >= 600;
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final style = t.text.caption.copyWith(color: t.color.textSecondary);
@@ -42,12 +43,13 @@ class DkPrivacyLine extends StatelessWidget {
           ),
         ),
         Flexible(
-          child: Text(
-            where == DkPrivacyContext.tool
-                ? l.privacy_line_tool
-                : l.privacy_line_home,
-            style: style,
-          ),
+          // "this tablet" on a tablet (the tablet artboards).
+          child: Text(switch ((where, tablet)) {
+            (DkPrivacyContext.tool, false) => l.privacy_line_tool,
+            (DkPrivacyContext.tool, true) => l.privacy_line_tool_tablet,
+            (_, false) => l.privacy_line_home,
+            (_, true) => l.privacy_line_home_tablet,
+          }, style: style),
         ),
       ],
     );

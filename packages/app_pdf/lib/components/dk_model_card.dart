@@ -46,9 +46,11 @@ class DkModelUnavailable extends DkModelState {
 
 /// An AI model in Me → Models (DK-0094; UI spec §11.2): the [name] in
 /// `type.titleS` with its [quality] pill ("Best quality" / "Fast" /
-/// "Small"), the [role] line in `type.bodyM` ("Summaries and questions"),
-/// the [facts] in `type.caption` ("1.3 GB · needs 3 GB memory") followed by
-/// the [licence] as a link, and the action for its [state] on the right.
+/// "Small"; [best] tints it `color.success`, the others
+/// `color.primaryContainer`, as the design draws it), the [role] line in
+/// `type.bodyM` ("Summaries and questions"), the [facts] in `type.caption`
+/// ("1.3 GB · needs 3 GB memory") followed by the [licence] as a link, and
+/// the action for its [state] on the right.
 class DkModelCard extends StatelessWidget {
   const DkModelCard({
     super.key,
@@ -59,9 +61,13 @@ class DkModelCard extends StatelessWidget {
     required this.licence,
     required this.onLicence,
     required this.state,
+    this.best = false,
   });
 
   final String name, quality, role, facts, licence;
+
+  /// The quality is the best one ("Best quality").
+  final bool best;
 
   /// Opens the licence text.
   final VoidCallback onLicence;
@@ -154,12 +160,14 @@ class DkModelCard extends StatelessWidget {
                 vertical: t.space.xxs,
               ),
               decoration: BoxDecoration(
-                color: c.surfaceSunken,
+                color: best ? c.successContainer : c.primaryContainer,
                 borderRadius: BorderRadius.circular(t.radius.pill),
               ),
               child: Text(
                 quality,
-                style: t.text.labelM.copyWith(color: c.textSecondary),
+                style: t.text.labelM.copyWith(
+                  color: best ? c.success : c.onPrimaryContainer,
+                ),
               ),
             ),
           ],

@@ -126,6 +126,10 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* keyboard_arrow_up */;
   static const delete = IconData(0xe92e, fontFamily: _font) /* delete */;
+  static const restoreFromTrash = IconData(
+    0xe938,
+    fontFamily: _font,
+  ) /* restore_from_trash */;
   static const deleteForever = IconData(
     0xe92b,
     fontFamily: _font,
@@ -135,6 +139,11 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* drive_file_rename_outline */;
   static const move = IconData(0xe9a1, fontFamily: _font) /* drive_file_move */;
+  static const notifications = IconData(
+    0xe7f4,
+    fontFamily: _font,
+  ) /* notifications */;
+  static const replace = IconData(0xe8d4, fontFamily: _font) /* swap_horiz */;
   static const duplicate = IconData(
     0xe14d,
     fontFamily: _font,
@@ -148,7 +157,10 @@ abstract final class DkIcons {
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
   static const flip = IconData(0xe3e8, fontFamily: _font) /* flip */;
+  static const addCircle = IconData(0xe147, fontFamily: _font) /* add_circle */;
   static const lock = IconData(0xe899, fontFamily: _font) /* lock */;
+  static const star = IconData(0xe838, fontFamily: _font) /* star */;
+  static const lockOpen = IconData(0xe898, fontFamily: _font) /* lock_open */;
   static const backspace = IconData(0xe14a, fontFamily: _font) /* backspace */;
   static const fingerprint = IconData(
     0xe90d,
@@ -188,12 +200,25 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* chevron_right */;
   static const undo = IconData(0xe166, fontFamily: _font) /* undo */;
+  static const dragHandle = IconData(
+    0xe945,
+    fontFamily: _font,
+  ) /* drag_indicator */;
   static const redo = IconData(0xe15a, fontFamily: _font) /* redo */;
+  static const blankPage = IconData(0xe89c, fontFamily: _font) /* note_add */;
+  static const pdf = IconData(0xe415, fontFamily: _font) /* picture_as_pdf */;
   static const pin = IconData(0xf10d, fontFamily: _font) /* push_pin */;
   static const info = IconData(0xe88e, fontFamily: _font) /* info */;
+  static const input = IconData(0xe890, fontFamily: _font) /* input */;
+  static const output = IconData(0xebbe, fontFamily: _font) /* output */;
+  static const internet = IconData(0xe80b, fontFamily: _font) /* public */;
 
   // Files.
   static const folder = IconData(0xe2c7, fontFamily: _font) /* folder */;
+  static const folderOpen = IconData(
+    0xe2c8,
+    fontFamily: _font,
+  ) /* folder_open */;
   static const lockedFolder = IconData(0xe899, fontFamily: _font) /* lock */;
   static const trash = IconData(0xe16c, fontFamily: _font) /* delete_sweep */;
 
@@ -217,6 +242,8 @@ abstract final class DkIcons {
   // Viewer and editor.
   static const nightMode = IconData(0xe51c, fontFamily: _font) /* dark_mode */;
   static const goToPage = IconData(0xe8a0, fontFamily: _font) /* pageview */;
+  static const pages = IconData(0xe8eb, fontFamily: _font) /* view_carousel */;
+  static const print = IconData(0xe8ad, fontFamily: _font) /* print */;
   static const pen = IconData(0xf097, fontFamily: _font) /* edit */;
   static const highlighter = IconData(
     0xe6d1,
@@ -253,6 +280,27 @@ abstract final class DkIcons {
   static const warning = IconData(0xf083, fontFamily: _font) /* warning */;
   static const error = IconData(0xf8b6, fontFamily: _font) /* error */;
   static const offline = IconData(0xe2c1, fontFamily: _font) /* cloud_off */;
+  // The error catalogue's situations (UI spec §26.3; DokuloError).
+  static const damaged = IconData(0xe3ad, fontFamily: _font) /* broken_image */;
+  static const storage = IconData(0xe1db, fontFamily: _font) /* storage */;
+  static const memory = IconData(0xe322, fontFamily: _font) /* memory */;
+  static const contrast = IconData(0xeb37, fontFamily: _font) /* contrast */;
+  static const shield = IconData(0xe9e0, fontFamily: _font) /* shield */;
+  static const gavel = IconData(0xe90e, fontFamily: _font) /* gavel */;
+  static const replay = IconData(0xe042, fontFamily: _font) /* replay */;
+  static const mail = IconData(0xe158, fontFamily: _font) /* mail */;
+  static const restore = IconData(0xe8b3, fontFamily: _font) /* restore */;
+  static const formUnsupported = IconData(
+    0xe85f,
+    fontFamily: _font,
+  ) /* assignment_late */;
+  static const cancelled = IconData(0xe888, fontFamily: _font) /* cancel */;
+  // Banners (26-global-states).
+  static const noText = IconData(0xf02f, fontFamily: _font) /* manage_search */;
+  static const cameraOff = IconData(
+    0xf1a8,
+    fontFamily: _font,
+  ) /* no_photography */;
   static const download = IconData(0xf090, fontFamily: _font) /* download */;
   static const pause = IconData(0xe034, fontFamily: _font) /* pause */;
   static const settings = IconData(0xe8b8, fontFamily: _font) /* settings */;
@@ -265,20 +313,20 @@ abstract final class DkIcons {
       Theme.of(context).platform == TargetPlatform.iOS;
 
   static IconData back(BuildContext context) => _ios(context)
-      ? IconData(0xe2ea, fontFamily: _font) /* arrow_back_ios_new */
-      : IconData(0xe5c4, fontFamily: _font) /* arrow_back */;
+      ? const IconData(0xe2ea, fontFamily: _font) /* arrow_back_ios_new */
+      : const IconData(0xe5c4, fontFamily: _font) /* arrow_back */;
 
   static IconData overflow(BuildContext context) => _ios(context)
-      ? IconData(0xe5d3, fontFamily: _font) /* more_horiz */
-      : IconData(0xe5d4, fontFamily: _font) /* more_vert */;
+      ? const IconData(0xe5d3, fontFamily: _font) /* more_horiz */
+      : const IconData(0xe5d4, fontFamily: _font) /* more_vert */;
 
   static IconData share(BuildContext context) => _ios(context)
-      ? IconData(0xe6b8, fontFamily: _font) /* ios_share */
-      : IconData(0xe80d, fontFamily: _font) /* share */;
+      ? const IconData(0xe6b8, fontFamily: _font) /* ios_share */
+      : const IconData(0xe80d, fontFamily: _font) /* share */;
 
   /// Face ID on an iPhone that has it; a fingerprint everywhere else.
   static IconData biometrics(BuildContext context, {required bool faceId}) =>
       _ios(context) && faceId
-      ? IconData(0xf008, fontFamily: _font) /* face */
-      : IconData(0xe90d, fontFamily: _font) /* fingerprint */;
+      ? const IconData(0xf008, fontFamily: _font) /* face */
+      : const IconData(0xe90d, fontFamily: _font) /* fingerprint */;
 }

@@ -47,16 +47,10 @@ class TextIndexer {
     final pages = <(int, String)>[];
     if (file.path.toLowerCase().endsWith('.pdf')) {
       try {
-        final count = (await PdfEngine.inspect(
-          file.path,
-          password: password,
-        )).pageCount;
-        for (var p = 0; p < count; p++) {
-          final text = (await PdfEngine.pageText(
-            file.path,
-            p,
-            password: password,
-          )).text.trim();
+        // One open for the whole file (DK-1064).
+        final texts = await PdfEngine.pageTexts(file.path, password: password);
+        for (final (p, raw) in texts.indexed) {
+          final text = raw.trim();
           if (text.isNotEmpty) pages.add((p, text));
         }
       } on DocError {

@@ -26,11 +26,25 @@ def placeholders(text: str) -> set[str]:
     return set(re.findall(r"\{(\w+)[,}]", text))
 
 
+def load_arb(path: Path, problems: list[str]) -> dict:
+    """The ARB as a dict; a key that appears twice (a merge that kept both
+    sides) is a problem: JSON would silently keep the last."""
+    def pairs(items):
+        seen = set()
+        for k, _ in items:
+            if k in seen:
+                problems.append(f"{path.name}: {k} appears twice")
+            seen.add(k)
+        return dict(items)
+    return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=pairs)
+
+
 def check_arb(root: Path) -> list[str]:
-    en = json.loads((root / ARB_DIR / "app_en.arb").read_text(encoding="utf-8"))
-    de = json.loads((root / ARB_DIR / "app_de.arb").read_text(encoding="utf-8"))
+    problems: list[str] = []
+    en = load_arb(root / ARB_DIR / "app_en.arb", problems)
+    de = load_arb(root / ARB_DIR / "app_de.arb", problems)
     keys = lambda arb: {k for k in arb if not k.startswith("@")}  # noqa: E731
-    problems = [f"app_de.arb: missing {k}" for k in sorted(keys(en) - keys(de))]
+    problems += [f"app_de.arb: missing {k}" for k in sorted(keys(en) - keys(de))]
     problems += [f"app_de.arb: {k} is not in app_en.arb" for k in sorted(keys(de) - keys(en))]
     for k in sorted(keys(en) & keys(de)):
         if placeholders(en[k]) != placeholders(de[k]):

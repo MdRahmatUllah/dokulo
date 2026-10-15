@@ -15,6 +15,8 @@ class DkProgressError {
     required this.body,
     required this.action,
     required this.onAction,
+    this.code,
+    this.more = const [],
   });
 
   final String title, body;
@@ -22,6 +24,14 @@ class DkProgressError {
   /// "Try again", "Choose another file".
   final String action;
   final VoidCallback onAction;
+
+  /// "Code DK-0190" in monospace under the body (an unexpected failure).
+  final String? code;
+
+  /// Further actions under [action] (tool-shell-failure, DK-1080): the
+  /// first as a secondary button ("Skip this page"), the rest tertiary
+  /// ("Send report by email").
+  final List<(String, VoidCallback)> more;
 }
 
 /// A long job's progress (UI spec §11.7, §20.2; DK-0194): the content of a
@@ -87,12 +97,31 @@ class DkProgressSheet extends StatelessWidget {
             style: t.text.bodyM.copyWith(color: c.textSecondary),
             textAlign: TextAlign.center,
           ),
+          if (failed.code case final code?) ...[
+            SizedBox(height: t.space.xs),
+            Text(
+              code,
+              style: t.text.mono.copyWith(color: c.textSecondary),
+              textAlign: TextAlign.center,
+            ),
+          ],
           SizedBox(height: t.space.xl),
           DkButton(
             label: failed.action,
             onPressed: failed.onAction,
             expand: true,
           ),
+          for (final (i, (label, onPressed)) in failed.more.indexed) ...[
+            SizedBox(height: t.space.s),
+            DkButton(
+              label: label,
+              onPressed: onPressed,
+              variant: i == 0 && failed.more.length > 1
+                  ? DkButtonVariant.secondary
+                  : DkButtonVariant.tertiary,
+              expand: true,
+            ),
+          ],
         ],
       );
     }
@@ -107,12 +136,10 @@ class DkProgressSheet extends StatelessWidget {
       label: l.common_cancel,
       onPressed: onCancel,
       variant: DkButtonVariant.secondary,
-      expand: true,
     );
     final keepWorking = DkButton(
       label: l.common_keep_working,
       onPressed: onKeepWorking,
-      expand: true,
     );
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -181,12 +208,12 @@ class DkProgressSheet extends StatelessWidget {
         // Side by side; from 150 % text stacked, Keep working on top, so
         // neither label wraps past two lines (as DkActionBar does).
         if (MediaQuery.textScalerOf(context).scale(1) < 1.5)
-          Row(
+          // Sized to their labels, from the start (tool-shell-progress);
+          // on a narrow sheet the second wraps under the first.
+          Wrap(
             spacing: t.space.s,
-            children: [
-              Expanded(child: cancel),
-              Expanded(child: keepWorking),
-            ],
+            runSpacing: t.space.s,
+            children: [cancel, keepWorking],
           )
         else
           Column(

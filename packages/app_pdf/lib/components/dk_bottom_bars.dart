@@ -14,11 +14,21 @@ class DkBarAction {
     required this.label,
     required this.onPressed,
     this.destructive = false,
-  });
+  }) : onMenu = null;
+
+  /// An action that opens a menu over its button ("More"): [onMenu] gets
+  /// the button's context to anchor a DkMenu to.
+  const DkBarAction.menu({
+    required this.icon,
+    required this.label,
+    required void Function(BuildContext anchor) this.onMenu,
+  }) : onPressed = null,
+       destructive = false;
 
   final IconData icon;
   final String label;
   final VoidCallback? onPressed;
+  final void Function(BuildContext anchor)? onMenu;
 
   /// Delete: icon and label in `color.danger`.
   final bool destructive;
@@ -153,7 +163,11 @@ class _BarButtonState extends State<_BarButton> {
     final t = context.tokens;
     final c = t.color;
     final a = widget.action;
-    final enabled = a.onPressed != null;
+    final onPressed = switch (a.onMenu) {
+      final menu? => () => menu(context),
+      null => a.onPressed,
+    };
+    final enabled = onPressed != null;
     final ink = a.destructive ? c.danger : c.textPrimary;
     return Semantics(
       button: true,
@@ -161,12 +175,12 @@ class _BarButtonState extends State<_BarButton> {
       label: a.label,
       excludeSemantics: true,
       // The children are excluded, the tap with them: give it back.
-      onTap: a.onPressed,
+      onTap: onPressed,
       child: DkRing(
         side: _focused ? t.focusRing : null,
         radius: t.radius.m,
         child: InkWell(
-          onTap: a.onPressed,
+          onTap: onPressed,
           onFocusChange: (v) => setState(() => _focused = keyboardFocus(v)),
           borderRadius: BorderRadius.circular(t.radius.m),
           overlayColor: WidgetStatePropertyAll(t.state.pressed),

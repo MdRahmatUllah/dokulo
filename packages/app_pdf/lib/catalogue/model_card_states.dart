@@ -21,12 +21,13 @@ class DkModelCardGallery extends StatelessWidget {
           licence: 'Apache-2.0',
           onLicence: tap,
           state: state,
+          best: quality == 'Best quality',
         );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: t.space.m,
       children: [
-        card('Qwen 3 1.7B', 'Best quality', DkModelAvailable(onDownload: tap)),
+        card('Gemma 4 E2B', 'Best quality', DkModelAvailable(onDownload: tap)),
         card(
           'Gemma 3 1B',
           'Fast',

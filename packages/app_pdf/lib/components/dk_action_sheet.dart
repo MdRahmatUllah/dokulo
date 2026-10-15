@@ -9,16 +9,25 @@ import 'dk_sheet.dart';
 /// One row of a [DkActionSheet]: an icon and a label.
 class DkAction {
   const DkAction({
-    required this.icon,
+    this.icon,
     required this.label,
     required this.onTap,
     this.destructive = false,
     this.tool = false,
     this.checked = false,
     this.trailing,
+    this.filled = false,
+    this.below,
   });
 
-  final IconData icon;
+  /// Under the row, in its padding: the folder menu's colour swatches.
+  final Widget? below;
+
+  /// The icon filled: a state that is on (a favourite's star, DK-0280).
+  final bool filled;
+
+  /// None in an options menu (F1's sort): the label and the check.
+  final IconData? icon;
   final String label;
 
   /// Runs after the sheet has closed.
@@ -173,8 +182,9 @@ class _DkActionRowState extends State<DkActionRow> {
     final a = widget.action;
     final ink = a.destructive ? t.color.danger : t.color.textPrimary;
     final icon = DkIcon(
-      a.icon,
+      a.icon ?? DkIcons.check,
       size: DkIconSize.m,
+      filled: a.filled,
       color: a.destructive
           ? t.color.danger
           : a.tool
@@ -182,7 +192,7 @@ class _DkActionRowState extends State<DkActionRow> {
           : t.color.iconPrimary,
     );
     // InkWell gives the tap; screen readers also need to hear "button".
-    return Semantics(
+    final row = Semantics(
       button: true,
       // A chosen sort order reads as "checked", as Material's
       // CheckedPopupMenuItem does; other rows have no checked state.
@@ -221,9 +231,9 @@ class _DkActionRowState extends State<DkActionRow> {
                       ),
                       child: icon,
                     )
-                  else
+                  else if (a.icon != null)
                     icon,
-                  SizedBox(width: t.space.m),
+                  if (a.icon != null) SizedBox(width: t.space.m),
                   Expanded(
                     child: Text(
                       a.label,
@@ -243,6 +253,19 @@ class _DkActionRowState extends State<DkActionRow> {
           ),
         ),
       ),
+    );
+    final below = a.below;
+    if (below == null) return row;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        row,
+        Padding(
+          padding: widget.padding.add(EdgeInsets.only(bottom: t.space.s)),
+          child: below,
+        ),
+      ],
     );
   }
 }

@@ -25,6 +25,7 @@ class DkPageGrid extends StatefulWidget {
     this.onLongPress,
     this.onReorder,
     this.initialColumns = 3,
+    this.edgePadding,
     this.onColumnsChanged,
     this.controller,
   });
@@ -47,6 +48,9 @@ class DkPageGrid extends StatefulWidget {
   /// any settle animation (§9's 220 ms, `DkSlot`).
   final void Function(int from, int to)? onReorder;
   final int initialColumns;
+
+  /// Around the grid; `space.l` (16) by default, 24 on tablets (DK-0651).
+  final double? edgePadding;
   final ValueChanged<int>? onColumnsChanged;
   final ScrollController? controller;
 
@@ -192,7 +196,7 @@ class _DkPageGridState extends State<DkPageGrid> {
         _m = _Metrics(
           width: constraints.maxWidth,
           columns: _columns,
-          padding: t.space.l,
+          padding: widget.edgePadding ?? t.space.l,
           gutter: t.space.m,
           captionHeight:
               t.space.xs +
@@ -231,6 +235,7 @@ class _DkPageGridState extends State<DkPageGrid> {
       page: page,
       lifted: lifted,
       selected: widget.selected.contains(i),
+      selecting: widget.selected.isNotEmpty,
       onTap: interactive && widget.onTap != null
           ? () => widget.onTap!(i)
           : null,
@@ -281,8 +286,9 @@ class _DkPageGridState extends State<DkPageGrid> {
               ),
             ),
           ),
+          // Its place stays empty while it's lifted (organize-drag).
           childWhenDragging: Opacity(
-            opacity: t.state.disabledOpacity,
+            opacity: 0,
             child: thumb(interactive: false),
           ),
           child: cell,
