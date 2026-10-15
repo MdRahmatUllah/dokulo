@@ -117,6 +117,10 @@
   "@common_more_options": {
     "description": "Copy deck (UI spec §27): common_more_options."
   },
+  "common_apply": "Apply",
+  "@common_apply": {
+    "description": "S2 crop mode: keeps the crop (DK-0353)."
+  },
   "common_apply_all": "Apply to all pages",
   "@common_apply_all": {
     "description": "Copy deck (UI spec §27): common_apply_all."
@@ -883,6 +887,153 @@
   "@camera_settings": {
     "description": "DkCameraTopBar: tune, opens the scanning settings."
   },
+  "camera_hint_ready": "Ready",
+  "@camera_hint_ready": {
+    "description": "S1 hint pill: a document is in view."
+  },
+  "camera_hint_point": "Point at a document",
+  "@camera_hint_point": {
+    "description": "S1 hint pill: no document found yet."
+  },
+  "camera_hint_closer": "Move closer",
+  "@camera_hint_closer": {
+    "description": "S1 hint: the page is too small in the frame."
+  },
+  "camera_hint_steady": "Hold steady",
+  "@camera_hint_steady": {
+    "description": "S1 hint: the camera is moving."
+  },
+  "camera_hint_light": "More light needed",
+  "@camera_hint_light": {
+    "description": "S1 hint: the scene is too dark."
+  },
+  "camera_hint_fit": "Fit the whole page in view",
+  "@camera_hint_fit": {
+    "description": "S1 hint: the page is cut off at the edge."
+  },
+  "camera_hint_capturing": "Capturing…",
+  "@camera_hint_capturing": {
+    "description": "S1 hint: auto-capture is taking the photo."
+  },
+  "camera_page_captured": "Page {number} captured",
+  "@camera_page_captured": {
+    "description": "S1: spoken to screen readers after each capture.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "camera_flash_menu": "Flash options",
+  "@camera_flash_menu": {
+    "description": "S1: the flash menu (Off, On, Auto), opened with a long press on the flash button."
+  },
+  "camera_retake_page": "Retake page {number}",
+  "@camera_retake_page": {
+    "description": "S1 opened from S2 Retake: the label over the camera.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "scan_add_pages": "Add pages",
+  "@scan_add_pages": {
+    "description": "S2: back to the camera to add pages (the bar's left button, and the tray's +)."
+  },
+  "scan_crop": "Crop",
+  "@scan_crop": {
+    "description": "S2 edit row: crop the page."
+  },
+  "scan_rotate": "Rotate",
+  "@scan_rotate": {
+    "description": "S2 edit row: rotate the page 90 degrees."
+  },
+  "scan_filter": "Filter",
+  "@scan_filter": {
+    "description": "S2 edit row: the page's filter."
+  },
+  "scan_retake": "Retake",
+  "@scan_retake": {
+    "description": "S2 edit row: take this page again."
+  },
+  "scan_page_of": "{number} of {total}",
+  "@scan_page_of": {
+    "description": "S2: which page is shown, under the preview.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "scan_auto_capture_desc": "Take the photo when the page is steady",
+  "@scan_auto_capture_desc": {
+    "description": "Scanning settings: what Auto-capture does."
+  },
+  "scan_auto_crop": "Auto-crop",
+  "@scan_auto_crop": {
+    "description": "Scanning settings: crop each photo to the detected page."
+  },
+  "scan_auto_crop_desc": "Crop to the detected page",
+  "@scan_auto_crop_desc": {
+    "description": "Scanning settings: what Auto-crop does."
+  },
+  "scan_default_filter": "Default filter",
+  "@scan_default_filter": {
+    "description": "Scanning settings: the filter a new page gets."
+  },
+  "scan_page_size": "Page size",
+  "@scan_page_size": {
+    "description": "Scanning settings: the page size a scan is saved at."
+  },
+  "scan_page_auto": "Auto",
+  "@scan_page_auto": {
+    "description": "Page size: as photographed."
+  },
+  "scan_page_a4": "A4",
+  "@scan_page_a4": {
+    "description": "Page size A4."
+  },
+  "scan_page_letter": "Letter",
+  "@scan_page_letter": {
+    "description": "Page size US Letter."
+  },
+  "scan_more_settings": "More scanning settings",
+  "@scan_more_settings": {
+    "description": "S1 quick settings: opens Settings → Scanning."
+  },
+  "filter_original": "Original",
+  "@filter_original": {
+    "description": "Scan filter: as photographed."
+  },
+  "filter_auto_colour": "Auto colour",
+  "@filter_auto_colour": {
+    "description": "Scan filter: colour boost."
+  },
+  "filter_greyscale": "Greyscale",
+  "@filter_greyscale": {
+    "description": "Scan filter: greyscale."
+  },
+  "filter_black_white": "Black & white",
+  "@filter_black_white": {
+    "description": "Scan filter: black and white."
+  },
+  "filter_remove_shadows": "Remove shadows",
+  "@filter_remove_shadows": {
+    "description": "Scan filter: shadow removal."
+  },
+  "camera_review": "{count, plural, =1{Review 1 page} other{Review {count} pages}}",
+  "@camera_review": {
+    "description": "S1 page stack: opens S2 with the captured pages (screen readers).",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "camera_access_title": "Allow camera access",
   "@camera_access_title": {
     "description": "S1 camera pre-prompt sheet: title (before the system prompt)."
@@ -1304,6 +1455,92 @@
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
   "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "camera_id_front": "Front side",
+  "@camera_id_front": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_id_back": "Turn the card over",
+  "@camera_id_back": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_book_spine": "Align the spine with the line",
+  "@camera_book_spine": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@camera_pages": {"description": "S1 mode overlays (DK-0346/0347/0348).", "placeholders": {"count": {"type": "int"}}},
+  "scan_brightness": "Brightness",
+  "@scan_brightness": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "scan_contrast": "Contrast",
+  "@scan_contrast": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "toast_applied_all": "Applied to all pages",
+  "@toast_applied_all": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "scan_save_title": "Save scan",
+  "@scan_save_title": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_name": "Name",
+  "@scan_name": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_format": "Format",
+  "@scan_format": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality": "Quality",
+  "@scan_quality": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_smaller": "Smaller",
+  "@scan_quality_smaller": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_smaller_desc": "For upload limits",
+  "@scan_quality_smaller_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_recommended": "Recommended",
+  "@scan_quality_recommended": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_recommended_desc": "Sharp text",
+  "@scan_quality_recommended_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_best": "Best",
+  "@scan_quality_best": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_best_desc": "For printing",
+  "@scan_quality_best_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_folder": "Folder",
+  "@scan_folder": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_save_pdf": "{count, plural, =1{Save PDF · 1 page} other{Save PDF · {count} pages}}",
+  "@scan_save_pdf": {"description": "The scan's Save sheet (DK-0359).", "placeholders": {"count": {"type": "int"}}},
+  "scan_save_images": "{count, plural, =1{Save 1 image} other{Save {count} images}}",
+  "@scan_save_images": {"description": "The scan's Save sheet (DK-0359).", "placeholders": {"count": {"type": "int"}}},
+  "settings_scanning": "Scanning",
+  "@settings_scanning": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_file_name": "File name",
+  "@settings_file_name": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_name_pattern": "Name pattern",
+  "@settings_name_pattern": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_insert": "Insert",
+  "@settings_insert": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_token_date": "date",
+  "@settings_token_date": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_token_time": "time",
+  "@settings_token_time": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_token_number": "number",
+  "@settings_token_number": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_preview": "Preview",
+  "@settings_preview": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_ocr_language": "Text recognition language",
+  "@settings_ocr_language": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_original_desc": "As photographed",
+  "@filter_original_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_auto_colour_desc": "Best for most documents",
+  "@filter_auto_colour_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_greyscale_desc": "Smaller files",
+  "@filter_greyscale_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_black_white_desc": "Crisp text, smallest files",
+  "@filter_black_white_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_remove_shadows_desc": "For photos taken at an angle",
+  "@filter_remove_shadows_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_default_footer": "Applies to the next scan. Long-press a filter while scanning to change it there.",
+  "@filter_default_footer": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "scan_saved": "Scan saved",
+  "@scan_saved": {"description": "The scan's result screen (DK-0360)."},
+  "scan_result_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@scan_result_pages": {"description": "The scan's result screen (DK-0360).", "placeholders": {"count": {"type": "int"}}},
+  "scan_text_found": "Text found on {found} of {total} pages",
+  "@scan_text_found": {"description": "The scan's result screen (DK-0360).", "placeholders": {"found": {"type": "int"}, "total": {"type": "int"}}},
+  "scan_file_name": "File name",
+  "@scan_file_name": {"description": "The scan's result screen (DK-0360)."},
+  "scan_next": "Next",
+  "@scan_next": {"description": "The scan's result screen (DK-0360)."},
   "link_broken_title": "This link doesn't work any more",
   "@link_broken_title": {"description": "A deep link to no route or tool (DK-0236)."},
   "link_broken_body": "What it pointed to may have been moved or deleted.",
@@ -2503,5 +2740,112 @@
         "type": "int"
       }
     }
+  },
+  "edit_title": "Editing",
+  "@edit_title": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_pan": "Pan",
+  "@edit_pan": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_pen": "Pen",
+  "@edit_pen": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_highlighter": "Highlighter",
+  "@edit_highlighter": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_text": "Text",
+  "@edit_text": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_shapes": "Shapes",
+  "@edit_shapes": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_note": "Note",
+  "@edit_note": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_sign": "Sign",
+  "@edit_sign": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "edit_eraser": "Eraser",
+  "@edit_eraser": {"description": "V2 edit mode (DK-0313; UI spec \u00a717.2)."},
+  "img2pdf_page_size": "Page size",
+  "@img2pdf_page_size": {
+    "description": "Image to PDF option (DK-0433; UI spec §21.7)."
+  },
+  "img2pdf_size_fit": "Fit image",
+  "@img2pdf_size_fit": {
+    "description": "Image to PDF page size: each page the image's proportions."
+  },
+  "img2pdf_size_letter": "Letter",
+  "@img2pdf_size_letter": {
+    "description": "Image to PDF page size: US Letter."
+  },
+  "img2pdf_margins": "Margins",
+  "@img2pdf_margins": {
+    "description": "Image to PDF option."
+  },
+  "img2pdf_margins_none": "None",
+  "@img2pdf_margins_none": {
+    "description": "Image to PDF margins: none."
+  },
+  "img2pdf_margins_small": "Small",
+  "@img2pdf_margins_small": {
+    "description": "Image to PDF margins: small (24 pt)."
+  },
+  "img2pdf_output": "Output",
+  "@img2pdf_output": {
+    "description": "Image to PDF option."
+  },
+  "img2pdf_output_one": "One PDF",
+  "@img2pdf_output_one": {
+    "description": "Image to PDF output: all images in one PDF."
+  },
+  "img2pdf_output_each": "One per image",
+  "@img2pdf_output_each": {
+    "description": "Image to PDF output: a PDF for each image."
+  },
+  "img2pdf_clean_up": "Clean up like a scan",
+  "@img2pdf_clean_up": {
+    "description": "Image to PDF switch."
+  },
+  "img2pdf_clean_up_help": "Crop to the document and improve contrast",
+  "@img2pdf_clean_up_help": {
+    "description": "Image to PDF switch's help line."
+  },
+  "img2pdf_action": "{n, plural, =1{Create PDF · 1 image} other{Create PDF · {n} images}}",
+  "@img2pdf_action": {
+    "description": "Image to PDF's button (§27.3).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "img2pdf_estimate": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 page} other{{pages} pages}} · about {size}",
+  "@img2pdf_estimate": {
+    "description": "Image to PDF's estimate above the button (the frame).",
+    "placeholders": {
+      "pdfs": {
+        "type": "int"
+      },
+      "pages": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "t2_section_images": "Images ({n})",
+  "@t2_section_images": {
+    "description": "T2 input header for an images-only tool (Image to PDF, DK-0433).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "common_add": "Add",
+  "@common_add": {
+    "description": "A compact Add button (T2's image strip)."
+  },
+  "scan_saving": "Saving…",
+  "@scan_saving": {"description": "S2 while the scan saves (DK-0359)."},
+  "scan_save_failed": "Couldn't save the scan. Your pages are still here.",
+  "@scan_save_failed": {"description": "S2 when saving the scan failed (DK-0359)."},
+  "settings_language_caption": "Changes immediately. No restart needed.",
+  "@settings_language_caption": {
+    "description": "M3 Language: under the choices (DK-0575)."
   }
 }

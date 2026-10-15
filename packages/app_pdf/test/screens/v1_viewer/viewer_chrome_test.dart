@@ -45,6 +45,7 @@ void main() {
               onAi: () => calls.add('ai'),
               onShare: () => calls.add('share'),
               onSearch: () => calls.add('search'),
+              onRename: () => calls.add('rename'),
             ),
             canvas: (onTap, onScrollStart) {
               tap = onTap;
@@ -123,4 +124,12 @@ void main() {
       );
     });
   }
+
+  testWidgets('a long name leaves search and overflow their taps; a tap on '
+      'the name renames', (tester) async {
+    await pump(tester);
+    await tester.tap(find.byTooltip('Search'));
+    await tester.tap(find.byType(DkMiddleEllipsisText));
+    expect(calls, ['search', 'rename']);
+  });
 }

@@ -27,3 +27,8 @@ def test_unlisted_permissions_fail_in_xml_and_aapt2_output() -> None:
         "android.permission.READ_CONTACTS"]
     assert [p.split()[0] for p in check_permissions.problems(check_permissions.declared(aapt))] == [
         "android.permission.ACCESS_FINE_LOCATION"]
+
+
+def test_a_removed_plugin_permission_does_not_count() -> None:
+    xml = '<uses-permission android:name="android.permission.RECORD_AUDIO" tools:node="remove"/>'
+    assert check_permissions.declared(xml) == set()

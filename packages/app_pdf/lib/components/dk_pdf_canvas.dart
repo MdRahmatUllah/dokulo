@@ -27,6 +27,8 @@ class DkPdfCanvas extends StatefulWidget {
     this.onReady,
     this.onTap,
     this.onScrollStart,
+    this.pageOverlay,
+    this.panEnabled = true,
     this.onLink,
     this.night = false,
     this.markup,
@@ -52,6 +54,13 @@ class DkPdfCanvas extends StatefulWidget {
 
   /// The user started to scroll or zoom.
   final VoidCallback? onScrollStart;
+
+  /// Over each page, sized to it on screen: V2's annotation layer
+  /// (DK-0313). [page] is 0-based; [size] the page's size in points.
+  final Widget Function(int page, Size size)? pageOverlay;
+
+  /// False while V2 draws: the pages stay put under the finger.
+  final bool panEnabled;
 
   /// A link to a web address was tapped (V1 asks first, DK-1088); a link to
   /// a page in the file jumps there. Null: links do nothing.
@@ -84,6 +93,28 @@ class DkPdfCanvas extends StatefulWidget {
 }
 
 class _DkPdfCanvasState extends State<DkPdfCanvas> {
+  /// Each page's image boxes, read once (night mode keeps them as they are).
+  final _images = <int, Future<List<Box>>>{};
+
+  Future<List<Box>> _imagesOn(int page) => _images[page] ??=
+      PdfEngine.images(
+        widget.path,
+        page,
+        password: widget.password,
+      ).then((found) => [for (final i in found) i.box]).catchError((Object _) {
+        // A page PDFium can't read (or a test without it): invert it all.
+        return <Box>[];
+      });
+
+  @override
+  void didUpdateWidget(DkPdfCanvas old) {
+    super.didUpdateWidget(old);
+    // Another file (or a new version saved under a new path): read again.
+    if (old.path != widget.path || old.password != widget.password) {
+      _images.clear();
+    }
+  }
+
   /// For in-file links when the screen gave no controller.
   late final _own = PdfViewerController();
 
@@ -159,6 +190,29 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
           return true;
         },
         onPageChanged: widget.onPageChanged,
+        panEnabled: widget.panEnabled,
+        scaleEnabled: widget.panEnabled,
+        pageOverlaysBuilder: widget.pageOverlay == null && !widget.night
+            ? null
+            : (context, rect, page) => [
+                // Night mode leaves images as they are (§17.1, DK-0304).
+                if (widget.night)
+                  Positioned.fromRect(
+                    rect: rect,
+                    child: _KeepImages(
+                      boxes: _imagesOn(page.pageNumber - 1),
+                      pageSize: Size(page.width, page.height),
+                    ),
+                  ),
+                if (widget.pageOverlay case final overlay?)
+                  Positioned.fromRect(
+                    rect: rect,
+                    child: overlay(
+                      page.pageNumber - 1,
+                      Size(page.width, page.height),
+                    ),
+                  ),
+              ],
         onInteractionStart: widget.onScrollStart == null
             ? null
             : (_) => widget.onScrollStart!(),
@@ -237,12 +291,53 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
   }
 }
 
+/// Night mode's images as they are (DK-0304): over each image object's box
+/// the night filter again, as a backdrop inside the inverted layer. The
+/// filter is close to its own inverse (inverted twice, turned 360°), so the
+/// image comes out near its own colours.
+// ponytail: the boxes are the objects' bounds in page space, unrotated; a
+// rotated page or a cropped one (its crop box off the media box) can place
+// them off. Map through the page's rotation and crop box if that shows.
+class _KeepImages extends StatelessWidget {
+  const _KeepImages({required this.boxes, required this.pageSize});
+
+  final Future<List<Box>> boxes;
+
+  /// The page in points: the boxes' space (origin bottom left).
+  final Size pageSize;
+
+  @override
+  Widget build(BuildContext context) => FutureBuilder(
+    future: boxes,
+    builder: (context, found) => LayoutBuilder(
+      builder: (context, box) {
+        final scale = box.maxWidth / pageSize.width;
+        return Stack(
+          children: [
+            for (final b in found.data ?? const <Box>[])
+              Positioned(
+                left: b.left * scale,
+                top: (pageSize.height - b.top) * scale,
+                width: (b.right - b.left) * scale,
+                height: (b.top - b.bottom) * scale,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: _night,
+                    child: const SizedBox.expand(),
+                  ),
+                ),
+              ),
+          ],
+        );
+      },
+    ),
+  );
+}
+
 /// Night mode's filter: each colour inverted, then turned 180° in hue, so
-/// white pages go dark and black text light while colours (a photo, a blue
-/// link) keep roughly their hue.
-// ponytail: one filter over the page; leaving images un-inverted (§17.1)
-// needs PDFium's per-object rendering, worth it when someone reads photo
-// books at night.
+/// white pages go dark and black text light while colours (a blue link)
+/// keep roughly their hue. Images get it twice, so stay as they are
+/// ([_KeepImages]).
 const _night = ColorFilter.matrix([
   // -(180° luminance-preserving hue rotation) + 255: inverted, hue kept.
   0.574, -1.43, -0.144, 0, 255, //
