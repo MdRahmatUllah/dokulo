@@ -471,7 +471,7 @@ void _placeStamp(
   if (decoded == null) {
     throw const DocError(DocErrorKind.unexpected, detail: 'not a PNG');
   }
-  final rgba = decoded.convert(numChannels: 4);
+  final rgba = decoded.convert(format: img.Format.uint8, numChannels: 4);
   final w = rgba.width, h = rgba.height;
   final bgra = arena<Uint8>(w * h * 4);
   final pixels = bgra.asTypedList(w * h * 4);

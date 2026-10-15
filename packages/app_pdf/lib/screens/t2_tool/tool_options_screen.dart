@@ -199,12 +199,25 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
   /// screens open files by their row).
   Future<void> _openScreen(String Function(String) open, FileEntry file) async {
     var id = file.id;
-    if (id < 0) {
-      final store = await ref.read(fileStoreProvider.future);
-      id = await store.importToUserFolder(
-        ref.read(appDatabaseProvider),
-        File(file.path),
-      );
+    try {
+      if (id < 0) {
+        final store = await ref.read(fileStoreProvider.future);
+        final picked = File(file.path);
+        id = await store.importToUserFolder(
+          ref.read(appDatabaseProvider),
+          picked,
+        );
+        // The picker's copy in inbox/ isn't needed once it's in Files.
+        if (picked.path.startsWith(store.inbox.path) && picked.existsSync()) {
+          await picked.delete();
+        }
+      }
+    } on FileSystemException {
+      _opening = false;
+      if (mounted) {
+        showDkToast(context, AppLocalizations.of(context).error_storage);
+      }
+      return;
     }
     if (mounted) context.pushReplacement(open('$id'));
   }
@@ -478,7 +491,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     final choosing = ready && files.length < input.min;
     final canRun = ready && !choosing && locked.isEmpty && _def.input != null;
     // Mark up, Sign, Organize: the file chosen, their screen opens.
-    if (ready && !choosing && files.isNotEmpty && !_opening) {
+    if (ready && !choosing && files.isNotEmpty && locked.isEmpty && !_opening) {
       if (screenTools[_def.id] case final open?) {
         _opening = true;
         WidgetsBinding.instance.addPostFrameCallback(

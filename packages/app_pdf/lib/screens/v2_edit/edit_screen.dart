@@ -112,6 +112,9 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   /// The file's row is gone (deleted, or a stale link).
   var _missing = false;
 
+  /// The file couldn't be read: locked (true) or damaged (false).
+  bool? _problem;
+
   /// Each tool's options, last used first (kept in [prefsProvider]).
   late final Map<EditTool, DkToolOptions> _options = {
     for (final tool in _toolKinds.keys) tool: _loadOptions(tool),
@@ -143,11 +146,22 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     await File(file.path).copy(view.path);
     // The tools' last-used options, before the strip is used.
     await ref.read(prefsProvider.future);
-    final info = _info = await PdfEngine.inspect(file.path);
-    final read = <int, List<PageAnnot>>{
-      for (var p = 0; p < info.pageCount; p++)
-        p: await PdfAnnotations.read(file.path, p),
-    };
+    final PdfInfo info;
+    final Map<int, List<PageAnnot>> read;
+    try {
+      info = _info = await PdfEngine.inspect(file.path);
+      read = {
+        for (var p = 0; p < info.pageCount; p++)
+          p: await PdfAnnotations.read(file.path, p),
+      };
+    } on DocError catch (e) {
+      // ponytail: locked files open in V1 (unlock there first); edit mode
+      // says why it can't, instead of spinning.
+      if (mounted) {
+        setState(() => _problem = e.kind == DocErrorKind.locked);
+      }
+      return;
+    }
     if (!mounted) return;
     setState(() {
       _file = file;
@@ -405,12 +419,16 @@ class _EditScreenState extends ConsumerState<EditScreen> {
             onCancel: _cancel,
             onDone: editor != null && editor.dirty && !_saving ? _done : null,
           ),
-          body: _missing
+          body: _missing || _problem != null
               ? Center(
                   child: Padding(
                     padding: EdgeInsets.all(t.space.xl),
                     child: Text(
-                      l.viewer_file_missing,
+                      switch (_problem) {
+                        true => l.viewer_locked_title,
+                        false => l.viewer_damaged_body,
+                        null => l.viewer_file_missing,
+                      },
                       style: t.text.bodyM.copyWith(
                         color: t.color.textSecondary,
                       ),

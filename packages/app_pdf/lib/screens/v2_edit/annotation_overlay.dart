@@ -366,6 +366,7 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
           rect: _toWidget(box, size),
           child: IgnorePointer(
             child: FittedBox(
+              fit: BoxFit.scaleDown,
               alignment: Alignment.bottomLeft,
               child: Text(
                 date,

@@ -359,21 +359,29 @@ PdfAnnot fitTo(PdfAnnot a, Box box) {
       color: a.color,
     ),
     OtherAnnot() => a,
-    // The signature scales; its date keeps its size beside it.
-    StampAnnot(:final png, :final date, :final dateSize) => StampAnnot(
-      switch (a.dateBox) {
-        final d? => (
+    // The signature scales with its shape kept (anchored top-left); its
+    // date keeps its size beside it. At least 8 pt wide.
+    StampAnnot(:final png, :final date, :final dateSize) => () {
+      final dateExtent = switch (a.dateBox) {
+        final d? => d.right - a.rect.right,
+        null => 0.0,
+      };
+      final w = math.max(8.0, box.right - box.left - dateExtent);
+      final aspect =
+          (a.rect.top - a.rect.bottom) /
+          math.max(a.rect.right - a.rect.left, 1e-6);
+      return StampAnnot(
+        (
           left: box.left,
           top: box.top,
-          right: box.right - (d.right - a.rect.right),
-          bottom: box.bottom,
+          right: box.left + w,
+          bottom: box.top - w * aspect,
         ),
-        null => box,
-      },
-      png,
-      date: date,
-      dateSize: dateSize,
-    ),
+        png,
+        date: date,
+        dateSize: dateSize,
+      );
+    }(),
   };
 }
 

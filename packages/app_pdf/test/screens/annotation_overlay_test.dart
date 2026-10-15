@@ -206,6 +206,18 @@ void main() {
       closeTo(dateWidth, 0.01),
     );
     expect(bigger.rect.right - bigger.rect.left, greaterThan(200));
+    // Shrunk past the date: never inside out, and the shape stays.
+    final tiny = fitTo(stamp, (
+      left: 100,
+      top: 500,
+      right: 120,
+      bottom: 495,
+    )) as StampAnnot;
+    expect(tiny.rect.right - tiny.rect.left, greaterThanOrEqualTo(8));
+    expect(
+      (tiny.rect.top - tiny.rect.bottom) / (tiny.rect.right - tiny.rect.left),
+      closeTo(60 / 200, 0.001),
+    );
     editor.delete((page: 0, id: id));
     expect(editor.signedPage, isNull);
   });
