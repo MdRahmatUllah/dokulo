@@ -2847,5 +2847,7 @@
   "settings_language_caption": "Changes immediately. No restart needed.",
   "@settings_language_caption": {
     "description": "M3 Language: under the choices (DK-0575)."
-  }
+  },
+  "viewer_markup_failed": "Couldn't add that mark. The file is as it was.",
+  "@viewer_markup_failed": {"description": "V1 when a Highlight/Underline/Strike could not be written (DK-0321)."}
 }

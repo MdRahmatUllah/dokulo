@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:doc_core/doc_core.dart';
 
@@ -127,18 +128,44 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         : context.tokens.markup.yellow;
     final edits = markupEdits(action, selected, colour);
     if (edits.isEmpty) return;
-    final out = await (await ref.read(fileStoreProvider.future))
-        .newTempFile(path.split(RegExp(r'[\\/]')).last);
-    await PdfAnnotations.apply(path, out.path, edits, password: _password);
-    final versions = await ref.read(versionStoreProvider.future);
-    final before = await versions.replace(widget.fileId, out.path);
-    if (!mounted) return;
-    showDkToast(
-      context,
-      l.toast_saved,
-      action: l.common_undo,
-      onAction: () => versions.restore(before),
-    );
+    // Everything from ref before the first await: the user may leave.
+    final storeFuture = ref.read(fileStoreProvider.future);
+    final versionsFuture = ref.read(versionStoreProvider.future);
+    File? out;
+    try {
+      out = await (await storeFuture).newTempFile(
+        path.split(RegExp(r'[\\/]')).last,
+      );
+      await PdfAnnotations.apply(path, out.path, edits, password: _password);
+      final versions = await versionsFuture;
+      final before = await versions.replace(widget.fileId, out.path);
+      if (!mounted) return;
+      _reload();
+      showDkToast(
+        context,
+        l.toast_saved,
+        action: l.common_undo,
+        above: _barHeight,
+        onAction: () async {
+          await versions.restore(before);
+          if (mounted) _reload();
+        },
+      );
+    } catch (_) {
+      if (mounted) {
+        showDkToast(context, l.viewer_markup_failed, above: _barHeight);
+      }
+    } finally {
+      if (out != null && await out.exists()) await out.delete();
+    }
+  }
+
+  /// The file was rewritten: the canvas opens it again, on the same page.
+  var _revision = 0;
+
+  void _reload() {
+    ref.invalidate(viewerFileProvider(widget.fileId));
+    setState(() => _revision++);
   }
 
   @override
@@ -379,8 +406,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           onPageChanged: (p) => setState(() => _page = p ?? _page),
           // Night mode (DK-1089), switched in the overflow menu (DK-0295).
           night: ref.watch(prefsProvider).value?[viewerNightKey] == true,
-          // Copy for now; Highlight, Underline, Strike come with the
-          // annotations (DK-0321), Ask AI with the AI pane (M13).
+          // Ask AI joins with the AI pane (M13).
           markup: const [
             DkMarkupAction.copy,
             DkMarkupAction.highlight,
@@ -389,7 +415,8 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           ],
           onMarkup: (action, lines) => _markup(path, action, lines),
           search: _search,
-          initialPage: widget.page ?? 1,
+          revision: _revision,
+          initialPage: (_revision == 0 ? widget.page : _page) ?? 1,
           // A web link asks first; it's the only step that leaves Dokulo
           // (DK-1088).
           onLink: (url) async {

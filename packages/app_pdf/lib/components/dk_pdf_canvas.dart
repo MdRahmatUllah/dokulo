@@ -34,9 +34,15 @@ class DkPdfCanvas extends StatefulWidget {
     this.markup,
     this.onMarkup,
     this.search,
+    this.revision = 0,
   });
 
   final String path;
+
+  /// Bumped when the file at [path] was rewritten (a markup, its Undo):
+  /// pdfrx keeps one open document per key, so the key carries it and the
+  /// canvas opens the new content.
+  final int revision;
 
   /// For a locked PDF the user unlocked.
   final String? password;
@@ -125,11 +131,17 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
     final t = context.tokens;
     final shadows = t.elevation.raised;
     final onLink = widget.onLink;
-    final viewer = PdfViewer.file(
-      widget.path,
+    final viewer = PdfViewer(
+      PdfDocumentRefFile(
+        widget.path,
+        passwordProvider: widget.password == null
+            ? null
+            : () => widget.password,
+        key: PdfDocumentRefKey(widget.path, [widget.revision]),
+      ),
+      key: ValueKey(widget.revision),
       controller: _controller,
       initialPageNumber: widget.initialPage,
-      passwordProvider: widget.password == null ? null : () => widget.password,
       params: PdfViewerParams(
         // In night mode the whole viewer goes through [_night]: its
         // background is the colour that comes out as `color.nightCanvas`.
