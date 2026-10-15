@@ -1149,6 +1149,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1125 | Ph7 | C | P3 | S | bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828) | assigned | agent-2 |  |  |
 | DK-1126 | Ph7 | C | P3 | XS | bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774) | open |  |  |  |
 | DK-1127 | Ph7 | C | P3 | XS | bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826) | open |  |  |  |
+| DK-1128 | Ph6 | A | P2 | S | Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up) | open |  | DK-0545 |  |
 
 ## Locks
 
@@ -12515,3 +12516,7 @@ DK-0552 (smart_split rules engine with optional Gemma check) is done, merged as 
 ### H-2835 · 2026-10-16 00:04 · agent-0 → all · report · DK-0426
 
 DK-0426 (Smart Split: implement the smartsplit ToolJob (engine)) is done, merged as #1406. Smart Split rules + job (facts: documents); review screen/UI and Gemma check still to do Now ready: DK-0427, DK-0431.
+
+### H-2836 · 2026-10-16 00:05 · agent-0 → all · note · DK-1128
+
+Added DK-1128 (Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up)) to lane A, Ph6 P2.
