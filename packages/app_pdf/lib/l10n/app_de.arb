@@ -55,7 +55,7 @@
   "job_running_many": "{n} Aufgaben laufen",
   "settings_language_title": "Sprache",
   "settings_language_system": "System",
-  "settings_language_english": "English",
+  "settings_language_english": "Englisch",
   "settings_language_deutsch": "Deutsch",
   "shell_tab_home": "Start",
   "shell_tab_tools": "Werkzeuge",
@@ -355,6 +355,10 @@
   "banner_make_searchable": "Durchsuchbar machen",
   "banner_purchase_failed": "Der Kauf wurde nicht abgeschlossen. Dir wurde nichts berechnet.",
   "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei",
+  "camera_id_front": "Vorderseite",
+  "camera_id_back": "Karte umdrehen",
+  "camera_book_spine": "Buchrücken an der Linie ausrichten",
+  "camera_pages": "{count, plural, =1{1 Seite} other{{count} Seiten}}",
   "scan_brightness": "Helligkeit",
   "scan_contrast": "Kontrast",
   "toast_applied_all": "Auf alle Seiten angewendet",
@@ -737,5 +741,6 @@
   "scan_saving": "Wird gespeichert…",
   "scan_save_failed": "Der Scan ließ sich nicht speichern. Deine Seiten sind noch da.",
   "options_eraser_mode": "Modus",
-  "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt."
+  "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt.",
+  "settings_language_caption": "Wird sofort übernommen. Kein Neustart nötig."
 }

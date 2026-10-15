@@ -1455,6 +1455,14 @@
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
   "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "camera_id_front": "Front side",
+  "@camera_id_front": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_id_back": "Turn the card over",
+  "@camera_id_back": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_book_spine": "Align the spine with the line",
+  "@camera_book_spine": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@camera_pages": {"description": "S1 mode overlays (DK-0346/0347/0348).", "placeholders": {"count": {"type": "int"}}},
   "scan_brightness": "Brightness",
   "@scan_brightness": {
     "description": "S2 filter mode (DK-0354/0355)."
@@ -2839,5 +2847,9 @@
   "options_eraser_mode": "Mode",
   "@options_eraser_mode": {"description": "V2 eraser options (DK-0320; design edit-eraser)."},
   "options_eraser_help": "Tap a mark to delete it. Stroke mode erases ink where you drag.",
-  "@options_eraser_help": {"description": "V2 eraser options (DK-0320; design edit-eraser)."}
+  "@options_eraser_help": {"description": "V2 eraser options (DK-0320; design edit-eraser)."},
+  "settings_language_caption": "Changes immediately. No restart needed.",
+  "@settings_language_caption": {
+    "description": "M3 Language: under the choices (DK-0575)."
+  }
 }

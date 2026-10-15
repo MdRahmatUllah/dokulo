@@ -140,19 +140,25 @@ def gate_lock(path: Path, poll: float = 20, say=print):
     while True:
         try:
             fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        except PermissionError:
+            # Windows: the file is being deleted, or read, right now.
+            time.sleep(min(poll, 0.2))
+            continue
         except FileExistsError:
             try:
                 pid = int(path.read_text(encoding="utf-8").split()[0])
             except (OSError, ValueError, IndexError):
                 # Being written this moment, or deleted: look again soon.
-                pid = None
-                if path.exists() and time.time() - path.stat().st_mtime > 10:
-                    path.unlink(missing_ok=True)
+                try:
+                    if time.time() - path.stat().st_mtime > 10:
+                        _unlink(path)
+                except OSError:
+                    pass
                 time.sleep(min(poll, 1))
                 continue
             if not alive(pid):
                 say(f"gate lock: pid {pid} is gone; taking over", flush=True)
-                path.unlink(missing_ok=True)
+                _unlink(path)
                 continue
             say(f"gate lock: waiting for the gate in pid {pid}", flush=True)
             time.sleep(poll)
@@ -163,7 +169,19 @@ def gate_lock(path: Path, poll: float = 20, say=print):
     try:
         yield
     finally:
-        path.unlink(missing_ok=True)
+        _unlink(path)
+
+
+def _unlink(path: Path) -> None:
+    """Deletes [path]; on Windows a waiting gate may be reading it this very
+    moment, so try again for a few seconds."""
+    for _ in range(50):
+        try:
+            path.unlink(missing_ok=True)
+            return
+        except PermissionError:
+            time.sleep(0.1)
+    path.unlink(missing_ok=True)
 
 
 def lock_path(root: Path) -> Path:
