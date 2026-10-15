@@ -613,14 +613,16 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
             else ...[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: t.space.l),
-                child: Row(
+                // Add files beside the header, or under it when large text
+                // leaves no room ("Dateien hinzufügen" at 200 %, DK-0389).
+                child: Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
-                    Expanded(
-                      child: _Header(
-                        files.length == 1
-                            ? l.t2_section_file
-                            : l.t2_section_files(files.length),
-                      ),
+                    _Header(
+                      files.length == 1
+                          ? l.t2_section_file
+                          : l.t2_section_files(files.length),
                     ),
                     if (input.many && ready)
                       Padding(

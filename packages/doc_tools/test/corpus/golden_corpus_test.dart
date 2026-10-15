@@ -132,6 +132,7 @@ final corpusInputs = <String, Object Function(CorpusFile file, String out)>{
     suffix: ' – PDF-A',
     passwords: {f.path: ?f.password},
   ),
+  'smartsplit': (f, out) => SmartSplitInput(file: f.path, password: f.password),
   'text': (f, out) =>
       TextInput(file: f.path, outputDir: out, password: f.password),
 };
@@ -296,6 +297,9 @@ void main() {
           };
           for (final path in paths) {
             if (!path.toLowerCase().endsWith('.pdf')) continue;
+            // An analysis (Smart Split) answers with its input: nothing
+            // written to check.
+            if (path == f.path) continue;
             // A locked input's output keeps its encryption (and password).
             final password = id == 'protect' ? _protected : f.password;
             final pages = (await PdfEngine.inspect(

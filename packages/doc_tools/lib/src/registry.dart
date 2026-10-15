@@ -10,6 +10,7 @@ import 'tools/ocr_job.dart';
 import 'tools/password_jobs.dart';
 import 'tools/pdf2img_job.dart';
 import 'tools/repair_job.dart';
+import 'tools/smart_split_job.dart';
 import 'tools/rotate_job.dart';
 import 'tools/split_job.dart';
 import 'tools/stamp_jobs.dart';
@@ -39,6 +40,7 @@ const List<ToolJob<Object?>> allToolJobs = [
   ProtectJob(),
   RepairJob(),
   RotateJob(),
+  SmartSplitJob(),
   SplitJob(),
   TextJob(),
   UnlockJob(),
