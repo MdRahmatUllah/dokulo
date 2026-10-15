@@ -25,6 +25,7 @@ import '../../patterns/dk_file_actions.dart';
 import '../../patterns/dk_file_info.dart';
 import '../../patterns/dk_tool_picker.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
+import '../../providers/share_providers.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
 import '../../providers/print_providers.dart';
@@ -170,6 +171,8 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                         // X1 with this file (DK-1094).
                         onTools: () => showToolPicker(context, [value]),
                         onOverflow: (anchor) => _menu(anchor, value),
+                        onShare: () =>
+                            ref.read(fileSharerProvider)([value.path]),
                       ),
                       strip: _thumbs && _pageCount > 0
                           ? ViewerThumbStrip(
