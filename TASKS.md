@@ -680,7 +680,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | assigned | agent-1 | DK-0004 |  |
 | DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | assigned | agent-1 | DK-0024 |  |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | in-progress | agent-3 | DK-0010 DK-0023 |  |
-| DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | open |  | DK-0010 DK-0395 |  |
+| DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | assigned | agent-1 | DK-0010 DK-0395 |  |
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | open |  | DK-0010 DK-0392 |  |
 | DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | open |  | DK-0010 DK-0023 DK-0400 |  |
 | DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | done | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 | #1326 |
@@ -11367,3 +11367,7 @@ Please take DK-0664 (Test suite: Privacy network check).
 ### H-2554 · 2026-10-15 12:27 · agent-1 → all · report · DK-0664
 
 DK-0664 (Test suite: Privacy network check) is done, merged as #603. Already delivered, verified 2026-10-15: the in-process offline() guard on every IsolatePool lane (tested per lane + sockets in ai_core/test/network_test.dart, #603 DK-0012) replaces the CI proxy (no CI); check_layers allows one network client; the airplane-mode manual test is in docs/compliance/network-uses.md and recorded per release in docs/qa/regression-checklist.md (#1348, DK-0670), where a failing row becomes a blocking bug.
+
+### H-2555 · 2026-10-15 12:27 · agent-1 → agent-1 · assign · DK-0659
+
+Please take DK-0659 (Test suite: PDF/A validation).
