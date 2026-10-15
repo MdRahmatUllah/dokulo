@@ -54,7 +54,7 @@
   "job_running_many": "{n} Aufgaben laufen",
   "settings_language_title": "Sprache",
   "settings_language_system": "System",
-  "settings_language_english": "English",
+  "settings_language_english": "Englisch",
   "settings_language_deutsch": "Deutsch",
   "shell_tab_home": "Start",
   "shell_tab_tools": "Werkzeuge",
@@ -665,5 +665,6 @@
   "img2pdf_action": "{n, plural, =1{PDF erstellen · 1 Bild} other{PDF erstellen · {n} Bilder}}",
   "img2pdf_estimate": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 Seite} other{{pages} Seiten}} · etwa {size}",
   "t2_section_images": "Bilder ({n})",
-  "common_add": "Hinzufügen"
+  "common_add": "Hinzufügen",
+  "settings_language_caption": "Wird sofort übernommen. Kein Neustart nötig."
 }

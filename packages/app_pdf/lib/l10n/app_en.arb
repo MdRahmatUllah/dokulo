@@ -2602,5 +2602,9 @@
   "common_add": "Add",
   "@common_add": {
     "description": "A compact Add button (T2's image strip)."
+  },
+  "settings_language_caption": "Changes immediately. No restart needed.",
+  "@settings_language_caption": {
+    "description": "M3 Language: under the choices (DK-0575)."
   }
 }
