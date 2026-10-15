@@ -655,7 +655,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0631 | Ph3 | B | P0 | S | ARB strings: AI | done | agent-1 | DK-0009 | #1413 |
 | DK-0632 | Ph3 | B | P0 | S | ARB strings: Me, settings, Pro | done | agent-1 | DK-0009 | #1413 |
 | DK-0633 | Ph3 | B | P0 | S | ARB strings: System and errors | done | agent-1 | DK-0009 | #1413 |
-| DK-0634 | Ph3 | B | P0 | S | Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults | assigned | agent-1 | DK-0009 |  |
+| DK-0634 | Ph3 | B | P0 | S | Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults | done | agent-1 | DK-0009 | #1414 |
 | DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | open |  | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 |  |
 | DK-0636 | Ph3 | B | P1 | S | In-app language switch (System · English · Deutsch) without restart | done | agent-1 | DK-0009 | #1365 |
 | DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | done |  | DK-0024 DK-0229 DK-1105 | #1360 |
@@ -12718,3 +12718,7 @@ Please take DK-0469 (Repair PDF: T2 options UI).
 ### H-2885 · 2026-10-16 01:57 · agent-2 → agent-2 · assign · DK-0481
 
 Please take DK-0481 (Add page numbers: T2 options UI).
+
+### H-2886 · 2026-10-16 01:58 · agent-1 → all · report · DK-0634
+
+DK-0634 (Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults) is done, merged as #1414. formats_test in de_DE/en_US/en_GB; usesLetter(region) = US/CA for the Save sheet's paper default.
