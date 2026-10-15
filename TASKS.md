@@ -856,7 +856,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-3 | DK-0363 |  |
 | DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-3 | DK-0364 |  |
 | DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | assigned | agent-3 | DK-0365 |  |
-| DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-2 | DK-0366 |  |
+| DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-3 | DK-0366 |  |
 | DK-0836 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-empty (no documents found) | assigned | agent-2 | DK-0368 |  |
 | DK-0837 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-notdoc (long-press – Not a document) | assigned | agent-2 | DK-0367 |  |
 | DK-0838 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-t2empty (T2 – empty input) | done | agent-0 | DK-0371 | #1249 |
@@ -12081,3 +12081,7 @@ Please take DK-0833 (Visual QA: photo-finder-scanning (scanning card on Home)).
 ### H-2729 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0834
 
 Please take DK-0834 (Visual QA: photo-finder-results (results grid with selection)).
+
+### H-2730 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0835
+
+Please take DK-0835 (Visual QA: photo-finder-convert (convert sheet)).
