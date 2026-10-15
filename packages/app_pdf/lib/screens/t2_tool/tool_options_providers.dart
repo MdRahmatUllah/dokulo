@@ -171,3 +171,27 @@ Future<bool> pdfLocked(Ref ref, String path) async {
     return e.kind == DocErrorKind.locked;
   }
 }
+
+/// A page (1-based) of the PDF at [path] at [dpi], for a close look
+/// (Compress's Before/After at 200 %, DK-0464). No retry: a page that can't
+/// be rendered keeps its skeleton.
+@Riverpod(retry: _noRetry)
+Future<ui.Image> pdfPageImage(
+  Ref ref,
+  String path, {
+  int page = 1,
+  double dpi = 144,
+}) async {
+  final rendered = await PdfEngine.render(path, page - 1, dpi: dpi);
+  final done = Completer<ui.Image>();
+  ui.decodeImageFromPixels(
+    rendered.bgra,
+    rendered.width,
+    rendered.height,
+    ui.PixelFormat.bgra8888,
+    done.complete,
+  );
+  final image = await done.future;
+  ref.onDispose(image.dispose);
+  return image;
+}

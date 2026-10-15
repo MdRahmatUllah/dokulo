@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_pdf/components/dk_action_bar.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/l10n/formats.dart';
@@ -191,4 +193,37 @@ void main() {
       );
     });
   }
+
+  test('T3: the size, how much smaller, and from what (DK-0464)', () {
+    final dir = Directory.systemTemp.createTempSync('dk_compress_t3');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    final out = File('${dir.path}/out.pdf')
+      ..writeAsBytesSync(List.filled(1900, 0));
+    final l = lookupAppLocalizations(const Locale('en'));
+    final summary = compressDefinition.summary!(
+      l,
+      ToolResult(
+        toolId: 'compress',
+        inputs: [
+          FileEntry(
+            id: 1,
+            path: '/docs/a.pdf',
+            name: 'a.pdf',
+            size: 8400,
+            pages: 12,
+            created: DateTime(2026),
+            modified: DateTime(2026),
+            hasText: false,
+            encrypted: false,
+          ),
+        ],
+        output: OneFile(out.path),
+        took: Duration.zero,
+      ),
+    );
+    expect(summary.headline, formatBytes(1900, 'en'));
+    expect(summary.delta, '(−77$unitSpace%)');
+    expect(summary.sub, 'From ${formatBytes(8400, 'en')} · 12 pages');
+    expect(compressDefinition.next, ['protect']);
+  });
 }

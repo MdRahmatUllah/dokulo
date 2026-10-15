@@ -179,7 +179,8 @@ void main() {
 
   testWidgets('a screen reader reads T3 top to bottom: the bar, the result, '
       'the name, where it goes, then the actions (DK-0637)', (tester) async {
-    tester.view.physicalSize = const Size(393, 852);
+    // Tall enough for all of it: Compress's Before/After sits in between.
+    tester.view.physicalSize = const Size(393, 1400);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     final semantics = tester.ensureSemantics();
@@ -194,7 +195,9 @@ void main() {
       containsAllInOrder([
         'Close',
         'Compress PDF',
-        contains('From Mietvertrag.pdf'), // the result card
+        contains('From'), // the result card
+        'Before',
+        'After',
         'File name',
         'Save to: Files › Taxes',
         'Share',
@@ -227,6 +230,9 @@ void main() {
       'haptic; "Saved to Files › Taxes" with Open; then Done (DK-0381)', (
     tester,
   ) async {
+    tester.view.physicalSize = const Size(393, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
     final router = await pumpT3(tester);
     expect(find.text('Compress PDF'), findsOneWidget);
     expect(find.text('Save to: Files › Taxes'), findsOneWidget);
@@ -324,6 +330,9 @@ void main() {
 
   testWidgets('Save to… (DK-0385): the folder picker, then Save here saves '
       'there; the row shows the folder', (tester) async {
+    tester.view.physicalSize = const Size(393, 1400);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
     await pumpT3(tester);
     await tester.tap(find.bySemanticsLabel('More ways to save'));
     await settle(tester);

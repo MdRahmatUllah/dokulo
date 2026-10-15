@@ -432,6 +432,10 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
                       )
                     : null,
               ),
+              if (!many && _def.resultDetail != null) ...[
+                SizedBox(height: t.space.l),
+                _def.resultDetail!(context, result),
+              ],
               if (many) ...[
                 Padding(
                   padding: EdgeInsets.only(top: t.space.xl, bottom: t.space.s),

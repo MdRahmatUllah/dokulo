@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import '../components/dk_level_card.dart';
 import '../components/dk_sheet.dart';
 import '../components/dk_button.dart';
 import '../components/dk_text_field.dart';
+import '../screens/t3_result/compress_before_after.dart';
 import '../l10n/app_localizations.dart';
 import '../l10n/formats.dart';
 import '../theme/dk_tokens.dart';
@@ -85,6 +88,33 @@ final compressDefinition = ToolDefinition(
       removeMetadata: v['metadata']! as bool,
     );
   },
+  // T3 (DK-0464): "1.9 MB (−77 %)", "From 8.4 MB · 12 pages", Before/After.
+  summary: (l, r) {
+    final locale = l.localeName;
+    int sizeOf(String path) =>
+        File(path).existsSync() ? File(path).lengthSync() : 0;
+    final after = r.files.fold(0, (n, f) => n + sizeOf(f));
+    final before = r.inputs.fold(0, (n, f) => n + f.size);
+    final pages = r.inputs.fold(0, (n, f) => n + f.pages);
+    final change = before == 0 ? 0 : ((after - before) * 100 / before).round();
+    return ToolSummary(
+      headline: formatBytes(after, locale),
+      delta: change == 0
+          ? null
+          // A minus sign, not a hyphen; the thin space before %.
+          : '(${change < 0 ? '−' : '+'}${change.abs()}$unitSpace%)',
+      sub: l.t3_from(
+        [
+          formatBytes(before, locale),
+          if (pages > 0) l.meta_pages(pages),
+        ].join(' · '),
+      ),
+    );
+  },
+  resultDetail: (context, r) => r.inputs.length == 1
+      ? CompressBeforeAfter(before: r.inputs.single.path, after: r.files.first)
+      : const SizedBox.shrink(),
+  next: const ['protect'],
 );
 
 class _SizeControl extends StatelessWidget {

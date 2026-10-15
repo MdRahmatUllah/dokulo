@@ -189,6 +189,7 @@ class ToolDefinition {
     this.next = const [],
     this.preview,
     this.canSkipPages = false,
+    this.resultDetail,
   });
 
   final String id;
@@ -243,6 +244,10 @@ class ToolDefinition {
   /// Its job can leave a failed page as it is ([ToolEnv.skipPages]): the
   /// failure then offers "Skip this page" (DK-1086).
   final bool canSkipPages;
+
+  /// T3's part under the result card (Compress's Before/After, DK-0464);
+  /// null: none.
+  final Widget Function(BuildContext, ToolResult)? resultDetail;
 
   /// Every option's starting value.
   ToolValues get initialValues => {

@@ -802,5 +802,8 @@
   "photos_select_more": "Mehr auswählen",
   "img2pdf_result": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 Seite} other{{pages} Seiten}} · {size}",
   "img2pdf_images": "{n, plural, =1{1 Bild} other{{n} Bildern}}",
-  "img2pdf_not_images": "{n, plural, =1{1 Datei ist kein Bild und wurde übersprungen.} other{{n} Dateien sind keine Bilder und wurden übersprungen.}}"
+  "img2pdf_not_images": "{n, plural, =1{1 Datei ist kein Bild und wurde übersprungen.} other{{n} Dateien sind keine Bilder und wurden übersprungen.}}",
+  "compress_before": "Vorher",
+  "compress_after": "Nachher",
+  "compress_zoom": "200 % Zoom"
 }
