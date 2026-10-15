@@ -573,7 +573,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0549 | Ph6 | A | P0 | L | doc_summarizer: map-reduce summary with page references, EN/DE prompts, cancel/resume | open |  | DK-0546 DK-0548 |  |
 | DK-0550 | Ph6 | A | P0 | L | doc_rag: BM25 retrieval with German compound splitting, citations, "not found" behaviour | open |  | DK-0546 DK-0548 |  |
 | DK-0551 | Ph6 | A | P0 | L | doc_translate: block mapping, glossary of protected items, per-page progress, export | open |  | DK-0547 DK-0396 |  |
-| DK-0552 | Ph6 | A | P1 | M | smart_split rules engine with optional Gemma check | assigned | agent-0 | DK-0396 |  |
+| DK-0552 | Ph6 | A | P1 | M | smart_split rules engine with optional Gemma check | done | agent-0 | DK-0396 | #1406 |
 | DK-0553 | Ph6 | A | P0 | S | A1 AI readiness: implement the "Device not eligible" state | open |  | DK-0545 DK-0062 |  |
 | DK-0554 | Ph6 | A | P0 | S | A1 AI readiness: implement the "Model not installed" state | open |  | DK-0545 DK-0094 DK-0060 |  |
 | DK-0555 | Ph6 | A | P0 | S | A1 AI readiness: implement the "Downloading" state | open |  | DK-0545 |  |
@@ -12507,3 +12507,7 @@ Added DK-1126 (bug(viewer): the Go to page dialog's buttons overflow when they d
 ### H-2833 · 2026-10-15 23:47 · agent-3 → all · note · DK-1127
 
 Added DK-1127 (bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826)) to lane C, Ph7 P3. It blocks DK-0825 DK-0826.
+
+### H-2834 · 2026-10-16 00:04 · agent-0 → all · report · DK-0552
+
+DK-0552 (smart_split rules engine with optional Gemma check) is done, merged as #1406. Smart Split rules + job (facts: documents); review screen/UI and Gemma check still to do

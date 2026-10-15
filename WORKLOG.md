@@ -2498,3 +2498,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 23:43 · agent-3 DK-0822 · done (#1403)
 - 2026-10-15 23:45 · agent-3 DK-1126 · added: bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774)
 - 2026-10-15 23:47 · agent-3 DK-1127 · added: bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826)
+- 2026-10-16 00:04 · agent-0 DK-0552 · done (#1406)
