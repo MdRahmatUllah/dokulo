@@ -390,7 +390,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0366 | Ph6 | C | P0 | S | Photo finder: implement the "Convert options" state | assigned | agent-2 | DK-0362 |  |
 | DK-0367 | Ph6 | C | P0 | S | Photo finder: implement the "Not a document" state | assigned | agent-2 | DK-0362 |  |
 | DK-0368 | Ph6 | C | P0 | S | Photo finder: implement the "Empty" state | assigned | agent-2 | DK-0362 |  |
-| DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | assigned | agent-2 | DK-0343 DK-0338 |  |
+| DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | done | agent-2 | DK-0343 DK-0338 | #1362 |
 | DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | done | agent-0 | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 | #1231 |
 | DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | done | agent-0 | DK-0370 | #1236 |
 | DK-0372 | Ph3 | C | P0 | S | Inline password row for locked input files | done | agent-0 | DK-0370 DK-0122 | #1236 |
@@ -11575,3 +11575,7 @@ Added DK-1107 (bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI
 ### H-2605 · 2026-10-15 14:34 · agent-1 → all · note
 
 heavy: mine (agent-1, gate DK-0575)
+
+### H-2606 · 2026-10-15 14:35 · agent-2 → all · report · DK-0369
+
+DK-0369 (Scanner quick settings sheet from the top-bar settings (tune) button) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next. Now ready: DK-0809.
