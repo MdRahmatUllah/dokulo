@@ -4,8 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 import 'dart:async';
+import 'dart:io';
 
-import 'package:doc_core/doc_core.dart' show FileEntry;
+import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart' show ManyFiles, Pdf2ImgInput;
 
 import '../../components/dk_action_sheet.dart';
 import '../../components/dk_icon.dart';
@@ -25,10 +27,13 @@ import '../../patterns/dk_file_actions.dart';
 import '../../patterns/dk_file_info.dart';
 import '../../patterns/dk_tool_picker.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
+import '../../providers/file_providers.dart';
+import '../../providers/files_providers.dart';
 import '../../providers/share_providers.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
 import '../../providers/print_providers.dart';
+import '../t2_tool/tool_run.dart';
 import 'viewer_chrome.dart';
 import 'viewer_providers.dart';
 import 'viewer_search.dart';
@@ -107,6 +112,62 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
       },
     );
     return true;
+  }
+
+  /// Highlight, Underline or Strike from the selection (DK-0321): the
+  /// annotations go straight into a new copy of the file (edit mode,
+  /// unseen), the old content is kept as a version, and "Saved · Undo"
+  /// puts it back. The colour is the highlighter's last-used one.
+  Future<void> _markup(
+    String path,
+    DkMarkupAction action,
+    List<SelectionLines> selected,
+  ) async {
+    final l = AppLocalizations.of(context);
+    final saved = ref.read(prefsProvider).value?['edit.options.highlighter'];
+    final colour = saved is Map && saved['color'] is int
+        ? Color(saved['color'] as int)
+        : context.tokens.markup.yellow;
+    final edits = markupEdits(action, selected, colour);
+    if (edits.isEmpty) return;
+    // Everything from ref before the first await: the user may leave.
+    final storeFuture = ref.read(fileStoreProvider.future);
+    final versionsFuture = ref.read(versionStoreProvider.future);
+    File? out;
+    try {
+      out = await (await storeFuture).newTempFile(
+        path.split(RegExp(r'[\\/]')).last,
+      );
+      await PdfAnnotations.apply(path, out.path, edits, password: _password);
+      final versions = await versionsFuture;
+      final before = await versions.replace(widget.fileId, out.path);
+      if (!mounted) return;
+      _reload();
+      showDkToast(
+        context,
+        l.toast_saved,
+        action: l.common_undo,
+        above: _barHeight,
+        onAction: () async {
+          await versions.restore(before);
+          if (mounted) _reload();
+        },
+      );
+    } catch (_) {
+      if (mounted) {
+        showDkToast(context, l.viewer_markup_failed, above: _barHeight);
+      }
+    } finally {
+      if (out != null && await out.exists()) await out.delete();
+    }
+  }
+
+  /// The file was rewritten: the canvas opens it again, on the same page.
+  var _revision = 0;
+
+  void _reload() {
+    ref.invalidate(viewerFileProvider(widget.fileId));
+    setState(() => _revision++);
   }
 
   @override
@@ -211,9 +272,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   }
 
   /// The overflow menu (DK-0295; UI spec §17.1, viewer-menu): Info · Go to
-  /// page · Pages · Night mode · Organize pages · Print · Move to locked
-  /// folder, then Delete (to Recently deleted with Undo; the viewer closes).
-  // ponytail: Share as images and Share text join with share_plus (DK-0311).
+  /// page · Pages · Night mode · Organize pages · Print · Share as images ·
+  /// Share text (DK-0311) · Move to locked folder, then Delete (to Recently
+  /// deleted with Undo; the viewer closes).
   void _menu(BuildContext anchor, FileEntry file) {
     final l = AppLocalizations.of(context);
     final night = ref.read(prefsProvider).value?[viewerNightKey] == true;
@@ -274,6 +335,16 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
             },
           ),
           DkAction(
+            icon: DkIcons.tool('pdf2img'),
+            label: l.viewer_menu_share_images,
+            onTap: () => _shareImages(file),
+          ),
+          DkAction(
+            icon: DkIcons.tool('text'),
+            label: l.viewer_menu_share_text,
+            onTap: () => _shareText(file),
+          ),
+          DkAction(
             icon: DkIcons.lockedFolder,
             label: l.file_move_to_locked,
             onTap: () => context.push(Routes.lockedFolder, extra: [file.id]),
@@ -295,6 +366,54 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         ],
       ],
     );
+  }
+
+  /// Share as images (DK-0311): every page as a 150 dpi JPG through the
+  /// pdf2img job, then the real files to the share sheet. A long document
+  /// says it's preparing them.
+  Future<void> _shareImages(FileEntry file) async {
+    final l = AppLocalizations.of(context);
+    if (_pageCount > 10) {
+      showDkToast(context, l.viewer_share_preparing, above: _barHeight);
+    }
+    try {
+      final run = await ref.read(toolRunnerProvider)(
+        'pdf2img',
+        (out) => Pdf2ImgInput(
+          file: file.path,
+          outputDir: out,
+          suffix: l.viewer_share_page_suffix,
+          password: _password,
+        ),
+      );
+      final images = await run.result as ManyFiles;
+      await ref.read(fileSharerProvider)(images.paths);
+    } catch (_) {
+      if (mounted) {
+        showDkToast(context, l.viewer_share_failed, above: _barHeight);
+      }
+    }
+  }
+
+  /// Share text (DK-0311): the pages' text, a blank line between pages, to
+  /// the share sheet; a scan without a text layer says so.
+  Future<void> _shareText(FileEntry file) async {
+    final l = AppLocalizations.of(context);
+    try {
+      final pages = await PdfEngine.pageTexts(file.path, password: _password);
+      final text = pages.map((p) => p.trim()).where((p) => p.isNotEmpty);
+      if (text.isEmpty) {
+        if (mounted) {
+          showDkToast(context, l.viewer_search_no_text, above: _barHeight);
+        }
+        return;
+      }
+      await ref.read(textSharerProvider)(text.join('\n\n'));
+    } catch (_) {
+      if (mounted) {
+        showDkToast(context, l.viewer_share_failed, above: _barHeight);
+      }
+    }
   }
 
   /// The form banner over the first page (UI spec §17.1; DK-1090): "This
@@ -347,11 +466,17 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           onPageChanged: (p) => setState(() => _page = p ?? _page),
           // Night mode (DK-1089), switched in the overflow menu (DK-0295).
           night: ref.watch(prefsProvider).value?[viewerNightKey] == true,
-          // Copy for now; Highlight, Underline, Strike come with the
-          // annotations (DK-0321), Ask AI with the AI pane (M13).
-          markup: const [DkMarkupAction.copy],
+          // Ask AI joins with the AI pane (M13).
+          markup: const [
+            DkMarkupAction.copy,
+            DkMarkupAction.highlight,
+            DkMarkupAction.underline,
+            DkMarkupAction.strike,
+          ],
+          onMarkup: (action, lines) => _markup(path, action, lines),
           search: _search,
-          initialPage: widget.page ?? 1,
+          revision: _revision,
+          initialPage: (_revision == 0 ? widget.page : _page) ?? 1,
           // A web link asks first; it's the only step that leaves Dokulo
           // (DK-1088).
           onLink: (url) async {
@@ -415,4 +540,41 @@ class ViewerPageSkeleton extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The annotations for [action] on [selected] (DK-0321): one markup per
+/// page, a quad per line. A highlight at 40 % (or the colour's own alpha);
+/// Underline and Strike opaque.
+Map<int, PageAnnotEdits> markupEdits(
+  DkMarkupAction action,
+  List<SelectionLines> selected,
+  Color colour,
+) {
+  final kind = switch (action) {
+    DkMarkupAction.highlight => MarkupKind.highlight,
+    DkMarkupAction.underline => MarkupKind.underline,
+    DkMarkupAction.strike => MarkupKind.strikeOut,
+    _ => null,
+  };
+  if (kind == null) return const {};
+  final argb = kind == MarkupKind.highlight
+      ? (colour.a < 1 ? colour : colour.withValues(alpha: 0.4)).toARGB32()
+      : colour.withValues(alpha: 1).toARGB32();
+  return {
+    for (final s in selected)
+      if (s.lines.isNotEmpty)
+        s.page: PageAnnotEdits(
+          add: [
+            MarkupAnnot(kind, [
+              for (final b in s.lines)
+                (
+                  (x: b.left, y: b.top),
+                  (x: b.right, y: b.top),
+                  (x: b.left, y: b.bottom),
+                  (x: b.right, y: b.bottom),
+                ),
+            ], color: argb),
+          ],
+        ),
+  };
 }

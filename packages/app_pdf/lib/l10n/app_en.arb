@@ -2888,8 +2888,26 @@
   "@scan_saving": {"description": "S2 while the scan saves (DK-0359)."},
   "scan_save_failed": "Couldn't save the scan. Your pages are still here.",
   "@scan_save_failed": {"description": "S2 when saving the scan failed (DK-0359)."},
+  "options_eraser_mode": "Mode",
+  "@options_eraser_mode": {"description": "V2 eraser options (DK-0320; design edit-eraser)."},
+  "options_eraser_help": "Tap a mark to delete it. Stroke mode erases ink where you drag.",
+  "@options_eraser_help": {"description": "V2 eraser options (DK-0320; design edit-eraser)."},
   "settings_language_caption": "Changes immediately. No restart needed.",
   "@settings_language_caption": {
     "description": "M3 Language: under the choices (DK-0575)."
-  }
+  },
+  "viewer_markup_failed": "Couldn't add that mark. The file is as it was.",
+  "@viewer_markup_failed": {"description": "V1 when a Highlight/Underline/Strike could not be written (DK-0321)."},
+  "viewer_menu_share_images": "Share as images",
+  "@viewer_menu_share_images": {"description": "V1 overflow menu: every page as a JPG to the share sheet (UI spec §17.1; DK-0311)."},
+  "viewer_menu_share_text": "Share text",
+  "@viewer_menu_share_text": {"description": "V1 overflow menu: the PDF's text to the share sheet (DK-0311)."},
+  "viewer_share_page_suffix": " – page",
+  "@viewer_share_page_suffix": {"description": "Share as images: the images' name suffix, then the page number (\"Invoice – page 03.jpg\")."},
+  "viewer_share_preparing": "Preparing the images…",
+  "@viewer_share_preparing": {"description": "Share as images on a long document, while the pages render (DK-0311)."},
+  "viewer_share_failed": "Couldn't prepare that for sharing.",
+  "@viewer_share_failed": {"description": "Share as images or Share text failed (DK-0311)."},
+  "sign_toast_signed": "Signed on page {page}",
+  "@sign_toast_signed": {"description": "V2 after Done with a signature placed (DK-0519; UI spec \u00a721).", "placeholders": {"page": {"type": "int"}}}
 }

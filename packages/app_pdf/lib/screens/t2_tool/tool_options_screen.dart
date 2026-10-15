@@ -38,6 +38,7 @@ import '../../providers/file_providers.dart';
 import '../../providers/image_providers.dart';
 import '../../providers/mail_providers.dart';
 import '../../routes/bottom_chrome.dart';
+import '../../providers/database_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../../tools/tool_catalogue.dart';
@@ -190,6 +191,35 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
       );
     }
     if (mounted && picked.isNotEmpty) _add(current, picked, input);
+  }
+
+  var _opening = false;
+
+  /// A screen tool's file: a picked one is copied into Files first (the
+  /// screens open files by their row).
+  Future<void> _openScreen(String Function(String) open, FileEntry file) async {
+    var id = file.id;
+    try {
+      if (id < 0) {
+        final store = await ref.read(fileStoreProvider.future);
+        final picked = File(file.path);
+        id = await store.importToUserFolder(
+          ref.read(appDatabaseProvider),
+          picked,
+        );
+        // The picker's copy in inbox/ isn't needed once it's in Files.
+        if (picked.path.startsWith(store.inbox.path) && picked.existsSync()) {
+          await picked.delete();
+        }
+      }
+    } on FileSystemException {
+      _opening = false;
+      if (mounted) {
+        showDkToast(context, AppLocalizations.of(context).error_storage);
+      }
+      return;
+    }
+    if (mounted) context.pushReplacement(open('$id'));
   }
 
   /// Pages the user skipped after they failed, kept for this screen's
@@ -460,6 +490,15 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     // Compare (two at least) with checkboxes.
     final choosing = ready && files.length < input.min;
     final canRun = ready && !choosing && locked.isEmpty && _def.input != null;
+    // Mark up, Sign, Organize: the file chosen, their screen opens.
+    if (ready && !choosing && files.isNotEmpty && locked.isEmpty && !_opening) {
+      if (screenTools[_def.id] case final open?) {
+        _opening = true;
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) => _openScreen(open, files.first),
+        );
+      }
+    }
     final String? caption;
     if (!ready) {
       caption = null;

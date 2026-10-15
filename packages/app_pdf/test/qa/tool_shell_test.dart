@@ -526,6 +526,13 @@ void main() {
       await golden(tester, 'tablet_result_portrait_$theme');
     });
 
+    // DK-0970: 24-tablet/tablet-compress-result-landscape, the large
+    // tablet: the result beside its preview pane.
+    testWidgets('tablet-compress-result-landscape, $theme', (tester) async {
+      await pumpT3(tester, Duration.zero, size: const Size(1366, 1024));
+      await golden(tester, 'tablet_result_landscape_$theme');
+    });
+
     // DK-0981: 27-accessibility/text-200-percent, "T3 Compress – result".
     testWidgets('text-200-percent T3, $theme', (tester) async {
       await pumpT3(tester, Duration.zero, textScale: 2);
