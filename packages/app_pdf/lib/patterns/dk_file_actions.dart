@@ -20,6 +20,7 @@ import '../screens/files/files_screen.dart' show fileMeta, newFolder;
 import '../theme/dk_tokens.dart';
 import '../tools/tool_catalogue.dart';
 import 'dk_file_info.dart';
+import 'dk_tool_picker.dart';
 import 'dk_text_dialog.dart';
 import 'dk_undo.dart';
 
@@ -121,7 +122,8 @@ Future<void> showFileActions(
         DkAction(
           icon: DkIcons.toolsTab,
           label: l.file_all_tools,
-          onTap: () => context.go(Routes.tools),
+          // X1 with this file: the chosen tool gets it (DK-0387).
+          onTap: () => showToolPicker(context, [file]),
         ),
       ],
       [

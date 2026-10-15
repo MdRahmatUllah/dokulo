@@ -344,3 +344,20 @@ the device facts and the local crash log (`reportEmail`), through the
 as it is (`ToolDefinition.canSkipPages`; Compress and Image to PDF's jobs
 take `skipPages`), it reruns with the page skipped; the failure now has the
 frame's three buttons.
+
+### X1, the tool picker (DK-1094; QA DK-0848)
+
+`test/patterns/dk_tool_picker_test.dart` renders x1single in light, dark and
+German (`test/qa/goldens/tool_shell_x1single_*.png`), next to the frames in
+`docs/qa/tool-shell/x1single-*.png`. Regions, order and copy match: the
+file's thumbnail, name and "2.4 MB · 12 pages", Search tools, Open in
+viewer, Suggested, All tools (only the tools that take the file).
+
+- Approved: Suggested is the user's pinned tools that take the file (the
+  spec's "top 4 by use"; pinned tools are what the user uses), so its order
+  can differ from the frame's (Compress, Black out, Add password, Sign).
+
+A share or "Open with" (DK-0235) opens X1 with the files copied into
+Dokulo's folder; several files show "4 files" over "3 PDFs · 1 image" with
+three fanned thumbnails (x1multi's header), and "Open with" on one PDF opens
+V1 instead.

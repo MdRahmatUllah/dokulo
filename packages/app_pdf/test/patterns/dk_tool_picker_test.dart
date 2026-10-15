@@ -29,6 +29,7 @@ void main() {
     WidgetTester tester,
     List<FileEntry> files, {
     DkTokens? tokens,
+    Locale locale = const Locale('en'),
   }) async {
     pushed = [];
     tester.view.physicalSize = const Size(393, 852);
@@ -78,6 +79,7 @@ void main() {
           routerConfig: router,
           debugShowCheckedModeBanner: false,
           theme: dokuloTheme(tokens ?? DkTokens.light),
+          locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
         ),
@@ -110,7 +112,7 @@ void main() {
     await open(tester, [
       for (var i = 1; i <= 4; i++) entry(i, 'IMG_$i.jpg', pages: 0),
     ]);
-    expect(find.text('Files (4)'), findsOneWidget);
+    expect(find.text('4 files'), findsOneWidget);
     expect(find.text('Open in viewer'), findsNothing);
     expect(find.text('Image to PDF'), findsOneWidget);
     expect(find.text('Compress PDF'), findsNothing);
@@ -133,17 +135,48 @@ void main() {
     expect(two.map((t) => t.id), contains('merge'));
   });
 
-  for (final (theme, tokens) in [
-    ('light', DkTokens.light),
-    ('dark', DkTokens.dark),
+  // Visual QA (DK-1094, DK-0848): the x1single frame in each theme and in
+  // German; the frames are in docs/qa/tool-shell/.
+  for (final (theme, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('deutsch', DkTokens.light, const Locale('de')),
   ]) {
     testWidgets('golden: tool_shell_x1single_$theme', (tester) async {
-      await open(tester, [
-        entry(7, 'Mietvertrag Musterstraße 12.pdf'),
-      ], tokens: tokens);
+      await open(
+        tester,
+        [entry(7, 'Mietvertrag Musterstraße 12.pdf')],
+        tokens: tokens,
+        locale: locale,
+      );
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('../qa/goldens/tool_shell_x1single_$theme.png'),
+      );
+    });
+  }
+
+  // Visual QA (DK-0849): the x1multi frame, X1 with 4 files.
+  for (final (theme, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('deutsch', DkTokens.light, const Locale('de')),
+  ]) {
+    testWidgets('golden: tool_shell_x1multi_$theme', (tester) async {
+      await open(
+        tester,
+        [
+          entry(1, 'Scan 2026-10-02 09.14.pdf', pages: 1),
+          entry(2, 'Scan 2026-10-02 09.15.pdf', pages: 1),
+          entry(3, 'Scan 2026-10-02 09.16.pdf', pages: 1),
+          entry(4, 'Scan 2026-10-02 09.17.pdf', pages: 1),
+        ],
+        tokens: tokens,
+        locale: locale,
+      );
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('../qa/goldens/tool_shell_x1multi_$theme.png'),
       );
     });
   }

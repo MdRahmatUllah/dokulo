@@ -27,6 +27,7 @@ import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_open_file.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/image_providers.dart';
 import '../../providers/files_providers.dart';
 import '../../routes/link_error.dart';
 import '../../routes/routes.dart';
@@ -485,18 +486,27 @@ class _OrganizeState extends ConsumerState<_Organize> {
       await edit.insertBlank(at, store.temp);
       setState(() {});
     } else if (choice == 'photos') {
-      final images = [
+      final picked = [
         for (final p in await ref.read(devicePickerProvider)(
           ToolInput.of('img2pdf')!,
           photos: true,
         ))
-          // HEIC needs the platform's decoder first (DK-1081).
-          if (ToolInput.kindOf(p) == DkFileKind.image &&
-              !RegExp(r'\.hei[cf]$', caseSensitive: false).hasMatch(p))
-            p,
+          if (ToolInput.kindOf(p) == DkFileKind.image) p,
       ];
-      if (images.isEmpty || !mounted) return;
       final store = await ref.read(fileStoreProvider.future);
+      // HEIC photos as JPEGs first (DK-1081).
+      final (paths: images, :skipped) = await prepareImages(
+        picked,
+        store,
+        ref.read(heicDecoderProvider),
+      );
+      if (skipped > 0 && mounted) {
+        showDkToast(
+          context,
+          AppLocalizations.of(context).images_heic_skipped(skipped),
+        );
+      }
+      if (images.isEmpty || !mounted) return;
       final pdf = await store.newTempFile('photos.pdf');
       // One page per photo, as Image to PDF makes them, off the UI isolate.
       await Isolate.run(() => _photosPdf(images, pdf.path));

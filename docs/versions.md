@@ -46,7 +46,7 @@ PR. Checked on pub.dev on 2026-10-07.
 | llamadart_llama_cpp_flutter | 0.0.8 | MIT | llama.cpp for iOS (SwiftPM); paired with llamadart 0.8.12 | Planned |
 | flutter_onnxruntime | 1.8.4 | MIT | OCR models, embeddings, TTS (ONNX Runtime 1.23); 1.9.0 exists | In use (DK-0398, doc_vision) |
 | opencv_dart | 2.2.2 | Apache-2.0 | Image pipeline; modules core, imgproc, imgcodecs only ([opencv-modules.md](compliance/opencv-modules.md)) | In use (DK-0339; doc_vision) |
-| receive_sharing_intent | 1.9.0 | Apache-2.0 | Share sheet / "Open with" | Planned |
+| receive_sharing_intent | — | Apache-2.0 | Share sheet / "Open with" | Not used: our `dokulo/incoming` channel (DK-0235) |
 | drift | 2.35.0 | MIT | File index, recents, folders, OCR text (FTS5) | In use (DK-0005, doc_core) |
 | drift_dev | ^2.35.0 (dev) | MIT | drift codegen | In use (DK-0005) |
 | sqlite3 | 3.6.0 | MIT | SQLite with FTS5 via build hooks. `sqlite3_flutter_libs` and `sqlcipher_flutter_libs` are obsolete with sqlite3 3.x: not added | In use (DK-0005, doc_core) |

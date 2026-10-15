@@ -241,6 +241,8 @@ abstract final class DkIcons {
   // Viewer and editor.
   static const nightMode = IconData(0xe51c, fontFamily: _font) /* dark_mode */;
   static const goToPage = IconData(0xe8a0, fontFamily: _font) /* pageview */;
+  static const pages = IconData(0xe8eb, fontFamily: _font) /* view_carousel */;
+  static const print = IconData(0xe8ad, fontFamily: _font) /* print */;
   static const pen = IconData(0xf097, fontFamily: _font) /* edit */;
   static const highlighter = IconData(
     0xe6d1,

@@ -146,29 +146,32 @@ QuadDetection? detectQuad(cv.Mat image) {
     );
     final kernel = track(cv.getStructuringElement(cv.MORPH_RECT, (5, 5)));
     final closed = track(cv.morphologyEx(edges, cv.MORPH_CLOSE, kernel));
-    final (contours, hierarchy) = cv.findContours(
-      closed,
-      cv.RETR_LIST,
-      cv.CHAIN_APPROX_SIMPLE,
-    );
     final frameArea = (small.cols * small.rows).toDouble();
-    QuadDetection? best;
-    try {
-      for (final contour in contours) {
-        // Small pages too: the hint asks to move closer (DK-0344).
-        final area = cv.contourArea(contour);
-        if (area < minAreaShare * frameArea) continue;
-        final corners = _fourCorners(contour);
-        if (corners == null) continue;
-        final quad = Quad.ordered(corners);
-        final score = _score(quad, frameArea);
-        if (best == null || score > best.score) {
-          best = (quad: quad, score: score);
-        }
+    var best = _bestQuad(closed, frameArea);
+    // A white page on a light desk is too faint for edges whose thresholds
+    // follow the frame's brightness (DK-0662's suite): the page is the
+    // brightest region there, so a threshold between it and the desk
+    // (Otsu) outlines it. Tried only when the edges found nothing sure.
+    if (best == null || best.score < _sure) {
+      // The text closed over first (thin dark strokes on white), or the
+      // threshold splits text from everything else, not page from desk.
+      final big = track(cv.getStructuringElement(cv.MORPH_RECT, (9, 9)));
+      final paper = track(cv.morphologyEx(blurred, cv.MORPH_CLOSE, big));
+      // Halfway between the desk and the paper: the page is the brightest
+      // large region, so the 95th percentile is paper.
+      final cut = (_percentile(paper, 0.4) + _percentile(paper, 0.95)) / 2;
+      final (_, bright) = cv.threshold(paper, cut, 255, cv.THRESH_BINARY);
+      track(bright);
+      final opened = track(cv.morphologyEx(bright, cv.MORPH_OPEN, kernel));
+      final other = _bestQuad(opened, frameArea);
+      // Only a page: not the whole frame (a pattern's light half joined
+      // up), and clearly brighter than around it.
+      if (other != null &&
+          other.quad.area < 0.92 * frameArea &&
+          _brighter(paper, other.quad) &&
+          (best == null || other.score > best.score)) {
+        best = other;
       }
-    } finally {
-      contours.dispose();
-      hierarchy.dispose();
     }
     if (best == null) return null;
     return (quad: best.quad.scaled(1 / scale), score: best.score);
@@ -181,6 +184,56 @@ QuadDetection? detectQuad(cv.Mat image) {
 
 /// The smallest share of the frame a page may cover and still be found.
 const minAreaShare = 0.05;
+
+/// A candidate scoring this well needs no second look.
+const _sure = 0.6;
+
+/// Whether [quad]'s inside is clearly brighter than the rest of [grey].
+bool _brighter(cv.Mat grey, Quad quad) {
+  final mask = cv.Mat.zeros(grey.rows, grey.cols, cv.MatType.CV_8UC1);
+  final poly = cv.VecVecPoint.fromList([
+    [for (final p in quad.corners) cv.Point(p.x.round(), p.y.round())],
+  ]);
+  cv.fillPoly(mask, poly, cv.Scalar.all(255));
+  final outside = cv.bitwiseNOT(mask);
+  try {
+    final inner = cv.mean(grey, mask: mask).val1;
+    final outer = cv.mean(grey, mask: outside).val1;
+    return inner - outer >= 15;
+  } finally {
+    poly.dispose();
+    mask.dispose();
+    outside.dispose();
+  }
+}
+
+/// The best page-like quad among [binary]'s contours, or null.
+QuadDetection? _bestQuad(cv.Mat binary, double frameArea) {
+  final (contours, hierarchy) = cv.findContours(
+    binary,
+    cv.RETR_LIST,
+    cv.CHAIN_APPROX_SIMPLE,
+  );
+  QuadDetection? best;
+  try {
+    for (final contour in contours) {
+      // Small pages too: the hint asks to move closer (DK-0344).
+      final area = cv.contourArea(contour);
+      if (area < minAreaShare * frameArea) continue;
+      final corners = _fourCorners(contour);
+      if (corners == null) continue;
+      final quad = Quad.ordered(corners);
+      final score = _score(quad, frameArea);
+      if (best == null || score > best.score) {
+        best = (quad: quad, score: score);
+      }
+    }
+  } finally {
+    contours.dispose();
+    hierarchy.dispose();
+  }
+  return best;
+}
 
 /// Four corners for [contour]: its polygon at growing tolerance, then its
 /// convex hull's (a shadow or a finger touching the page edge adds spurs
@@ -244,7 +297,10 @@ double _score(Quad q, double frameArea) {
   return 0.5 * areaShare.clamp(0.0, 0.9) / 0.9 + 0.5 * angles;
 }
 
-double _median(cv.Mat grey) {
+double _median(cv.Mat grey) => _percentile(grey, 0.5);
+
+/// The grey level below which [q] of [grey]'s pixels lie.
+double _percentile(cv.Mat grey, double q) {
   // ponytail: a 256-bin histogram by hand on a 480 px frame; cv.calcHist if it shows in a profile.
   final data = grey.data;
   final hist = List.filled(256, 0);
@@ -254,7 +310,7 @@ double _median(cv.Mat grey) {
   var seen = 0;
   for (var i = 0; i < 256; i++) {
     seen += hist[i];
-    if (seen * 2 >= data.length) return i.toDouble();
+    if (seen >= q * data.length) return i.toDouble();
   }
   return 127;
 }

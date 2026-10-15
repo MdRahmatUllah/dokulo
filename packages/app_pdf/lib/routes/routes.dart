@@ -20,9 +20,12 @@ import '../screens/settings/files_settings_screen.dart';
 import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
+import '../screens/s1_scanner/s1_screen.dart';
+import '../screens/s2_review/s2_screen.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
+import '../screens/v2_edit/edit_screen.dart';
 import '../tools/tool_catalogue.dart';
 import '../tools/tool_definition.dart';
 import 'app_shell.dart';
@@ -53,6 +56,9 @@ abstract final class Routes {
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
 
+  /// S1 taking page [index] again for S2 (DK-0350).
+  static String scanRetake(int index) => '/scan?retake=$index';
+
   /// Import photos (the Scan popover): S2 opens the photo picker first.
   static const scanImport = '/scan/review?source=photos';
 
@@ -80,10 +86,13 @@ abstract final class Routes {
   static String viewer(
     String fileId, {
     bool edit = false,
+    bool sign = false,
     int? page,
     String? query,
   }) {
-    if (edit) return '/viewer/$fileId?mode=edit';
+    if (edit || sign) {
+      return '/viewer/$fileId?mode=edit${sign ? '&from=sign' : ''}';
+    }
     final params = {
       if (page != null) 'page': '$page',
       if (query != null && query.isNotEmpty) 'q': query, // V1 search
@@ -247,16 +256,26 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           context,
           key: s.pageKey,
           child: _HomeUnderneath(
-            child: _scanner(s.uri.queryParameters['mode'] ?? ''),
+            child: _scanner(
+              s.uri.queryParameters['mode'] ?? '',
+              retake: int.tryParse(s.uri.queryParameters['retake'] ?? ''),
+            ),
           ),
         ),
         routes: [
           fullScreen(
             'review',
-            (s) => PlaceholderScreen(
-              'S2',
-              detail: s.uri.queryParameters['source'] ?? '',
-            ),
+            (s) => s.uri.queryParameters['source'] == 'photos'
+                // The photo picker: DK-0351.
+                ? const PlaceholderScreen('S2', detail: 'photos')
+                : Builder(
+                    builder: (context) => S2Screen(
+                      onAddPages: () => context.canPop()
+                          ? context.pop()
+                          : context.go(Routes.scan),
+                      onRetake: (i) => context.push(Routes.scanRetake(i)),
+                    ),
+                  ),
           ),
         ],
       ),
@@ -302,7 +321,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           key: s.pageKey,
           child: _HomeUnderneath(
             child: s.uri.queryParameters['mode'] == 'edit'
-                ? PlaceholderScreen('V2', detail: s.pathParameters['fileId']!)
+                ? EditScreen(
+                    fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+                    fromSign: s.uri.queryParameters['from'] == 'sign',
+                  )
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(
                     fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
@@ -380,15 +402,30 @@ class _HomeUnderneath extends StatelessWidget {
 
 /// S1 behind its camera permission (DK-0342). Importing photos needs no
 /// camera; every other mode asks for it first.
-Widget _scanner(String mode) {
-  final camera = PlaceholderScreen('S1', detail: mode);
-  if (mode == DkScanMode.importPhotos.name) return camera;
+Widget _scanner(String mode, {int? retake}) {
+  if (mode == DkScanMode.importPhotos.name) {
+    return PlaceholderScreen('S1', detail: mode);
+  }
   return Builder(
-    builder: (context) => CameraPermissionGate(
-      camera: (_) => camera,
-      onClose: () => context.canPop() ? context.pop() : context.go(Routes.home),
+    builder: (context) {
+      void close() =>
+          context.canPop() ? context.pop() : context.go(Routes.home);
       // As the Scan button's Import photos: S2's picker (DK-0230).
-      onImport: () => context.pushReplacement(Routes.scanImport),
-    ),
+      void import() => context.pushReplacement(Routes.scanImport);
+      return CameraPermissionGate(
+        camera: (_) => S1Screen(
+          initialMode: DkScanMode.values.asNameMap()[mode],
+          retake: retake,
+          // Back to S2, the page replaced.
+          onRetaken: () => context.pop(),
+          onClose: close,
+          onImport: import,
+          onReview: () => context.push(Routes.scanReview),
+          onSettings: () => context.push(Routes.settings('scanning')),
+        ),
+        onClose: close,
+        onImport: import,
+      );
+    },
   );
 }

@@ -26,6 +26,7 @@ import '../../l10n/formats.dart';
 import '../../patterns/dk_empty_states.dart';
 import '../../patterns/dk_file_actions.dart';
 import '../../patterns/dk_swipe_actions.dart';
+import '../../patterns/dk_tool_picker.dart';
 import '../../patterns/dk_open_file.dart';
 import '../../patterns/dk_text_dialog.dart';
 import '../../providers/database_providers.dart';
@@ -965,12 +966,11 @@ Future<void> _selectionMore(
             }
           }),
         ),
-        // ponytail: X1 is agent-0's DK-0387; until it lands, the Tools
-        // tab, as the file sheet's "All tools…".
+        // X1 with the selected files (DK-0263, DK-0387).
         DkAction(
           icon: DkIcons.toolsTab,
           label: l.files_run_tool,
-          onTap: () => done(() => context.go(Routes.tools)),
+          onTap: () => done(() => showToolPicker(context, files)),
         ),
       ],
       [

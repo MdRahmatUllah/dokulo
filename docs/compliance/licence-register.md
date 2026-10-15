@@ -51,7 +51,7 @@ Versions live in `pubspec.lock`; DK-0002 pins them.
 | `llamadart_llama_cpp_flutter` | MIT | Yes | llama.cpp for iOS (SwiftPM) | Notice |
 | `flutter_onnxruntime` | MIT | Yes | OCR models, embeddings, TTS | Notice; ONNX Runtime notice (native table) |
 | `opencv_dart` | Apache-2.0 | Yes | Image filters, perspective, contours | Notice; exclude videoio/highgui/dnn/contrib (DK-0680) |
-| `receive_sharing_intent` | Apache-2.0 | Yes | Share sheet / "Open with" input | Notice |
+| `receive_sharing_intent` | Apache-2.0 | No (DK-0235: our `dokulo/incoming` channel) | Share sheet / "Open with" input | — |
 | `flutter_riverpod` | MIT | Yes | State management | Notice |
 | `riverpod_annotation` | MIT | Yes | Riverpod codegen annotations | Notice |
 | `riverpod_generator` | MIT | Dev | Riverpod codegen | None (not shipped) |

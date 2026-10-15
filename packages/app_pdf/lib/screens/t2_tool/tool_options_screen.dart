@@ -12,6 +12,7 @@ import '../../components/dk_action_sheet.dart';
 import '../../components/dk_button.dart';
 import '../../components/dk_file_card.dart';
 import '../../components/dk_icon.dart';
+import '../../components/dk_page_thumb.dart';
 import '../../components/dk_icon_button.dart';
 import '../../components/dk_menu.dart';
 import '../../components/dk_option_row.dart';
@@ -34,6 +35,7 @@ import '../../crash/crash_log.dart';
 import '../../providers/crash_providers.dart';
 import '../../providers/device_providers.dart';
 import '../../providers/file_providers.dart';
+import '../../providers/image_providers.dart';
 import '../../providers/mail_providers.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../routes/routes.dart';
@@ -145,9 +147,21 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
     ToolInput input, {
     required bool photos,
   }) async {
-    final paths = await ref.read(devicePickerProvider)(input, photos: photos);
-    if (paths.isEmpty) return;
+    final raw = await ref.read(devicePickerProvider)(input, photos: photos);
+    if (raw.isEmpty) return;
     final store = await ref.read(fileStoreProvider.future);
+    // HEIC photos as JPEGs (DK-1081); one the phone can't open is skipped.
+    final (:paths, :skipped) = await prepareImages(
+      raw,
+      store,
+      ref.read(heicDecoderProvider),
+    );
+    if (skipped > 0 && mounted) {
+      showDkToast(
+        context,
+        AppLocalizations.of(context).images_heic_skipped(skipped),
+      );
+    }
     final picked = <FileEntry>[];
     for (final path in paths) {
       if (!input.takes(path)) continue;
@@ -545,6 +559,18 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                     ? () => _browse(files, input, photos: true)
                     : null,
               )
+            else if (ready && input.kinds.length == 1 && input.images)
+              // Images only (Image to PDF): the numbered strip with reorder
+              // (UI spec §21.7, DK-0433).
+              _ImageStrip(
+                files: files,
+                onReorder: _setInput,
+                onRemove: (f) => _setInput([
+                  for (final x in files)
+                    if (x.path != f.path) x,
+                ]),
+                onAdd: () => _browse(files, input, photos: true),
+              )
             else ...[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: t.space.l),
@@ -653,6 +679,103 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
         actions,
         preview: preview != null,
       ),
+    );
+  }
+}
+
+/// An images-only tool's input (DK-0433; UI spec §21.7): "Images (12)"
+/// with Add, then the images as numbered thumbnails in a strip; a long
+/// press drags one to a new place, a tap offers Remove.
+class _ImageStrip extends StatelessWidget {
+  const _ImageStrip({
+    required this.files,
+    required this.onReorder,
+    required this.onRemove,
+    required this.onAdd,
+  });
+
+  final List<FileEntry> files;
+  final ValueChanged<List<FileEntry>> onReorder;
+  final ValueChanged<FileEntry> onRemove;
+  final VoidCallback onAdd;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: t.space.l),
+          child: Row(
+            children: [
+              Expanded(child: _Header(l.t2_section_images(files.length))),
+              Padding(
+                padding: EdgeInsets.only(top: t.space.l),
+                child: DkButton(
+                  label: l.common_add,
+                  icon: DkIcons.add,
+                  variant: DkButtonVariant.tertiary,
+                  size: DkButtonSize.compact,
+                  onPressed: onAdd,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 96,
+          child: ReorderableListView(
+            scrollDirection: Axis.horizontal,
+            padding: EdgeInsets.symmetric(horizontal: t.space.l),
+            buildDefaultDragHandles: false,
+            onReorderItem: (from, to) {
+              final order = [...files];
+              order.insert(to, order.removeAt(from));
+              onReorder(order);
+            },
+            children: [
+              for (final (i, f) in files.indexed)
+                Padding(
+                  key: ValueKey(f.path),
+                  padding: EdgeInsets.only(right: t.space.s),
+                  child: ReorderableDelayedDragStartListener(
+                    index: i,
+                    child: SizedBox(
+                      width: 56,
+                      child: Builder(
+                        builder: (anchor) => DkPageThumb(
+                          pageNumber: i + 1,
+                          pageCount: files.length,
+                          page: Image.file(
+                            File(f.path),
+                            fit: BoxFit.cover,
+                            cacheWidth: 112,
+                            errorBuilder: (_, _, _) =>
+                                ColoredBox(color: t.color.pageWhite),
+                          ),
+                          onTap: () => showDkMenu(
+                            anchor,
+                            groups: [
+                              [
+                                DkAction(
+                                  icon: DkIcons.close,
+                                  label: l.common_remove,
+                                  onTap: () => onRemove(f),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
