@@ -30,7 +30,8 @@ CONTEXT = {
 
 def texts(page: Path) -> list[str]:
     s = page.read_text(encoding='utf-8')
-    s = s[s.find('class="dk-frame"'):]
+    frame = s.find('class="dk-frame"')
+    s = s[s.find('>', frame) + 1:]  # from inside the frame's tag
     s = re.sub(r'<(style|script|svg)\b.*?</\1>', '', s, flags=re.S)
     s = re.sub(r'<span class="i[ "][^>]*>[^<]*</span>', '', s)  # icon names
     out = []
