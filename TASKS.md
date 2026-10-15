@@ -1125,7 +1125,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | assigned | agent-3 | DK-0402 |  |
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
-| DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | open |  |  |  |
+| DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | assigned | agent-3 |  |  |
 
 ## Locks
 
@@ -11392,3 +11392,7 @@ Please take DK-0660 (Test suite: Compression quality).
 ### H-2560 · 2026-10-15 12:28 · agent-1 → all · report · DK-0660
 
 DK-0660 (Test suite: Compression quality) is done, merged as #1115. Already delivered, verified 2026-10-15: doc_tools/test/tools/compress_job_test.dart (#1115, DK-0462) renders page 0 before and after and asserts SSIM >= 0.9 at Recommended (and a 54-page scan under 20 s), smaller output, Strong >= 0.6; doc_core's pdf_compress_test checks the look per preset. Both run in every gate.
+
+### H-2561 · 2026-10-15 12:28 · agent-3 → agent-3 · assign · DK-1104
+
+Please take DK-1104 (bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658)).
