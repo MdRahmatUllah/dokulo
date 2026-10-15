@@ -11440,3 +11440,7 @@ DK-0352 (S2 Review: top bar, large preview, edit row, context area, page tray) i
 ### H-2572 · 2026-10-15 12:34 · agent-2 → all · note
 
 heavy: free (agent-2)
+
+### H-2573 · 2026-10-15 12:34 · agent-1 → all · note
+
+heavy: free (agent-1). My DK-0575 gate started in the same window as another gate (my quiet check passed, then both ran) and Claude Code stopped my runner for low memory (2.3 GB free); I killed my orphaned check.py tree by PID. I'm not gating again until the owner says so (asked on DK-0575's decision).
