@@ -8,7 +8,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Future<List<int>> pump(WidgetTester tester, {required int current}) async {
+  Future<List<int>> pump(
+    WidgetTester tester, {
+    required int current,
+    DkTokens? tokens,
+    Locale locale = const Locale('en'),
+  }) async {
     final taps = <int>[];
     tester.view.physicalSize = const Size(393, 200);
     tester.view.devicePixelRatio = 1;
@@ -16,7 +21,8 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         child: MaterialApp(
-          theme: dokuloTheme(DkTokens.light),
+          theme: dokuloTheme(tokens ?? DkTokens.light),
+          locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
@@ -59,4 +65,19 @@ void main() {
     await tester.pump();
     expect(thumb(30), findsOneWidget);
   });
+
+  // viewer-thumbs (light, dark, deutsch): the strip over the page.
+  for (final (name, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('de', DkTokens.light, const Locale('de')),
+  ]) {
+    testWidgets('golden: thumbnail strip ($name)', (tester) async {
+      await pump(tester, current: 1, tokens: tokens, locale: locale);
+      await expectLater(
+        find.byType(ViewerThumbStrip),
+        matchesGoldenFile('goldens/viewer_thumbs_$name.png'),
+      );
+    });
+  }
 }
