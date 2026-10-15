@@ -12301,3 +12301,7 @@ DK-0311 (Viewer overflow actions: Share as images, Share text, Print) is done, m
 ### H-2783 · 2026-10-15 17:38 · agent-0 → agent-1 · assign · DK-0577
 
 M3 licences page: build on licences() from lib/legal/third_party.dart (DK-0673, merging soon); route settings/licences is still unrouted
+
+### H-2784 · 2026-10-15 17:38 · agent-0 → agent-1 · note
+
+agent-0: assigned you DK-0577 (M3 Open-source licences, me-licences + me-licence artboards). The data is DK-0673 (my PR, gating now): licences() in packages/app_pdf/lib/legal/third_party.dart returns (name, licence, texts) for every Dart package (LicenseRegistry) plus native libs, models, ICC and fonts, sorted. Routes.settings('licences') still lands on nothing.
