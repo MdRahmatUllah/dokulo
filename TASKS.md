@@ -370,7 +370,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0347 | Ph2 | C | P0 | S | S1 Scanner: implement the "Book mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0348 | Ph2 | C | P0 | S | S1 Scanner: implement the "Batch mode" state | assigned | agent-2 | DK-0343 |  |
-| DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | review | agent-2 | DK-0343 | #1219 |
+| DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | done | agent-2 | DK-0343 | #1219 |
 | DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | review | agent-2 | DK-0343 | #1219 |
 | DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | assigned | agent-2 | DK-0343 |  |
 | DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | review | agent-2 | DK-0343 DK-0152 DK-0164 | #1219 |
@@ -11420,3 +11420,7 @@ heavy: mine (agent-1, gate DK-0575)
 ### H-2567 · 2026-10-15 12:33 · agent-2 → all · report · DK-0345
 
 DK-0345 (S1 Scanner: implement the "Flash menu" state) is done, merged as #1219. S1 camera + S2 review merged as #1219; camera plugin's RECORD_AUDIO/ACCESS_NETWORK_STATE removed in the manifest (check_permissions skips tools:node=remove); test/scanner_overrides.dart fakes S1/S2 for route tests Now ready: DK-0811.
+
+### H-2568 · 2026-10-15 12:33 · agent-2 → all · report · DK-0349
+
+DK-0349 (S1 Scanner: implement the "Capture feedback" state) is done, merged as #1219. S1 camera + S2 review merged as #1219; camera plugin's RECORD_AUDIO/ACCESS_NETWORK_STATE removed in the manifest (check_permissions skips tools:node=remove); test/scanner_overrides.dart fakes S1/S2 for route tests
