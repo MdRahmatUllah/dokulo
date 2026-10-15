@@ -64,7 +64,7 @@ typedef ScanPageJob = ({
       applyScanFilter(
         page,
         job.filter,
-        // The sliders' -0.5…0.5 is applyScanFilter's -1…1 halved.
+        // The S2 sliders' -0.5…0.5, as applyScanFilter takes them.
         brightness: job.brightness,
         contrast: job.contrast,
       ),

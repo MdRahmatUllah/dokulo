@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_page_thumb.dart';
@@ -43,6 +44,7 @@ void main() {
 
   /// Holds the save until completed: the "Saving…" card shows meanwhile.
   Completer<void>? holdSave;
+  var failSave = false;
 
   List<ScannedPage> pages() => container.read(scanSessionProvider);
 
@@ -60,6 +62,7 @@ void main() {
     added = discarded = 0;
     saved = result = null;
     holdSave = null;
+    failSave = false;
     retook = null;
     store = MemoryScanStore();
     container = ProviderContainer(
@@ -79,6 +82,7 @@ void main() {
           saved = options;
           onPage?.call(1);
           await holdSave?.future;
+          if (failSave) throw const FileSystemException('disk full');
           return (
             name: '${options.name}.pdf',
             fileId: 1,
@@ -373,6 +377,21 @@ void main() {
       expect(saved!.folder, isNull);
       expect(result!.pages, 3);
       expect(pages(), isEmpty, reason: 'saved: the session ends');
+    });
+
+    testWidgets('a failed save says so and keeps the pages', (tester) async {
+      await pump(tester);
+      await open(tester);
+      failSave = true;
+      await tester.tap(find.text('Save PDF · 3 pages'));
+      await tester.pumpAndSettle();
+      expect(
+        find.text("Couldn't save the scan. Your pages are still here."),
+        findsOneWidget,
+      );
+      expect(result, isNull);
+      expect(pages(), hasLength(3));
+      expect(find.text('Saving…'), findsNothing);
     });
 
     testWidgets('"Saving…" with the pages done while it saves', (tester) async {

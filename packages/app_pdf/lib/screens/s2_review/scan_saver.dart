@@ -27,13 +27,19 @@ typedef ScanSaver = Future<SavedScan> Function(
 final scanSaverProvider = Provider<ScanSaver>(
   (ref) => (pages, options, {onPage}) async {
     final store = await ref.read(fileStoreProvider.future);
+    final db = ref.read(appDatabaseProvider);
     final settings = ref.read(scannerSettingsProvider);
     final work = await store.workDirectory.createTemp('scan_');
+    Future<void> Function()? discardOcr;
+    final saved = <FileEntry>[];
     try {
-      final name = options.name.replaceAll(
-        RegExp(r'\.(pdf|jpe?g)$', caseSensitive: false),
-        '',
-      );
+      // As Rename does (DK-0272): no characters a file system refuses, and
+      // never a hidden or empty name.
+      var name = options.name
+          .replaceAll(RegExp(r'\.(pdf|jpe?g)$', caseSensitive: false), '')
+          .replaceAll(RegExp(r'[\/:*?"<>|]'), '')
+          .trim();
+      if (name.isEmpty || name.startsWith('.')) name = 'Scan';
       final jpg = options.format == ScanFormat.jpg;
       var outputs = await saveScan(
         [
@@ -62,7 +68,6 @@ final scanSaverProvider = Provider<ScanSaver>(
         onPage: onPage,
       );
       int? textPages;
-      Future<void> Function()? discardOcr;
       if (options.searchable && !jpg) {
         final run = await ref.read(toolRunnerProvider)(
           'ocr',
@@ -74,28 +79,29 @@ final scanSaverProvider = Provider<ScanSaver>(
           }),
         );
         discardOcr = run.discard;
-        if (await run.result case OneFile(:final path)) outputs = [path];
+        final result = await run.result;
+        if (result is! OneFile) throw StateError('OCR wrote no file');
+        outputs = [result.path];
         textPages = (await PdfEngine.pageTexts(outputs.single))
             .where((t) => t.trim().isNotEmpty)
             .length;
       }
-      final db = ref.read(appDatabaseProvider);
-      FileEntry? first;
       var bytes = 0;
       for (final out in outputs) {
         final file = File(out);
         bytes += await file.length();
-        final saved = await store.saveIndexed(
-          db,
-          file,
-          name: file.uri.pathSegments.last,
-          subfolder: options.folder,
+        saved.add(
+          await store.saveIndexed(
+            db,
+            file,
+            name: file.uri.pathSegments.last,
+            subfolder: options.folder,
+          ),
         );
-        first ??= saved;
       }
-      await discardOcr?.call();
+      final first = saved.first;
       return (
-        name: first!.name,
+        name: first.name,
         fileId: first.id,
         path: first.path,
         pages: pages.length,
@@ -103,7 +109,14 @@ final scanSaverProvider = Provider<ScanSaver>(
         textPages: textPages,
         folder: options.folder,
       );
+    } catch (_) {
+      // No half a scan in Files: what was saved goes again.
+      for (final f in saved) {
+        await store.deleteForever(db, f.id);
+      }
+      rethrow;
     } finally {
+      await discardOcr?.call();
       if (await work.exists()) await work.delete(recursive: true);
     }
   },

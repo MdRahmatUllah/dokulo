@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -10,6 +11,7 @@ import '../../components/dk_crop_overlay.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_page_tray.dart';
 import '../../components/dk_slider.dart';
+import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
@@ -99,6 +101,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
 
   /// While saving: the pages rendered so far.
   int? _saving;
+  var _savingTotal = 0;
 
   @override
   void initState() {
@@ -243,6 +246,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
       now: ref.read(scanClockProvider)(),
     );
     if (options == null || !mounted) return;
+    _savingTotal = pages.length;
     setState(() => _saving = 0);
     try {
       final saved = await ref.read(scanSaverProvider)(
@@ -252,8 +256,15 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
           if (mounted) setState(() => _saving = n);
         },
       );
+      if (!mounted) return;
       await ref.read(scanSessionProvider.notifier).clear();
       widget.onSave?.call(saved);
+    } catch (_) {
+      // The pages stay; the user can try again.
+      if (mounted) {
+        final l = AppLocalizations.of(context);
+        unawaited(showDkToast(context, l.scan_save_failed));
+      }
     } finally {
       if (mounted) setState(() => _saving = null);
     }
@@ -429,7 +440,9 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
         cancelLabel: l.scan_add_pages,
         onCancel: widget.onAddPages,
         doneLabel: l.common_save,
-        onDone: pages.isEmpty || widget.onSave == null ? null : _save,
+        onDone: pages.isEmpty || widget.onSave == null || _saving != null
+            ? null
+            : _save,
       ),
       body: Column(
         children: [
@@ -590,14 +603,20 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     );
     // Back in crop mode cancels the crop instead of leaving the review.
     final review = PopScope(
-      canPop: _draft == null,
+      canPop: _draft == null && _saving == null,
       onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) _endCrop();
+        if (!didPop && _draft != null) _endCrop();
       },
       child: screen,
     );
     return switch (_saving) {
-      final done? => Stack(children: [review, _savingCard(done, pages.length)]),
+      final done? => Stack(
+        children: [
+          // Nothing under the card can be reached, by touch or screen reader.
+          ExcludeSemantics(child: review),
+          _savingCard(done, _savingTotal),
+        ],
+      ),
       null => review,
     };
   }

@@ -288,14 +288,21 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
             // Nothing to show without the saved scan (a link, a restore).
             final saved = s.extra;
             if (saved is! SavedScan) return const LinkErrorScreen();
+            // Back goes Home, as Close does: the scanner under it is done.
             return Consumer(
-              builder: (context, ref, _) => ScanResultScreen(
-                scan: saved,
-                onClose: () => context.go(Routes.home),
-                onOpen: () => context.go(Routes.viewer('${saved.fileId}')),
-                onTool: (id) =>
-                    context.go(Routes.tool(id, files: ['${saved.fileId}'])),
-                onShare: () => ref.read(fileSharerProvider)([saved.path]),
+              builder: (context, ref, _) => PopScope(
+                canPop: false,
+                onPopInvokedWithResult: (didPop, _) {
+                  if (!didPop) context.go(Routes.home);
+                },
+                child: ScanResultScreen(
+                  scan: saved,
+                  onClose: () => context.go(Routes.home),
+                  onOpen: () => context.go(Routes.viewer('${saved.fileId}')),
+                  onTool: (id) =>
+                      context.go(Routes.tool(id, files: ['${saved.fileId}'])),
+                  onShare: () => ref.read(fileSharerProvider)([saved.path]),
+                ),
               ),
             );
           }),
