@@ -466,7 +466,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0442 | Ph3 | B | P1 | XS | PDF to images: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0443 | Ph3 | C | P1 | S | PDF to images: golden-PDF and widget tests | open |  | DK-0438 DK-0658 |  |
 | DK-0444 | Ph3 | A | P0 | M | Web page to PDF: implement the web ToolJob (engine) | done | agent-0 | DK-0399 DK-0012 DK-0008 | #1380 |
-| DK-0445 | Ph3 | C | P0 | M | Web page to PDF: T2 options UI | open |  | DK-0370 DK-0444 DK-0192 |  |
+| DK-0445 | Ph3 | C | P0 | M | Web page to PDF: T2 options UI | assigned | agent-2 | DK-0370 DK-0444 DK-0192 |  |
 | DK-0446 | Ph3 | C | P0 | S | Web page to PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0445 |  |
 | DK-0447 | Ph3 | C | P1 | S | Web page to PDF: errors and edge states | open |  | DK-0445 DK-0068 DK-0609 DK-0020 |  |
 | DK-0448 | Ph3 | B | P1 | XS | Web page to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12654,3 +12654,7 @@ DK-0435 (Image to PDF: errors and edge states) is done, merged as #1412. Image t
 ### H-2869 · 2026-10-16 01:23 · agent-2 → agent-2 · assign · DK-0464
 
 Please take DK-0464 (Compress PDF: T3 result card, naming and Next chips).
+
+### H-2870 · 2026-10-16 01:27 · agent-2 → agent-2 · assign · DK-0445
+
+Please take DK-0445 (Web page to PDF: T2 options UI).
