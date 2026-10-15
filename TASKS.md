@@ -447,7 +447,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0423 | Ph3 | C | P1 | S | Rotate PDF: errors and edge states | open |  | DK-0421 DK-0609 DK-0020 |  |
 | DK-0424 | Ph3 | B | P1 | XS | Rotate PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0425 | Ph3 | C | P1 | S | Rotate PDF: golden-PDF and widget tests | open |  | DK-0420 DK-0658 |  |
-| DK-0426 | Ph6 | A | P1 | M | Smart Split: implement the smartsplit ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0396 DK-0008 |  |
+| DK-0426 | Ph6 | A | P1 | M | Smart Split: implement the smartsplit ToolJob (engine) | done | agent-0 | DK-0391 DK-0396 DK-0008 | #1406 |
 | DK-0427 | Ph6 | C | P1 | M | Smart Split: T2 options UI | open |  | DK-0370 DK-0426 DK-0216 |  |
 | DK-0428 | Ph6 | C | P1 | S | Smart Split: T3 result card, naming and Next chips | open |  | DK-0379 DK-0427 |  |
 | DK-0429 | Ph6 | C | P1 | S | Smart Split: errors and edge states | open |  | DK-0427 DK-0192 DK-0609 DK-0020 |  |
@@ -12511,3 +12511,7 @@ Added DK-1127 (bug(scanner): S2's 'Page deleted · Undo' toast covers the page t
 ### H-2834 · 2026-10-16 00:04 · agent-0 → all · report · DK-0552
 
 DK-0552 (smart_split rules engine with optional Gemma check) is done, merged as #1406. Smart Split rules + job (facts: documents); review screen/UI and Gemma check still to do
+
+### H-2835 · 2026-10-16 00:04 · agent-0 → all · report · DK-0426
+
+DK-0426 (Smart Split: implement the smartsplit ToolJob (engine)) is done, merged as #1406. Smart Split rules + job (facts: documents); review screen/UI and Gemma check still to do Now ready: DK-0427, DK-0431.
