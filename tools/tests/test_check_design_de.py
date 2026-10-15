@@ -13,8 +13,8 @@ def page(text: str) -> str:
 
 def test_problems(tmp_path: Path) -> None:
     for theme, a, b in [
-        ("light", "<b>Saved</b><p>Not now</p>", "<b>Clear</b>"),
-        ("deutsch", "<b>Gespeichert</b><p>Nicht jetzt</p>", "<b>Löschen</b>"),
+        ("light", "<b>Saved</b><p>Not now</p>", "<b>Clear</b><i>Capturing</i>"),
+        ("deutsch", "<b>Gespeichert</b><p>Nicht jetzt</p>", "<b>Löschen</b><i>Capturing</i>"),
     ]:
         (tmp_path / theme / "x").mkdir(parents=True)
         (tmp_path / theme / "x" / "a.html").write_text(page(a), encoding="utf-8")
@@ -22,8 +22,10 @@ def test_problems(tmp_path: Path) -> None:
     pairs = check_design_de.design_pairs(tmp_path)
     assert pairs["Saved"] == {"Gespeichert": "x/a.html"}
     assert "close" not in pairs  # icon names are not text
-    en = {"toast_saved": "Saved", "common_not_now": "Not now", "common_clear": "Clear"}
-    de = {"toast_saved": "Gesichert", "common_not_now": "Nicht jetzt", "common_clear": "Leeren"}
+    en = {"toast_saved": "Saved", "common_not_now": "Not now", "common_clear": "Clear",
+          "camera_hint": "Capturing"}
+    de = {"toast_saved": "Gesichert", "common_not_now": "Nicht jetzt", "common_clear": "Leeren",
+          "camera_hint": "Wird aufgenommen"}
     assert [p.split(":")[0] for p in check_design_de.problems(pairs, en, de)] == [
-        "toast_saved",  # common_clear is a CONTEXT key
+        "toast_saved",  # common_clear is a CONTEXT key; camera_hint untranslated
     ]

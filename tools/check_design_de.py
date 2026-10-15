@@ -6,7 +6,9 @@ document order. An ARB key whose English is one of those texts must have
 that text's German. The design's German is the reviewed copy (brand voice:
 "du", "Handy", sentence case).
 
-The same English can mean two things: [CONTEXT] lists keys whose screen is
+A frame whose German still shows the English text (left untranslated in
+the export) says nothing about the German, so it is skipped. The same
+English can mean two things: [CONTEXT] lists keys whose screen is
 not the one the design pairs them with.
 """
 
@@ -63,6 +65,8 @@ def problems(pairs: dict, en: dict, de: dict) -> list[str]:
     for key, value in en.items():
         if key.startswith('@') or key in CONTEXT or value not in pairs:
             continue
+        if set(pairs[value]) == {value}:
+            continue  # the frame's German is still English: nothing to check
         if de.get(key) not in pairs[value]:
             want = ' | '.join(f'{d!r} ({p})' for d, p in pairs[value].items())
             out.append(f'{key}: {de.get(key)!r}, the design says {want}')
