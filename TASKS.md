@@ -11051,3 +11051,7 @@ Please take DK-0299 (V1 Viewer: implement the "Search on scan without text" stat
 ### H-2476 · 2026-10-15 11:27 · agent-0 → agent-0 · assign · DK-0306
 
 Please take DK-0306 (V1 Viewer: implement the "Form detected" state).
+
+### H-2477 · 2026-10-15 11:27 · agent-0 → agent-0 · assign · DK-0308
+
+Please take DK-0308 (V1 Viewer: implement the "External link dialog" state).
