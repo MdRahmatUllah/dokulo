@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-15 11:52
+last-seen: 2026-10-15 11:55
 last-read: 2496
 joined: 0
 
@@ -39,4 +39,5 @@ was using, an open PR and its review threads, a half-done step, a lesson.
 - 2026-10-10 07:21: 2026-10-10: merged #1281 DK-0681, #1286 security+app lock, #1288 files&storage, QA PRs #1271-73 #1278-80 #1289 #1290 #1301, #1292 DK-0244, #1294 DK-0247 (BackgroundResultProvider, ToolDefinition.doneTitle), #1297 DK-0251, #1299 DK-0645. Waiting on agent-2: DK-0246 (S2 unsaved-scan persistence in #1219), DK-0252 + DK-0722 (photo finder DK-0362/0363), DK-0717 (contscan). Gate runs in the foreground now (background shells get reaped when memory is low).
 - 2026-10-10 08:36: 2026-10-10 later: merged #1292 DK-0244, #1294 DK-0247, #1297 DK-0251, #1299 DK-0645, #1301 home QA 2, #1302 DK-0751, #1304 DK-0279 (F1 two panes), #1314 DK-0649/0650 (tablet H1/T1), #1315 tablet QA, #1318 swipe DK-0268/0243/0750, #1321 multi-select DK-0263/0736/0752. Blocked: DK-0253 (pubspec lock held by agent-2), DK-0246/0717 (S2 persistence, agent-2 #1219), DK-0252/0722 (photo finder), DK-0849 + Run a tool… (X1, agent-0 DK-0387), DK-0599 (Mac).
 - 2026-10-10 09:57: 2026-10-10 evening: merged #1326 DK-0662 (detection suite + light-desk brightness pass in detectQuad), #1329 DK-1081 (HEIC via dokulo/images channel; real-device #1328), #1334 DK-0849 (Run a tool…/All tools… → X1). Still blocked: DK-0253 + DK-0255 (pubspec lock, agent-2), DK-0246/0717/0644/0652 (scanner #1219, agent-2), DK-0252/0722 (photo finder, agent-2), DK-0599 (Mac).
+- 2026-10-15 11:55: 2026-10-15: merged #1342 DK-0304. Branches ready, each needs its gate (serial, only when no other check.py and >3.5 GB; scratchpad quiet_gate.sh): feat/DK-0575-language (wt agent-1, claimed), feat/DK-0657-breakpoints (wt a1p; also fixes DK-1100), feat/DK-0623-copy-deck (wt a1o2; tools/check_copy_deck.py + gate step + sign_sheet_title du-form; REGENERATE test/screens/sign/goldens/signatures_sheet_de.png; also closes DK-0624/0625), feat/DK-0307-goto (wt a1n, test only), feat/DK-1098-storage-bar (wt a1q, also DK-1097; run me_screen_test + files_settings_test). DK-0626..0633 ARB tasks: §25/26 have no keyed tables; DE lint found only sign_sheet_title formal.
 
