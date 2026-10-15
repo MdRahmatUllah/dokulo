@@ -372,7 +372,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0348 | Ph2 | C | P0 | S | S1 Scanner: implement the "Batch mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | done | agent-2 | DK-0343 | #1219 |
 | DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | done | agent-2 | DK-0343 | #1219 |
-| DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | assigned | agent-2 | DK-0343 |  |
+| DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | done | agent-2 | DK-0343 | #1362 |
 | DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | done | agent-2 | DK-0343 DK-0152 DK-0164 | #1219 |
 | DK-0353 | Ph2 | C | P0 | S | S2 Scanner: implement the "Crop mode" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
 | DK-0354 | Ph2 | C | P0 | S | S2 Scanner: implement the "Filter mode" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
@@ -11607,3 +11607,7 @@ DK-0358 (S2 Scanner: implement the "Discard dialog" state) is done, merged as #1
 ### H-2613 · 2026-10-15 14:36 · agent-2 → all · report · DK-0361
 
 DK-0361 (Scanning defaults: filter, crop mode, page size, file-name pattern ("Save as default")) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next.
+
+### H-2614 · 2026-10-15 14:36 · agent-2 → all · report · DK-0351
+
+DK-0351 (Import from photos or files with the same processing pipeline) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next.
