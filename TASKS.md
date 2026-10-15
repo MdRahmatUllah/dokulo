@@ -892,7 +892,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0868 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-splitinvalid (invalid range) | open |  | DK-0410 DK-0411 |  |
 | DK-0869 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-smartinput (input) | open |  | DK-0427 DK-0428 DK-0429 |  |
 | DK-0870 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-smartprogress (checking uncertain pages) | open |  | DK-0428 DK-0429 |  |
-| DK-0871 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-img2pdf (Image to PDF) | assigned | agent-2 | DK-0433 DK-0434 DK-0435 |  |
+| DK-0871 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-img2pdf (Image to PDF) | assigned | agent-3 | DK-0433 DK-0434 DK-0435 |  |
 | DK-0872 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-pdf2img (PDF to images) | open |  | DK-0439 DK-0440 DK-0441 |  |
 | DK-0873 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-web (preview) | open |  | DK-0445 DK-0446 DK-0447 |  |
 | DK-0874 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-weboffline (offline) | open |  | DK-0445 DK-0446 DK-0447 |  |
@@ -12093,3 +12093,7 @@ Please take DK-0836 (Visual QA: photo-finder-empty (no documents found)).
 ### H-2732 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0837
 
 Please take DK-0837 (Visual QA: photo-finder-notdoc (long-press – Not a document)).
+
+### H-2733 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0871
+
+Please take DK-0871 (Visual QA: tools-convert-img2pdf (Image to PDF)).
