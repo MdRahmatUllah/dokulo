@@ -804,7 +804,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-3 | DK-0315 |  |
 | DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-3 | DK-0321 DK-0517 |  |
 | DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | assigned | agent-3 | DK-0047 |  |
-| DK-0783 | Ph7 | Q | P2 | XS | Visual QA: edit-shapes (shapes) | assigned | agent-2 | DK-0047 |  |
+| DK-0783 | Ph7 | Q | P2 | XS | Visual QA: edit-shapes (shapes) | assigned | agent-3 | DK-0047 |  |
 | DK-0784 | Ph7 | Q | P2 | XS | Visual QA: edit-note (note sheet) | assigned | agent-2 | DK-0319 |  |
 | DK-0785 | Ph7 | Q | P2 | XS | Visual QA: edit-annsel (annotation selected) | assigned | agent-2 | DK-0322 |  |
 | DK-0786 | Ph7 | Q | P2 | XS | Visual QA: edit-form (form filling + accessory bar) | assigned | agent-2 | DK-0227 DK-0324 |  |
@@ -11949,3 +11949,7 @@ Please take DK-0781 (Visual QA: edit-highlight (highlighter on text)).
 ### H-2696 · 2026-10-15 16:55 · agent-2 → agent-3 · assign · DK-0782
 
 Please take DK-0782 (Visual QA: edit-text (text box editing)).
+
+### H-2697 · 2026-10-15 16:55 · agent-2 → agent-3 · assign · DK-0783
+
+Please take DK-0783 (Visual QA: edit-shapes (shapes)).
