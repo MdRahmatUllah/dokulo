@@ -4,6 +4,7 @@ import 'package:app_pdf/components/dk_action_bar.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
+import 'package:app_pdf/providers/share_providers.dart';
 import 'package:app_pdf/routes/link_error.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/screens/t3_result/tool_result_screen.dart';
@@ -33,6 +34,7 @@ void main() {
   late List<String> partFiles;
   var saves = 0;
   final elsewhere = <(String, String)>[];
+  final shared = <List<String>>[];
 
   setUp(() {
     root = Directory.systemTemp.createTempSync('dk_t3_');
@@ -43,6 +45,7 @@ void main() {
     db = DokuloDatabase.memory();
     saves = 0;
     elsewhere.clear();
+    shared.clear();
   });
   tearDown(() async {
     await db.close();
@@ -90,6 +93,9 @@ void main() {
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         fileStoreProvider.overrideWith((ref) async => store),
+        fileSharerProvider.overrideWithValue(
+          (paths) async => shared.add(paths),
+        ),
         hapticsProvider.overrideWithValue(
           DkHaptics(medium: () async => saves++),
         ),
@@ -170,6 +176,23 @@ void main() {
       );
     });
   }
+
+  testWidgets('Share sends the real file: the output, then the saved file '
+      '(DK-1077)', (tester) async {
+    await pumpT3(tester);
+    await tester.tap(find.text('Share'));
+    await tester.pump();
+    expect(shared, [
+      [output.path],
+    ]);
+    await tester.tap(find.text('Save'));
+    await settle(tester);
+    await tester.tap(find.text('Share'));
+    await tester.pump();
+    expect(shared.last, [
+      '${store.userFolder.path}${sep}Taxes${sep}Mietvertrag – compressed.pdf',
+    ]);
+  });
 
   testWidgets('Save keeps a new file next to the input, indexed; medium '
       'haptic; "Saved to Files › Taxes" with Open; then Done (DK-0381)', (
