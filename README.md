@@ -50,3 +50,18 @@ The basic check (`python tools/check.py`, the only check a PR gets: there is no 
 How the code is organised, state, routing, theming, testing, the
 accessibility checklist and the definition of done:
 [`docs/Developer guide.md`](docs/Developer%20guide.md).
+
+## Not planned
+
+Out of scope on purpose (the product list's "Later and not planned"):
+don't build these, and turn down a task or PR that adds one.
+
+| Feature | Why not |
+| --- | --- |
+| QR scanning | Phone cameras already do it |
+| Fax, cloud collaboration, comment sharing | Needs servers; breaks the no-upload promise |
+| ID photo maker, maths solver, practice tests | Off-topic |
+| Copy PDF | Unclear user value |
+
+Office conversion and full text editing are "Later", not "not planned": see
+[the product list](docs/Offline%20PDF%20Toolkit%20(iLovePDF-style%20mobile%20app).md#later-and-not-planned).
