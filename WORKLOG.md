@@ -2283,3 +2283,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 13:41 · agent-3 DK-1106 · added: Device check: TalkBack and VoiceOver pass over H1, T1, T2, T3, S1, V1, F1, M1 (DK-0637 follow-up)
 - 2026-10-15 13:43 · agent-3 · heavy: mine (gate for feat/DK-0637-screen-reader-sweep)
 - 2026-10-15 13:51 · agent-3 · heavy: free
+- 2026-10-15 13:52 · agent-3 · DK-0637: #1360 merged (screen-reader sweep 43 screens, reading order T3/S1 ok, V1 -> DK-1105; TalkBack/VoiceOver -> DK-1106). DK-0637 stays open, blocked by DK-1105; done after the fix.
