@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:doc_tools/doc_tools.dart' show detectFramePage;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/painting.dart';
 import 'package:path_provider/path_provider.dart';
@@ -17,14 +18,36 @@ part 'scan_session.g.dart';
 /// frame's width and height (so the screen can draw it at any size).
 typedef DetectedQuad = List<Offset>;
 
-/// Finds the document in a preview frame. DK-0337 (OpenCV, both platforms)
-/// and DK-0336 (Vision on iOS) provide the real one; until then nothing is
-/// found and the user captures by hand.
+/// Finds the document in a preview frame, upright.
 typedef QuadDetector = Future<DetectedQuad?> Function(GreyFrame frame);
 
+/// doc_vision's OpenCV detector (DK-0337, both platforms) on a worker
+/// isolate; DK-0336 may swap in Vision on iOS.
 @riverpod
-QuadDetector quadDetector(Ref ref) =>
-    (_) async => null;
+QuadDetector quadDetector(Ref ref) => (frame) async {
+  final page = await detectFramePage(
+    frame.bytes,
+    frame.width,
+    frame.height,
+    rowStride: frame.rowStride,
+  );
+  if (page == null) return null;
+  return uprightQuad([
+    for (final c in page.corners) Offset(c.x, c.y),
+  ], frame.quarterTurns);
+};
+
+/// [quad] (0–1 of the sensor's frame) turned [quarterTurns] clockwise, as
+/// the upright preview shows it: still clockwise from its top-left corner.
+DetectedQuad uprightQuad(DetectedQuad quad, int quarterTurns) {
+  var q = quad;
+  for (var i = 0; i < quarterTurns % 4; i++) {
+    // (x, y) → (1 − y, x); the old bottom-left corner is the new top-left.
+    final turned = [for (final p in q) Offset(1 - p.dy, p.dx)];
+    q = [turned[3], turned[0], turned[1], turned[2]];
+  }
+  return q;
+}
 
 /// One captured page, as S2 reviews it: the photo on disk (so an unsaved
 /// scan survives the app being killed), the corners found at capture, the
