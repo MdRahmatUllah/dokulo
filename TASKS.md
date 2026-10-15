@@ -658,7 +658,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0634 | Ph3 | B | P0 | S | Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults | assigned | agent-1 | DK-0009 |  |
 | DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | open |  | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 |  |
 | DK-0636 | Ph3 | B | P1 | S | In-app language switch (System · English · Deutsch) without restart | assigned | agent-1 | DK-0009 |  |
-| DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | open |  | DK-0024 DK-0229 |  |
+| DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | in-progress | agent-3 | DK-0024 DK-0229 |  |
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
 | DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | assigned | agent-1 | DK-0024 DK-0218 DK-0220 DK-0102 |  |
 | DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | assigned | agent-1 | DK-0024 DK-0036 |  |

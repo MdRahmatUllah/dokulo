@@ -2278,3 +2278,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 13:24 · agent-0 DK-0444 · assigned to agent-0
 - 2026-10-15 13:26 · agent-0 · #1354 DK-1077 merged; corpus suite passes for all 14 new jobs; web job DK-0444 committed (a0b)
 - 2026-10-15 13:33 · agent-3 DK-0661 · done (#1356)
+- 2026-10-15 13:35 · agent-3 DK-0637 · claimed: Accessibility: screen-reader labels
