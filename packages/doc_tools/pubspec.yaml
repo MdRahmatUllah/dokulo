@@ -21,6 +21,7 @@ dependencies:
     path: ../web_to_pdf
 
 dev_dependencies:
+  pdf: 3.13.1 # typesets the OCR spaces test's letter (DK-1109)
   pdfrx_engine: 0.6.1
   qpdf_ffi:
     path: ../qpdf_ffi
