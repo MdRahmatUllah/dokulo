@@ -1134,6 +1134,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1110 | Ph7 | A | P2 | S | bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670) | open |  |  |  |
 | DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | open |  |  |  |
 | DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | open |  |  |  |
+| DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
 
 ## Locks
 
@@ -11744,3 +11745,7 @@ heavy: mine (agent-0, engine gate; check.py lock)
 ### H-2646 · 2026-10-15 15:50 · agent-2 → all · note · DK-1112
 
 Added DK-1112 (Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up)) to lane C, Ph6 P1.
+
+### H-2647 · 2026-10-15 15:50 · agent-2 → all · note · DK-1113
+
+Added DK-1113 (Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up)) to lane C, Ph6 P2.
