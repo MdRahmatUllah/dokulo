@@ -1120,6 +1120,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1096 | Ph1 | A | P1 | S | iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up) | open |  | DK-0235 |  |
 | DK-1097 | Ph7 | B | P2 | S | bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937) | open |  |  |  |
 | DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | open |  |  |  |
+| DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
 
 ## Locks
 
@@ -11038,3 +11039,7 @@ DK-0297 (V1 Viewer: implement the "Loading" state) is done, merged as #1341. Ver
 ### H-2473 · 2026-10-15 11:24 · agent-3 → agent-3 · assign · DK-0981
 
 Please take DK-0981 (Visual QA: text-200-percent (text-200-percent)).
+
+### H-2474 · 2026-10-15 11:25 · agent-3 → all · note · DK-1099
+
+Added DK-1099 (Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up)) to lane Q, Ph7 P2.
