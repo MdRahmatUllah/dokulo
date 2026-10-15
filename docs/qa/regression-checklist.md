@@ -13,18 +13,27 @@ accepts for that build; the sign-off goes in the log at the bottom.
    Note the short sha.
 2. `python tools/check.py --apk <apk>`: the gate, plus the native-library and
    size checks on that APK.
-3. Hold `team.py device`, uninstall the old build, install, and confirm it with
+3. The golden PDF corpus, full (DK-0658; the gate runs the quick one):
+   `DK_CORPUS=full DK_CORPUS_REPORT=<file.md> flutter test test/corpus` in
+   `packages/doc_tools` (about 5 minutes). Every tool's row must read
+   "0 failed"; paste the table into the log below. The OCR rates: run
+   `flutter test test/ocr/ocr_engine_test.dart --plain-name PP-OCRv5` in
+   `packages/doc_vision` (needs `pip install onnxruntime numpy`; skipped,
+   not failed, without it) and update the table in
+   `packages/doc_vision/test/fixtures/ocr/README.md` (DK-0661).
+4. Hold `team.py device`, uninstall the old build, install, and confirm it with
    `adb -s emulator-555x shell dumpsys package app.dokulo | grep lastUpdateTime`.
-4. Push the sample documents of `test/fixtures/` (DK-0023, all fictional;
+5. Push the sample documents of `test/fixtures/` (DK-0023, all fictional;
    see its README) to the device:
-   `MSYS_NO_PATHCONV=1 adb -s emulator-555x push test/fixtures/. /sdcard/Download/`.
+   `MSYS_NO_PATHCONV=1 adb -s emulator-555x push test/fixtures/. /sdcard/Download/` (the
+   `corpus/` folder too).
    They cover the passes below: a text contract (Mietvertrag), an invoice, a
    CV, the scanned letters bundle, an AcroForm and an XFA form, the
    AES-256-locked invoice (password `dokulo`), the damaged xref, the
    300-page file. Compare PDFs needs two versions of one file: run Add page
    numbers on the Mietvertrag first and compare the two. Photos for Image to
    PDF and the photo finder: take them with the emulator's virtual camera.
-5. Leave the emulator as found afterwards: language, theme, font scale,
+6. Leave the emulator as found afterwards: language, theme, font scale,
    animations, airplane mode.
 
 ## The pass
@@ -119,3 +128,32 @@ with the task id that builds it.
 
 | Date | Build (sha, flavour) | Device | Result | Bugs / not built |
 | --- | --- | --- | --- | --- |
+| 2026-10-15 | `08e2bffc`, prod release (debug-signed, universal APK 197.8 MB) | emulator-5554, Android 16, x86_64, 2 GB | **Partial, not for release** (first run; see the notes below) | DK-1107, DK-1108, DK-1109, DK-1110; n/b: most tools' engines and options (only Compress, Image to PDF and Make text searchable have engines), X3 paywall (DK-0579/0580), A1 AI (DK-0559) |
+
+### 2026-10-15 · `08e2bffc` (agent-3)
+
+- **APK checks:** native libraries clean, permissions clean. Size: arm64-v8a
+  80.4 MB, armeabi-v7a 66.6 MB, x86_64 90.5 MB, over the 90 MB budget:
+  **DK-1107**.
+- **Golden corpus, full:** 162 PDFs + 7 images, 0 failed (compress and ocr
+  137 ok each, tooLarge × 9, damaged × 16; img2pdf 7 ok), run on #1355's
+  branch the same day.
+- **Install and first run:** installed and verified (lastUpdateTime
+  14:28:57); cold start 3.9 s (1.1 s warm); onboarding → Skip → H1 with the
+  tab bar. Checked through the accessibility tree: every screen capture of
+  Dokulo was black. Hide previews is on by default (FLAG_SECURE), and even
+  with it off this emulator showed Dokulo black (MEMORY.md, "Device
+  screenshots and the privacy cover").
+- **Tools:** all 30 open their T2 from T1; the AI tools say "AI isn't
+  available on this phone – it needs at least 6 GB, this phone has 2 GB" (as
+  DK-0013 wants on 2 GB). Engines on the device, in **airplane mode**
+  (`device_checks_test`, 7/7 pass, peak RSS 945 MB): open 300 pages 1.6 s;
+  qpdf encrypt/repair/structure on 300 pages 0.1–0.3 s; redaction 0.6 s a
+  page, no leaks; Compress 1.2–1.9 s a page, a 5 MB target met; OCR 7.2 s a
+  page, but the searchable output glues words on 2 of 9 lines: **DK-1109**
+  (P1).
+- **Settings:** a switch row toggles only on the switch: **DK-1108**.
+- **Not run this time:** killed-job recovery (the harness can't run:
+  **DK-1110**), the scanner (no camera scene), viewer and edit, files,
+  trash and locked folder, theme, language and 200 % on the device (all
+  covered by the gate's widget and QA tests), the paywall (n/b).

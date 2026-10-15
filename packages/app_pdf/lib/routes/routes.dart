@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show Consumer;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../catalogue/catalogue.dart';
@@ -17,9 +18,15 @@ import '../screens/p1_organize/organize_screen.dart';
 import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
 import '../screens/settings/files_settings_screen.dart';
+import '../screens/settings/language_settings_screen.dart';
+import '../screens/settings/scanning_settings_screen.dart';
 import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
+import '../screens/s1_scanner/s1_screen.dart';
+import '../screens/s2_review/s2_screen.dart';
+import '../providers/share_providers.dart';
+import '../screens/s2_review/scan_result_screen.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
@@ -53,6 +60,10 @@ abstract final class Routes {
   /// S1 in a mode from the Scan button's menu.
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
+  static const scanResult = '/scan/result'; // the saved scan (DK-0360)
+
+  /// S1 taking page [index] again for S2 (DK-0350).
+  static String scanRetake(int index) => '/scan?retake=$index';
 
   /// Import photos (the Scan popover): S2 opens the photo picker first.
   static const scanImport = '/scan/review?source=photos';
@@ -222,8 +233,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
                       child: switch (state.pathParameters['page']!) {
+                        'scanning' => const ScanningSettingsScreen(),
                         'security' => const SecuritySettingsScreen(),
                         'files' => const FilesSettingsScreen(),
+                        'language' => const LanguageSettingsScreen(),
                         final page => PlaceholderScreen('M3', detail: page),
                       },
                     ),
@@ -251,17 +264,50 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           context,
           key: s.pageKey,
           child: _HomeUnderneath(
-            child: _scanner(s.uri.queryParameters['mode'] ?? ''),
+            child: _scanner(
+              s.uri.queryParameters['mode'] ?? '',
+              retake: int.tryParse(s.uri.queryParameters['retake'] ?? ''),
+            ),
           ),
         ),
         routes: [
           fullScreen(
             'review',
-            (s) => PlaceholderScreen(
-              'S2',
-              detail: s.uri.queryParameters['source'] ?? '',
+            (s) => Builder(
+              builder: (context) => S2Screen(
+                // The photo picker first (DK-0351).
+                importOnOpen: s.uri.queryParameters['source'] == 'photos',
+                onAddPages: () =>
+                    context.canPop() ? context.pop() : context.go(Routes.scan),
+                onDiscard: () => context.go(Routes.home),
+                onRetake: (i) => context.push(Routes.scanRetake(i)),
+                onSave: (saved) =>
+                    context.pushReplacement(Routes.scanResult, extra: saved),
+              ),
             ),
           ),
+          fullScreen('result', (s) {
+            // Nothing to show without the saved scan (a link, a restore).
+            final saved = s.extra;
+            if (saved is! SavedScan) return const LinkErrorScreen();
+            // Back goes Home, as Close does: the scanner under it is done.
+            return Consumer(
+              builder: (context, ref, _) => PopScope(
+                canPop: false,
+                onPopInvokedWithResult: (didPop, _) {
+                  if (!didPop) context.go(Routes.home);
+                },
+                child: ScanResultScreen(
+                  scan: saved,
+                  onClose: () => context.go(Routes.home),
+                  onOpen: () => context.go(Routes.viewer('${saved.fileId}')),
+                  onTool: (id) =>
+                      context.go(Routes.tool(id, files: ['${saved.fileId}'])),
+                  onShare: () => ref.read(fileSharerProvider)([saved.path]),
+                ),
+              ),
+            );
+          }),
         ],
       ),
       fullScreen(
@@ -387,15 +433,30 @@ class _HomeUnderneath extends StatelessWidget {
 
 /// S1 behind its camera permission (DK-0342). Importing photos needs no
 /// camera; every other mode asks for it first.
-Widget _scanner(String mode) {
-  final camera = PlaceholderScreen('S1', detail: mode);
-  if (mode == DkScanMode.importPhotos.name) return camera;
+Widget _scanner(String mode, {int? retake}) {
+  if (mode == DkScanMode.importPhotos.name) {
+    return PlaceholderScreen('S1', detail: mode);
+  }
   return Builder(
-    builder: (context) => CameraPermissionGate(
-      camera: (_) => camera,
-      onClose: () => context.canPop() ? context.pop() : context.go(Routes.home),
+    builder: (context) {
+      void close() =>
+          context.canPop() ? context.pop() : context.go(Routes.home);
       // As the Scan button's Import photos: S2's picker (DK-0230).
-      onImport: () => context.pushReplacement(Routes.scanImport),
-    ),
+      void import() => context.pushReplacement(Routes.scanImport);
+      return CameraPermissionGate(
+        camera: (_) => S1Screen(
+          initialMode: DkScanMode.values.asNameMap()[mode],
+          retake: retake,
+          // Back to S2, the page replaced.
+          onRetaken: () => context.pop(),
+          onClose: close,
+          onImport: import,
+          onReview: () => context.push(Routes.scanReview),
+          onSettings: () => context.push(Routes.settings('scanning')),
+        ),
+        onClose: close,
+        onImport: import,
+      );
+    },
   );
 }

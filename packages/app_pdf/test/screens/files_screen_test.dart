@@ -25,6 +25,8 @@ import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
+import '../scanner_overrides.dart';
+
 /// No PDFium in widget tests: every thumbnail is a small white page.
 class _WhitePages extends ThumbnailCache {
   // Never the system temp itself: Clear cache deletes this folder.
@@ -168,7 +170,7 @@ void main() {
   tearDown(() => f.tearDown());
 
   testWidgets('empty root: the empty state, Scan a document', (tester) async {
-    final router = await pumpFiles(tester, f);
+    final router = await pumpFiles(tester, f, overrides: scannerOverrides());
     expect(find.byType(DkEmptyState), findsOneWidget);
     expect(find.text('No files yet'), findsOneWidget);
     expect(find.text('Locked folder'), findsOneWidget);

@@ -9,6 +9,9 @@ and exits 1 if any step failed. A failing step's output is printed in full.
 """
 
 import argparse
+import contextlib
+import ctypes
+import os
 import re
 import shutil
 import subprocess
@@ -107,6 +110,87 @@ def run(plan: list[tuple[str, list[str], Path]]) -> int:
     return 1 if failed else 0
 
 
+def alive(pid: int) -> bool:
+    """Whether process [pid] is still running."""
+    if sys.platform == "win32":
+        kernel = ctypes.windll.kernel32
+        handle = kernel.OpenProcess(0x1000, False, pid)  # PROCESS_QUERY_LIMITED_INFORMATION
+        if not handle:
+            return False
+        try:
+            code = ctypes.c_ulong()
+            return bool(kernel.GetExitCodeProcess(handle, ctypes.byref(code))) and code.value == 259  # STILL_ACTIVE
+        finally:
+            kernel.CloseHandle(handle)
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+@contextlib.contextmanager
+def gate_lock(path: Path, poll: float = 20, say=print):
+    """One gate at a time on this machine (the owner, 2026-10-15): every
+    worktree's gate takes [path] (in the shared .git folder), and waits while
+    a running gate holds it. A lock whose gate is gone (killed for low memory,
+    say) is taken over."""
+    while True:
+        try:
+            fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        except PermissionError:
+            # Windows: the file is being deleted, or read, right now.
+            time.sleep(min(poll, 0.2))
+            continue
+        except FileExistsError:
+            try:
+                pid = int(path.read_text(encoding="utf-8").split()[0])
+            except (OSError, ValueError, IndexError):
+                # Being written this moment, or deleted: look again soon.
+                try:
+                    if time.time() - path.stat().st_mtime > 10:
+                        _unlink(path)
+                except OSError:
+                    pass
+                time.sleep(min(poll, 1))
+                continue
+            if not alive(pid):
+                say(f"gate lock: pid {pid} is gone; taking over", flush=True)
+                _unlink(path)
+                continue
+            say(f"gate lock: waiting for the gate in pid {pid}", flush=True)
+            time.sleep(poll)
+            continue
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(f"{os.getpid()} {ROOT}\n")
+        break
+    try:
+        yield
+    finally:
+        _unlink(path)
+
+
+def _unlink(path: Path) -> None:
+    """Deletes [path]; on Windows a waiting gate may be reading it this very
+    moment, so try again for a few seconds."""
+    for _ in range(50):
+        try:
+            path.unlink(missing_ok=True)
+            return
+        except PermissionError:
+            time.sleep(0.1)
+    path.unlink(missing_ok=True)
+
+
+def lock_path(root: Path) -> Path:
+    """The lock file in the git folder every worktree shares."""
+    common = subprocess.run(["git", "rev-parse", "--path-format=absolute", "--git-common-dir"],
+                            cwd=root, capture_output=True, text=True, check=True).stdout.strip()
+    return Path(common) / "dokulo-gate.lock"
+
+
 def main() -> int:
     # A failing step's output (ß, –, emoji from test names) must print on a
     # Windows console (cp1252) instead of crashing the gate.
@@ -114,7 +198,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--apk", type=Path, help="also check a built APK's native libraries")
     args = parser.parse_args()
-    return run(steps(ROOT, args.apk))
+    with gate_lock(lock_path(ROOT)):
+        return run(steps(ROOT, args.apk))
 
 
 if __name__ == "__main__":
