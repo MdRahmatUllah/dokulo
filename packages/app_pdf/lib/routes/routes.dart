@@ -45,6 +45,7 @@ part 'routes.g.dart';
 final Map<String, String Function(String fileId)> screenTools = {
   'markup': (id) => Routes.viewer(id, edit: true, tool: 'highlighter'),
   'sign': (id) => Routes.viewer(id, sign: true),
+  'form': (id) => Routes.viewer(id, edit: true, tool: 'form'), // DK-0518
   'organize': Routes.organize,
 };
 
@@ -378,6 +379,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                     fromSign: s.uri.queryParameters['from'] == 'sign',
                     startTool: EditTool.values
                         .asNameMap()[s.uri.queryParameters['tool']],
+                    fillForm: s.uri.queryParameters['tool'] == 'form',
                   )
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(

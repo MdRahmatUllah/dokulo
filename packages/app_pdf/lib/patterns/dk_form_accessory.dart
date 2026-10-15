@@ -58,9 +58,18 @@ class _DkFormAccessoryState extends State<DkFormAccessory>
 /// left, Done (bold) on the right. They move the focus without taking it,
 /// so the keyboard stays open.
 class DkFormAccessoryBar extends StatelessWidget {
-  const DkFormAccessoryBar({super.key, this.onDone});
+  const DkFormAccessoryBar({
+    super.key,
+    this.onDone,
+    this.onPrevious,
+    this.onNext,
+  });
 
   final VoidCallback? onDone;
+
+  /// A form with its own order (a PDF's fields, across pages): Previous and
+  /// Next call these instead of moving the focus on screen.
+  final VoidCallback? onPrevious, onNext;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +90,7 @@ class DkFormAccessoryBar extends StatelessWidget {
             DkIconButton(
               icon: DkIcons.previousField,
               tooltip: l.form_previous_field,
-              onPressed: () => _toField(scope, forward: false),
+              onPressed: onPrevious ?? () => _toField(scope, forward: false),
             ),
             // Next field gives way at large text; Done keeps its width.
             Expanded(
@@ -89,7 +98,7 @@ class DkFormAccessoryBar extends StatelessWidget {
                 alignment: AlignmentDirectional.centerStart,
                 child: DkTextAction(
                   label: l.form_next_field,
-                  onTap: () => _toField(scope, forward: true),
+                  onTap: onNext ?? () => _toField(scope, forward: true),
                 ),
               ),
             ),
