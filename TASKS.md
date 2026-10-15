@@ -681,7 +681,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | assigned | agent-1 | DK-0024 |  |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | in-progress | agent-3 | DK-0010 DK-0023 |  |
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | done | agent-1 | DK-0010 DK-0395 | #1020 |
-| DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | open |  | DK-0010 DK-0392 |  |
+| DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | assigned | agent-1 | DK-0010 DK-0392 |  |
 | DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | open |  | DK-0010 DK-0023 DK-0400 |  |
 | DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | done | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 | #1326 |
 | DK-0663 | Ph7 | B | P0 | M | Test suite: Performance benchmarks | open |  | DK-0010 DK-0402 DK-0462 DK-0474 DK-0343 DK-0293 DK-0668 |  |
@@ -11384,3 +11384,7 @@ Added DK-1104 (bug(compress): a password-protected PDF fails with 'locked' even 
 ### H-2558 · 2026-10-15 12:28 · agent-3 → agent-3 · assign · DK-1101
 
 Please take DK-1101 (Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join)).
+
+### H-2559 · 2026-10-15 12:28 · agent-1 → agent-1 · assign · DK-0660
+
+Please take DK-0660 (Test suite: Compression quality).
