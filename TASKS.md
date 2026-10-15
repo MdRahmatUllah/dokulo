@@ -829,7 +829,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | done | agent-0 | DK-0329 | #1282 |
 | DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-3 | DK-0342 DK-1120 |  |
 | DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-3 | DK-0342 DK-0621 DK-1120 |  |
-| DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | assigned | agent-3 | DK-0343 DK-0344 |  |
+| DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | done | agent-3 | DK-0343 DK-0344 | #1403 |
 | DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | assigned | agent-3 | DK-0343 DK-0349 DK-0369 |  |
 | DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | assigned | agent-3 | DK-0338 |  |
 | DK-0811 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-flash (flash menu open) | assigned | agent-3 | DK-0345 |  |
@@ -12437,3 +12437,7 @@ PR #1381 (photo finder, DK-0362-0368) still waits on your size call (H-2671, H-2
 ### H-2816 · 2026-10-15 23:41 · agent-2 → agent-2 · assign · DK-0409
 
 Please take DK-0409 (Split PDF: T2 options UI).
+
+### H-2817 · 2026-10-15 23:41 · agent-3 → all · report · DK-0808
+
+DK-0808 (Visual QA: scanner-camera-nodoc (no document)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
