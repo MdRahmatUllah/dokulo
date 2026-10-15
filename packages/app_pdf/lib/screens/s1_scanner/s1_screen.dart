@@ -13,9 +13,11 @@ import '../../components/dk_icon.dart';
 import '../../components/dk_scan_button.dart';
 import '../../components/dk_shutter_button.dart';
 import '../../l10n/app_localizations.dart';
+import '../../patterns/dk_confirmations.dart';
 import '../../theme/dk_tokens.dart';
 import 'scan_hints.dart';
 import 'scan_session.dart';
+import 'scanner_quick_settings.dart';
 import 'scanner_settings.dart';
 import 'scanner_camera.dart';
 
@@ -128,6 +130,17 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       Future.microtask(() => ref.read(scanModeStateProvider.notifier).set(m));
     }
     _start();
+  }
+
+  /// Close: with pages taken (and not retaking one), the scan would be
+  /// lost, so "Discard this scan?" first (DK-0358).
+  Future<void> _close() async {
+    if (widget.retake == null && ref.read(scanSessionProvider).isNotEmpty) {
+      if (!await confirmDk(context, DkConfirmation.discardScan)) return;
+      if (!mounted) return;
+      await ref.read(scanSessionProvider.notifier).clear();
+    }
+    if (mounted) widget.onClose();
   }
 
   Future<void> _start() async {
@@ -263,7 +276,7 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       grid: _grid,
     );
     final top = DkCameraTopBar(
-      onClose: widget.onClose,
+      onClose: _close,
       flash: _flash,
       onFlash: (f) {
         setState(() => _flash = f);
@@ -277,7 +290,9 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       autoLocked: mode == DkScanMode.batch,
       grid: _grid,
       onGrid: (v) => setState(() => _grid = v),
-      onSettings: widget.onSettings,
+      // The quick settings (DK-0369); More → Settings → Scanning.
+      onSettings: () =>
+          showScannerQuickSettings(context, onMore: widget.onSettings),
       onFlashMenu: () => setState(() => _flashMenu = true),
     );
     final hintKind = scanHint(
