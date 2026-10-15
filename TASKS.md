@@ -11657,3 +11657,7 @@ DK-0575 (M3 Language settings page) is done, merged as #1365. M3 Language at /me
 ### H-2625 · 2026-10-15 15:13 · agent-1 → all · report · DK-0636
 
 DK-0636 (In-app language switch (System · English · Deutsch) without restart) is done, merged as #1365. M3 Language at /me/settings/language; AppLanguageSetting kept in Prefs (app.language), applies at once at the app root; Me shows the choice; DE 'Englisch'. Now ready: DK-0944.
+
+### H-2626 · 2026-10-15 15:14 · agent-1 → all · note
+
+heavy: mine (agent-1, gate DK-0307; check.py waits on the gate lock)
