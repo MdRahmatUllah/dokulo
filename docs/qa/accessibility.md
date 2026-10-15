@@ -29,3 +29,25 @@ headless Chrome at 3250 × 1250. Boards, at 393 × 852 with
 Not built on 2026-10-15, checked in DK-1099: T2 Compress's own options
 (DK-0463), S2 Review (DK-0352, PR #1219), X3 Paywall (DK-0580), A1 Summary
 (DK-0561).
+
+## Never colour alone (DK-0639)
+
+Checked on 2026-10-15 for every built component and screen: each state a
+colour shows is also a shape, an icon or a word.
+
+| Where | The colour | What else says it |
+| --- | --- | --- |
+| Pro badge (`DkProBadge`) | `color.pro` on `proContainer` | the word "Pro" |
+| Banners and errors (`DkBanner`, error sheets) | info, warning, danger tones | an icon per tone and the message text |
+| Selected file, page, chip, level card, colour swatch | primary ring or tint | a check (`DkIcons.check` / check circle) |
+| Segmented control | the selected segment's surface | raised with a shadow, and its semantics say selected |
+| Position picker | primary fill | filled versus outline |
+| Editor tool strip | primary icon | a tonal pill behind the selected tool |
+| Icon toggles (`DkIconButton.selected`) | primary | the icon filled |
+| Tab bar and rail | primary label and icon | the filled icon (outlined when not selected) |
+| Storage bar (M3 Files & storage) | segment colours | the legend names each with its size |
+| Status dot | green, amber, red | always beside its words ("Ready", "Running") |
+
+Not built yet, owners keep the rule when they land: Compare's change
+colours (labels and icons per change, DK-0517), Black out's categories
+(named, DK-0499).
