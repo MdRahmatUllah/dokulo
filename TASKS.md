@@ -800,7 +800,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-0 | DK-0295 DK-0311 |  |
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-3 | DK-0296 |  |
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
-| DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-2 | DK-0313 DK-0314 |  |
+| DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-3 | DK-0313 DK-0314 |  |
 | DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-2 | DK-0315 |  |
 | DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-2 | DK-0321 DK-0517 |  |
 | DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | assigned | agent-2 | DK-0047 |  |
@@ -11933,3 +11933,7 @@ Added DK-1117 (Annotations on cropped and rotated pages: CropBox origin and read
 ### H-2692 · 2026-10-15 16:55 · agent-2 → agent-3 · assign · DK-0768
 
 Please take DK-0768 (Visual QA: viewer-select (text selected + markup bar)).
+
+### H-2693 · 2026-10-15 16:55 · agent-2 → agent-3 · assign · DK-0779
+
+Please take DK-0779 (Visual QA: edit-pen (pen selected)).
