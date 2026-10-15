@@ -55,7 +55,7 @@
   "job_running_many": "{n} Aufgaben laufen",
   "settings_language_title": "Sprache",
   "settings_language_system": "System",
-  "settings_language_english": "English",
+  "settings_language_english": "Englisch",
   "settings_language_deutsch": "Deutsch",
   "shell_tab_home": "Start",
   "shell_tab_tools": "Werkzeuge",
@@ -355,6 +355,10 @@
   "banner_make_searchable": "Durchsuchbar machen",
   "banner_purchase_failed": "Der Kauf wurde nicht abgeschlossen. Dir wurde nichts berechnet.",
   "banner_pro_free_try": "Kostenloser Versuch · Pro schaltet unbegrenzte Nutzung frei",
+  "camera_id_front": "Vorderseite",
+  "camera_id_back": "Karte umdrehen",
+  "camera_book_spine": "Buchrücken an der Linie ausrichten",
+  "camera_pages": "{count, plural, =1{1 Seite} other{{count} Seiten}}",
   "scan_brightness": "Helligkeit",
   "scan_contrast": "Kontrast",
   "toast_applied_all": "Auf alle Seiten angewendet",
@@ -755,5 +759,6 @@
   "scan_save_failed": "Der Scan ließ sich nicht speichern. Deine Seiten sind noch da.",
   "photos_access_off": "Der Fotozugriff ist aus. Schalte ihn in den Einstellungen ein, um Dokumente zu finden.",
   "photos_limited": "Dokulo sieht nur die Fotos, die du ausgewählt hast.",
-  "photos_select_more": "Mehr auswählen"
+  "photos_select_more": "Mehr auswählen",
+  "settings_language_caption": "Wird sofort übernommen. Kein Neustart nötig."
 }
