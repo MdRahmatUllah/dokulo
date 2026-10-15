@@ -667,7 +667,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | assigned | agent-1 | DK-0024 DK-0039 |  |
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | assigned | agent-1 | DK-0024 DK-0343 |  |
 | DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
-| DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | open |  | DK-0024 |  |
+| DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | assigned | agent-1 | DK-0024 |  |
 | DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | open |  | DK-0024 DK-0120 |  |
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
 | DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | done | agent-1 | DK-0232 DK-0242 | #1314 |
@@ -11346,3 +11346,7 @@ Please take DK-0641 (Accessibility: touch targets).
 ### H-2549 · 2026-10-15 12:25 · agent-1 → agent-1 · assign · DK-0643
 
 Please take DK-0643 (Accessibility: reduce motion).
+
+### H-2550 · 2026-10-15 12:25 · agent-1 → agent-1 · assign · DK-0646
+
+Please take DK-0646 (Accessibility: contrast in all themes).
