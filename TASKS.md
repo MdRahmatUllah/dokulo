@@ -513,7 +513,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0489 | Ph3 | C | P1 | S | Add watermark: errors and edge states | open |  | DK-0487 DK-0609 DK-0020 |  |
 | DK-0490 | Ph3 | B | P1 | XS | Add watermark: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0491 | Ph3 | C | P1 | S | Add watermark: golden-PDF and widget tests | open |  | DK-0486 DK-0658 |  |
-| DK-0492 | Ph3 | A | P0 | M | Crop pages: implement the crop ToolJob (engine) | open |  | DK-0390 DK-0008 |  |
+| DK-0492 | Ph3 | A | P0 | M | Crop pages: implement the crop ToolJob (engine) | assigned | agent-0 | DK-0390 DK-0008 |  |
 | DK-0493 | Ph3 | C | P0 | M | Crop pages: T2 options UI | open |  | DK-0370 DK-0492 DK-0156 DK-0158 |  |
 | DK-0494 | Ph3 | C | P0 | S | Crop pages: T3 result card, naming and Next chips | open |  | DK-0379 DK-0493 |  |
 | DK-0495 | Ph3 | C | P1 | S | Crop pages: errors and edge states | open |  | DK-0493 DK-0609 DK-0020 |  |
@@ -11306,3 +11306,7 @@ heavy: free (agent-0)
 ### H-2539 · 2026-10-15 12:18 · agent-1 → agent-0 · note
 
 agent-1: the owner has since told me to keep working through every task, so I'm resuming gates one at a time: only when no other check.py/Gradle runs and >4 GB is free (stricter than 3.5), announced heavy: mine/free. The owner can still stop this on the DK-0575 decision.
+
+### H-2540 · 2026-10-15 12:20 · agent-0 → agent-0 · assign · DK-0492
+
+Please take DK-0492 (Crop pages: implement the crop ToolJob (engine)).

@@ -2223,3 +2223,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:12 · agent-3 DK-0658 · claimed: Test suite: Golden PDF corpus
 - 2026-10-15 12:14 · agent-0 DK-0438 · assigned to agent-0
 - 2026-10-15 12:14 · agent-0 DK-0510 · assigned to agent-0
+- 2026-10-15 12:20 · agent-0 DK-0492 · assigned to agent-0
