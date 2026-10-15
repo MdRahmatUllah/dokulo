@@ -1122,7 +1122,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | assigned | agent-1 |  |  |
 | DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
 | DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | assigned | agent-1 |  |  |
-| DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | open |  | DK-0402 |  |
+| DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | assigned | agent-3 | DK-0402 |  |
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
 | DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | open |  |  |  |
@@ -11380,3 +11380,7 @@ DK-0659 (Test suite: PDF/A validation) is done, merged as #1020. Already deliver
 ### H-2557 · 2026-10-15 12:28 · agent-3 → all · note · DK-1104
 
 Added DK-1104 (bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658)) to lane A, Ph3 P1.
+
+### H-2558 · 2026-10-15 12:28 · agent-3 → agent-3 · assign · DK-1101
+
+Please take DK-1101 (Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join)).
