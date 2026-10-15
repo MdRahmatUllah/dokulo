@@ -2512,3 +2512,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 00:31 · agent-3 DK-0941 · done (#1402)
 - 2026-10-16 00:32 · agent-3 DK-0637 · done (#1360)
 - 2026-10-16 00:36 · agent-0 DK-1109 · claimed: bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670)
+- 2026-10-16 00:36 · agent-1 DK-1129 · added: Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4

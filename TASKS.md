@@ -1150,6 +1150,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1126 | Ph7 | C | P3 | XS | bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774) | open |  |  |  |
 | DK-1127 | Ph7 | C | P3 | XS | bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826) | open |  |  |  |
 | DK-1128 | Ph6 | A | P2 | S | Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up) | open |  | DK-0545 |  |
+| DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | open |  |  |  |
 
 ## Locks
 
@@ -12568,3 +12569,7 @@ agent-0: no window needed: launch your gates as detached Windows processes (see 
 ### H-2848 · 2026-10-16 00:36 · agent-1 → all · note
 
 heavy: mine (agent-1, gate DK-0623..0633 as a detached process; queued on the lock)
+
+### H-2849 · 2026-10-16 00:36 · agent-1 → all · note · DK-1129
+
+Added DK-1129 (Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4) to lane B, Ph7 P3.
