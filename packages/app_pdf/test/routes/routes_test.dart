@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
-import 'package:app_pdf/providers/camera_permission.dart';
+import 'package:app_pdf/screens/s1_scanner/s1_screen.dart';
+import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:app_pdf/screens/s2_review/s2_screen.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,15 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
-/// The camera is allowed: these tests are about routes, not the permission.
-class _Granted implements CameraPermission {
-  @override
-  Future<CameraAccess> status() async => CameraAccess.granted;
-  @override
-  Future<CameraAccess> request() async => CameraAccess.granted;
-  @override
-  Future<void> openSettings() async {}
-}
+import '../scanner_overrides.dart';
 
 Future<GoRouter> pumpAt(
   WidgetTester tester,
@@ -54,7 +48,7 @@ Future<GoRouter> pumpAt(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         prefsProvider.overrideWith(Prefs.memory),
-        cameraPermissionProvider.overrideWithValue(_Granted()),
+        ...scannerOverrides(),
         ...overrides,
       ],
       child: MaterialApp.router(
@@ -109,8 +103,6 @@ void main() {
   const coldStarts = {
     Routes.models: ('M2', true),
     '/me/settings/appearance': ('M3 appearance', true),
-    Routes.scan: ('S1', false),
-    Routes.scanReview: ('S2', false),
     '/tool/compress': ('Compress PDF', false),
   };
   for (final MapEntry(key: location, value: (screen, tabs))
@@ -278,13 +270,27 @@ void main() {
     expect(tabBarShown(tester), isTrue);
   });
 
+  testWidgets('cold start at /scan/review shows S2, no tab bar', (
+    tester,
+  ) async {
+    await pumpAt(tester, Routes.scanReview);
+    expect(find.byType(S2Screen), findsOneWidget);
+    expect(tabBarShown(tester), isFalse);
+  });
+
+  testWidgets('cold start at /scan shows S1, no tab bar', (tester) async {
+    await pumpAt(tester, Routes.scan);
+    expect(find.byType(S1Screen), findsOneWidget);
+    expect(tabBarShown(tester), isFalse);
+  });
+
   testWidgets('the Scan button opens the scanner above the tabs', (
     tester,
   ) async {
     await pumpAt(tester, Routes.files);
     await tester.tap(find.bySemanticsLabel('Scan'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'S1');
+    expect(find.byType(S1Screen), findsOneWidget);
     expect(tabBarShown(tester), isFalse);
   });
 
@@ -296,7 +302,11 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('ID card'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'S1 idCard');
+    expect(
+      ProviderScope.containerOf(tester.element(find.byType(S1Screen)))
+          .read(scanModeStateProvider),
+      DkScanMode.idCard,
+    );
     expect(Routes.scanIn(DkScanMode.book), '/scan?mode=book');
   });
 
@@ -365,9 +375,9 @@ void main() {
         await tester.tap(find.bySemanticsLabel('Scan'));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 60));
-        final mid = tester.getTopLeft(find.text('S1')).dy;
+        final mid = tester.getTopLeft(find.byType(S1Screen)).dy;
         await tester.pumpAndSettle();
-        return mid - tester.getTopLeft(find.text('S1')).dy;
+        return mid - tester.getTopLeft(find.byType(S1Screen)).dy;
       }
 
       expect(await midway(reduce: false), greaterThan(100), reason: 'sliding');
