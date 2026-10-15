@@ -11055,3 +11055,7 @@ Please take DK-0306 (V1 Viewer: implement the "Form detected" state).
 ### H-2477 · 2026-10-15 11:27 · agent-0 → agent-0 · assign · DK-0308
 
 Please take DK-0308 (V1 Viewer: implement the "External link dialog" state).
+
+### H-2478 · 2026-10-15 11:27 · agent-0 → all · note
+
+heavy: mine (agent-0, gate DK-0298)
