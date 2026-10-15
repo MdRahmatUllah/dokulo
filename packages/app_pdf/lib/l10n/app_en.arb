@@ -1522,5 +1522,15 @@
   "filter_remove_shadows_desc": "For photos taken at an angle",
   "@filter_remove_shadows_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
   "filter_default_footer": "Applies to the next scan. Long-press a filter while scanning to change it there.",
-  "@filter_default_footer": {"description": "Settings \u2192 Scanning (DK-0361)."}
+  "@filter_default_footer": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "scan_saved": "Scan saved",
+  "@scan_saved": {"description": "The scan's result screen (DK-0360)."},
+  "scan_result_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@scan_result_pages": {"description": "The scan's result screen (DK-0360).", "placeholders": {"count": {"type": "int"}}},
+  "scan_text_found": "Text found on {found} of {total} pages",
+  "@scan_text_found": {"description": "The scan's result screen (DK-0360).", "placeholders": {"found": {"type": "int"}, "total": {"type": "int"}}},
+  "scan_file_name": "File name",
+  "@scan_file_name": {"description": "The scan's result screen (DK-0360)."},
+  "scan_next": "Next",
+  "@scan_next": {"description": "The scan's result screen (DK-0360)."}
 }

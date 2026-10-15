@@ -385,5 +385,10 @@
   "filter_greyscale_desc": "Kleinere Dateien",
   "filter_black_white_desc": "Klarer Text, kleinste Dateien",
   "filter_remove_shadows_desc": "Für schräg aufgenommene Fotos",
-  "filter_default_footer": "Gilt ab dem nächsten Scan. Beim Scannen einen Filter lange drücken, um ihn dort zu ändern."
+  "filter_default_footer": "Gilt ab dem nächsten Scan. Beim Scannen einen Filter lange drücken, um ihn dort zu ändern.",
+  "scan_saved": "Scan gespeichert",
+  "scan_result_pages": "{count, plural, =1{1 Seite} other{{count} Seiten}}",
+  "scan_text_found": "Text auf {found} von {total} Seiten gefunden",
+  "scan_file_name": "Dateiname",
+  "scan_next": "Weiter"
 }
