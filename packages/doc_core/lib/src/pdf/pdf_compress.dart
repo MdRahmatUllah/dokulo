@@ -310,6 +310,7 @@ class PdfCompress {
           )).result,
         ),
         work: work,
+        password: password,
       );
       imaged = rastered;
     }
@@ -318,7 +319,9 @@ class PdfCompress {
         imaged,
         output,
         options.removeMetadata,
-        null, // PDFium saved it without encryption
+        // PDFium's save keeps a locked input's encryption (DK-1104): the
+        // output opens with the same password, as the original did.
+        password,
       )).result,
     );
     return _Pass(output, await File(output).length(), images, level);
