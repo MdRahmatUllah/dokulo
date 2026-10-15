@@ -1,11 +1,15 @@
 import 'dart:io';
 
+import 'package:app_pdf/screens/v2_edit/annotation_editor.dart' show EditTool;
+import 'package:app_pdf/screens/v2_edit/form_layer.dart';
+import 'package:app_pdf/components/dk_editor_bars.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
 import 'package:app_pdf/components/dk_text_action.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/providers/files_providers.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/signature_providers.dart';
 import 'package:app_pdf/screens/v2_edit/edit_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -36,10 +40,12 @@ void main() {
   late String path;
   late int id;
   late GoRouter router;
+  late Prefs prefs;
 
   setUp(() {
     root = Directory.systemTemp.createTempSync('dk_v2_');
     db = DokuloDatabase.memory();
+    prefs = Prefs.memory();
   });
   tearDown(() async {
     await db.close();
@@ -55,6 +61,9 @@ void main() {
     WidgetTester tester, {
     DkTokens? tokens,
     bool fromSign = false,
+    EditTool? startTool,
+    String source = 'Invoice INV-2026-014.pdf',
+    bool fillForm = false,
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
@@ -67,7 +76,7 @@ void main() {
       store.userFolder.createSync(recursive: true);
       Directory('${root.path}/versions').createSync();
       path = (await File(
-        fixture('Invoice INV-2026-014.pdf'),
+        fixture(source),
       ).copy('${store.userFolder.path}/Invoice.pdf')).path;
       id = await db
           .into(db.files)
@@ -86,7 +95,12 @@ void main() {
         GoRoute(path: '/', builder: (_, _) => const Text('V1')),
         GoRoute(
           path: '/edit',
-          builder: (_, _) => EditScreen(fileId: id, fromSign: fromSign),
+          builder: (_, _) => EditScreen(
+            fileId: id,
+            fromSign: fromSign,
+            startTool: startTool,
+            fillForm: fillForm,
+          ),
         ),
       ],
     );
@@ -96,6 +110,7 @@ void main() {
         overrides: [
           appDatabaseProvider.overrideWithValue(db),
           fileStoreProvider.overrideWith((ref) async => store),
+          prefsProvider.overrideWith(() => prefs),
           signatureStoreProvider.overrideWith(
             (ref) async => SignatureStore(
               db,
@@ -118,6 +133,11 @@ void main() {
     );
     router.push('/edit');
     await settle(tester);
+    // Under a loaded machine the file takes longer to open: wait for it
+    // (a form or a missing file never shows the page).
+    for (var i = 0; i < 100 && find.byType(PdfViewer).evaluate().isEmpty; i++) {
+      await settle(tester, rounds: 2);
+    }
   }
 
   DkTextAction done(WidgetTester tester) => tester.widget<DkTextAction>(
@@ -222,4 +242,235 @@ void main() {
       );
     });
   }
+
+  testWidgets('Mark up opens V2 with the highlighter selected (DK-0517)', (
+    tester,
+  ) async {
+    await pump(tester, startTool: EditTool.highlighter);
+    expect(
+      tester.widget<DkToolStrip>(find.byType(DkToolStrip)).selected,
+      2,
+      reason: 'Pan, Pen, Highlighter',
+    );
+  });
+
+  testWidgets('a form: fields tinted; a checkbox toggles, a text field '
+      'takes text on the page; Done fills the file (DK-0324)', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester, source: 'form-acroform.pdf');
+    await settle(tester);
+    expect(find.byType(FormLayer), findsWidgets);
+    await tester.tap(find.bySemanticsLabel('consent'));
+    await tester.pump();
+    await tester.tap(find.bySemanticsLabel('name'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Jürgen Groß');
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    final fields = await tester.runAsync(() => PdfForms.fields(path));
+    String value(String name) =>
+        fields!.firstWhere((f) => f.name == name).value;
+    expect(value('name'), 'Jürgen Groß');
+    expect(fields!.firstWhere((f) => f.name == 'consent').checked, isTrue);
+    semantics.dispose();
+  });
+
+  testWidgets('typed text alone is a change: Done saves it', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester, source: 'form-acroform.pdf');
+    await settle(tester);
+    await tester.tap(find.bySemanticsLabel('name'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Max');
+    await tester.pump();
+    final done = tester.widget<DkTextAction>(
+      find.widgetWithText(DkTextAction, 'Done'),
+    );
+    expect(done.onTap, isNotNull);
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    final fields = await tester.runAsync(() => PdfForms.fields(path));
+    expect(fields!.firstWhere((f) => f.name == 'name').value, 'Max');
+    semantics.dispose();
+  });
+
+  group('Fill form (DK-0518)', () {
+    testWidgets('no fields: says so, and Mark up selects the highlighter', (
+      tester,
+    ) async {
+      await pump(tester, fillForm: true);
+      await settle(tester);
+      expect(find.text('Fill form'), findsOneWidget);
+      expect(find.text('This PDF has no fillable fields.'), findsOneWidget);
+      await tester.tap(find.text('Mark up'));
+      await tester.pumpAndSettle();
+      expect(tester.widget<DkToolStrip>(find.byType(DkToolStrip)).selected, 2);
+    });
+
+    testWidgets("XFA: \"This form type can't be filled on phones.\"", (
+      tester,
+    ) async {
+      await pump(tester, fillForm: true, source: 'form-xfa.pdf');
+      await settle(tester);
+      expect(
+        find.text("This form type can't be filled on phones."),
+        findsOneWidget,
+      );
+      expect(find.text('Open read-only'), findsOneWidget);
+    });
+
+    testWidgets('Done asks "Lock form values?"; Flatten makes the fields '
+        'part of the page', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester, fillForm: true, source: 'form-acroform.pdf');
+      await settle(tester);
+      await tester.tap(find.bySemanticsLabel('consent'));
+      await tester.pump();
+      await tester.tap(find.text('Done'));
+      await tester.pumpAndSettle();
+      expect(find.text('Lock form values?'), findsOneWidget);
+      await tester.tap(find.text('Flatten form'));
+      await tester.pump();
+      await tester.tap(find.text('Save'));
+      await settle(tester, rounds: 150);
+      final fields = await tester.runAsync(() => PdfForms.fields(path));
+      expect(fields, isEmpty, reason: 'flattened');
+      semantics.dispose();
+    });
+  });
+
+  group('tool options (DK-0314..DK-0320)', () {
+    Offset centre(WidgetTester tester) =>
+        tester.getCenter(find.byType(PdfViewer));
+
+    Future<void> drag(WidgetTester tester, Offset by) async {
+      final g = await tester.startGesture(centre(tester));
+      for (var i = 0; i < 10; i++) {
+        await g.moveBy(by / 10);
+        await tester.pump();
+      }
+      await g.up();
+      await tester.pump();
+    }
+
+    testWidgets('a second tap on Pen opens its options; they are remembered', (
+      tester,
+    ) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester);
+      await tester.tap(find.text('Pen'));
+      await tester.pump();
+      await tester.tap(find.text('Pen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsOneWidget);
+      await tester.tap(find.bySemanticsLabel('Red'));
+      await tester.pumpAndSettle();
+      expect(
+        prefs.state.value!['edit.options.pen'],
+        isNull,
+        reason: 'written once the sheet closes',
+      );
+      Navigator.of(tester.element(find.text('Thickness'))).pop();
+      await tester.pumpAndSettle();
+      final saved = prefs.state.value!['edit.options.pen'] as Map;
+      expect(Color(saved['color'] as int), DkTokens.light.markup.red);
+      semantics.dispose();
+    });
+
+    testWidgets('a second tap on Pan opens nothing', (tester) async {
+      await pump(tester);
+      await tester.tap(find.text('Pan'));
+      await tester.pump();
+      await tester.tap(find.text('Pan'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsNothing);
+      expect(find.byType(BottomSheet), findsNothing);
+    });
+
+    testWidgets('options kept with the wrong types or out of range: defaults '
+        'and limits, no crash', (tester) async {
+      prefs = Prefs.memory({
+        'edit.options.pen': {'thickness': 'thick', 'color': 'red'},
+        'edit.options.text': {'fontSize': 200.0},
+      });
+      await pump(tester);
+      expect(tester.takeException(), isNull);
+      await tester.tap(find.text('Pen'));
+      await tester.pump();
+      await tester.tap(find.text('Pen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsOneWidget);
+    });
+
+    testWidgets('Shapes: an arrow is ink, the shaft and two barbs', (
+      tester,
+    ) async {
+      await pump(tester);
+      await tester.scrollUntilVisible(
+        find.text('Shapes'),
+        60,
+        scrollable: find
+            .descendant(
+              of: find.byType(DkToolStrip),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Shapes'));
+      await tester.pump();
+      await tester.tap(find.text('Shapes'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Arrow'));
+      await tester.pumpAndSettle();
+      Navigator.of(tester.element(find.text('Arrow'))).pop();
+      await tester.pumpAndSettle();
+      await drag(tester, const Offset(80, 40));
+      await tester.tap(find.text('Done'));
+      await settle(tester);
+      final annots = await tester.runAsync(() => PdfAnnotations.read(path, 0));
+      final ink = annots!.map((a) => a.annot).whereType<InkAnnot>().single;
+      expect(ink.strokes, hasLength(3));
+    });
+
+    testWidgets('Text: a tap places a box and asks for its text', (
+      tester,
+    ) async {
+      await pump(tester);
+      await tester.ensureVisible(find.text('Text'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Text'));
+      await tester.pump();
+      await tester.tapAt(centre(tester));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(EditableText).last, 'Bezahlt');
+      await tester.tap(find.text('Done').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Done'));
+      await settle(tester);
+      final annots = await tester.runAsync(() => PdfAnnotations.read(path, 0));
+      expect(
+        annots!.map((a) => a.annot).whereType<FreeTextAnnot>().single.text,
+        'Bezahlt',
+      );
+    });
+
+    testWidgets('Text: a box left empty goes again; nothing to save', (
+      tester,
+    ) async {
+      await pump(tester);
+      await tester.ensureVisible(find.text('Text'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Text'));
+      await tester.pump();
+      await tester.tapAt(centre(tester));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Done').last);
+      await tester.pumpAndSettle();
+      final done = tester.widget<DkTextAction>(
+        find.widgetWithText(DkTextAction, 'Done'),
+      );
+      expect(done.onTap, isNull, reason: 'no changes');
+    });
+  });
 }

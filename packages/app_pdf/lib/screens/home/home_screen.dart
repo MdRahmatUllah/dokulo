@@ -22,6 +22,7 @@ import '../files/files_screen.dart';
 import '../me/me_screen.dart';
 import 'continue_card.dart';
 import 'pinned_tools.dart';
+import '../../theme/dk_layout.dart';
 
 /// H1 · Home (DK-0242; UI spec §15.1): the large top bar "Dokulo" with
 /// search and settings; the privacy line; "Your tools", the pinned tools
@@ -48,9 +49,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     // Tablets (UI spec §30): from 600 dp the tools 6 across and Recent in
     // 2 columns; from 840 Recent moves to a 360 column on the right. The
     // content's side padding grows to 24 there.
-    final width = MediaQuery.sizeOf(context).width;
-    final tablet = width >= 600;
-    final wide = width >= 840;
+    final grid = DkGrid.of(context);
+    final tablet = grid != DkGrid.phone;
+    final wide = grid == DkGrid.largeTablet;
     final top = <Widget>[
       SliverPadding(
         padding: EdgeInsets.fromLTRB(t.space.l, t.space.xs, t.space.l, 0),

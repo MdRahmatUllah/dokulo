@@ -87,6 +87,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/illustrations/ # DK-0050..0069, from the design export
+    # The fonts' licence texts, for the licences page (DK-0673); fetched
+    # with the fonts.
+    - assets/fonts/Caveat-OFL.txt
+    - assets/fonts/DancingScript-OFL.txt
+    - assets/fonts/HomemadeApple-LICENSE.txt
 
   # Material Symbols Rounded (DK-0048), fetched by tools/fetch_icon_font.py;
   # the icon tree-shaker keeps only the glyphs DkIcons uses.
