@@ -168,7 +168,8 @@ abstract final class SmartSplitRules {
     var h = 0;
     for (var y = 0; y < 8; y++) {
       for (var x = 0; x < 8; x++) {
-        final left = sum[y][x] / count[y][x], right = sum[y][x + 1] / count[y][x + 1];
+        final left = sum[y][x] / count[y][x],
+            right = sum[y][x + 1] / count[y][x + 1];
         h = (h << 1) | (left > right ? 1 : 0);
       }
     }

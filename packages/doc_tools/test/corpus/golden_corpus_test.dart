@@ -132,6 +132,7 @@ final corpusInputs = <String, Object Function(CorpusFile file, String out)>{
     suffix: ' – PDF-A',
     passwords: {f.path: ?f.password},
   ),
+  'smartsplit': (f, out) => SmartSplitInput(file: f.path, password: f.password),
   'text': (f, out) =>
       TextInput(file: f.path, outputDir: out, password: f.password),
 };
