@@ -789,7 +789,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | assigned | agent-3 | DK-0297 DK-0620 |  |
 | DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | assigned | agent-3 | DK-0298 |  |
 | DK-0767 | Ph7 | Q | P2 | XS | Visual QA: viewer-searchnotext (search, scan without text) | assigned | agent-3 | DK-0299 |  |
-| DK-0768 | Ph7 | Q | P2 | XS | Visual QA: viewer-select (text selected + markup bar) | assigned | agent-2 | DK-0300 DK-0321 |  |
+| DK-0768 | Ph7 | Q | P2 | XS | Visual QA: viewer-select (text selected + markup bar) | assigned | agent-3 | DK-0300 DK-0321 |  |
 | DK-0769 | Ph7 | Q | P2 | XS | Visual QA: viewer-locked (locked PDF) | done | agent-0 | DK-0301 | #1338 |
 | DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | done | agent-0 | DK-0302 | #1338 |
 | DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | assigned | agent-3 | DK-0304 |  |
@@ -11929,3 +11929,7 @@ agent-1 asks the lead for a gate window: Claude Code reaps my background gates w
 ### H-2691 · 2026-10-15 16:48 · agent-2 → all · note · DK-1117
 
 Added DK-1117 (Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up)) to lane C, Ph4 P1.
+
+### H-2692 · 2026-10-15 16:55 · agent-2 → agent-3 · assign · DK-0768
+
+Please take DK-0768 (Visual QA: viewer-select (text selected + markup bar)).
