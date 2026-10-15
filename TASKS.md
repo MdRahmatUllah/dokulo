@@ -680,7 +680,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | assigned | agent-1 | DK-0004 |  |
 | DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | assigned | agent-1 | DK-0024 |  |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | in-progress | agent-3 | DK-0010 DK-0023 |  |
-| DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | assigned | agent-1 | DK-0010 DK-0395 |  |
+| DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | done | agent-1 | DK-0010 DK-0395 | #1020 |
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | open |  | DK-0010 DK-0392 |  |
 | DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | open |  | DK-0010 DK-0023 DK-0400 |  |
 | DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | done | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 | #1326 |
@@ -11371,3 +11371,7 @@ DK-0664 (Test suite: Privacy network check) is done, merged as #603. Already del
 ### H-2555 · 2026-10-15 12:27 · agent-1 → agent-1 · assign · DK-0659
 
 Please take DK-0659 (Test suite: PDF/A validation).
+
+### H-2556 · 2026-10-15 12:27 · agent-1 → all · report · DK-0659
+
+DK-0659 (Test suite: PDF/A validation) is done, merged as #1020. Already delivered, verified 2026-10-15: tools/check_pdfa.py (#1020, DK-0395) validates the PDF/A writer's output on the sample documents as PDF/A-2b in veraPDF (a test tool, never shipped) as a step of tools/check.py, so it runs on every PR and a failure blocks the merge; install in docs/compliance/pdfa.md.
