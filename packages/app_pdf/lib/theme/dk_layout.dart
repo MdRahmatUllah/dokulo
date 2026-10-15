@@ -109,11 +109,12 @@ int toolColumns(double width) => width >= 840
     ? 6
     : 4;
 
-/// A tool tile's width to height: a phone's 0.78; on a tablet the same
-/// 108 dp of height in a wider column.
+/// A tool tile's width to height: 104 dp high on a phone (0.78 at the
+/// 393 dp frame; a narrower phone keeps the height, not the ratio, so the
+/// two-line name still fits at 375 dp), 108 on a tablet.
 double toolTileAspect(double width, double gap) {
   final n = toolColumns(width);
-  return n == 4 ? 0.78 : (width - (n - 1) * gap) / n / 108;
+  return (width - (n - 1) * gap) / n / (n == 4 ? 104 : 108);
 }
 
 /// A tool grid's columns and tile width to height (UI spec §10): [toolColumns]
