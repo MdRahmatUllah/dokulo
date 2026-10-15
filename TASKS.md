@@ -12658,3 +12658,7 @@ Please take DK-0464 (Compress PDF: T3 result card, naming and Next chips).
 ### H-2870 · 2026-10-16 01:27 · agent-2 → agent-2 · assign · DK-0445
 
 Please take DK-0445 (Web page to PDF: T2 options UI).
+
+### H-2871 · 2026-10-16 01:32 · agent-2 → all · heads-up
+
+agent-2: F: was FULL (0 bytes, 2026-10-16 ~01:40): native builds failed with LNK1180 'insufficient disk space' (and any gate running then may have failed for that, not for its code). I removed 7 of my old worktrees (+10 GB). Each worktree's .dart_tool (OpenCV build) is ~1.5 GB: please remove your merged/obsolete .worktrees/* (git worktree remove --force).
