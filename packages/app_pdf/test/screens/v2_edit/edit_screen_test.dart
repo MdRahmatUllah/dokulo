@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_pdf/screens/v2_edit/annotation_editor.dart' show EditTool;
+import 'package:app_pdf/screens/v2_edit/form_layer.dart';
 import 'package:app_pdf/components/dk_editor_bars.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
 import 'package:app_pdf/components/dk_text_action.dart';
@@ -61,6 +62,7 @@ void main() {
     DkTokens? tokens,
     bool fromSign = false,
     EditTool? startTool,
+    String source = 'Invoice INV-2026-014.pdf',
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
@@ -73,7 +75,7 @@ void main() {
       store.userFolder.createSync(recursive: true);
       Directory('${root.path}/versions').createSync();
       path = (await File(
-        fixture('Invoice INV-2026-014.pdf'),
+        fixture(source),
       ).copy('${store.userFolder.path}/Invoice.pdf')).path;
       id = await db
           .into(db.files)
@@ -240,6 +242,27 @@ void main() {
       2,
       reason: 'Pan, Pen, Highlighter',
     );
+  });
+
+  testWidgets('a form: fields tinted; a checkbox toggles, a text field '
+      'takes text on the page; Done fills the file (DK-0324)', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester, source: 'form-acroform.pdf');
+    await settle(tester);
+    expect(find.byType(FormLayer), findsWidgets);
+    await tester.tap(find.bySemanticsLabel('consent'));
+    await tester.pump();
+    await tester.tap(find.bySemanticsLabel('name'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Jürgen Groß');
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    final fields = await tester.runAsync(() => PdfForms.fields(path));
+    String value(String name) =>
+        fields!.firstWhere((f) => f.name == name).value;
+    expect(value('name'), 'Jürgen Groß');
+    expect(fields!.firstWhere((f) => f.name == 'consent').checked, isTrue);
+    semantics.dispose();
   });
 
   group('tool options (DK-0314..DK-0320)', () {

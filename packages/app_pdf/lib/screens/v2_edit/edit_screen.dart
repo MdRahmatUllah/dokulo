@@ -12,6 +12,7 @@ import '../../components/dk_editor_bars.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_button.dart';
 import '../../components/dk_pdf_canvas.dart';
+import '../../components/dk_settings_row.dart';
 import '../../components/dk_sheet.dart';
 import '../../components/dk_text_field.dart';
 import '../../components/dk_tool_options_sheet.dart';
@@ -19,6 +20,7 @@ import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
+import '../../patterns/dk_form_accessory.dart';
 import '../../providers/file_providers.dart';
 import '../../providers/files_providers.dart';
 import '../../providers/prefs_providers.dart';
@@ -28,6 +30,7 @@ import '../sign/signatures_sheet.dart';
 import '../v1_viewer/viewer_providers.dart';
 import 'annotation_editor.dart';
 import 'annotation_overlay.dart';
+import 'form_layer.dart';
 
 /// The tool strip's items, in the spec's order (UI spec §17.2): the
 /// editor's tools, with Sign (it opens the signatures sheet) before Eraser.
@@ -129,6 +132,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   @override
   void dispose() {
     _editor?.dispose();
+    _formText.dispose();
     super.dispose();
   }
 
@@ -154,6 +158,10 @@ class _EditScreenState extends ConsumerState<EditScreen> {
         for (var p = 0; p < info.pageCount; p++)
           p: await PdfAnnotations.read(file.path, p),
       };
+      // An AcroForm's fields, in the file's order (DK-0324).
+      if (await PdfForms.kind(file.path) == PdfFormKind.acroForm) {
+        _fields = await PdfForms.fields(file.path);
+      }
     } on DocError catch (e) {
       // ponytail: locked files open in V1 (unlock there first); edit mode
       // says why it can't, instead of spinning.
@@ -355,12 +363,137 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     );
   }
 
+  // --- The form (DK-0324).
+
+  List<PdfFormField> _fields = const [];
+  final _formValues = <String, PdfFieldValue>{};
+  String? _activeField;
+  final _formText = TextEditingController();
+
+  /// "Highlight fields": every fillable field tinted. ponytail: always on
+  /// until the Fill form tool's overflow toggle (DK-0518).
+  final _highlightFields = true;
+
+  bool get _dirty => (_editor?.dirty ?? false) || _formValues.isNotEmpty;
+
+  PdfFormField? get _activeText => switch (_activeField) {
+    final id? =>
+      _fields
+          .where((f) => f.id == id && f.kind == PdfFieldKind.text)
+          .firstOrNull,
+    null => null,
+  };
+
+  /// The text being typed becomes the field's value once it changed.
+  void _commitText() {
+    final f = _activeText;
+    if (f == null) return;
+    final now = _formText.text;
+    final before = fieldState(f, _formValues[f.id]).text;
+    if (now != before) _formValues[f.id] = TextFieldValue(now);
+  }
+
+  /// The fields a user fills, in the file's order (its tab order).
+  List<PdfFormField> get _fillable => [
+    for (final f in _fields)
+      if (!f.readOnly &&
+          const {
+            PdfFieldKind.text,
+            PdfFieldKind.checkbox,
+            PdfFieldKind.radio,
+            PdfFieldKind.combo,
+            PdfFieldKind.list,
+          }.contains(f.kind))
+        f,
+  ];
+
+  /// Previous / Next field: to the next text field in the file's order,
+  /// scrolling to its page.
+  void _moveField(int by) {
+    final texts = [
+      for (final f in _fillable)
+        if (f.kind == PdfFieldKind.text) f,
+    ];
+    final i = texts.indexWhere((f) => f.id == _activeField);
+    final next = i + by;
+    if (i < 0 || next < 0 || next >= texts.length) return;
+    final f = texts[next];
+    if ((_canvas.isReady ? _canvas.pageNumber : null) != f.page + 1) {
+      _canvas.goToPage(pageNumber: f.page + 1);
+    }
+    _tapField(f);
+  }
+
+  Future<void> _tapField(PdfFormField f) async {
+    setState(() {
+      _commitText();
+      _activeField = null;
+    });
+    final now = fieldState(f, _formValues[f.id]);
+    switch (f.kind) {
+      case PdfFieldKind.text:
+        _formText.text = now.text;
+        setState(() => _activeField = f.id);
+      case PdfFieldKind.checkbox:
+        setState(() => _formValues[f.id] = CheckFieldValue(!now.checked));
+      case PdfFieldKind.radio:
+        // One of the group: the others of this name go off.
+        setState(() {
+          for (final other in _fields) {
+            if (other.name == f.name) _formValues.remove(other.id);
+          }
+          _formValues[f.id] = const CheckFieldValue(true);
+          for (final other in _fields) {
+            if (other.name == f.name && other.id != f.id && other.checked) {
+              _formValues[other.id] = const CheckFieldValue(false);
+            }
+          }
+        });
+      case PdfFieldKind.combo || PdfFieldKind.list:
+        setState(() => _activeField = f.id);
+        final picked = await showDkSheet<int>(
+          context,
+          title: f.name,
+          showClose: true,
+          body: Builder(
+            builder: (sheet) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final (i, o) in f.options.indexed)
+                  DkSettingsRow(
+                    title: o,
+                    trailing: i == now.choice
+                        ? DkIcon(
+                            DkIcons.check,
+                            color: context.tokens.color.primary,
+                          )
+                        : null,
+                    onTap: () => Navigator.of(sheet).pop(i),
+                  ),
+              ],
+            ),
+          ),
+        );
+        if (!mounted) return;
+        setState(() {
+          _activeField = null;
+          if (picked != null && picked != now.choice) {
+            _formValues[f.id] = ChoiceFieldValue(picked);
+          }
+        });
+      case PdfFieldKind.signature ||
+          PdfFieldKind.button ||
+          PdfFieldKind.unknown:
+        break;
+    }
+  }
+
   /// The file's pages (their sizes), read when it opened.
   PdfInfo? _info;
   final _canvas = PdfViewerController();
 
   Future<void> _cancel() async {
-    if (_editor?.dirty ?? false) {
+    if (_dirty) {
       if (!await confirmDk(context, DkConfirmation.discardEdits)) return;
     }
     if (mounted) _leave();
@@ -382,8 +515,15 @@ class _EditScreenState extends ConsumerState<EditScreen> {
         file.path.split(RegExp(r'[\\/]')).last,
       );
       await PdfAnnotations.apply(file.path, out.path, editor.edits());
+      _commitText();
+      var result = out;
+      if (_formValues.isNotEmpty) {
+        // The filled form on top of the marks, regenerated as Acrobat does.
+        result = await store.newTempFile(out.path.split(RegExp(r'[\\/]')).last);
+        await PdfForms.fill(out.path, result.path, _formValues);
+      }
       final versions = await ref.read(versionStoreProvider.future);
-      final before = await versions.replace(widget.fileId, out.path);
+      final before = await versions.replace(widget.fileId, result.path);
       if (!mounted) return;
       // Signed: "Signed on page 3 · Undo" (DK-0519); else "Saved".
       final signed = editor.signedPage;
@@ -417,7 +557,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
           appBar: DkTopBar.editing(
             title: l.edit_title,
             onCancel: _cancel,
-            onDone: editor != null && editor.dirty && !_saving ? _done : null,
+            onDone: editor != null && _dirty && !_saving ? _done : null,
           ),
           body: _missing || _problem != null
               ? Center(
@@ -447,15 +587,50 @@ class _EditScreenState extends ConsumerState<EditScreen> {
                         path: _view!,
                         controller: _canvas,
                         panEnabled: editor.tool == EditTool.pan,
-                        pageOverlay: (page, size) => AnnotationOverlay(
-                          editor: editor,
-                          page: page,
-                          pageSize: size,
-                          style: _style,
-                          onPlaced: _placed,
+                        pageOverlay: (page, size) => Stack(
+                          children: [
+                            Positioned.fill(
+                              child: AnnotationOverlay(
+                                editor: editor,
+                                page: page,
+                                pageSize: size,
+                                style: _style,
+                                onPlaced: _placed,
+                              ),
+                            ),
+                            // The fields answer while panning; the drawing
+                            // tools draw over them.
+                            if (editor.tool == EditTool.pan &&
+                                _fields.any((f) => f.page == page))
+                              Positioned.fill(
+                                child: FormLayer(
+                                  fields: [
+                                    for (final f in _fields)
+                                      if (f.page == page) f,
+                                  ],
+                                  pageSize: size,
+                                  values: _formValues,
+                                  active: _activeField,
+                                  text: _formText,
+                                  highlight: _highlightFields,
+                                  onTap: _tapField,
+                                ),
+                              ),
+                          ],
                         ),
                       ),
                     ),
+                    // Previous · Next field · Done over the keyboard.
+                    if (_activeText != null &&
+                        View.of(context).viewInsets.bottom > 0)
+                      DkFormAccessoryBar(
+                        onPrevious: () => _moveField(-1),
+                        onNext: () => _moveField(1),
+                        onDone: () => setState(() {
+                          _commitText();
+                          _activeField = null;
+                        }),
+                      ),
                   ],
                 ),
           bottomNavigationBar: SafeArea(
