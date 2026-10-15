@@ -7,6 +7,7 @@ import 'package:pdfium_dart/pdfium_dart.dart' as fpdf;
 import 'package:pdfrx_engine/pdfrx_engine.dart' show PdfrxEntryFunctions;
 
 import 'pdf_engine.dart';
+import 'pdfium_raw.dart';
 
 /// A point in page space (points, origin bottom-left, the page unrotated).
 typedef PagePoint = ({double x, double y});
@@ -191,37 +192,6 @@ Box _boundsOf(List<PagePoint> pts, {double pad = 0}) {
 // ---------------------------------------------------------------------------
 // On pdfrx's worker.
 
-T _withDoc<T>(
-  String path,
-  String? password,
-  T Function(fpdf.PDFium pdfium, fpdf.FPDF_DOCUMENT doc, Arena arena) body,
-) {
-  final pdfium = fpdf.getPdfium();
-  return using((arena) {
-    // From memory: PDFium's path handling isn't UTF-8-safe everywhere.
-    final bytes = File(path).readAsBytesSync();
-    final buffer = arena<Uint8>(bytes.length);
-    buffer.asTypedList(bytes.length).setAll(0, bytes);
-    final doc = pdfium.FPDF_LoadMemDocument64(
-      buffer.cast(),
-      bytes.length,
-      password == null
-          ? nullptr
-          : password.toNativeUtf8(allocator: arena).cast(),
-    );
-    if (doc == nullptr) {
-      throw StateError(
-        'FPDF_LoadMemDocument64 failed: ${pdfium.FPDF_GetLastError()}',
-      );
-    }
-    try {
-      return body(pdfium, doc, arena);
-    } finally {
-      pdfium.FPDF_CloseDocument(doc);
-    }
-  });
-}
-
 String _string(
   fpdf.PDFium pdfium,
   fpdf.FPDF_ANNOTATION a,
@@ -267,7 +237,7 @@ const _markupSubtypes = {
 
 List<PageAnnot> _readOnWorker(
   (String, String?, int) m,
-) => _withDoc(m.$1, m.$2, (pdfium, doc, arena) {
+) => withRawDocument(m.$1, m.$2, (pdfium, doc, arena) {
   final page = pdfium.FPDF_LoadPage(doc, m.$3);
   final found = <PageAnnot>[];
   final rect = arena<fpdf.FS_RECTF>();
@@ -400,7 +370,7 @@ int _daColor(String da) {
 
 Uint8List _apply((String, String?, Map<int, PageAnnotEdits>) m) {
   final (path, password, edits) = m;
-  return _withDoc(path, password, (pdfium, doc, arena) {
+  return withRawDocument(path, password, (pdfium, doc, arena) {
     for (final MapEntry(key: p, value: e) in edits.entries) {
       if (p < 0 || p >= pdfium.FPDF_GetPageCount(doc)) {
         throw DocError(DocErrorKind.unexpected, page: p, detail: 'no page $p');
@@ -427,7 +397,7 @@ Uint8List _apply((String, String?, Map<int, PageAnnotEdits>) m) {
         pdfium.FPDF_ClosePage(page);
       }
     }
-    return _save(pdfium, doc);
+    return saveRawDocument(pdfium, doc);
   });
 }
 
@@ -555,35 +525,3 @@ void _setString(
   key.toNativeUtf8(allocator: arena).cast(),
   value.toNativeUtf16(allocator: arena).cast(),
 );
-
-final _saved = BytesBuilder(copy: false);
-
-int _writeBlock(
-  Pointer<fpdf.FPDF_FILEWRITE> self,
-  Pointer<Void> data,
-  int size,
-) {
-  _saved.add(Uint8List.fromList(data.cast<Uint8>().asTypedList(size)));
-  return 1;
-}
-
-/// The whole document, rewritten (never incremental).
-Uint8List _save(fpdf.PDFium pdfium, fpdf.FPDF_DOCUMENT doc) {
-  final write =
-      NativeCallable<
-        Int Function(Pointer<fpdf.FPDF_FILEWRITE>, Pointer<Void>, UnsignedLong)
-      >.isolateLocal(_writeBlock, exceptionalReturn: 0);
-  final fw = calloc<fpdf.FPDF_FILEWRITE>()
-    ..ref.version = 1
-    ..ref.WriteBlock = write.nativeFunction;
-  try {
-    _saved.clear();
-    if (pdfium.FPDF_SaveAsCopy(doc, fw, fpdf.FPDF_NO_INCREMENTAL) == 0) {
-      throw StateError('FPDF_SaveAsCopy failed');
-    }
-    return _saved.takeBytes();
-  } finally {
-    calloc.free(fw);
-    write.close();
-  }
-}

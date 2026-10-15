@@ -1,7 +1,18 @@
 import 'tool_job.dart';
 import 'tools/compress_job.dart';
+import 'tools/convert_jobs.dart';
+import 'tools/crop_job.dart';
+import 'tools/extract_assets_job.dart';
+import 'tools/extract_job.dart';
 import 'tools/img2pdf_job.dart';
+import 'tools/merge_job.dart';
 import 'tools/ocr_job.dart';
+import 'tools/password_jobs.dart';
+import 'tools/pdf2img_job.dart';
+import 'tools/repair_job.dart';
+import 'tools/rotate_job.dart';
+import 'tools/split_job.dart';
+import 'tools/stamp_jobs.dart';
 
 /// The tools that run as a ToolJob: one engine task each in the plan
 /// ("Merge PDF: implement the merge ToolJob"). Organize, Mark up, Sign, Fill form
@@ -15,8 +26,22 @@ const toolJobIds = [
 /// Every ToolJob the app has. A tool's engine task adds its job here.
 const List<ToolJob<Object?>> allToolJobs = [
   CompressJob(),
+  CropJob(),
+  ExtractAssetsJob(),
+  ExtractJob(),
   Img2PdfJob(),
+  MergeJob(),
   OcrJob(),
+  PageNumbersJob(),
+  PdfaJob(),
+  Pdf2ImgJob(),
+  ProtectJob(),
+  RepairJob(),
+  RotateJob(),
+  SplitJob(),
+  TextJob(),
+  UnlockJob(),
+  WatermarkJob(),
 ];
 
 /// ToolJobs by id.
