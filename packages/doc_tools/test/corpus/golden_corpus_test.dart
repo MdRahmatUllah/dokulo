@@ -245,7 +245,11 @@ void main() {
   });
 
   test('every ToolJob has its corpus input', () {
-    expect(corpusInputs.keys.toSet(), ToolRegistry.app().ids.toSet());
+    // Web page to PDF reads a web page, not a file (web_job_test).
+    expect(
+      corpusInputs.keys.toSet(),
+      ToolRegistry.app().ids.toSet().difference({'web'}),
+    );
   });
 
   test('the corpus: the bases, their variants, PDF/A, images', () {

@@ -13,6 +13,7 @@ import 'tools/repair_job.dart';
 import 'tools/rotate_job.dart';
 import 'tools/split_job.dart';
 import 'tools/stamp_jobs.dart';
+import 'tools/web_job.dart';
 
 /// The tools that run as a ToolJob: one engine task each in the plan
 /// ("Merge PDF: implement the merge ToolJob"). Organize, Mark up, Sign, Fill form
@@ -33,8 +34,8 @@ const List<ToolJob<Object?>> allToolJobs = [
   MergeJob(),
   OcrJob(),
   PageNumbersJob(),
-  PdfaJob(),
   Pdf2ImgJob(),
+  PdfaJob(),
   ProtectJob(),
   RepairJob(),
   RotateJob(),
@@ -42,6 +43,7 @@ const List<ToolJob<Object?>> allToolJobs = [
   TextJob(),
   UnlockJob(),
   WatermarkJob(),
+  WebJob(),
 ];
 
 /// ToolJobs by id.
