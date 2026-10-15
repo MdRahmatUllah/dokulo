@@ -2,12 +2,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:doc_tools/doc_tools.dart' show detectFramePage;
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/painting.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../components/dk_scan_button.dart';
 import 'scanner_camera.dart';
+import 'scanner_settings.dart';
 
 part 'scan_session.g.dart';
 
@@ -15,53 +18,137 @@ part 'scan_session.g.dart';
 /// frame's width and height (so the screen can draw it at any size).
 typedef DetectedQuad = List<Offset>;
 
-/// Finds the document in a preview frame. DK-0337 (OpenCV, both platforms)
-/// and DK-0336 (Vision on iOS) provide the real one; until then nothing is
-/// found and the user captures by hand.
+/// Finds the document in a preview frame, upright.
 typedef QuadDetector = Future<DetectedQuad?> Function(GreyFrame frame);
 
+/// doc_vision's OpenCV detector (DK-0337, both platforms) on a worker
+/// isolate; DK-0336 may swap in Vision on iOS.
 @riverpod
-QuadDetector quadDetector(Ref ref) =>
-    (_) async => null;
+QuadDetector quadDetector(Ref ref) => (frame) async {
+  final page = await detectFramePage(
+    frame.bytes,
+    frame.width,
+    frame.height,
+    rowStride: frame.rowStride,
+  );
+  if (page == null) return null;
+  return uprightQuad([
+    for (final c in page.corners) Offset(c.x, c.y),
+  ], frame.quarterTurns);
+};
+
+/// [quad] (0–1 of the sensor's frame) turned [quarterTurns] clockwise, as
+/// the upright preview shows it: still clockwise from its top-left corner.
+DetectedQuad uprightQuad(DetectedQuad quad, int quarterTurns) {
+  var q = quad;
+  for (var i = 0; i < quarterTurns % 4; i++) {
+    // (x, y) → (1 − y, x); the old bottom-left corner is the new top-left.
+    final turned = [for (final p in q) Offset(1 - p.dy, p.dx)];
+    q = [turned[3], turned[0], turned[1], turned[2]];
+  }
+  return q;
+}
 
 /// One captured page, as S2 reviews it: the photo on disk (so an unsaved
-/// scan survives the app being killed), the corners found at capture and
-/// the quarter turns the user rotated it by.
+/// scan survives the app being killed), the corners found at capture, the
+/// user's own crop (S2's crop mode) and the quarter turns the user rotated
+/// it by, and its filter (S2's filter mode).
 class ScannedPage {
-  const ScannedPage(this.id, this.path, {this.quad, this.turns = 0});
+  const ScannedPage(
+    this.id,
+    this.path, {
+    this.quad,
+    this.crop,
+    this.turns = 0,
+    this.filter,
+    this.brightness = 0,
+    this.contrast = 0,
+  });
 
   final String id;
   final String path;
+
+  /// Found at capture; null when nothing was.
   final DetectedQuad? quad;
+
+  /// The user's crop, in the same fractions; null: [quad], or the full
+  /// photo.
+  final DetectedQuad? crop;
   final int turns;
 
-  ScannedPage rotated() =>
-      ScannedPage(id, path, quad: quad, turns: (turns + 1) % 4);
+  /// The page's own filter; null: the scanner's default.
+  final ScanFilterChoice? filter;
+
+  /// The "Adjust" sliders, -0.5 to 0.5 (0: as the filter leaves it).
+  final double brightness, contrast;
+
+  /// The corners the page is cut at.
+  DetectedQuad get corners => crop ?? quad ?? fullPage;
+
+  static const DetectedQuad fullPage = [
+    Offset.zero,
+    Offset(1, 0),
+    Offset(1, 1),
+    Offset(0, 1),
+  ];
+
+  ScannedPage copyWith({
+    DetectedQuad? crop,
+    int? turns,
+    ScanFilterChoice? filter,
+    double? brightness,
+    double? contrast,
+  }) => ScannedPage(
+    id,
+    path,
+    quad: quad,
+    crop: crop ?? this.crop,
+    turns: turns ?? this.turns,
+    filter: filter ?? this.filter,
+    brightness: brightness ?? this.brightness,
+    contrast: contrast ?? this.contrast,
+  );
+
+  ScannedPage rotated() => copyWith(turns: (turns + 1) % 4);
+
+  static List<num>? _flat(DetectedQuad? q) => q == null
+      ? null
+      : [
+          for (final o in q) ...[o.dx, o.dy],
+        ];
+
+  static DetectedQuad? _quad(Object? json) {
+    final q = (json as List?)?.cast<num>();
+    // A quad has four corners; anything else is a damaged manifest.
+    return q == null || q.length != 8
+        ? null
+        : [
+            for (var i = 0; i + 1 < q.length; i += 2)
+              Offset(q[i].toDouble(), q[i + 1].toDouble()),
+          ];
+  }
 
   Map<String, Object?> toJson() => {
     'id': id,
     'path': path,
     'turns': turns,
-    if (quad case final q?)
-      'quad': [
-        for (final o in q) ...[o.dx, o.dy],
-      ],
+    'quad': ?_flat(quad),
+    'crop': ?_flat(crop),
+    'filter': ?filter?.name,
+    'brightness': brightness,
+    'contrast': contrast,
   };
 
-  static ScannedPage fromJson(Map<String, Object?> j) {
-    final q = (j['quad'] as List?)?.cast<num>();
-    return ScannedPage(
-      j['id']! as String,
-      j['path']! as String,
-      turns: (j['turns'] as int?) ?? 0,
-      quad: q == null
-          ? null
-          : [
-              for (var i = 0; i + 1 < q.length; i += 2)
-                Offset(q[i].toDouble(), q[i + 1].toDouble()),
-            ],
-    );
-  }
+  static ScannedPage fromJson(Map<String, Object?> j) => ScannedPage(
+    j['id']! as String,
+    j['path']! as String,
+    turns: (j['turns'] as int?) ?? 0,
+    quad: _quad(j['quad']),
+    crop: _quad(j['crop']),
+    filter: ScanFilterChoice.values.asNameMap()[j['filter']],
+    brightness: (j['brightness'] as num?)?.toDouble() ?? 0,
+    contrast: (j['contrast'] as num?)?.toDouble() ?? 0,
+  );
 }
 
 /// Where the scan in progress is kept: photos and a manifest.
@@ -73,6 +160,9 @@ abstract interface class ScanStore {
   Future<void> writeManifest(String json);
   Future<void> clear();
   bool exists(String path);
+
+  /// A photo's size in bytes (the Save sheet's estimates).
+  int length(String path);
 
   /// How a screen shows the photo at [path].
   ImageProvider image(String path);
@@ -123,6 +213,9 @@ class FileScanStore implements ScanStore {
   bool exists(String path) => File(path).existsSync();
 
   @override
+  int length(String path) => File(path).lengthSync();
+
+  @override
   ImageProvider image(String path) => FileImage(File(path));
 }
 
@@ -151,6 +244,9 @@ class MemoryScanStore implements ScanStore {
 
   @override
   bool exists(String path) => files.containsKey(path);
+
+  @override
+  int length(String path) => files[path]!.length;
   @override
   ImageProvider image(String path) => MemoryImage(files[path]!);
 }
@@ -188,13 +284,22 @@ class ScanSession extends _$ScanSession {
       ];
       _next = pages.length;
       state = pages;
-    } on FormatException {
-      // A manifest cut off mid-write: start over rather than fail.
+    } on Object {
+      // A manifest cut off mid-write, or damaged: start over rather than
+      // fail.
     }
   }
 
-  Future<void> _save() =>
-      _store.writeManifest(jsonEncode([for (final p in state) p.toJson()]));
+  /// Manifest writes one after the other (a slider calls this on every
+  /// tick), so the last state is the one on disk.
+  Future<void> _saving = Future.value();
+
+  Future<void> _save() {
+    final json = jsonEncode([for (final p in state) p.toJson()]);
+    return _saving = _saving
+        .catchError((Object _) {})
+        .then((_) => _store.writeManifest(json));
+  }
 
   Future<String> _write(Uint8List jpeg) =>
       _store.write('${DateTime.now().microsecondsSinceEpoch}-${_next++}', jpeg);
@@ -220,6 +325,75 @@ class ScanSession extends _$ScanSession {
 
   Future<void> rotate(int index) async {
     state = [...state]..[index] = state[index].rotated();
+    await _save();
+  }
+
+  /// Crop mode's Apply.
+  Future<void> setCrop(int index, DetectedQuad crop) async {
+    state = [...state]..[index] = state[index].copyWith(crop: crop);
+    await _save();
+  }
+
+  /// A page's own changes (the filter mode's).
+  Future<void> update(int index, ScannedPage page) async {
+    state = [...state]..[index] = page;
+    await _save();
+  }
+
+  /// "Apply to all pages": every page gets what is given. Returns the pages
+  /// as they were, for Undo ([restoreAll]).
+  Future<List<ScannedPage>> applyToAll({
+    DetectedQuad? crop,
+    int? turns,
+    ScanFilterChoice? filter,
+    double? brightness,
+    double? contrast,
+  }) async {
+    final before = state;
+    state = [
+      for (final p in state)
+        p.copyWith(
+          crop: crop,
+          turns: turns,
+          filter: filter,
+          brightness: brightness,
+          contrast: contrast,
+        ),
+    ];
+    await _save();
+    return before;
+  }
+
+  /// Every page but [id] turned a quarter more ("Apply to all pages" after
+  /// Rotate turned that one). Returns the pages as they were.
+  Future<List<ScannedPage>> rotateAllBut(String id) async {
+    final before = state;
+    state = [for (final p in state) p.id == id ? p : p.rotated()];
+    await _save();
+    return before;
+  }
+
+  /// Undo of [applyToAll] and [rotateAllBut]: each page still here (same
+  /// photo) gets its edits back; pages added, moved, deleted or retaken
+  /// since stay as they are.
+  Future<void> restoreAll(List<ScannedPage> pages) async {
+    final old = {for (final p in pages) p.id: p};
+    state = [
+      for (final p in state)
+        switch (old[p.id]) {
+          final o? when o.path == p.path => ScannedPage(
+            p.id,
+            p.path,
+            quad: p.quad,
+            crop: o.crop,
+            turns: o.turns,
+            filter: o.filter,
+            brightness: o.brightness,
+            contrast: o.contrast,
+          ),
+          _ => p,
+        },
+    ];
     await _save();
   }
 
@@ -249,6 +423,18 @@ class ScanSession extends _$ScanSession {
     await _store.clear();
   }
 }
+
+/// Picks photos to add to a scan (DK-0351): the system photo picker, which
+/// needs no library permission (PHPicker on iOS 14+, the photo picker on
+/// Android 13+). JPG, PNG, HEIC and WebP. Empty when the user cancels.
+typedef ScanImportPicker = Future<List<Uint8List>> Function();
+
+@riverpod
+ScanImportPicker scanImportPicker(Ref ref) =>
+    () async => [
+      for (final f in await FilePicker.pickFiles(type: FileType.image))
+        await f.readAsBytes(),
+    ];
 
 /// The scanner's mode (the mode switcher; the Scan button's long press).
 @riverpod
