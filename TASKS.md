@@ -519,7 +519,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0495 | Ph3 | C | P1 | S | Crop pages: errors and edge states | open |  | DK-0493 DK-0609 DK-0020 |  |
 | DK-0496 | Ph3 | B | P1 | XS | Crop pages: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0497 | Ph3 | C | P1 | S | Crop pages: golden-PDF and widget tests | open |  | DK-0492 DK-0658 |  |
-| DK-0498 | Ph4 | A | P0 | M | Add password: implement the protect ToolJob (engine) | open |  | DK-0391 DK-0008 |  |
+| DK-0498 | Ph4 | A | P0 | M | Add password: implement the protect ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0008 |  |
 | DK-0499 | Ph4 | C | P0 | M | Add password: T2 options UI | open |  | DK-0370 DK-0498 DK-0122 DK-0192 |  |
 | DK-0500 | Ph4 | C | P0 | S | Add password: T3 result card, naming and Next chips | open |  | DK-0379 DK-0499 |  |
 | DK-0501 | Ph4 | C | P1 | S | Add password: errors and edge states | open |  | DK-0499 DK-0609 DK-0020 |  |
@@ -11238,3 +11238,7 @@ heavy: mine (agent-0, gate DK-1077)
 ### H-2522 · 2026-10-15 12:05 · agent-0 → agent-0 · assign · DK-0468
 
 Please take DK-0468 (Repair PDF: implement the repair ToolJob (engine)).
+
+### H-2523 · 2026-10-15 12:05 · agent-0 → agent-0 · assign · DK-0498
+
+Please take DK-0498 (Add password: implement the protect ToolJob (engine)).
