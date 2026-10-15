@@ -323,6 +323,63 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
     return null;
   }
 
+  /// What the page shows: its annotations, the one being moved where the
+  /// finger is, and the stroke or shape being drawn.
+  List<PdfAnnot> _shown() => [
+    for (final a in _e.annotsOn(widget.page))
+      if (!(_drag == _Drag.move && _e.selected?.id == a.id)) a.annot,
+    if (_drag == _Drag.move && _e.selectedAnnot != null)
+      translate(
+        _e.selectedAnnot!.annot,
+        _last!.x - _start!.x,
+        _last!.y - _start!.y,
+      ),
+    if (_drag == _Drag.draw && _e.tool == EditTool.pen && _stroke.isNotEmpty)
+      InkAnnot(
+        [_stroke],
+        width: widget.style.penWidth,
+        color: widget.style.penColor,
+      ),
+    if (_drag == _Drag.draw &&
+        _e.tool == EditTool.highlighter &&
+        _stroke.isNotEmpty)
+      InkAnnot(
+        [_stroke],
+        width: widget.style.highlighterWidth,
+        color: widget.style.highlighterColor,
+      ),
+    if (_drag == _Drag.draw && _e.tool == EditTool.shapes && _last != null)
+      _shape(widget.style, _start!, _last!),
+  ];
+
+  /// A signature's image (and its date) where it sits on the page.
+  List<Widget> _stamp(StampAnnot a, Size size) {
+    final t = context.tokens;
+    final scale = size.width / widget.pageSize.width;
+    return [
+      Positioned.fromRect(
+        rect: _toWidget(a.rect, size),
+        child: IgnorePointer(child: Image.memory(a.png, fit: BoxFit.fill)),
+      ),
+      if ((a.date, a.dateBox) case (final date?, final box?))
+        Positioned.fromRect(
+          rect: _toWidget(box, size),
+          child: IgnorePointer(
+            child: FittedBox(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                date,
+                style: TextStyle(
+                  fontSize: a.dateSize * scale,
+                  color: t.markup.black, // as it's written: black on the page
+                ),
+              ),
+            ),
+          ),
+        ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, c) {
@@ -346,37 +403,7 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
           builder: (context, _) => CustomPaint(
             size: size,
             painter: AnnotationPainter(
-              annots: [
-                for (final a in _e.annotsOn(widget.page))
-                  if (!(_drag == _Drag.move && _e.selected?.id == a.id))
-                    a.annot,
-                if (_drag == _Drag.move && _e.selectedAnnot != null)
-                  translate(
-                    _e.selectedAnnot!.annot,
-                    _last!.x - _start!.x,
-                    _last!.y - _start!.y,
-                  ),
-                if (_drag == _Drag.draw &&
-                    _e.tool == EditTool.pen &&
-                    _stroke.isNotEmpty)
-                  InkAnnot(
-                    [_stroke],
-                    width: widget.style.penWidth,
-                    color: widget.style.penColor,
-                  ),
-                if (_drag == _Drag.draw &&
-                    _e.tool == EditTool.highlighter &&
-                    _stroke.isNotEmpty)
-                  InkAnnot(
-                    [_stroke],
-                    width: widget.style.highlighterWidth,
-                    color: widget.style.highlighterColor,
-                  ),
-                if (_drag == _Drag.draw &&
-                    _e.tool == EditTool.shapes &&
-                    _last != null)
-                  _shape(widget.style, _start!, _last!),
-              ],
+              annots: _shown(),
               selected: switch ((_drag, _e.selectedAnnot)) {
                 (_Drag.move, final s?) => translate(
                   s.annot,
@@ -400,6 +427,9 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
         builder: (context, _) => Stack(
           clipBehavior: Clip.none,
           children: [
+            // Signatures are images: drawn as widgets under the gestures.
+            for (final a in _shown())
+              if (a is StampAnnot) ..._stamp(a, size),
             listener,
             if (_e.selectedAnnot case final sel? when _pointer == null)
               DkAnnotBar.over(
@@ -572,7 +602,8 @@ class AnnotationPainter extends CustomPainter {
               lines,
             );
           }
-        case OtherAnnot():
+        // A signature is a widget over the page (its image), not painted.
+        case OtherAnnot() || StampAnnot():
           break;
       }
     }

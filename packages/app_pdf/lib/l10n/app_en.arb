@@ -2895,5 +2895,7 @@
   "settings_language_caption": "Changes immediately. No restart needed.",
   "@settings_language_caption": {
     "description": "M3 Language: under the choices (DK-0575)."
-  }
+  },
+  "sign_toast_signed": "Signed on page {page}",
+  "@sign_toast_signed": {"description": "V2 after Done with a signature placed (DK-0519; UI spec \u00a721).", "placeholders": {"page": {"type": "int"}}}
 }
