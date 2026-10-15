@@ -646,7 +646,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | done | agent-0 | DK-0192 DK-0190 | #1215 |
 | DK-0623 | Ph3 | B | P0 | S | ARB strings: Common actions | assigned | agent-1 | DK-0009 |  |
 | DK-0624 | Ph3 | B | P0 | S | ARB strings: Common labels and toasts | assigned | agent-1 | DK-0009 |  |
-| DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | open |  | DK-0009 |  |
+| DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | assigned | agent-1 | DK-0009 |  |
 | DK-0626 | Ph7 | B | P0 | S | ARB strings: Onboarding and Home | open |  | DK-0009 |  |
 | DK-0627 | Ph3 | B | P0 | S | ARB strings: Files, trash, locked folder | open |  | DK-0009 |  |
 | DK-0628 | Ph3 | B | P0 | S | ARB strings: Viewer and edit mode | open |  | DK-0009 |  |
@@ -11178,3 +11178,7 @@ Please take DK-0623 (ARB strings: Common actions).
 ### H-2507 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0624
 
 Please take DK-0624 (ARB strings: Common labels and toasts).
+
+### H-2508 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0625
+
+Please take DK-0625 (ARB strings: Tool names, buttons, suffixes).
