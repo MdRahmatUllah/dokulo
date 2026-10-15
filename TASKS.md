@@ -648,7 +648,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0624 | Ph3 | B | P0 | S | ARB strings: Common labels and toasts | assigned | agent-1 | DK-0009 |  |
 | DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | assigned | agent-1 | DK-0009 |  |
 | DK-0626 | Ph7 | B | P0 | S | ARB strings: Onboarding and Home | assigned | agent-1 | DK-0009 |  |
-| DK-0627 | Ph3 | B | P0 | S | ARB strings: Files, trash, locked folder | open |  | DK-0009 |  |
+| DK-0627 | Ph3 | B | P0 | S | ARB strings: Files, trash, locked folder | assigned | agent-1 | DK-0009 |  |
 | DK-0628 | Ph3 | B | P0 | S | ARB strings: Viewer and edit mode | open |  | DK-0009 |  |
 | DK-0629 | Ph3 | B | P0 | S | ARB strings: Scanner | open |  | DK-0009 |  |
 | DK-0630 | Ph3 | B | P0 | S | ARB strings: Tool shell and tools | open |  | DK-0009 |  |
@@ -11186,3 +11186,7 @@ Please take DK-0625 (ARB strings: Tool names, buttons, suffixes).
 ### H-2509 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0626
 
 Please take DK-0626 (ARB strings: Onboarding and Home).
+
+### H-2510 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0627
+
+Please take DK-0627 (ARB strings: Files, trash, locked folder).
