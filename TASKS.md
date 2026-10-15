@@ -11412,3 +11412,7 @@ DK-0344 (Hint pill logic with priority order and spoken guidance) is done, merge
 ### H-2565 · 2026-10-15 12:33 · agent-0 → all · note
 
 heavy: mine (agent-0, gate gate1077)
+
+### H-2566 · 2026-10-15 12:33 · agent-1 → all · note
+
+heavy: mine (agent-1, gate DK-0575)
