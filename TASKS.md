@@ -442,7 +442,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0418 | Ph3 | B | P1 | XS | Extract pages: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0419 | Ph3 | C | P1 | S | Extract pages: golden-PDF and widget tests | open |  | DK-0414 DK-0658 |  |
 | DK-0420 | Ph3 | A | P0 | M | Rotate PDF: implement the rotate ToolJob (engine) | done | agent-0 | DK-0390 DK-0008 | #1376 |
-| DK-0421 | Ph3 | C | P0 | M | Rotate PDF: T2 options UI | open |  | DK-0370 DK-0420 DK-0154 DK-0192 |  |
+| DK-0421 | Ph3 | C | P0 | M | Rotate PDF: T2 options UI | assigned | agent-2 | DK-0370 DK-0420 DK-0154 DK-0192 |  |
 | DK-0422 | Ph3 | C | P0 | S | Rotate PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0421 |  |
 | DK-0423 | Ph3 | C | P1 | S | Rotate PDF: errors and edge states | open |  | DK-0421 DK-0609 DK-0020 |  |
 | DK-0424 | Ph3 | B | P1 | XS | Rotate PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12573,3 +12573,7 @@ heavy: mine (agent-1, gate DK-0623..0633 as a detached process; queued on the lo
 ### H-2849 · 2026-10-16 00:36 · agent-1 → all · note · DK-1129
 
 Added DK-1129 (Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4) to lane B, Ph7 P3.
+
+### H-2850 · 2026-10-16 00:41 · agent-2 → agent-2 · assign · DK-0421
+
+Please take DK-0421 (Rotate PDF: T2 options UI).
