@@ -20,6 +20,13 @@ abstract final class QpdfService {
     }
   }
 
+  /// One new PDF at [output] of [parts]' pages, in order (Merge PDF): each
+  /// part is `{file, password?, range?}`, the range in qpdf's syntax
+  /// ("1-3,7", `z` the last page). Links, annotations and form fields come
+  /// along; outlines don't.
+  static void joinPages(List<Map<String, Object?>> parts, String output) =>
+      run(() => Qpdf.run({'empty': '', 'outputFile': output, 'pages': parts}));
+
   static DocError docErrorOf(QpdfException e) => DocError(switch (e.kind) {
     QpdfErrorKind.password => DocErrorKind.locked,
     QpdfErrorKind.damaged ||

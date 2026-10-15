@@ -8,9 +8,13 @@ export 'src/signature_photo.dart';
 export 'src/startup.dart';
 export 'src/tool_job.dart';
 export 'src/tools/compress_job.dart';
+export 'src/tools/extract_job.dart';
 export 'src/tools/img2pdf_job.dart';
+export 'src/tools/merge_job.dart';
 export 'src/tools/ocr_job.dart';
 export 'src/tools/output_name.dart';
+export 'src/tools/rotate_job.dart';
+export 'src/tools/split_job.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
 const int docToolsLayer = 2;
