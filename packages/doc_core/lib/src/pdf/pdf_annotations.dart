@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
+import 'package:image/image.dart' as img;
 import 'package:pdfium_dart/pdfium_dart.dart' as fpdf;
 import 'package:pdfrx_engine/pdfrx_engine.dart' show PdfrxEntryFunctions;
 
@@ -114,6 +115,50 @@ final class NoteAnnot extends PdfAnnot {
   @override
   Box get bounds =>
       (left: at.x, top: at.y, right: at.x + iconSize, bottom: at.y - iconSize);
+}
+
+/// A signature (DK-0328): the signature's image in [rect], and the date
+/// ([date], already in the user's format) to its right, grouped with it.
+/// Written into the page's content (an image object and a text object), so
+/// every reader shows it and it prints; it isn't an annotation once saved.
+final class StampAnnot extends PdfAnnot {
+  const StampAnnot(this.rect, this.png, {this.date, this.dateSize = 10})
+    : super(color: 0xFF000000);
+
+  final Box rect;
+
+  /// The signature as PNG (transparent around the ink).
+  final Uint8List png;
+  final String? date;
+
+  /// The date's font size, in points.
+  final double dateSize;
+
+  /// The gap between the signature and the date, in points.
+  static const dateGap = 6.0;
+
+  /// The date's box: right of the signature, its baseline near the
+  /// signature's bottom (Helvetica's digits are about 0.55 em wide).
+  Box? get dateBox => switch (date) {
+    final d? => (
+      left: rect.right + dateGap,
+      top: rect.bottom + dateSize * 1.2,
+      right: rect.right + dateGap + d.length * dateSize * 0.56,
+      bottom: rect.bottom,
+    ),
+    null => null,
+  };
+
+  @override
+  Box get bounds => switch (dateBox) {
+    final d? => (
+      left: rect.left,
+      top: rect.top > d.top ? rect.top : d.top,
+      right: d.right,
+      bottom: rect.bottom,
+    ),
+    null => rect,
+  };
 }
 
 /// An annotation Dokulo doesn't edit (a link, a stamp, a form widget): kept
@@ -391,7 +436,19 @@ Uint8List _apply((String, String?, Map<int, PageAnnotEdits>) m) {
           }
         }
         for (final a in e.add) {
-          _create(pdfium, page, a, arena);
+          if (a is StampAnnot) {
+            _placeStamp(pdfium, doc, page, a, arena);
+          } else {
+            _create(pdfium, page, a, arena);
+          }
+        }
+        if (e.add.any((a) => a is StampAnnot) &&
+            pdfium.FPDFPage_GenerateContent(page) == 0) {
+          throw DocError(
+            DocErrorKind.unexpected,
+            page: p,
+            detail: 'FPDFPage_GenerateContent failed',
+          );
         }
       } finally {
         pdfium.FPDF_ClosePage(page);
@@ -399,6 +456,87 @@ Uint8List _apply((String, String?, Map<int, PageAnnotEdits>) m) {
     }
     return saveRawDocument(pdfium, doc);
   });
+}
+
+/// A signature into the page's content: its image (BGRA, so the
+/// transparency stays) scaled to [StampAnnot.rect], then the date.
+void _placeStamp(
+  fpdf.PDFium pdfium,
+  fpdf.FPDF_DOCUMENT doc,
+  fpdf.FPDF_PAGE page,
+  StampAnnot stamp,
+  Arena arena,
+) {
+  final decoded = img.decodePng(stamp.png);
+  if (decoded == null) {
+    throw const DocError(DocErrorKind.unexpected, detail: 'not a PNG');
+  }
+  final rgba = decoded.convert(format: img.Format.uint8, numChannels: 4);
+  final w = rgba.width, h = rgba.height;
+  final bgra = arena<Uint8>(w * h * 4);
+  final pixels = bgra.asTypedList(w * h * 4);
+  var i = 0;
+  for (final px in rgba) {
+    pixels[i++] = px.b.toInt();
+    pixels[i++] = px.g.toInt();
+    pixels[i++] = px.r.toInt();
+    pixels[i++] = px.a.toInt();
+  }
+  final bitmap = pdfium.FPDFBitmap_CreateEx(
+    w,
+    h,
+    fpdf.FPDFBitmap_BGRA,
+    bgra.cast(),
+    w * 4,
+  );
+  final obj = pdfium.FPDFPageObj_NewImageObj(doc);
+  final pages = arena<fpdf.FPDF_PAGE>()..value = page;
+  try {
+    final r = stamp.rect;
+    if (pdfium.FPDFImageObj_SetBitmap(pages, 1, obj, bitmap) == 0 ||
+        pdfium.FPDFImageObj_SetMatrix(
+              obj,
+              r.right - r.left,
+              0,
+              0,
+              r.top - r.bottom,
+              r.left,
+              r.bottom,
+            ) ==
+            0) {
+      pdfium.FPDFPageObj_Destroy(obj);
+      throw const DocError(
+        DocErrorKind.unexpected,
+        detail: 'the signature image could not be set',
+      );
+    }
+    pdfium.FPDFPage_InsertObject(page, obj);
+  } finally {
+    pdfium.FPDFBitmap_Destroy(bitmap);
+  }
+  if (stamp.dateBox case final box?) {
+    final text = pdfium.FPDFPageObj_NewTextObj(
+      doc,
+      'Helvetica'.toNativeUtf8(allocator: arena).cast(),
+      stamp.dateSize,
+    );
+    pdfium.FPDFText_SetText(
+      text,
+      stamp.date!.toNativeUtf16(allocator: arena).cast(),
+    );
+    pdfium.FPDFPageObj_SetFillColor(text, 0, 0, 0, 255);
+    // Its baseline a little above the box's bottom (descenders).
+    pdfium.FPDFPageObj_Transform(
+      text,
+      1,
+      0,
+      0,
+      1,
+      box.left,
+      box.bottom + stamp.dateSize * 0.2,
+    );
+    pdfium.FPDFPage_InsertObject(page, text);
+  }
 }
 
 void _setColor(
@@ -432,6 +570,10 @@ void _create(
     OtherAnnot() => throw const DocError(
       DocErrorKind.unexpected,
       detail: 'other annotations are kept, not created',
+    ),
+    StampAnnot() => throw const DocError(
+      DocErrorKind.unexpected,
+      detail: 'a signature goes into the content, not an annotation',
     ),
   };
   final a = pdfium.FPDFPage_CreateAnnot(page, subtype);
@@ -506,7 +648,7 @@ void _create(
         );
       case NoteAnnot():
         _setColor(pdfium, a, color, annot.color);
-      case OtherAnnot():
+      case OtherAnnot() || StampAnnot():
         break;
     }
   } finally {

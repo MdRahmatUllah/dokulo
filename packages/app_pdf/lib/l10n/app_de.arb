@@ -770,5 +770,15 @@
   "viewer_share_failed": "Das ließ sich nicht zum Teilen vorbereiten.",
   "options_eraser_mode": "Modus",
   "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt.",
-  "viewer_thumbnails": "Miniaturansichten"
+  "viewer_thumbnails": "Miniaturansichten",
+  "viewer_markup_failed": "Die Markierung ließ sich nicht hinzufügen. Die Datei ist unverändert.",
+  "sign_toast_signed": "Auf Seite {page} unterschrieben",
+  "form_lock_title": "Formularwerte sperren?",
+  "form_flatten": "Formular reduzieren",
+  "form_flatten_desc": "Felder lassen sich danach nicht mehr bearbeiten",
+  "form_no_fields_title": "Dieses PDF hat keine ausfüllbaren Felder.",
+  "form_no_fields_body": "Mit Markieren kannst du überall Text hinzufügen.",
+  "form_xfa_body": "Es nutzt XFA, ein älteres Formularformat. Du kannst es trotzdem lesen und markieren.",
+  "form_open_read_only": "Schreibgeschützt öffnen",
+  "edit_save_failed": "Speichern hat nicht geklappt. Die Datei ist unverändert."
 }
