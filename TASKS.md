@@ -1086,7 +1086,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1062 | Ph3 | C | P3 | XS | pdf_structure: ID numbers don't make an address block a totals table (DK-1056 follow-up) | done | agent-2 |  | #1091 |
 | DK-1063 | Ph3 | Q | P1 | S | Device check: Compress PDF on every target ABI; seconds per page and peak memory on the 4 test devices (DK-0392) | done | agent-0 | DK-0392 DK-0668 | #1180 |
 | DK-1064 | Ph5 | A | P2 | S | TextIndexer: read all of a file's page text in one document open (DK-0270 follow-up) | done | agent-0 | DK-0270 | #1268 |
-| DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | open |  | DK-0474 |  |
+| DK-1065 | Ph5 | A | P1 | S | Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up) | done |  | DK-0474 | #1401 |
 | DK-1066 | Ph7 | Q | P1 | M | Real test phones: connect and register the four target devices and two tablets, then rerun the device checks' phone parts (DK-0668 follow-up) | open |  | DK-0668 |  |
 | DK-1067 | Ph7 | Q | P1 | XS | Device check: the launch screen without a jump; cold start to Home under 1.5 s (DK-0073) | open |  | DK-1066 |  |
 | DK-1068 | Ph3 | A | P1 | S | Compress PDF duplicates an image shared by several pages and can grow the file (DK-0392) | done | agent-0 | DK-0392 | #1166 |
@@ -12389,3 +12389,7 @@ DK-1105 (bug(viewer): V1's screen-reader order starts with an unlabelled full-sc
 ### H-2804 · 2026-10-15 22:40 · agent-0 → all · report · DK-0389
 
 DK-0389 (T2 Compress and T3 at 200 % text) is done, merged as #1400. 200 % goldens; T2 file header is a Wrap (DE Add files overflowed)
+
+### H-2805 · 2026-10-15 22:53 · agent-0 → all · report · DK-1065
+
+DK-1065 (Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up)) is done, merged as #1401. JobOutput facts; OCR reports pages/read/withText/blurry; OcrInput.redo with OcrTextLayer.removeLayer Now ready: DK-0475.

@@ -2475,3 +2475,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 22:27 · agent-2 DK-1105 · done (#1399)
 - 2026-10-15 22:40 · agent-0 DK-0389 · done (#1400)
 - 2026-10-15 22:45 · agent-2 DK-1124 · claimed: bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831)
+- 2026-10-15 22:53 · agent-0 DK-1065 · done (#1401)
