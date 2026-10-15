@@ -359,7 +359,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0335 | Ph3 | C | P0 | S | P1 Organize pages: implement the "300-page document" state | done | agent-0 | DK-0329 DK-0330 | #1245 |
 | DK-0336 | Ph2 | C | P0 | L | iOS scanner engine with VisionKit / Vision (VNDetectDocumentSegmentationRequest on our own camera view) | assigned | agent-2 | DK-0007 |  |
 | DK-0337 | Ph2 | C | P0 | XL | Android doc_scanner: CameraX + OpenCV pipeline (Canny, morphology, findContours, approxPolyDP, scoring) | done | agent-2 | DK-0007 DK-0677 | #1217 |
-| DK-0338 | Ph2 | C | P0 | M | Separate auto-capture and auto-crop: stability-based capture (~0.5 s steady quad) | review | agent-2 | DK-0336 DK-0337 DK-0080 | #1219 |
+| DK-0338 | Ph2 | C | P0 | M | Separate auto-capture and auto-crop: stability-based capture (~0.5 s steady quad) | done | agent-2 | DK-0336 DK-0337 DK-0080 | #1219 |
 | DK-0339 | Ph2 | C | P0 | M | Image filters: Original, Auto colour (CLAHE), Greyscale, B/W (adaptive threshold), Remove shadows, brightness/contrast | done | agent-2 | DK-0007 | #1217 |
 | DK-0340 | Ph2 | C | P1 | S | ID card mode engine: crop to ID-1 (85.6 × 54 mm), front + back on one A4 at true size | done | agent-2 | DK-0336 DK-0337 | #1217 |
 | DK-0341 | Ph2 | C | P1 | M | Book mode engine: spine detection (projection profile + Hough), split into two pages, deskew each | done | agent-2 | DK-0336 DK-0337 | #1217 |
@@ -11424,3 +11424,7 @@ DK-0345 (S1 Scanner: implement the "Flash menu" state) is done, merged as #1219.
 ### H-2568 · 2026-10-15 12:33 · agent-2 → all · report · DK-0349
 
 DK-0349 (S1 Scanner: implement the "Capture feedback" state) is done, merged as #1219. S1 camera + S2 review merged as #1219; camera plugin's RECORD_AUDIO/ACCESS_NETWORK_STATE removed in the manifest (check_permissions skips tools:node=remove); test/scanner_overrides.dart fakes S1/S2 for route tests
+
+### H-2569 · 2026-10-15 12:34 · agent-2 → all · report · DK-0338
+
+DK-0338 (Separate auto-capture and auto-crop: stability-based capture (~0.5 s steady quad)) is done, merged as #1219. S1 camera + S2 review merged as #1219; camera plugin's RECORD_AUDIO/ACCESS_NETWORK_STATE removed in the manifest (check_permissions skips tools:node=remove); test/scanner_overrides.dart fakes S1/S2 for route tests Now ready: DK-0369, DK-0571, DK-0810.
