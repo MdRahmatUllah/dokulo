@@ -29,13 +29,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pdfrx/pdfrx.dart';
 
 // Visual QA (DK-0838, DK-0842, DK-0843, DK-0844, DK-0847; DK-0845, DK-0846,
-// DK-0855, DK-0856; DK-0853, DK-0854, DK-0857): the T2, X2 and T3 frames of
-// 12-tool-shell (t2empty, lockedrow, btnloading, progress, failure;
+// DK-0855, DK-0856; DK-0853, DK-0854, DK-0857): the T2, X2 and T3 frames
+// of 12-tool-shell (t2empty, lockedrow, btnloading, progress, failure;
 // minibar, canceldlg, discard, aftersave; savemenu, replace, replaced),
 // rendered by the real screens in each state at 393 × 852. The goldens
 // sit next to the frames' screenshots in docs/qa/tool-shell/; the findings
 // are in docs/qa/design-system.md. A tool's own options (Compress's levels)
-// come with its task (DK-0463), so the boards show the shell.
+// come with its task (DK-0463), so the boards show the shell. DK-0972 adds
+// T3 on the small tablet (24-tablet, 820 × 1180; frames in docs/qa/tablet/).
 
 String fixture(String name) =>
     '${Directory.current.path}/../../test/fixtures/$name';
@@ -454,8 +455,13 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
     });
 
-    Future<void> pumpT3(WidgetTester tester, Duration took) async {
-      tester.view.physicalSize = const Size(393, 852);
+    Future<void> pumpT3(
+      WidgetTester tester,
+      Duration took, {
+      Size size = const Size(393, 852),
+      double textScale = 1,
+    }) async {
+      tester.view.physicalSize = size;
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
       final id = await file(
@@ -501,11 +507,28 @@ void main() {
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             home: const ToolResultScreen(toolId: 'compress'),
+            builder: (context, child) => MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(textScale)),
+              child: child!,
+            ),
           ),
         ),
       );
       await settle(tester);
     }
+
+    // DK-0972: 24-tablet/tablet-compress-result-portrait, the small tablet.
+    testWidgets('tablet-compress-result-portrait, $theme', (tester) async {
+      await pumpT3(tester, Duration.zero, size: const Size(820, 1180));
+      await golden(tester, 'tablet_result_portrait_$theme');
+    });
+
+    // DK-0981: 27-accessibility/text-200-percent, "T3 Compress – result".
+    testWidgets('text-200-percent T3, $theme', (tester) async {
+      await pumpT3(tester, Duration.zero, textScale: 2);
+      await golden(tester, 'result_200_$theme');
+    });
 
     testWidgets("discard, $theme: closing a long job's unsaved result", (
       tester,

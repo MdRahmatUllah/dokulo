@@ -15,6 +15,7 @@ so the layout is what they check; the copy is the phone's.
 | DK-0961 | `24-tablet/tablet-tools-landscape` | Match |
 | DK-0962 | `24-tablet/tablet-tools-portrait` | Match, 1 approved |
 | DK-0964 | `24-tablet/tablet-files-portrait` | Match, 2 approved |
+| DK-0972 | `24-tablet/tablet-compress-result-portrait` | Match, 3 approved, below |
 
 What matches: the navigation rail from 840 dp (DK-0168); Home's tools 6
 across in portrait and 8 in landscape, Recent in 2 columns in portrait and
@@ -35,3 +36,24 @@ Approved:
 - Files in portrait keeps the Locked folder and Recently deleted rows
   (§16.1); the frame starts with the folders. Its folder tiles are the 3 : 4
   tiles of §11.2, as on phones ([files-root.md](files-root.md)).
+
+## T3 on the small tablet (DK-0972)
+
+Board: `tool_shell_tablet_result_portrait_<theme>` in
+`test/qa/tool_shell_test.dart` (the real T3 after Compress, 820 × 1180);
+frames: `tablet-compress-result-portrait-<theme>.png` in [tablet/](tablet/)
+(the frame is 820 × 1180; read its layout from the HTML, the shot is offset).
+Matches: one 640-wide column centred (§30, `ToolLayout`), the result card,
+File name, Save to with its chevron, the action bar with Open over the split
+Save at the column's width. Approved:
+
+- The top bar is × and the tool's name, as §20.4 row 1 and the phone T3
+  frames; the tablet frame adds the tool icon and a More button.
+- No "Processed on this tablet" line: §20.4 has none on T3, nor do the phone
+  T3 frames (the line is T2's, `privacy_line_tool_tablet`).
+- The preview strip (§20.4 row 3) is there; the tablet frame leaves it out.
+  Spec wins.
+
+Not on the board: the Next chips (Add password, Share) come with Compress's
+own definition (DK-0463: the board's test tool lists no next tools), and
+Share beside Open with DK-1077, as on the phone (`design-system.md`).
