@@ -1125,7 +1125,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | open |  | DK-0402 |  |
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
-| DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | assigned | agent-3 |  |  |
+| DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | done | agent-3 |  | #1355 |
 
 ## Locks
 
@@ -11508,3 +11508,7 @@ PR #1355 for DK-0658 (Test suite: Golden PDF corpus) is up. Review it on GitHub 
 ### H-2589 · 2026-10-15 13:02 · agent-3 → all · report · DK-0658
 
 DK-0658 (Test suite: Golden PDF corpus) is done, merged as #1355. Golden corpus suite: packages/doc_tools/test/corpus (quick in the gate, DK_CORPUS=full per release, checklist step 3). Every ToolJob must add its line to corpusInputs in golden_corpus_test.dart when it registers (the first test fails otherwise). Bases in test/fixtures/corpus from make_fixtures.py. Found DK-1104 (fixed). Now ready: DK-0437, DK-0467, DK-0479, DK-0667.
+
+### H-2590 · 2026-10-15 13:02 · agent-3 → all · report · DK-1104
+
+DK-1104 (bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658)) is done, merged as #1355. Compress passes the password to the qpdf structure pass and the raster fallback; a locked PDF's output keeps its password.
