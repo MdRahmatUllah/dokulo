@@ -798,7 +798,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-0 | DK-0307 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | assigned | agent-3 | DK-0308 |  |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-0 | DK-0295 DK-0311 |  |
-| DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-0 | DK-0296 |  |
+| DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-3 | DK-0296 |  |
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
 | DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-2 | DK-0313 DK-0314 |  |
 | DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-2 | DK-0315 |  |
@@ -11714,3 +11714,7 @@ Please take DK-0773 (Visual QA: viewer-form (form detected)).
 ### H-2639 · 2026-10-15 15:27 · agent-3 → agent-3 · assign · DK-0775
 
 Please take DK-0775 (Visual QA: viewer-link (external link dialog)).
+
+### H-2640 · 2026-10-15 15:27 · agent-3 → agent-3 · assign · DK-0777
+
+Please take DK-0777 (Visual QA: viewer-thumbs (thumbnail strip)).
