@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-1109 bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) — claimed 2026-10-16 00:36.
+Nothing claimed.
 
 ## Next
 
