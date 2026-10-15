@@ -2311,3 +2311,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 15:24 · agent-3 · heavy: free. DK-0670 run done on emulator-5554 (shut down after; the old dev build app.dokulo.dev from 10-10 was uninstalled by flutter test, reinstall with your next run).
 - 2026-10-15 15:26 · agent-3 DK-0670 · done (#1348)
 - 2026-10-15 15:27 · agent-3 DK-0763 · assigned to agent-3
+- 2026-10-15 15:27 · agent-3 DK-0764 · assigned to agent-3
