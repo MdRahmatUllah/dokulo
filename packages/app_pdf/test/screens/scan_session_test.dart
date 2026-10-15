@@ -2,10 +2,21 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:app_pdf/screens/s1_scanner/scanner_camera.dart';
+import 'package:flutter/services.dart' show DeviceOrientation;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('frame turns: Android takes the device turn off the sensor turn; '
+      'iOS frames come upright', () {
+    expect(frameTurns(90, DeviceOrientation.portraitUp, ios: false), 1);
+    expect(frameTurns(90, DeviceOrientation.landscapeLeft, ios: false), 0);
+    expect(frameTurns(90, DeviceOrientation.landscapeRight, ios: false), 2);
+    expect(frameTurns(270, DeviceOrientation.portraitUp, ios: false), 3);
+    expect(frameTurns(90, DeviceOrientation.portraitUp, ios: true), 0);
+  });
+
   test('a quad from a landscape sensor turns upright, top-left first', () {
     // A page in the sensor frame's left half, as a phone held upright sees
     // it in the preview's top half.

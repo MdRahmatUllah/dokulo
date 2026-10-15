@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:io' show Platform;
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:flutter/services.dart' show DeviceOrientation;
 import 'package:flutter/widgets.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -98,6 +100,7 @@ class PluginScannerCamera implements ScannerCamera {
     }
     _controller = c;
     _clock.start();
+    final sensor = back.first.sensorOrientation;
     await c.startImageStream((image) {
       // The screen drops frames while its detector is busy.
       if (!_frames.hasListener) return;
@@ -109,7 +112,11 @@ class PluginScannerCamera implements ScannerCamera {
           image.height,
           rowStride: y.bytesPerRow,
           time: _clock.elapsed,
-          quarterTurns: back.first.sensorOrientation ~/ 90,
+          quarterTurns: frameTurns(
+            sensor,
+            c.value.deviceOrientation,
+            ios: Platform.isIOS,
+          ),
         ),
       );
     });
@@ -162,3 +169,20 @@ class PluginScannerCamera implements ScannerCamera {
 /// A new camera for each scanner screen (it is opened and closed with it).
 @riverpod
 ScannerCamera scannerCamera(Ref ref) => PluginScannerCamera();
+
+/// Clockwise quarter turns from a back-camera frame to the screen as the
+/// device is held. Android streams frames as the sensor lies ([sensor]
+/// degrees, usually 90), so the device's own turn is taken off; on iOS the
+/// plugin streams them already turned to the device: none.
+/// ponytail: the iOS half is the plugin's documented behaviour; checked on
+/// an iPhone with the Mac tasks (Real-device checks).
+int frameTurns(int sensor, DeviceOrientation device, {required bool ios}) {
+  if (ios) return 0;
+  final held = switch (device) {
+    DeviceOrientation.portraitUp => 0,
+    DeviceOrientation.landscapeLeft => 90,
+    DeviceOrientation.portraitDown => 180,
+    DeviceOrientation.landscapeRight => 270,
+  };
+  return ((sensor - held + 360) % 360) ~/ 90;
+}
