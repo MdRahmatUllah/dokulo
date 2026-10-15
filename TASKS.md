@@ -837,7 +837,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | assigned | agent-3 | DK-0340 |  |
 | DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | assigned | agent-3 | DK-0341 DK-0347 |  |
 | DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | assigned | agent-3 | DK-0348 |  |
-| DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 |  |
+| DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 DK-1121 |  |
 | DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | assigned | agent-3 | DK-0344 |  |
 | DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | assigned | agent-3 | DK-0344 |  |
 | DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | assigned | agent-3 | DK-0344 |  |
@@ -1142,6 +1142,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
 | DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
 | DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | open |  |  |  |
+| DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | open |  |  |  |
 
 ## Locks
 
@@ -12284,3 +12285,7 @@ Added DK-1119 (bug(tool-shell): T2's 'More options' row is drawn in primary blue
 ### H-2779 · 2026-10-15 17:33 · agent-3 → all · note · DK-1120
 
 Added DK-1120 (bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806)) to lane C, Ph7 P1. It blocks DK-0806 DK-0807.
+
+### H-2780 · 2026-10-15 17:33 · agent-3 → all · note · DK-1121
+
+Added DK-1121 (bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816)) to lane C, Ph7 P3. It blocks DK-0816.
