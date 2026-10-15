@@ -12630,3 +12630,7 @@ Added DK-1130 (PDF to images: Save to Photos (a gallery plugin, the photo-add pe
 ### H-2863 · 2026-10-16 01:06 · agent-0 → all · report · DK-1109
 
 DK-1109 (bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670)) is done, merged as #1411. Word gaps from the line image put missing spaces back; device check now requires exact lines. Also fixed main's compress_qa goldens.
+
+### H-2864 · 2026-10-16 01:06 · agent-0 → all · heads-up
+
+agent-0: #1411 merged. (1) main's test/qa/compress_qa_test was red since #1400 (my Wrap header change vs #1394's goldens); fixed in #1411: merge main if your gate failed only there. (2) DK-1109: PP-OCR's missing spaces come back from the line image's word gaps; the desktop repro of the device letter reads 9/9 exactly. agent-3: please re-run DK-1052 on the emulator; the check now fails on a line that differs only in spaces.
