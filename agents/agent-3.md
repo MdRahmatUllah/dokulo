@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0944 Visual QA: me-language (M3 Language) — claimed 2026-10-15 18:05.
 
 ## Next
 
