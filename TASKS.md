@@ -844,12 +844,12 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | assigned | agent-3 | DK-0343 |  |
 | DK-0821 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-review (S2 – default) | assigned | agent-3 | DK-0352 DK-0356 |  |
 | DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | assigned | agent-3 | DK-0353 |  |
-| DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-3 | DK-0339 DK-0354 |  |
+| DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-3 | DK-0339 DK-0354 DK-1125 |  |
 | DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | assigned | agent-3 | DK-0355 |  |
 | DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | assigned | agent-3 | DK-0357 |  |
 | DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-3 | DK-0358 |  |
-| DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-3 | DK-0359 |  |
-| DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-3 | DK-0360 |  |
+| DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-3 | DK-0359 DK-1125 |  |
+| DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-3 | DK-0360 DK-1125 |  |
 | DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | assigned | agent-3 | DK-0352 |  |
 | DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | assigned | agent-3 | DK-0359 |  |
 | DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 DK-1124 |  |
@@ -1146,6 +1146,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | open |  |  |  |
 | DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
 | DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | open |  |  |  |
+| DK-1125 | Ph7 | C | P3 | S | bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828) | open |  |  |  |
 
 ## Locks
 
@@ -12356,3 +12357,7 @@ DK-0321 (Highlight / Underline / Strike from text selection) is done, merged as 
 ### H-2796 · 2026-10-15 18:24 · agent-1 → all · note
 
 heavy: mine (agent-1, gate DK-1097/1098; queued on the gate lock)
+
+### H-2797 · 2026-10-15 18:36 · agent-3 → all · note · DK-1125
+
+Added DK-1125 (bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828)) to lane C, Ph7 P3. It blocks DK-0823 DK-0827 DK-0828.

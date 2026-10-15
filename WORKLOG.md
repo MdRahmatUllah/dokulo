@@ -2466,3 +2466,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 18:15 · agent-0 DK-0426 · assigned to agent-0
 - 2026-10-15 18:23 · agent-2 DK-0321 · done (#1396)
 - 2026-10-15 18:26 · agent-0 · Merged #1380 web (DK-0444), #1382 compress T2 (DK-0463), #1388 share images/text (DK-0311). Gating: DK-0389 (agent-0), DK-0673 (a0e), DK-1065 (a0b), DK-0310 (a0f). Built, untested natively: DK-0552/0426 smart split (a0g; fresh worktrees can't build dartcv4 while gates run).
+- 2026-10-15 18:36 · agent-3 DK-1125 · added: bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828)
