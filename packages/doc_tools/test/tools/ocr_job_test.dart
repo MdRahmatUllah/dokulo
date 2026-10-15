@@ -61,6 +61,20 @@ class _FakeOcr implements OcrEngine {
 
 Future<OcrEngine> _fake(OcrAssets? assets) async => const _FakeOcr();
 
+/// [_FakeOcr], every page too blurry.
+class _BlurryOcr extends _FakeOcr {
+  const _BlurryOcr();
+
+  @override
+  Future<PageOcr> recognizeRaster(
+    Raster raster, {
+    OcrLanguage language = OcrLanguage.auto,
+    required Directory scratch,
+  }) async => PageOcr('fake', _FakeOcr._page.words, PageQuality.tooBlurry);
+}
+
+Future<OcrEngine> _blurry(OcrAssets? assets) async => const _BlurryOcr();
+
 /// [_FakeOcr], failing when more than two rendered pages wait on disk.
 class _WindowOcr extends _FakeOcr {
   const _WindowOcr();
@@ -103,14 +117,19 @@ void main() {
   });
 
   final scan = fixture('scanned-letters-bundle.pdf');
-  OcrInput input(List<String> files, {String? password, List<int>? pages}) =>
-      OcrInput(
-        files: files,
-        outputDir: outDir.path,
-        suffix: ' – searchable',
-        password: password,
-        pages: pages,
-      );
+  OcrInput input(
+    List<String> files, {
+    String? password,
+    List<int>? pages,
+    bool redo = false,
+  }) => OcrInput(
+    files: files,
+    outputDir: outDir.path,
+    suffix: ' – searchable',
+    password: password,
+    pages: pages,
+    redo: redo,
+  );
 
   Future<String> text(String path, int page, {String? password}) async =>
       (await PdfEngine.pageText(path, page, password: password)).text;
@@ -165,6 +184,61 @@ void main() {
       isEmpty,
       reason: 'pixels cleaned up',
     );
+  });
+
+  test(
+    "T3's facts (DK-1065): pages, read, with text, the blurry ones",
+    () async {
+      final first =
+          await (await queue.start('ocr', input([scan]))).result as OneFile;
+      expect(first.facts, {
+        'pages': 6,
+        'read': 6,
+        'withText': 6,
+        'blurry': <int>[],
+      });
+      expect(
+        JobOutput.fromJson(first.toJson()),
+        isA<OneFile>().having(
+          (o) => o.facts['withText'],
+          'facts survive JSON',
+          6,
+        ),
+      );
+
+      OcrJob.engine = _blurry;
+      final blurry =
+          await (await queue.start('ocr', input([scan], pages: [1, 4]))).result
+              as OneFile;
+      expect(blurry.facts['blurry'], [2, 5]);
+    },
+  );
+
+  test('Existing text: Keep reads nothing again; Redo reads every page '
+      'and leaves one layer, not two', () async {
+    final once =
+        await (await queue.start('ocr', input([scan]))).result as OneFile;
+    final again = '${dir.path}/again.pdf';
+    File(once.path).renameSync(again);
+
+    final keep =
+        await (await queue.start('ocr', input([again]))).result as OneFile;
+    expect(keep.facts['read'], 0);
+    expect(keep.facts['withText'], 6);
+    File(keep.path).deleteSync();
+
+    final redo =
+        await (await queue.start('ocr', input([again], redo: true))).result
+            as OneFile;
+    expect(redo.facts['read'], 6);
+    for (var p = 0; p < 6; p++) {
+      expect(
+        RegExp('Jahresabrechnung').allMatches(await text(redo.path, p)).length,
+        1,
+        reason: 'page $p: one layer',
+      );
+    }
+    expect(await pool.run(Lane.qpdf, _check, redo.path).result, isEmpty);
   });
 
   test('pages are rendered a window at a time, never the whole file', () async {

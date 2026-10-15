@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:app_pdf/components/dk_editor_bars.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/screens/v2_edit/annotation_editor.dart';
@@ -16,7 +18,11 @@ void main() {
   late AnnotationEditor editor;
   AnnotRef? placed, coloured, noted;
 
-  Future<void> pump(WidgetTester tester, {DkTokens? tokens}) async {
+  Future<void> pump(
+    WidgetTester tester, {
+    DkTokens? tokens,
+    EditStyle style = const EditStyle(),
+  }) async {
     tester.view.physicalSize = const Size(297.5, 421);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -35,6 +41,7 @@ void main() {
               editor: editor,
               page: 0,
               pageSize: a4,
+              style: style,
               onPlaced: (r) => placed = r,
               onColour: (r) => coloured = r,
               onNote: (r) => noted = r,
@@ -147,7 +154,9 @@ void main() {
     expect(editor.annotsOn(0), isEmpty);
   });
 
-  testWidgets('eraser: wipes the ink it touches, nothing else', (tester) async {
+  testWidgets('eraser, Stroke: wipes the ink it touches, nothing else', (
+    tester,
+  ) async {
     editor
       ..add(
         0,
@@ -160,7 +169,7 @@ void main() {
         ),
       )
       ..add(0, const NoteAnnot((x: 300, y: 700), note: '', color: 0xFFFFC107));
-    await pump(tester);
+    await pump(tester, style: const EditStyle(eraseObjects: false));
     editor.tool = EditTool.eraser;
     await drag(tester, const [Offset(50, 0), Offset(50, 30)]);
     await drag(tester, const [Offset(150, 70), Offset(160, 75)]);
@@ -168,6 +177,49 @@ void main() {
       [for (final a in editor.annotsOn(0)) a.annot.runtimeType],
       [NoteAnnot],
     );
+  });
+
+  testWidgets('a signature shows as its image with the date beside it; it '
+      'resizes, the date keeps its size (DK-0328)', (tester) async {
+    final png = base64Decode(
+      'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==',
+    );
+    final stamp = StampAnnot(
+      (left: 100, top: 500, right: 300, bottom: 440),
+      png,
+      date: '15.10.2026',
+    );
+    final id = editor.add(0, stamp);
+    await pump(tester);
+    expect(find.byType(Image), findsOneWidget);
+    expect(find.text('15.10.2026'), findsOneWidget);
+    expect(editor.signedPage, 0);
+    final dateWidth = stamp.dateBox!.right - stamp.dateBox!.left;
+    final bigger = fitTo(stamp, (
+      left: 100,
+      top: 560,
+      right: 400,
+      bottom: 440,
+    )) as StampAnnot;
+    expect(
+      bigger.dateBox!.right - bigger.dateBox!.left,
+      closeTo(dateWidth, 0.01),
+    );
+    expect(bigger.rect.right - bigger.rect.left, greaterThan(200));
+    // Shrunk past the date: never inside out, and the shape stays.
+    final tiny = fitTo(stamp, (
+      left: 100,
+      top: 500,
+      right: 120,
+      bottom: 495,
+    )) as StampAnnot;
+    expect(tiny.rect.right - tiny.rect.left, greaterThanOrEqualTo(8));
+    expect(
+      (tiny.rect.top - tiny.rect.bottom) / (tiny.rect.right - tiny.rect.left),
+      closeTo(60 / 200, 0.001),
+    );
+    editor.delete((page: 0, id: id));
+    expect(editor.signedPage, isNull);
   });
 
   testWidgets('pan: tap selects, drag moves, a corner resizes; all undoable', (
