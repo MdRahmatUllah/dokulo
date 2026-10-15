@@ -11,7 +11,7 @@ DK-0575 M3 Language settings page — claimed 2026-10-15 11:31.
 
 ## Next
 
-When agent-2 frees the pubspec lock: DK-0253 (in_app_review) and DK-0255 (clipboard/drop). When #1219 merges: DK-0246 + DK-0717, DK-0644, DK-0652. Photo finder: DK-0252 + DK-0722.
+Gate queue (one at a time, when no other check.py): DK-0575 (agent-1 wt), DK-0657+DK-1100 (a1p), DK-0623-0625 copy deck + sign_sheet_title (a1o2, regenerate signatures_sheet_de golden), DK-0307 test (a1n). Then DK-1097, DK-1098.
 
 ## Memory
 
