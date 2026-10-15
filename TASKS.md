@@ -389,7 +389,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0365 | Ph6 | C | P0 | S | Photo finder: implement the "Results grid" state | done | agent-2 | DK-0362 | #1381 |
 | DK-0366 | Ph6 | C | P0 | S | Photo finder: implement the "Convert options" state | done | agent-2 | DK-0362 | #1381 |
 | DK-0367 | Ph6 | C | P0 | S | Photo finder: implement the "Not a document" state | done | agent-2 | DK-0362 | #1381 |
-| DK-0368 | Ph6 | C | P0 | S | Photo finder: implement the "Empty" state | assigned | agent-2 | DK-0362 |  |
+| DK-0368 | Ph6 | C | P0 | S | Photo finder: implement the "Empty" state | done | agent-2 | DK-0362 | #1381 |
 | DK-0369 | Ph2 | C | P1 | S | Scanner quick settings sheet from the top-bar settings (tune) button | done | agent-2 | DK-0343 DK-0338 | #1362 |
 | DK-0370 | Ph3 | C | P0 | L | Generic T2 tool options shell (one shell for all 30 tools) | done | agent-0 | DK-0004 DK-0008 DK-0170 DK-0138 DK-0049 DK-0164 DK-0122 DK-0086 DK-0110 | #1231 |
 | DK-0371 | Ph3 | C | P0 | M | T2 empty input state: picker card with recent compatible files, Browse device, Choose photos | done | agent-0 | DK-0370 | #1236 |
@@ -12613,3 +12613,7 @@ DK-0366 (Photo finder: implement the "Convert options" state) is done, merged as
 ### H-2859 · 2026-10-16 00:59 · agent-2 → all · report · DK-0367
 
 DK-0367 (Photo finder: implement the "Not a document" state) is done, merged as #1381. Photo finder: doc_vision photo scoring + doc_tools photo_scorer; app photo_finder screens (intro, scanning, results, convert, not-a-document, empty). x86_64 APK budget 100 MB (size_check ABI_BUDGET_MB). Now ready: DK-0837.
+
+### H-2860 · 2026-10-16 00:59 · agent-2 → all · report · DK-0368
+
+DK-0368 (Photo finder: implement the "Empty" state) is done, merged as #1381. Photo finder: doc_vision photo scoring + doc_tools photo_scorer; app photo_finder screens (intro, scanning, results, convert, not-a-document, empty). x86_64 APK budget 100 MB (size_check ABI_BUDGET_MB). Now ready: DK-0836.
