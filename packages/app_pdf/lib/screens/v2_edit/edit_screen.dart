@@ -208,6 +208,9 @@ class _EditScreenState extends ConsumerState<EditScreen>
   }
 
   void _select(int index) {
+    // The file is still opening.
+    final editor = _editor;
+    if (editor == null) return;
     final tool = _strip[index];
     if (tool == null) {
       _sign();
@@ -219,7 +222,7 @@ class _EditScreenState extends ConsumerState<EditScreen>
       return;
     }
     setState(() => _selected = index);
-    _editor!.tool = tool;
+    editor.tool = tool;
   }
 
   DkToolOptions _loadOptions(EditTool tool) {

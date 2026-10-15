@@ -133,6 +133,11 @@ void main() {
     );
     router.push('/edit');
     await settle(tester);
+    // Under a loaded machine the file takes longer to open: wait for it
+    // (a form or a missing file never shows the page).
+    for (var i = 0; i < 100 && find.byType(PdfViewer).evaluate().isEmpty; i++) {
+      await settle(tester, rounds: 2);
+    }
   }
 
   DkTextAction done(WidgetTester tester) => tester.widget<DkTextAction>(
