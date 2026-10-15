@@ -7,8 +7,9 @@ import '../routes/routes_test.dart' show pumpAt;
 
 /// Whole screens against the platform guidelines (DK-0641 touch targets,
 /// DK-0640 text at 200 %,
-/// DK-0646 contrast; UI spec §28): every target 48 dp and labelled, text at
-/// 4.5:1 (3:1 large), in light and dark. The catalogue test checks each
+/// DK-0646 contrast; UI spec §28): every target 48 dp, text at
+/// 4.5:1 (3:1 large), in light and dark. Labels: test/a11y/screen_reader_test
+/// (DK-0637). The catalogue test checks each
 /// component alone; this checks them as the screens put them together.
 void main() {
   const screens = [
@@ -33,7 +34,6 @@ void main() {
         final handle = tester.ensureSemantics();
         await pumpAt(tester, location, tokens: tokens);
         await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
-        await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
         await expectLater(tester, meetsGuideline(textContrastGuideline));
         handle.dispose();
       });

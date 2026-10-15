@@ -28,14 +28,20 @@ PASSWORD = "dokulo"  # the encrypted sample's user password; documented in the R
 W, H = A4
 
 
-def scan_font(size: int) -> ImageFont.FreeTypeFont:
-    """Roboto from the Flutter SDK (Apache-2.0; every dev machine has it) for the
-    scanned letters: Pillow's built-in font has no ß or umlauts (DK-1050)."""
+def roboto() -> Path:
+    """Roboto from the Flutter SDK (Apache-2.0; every dev machine has it): Latin,
+    Greek and Cyrillic, with ß and umlauts, which Pillow's and the PDF base 14
+    fonts lack (DK-1050, DK-0658)."""
     flutter = shutil.which("flutter")
     if not flutter:
-        raise SystemExit("make_fixtures: the scanned letters need Flutter's Roboto; put flutter on PATH")
+        raise SystemExit("make_fixtures: the scanned letters and the corpus need Flutter's Roboto; put flutter on PATH")
     sdk = Path(flutter).resolve().parent.parent
-    return ImageFont.truetype(str(sdk / "bin" / "cache" / "artifacts" / "material_fonts" / "roboto-regular.ttf"), size)
+    return sdk / "bin" / "cache" / "artifacts" / "material_fonts" / "roboto-regular.ttf"
+
+
+def scan_font(size: int) -> ImageFont.FreeTypeFont:
+    """Roboto for the scanned letters."""
+    return ImageFont.truetype(str(roboto()), size)
 
 
 def canvas(buffer: io.BytesIO, title: str, author: str = "Dokulo samples (fictional)") -> Canvas:
@@ -344,6 +350,214 @@ def long_document() -> bytes:
     return b.getvalue()
 
 
+# The golden corpus's base files (DK-0658): what the samples above don't cover.
+# packages/doc_tools/test/corpus/ turns them and the samples into ~100 variants
+# with qpdf (encrypted, linearized, rotated, damaged, PDF/A, ...) and runs every
+# tool over them.
+
+
+def non_latin() -> bytes:
+    """Greek, Cyrillic, Polish, Czech, Turkish and Vietnamese text in an
+    embedded subset of Roboto (a TrueType font, not one of the base 14)."""
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
+
+    pdfmetrics.registerFont(TTFont("Roboto", str(roboto())))
+    lines = [
+        ("Ελληνικά", "Τιμολόγιο αρ. 14 · Οδός Παραδείγματος 12, Αθήνα · σύνολο 1.240,00 €"),
+        ("Русский", "Счёт № 14 · ул. Примерная, 12, Москва · итого 1 240,00 €"),
+        ("Українська", "Рахунок № 14 · вул. Прикладна, 12, Київ · разом 1 240,00 €"),
+        ("Polski", "Faktura nr 14 · ul. Przykładowa 12, Łódź · razem 1 240,00 zł"),
+        ("Čeština", "Faktura č. 14 · Příkladová 12, Brno · celkem 1 240,00 Kč"),
+        ("Türkçe", "Fatura no. 14 · Örnek Sokağı 12, İstanbul · toplam 1.240,00 TL"),
+        ("Tiếng Việt", "Hóa đơn số 14 · Đường Ví Dụ 12, Hà Nội · tổng cộng 1.240.000 đ"),
+    ]
+    b = io.BytesIO()
+    c = canvas(b, "Non-Latin samples – Ελληνικά, Русский")
+    for page in range(2):
+        y = H - 30 * mm
+        c.setFont("Roboto", 18)
+        c.drawString(25 * mm, y, f"Beispieltexte · Παράδειγμα · Пример ({page + 1}/2)")
+        for label, text in lines[page * 4:page * 4 + 4]:
+            y -= 14 * mm
+            c.setFont("Roboto", 12)
+            c.drawString(25 * mm, y, label)
+            c.setFont("Roboto", 11)
+            c.drawString(25 * mm, y - 6 * mm, text)
+        c.showPage()
+    c.save()
+    return b.getvalue()
+
+
+def page_sizes() -> bytes:
+    """Six page sizes, portrait and landscape, each page saying what it is."""
+    from reportlab.lib.pagesizes import A3, A5, LEGAL, LETTER, landscape
+
+    sizes = [("A4", A4), ("US Letter", LETTER), ("A3 landscape", landscape(A3)), ("A5", A5),
+             ("US Legal", LEGAL), ("Square 140 mm", (140 * mm, 140 * mm))]
+    b = io.BytesIO()
+    c = canvas(b, "Page sizes")
+    for name, size in sizes:
+        c.setPageSize(size)
+        c.rect(10 * mm, 10 * mm, size[0] - 20 * mm, size[1] - 20 * mm)
+        c.setFont("Helvetica-Bold", 16)
+        c.drawString(20 * mm, size[1] - 25 * mm, f"{name}: {size[0] / mm:.0f} × {size[1] / mm:.0f} mm")
+        c.showPage()
+    c.save()
+    return b.getvalue()
+
+
+def rotated_pages() -> bytes:
+    """Four pages with /Rotate 0, 90, 180, 270, the last two with a CropBox
+    smaller than the MediaBox."""
+    b = io.BytesIO()
+    c = canvas(b, "Rotated pages")
+    for n in range(4):
+        c.setFont("Helvetica-Bold", 20)
+        c.drawString(25 * mm, H - 30 * mm, f"Seite {n + 1}: oben ist hier (Rotate {n * 90})")
+        c.line(25 * mm, H - 35 * mm, 100 * mm, H - 35 * mm)
+        c.showPage()
+    c.save()
+    writer = PdfWriter(clone_from=PdfReader(io.BytesIO(b.getvalue())))
+    for n, page in enumerate(writer.pages):
+        if n:
+            page.rotate(n * 90)
+        if n >= 2:
+            page.cropbox.lower_left = (15 * mm, 15 * mm)
+            page.cropbox.upper_right = (W - 15 * mm, H - 15 * mm)
+    out = io.BytesIO()
+    writer.write(out)
+    return out.getvalue()
+
+
+def images() -> bytes:
+    """Pictures in every form a tool meets: a JPEG photo, a PNG with alpha,
+    a CMYK JPEG, greyscale and a 1-bit bitmap."""
+    rng = random.Random(58)
+    photo = Image.new("RGB", (900, 600))
+    photo.putdata([(x * 255 // 900, y * 255 // 600, (x + y) * 255 // 1500) for y in range(600) for x in range(900)])
+    d = ImageDraw.Draw(photo)
+    for _ in range(40):
+        x, y = rng.randrange(900), rng.randrange(600)
+        d.ellipse((x, y, x + rng.randrange(20, 120), y + rng.randrange(20, 120)),
+                  fill=(rng.randrange(256), rng.randrange(256), rng.randrange(256)))
+    alpha = Image.new("RGBA", (400, 400), (0, 0, 0, 0))
+    ImageDraw.Draw(alpha).ellipse((40, 40, 360, 360), fill=(34, 81, 230, 160))
+    kinds = [("JPEG photo", photo, "JPEG"), ("PNG with alpha", alpha, "PNG"), ("CMYK JPEG", photo.convert("CMYK"), "JPEG"),
+             ("Greyscale", photo.convert("L"), "JPEG"), ("1-bit", photo.convert("1"), "PNG")]
+    b = io.BytesIO()
+    c = canvas(b, "Images")
+    y = H - 25 * mm
+    for n, (label, img, fmt) in enumerate(kinds):
+        if n == 3:
+            c.showPage()
+            y = H - 25 * mm
+        data = io.BytesIO()
+        if fmt == "JPEG":
+            img.save(data, fmt, quality=80)
+        else:
+            img.save(data, fmt)
+        c.setFont("Helvetica", 10)
+        c.drawString(25 * mm, y, label)
+        c.drawImage(ImageReader(io.BytesIO(data.getvalue())), 25 * mm, y - 75 * mm, 100 * mm, 70 * mm, mask="auto")
+        y -= 85 * mm
+    c.showPage()
+    c.save()
+    return b.getvalue()
+
+
+def links_annotations() -> bytes:
+    """An outline, internal and web links, a highlight, a sticky note and a
+    free-text comment."""
+    from pypdf.annotations import FreeText, Highlight, Link, Text
+    from pypdf.generic import ArrayObject as Arr, FloatObject as F
+
+    b = io.BytesIO()
+    c = canvas(b, "Links and annotations")
+    for n in range(2):
+        c.bookmarkPage(f"p{n}")
+        c.addOutlineEntry(f"Teil {n + 1}", f"p{n}", level=0)
+        c.setFont("Helvetica-Bold", 16)
+        c.drawString(25 * mm, H - 30 * mm, f"Teil {n + 1}")
+        text_block(c, 25 * mm, H - 45 * mm, ["Zu Teil 2 (interner Link) · www.example.com (Weblink)",
+                                             "Dieser Satz ist markiert."])
+        c.showPage()
+    c.save()
+    writer = PdfWriter(clone_from=PdfReader(io.BytesIO(b.getvalue())))
+    y = H - 45 * mm
+    writer.add_annotation(0, Link(rect=(25 * mm, y - 3, 75 * mm, y + 10), target_page_index=1))
+    writer.add_annotation(0, Link(rect=(80 * mm, y - 3, 130 * mm, y + 10), url="https://www.example.com"))
+    quad = Arr([F(25 * mm), F(y - 2), F(85 * mm), F(y - 2), F(25 * mm), F(y - 17), F(85 * mm), F(y - 17)])
+    writer.add_annotation(0, Highlight(rect=(25 * mm, y - 17, 85 * mm, y - 2), quad_points=quad))
+    writer.add_annotation(1, Text(rect=(150 * mm, H - 40 * mm, 160 * mm, H - 30 * mm), text="Notiz: bitte prüfen"))
+    writer.add_annotation(1, FreeText(text="Freitext-Kommentar", rect=(25 * mm, 100 * mm, 120 * mm, 115 * mm)))
+    out = io.BytesIO()
+    writer.write(out)
+    return out.getvalue()
+
+
+def incremental() -> bytes:
+    """The invoice plus an incremental update: a second revision appended after
+    the first %%EOF, with its own xref section and a trailer whose /Prev points
+    back, giving the document a new Info dictionary (title "… - paid")."""
+    first = invoice()
+    prev = int(re.search(rb"startxref\s+(\d+)", first[first.rindex(b"startxref"):]).group(1))
+    trailer = first[first.rindex(b"trailer"):]
+    size = int(re.search(rb"/Size (\d+)", trailer).group(1))
+    root = re.search(rb"/Root (\d+ 0 R)", trailer).group(1)
+    obj = f"{size} 0 obj\n<< /Title (Invoice INV-2026-014 - paid) /Producer (Dokulo samples) >>\nendobj\n".encode()
+    offset = len(first)
+    xref_at = offset + len(obj)
+    update = obj + (f"xref\n{size} 1\n{offset:010d} 00000 n \n"
+                    f"trailer\n<< /Size {size + 1} /Root {root.decode()} /Info {size} 0 R /Prev {prev} >>\n"
+                    f"startxref\n{xref_at}\n%%EOF\n").encode()
+    return first + update
+
+
+def extreme_pages() -> bytes:
+    """A 5 × 5 m page (PDF allows up to 5.08 m), a 25 mm stamp-sized page and
+    an empty page."""
+    b = io.BytesIO()
+    c = canvas(b, "Extreme page sizes")
+    for size, label in (((5000 * mm, 5000 * mm), "5 m × 5 m"), ((25 * mm, 25 * mm), "25 mm"), (A4, None)):
+        c.setPageSize(size)
+        if label:
+            c.setFont("Helvetica-Bold", 6 if size[0] < 100 * mm else 400)
+            c.drawString(size[0] * 0.1, size[1] / 2, label)
+        c.showPage()
+    c.save()
+    return b.getvalue()
+
+
+def vector_heavy() -> bytes:
+    """One page of 6,000 thin strokes and 400 semi-transparent circles: slow
+    to render, small to store."""
+    rng = random.Random(6)
+    b = io.BytesIO()
+    c = canvas(b, "Vector drawing")
+    c.setLineWidth(0.3)
+    for _ in range(6000):
+        c.line(rng.uniform(0, W), rng.uniform(0, H), rng.uniform(0, W), rng.uniform(0, H))
+    for _ in range(400):
+        c.setFillColorRGB(rng.random(), rng.random(), rng.random(), alpha=0.4)
+        c.circle(rng.uniform(0, W), rng.uniform(0, H), rng.uniform(5, 40), stroke=0, fill=1)
+    c.showPage()
+    c.save()
+    return b.getvalue()
+
+
+CORPUS = {
+    "non-latin.pdf": non_latin,
+    "page-sizes.pdf": page_sizes,
+    "rotated-pages.pdf": rotated_pages,
+    "images.pdf": images,
+    "links-annotations.pdf": links_annotations,
+    "incremental-update.pdf": incremental,
+    "extreme-pages.pdf": extreme_pages,
+    "vector-heavy.pdf": vector_heavy,
+}
+
+
 FIXTURES = {
     "Mietvertrag Musterstraße 12.pdf": mietvertrag,
     "Invoice INV-2026-014.pdf": invoice,
@@ -364,6 +578,10 @@ def main() -> int:
     for name, make in FIXTURES.items():
         (out / name).write_bytes(make())
         print(f"{name}: {(out / name).stat().st_size:,} bytes")
+    (out / "corpus").mkdir(exist_ok=True)
+    for name, make in CORPUS.items():
+        (out / "corpus" / name).write_bytes(make())
+        print(f"corpus/{name}: {(out / 'corpus' / name).stat().st_size:,} bytes")
     return 0
 
 
