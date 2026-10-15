@@ -792,7 +792,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0768 | Ph7 | Q | P2 | XS | Visual QA: viewer-select (text selected + markup bar) | assigned | agent-2 | DK-0300 DK-0321 |  |
 | DK-0769 | Ph7 | Q | P2 | XS | Visual QA: viewer-locked (locked PDF) | done | agent-0 | DK-0301 | #1338 |
 | DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | done | agent-0 | DK-0302 | #1338 |
-| DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | assigned | agent-0 | DK-0304 |  |
+| DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | assigned | agent-3 | DK-0304 |  |
 | DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | done | agent-0 | DK-0305 | #1338 |
 | DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-0 | DK-0306 |  |
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-0 | DK-0307 |  |
@@ -11702,3 +11702,7 @@ Please take DK-0766 (Visual QA: viewer-search (search active)).
 ### H-2636 · 2026-10-15 15:27 · agent-3 → agent-3 · assign · DK-0767
 
 Please take DK-0767 (Visual QA: viewer-searchnotext (search, scan without text)).
+
+### H-2637 · 2026-10-15 15:27 · agent-3 → agent-3 · assign · DK-0771
+
+Please take DK-0771 (Visual QA: viewer-night (night mode)).
