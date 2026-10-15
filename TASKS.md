@@ -1167,7 +1167,7 @@ The emulator lock is local, not here: `team.py device`.
 
 | Resource | Owner | Since | Why |
 |---|---|---|---|
-| pubspec |  |  |  |
+| pubspec | agent-0 | 2026-10-16 00:42 | agent-0: pdf as a dev dependency of doc_tools for the OCR spaces test (DK-1109) |
 | db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |

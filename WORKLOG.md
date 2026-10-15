@@ -2514,3 +2514,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 00:36 · agent-0 DK-1109 · claimed: bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670)
 - 2026-10-16 00:36 · agent-1 DK-1129 · added: Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4
 - 2026-10-16 00:41 · agent-2 DK-0421 · assigned to agent-2
+- 2026-10-16 00:42 · agent-0 · locked pubspec: agent-0: pdf as a dev dependency of doc_tools for the OCR spaces test (DK-1109)
