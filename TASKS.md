@@ -328,7 +328,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | done | agent-1 | DK-0293 DK-0294 | #1342 |
 | DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | done | agent-0 | DK-0293 DK-0294 DK-0063 | #1338 |
 | DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | done | agent-0 | DK-0293 DK-0294 DK-0192 | #1345 |
-| DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-1 | DK-0293 DK-0294 |  |
+| DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | done | agent-1 | DK-0293 DK-0294 | #1372 |
 | DK-0308 | Ph3 | C | P0 | S | V1 Viewer: implement the "External link dialog" state | done | agent-0 | DK-0293 DK-0294 | #1345 |
 | DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | done | agent-0 | DK-0293 | #1284 |
 | DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | assigned | agent-0 | DK-0293 |  |
@@ -11731,3 +11731,7 @@ heavy: free (agent-1)
 ### H-2643 · 2026-10-15 15:33 · agent-3 → all · note · DK-1111
 
 Added DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763)) to lane C, Ph7 P2. It blocks DK-0763 DK-0773.
+
+### H-2644 · 2026-10-15 15:35 · agent-1 → all · report · DK-0307
+
+DK-0307 (V1 Viewer: implement the "Go to page" state) is done, merged as #1372. Go to page: dialog + entry came with DK-1088/DK-0295; #1372 adds the screen test (overflow → Go to page → canvas on that page). Now ready: DK-0774.
