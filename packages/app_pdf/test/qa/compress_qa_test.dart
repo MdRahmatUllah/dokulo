@@ -70,7 +70,10 @@ void main() {
           locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: ToolOptionsScreen(definition: compressDefinition, fileIds: [id]),
+          home: ToolOptionsScreen(
+            definition: compressDefinition,
+            fileIds: [id],
+          ),
         ),
       ),
     );
