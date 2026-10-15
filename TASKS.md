@@ -827,8 +827,8 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0803 | Ph7 | Q | P2 | XS | Visual QA: organize-pinch (pinch to 5 columns) | done | agent-0 | DK-0334 | #1270 |
 | DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | done | agent-0 | DK-0335 | #1282 |
 | DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | done | agent-0 | DK-0329 | #1282 |
-| DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-3 | DK-0342 |  |
-| DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-3 | DK-0342 DK-0621 |  |
+| DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-3 | DK-0342 DK-1120 |  |
+| DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-3 | DK-0342 DK-0621 DK-1120 |  |
 | DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | assigned | agent-3 | DK-0343 DK-0344 |  |
 | DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | assigned | agent-3 | DK-0343 DK-0349 DK-0369 |  |
 | DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | assigned | agent-3 | DK-0338 |  |
@@ -1141,6 +1141,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | open |  |  |  |
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
 | DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
+| DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | open |  |  |  |
 
 ## Locks
 
@@ -12279,3 +12280,7 @@ Added DK-1118 (Compress on large tablets: the preview pane shows the chosen leve
 ### H-2778 · 2026-10-15 17:29 · agent-3 → all · note · DK-1119
 
 Added DK-1119 (bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860)) to lane C, Ph7 P3. It blocks DK-0860.
+
+### H-2779 · 2026-10-15 17:33 · agent-3 → all · note · DK-1120
+
+Added DK-1120 (bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806)) to lane C, Ph7 P1. It blocks DK-0806 DK-0807.
