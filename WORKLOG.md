@@ -2365,3 +2365,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 16:48 · agent-2 DK-1117 · added: Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up)
 - 2026-10-15 16:55 · agent-2 DK-0768 · assigned to agent-3
 - 2026-10-15 16:55 · agent-2 DK-0779 · assigned to agent-3
+- 2026-10-15 16:55 · agent-2 DK-0780 · assigned to agent-3
