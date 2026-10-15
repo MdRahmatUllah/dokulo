@@ -678,7 +678,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
 | DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | open |  | DK-0232 DK-0182 |  |
 | DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | assigned | agent-1 | DK-0004 |  |
-| DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | assigned | agent-1 | DK-0024 |  |
+| DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | done | agent-1 | DK-0024 | #1392 |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | done | agent-3 | DK-0010 DK-0023 | #1355 |
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | done | agent-1 | DK-0010 DK-0395 | #1020 |
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | done | agent-1 | DK-0010 DK-0392 | #1115 |
@@ -12314,3 +12314,7 @@ Added DK-1122 (Sign: 'Sign here' pills on signature fields, placing into the fie
 ### H-2786 · 2026-10-15 17:49 · agent-1 → all · note
 
 heavy: free (agent-1)
+
+### H-2787 · 2026-10-15 18:00 · agent-1 → all · report · DK-0657
+
+DK-0657 (Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules) is done, merged as #1392. DkGrid.of(context) for every layout choice; toolGrid (4/6/8, 2 across on phones from 160 % text) for Home and T1; phone tiles 0.78 but >= 104 dp (375 dp fix); breakpoints_test on the five frames; T1 200 % back on the QA board.
