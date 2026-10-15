@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../providers/share_providers.dart';
 import '../../components/dk_action_sheet.dart';
 import '../../components/dk_banner.dart';
 import '../../components/dk_file_card.dart';
@@ -832,8 +833,7 @@ class FileEntryCard extends ConsumerWidget {
       Map<CustomSemanticsAction, VoidCallback>? also,
       VoidCallback? onLongPress,
     }) => DkSwipeActions(
-      // ponytail: Share waits for share_plus (DK-1077), as elsewhere.
-      onShare: null,
+      onShare: () => ref.read(fileSharerProvider)([file.path]),
       onDelete: () => deleteFiles(context, ref, [file]),
       builder: (context, actions) =>
           card(actions: {...actions, ...?also}, onLongPress: onLongPress),
@@ -871,7 +871,7 @@ class FileEntryCard extends ConsumerWidget {
   }
 }
 
-/// The selection bar (DK-0263; UI spec §16.1): Share (off until share_plus),
+/// The selection bar (DK-0263; UI spec §16.1): Share (the real files),
 /// Move, Merge (2 PDFs or more, in the order they were selected), Compress,
 /// More (Move to locked folder, Duplicate, Run a tool…, Delete). Each action
 /// ends selection mode.
@@ -890,11 +890,15 @@ List<DkBarAction> _selectionActions(
   }
 
   return [
-    // ponytail: Share waits for share_plus (DK-1077), as elsewhere.
     DkBarAction(
       icon: DkIcons.share(context),
       label: l.common_share,
-      onPressed: null,
+      onPressed: files.isEmpty
+          ? null
+          : () => done(
+              () =>
+                  ref.read(fileSharerProvider)([for (final f in files) f.path]),
+            ),
     ),
     DkBarAction(
       icon: DkIcons.move,
