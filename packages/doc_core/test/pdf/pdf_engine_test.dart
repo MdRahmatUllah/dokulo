@@ -188,6 +188,29 @@ void main() {
     );
   });
 
+  test(
+    'a region: only that square, the same pixels as the whole page',
+    () async {
+      final path = fixture('Invoice INV-2026-014.pdf');
+      final whole = await PdfEngine.render(path, 0, dpi: 144);
+      final part = await PdfEngine.render(
+        path,
+        0,
+        dpi: 144,
+        region: (left: 0.12, top: 0.1, width: 200, height: 200),
+      );
+      expect((part.width, part.height), (200, 200));
+      final x = (whole.width * 0.12).round(), y = (whole.height * 0.1).round();
+      // A row of the square is that row of the page, from x on.
+      final row = 120;
+      final from = ((y + row) * whole.width + x) * 4;
+      expect(
+        part.bgra.sublist(row * 200 * 4, (row + 1) * 200 * 4),
+        whole.bgra.sublist(from, from + 200 * 4),
+      );
+    },
+  );
+
   test('a page out of range is an error, not a crash', () async {
     await expectLater(
       PdfEngine.render(fixture('Invoice INV-2026-014.pdf'), 3, dpi: 72),
