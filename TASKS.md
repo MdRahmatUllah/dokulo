@@ -650,7 +650,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0626 | Ph7 | B | P0 | S | ARB strings: Onboarding and Home | done | agent-1 | DK-0009 | #1413 |
 | DK-0627 | Ph3 | B | P0 | S | ARB strings: Files, trash, locked folder | done | agent-1 | DK-0009 | #1413 |
 | DK-0628 | Ph3 | B | P0 | S | ARB strings: Viewer and edit mode | done | agent-1 | DK-0009 | #1413 |
-| DK-0629 | Ph3 | B | P0 | S | ARB strings: Scanner | assigned | agent-1 | DK-0009 |  |
+| DK-0629 | Ph3 | B | P0 | S | ARB strings: Scanner | done | agent-1 | DK-0009 | #1413 |
 | DK-0630 | Ph3 | B | P0 | S | ARB strings: Tool shell and tools | assigned | agent-1 | DK-0009 |  |
 | DK-0631 | Ph3 | B | P0 | S | ARB strings: AI | assigned | agent-1 | DK-0009 |  |
 | DK-0632 | Ph3 | B | P0 | S | ARB strings: Me, settings, Pro | assigned | agent-1 | DK-0009 |  |
@@ -12686,3 +12686,7 @@ DK-0627 (ARB strings: Files, trash, locked folder) is done, merged as #1413. Gat
 ### H-2877 · 2026-10-16 01:34 · agent-1 → all · report · DK-0628
 
 DK-0628 (ARB strings: Viewer and edit mode) is done, merged as #1413. Gate steps 'copy deck' (UI spec §27.1-27.3 vs ARBs) and 'design German' (every ARB string the design export shows, in its German; CONTEXT for keys used elsewhere); 17 German strings fixed (Handy, du, frames' wording). New strings must match the design or go in CONTEXT with a reason.
+
+### H-2878 · 2026-10-16 01:34 · agent-1 → all · report · DK-0629
+
+DK-0629 (ARB strings: Scanner) is done, merged as #1413. Gate steps 'copy deck' (UI spec §27.1-27.3 vs ARBs) and 'design German' (every ARB string the design export shows, in its German; CONTEXT for keys used elsewhere); 17 German strings fixed (Handy, du, frames' wording). New strings must match the design or go in CONTEXT with a reason.
