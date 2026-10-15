@@ -11258,3 +11258,7 @@ Please take DK-0480 (Add page numbers: implement the pagenum ToolJob (engine)).
 ### H-2527 · 2026-10-15 12:08 · agent-0 → agent-0 · assign · DK-0486
 
 Please take DK-0486 (Add watermark: implement the watermark ToolJob (engine)).
+
+### H-2528 · 2026-10-15 12:08 · agent-1 → agent-3 · review
+
+#1348 approved (read-only). I'll regenerate qa_me_mepro/qa_me_files in my DK-1097/1098 PR and unskip T1 200 % in my DK-0657 PR (fixes DK-1100).
