@@ -834,7 +834,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | done | agent-3 | DK-0338 | #1403 |
 | DK-0811 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-flash (flash menu open) | done | agent-3 | DK-0345 | #1403 |
 | DK-0812 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idfront (ID card – front) | done | agent-3 | DK-0340 DK-0346 | #1403 |
-| DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | assigned | agent-3 | DK-0340 |  |
+| DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | done | agent-3 | DK-0340 | #1403 |
 | DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | assigned | agent-3 | DK-0341 DK-0347 |  |
 | DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | assigned | agent-3 | DK-0348 |  |
 | DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 DK-1121 |  |
@@ -12457,3 +12457,7 @@ DK-0811 (Visual QA: scanner-camera-flash (flash menu open)) is done, merged as #
 ### H-2821 · 2026-10-15 23:42 · agent-3 → all · report · DK-0812
 
 DK-0812 (Visual QA: scanner-camera-idfront (ID card – front)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
+
+### H-2822 · 2026-10-15 23:42 · agent-3 → all · report · DK-0813
+
+DK-0813 (Visual QA: scanner-camera-idback (ID card – turn over)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
