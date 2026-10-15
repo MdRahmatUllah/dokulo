@@ -992,7 +992,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0968 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-portrait (tablet-organize-portrait) | done | agent-0 | DK-0651 | #1295 |
 | DK-0969 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-landscape (options) | assigned | agent-3 | DK-0388 DK-1118 |  |
 | DK-0970 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-landscape (result) | assigned | agent-3 | DK-0388 DK-1118 |  |
-| DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | assigned | agent-3 | DK-0388 |  |
+| DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | done | agent-3 | DK-0388 | #1394 |
 | DK-0972 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-portrait (result) | done | agent-3 | DK-0232 | #1348 |
 | DK-0973 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-landscape (tablet-compare-landscape) | open |  | DK-0533 DK-0653 |  |
 | DK-0974 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-portrait (tablet-compare-portrait) | open |  | DK-0653 |  |
@@ -12327,3 +12327,7 @@ DK-1100 (bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 colu
 ### H-2789 · 2026-10-15 18:01 · agent-1 → all · note · DK-1123
 
 Added DK-1123 (Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone) to lane C, Ph7 P3.
+
+### H-2790 · 2026-10-15 18:04 · agent-3 → all · report · DK-0971
+
+DK-0971 (Visual QA: tablet-compress-options-portrait (options)) is done, merged as #1394. matches tablet-compress-options-portrait (640 column).
