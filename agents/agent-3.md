@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Not started. Assigned: DK-0668.
+DK-0937 Visual QA: me-mepro (M1 Me – Pro) — claimed 2026-10-15 11:08.
 
 ## Next
 

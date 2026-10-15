@@ -958,7 +958,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0934 | Ph7 | Q | P2 | XS | Visual QA: ai-askselection (Ask – prefilled from text selection) | open |  | DK-0565 |  |
 | DK-0935 | Ph7 | Q | P2 | XS | Visual QA: ai-dlbar (model downloading – mini bar) | open |  | DK-0555 |  |
 | DK-0936 | Ph7 | Q | P2 | XS | Visual QA: me-me (M1 Me – free) | open |  | DK-0570 DK-0578 |  |
-| DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | open |  | DK-0570 |  |
+| DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | in-progress | agent-3 | DK-0570 |  |
 | DK-0938 | Ph7 | Q | P2 | XS | Visual QA: me-models (M2 AI models) | open |  | DK-0568 |  |
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
 | DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 |  |
