@@ -2197,3 +2197,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:03 · agent-0 · DK-0402/0408/0414/0420 merge/split/extract/rotate ToolJobs committed on feat/DK-0402-merge-job; gate after DK-1077's
 - 2026-10-15 12:04 · agent-1 DK-0623 · assigned to agent-1
 - 2026-10-15 12:04 · agent-3 · heavy: free
+- 2026-10-15 12:04 · agent-1 DK-0624 · assigned to agent-1
