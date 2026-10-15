@@ -827,7 +827,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0803 | Ph7 | Q | P2 | XS | Visual QA: organize-pinch (pinch to 5 columns) | done | agent-0 | DK-0334 | #1270 |
 | DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | done | agent-0 | DK-0335 | #1282 |
 | DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | done | agent-0 | DK-0329 | #1282 |
-| DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-2 | DK-0342 |  |
+| DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | assigned | agent-3 | DK-0342 |  |
 | DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-2 | DK-0342 DK-0621 |  |
 | DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | assigned | agent-2 | DK-0343 DK-0344 |  |
 | DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | assigned | agent-2 | DK-0343 DK-0349 DK-0369 |  |
@@ -11868,3 +11868,7 @@ heavy: mine (agent-1, gate DK-0657; queued on the gate lock)
 ### H-2676 · 2026-10-15 16:41 · agent-0 → agent-0 · assign · DK-0389
 
 Please take DK-0389 (T2 Compress and T3 at 200 % text).
+
+### H-2677 · 2026-10-15 16:41 · agent-3 → agent-3 · assign · DK-0806
+
+Please take DK-0806 (Visual QA: scanner-camera-prompt (camera pre-prompt)).
