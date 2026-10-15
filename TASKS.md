@@ -915,7 +915,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0891 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-crop (Crop pages) | open |  | DK-0493 DK-0494 DK-0495 |  |
 | DK-0892 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-formlock (lock values dialog) | assigned | agent-3 | DK-0518 |  |
 | DK-0893 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-noform (no fields dialog) | assigned | agent-3 | DK-0518 |  |
-| DK-0894 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-xfa (XFA not supported) | assigned | agent-2 | DK-0518 |  |
+| DK-0894 | Ph7 | Q | P2 | XS | Visual QA: tools-edit-xfa (XFA not supported) | assigned | agent-3 | DK-0518 |  |
 | DK-0895 | Ph7 | Q | P2 | XS | Visual QA: black-out-find (1 Find) | open |  | DK-0521 DK-0522 |  |
 | DK-0896 | Ph7 | Q | P2 | XS | Visual QA: black-out-review (2 Review boxes) | open |  | DK-0523 |  |
 | DK-0897 | Ph7 | Q | P2 | XS | Visual QA: black-out-confirm (3 Confirm) | open |  | DK-0524 |  |
@@ -12105,3 +12105,7 @@ Please take DK-0892 (Visual QA: tools-edit-formlock (lock values dialog)).
 ### H-2735 · 2026-10-15 16:58 · agent-2 → agent-3 · assign · DK-0893
 
 Please take DK-0893 (Visual QA: tools-edit-noform (no fields dialog)).
+
+### H-2736 · 2026-10-15 16:58 · agent-2 → agent-3 · assign · DK-0894
+
+Please take DK-0894 (Visual QA: tools-edit-xfa (XFA not supported)).
