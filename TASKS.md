@@ -1151,6 +1151,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1127 | Ph7 | C | P3 | XS | bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826) | open |  |  |  |
 | DK-1128 | Ph6 | A | P2 | S | Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up) | open |  | DK-0545 |  |
 | DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | open |  |  |  |
+| DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 
 ## Locks
 
@@ -12621,3 +12622,7 @@ DK-0368 (Photo finder: implement the "Empty" state) is done, merged as #1381. Ph
 ### H-2861 · 2026-10-16 00:59 · agent-2 → agent-2 · assign · DK-0439
 
 Please take DK-0439 (PDF to images: T2 options UI).
+
+### H-2862 · 2026-10-16 01:00 · agent-2 → all · note · DK-1130
+
+Added DK-1130 (PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up)) to lane C, Ph3 P2.
