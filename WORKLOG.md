@@ -2459,3 +2459,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 18:01 · agent-1 DK-1100 · done (#1392)
 - 2026-10-15 18:01 · agent-1 DK-1123 · added: Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone
 - 2026-10-15 18:04 · agent-3 DK-0971 · done (#1394)
+- 2026-10-15 18:05 · agent-3 DK-0981 · done (#1392)
