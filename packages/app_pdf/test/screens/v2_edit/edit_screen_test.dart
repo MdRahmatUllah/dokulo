@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_pdf/screens/v2_edit/annotation_editor.dart' show EditTool;
 import 'package:app_pdf/components/dk_editor_bars.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
 import 'package:app_pdf/components/dk_text_action.dart';
@@ -59,6 +60,7 @@ void main() {
     WidgetTester tester, {
     DkTokens? tokens,
     bool fromSign = false,
+    EditTool? startTool,
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
@@ -90,7 +92,8 @@ void main() {
         GoRoute(path: '/', builder: (_, _) => const Text('V1')),
         GoRoute(
           path: '/edit',
-          builder: (_, _) => EditScreen(fileId: id, fromSign: fromSign),
+          builder: (_, _) =>
+              EditScreen(fileId: id, fromSign: fromSign, startTool: startTool),
         ),
       ],
     );
@@ -227,6 +230,17 @@ void main() {
       );
     });
   }
+
+  testWidgets('Mark up opens V2 with the highlighter selected (DK-0517)', (
+    tester,
+  ) async {
+    await pump(tester, startTool: EditTool.highlighter);
+    expect(
+      tester.widget<DkToolStrip>(find.byType(DkToolStrip)).selected,
+      2,
+      reason: 'Pan, Pen, Highlighter',
+    );
+  });
 
   group('tool options (DK-0314..DK-0320)', () {
     Offset centre(WidgetTester tester) =>

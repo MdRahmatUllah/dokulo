@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:doc_core/doc_core.dart';
+import 'package:image/image.dart' as img;
 import 'package:pdfrx_engine/pdfrx_engine.dart' show pdfrxInitialize;
 import 'package:test/test.dart';
 
@@ -21,6 +22,38 @@ void main() {
     await PdfAnnotations.apply(src, done, {0: PageAnnotEdits(add: add)});
     return PdfAnnotations.read(done, 0);
   }
+
+  test('a signature goes into the page: its image where it was placed '
+      '(within 1 pt), the date as text beside it (DK-0328)', () async {
+    final sig = img.Image(width: 300, height: 100, numChannels: 4);
+    img.drawLine(
+      sig,
+      x1: 10,
+      y1: 80,
+      x2: 290,
+      y2: 20,
+      color: img.ColorRgba8(0, 0, 0, 255),
+      thickness: 4,
+    );
+    const rect = (left: 200.0, top: 420.0, right: 350.0, bottom: 370.0);
+    final done = '${out.path}/signed.pdf';
+    await PdfAnnotations.apply(src, done, {
+      0: PageAnnotEdits(
+        add: [StampAnnot(rect, img.encodePng(sig), date: '15.10.2026')],
+      ),
+    });
+    expect(await PdfAnnotations.read(done, 0), isEmpty, reason: 'content');
+    final images = await PdfEngine.images(done, 0);
+    final placed = images.where(
+      (i) =>
+          (i.box.left - rect.left).abs() < 1 &&
+          (i.box.top - rect.top).abs() < 1,
+    );
+    expect(placed, hasLength(1));
+    expect(placed.single.box.right, closeTo(rect.right, 1));
+    expect(placed.single.box.bottom, closeTo(rect.bottom, 1));
+    expect((await PdfEngine.pageText(done, 0)).text, contains('15.10.2026'));
+  });
 
   test('the corpus page starts without annotations', () async {
     expect(await PdfAnnotations.read(src, 0), isEmpty);
