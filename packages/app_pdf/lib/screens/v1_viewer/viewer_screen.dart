@@ -25,6 +25,7 @@ import '../../patterns/dk_file_actions.dart';
 import '../../patterns/dk_file_info.dart';
 import '../../patterns/dk_tool_picker.dart';
 import '../../patterns/dk_viewer_dialogs.dart';
+import '../../providers/share_providers.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
 import '../../providers/print_providers.dart';
@@ -73,6 +74,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   var _pageCount = 0;
   final _controller = PdfViewerController();
 
+  /// V1's bottom bar, drawn in the body: toasts go above it.
+  double get _barHeight => 64 + MediaQuery.paddingOf(context).bottom;
+
   /// The thumbnail strip, from Pages in the overflow menu (DK-0295).
   var _thumbs = false;
 
@@ -94,6 +98,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
     showDkToast(
       context,
       l.viewer_unlocked,
+      above: _barHeight,
       action: l.tool_unlock_name,
       onAction: () {
         if (mounted) {
@@ -166,6 +171,8 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                         // X1 with this file (DK-1094).
                         onTools: () => showToolPicker(context, [value]),
                         onOverflow: (anchor) => _menu(anchor, value),
+                        onShare: () =>
+                            ref.read(fileSharerProvider)([value.path]),
                       ),
                       strip: _thumbs && _pageCount > 0
                           ? ViewerThumbStrip(
@@ -262,7 +269,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                 file.name,
               );
               if (!opened && mounted) {
-                showDkToast(context, l.viewer_print_failed);
+                showDkToast(context, l.viewer_print_failed, above: _barHeight);
               }
             },
           ),

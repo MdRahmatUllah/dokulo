@@ -161,7 +161,12 @@ class _ViewerChromeState extends State<ViewerChrome> {
                   child: SafeArea(
                     bottom: false,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 56 + 4),
+                      // Clear of back on the left and of search and
+                      // overflow on the right, or the name takes their taps.
+                      padding: EdgeInsetsDirectional.only(
+                        start: 56 + 4,
+                        end: 4 + 48 * (a.onSearch != null ? 2 : 1),
+                      ),
                       child: Semantics(
                         button: a.onRename != null,
                         label: widget.name,

@@ -156,7 +156,8 @@ void main() {
     expect(find.text('Choose images'), findsOneWidget);
     await tester.tap(find.text('Choose photos'));
     await settle(tester);
-    expect(find.text('IMG_0001.jpg'), findsOneWidget);
+    // Images only: the numbered strip (DK-0433).
+    expect(find.text('Images (1)'), findsOneWidget);
     expect(lastSubject!.files.single.path, startsWith(store.inbox.path));
     expect(photo.existsSync(), isTrue, reason: 'the original stays');
     // Let go of the image file (Windows can't delete an open one).
@@ -173,7 +174,8 @@ void main() {
     await pumpT2(tester, def('img2pdf'));
     await tester.tap(find.text('Choose photos'));
     await settle(tester);
-    expect(find.text('IMG_0002.jpg'), findsOneWidget);
+    expect(find.text('Images (1)'), findsOneWidget);
+    expect(lastSubject!.files.single.name, 'IMG_0002.jpg');
     expect(lastSubject!.files.single.path, endsWith('.jpg'));
     expect(lastSubject!.files.single.path, startsWith(store.inbox.path));
     expect(photo.existsSync(), isTrue, reason: 'the original stays');
