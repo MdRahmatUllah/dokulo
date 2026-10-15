@@ -292,6 +292,21 @@ void main() {
     },
   );
 
+  testWidgets('a tablet turned to landscape keeps the scan; the controls '
+      'move to the right edge (DK-0652)', (tester) async {
+    await pump(tester, size: const Size(820, 1180), quad: found);
+    camera.frame();
+    await tester.pumpAndSettle();
+    await capture(tester);
+    expect(container.read(scanSessionProvider), hasLength(1));
+    tester.view.physicalSize = const Size(1366, 1024);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(container.read(scanSessionProvider), hasLength(1));
+    final shutter = tester.getCenter(find.byType(DkShutterButton));
+    expect(shutter.dx, greaterThan(1366 * 0.8));
+  });
+
   testWidgets('closing the screen closes the camera', (tester) async {
     await pump(tester);
     await tester.pumpWidget(const SizedBox());
@@ -311,6 +326,19 @@ void main() {
     (
       'quad_landscape',
       const Size(852, 393),
+      DkTokens.light,
+      const Locale('en'),
+    ),
+    // DK-0652: 24-tablet/tablet-scanner-portrait and -landscape.
+    (
+      'tablet_portrait',
+      const Size(820, 1180),
+      DkTokens.light,
+      const Locale('en'),
+    ),
+    (
+      'tablet_landscape',
+      const Size(1366, 1024),
       DkTokens.light,
       const Locale('en'),
     ),
