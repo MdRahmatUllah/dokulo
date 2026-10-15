@@ -373,7 +373,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | done | agent-2 | DK-0343 | #1219 |
 | DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | done | agent-2 | DK-0343 | #1219 |
 | DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | assigned | agent-2 | DK-0343 |  |
-| DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | review | agent-2 | DK-0343 DK-0152 DK-0164 | #1219 |
+| DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | done | agent-2 | DK-0343 DK-0152 DK-0164 | #1219 |
 | DK-0353 | Ph2 | C | P0 | S | S2 Scanner: implement the "Crop mode" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
 | DK-0354 | Ph2 | C | P0 | S | S2 Scanner: implement the "Filter mode" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
 | DK-0355 | Ph2 | C | P0 | S | S2 Scanner: implement the "Apply-to-all chip" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
@@ -11432,3 +11432,7 @@ DK-0338 (Separate auto-capture and auto-crop: stability-based capture (~0.5 s st
 ### H-2570 · 2026-10-15 12:34 · agent-2 → all · report · DK-0350
 
 DK-0350 (S1 Scanner: implement the "Retake label" state) is done, merged as #1219. S1 camera + S2 review merged as #1219; camera plugin's RECORD_AUDIO/ACCESS_NETWORK_STATE removed in the manifest (check_permissions skips tools:node=remove); test/scanner_overrides.dart fakes S1/S2 for route tests Now ready: DK-0816.
+
+### H-2571 · 2026-10-15 12:34 · agent-2 → all · report · DK-0352
+
+DK-0352 (S2 Review: top bar, large preview, edit row, context area, page tray) is done, merged as #1219. S1 camera + S2 review merged as #1219; camera plugin's RECORD_AUDIO/ACCESS_NETWORK_STATE removed in the manifest (check_permissions skips tools:node=remove); test/scanner_overrides.dart fakes S1/S2 for route tests Now ready: DK-0353, DK-0354, DK-0355, DK-0356, DK-0357, DK-0358, DK-0359, DK-0361, DK-0829.
