@@ -30,3 +30,44 @@ Approved deviations:
   catalogue's string, shared with T2 and F1.
 - One-page files sit centred on the canvas (pdfrx's layout for a page
   shorter than the screen); the frame shows a 12-page file from its top.
+
+## Default, hidden, loading, search, scan search, night, form, link, thumbnails (DK-0763 to DK-0777)
+
+Board: `test/qa/viewer_qa_test.dart`, the real V1 at 393 × 852 on the corpus
+lease (3 pages; the frames show 12), light, dark and German
+(`qa_viewer_<state>_<theme>.png`); frames in [viewer/](viewer/). Copy checked
+as values in EN and DE: "This PDF has fillable fields." / "Diese PDF hat
+ausfüllbare Felder.", "This scan has no searchable text." / "Dieser Scan hat
+keinen durchsuchbaren Text.", "Open {host} in your browser?" / "{host} im
+Browser öffnen?", "This is the only step that leaves Dokulo." / "Das ist der
+einzige Schritt, der Dokulo verlässt."
+
+| Task | Frame | Result |
+| --- | --- | --- |
+| DK-0763 | `viewer-default` | **DK-1111**: page 1 opens under the top bar |
+| DK-0764 | `viewer-hidden` | Match: only the page pill |
+| DK-0765 | `viewer-loading` | Match, 2 approved |
+| DK-0766 | `viewer-search` | Match, 1 approved |
+| DK-0767 | `viewer-searchnotext` | Match |
+| DK-0771 | `viewer-night` | Match (the bar overlap is DK-1111's) |
+| DK-0773 | `viewer-form` | **DK-1111**: the banner's first row is under the top bar |
+| DK-0775 | `viewer-link` | Match (`dk_viewer_dialogs_test`'s `viewer_link_*` golden: the dialog on its scrim) |
+| DK-0777 | `viewer-thumbs` | Match |
+
+Deviation, **DK-1111** (lane C): the canvas starts at y = 0 under the
+translucent top bar, so on open page 1's title is cut in half and the form
+banner shows only "Fill form". The frames start the first page and the banner
+below the bar (§17.1: pages may scroll under it later). Search is fine: its
+bar is laid out above the canvas.
+
+Approved:
+
+- Loading: the skeleton is page-shaped and white with a small spinner over the
+  canvas (DK-0297, DK-0620); the frame shows the spinner on the bare canvas.
+  §17.1 asks for a page-shaped block and a small spinner, which this is.
+- Loading and search show no page pill (the page count isn't known yet; in
+  search the bar's counter says where you are); the frames keep "1 / 12".
+- Thumbnails: the board shows the strip's frames (96 tall, the current page
+  ringed, numbers under); the page images render asynchronously and show as
+  placeholders in a widget test. `viewer_thumb_strip_test`'s goldens and the
+  DK-0296 pass cover the images.
