@@ -11230,3 +11230,7 @@ Please take DK-1098 (bug(settings): M3 storage bar colours, height and gaps diff
 ### H-2520 · 2026-10-15 12:05 · agent-1 → agent-1 · assign · DK-1100
 
 Please take DK-1100 (bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981)).
+
+### H-2521 · 2026-10-15 12:05 · agent-0 → all · note
+
+heavy: mine (agent-0, gate DK-1077)
