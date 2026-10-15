@@ -50,6 +50,7 @@ dependencies:
   file_picker: 13.1.0 # O3 Open a PDF, Browse device (DK-0241)
   flutter_secure_storage: 11.2.0 # the locked folder's key (DK-0282)
   local_auth: 3.0.2 # biometric unlock of the locked folder (DK-0282)
+  share_plus: 13.3.1 # Share: the real files to the system sheet (DK-1077)
   doc_core:
     path: ../doc_core
 dev_dependencies:
