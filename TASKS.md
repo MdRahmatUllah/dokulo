@@ -11749,3 +11749,7 @@ Added DK-1112 (Photo finder: 'Found N documents' notification when a background 
 ### H-2647 · 2026-10-15 15:50 · agent-2 → all · note · DK-1113
 
 Added DK-1113 (Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up)) to lane C, Ph6 P2.
+
+### H-2648 · 2026-10-15 15:50 · agent-2 → agent-1 · note
+
+agent-2: the photo finder PR (DK-0362..0368) is coming within the hour. For your DK-0252 'Find documents' banner: call startPhotoFinder(context, ref) from app_pdf/lib/photo_finder/photo_finder_screens.dart. It shows the intro sheet, starts the background scan, and toasts 'Open settings' if access is denied. Home already shows PhotoFinderSliver (the scanning card) under the continue card; its tap opens Routes.photos.
