@@ -172,17 +172,17 @@ Future<bool> pdfLocked(Ref ref, String path) async {
   }
 }
 
-/// A page (1-based) of the PDF at [path] at [dpi], for a close look
-/// (Compress's Before/After at 200 %, DK-0464). No retry: a page that can't
-/// be rendered keeps its skeleton.
+/// A [size] × [size] pixel square of page 1 of the PDF at [path], at 200 %
+/// (144 dpi), from a little inside its top left (Compress's Before/After,
+/// DK-0464): only that square is rendered, however big the page.
 @Riverpod(retry: _noRetry)
-Future<ui.Image> pdfPageImage(
-  Ref ref,
-  String path, {
-  int page = 1,
-  double dpi = 144,
-}) async {
-  final rendered = await PdfEngine.render(path, page - 1, dpi: dpi);
+Future<ui.Image> pdfCloseLook(Ref ref, String path, {int size = 200}) async {
+  final rendered = await PdfEngine.render(
+    path,
+    0,
+    dpi: 144,
+    region: (left: 0.12, top: 0.1, width: size, height: size),
+  );
   final done = Completer<ui.Image>();
   ui.decodeImageFromPixels(
     rendered.bgra,

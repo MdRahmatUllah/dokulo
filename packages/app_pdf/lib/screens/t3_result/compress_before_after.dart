@@ -20,10 +20,8 @@ class CompressBeforeAfter extends ConsumerStatefulWidget {
   /// The input and the output, as paths.
   final String before, after;
 
-  /// The crop's side, and where on the page it starts (a fraction of the
-  /// width and height: past the margin, into the text).
+  /// The crop's side.
   static const side = 200.0;
-  static const origin = Alignment(-0.7, -0.75);
 
   @override
   ConsumerState<CompressBeforeAfter> createState() =>
@@ -37,9 +35,13 @@ class _CompressBeforeAfterState extends ConsumerState<CompressBeforeAfter> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
-    final path = _after ? widget.after : widget.before;
-    // 144 dpi: 200 % of the page's 72 points per inch.
-    final image = ref.watch(pdfPageImageProvider(path)).value;
+    // Both, from the start: toggling doesn't render again, and Before
+    // stays the original even after Replace original writes over it.
+    final before = ref.watch(pdfCloseLookProvider(widget.before));
+    final after = ref.watch(pdfCloseLookProvider(widget.after));
+    // A page that can't be rendered (locked, gone): no comparison.
+    if (before.hasError || after.hasError) return const SizedBox.shrink();
+    final image = (_after ? after : before).value;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: t.space.s,
@@ -61,11 +63,7 @@ class _CompressBeforeAfterState extends ConsumerState<CompressBeforeAfter> {
                     ? const DkSkeleton.page()
                     : ColoredBox(
                         color: t.color.pageWhite,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          alignment: CompressBeforeAfter.origin,
-                          child: RawImage(image: image),
-                        ),
+                        child: RawImage(image: image, fit: BoxFit.none),
                       ),
               ),
             ),

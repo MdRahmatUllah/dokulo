@@ -99,10 +99,9 @@ final compressDefinition = ToolDefinition(
     final change = before == 0 ? 0 : ((after - before) * 100 / before).round();
     return ToolSummary(
       headline: formatBytes(after, locale),
-      delta: change == 0
-          ? null
-          // A minus sign, not a hyphen; the thin space before %.
-          : '(${change < 0 ? '−' : '+'}${change.abs()}$unitSpace%)',
+      // Only a saving, in the card's success green (a minus sign, the thin
+      // space before %); none for a file that is gone or didn't shrink.
+      delta: after == 0 || change >= 0 ? null : '(−${change.abs()}$unitSpace%)',
       sub: l.t3_from(
         [
           formatBytes(before, locale),

@@ -136,24 +136,33 @@ abstract final class PdfEngine {
       });
 
   /// Renders a page to BGRA pixels (white background), at [dpi] or scaled
-  /// to [width] pixels; give exactly one.
+  /// to [width] pixels; give exactly one. With [region], only that part:
+  /// [region]'s left and top as fractions of the page, its size in pixels
+  /// (a close look at a big page without rendering all of it).
   static Future<RenderedPage> render(
     String path,
     int page, {
     double? dpi,
     int? width,
     String? password,
+    ({double left, double top, int width, int height})? region,
   }) => _withDocument(path, password, (doc) async {
     assert((dpi == null) != (width == null), 'give dpi or width');
     final p = _page(doc, page);
     final scale = width != null ? width / p.width : dpi! / 72;
     final w = (p.width * scale).round();
     final height = (p.height * scale).round();
+    final x = region == null ? 0 : (w * region.left).round().clamp(0, w - 1);
+    final y = region == null
+        ? 0
+        : (height * region.top).round().clamp(0, height - 1);
     final image = await p.render(
+      x: x,
+      y: y,
       fullWidth: w.toDouble(),
       fullHeight: height.toDouble(),
-      width: w,
-      height: height,
+      width: region == null ? w : region.width.clamp(1, w - x),
+      height: region == null ? height : region.height.clamp(1, height - y),
     );
     if (image == null) {
       throw DocError(

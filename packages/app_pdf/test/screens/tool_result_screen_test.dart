@@ -195,7 +195,7 @@ void main() {
       containsAllInOrder([
         'Close',
         'Compress PDF',
-        contains('From'), // the result card
+        contains('From 8'), // the result card: From 8.4 MB · 3 pages
         'Before',
         'After',
         'File name',
@@ -230,11 +230,17 @@ void main() {
       'haptic; "Saved to Files › Taxes" with Open; then Done (DK-0381)', (
     tester,
   ) async {
-    tester.view.physicalSize = const Size(393, 1400);
+    // A phone's height: Before/After pushes the name and Save to down.
+    tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     final router = await pumpT3(tester);
     expect(find.text('Compress PDF'), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('Save to: Files › Taxes'),
+      100,
+      scrollable: find.byType(Scrollable).first,
+    );
     expect(find.text('Save to: Files › Taxes'), findsOneWidget);
     expect(bar(tester).label, 'Save');
 
