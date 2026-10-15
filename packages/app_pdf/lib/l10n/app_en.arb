@@ -2839,5 +2839,17 @@
   "settings_language_caption": "Changes immediately. No restart needed.",
   "@settings_language_caption": {
     "description": "M3 Language: under the choices (DK-0575)."
+  },
+  "appearance_theme": "Theme",
+  "@appearance_theme": {
+    "description": "M3 Appearance: the section over the theme tiles (DK-0574)."
+  },
+  "appearance_night": "Viewer night mode",
+  "@appearance_night": {
+    "description": "M3 Appearance: the switch row's title (DK-0574)."
+  },
+  "appearance_night_help": "Invert pages for reading in the dark",
+  "@appearance_night_help": {
+    "description": "M3 Appearance: under Viewer night mode (DK-0574)."
   }
 }

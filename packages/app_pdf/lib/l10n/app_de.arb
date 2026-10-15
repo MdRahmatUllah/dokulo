@@ -736,5 +736,8 @@
   "common_add": "Hinzufügen",
   "scan_saving": "Wird gespeichert…",
   "scan_save_failed": "Der Scan ließ sich nicht speichern. Deine Seiten sind noch da.",
-  "settings_language_caption": "Wird sofort übernommen. Kein Neustart nötig."
+  "settings_language_caption": "Wird sofort übernommen. Kein Neustart nötig.",
+  "appearance_theme": "Design",
+  "appearance_night": "Nachtmodus im Viewer",
+  "appearance_night_help": "Seiten zum Lesen im Dunkeln invertieren"
 }

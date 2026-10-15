@@ -17,6 +17,7 @@ import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/p1_organize/organize_screen.dart';
 import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/settings/appearance_settings_screen.dart';
 import '../screens/settings/files_settings_screen.dart';
 import '../screens/settings/language_settings_screen.dart';
 import '../screens/settings/scanning_settings_screen.dart';
@@ -237,6 +238,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                         'security' => const SecuritySettingsScreen(),
                         'files' => const FilesSettingsScreen(),
                         'language' => const LanguageSettingsScreen(),
+                        'appearance' => const AppearanceSettingsScreen(),
                         final page => PlaceholderScreen('M3', detail: page),
                       },
                     ),

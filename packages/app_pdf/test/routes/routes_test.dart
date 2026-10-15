@@ -106,7 +106,7 @@ void main() {
   // whether the tab bar shows.
   const coldStarts = {
     Routes.models: ('M2', true),
-    '/me/settings/appearance': ('M3 appearance', true),
+    '/me/settings/appearance': ('Appearance', true),
     '/tool/compress': ('Compress PDF', false),
   };
   for (final MapEntry(key: location, value: (screen, tabs))
