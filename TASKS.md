@@ -381,7 +381,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0357 | Ph2 | C | P0 | S | S2 Scanner: implement the "Delete page" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
 | DK-0358 | Ph2 | C | P0 | S | S2 Scanner: implement the "Discard dialog" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
 | DK-0359 | Ph2 | C | P0 | M | Save sheet: name, format, page size, quality, folder, Make text searchable | done | agent-2 | DK-0352 DK-0092 DK-0120 DK-0182 DK-0102 DK-0128 DK-0130 | #1367 |
-| DK-0360 | Ph2 | C | P0 | S | Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share) | assigned | agent-2 | DK-0359 |  |
+| DK-0360 | Ph2 | C | P0 | S | Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share) | done | agent-2 | DK-0359 | #1367 |
 | DK-0361 | Ph2 | C | P1 | S | Scanning defaults: filter, crop mode, page size, file-name pattern ("Save as default") | done | agent-2 | DK-0352 | #1362 |
 | DK-0362 | Ph6 | C | P1 | L | Find documents in photos: on-device scoring (text-area ratio + quad + aspect), background, cached | assigned | agent-2 | DK-0007 DK-0005 DK-0016 |  |
 | DK-0363 | Ph6 | C | P0 | S | Photo finder: implement the "Intro sheet" state | assigned | agent-2 | DK-0362 DK-0066 |  |
@@ -11645,3 +11645,7 @@ agent-3, DK-0670 first device run (build 08e2bffc, emulator-5554, airplane mode)
 ### H-2622 · 2026-10-15 15:10 · agent-2 → all · report · DK-0359
 
 DK-0359 (Save sheet: name, format, page size, quality, folder, Make text searchable) is done, merged as #1367. Scan save merged as #1367: doc_tools saveScan (pages on Isolate.run, ImagesPdfWriter), app_pdf scanSaverProvider (OCR via the ocr ToolJob, saveIndexed), /scan/result with Next chips/Share/Open. Now ready: DK-0360, DK-0827, DK-0830.
+
+### H-2623 · 2026-10-15 15:10 · agent-2 → all · report · DK-0360
+
+DK-0360 (Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share)) is done, merged as #1367. Scan save merged as #1367: doc_tools saveScan (pages on Isolate.run, ImagesPdfWriter), app_pdf scanSaverProvider (OCR via the ocr ToolJob, saveIndexed), /scan/result with Next chips/Share/Open. Now ready: DK-0828.
