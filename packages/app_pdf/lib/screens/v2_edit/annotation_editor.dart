@@ -116,6 +116,9 @@ class AnnotationEditor extends ChangeNotifier {
         if (i >= 0) list[i] = list[i].copyWith(f(list[i].annot));
       });
 
+  /// Changes an annotation (a text box's text, a note's), undoably.
+  void update(AnnotRef ref, PdfAnnot Function(PdfAnnot) f) => _replace(ref, f);
+
   /// Moves an annotation by ([dx], [dy]) points.
   void move(AnnotRef ref, double dx, double dy) =>
       _replace(ref, (a) => translate(a, dx, dy));

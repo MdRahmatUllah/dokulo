@@ -9,8 +9,8 @@ import 'dk_segmented.dart';
 import 'dk_slider.dart';
 import 'dk_stepper.dart';
 
-/// The markup tools that have options.
-enum DkMarkupKind { pen, highlighter, text, shape, eraser }
+/// The markup tools that have options. Note: its colour only.
+enum DkMarkupKind { pen, highlighter, text, shape, eraser, note }
 
 /// What a shape tool draws.
 enum DkShapeKind { rectangle, ellipse, line, arrow }

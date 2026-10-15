@@ -7,13 +7,18 @@ import 'package:go_router/go_router.dart';
 
 import '../../components/dk_editor_bars.dart';
 import '../../components/dk_icon.dart';
+import '../../components/dk_button.dart';
 import '../../components/dk_pdf_canvas.dart';
+import '../../components/dk_sheet.dart';
+import '../../components/dk_text_field.dart';
+import '../../components/dk_tool_options_sheet.dart';
 import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../providers/file_providers.dart';
 import '../../providers/files_providers.dart';
+import '../../providers/prefs_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../sign/signatures_sheet.dart';
@@ -34,6 +39,31 @@ const _strip = <EditTool?>[
   EditTool.eraser,
 ];
 
+/// The tools with an options sheet, and which (DK-0315..DK-0320). Pan has
+/// none.
+const _toolKinds = {
+  EditTool.pen: DkMarkupKind.pen,
+  EditTool.highlighter: DkMarkupKind.highlighter,
+  EditTool.text: DkMarkupKind.text,
+  EditTool.shapes: DkMarkupKind.shape,
+  EditTool.note: DkMarkupKind.note,
+  EditTool.eraser: DkMarkupKind.eraser,
+};
+
+/// Where the tools' last-used options are kept.
+const _prefsKey = 'edit.options';
+
+List<(IconData, String)> _labels(AppLocalizations l) => [
+  (DkIcons.pan, l.edit_pan),
+  (DkIcons.pen, l.edit_pen),
+  (DkIcons.highlighter, l.edit_highlighter),
+  (DkIcons.textBox, l.edit_text),
+  (DkIcons.shape, l.edit_shapes),
+  (DkIcons.note, l.edit_note),
+  (DkIcons.tool('sign'), l.edit_sign),
+  (DkIcons.eraser, l.edit_eraser),
+];
+
 /// V2, edit mode (DK-0313; UI spec §17.2, design `07-edit/*`): the editing
 /// top bar ("Editing", Cancel, Done), the pages at full brightness under a
 /// 2 dp `color.primary` line that says edit mode is on, each page's
@@ -44,7 +74,9 @@ const _strip = <EditTool?>[
 /// Done writes the annotations into a new copy, keeps what the file was as
 /// a version (Info → Versions) and says "Saved · Undo". Cancel (or back)
 /// with changes asks "Discard your changes?" first; without, it just
-/// leaves. Reading mode (V1) never creates marks. [fromSign]: entered from
+/// leaves. Reading mode (V1) never creates marks. A second tap on the
+/// selected tool opens its options, remembered across launches; a placed
+/// text box or note asks for its text. [fromSign]: entered from
 /// Sign, so Pan is selected and the signatures sheet opens.
 class EditScreen extends ConsumerStatefulWidget {
   const EditScreen({super.key, required this.fileId, this.fromSign = false});
@@ -68,7 +100,11 @@ class _EditScreenState extends ConsumerState<EditScreen> {
 
   /// The file's row is gone (deleted, or a stale link).
   var _missing = false;
-  final _style = const EditStyle();
+
+  /// Each tool's options, last used first (kept in [prefsProvider]).
+  late final Map<EditTool, DkToolOptions> _options = {
+    for (final tool in _toolKinds.keys) tool: _loadOptions(tool),
+  };
 
   @override
   void initState() {
@@ -94,6 +130,8 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     final store = await ref.read(fileStoreProvider.future);
     final view = await store.newTempFile('view-${file.name}');
     await File(file.path).copy(view.path);
+    // The tools' last-used options, before the strip is used.
+    await ref.read(prefsProvider.future);
     final info = await PdfEngine.inspect(file.path);
     final read = <int, List<PageAnnot>>{
       for (var p = 0; p < info.pageCount; p++)
@@ -114,8 +152,114 @@ class _EditScreenState extends ConsumerState<EditScreen> {
       _sign();
       return;
     }
+    // A second tap on the selected tool: its options (DK-0314..DK-0320).
+    if (index == _selected && _toolKinds.containsKey(tool)) {
+      _openOptions(tool, index);
+      return;
+    }
     setState(() => _selected = index);
     _editor!.tool = tool;
+  }
+
+  DkToolOptions _loadOptions(EditTool tool) {
+    final saved = ref.read(prefsProvider).value?['$_prefsKey.${tool.name}'];
+    final base = _defaults(tool);
+    if (saved is! Map) return base;
+    return base.copyWith(
+      color: saved['color'] is int ? Color(saved['color'] as int) : null,
+      thickness: (saved['thickness'] as num?)?.toDouble(),
+      opacity: (saved['opacity'] as num?)?.toDouble(),
+      fontSize: saved['fontSize'] as int?,
+      shape: DkShapeKind.values.asNameMap()[saved['shape']],
+      eraser: DkEraserMode.values.asNameMap()[saved['eraser']],
+    );
+  }
+
+  DkToolOptions _defaults(EditTool tool) {
+    final m = context.tokens.markup;
+    return switch (tool) {
+      EditTool.highlighter => DkToolOptions(color: m.yellow),
+      EditTool.shapes => DkToolOptions(color: m.red, thickness: 2),
+      EditTool.note => DkToolOptions(color: m.yellow),
+      _ => DkToolOptions(color: m.black, thickness: 2),
+    };
+  }
+
+  Future<void> _openOptions(EditTool tool, int index) async {
+    final l = AppLocalizations.of(context);
+    await showDkSheet<void>(
+      context,
+      title: _labels(l)[index].$2,
+      body: StatefulBuilder(
+        builder: (context, setSheet) => DkToolOptionsSheet(
+          kind: _toolKinds[tool]!,
+          options: _options[tool]!,
+          onChanged: (o) {
+            setSheet(() {});
+            setState(() => _options[tool] = o);
+            ref.read(prefsProvider.notifier).set('$_prefsKey.${tool.name}', {
+              'color': o.color.toARGB32(),
+              'thickness': o.thickness,
+              'opacity': o.opacity,
+              'fontSize': o.fontSize,
+              'shape': o.shape.name,
+              'eraser': o.eraser.name,
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  /// The overlay's style from the tools' options.
+  EditStyle get _style {
+    final pen = _options[EditTool.pen]!,
+        hi = _options[EditTool.highlighter]!,
+        text = _options[EditTool.text]!,
+        shapes = _options[EditTool.shapes]!;
+    return EditStyle(
+      penColor: pen.color.toARGB32(),
+      penWidth: pen.thickness,
+      highlighterColor: hi.color.withValues(alpha: hi.opacity).toARGB32(),
+      shape: shapes.shape,
+      shapeColor: shapes.color.toARGB32(),
+      shapeWidth: shapes.thickness,
+      textColor: text.color.toARGB32(),
+      fontSize: text.fontSize.toDouble(),
+      noteColor: _options[EditTool.note]!.color.toARGB32(),
+      eraseObjects: _options[EditTool.eraser]!.eraser == DkEraserMode.object,
+    );
+  }
+
+  /// A text box or a note was placed: type its text (DK-0317, DK-0319).
+  Future<void> _placed(AnnotRef ref) async {
+    final editor = _editor!;
+    final annot = editor.selectedAnnot?.annot;
+    final l = AppLocalizations.of(context);
+    final note = annot is NoteAnnot;
+    if (annot is! FreeTextAnnot && !note) return;
+    final text = await showDkSheet<String>(
+      context,
+      title: note ? l.edit_note : l.edit_text,
+      body: _TextSheet(
+        text: annot is FreeTextAnnot ? annot.text : annot!.note,
+        done: l.common_done,
+      ),
+    );
+    if (text == null) return;
+    editor.update(
+      ref,
+      (a) => switch (a) {
+        FreeTextAnnot(:final rect, :final fontSize, :final color) =>
+          FreeTextAnnot(rect, text, fontSize: fontSize, color: color),
+        NoteAnnot(:final at, :final color) => NoteAnnot(
+          at,
+          note: text,
+          color: color,
+        ),
+        _ => a,
+      },
+    );
   }
 
   /// Sign: Pan, and the signatures sheet. ponytail: placing the chosen
@@ -169,16 +313,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final editor = _editor, file = _file;
-    final labels = [
-      (DkIcons.pan, l.edit_pan),
-      (DkIcons.pen, l.edit_pen),
-      (DkIcons.highlighter, l.edit_highlighter),
-      (DkIcons.textBox, l.edit_text),
-      (DkIcons.shape, l.edit_shapes),
-      (DkIcons.note, l.edit_note),
-      (DkIcons.tool('sign'), l.edit_sign),
-      (DkIcons.eraser, l.edit_eraser),
-    ];
+    final labels = _labels(l);
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, _) {
@@ -221,6 +356,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
                           page: page,
                           pageSize: size,
                           style: _style,
+                          onPlaced: _placed,
                         ),
                       ),
                     ),
@@ -243,4 +379,39 @@ class _EditScreenState extends ConsumerState<EditScreen> {
       ),
     );
   }
+}
+
+/// A text box's or a note's text: a field and Done. It owns its controller,
+/// so the sheet can animate away after Done.
+class _TextSheet extends StatefulWidget {
+  const _TextSheet({required this.text, required this.done});
+  final String text, done;
+
+  @override
+  State<_TextSheet> createState() => _TextSheetState();
+}
+
+class _TextSheetState extends State<_TextSheet> {
+  late final _field = TextEditingController(text: widget.text);
+
+  @override
+  void dispose() {
+    _field.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    spacing: context.tokens.space.l,
+    children: [
+      DkTextField(controller: _field, autofocus: true),
+      DkButton(
+        label: widget.done,
+        expand: true,
+        onPressed: () => Navigator.of(context).pop(_field.text),
+      ),
+    ],
+  );
 }
