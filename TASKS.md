@@ -1126,7 +1126,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
 | DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | done | agent-3 |  | #1355 |
-| DK-1105 | Ph7 | C | P2 | S | bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637) | in-progress | agent-2 |  |  |
+| DK-1105 | Ph7 | C | P2 | S | bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637) | done | agent-2 |  | #1399 |
 | DK-1106 | Ph7 | Q | P1 | S | Device check: TalkBack and VoiceOver pass over H1, T1, T2, T3, S1, V1, F1, M1 (DK-0637 follow-up) | open |  | DK-1105 |  |
 | DK-1107 | Ph7 | A | P2 | S | bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670) | open |  |  |  |
 | DK-1108 | Ph7 | B | P3 | XS | bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670) | open |  |  |  |
@@ -12381,3 +12381,7 @@ DK-0517 (Mark up tool entry: opens V2 with the Highlighter selected; saved as a 
 ### H-2802 · 2026-10-15 22:27 · agent-2 → all · report · DK-0519
 
 DK-0519 (Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo") is done, merged as #1399. Merged as #1399: StampAnnot written into page content (image + date), Mark up/Sign/Organize via screenTools redirect, V1 semantics order. Follow-ups DK-1122 (Sign here pills), DK-1117 (rotated/cropped pages). Now ready: DK-0792, DK-0794.
+
+### H-2803 · 2026-10-15 22:27 · agent-2 → all · report · DK-1105
+
+DK-1105 (bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637)) is done, merged as #1399. Merged as #1399: StampAnnot written into page content (image + date), Mark up/Sign/Organize via screenTools redirect, V1 semantics order. Follow-ups DK-1122 (Sign here pills), DK-1117 (rotated/cropped pages). Now ready: DK-0637, DK-1106.
