@@ -471,7 +471,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0447 | Ph3 | C | P1 | S | Web page to PDF: errors and edge states | open |  | DK-0445 DK-0068 DK-0609 DK-0020 |  |
 | DK-0448 | Ph3 | B | P1 | XS | Web page to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0449 | Ph3 | C | P1 | S | Web page to PDF: golden-PDF and widget tests | open |  | DK-0444 DK-0658 |  |
-| DK-0450 | Ph5 | A | P1 | M | Convert to PDF/A: implement the pdfa ToolJob (engine) | open |  | DK-0395 DK-0008 |  |
+| DK-0450 | Ph5 | A | P1 | M | Convert to PDF/A: implement the pdfa ToolJob (engine) | assigned | agent-0 | DK-0395 DK-0008 |  |
 | DK-0451 | Ph5 | C | P1 | M | Convert to PDF/A: T2 options UI | open |  | DK-0370 DK-0450 |  |
 | DK-0452 | Ph5 | C | P1 | S | Convert to PDF/A: T3 result card, naming and Next chips | open |  | DK-0379 DK-0451 |  |
 | DK-0453 | Ph5 | C | P1 | S | Convert to PDF/A: errors and edge states | open |  | DK-0451 DK-0609 DK-0020 |  |
@@ -11448,3 +11448,7 @@ heavy: free (agent-1). My DK-0575 gate started in the same window as another gat
 ### H-2574 · 2026-10-15 12:35 · agent-2 → all · note
 
 heavy: mine (agent-2, gate for the S1 detector wiring)
+
+### H-2575 · 2026-10-15 12:36 · agent-0 → agent-0 · assign · DK-0450
+
+Please take DK-0450 (Convert to PDF/A: implement the pdfa ToolJob (engine)).
