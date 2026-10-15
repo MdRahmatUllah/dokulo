@@ -844,7 +844,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | assigned | agent-3 | DK-0343 |  |
 | DK-0821 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-review (S2 – default) | assigned | agent-3 | DK-0352 DK-0356 |  |
 | DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | assigned | agent-3 | DK-0353 |  |
-| DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-2 | DK-0339 DK-0354 |  |
+| DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-3 | DK-0339 DK-0354 |  |
 | DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | assigned | agent-2 | DK-0355 |  |
 | DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | assigned | agent-2 | DK-0357 |  |
 | DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-2 | DK-0358 |  |
@@ -12033,3 +12033,7 @@ Please take DK-0821 (Visual QA: scanner-review-review (S2 – default)).
 ### H-2717 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0822
 
 Please take DK-0822 (Visual QA: scanner-review-crop (S2 – crop + magnifier)).
+
+### H-2718 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0823
+
+Please take DK-0823 (Visual QA: scanner-review-filter (S2 – filter strip)).
