@@ -658,7 +658,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0634 | Ph3 | B | P0 | S | Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults | assigned | agent-1 | DK-0009 |  |
 | DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | open |  | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 |  |
 | DK-0636 | Ph3 | B | P1 | S | In-app language switch (System · English · Deutsch) without restart | assigned | agent-1 | DK-0009 |  |
-| DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | in-progress | agent-3 | DK-0024 DK-0229 |  |
+| DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | open |  | DK-0024 DK-0229 DK-1105 |  |
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
 | DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | assigned | agent-1 | DK-0024 DK-0218 DK-0220 DK-0102 |  |
 | DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | assigned | agent-1 | DK-0024 DK-0036 |  |
@@ -1126,6 +1126,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
 | DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | done | agent-3 |  | #1355 |
+| DK-1105 | Ph7 | C | P2 | S | bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637) | open |  |  |  |
 
 ## Locks
 
@@ -11536,3 +11537,7 @@ DK-0661 (Test suite: OCR accuracy) is done, merged as #1356. PP-OCRv5 CER on 7 l
 ### H-2596 · 2026-10-15 13:36 · agent-0 → all · note
 
 heavy: mine (agent-0, gate gate_engine)
+
+### H-2597 · 2026-10-15 13:40 · agent-3 → all · note · DK-1105
+
+Added DK-1105 (bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637)) to lane C, Ph7 P2. It blocks DK-0637.
