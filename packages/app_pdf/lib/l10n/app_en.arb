@@ -117,6 +117,10 @@
   "@common_more_options": {
     "description": "Copy deck (UI spec §27): common_more_options."
   },
+  "common_apply": "Apply",
+  "@common_apply": {
+    "description": "S2 crop mode: keeps the crop (DK-0353)."
+  },
   "common_apply_all": "Apply to all pages",
   "@common_apply_all": {
     "description": "Copy deck (UI spec §27): common_apply_all."
@@ -965,6 +969,62 @@
       }
     }
   },
+  "scan_auto_capture_desc": "Take the photo when the page is steady",
+  "@scan_auto_capture_desc": {
+    "description": "Scanning settings: what Auto-capture does."
+  },
+  "scan_auto_crop": "Auto-crop",
+  "@scan_auto_crop": {
+    "description": "Scanning settings: crop each photo to the detected page."
+  },
+  "scan_auto_crop_desc": "Crop to the detected page",
+  "@scan_auto_crop_desc": {
+    "description": "Scanning settings: what Auto-crop does."
+  },
+  "scan_default_filter": "Default filter",
+  "@scan_default_filter": {
+    "description": "Scanning settings: the filter a new page gets."
+  },
+  "scan_page_size": "Page size",
+  "@scan_page_size": {
+    "description": "Scanning settings: the page size a scan is saved at."
+  },
+  "scan_page_auto": "Auto",
+  "@scan_page_auto": {
+    "description": "Page size: as photographed."
+  },
+  "scan_page_a4": "A4",
+  "@scan_page_a4": {
+    "description": "Page size A4."
+  },
+  "scan_page_letter": "Letter",
+  "@scan_page_letter": {
+    "description": "Page size US Letter."
+  },
+  "scan_more_settings": "More scanning settings",
+  "@scan_more_settings": {
+    "description": "S1 quick settings: opens Settings → Scanning."
+  },
+  "filter_original": "Original",
+  "@filter_original": {
+    "description": "Scan filter: as photographed."
+  },
+  "filter_auto_colour": "Auto colour",
+  "@filter_auto_colour": {
+    "description": "Scan filter: colour boost."
+  },
+  "filter_greyscale": "Greyscale",
+  "@filter_greyscale": {
+    "description": "Scan filter: greyscale."
+  },
+  "filter_black_white": "Black & white",
+  "@filter_black_white": {
+    "description": "Scan filter: black and white."
+  },
+  "filter_remove_shadows": "Remove shadows",
+  "@filter_remove_shadows": {
+    "description": "Scan filter: shadow removal."
+  },
   "camera_review": "{count, plural, =1{Review 1 page} other{Review {count} pages}}",
   "@camera_review": {
     "description": "S1 page stack: opens S2 with the captured pages (screen readers).",
@@ -1395,6 +1455,92 @@
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
   "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "camera_id_front": "Front side",
+  "@camera_id_front": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_id_back": "Turn the card over",
+  "@camera_id_back": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_book_spine": "Align the spine with the line",
+  "@camera_book_spine": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@camera_pages": {"description": "S1 mode overlays (DK-0346/0347/0348).", "placeholders": {"count": {"type": "int"}}},
+  "scan_brightness": "Brightness",
+  "@scan_brightness": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "scan_contrast": "Contrast",
+  "@scan_contrast": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "toast_applied_all": "Applied to all pages",
+  "@toast_applied_all": {
+    "description": "S2 filter mode (DK-0354/0355)."
+  },
+  "scan_save_title": "Save scan",
+  "@scan_save_title": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_name": "Name",
+  "@scan_name": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_format": "Format",
+  "@scan_format": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality": "Quality",
+  "@scan_quality": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_smaller": "Smaller",
+  "@scan_quality_smaller": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_smaller_desc": "For upload limits",
+  "@scan_quality_smaller_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_recommended": "Recommended",
+  "@scan_quality_recommended": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_recommended_desc": "Sharp text",
+  "@scan_quality_recommended_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_best": "Best",
+  "@scan_quality_best": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_quality_best_desc": "For printing",
+  "@scan_quality_best_desc": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_folder": "Folder",
+  "@scan_folder": {"description": "The scan's Save sheet (DK-0359)."},
+  "scan_save_pdf": "{count, plural, =1{Save PDF · 1 page} other{Save PDF · {count} pages}}",
+  "@scan_save_pdf": {"description": "The scan's Save sheet (DK-0359).", "placeholders": {"count": {"type": "int"}}},
+  "scan_save_images": "{count, plural, =1{Save 1 image} other{Save {count} images}}",
+  "@scan_save_images": {"description": "The scan's Save sheet (DK-0359).", "placeholders": {"count": {"type": "int"}}},
+  "settings_scanning": "Scanning",
+  "@settings_scanning": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_file_name": "File name",
+  "@settings_file_name": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_name_pattern": "Name pattern",
+  "@settings_name_pattern": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_insert": "Insert",
+  "@settings_insert": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_token_date": "date",
+  "@settings_token_date": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_token_time": "time",
+  "@settings_token_time": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_token_number": "number",
+  "@settings_token_number": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_preview": "Preview",
+  "@settings_preview": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "settings_ocr_language": "Text recognition language",
+  "@settings_ocr_language": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_original_desc": "As photographed",
+  "@filter_original_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_auto_colour_desc": "Best for most documents",
+  "@filter_auto_colour_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_greyscale_desc": "Smaller files",
+  "@filter_greyscale_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_black_white_desc": "Crisp text, smallest files",
+  "@filter_black_white_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_remove_shadows_desc": "For photos taken at an angle",
+  "@filter_remove_shadows_desc": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "filter_default_footer": "Applies to the next scan. Long-press a filter while scanning to change it there.",
+  "@filter_default_footer": {"description": "Settings \u2192 Scanning (DK-0361)."},
+  "scan_saved": "Scan saved",
+  "@scan_saved": {"description": "The scan's result screen (DK-0360)."},
+  "scan_result_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@scan_result_pages": {"description": "The scan's result screen (DK-0360).", "placeholders": {"count": {"type": "int"}}},
+  "scan_text_found": "Text found on {found} of {total} pages",
+  "@scan_text_found": {"description": "The scan's result screen (DK-0360).", "placeholders": {"found": {"type": "int"}, "total": {"type": "int"}}},
+  "scan_file_name": "File name",
+  "@scan_file_name": {"description": "The scan's result screen (DK-0360)."},
+  "scan_next": "Next",
+  "@scan_next": {"description": "The scan's result screen (DK-0360)."},
   "link_broken_title": "This link doesn't work any more",
   "@link_broken_title": {"description": "A deep link to no route or tool (DK-0236)."},
   "link_broken_body": "What it pointed to may have been moved or deleted.",
@@ -2693,6 +2839,14 @@
   "common_add": "Add",
   "@common_add": {
     "description": "A compact Add button (T2's image strip)."
+  },
+  "scan_saving": "Saving…",
+  "@scan_saving": {"description": "S2 while the scan saves (DK-0359)."},
+  "scan_save_failed": "Couldn't save the scan. Your pages are still here.",
+  "@scan_save_failed": {"description": "S2 when saving the scan failed (DK-0359)."},
+  "settings_language_caption": "Changes immediately. No restart needed.",
+  "@settings_language_caption": {
+    "description": "M3 Language: under the choices (DK-0575)."
   },
   "home_scan_unsaved": "{n, plural, =1{Scan of 1 page not saved} other{Scan of {n} pages not saved}}",
   "@home_scan_unsaved": {

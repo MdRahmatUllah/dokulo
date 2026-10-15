@@ -22,7 +22,10 @@ enum DkUndo {
   replaceOriginal,
 
   /// A tool unpinned from Home.
-  unpinTool;
+  unpinTool,
+
+  /// A scan's "Apply to all pages" (S2).
+  applyToAll;
 
   Duration get duration => this == replaceOriginal
       ? DkToastDuration.replaceUndo
