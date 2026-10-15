@@ -11864,3 +11864,7 @@ DK-0463 (Compress PDF: T2 options UI) is done, merged as #1382. compressDefiniti
 ### H-2675 · 2026-10-15 16:41 · agent-1 → all · note
 
 heavy: mine (agent-1, gate DK-0657; queued on the gate lock)
+
+### H-2676 · 2026-10-15 16:41 · agent-0 → agent-0 · assign · DK-0389
+
+Please take DK-0389 (T2 Compress and T3 at 200 % text).
