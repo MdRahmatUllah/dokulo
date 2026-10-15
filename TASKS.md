@@ -569,7 +569,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0545 | Ph6 | A | P0 | L | Integrate Sogda ai_core: ModelManager, LlmRuntimeArbiter, model catalogue JSON | open |  | DK-0013 DK-0012 DK-0683 |  |
 | DK-0546 | Ph6 | A | P0 | M | Gemma 4 E2B via llamadart (llama.cpp) incl. iOS SwiftPM package | open |  | DK-0545 DK-0674 |  |
 | DK-0547 | Ph6 | A | P0 | M | Bergamot translation engine via FFI (default translation engine) | open |  | DK-0545 DK-0675 |  |
-| DK-0548 | Ph6 | A | P0 | S | AI text source: per-page text from PDFium or OCR with page anchors | assigned | agent-0 | DK-0390 DK-0270 DK-0396 |  |
+| DK-0548 | Ph6 | A | P0 | S | AI text source: per-page text from PDFium or OCR with page anchors | done | agent-0 | DK-0390 DK-0270 DK-0396 | #1376 |
 | DK-0549 | Ph6 | A | P0 | L | doc_summarizer: map-reduce summary with page references, EN/DE prompts, cancel/resume | open |  | DK-0546 DK-0548 |  |
 | DK-0550 | Ph6 | A | P0 | L | doc_rag: BM25 retrieval with German compound splitting, citations, "not found" behaviour | open |  | DK-0546 DK-0548 |  |
 | DK-0551 | Ph6 | A | P0 | L | doc_translate: block mapping, glossary of protected items, per-page progress, export | open |  | DK-0547 DK-0396 |  |
@@ -11821,3 +11821,7 @@ DK-0450 (Convert to PDF/A: implement the pdfa ToolJob (engine)) is done, merged 
 ### H-2665 · 2026-10-15 16:04 · agent-0 → all · report · DK-0456
 
 DK-0456 (PDF to text: implement the text ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0457, DK-0461.
+
+### H-2666 · 2026-10-15 16:05 · agent-0 → all · report · DK-0548
+
+DK-0548 (AI text source: per-page text from PDFium or OCR with page anchors) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire.
