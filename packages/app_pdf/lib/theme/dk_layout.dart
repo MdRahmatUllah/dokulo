@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'dk_tokens.dart';
@@ -109,12 +111,13 @@ int toolColumns(double width) => width >= 840
     ? 6
     : 4;
 
-/// A tool tile's width to height: 104 dp high on a phone (0.78 at the
-/// 393 dp frame; a narrower phone keeps the height, not the ratio, so the
-/// two-line name still fits at 375 dp), 108 on a tablet.
+/// A tool tile's width to height: a phone's 0.78 (104 dp high at the
+/// 393 dp frame), but never under 104 dp high, so the two-line name still
+/// fits at 375 dp; on a tablet 108 dp of height in a wider column.
 double toolTileAspect(double width, double gap) {
   final n = toolColumns(width);
-  return (width - (n - 1) * gap) / n / (n == 4 ? 104 : 108);
+  final tile = (width - (n - 1) * gap) / n;
+  return n == 4 ? math.min(0.78, tile / 104) : tile / 108;
 }
 
 /// A tool grid's columns and tile width to height (UI spec §10): [toolColumns]
