@@ -834,7 +834,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | assigned | agent-3 | DK-0338 |  |
 | DK-0811 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-flash (flash menu open) | assigned | agent-3 | DK-0345 |  |
 | DK-0812 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idfront (ID card – front) | assigned | agent-2 | DK-0340 DK-0346 |  |
-| DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | assigned | agent-2 | DK-0340 |  |
+| DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | assigned | agent-3 | DK-0340 |  |
 | DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | assigned | agent-2 | DK-0341 DK-0347 |  |
 | DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | assigned | agent-2 | DK-0348 |  |
 | DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-2 | DK-0350 |  |
@@ -11888,3 +11888,7 @@ Please take DK-0810 (Visual QA: scanner-camera-countdown (auto-capture countdown
 ### H-2681 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0811
 
 Please take DK-0811 (Visual QA: scanner-camera-flash (flash menu open)).
+
+### H-2682 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0813
+
+Please take DK-0813 (Visual QA: scanner-camera-idback (ID card – turn over)).
