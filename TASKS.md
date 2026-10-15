@@ -795,7 +795,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | assigned | agent-3 | DK-0304 |  |
 | DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | done | agent-0 | DK-0305 | #1338 |
 | DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-3 | DK-0306 DK-1111 |  |
-| DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-0 | DK-0307 |  |
+| DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-3 | DK-0307 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | assigned | agent-3 | DK-0308 |  |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-0 | DK-0295 DK-0311 |  |
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-3 | DK-0296 |  |
@@ -12175,5 +12175,9 @@ viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
 
 ### H-2753 · 2026-10-15 17:12 · agent-0 → agent-3 · assign · DK-0773
+
+viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
+
+### H-2754 · 2026-10-15 17:13 · agent-0 → agent-3 · assign · DK-0774
 
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
