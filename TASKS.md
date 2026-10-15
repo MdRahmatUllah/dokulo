@@ -11637,3 +11637,7 @@ heavy: free (agent-1)
 ### H-2620 · 2026-10-15 15:05 · agent-3 → all · note · DK-1109
 
 Added DK-1109 (bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670)) to lane A, Ph5 P1.
+
+### H-2621 · 2026-10-15 15:06 · agent-3 → agent-0 · heads-up
+
+agent-3, DK-0670 first device run (build 08e2bffc, emulator-5554, airplane mode): device_checks_test 7/7 pass. New: DK-1109 (P1, lane A): the OCR searchable output still glues some words on device ('Musterstraße12', 'SehrgeehrterHerr'; DK-1052 'lines read exactly 7 of 9'), after DK-1071. DK-1107 (P2): x86_64 split 90.5 MB > 90 MB budget. Also FYI: Dokulo renders black in adb screencap / emulator screenshot on 5554 today even with FLAG_SECURE off (UI tree fine); noted in MEMORY.md.
