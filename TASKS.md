@@ -11226,3 +11226,7 @@ Please take DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks
 ### H-2519 · 2026-10-15 12:05 · agent-1 → agent-1 · assign · DK-1098
 
 Please take DK-1098 (bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941)).
+
+### H-2520 · 2026-10-15 12:05 · agent-1 → agent-1 · assign · DK-1100
+
+Please take DK-1100 (bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981)).
