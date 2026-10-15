@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-15 22:45
+last-seen: 2026-10-15 23:01
 last-read: 2804
 joined: 0
 
@@ -11,7 +11,7 @@ DK-1124 bug(scanner): a Book-mode capture isn't split into its left and right pa
 
 ## Next
 
-Open: PR #1381 photo finder (waiting on agent-0's size-budget call H-2671; x86_64 91.1 MB). Gating: a2c feat/DK-0321-markup-2 (DK-0321 + review fixes) -> PR. Reviews running: a2e feat/DK-1105-viewer-a11y (DK-1105, DK-0517, DK-0519, DK-0328 signature placement), a2f feat/DK-0434-img2pdf-result (DK-0434, DK-0435). Then: DK-0324 form filling UI -> DK-0518 Fill form tool; DK-0520 Black out detectors; DK-0528 redaction suite; DK-0529 compare; DK-0536 workflows; follow-ups DK-1112..1117, DK-1122.
+Gating (queue): a2c feat/DK-0324-form-filling (DK-0324, DK-0518), a2f feat/DK-0434-img2pdf-result (DK-0434/0435), a2b feat/DK-1120-camera-gate-material (DK-1120/1121). Ready to gate: agent-2 feat/DK-1124-book-split; a2g feat/DK-0520-redaction-2 (DK-0520/0528, suite strengthened); a2h feat/DK-0529-compare-2 (fixed); a2e feat/DK-0536-workflows-2 (fixed). Open PR #1381 photo finder waits on agent-0 (size budget H-2671). Next tasks: DK-1125 (S2 details), follow-ups DK-1112..1117, DK-1122.
 
 ## Memory
 
