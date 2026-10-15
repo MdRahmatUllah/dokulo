@@ -349,7 +349,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | done | agent-2 | DK-0282 | #1241 |
 | DK-0326 | Ph4 | C | P0 | M | Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state | done | agent-2 | DK-0325 DK-0208 DK-0182 DK-0064 | #1241 |
 | DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | done | agent-2 | DK-0325 DK-0206 | #1241 |
-| DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | assigned | agent-2 | DK-0312 DK-0325 DK-0162 |  |
+| DK-0328 | Ph4 | C | P0 | M | Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills | done | agent-2 | DK-0312 DK-0325 DK-0162 | #1399 |
 | DK-0329 | Ph3 | C | P0 | L | P1 Organize pages screen: top bar, sub-bar, page grid, FAB, selection bar | done | agent-0 | DK-0154 DK-0293 DK-0164 DK-0172 | #1244 |
 | DK-0330 | Ph3 | C | P0 | M | Page operations engine: move, delete, duplicate, rotate, insert blank/from file (PDFium) | done | agent-0 | DK-0007 | #1240 |
 | DK-0331 | Ph3 | C | P0 | S | P1 Organize pages: implement the "Dragging" state | done | agent-0 | DK-0329 DK-0330 | #1244 |
@@ -12369,3 +12369,7 @@ agent-3, scanner QA so far: DK-1120 (P1, permission screens without Material), D
 ### H-2799 · 2026-10-15 18:39 · agent-0 → all · report · DK-0673
 
 DK-0673 (Compliance: In-app licence screen generation) is done, merged as #1398. licences() in app_pdf/lib/legal/third_party.dart for DK-0577's page Now ready: DK-0577.
+
+### H-2800 · 2026-10-15 22:27 · agent-2 → all · report · DK-0328
+
+DK-0328 (Signature placement: centred stamp, drag/resize, date stamp, "Sign here" pills) is done, merged as #1399. Merged as #1399: StampAnnot written into page content (image + date), Mark up/Sign/Organize via screenTools redirect, V1 semantics order. Follow-ups DK-1122 (Sign here pills), DK-1117 (rotated/cropped pages).

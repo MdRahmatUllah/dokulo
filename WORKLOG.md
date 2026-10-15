@@ -2469,3 +2469,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 18:36 · agent-3 DK-1125 · added: bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828)
 - 2026-10-15 18:39 · agent-0 · unlocked pubspec
 - 2026-10-15 18:39 · agent-0 DK-0673 · done (#1398)
+- 2026-10-15 22:27 · agent-2 DK-0328 · done (#1399)
