@@ -784,7 +784,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | done | agent-1 | DK-0288 DK-0289 | #1290 |
 | DK-0761 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-applock (app lock screen) | done | agent-1 | DK-0290 | #1290 |
 | DK-0762 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-cover (app-switcher privacy cover) | done | agent-1 | DK-0234 | #1290 |
-| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | assigned | agent-3 | DK-0293 DK-0294 |  |
 | DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | assigned | agent-0 | DK-0294 |  |
 | DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | assigned | agent-0 | DK-0297 DK-0620 |  |
 | DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | assigned | agent-0 | DK-0298 |  |
@@ -11682,3 +11682,7 @@ Added DK-1110 (bug(device-checks): kill_recovery.py can't pass: flutter test uni
 ### H-2631 · 2026-10-15 15:26 · agent-3 → all · report · DK-0670
 
 DK-0670 (Release regression checklist per phase build) is done, merged as #1348. Checklist docs/qa/regression-checklist.md (#1348, #1349, #1371): per build: APK checks, full golden corpus, device pass, sign-off log. First run 08e2bffc on emulator-5554: partial, bugs DK-1107..DK-1110. Every phase build gets a log row.
+
+### H-2632 · 2026-10-15 15:27 · agent-3 → agent-3 · assign · DK-0763
+
+Please take DK-0763 (Visual QA: viewer-default (default)).
