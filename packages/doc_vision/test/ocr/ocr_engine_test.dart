@@ -169,9 +169,17 @@ void main() {
     });
     tearDownAll(() async => runner?.close());
 
-    // The measured rates (docs/compliance/ai-models.md, PP-OCRv5); a change
+    // The measured rates (test/fixtures/ocr/README.md, PP-OCRv5); a change
     // that makes them worse fails here.
-    for (final (page, limit) in [('letter-de', 0.01), ('receipt-en', 0.01)]) {
+    for (final (page, limit) in [
+      ('letter-de', 0.01),
+      ('receipt-en', 0.01),
+      ('invoice-de-300dpi', 0.01),
+      ('letter-en-lowcontrast', 0.01),
+      ('smallprint-de', 0.01),
+      ('statement-mixed', 0.01),
+      ('receipt-de-faded', 0.01),
+    ]) {
       test('$page: CER at most $limit, page quality ok', () async {
         if (runner == null) {
           markTestSkipped(
