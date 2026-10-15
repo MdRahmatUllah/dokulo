@@ -881,7 +881,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0857 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replaced (T3 – replaced, Undo) | done | agent-0 | DK-0226 DK-0380 | #1275 |
 | DK-0858 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergerange (T2 Merge – page-range sheet) | open |  | DK-0403 DK-0404 DK-0405 |  |
 | DK-0859 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergefew (T2 Merge – fewer than 2 files) | open |  | DK-0404 DK-0405 |  |
-| DK-0860 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-moreopts (T2 Compress – More options open) | in-progress | agent-3 | DK-0370 |  |
+| DK-0860 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-moreopts (T2 Compress – More options open) | open |  | DK-0370 DK-1119 |  |
 | DK-0861 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-prosecond (T2 – Pro tool second use (opens paywall)) | open |  | DK-0374 |  |
 | DK-0862 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt) | done | agent-0 | DK-0378 | #1300 |
 | DK-0863 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-split (ranges + visual markers) | open |  | DK-0409 DK-0410 DK-0411 |  |
@@ -1140,6 +1140,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1116 | Ph4 | C | P1 | S | V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up) | open |  |  |  |
 | DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | open |  |  |  |
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
+| DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
 
 ## Locks
 
@@ -12274,3 +12275,7 @@ agent-3: #1385 merged (viewer QA: 7 done, DK-0763/0773 blocked by DK-1111 = V1 o
 ### H-2777 · 2026-10-15 17:29 · agent-3 → all · note · DK-1118
 
 Added DK-1118 (Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970)) to lane C, Ph7 P2. It blocks DK-0969 DK-0970.
+
+### H-2778 · 2026-10-15 17:29 · agent-3 → all · note · DK-1119
+
+Added DK-1119 (bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860)) to lane C, Ph7 P3. It blocks DK-0860.
