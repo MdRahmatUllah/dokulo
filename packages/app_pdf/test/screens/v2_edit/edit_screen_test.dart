@@ -63,6 +63,7 @@ void main() {
     bool fromSign = false,
     EditTool? startTool,
     String source = 'Invoice INV-2026-014.pdf',
+    bool fillForm = false,
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
@@ -94,8 +95,12 @@ void main() {
         GoRoute(path: '/', builder: (_, _) => const Text('V1')),
         GoRoute(
           path: '/edit',
-          builder: (_, _) =>
-              EditScreen(fileId: id, fromSign: fromSign, startTool: startTool),
+          builder: (_, _) => EditScreen(
+            fileId: id,
+            fromSign: fromSign,
+            startTool: startTool,
+            fillForm: fillForm,
+          ),
         ),
       ],
     );
@@ -263,6 +268,51 @@ void main() {
     expect(value('name'), 'Jürgen Groß');
     expect(fields!.firstWhere((f) => f.name == 'consent').checked, isTrue);
     semantics.dispose();
+  });
+
+  group('Fill form (DK-0518)', () {
+    testWidgets('no fields: says so, and Mark up selects the highlighter', (
+      tester,
+    ) async {
+      await pump(tester, fillForm: true);
+      await settle(tester);
+      expect(find.text('Fill form'), findsOneWidget);
+      expect(find.text('This PDF has no fillable fields.'), findsOneWidget);
+      await tester.tap(find.text('Mark up'));
+      await tester.pumpAndSettle();
+      expect(tester.widget<DkToolStrip>(find.byType(DkToolStrip)).selected, 2);
+    });
+
+    testWidgets("XFA: \"This form type can't be filled on phones.\"", (
+      tester,
+    ) async {
+      await pump(tester, fillForm: true, source: 'form-xfa.pdf');
+      await settle(tester);
+      expect(
+        find.text("This form type can't be filled on phones."),
+        findsOneWidget,
+      );
+      expect(find.text('Open read-only'), findsOneWidget);
+    });
+
+    testWidgets('Done asks "Lock form values?"; Flatten makes the fields '
+        'part of the page', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester, fillForm: true, source: 'form-acroform.pdf');
+      await settle(tester);
+      await tester.tap(find.bySemanticsLabel('consent'));
+      await tester.pump();
+      await tester.tap(find.text('Done'));
+      await tester.pumpAndSettle();
+      expect(find.text('Lock form values?'), findsOneWidget);
+      await tester.tap(find.text('Flatten form'));
+      await tester.pump();
+      await tester.tap(find.text('Save'));
+      await settle(tester);
+      final fields = await tester.runAsync(() => PdfForms.fields(path));
+      expect(fields, isEmpty, reason: 'flattened');
+      semantics.dispose();
+    });
   });
 
   group('tool options (DK-0314..DK-0320)', () {

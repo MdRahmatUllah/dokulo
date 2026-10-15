@@ -11,7 +11,10 @@ import 'package:pdfrx/pdfrx.dart' show PdfViewerController;
 import '../../components/dk_editor_bars.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_button.dart';
+import '../../components/dk_confirm_dialog.dart';
 import '../../components/dk_pdf_canvas.dart';
+import '../../components/motion/dk_transition_motion.dart' show DkDialogRoute;
+import '../../components/dk_switch.dart';
 import '../../components/dk_settings_row.dart';
 import '../../components/dk_sheet.dart';
 import '../../components/dk_text_field.dart';
@@ -90,7 +93,12 @@ class EditScreen extends ConsumerStatefulWidget {
     required this.fileId,
     this.fromSign = false,
     this.startTool,
+    this.fillForm = false,
   });
+
+  /// The Fill form tool (DK-0518): "Fill form" on the bar, the form's
+  /// dialogs (no fields, XFA), and "Lock form values?" on Done.
+  final bool fillForm;
 
   /// Selected when the file is open (Mark up: the highlighter, DK-0517).
   final EditTool? startTool;
@@ -159,7 +167,8 @@ class _EditScreenState extends ConsumerState<EditScreen> {
           p: await PdfAnnotations.read(file.path, p),
       };
       // An AcroForm's fields, in the file's order (DK-0324).
-      if (await PdfForms.kind(file.path) == PdfFormKind.acroForm) {
+      _formKind = await PdfForms.kind(file.path);
+      if (_formKind == PdfFormKind.acroForm) {
         _fields = await PdfForms.fields(file.path);
       }
     } on DocError catch (e) {
@@ -181,6 +190,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
       final index = _strip.indexOf(tool);
       if (index >= 0) _select(index);
     }
+    if (widget.fillForm && mounted) await _checkForm();
   }
 
   void _select(int index) {
@@ -366,6 +376,72 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   // --- The form (DK-0324).
 
   List<PdfFormField> _fields = const [];
+  var _formKind = PdfFormKind.none;
+
+  /// Fill form on a file it can't fill: XFA ("Open read-only" or Mark up),
+  /// or no fields at all ("Use Mark up to add text anywhere").
+  Future<void> _checkForm() async {
+    final l = AppLocalizations.of(context);
+    if (_formKind == PdfFormKind.xfa) {
+      final readOnly = await showDkConfirm(
+        context,
+        title: l.error_unsupported_form,
+        body: l.form_xfa_body,
+        action: l.form_open_read_only,
+        cancel: l.tool_markup_name,
+      );
+      if (!mounted) return;
+      if (readOnly) {
+        context.pushReplacement(Routes.viewer('${widget.fileId}'));
+      } else {
+        _select(_strip.indexOf(EditTool.highlighter));
+      }
+      return;
+    }
+    if (_fillable.isEmpty) {
+      final markUp = await showDkConfirm(
+        context,
+        title: l.form_no_fields_title,
+        body: l.form_no_fields_body,
+        action: l.tool_markup_name,
+      );
+      if (!mounted) return;
+      if (markUp) {
+        _select(_strip.indexOf(EditTool.highlighter));
+      } else {
+        _leave();
+      }
+    }
+  }
+
+  /// "Lock form values?" (DK-0518): Flatten form, off; null: Cancel.
+  Future<bool?> _askLock() async {
+    final l = AppLocalizations.of(context);
+    var flatten = false;
+    return Navigator.of(context, rootNavigator: true).push<bool>(
+      DkDialogRoute.of(
+        context,
+        builder: (dialog) => StatefulBuilder(
+          builder: (dialog, setDialog) => DkConfirmDialog(
+            title: l.form_lock_title,
+            action: l.common_save,
+            onCancel: () => Navigator.pop(dialog),
+            onAction: () => Navigator.pop(dialog, flatten),
+            content: DkSettingsRow(
+              title: l.form_flatten,
+              description: l.form_flatten_desc,
+              trailing: DkSwitch(
+                value: flatten,
+                onChanged: (v) => setDialog(() => flatten = v),
+              ),
+              onTap: () => setDialog(() => flatten = !flatten),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   final _formValues = <String, PdfFieldValue>{};
   String? _activeField;
   final _formText = TextEditingController();
@@ -508,6 +584,14 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   Future<void> _done() async {
     final editor = _editor!, file = _file!;
     final l = AppLocalizations.of(context);
+    _commitText();
+    // Fill form: lock the values or not, before anything is written.
+    var flatten = false;
+    if (widget.fillForm && _formValues.isNotEmpty) {
+      final lock = await _askLock();
+      if (lock == null || !mounted) return;
+      flatten = lock;
+    }
     setState(() => _saving = true);
     try {
       final store = await ref.read(fileStoreProvider.future);
@@ -515,12 +599,16 @@ class _EditScreenState extends ConsumerState<EditScreen> {
         file.path.split(RegExp(r'[\\/]')).last,
       );
       await PdfAnnotations.apply(file.path, out.path, editor.edits());
-      _commitText();
       var result = out;
       if (_formValues.isNotEmpty) {
         // The filled form on top of the marks, regenerated as Acrobat does.
         result = await store.newTempFile(out.path.split(RegExp(r'[\\/]')).last);
-        await PdfForms.fill(out.path, result.path, _formValues);
+        await PdfForms.fill(
+          out.path,
+          result.path,
+          _formValues,
+          flatten: flatten,
+        );
       }
       final versions = await ref.read(versionStoreProvider.future);
       final before = await versions.replace(widget.fileId, result.path);
@@ -555,7 +643,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
         builder: (context, _) => Scaffold(
           backgroundColor: t.color.surfaceSunken,
           appBar: DkTopBar.editing(
-            title: l.edit_title,
+            title: widget.fillForm ? l.tool_form_name : l.edit_title,
             onCancel: _cancel,
             onDone: editor != null && _dirty && !_saving ? _done : null,
           ),
