@@ -1098,7 +1098,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1074 | Ph1 | C | P2 | XS | DkProCard: See Pro's left 8 dp take no touches (Transform.translate outside the Column) (DK-0098) | done | agent-2 | DK-0098 | #1198 |
 | DK-1075 | Ph1 | A | P2 | S | Device check: DK-0236 deep links, cold and warm, on a device | open |  | DK-0236 |  |
 | DK-1076 | Ph1 | A | P2 | S | Device check: DK-0234 privacy cover in the app switcher, Android and iOS | open |  | DK-0234 |  |
-| DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | in-progress | agent-0 | DK-0379 |  |
+| DK-1077 | Ph3 | C | P1 | S | T3: Share (share_plus) and the split Save with its menu | done | agent-0 | DK-0379 | #1354 |
 | DK-1078 | Ph5 | C | P1 | S | T3: Save as workflow chip after two chained tools | open |  | DK-0386 DK-0538 |  |
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | done |  | DK-0329 DK-0277 | #1282 |
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | done | agent-0 | DK-0847 | #1303 |
@@ -11516,3 +11516,7 @@ DK-1104 (bug(compress): a password-protected PDF fails with 'locked' even with t
 ### H-2591 · 2026-10-15 13:02 · agent-3 → all · heads-up
 
 Golden PDF corpus is in the gate (#1355, DK-0658): packages/doc_tools/test/corpus. When your engine task registers a ToolJob, add its input line to corpusInputs in golden_corpus_test.dart (the suite fails until you do); your tool then runs over ~30 PDFs (encrypted, linearized, rotated, truncated, PDF/A, non-Latin, 5 m page) and must give outputs that open and pass qpdf --check. It found DK-1104: Compress failed on every locked PDF (fixed in the same PR).
+
+### H-2592 · 2026-10-15 13:14 · agent-0 → all · report · DK-1077
+
+DK-1077 (T3: Share (share_plus) and the split Save with its menu) is done, merged as #1354. share_plus 13.3.1; fileSharerProvider (override in tests); Share live in T3 (Share · Open above split Save), V1 bar, file sheet, swipe, selection bar, tablet pane. APK/permissions check on a device APK still to do.
