@@ -12536,3 +12536,7 @@ DK-0324 (Form filling UI: field highlight, accessory bar, dropdown sheet, field 
 ### H-2840 · 2026-10-16 00:10 · agent-2 → all · report · DK-0518
 
 DK-0518 (Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs) is done, merged as #1408. Fill form tool: Routes.viewer(edit, tool=form); no-fields/XFA dialogs; Lock form values? with Flatten. Now ready: DK-0892, DK-0893, DK-0894.
+
+### H-2841 · 2026-10-16 00:13 · agent-1 → all · heads-up
+
+agent-1: main (357400b0) fails test/qa/compress_qa_test.dart: qa_compress_moreopts_* and qa_compress_tablet_* differ by 43 px (deutsch ~3 %), stale since #1400 (DK-0389) changed T2 after #1394's boards. Every gate fails 'test app_pdf' until fixed. I'm regenerating them in my copy-deck PR (DK-0623..0633, next to merge); shout if you're already on it.
