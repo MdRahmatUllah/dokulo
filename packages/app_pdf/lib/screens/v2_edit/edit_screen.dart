@@ -165,11 +165,15 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     final saved = ref.read(prefsProvider).value?['$_prefsKey.${tool.name}'];
     final base = _defaults(tool);
     if (saved is! Map) return base;
+    // Kept by an older version or edited by hand: anything of the wrong
+    // type or out of range falls back to the default.
+    double? number(Object? v, double min, double max) =>
+        v is num ? v.toDouble().clamp(min, max) : null;
     return base.copyWith(
       color: saved['color'] is int ? Color(saved['color'] as int) : null,
-      thickness: (saved['thickness'] as num?)?.toDouble(),
-      opacity: (saved['opacity'] as num?)?.toDouble(),
-      fontSize: saved['fontSize'] as int?,
+      thickness: number(saved['thickness'], 1, tool == EditTool.pen ? 8 : 12),
+      opacity: number(saved['opacity'], 0.3, 0.6),
+      fontSize: number(saved['fontSize'], 8, 24)?.round(),
       shape: DkShapeKind.values.asNameMap()[saved['shape']],
       eraser: DkEraserMode.values.asNameMap()[saved['eraser']],
     );
@@ -178,18 +182,22 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   DkToolOptions _defaults(EditTool tool) {
     final m = context.tokens.markup;
     return switch (tool) {
+      // The designs' defaults: pen 3 pt, text 12 pt, shapes 2 pt in red.
       EditTool.highlighter => DkToolOptions(color: m.yellow),
       EditTool.shapes => DkToolOptions(color: m.red, thickness: 2),
       EditTool.note => DkToolOptions(color: m.yellow),
-      _ => DkToolOptions(color: m.black, thickness: 2),
+      EditTool.text => DkToolOptions(color: m.black, fontSize: 12),
+      _ => DkToolOptions(color: m.black),
     };
   }
 
   Future<void> _openOptions(EditTool tool, int index) async {
     final l = AppLocalizations.of(context);
+    final before = _options[tool]!;
     await showDkSheet<void>(
       context,
       title: _labels(l)[index].$2,
+      showClose: true,
       body: StatefulBuilder(
         builder: (context, setSheet) => DkToolOptionsSheet(
           kind: _toolKinds[tool]!,
@@ -197,18 +205,21 @@ class _EditScreenState extends ConsumerState<EditScreen> {
           onChanged: (o) {
             setSheet(() {});
             setState(() => _options[tool] = o);
-            ref.read(prefsProvider.notifier).set('$_prefsKey.${tool.name}', {
-              'color': o.color.toARGB32(),
-              'thickness': o.thickness,
-              'opacity': o.opacity,
-              'fontSize': o.fontSize,
-              'shape': o.shape.name,
-              'eraser': o.eraser.name,
-            });
           },
         ),
       ),
     );
+    // Remembered once the sheet closes: one write, not one per slider step.
+    final o = _options[tool]!;
+    if (!mounted || identical(o, before)) return;
+    await ref.read(prefsProvider.notifier).set('$_prefsKey.${tool.name}', {
+      'color': o.color.toARGB32(),
+      'thickness': o.thickness,
+      'opacity': o.opacity,
+      'fontSize': o.fontSize,
+      'shape': o.shape.name,
+      'eraser': o.eraser.name,
+    });
   }
 
   /// The overlay's style from the tools' options.
@@ -234,20 +245,34 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   /// A text box or a note was placed: type its text (DK-0317, DK-0319).
   Future<void> _placed(AnnotRef ref) async {
     final editor = _editor!;
-    final annot = editor.selectedAnnot?.annot;
+    final annot = [
+      for (final a in editor.annotsOn(ref.page))
+        if (a.id == ref.id) a.annot,
+    ].firstOrNull;
     final l = AppLocalizations.of(context);
     final note = annot is NoteAnnot;
     if (annot is! FreeTextAnnot && !note) return;
+    final before = annot is FreeTextAnnot ? annot.text : annot!.note;
+    // Just placed (still empty): the box and its text are one Undo step,
+    // and a box left empty goes again.
+    final placed = before.isEmpty;
     final text = await showDkSheet<String>(
       context,
       title: note ? l.edit_note : l.edit_text,
+      showClose: true,
       body: _TextSheet(
-        text: annot is FreeTextAnnot ? annot.text : annot!.note,
+        text: before,
+        label: note ? l.edit_note : l.edit_text,
         done: l.common_done,
       ),
     );
-    if (text == null) return;
-    editor.update(
+    if (!mounted) return;
+    if (placed && (text == null || text.trim().isEmpty)) {
+      editor.retract();
+      return;
+    }
+    if (text == null || text == before) return;
+    (placed ? editor.amend : editor.update)(
       ref,
       (a) => switch (a) {
         FreeTextAnnot(:final rect, :final fontSize, :final color) =>
@@ -384,8 +409,12 @@ class _EditScreenState extends ConsumerState<EditScreen> {
 /// A text box's or a note's text: a field and Done. It owns its controller,
 /// so the sheet can animate away after Done.
 class _TextSheet extends StatefulWidget {
-  const _TextSheet({required this.text, required this.done});
-  final String text, done;
+  const _TextSheet({
+    required this.text,
+    required this.label,
+    required this.done,
+  });
+  final String text, label, done;
 
   @override
   State<_TextSheet> createState() => _TextSheetState();
@@ -406,7 +435,7 @@ class _TextSheetState extends State<_TextSheet> {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     spacing: context.tokens.space.l,
     children: [
-      DkTextField(controller: _field, autofocus: true),
+      DkTextField(controller: _field, autofocus: true, hint: widget.label),
       DkButton(
         label: widget.done,
         expand: true,

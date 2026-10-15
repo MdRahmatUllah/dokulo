@@ -735,5 +735,7 @@
   "t2_section_images": "Bilder ({n})",
   "common_add": "Hinzufügen",
   "scan_saving": "Wird gespeichert…",
-  "scan_save_failed": "Der Scan ließ sich nicht speichern. Deine Seiten sind noch da."
+  "scan_save_failed": "Der Scan ließ sich nicht speichern. Deine Seiten sind noch da.",
+  "options_eraser_mode": "Modus",
+  "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt."
 }

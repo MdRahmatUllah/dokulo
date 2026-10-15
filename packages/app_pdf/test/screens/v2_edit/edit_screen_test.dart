@@ -254,9 +254,41 @@ void main() {
       expect(find.text('Thickness'), findsOneWidget);
       await tester.tap(find.bySemanticsLabel('Red'));
       await tester.pumpAndSettle();
+      expect(
+        prefs.state.value!['edit.options.pen'],
+        isNull,
+        reason: 'written once the sheet closes',
+      );
+      Navigator.of(tester.element(find.text('Thickness'))).pop();
+      await tester.pumpAndSettle();
       final saved = prefs.state.value!['edit.options.pen'] as Map;
       expect(Color(saved['color'] as int), DkTokens.light.markup.red);
       semantics.dispose();
+    });
+
+    testWidgets('a second tap on Pan opens nothing', (tester) async {
+      await pump(tester);
+      await tester.tap(find.text('Pan'));
+      await tester.pump();
+      await tester.tap(find.text('Pan'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsNothing);
+      expect(find.byType(BottomSheet), findsNothing);
+    });
+
+    testWidgets('options kept with the wrong types or out of range: defaults '
+        'and limits, no crash', (tester) async {
+      prefs = Prefs.memory({
+        'edit.options.pen': {'thickness': 'thick', 'color': 'red'},
+        'edit.options.text': {'fontSize': 200.0},
+      });
+      await pump(tester);
+      expect(tester.takeException(), isNull);
+      await tester.tap(find.text('Pen'));
+      await tester.pump();
+      await tester.tap(find.text('Pen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsOneWidget);
     });
 
     testWidgets('Shapes: an arrow is ink, the shaft and two barbs', (
@@ -310,6 +342,24 @@ void main() {
         annots!.map((a) => a.annot).whereType<FreeTextAnnot>().single.text,
         'Bezahlt',
       );
+    });
+
+    testWidgets('Text: a box left empty goes again; nothing to save', (
+      tester,
+    ) async {
+      await pump(tester);
+      await tester.ensureVisible(find.text('Text'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Text'));
+      await tester.pump();
+      await tester.tapAt(centre(tester));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Done').last);
+      await tester.pumpAndSettle();
+      final done = tester.widget<DkTextAction>(
+        find.widgetWithText(DkTextAction, 'Done'),
+      );
+      expect(done.onTap, isNull, reason: 'no changes');
     });
   });
 }
