@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/components/dk_shutter_button.dart';

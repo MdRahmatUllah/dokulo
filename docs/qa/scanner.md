@@ -33,6 +33,12 @@ body, Open settings / Einstellungen öffnen).
 | DK-0818 | `scanner-camera-dark` | Match |
 | DK-0819 | `scanner-camera-cutoff` | Match |
 | DK-0820 | `scanner-camera-quad-iphone-se` | Match |
+| DK-0809 | `scanner-camera-quad` | Match (`s1_quad_*` in `test/screens/goldens`) |
+| DK-0812 | `scanner-camera-idfront` | Match (`s1_mode_idfront`) |
+| DK-0814 | `scanner-camera-book` | Match (`s1_mode_book`) |
+| DK-0815 | `scanner-camera-batch` | Match (`s1_mode_batch`) |
+| DK-0821 | `scanner-review-review` | Match (`s2_review_*`) |
+| DK-0822 | `scanner-review-crop` | Match, 2 approved (`s2_crop_*`) |
 
 **DK-1120** (P1, lane C): the pre-prompt sheet and the "Camera access is
 off" screen sit on a bare `ColoredBox`, and neither the gate nor its route
@@ -57,3 +63,26 @@ Approved:
   100 % high, so ILL-10 sits at the top left over Close. Its HTML (and the
   gate's doc) is a centred column: the 120 illustration, the title, the body,
   Open settings and Import from photos, which is what the app draws.
+
+## S1 modes and S2 review, crop (DK-0809, DK-0812, DK-0814, DK-0815, DK-0821, DK-0822)
+
+agent-2's goldens of S1 and S2 (`test/screens/goldens/s1_*`, `s2_*`, light,
+dark, German) beside the frames in [scanner/](scanner/). Match: the quad
+with its rounded stroke and fill; ID front's dashed card guide and "Front
+side"; Book's dashed spine and "Align the spine with the line"; Batch's
+locked Auto pill, "12 pages" above the tray and the stack; S2's top bar (Add
+pages, "Review 6 pages", Save), the large page, "3 of 6", the five edit
+actions and the tray with the current page ringed; Crop's overlay with
+corner and edge handles over the uncropped page and Cancel / Apply.
+
+Approved (crop):
+
+- "Auto" shows only when the page has a detected quad (the golden's page has
+  none; the frame's has one): resetting to a detection that doesn't exist
+  would do nothing.
+- Cancel and Apply share the bar half and half, as every two-button
+  `DkActionBar`; the frame sets them at their own widths on the left.
+
+The S2 states without a golden (apply to all, deleted, discard, reorder,
+JPG) and the small deviations of filter, save and result (DK-1125) follow in
+the next pass; Book's two pages are DK-1124.
