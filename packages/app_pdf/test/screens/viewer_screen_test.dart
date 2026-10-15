@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:app_pdf/components/dk_button.dart';
 import 'package:app_pdf/components/dk_pdf_canvas.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_search.dart';
+import 'package:app_pdf/screens/v1_viewer/viewer_states.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
@@ -19,9 +21,10 @@ import 'package:pdfrx/pdfrx.dart';
 String fixture(String name) =>
     '${Directory.current.path}/../../test/fixtures/$name';
 
-Widget app(Widget child, {DkTokens? tokens}) => MaterialApp(
+Widget app(Widget child, {DkTokens? tokens, Locale? locale}) => MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: dokuloTheme(tokens ?? DkTokens.light),
+  locale: locale,
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,
   home: child,
@@ -189,10 +192,14 @@ void main() {
         ),
   ))!;
 
-  for (final (theme, tokens) in [
-    ('light', DkTokens.light),
-    ('dark', DkTokens.dark),
+  // Visual QA (DK-0769, DK-0770, DK-0772, DK-0778): the frames are in
+  // docs/qa/viewer/, the findings in docs/qa/viewer.md.
+  for (final (theme, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('deutsch', DkTokens.light, const Locale('de')),
   ]) {
+    final en = locale.languageCode == 'en';
     testWidgets('locked (DK-0301, DK-0302, DK-0303): the card, a wrong '
         'password, then the pages and "Unlocked for viewing" ($theme)', (
       tester,
@@ -206,32 +213,42 @@ void main() {
           child: app(
             Scaffold(body: ViewerScreen(fileId: id)),
             tokens: tokens,
+            locale: locale,
           ),
         ),
       );
       await settle(tester);
-      expect(find.text('This PDF is locked'), findsOneWidget);
+      expect(find.byType(ViewerLockedCard), findsOneWidget);
+      if (en) expect(find.text('This PDF is locked'), findsOneWidget);
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/viewer_locked_$theme.png'),
       );
       await tester.enterText(find.byType(TextField), 'wrong');
-      await tester.tap(find.text('Unlock'));
+      await tester.tap(find.byType(DkButton));
       await settle(tester);
-      expect(
-        find.text("That password doesn't open this file."),
-        findsOneWidget,
-      );
+      if (en) {
+        expect(
+          find.text("That password doesn't open this file."),
+          findsOneWidget,
+        );
+      }
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/viewer_wrongpw_$theme.png'),
       );
       await tester.enterText(find.byType(TextField), 'dokulo');
-      await tester.tap(find.text('Unlock'));
+      await tester.tap(find.byType(DkButton));
       await settle(tester);
       expect(find.byType(PdfViewer), findsOneWidget);
-      expect(find.text('Unlocked for viewing'), findsOneWidget);
-      expect(find.text('Remove password'), findsOneWidget);
+      if (en) {
+        expect(find.text('Unlocked for viewing'), findsOneWidget);
+        expect(find.text('Remove password'), findsOneWidget);
+      }
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_unlocked_$theme.png'),
+      );
     });
 
     testWidgets('damaged (DK-0305): "This file cannot be opened", Close and '
@@ -246,12 +263,19 @@ void main() {
       await tester.pumpWidget(
         ProviderScope(
           overrides: [appDatabaseProvider.overrideWithValue(db)],
-          child: app(ViewerScreen(fileId: id), tokens: tokens),
+          child: app(
+            ViewerScreen(fileId: id),
+            tokens: tokens,
+            locale: locale,
+          ),
         ),
       );
       await settle(tester);
-      expect(find.text("This file can't be opened."), findsOneWidget);
-      expect(find.text('Try Repair'), findsOneWidget);
+      expect(find.byType(ViewerDamaged), findsOneWidget);
+      if (en) {
+        expect(find.text("This file can't be opened."), findsOneWidget);
+        expect(find.text('Try Repair'), findsOneWidget);
+      }
       await expectLater(
         find.byType(MaterialApp),
         matchesGoldenFile('goldens/viewer_damaged_$theme.png'),
