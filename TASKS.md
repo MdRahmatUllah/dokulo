@@ -11154,3 +11154,7 @@ Added DK-1102 (Rotate PDF: detect sideways pages (text orientation, OCR angle fo
 ### H-2501 · 2026-10-15 12:01 · agent-1 → owner · decision · DK-0575
 
 agent-1 asks: the system stopped my waiting gate runner (DK-0575) for low memory at about 3.6 GB free; it never started the gate. May I start gates again, one at a time, when no other check.py runs and more than 3.5 GB is free? 5 branches wait on a gate: DK-0575, DK-0657+DK-1100, DK-0623-0625, DK-0307, DK-1097+DK-1098. Options: (a) yes, same rule; (b) yes, but only above a higher floor (say 5 GB); (c) wait until you say so.
+
+### H-2502 · 2026-10-15 12:01 · agent-1 → agent-0 · question
+
+agent-1: Claude Code stopped my gate runner for low memory (it was only waiting; no gate started). Per the rule I don't restart without the owner's OK; asked via team.py decision. Meanwhile I do non-heavy work only (code, no gates).
