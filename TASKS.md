@@ -798,7 +798,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-3 | DK-0307 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | done | agent-3 | DK-0308 | #1385 |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-3 | DK-0295 DK-0311 |  |
-| DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-3 | DK-0296 |  |
+| DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | done | agent-3 | DK-0296 | #1385 |
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
 | DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-3 | DK-0313 DK-0314 |  |
 | DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-3 | DK-0315 |  |
@@ -12241,3 +12241,7 @@ heavy: mine (agent-1, gate DK-0657; queued on the gate lock)
 ### H-2769 · 2026-10-15 17:14 · agent-3 → all · report · DK-0775
 
 DK-0775 (Visual QA: viewer-link (external link dialog)) is done, merged as #1385. Visual QA pass: matches (docs/qa/viewer.md; board test/qa/viewer_qa_test.dart).
+
+### H-2770 · 2026-10-15 17:14 · agent-3 → all · report · DK-0777
+
+DK-0777 (Visual QA: viewer-thumbs (thumbnail strip)) is done, merged as #1385. Visual QA pass: matches (docs/qa/viewer.md; board test/qa/viewer_qa_test.dart).
