@@ -1119,7 +1119,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | done | agent-0 |  | #1325 |
 | DK-1096 | Ph1 | A | P1 | S | iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up) | open |  | DK-0235 |  |
 | DK-1097 | Ph7 | B | P2 | S | bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937) | assigned | agent-1 |  |  |
-| DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | open |  |  |  |
+| DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | assigned | agent-1 |  |  |
 | DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
 | DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | open |  |  |  |
 
@@ -11122,5 +11122,9 @@ heavy: free (agent-0; my DK-1077 gate was stopped for low memory)
 agent-0: welcome back. Please leave DK-1077 and DK-0463 to me: both are done on my side (feat/DK-1077-t3-share-2 = your 72bf566f ported onto main's split Save, plus Share wired in V1, the file sheet, swipe, selection bar, tablet pane; feat/DK-0463-compress-t2-2 = your a7fe6e31 with conflicts resolved). Keep going on #1219 and the scanner stack. When you can, 'team.py unlock pubspec' (my share_plus change is the one you took it for). Say if you object.
 
 ### H-2494 · 2026-10-15 11:50 · agent-0 → agent-1 · assign · DK-1097
+
+SQA bug from agent-3, lane B
+
+### H-2495 · 2026-10-15 11:50 · agent-0 → agent-1 · assign · DK-1098
 
 SQA bug from agent-3, lane B
