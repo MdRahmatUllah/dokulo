@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -162,13 +163,16 @@ class _S1ScreenState extends ConsumerState<S1Screen>
         final quad = await detect(frame);
         if (!mounted) return;
         setState(() {
+          if (_awaitNewCard && (quad == null || !quadSteady(_quad, quad))) {
+            _awaitNewCard = false;
+          }
           _steady = quadSteady(_quad, quad);
           _quad = quad;
           _brightness = brightnessOf(frame.bytes);
           final ready =
               scanHint(quad: quad, brightness: _brightness, steady: _steady) ==
               ScanHint.ready;
-          if (_autoActive && ready) {
+          if (_autoActive && ready && !_awaitNewCard) {
             _steadySince ??= frame.time;
             _countdown =
                 ((frame.time - _steadySince!).inMicroseconds /
@@ -219,6 +223,10 @@ class _S1ScreenState extends ConsumerState<S1Screen>
   /// ID card mode (DK-0346): the back is next once the front is taken.
   var _idBack = false;
 
+  /// After the front: no auto-capture until the card has left the frame
+  /// (or the quad moved), so the front isn't taken twice.
+  var _awaitNewCard = false;
+
   Future<void> _capture() async {
     if (_capturing || !_open) return;
     _capturing = true;
@@ -246,8 +254,12 @@ class _S1ScreenState extends ConsumerState<S1Screen>
           widget.onReview();
           return;
         }
-        setState(() => _idBack = true);
-        _speak(l.camera_id_back);
+        // The pill (a live region) says "Turn the card over"; auto-capture
+        // waits until the front has left the frame.
+        setState(() {
+          _idBack = true;
+          _awaitNewCard = true;
+        });
       }
       if (!reduce) {
         setState(() => _flying = jpeg);
@@ -268,6 +280,10 @@ class _S1ScreenState extends ConsumerState<S1Screen>
     final l = AppLocalizations.of(context);
     final pages = ref.watch(scanSessionProvider);
     final mode = ref.watch(scanModeStateProvider);
+    // A half-done ID card doesn't survive a change of mode.
+    ref.listen(scanModeStateProvider, (_, _) {
+      if (_idBack) setState(() => _idBack = false);
+    });
     final c = t.color;
 
     final preview = _Preview(
@@ -307,11 +323,16 @@ class _S1ScreenState extends ConsumerState<S1Screen>
           ? hintKind.text(l)
           : l.camera_retake_page(widget.retake! + 1),
     );
-    // ID card and Book draw their guide and say what to do instead.
-    final guided = mode == DkScanMode.idCard || mode == DkScanMode.book;
-    final guide = Positioned.fill(
-      child: _ModeGuide(mode: mode, idBack: _idBack),
-    );
+    // ID card draws its guide and says what to do instead of the hint;
+    // Book draws its spine line and keeps the hint (the design). A retake
+    // says which page it retakes, whatever the mode.
+    final retaking = widget.retake != null;
+    final guided = !retaking && mode == DkScanMode.idCard;
+    final guide = retaking
+        ? const SizedBox.shrink()
+        : Positioned.fill(
+            child: _ModeGuide(mode: mode, idBack: _idBack),
+          );
     final modes = _ModeSwitcher(
       mode: mode,
       onMode: (m) => ref.read(scanModeStateProvider.notifier).set(m),
@@ -924,12 +945,17 @@ class _ModeGuide extends StatelessWidget {
         final w = box.maxWidth, h = box.maxHeight;
         switch (mode) {
           case DkScanMode.idCard:
-            final top = h * 0.36;
+            // 80 % wide at 36 % down; in landscape as wide as still fits.
+            final cw = math.min(w * 0.8, h * 0.55 * 85.6 / 54);
+            final top = math.max(
+              56.0,
+              math.min(h * 0.36, h - cw * 54 / 85.6 - 16),
+            );
             return Stack(
               children: [
                 Positioned(
-                  left: w * 0.1,
-                  width: w * 0.8,
+                  left: (w - cw) / 2,
+                  width: cw,
                   top: top,
                   child: AspectRatio(
                     aspectRatio: 85.6 / 54,

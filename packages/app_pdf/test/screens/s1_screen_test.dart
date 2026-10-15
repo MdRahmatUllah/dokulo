@@ -96,6 +96,7 @@ void main() {
     Locale locale = const Locale('en'),
     DetectedQuad? quad,
     String? prefsJson,
+    int? retake,
   }) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
@@ -129,6 +130,8 @@ void main() {
             onImport: () => imported++,
             onReview: () => reviewed++,
             onSettings: () => settingsOpened++,
+            retake: retake,
+            onRetaken: () {},
           ),
         ),
       ),
@@ -509,11 +512,37 @@ void main() {
       expect(find.text('Front side'), findsOneWidget, reason: 'ready again');
     });
 
-    testWidgets('Book: the spine guide', (tester) async {
+    testWidgets('ID card: switching modes forgets a half-done card', (
+      tester,
+    ) async {
+      await pump(tester);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      await capture(tester);
+      expect(find.text('Turn the card over'), findsOneWidget);
+      setMode(DkScanMode.document);
+      await tester.pumpAndSettle();
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Front side'), findsOneWidget);
+    });
+
+    testWidgets('a retake says which page, even in ID card mode', (
+      tester,
+    ) async {
+      await pump(tester, retake: 1);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Retake page 2'), findsOneWidget);
+      expect(find.text('Front side'), findsNothing);
+    });
+
+    testWidgets('Book: the spine guide, and the hint stays', (tester) async {
       await pump(tester);
       setMode(DkScanMode.book);
       await tester.pumpAndSettle();
       expect(find.text('Align the spine with the line'), findsOneWidget);
+      expect(find.text('Point at a document'), findsOneWidget);
     });
 
     testWidgets('Batch: the larger count once pages are taken', (tester) async {
