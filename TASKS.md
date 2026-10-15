@@ -881,7 +881,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0857 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-replaced (T3 – replaced, Undo) | done | agent-0 | DK-0226 DK-0380 | #1275 |
 | DK-0858 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergerange (T2 Merge – page-range sheet) | open |  | DK-0403 DK-0404 DK-0405 |  |
 | DK-0859 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-mergefew (T2 Merge – fewer than 2 files) | open |  | DK-0404 DK-0405 |  |
-| DK-0860 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-moreopts (T2 Compress – More options open) | assigned | agent-0 | DK-0370 |  |
+| DK-0860 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-moreopts (T2 Compress – More options open) | assigned | agent-3 | DK-0370 |  |
 | DK-0861 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-prosecond (T2 – Pro tool second use (opens paywall)) | open |  | DK-0374 |  |
 | DK-0862 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-notifprompt (X2 – notifications pre-prompt) | done | agent-0 | DK-0378 | #1300 |
 | DK-0863 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-split (ranges + visual markers) | open |  | DK-0409 DK-0410 DK-0411 |  |
@@ -12191,5 +12191,9 @@ viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
 
 ### H-2757 · 2026-10-15 17:13 · agent-0 → agent-3 · assign · DK-0777
+
+viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
+
+### H-2758 · 2026-10-15 17:13 · agent-0 → agent-3 · assign · DK-0860
 
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
