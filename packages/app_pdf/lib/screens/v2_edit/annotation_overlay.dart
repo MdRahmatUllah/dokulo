@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/dk_editor_bars.dart';
+import '../../components/dk_tool_options_sheet.dart';
 import '../../theme/dk_tokens.dart';
 import 'annotation_editor.dart';
 
@@ -17,7 +18,8 @@ class EditStyle {
     this.penWidth = 2,
     this.highlighterColor = 0x80FFEB3B,
     this.highlighterWidth = 14,
-    this.shape = ShapeKind.square,
+    this.shape = DkShapeKind.rectangle,
+    this.eraseObjects = true,
     this.shapeColor = 0xFFE53935,
     this.shapeWidth = 2,
     this.textColor = 0xFF14171C,
@@ -27,7 +29,14 @@ class EditStyle {
 
   final int penColor, highlighterColor, shapeColor, textColor, noteColor;
   final double penWidth, highlighterWidth, shapeWidth, fontSize;
-  final ShapeKind shape;
+
+  /// What Shapes draws (UI spec §17.2): a rectangle or an ellipse as a
+  /// shape annotation, a line or an arrow as ink.
+  final DkShapeKind shape;
+
+  /// The eraser's mode: Object deletes whatever it touches; Stroke only
+  /// ink, along the finger.
+  final bool eraseObjects;
 }
 
 /// The annotation layer over one page (DK-0312): draws [editor]'s
@@ -202,15 +211,7 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
         }
       case EditTool.shapes:
         if (!tap) {
-          _e.add(
-            page,
-            ShapeAnnot(
-              st.shape,
-              _boxOf(start, end),
-              width: st.shapeWidth,
-              color: st.shapeColor,
-            ),
-          );
+          _e.add(page, _shape(st, start, end));
         }
       case EditTool.text:
         // A tap on a text box edits it rather than stacking a new one.
@@ -262,9 +263,42 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
     setState(() {});
   }
 
+  /// Shapes' annotation from a drag: a rectangle or an ellipse as a shape
+  /// annotation; a line, or an arrow (the shaft and two 30° barbs), as ink.
+  static PdfAnnot _shape(EditStyle st, PagePoint start, PagePoint end) {
+    switch (st.shape) {
+      case DkShapeKind.rectangle || DkShapeKind.ellipse:
+        return ShapeAnnot(
+          st.shape == DkShapeKind.rectangle
+              ? ShapeKind.square
+              : ShapeKind.circle,
+          _boxOf(start, end),
+          width: st.shapeWidth,
+          color: st.shapeColor,
+        );
+      case DkShapeKind.line || DkShapeKind.arrow:
+        final strokes = [
+          [start, end],
+        ];
+        if (st.shape == DkShapeKind.arrow) {
+          final angle = math.atan2(end.y - start.y, end.x - start.x);
+          final barb = math.max(6.0, st.shapeWidth * 4);
+          for (final side in [-1, 1]) {
+            final a = angle + math.pi + side * math.pi / 6;
+            strokes.add([
+              end,
+              (x: end.x + barb * math.cos(a), y: end.y + barb * math.sin(a)),
+            ]);
+          }
+        }
+        return InkAnnot(strokes, width: st.shapeWidth, color: st.shapeColor);
+    }
+  }
+
   void _erase(PagePoint at, Size size) {
     for (final a in _e.annotsOn(widget.page).reversed) {
-      if (a.annot is InkAnnot && hits(a.annot, at, _tolerance(size))) {
+      if ((widget.style.eraseObjects || a.annot is InkAnnot) &&
+          hits(a.annot, at, _tolerance(size))) {
         _e.delete((page: widget.page, id: a.id));
         return;
       }
@@ -341,12 +375,7 @@ class _AnnotationOverlayState extends State<AnnotationOverlay> {
                 if (_drag == _Drag.draw &&
                     _e.tool == EditTool.shapes &&
                     _last != null)
-                  ShapeAnnot(
-                    widget.style.shape,
-                    _boxOf(_start!, _last!),
-                    width: widget.style.shapeWidth,
-                    color: widget.style.shapeColor,
-                  ),
+                  _shape(widget.style, _start!, _last!),
               ],
               selected: switch ((_drag, _e.selectedAnnot)) {
                 (_Drag.move, final s?) => translate(

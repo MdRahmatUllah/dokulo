@@ -16,7 +16,11 @@ void main() {
   late AnnotationEditor editor;
   AnnotRef? placed, coloured, noted;
 
-  Future<void> pump(WidgetTester tester, {DkTokens? tokens}) async {
+  Future<void> pump(
+    WidgetTester tester, {
+    DkTokens? tokens,
+    EditStyle style = const EditStyle(),
+  }) async {
     tester.view.physicalSize = const Size(297.5, 421);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -35,6 +39,7 @@ void main() {
               editor: editor,
               page: 0,
               pageSize: a4,
+              style: style,
               onPlaced: (r) => placed = r,
               onColour: (r) => coloured = r,
               onNote: (r) => noted = r,
@@ -147,7 +152,9 @@ void main() {
     expect(editor.annotsOn(0), isEmpty);
   });
 
-  testWidgets('eraser: wipes the ink it touches, nothing else', (tester) async {
+  testWidgets('eraser, Stroke: wipes the ink it touches, nothing else', (
+    tester,
+  ) async {
     editor
       ..add(
         0,
@@ -160,7 +167,7 @@ void main() {
         ),
       )
       ..add(0, const NoteAnnot((x: 300, y: 700), note: '', color: 0xFFFFC107));
-    await pump(tester);
+    await pump(tester, style: const EditStyle(eraseObjects: false));
     editor.tool = EditTool.eraser;
     await drag(tester, const [Offset(50, 0), Offset(50, 30)]);
     await drag(tester, const [Offset(150, 70), Offset(160, 75)]);
