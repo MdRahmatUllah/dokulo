@@ -25,6 +25,8 @@ export 'src/tools/password_jobs.dart';
 export 'src/tools/pdf2img_job.dart';
 export 'src/tools/repair_job.dart';
 export 'src/tools/rotate_job.dart';
+export 'src/tools/smart_split.dart';
+export 'src/tools/smart_split_job.dart';
 export 'src/tools/split_job.dart';
 export 'src/tools/stamp_jobs.dart';
 export 'src/tools/web_job.dart';
