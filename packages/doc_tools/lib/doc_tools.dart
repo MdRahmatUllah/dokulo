@@ -11,6 +11,7 @@ export 'src/tools/compress_job.dart';
 export 'src/tools/img2pdf_job.dart';
 export 'src/tools/ocr_job.dart';
 export 'src/tools/output_name.dart';
+export 'src/tools/web_job.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
 const int docToolsLayer = 2;

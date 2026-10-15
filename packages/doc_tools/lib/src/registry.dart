@@ -2,6 +2,7 @@ import 'tool_job.dart';
 import 'tools/compress_job.dart';
 import 'tools/img2pdf_job.dart';
 import 'tools/ocr_job.dart';
+import 'tools/web_job.dart';
 
 /// The tools that run as a ToolJob: one engine task each in the plan
 /// ("Merge PDF: implement the merge ToolJob"). Organize, Mark up, Sign, Fill form
@@ -17,6 +18,7 @@ const List<ToolJob<Object?>> allToolJobs = [
   CompressJob(),
   Img2PdfJob(),
   OcrJob(),
+  WebJob(),
 ];
 
 /// ToolJobs by id.
