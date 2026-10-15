@@ -840,7 +840,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 |  |
 | DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | assigned | agent-3 | DK-0344 |  |
 | DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | assigned | agent-3 | DK-0344 |  |
-| DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | assigned | agent-2 | DK-0344 |  |
+| DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | assigned | agent-3 | DK-0344 |  |
 | DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | assigned | agent-2 | DK-0343 |  |
 | DK-0821 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-review (S2 – default) | assigned | agent-2 | DK-0352 DK-0356 |  |
 | DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | assigned | agent-2 | DK-0353 |  |
@@ -11904,3 +11904,7 @@ Please take DK-0817 (Visual QA: scanner-camera-far (hint – move closer)).
 ### H-2685 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0818
 
 Please take DK-0818 (Visual QA: scanner-camera-dark (hint – more light needed)).
+
+### H-2686 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0819
+
+Please take DK-0819 (Visual QA: scanner-camera-cutoff (hint – fit the whole page)).
