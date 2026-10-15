@@ -21,10 +21,12 @@ headless Chrome at 3250 × 1250. Boards, at 393 × 852 with
 - T3 matches: the result card's headline and its line wrap, the file name
   field and the action bar keep their full labels; the content scrolls above
   the bar.
-- T1 fails, DK-1100 (lane B): the grid stays 4 columns (73 px tiles) and
-  every tile's label overflows by 36 px. H1 already switches to 2 columns
-  from 1.5× text (`pinned_tools.dart`); T1 needs the same. The board's T1
-  case is skipped with that id until the fix.
+- T1 failed, DK-1100: the grid stayed 4 columns (73 px tiles) and every
+  tile's label overflowed by 36 px. Fixed in DK-0657: H1 and T1 share
+  `toolGrid` (2 across on a phone from 160 % text); the board's T1 case
+  runs again (`qa_text200_tools_*`). The same pass found H1's tiles 5.6 px
+  short at 375 dp and 100 % text: phone tiles are now 104 dp high at any
+  width (`toolTileAspect`).
 
 Not built on 2026-10-15, checked in DK-1099: T2 Compress's own options
 (DK-0463), S2 Review (DK-0352, PR #1219), X3 Paywall (DK-0580), A1 Summary

@@ -84,6 +84,16 @@ class AnnotationEditor extends ChangeNotifier {
 
   List<EditAnnot> annotsOn(int page) => _pages[page] ?? const [];
 
+  /// The first page a signature was placed on in this session (the
+  /// "Signed on page 3" toast); null: none.
+  int? get signedPage {
+    final pages = [
+      for (final MapEntry(:key, :value) in _pages.entries)
+        if (value.any((a) => a.annot is StampAnnot)) key,
+    ]..sort();
+    return pages.firstOrNull;
+  }
+
   // --- Changes. Each is one undo step.
 
   void _change(void Function(Map<int, List<EditAnnot>> pages) apply) {
@@ -115,6 +125,28 @@ class AnnotationEditor extends ChangeNotifier {
         final i = list.indexWhere((a) => a.id == ref.id);
         if (i >= 0) list[i] = list[i].copyWith(f(list[i].annot));
       });
+
+  /// Changes an annotation (a text box's text, a note's), undoably.
+  void update(AnnotRef ref, PdfAnnot Function(PdfAnnot) f) => _replace(ref, f);
+
+  /// Changes the annotation the last step just added (its text), in that
+  /// same undo step: one Undo takes the box and its text away together.
+  void amend(AnnotRef ref, PdfAnnot Function(PdfAnnot) f) {
+    final list = _pages[ref.page];
+    final i = list?.indexWhere((a) => a.id == ref.id) ?? -1;
+    if (i < 0) return;
+    list![i] = list[i].copyWith(f(list[i].annot));
+    notifyListeners();
+  }
+
+  /// Takes the last step back without a Redo (a text box placed, then left
+  /// empty: as if never placed).
+  void retract() {
+    if (_undo.isEmpty) return;
+    _pages = _undo.removeLast();
+    _dropStaleSelection();
+    notifyListeners();
+  }
 
   /// Moves an annotation by ([dx], [dy]) points.
   void move(AnnotRef ref, double dx, double dy) =>
@@ -248,6 +280,8 @@ PdfAnnot translate(PdfAnnot a, double dx, double dy) => switch (a) {
     color: a.color,
     note: a.note,
   ),
+  StampAnnot(:final rect, :final png, :final date, :final dateSize) =>
+    StampAnnot(_tb(rect, dx, dy), png, date: date, dateSize: dateSize),
   ShapeAnnot(:final kind, :final rect, :final width, :final fill) => ShapeAnnot(
     kind,
     _tb(rect, dx, dy),
@@ -325,6 +359,29 @@ PdfAnnot fitTo(PdfAnnot a, Box box) {
       color: a.color,
     ),
     OtherAnnot() => a,
+    // The signature scales with its shape kept (anchored top-left); its
+    // date keeps its size beside it. At least 8 pt wide.
+    StampAnnot(:final png, :final date, :final dateSize) => () {
+      final dateExtent = switch (a.dateBox) {
+        final d? => d.right - a.rect.right,
+        null => 0.0,
+      };
+      final w = math.max(8.0, box.right - box.left - dateExtent);
+      final aspect =
+          (a.rect.top - a.rect.bottom) /
+          math.max(a.rect.right - a.rect.left, 1e-6);
+      return StampAnnot(
+        (
+          left: box.left,
+          top: box.top,
+          right: box.left + w,
+          bottom: box.top - w * aspect,
+        ),
+        png,
+        date: date,
+        dateSize: dateSize,
+      );
+    }(),
   };
 }
 
@@ -357,7 +414,7 @@ PdfAnnot withColor(PdfAnnot a, int color) => switch (a) {
     color: color,
   ),
   NoteAnnot(:final at) => NoteAnnot(at, note: a.note, color: color),
-  OtherAnnot() => a,
+  OtherAnnot() || StampAnnot() => a,
 };
 
 bool _inBox(Box b, PagePoint p, double tol) =>

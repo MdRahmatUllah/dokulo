@@ -30,6 +30,7 @@ import '../screens/s2_review/scan_result_screen.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
+import '../screens/v2_edit/annotation_editor.dart' show EditTool;
 import '../screens/v2_edit/edit_screen.dart';
 import '../tools/tool_catalogue.dart';
 import '../tools/tool_definition.dart';
@@ -38,6 +39,15 @@ import 'bottom_chrome.dart';
 import 'link_error.dart';
 
 part 'routes.g.dart';
+
+/// The tools that open a screen instead of T2's options (DK-0517,
+/// DK-0519; Organize, DK-0329): the screen's route for a file row id.
+final Map<String, String Function(String fileId)> screenTools = {
+  'markup': (id) => Routes.viewer(id, edit: true, tool: 'highlighter'),
+  'sign': (id) => Routes.viewer(id, sign: true),
+  'form': (id) => Routes.viewer(id, edit: true, tool: 'form'), // DK-0518
+  'organize': Routes.organize,
+};
 
 /// Every route, by screen ID. The table with its rules is in
 /// docs/Developer guide.md §3. Sheets (A1, X1, X2, X3) are not routes.
@@ -93,11 +103,14 @@ abstract final class Routes {
     String fileId, {
     bool edit = false,
     bool sign = false,
+    String? tool,
     int? page,
     String? query,
   }) {
     if (edit || sign) {
-      return '/viewer/$fileId?mode=edit${sign ? '&from=sign' : ''}';
+      // [tool]: V2 starts with it selected (Mark up: the highlighter).
+      return '/viewer/$fileId?mode=edit${sign ? '&from=sign' : ''}'
+          '${tool == null ? '' : '&tool=$tool'}';
     }
     final params = {
       if (page != null) 'page': '$page',
@@ -140,8 +153,10 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
     String path,
     Widget Function(GoRouterState state) builder, {
     List<RouteBase> routes = const [],
+    GoRouterRedirect? redirect,
   }) => GoRoute(
     path: path,
+    redirect: redirect,
     parentNavigatorKey: root,
     // A MaterialPage, so it takes the theme's push transition (§13.4).
     pageBuilder: (context, state) => MaterialPage(
@@ -312,6 +327,13 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       ),
       fullScreen(
         '/tool/:toolId',
+        // Mark up, Sign and Organize open their screen with the file
+        // (DK-0517, DK-0519); without one, T2's picker chooses it first.
+        redirect: (context, s) {
+          final open = screenTools[s.pathParameters['toolId']];
+          final files = s.uri.queryParametersAll['file'] ?? const [];
+          return open == null || files.isEmpty ? null : open(files.first);
+        },
         (s) {
           final toolId = s.pathParameters['toolId']!;
           // A link to a tool this version doesn't have (DK-0236).
@@ -355,6 +377,9 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                 ? EditScreen(
                     fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
                     fromSign: s.uri.queryParameters['from'] == 'sign',
+                    startTool: EditTool.values
+                        .asNameMap()[s.uri.queryParameters['tool']],
+                    fillForm: s.uri.queryParameters['tool'] == 'form',
                   )
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(
