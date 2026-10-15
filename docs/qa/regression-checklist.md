@@ -15,12 +15,15 @@ accepts for that build; the sign-off goes in the log at the bottom.
    size checks on that APK.
 3. Hold `team.py device`, uninstall the old build, install, and confirm it with
    `adb -s emulator-555x shell dumpsys package app.dokulo | grep lastUpdateTime`.
-4. Copy the sample set to `Download/` on the device: a text PDF (20+ pages),
-   a scanned PDF without text, a password-protected PDF, a PDF form, a
-   damaged PDF, two versions of one contract, three photos of a document.
-   (`docs/compliance/network-uses.md` names `test/fixtures/`; that set is not
-   in the repo yet, so SQA keeps its own in `.worktrees/agent-3/sqa-samples/`,
-   with no personal data.)
+4. Push the sample documents of `test/fixtures/` (DK-0023, all fictional;
+   see its README) to the device:
+   `MSYS_NO_PATHCONV=1 adb -s emulator-555x push test/fixtures/. /sdcard/Download/`.
+   They cover the passes below: a text contract (Mietvertrag), an invoice, a
+   CV, the scanned letters bundle, an AcroForm and an XFA form, the
+   AES-256-locked invoice (password `dokulo`), the damaged xref, the
+   300-page file. Compare PDFs needs two versions of one file: run Add page
+   numbers on the Mietvertrag first and compare the two. Photos for Image to
+   PDF and the photo finder: take them with the emulator's virtual camera.
 5. Leave the emulator as found afterwards: language, theme, font scale,
    animations, airplane mode.
 
