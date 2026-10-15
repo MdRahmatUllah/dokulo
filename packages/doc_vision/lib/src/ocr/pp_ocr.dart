@@ -120,6 +120,51 @@ class PpOcr {
     return lines;
   }
 
+  /// How far a scan is turned: the clockwise quarter turns that set its
+  /// text upright, or null when it has too little text to tell (Rotate PDF's
+  /// "N pages look sideways", DK-1102). Lines on a sideways page are taller
+  /// than wide, so it's turned a quarter and looked at again; the line
+  /// classifier then tells upright from upside down by majority.
+  Future<int?> orientation(Raster image) async {
+    var quads = await detect(image);
+    if (quads.length < 2) return null;
+    var wide = 0, tall = 0;
+    for (final q in quads) {
+      final b = q.bounds(image.width, image.height);
+      final w = b.right - b.left, h = b.bottom - b.top;
+      if (w > 2 * h) wide++;
+      if (h > 2 * w) tall++;
+    }
+    var turns = 0;
+    var page = image;
+    if (tall > wide) {
+      page = _rotate90(image);
+      turns = 1;
+      quads = await detect(page);
+      if (quads.length < 2) return null;
+    }
+    // The widest lines say it best.
+    final lines = [for (final q in quads) _crop(page, q)]
+      ..sort((a, b) => (b.width / b.height).compareTo(a.width / a.height));
+    final sample = lines.take(_batch).toList();
+    final input = Float32List(sample.length * 3 * _recHeight * _clsWidth);
+    for (final (j, crop) in sample.indexed) {
+      _writeLine(crop, input, j * 3 * _recHeight * _clsWidth, _clsWidth);
+    }
+    final (probs, _) = await runner.run('cls', input, [
+      sample.length,
+      3,
+      _recHeight,
+      _clsWidth,
+    ]);
+    var flipped = 0;
+    for (var j = 0; j < sample.length; j++) {
+      if (probs[j * 2 + 1] > 0.5) flipped++;
+    }
+    if (flipped * 2 > sample.length) turns += 2;
+    return turns % 4;
+  }
+
   /// The text lines in [image] (DB post-processing on the probability map).
   Future<List<TextQuad>> detect(Raster image) async {
     final scale = math.min(
@@ -399,6 +444,19 @@ class PpOcr {
             c,
           ).round().clamp(0, 255);
         }
+      }
+    }
+    return Raster(w, h, out);
+  }
+
+  /// [img] turned a quarter clockwise.
+  static Raster _rotate90(Raster img) {
+    final w = img.height, h = img.width;
+    final out = Uint8List(img.bgr.length);
+    for (var y = 0; y < img.height; y++) {
+      for (var x = 0; x < img.width; x++) {
+        final to = (x * w + (img.height - 1 - y)) * 3;
+        out.setRange(to, to + 3, img.bgr, (y * img.width + x) * 3);
       }
     }
     return Raster(w, h, out);
