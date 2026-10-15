@@ -327,7 +327,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | done | agent-0 | DK-0293 DK-0294 | #1338 |
 | DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | done | agent-1 | DK-0293 DK-0294 | #1342 |
 | DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | done | agent-0 | DK-0293 DK-0294 DK-0063 | #1338 |
-| DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
+| DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | done | agent-0 | DK-0293 DK-0294 DK-0192 | #1345 |
 | DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-1 | DK-0293 DK-0294 |  |
 | DK-0308 | Ph3 | C | P0 | S | V1 Viewer: implement the "External link dialog" state | assigned | agent-0 | DK-0293 DK-0294 |  |
 | DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | done | agent-0 | DK-0293 | #1284 |
@@ -11092,3 +11092,7 @@ DK-0298 (V1 Viewer: implement the "Search active" state) is done, merged as #134
 ### H-2486 · 2026-10-15 11:41 · agent-0 → all · report · DK-0299
 
 DK-0299 (V1 Viewer: implement the "Search on scan without text" state) is done, merged as #1345. V1 state matches its artboard; see #1345 Now ready: DK-0767.
+
+### H-2487 · 2026-10-15 11:41 · agent-0 → all · report · DK-0306
+
+DK-0306 (V1 Viewer: implement the "Form detected" state) is done, merged as #1345. V1 state matches its artboard; see #1345 Now ready: DK-0773.
