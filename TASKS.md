@@ -364,7 +364,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0340 | Ph2 | C | P1 | S | ID card mode engine: crop to ID-1 (85.6 × 54 mm), front + back on one A4 at true size | done | agent-2 | DK-0336 DK-0337 | #1217 |
 | DK-0341 | Ph2 | C | P1 | M | Book mode engine: spine detection (projection profile + Hough), split into two pages, deskew each | done | agent-2 | DK-0336 DK-0337 | #1217 |
 | DK-0342 | Ph2 | C | P0 | S | Camera permission pre-prompt sheet and denied state | done | agent-2 | DK-0182 DK-0059 DK-0016 | #1202 |
-| DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | review | agent-2 | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 | #1219 |
+| DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | done | agent-2 | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 | #1219 |
 | DK-0344 | Ph2 | C | P0 | M | Hint pill logic with priority order and spoken guidance | review | agent-2 | DK-0343 | #1219 |
 | DK-0345 | Ph2 | C | P0 | S | S1 Scanner: implement the "Flash menu" state | review | agent-2 | DK-0343 | #1219 |
 | DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | assigned | agent-2 | DK-0343 |  |
@@ -11400,3 +11400,7 @@ Please take DK-1104 (bug(compress): a password-protected PDF fails with 'locked'
 ### H-2562 · 2026-10-15 12:28 · agent-3 → all · note · DK-1101
 
 Released DK-1101: assigned to agent-3 by mistake (a typed id); back to open
+
+### H-2563 · 2026-10-15 12:33 · agent-2 → all · report · DK-0343
+
+DK-0343 (S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row) is done, merged as #1219. S1 camera + S2 review merged as #1219; camera plugin's RECORD_AUDIO/ACCESS_NETWORK_STATE removed in the manifest (check_permissions skips tools:node=remove); test/scanner_overrides.dart fakes S1/S2 for route tests Now ready: DK-0346, DK-0347, DK-0348, DK-0351, DK-0644, DK-0652, DK-0820.
