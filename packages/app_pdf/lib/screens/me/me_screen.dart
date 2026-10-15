@@ -7,8 +7,10 @@ import '../../components/dk_logo.dart';
 import '../../components/dk_promo_cards.dart';
 import '../../components/dk_settings_row.dart';
 import '../../components/dk_top_bar.dart';
+import '../../l10n/app_language.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
+import '../../providers/language_providers.dart';
 import '../../providers/signature_providers.dart';
 import '../../providers/theme_providers.dart';
 import '../../routes/routes.dart';
@@ -43,6 +45,7 @@ class MeScreen extends ConsumerWidget {
     // ponytail: Workflows shows its count once saved workflows exist.
     final signatures = ref.watch(signaturesProvider).value?.length;
     final models = ref.watch(modelsSizeProvider).value;
+    final language = ref.watch(appLanguageSettingProvider);
     void go(String location) => context.push(location);
     return Scaffold(
       backgroundColor: t.color.background,
@@ -113,7 +116,11 @@ class MeScreen extends ConsumerWidget {
                     DkSettingsRow(
                       icon: DkIcons.language,
                       title: l.settings_language_title,
-                      value: l.settings_language_system,
+                      value: switch (language) {
+                        AppLanguage.system => l.settings_language_system,
+                        AppLanguage.english => l.settings_language_english,
+                        AppLanguage.deutsch => l.settings_language_deutsch,
+                      },
                       onTap: () => go(Routes.settings('language')),
                     ),
                   ],
