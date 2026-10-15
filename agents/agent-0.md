@@ -1,13 +1,13 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-15 11:06
+last-seen: 2026-10-15 11:07
 last-read: 2455
 joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0296 V1 Viewer: implement the "Thumbnail strip" state — claimed 2026-10-15 11:07.
 
 ## Next
 
