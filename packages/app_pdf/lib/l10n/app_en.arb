@@ -2905,5 +2905,7 @@
   "viewer_share_preparing": "Preparing the images…",
   "@viewer_share_preparing": {"description": "Share as images on a long document, while the pages render (DK-0311)."},
   "viewer_share_failed": "Couldn't prepare that for sharing.",
-  "@viewer_share_failed": {"description": "Share as images or Share text failed (DK-0311)."}
+  "@viewer_share_failed": {"description": "Share as images or Share text failed (DK-0311)."},
+  "viewer_thumbnails": "Thumbnails",
+  "@viewer_thumbnails": {"description": "Tablet viewer: the button that shows or hides the thumbnail sidebar (UI spec §17.4; DK-0310)."}
 }

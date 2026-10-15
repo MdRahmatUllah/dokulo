@@ -769,5 +769,6 @@
   "viewer_share_preparing": "Bilder werden vorbereitet…",
   "viewer_share_failed": "Das ließ sich nicht zum Teilen vorbereiten.",
   "options_eraser_mode": "Modus",
-  "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt."
+  "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt.",
+  "viewer_thumbnails": "Miniaturansichten"
 }
