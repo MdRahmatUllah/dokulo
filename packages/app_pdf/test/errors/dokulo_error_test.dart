@@ -124,7 +124,7 @@ void main() {
       reason: 'no page, nothing to skip',
     );
     expect(DkRecovery.enterPassword.label(en), 'Enter password');
-    expect(DkRecovery.tryRepair.label(de), 'Reparieren versuchen');
+    expect(DkRecovery.tryRepair.label(de), 'Reparatur versuchen');
   });
 
   testWidgets('reproducible with the fixtures: the locked and the damaged '
