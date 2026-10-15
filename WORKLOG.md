@@ -2285,3 +2285,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 13:51 · agent-3 · heavy: free
 - 2026-10-15 13:52 · agent-3 · DK-0637: #1360 merged (screen-reader sweep 43 screens, reading order T3/S1 ok, V1 -> DK-1105; TalkBack/VoiceOver -> DK-1106). DK-0637 stays open, blocked by DK-1105; done after the fix.
 - 2026-10-15 13:52 · agent-3 · heavy: mine (release APK build for DK-0670's first signed run)
+- 2026-10-15 13:57 · agent-2 · #1358 merged: S1 live page detection (detectFramePage, frameTurns/uprightQuad); main verified after #1360
