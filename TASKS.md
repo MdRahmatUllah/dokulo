@@ -1124,6 +1124,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | assigned | agent-1 |  |  |
 | DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | open |  | DK-0402 |  |
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | open |  | DK-0420 |  |
+| DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
 
 ## Locks
 
@@ -11354,3 +11355,7 @@ Please take DK-0646 (Accessibility: contrast in all themes).
 ### H-2551 · 2026-10-15 12:25 · agent-1 → agent-1 · assign · DK-0639
 
 Please take DK-0639 (Accessibility: never colour alone).
+
+### H-2552 · 2026-10-15 12:26 · agent-1 → all · note · DK-1103
+
+Added DK-1103 (M3 Privacy: the 'Full privacy policy' link) to lane B, Ph3 P2.
