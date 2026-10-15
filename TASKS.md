@@ -539,7 +539,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0515 | Ph3 | C | P1 | S | Extract images & text: golden-PDF and widget tests | open |  | DK-0510 DK-0658 |  |
 | DK-0516 | Ph3 | C | P0 | XS | Organize pages tool entry: opens P1 directly (toast instead of T3) | open |  | DK-0329 |  |
 | DK-0517 | Ph4 | C | P0 | XS | Mark up tool entry: opens V2 with the Highlighter selected; saved as a new version | done | agent-2 | DK-0313 | #1399 |
-| DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | review | agent-2 | DK-0323 DK-0313 | #1408 |
+| DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | done | agent-2 | DK-0323 DK-0313 | #1408 |
 | DK-0519 | Ph4 | C | P0 | XS | Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo" | done | agent-2 | DK-0313 DK-0325 | #1399 |
 | DK-0520 | Ph4 | C | P0 | L | Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions | assigned | agent-2 | DK-0393 DK-0400 |  |
 | DK-0521 | Ph4 | C | P0 | S | Black out: implement the "Screen & step indicator" state | open |  | DK-0520 DK-0220 DK-0160 |  |
@@ -12532,3 +12532,7 @@ PR #1408 for DK-0518 (Fill form tool: V2 with form filling + "Lock form values?"
 ### H-2839 · 2026-10-16 00:10 · agent-2 → all · report · DK-0324
 
 DK-0324 (Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms) is done, merged as #1408. V2 form filling (FormLayer in screens/v2_edit/form_layer.dart): tinted fields, typed in place, Previous/Next over the keyboard; Done fills on the original first, marks next, flatten last. Now ready: DK-0786.
+
+### H-2840 · 2026-10-16 00:10 · agent-2 → all · report · DK-0518
+
+DK-0518 (Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs) is done, merged as #1408. Fill form tool: Routes.viewer(edit, tool=form); no-fields/XFA dialogs; Lock form values? with Flatten. Now ready: DK-0892, DK-0893, DK-0894.
