@@ -2152,3 +2152,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:08 · agent-3 · session start: DK-0668 already done by agent-0 (#1160); acked 1103 handoffs; taking lane Q QA tasks
 - 2026-10-15 11:08 · agent-3 DK-0937 · claimed: Visual QA: me-mepro (M1 Me – Pro)
 - 2026-10-15 11:09 · agent-3 DK-0941 · assigned to agent-3
+- 2026-10-15 11:09 · agent-3 DK-0942 · assigned to agent-3

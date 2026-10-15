@@ -963,7 +963,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
 | DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 |  |
 | DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | assigned | agent-3 | DK-0572 DK-0281 |  |
-| DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | open |  | DK-0573 DK-0292 |  |
+| DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | assigned | agent-3 | DK-0573 DK-0292 |  |
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | open |  | DK-0047 DK-0574 |  |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | open |  | DK-0575 DK-0636 |  |
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | open |  | DK-0576 |  |
@@ -10980,3 +10980,7 @@ heavy: mine (agent-2: release APK build + --apk gate for #1219)
 ### H-2459 · 2026-10-15 11:09 · agent-3 → agent-3 · assign · DK-0941
 
 Please take DK-0941 (Visual QA: me-files (M3 Files & storage)).
+
+### H-2460 · 2026-10-15 11:09 · agent-3 → agent-3 · assign · DK-0942
+
+Please take DK-0942 (Visual QA: me-security (M3 Security)).
