@@ -270,6 +270,25 @@ void main() {
     semantics.dispose();
   });
 
+  testWidgets('typed text alone is a change: Done saves it', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester, source: 'form-acroform.pdf');
+    await settle(tester);
+    await tester.tap(find.bySemanticsLabel('name'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Max');
+    await tester.pump();
+    final done = tester.widget<DkTextAction>(
+      find.widgetWithText(DkTextAction, 'Done'),
+    );
+    expect(done.onTap, isNotNull);
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    final fields = await tester.runAsync(() => PdfForms.fields(path));
+    expect(fields!.firstWhere((f) => f.name == 'name').value, 'Max');
+    semantics.dispose();
+  });
+
   group('Fill form (DK-0518)', () {
     testWidgets('no fields: says so, and Mark up selects the highlighter', (
       tester,
@@ -308,7 +327,7 @@ void main() {
       await tester.tap(find.text('Flatten form'));
       await tester.pump();
       await tester.tap(find.text('Save'));
-      await settle(tester);
+      await settle(tester, rounds: 150);
       final fields = await tester.runAsync(() => PdfForms.fields(path));
       expect(fields, isEmpty, reason: 'flattened');
       semantics.dispose();

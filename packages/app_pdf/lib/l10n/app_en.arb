@@ -2923,5 +2923,7 @@
   "form_xfa_body": "It uses XFA, an older form format. You can still read it and add marks.",
   "@form_xfa_body": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
   "form_open_read_only": "Open read-only",
-  "@form_open_read_only": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."}
+  "@form_open_read_only": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "edit_save_failed": "Couldn't save. The file is as it was.",
+  "@edit_save_failed": {"description": "V2 when Done could not write the file (DK-0324)."}
 }

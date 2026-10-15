@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 
@@ -95,10 +97,15 @@ class FormLayer extends StatelessWidget {
 }
 
 class _Field extends StatelessWidget {
+  /// The text about as the page will set it: half the field's height, at
+  /// most 14 pt (a tall multiline field keeps normal-sized lines).
+  double get _fontSize =>
+      math.min((field.box.top - field.box.bottom) * 0.55, 14) * scale;
+
   /// A changed value as the page will show it once saved.
   Widget _value(BuildContext context) {
     final t = context.tokens;
-    final size = (field.box.top - field.box.bottom) * scale * 0.55;
+    final size = _fontSize;
     return switch (field.kind) {
       PdfFieldKind.checkbox || PdfFieldKind.radio =>
         state.checked
@@ -155,6 +162,7 @@ class _Field extends StatelessWidget {
       child: editing
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2),
+              // The field's name for screen readers while it is filled.
               child: TextField(
                 controller: text,
                 autofocus: true,
@@ -162,14 +170,21 @@ class _Field extends StatelessWidget {
                 textAlignVertical: TextAlignVertical.center,
                 style: TextStyle(
                   // Close to the page's own text at this zoom.
-                  fontSize: (field.box.top - field.box.bottom) * scale * 0.55,
+                  fontSize: _fontSize,
                   color: t.markup.black,
                 ),
-                decoration: const InputDecoration.collapsed(hintText: null),
+                decoration: InputDecoration.collapsed(hintText: field.name),
               ),
             )
           : changed
-          ? ColoredBox(color: t.color.pageWhite, child: _value(context))
+          // Inset, so the field's printed frame stays visible.
+          ? Padding(
+              padding: const EdgeInsets.all(2),
+              child: ColoredBox(
+                color: t.color.pageWhite,
+                child: _value(context),
+              ),
+            )
           : null,
     );
     if (editing) return box;

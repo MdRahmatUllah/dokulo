@@ -110,7 +110,8 @@ class EditScreen extends ConsumerStatefulWidget {
   ConsumerState<EditScreen> createState() => _EditScreenState();
 }
 
-class _EditScreenState extends ConsumerState<EditScreen> {
+class _EditScreenState extends ConsumerState<EditScreen>
+    with WidgetsBindingObserver {
   AnnotationEditor? _editor;
   FileEntry? _file;
 
@@ -134,11 +135,24 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   @override
   void initState() {
     super.initState();
+    // The bar over the keyboard follows the keyboard (team memory: the
+    // body's MediaQuery never sees its inset).
+    WidgetsBinding.instance.addObserver(this);
+    // Typing makes the form changed (Done, the discard question).
+    _formText.addListener(() {
+      if (_activeText != null && mounted) setState(() {});
+    });
     _load();
   }
 
   @override
+  void didChangeMetrics() {
+    if (mounted) setState(() {});
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _editor?.dispose();
     _formText.dispose();
     super.dispose();
@@ -450,7 +464,13 @@ class _EditScreenState extends ConsumerState<EditScreen> {
   /// until the Fill form tool's overflow toggle (DK-0518).
   final _highlightFields = true;
 
-  bool get _dirty => (_editor?.dirty ?? false) || _formValues.isNotEmpty;
+  bool get _dirty =>
+      (_editor?.dirty ?? false) ||
+      _formValues.isNotEmpty ||
+      switch (_activeText) {
+        final f? => _formText.text != fieldState(f, _formValues[f.id]).text,
+        null => false,
+      };
 
   PdfFormField? get _activeText => switch (_activeField) {
     final id? =>
@@ -598,17 +618,20 @@ class _EditScreenState extends ConsumerState<EditScreen> {
       final out = await store.newTempFile(
         file.path.split(RegExp(r'[\\/]')).last,
       );
-      await PdfAnnotations.apply(file.path, out.path, editor.edits());
-      var result = out;
+      // The form first, on the file as read: its fields' ids are their
+      // annotation indices, which removing a mark would shift. Then the
+      // marks; Flatten last, so it bakes in the finished page.
+      var source = file.path;
       if (_formValues.isNotEmpty) {
-        // The filled form on top of the marks, regenerated as Acrobat does.
-        result = await store.newTempFile(out.path.split(RegExp(r'[\\/]')).last);
-        await PdfForms.fill(
-          out.path,
-          result.path,
-          _formValues,
-          flatten: flatten,
-        );
+        final filled = await store.newTempFile('form-${file.name}');
+        await PdfForms.fill(file.path, filled.path, _formValues);
+        source = filled.path;
+      }
+      await PdfAnnotations.apply(source, out.path, editor.edits());
+      var result = out;
+      if (flatten) {
+        result = await store.newTempFile('flat-${file.name}');
+        await PdfForms.fill(out.path, result.path, const {}, flatten: true);
       }
       final versions = await ref.read(versionStoreProvider.future);
       final before = await versions.replace(widget.fileId, result.path);
@@ -622,6 +645,9 @@ class _EditScreenState extends ConsumerState<EditScreen> {
         onAction: () => versions.restore(before),
       );
       _leave();
+    } on DocError {
+      // Nothing was replaced: the file is as it was.
+      if (mounted) showDkToast(context, l.edit_save_failed);
     } finally {
       if (mounted) setState(() => _saving = false);
     }
