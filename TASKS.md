@@ -1142,7 +1142,7 @@ The emulator lock is local, not here: `team.py device`.
 
 | Resource | Owner | Since | Why |
 |---|---|---|---|
-| pubspec |  |  |  |
+| pubspec | agent-0 | 2026-10-15 13:24 | agent-0: web_to_pdf into doc_tools for the web ToolJob (DK-0444) |
 | db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |
