@@ -447,7 +447,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0423 | Ph3 | C | P1 | S | Rotate PDF: errors and edge states | open |  | DK-0421 DK-0609 DK-0020 |  |
 | DK-0424 | Ph3 | B | P1 | XS | Rotate PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0425 | Ph3 | C | P1 | S | Rotate PDF: golden-PDF and widget tests | open |  | DK-0420 DK-0658 |  |
-| DK-0426 | Ph6 | A | P1 | M | Smart Split: implement the smartsplit ToolJob (engine) | open |  | DK-0391 DK-0396 DK-0008 |  |
+| DK-0426 | Ph6 | A | P1 | M | Smart Split: implement the smartsplit ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0396 DK-0008 |  |
 | DK-0427 | Ph6 | C | P1 | M | Smart Split: T2 options UI | open |  | DK-0370 DK-0426 DK-0216 |  |
 | DK-0428 | Ph6 | C | P1 | S | Smart Split: T3 result card, naming and Next chips | open |  | DK-0379 DK-0427 |  |
 | DK-0429 | Ph6 | C | P1 | S | Smart Split: errors and edge states | open |  | DK-0427 DK-0192 DK-0609 DK-0020 |  |
@@ -12344,3 +12344,7 @@ Added DK-1124 (bug(scanner): a Book-mode capture isn't split into its left and r
 ### H-2793 · 2026-10-15 18:14 · agent-0 → agent-0 · assign · DK-0552
 
 Please take DK-0552 (smart_split rules engine with optional Gemma check).
+
+### H-2794 · 2026-10-15 18:15 · agent-0 → agent-0 · assign · DK-0426
+
+Please take DK-0426 (Smart Split: implement the smartsplit ToolJob (engine)).
