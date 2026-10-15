@@ -1,0 +1,7 @@
+Kontoauszug / Account statement 09/2026
+01.09.2026 Miete September -1.240,00
+03.09.2026 Gehalt Beispiel AG +3.512,46
+11.09.2026 Card payment Corner Bakery -19,45
+18.09.2026 Stromabschlag Stadtwerke -86,00
+30.09.2026 Kontostand / Balance 4.127,01
+IBAN DE00 0000 0000 0000 0000 00 BIC BEISDEMMXXX

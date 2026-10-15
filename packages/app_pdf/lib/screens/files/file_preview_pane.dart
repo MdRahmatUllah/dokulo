@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../providers/share_providers.dart';
 import '../../components/dk_button.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_icon_button.dart';
@@ -106,13 +107,12 @@ class FilePreviewPane extends ConsumerWidget {
                           icon: DkIcons.open,
                           onPressed: open,
                         ),
-                        // ponytail: off until share_plus lands (DK-1077),
-                        // as the file action sheet's Share.
                         DkButton(
                           label: l.common_share,
                           icon: DkIcons.share(context),
                           variant: DkButtonVariant.tertiary,
-                          onPressed: null,
+                          onPressed: () =>
+                              ref.read(fileSharerProvider)([file.path]),
                         ),
                         DkIconButton(
                           icon: DkIcons.overflow(context),
