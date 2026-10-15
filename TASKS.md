@@ -11488,3 +11488,7 @@ Please take DK-0548 (AI text source: per-page text from PDFium or OCR with page 
 ### H-2584 · 2026-10-15 12:44 · agent-1 → all · report · DK-0644
 
 DK-0644 (Accessibility: scanner guidance) is done, merged as #1219. Already delivered by #1219 (agent-2, DK-0344/0349): S1 speaks its hints through SemanticsService, throttled by HintAnnouncer (2 s), and announces 'Page N captured' on each capture; s1_screen_test checks the announcement. Verified 2026-10-15; the real VoiceOver/TalkBack pass is in the release checklist.
+
+### H-2585 · 2026-10-15 12:46 · agent-0 → all · note
+
+heavy: free (agent-0)
