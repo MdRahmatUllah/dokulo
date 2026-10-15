@@ -104,6 +104,7 @@ python tools/licence_scan.py                                     # every pubspec
 python tools/check_l10n.py                                       # EN/DE keys match, no hard-coded strings in app_pdf
 python tools/check_permissions.py [built apk]                    # only the Android permissions DK-0016 lists
 python tools/check_tokens.py                                     # no raw colours in screens/components: DkTokens only
+python tools/check_copy_deck.py                                  # UI spec §27.1-27.3 keys and tool names match both ARBs
 python tools/check_privacy_manifests.py                          # the iOS privacy manifest, and one per native iOS plugin
 (cd packages/<p> && flutter test --timeout 60s --concurrency 4 | dart test)  # every package with tests; 4 flutter_testers at once (memory)
 python -m pytest tools/tests -q
