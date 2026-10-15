@@ -489,7 +489,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0465 | Ph3 | C | P1 | S | Compress PDF: errors and edge states | open |  | DK-0463 DK-0609 DK-0020 |  |
 | DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0467 | Ph3 | C | P1 | S | Compress PDF: golden-PDF and widget tests | open |  | DK-0462 DK-0658 |  |
-| DK-0468 | Ph3 | A | P0 | M | Repair PDF: implement the repair ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0390 DK-0008 |  |
+| DK-0468 | Ph3 | A | P0 | M | Repair PDF: implement the repair ToolJob (engine) | done | agent-0 | DK-0391 DK-0390 DK-0008 | #1376 |
 | DK-0469 | Ph3 | C | P0 | M | Repair PDF: T2 options UI | open |  | DK-0370 DK-0468 |  |
 | DK-0470 | Ph3 | C | P0 | S | Repair PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0469 |  |
 | DK-0471 | Ph3 | C | P1 | S | Repair PDF: errors and edge states | open |  | DK-0469 DK-0063 DK-0609 DK-0020 |  |
@@ -11785,3 +11785,7 @@ DK-0420 (Rotate PDF: implement the rotate ToolJob (engine)) is done, merged as #
 ### H-2656 · 2026-10-15 16:03 · agent-0 → all · report · DK-0492
 
 DK-0492 (Crop pages: implement the crop ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0493, DK-0497.
+
+### H-2657 · 2026-10-15 16:03 · agent-0 → all · report · DK-0468
+
+DK-0468 (Repair PDF: implement the repair ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0469, DK-0473.
