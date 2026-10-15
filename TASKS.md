@@ -992,7 +992,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0968 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-portrait (tablet-organize-portrait) | done | agent-0 | DK-0651 | #1295 |
 | DK-0969 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-landscape (options) | assigned | agent-3 | DK-0388 |  |
 | DK-0970 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-landscape (result) | assigned | agent-3 | DK-0388 |  |
-| DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | assigned | agent-0 | DK-0388 |  |
+| DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | assigned | agent-3 | DK-0388 |  |
 | DK-0972 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-portrait (result) | done | agent-3 | DK-0232 | #1348 |
 | DK-0973 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-landscape (tablet-compare-landscape) | open |  | DK-0533 DK-0653 |  |
 | DK-0974 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-portrait (tablet-compare-portrait) | open |  | DK-0653 |  |
@@ -12203,5 +12203,9 @@ viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
 
 ### H-2760 · 2026-10-15 17:13 · agent-0 → agent-3 · assign · DK-0970
+
+viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
+
+### H-2761 · 2026-10-15 17:13 · agent-0 → agent-3 · assign · DK-0971
 
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
