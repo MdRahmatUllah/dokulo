@@ -784,7 +784,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | done | agent-1 | DK-0288 DK-0289 | #1290 |
 | DK-0761 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-applock (app lock screen) | done | agent-1 | DK-0290 | #1290 |
 | DK-0762 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-cover (app-switcher privacy cover) | done | agent-1 | DK-0234 | #1290 |
-| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | open |  | DK-0293 DK-0294 DK-1111 |  |
+| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | assigned | agent-3 | DK-0293 DK-0294 DK-1111 |  |
 | DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | assigned | agent-3 | DK-0294 |  |
 | DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | assigned | agent-3 | DK-0297 DK-0620 |  |
 | DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | assigned | agent-3 | DK-0298 |  |
@@ -12149,3 +12149,7 @@ DK-0319 (V2 Note tool with its options sheet) is done, merged as #1384. V2 tools
 ### H-2746 · 2026-10-15 17:03 · agent-2 → all · report · DK-0320
 
 DK-0320 (V2 Eraser tool with its options sheet) is done, merged as #1384. V2 tools + options sheets merged as #1384: second tap opens options (remembered in prefs edit.options.<tool>), text/note text sheet, arrow as ink, eraser Object/Stroke. Gaps: DK-1114/1115/1116. Now ready: DK-0791.
+
+### H-2747 · 2026-10-15 17:12 · agent-0 → agent-3 · assign · DK-0763
+
+viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
