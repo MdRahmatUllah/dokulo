@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0658 Test suite: Golden PDF corpus — claimed 2026-10-15 12:12.
+Nothing claimed.
 
 ## Next
 
