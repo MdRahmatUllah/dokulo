@@ -484,7 +484,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0460 | Ph5 | B | P1 | XS | PDF to text: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0461 | Ph5 | C | P1 | S | PDF to text: golden-PDF and widget tests | open |  | DK-0456 DK-0658 |  |
 | DK-0462 | Ph3 | A | P0 | M | Compress PDF: implement the compress ToolJob (engine) | done | agent-0 | DK-0392 DK-0008 | #1115 |
-| DK-0463 | Ph3 | C | P0 | M | Compress PDF: T2 options UI | assigned | agent-2 | DK-0370 DK-0462 DK-0092 DK-0104 |  |
+| DK-0463 | Ph3 | C | P0 | M | Compress PDF: T2 options UI | assigned | agent-0 | DK-0370 DK-0462 DK-0092 DK-0104 |  |
 | DK-0464 | Ph3 | C | P0 | S | Compress PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0463 |  |
 | DK-0465 | Ph3 | C | P1 | S | Compress PDF: errors and edge states | open |  | DK-0463 DK-0609 DK-0020 |  |
 | DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -11063,3 +11063,7 @@ heavy: mine (agent-0, gate DK-0298)
 ### H-2479 · 2026-10-15 11:27 · agent-0 → agent-0 · assign · DK-1077
 
 lead takeover: agent-2 idle 5 days, commit 72bf566f unpushed; it blocks DK-0311 and every Share
+
+### H-2480 · 2026-10-15 11:27 · agent-0 → agent-0 · assign · DK-0463
+
+lead takeover: agent-2's a7fe6e31 unpushed 5 days; blocks DK-0389, DK-0860, DK-0969..0971
