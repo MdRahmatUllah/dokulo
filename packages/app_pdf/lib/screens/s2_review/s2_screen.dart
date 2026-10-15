@@ -129,8 +129,18 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
     if (_pager.hasClients) _pager.jumpToPage(index);
   }
 
+  /// Leaves crop mode. The PageView comes back on page 1, so it is sent to
+  /// the current page once it is there again.
+  void _endCrop() {
+    setState(() => _draft = null);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_pager.hasClients) _pager.jumpToPage(_current);
+    });
+  }
+
   void _crop(ScannedPage page) {
     setState(() {
+      _aspect = 3 / 4; // until this page's photo has loaded
       _draft = _cropStart = page.corners;
       _applyAll = null;
       _filtering = false;
@@ -152,7 +162,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
 
   Future<void> _applyCrop(int index) async {
     final crop = _draft!;
-    setState(() => _draft = null);
+    _endCrop();
     final session = ref.read(scanSessionProvider.notifier);
     await session.setCrop(index, crop);
     if (!mounted) return;
@@ -166,11 +176,10 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
   Future<void> _rotate(int index) async {
     final session = ref.read(scanSessionProvider.notifier);
     setState(() => _turned = ref.read(scanSessionProvider)[index].id);
+    final id = ref.read(scanSessionProvider)[index].id;
     await session.rotate(index);
-    final turns = ref.read(scanSessionProvider)[index].turns;
-    if (mounted) {
-      setState(() => _applyAll = () => session.applyToAll(turns: turns));
-    }
+    // Apply to all: the other pages turn a quarter more too.
+    if (mounted) setState(() => _applyAll = () => session.rotateAllBut(id));
   }
 
   /// A filter-mode change to the current page.
@@ -237,7 +246,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
       // The last page: the whole scan goes, so ask (no Undo for that).
       if (!await confirmDk(context, DkConfirmation.discardScan)) return;
       await session.clear();
-      widget.onDiscard();
+      if (mounted) widget.onDiscard();
       return;
     }
     final page = await session.remove(index);
@@ -310,6 +319,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
       child: Semantics(
         button: true,
         enabled: onTap != null,
+        toggled: active ? true : null,
         label: label,
         excludeSemantics: true,
         onTap: onTap,
@@ -339,7 +349,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
       ),
     );
 
-    return Scaffold(
+    final screen = Scaffold(
       backgroundColor: c.surface,
       appBar: DkTopBar.editing(
         title: l.camera_review(pages.length),
@@ -363,7 +373,11 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                           child: PageView.builder(
                             controller: _pager,
                             itemCount: pages.length,
-                            onPageChanged: (i) => setState(() => _current = i),
+                            onPageChanged: (i) => setState(() {
+                              _current = i;
+                              _applyAll = null;
+                              _filterChanged = false;
+                            }),
                             itemBuilder: (context, i) => Padding(
                               padding: EdgeInsets.fromLTRB(
                                 t.space.xl,
@@ -409,7 +423,7 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
                           label: l.common_cancel,
                           variant: DkButtonVariant.secondary,
                           expand: true,
-                          onPressed: () => setState(() => _draft = null),
+                          onPressed: _endCrop,
                         ),
                       ),
                       Expanded(
@@ -500,6 +514,14 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
           ],
         ],
       ),
+    );
+    // Back in crop mode cancels the crop instead of leaving the review.
+    return PopScope(
+      canPop: _draft == null,
+      onPopInvokedWithResult: (didPop, _) {
+        if (!didPop) _endCrop();
+      },
+      child: screen,
     );
   }
 

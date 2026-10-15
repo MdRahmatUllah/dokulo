@@ -215,6 +215,41 @@ void main() {
     expect(find.text('Rotate'), findsOneWidget);
   });
 
+  testWidgets('Crop on page 2: Cancel comes back to page 2', (tester) async {
+    await pump(tester);
+    await tester.fling(find.byType(PageView), const Offset(-300, 0), 1000);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Crop'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Cancel'));
+    await tester.pumpAndSettle();
+    expect(find.text('2 of 3'), findsOneWidget);
+    expect(tester.widget<PageView>(find.byType(PageView)).controller!.page, 1);
+  });
+
+  testWidgets('Rotate, then Apply to all turns the others a quarter more', (
+    tester,
+  ) async {
+    await pump(tester);
+    await container.read(scanSessionProvider.notifier).rotate(1);
+    await tester.tap(find.text('Rotate'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Apply to all pages'));
+    await tester.pumpAndSettle();
+    expect(pages().map((p) => p.turns), [1, 2, 1]);
+  });
+
+  testWidgets('Undo of Apply to all keeps what changed since: '
+      'a deleted page stays deleted', (tester) async {
+    await pump(tester);
+    final session = container.read(scanSessionProvider.notifier);
+    final before = await session.applyToAll(filter: ScanFilterChoice.greyscale);
+    await session.remove(1);
+    await session.restoreAll(before);
+    expect(pages(), hasLength(2));
+    expect(pages().map((p) => p.filter), everyElement(isNull));
+  });
+
   testWidgets('a rotation offers the chip; it turns every page alike', (
     tester,
   ) async {
@@ -224,6 +259,9 @@ void main() {
     await tester.tap(find.text('Apply to all pages'));
     await tester.pumpAndSettle();
     expect(pages().map((p) => p.turns), everyElement(1));
+    await tester.tap(find.text('Undo'));
+    await tester.pumpAndSettle();
+    expect(pages().map((p) => p.turns), [1, 0, 0]);
   });
 
   testWidgets('Filter: a filter for this page, then for all with Undo', (

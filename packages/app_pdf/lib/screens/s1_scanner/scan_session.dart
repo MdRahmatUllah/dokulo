@@ -119,7 +119,8 @@ class ScannedPage {
 
   static DetectedQuad? _quad(Object? json) {
     final q = (json as List?)?.cast<num>();
-    return q == null
+    // A quad has four corners; anything else is a damaged manifest.
+    return q == null || q.length != 8
         ? null
         : [
             for (var i = 0; i + 1 < q.length; i += 2)
@@ -283,13 +284,22 @@ class ScanSession extends _$ScanSession {
       ];
       _next = pages.length;
       state = pages;
-    } on FormatException {
-      // A manifest cut off mid-write: start over rather than fail.
+    } on Object {
+      // A manifest cut off mid-write, or damaged: start over rather than
+      // fail.
     }
   }
 
-  Future<void> _save() =>
-      _store.writeManifest(jsonEncode([for (final p in state) p.toJson()]));
+  /// Manifest writes one after the other (a slider calls this on every
+  /// tick), so the last state is the one on disk.
+  Future<void> _saving = Future.value();
+
+  Future<void> _save() {
+    final json = jsonEncode([for (final p in state) p.toJson()]);
+    return _saving = _saving
+        .catchError((Object _) {})
+        .then((_) => _store.writeManifest(json));
+  }
 
   Future<String> _write(Uint8List jpeg) =>
       _store.write('${DateTime.now().microsecondsSinceEpoch}-${_next++}', jpeg);
@@ -354,9 +364,36 @@ class ScanSession extends _$ScanSession {
     return before;
   }
 
-  /// Undo of [applyToAll].
+  /// Every page but [id] turned a quarter more ("Apply to all pages" after
+  /// Rotate turned that one). Returns the pages as they were.
+  Future<List<ScannedPage>> rotateAllBut(String id) async {
+    final before = state;
+    state = [for (final p in state) p.id == id ? p : p.rotated()];
+    await _save();
+    return before;
+  }
+
+  /// Undo of [applyToAll] and [rotateAllBut]: each page still here (same
+  /// photo) gets its edits back; pages added, moved, deleted or retaken
+  /// since stay as they are.
   Future<void> restoreAll(List<ScannedPage> pages) async {
-    state = pages;
+    final old = {for (final p in pages) p.id: p};
+    state = [
+      for (final p in state)
+        switch (old[p.id]) {
+          final o? when o.path == p.path => ScannedPage(
+            p.id,
+            p.path,
+            quad: p.quad,
+            crop: o.crop,
+            turns: o.turns,
+            filter: o.filter,
+            brightness: o.brightness,
+            contrast: o.contrast,
+          ),
+          _ => p,
+        },
+    ];
     await _save();
   }
 

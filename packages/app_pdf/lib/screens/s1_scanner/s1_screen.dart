@@ -136,6 +136,7 @@ class _S1ScreenState extends ConsumerState<S1Screen>
   Future<void> _close() async {
     if (widget.retake == null && ref.read(scanSessionProvider).isNotEmpty) {
       if (!await confirmDk(context, DkConfirmation.discardScan)) return;
+      if (!mounted) return;
       await ref.read(scanSessionProvider.notifier).clear();
     }
     if (mounted) widget.onClose();
