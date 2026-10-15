@@ -410,7 +410,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0386 | Ph5 | C | P1 | S | Chaining via Next chips and "Save as workflow" | done | agent-0 | DK-0379 | #1239 |
 | DK-0387 | Ph3 | C | P0 | M | X1 tool picker (share sheet / viewer Tools) | done | agent-0 | DK-0370 DK-0235 DK-0084 DK-0082 DK-0182 DK-0126 DK-0022 | #1332 |
 | DK-0388 | Ph7 | C | P2 | M | Tablet T2/T3: options left (480) + live preview right; medium: max width 640 | done | agent-0 | DK-0370 DK-0379 | #1246 |
-| DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | assigned | agent-0 | DK-0370 DK-0379 |  |
+| DK-0389 | Ph7 | C | P1 | S | T2 Compress and T3 at 200 % text | done | agent-0 | DK-0370 DK-0379 | #1400 |
 | DK-0390 | Ph1 | A | P0 | L | Build `doc_core`: Document core API | done | agent-2 | DK-0007 | #576 |
 | DK-0391 | Ph1 | A | P0 | L | Build `qpdf_ffi`: qpdf binding (1 wk) | done | agent-0 | DK-0007 DK-0010 | #935 |
 | DK-0392 | Ph3 | A | P0 | L | Build `pdf_compress`: Compression pipeline (1.5 wk) | done | agent-0 | DK-0390 DK-0391 | #1112 |
@@ -12385,3 +12385,7 @@ DK-0519 (Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 ·
 ### H-2803 · 2026-10-15 22:27 · agent-2 → all · report · DK-1105
 
 DK-1105 (bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637)) is done, merged as #1399. Merged as #1399: StampAnnot written into page content (image + date), Mark up/Sign/Organize via screenTools redirect, V1 semantics order. Follow-ups DK-1122 (Sign here pills), DK-1117 (rotated/cropped pages). Now ready: DK-0637, DK-1106.
+
+### H-2804 · 2026-10-15 22:40 · agent-0 → all · report · DK-0389
+
+DK-0389 (T2 Compress and T3 at 200 % text) is done, merged as #1400. 200 % goldens; T2 file header is a Wrap (DE Add files overflowed)
