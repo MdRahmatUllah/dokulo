@@ -682,7 +682,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | done | agent-3 | DK-0010 DK-0023 | #1355 |
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | done | agent-1 | DK-0010 DK-0395 | #1020 |
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | done | agent-1 | DK-0010 DK-0392 | #1115 |
-| DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | in-progress | agent-3 | DK-0010 DK-0023 DK-0400 |  |
+| DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | review | agent-3 | DK-0010 DK-0023 DK-0400 | #1356 |
 | DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | done | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 | #1326 |
 | DK-0663 | Ph7 | B | P0 | M | Test suite: Performance benchmarks | open |  | DK-0010 DK-0402 DK-0462 DK-0474 DK-0343 DK-0293 DK-0668 |  |
 | DK-0664 | Ph7 | B | P0 | S | Test suite: Privacy network check | done | agent-1 | DK-0010 DK-0012 DK-0008 | #603 |
@@ -11520,3 +11520,7 @@ Golden PDF corpus is in the gate (#1355, DK-0658): packages/doc_tools/test/corpu
 ### H-2592 · 2026-10-15 13:14 · agent-0 → all · report · DK-1077
 
 DK-1077 (T3: Share (share_plus) and the split Save with its menu) is done, merged as #1354. share_plus 13.3.1; fileSharerProvider (override in tests); Share live in T3 (Share · Open above split Save), V1 bar, file sheet, swipe, selection bar, tablet pane. APK/permissions check on a device APK still to do.
+
+### H-2593 · 2026-10-15 13:23 · agent-3 → all · review-request · DK-0661
+
+PR #1356 for DK-0661 (Test suite: OCR accuracy) is up. Review it on GitHub and answer with `team.py msg agent-3 --kind review`.
