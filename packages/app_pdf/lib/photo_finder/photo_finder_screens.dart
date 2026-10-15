@@ -1,11 +1,16 @@
+import 'dart:io';
 import 'dart:typed_data';
+
+import 'package:doc_core/doc_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../components/dk_action_bar.dart';
 import '../components/dk_action_sheet.dart';
+import '../components/dk_banner.dart';
 import '../components/dk_button.dart';
 import '../components/dk_empty_state.dart';
 import '../components/dk_icon.dart';
@@ -16,16 +21,43 @@ import '../components/dk_settings_row.dart';
 import '../components/dk_sheet.dart';
 import '../components/dk_switch.dart';
 import '../components/dk_text_action.dart';
+import '../components/dk_toast.dart';
 import '../components/dk_top_bar.dart';
 import '../l10n/app_localizations.dart';
 import '../patterns/dk_empty_states.dart';
+import '../providers/file_providers.dart';
+import '../providers/image_providers.dart';
+import '../routes/routes.dart';
+import '../screens/t2_tool/tool_options_providers.dart';
 import '../theme/dk_tokens.dart';
 import 'photo_finder.dart';
 
-/// A library thumbnail, kept while the results are open.
-final photoThumbProvider = FutureProvider.family<Uint8List?, String>(
-  (ref, id) => ref.read(photoLibraryProvider).thumbnail(id),
-);
+/// A library thumbnail, kept while a tile shows it.
+final photoThumbProvider = FutureProvider.autoDispose
+    .family<Uint8List?, String>(
+      (ref, id) => ref.read(photoLibraryProvider).thumbnail(id),
+    );
+
+/// The same photo larger, for Preview.
+final photoPreviewProvider = FutureProvider.autoDispose
+    .family<Uint8List?, String>(
+      (ref, id) => ref.read(photoLibraryProvider).thumbnail(id, size: 1080),
+    );
+
+/// The way in (Home's banner, DK-0252): the intro, then the scan in the
+/// background. Without access it says so and offers the Settings.
+Future<void> startPhotoFinder(BuildContext context, WidgetRef ref) async {
+  if (!await showPhotoFinderIntro(context)) return;
+  final access = await ref.read(photoFinderProvider.notifier).scan();
+  if (access != PhotoAccess.denied || !context.mounted) return;
+  final l = AppLocalizations.of(context);
+  await showDkToast(
+    context,
+    l.photos_access_off,
+    action: l.common_open_settings,
+    onAction: () => ref.read(photoLibraryProvider).openSettings(),
+  );
+}
 
 /// "Find documents in your photos" (DK-0363; UI spec §19.5, design
 /// `11-photo-finder/photo-finder-intro`): ILL-17, what happens, "Allow
@@ -133,6 +165,81 @@ class PhotoFinderCard extends ConsumerWidget {
 /// What "Convert to PDF" chose (DK-0366).
 typedef PhotoConvertOptions = ({bool onePdf, bool cleanUp});
 
+/// Home's card as a sliver (DK-0364): nothing, not even its padding, while
+/// no scan runs. A tap opens the results.
+class PhotoFinderSliver extends ConsumerWidget {
+  const PhotoFinderSliver({super.key, this.onTap});
+
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (!ref.watch(photoFinderProvider.select((s) => s.running))) {
+      return const SliverToBoxAdapter(child: SizedBox.shrink());
+    }
+    final t = context.tokens;
+    return SliverPadding(
+      padding: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
+      sliver: SliverToBoxAdapter(child: PhotoFinderCard(onTap: onTap)),
+    );
+  }
+}
+
+/// Convert (DK-0366): the chosen photos, copied into the app (HEIC as JPEG),
+/// go to Image to PDF's T2 with One PDF / One per photo and "Clean up like
+/// a scan" (the scanner's crop and filters) set as chosen; T2's Create runs
+/// it, T3 saves. Photos not on the phone are left out.
+Future<void> convertPhotos(
+  BuildContext context,
+  WidgetRef ref,
+  List<String> ids,
+  PhotoConvertOptions options,
+) async {
+  final library = ref.read(photoLibraryProvider);
+  final store = await ref.read(fileStoreProvider.future);
+  final work = await store.workDirectory.createTemp('photos_');
+  final raw = <String>[];
+  for (final (i, id) in ids.indexed) {
+    final photo = await library.original(id);
+    if (photo == null) continue;
+    final name = photo.name.replaceAll(RegExp(r'[\\/:*?"<>|]'), '_');
+    raw.add(
+      (await File('${work.path}/${i}_$name').writeAsBytes(photo.bytes)).path,
+    );
+  }
+  final (:paths, skipped: _) = await prepareImages(
+    raw,
+    store,
+    ref.read(heicDecoderProvider),
+  );
+  var nextId = -1;
+  final files = <FileEntry>[];
+  for (final path in paths) {
+    final copy = await store.importIncoming(File(path));
+    final stat = await copy.stat();
+    files.add(
+      FileEntry(
+        id: nextId--,
+        path: copy.path,
+        name: copy.uri.pathSegments.last,
+        size: stat.size,
+        pages: 0,
+        created: stat.changed,
+        modified: stat.modified,
+        hasText: false,
+        encrypted: false,
+      ),
+    );
+  }
+  if (await work.exists()) await work.delete(recursive: true);
+  if (files.isEmpty || !context.mounted) return;
+  ref.read(chainInputProvider.notifier).set(files, const []);
+  ref.read(toolOptionValuesProvider('img2pdf').notifier)
+    ..set('onePerImage', !options.onePdf)
+    ..set('cleanUp', options.cleanUp);
+  await context.push(Routes.tool('img2pdf', chained: true));
+}
+
 /// "Documents in photos" (DK-0365, DK-0367, DK-0368; UI spec §19.5): the
 /// found photos in three columns under month headers, each with a small
 /// document badge. Select starts multi-select; "Convert 8 to PDF" opens the
@@ -175,7 +282,7 @@ class _PhotoFinderScreenState extends ConsumerState<PhotoFinderScreen> {
       builder: (_) => Scaffold(
         backgroundColor: context.tokens.color.cameraChrome,
         appBar: const DkTopBar(leading: DkTopBarLeading.close),
-        body: Center(child: _Thumb(id, fit: BoxFit.contain)),
+        body: Center(child: _Thumb(id, fit: BoxFit.contain, large: true)),
       ),
     ),
   );
@@ -190,14 +297,14 @@ class _PhotoFinderScreenState extends ConsumerState<PhotoFinderScreen> {
     final locale = Localizations.localeOf(context).toLanguageTag();
 
     // Month headers, newest first.
-    final months = <String, List<LibraryPhoto>>{};
+    final months = <String, List<FoundPhoto>>{};
     for (final p in s.found) {
       months
-          .putIfAbsent(DateFormat.yMMMM(locale).format(p.modified), () => [])
+          .putIfAbsent(DateFormat.yMMMM(locale).format(p.taken), () => [])
           .add(p);
     }
 
-    Widget tile(LibraryPhoto p) => Builder(
+    Widget tile(FoundPhoto p) => Builder(
       builder: (anchor) {
         final on = selected?.contains(p.id) ?? false;
         void toggle() =>
@@ -283,6 +390,25 @@ class _PhotoFinderScreenState extends ConsumerState<PhotoFinderScreen> {
             )
           : CustomScrollView(
               slivers: [
+                if (s.access == PhotoAccess.limited)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        t.space.l,
+                        t.space.m,
+                        t.space.l,
+                        0,
+                      ),
+                      child: DkBanner(
+                        text: l.photos_limited,
+                        action: l.photos_select_more,
+                        onAction: () async {
+                          await ref.read(photoLibraryProvider).selectMore();
+                          await ref.read(photoFinderProvider.notifier).scan();
+                        },
+                      ),
+                    ),
+                  ),
                 for (final MapEntry(key: month, value: photos)
                     in months.entries) ...[
                   SliverToBoxAdapter(
@@ -332,7 +458,7 @@ class _PhotoFinderScreenState extends ConsumerState<PhotoFinderScreen> {
             icon: DkIcons.hideImage,
             label: l.photos_not_document,
             onTap: () {
-              _selected?.remove(id);
+              setState(() => _selected?.remove(id));
               ref.read(photoFinderProvider.notifier).notADocument(id);
             },
           ),
@@ -348,14 +474,17 @@ class _PhotoFinderScreenState extends ConsumerState<PhotoFinderScreen> {
 }
 
 class _Thumb extends ConsumerWidget {
-  const _Thumb(this.id, {this.fit = BoxFit.cover});
+  const _Thumb(this.id, {this.fit = BoxFit.cover, this.large = false});
 
   final String id;
   final BoxFit fit;
+  final bool large;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bytes = ref.watch(photoThumbProvider(id)).value;
+    final bytes = ref
+        .watch(large ? photoPreviewProvider(id) : photoThumbProvider(id))
+        .value;
     return bytes == null
         ? const SizedBox.shrink()
         : Image.memory(bytes, fit: fit, gaplessPlayback: true);

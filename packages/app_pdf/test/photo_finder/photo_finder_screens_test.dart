@@ -30,7 +30,19 @@ class FakeLibrary implements PhotoLibrary {
   FakeLibrary(this.photos);
   final List<LibraryPhoto> photos;
   @override
-  Future<bool> requestAccess() async => true;
+  Future<PhotoAccess> requestAccess() async => access;
+  PhotoAccess access = PhotoAccess.full;
+  @override
+  Future<void> openSettings() async {}
+  @override
+  Future<void> selectMore() async {}
+  @override
+  Future<Map<String, DateTime>> taken(List<String> ids) async => {
+    for (final p in photos)
+      if (ids.contains(p.id)) p.id: p.modified,
+  };
+  @override
+  Future<({Uint8List bytes, String name})?> original(String id) async => null;
   @override
   Future<int> count() async => photos.length;
   @override

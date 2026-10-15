@@ -7,13 +7,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeLibrary implements PhotoLibrary {
-  FakeLibrary(this.photos, {this.access = true});
+  FakeLibrary(this.photos, {this.access = PhotoAccess.full});
   final List<LibraryPhoto> photos;
-  bool access;
+  PhotoAccess access;
   final thumbs = <String>[];
 
+  /// Photos whose thumbnail throws (deleted mid-scan, unreadable).
+  final broken = <String>{};
+
   @override
-  Future<bool> requestAccess() async => access;
+  Future<PhotoAccess> requestAccess() async => access;
+  @override
+  Future<void> openSettings() async {}
+  @override
+  Future<void> selectMore() async {}
+  @override
+  Future<Map<String, DateTime>> taken(List<String> ids) async => {
+    for (final p in photos)
+      if (ids.contains(p.id)) p.id: p.modified,
+  };
+  @override
+  Future<({Uint8List bytes, String name})?> original(String id) async => null;
   @override
   Future<int> count() async => photos.length;
   @override
@@ -22,6 +36,7 @@ class FakeLibrary implements PhotoLibrary {
   @override
   Future<Uint8List?> thumbnail(String id, {int size = 320}) async {
     thumbs.add(id);
+    if (broken.contains(id)) throw StateError('gone');
     return Uint8List.fromList(id.codeUnits);
   }
 }
@@ -65,7 +80,7 @@ void main() {
     final c = finder();
     expect(
       await c.read(photoFinderProvider.notifier).scan(pageSize: 2),
-      isTrue,
+      PhotoAccess.full,
     );
     final s = c.read(photoFinderProvider);
     expect((s.scanned, s.total, s.running), (5, 5, false));
@@ -123,9 +138,48 @@ void main() {
   });
 
   test('no access: nothing is scanned', () async {
-    library.access = false;
+    library.access = PhotoAccess.denied;
     final c = finder();
-    expect(await c.read(photoFinderProvider.notifier).scan(), isFalse);
+    expect(
+      await c.read(photoFinderProvider.notifier).scan(),
+      PhotoAccess.denied,
+    );
     expect(library.thumbs, isEmpty);
+  });
+
+  test('a photo that fails is skipped; the scan goes on', () async {
+    library.broken.add('cat');
+    final c = finder();
+    await c.read(photoFinderProvider.notifier).scan();
+    final s = c.read(photoFinderProvider);
+    expect(s.scanned, 5);
+    expect([for (final p in s.found) p.id], ['doc-90', 'doc-60']);
+  });
+
+  test('photos gone from the library leave the results', () async {
+    await finder().read(photoFinderProvider.notifier).scan();
+    library.photos.removeWhere((p) => p.id == 'doc-90');
+    final c = finder();
+    await c.read(photoFinderProvider.notifier).load();
+    expect(
+      [for (final p in c.read(photoFinderProvider).found) p.id],
+      ['doc-60'],
+      reason: 'gone before the next scan: hidden',
+    );
+    await c.read(photoFinderProvider.notifier).scan();
+    expect(await PhotoFinderStore(db).lookup(['doc-90']), isEmpty);
+  });
+
+  test('results are newest taken first', () async {
+    library.photos[2] = (
+      id: 'doc-60',
+      modified: t0.add(const Duration(days: 3)),
+    );
+    final c = finder();
+    await c.read(photoFinderProvider.notifier).scan();
+    expect(
+      [for (final p in c.read(photoFinderProvider).found) p.id],
+      ['doc-60', 'doc-90'],
+    );
   });
 }

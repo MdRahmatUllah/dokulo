@@ -46,6 +46,23 @@ class PhotoFinderStore {
         ),
       );
 
+  /// After a whole scan: the rows of photos no longer in the library (or
+  /// no longer shared with the app) go.
+  Future<void> prune(Set<String> seen) async {
+    final gone = [
+      for (final r in await _db.select(_db.photoFinderCache).get())
+        if (!seen.contains(r.assetId)) r.assetId,
+    ];
+    for (var i = 0; i < gone.length; i += 500) {
+      await (_db.delete(_db.photoFinderCache)..where(
+            (r) => r.assetId.isIn(
+              gone.sublist(i, (i + 500).clamp(0, gone.length)),
+            ),
+          ))
+          .go();
+    }
+  }
+
   /// The user's long press: not a document, for good.
   Future<void> notADocument(String id) =>
       (_db.update(
