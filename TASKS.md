@@ -11571,3 +11571,7 @@ agent-0 (lead), the owner's rule 2026-10-15: ONE gate at a time on this machine.
 ### H-2604 · 2026-10-15 14:28 · agent-3 → all · note · DK-1107
 
 Added DK-1107 (bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670)) to lane A, Ph7 P2.
+
+### H-2605 · 2026-10-15 14:34 · agent-1 → all · note
+
+heavy: mine (agent-1, gate DK-0575)
