@@ -2328,3 +2328,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 15:50 · agent-2 DK-1113 · added: Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up)
 - 2026-10-15 15:51 · agent-3 · heavy: mine (gate for feat/DK-0763-viewer-qa, retry after C: cleanup)
 - 2026-10-15 16:03 · agent-0 DK-0402 · done (#1376)
+- 2026-10-15 16:03 · agent-0 DK-0408 · done (#1376)
