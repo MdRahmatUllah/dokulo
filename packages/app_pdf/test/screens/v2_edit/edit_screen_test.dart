@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:app_pdf/components/dk_editor_bars.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
 import 'package:app_pdf/components/dk_text_action.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/providers/files_providers.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/signature_providers.dart';
 import 'package:app_pdf/screens/v2_edit/edit_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -36,10 +38,12 @@ void main() {
   late String path;
   late int id;
   late GoRouter router;
+  late Prefs prefs;
 
   setUp(() {
     root = Directory.systemTemp.createTempSync('dk_v2_');
     db = DokuloDatabase.memory();
+    prefs = Prefs.memory();
   });
   tearDown(() async {
     await db.close();
@@ -96,6 +100,7 @@ void main() {
         overrides: [
           appDatabaseProvider.overrideWithValue(db),
           fileStoreProvider.overrideWith((ref) async => store),
+          prefsProvider.overrideWith(() => prefs),
           signatureStoreProvider.overrideWith(
             (ref) async => SignatureStore(
               db,
@@ -222,4 +227,139 @@ void main() {
       );
     });
   }
+
+  group('tool options (DK-0314..DK-0320)', () {
+    Offset centre(WidgetTester tester) =>
+        tester.getCenter(find.byType(PdfViewer));
+
+    Future<void> drag(WidgetTester tester, Offset by) async {
+      final g = await tester.startGesture(centre(tester));
+      for (var i = 0; i < 10; i++) {
+        await g.moveBy(by / 10);
+        await tester.pump();
+      }
+      await g.up();
+      await tester.pump();
+    }
+
+    testWidgets('a second tap on Pen opens its options; they are remembered', (
+      tester,
+    ) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester);
+      await tester.tap(find.text('Pen'));
+      await tester.pump();
+      await tester.tap(find.text('Pen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsOneWidget);
+      await tester.tap(find.bySemanticsLabel('Red'));
+      await tester.pumpAndSettle();
+      expect(
+        prefs.state.value!['edit.options.pen'],
+        isNull,
+        reason: 'written once the sheet closes',
+      );
+      Navigator.of(tester.element(find.text('Thickness'))).pop();
+      await tester.pumpAndSettle();
+      final saved = prefs.state.value!['edit.options.pen'] as Map;
+      expect(Color(saved['color'] as int), DkTokens.light.markup.red);
+      semantics.dispose();
+    });
+
+    testWidgets('a second tap on Pan opens nothing', (tester) async {
+      await pump(tester);
+      await tester.tap(find.text('Pan'));
+      await tester.pump();
+      await tester.tap(find.text('Pan'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsNothing);
+      expect(find.byType(BottomSheet), findsNothing);
+    });
+
+    testWidgets('options kept with the wrong types or out of range: defaults '
+        'and limits, no crash', (tester) async {
+      prefs = Prefs.memory({
+        'edit.options.pen': {'thickness': 'thick', 'color': 'red'},
+        'edit.options.text': {'fontSize': 200.0},
+      });
+      await pump(tester);
+      expect(tester.takeException(), isNull);
+      await tester.tap(find.text('Pen'));
+      await tester.pump();
+      await tester.tap(find.text('Pen'));
+      await tester.pumpAndSettle();
+      expect(find.text('Thickness'), findsOneWidget);
+    });
+
+    testWidgets('Shapes: an arrow is ink, the shaft and two barbs', (
+      tester,
+    ) async {
+      await pump(tester);
+      await tester.scrollUntilVisible(
+        find.text('Shapes'),
+        60,
+        scrollable: find
+            .descendant(
+              of: find.byType(DkToolStrip),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Shapes'));
+      await tester.pump();
+      await tester.tap(find.text('Shapes'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Arrow'));
+      await tester.pumpAndSettle();
+      Navigator.of(tester.element(find.text('Arrow'))).pop();
+      await tester.pumpAndSettle();
+      await drag(tester, const Offset(80, 40));
+      await tester.tap(find.text('Done'));
+      await settle(tester);
+      final annots = await tester.runAsync(() => PdfAnnotations.read(path, 0));
+      final ink = annots!.map((a) => a.annot).whereType<InkAnnot>().single;
+      expect(ink.strokes, hasLength(3));
+    });
+
+    testWidgets('Text: a tap places a box and asks for its text', (
+      tester,
+    ) async {
+      await pump(tester);
+      await tester.ensureVisible(find.text('Text'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Text'));
+      await tester.pump();
+      await tester.tapAt(centre(tester));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(EditableText).last, 'Bezahlt');
+      await tester.tap(find.text('Done').last);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Done'));
+      await settle(tester);
+      final annots = await tester.runAsync(() => PdfAnnotations.read(path, 0));
+      expect(
+        annots!.map((a) => a.annot).whereType<FreeTextAnnot>().single.text,
+        'Bezahlt',
+      );
+    });
+
+    testWidgets('Text: a box left empty goes again; nothing to save', (
+      tester,
+    ) async {
+      await pump(tester);
+      await tester.ensureVisible(find.text('Text'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Text'));
+      await tester.pump();
+      await tester.tapAt(centre(tester));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Done').last);
+      await tester.pumpAndSettle();
+      final done = tester.widget<DkTextAction>(
+        find.widgetWithText(DkTextAction, 'Done'),
+      );
+      expect(done.onTap, isNull, reason: 'no changes');
+    });
+  });
 }

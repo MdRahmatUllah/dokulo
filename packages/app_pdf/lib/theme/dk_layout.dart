@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import 'dk_tokens.dart';
@@ -95,6 +97,10 @@ class DkGrid {
       : width < 840
       ? smallTablet
       : largeTablet;
+
+  /// The window's class (DK-0657): use this, never raw 600/840 widths.
+  static DkGrid of(BuildContext context) =>
+      forWidth(MediaQuery.sizeOf(context).width);
 }
 
 /// Tool tiles across (UI spec §30): 4 on a phone, 6 from 600 dp of width, 8
@@ -105,9 +111,21 @@ int toolColumns(double width) => width >= 840
     ? 6
     : 4;
 
-/// A tool tile's width to height: a phone's 0.78; on a tablet the same
-/// 108 dp of height in a wider column.
+/// A tool tile's width to height: a phone's 0.78 (104 dp high at the
+/// 393 dp frame), but never under 104 dp high, so the two-line name still
+/// fits at 375 dp; on a tablet 108 dp of height in a wider column.
 double toolTileAspect(double width, double gap) {
   final n = toolColumns(width);
-  return n == 4 ? 0.78 : (width - (n - 1) * gap) / n / 108;
+  final tile = (width - (n - 1) * gap) / n;
+  return n == 4 ? math.min(0.78, tile / 104) : tile / 108;
+}
+
+/// A tool grid's columns and tile width to height (UI spec §10): [toolColumns]
+/// and [toolTileAspect], but on a phone at 160 % text or more 2 across and
+/// square, so the names wrap whole (DK-0254, DK-0657).
+(int, double) toolGrid(BuildContext context, double width, double gap) {
+  if (width < 600 && MediaQuery.textScalerOf(context).scale(1) >= 1.6) {
+    return (2, 1.0);
+  }
+  return (toolColumns(width), toolTileAspect(width, gap));
 }

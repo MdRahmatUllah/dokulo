@@ -116,6 +116,28 @@ class AnnotationEditor extends ChangeNotifier {
         if (i >= 0) list[i] = list[i].copyWith(f(list[i].annot));
       });
 
+  /// Changes an annotation (a text box's text, a note's), undoably.
+  void update(AnnotRef ref, PdfAnnot Function(PdfAnnot) f) => _replace(ref, f);
+
+  /// Changes the annotation the last step just added (its text), in that
+  /// same undo step: one Undo takes the box and its text away together.
+  void amend(AnnotRef ref, PdfAnnot Function(PdfAnnot) f) {
+    final list = _pages[ref.page];
+    final i = list?.indexWhere((a) => a.id == ref.id) ?? -1;
+    if (i < 0) return;
+    list![i] = list[i].copyWith(f(list[i].annot));
+    notifyListeners();
+  }
+
+  /// Takes the last step back without a Redo (a text box placed, then left
+  /// empty: as if never placed).
+  void retract() {
+    if (_undo.isEmpty) return;
+    _pages = _undo.removeLast();
+    _dropStaleSelection();
+    notifyListeners();
+  }
+
   /// Moves an annotation by ([dx], [dy]) points.
   void move(AnnotRef ref, double dx, double dy) =>
       _replace(ref, (a) => translate(a, dx, dy));
