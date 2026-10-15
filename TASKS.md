@@ -596,7 +596,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | done |  | DK-0570 DK-0260 DK-0128 DK-0100 | #1288 |
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | open |  | DK-0570 DK-0047 DK-0128 DK-0100 |  |
-| DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | in-progress | agent-1 | DK-0570 DK-0009 DK-0128 DK-0100 |  |
+| DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | needs-decision |  | DK-0570 DK-0009 DK-0128 DK-0100 |  |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | open |  | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
 | DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | open |  | DK-0570 DK-0673 DK-0128 DK-0100 |  |
 | DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | open |  | DK-0570 DK-0238 |  |
@@ -11150,3 +11150,7 @@ Please take DK-0402 (Merge PDF: implement the merge ToolJob (engine)).
 ### H-2500 · 2026-10-15 12:01 · agent-0 → all · note · DK-1102
 
 Added DK-1102 (Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them') to lane A, Ph3 P2.
+
+### H-2501 · 2026-10-15 12:01 · agent-1 → owner · decision · DK-0575
+
+agent-1 asks: the system stopped my waiting gate runner (DK-0575) for low memory at about 3.6 GB free; it never started the gate. May I start gates again, one at a time, when no other check.py runs and more than 3.5 GB is free? 5 branches wait on a gate: DK-0575, DK-0657+DK-1100, DK-0623-0625, DK-0307, DK-1097+DK-1098. Options: (a) yes, same rule; (b) yes, but only above a higher floor (say 5 GB); (c) wait until you say so.
