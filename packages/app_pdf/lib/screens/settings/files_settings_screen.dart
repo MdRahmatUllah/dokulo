@@ -166,20 +166,23 @@ class _StorageBar extends ConsumerWidget {
     final u = use;
     final parts = [
       (l.shell_tab_files, u?.files ?? 0, c.primary),
-      (l.me_ai_models, u?.models ?? 0, c.success),
-      (l.storage_cache, u?.cache ?? 0, c.outlineStrong),
+      (l.me_ai_models, u?.models ?? 0, c.warning),
+      (l.storage_cache, u?.cache ?? 0, c.iconSecondary),
     ];
     final total = parts.fold<int>(0, (s, p) => s + p.$2);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: t.space.m,
       children: [
+        // The me-files frame: 10 high, round ends, 2 apart on the track.
         ExcludeSemantics(
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(t.radius.xs),
-            child: SizedBox(
-              height: 8,
+            borderRadius: BorderRadius.circular(5),
+            child: Container(
+              height: 10,
+              color: c.surfaceSunken,
               child: Row(
+                spacing: t.space.xxs,
                 children: [
                   for (final (_, bytes, colour) in parts)
                     if (bytes > 0)
@@ -190,39 +193,43 @@ class _StorageBar extends ConsumerWidget {
                         ),
                         child: ColoredBox(color: colour),
                       ),
-                  if (total == 0)
-                    Expanded(child: ColoredBox(color: c.surfaceSunken)),
                 ],
               ),
             ),
           ),
         ),
-        for (final (label, bytes, colour) in parts)
-          MergeSemantics(
-            child: Row(
-              spacing: t.space.s,
-              children: [
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: colour,
-                    shape: BoxShape.circle,
-                  ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: t.space.xs,
+          children: [
+            for (final (label, bytes, colour) in parts)
+              MergeSemantics(
+                child: Row(
+                  spacing: t.space.s,
+                  children: [
+                    Container(
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: colour,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        label,
+                        style: t.text.bodyM.copyWith(color: c.textPrimary),
+                      ),
+                    ),
+                    Text(
+                      u == null ? '…' : formatBytes(bytes, locale),
+                      style: t.text.bodyM.copyWith(color: c.textSecondary),
+                    ),
+                  ],
                 ),
-                Expanded(
-                  child: Text(
-                    label,
-                    style: t.text.bodyM.copyWith(color: c.textPrimary),
-                  ),
-                ),
-                Text(
-                  u == null ? '…' : formatBytes(bytes, locale),
-                  style: t.text.bodyM.copyWith(color: c.textSecondary),
-                ),
-              ],
-            ),
-          ),
+              ),
+          ],
+        ),
         Align(
           alignment: Alignment.centerLeft,
           child: DkButton(
