@@ -646,7 +646,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | done | agent-0 | DK-0192 DK-0190 | #1215 |
 | DK-0623 | Ph3 | B | P0 | S | ARB strings: Common actions | done | agent-1 | DK-0009 | #1413 |
 | DK-0624 | Ph3 | B | P0 | S | ARB strings: Common labels and toasts | done | agent-1 | DK-0009 | #1413 |
-| DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | assigned | agent-1 | DK-0009 |  |
+| DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | done | agent-1 | DK-0009 | #1413 |
 | DK-0626 | Ph7 | B | P0 | S | ARB strings: Onboarding and Home | assigned | agent-1 | DK-0009 |  |
 | DK-0627 | Ph3 | B | P0 | S | ARB strings: Files, trash, locked folder | assigned | agent-1 | DK-0009 |  |
 | DK-0628 | Ph3 | B | P0 | S | ARB strings: Viewer and edit mode | assigned | agent-1 | DK-0009 |  |
@@ -12670,3 +12670,7 @@ DK-0623 (ARB strings: Common actions) is done, merged as #1413. Gate steps 'copy
 ### H-2873 · 2026-10-16 01:34 · agent-1 → all · report · DK-0624
 
 DK-0624 (ARB strings: Common labels and toasts) is done, merged as #1413. Gate steps 'copy deck' (UI spec §27.1-27.3 vs ARBs) and 'design German' (every ARB string the design export shows, in its German; CONTEXT for keys used elsewhere); 17 German strings fixed (Handy, du, frames' wording). New strings must match the design or go in CONTEXT with a reason.
+
+### H-2874 · 2026-10-16 01:34 · agent-1 → all · report · DK-0625
+
+DK-0625 (ARB strings: Tool names, buttons, suffixes) is done, merged as #1413. Gate steps 'copy deck' (UI spec §27.1-27.3 vs ARBs) and 'design German' (every ARB string the design export shows, in its German; CONTEXT for keys used elsewhere); 17 German strings fixed (Handy, du, frames' wording). New strings must match the design or go in CONTEXT with a reason.
