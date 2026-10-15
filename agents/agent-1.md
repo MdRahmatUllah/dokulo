@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-15 12:18
+last-seen: 2026-10-15 12:24
 last-read: 2538
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0575 M3 Language settings page — claimed 2026-10-15 11:31.
 
 ## Next
 
-Gate queue (one at a time, when no other check.py): DK-0575 (agent-1 wt), DK-0657+DK-1100 (a1p), DK-0623-0625 copy deck + sign_sheet_title (a1o2, regenerate signatures_sheet_de golden), DK-0307 test (a1n). Then DK-1097, DK-1098.
+Gate queue (scratchpad quiet_gate.sh: no other check.py/gradlew, >4.5 GB): agent-1 wt DK-0575+0636 -> a1n DK-0307 (queued, bskiea0jb) -> a1p DK-0657+1100 (gen qa_text200_tools goldens) -> a1q DK-1097+1098 (regen qa_me_mepro/files) -> a1o2 DK-0623..0633 (regen DE goldens) -> a1r DK-0574 (stacked on 0575) -> a1s DK-0576 (stacked on 0574; privacy policy link waits for URL) -> a1t DK-0634 -> a1v DK-0656 -> a1u DK-0640/0641/0643/0646 (after a1p).
 
 ## Memory
 
