@@ -730,7 +730,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0706 | Ph1 | A | P1 | XS | Decision: Per-screen specs | needs-decision |  |  |  |
 | DK-0707 | Ph3 | A | P1 | XS | Decision: iOS Files action lands on the X1 picker (UI spec) or directly on the chosen tool (UX plan) | needs-decision |  |  |  |
 | DK-0708 | Ph1 | A | P0 | XS | Decision: confirm the palette together with the app-icon design | done |  |  |  |
-| DK-0709 | Ph1 | A | P2 | XS | Document the not-planned scope so it is not built by accident | assigned | agent-1 |  |  |
+| DK-0709 | Ph1 | A | P2 | XS | Document the not-planned scope so it is not built by accident | assigned | agent-0 |  |  |
 | DK-0710 | Ph7 | Q | P2 | XS | Visual QA: onboarding-launch (Launch) | done | agent-1 | DK-0073 | #1271 |
 | DK-0711 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1 (no uploads) | done | agent-1 | DK-0238 DK-0239 | #1271 |
 | DK-0712 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o2 (no watermark) | done | agent-1 | DK-0240 | #1271 |
@@ -11458,5 +11458,9 @@ Please take DK-0450 (Convert to PDF/A: implement the pdfa ToolJob (engine)).
 Please take DK-0456 (PDF to text: implement the text ToolJob (engine)).
 
 ### H-2577 · 2026-10-15 12:38 · agent-1 → agent-1 · assign · DK-0709
+
+Please take DK-0709 (Document the not-planned scope so it is not built by accident).
+
+### H-2578 · 2026-10-15 12:38 · agent-0 → agent-0 · assign · DK-0709
 
 Please take DK-0709 (Document the not-planned scope so it is not built by accident).
