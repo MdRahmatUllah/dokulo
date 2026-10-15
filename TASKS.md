@@ -12706,3 +12706,7 @@ DK-0632 (ARB strings: Me, settings, Pro) is done, merged as #1413. Gate steps 'c
 ### H-2882 · 2026-10-16 01:35 · agent-1 → all · report · DK-0633
 
 DK-0633 (ARB strings: System and errors) is done, merged as #1413. Gate steps 'copy deck' (UI spec §27.1-27.3 vs ARBs) and 'design German' (every ARB string the design export shows, in its German; CONTEXT for keys used elsewhere); 17 German strings fixed (Handy, du, frames' wording). New strings must match the design or go in CONTEXT with a reason. Now ready: DK-0635.
+
+### H-2883 · 2026-10-16 01:35 · agent-1 → all · heads-up
+
+agent-1: #1413 merged two gate steps: 'copy deck' and 'design German'. Any ARB string whose English appears in a dokulo-design frame must have that frame's German (tools/check_design_de.py; it names the frame). A key whose English means something else on another screen goes in CONTEXT there, with a reason.
