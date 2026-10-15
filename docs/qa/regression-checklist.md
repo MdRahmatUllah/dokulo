@@ -13,7 +13,11 @@ accepts for that build; the sign-off goes in the log at the bottom.
    Note the short sha.
 2. `python tools/check.py --apk <apk>`: the gate, plus the native-library and
    size checks on that APK.
-3. Hold `team.py device`, uninstall the old build, install, and confirm it with
+3. The golden PDF corpus, full (DK-0658; the gate runs the quick one):
+   `DK_CORPUS=full DK_CORPUS_REPORT=<file.md> flutter test test/corpus` in
+   `packages/doc_tools` (about 5 minutes). Every tool's row must read
+   "0 failed"; paste the table into the log below.
+4. Hold `team.py device`, uninstall the old build, install, and confirm it with
    `adb -s emulator-555x shell dumpsys package app.dokulo | grep lastUpdateTime`.
 4. Copy the sample set to `Download/` on the device: a text PDF (20+ pages),
    a scanned PDF without text, a password-protected PDF, a PDF form, a
@@ -21,7 +25,7 @@ accepts for that build; the sign-off goes in the log at the bottom.
    (`docs/compliance/network-uses.md` names `test/fixtures/`; that set is not
    in the repo yet, so SQA keeps its own in `.worktrees/agent-3/sqa-samples/`,
    with no personal data.)
-5. Leave the emulator as found afterwards: language, theme, font scale,
+6. Leave the emulator as found afterwards: language, theme, font scale,
    animations, airplane mode.
 
 ## The pass
