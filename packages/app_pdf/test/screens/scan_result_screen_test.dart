@@ -27,10 +27,12 @@ void main() {
         home: ScanResultScreen(
           scan: (
             name: 'Scan 2026-10-07 14.32.pdf',
+            fileId: 7,
+            path: '/files/Apartment/Scan 2026-10-07 14.32.pdf',
             pages: 6,
             bytes: 2100000,
             textPages: 6,
-            place: 'Files › Apartment',
+            folder: 'Apartment',
           ),
           onClose: () => calls.add('close'),
           onOpen: () => calls.add('open'),

@@ -1455,6 +1455,14 @@
   "@banner_purchase_failed": {"description": "Error banner on the paywall (global states board)."},
   "banner_pro_free_try": "Free try · Pro unlocks unlimited use",
   "@banner_pro_free_try": {"description": "Pro banner on a Pro tool's T2 (global states board)."},
+  "camera_id_front": "Front side",
+  "@camera_id_front": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_id_back": "Turn the card over",
+  "@camera_id_back": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_book_spine": "Align the spine with the line",
+  "@camera_book_spine": {"description": "S1 mode overlays (DK-0346/0347/0348)."},
+  "camera_pages": "{count, plural, =1{1 page} other{{count} pages}}",
+  "@camera_pages": {"description": "S1 mode overlays (DK-0346/0347/0348).", "placeholders": {"count": {"type": "int"}}},
   "scan_brightness": "Brightness",
   "@scan_brightness": {
     "description": "S2 filter mode (DK-0354/0355)."
@@ -2831,5 +2839,13 @@
   "common_add": "Add",
   "@common_add": {
     "description": "A compact Add button (T2's image strip)."
+  },
+  "scan_saving": "Saving…",
+  "@scan_saving": {"description": "S2 while the scan saves (DK-0359)."},
+  "scan_save_failed": "Couldn't save the scan. Your pages are still here.",
+  "@scan_save_failed": {"description": "S2 when saving the scan failed (DK-0359)."},
+  "settings_language_caption": "Changes immediately. No restart needed.",
+  "@settings_language_caption": {
+    "description": "M3 Language: under the choices (DK-0575)."
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../components/dk_box_frame.dart';
 import '../../components/dk_camera_top_bar.dart';
 import '../../components/dk_count_badge.dart';
 import '../../components/dk_hint_pill.dart';
@@ -161,13 +163,16 @@ class _S1ScreenState extends ConsumerState<S1Screen>
         final quad = await detect(frame);
         if (!mounted) return;
         setState(() {
+          if (_awaitNewCard && (quad == null || !quadSteady(_quad, quad))) {
+            _awaitNewCard = false;
+          }
           _steady = quadSteady(_quad, quad);
           _quad = quad;
           _brightness = brightnessOf(frame.bytes);
           final ready =
               scanHint(quad: quad, brightness: _brightness, steady: _steady) ==
               ScanHint.ready;
-          if (_autoActive && ready) {
+          if (_autoActive && ready && !_awaitNewCard) {
             _steadySince ??= frame.time;
             _countdown =
                 ((frame.time - _steadySince!).inMicroseconds /
@@ -215,6 +220,13 @@ class _S1ScreenState extends ConsumerState<S1Screen>
     super.dispose();
   }
 
+  /// ID card mode (DK-0346): the back is next once the front is taken.
+  var _idBack = false;
+
+  /// After the front: no auto-capture until the card has left the frame
+  /// (or the quad moved), so the front isn't taken twice.
+  var _awaitNewCard = false;
+
   Future<void> _capture() async {
     if (_capturing || !_open) return;
     _capturing = true;
@@ -235,6 +247,20 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       await session.add(jpeg, quad: _quad);
       if (!mounted) return;
       _speak(l.camera_page_captured(ref.read(scanSessionProvider).length));
+      if (ref.read(scanModeStateProvider) == DkScanMode.idCard) {
+        // Front, then back; after both, the review (UI spec S1).
+        if (_idBack) {
+          setState(() => _idBack = false);
+          widget.onReview();
+          return;
+        }
+        // The pill (a live region) says "Turn the card over"; auto-capture
+        // waits until the front has left the frame.
+        setState(() {
+          _idBack = true;
+          _awaitNewCard = true;
+        });
+      }
       if (!reduce) {
         setState(() => _flying = jpeg);
         await _fly.forward(from: 0);
@@ -254,6 +280,10 @@ class _S1ScreenState extends ConsumerState<S1Screen>
     final l = AppLocalizations.of(context);
     final pages = ref.watch(scanSessionProvider);
     final mode = ref.watch(scanModeStateProvider);
+    // A half-done ID card doesn't survive a change of mode.
+    ref.listen(scanModeStateProvider, (_, _) {
+      if (_idBack) setState(() => _idBack = false);
+    });
     final c = t.color;
 
     final preview = _Preview(
@@ -293,6 +323,16 @@ class _S1ScreenState extends ConsumerState<S1Screen>
           ? hintKind.text(l)
           : l.camera_retake_page(widget.retake! + 1),
     );
+    // ID card draws its guide and says what to do instead of the hint;
+    // Book draws its spine line and keeps the hint (the design). A retake
+    // says which page it retakes, whatever the mode.
+    final retaking = widget.retake != null;
+    final guided = !retaking && mode == DkScanMode.idCard;
+    final guide = retaking
+        ? const SizedBox.shrink()
+        : Positioned.fill(
+            child: _ModeGuide(mode: mode, idBack: _idBack),
+          );
     final modes = _ModeSwitcher(
       mode: mode,
       onMode: (m) => ref.read(scanModeStateProvider.notifier).set(m),
@@ -358,6 +398,7 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                         child: Stack(
                           children: [
                             Positioned.fill(child: preview),
+                            guide,
                             Positioned(
                               top: 0,
                               left: 0,
@@ -368,12 +409,13 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                                 child: top,
                               ),
                             ),
-                            Positioned(
-                              top: 72,
-                              left: 0,
-                              right: 0,
-                              child: SafeArea(child: Center(child: hint)),
-                            ),
+                            if (!guided)
+                              Positioned(
+                                top: 72,
+                                left: 0,
+                                right: 0,
+                                child: SafeArea(child: Center(child: hint)),
+                              ),
                           ],
                         ),
                       ),
@@ -407,6 +449,7 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                 return Stack(
                   children: [
                     Positioned.fill(child: preview),
+                    guide,
                     Positioned(
                       top: 0,
                       left: 0,
@@ -416,17 +459,18 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                         child: SafeArea(bottom: false, child: top),
                       ),
                     ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      child: SafeArea(
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 56 + t.space.l),
-                          child: Center(child: hint),
+                    if (!guided)
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: SafeArea(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 56 + t.space.l),
+                            child: Center(child: hint),
+                          ),
                         ),
                       ),
-                    ),
                     Positioned(
                       left: 0,
                       right: 0,
@@ -438,6 +482,25 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
+                              // Batch (DK-0348): the count, larger.
+                              if (mode == DkScanMode.batch && pages.isNotEmpty)
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    20,
+                                    8,
+                                    20,
+                                    0,
+                                  ),
+                                  child: Align(
+                                    alignment: AlignmentDirectional.centerEnd,
+                                    child: Text(
+                                      l.camera_pages(pages.length),
+                                      style: t.text.titleM.copyWith(
+                                        color: c.onCamera,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               SizedBox(height: 44, child: modes),
                               SizedBox(
                                 height: 120,
@@ -857,4 +920,113 @@ class _PageStack extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The ID card and Book guides (DK-0346, DK-0347; UI spec S1 mode
+/// overlays), over the whole camera screen:
+/// - ID card: an ID-1 (85.6 : 54) rounded rectangle, 80 % wide, 2 dp white
+///   dashed, at 36 % of the height, with "Front side" above it, then "Turn
+///   the card over" with a flip icon;
+/// - Book: a dashed vertical spine line in the middle (18 % to 78 %) and
+///   "Align the spine with the line" under it.
+class _ModeGuide extends StatelessWidget {
+  const _ModeGuide({required this.mode, required this.idBack});
+
+  final DkScanMode mode;
+  final bool idBack;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final l = AppLocalizations.of(context);
+    final ink = t.color.onCamera;
+    return LayoutBuilder(
+      builder: (context, box) {
+        final w = box.maxWidth, h = box.maxHeight;
+        switch (mode) {
+          case DkScanMode.idCard:
+            // 80 % wide at 36 % down; in landscape as wide as still fits.
+            final cw = math.min(w * 0.8, h * 0.55 * 85.6 / 54);
+            final top = math.max(
+              56.0,
+              math.min(h * 0.36, h - cw * 54 / 85.6 - 16),
+            );
+            return Stack(
+              children: [
+                Positioned(
+                  left: (w - cw) / 2,
+                  width: cw,
+                  top: top,
+                  child: AspectRatio(
+                    aspectRatio: 85.6 / 54,
+                    child: CustomPaint(
+                      painter: DkDashedBorder(
+                        ink,
+                        radius: BorderRadius.circular(14),
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: top - 44,
+                  child: Center(
+                    child: idBack
+                        ? DkHintPill(l.camera_id_back, icon: DkIcons.flip)
+                        : DkHintPill(l.camera_id_front),
+                  ),
+                ),
+              ],
+            );
+          case DkScanMode.book:
+            return Stack(
+              children: [
+                Positioned(
+                  left: w / 2 - 1,
+                  top: h * 0.18,
+                  bottom: h * 0.22,
+                  width: 2,
+                  child: CustomPaint(painter: _DashedLine(ink)),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  top: h * 0.74,
+                  child: Center(child: DkHintPill(l.camera_book_spine)),
+                ),
+              ],
+            );
+          case _:
+            return const SizedBox.shrink();
+        }
+      },
+    );
+  }
+}
+
+/// A vertical 2 dp dashed line (6 on, 6 off), as CSS `border-left: 2px
+/// dashed` draws it.
+class _DashedLine extends CustomPainter {
+  const _DashedLine(this.color);
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..strokeWidth = size.width;
+    final x = size.width / 2;
+    for (var y = 0.0; y < size.height; y += 12) {
+      canvas.drawLine(
+        Offset(x, y),
+        Offset(x, (y + 6).clamp(0, size.height)),
+        paint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_DashedLine old) => old.color != color;
 }

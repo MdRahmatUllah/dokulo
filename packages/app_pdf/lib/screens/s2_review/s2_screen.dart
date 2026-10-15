@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
@@ -10,15 +11,19 @@ import '../../components/dk_crop_overlay.dart';
 import '../../components/dk_icon.dart';
 import '../../components/dk_page_tray.dart';
 import '../../components/dk_slider.dart';
+import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_undo.dart';
+import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../s1_scanner/scan_session.dart';
 import '../s1_scanner/scanner_quick_settings.dart';
 import '../s1_scanner/scanner_settings.dart';
 import 'save_sheet.dart';
+import 'scan_result_screen.dart';
+import 'scan_saver.dart';
 
 /// S2, the scan's review (DK-0352; UI spec S2, design
 /// `10-scanner/scanner-review-review`, `-reorder`):
@@ -59,9 +64,10 @@ class S2Screen extends ConsumerStatefulWidget {
   /// The scan was discarded (its last page deleted): leave the scanner.
   final VoidCallback onDiscard;
 
-  /// Save opens the Save sheet (DK-0359); this gets what it chose. Save is
-  /// disabled until it is given.
-  final ValueChanged<ScanSaveOptions>? onSave;
+  /// Save opens the Save sheet (DK-0359), saves the scan as it chose
+  /// ([scanSaverProvider]) and ends the session; this gets what was saved.
+  /// Save is disabled until it is given.
+  final ValueChanged<SavedScan>? onSave;
 
   /// The page's index; null hides nothing, but disables the button.
   final ValueChanged<int>? onRetake;
@@ -92,6 +98,10 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
 
   /// The page Rotate was last tapped on: it turns into place.
   String? _turned;
+
+  /// While saving: the pages rendered so far.
+  int? _saving;
+  var _savingTotal = 0;
 
   @override
   void initState() {
@@ -235,7 +245,81 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
       folders: ref.read(scanFoldersProvider),
       now: ref.read(scanClockProvider)(),
     );
-    if (options != null) widget.onSave?.call(options);
+    if (options == null || !mounted) return;
+    _savingTotal = pages.length;
+    setState(() => _saving = 0);
+    try {
+      final saved = await ref.read(scanSaverProvider)(
+        pages,
+        options,
+        onPage: (n) {
+          if (mounted) setState(() => _saving = n);
+        },
+      );
+      if (!mounted) return;
+      await ref.read(scanSessionProvider.notifier).clear();
+      widget.onSave?.call(saved);
+    } catch (_) {
+      // The pages stay; the user can try again.
+      if (mounted) {
+        final l = AppLocalizations.of(context);
+        unawaited(showDkToast(context, l.scan_save_failed));
+      }
+    } finally {
+      if (mounted) setState(() => _saving = null);
+    }
+  }
+
+  /// "Saving… Page 3 of 6" over the screen while the pages render.
+  /// ponytail: no Cancel; a page takes well under a second. A cancel
+  /// between pages if long scans make users wait.
+  Widget _savingCard(int done, int total) {
+    final t = context.tokens;
+    final c = t.color;
+    final l = AppLocalizations.of(context);
+    return Positioned.fill(
+      child: ColoredBox(
+        color: c.scrim,
+        child: Center(
+          child: Container(
+            margin: EdgeInsets.all(t.space.xl),
+            padding: EdgeInsets.all(t.space.xl),
+            decoration: t.surfaceAt(
+              DkLevel.overlay,
+              radius: BorderRadius.circular(t.radius.sheet),
+            ),
+            child: Semantics(
+              liveRegion: true,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l.scan_saving,
+                    style: t.text.titleM.copyWith(color: c.textPrimary),
+                  ),
+                  SizedBox(height: t.space.m),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(t.radius.pill),
+                    child: LinearProgressIndicator(
+                      value: total == 0 ? null : done / total,
+                      minHeight: 6,
+                      color: c.primary,
+                      backgroundColor: c.surfaceSunken,
+                    ),
+                  ),
+                  SizedBox(height: t.space.s),
+                  Text(
+                    l.progress_page(done, total),
+                    style: t.text.bodyM.copyWith(color: c.textSecondary),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   Future<void> _delete() async {
@@ -356,7 +440,9 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
         cancelLabel: l.scan_add_pages,
         onCancel: widget.onAddPages,
         doneLabel: l.common_save,
-        onDone: pages.isEmpty || widget.onSave == null ? null : _save,
+        onDone: pages.isEmpty || widget.onSave == null || _saving != null
+            ? null
+            : _save,
       ),
       body: Column(
         children: [
@@ -516,13 +602,23 @@ class _S2ScreenState extends ConsumerState<S2Screen> {
       ),
     );
     // Back in crop mode cancels the crop instead of leaving the review.
-    return PopScope(
-      canPop: _draft == null,
+    final review = PopScope(
+      canPop: _draft == null && _saving == null,
       onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) _endCrop();
+        if (!didPop && _draft != null) _endCrop();
       },
       child: screen,
     );
+    return switch (_saving) {
+      final done? => Stack(
+        children: [
+          // Nothing under the card can be reached, by touch or screen reader.
+          ExcludeSemantics(child: review),
+          _savingCard(done, _savingTotal),
+        ],
+      ),
+      null => review,
+    };
   }
 
   /// "Apply to all pages", and after a filter change "Use as default".
