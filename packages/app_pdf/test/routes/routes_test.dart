@@ -329,6 +329,7 @@ void main() {
     for (final (tool, uri) in [
       ('markup', '/viewer/7?mode=edit&tool=highlighter'),
       ('sign', '/viewer/7?mode=edit&from=sign'),
+      ('form', '/viewer/7?mode=edit&tool=form'),
       ('organize', '/organize/7'),
     ]) {
       router.go(Routes.tool(tool, files: ['7']));
