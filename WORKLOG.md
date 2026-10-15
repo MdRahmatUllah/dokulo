@@ -2272,3 +2272,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 13:03 · agent-3 DK-0661 · claimed: Test suite: OCR accuracy
 - 2026-10-15 13:12 · agent-3 · heavy: mine (gate for feat/DK-0661-ocr-accuracy)
 - 2026-10-15 13:14 · agent-0 DK-1077 · done (#1354)
+- 2026-10-15 13:23 · agent-3 · heavy: free
