@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 
@@ -67,5 +69,21 @@ final img2pdfDefinition = ToolDefinition(
     skipPages: env.skipPages.toList(),
   ),
   canSkipPages: true,
+  // T3 (DK-0434): "1 PDF · 12 pages · 4.1 MB", from the images; one page
+  // per image. Next: Compress · Make text searchable.
+  summary: (l, r) => ToolSummary(
+    headline: l.img2pdf_result(
+      r.files.length,
+      r.inputs.length - r.skipped,
+      formatBytes(
+        r.files.fold(0, (n, f) {
+          final file = File(f);
+          return n + (file.existsSync() ? file.lengthSync() : 0);
+        }),
+        l.localeName,
+      ),
+    ),
+    sub: l.t3_from(l.img2pdf_images(r.inputs.length)),
+  ),
   next: const ['compress', 'ocr'],
 );

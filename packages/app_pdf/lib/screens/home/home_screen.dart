@@ -16,6 +16,7 @@ import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
 import '../../providers/files_providers.dart';
 import '../../providers/prefs_providers.dart';
+import '../../photo_finder/photo_finder_screens.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
 import '../files/files_screen.dart';
@@ -61,6 +62,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       const HomeScanCard(),
       const HomeContinueCard(),
+      PhotoFinderSliver(onTap: () => context.push(Routes.photos)),
       PinnedToolsSection(key: _pinned),
       SliverPadding(
         padding: EdgeInsets.fromLTRB(t.space.l, t.space.l, t.space.l, 0),
