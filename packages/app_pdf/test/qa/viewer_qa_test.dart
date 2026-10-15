@@ -114,9 +114,7 @@ void main() {
       await shot(tester, 'default');
     });
 
-    testWidgets('viewer-hidden (a tap hides the bars), $theme', (
-      tester,
-    ) async {
+    testWidgets('viewer-hidden (a tap hides the bars), $theme', (tester) async {
       await pump(tester, lease);
       await tester.tapAt(const Offset(196, 500));
       await settle(tester, rounds: 10);
