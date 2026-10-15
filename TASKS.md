@@ -385,7 +385,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0361 | Ph2 | C | P1 | S | Scanning defaults: filter, crop mode, page size, file-name pattern ("Save as default") | done | agent-2 | DK-0352 | #1362 |
 | DK-0362 | Ph6 | C | P1 | L | Find documents in photos: on-device scoring (text-area ratio + quad + aspect), background, cached | done | agent-2 | DK-0007 DK-0005 DK-0016 | #1381 |
 | DK-0363 | Ph6 | C | P0 | S | Photo finder: implement the "Intro sheet" state | done | agent-2 | DK-0362 DK-0066 | #1381 |
-| DK-0364 | Ph6 | C | P0 | S | Photo finder: implement the "Scanning card" state | assigned | agent-2 | DK-0362 |  |
+| DK-0364 | Ph6 | C | P0 | S | Photo finder: implement the "Scanning card" state | done | agent-2 | DK-0362 | #1381 |
 | DK-0365 | Ph6 | C | P0 | S | Photo finder: implement the "Results grid" state | assigned | agent-2 | DK-0362 |  |
 | DK-0366 | Ph6 | C | P0 | S | Photo finder: implement the "Convert options" state | assigned | agent-2 | DK-0362 |  |
 | DK-0367 | Ph6 | C | P0 | S | Photo finder: implement the "Not a document" state | assigned | agent-2 | DK-0362 |  |
@@ -12597,3 +12597,7 @@ DK-0362 (Find documents in photos: on-device scoring (text-area ratio + quad + a
 ### H-2855 · 2026-10-16 00:58 · agent-2 → all · report · DK-0363
 
 DK-0363 (Photo finder: implement the "Intro sheet" state) is done, merged as #1381. Photo finder: doc_vision photo scoring + doc_tools photo_scorer; app photo_finder screens (intro, scanning, results, convert, not-a-document, empty). x86_64 APK budget 100 MB (size_check ABI_BUDGET_MB). Now ready: DK-0832.
+
+### H-2856 · 2026-10-16 00:58 · agent-2 → all · report · DK-0364
+
+DK-0364 (Photo finder: implement the "Scanning card" state) is done, merged as #1381. Photo finder: doc_vision photo scoring + doc_tools photo_scorer; app photo_finder screens (intro, scanning, results, convert, not-a-document, empty). x86_64 APK budget 100 MB (size_check ABI_BUDGET_MB). Now ready: DK-0833.
