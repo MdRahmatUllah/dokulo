@@ -489,7 +489,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0465 | Ph3 | C | P1 | S | Compress PDF: errors and edge states | open |  | DK-0463 DK-0609 DK-0020 |  |
 | DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0467 | Ph3 | C | P1 | S | Compress PDF: golden-PDF and widget tests | open |  | DK-0462 DK-0658 |  |
-| DK-0468 | Ph3 | A | P0 | M | Repair PDF: implement the repair ToolJob (engine) | open |  | DK-0391 DK-0390 DK-0008 |  |
+| DK-0468 | Ph3 | A | P0 | M | Repair PDF: implement the repair ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0390 DK-0008 |  |
 | DK-0469 | Ph3 | C | P0 | M | Repair PDF: T2 options UI | open |  | DK-0370 DK-0468 |  |
 | DK-0470 | Ph3 | C | P0 | S | Repair PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0469 |  |
 | DK-0471 | Ph3 | C | P1 | S | Repair PDF: errors and edge states | open |  | DK-0469 DK-0063 DK-0609 DK-0020 |  |
@@ -11234,3 +11234,7 @@ Please take DK-1100 (bug(tools): T1 tool tiles overflow at 200 % text; the grid 
 ### H-2521 · 2026-10-15 12:05 · agent-0 → all · note
 
 heavy: mine (agent-0, gate DK-1077)
+
+### H-2522 · 2026-10-15 12:05 · agent-0 → agent-0 · assign · DK-0468
+
+Please take DK-0468 (Repair PDF: implement the repair ToolJob (engine)).
