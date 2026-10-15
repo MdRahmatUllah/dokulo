@@ -2,12 +2,14 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_promo_cards.dart';
+import 'package:app_pdf/l10n/formats.dart';
 import 'package:app_pdf/providers/signature_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
 import 'package:app_pdf/screens/settings/files_settings_screen.dart';
 import 'package:app_pdf/screens/settings/security_settings_screen.dart';
-import 'package:doc_core/doc_core.dart';
+import 'package:doc_core/doc_core.dart'
+    show SavedSignature, SignatureInk, SignatureKind;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -71,7 +73,7 @@ void main() {
     );
     await tester.pumpAndSettle();
     expect(find.text('2'), findsOneWidget);
-    expect(find.text('1.8 GB'), findsOneWidget);
+    expect(find.text(formatBytes(1800000000, 'en')), findsOneWidget);
   });
 
   testWidgets('a Settings row opens its page', (tester) async {
