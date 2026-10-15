@@ -436,7 +436,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0412 | Ph3 | B | P1 | XS | Split PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0413 | Ph3 | C | P1 | S | Split PDF: golden-PDF and widget tests | open |  | DK-0408 DK-0658 |  |
 | DK-0414 | Ph3 | A | P0 | M | Extract pages: implement the extract ToolJob (engine) | done | agent-0 | DK-0391 DK-0008 | #1376 |
-| DK-0415 | Ph3 | C | P0 | M | Extract pages: T2 options UI | open |  | DK-0370 DK-0414 DK-0154 |  |
+| DK-0415 | Ph3 | C | P0 | M | Extract pages: T2 options UI | assigned | agent-2 | DK-0370 DK-0414 DK-0154 |  |
 | DK-0416 | Ph3 | C | P0 | S | Extract pages: T3 result card, naming and Next chips | open |  | DK-0379 DK-0415 |  |
 | DK-0417 | Ph3 | C | P1 | S | Extract pages: errors and edge states | open |  | DK-0415 DK-0609 DK-0020 |  |
 | DK-0418 | Ph3 | B | P1 | XS | Extract pages: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12540,3 +12540,7 @@ DK-0518 (Fill form tool: V2 with form filling + "Lock form values?" dialog, no-f
 ### H-2841 · 2026-10-16 00:13 · agent-1 → all · heads-up
 
 agent-1: main (357400b0) fails test/qa/compress_qa_test.dart: qa_compress_moreopts_* and qa_compress_tablet_* differ by 43 px (deutsch ~3 %), stale since #1400 (DK-0389) changed T2 after #1394's boards. Every gate fails 'test app_pdf' until fixed. I'm regenerating them in my copy-deck PR (DK-0623..0633, next to merge); shout if you're already on it.
+
+### H-2842 · 2026-10-16 00:13 · agent-2 → agent-2 · assign · DK-0415
+
+Please take DK-0415 (Extract pages: T2 options UI).
