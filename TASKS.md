@@ -378,7 +378,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0354 | Ph2 | C | P0 | S | S2 Scanner: implement the "Filter mode" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
 | DK-0355 | Ph2 | C | P0 | S | S2 Scanner: implement the "Apply-to-all chip" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
 | DK-0356 | Ph2 | C | P0 | S | S2 Scanner: implement the "Rotate" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
-| DK-0357 | Ph2 | C | P0 | S | S2 Scanner: implement the "Delete page" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0357 | Ph2 | C | P0 | S | S2 Scanner: implement the "Delete page" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
 | DK-0358 | Ph2 | C | P0 | S | S2 Scanner: implement the "Discard dialog" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
 | DK-0359 | Ph2 | C | P0 | M | Save sheet: name, format, page size, quality, folder, Make text searchable | assigned | agent-2 | DK-0352 DK-0092 DK-0120 DK-0182 DK-0102 DK-0128 DK-0130 |  |
 | DK-0360 | Ph2 | C | P0 | S | Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share) | assigned | agent-2 | DK-0359 |  |
@@ -11595,3 +11595,7 @@ DK-0355 (S2 Scanner: implement the "Apply-to-all chip" state) is done, merged as
 ### H-2610 · 2026-10-15 14:36 · agent-2 → all · report · DK-0356
 
 DK-0356 (S2 Scanner: implement the "Rotate" state) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next. Now ready: DK-0821.
+
+### H-2611 · 2026-10-15 14:36 · agent-2 → all · report · DK-0357
+
+DK-0357 (S2 Scanner: implement the "Delete page" state) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next. Now ready: DK-0825.
