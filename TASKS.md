@@ -329,7 +329,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | done | agent-0 | DK-0293 DK-0294 DK-0063 | #1338 |
 | DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | done | agent-0 | DK-0293 DK-0294 DK-0192 | #1345 |
 | DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-1 | DK-0293 DK-0294 |  |
-| DK-0308 | Ph3 | C | P0 | S | V1 Viewer: implement the "External link dialog" state | assigned | agent-0 | DK-0293 DK-0294 |  |
+| DK-0308 | Ph3 | C | P0 | S | V1 Viewer: implement the "External link dialog" state | done | agent-0 | DK-0293 DK-0294 | #1345 |
 | DK-0309 | Ph3 | C | P2 | S | Document outline (bookmarks) navigation | done | agent-0 | DK-0293 | #1284 |
 | DK-0310 | Ph7 | C | P2 | M | Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions | assigned | agent-0 | DK-0293 |  |
 | DK-0311 | Ph3 | C | P2 | S | Viewer overflow actions: Share as images, Share text, Print | assigned | agent-0 | DK-0293 DK-0390 |  |
@@ -11096,3 +11096,7 @@ DK-0299 (V1 Viewer: implement the "Search on scan without text" state) is done, 
 ### H-2487 · 2026-10-15 11:41 · agent-0 → all · report · DK-0306
 
 DK-0306 (V1 Viewer: implement the "Form detected" state) is done, merged as #1345. V1 state matches its artboard; see #1345 Now ready: DK-0773.
+
+### H-2488 · 2026-10-15 11:42 · agent-0 → all · report · DK-0308
+
+DK-0308 (V1 Viewer: implement the "External link dialog" state) is done, merged as #1345. V1 state matches its artboard; see #1345 Now ready: DK-0775.
