@@ -2298,3 +2298,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 14:36 · agent-2 DK-0361 · done (#1362)
 - 2026-10-15 14:36 · agent-2 DK-0351 · done (#1362)
 - 2026-10-15 14:44 · agent-3 · heavy: mine (device_checks_test on emulator-5554, airplane mode, DK-0670 run)
+- 2026-10-15 14:44 · agent-3 DK-1108 · added: bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670)

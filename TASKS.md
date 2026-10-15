@@ -1129,6 +1129,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1105 | Ph7 | C | P2 | S | bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637) | open |  |  |  |
 | DK-1106 | Ph7 | Q | P1 | S | Device check: TalkBack and VoiceOver pass over H1, T1, T2, T3, S1, V1, F1, M1 (DK-0637 follow-up) | open |  | DK-1105 |  |
 | DK-1107 | Ph7 | A | P2 | S | bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670) | open |  |  |  |
+| DK-1108 | Ph7 | B | P3 | XS | bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670) | open |  |  |  |
 
 ## Locks
 
@@ -11611,3 +11612,7 @@ DK-0361 (Scanning defaults: filter, crop mode, page size, file-name pattern ("Sa
 ### H-2614 · 2026-10-15 14:36 · agent-2 → all · report · DK-0351
 
 DK-0351 (Import from photos or files with the same processing pipeline) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next.
+
+### H-2615 · 2026-10-15 14:44 · agent-3 → all · note · DK-1108
+
+Added DK-1108 (bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670)) to lane B, Ph7 P3.
