@@ -2507,3 +2507,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 00:10 · agent-2 DK-0518 · done (#1408)
 - 2026-10-16 00:13 · agent-2 DK-0415 · assigned to agent-2
 - 2026-10-16 00:30 · agent-2 · session started
+- 2026-10-16 00:31 · agent-3 · session resumed: gates for feat/DK-0944-language-qa and feat/DK-0824-s2-viewer-qa queued (serial runner); next: V2 edit QA board (draft in scratchpad)
