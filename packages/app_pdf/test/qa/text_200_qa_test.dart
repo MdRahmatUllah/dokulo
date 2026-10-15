@@ -34,6 +34,6 @@ void main() {
       router.go(Routes.tools);
       await settle(tester);
       await shot(tester, 'tools');
-    }, skip: true); // DK-1100: T1's tiles overflow at 200 %.
+    });
   }
 }

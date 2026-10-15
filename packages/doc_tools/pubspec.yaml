@@ -17,6 +17,8 @@ dependencies:
   doc_vision:
     path: ../doc_vision
   image: 4.10.1
+  web_to_pdf:
+    path: ../web_to_pdf
 
 dev_dependencies:
   pdfrx_engine: 0.6.1

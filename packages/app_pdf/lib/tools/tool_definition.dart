@@ -3,6 +3,7 @@ import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/widgets.dart';
 
 import '../l10n/app_localizations.dart';
+import 'compress_tool.dart';
 import 'img2pdf_tool.dart';
 
 /// The values of a tool's options, by [ToolOption.key].
@@ -248,7 +249,8 @@ class ToolDefinition {
 /// Every tool's definition. A tool's task adds its own here.
 abstract final class ToolDefinitions {
   static final Map<String, ToolDefinition> _defined = {
-    for (final d in <ToolDefinition>[img2pdfDefinition]) d.id: d,
+    for (final d in <ToolDefinition>[compressDefinition, img2pdfDefinition])
+      d.id: d,
   };
 
   /// The definition of [toolId]; a plain one for a tool without its own.
