@@ -838,7 +838,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | done | agent-3 | DK-0341 DK-0347 | #1403 |
 | DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | done | agent-3 | DK-0348 | #1403 |
 | DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 DK-1121 |  |
-| DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | assigned | agent-3 | DK-0344 |  |
+| DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | done | agent-3 | DK-0344 | #1403 |
 | DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | assigned | agent-3 | DK-0344 |  |
 | DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | assigned | agent-3 | DK-0344 |  |
 | DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | assigned | agent-3 | DK-0343 |  |
@@ -12469,3 +12469,7 @@ DK-0814 (Visual QA: scanner-camera-book (Book mode)) is done, merged as #1403. V
 ### H-2824 · 2026-10-15 23:42 · agent-3 → all · report · DK-0815
 
 DK-0815 (Visual QA: scanner-camera-batch (Batch – 12 pages)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
+
+### H-2825 · 2026-10-15 23:42 · agent-3 → all · report · DK-0817
+
+DK-0817 (Visual QA: scanner-camera-far (hint – move closer)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
