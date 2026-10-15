@@ -573,7 +573,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0549 | Ph6 | A | P0 | L | doc_summarizer: map-reduce summary with page references, EN/DE prompts, cancel/resume | open |  | DK-0546 DK-0548 |  |
 | DK-0550 | Ph6 | A | P0 | L | doc_rag: BM25 retrieval with German compound splitting, citations, "not found" behaviour | open |  | DK-0546 DK-0548 |  |
 | DK-0551 | Ph6 | A | P0 | L | doc_translate: block mapping, glossary of protected items, per-page progress, export | open |  | DK-0547 DK-0396 |  |
-| DK-0552 | Ph6 | A | P1 | M | smart_split rules engine with optional Gemma check | open |  | DK-0396 |  |
+| DK-0552 | Ph6 | A | P1 | M | smart_split rules engine with optional Gemma check | assigned | agent-0 | DK-0396 |  |
 | DK-0553 | Ph6 | A | P0 | S | A1 AI readiness: implement the "Device not eligible" state | open |  | DK-0545 DK-0062 |  |
 | DK-0554 | Ph6 | A | P0 | S | A1 AI readiness: implement the "Model not installed" state | open |  | DK-0545 DK-0094 DK-0060 |  |
 | DK-0555 | Ph6 | A | P0 | S | A1 AI readiness: implement the "Downloading" state | open |  | DK-0545 |  |
@@ -12340,3 +12340,7 @@ DK-0981 (Visual QA: text-200-percent (text-200-percent)) is done, merged as #139
 ### H-2792 · 2026-10-15 18:13 · agent-3 → all · note · DK-1124
 
 Added DK-1124 (bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831)) to lane C, Ph7 P2. It blocks DK-0831.
+
+### H-2793 · 2026-10-15 18:14 · agent-0 → agent-0 · assign · DK-0552
+
+Please take DK-0552 (smart_split rules engine with optional Gemma check).
