@@ -654,7 +654,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0630 | Ph3 | B | P0 | S | ARB strings: Tool shell and tools | assigned | agent-1 | DK-0009 |  |
 | DK-0631 | Ph3 | B | P0 | S | ARB strings: AI | assigned | agent-1 | DK-0009 |  |
 | DK-0632 | Ph3 | B | P0 | S | ARB strings: Me, settings, Pro | assigned | agent-1 | DK-0009 |  |
-| DK-0633 | Ph3 | B | P0 | S | ARB strings: System and errors | open |  | DK-0009 |  |
+| DK-0633 | Ph3 | B | P0 | S | ARB strings: System and errors | assigned | agent-1 | DK-0009 |  |
 | DK-0634 | Ph3 | B | P0 | S | Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults | open |  | DK-0009 |  |
 | DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | open |  | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 |  |
 | DK-0636 | Ph3 | B | P1 | S | In-app language switch (System · English · Deutsch) without restart | open |  | DK-0009 |  |
@@ -11210,3 +11210,7 @@ Please take DK-0631 (ARB strings: AI).
 ### H-2515 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0632
 
 Please take DK-0632 (ARB strings: Me, settings, Pro).
+
+### H-2516 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0633
+
+Please take DK-0633 (ARB strings: System and errors).
