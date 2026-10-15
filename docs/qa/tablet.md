@@ -42,7 +42,8 @@ Approved:
 Board: `tool_shell_tablet_result_portrait_<theme>` in
 `test/qa/tool_shell_test.dart` (the real T3 after Compress, 820 × 1180);
 frames: `tablet-compress-result-portrait-<theme>.png` in [tablet/](tablet/)
-(the frame is 820 × 1180; read its layout from the HTML, the shot is offset).
+(the frame is 820 × 1180, but the export clips it at 1024 high: its action
+bar, Share · Open over a full-width Save, is in the HTML only).
 Matches: one 640-wide column centred (§30, `ToolLayout`), the result card,
 File name, Save to with its chevron, the action bar with Open over the split
 Save at the column's width. Approved:
