@@ -795,7 +795,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | done | agent-3 | DK-0304 | #1385 |
 | DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | done | agent-0 | DK-0305 | #1338 |
 | DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-3 | DK-0306 DK-1111 |  |
-| DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-3 | DK-0307 |  |
+| DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-3 | DK-0307 DK-1126 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | done | agent-3 | DK-0308 | #1385 |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-3 | DK-0295 DK-0311 |  |
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | done | agent-3 | DK-0296 | #1385 |
@@ -1147,6 +1147,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
 | DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | in-progress | agent-2 |  |  |
 | DK-1125 | Ph7 | C | P3 | S | bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828) | assigned | agent-2 |  |  |
+| DK-1126 | Ph7 | C | P3 | XS | bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774) | open |  |  |  |
 
 ## Locks
 
@@ -12497,3 +12498,7 @@ DK-0821 (Visual QA: scanner-review-review (S2 – default)) is done, merged as #
 ### H-2831 · 2026-10-15 23:43 · agent-3 → all · report · DK-0822
 
 DK-0822 (Visual QA: scanner-review-crop (S2 – crop + magnifier)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
+
+### H-2832 · 2026-10-15 23:45 · agent-3 → all · note · DK-1126
+
+Added DK-1126 (bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774)) to lane C, Ph7 P3. It blocks DK-0774.
