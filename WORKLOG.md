@@ -2441,3 +2441,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 17:14 · agent-3 DK-0771 · done (#1385)
 - 2026-10-15 17:14 · agent-3 DK-0775 · done (#1385)
 - 2026-10-15 17:14 · agent-3 DK-0777 · done (#1385)
+- 2026-10-15 17:14 · agent-0 · locked pubspec: agent-0: app_pdf assets for the font licence texts (DK-0673)

@@ -1155,7 +1155,7 @@ The emulator lock is local, not here: `team.py device`.
 
 | Resource | Owner | Since | Why |
 |---|---|---|---|
-| pubspec |  |  |  |
+| pubspec | agent-0 | 2026-10-15 17:14 | agent-0: app_pdf assets for the font licence texts (DK-0673) |
 | db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |
