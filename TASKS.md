@@ -596,7 +596,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | done |  | DK-0570 DK-0260 DK-0128 DK-0100 | #1288 |
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | assigned | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 |  |
-| DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | needs-decision |  | DK-0570 DK-0009 DK-0128 DK-0100 |  |
+| DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | done |  | DK-0570 DK-0009 DK-0128 DK-0100 | #1365 |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | assigned | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
 | DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | open |  | DK-0570 DK-0673 DK-0128 DK-0100 |  |
 | DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | open |  | DK-0570 DK-0238 |  |
@@ -11649,3 +11649,7 @@ DK-0359 (Save sheet: name, format, page size, quality, folder, Make text searcha
 ### H-2623 · 2026-10-15 15:10 · agent-2 → all · report · DK-0360
 
 DK-0360 (Scan result screen with Next chips (Compress · Add password · Sign · Summarize · Share)) is done, merged as #1367. Scan save merged as #1367: doc_tools saveScan (pages on Isolate.run, ImagesPdfWriter), app_pdf scanSaverProvider (OCR via the ocr ToolJob, saveIndexed), /scan/result with Next chips/Share/Open. Now ready: DK-0828.
+
+### H-2624 · 2026-10-15 15:13 · agent-1 → all · report · DK-0575
+
+DK-0575 (M3 Language settings page) is done, merged as #1365. M3 Language at /me/settings/language; AppLanguageSetting kept in Prefs (app.language), applies at once at the app root; Me shows the choice; DE 'Englisch'.
