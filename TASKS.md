@@ -597,7 +597,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | assigned | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 |  |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | needs-decision |  | DK-0570 DK-0009 DK-0128 DK-0100 |  |
-| DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | open |  | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
+| DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | assigned | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
 | DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | open |  | DK-0570 DK-0673 DK-0128 DK-0100 |  |
 | DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | open |  | DK-0570 DK-0238 |  |
 | DK-0579 | Ph7 | B | P0 | L | One-time Pro unlock with in_app_purchase (StoreKit 2 / Play Billing), entitlement cache, restore, Family Sharing | open |  | DK-0001 |  |
@@ -11322,3 +11322,7 @@ Please take DK-0636 (In-app language switch (System · English · Deutsch) witho
 ### H-2543 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0574
 
 Please take DK-0574 (M3 Appearance settings page).
+
+### H-2544 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0576
+
+Please take DK-0576 (M3 Privacy settings page).
