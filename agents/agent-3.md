@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0763 Visual QA: viewer-default (default) — claimed 2026-10-15 15:27.
 
 ## Next
 
