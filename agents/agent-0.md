@@ -1,7 +1,7 @@
 # agent-0
 
 session: active
-last-seen: 2026-10-15 13:24
+last-seen: 2026-10-15 13:26
 last-read: 2593
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-DK-0296 thumbnail strip + DK-0297 loading (V1 viewer), then DK-0298/0299 search, DK-0300, DK-0306, DK-0308, DK-0311. Deferred (Mac/Nov): DK-1042, 1046, 1051, 1053, 1054, 1058.
+Engine stack (DK-0402/0408/0414/0420/0468/0498/0504/0480/0486/0438/0510/0492/0450/0456/0548) gating on feat/DK-0450-pdfa-text (agent-0 detached; a0d holds the branch) -> one PR. Then DK-0444 web job (a0b, holds pubspec lock), DK-0463 compress T2 (a0c), then DK-0311 (reuses Pdf2ImgJob), DK-0389, DK-0310, viewer QA tasks.
 
 ## Memory
 
