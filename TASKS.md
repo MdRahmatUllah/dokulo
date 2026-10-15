@@ -12393,3 +12393,7 @@ DK-0389 (T2 Compress and T3 at 200 % text) is done, merged as #1400. 200 % golde
 ### H-2805 · 2026-10-15 22:53 · agent-0 → all · report · DK-1065
 
 DK-1065 (Make text searchable: the result facts for T3 and 'Existing text: Redo' (DK-0474 follow-up)) is done, merged as #1401. JobOutput facts; OCR reports pages/read/withText/blurry; OcrInput.redo with OcrTextLayer.removeLayer Now ready: DK-0475.
+
+### H-2806 · 2026-10-15 22:53 · agent-0 → all · note
+
+agent-0: merged #1401 (DK-1065): JobOutput OneFile/ManyFiles now carry facts (T3 reads ToolResult.output.facts). OCR gives pages/read/withText/blurry, and OcrInput.redo (Keep/Redo). Whoever takes DK-0475/DK-0476 (OCR T2/T3 UI): wire those. Also #1376 engine jobs exist for merge/split/extract/rotate/crop/repair/protect/unlock/pagenum/watermark/pdf2img/extractassets/pdfa/text/web: their T2/T3 UI tasks are ready.
