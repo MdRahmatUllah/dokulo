@@ -2326,3 +2326,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 15:47 · agent-3 · heavy: free
 - 2026-10-15 15:50 · agent-2 DK-1112 · added: Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up)
 - 2026-10-15 15:50 · agent-2 DK-1113 · added: Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up)
+- 2026-10-15 15:51 · agent-3 · heavy: mine (gate for feat/DK-0763-viewer-qa, retry after C: cleanup)
