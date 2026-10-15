@@ -13,6 +13,8 @@ export 'src/tools/img2pdf_job.dart';
 export 'src/tools/merge_job.dart';
 export 'src/tools/ocr_job.dart';
 export 'src/tools/output_name.dart';
+export 'src/tools/password_jobs.dart';
+export 'src/tools/repair_job.dart';
 export 'src/tools/rotate_job.dart';
 export 'src/tools/split_job.dart';
 
