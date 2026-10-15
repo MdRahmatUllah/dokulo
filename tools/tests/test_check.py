@@ -43,3 +43,36 @@ def test_app_pdf_generates_last(tmp_path: Path) -> None:
             "dev_dependencies:\n  build_runner: ^2.0.0\n", encoding="utf-8")
     plan = [name for name, _, _ in check.steps(tmp_path, apk=None) if name.startswith("build_runner")]
     assert plan == ["build_runner doc_core", "build_runner zeta", "build_runner app_pdf"]
+
+
+def test_gate_lock_waits_for_a_live_gate_and_takes_over_a_dead_one(tmp_path: Path) -> None:
+    import subprocess
+    import threading
+
+    lock = tmp_path / "gate.lock"
+    said = []
+    # A live holder: this very process. The second gate waits until it lets go.
+    with check.gate_lock(lock, poll=0.05):
+        assert lock.read_text(encoding="utf-8").split()[0] == str(__import__("os").getpid())
+        entered = threading.Event()
+
+        def second():
+            with check.gate_lock(lock, poll=0.05, say=lambda *a, **k: said.append(a[0])):
+                entered.set()
+
+        t = threading.Thread(target=second)
+        t.start()
+        assert not entered.wait(0.3)
+        assert any("waiting" in s for s in said)
+    t.join(5)
+    assert entered.is_set() and not lock.exists()
+
+    # A dead holder: a process that has ended.
+    gone = subprocess.run([sys.executable, "-c", "import os; print(os.getpid())"],
+                          capture_output=True, text=True).stdout.strip()
+    lock.write_text(f"{gone} somewhere\n", encoding="utf-8")
+    said.clear()
+    with check.gate_lock(lock, poll=0.05, say=lambda *a, **k: said.append(a[0])):
+        assert "taking over" in said[0]
+    assert not lock.exists()
+
