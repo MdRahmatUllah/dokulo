@@ -4,6 +4,7 @@ import 'package:app_pdf/components/dk_action_bar.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
+import 'package:app_pdf/providers/share_providers.dart';
 import 'package:app_pdf/routes/link_error.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/screens/t3_result/tool_result_screen.dart';
@@ -32,6 +33,8 @@ void main() {
   late FileEntry input;
   late List<String> partFiles;
   var saves = 0;
+  final elsewhere = <(String, String)>[];
+  final shared = <List<String>>[];
 
   setUp(() {
     root = Directory.systemTemp.createTempSync('dk_t3_');
@@ -41,6 +44,8 @@ void main() {
     );
     db = DokuloDatabase.memory();
     saves = 0;
+    elsewhere.clear();
+    shared.clear();
   });
   tearDown(() async {
     await db.close();
@@ -88,9 +93,16 @@ void main() {
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         fileStoreProvider.overrideWith((ref) async => store),
+        fileSharerProvider.overrideWithValue(
+          (paths) async => shared.add(paths),
+        ),
         hapticsProvider.overrideWithValue(
           DkHaptics(medium: () async => saves++),
         ),
+        saveElsewhereProvider.overrideWithValue((path, name) async {
+          elsewhere.add((path, name));
+          return true;
+        }),
       ],
     );
     addTearDown(container.dispose);
@@ -165,6 +177,52 @@ void main() {
     });
   }
 
+  testWidgets('a screen reader reads T3 top to bottom: the bar, the result, '
+      'the name, where it goes, then the actions (DK-0637)', (tester) async {
+    tester.view.physicalSize = const Size(393, 852);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final semantics = tester.ensureSemantics();
+    await pumpT3(tester);
+    final labels = [
+      for (final node in tester.semantics.simulatedAccessibilityTraversal())
+        node.label,
+    ];
+    printOnFailure(labels.join('\n'));
+    expect(
+      labels,
+      containsAllInOrder([
+        'Close',
+        'Compress PDF',
+        contains('From Mietvertrag.pdf'), // the result card
+        'File name',
+        'Save to: Files › Taxes',
+        'Share',
+        'Open',
+        'Save',
+        'More ways to save',
+      ]),
+    );
+    semantics.dispose();
+  });
+
+  testWidgets('Share sends the real file: the output, then the saved file '
+      '(DK-1077)', (tester) async {
+    await pumpT3(tester);
+    await tester.tap(find.text('Share'));
+    await tester.pump();
+    expect(shared, [
+      [output.path],
+    ]);
+    await tester.tap(find.text('Save'));
+    await settle(tester);
+    await tester.tap(find.text('Share'));
+    await tester.pump();
+    expect(shared.last, [
+      '${store.userFolder.path}${sep}Taxes${sep}Mietvertrag – compressed.pdf',
+    ]);
+  });
+
   testWidgets('Save keeps a new file next to the input, indexed; medium '
       'haptic; "Saved to Files › Taxes" with Open; then Done (DK-0381)', (
     tester,
@@ -215,6 +273,86 @@ void main() {
     await settle(tester);
     expect(find.text('Start'), findsOneWidget);
     expect(output.existsSync(), isFalse, reason: 'nothing kept');
+  });
+
+  testWidgets('Replace original (DK-0380): the split menu, the dialog, the '
+      'output over the file, the original in Versions, Undo for 10 s', (
+    tester,
+  ) async {
+    await pumpT3(tester);
+    final original = File(input.path).readAsBytesSync();
+    // A different result, so a replace shows.
+    await tester.runAsync(
+      () => File(output.path).writeAsBytes([...original, 0x0A]),
+    );
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    expect(find.text('Save as copy'), findsOneWidget);
+    await tester.tap(find.text('Replace original'));
+    await settle(tester);
+    expect(find.text('Replace the original file?'), findsOneWidget);
+    expect(
+      find.text('The original will be kept in Versions for 30 days.'),
+      findsOneWidget,
+    );
+    await tester.tap(find.text('Replace'));
+    await settle(tester);
+    expect(File(input.path).lengthSync(), original.length + 1);
+    final versions = await tester.runAsync(() => db.select(db.versions).get());
+    expect(versions, hasLength(1));
+    expect(File(versions!.single.path).readAsBytesSync(), original);
+    expect(find.text('Replaced'), findsOneWidget);
+    expect(bar(tester).label, 'Done');
+    expect(saves, 1);
+    final toast = tester.widget<SnackBar>(find.byType(SnackBar));
+    expect(toast.duration, const Duration(seconds: 10));
+
+    await tester.tap(find.text('Undo'));
+    await settle(tester);
+    expect(File(input.path).readAsBytesSync(), original);
+  });
+
+  testWidgets('a multi-file result: Save as copy and Save to…, no Replace', (
+    tester,
+  ) async {
+    await pumpT3(tester, parts: 3);
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    expect(find.text('Save to…'), findsOneWidget);
+    expect(find.text('Replace original'), findsNothing);
+  });
+
+  testWidgets('Save to… (DK-0385): the folder picker, then Save here saves '
+      'there; the row shows the folder', (tester) async {
+    await pumpT3(tester);
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    await tester.tap(find.text('Save to…'));
+    await settle(tester);
+    // From Taxes up to the root, then Save here.
+    await tester.tap(find.text('Files').last);
+    await settle(tester);
+    await tester.tap(find.text('Save here'));
+    await settle(tester);
+    final saved = File(
+      '${store.userFolder.path}${sep}Mietvertrag – compressed.pdf',
+    );
+    expect(saved.existsSync(), isTrue);
+    expect(find.text('Save to: Files'), findsOneWidget);
+    expect(bar(tester).label, 'Done');
+  });
+
+  testWidgets('Save to… › Save outside Dokulo…: the system dialog gets the '
+      'file and its name', (tester) async {
+    await pumpT3(tester);
+    await tester.tap(find.bySemanticsLabel('More ways to save'));
+    await settle(tester);
+    await tester.tap(find.text('Save to…'));
+    await settle(tester);
+    await tester.tap(find.text('Save outside Dokulo…'));
+    await settle(tester);
+    expect(elsewhere, [(output.path, 'Mietvertrag – compressed.pdf')]);
+    expect(find.text('Saved'), findsOneWidget);
   });
 
   testWidgets('a short job closes silently', (tester) async {

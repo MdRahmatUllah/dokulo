@@ -84,19 +84,31 @@ void main() {
   }
 
   group('DkPrivacyLine and DkStatusDot (DK-0110, DK-0112)', () {
-    testWidgets('privacy: tool and Home wording', (tester) async {
-      await tester.pumpWidget(
-        app(
-          const Column(
-            children: [
-              DkPrivacyLine(),
-              DkPrivacyLine(where: DkPrivacyContext.home),
-            ],
+    testWidgets('privacy: tool and Home wording; "tablet" on a tablet', (
+      tester,
+    ) async {
+      Future<void> pumpAt(Size size) async {
+        tester.view.physicalSize = size;
+        tester.view.devicePixelRatio = 1;
+        await tester.pumpWidget(
+          app(
+            const Column(
+              children: [
+                DkPrivacyLine(),
+                DkPrivacyLine(where: DkPrivacyContext.home),
+              ],
+            ),
           ),
-        ),
-      );
+        );
+      }
+
+      addTearDown(tester.view.reset);
+      await pumpAt(const Size(393, 852));
       expect(find.text('Processed on this phone'), findsOneWidget);
       expect(find.text('Everything stays on this phone'), findsOneWidget);
+      await pumpAt(const Size(1024, 1366));
+      expect(find.text('Processed on this tablet'), findsOneWidget);
+      expect(find.text('Everything stays on this tablet'), findsOneWidget);
     });
 
     testWidgets('status: 8 dp; running pulses, steady with Reduce Motion', (

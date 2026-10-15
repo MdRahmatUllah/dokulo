@@ -18,6 +18,7 @@ class CompressInput {
     this.removeMetadata = false,
     this.targetBytes,
     this.password,
+    this.skipPages = const [],
   });
 
   factory CompressInput.fromJson(Map<String, Object?> json) => CompressInput(
@@ -31,6 +32,7 @@ class CompressInput {
     removeMetadata: json['removeMetadata'] as bool? ?? false,
     targetBytes: json['targetBytes'] as int?,
     password: json['password'] as String?,
+    skipPages: (json['skipPages'] as List? ?? const []).cast<int>(),
   );
 
   /// 1 to 500 PDFs (batch).
@@ -52,6 +54,9 @@ class CompressInput {
   /// For a locked file the user unlocked in T2.
   final String? password;
 
+  /// 0-based pages left as they are, per file: "Skip this page" (DK-1086).
+  final List<int> skipPages;
+
   Map<String, Object?> toJson() => {
     'files': files,
     'outputDir': outputDir,
@@ -60,6 +65,7 @@ class CompressInput {
     'greyscale': greyscale,
     'removeMetadata': removeMetadata,
     'targetBytes': ?targetBytes,
+    if (skipPages.isNotEmpty) 'skipPages': skipPages,
     // No password: it would sit in the jobs table in plain text. A resumed
     // job on a locked file fails as `locked`, and T2 asks again.
   };
@@ -144,6 +150,7 @@ class CompressJob extends ToolJob<CompressInput> {
             greyscale: input.greyscale,
             removeMetadata: input.removeMetadata,
             targetBytes: input.targetBytes,
+            skipPages: input.skipPages.toSet(),
           ),
           password: input.password,
           workDir: context.tempDir,

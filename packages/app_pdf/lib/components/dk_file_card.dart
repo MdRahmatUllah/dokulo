@@ -62,6 +62,11 @@ class DkFileCard extends StatefulWidget {
     this.progress,
     this.showPressed = false,
     this.semanticsActions,
+    this.moreIcon,
+    this.moreLabel,
+    this.nameMatch,
+    this.extra,
+    this.extraLabel,
   });
 
   final String name;
@@ -81,6 +86,19 @@ class DkFileCard extends StatefulWidget {
 
   /// The file menu; no more button when null.
   final VoidCallback? onMore;
+
+  /// The more button's icon and label, when it does one thing (R1's
+  /// restore) rather than open the menu.
+  final IconData? moreIcon;
+  final String? moreLabel;
+
+  /// Search (DK-0269): the part of [name] to set in bold, any case.
+  final String? nameMatch;
+
+  /// A line under the meta (search: the matching sentence and its page),
+  /// with [extraLabel] for screen readers.
+  final Widget? extra;
+  final String? extraLabel;
 
   /// Null: not in multi-select. False/true: the empty or checked circle.
   final bool? selected;
@@ -196,7 +214,9 @@ class _DkFileCardState extends State<DkFileCard> {
         : Semantics(
             container: true, // its own button inside the card's node
             button: true,
-            label: MaterialLocalizations.of(context).moreButtonTooltip,
+            label:
+                w.moreLabel ??
+                MaterialLocalizations.of(context).moreButtonTooltip,
             excludeSemantics: true,
             onTap: w.onMore,
             child: DkTappable(
@@ -214,13 +234,13 @@ class _DkFileCardState extends State<DkFileCard> {
                             color: c.primaryContainer,
                           ),
                           child: Icon(
-                            DkIcons.overflow(context),
+                            w.moreIcon ?? DkIcons.overflow(context),
                             size: 18,
                             color: c.onPrimaryContainer,
                           ),
                         )
                       : DkIcon(
-                          DkIcons.overflow(context),
+                          w.moreIcon ?? DkIcons.overflow(context),
                           color: c.iconSecondary,
                         ),
                 ),
@@ -241,6 +261,12 @@ class _DkFileCardState extends State<DkFileCard> {
 
     final nameStyle = t.text.titleS.copyWith(color: c.textPrimary);
     final name = switch (w.variant) {
+      DkFileCardVariant.list when w.nameMatch != null => Text.rich(
+        boldMatch(w.name, w.nameMatch!),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: nameStyle,
+      ),
       DkFileCardVariant.list => DkMiddleEllipsisText(w.name, style: nameStyle),
       DkFileCardVariant.grid => Text(
         w.name,
@@ -273,7 +299,7 @@ class _DkFileCardState extends State<DkFileCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        children: [name, metaLine],
+        children: [name, metaLine, ?w.extra],
       ),
     );
 
@@ -326,6 +352,7 @@ class _DkFileCardState extends State<DkFileCard> {
       label: [
         w.name,
         w.meta,
+        ?w.extraLabel,
         if (w.locked) l.file_locked,
         if (w.encrypted) l.file_encrypted,
       ].join('\n'),
@@ -364,4 +391,20 @@ class _DkFileCardState extends State<DkFileCard> {
       ),
     );
   }
+}
+
+/// [text] with the first [match] (any case) in bold (search, DK-0269).
+TextSpan boldMatch(String text, String match) {
+  final at = text.toLowerCase().indexOf(match.toLowerCase());
+  if (match.isEmpty || at < 0) return TextSpan(text: text);
+  return TextSpan(
+    children: [
+      TextSpan(text: text.substring(0, at)),
+      TextSpan(
+        text: text.substring(at, at + match.length),
+        style: const TextStyle(fontWeight: FontWeight.w700),
+      ),
+      TextSpan(text: text.substring(at + match.length)),
+    ],
+  );
 }

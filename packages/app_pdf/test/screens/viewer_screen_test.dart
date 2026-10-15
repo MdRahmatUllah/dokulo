@@ -1,10 +1,14 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:app_pdf/components/dk_button.dart';
 import 'package:app_pdf/components/dk_pdf_canvas.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
+import 'package:app_pdf/screens/v1_viewer/viewer_search.dart';
+import 'package:app_pdf/screens/v1_viewer/viewer_states.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
@@ -17,9 +21,10 @@ import 'package:pdfrx/pdfrx.dart';
 String fixture(String name) =>
     '${Directory.current.path}/../../test/fixtures/$name';
 
-Widget app(Widget child, {DkTokens? tokens}) => MaterialApp(
+Widget app(Widget child, {DkTokens? tokens, Locale? locale}) => MaterialApp(
   debugShowCheckedModeBanner: false,
   theme: dokuloTheme(tokens ?? DkTokens.light),
+  locale: locale,
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   supportedLocales: AppLocalizations.supportedLocales,
   home: child,
@@ -81,6 +86,56 @@ void main() {
     final scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
     expect(scaffold.backgroundColor, DkTokens.light.color.surfaceSunken);
   });
+
+  testWidgets('a screen reader reads V1: the bar, the page, then the bottom '
+      'actions (DK-0637)', (tester) async {
+    final semantics = tester.ensureSemantics();
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await tester.runAsync(
+      () => db
+          .into(db.files)
+          .insert(
+            FilesCompanion.insert(
+              path: fixture('Mietvertrag Musterstraße 12.pdf'),
+              name: 'Mietvertrag Musterstraße 12.pdf',
+              size: 1,
+              created: DateTime(2026),
+              modified: DateTime(2026),
+            ),
+          ),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id!)),
+      ),
+    );
+    await settle(tester);
+    final labels = [
+      for (final node in tester.semantics.simulatedAccessibilityTraversal())
+        node.label,
+    ];
+    printOnFailure(labels.join('\n'));
+    expect(labels, isNot(contains('')), reason: 'no unlabelled stop');
+    expect(
+      labels,
+      containsAllInOrder([
+        'Back',
+        'Mietvertrag Musterstraße 12.pdf',
+        'Search',
+        'More',
+        'Page 1',
+        'Mietvertrag für Wohnräume',
+        'Edit',
+        'Sign',
+        'AI',
+        'Tools',
+        'Share',
+      ]),
+    );
+    semantics.dispose();
+  }, skip: true); // DK-1105: the pages come before the bar.
 
   testWidgets('V1 says so when the file is gone, instead of spinning', (
     tester,
@@ -168,4 +223,250 @@ void main() {
       );
     });
   }
+
+  Future<int> addFile(
+    WidgetTester tester,
+    DokuloDatabase db,
+    String path,
+  ) async => (await tester.runAsync(
+    () => db
+        .into(db.files)
+        .insert(
+          FilesCompanion.insert(
+            path: path,
+            name: path.split(RegExp(r'[\/]')).last,
+            size: 1,
+            created: DateTime(2026),
+            modified: DateTime(2026),
+          ),
+        ),
+  ))!;
+
+  // Visual QA (DK-0769, DK-0770, DK-0772, DK-0778): the frames are in
+  // docs/qa/viewer/, the findings in docs/qa/viewer.md.
+  for (final (theme, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('deutsch', DkTokens.light, const Locale('de')),
+  ]) {
+    final en = locale.languageCode == 'en';
+    testWidgets('locked (DK-0301, DK-0302, DK-0303): the card, a wrong '
+        'password, then the pages and "Unlocked for viewing" ($theme)', (
+      tester,
+    ) async {
+      final db = DokuloDatabase.memory();
+      addTearDown(db.close);
+      final id = await addFile(tester, db, fixture('encrypted-aes256.pdf'));
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          child: app(
+            Scaffold(body: ViewerScreen(fileId: id)),
+            tokens: tokens,
+            locale: locale,
+          ),
+        ),
+      );
+      await settle(tester);
+      expect(find.byType(ViewerLockedCard), findsOneWidget);
+      if (en) expect(find.text('This PDF is locked'), findsOneWidget);
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_locked_$theme.png'),
+      );
+      await tester.enterText(find.byType(TextField), 'wrong');
+      await tester.tap(find.byType(DkButton));
+      await settle(tester);
+      if (en) {
+        expect(
+          find.text("That password doesn't open this file."),
+          findsOneWidget,
+        );
+      }
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_wrongpw_$theme.png'),
+      );
+      await tester.enterText(find.byType(TextField), 'dokulo');
+      await tester.tap(find.byType(DkButton));
+      await settle(tester);
+      expect(find.byType(PdfViewer), findsOneWidget);
+      if (en) {
+        expect(find.text('Unlocked for viewing'), findsOneWidget);
+        expect(find.text('Remove password'), findsOneWidget);
+      }
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_unlocked_$theme.png'),
+      );
+    });
+
+    testWidgets('damaged (DK-0305): "This file cannot be opened", Close and '
+        'Try Repair ($theme)', (tester) async {
+      final dir = Directory.systemTemp.createTempSync('dk_v1_bad_');
+      addTearDown(() => dir.deleteSync(recursive: true));
+      final bad = File('${dir.path}/broken.pdf')
+        ..writeAsStringSync('%PDF-1.7 not really a pdf');
+      final db = DokuloDatabase.memory();
+      addTearDown(db.close);
+      final id = await addFile(tester, db, bad.path);
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          child: app(
+            ViewerScreen(fileId: id),
+            tokens: tokens,
+            locale: locale,
+          ),
+        ),
+      );
+      await settle(tester);
+      expect(find.byType(ViewerDamaged), findsOneWidget);
+      if (en) {
+        expect(find.text("This file can't be opened."), findsOneWidget);
+        expect(find.text('Try Repair'), findsOneWidget);
+      }
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_damaged_$theme.png'),
+      );
+    });
+  }
+
+  testWidgets('night mode (DK-1089): the pages through the night filter on '
+      'the night canvas', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(
+      tester,
+      db,
+      fixture('Mietvertrag Musterstraße 12.pdf'),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appDatabaseProvider.overrideWithValue(db),
+          prefsProvider.overrideWith(
+            () => Prefs.memory({viewerNightKey: true}),
+          ),
+        ],
+        child: app(ViewerScreen(fileId: id)),
+      ),
+    );
+    await settle(tester);
+    expect(find.byType(ColorFiltered), findsOneWidget);
+    expect(tester.widget<DkPdfCanvas>(find.byType(DkPdfCanvas)).night, isTrue);
+  });
+
+  testWidgets('night mode keeps images as they are (DK-0304): the night '
+      'filter again over each image on a scanned page', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(tester, db, fixture('scanned-letters-bundle.pdf'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appDatabaseProvider.overrideWithValue(db),
+          prefsProvider.overrideWith(
+            () => Prefs.memory({viewerNightKey: true}),
+          ),
+        ],
+        child: app(ViewerScreen(fileId: id)),
+      ),
+    );
+    await settle(tester);
+    // The night filter as a backdrop (the chrome's bars blur instead).
+    final kept = find.byWidgetPredicate(
+      (w) => w is BackdropFilter && w.filter is ColorFilter,
+    );
+    expect(kept, findsWidgets);
+    // Each covers its image, inside its page (not the whole canvas).
+    final screen = tester.getSize(find.byType(DkPdfCanvas));
+    final box = tester.getRect(kept.first);
+    expect(box.width, greaterThan(50));
+    expect(box.width, lessThanOrEqualTo(screen.width));
+  });
+
+  testWidgets('night mode off: no image overlays', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(tester, db, fixture('scanned-letters-bundle.pdf'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id)),
+      ),
+    );
+    await settle(tester);
+    expect(
+      find.byWidgetPredicate(
+        (w) => w is BackdropFilter && w.filter is ColorFilter,
+      ),
+      findsNothing,
+    );
+  });
+
+  for (final (name, expected) in [
+    ('form-acroform.pdf', true),
+    ('Invoice INV-2026-014.pdf', false),
+  ]) {
+    testWidgets('form banner (DK-1090) on $name: $expected', (tester) async {
+      final db = DokuloDatabase.memory();
+      addTearDown(db.close);
+      final id = await addFile(tester, db, fixture(name));
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [appDatabaseProvider.overrideWithValue(db)],
+          child: app(ViewerScreen(fileId: id)),
+        ),
+      );
+      await settle(tester);
+      expect(
+        find.text('This PDF has fillable fields.'),
+        expected ? findsOneWidget : findsNothing,
+      );
+      if (expected) expect(find.text('Fill form'), findsOneWidget);
+    });
+  }
+
+  testWidgets('search (DK-1093): opened with words, the bar counts the '
+      'matches and Done closes it', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(
+      tester,
+      db,
+      fixture('Mietvertrag Musterstraße 12.pdf'),
+    );
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id, query: 'Mieter')),
+      ),
+    );
+    await settle(tester, rounds: 60);
+    expect(find.byType(ViewerSearchBar), findsOneWidget);
+    expect(find.textContaining(RegExp(r'^\d+ of \d+$')), findsOneWidget);
+    expect(find.text('This scan has no searchable text.'), findsNothing);
+    await tester.tap(find.text('Done'));
+    await settle(tester);
+    expect(find.byType(ViewerSearchBar), findsNothing);
+  });
+
+  testWidgets('search on a scan without text: the banner with Make '
+      'searchable', (tester) async {
+    final db = DokuloDatabase.memory();
+    addTearDown(db.close);
+    final id = await addFile(tester, db, fixture('scanned-letters-bundle.pdf'));
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [appDatabaseProvider.overrideWithValue(db)],
+        child: app(ViewerScreen(fileId: id, query: 'Rechnung')),
+      ),
+    );
+    await settle(tester, rounds: 60);
+    expect(find.text('This scan has no searchable text.'), findsOneWidget);
+    expect(find.text('Make searchable'), findsOneWidget);
+    expect(find.text('0 results'), findsOneWidget);
+  });
 }

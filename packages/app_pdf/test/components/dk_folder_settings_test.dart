@@ -77,7 +77,7 @@ void main() {
       );
       expect(tester.getSize(find.byType(DkFolderCard)).height, 64);
       expect(
-        tester.widget<Icon>(find.byType(Icon)).color,
+        tester.widget<Icon>(find.byType(Icon).first).color,
         DkFolderTag.green.colour,
       );
       expect(find.text('8 Dateien'), findsOneWidget);
@@ -96,7 +96,7 @@ void main() {
         ),
       );
       expect(
-        tester.widget<Icon>(find.byType(Icon)).color,
+        tester.widget<Icon>(find.byType(Icon).first).color,
         DkTokens.light.color.iconSecondary,
       );
       expect(

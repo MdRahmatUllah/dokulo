@@ -170,8 +170,14 @@ void main() {
   });
 }
 
-/// A Next chip, scrolled out from under the action bar first.
+/// A Next chip, scrolled into the list's built range and out from under
+/// the action bar first.
 Future<void> tapChip(WidgetTester tester, String tool) async {
+  await tester.scrollUntilVisible(
+    find.text(tool),
+    100,
+    scrollable: find.byType(Scrollable).first,
+  );
   await tester.ensureVisible(find.text(tool));
   await tester.pump();
   await tester.tap(find.text(tool));

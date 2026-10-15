@@ -7,15 +7,25 @@ import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
 import '../screens/files/files_screen.dart';
+import '../screens/files/trash_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/launch/launch_screen.dart';
 import '../screens/locked/locked_folder_screen.dart';
+import '../screens/m1_me/signatures_screen.dart';
 import '../screens/onboarding/onboarding_screen.dart';
+import '../screens/p1_organize/organize_screen.dart';
+import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/settings/files_settings_screen.dart';
+import '../screens/settings/security_settings_screen.dart';
+import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
+import '../screens/s1_scanner/s1_screen.dart';
+import '../screens/s2_review/s2_screen.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
+import '../screens/v2_edit/edit_screen.dart';
 import '../tools/tool_catalogue.dart';
 import '../tools/tool_definition.dart';
 import 'app_shell.dart';
@@ -38,12 +48,16 @@ abstract final class Routes {
   static const trash = '/files/trash'; // Recently deleted
   static const me = '/me'; // M1
   static const models = '/me/models'; // M2
+  static const signatures = '/me/signatures'; // Me → Signatures
   static String settings(String page) => '/me/settings/$page'; // M3
   static const scan = '/scan'; // S1
 
   /// S1 in a mode from the Scan button's menu.
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
+
+  /// S1 taking page [index] again for S2 (DK-0350).
+  static String scanRetake(int index) => '/scan?retake=$index';
 
   /// Import photos (the Scan popover): S2 opens the photo picker first.
   static const scanImport = '/scan/review?source=photos';
@@ -68,8 +82,27 @@ abstract final class Routes {
 
   static String toolResult(String toolId) => '/tool/$toolId/result'; // T3
   /// V1; `edit: true` opens it in edit mode (V2).
-  static String viewer(String fileId, {bool edit = false}) =>
-      '/viewer/$fileId${edit ? '?mode=edit' : ''}';
+  /// [page] (1-based) opens it there (a search hit, DK-0269).
+  static String viewer(
+    String fileId, {
+    bool edit = false,
+    bool sign = false,
+    int? page,
+    String? query,
+  }) {
+    if (edit || sign) {
+      return '/viewer/$fileId?mode=edit${sign ? '&from=sign' : ''}';
+    }
+    final params = {
+      if (page != null) 'page': '$page',
+      if (query != null && query.isNotEmpty) 'q': query, // V1 search
+    };
+    return Uri(
+      path: '/viewer/$fileId',
+      queryParameters: params.isEmpty ? null : params,
+    ).toString();
+  }
+
   static String organize(String fileId) => '/organize/$fileId'; // P1
 
   /// A running job's progress (X2) over Home: a notification's tap.
@@ -145,41 +178,59 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
               ),
             ],
           ),
-          StatefulShellBranch(routes: [_screen(Routes.tools, 'T1')]),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: Routes.tools,
+                builder: (context, state) => const ToolsScreen(),
+              ),
+            ],
+          ),
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: Routes.files,
                 builder: (context, state) => const FilesScreen(),
                 routes: [
-                  // The folder screen (DK-0262) and the trash (DK-0278).
+                  // The folder screen (DK-0262).
                   GoRoute(
                     path: 'folder/:id',
-                    builder: (context, state) => PlaceholderScreen(
-                      'Folder',
-                      detail: state.pathParameters['id']!,
+                    builder: (context, state) => FilesScreen(
+                      // A malformed id finds no folder: the screen is empty.
+                      folder: int.tryParse(state.pathParameters['id']!) ?? -1,
                     ),
                   ),
-                  _screen('trash', 'Recently deleted'),
+                  GoRoute(
+                    path: 'trash',
+                    builder: (context, state) => const TrashScreen(),
+                  ),
                 ],
               ),
             ],
           ),
           StatefulShellBranch(
             routes: [
-              _screen(
-                Routes.me,
-                'M1',
+              GoRoute(
+                path: Routes.me,
+                builder: (context, state) => const MeScreen(),
                 routes: [
                   _screen('models', 'M2'),
+                  GoRoute(
+                    path: 'signatures',
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: const SignaturesScreen(),
+                    ),
+                  ),
                   GoRoute(
                     path: 'settings/:page',
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
-                      child: PlaceholderScreen(
-                        'M3',
-                        detail: state.pathParameters['page']!,
-                      ),
+                      child: switch (state.pathParameters['page']!) {
+                        'security' => const SecuritySettingsScreen(),
+                        'files' => const FilesSettingsScreen(),
+                        final page => PlaceholderScreen('M3', detail: page),
+                      },
                     ),
                   ),
                 ],
@@ -189,7 +240,13 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ],
       ),
       // F2: full-screen pages, no tab bar (UI spec §16.6, DK-0283).
-      fullScreen(Routes.lockedFolder, (_) => const LockedFolderScreen()),
+      fullScreen(
+        Routes.lockedFolder,
+        // "Move to locked folder" hands over the file ids (DK-0289).
+        (s) => LockedFolderScreen(
+          moveIn: s.extra is List<int> ? s.extra! as List<int> : const [],
+        ),
+      ),
       fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
@@ -199,16 +256,26 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           context,
           key: s.pageKey,
           child: _HomeUnderneath(
-            child: _scanner(s.uri.queryParameters['mode'] ?? ''),
+            child: _scanner(
+              s.uri.queryParameters['mode'] ?? '',
+              retake: int.tryParse(s.uri.queryParameters['retake'] ?? ''),
+            ),
           ),
         ),
         routes: [
           fullScreen(
             'review',
-            (s) => PlaceholderScreen(
-              'S2',
-              detail: s.uri.queryParameters['source'] ?? '',
-            ),
+            (s) => s.uri.queryParameters['source'] == 'photos'
+                // The photo picker: DK-0351.
+                ? const PlaceholderScreen('S2', detail: 'photos')
+                : Builder(
+                    builder: (context) => S2Screen(
+                      onAddPages: () => context.canPop()
+                          ? context.pop()
+                          : context.go(Routes.scan),
+                      onRetake: (i) => context.push(Routes.scanRetake(i)),
+                    ),
+                  ),
           ),
         ],
       ),
@@ -254,10 +321,15 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
           key: s.pageKey,
           child: _HomeUnderneath(
             child: s.uri.queryParameters['mode'] == 'edit'
-                ? PlaceholderScreen('V2', detail: s.pathParameters['fileId']!)
+                ? EditScreen(
+                    fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+                    fromSign: s.uri.queryParameters['from'] == 'sign',
+                  )
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(
                     fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+                    page: int.tryParse(s.uri.queryParameters['page'] ?? ''),
+                    query: s.uri.queryParameters['q'],
                   ),
           ),
         ),
@@ -279,7 +351,9 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
       ),
       fullScreen(
         '/organize/:fileId',
-        (s) => PlaceholderScreen('P1', detail: s.pathParameters['fileId']!),
+        (s) => OrganizeScreen(
+          fileId: int.tryParse(s.pathParameters['fileId']!) ?? -1,
+        ),
       ),
       // The component catalogue: debug builds only (kDebugMode is a
       // constant, so a release build doesn't contain it).
@@ -328,15 +402,30 @@ class _HomeUnderneath extends StatelessWidget {
 
 /// S1 behind its camera permission (DK-0342). Importing photos needs no
 /// camera; every other mode asks for it first.
-Widget _scanner(String mode) {
-  final camera = PlaceholderScreen('S1', detail: mode);
-  if (mode == DkScanMode.importPhotos.name) return camera;
+Widget _scanner(String mode, {int? retake}) {
+  if (mode == DkScanMode.importPhotos.name) {
+    return PlaceholderScreen('S1', detail: mode);
+  }
   return Builder(
-    builder: (context) => CameraPermissionGate(
-      camera: (_) => camera,
-      onClose: () => context.canPop() ? context.pop() : context.go(Routes.home),
+    builder: (context) {
+      void close() =>
+          context.canPop() ? context.pop() : context.go(Routes.home);
       // As the Scan button's Import photos: S2's picker (DK-0230).
-      onImport: () => context.pushReplacement(Routes.scanImport),
-    ),
+      void import() => context.pushReplacement(Routes.scanImport);
+      return CameraPermissionGate(
+        camera: (_) => S1Screen(
+          initialMode: DkScanMode.values.asNameMap()[mode],
+          retake: retake,
+          // Back to S2, the page replaced.
+          onRetaken: () => context.pop(),
+          onClose: close,
+          onImport: import,
+          onReview: () => context.push(Routes.scanReview),
+          onSettings: () => context.push(Routes.settings('scanning')),
+        ),
+        onClose: close,
+        onImport: import,
+      );
+    },
   );
 }

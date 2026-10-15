@@ -22,7 +22,7 @@ class SignaturePadStates extends StatelessWidget {
           initialMode: mode,
           name: mode == DkSignatureMode.type ? 'Max Mustermann' : '',
           onCancel: () {},
-          onSave: (_) {},
+          onSave: (_, _) {},
           onTakePhoto: () {},
           onChoosePhoto: () {},
         ),

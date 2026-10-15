@@ -1,0 +1,8 @@
+Bäckerei Muster
+Hauptstraße 3, 80331 München
+2 x Brezel 1,60
+1 x Laugenstange 1,10
+1 x Kaffee groß 2,90
+Summe EUR 5,60
+Bar 10,00 Rückgeld 4,40
+Vielen Dank für Ihren Einkauf!

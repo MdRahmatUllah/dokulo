@@ -38,6 +38,7 @@ class StartupReport {
 ///    write output to temp and only [FileStore.save] moves it into the user
 ///    folder, so a job killed mid-run leaves nothing partial there.
 /// 2. Deletes files that sat in Recently deleted longer than [trashRetention].
+///    Drops version-history copies older than 30 days ([VersionStore.purge]).
 /// 3. Resumes each job the OS killed whose input files still exist; reports
 ///    the rest.
 /// 4. Brings the file index in line with the user folder and indexes the
@@ -76,6 +77,12 @@ Future<StartupReport> startupCleanup({
       db.files,
     )..where((f) => f.id.equals(file.id))).go(); // cascades to trash
   }
+
+  await VersionStore(
+    db,
+    files.versions,
+    clock: now == null ? null : () => now,
+  ).purge();
 
   final resumed = <ToolRun>[];
   final couldNotFinish = <UnfinishedJob>[];
