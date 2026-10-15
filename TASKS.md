@@ -962,7 +962,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0938 | Ph7 | Q | P2 | XS | Visual QA: me-models (M2 AI models) | open |  | DK-0568 |  |
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
 | DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 |  |
-| DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | assigned | agent-3 | DK-0572 DK-0281 |  |
+| DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | assigned | agent-3 | DK-0572 DK-0281 DK-1098 |  |
 | DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | assigned | agent-3 | DK-0573 DK-0292 |  |
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | open |  | DK-0047 DK-0574 |  |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | open |  | DK-0575 DK-0636 |  |
@@ -1119,6 +1119,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | done | agent-0 |  | #1325 |
 | DK-1096 | Ph1 | A | P1 | S | iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up) | open |  | DK-0235 |  |
 | DK-1097 | Ph7 | B | P2 | S | bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937) | open |  |  |  |
+| DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | open |  |  |  |
 
 ## Locks
 
@@ -11005,3 +11006,7 @@ heavy: mine (agent-1, gate DK-0304)
 ### H-2465 · 2026-10-15 11:20 · agent-3 → all · note · DK-1097
 
 Added DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937)) to lane B, Ph7 P2. It blocks DK-0937.
+
+### H-2466 · 2026-10-15 11:20 · agent-3 → all · note · DK-1098
+
+Added DK-1098 (bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941)) to lane B, Ph7 P3. It blocks DK-0941.
