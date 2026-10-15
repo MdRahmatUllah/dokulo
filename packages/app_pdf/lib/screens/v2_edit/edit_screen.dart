@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:pdfrx/pdfrx.dart' show PdfViewerController;
 
 import '../../components/dk_editor_bars.dart';
 import '../../components/dk_icon.dart';
@@ -79,7 +82,15 @@ List<(IconData, String)> _labels(AppLocalizations l) => [
 /// text box or note asks for its text. [fromSign]: entered from
 /// Sign, so Pan is selected and the signatures sheet opens.
 class EditScreen extends ConsumerStatefulWidget {
-  const EditScreen({super.key, required this.fileId, this.fromSign = false});
+  const EditScreen({
+    super.key,
+    required this.fileId,
+    this.fromSign = false,
+    this.startTool,
+  });
+
+  /// Selected when the file is open (Mark up: the highlighter, DK-0517).
+  final EditTool? startTool;
 
   final int fileId;
   final bool fromSign;
@@ -100,6 +111,9 @@ class _EditScreenState extends ConsumerState<EditScreen> {
 
   /// The file's row is gone (deleted, or a stale link).
   var _missing = false;
+
+  /// The file couldn't be read: locked (true) or damaged (false).
+  bool? _problem;
 
   /// Each tool's options, last used first (kept in [prefsProvider]).
   late final Map<EditTool, DkToolOptions> _options = {
@@ -132,11 +146,22 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     await File(file.path).copy(view.path);
     // The tools' last-used options, before the strip is used.
     await ref.read(prefsProvider.future);
-    final info = await PdfEngine.inspect(file.path);
-    final read = <int, List<PageAnnot>>{
-      for (var p = 0; p < info.pageCount; p++)
-        p: await PdfAnnotations.read(file.path, p),
-    };
+    final PdfInfo info;
+    final Map<int, List<PageAnnot>> read;
+    try {
+      info = _info = await PdfEngine.inspect(file.path);
+      read = {
+        for (var p = 0; p < info.pageCount; p++)
+          p: await PdfAnnotations.read(file.path, p),
+      };
+    } on DocError catch (e) {
+      // ponytail: locked files open in V1 (unlock there first); edit mode
+      // says why it can't, instead of spinning.
+      if (mounted) {
+        setState(() => _problem = e.kind == DocErrorKind.locked);
+      }
+      return;
+    }
     if (!mounted) return;
     setState(() {
       _file = file;
@@ -144,6 +169,10 @@ class _EditScreenState extends ConsumerState<EditScreen> {
       _editor = AnnotationEditor(read: read)..tool = EditTool.pan;
     });
     if (widget.fromSign) await _sign();
+    if (widget.startTool case final tool?) {
+      final index = _strip.indexOf(tool);
+      if (index >= 0) _select(index);
+    }
   }
 
   void _select(int index) {
@@ -287,13 +316,48 @@ class _EditScreenState extends ConsumerState<EditScreen> {
     );
   }
 
-  /// Sign: Pan, and the signatures sheet. ponytail: placing the chosen
-  /// signature on the page is DK-0328.
+  /// Sign: Pan, and the signatures sheet; the chosen signature lands
+  /// centred on the page in view at 40 % of its width, selected, with the
+  /// date beside it when "Add date" is on (UI spec §17.3; DK-0328).
   Future<void> _sign() async {
     setState(() => _selected = 0);
     _editor!.tool = EditTool.pan;
-    await showSignaturesSheet(context);
+    final picked = await showSignaturesSheet(context);
+    if (picked == null || !mounted) return;
+    final (_, png) = picked;
+    final info = _info;
+    if (info == null) return;
+    final descriptor = await ui.ImageDescriptor.encoded(
+      await ui.ImmutableBuffer.fromUint8List(png),
+    );
+    final size = (width: descriptor.width, height: descriptor.height);
+    descriptor.dispose();
+    if (!mounted || size.width == 0) return;
+    final page = ((_canvas.isReady ? _canvas.pageNumber : null) ?? 1) - 1;
+    final p = info.pages[page.clamp(0, info.pageCount - 1)];
+    final w = p.width * 0.4, h = w * size.height / size.width;
+    final addDate = ref.read(prefsProvider).value?[signAddDateKey] == true;
+    _editor!.add(
+      page,
+      StampAnnot(
+        (
+          left: (p.width - w) / 2,
+          top: (p.height + h) / 2,
+          right: (p.width + w) / 2,
+          bottom: (p.height - h) / 2,
+        ),
+        png,
+        date: addDate
+            ? DateFormat.yMd(AppLocalizations.of(context).localeName)
+                  .format(DateTime.now())
+            : null,
+      ),
+    );
   }
+
+  /// The file's pages (their sizes), read when it opened.
+  PdfInfo? _info;
+  final _canvas = PdfViewerController();
 
   Future<void> _cancel() async {
     if (_editor?.dirty ?? false) {
@@ -321,9 +385,11 @@ class _EditScreenState extends ConsumerState<EditScreen> {
       final versions = await ref.read(versionStoreProvider.future);
       final before = await versions.replace(widget.fileId, out.path);
       if (!mounted) return;
+      // Signed: "Signed on page 3 · Undo" (DK-0519); else "Saved".
+      final signed = editor.signedPage;
       showDkToast(
         context,
-        l.toast_saved,
+        signed == null ? l.toast_saved : l.sign_toast_signed(signed + 1),
         action: l.common_undo,
         onAction: () => versions.restore(before),
       );
@@ -353,12 +419,16 @@ class _EditScreenState extends ConsumerState<EditScreen> {
             onCancel: _cancel,
             onDone: editor != null && editor.dirty && !_saving ? _done : null,
           ),
-          body: _missing
+          body: _missing || _problem != null
               ? Center(
                   child: Padding(
                     padding: EdgeInsets.all(t.space.xl),
                     child: Text(
-                      l.viewer_file_missing,
+                      switch (_problem) {
+                        true => l.viewer_locked_title,
+                        false => l.viewer_damaged_body,
+                        null => l.viewer_file_missing,
+                      },
                       style: t.text.bodyM.copyWith(
                         color: t.color.textSecondary,
                       ),
@@ -375,6 +445,7 @@ class _EditScreenState extends ConsumerState<EditScreen> {
                     Expanded(
                       child: DkPdfCanvas(
                         path: _view!,
+                        controller: _canvas,
                         panEnabled: editor.tool == EditTool.pan,
                         pageOverlay: (page, size) => AnnotationOverlay(
                           editor: editor,
