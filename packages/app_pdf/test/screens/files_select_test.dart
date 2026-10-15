@@ -46,7 +46,7 @@ void main() {
     expect(find.byType(DkSelectionBar), findsOneWidget);
     expect(find.byType(DkTabBar), findsNothing);
     expect(action(tester, 'Merge').onPressed, isNull);
-    expect(action(tester, 'Share').onPressed, isNull, reason: 'share_plus');
+    expect(action(tester, 'Share').onPressed, isNotNull, reason: 'DK-1077');
 
     await tester.tap(find.text('B.pdf'));
     await settle(tester);

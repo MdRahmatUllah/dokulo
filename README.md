@@ -50,3 +50,20 @@ The basic check (`python tools/check.py`, the only check a PR gets: there is no 
 How the code is organised, state, routing, theming, testing, the
 accessibility checklist and the definition of done:
 [`docs/Developer guide.md`](docs/Developer%20guide.md).
+
+## Not planned
+
+Dokulo deliberately leaves these out (the product plan's "Later and not
+planned", DK-0709). A task or PR that adds one needs the owner's decision
+first (`team.py decision`):
+
+| Feature | Why not |
+| --- | --- |
+| QR scanning | Phone cameras already do it |
+| Fax, cloud collaboration, comment sharing | Needs servers; breaks the no-upload promise |
+| ID photo maker, maths solver, practice tests | Off-topic |
+| Copy PDF | Unclear user value |
+
+The "Later" list (Office conversion, full text editing, dewarping and the
+rest) is in
+[the product plan](docs/Offline%20PDF%20Toolkit%20(iLovePDF-style%20mobile%20app).md#later-and-not-planned).
