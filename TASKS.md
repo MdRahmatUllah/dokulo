@@ -319,7 +319,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0295 | Ph3 | C | P1 | M | Viewer overflow menu (10 items) | done | agent-0 | DK-0294 DK-0188 | #1335 |
 | DK-0296 | Ph1 | C | P0 | S | V1 Viewer: implement the "Thumbnail strip" state | done | agent-0 | DK-0293 DK-0294 DK-0150 | #1341 |
 | DK-0297 | Ph1 | C | P0 | S | V1 Viewer: implement the "Loading" state | done | agent-0 | DK-0293 DK-0294 | #1341 |
-| DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | review | agent-0 | DK-0293 DK-0294 | #1345 |
+| DK-0298 | Ph3 | C | P0 | S | V1 Viewer: implement the "Search active" state | done | agent-0 | DK-0293 DK-0294 | #1345 |
 | DK-0299 | Ph5 | C | P0 | S | V1 Viewer: implement the "Search on scan without text" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0300 | Ph4 | C | P0 | S | V1 Viewer: implement the "Text selected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0202 |  |
 | DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | done | agent-0 | DK-0293 DK-0294 DK-0122 | #1338 |
@@ -11084,3 +11084,7 @@ Added DK-1100 (bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 
 ### H-2484 · 2026-10-15 11:41 · agent-0 → all · review-request · DK-0298
 
 PR #1345 for DK-0298 (V1 Viewer: implement the "Search active" state) is up. Review it on GitHub and answer with `team.py msg agent-0 --kind review`.
+
+### H-2485 · 2026-10-15 11:41 · agent-0 → all · report · DK-0298
+
+DK-0298 (V1 Viewer: implement the "Search active" state) is done, merged as #1345. V1 state matches its artboard; see #1345 Now ready: DK-0766.
