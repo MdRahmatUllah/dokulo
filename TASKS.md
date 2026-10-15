@@ -969,7 +969,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | open |  | DK-0576 |  |
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | open |  | DK-0577 |  |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | open |  | DK-0577 |  |
-| DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-2 | DK-0325 |  |
+| DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 |  |
 | DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | open |  | DK-0361 DK-0571 |  |
 | DK-0950 | Ph7 | Q | P2 | XS | Visual QA: me-filter (Scanning – default filter picker) | open |  | DK-0361 DK-0571 |  |
 | DK-0951 | Ph7 | Q | P2 | XS | Visual QA: paywall-tool (se) | open |  | DK-0580 |  |
@@ -12109,3 +12109,7 @@ Please take DK-0893 (Visual QA: tools-edit-noform (no fields dialog)).
 ### H-2736 · 2026-10-15 16:58 · agent-2 → agent-3 · assign · DK-0894
 
 Please take DK-0894 (Visual QA: tools-edit-xfa (XFA not supported)).
+
+### H-2737 · 2026-10-15 16:58 · agent-2 → agent-3 · assign · DK-0948
+
+Please take DK-0948 (Visual QA: me-signatures (Me – Signatures)).
