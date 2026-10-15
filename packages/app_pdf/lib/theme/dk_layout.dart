@@ -95,6 +95,10 @@ class DkGrid {
       : width < 840
       ? smallTablet
       : largeTablet;
+
+  /// The window's class (DK-0657): use this, never raw 600/840 widths.
+  static DkGrid of(BuildContext context) =>
+      forWidth(MediaQuery.sizeOf(context).width);
 }
 
 /// Tool tiles across (UI spec §30): 4 on a phone, 6 from 600 dp of width, 8
@@ -110,4 +114,14 @@ int toolColumns(double width) => width >= 840
 double toolTileAspect(double width, double gap) {
   final n = toolColumns(width);
   return n == 4 ? 0.78 : (width - (n - 1) * gap) / n / 108;
+}
+
+/// A tool grid's columns and tile width to height (UI spec §10): [toolColumns]
+/// and [toolTileAspect], but on a phone at 160 % text or more 2 across and
+/// square, so the names wrap whole (DK-0254, DK-0657).
+(int, double) toolGrid(BuildContext context, double width, double gap) {
+  if (width < 600 && MediaQuery.textScalerOf(context).scale(1) >= 1.6) {
+    return (2, 1.0);
+  }
+  return (toolColumns(width), toolTileAspect(width, gap));
 }

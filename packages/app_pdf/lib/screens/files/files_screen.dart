@@ -35,6 +35,7 @@ import '../../providers/files_providers.dart';
 import '../../providers/prefs_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_folder_tags.dart';
+import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../../patterns/dk_selection.dart';
 import '../../components/dk_bottom_bars.dart';
@@ -78,7 +79,7 @@ class FilesScreen extends ConsumerWidget {
     final loading = !folders.hasValue || !files.hasValue;
     final empty = !loading && folders.value!.isEmpty && files.value!.isEmpty;
     // A large tablet: the list (360) and the preview pane (DK-0279, §30).
-    final wide = MediaQuery.sizeOf(context).width >= _twoPaneFrom;
+    final wide = DkGrid.of(context) == DkGrid.largeTablet;
     final grid = view.grid && !wide;
     final selection = ref.watch(filesSelectionProvider);
     final all = [...favourites, ...?files.value];
@@ -993,7 +994,6 @@ final filesSelectionProvider = Provider.autoDispose<DkSelection<int>>((ref) {
 });
 
 /// From this width F1 is two panes (UI spec §30, Expanded).
-const _twoPaneFrom = 840.0;
 
 /// Two panes (DK-0279): F1's list at 360, the [FilePreviewPane] beside it.
 /// A tap on a file selects it (no navigation); the arrow keys move the
