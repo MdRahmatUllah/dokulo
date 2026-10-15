@@ -1,0 +1,10 @@
+Rechnung Nr. 2026-0815
+Beispiel Handwerk GmbH, Werkstraße 7, 80333 München
+Rechnungsdatum: 14.10.2026 Leistungsdatum: 09.10.2026
+Pos. 1 Wartung Heizungsanlage 1 Std. 89,00 EUR
+Pos. 2 Dichtungssatz 2 Stk. 24,50 EUR
+Pos. 3 Anfahrtspauschale 1 35,00 EUR
+Nettobetrag 173,00 EUR
+zzgl. 19 % USt. 32,87 EUR
+Gesamtbetrag 205,87 EUR
+Zahlbar bis 28.10.2026 ohne Abzug auf IBAN DE00 0000 0000 0000 0000 00.

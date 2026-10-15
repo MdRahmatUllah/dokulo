@@ -26,6 +26,9 @@ Future<double> difference(String a, String b) async {
   return sum / (x.bgra.length * 3 / 4);
 }
 
+List<String> _encrypt((String, String, String) a, JobContext context) =>
+    QpdfService.run(() => Qpdf.encrypt(a.$1, a.$2, userPassword: a.$3));
+
 int qpdfInWorker((String, String) job, JobContext context) => QpdfService.run(
   () => Qpdf.run({
     'inputFile': job.$1,
@@ -82,6 +85,35 @@ void main() {
       reason: 'the pages look the same',
     );
   });
+
+  test(
+    'a locked PDF compresses with its password and keeps it (DK-1104)',
+    () async {
+      // The sample is the invoice, AES-256 with the password "dokulo"; a
+      // locked scan has images to recompress as well.
+      final scanLocked = outFile('scan-locked.pdf');
+      await pool.run(Lane.qpdf, _encrypt, (scan, scanLocked, 'dokulo')).result;
+      for (final input in [fixture('encrypted-aes256.pdf'), scanLocked]) {
+        final result = await compressor.compress(
+          input,
+          outFile('locked-out.pdf'),
+          const CompressOptions(preset: CompressPreset.strong),
+          password: 'dokulo',
+        );
+        expect(result.bytesAfter, greaterThan(0), reason: input);
+        final info = await PdfEngine.inspect(
+          outFile('locked-out.pdf'),
+          password: 'dokulo',
+        );
+        expect(info.pageCount, greaterThan(0), reason: input);
+        await expectLater(
+          PdfEngine.inspect(outFile('locked-out.pdf')),
+          throwsA(isA<DocError>()),
+          reason: 'the output stays locked: $input',
+        );
+      }
+    },
+  );
 
   test('images already below the target are left alone', () async {
     // The sample scan is 110 dpi and tightly encoded: at 150 dpi there's

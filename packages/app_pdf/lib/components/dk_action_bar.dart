@@ -10,7 +10,8 @@ import 'dk_number_text.dart';
 /// The sticky bottom of a tool or flow (UI spec §11.6; DK-0170): `surface`
 /// with a top hairline, 16 / 12 padding and the safe area below; one large
 /// full-width button, optionally a secondary above it ([secondaryBeside]:
-/// to its left), and an optional [caption] above the button ("About 1.8 MB
+/// to its left; [secondaryStart] beside it, T3's Share · Open), and an
+/// optional [caption] above the button ("About 1.8 MB
 /// · 12 pages", "Free try · Pro unlocks unlimited use").
 ///
 /// Put it in the Scaffold's `bottomNavigationBar`, so toasts float above it.
@@ -28,6 +29,7 @@ class DkActionBar extends StatelessWidget {
     this.secondaryLabel,
     this.onSecondary,
     this.secondaryBeside = false,
+    this.secondaryStart,
     this.onMenu,
     this.menuLabel,
   }) : assert((onMenu == null) == (menuLabel == null), 'a menu needs both');
@@ -46,6 +48,9 @@ class DkActionBar extends StatelessWidget {
   final String? secondaryLabel;
   final VoidCallback? onSecondary;
   final bool secondaryBeside;
+
+  /// A second secondary on the secondary's left: (label, icon, onTap).
+  final (String, IconData, VoidCallback?)? secondaryStart;
 
   /// A split button (T3's Save, UI spec §20.4): a chevron segment on the
   /// primary's right opens a menu, anchored to it ([showDkMenu]).
@@ -87,7 +92,10 @@ class DkActionBar extends StatelessWidget {
               ],
             ),
           );
-    final secondary = secondaryLabel == null
+    // At 150 % text and more, side by side leaves each label too little
+    // room: stack them.
+    final roomy = MediaQuery.textScalerOf(context).scale(1) < 1.5;
+    final second = secondaryLabel == null
         ? null
         : DkButton(
             label: secondaryLabel!,
@@ -96,10 +104,28 @@ class DkActionBar extends StatelessWidget {
             variant: DkButtonVariant.secondary,
             expand: true,
           );
-    // At 150 % text and more, side by side leaves each label too little
-    // room: stack them.
-    final beside =
-        secondaryBeside && MediaQuery.textScalerOf(context).scale(1) < 1.5;
+    final start = secondaryStart == null
+        ? null
+        : DkButton(
+            label: secondaryStart!.$1,
+            icon: secondaryStart!.$2,
+            onPressed: secondaryStart!.$3,
+            size: DkButtonSize.large,
+            variant: DkButtonVariant.secondary,
+            expand: true,
+          );
+    final Widget? secondary = start == null || second == null
+        ? second ?? start
+        : roomy
+        ? Row(
+            spacing: t.space.s,
+            children: [
+              Expanded(child: start),
+              Expanded(child: second),
+            ],
+          )
+        : Column(spacing: t.space.s, children: [start, second]);
+    final beside = secondaryBeside && start == null && roomy;
     final keyboard = MediaQuery.viewInsetsOf(context).bottom;
     return DecoratedBox(
       decoration: BoxDecoration(
