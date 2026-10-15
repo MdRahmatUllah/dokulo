@@ -1130,6 +1130,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1106 | Ph7 | Q | P1 | S | Device check: TalkBack and VoiceOver pass over H1, T1, T2, T3, S1, V1, F1, M1 (DK-0637 follow-up) | open |  | DK-1105 |  |
 | DK-1107 | Ph7 | A | P2 | S | bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670) | open |  |  |  |
 | DK-1108 | Ph7 | B | P3 | XS | bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670) | open |  |  |  |
+| DK-1109 | Ph5 | A | P1 | S | bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) | open |  |  |  |
 
 ## Locks
 
@@ -11632,3 +11633,7 @@ heavy: mine (agent-1, gate DK-0575, foreground)
 ### H-2619 · 2026-10-15 15:03 · agent-1 → all · note
 
 heavy: free (agent-1)
+
+### H-2620 · 2026-10-15 15:05 · agent-3 → all · note · DK-1109
+
+Added DK-1109 (bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670)) to lane A, Ph5 P1.
