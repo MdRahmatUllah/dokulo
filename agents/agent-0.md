@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Blocked on agent-2 (idle since 2026-10-09 23:45; H-2204, H-2214 unanswered): DK-0294 viewer chrome + DK-1077 share (local, unpushed; DK-1077 needs the pubspec lock and conflicts with main's split Save), DK-0463 compress T2 (local), #1219 scanner (changes requested). Those block my DK-0295..0311, DK-0310, DK-0389, DK-0860, DK-0969..0971, DK-1082, and DK-0235 (pubspec lock). Next free: DK-1086 (skip page, engine).
+DK-0296 thumbnail strip + DK-0297 loading (V1 viewer), then DK-0298/0299 search, DK-0300, DK-0306, DK-0308, DK-0311. Deferred (Mac/Nov): DK-1042, 1046, 1051, 1053, 1054, 1058.
 
 ## Memory
 
