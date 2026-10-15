@@ -1,11 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:app_pdf/components/dk_camera_top_bar.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
-import 'package:app_pdf/providers/camera_permission.dart';
 import 'package:app_pdf/screens/s1_scanner/s1_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
-import 'package:app_pdf/screens/s1_scanner/scanner_camera.dart';
-import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/screens/s2_review/s2_screen.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
@@ -30,33 +26,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
-/// A camera that opens and shows nothing: these tests are about routes.
-class _FakeCamera implements ScannerCamera {
-  @override
-  Future<void> open() async {}
-  @override
-  Widget preview() => const SizedBox.expand();
-  @override
-  double? get aspectRatio => 3 / 4;
-  @override
-  Stream<GreyFrame> get frames => const Stream.empty();
-  @override
-  Future<void> setFlash(DkFlash flash) async {}
-  @override
-  Future<Uint8List> capture() async => Uint8List(0);
-  @override
-  Future<void> close() async {}
-}
-
-/// The camera is allowed: these tests are about routes, not the permission.
-class _Granted implements CameraPermission {
-  @override
-  Future<CameraAccess> status() async => CameraAccess.granted;
-  @override
-  Future<CameraAccess> request() async => CameraAccess.granted;
-  @override
-  Future<void> openSettings() async {}
-}
+import '../scanner_overrides.dart';
 
 Future<GoRouter> pumpAt(
   WidgetTester tester,
@@ -78,10 +48,7 @@ Future<GoRouter> pumpAt(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         prefsProvider.overrideWith(Prefs.memory),
-        cameraPermissionProvider.overrideWithValue(_Granted()),
-        scannerCameraProvider.overrideWith((ref) => _FakeCamera()),
-        scanStoreProvider.overrideWithValue(MemoryScanStore()),
-        scannerPrefsStoreProvider.overrideWithValue(MemoryPrefsStore()),
+        ...scannerOverrides(),
         ...overrides,
       ],
       child: MaterialApp.router(

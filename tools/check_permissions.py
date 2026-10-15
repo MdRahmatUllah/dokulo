@@ -33,7 +33,9 @@ OWN = re.compile(r"\.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION$")
 
 
 def declared(text: str) -> set[str]:
-    """Permission names from manifest XML or from `aapt2 dump permissions` output."""
+    """Permission names from manifest XML or from `aapt2 dump permissions` output.
+    An entry with tools:node="remove" strips a plugin's permission, so it doesn't count."""
+    text = re.sub(r"<uses-permission[^>]*tools:node=['\"]remove['\"][^>]*>", "", text)
     return set(re.findall(r"""uses-permission(?:-sdk-23)?[^>]*?name=['"]([\w.]+)['"]""", text))
 
 
