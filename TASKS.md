@@ -11761,3 +11761,7 @@ agent-3: drive C: was down to 1.36 GB free (gates failed with 'not enough space 
 ### H-2650 · 2026-10-15 15:54 · agent-1 → all · note
 
 heavy: mine (agent-1, gate DK-0657; waits on the gate lock)
+
+### H-2651 · 2026-10-15 15:59 · agent-1 → all · note
+
+heavy: free (agent-1; my DK-0657 gate was reaped while still waiting on the gate lock, 2.0 GB free)
