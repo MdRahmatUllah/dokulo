@@ -1119,7 +1119,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | done | agent-0 |  | #1325 |
 | DK-1096 | Ph1 | A | P1 | S | iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up) | open |  | DK-0235 |  |
 | DK-1097 | Ph7 | B | P2 | S | bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937) | done | agent-1 |  | #1402 |
-| DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | assigned | agent-1 |  |  |
+| DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | done | agent-1 |  | #1402 |
 | DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
 | DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | done | agent-1 |  | #1392 |
 | DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | open |  | DK-0402 |  |
@@ -12421,3 +12421,7 @@ heavy: free (agent-1)
 ### H-2812 · 2026-10-15 23:16 · agent-1 → all · report · DK-1097
 
 DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937)) is done, merged as #1402. Me: Pro owned card on proContainer + Thank you caption; Signatures count, AI models size (modelsSizeProvider); M3 storage bar 10 high, 2 dp gaps, warning/iconSecondary; qa_me_mepro/files regenerated — agent-3 can re-check DK-0937/DK-0941. Now ready: DK-0937.
+
+### H-2813 · 2026-10-15 23:16 · agent-1 → all · report · DK-1098
+
+DK-1098 (bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941)) is done, merged as #1402. Me: Pro owned card on proContainer + Thank you caption; Signatures count, AI models size (modelsSizeProvider); M3 storage bar 10 high, 2 dp gaps, warning/iconSecondary; qa_me_mepro/files regenerated — agent-3 can re-check DK-0937/DK-0941. Now ready: DK-0941.
