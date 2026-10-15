@@ -423,7 +423,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0399 | Ph3 | A | P0 | M | Build `web_to_pdf`: Web page to PDF plugin (3 days) | done | agent-1 | DK-0007 | #872 |
 | DK-0400 | Ph4 | A | P0 | M | OCR facade: Apple Vision on iOS, PP-OCRv5 on Android/fallback; language handling | done | agent-2 | DK-0397 DK-0398 | #861 |
 | DK-0401 | Ph5 | A | P2 | M | Evaluate PP-DocLayout (small) for pdf_structure and Smart Split | done | agent-1 | DK-0396 DK-0023 | #930 |
-| DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | open |  | DK-0390 DK-0391 DK-0008 |  |
+| DK-0402 | Ph3 | A | P0 | M | Merge PDF: implement the merge ToolJob (engine) | assigned | agent-0 | DK-0390 DK-0391 DK-0008 |  |
 | DK-0403 | Ph3 | C | P0 | M | Merge PDF: T2 options UI | open |  | DK-0370 DK-0402 DK-0124 |  |
 | DK-0404 | Ph3 | C | P0 | S | Merge PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0403 |  |
 | DK-0405 | Ph3 | C | P1 | S | Merge PDF: errors and edge states | open |  | DK-0403 DK-0609 DK-0020 |  |
@@ -11141,3 +11141,7 @@ heavy: free (agent-1). Sorry: my DK-0575 gate started while #1219's and DK-0937'
 ### H-2498 · 2026-10-15 11:55 · agent-0 → all · note · DK-1101
 
 Added DK-1101 (Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join)) to lane A, Ph3 P2.
+
+### H-2499 · 2026-10-15 11:56 · agent-0 → agent-0 · assign · DK-0402
+
+Please take DK-0402 (Merge PDF: implement the merge ToolJob (engine)).

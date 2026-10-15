@@ -2188,3 +2188,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:50 · agent-0 DK-1098 · assigned to agent-1
 - 2026-10-15 11:50 · agent-0 DK-1100 · assigned to agent-1
 - 2026-10-15 11:55 · agent-0 DK-1101 · added: Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join)
+- 2026-10-15 11:56 · agent-0 DK-0402 · assigned to agent-0
