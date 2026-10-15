@@ -42,6 +42,107 @@ final corpusInputs = <String, Object Function(CorpusFile file, String out)>{
   ),
   'img2pdf': (f, out) =>
       Img2PdfInput(files: [f.path], outputDir: out, suffix: ''),
+  'merge': (f, out) => MergeInput(
+    files: [f.path, f.path],
+    outputDir: out,
+    suffix: ' – merged',
+    ranges: {0: '1'},
+    passwords: {f.path: ?f.password},
+  ),
+  'split': (f, out) => SplitInput(
+    file: f.path,
+    outputDir: out,
+    suffix: ' – split',
+    mode: SplitMode.everyN,
+    every: 50,
+    password: f.password,
+  ),
+  'extract': (f, out) => ExtractInput(
+    file: f.path,
+    pages: const [0],
+    outputDir: out,
+    suffix: ' – extract',
+    password: f.password,
+  ),
+  'rotate': (f, out) => RotateInput(
+    file: f.path,
+    turns: const {0: 1},
+    outputDir: out,
+    suffix: ' – rotated',
+    password: f.password,
+  ),
+  'crop': (f, out) => CropInput(
+    file: f.path,
+    outputDir: out,
+    suffix: ' – cropped',
+    insets: const {0: (left: 0.1, top: 0.1, right: 0.1, bottom: 0.1)},
+    password: f.password,
+  ),
+  'repair': (f, out) => RepairInput(
+    file: f.path,
+    outputDir: out,
+    suffix: ' – repaired',
+    password: f.password,
+  ),
+  'protect': (f, out) => ProtectInput(
+    files: [f.path],
+    outputDir: out,
+    suffix: ' – protected',
+    password: _protected,
+    passwords: {f.path: ?f.password},
+  ),
+  'unlock': (f, out) => UnlockInput(
+    file: f.path,
+    outputDir: out,
+    suffix: ' – unlocked',
+    password: f.password ?? '',
+  ),
+  'pagenum': (f, out) => PageNumbersInput(
+    files: [f.path],
+    outputDir: out,
+    suffix: ' – numbered',
+    format: '{n} / {total}',
+    passwords: {f.path: ?f.password},
+  ),
+  'watermark': (f, out) => WatermarkInput(
+    files: [f.path],
+    outputDir: out,
+    suffix: ' – watermarked',
+    text: 'KOPIE',
+    passwords: {f.path: ?f.password},
+  ),
+  'pdf2img': (f, out) => Pdf2ImgInput(
+    file: f.path,
+    outputDir: out,
+    suffix: ' – page',
+    dpi: 72,
+    pages: const [0],
+    password: f.password,
+  ),
+  'extractassets': (f, out) => ExtractAssetsInput(
+    file: f.path,
+    outputDir: out,
+    suffix: ' – image',
+    text: true,
+    password: f.password,
+  ),
+  'pdfa': (f, out) => PdfaInput(
+    files: [f.path],
+    outputDir: out,
+    suffix: ' – PDF-A',
+    passwords: {f.path: ?f.password},
+  ),
+  'text': (f, out) =>
+      TextInput(file: f.path, outputDir: out, password: f.password),
+};
+
+/// Add password's new password: its output opens with this one.
+const _protected = 'korpus-2026';
+
+/// What a tool may end in beyond each file's mayFail: Remove password on a
+/// file that has none says so ("This file has no password.").
+const _alsoAllowed = {
+  'unlock': {'NotEncrypted'},
 };
 
 /// Tools whose inputs are images, not PDFs.
@@ -144,7 +245,11 @@ void main() {
   });
 
   test('every ToolJob has its corpus input', () {
-    expect(corpusInputs.keys.toSet(), ToolRegistry.app().ids.toSet());
+    // Web page to PDF reads a web page, not a file (web_job_test).
+    expect(
+      corpusInputs.keys.toSet(),
+      ToolRegistry.app().ids.toSet().difference({'web'}),
+    );
   });
 
   test('the corpus: the bases, their variants, PDF/A, images', () {
@@ -192,13 +297,14 @@ void main() {
           for (final path in paths) {
             if (!path.toLowerCase().endsWith('.pdf')) continue;
             // A locked input's output keeps its encryption (and password).
+            final password = id == 'protect' ? _protected : f.password;
             final pages = (await PdfEngine.inspect(
               path,
-              password: f.password,
+              password: password,
             )).pageCount;
             final warnings = await pool.run(Lane.qpdf, _check, (
               path,
-              f.password,
+              password,
             )).result;
             if (pages == 0 || warnings.isNotEmpty) {
               problems.add('$f: $pages pages, qpdf: ${warnings.join('; ')}');
@@ -210,12 +316,14 @@ void main() {
           // ends in JobFailed with the DocError in its message.
           final kind = switch (e) {
             DocError(:final kind) => kind.name,
-            JobFailed(:final message) => RegExp(
-              r'DocError\((\w+)',
-            ).firstMatch(message)?[1],
+            JobFailed(:final message) =>
+              RegExp(r'DocError\((\w+)').firstMatch(message)?[1] ??
+                  RegExp(r'^(\w+):').firstMatch(message)?[1],
             _ => null,
           };
-          if (kind != null && f.mayFail.contains(kind)) {
+          if (kind != null &&
+              (f.mayFail.contains(kind) ||
+                  (_alsoAllowed[id]?.contains(kind) ?? false))) {
             allowed.update(kind, (n) => n + 1, ifAbsent: () => 1);
           } else {
             problems.add('$f: ${e.runtimeType}: $e');
