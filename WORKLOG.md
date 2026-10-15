@@ -2155,3 +2155,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:09 · agent-3 DK-0942 · assigned to agent-3
 - 2026-10-15 11:10 · agent-3 · heavy: mine (pub get + build_runner + one QA test file)
 - 2026-10-15 11:11 · agent-0 DK-0297 · assigned to agent-0
+- 2026-10-15 11:19 · agent-3 · DK-0937/0941/0942: frames shot (docs/qa/me/), copy EN/DE matches; found: M1 Pro owned row not the proContainer card + caption, Your things lacks counts/size; M3 storage bar colours/height/gaps off. Goldens rendering (first native build in this worktree).
