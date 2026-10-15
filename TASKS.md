@@ -661,7 +661,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | open |  | DK-0024 DK-0229 |  |
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
 | DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | open |  | DK-0024 DK-0218 DK-0220 DK-0102 |  |
-| DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | open |  | DK-0024 DK-0036 |  |
+| DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | assigned | agent-1 | DK-0024 DK-0036 |  |
 | DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | open |  | DK-0024 |  |
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | open |  | DK-0024 DK-0039 |  |
@@ -11334,3 +11334,7 @@ Please take DK-0634 (Locale formats: decimal comma, thin-space units, date forma
 ### H-2546 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0656
 
 Please take DK-0656 (Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner).
+
+### H-2547 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0640
+
+Please take DK-0640 (Accessibility: text size 200 %).
