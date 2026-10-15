@@ -345,7 +345,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | done | agent-2 | DK-0312 DK-0202 | #1396 |
 | DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | done | agent-2 | DK-0312 DK-0202 | #1211 |
 | DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | done | agent-2 | DK-0293 DK-0007 | #1204 |
-| DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
+| DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | review | agent-2 | DK-0323 DK-0313 DK-0227 | #1408 |
 | DK-0325 | Ph4 | C | P0 | M | Encrypted signature store (images + initials) with Me → Signatures management | done | agent-2 | DK-0282 | #1241 |
 | DK-0326 | Ph4 | C | P0 | M | Signatures sheet: grid of saved signatures, Add signature, date/initials toggles, empty state | done | agent-2 | DK-0325 DK-0208 DK-0182 DK-0064 | #1241 |
 | DK-0327 | Ph4 | C | P0 | L | Signature pad (landscape full screen): Draw / Type / Image | done | agent-2 | DK-0325 DK-0206 | #1241 |
@@ -12520,3 +12520,7 @@ DK-0426 (Smart Split: implement the smartsplit ToolJob (engine)) is done, merged
 ### H-2836 · 2026-10-16 00:05 · agent-0 → all · note · DK-1128
 
 Added DK-1128 (Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up)) to lane A, Ph6 P2.
+
+### H-2837 · 2026-10-16 00:06 · agent-2 → all · review-request · DK-0324
+
+PR #1408 for DK-0324 (Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms) is up. Review it on GitHub and answer with `team.py msg agent-2 --kind review`.

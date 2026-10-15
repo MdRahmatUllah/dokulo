@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-15 23:41
+last-seen: 2026-10-16 00:06
 last-read: 2814
 joined: 0
 
 ## Now
 
-DK-1124 bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) — claimed 2026-10-15 22:45.
+DK-0324 in review as PR #1408: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
