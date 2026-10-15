@@ -51,28 +51,47 @@ sealed class JobOutput {
 
   Map<String, Object?> toJson();
 
-  static JobOutput fromJson(Map<String, Object?> json) => switch (json) {
-    {'file': final String path} => OneFile(path),
-    {'files': final List<Object?> paths} => ManyFiles(paths.cast<String>()),
-    {'text': final String text} => TextOutput(text),
-    _ => throw FormatException('not a JobOutput: $json'),
-  };
+  static JobOutput fromJson(Map<String, Object?> json) {
+    final facts = (json['facts'] as Map?)?.cast<String, Object?>() ?? const {};
+    return switch (json) {
+      {'file': final String path} => OneFile(path, facts: facts),
+      {'files': final List<Object?> paths} => ManyFiles(
+        paths.cast<String>(),
+        facts: facts,
+      ),
+      {'text': final String text} => TextOutput(text),
+      _ => throw FormatException('not a JobOutput: $json'),
+    };
+  }
 }
 
 final class OneFile extends JobOutput {
-  const OneFile(this.path);
+  const OneFile(this.path, {this.facts = const {}});
   final String path;
 
+  /// What the job found, for T3's lines (JSON values; each tool documents
+  /// its keys): Make text searchable's pages with text, say.
+  final Map<String, Object?> facts;
+
   @override
-  Map<String, Object?> toJson() => {'file': path};
+  Map<String, Object?> toJson() => {
+    'file': path,
+    if (facts.isNotEmpty) 'facts': facts,
+  };
 }
 
 final class ManyFiles extends JobOutput {
-  const ManyFiles(this.paths);
+  const ManyFiles(this.paths, {this.facts = const {}});
   final List<String> paths;
 
+  /// As [OneFile.facts], for the whole batch.
+  final Map<String, Object?> facts;
+
   @override
-  Map<String, Object?> toJson() => {'files': paths};
+  Map<String, Object?> toJson() => {
+    'files': paths,
+    if (facts.isNotEmpty) 'facts': facts,
+  };
 }
 
 final class TextOutput extends JobOutput {

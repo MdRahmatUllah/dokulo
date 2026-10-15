@@ -18,6 +18,9 @@ from collections import Counter
 from pathlib import Path
 
 BUDGET_MB = 90  # per-ABI APK; docs/size-budget.md says why
+# Play serves x86_64 only to emulators and Chromebooks, and its OpenCV build is
+# the largest: its own budget (the lead, 2026-10-16, H-2845).
+ABI_BUDGET_MB = {"x86_64": 100}
 # Model files by type; .bin/.spm (Bergamot packs) only inside a models/ folder,
 # since Flutter and Kotlin ship unrelated .bin files.
 MODEL = re.compile(r"\.(onnx|ort|gguf|tflite|pt|pth|safetensors|ckpt)$|(^|/)models?/.*\.(bin|spm)$", re.I)
@@ -48,10 +51,11 @@ def main() -> int:
     apk = Path(sys.argv[1])
     problems = []
     for abi, size in sorted(per_abi(apk).items()):
-        over = size > BUDGET_MB * 1_000_000
-        print(f"{abi:12} {size / 1_000_000:6.1f} MB  (budget {BUDGET_MB} MB){'  OVER' if over else ''}")
+        budget = ABI_BUDGET_MB.get(abi, BUDGET_MB)
+        over = size > budget * 1_000_000
+        print(f"{abi:12} {size / 1_000_000:6.1f} MB  (budget {budget} MB){'  OVER' if over else ''}")
         if over:
-            problems.append(f"{abi} is {size / 1_000_000:.1f} MB, over the {BUDGET_MB} MB budget")
+            problems.append(f"{abi} is {size / 1_000_000:.1f} MB, over the {budget} MB budget")
     problems += [f"{m}: a bundled model; only PP-OCRv5 det/rec/cls ship in the app, the rest are downloads"
                  for m in bundled_models(apk)]
     for p in problems:

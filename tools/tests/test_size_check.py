@@ -50,3 +50,12 @@ def test_the_budget_fails_the_run(tmp_path: Path, monkeypatch, capsys) -> None:
     monkeypatch.setattr(sys, "argv", ["size_check.py", str(target)])
     assert size_check.main() == 1
     assert "OVER" in capsys.readouterr().out
+
+
+def test_x86_64_has_its_own_budget(tmp_path: Path, monkeypatch, capsys) -> None:
+    target = apk(tmp_path / "app.apk", {"lib/x86_64/libx.so": 1_500_000})
+    monkeypatch.setattr(size_check, "BUDGET_MB", 1)
+    monkeypatch.setattr(size_check, "ABI_BUDGET_MB", {"x86_64": 2})
+    monkeypatch.setattr(sys, "argv", ["size_check.py", str(target)])
+    assert size_check.main() == 0
+    assert "(budget 2 MB)" in capsys.readouterr().out

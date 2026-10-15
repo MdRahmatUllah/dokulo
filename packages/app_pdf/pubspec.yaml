@@ -44,6 +44,7 @@ dependencies:
   riverpod_annotation: 4.0.7
   go_router: 18.0.1
   flutter_svg: 2.3.0
+  photo_manager: 3.12.0 # Find documents in photos: thumbnails of the photo library (DK-0362)
   camera: 0.12.1 # S1's preview and frames: CameraX on Android, AVFoundation on iOS (DK-0343)
   path_provider: 2.1.6
   pdfrx: 2.6.5 # the viewer (DK-0293); PDFium through pdfrx's worker
@@ -87,6 +88,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/illustrations/ # DK-0050..0069, from the design export
+    # The fonts' licence texts, for the licences page (DK-0673); fetched
+    # with the fonts.
+    - assets/fonts/Caveat-OFL.txt
+    - assets/fonts/DancingScript-OFL.txt
+    - assets/fonts/HomemadeApple-LICENSE.txt
 
   # Material Symbols Rounded (DK-0048), fetched by tools/fetch_icon_font.py;
   # the icon tree-shaker keeps only the glyphs DkIcons uses.

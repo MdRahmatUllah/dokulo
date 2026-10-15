@@ -8,9 +8,12 @@ Technology & Package Plan (→ Licence register); the licence *rules* stay there
 **The rule:** a new dependency (a Dart package, a native library, a model, a
 font) needs a line here **in the same PR** that adds it. `tools/licence_scan.py`
 enforces it for every `pubspec.lock` in the repo; native libraries, models and
-fonts are checked by the reviewer against the tables below. DK-0673 builds the
-in-app licence screen from `pubspec.lock` plus the native, model and font
-tables here.
+fonts are checked by the reviewer against the tables below. The in-app
+licences (DK-0673) are Flutter's `LicenseRegistry` (every Dart package's
+LICENSE, as pub resolved them) plus `packages/app_pdf/lib/legal/third_party.dart`,
+which mirrors the native, model, colour-profile and font tables here with
+their notices and bundled texts: a row added to those tables needs its entry
+there too (`third_party_test` fails otherwise).
 
 ## What the scan does
 
