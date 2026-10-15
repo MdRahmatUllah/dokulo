@@ -2843,5 +2843,9 @@
   "scan_saving": "Saving…",
   "@scan_saving": {"description": "S2 while the scan saves (DK-0359)."},
   "scan_save_failed": "Couldn't save the scan. Your pages are still here.",
-  "@scan_save_failed": {"description": "S2 when saving the scan failed (DK-0359)."}
+  "@scan_save_failed": {"description": "S2 when saving the scan failed (DK-0359)."},
+  "settings_language_caption": "Changes immediately. No restart needed.",
+  "@settings_language_caption": {
+    "description": "M3 Language: under the choices (DK-0575)."
+  }
 }
