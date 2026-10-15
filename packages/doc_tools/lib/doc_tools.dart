@@ -8,6 +8,7 @@ export 'src/signature_photo.dart';
 export 'src/startup.dart';
 export 'src/tool_job.dart';
 export 'src/tools/compress_job.dart';
+export 'src/tools/crop_job.dart';
 export 'src/tools/extract_assets_job.dart';
 export 'src/tools/extract_job.dart';
 export 'src/tools/img2pdf_job.dart';

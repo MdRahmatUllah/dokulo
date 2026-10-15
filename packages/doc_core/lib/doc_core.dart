@@ -22,6 +22,7 @@ export 'src/files/signature_store.dart';
 export 'src/files/text_indexer.dart';
 export 'src/files/version_store.dart';
 export 'src/pdf/pdf_annotations.dart';
+export 'src/pdf/pdf_crop.dart';
 export 'src/pdf/page_edit.dart';
 export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/id_card_page.dart';

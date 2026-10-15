@@ -1,5 +1,6 @@
 import 'tool_job.dart';
 import 'tools/compress_job.dart';
+import 'tools/crop_job.dart';
 import 'tools/extract_assets_job.dart';
 import 'tools/extract_job.dart';
 import 'tools/img2pdf_job.dart';
@@ -24,6 +25,7 @@ const toolJobIds = [
 /// Every ToolJob the app has. A tool's engine task adds its job here.
 const List<ToolJob<Object?>> allToolJobs = [
   CompressJob(),
+  CropJob(),
   ExtractAssetsJob(),
   ExtractJob(),
   Img2PdfJob(),
