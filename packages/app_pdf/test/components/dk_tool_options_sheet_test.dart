@@ -121,7 +121,7 @@ void main() {
     await tester.pumpWidget(
       app(sheet(DkMarkupKind.pen, []), locale: const Locale('de')),
     );
-    expect(find.text('Stärke'), findsOne);
+    expect(find.text('Strichstärke'), findsOne);
     await tester.pumpWidget(
       app(sheet(DkMarkupKind.highlighter, []), locale: const Locale('de')),
     );
