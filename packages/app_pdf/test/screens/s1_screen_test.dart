@@ -96,6 +96,7 @@ void main() {
     Locale locale = const Locale('en'),
     DetectedQuad? quad,
     String? prefsJson,
+    int? retake,
   }) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
@@ -129,6 +130,8 @@ void main() {
             onImport: () => imported++,
             onReview: () => reviewed++,
             onSettings: () => settingsOpened++,
+            retake: retake,
+            onRetaken: () {},
           ),
         ),
       ),
@@ -487,4 +490,96 @@ void main() {
       );
     });
   }
+
+  group('modes (DK-0346, DK-0347, DK-0348)', () {
+    void setMode(DkScanMode m) =>
+        container.read(scanModeStateProvider.notifier).set(m);
+
+    testWidgets('ID card: front, then "Turn the card over", then the review', (
+      tester,
+    ) async {
+      await pump(tester);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Front side'), findsOneWidget);
+      expect(find.text('Point at a document'), findsNothing);
+      await capture(tester);
+      expect(find.text('Turn the card over'), findsOneWidget);
+      expect(reviewed, 0);
+      await capture(tester);
+      expect(reviewed, 1);
+      expect(container.read(scanSessionProvider), hasLength(2));
+      expect(find.text('Front side'), findsOneWidget, reason: 'ready again');
+    });
+
+    testWidgets('ID card: switching modes forgets a half-done card', (
+      tester,
+    ) async {
+      await pump(tester);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      await capture(tester);
+      expect(find.text('Turn the card over'), findsOneWidget);
+      setMode(DkScanMode.document);
+      await tester.pumpAndSettle();
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Front side'), findsOneWidget);
+    });
+
+    testWidgets('a retake says which page, even in ID card mode', (
+      tester,
+    ) async {
+      await pump(tester, retake: 1);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Retake page 2'), findsOneWidget);
+      expect(find.text('Front side'), findsNothing);
+    });
+
+    testWidgets('Book: the spine guide, and the hint stays', (tester) async {
+      await pump(tester);
+      setMode(DkScanMode.book);
+      await tester.pumpAndSettle();
+      expect(find.text('Align the spine with the line'), findsOneWidget);
+      expect(find.text('Point at a document'), findsOneWidget);
+    });
+
+    testWidgets('Batch: the larger count once pages are taken', (tester) async {
+      await pump(tester);
+      setMode(DkScanMode.batch);
+      await tester.pumpAndSettle();
+      expect(find.text('2 pages'), findsNothing);
+      await capture(tester);
+      await capture(tester);
+      expect(find.text('2 pages'), findsOneWidget);
+    });
+
+    for (final (name, mode, shots, tokens, locale) in [
+      ('idfront', DkScanMode.idCard, 0, DkTokens.light, const Locale('en')),
+      ('idback', DkScanMode.idCard, 1, DkTokens.light, const Locale('en')),
+      ('idback_de', DkScanMode.idCard, 1, DkTokens.light, const Locale('de')),
+      ('book', DkScanMode.book, 0, DkTokens.dark, const Locale('en')),
+      ('batch', DkScanMode.batch, 3, DkTokens.light, const Locale('en')),
+    ]) {
+      testWidgets('golden: $name', (tester) async {
+        await pump(tester, tokens: tokens, locale: locale);
+        setMode(mode);
+        await tester.pumpAndSettle();
+        for (var i = 0; i < shots; i++) {
+          await capture(tester);
+        }
+        await tester.runAsync(() async {
+          for (final e in find.byType(Image).evaluate()) {
+            await precacheImage((e.widget as Image).image, e);
+          }
+        });
+        await tester.pumpAndSettle();
+        await expectLater(
+          find.byType(S1Screen),
+          matchesGoldenFile('goldens/s1_mode_$name.png'),
+        );
+      });
+    }
+  });
 }
