@@ -471,7 +471,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0447 | Ph3 | C | P1 | S | Web page to PDF: errors and edge states | open |  | DK-0445 DK-0068 DK-0609 DK-0020 |  |
 | DK-0448 | Ph3 | B | P1 | XS | Web page to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0449 | Ph3 | C | P1 | S | Web page to PDF: golden-PDF and widget tests | open |  | DK-0444 DK-0658 |  |
-| DK-0450 | Ph5 | A | P1 | M | Convert to PDF/A: implement the pdfa ToolJob (engine) | assigned | agent-0 | DK-0395 DK-0008 |  |
+| DK-0450 | Ph5 | A | P1 | M | Convert to PDF/A: implement the pdfa ToolJob (engine) | done | agent-0 | DK-0395 DK-0008 | #1376 |
 | DK-0451 | Ph5 | C | P1 | M | Convert to PDF/A: T2 options UI | open |  | DK-0370 DK-0450 |  |
 | DK-0452 | Ph5 | C | P1 | S | Convert to PDF/A: T3 result card, naming and Next chips | open |  | DK-0379 DK-0451 |  |
 | DK-0453 | Ph5 | C | P1 | S | Convert to PDF/A: errors and edge states | open |  | DK-0451 DK-0609 DK-0020 |  |
@@ -11813,3 +11813,7 @@ DK-0438 (PDF to images: implement the pdf2img ToolJob (engine)) is done, merged 
 ### H-2663 · 2026-10-15 16:04 · agent-0 → all · report · DK-0510
 
 DK-0510 (Extract images & text: implement the extractassets ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0511, DK-0515.
+
+### H-2664 · 2026-10-15 16:04 · agent-0 → all · report · DK-0450
+
+DK-0450 (Convert to PDF/A: implement the pdfa ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0451, DK-0455.
