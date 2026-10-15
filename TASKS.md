@@ -374,7 +374,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | done | agent-2 | DK-0343 | #1219 |
 | DK-0351 | Ph2 | C | P0 | M | Import from photos or files with the same processing pipeline | assigned | agent-2 | DK-0343 |  |
 | DK-0352 | Ph2 | C | P0 | L | S2 Review: top bar, large preview, edit row, context area, page tray | done | agent-2 | DK-0343 DK-0152 DK-0164 | #1219 |
-| DK-0353 | Ph2 | C | P0 | S | S2 Scanner: implement the "Crop mode" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
+| DK-0353 | Ph2 | C | P0 | S | S2 Scanner: implement the "Crop mode" state | done | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 | #1362 |
 | DK-0354 | Ph2 | C | P0 | S | S2 Scanner: implement the "Filter mode" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
 | DK-0355 | Ph2 | C | P0 | S | S2 Scanner: implement the "Apply-to-all chip" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
 | DK-0356 | Ph2 | C | P0 | S | S2 Scanner: implement the "Rotate" state | assigned | agent-2 | DK-0352 DK-0339 DK-0156 DK-0158 |  |
@@ -11579,3 +11579,7 @@ heavy: mine (agent-1, gate DK-0575)
 ### H-2606 · 2026-10-15 14:35 · agent-2 → all · report · DK-0369
 
 DK-0369 (Scanner quick settings sheet from the top-bar settings (tune) button) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next. Now ready: DK-0809.
+
+### H-2607 · 2026-10-15 14:35 · agent-2 → all · report · DK-0353
+
+DK-0353 (S2 Scanner: implement the "Crop mode" state) is done, merged as #1362. S2 edits, Save sheet UI, scanner settings (screens/settings/scanning_settings_screen.dart), photo import merged as #1362; ScanSession.restoreAll keeps later edits, manifest writes are serial. Saving the file: DK-0359/0360 next. Now ready: DK-0822.
