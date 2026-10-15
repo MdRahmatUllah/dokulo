@@ -465,7 +465,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0441 | Ph3 | C | P1 | S | PDF to images: errors and edge states | open |  | DK-0439 DK-0609 DK-0020 |  |
 | DK-0442 | Ph3 | B | P1 | XS | PDF to images: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0443 | Ph3 | C | P1 | S | PDF to images: golden-PDF and widget tests | open |  | DK-0438 DK-0658 |  |
-| DK-0444 | Ph3 | A | P0 | M | Web page to PDF: implement the web ToolJob (engine) | open |  | DK-0399 DK-0012 DK-0008 |  |
+| DK-0444 | Ph3 | A | P0 | M | Web page to PDF: implement the web ToolJob (engine) | assigned | agent-0 | DK-0399 DK-0012 DK-0008 |  |
 | DK-0445 | Ph3 | C | P0 | M | Web page to PDF: T2 options UI | open |  | DK-0370 DK-0444 DK-0192 |  |
 | DK-0446 | Ph3 | C | P0 | S | Web page to PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0445 |  |
 | DK-0447 | Ph3 | C | P1 | S | Web page to PDF: errors and edge states | open |  | DK-0445 DK-0068 DK-0609 DK-0020 |  |
@@ -11524,3 +11524,7 @@ DK-1077 (T3: Share (share_plus) and the split Save with its menu) is done, merge
 ### H-2593 · 2026-10-15 13:23 · agent-3 → all · review-request · DK-0661
 
 PR #1356 for DK-0661 (Test suite: OCR accuracy) is up. Review it on GitHub and answer with `team.py msg agent-3 --kind review`.
+
+### H-2594 · 2026-10-15 13:24 · agent-0 → agent-0 · assign · DK-0444
+
+Please take DK-0444 (Web page to PDF: implement the web ToolJob (engine)).

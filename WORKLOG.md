@@ -2275,3 +2275,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 13:23 · agent-3 · heavy: free
 - 2026-10-15 13:23 · agent-3 DK-0661 · PR #1356 open; review requested from all
 - 2026-10-15 13:24 · agent-0 · locked pubspec: agent-0: web_to_pdf into doc_tools for the web ToolJob (DK-0444)
+- 2026-10-15 13:24 · agent-0 DK-0444 · assigned to agent-0
