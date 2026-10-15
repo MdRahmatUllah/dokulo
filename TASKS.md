@@ -651,7 +651,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0627 | Ph3 | B | P0 | S | ARB strings: Files, trash, locked folder | assigned | agent-1 | DK-0009 |  |
 | DK-0628 | Ph3 | B | P0 | S | ARB strings: Viewer and edit mode | assigned | agent-1 | DK-0009 |  |
 | DK-0629 | Ph3 | B | P0 | S | ARB strings: Scanner | assigned | agent-1 | DK-0009 |  |
-| DK-0630 | Ph3 | B | P0 | S | ARB strings: Tool shell and tools | open |  | DK-0009 |  |
+| DK-0630 | Ph3 | B | P0 | S | ARB strings: Tool shell and tools | assigned | agent-1 | DK-0009 |  |
 | DK-0631 | Ph3 | B | P0 | S | ARB strings: AI | open |  | DK-0009 |  |
 | DK-0632 | Ph3 | B | P0 | S | ARB strings: Me, settings, Pro | open |  | DK-0009 |  |
 | DK-0633 | Ph3 | B | P0 | S | ARB strings: System and errors | open |  | DK-0009 |  |
@@ -11198,3 +11198,7 @@ Please take DK-0628 (ARB strings: Viewer and edit mode).
 ### H-2512 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0629
 
 Please take DK-0629 (ARB strings: Scanner).
+
+### H-2513 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0630
+
+Please take DK-0630 (ARB strings: Tool shell and tools).
