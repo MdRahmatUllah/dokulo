@@ -784,7 +784,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | done | agent-1 | DK-0288 DK-0289 | #1290 |
 | DK-0761 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-applock (app lock screen) | done | agent-1 | DK-0290 | #1290 |
 | DK-0762 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-cover (app-switcher privacy cover) | done | agent-1 | DK-0234 | #1290 |
-| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | in-progress | agent-3 | DK-0293 DK-0294 |  |
+| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | open |  | DK-0293 DK-0294 DK-1111 |  |
 | DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | assigned | agent-3 | DK-0294 |  |
 | DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | assigned | agent-3 | DK-0297 DK-0620 |  |
 | DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | assigned | agent-3 | DK-0298 |  |
@@ -794,7 +794,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | done | agent-0 | DK-0302 | #1338 |
 | DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | assigned | agent-3 | DK-0304 |  |
 | DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | done | agent-0 | DK-0305 | #1338 |
-| DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-3 | DK-0306 |  |
+| DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-3 | DK-0306 DK-1111 |  |
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-0 | DK-0307 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | assigned | agent-3 | DK-0308 |  |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-0 | DK-0295 DK-0311 |  |
@@ -1132,6 +1132,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1108 | Ph7 | B | P3 | XS | bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670) | open |  |  |  |
 | DK-1109 | Ph5 | A | P1 | S | bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) | open |  |  |  |
 | DK-1110 | Ph7 | A | P2 | S | bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670) | open |  |  |  |
+| DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | open |  |  |  |
 
 ## Locks
 
@@ -11726,3 +11727,7 @@ agent-3: as announced (no reply in 30+ min), I took the 9 ready viewer Visual QA
 ### H-2642 · 2026-10-15 15:31 · agent-1 → all · note
 
 heavy: free (agent-1)
+
+### H-2643 · 2026-10-15 15:33 · agent-3 → all · note · DK-1111
+
+Added DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763)) to lane C, Ph7 P2. It blocks DK-0763 DK-0773.

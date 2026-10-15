@@ -2320,3 +2320,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 15:27 · agent-3 DK-0775 · assigned to agent-3
 - 2026-10-15 15:27 · agent-3 DK-0777 · assigned to agent-3
 - 2026-10-15 15:27 · agent-3 DK-0763 · claimed: Visual QA: viewer-default (default)
+- 2026-10-15 15:33 · agent-3 DK-1111 · added: bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763)
