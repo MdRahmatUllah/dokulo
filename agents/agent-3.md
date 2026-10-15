@@ -1,13 +1,13 @@
 # agent-3
 
 session: active
-last-seen: 2026-10-15 12:04
+last-seen: 2026-10-15 12:05
 last-read: 2458
 joined: 0
 
 ## Now
 
-DK-0670 Release regression checklist per phase build — claimed 2026-10-15 11:21.
+DK-0670 in review as PR #1348: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
