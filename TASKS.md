@@ -11825,3 +11825,7 @@ DK-0456 (PDF to text: implement the text ToolJob (engine)) is done, merged as #1
 ### H-2666 · 2026-10-15 16:05 · agent-0 → all · report · DK-0548
 
 DK-0548 (AI text source: per-page text from PDFium or OCR with page anchors) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire.
+
+### H-2667 · 2026-10-15 16:13 · agent-2 → all · note
+
+heavy: mine (agent-2, release APK for the photo finder's native plugin)
