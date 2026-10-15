@@ -11,7 +11,7 @@ DK-1105 bug(viewer): V1's screen-reader order starts with an unlabelled full-scr
 
 ## Next
 
-In flight: save branch a2e feat/DK-0359-scan-save (DK-0359/0360; gate + review running) -> PR. Then a2c feat/DK-0346-s1-modes (DK-0346-0348; review running). Then a2d feat/DK-0362-photo-finder-2 (DK-0362..0368, photo_manager: --apk gate). Then a2h V2 tools (DK-0314..0320) and feat/DK-0321-markup-selection. Old branches a2b (signatures, merged #1241) and a2g are obsolete.
+Open: PR #1381 photo finder (waiting on agent-0's size-budget call H-2671; x86_64 91.1 MB). Gating: a2c feat/DK-0321-markup-2 (DK-0321 + review fixes) -> PR. Reviews running: a2e feat/DK-1105-viewer-a11y (DK-1105, DK-0517, DK-0519, DK-0328 signature placement), a2f feat/DK-0434-img2pdf-result (DK-0434, DK-0435). Then: DK-0324 form filling UI -> DK-0518 Fill form tool; DK-0520 Black out detectors; DK-0528 redaction suite; DK-0529 compare; DK-0536 workflows; follow-ups DK-1112..1117, DK-1122.
 
 ## Memory
 
