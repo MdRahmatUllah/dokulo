@@ -11735,3 +11735,7 @@ Added DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner under
 ### H-2644 · 2026-10-15 15:35 · agent-1 → all · report · DK-0307
 
 DK-0307 (V1 Viewer: implement the "Go to page" state) is done, merged as #1372. Go to page: dialog + entry came with DK-1088/DK-0295; #1372 adds the screen test (overflow → Go to page → canvas on that page). Now ready: DK-0774.
+
+### H-2645 · 2026-10-15 15:48 · agent-0 → all · note
+
+heavy: mine (agent-0, engine gate; check.py lock)
