@@ -128,6 +128,27 @@ void main() {
     expect(tester.getRect(find.byType(DkMarkupBar)).top, top.bottom + 8);
   });
 
+  testWidgets('markup bar: only the actions it is given (DK-1092)', (
+    tester,
+  ) async {
+    final taps = <DkMarkupAction>[];
+    await tester.pumpWidget(
+      app(
+        Center(
+          child: DkMarkupBar(
+            actions: const [DkMarkupAction.copy],
+            onAction: taps.add,
+          ),
+        ),
+      ),
+    );
+    expect(find.text('Copy'), findsOneWidget);
+    expect(find.text('Highlight'), findsNothing);
+    expect(find.text('Ask AI'), findsNothing);
+    await tester.tap(find.text('Copy'));
+    expect(taps, [DkMarkupAction.copy]);
+  });
+
   testWidgets('markup bar: labels where they fit, icons alone where not', (
     tester,
   ) async {

@@ -3,6 +3,7 @@ import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/widgets.dart';
 
 import '../l10n/app_localizations.dart';
+import 'img2pdf_tool.dart';
 
 /// The values of a tool's options, by [ToolOption.key].
 typedef ToolValues = Map<String, Object?>;
@@ -31,12 +32,17 @@ class ToolResult {
     required this.inputs,
     required this.output,
     required this.took,
+    this.chain = const [],
   });
 
   final String toolId;
   final List<FileEntry> inputs;
   final JobOutput output;
   final Duration took;
+
+  /// The tools run so far in this chain, this one last (DK-0386): after two,
+  /// T3 offers "Save as workflow".
+  final List<String> chain;
 
   /// The files the job wrote.
   List<String> get files => switch (output) {
@@ -69,11 +75,19 @@ class ToolSummary {
 
 /// Where a tool's job writes, and the words it needs (the engine has none).
 class ToolEnv {
-  const ToolEnv({required this.outputDir, required this.l10n});
+  const ToolEnv({
+    required this.outputDir,
+    required this.l10n,
+    this.skipPages = const {},
+  });
 
   /// A temp folder of the file store; T3 saves from there.
   final String outputDir;
   final AppLocalizations l10n;
+
+  /// 0-based pages the user chose to skip after they failed (DK-1086); a
+  /// tool with [ToolDefinition.canSkipPages] passes them to its job.
+  final Set<int> skipPages;
 }
 
 /// One option of a tool, rendered by T2 (UI spec §20.1 region 4) as a
@@ -163,9 +177,13 @@ class ToolDefinition {
     this.input,
     this.busyLabel,
     this.busyTitle,
+    this.doneTitle,
     this.stopTitle,
     this.summary,
     this.partLine,
+    this.next = const [],
+    this.preview,
+    this.canSkipPages = false,
   });
 
   final String id;
@@ -192,6 +210,11 @@ class ToolDefinition {
   /// tool's name.
   final String Function(AppLocalizations, ToolSubject)? busyTitle;
 
+  /// Home's continue card for a run that finished in the background
+  /// ("Compressed Mietvertrag.pdf" / "Mietvertrag.pdf verkleinert", UI spec
+  /// §15.2, DK-0247); null: "Compress PDF · Mietvertrag.pdf".
+  final String Function(AppLocalizations, String file)? doneTitle;
+
   /// The cancel dialog's title ("Stop compressing?"); null: "Stop this job?".
   final String Function(AppLocalizations)? stopTitle;
 
@@ -203,6 +226,19 @@ class ToolDefinition {
   /// null: its size.
   final String Function(AppLocalizations, ToolResult, int part)? partLine;
 
+  /// T3's Next chips, 2–4 tool ids (UI spec §21 "Next"): each opens that
+  /// tool with this result as its input (DK-0386).
+  final List<String> next;
+
+  /// A large tablet's live preview pane (DK-0388): the input with the
+  /// options applied (Compress's before/after, a watermark, page numbers);
+  /// null: the first PDF input as it is.
+  final Widget Function(BuildContext, ToolSubject, ToolValues)? preview;
+
+  /// Its job can leave a failed page as it is ([ToolEnv.skipPages]): the
+  /// failure then offers "Skip this page" (DK-1086).
+  final bool canSkipPages;
+
   /// Every option's starting value.
   ToolValues get initialValues => {
     for (final o in [...options, ...moreOptions]) o.key: o.initial,
@@ -212,7 +248,7 @@ class ToolDefinition {
 /// Every tool's definition. A tool's task adds its own here.
 abstract final class ToolDefinitions {
   static final Map<String, ToolDefinition> _defined = {
-    for (final d in <ToolDefinition>[]) d.id: d,
+    for (final d in <ToolDefinition>[img2pdfDefinition]) d.id: d,
   };
 
   /// The definition of [toolId]; a plain one for a tool without its own.

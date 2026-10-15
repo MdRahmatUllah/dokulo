@@ -26,12 +26,15 @@ class DkSwipeActions extends StatefulWidget {
     required this.onDelete,
   });
 
+  /// Null: Share shows dimmed and does nothing (until share_plus, DK-1077).
+
   final Widget Function(
     BuildContext context,
     Map<CustomSemanticsAction, VoidCallback> actions,
   )
   builder;
-  final VoidCallback onShare, onDelete;
+  final VoidCallback? onShare;
+  final VoidCallback onDelete;
 
   /// Each action's width; open, the row moves by both.
   static const actionWidth = 80.0;
@@ -92,13 +95,15 @@ class _DkSwipeActionsState extends State<DkSwipeActions>
       String label,
       Color fill,
       Color ink,
-      VoidCallback onTap,
+      VoidCallback? onTap,
     ) => SizedBox(
       width: DkSwipeActions.actionWidth,
       child: Material(
-        color: fill,
+        color: onTap == null
+            ? fill.withValues(alpha: t.state.disabledOpacity)
+            : fill,
         child: InkWell(
-          onTap: () => _run(onTap),
+          onTap: onTap == null ? null : () => _run(onTap),
           overlayColor: WidgetStatePropertyAll(t.state.pressed),
           splashFactory: NoSplash.splashFactory,
           child: Column(
@@ -113,7 +118,7 @@ class _DkSwipeActionsState extends State<DkSwipeActions>
       ),
     );
     final actions = {
-      CustomSemanticsAction(label: l.common_share): widget.onShare,
+      CustomSemanticsAction(label: l.common_share): ?widget.onShare,
       CustomSemanticsAction(label: l.common_delete): widget.onDelete,
     };
     return LayoutBuilder(
@@ -160,15 +165,16 @@ class _DkSwipeActionsState extends State<DkSwipeActions>
                     ),
                   Transform.translate(
                     offset: Offset(-_offset.value, 0),
-                    child: row,
+                    // Moved, the row covers the actions: the page's colour
+                    // under it; at rest it shows what's behind it (Home's
+                    // Recent column on a tablet is `color.surface`).
+                    child: _offset.value > 0
+                        ? ColoredBox(color: c.background, child: row)
+                        : row,
                   ),
                 ],
               ),
-              // The row covers the actions: give it the page's colour.
-              child: ColoredBox(
-                color: c.background,
-                child: widget.builder(context, actions),
-              ),
+              child: widget.builder(context, actions),
             ),
           ),
         );

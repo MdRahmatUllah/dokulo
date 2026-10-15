@@ -5,6 +5,7 @@ import 'package:app_pdf/components/dk_action_bar.dart';
 import 'package:app_pdf/components/dk_progress_sheet.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
+import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_screen.dart';
 import 'package:app_pdf/screens/t2_tool/tool_run.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -13,6 +14,7 @@ import 'package:app_pdf/tools/tool_definition.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -185,6 +187,73 @@ void main() {
     expect(find.byType(DkProgressSheet), findsNothing);
     expect(find.text('T3'), findsOneWidget);
     expect(run.discarded, isFalse);
+  });
+
+  testWidgets('finished out of sight: Home gets it as a continue card '
+      '(DK-0247)', (tester) async {
+    final router = await pumpT2(tester);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(MaterialApp)),
+    );
+    await start(tester);
+    // The user goes elsewhere while it runs.
+    router.push('/tool/merge');
+    await settle(tester);
+    run.result.complete(const OneFile('Mietvertrag_small.pdf'));
+    await settle(tester);
+    final waiting = container.read(backgroundResultProvider);
+    expect(waiting?.toolId, 'compress');
+    expect(waiting?.files, ['Mietvertrag_small.pdf']);
+  });
+
+  testWidgets('finished in view: T3, and no continue card', (tester) async {
+    await pumpT2(tester);
+    final container = ProviderScope.containerOf(
+      tester.element(find.byType(MaterialApp)),
+    );
+    await start(tester);
+    run.result.complete(const OneFile('Mietvertrag_small.pdf'));
+    await settle(tester);
+    expect(find.text('T3'), findsOneWidget);
+    expect(container.read(backgroundResultProvider), isNull);
+  });
+
+  testWidgets('screen readers: each step has a heading, and the main action '
+      'is the last thing to focus (DK-0645)', (tester) async {
+    final handle = tester.ensureSemantics();
+    await pumpT2(tester);
+    final order = <SemanticsNode>[];
+    void walk(SemanticsNode node) {
+      order.add(node);
+      for (final child in node.debugListChildrenInOrder(
+        DebugSemanticsDumpOrder.traversalOrder,
+      )) {
+        walk(child);
+      }
+    }
+
+    walk(
+      tester
+          .binding
+          .renderViews
+          .first
+          .owner!
+          .semanticsOwner!
+          .rootSemanticsNode!,
+    );
+    final headings = [
+      for (final n in order)
+        if (n.getSemanticsData().flagsCollection.isHeader) n.label,
+    ];
+    expect(headings, isNotEmpty);
+    final focusable = [
+      for (final n in order)
+        if (n.getSemanticsData().hasAction(SemanticsAction.tap) &&
+            n.label.isNotEmpty)
+          n.label,
+    ];
+    expect(focusable.last, 'Compress 0 pages');
+    handle.dispose();
   });
 
   testWidgets('Cancel before 30 s stops at once: "Cancelled", nothing kept '

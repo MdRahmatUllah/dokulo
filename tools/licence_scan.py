@@ -4,7 +4,8 @@ licence register (docs/compliance/licence-register.md). DK-0672.
     python tools/licence_scan.py [repo root]
 
 Fails (exit 1) on a denied engine or SDK, a direct dependency without a
-register line, or a copyleft or unrecognised licence without a register line.
+register line, any GPL, AGPL or LGPL package, or an MPL or unrecognised
+licence without a register line.
 Reads each package's LICENSE from the pub cache, so run `flutter pub get` first.
 """
 
@@ -30,6 +31,10 @@ LICENCES = (
     ("ISC", r"Permission to use, copy, modify, and/or distribute this software"),
 )
 PERMISSIVE = {"Apache-2.0", "MIT", "BSD", "Zlib", "ISC"}
+# Never in the app, register line or not (DK-0681): GPL and AGPL at all, and
+# LGPL because a pub package ships to iOS too, where it would be linked
+# statically. MPL may ship with a register line (file-level copyleft).
+NEVER = {"AGPL", "GPL", "LGPL"}
 
 
 def registered(root: Path) -> set[str]:
@@ -111,7 +116,9 @@ def scan(root: Path, cache: Path) -> list[str]:
                 problems.append(f"{where}: {name} {p.get('version')} not in the pub cache (run `flutter pub get`)")
                 continue
             licence = classify(package_dir)
-            if licence not in PERMISSIVE and name not in allowed:
+            if licence in NEVER:
+                problems.append(f"{where}: {name} has licence {licence}: never in the app (DK-0681)")
+            elif licence not in PERMISSIVE and name not in allowed:
                 problems.append(f"{where}: {name} has licence {licence or 'unrecognised'}: needs a register line or removal")
     return problems
 

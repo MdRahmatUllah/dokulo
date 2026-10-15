@@ -7,6 +7,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'file_providers.dart';
+
 part 'locked_providers.g.dart';
 
 /// Where the locked folder keeps its secrets: the Keychain on iOS, the
@@ -138,6 +140,9 @@ class LockedVault {
     return true;
   }
 
+  /// Settings → Security: biometrics no longer open the folder (DK-0573).
+  Future<void> disableBiometrics() => _store.delete(_bio);
+
   /// Null when biometrics are off, the prompt was cancelled or failed, or
   /// there is no key yet.
   Future<LockedCipher?> unlockWithBiometrics(String reason) async {
@@ -205,5 +210,29 @@ class LockedSession extends _$LockedSession {
   LockedCipher? build() => null;
 
   void open(LockedCipher cipher) => state = cipher;
-  void lock() => state = null;
+  void lock() {
+    if (!ref.mounted) return; // a disposed container has no key anyway
+    state = null;
+    // The decrypted copies go with the key (DK-0291).
+    ref.read(lockedStoreProvider.future).then((s) => s.closeAll()).ignore();
+  }
+}
+
+/// The vault (DK-0289): in the app sandbox, next to the inbox and temp.
+@Riverpod(keepAlive: true)
+Future<LockedStore> lockedStore(Ref ref) async {
+  final files = await ref.watch(fileStoreProvider.future);
+  return LockedStore(
+    Directory('${files.workDirectory.path}${Platform.pathSeparator}locked'),
+  );
+}
+
+/// What F2 lists while it is open; nothing while it is locked.
+@riverpod
+Future<List<LockedEntry>> lockedFiles(Ref ref) async {
+  final cipher = ref.watch(lockedSessionProvider);
+  if (cipher == null) return const [];
+  final entries = await (await ref.watch(lockedStoreProvider.future))
+      .list(cipher);
+  return [...entries]..sort((a, b) => b.added.compareTo(a.added));
 }

@@ -62,12 +62,13 @@ Future<bool> confirmDk(
       null,
       true,
     ),
+    // Replace is destructive, with its icon (tool-shell-replace).
     DkConfirmation.replaceOriginal => (
       l.confirm_replace_title,
       l.confirm_replace_body,
       l.confirm_replace_action,
       null,
-      false,
+      true,
     ),
     DkConfirmation.discardScan => (
       l.confirm_discard_scan_title,
@@ -90,12 +91,13 @@ Future<bool> confirmDk(
       l.common_keep_editing,
       true,
     ),
+    // Stop is destructive: the work so far is lost (tool-shell-canceldlg).
     DkConfirmation.cancelJob => (
       l.confirm_stop_job_title,
       l.confirm_stop_job_body,
       l.common_stop,
       l.common_keep_going,
-      false,
+      true,
     ),
     DkConfirmation.removeSignature => (
       l.confirm_remove_signature_title,
@@ -112,11 +114,12 @@ Future<bool> confirmDk(
     action: action,
     cancel: cancel,
     destructive: destructive,
-    // "Confirm empty" (§16) is an icon dialog; the rest are plain.
-    icon:
-        kind == DkConfirmation.deleteForever ||
-            kind == DkConfirmation.emptyTrash
-        ? DkIcons.deleteForever
-        : null,
+    // "Confirm empty" (§16) and Replace are icon dialogs; the rest plain.
+    icon: switch (kind) {
+      DkConfirmation.deleteForever ||
+      DkConfirmation.emptyTrash => DkIcons.deleteForever,
+      DkConfirmation.replaceOriginal => DkIcons.replace,
+      _ => null,
+    },
   );
 }

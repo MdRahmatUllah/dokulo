@@ -40,6 +40,27 @@ class ThumbnailCache {
     return rendered;
   }
 
+  /// Drops [path]'s thumbnails (its [pages] at the cards' and T2's
+  /// [widths]) before the file goes where no copy may stay: the locked
+  /// folder. Call it while the file still exists: the key holds its mtime.
+  Future<void> forget(
+    String path, {
+    int pages = 1,
+    List<int> widths = const [96, 360],
+  }) async {
+    final stat = await File(path).stat();
+    if (stat.type == FileSystemEntityType.notFound) return;
+    final modified = stat.modified.microsecondsSinceEpoch;
+    for (var page = 0; page < (pages < 1 ? 1 : pages); page++) {
+      for (final width in widths) {
+        final file = File(
+          '${directory.path}${Platform.pathSeparator}${_key('$path|$modified|$page|$width')}.bgra',
+        );
+        if (await file.exists()) await file.delete();
+      }
+    }
+  }
+
   Future<void> clear() async {
     if (await directory.exists()) await directory.delete(recursive: true);
   }
