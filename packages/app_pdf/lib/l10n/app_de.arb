@@ -799,5 +799,8 @@
   "edit_save_failed": "Speichern hat nicht geklappt. Die Datei ist unverändert.",
   "photos_access_off": "Der Fotozugriff ist aus. Schalte ihn in den Einstellungen ein, um Dokumente zu finden.",
   "photos_limited": "Dokulo sieht nur die Fotos, die du ausgewählt hast.",
-  "photos_select_more": "Mehr auswählen"
+  "photos_select_more": "Mehr auswählen",
+  "img2pdf_result": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 Seite} other{{pages} Seiten}} · {size}",
+  "img2pdf_images": "{n, plural, =1{1 Bild} other{{n} Bildern}}",
+  "img2pdf_not_images": "{n, plural, =1{1 Datei ist kein Bild und wurde übersprungen.} other{{n} Dateien sind keine Bilder und wurden übersprungen.}}"
 }
