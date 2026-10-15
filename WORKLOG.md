@@ -2174,3 +2174,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:27 · agent-0 DK-0463 · assigned to agent-0
 - 2026-10-15 11:30 · agent-1 DK-0304 · done (#1342)
 - 2026-10-15 11:31 · agent-1 DK-0575 · claimed: M3 Language settings page
+- 2026-10-15 11:38 · agent-3 DK-1100 · added: bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981)
