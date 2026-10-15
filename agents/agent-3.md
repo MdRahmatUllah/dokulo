@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0658 in review as PR #1355: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
