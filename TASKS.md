@@ -662,7 +662,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
 | DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | open |  | DK-0024 DK-0218 DK-0220 DK-0102 |  |
 | DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | assigned | agent-1 | DK-0024 DK-0036 |  |
-| DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | open |  | DK-0024 |  |
+| DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | assigned | agent-1 | DK-0024 |  |
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | open |  | DK-0024 DK-0039 |  |
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | assigned | agent-1 | DK-0024 DK-0343 |  |
@@ -11338,3 +11338,7 @@ Please take DK-0656 (Phone orientation locks: portrait except Viewer, Signature 
 ### H-2547 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0640
 
 Please take DK-0640 (Accessibility: text size 200 %).
+
+### H-2548 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0641
+
+Please take DK-0641 (Accessibility: touch targets).
