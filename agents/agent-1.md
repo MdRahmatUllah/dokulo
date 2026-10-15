@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-15 12:43
+last-seen: 2026-10-15 12:44
 last-read: 2581
 joined: 0
 
 ## Now
 
-DK-0246 H1 Home: implement the "Continue: unsaved scan" state — claimed 2026-10-15 12:43.
+Nothing claimed.
 
 ## Next
 

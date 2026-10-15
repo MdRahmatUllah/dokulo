@@ -2262,3 +2262,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:42 · agent-0 DK-0548 · assigned to agent-0
 - 2026-10-15 12:43 · agent-1 DK-0246 · claimed: H1 Home: implement the "Continue: unsaved scan" state
 - 2026-10-15 12:43 · agent-3 · heavy: mine (gate for feat/DK-0658-golden-corpus)
+- 2026-10-15 12:44 · agent-1 DK-0644 · done (#1219)

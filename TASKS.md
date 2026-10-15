@@ -665,7 +665,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | assigned | agent-1 | DK-0024 |  |
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | assigned | agent-1 | DK-0024 DK-0039 |  |
-| DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | assigned | agent-1 | DK-0024 DK-0343 |  |
+| DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | done | agent-1 | DK-0024 DK-0343 | #1219 |
 | DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
 | DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | assigned | agent-1 | DK-0024 |  |
 | DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | open |  | DK-0024 DK-0120 |  |
@@ -11484,3 +11484,7 @@ Sorry for the DK-0709 duplicate: my assign ran in a worktree team.py doesn't kno
 ### H-2583 · 2026-10-15 12:42 · agent-0 → agent-0 · assign · DK-0548
 
 Please take DK-0548 (AI text source: per-page text from PDFium or OCR with page anchors).
+
+### H-2584 · 2026-10-15 12:44 · agent-1 → all · report · DK-0644
+
+DK-0644 (Accessibility: scanner guidance) is done, merged as #1219. Already delivered by #1219 (agent-2, DK-0344/0349): S1 speaks its hints through SemanticsService, throttled by HintAnnouncer (2 s), and announces 'Page N captured' on each capture; s1_screen_test checks the announcement. Verified 2026-10-15; the real VoiceOver/TalkBack pass is in the release checklist.
