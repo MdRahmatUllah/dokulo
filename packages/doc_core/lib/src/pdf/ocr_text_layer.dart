@@ -1,11 +1,14 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:pdf/pdf.dart' as pw;
-
+import 'package:pdfium_dart/pdfium_dart.dart' as fpdf;
+import 'package:pdfrx_engine/pdfrx_engine.dart' show PdfrxEntryFunctions;
 import 'package:qpdf_ffi/qpdf_ffi.dart';
 
 import 'pdf_engine.dart';
+import 'pdfium_raw.dart';
 import 'qpdf_service.dart';
 
 /// A recognised word for the text layer: the text and its box on the page as
@@ -114,6 +117,27 @@ abstract final class OcrTextLayer {
     return overlayPath;
   }
 
+  /// Make text searchable's Redo (DK-1065): writes [output] without the
+  /// invisible text (rendering mode 3) of [pages] (0-based), so they read
+  /// as scans again and get one new layer, not a second. An earlier layer
+  /// of ours sits in a form XObject of its own (qpdf's overlay): a form
+  /// holding nothing but invisible text goes whole; visible text, images
+  /// and drawings stay. Returns the pages that had a layer removed.
+  static Future<List<int>> removeLayer(
+    String input,
+    String output,
+    List<int> pages, {
+    String? password,
+  }) async {
+    await PdfEngine.inspect(input, password: password);
+    final (bytes, removed) = await PdfrxEntryFunctions.instance.compute(
+      _removeLayerOnWorker,
+      (input, password, pages),
+    );
+    await File(output).writeAsBytes(bytes, flush: true);
+    return removed;
+  }
+
   /// Lays [overlayPath] over [input]'s pages into [output] (page n on page
   /// n): call it inside a `Lane.qpdf` job. qpdf places each overlay page
   /// upright in its page's crop box, undoing /Rotate. A locked [input] needs
@@ -128,3 +152,54 @@ abstract final class OcrTextLayer {
     () => Qpdf.overlay(input, overlayPath, output, password: password),
   );
 }
+
+/// On pdfrx's worker: [OcrTextLayer.removeLayer].
+(Uint8List, List<int>) _removeLayerOnWorker((String, String?, List<int>) m) =>
+    withRawDocument(m.$1, m.$2, (pdfium, doc, arena) {
+      bool invisibleText(fpdf.FPDF_PAGEOBJECT obj) =>
+          pdfium.FPDFPageObj_GetType(obj) == fpdf.FPDF_PAGEOBJ_TEXT &&
+          pdfium.FPDFTextObj_GetTextRenderMode(obj) ==
+              fpdf.FPDF_TEXT_RENDERMODE.FPDF_TEXTRENDERMODE_INVISIBLE;
+      // A form that holds only invisible text (and forms of the same).
+      bool layerOnly(fpdf.FPDF_PAGEOBJECT form) {
+        final n = pdfium.FPDFFormObj_CountObjects(form);
+        if (n <= 0) return false;
+        for (var i = 0; i < n; i++) {
+          final child = pdfium.FPDFFormObj_GetObject(form, i);
+          final ok =
+              invisibleText(child) ||
+              (pdfium.FPDFPageObj_GetType(child) == fpdf.FPDF_PAGEOBJ_FORM &&
+                  layerOnly(child));
+          if (!ok) return false;
+        }
+        return true;
+      }
+
+      final removed = <int>[];
+      for (final index in m.$3) {
+        final page = pdfium.FPDF_LoadPage(doc, index);
+        if (page == nullptr) continue;
+        try {
+          final drop = <fpdf.FPDF_PAGEOBJECT>[];
+          for (var i = 0; i < pdfium.FPDFPage_CountObjects(page); i++) {
+            final obj = pdfium.FPDFPage_GetObject(page, i);
+            if (invisibleText(obj) ||
+                (pdfium.FPDFPageObj_GetType(obj) == fpdf.FPDF_PAGEOBJ_FORM &&
+                    layerOnly(obj))) {
+              drop.add(obj);
+            }
+          }
+          if (drop.isEmpty) continue;
+          for (final obj in drop) {
+            if (pdfium.FPDFPage_RemoveObject(page, obj) != 0) {
+              pdfium.FPDFPageObj_Destroy(obj);
+            }
+          }
+          pdfium.FPDFPage_GenerateContent(page);
+          removed.add(index);
+        } finally {
+          pdfium.FPDF_ClosePage(page);
+        }
+      }
+      return (saveRawDocument(pdfium, doc), removed);
+    });
