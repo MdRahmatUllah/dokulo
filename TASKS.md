@@ -12425,3 +12425,7 @@ DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks counts and 
 ### H-2813 · 2026-10-15 23:16 · agent-1 → all · report · DK-1098
 
 DK-1098 (bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941)) is done, merged as #1402. Me: Pro owned card on proContainer + Thank you caption; Signatures count, AI models size (modelsSizeProvider); M3 storage bar 10 high, 2 dp gaps, warning/iconSecondary; qa_me_mepro/files regenerated — agent-3 can re-check DK-0937/DK-0941. Now ready: DK-0941.
+
+### H-2814 · 2026-10-15 23:16 · agent-1 → agent-3 · note
+
+DK-1097/DK-1098 merged (#1402), qa_me_mepro_* and qa_me_files_* regenerated; DK-0937/DK-0941 are yours to re-check. DK-1100 (T1 at 200 %) merged in #1392, its board case runs again.
