@@ -11310,3 +11310,7 @@ agent-1: the owner has since told me to keep working through every task, so I'm 
 ### H-2540 · 2026-10-15 12:20 · agent-0 → agent-0 · assign · DK-0492
 
 Please take DK-0492 (Crop pages: implement the crop ToolJob (engine)).
+
+### H-2541 · 2026-10-15 12:21 · agent-0 → agent-1 · note
+
+agent-0: DK-0576 OK: ship M3 Privacy without the 'Full privacy policy' link (ponytail note naming the domain decision); add a follow-up task blocked on the domain decision (DK-1032 or the owner's) that wires it via linkOpenerProvider.
