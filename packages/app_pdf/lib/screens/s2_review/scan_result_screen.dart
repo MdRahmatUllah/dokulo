@@ -11,14 +11,17 @@ import '../../theme/dk_tokens.dart';
 /// What a saved scan is, for its result screen.
 typedef SavedScan = ({
   String name,
+
+  /// The (first) saved file, for Open and the Next chips.
+  String path,
   int pages,
   int bytes,
 
   /// Pages with recognised text; null: Make text searchable was off.
   int? textPages,
 
-  /// "Files › Apartment".
-  String place,
+  /// The folder in Files it went to ("Apartment/Bills"); null: Files.
+  String? folder,
 });
 
 /// The scan's result (DK-0360; UI spec §19.4, design
@@ -67,7 +70,7 @@ class ScanResultScreen extends StatelessWidget {
             sub: [
               if (scan.textPages case final n?)
                 l.scan_text_found(n, scan.pages),
-              scan.place,
+              [l.shell_tab_files, ...?scan.folder?.split('/')].join(' › '),
             ].join(' · '),
           ),
           SizedBox(height: t.space.xl),

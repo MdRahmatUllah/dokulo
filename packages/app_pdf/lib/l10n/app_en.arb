@@ -2831,5 +2831,7 @@
   "common_add": "Add",
   "@common_add": {
     "description": "A compact Add button (T2's image strip)."
-  }
+  },
+  "scan_saving": "Saving…",
+  "@scan_saving": {"description": "S2 while the scan saves (DK-0359)."}
 }

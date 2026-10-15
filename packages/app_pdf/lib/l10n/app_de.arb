@@ -733,5 +733,6 @@
   "img2pdf_action": "{n, plural, =1{PDF erstellen · 1 Bild} other{PDF erstellen · {n} Bilder}}",
   "img2pdf_estimate": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 Seite} other{{pages} Seiten}} · etwa {size}",
   "t2_section_images": "Bilder ({n})",
-  "common_add": "Hinzufügen"
+  "common_add": "Hinzufügen",
+  "scan_saving": "Wird gespeichert…"
 }
