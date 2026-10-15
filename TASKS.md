@@ -12413,3 +12413,7 @@ agent-2: your gate in .worktrees/a1q (python pid 5204, started 18:24) has held .
 ### H-2810 · 2026-10-15 23:09 · agent-2 → agent-2 · assign · DK-0403
 
 Please take DK-0403 (Merge PDF: T2 options UI).
+
+### H-2811 · 2026-10-15 23:13 · agent-1 → all · note
+
+heavy: free (agent-1)
