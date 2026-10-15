@@ -226,6 +226,20 @@ void main() {
         (headline + formatBytes(2000000, locale), sub),
       );
     }
+    final skipped = ToolResult(
+      toolId: 'img2pdf',
+      inputs: images,
+      output: OneFile(out.path),
+      took: const Duration(seconds: 2),
+      skipped: 1,
+    );
+    expect(
+      img2pdfDefinition
+          .summary!(lookupAppLocalizations(const Locale('en')), skipped)
+          .headline,
+      startsWith('1 PDF · 11 pages'),
+      reason: 'a skipped image is no page (DK-1086)',
+    );
     expect(img2pdfDefinition.next, ['compress', 'ocr']);
   });
 }

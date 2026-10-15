@@ -74,9 +74,12 @@ final img2pdfDefinition = ToolDefinition(
   summary: (l, r) => ToolSummary(
     headline: l.img2pdf_result(
       r.files.length,
-      r.inputs.length,
+      r.inputs.length - r.skipped,
       formatBytes(
-        r.files.fold(0, (n, f) => n + File(f).lengthSync()),
+        r.files.fold(0, (n, f) {
+          final file = File(f);
+          return n + (file.existsSync() ? file.lengthSync() : 0);
+        }),
         l.localeName,
       ),
     ),

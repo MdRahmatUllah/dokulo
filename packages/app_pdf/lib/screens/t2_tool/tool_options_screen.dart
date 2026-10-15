@@ -252,6 +252,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
       final result = output is JobOutput
           ? ToolResult(
               toolId: _def.id,
+              skipped: _skipPages.length,
               inputs: subject.files,
               output: output,
               took: DateTime.now().difference(started),
@@ -323,7 +324,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                 timeLeft: s.eta == null ? null : formatSeconds(s.eta!),
                 onCancel: () => _cancel(sheetContext),
                 onKeepWorking: _closeSheet,
-                error: error == null || error.actions.isEmpty
+                error: error == null || _actionsFor(error).isEmpty
                     ? null
                     : DkProgressError(
                         title: error.headline(l),
@@ -331,13 +332,19 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                         code: error.situation == DkErrorSituation.unexpected
                             ? l.error_code_line(error.situation.code)
                             : null,
-                        action: error.actions.first.label(l),
+                        action: _actionsFor(error).first.label(l),
                         onAction: () =>
-                            _recover(error.actions.first, subject, values),
+                            _actionsFor(error).first == DkRecovery.skipPage
+                            ? _skip(error, subject, values)
+                            : _recover(
+                                _actionsFor(error).first,
+                                subject,
+                                values,
+                              ),
                         // Skip this page only for a tool whose job can go
                         // on past a page (DK-1086).
                         more: [
-                          for (final a in error.actions.skip(1))
+                          for (final a in _actionsFor(error).skip(1))
                             if (a == DkRecovery.sendReport)
                               (
                                 a.label(l),
@@ -346,17 +353,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                             else if (a == DkRecovery.skipPage &&
                                 _def.canSkipPages &&
                                 error.page != null)
-                              (
-                                a.label(l),
-                                () {
-                                  _skipPages.add(error.page!);
-                                  _recover(
-                                    DkRecovery.tryAgain,
-                                    subject,
-                                    values,
-                                  );
-                                },
-                              ),
+                              (a.label(l), () => _skip(error, subject, values)),
                         ],
                       ),
               );
@@ -413,6 +410,29 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
   }
 
   /// The error's recovery action (UI spec §26.3).
+  /// The error's recovery actions for this tool. An image tool (Image to
+  /// PDF) can't repair or split a picture: an image it can't read is
+  /// skipped instead (DK-0435).
+  List<DkRecovery> _actionsFor(DokuloError error) {
+    final images =
+        ToolInput.of(_def.id)?.kinds.every((k) => k == DkFileKind.image) ??
+        false;
+    if (images &&
+        _def.canSkipPages &&
+        error.page != null &&
+        (error.situation == DkErrorSituation.damaged ||
+            error.situation == DkErrorSituation.tooLarge)) {
+      return const [DkRecovery.skipPage];
+    }
+    return error.actions;
+  }
+
+  /// Skip this page (DK-1086): the run again without it.
+  void _skip(DokuloError error, ToolSubject subject, ToolValues values) {
+    _skipPages.add(error.page!);
+    _recover(DkRecovery.tryAgain, subject, values);
+  }
+
   void _recover(DkRecovery action, ToolSubject subject, ToolValues values) {
     _closeSheet();
     final files = [for (final f in subject.files) '${f.id}'];
@@ -550,7 +570,20 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                 child: DkPrivacyLine(),
               ),
             ),
-            if (choosing)
+            if (choosing) ...[
+              if (_notTaken > 0)
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    t.space.l,
+                    0,
+                    t.space.l,
+                    t.space.m,
+                  ),
+                  child: DkBanner(
+                    variant: DkBannerVariant.warning,
+                    text: l.img2pdf_not_images(_notTaken),
+                  ),
+                ),
               _PickerCard(
                 toolId: _def.id,
                 input: input,
@@ -565,8 +598,8 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                 onPhotos: input.images
                     ? () => _browse(files, input, photos: true)
                     : null,
-              )
-            else if (ready && input.kinds.length == 1 && input.images) ...[
+              ),
+            ] else if (ready && input.kinds.length == 1 && input.images) ...[
               if (_notTaken > 0)
                 Padding(
                   padding: EdgeInsets.fromLTRB(
