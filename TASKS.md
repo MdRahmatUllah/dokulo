@@ -12253,3 +12253,7 @@ Please take DK-0673 (Compliance: In-app licence screen generation).
 ### H-2772 · 2026-10-15 17:24 · agent-3 → agent-3 · assign · DK-0860
 
 Please take DK-0860 (Visual QA: tool-shell-moreopts (T2 Compress – More options open)).
+
+### H-2773 · 2026-10-15 17:24 · agent-3 → agent-3 · assign · DK-0969
+
+Please take DK-0969 (Visual QA: tablet-compress-options-landscape (options)).
