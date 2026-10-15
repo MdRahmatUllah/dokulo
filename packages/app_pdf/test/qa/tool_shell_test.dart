@@ -460,6 +460,7 @@ void main() {
       Duration took, {
       Size size = const Size(393, 852),
       double textScale = 1,
+      Locale locale = const Locale('en'),
     }) async {
       tester.view.physicalSize = size;
       tester.view.devicePixelRatio = 1;
@@ -504,6 +505,7 @@ void main() {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: dokuloTheme(tokens),
+            locale: locale,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             home: const ToolResultScreen(toolId: 'compress'),
@@ -535,6 +537,17 @@ void main() {
     testWidgets('text-200-percent T3, $theme', (tester) async {
       await pumpT3(tester, Duration.zero, textScale: 2);
       await golden(tester, 'result_200_$theme');
+    });
+
+    // DK-0389: T3 Compress at 200 % in German, the longer words.
+    testWidgets('text-200-percent T3 Deutsch, $theme', (tester) async {
+      await pumpT3(
+        tester,
+        Duration.zero,
+        textScale: 2,
+        locale: const Locale('de'),
+      );
+      await golden(tester, 'result_200_de_$theme');
     });
 
     testWidgets("discard, $theme: closing a long job's unsaved result", (
