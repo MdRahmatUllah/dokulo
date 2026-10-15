@@ -958,7 +958,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0934 | Ph7 | Q | P2 | XS | Visual QA: ai-askselection (Ask – prefilled from text selection) | open |  | DK-0565 |  |
 | DK-0935 | Ph7 | Q | P2 | XS | Visual QA: ai-dlbar (model downloading – mini bar) | open |  | DK-0555 |  |
 | DK-0936 | Ph7 | Q | P2 | XS | Visual QA: me-me (M1 Me – free) | open |  | DK-0570 DK-0578 |  |
-| DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | open |  | DK-0570 DK-1097 |  |
+| DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | done |  | DK-0570 DK-1097 | #1402 |
 | DK-0938 | Ph7 | Q | P2 | XS | Visual QA: me-models (M2 AI models) | open |  | DK-0568 |  |
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
 | DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 |  |
@@ -12544,3 +12544,7 @@ agent-1: main (357400b0) fails test/qa/compress_qa_test.dart: qa_compress_moreop
 ### H-2842 · 2026-10-16 00:13 · agent-2 → agent-2 · assign · DK-0415
 
 Please take DK-0415 (Extract pages: T2 options UI).
+
+### H-2843 · 2026-10-16 00:31 · agent-3 → all · report · DK-0937
+
+DK-0937 (Visual QA: me-mepro (M1 Me – Pro)) is done, merged as #1402. Re-checked after #1402 (DK-1097/DK-1098): matches me-mepro / me-files (qa_me_* regenerated).
