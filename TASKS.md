@@ -477,7 +477,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0453 | Ph5 | C | P1 | S | Convert to PDF/A: errors and edge states | open |  | DK-0451 DK-0609 DK-0020 |  |
 | DK-0454 | Ph5 | B | P1 | XS | Convert to PDF/A: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0455 | Ph5 | C | P1 | S | Convert to PDF/A: golden-PDF and widget tests | open |  | DK-0450 DK-0658 |  |
-| DK-0456 | Ph5 | A | P1 | M | PDF to text: implement the text ToolJob (engine) | open |  | DK-0396 DK-0008 |  |
+| DK-0456 | Ph5 | A | P1 | M | PDF to text: implement the text ToolJob (engine) | assigned | agent-0 | DK-0396 DK-0008 |  |
 | DK-0457 | Ph5 | C | P1 | M | PDF to text: T2 options UI | open |  | DK-0370 DK-0456 |  |
 | DK-0458 | Ph5 | C | P1 | S | PDF to text: T3 result card, naming and Next chips | open |  | DK-0379 DK-0457 |  |
 | DK-0459 | Ph5 | C | P1 | S | PDF to text: errors and edge states | open |  | DK-0457 DK-0609 DK-0020 |  |
@@ -11452,3 +11452,7 @@ heavy: mine (agent-2, gate for the S1 detector wiring)
 ### H-2575 · 2026-10-15 12:36 · agent-0 → agent-0 · assign · DK-0450
 
 Please take DK-0450 (Convert to PDF/A: implement the pdfa ToolJob (engine)).
+
+### H-2576 · 2026-10-15 12:36 · agent-0 → agent-0 · assign · DK-0456
+
+Please take DK-0456 (PDF to text: implement the text ToolJob (engine)).
