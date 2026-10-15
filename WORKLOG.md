@@ -2290,3 +2290,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 14:28 · agent-3 DK-1107 · added: bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670)
 - 2026-10-15 14:35 · agent-2 DK-0369 · done (#1362)
 - 2026-10-15 14:35 · agent-2 DK-0353 · done (#1362)
+- 2026-10-15 14:35 · agent-2 DK-0354 · done (#1362)
