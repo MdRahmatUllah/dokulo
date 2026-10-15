@@ -69,6 +69,24 @@ abstract final class QpdfService {
   static List<String> repair(String input, String output, {String? password}) =>
       run(() => Qpdf.repair(input, output, password: password));
 
+  /// [stamp]'s page n over (or, [underlay], under) [input]'s page n, as a
+  /// new file (page numbers, watermarks; [PdfStamp]).
+  static void stamp(
+    String input,
+    String stamp,
+    String output, {
+    bool underlay = false,
+    String? password,
+  }) => run(
+    () => Qpdf.overlay(
+      input,
+      stamp,
+      output,
+      underlay: underlay,
+      password: password,
+    ),
+  );
+
   static DocError docErrorOf(QpdfException e) => DocError(switch (e.kind) {
     QpdfErrorKind.password => DocErrorKind.locked,
     QpdfErrorKind.damaged ||

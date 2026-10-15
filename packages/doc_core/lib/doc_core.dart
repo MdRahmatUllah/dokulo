@@ -31,6 +31,7 @@ export 'src/pdf/compress/raster_fallback.dart';
 export 'src/pdf/compress/size_target.dart';
 export 'src/pdf/ocr_text_layer.dart';
 export 'src/pdf/pdf_compress.dart';
+export 'src/pdf/pdf_stamp.dart';
 export 'src/pdf/pdf_structure.dart';
 export 'src/pdf/pdfa_writer.dart';
 export 'src/pdf/srgb2014_icc.dart';

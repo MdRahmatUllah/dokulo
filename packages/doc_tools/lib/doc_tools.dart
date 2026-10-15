@@ -17,6 +17,7 @@ export 'src/tools/password_jobs.dart';
 export 'src/tools/repair_job.dart';
 export 'src/tools/rotate_job.dart';
 export 'src/tools/split_job.dart';
+export 'src/tools/stamp_jobs.dart';
 
 /// Its row in the Technology plan's "Stack at a glance" table.
 const int docToolsLayer = 2;
