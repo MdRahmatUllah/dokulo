@@ -993,7 +993,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0969 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-landscape (options) | assigned | agent-0 | DK-0388 |  |
 | DK-0970 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-landscape (result) | assigned | agent-0 | DK-0388 |  |
 | DK-0971 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-options-portrait (options) | assigned | agent-0 | DK-0388 |  |
-| DK-0972 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-portrait (result) | open |  | DK-0232 |  |
+| DK-0972 | Ph7 | Q | P2 | XS | Visual QA: tablet-compress-result-portrait (result) | assigned | agent-3 | DK-0232 |  |
 | DK-0973 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-landscape (tablet-compare-landscape) | open |  | DK-0533 DK-0653 |  |
 | DK-0974 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-portrait (tablet-compare-portrait) | open |  | DK-0653 |  |
 | DK-0975 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-landscape (tablet-paywall-landscape) | open |  | DK-0580 DK-0654 |  |
@@ -11014,3 +11014,7 @@ Added DK-1098 (bug(settings): M3 storage bar colours, height and gaps differ fro
 ### H-2467 · 2026-10-15 11:20 · agent-3 → agent-1 · heads-up
 
 Two Me/Settings bugs from visual QA in your lane: DK-1097 (P2, #1339: M1 Pro owned row should be the proContainer card + caption; Your things needs counts/size, §23.1) and DK-1098 (P3, #1340: M3 storage bar colours warning/iconSecondary, 10 px, 2 px gaps). They block DK-0937/DK-0941; I re-check after the fix.
+
+### H-2468 · 2026-10-15 11:23 · agent-3 → agent-3 · assign · DK-0972
+
+Please take DK-0972 (Visual QA: tablet-compress-result-portrait (result)).
