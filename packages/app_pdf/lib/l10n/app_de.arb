@@ -762,7 +762,12 @@
   "compress_suffix": " – verkleinert",
   "scan_saving": "Wird gespeichert…",
   "scan_save_failed": "Der Scan ließ sich nicht speichern. Deine Seiten sind noch da.",
+  "settings_language_caption": "Wird sofort übernommen. Kein Neustart nötig.",
+  "viewer_menu_share_images": "Als Bilder teilen",
+  "viewer_menu_share_text": "Text teilen",
+  "viewer_share_page_suffix": " – Seite",
+  "viewer_share_preparing": "Bilder werden vorbereitet…",
+  "viewer_share_failed": "Das ließ sich nicht zum Teilen vorbereiten.",
   "options_eraser_mode": "Modus",
-  "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt.",
-  "settings_language_caption": "Wird sofort übernommen. Kein Neustart nötig."
+  "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt."
 }

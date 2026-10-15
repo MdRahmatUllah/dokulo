@@ -425,7 +425,10 @@ percentages) are `DkNumberText` or `t.text.numberXL`: tabular figures
 (DK-0036). Surfaces take `t.surfaceAt(DkLevel.raised, radius: …)`, which is
 shadows in light and a lighter surface plus an outline in dark. Borders are
 `t.divider`, `t.inputRest/Focused/Error` and `t.selectionRing`, and the grid
-is `DkGrid.forWidth(width)` (`theme/dk_layout.dart`, DK-0038).
+is `DkGrid.of(context)` (`theme/dk_layout.dart`, DK-0038, DK-0657): the window
+class (phone < 600, small tablet < 840, large tablet) for every layout
+choice, never a raw 600 or 840. Tool grids take `toolGrid(context, width,
+gap)` (4/6/8 across; 2 on a phone at 160 % text).
 
 **Ask or undo (UI spec §12.4, §12.6; `lib/patterns/`).** Only what can't be
 undone asks first: `confirmDk(context, DkConfirmation.x)` with its EN/DE copy
