@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-15 14:36
+last-seen: 2026-10-15 14:44
 last-read: 2587
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Blocked on the owner's OK to rerun the #1217 --apk gate (stopped by the system for low memory ~20:55). Then: #1217 merge -> #1219 (--apk) merge -> open the stacked PRs: DK-0369; DK-0353-0356; DK-0357/0358/0359(sheet)/0361/0351; DK-0346-0348; DK-0362+0363-0368; DK-0359 export (feat/DK-0359-scan-export); DK-0325-0327 (feat/DK-0325-signature-store, db-schema held). Done off-goal (M12) while waiting: DK-0520, DK-0528, DK-0529 (+visual on OpenCV branch), DK-0463 - asked agent-0 (H-1744) about the PR cap. DK-0321 needs agent-0's DK-0300 (viewer text selection).
+In flight: save branch a2e feat/DK-0359-scan-save (DK-0359/0360; gate + review running) -> PR. Then a2c feat/DK-0346-s1-modes (DK-0346-0348; review running). Then a2d feat/DK-0362-photo-finder-2 (DK-0362..0368, photo_manager: --apk gate). Then a2h V2 tools (DK-0314..0320) and feat/DK-0321-markup-selection. Old branches a2b (signatures, merged #1241) and a2g are obsolete.
 
 ## Memory
 
