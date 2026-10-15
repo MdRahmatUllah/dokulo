@@ -84,6 +84,16 @@ class AnnotationEditor extends ChangeNotifier {
 
   List<EditAnnot> annotsOn(int page) => _pages[page] ?? const [];
 
+  /// The first page a signature was placed on in this session (the
+  /// "Signed on page 3" toast); null: none.
+  int? get signedPage {
+    final pages = [
+      for (final MapEntry(:key, :value) in _pages.entries)
+        if (value.any((a) => a.annot is StampAnnot)) key,
+    ]..sort();
+    return pages.firstOrNull;
+  }
+
   // --- Changes. Each is one undo step.
 
   void _change(void Function(Map<int, List<EditAnnot>> pages) apply) {
@@ -270,6 +280,8 @@ PdfAnnot translate(PdfAnnot a, double dx, double dy) => switch (a) {
     color: a.color,
     note: a.note,
   ),
+  StampAnnot(:final rect, :final png, :final date, :final dateSize) =>
+    StampAnnot(_tb(rect, dx, dy), png, date: date, dateSize: dateSize),
   ShapeAnnot(:final kind, :final rect, :final width, :final fill) => ShapeAnnot(
     kind,
     _tb(rect, dx, dy),
@@ -347,6 +359,29 @@ PdfAnnot fitTo(PdfAnnot a, Box box) {
       color: a.color,
     ),
     OtherAnnot() => a,
+    // The signature scales with its shape kept (anchored top-left); its
+    // date keeps its size beside it. At least 8 pt wide.
+    StampAnnot(:final png, :final date, :final dateSize) => () {
+      final dateExtent = switch (a.dateBox) {
+        final d? => d.right - a.rect.right,
+        null => 0.0,
+      };
+      final w = math.max(8.0, box.right - box.left - dateExtent);
+      final aspect =
+          (a.rect.top - a.rect.bottom) /
+          math.max(a.rect.right - a.rect.left, 1e-6);
+      return StampAnnot(
+        (
+          left: box.left,
+          top: box.top,
+          right: box.left + w,
+          bottom: box.top - w * aspect,
+        ),
+        png,
+        date: date,
+        dateSize: dateSize,
+      );
+    }(),
   };
 }
 
@@ -379,7 +414,7 @@ PdfAnnot withColor(PdfAnnot a, int color) => switch (a) {
     color: color,
   ),
   NoteAnnot(:final at) => NoteAnnot(at, note: a.note, color: color),
-  OtherAnnot() => a,
+  OtherAnnot() || StampAnnot() => a,
 };
 
 bool _inBox(Box b, PagePoint p, double tol) =>

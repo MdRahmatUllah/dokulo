@@ -40,6 +40,7 @@ void main() {
     List<(String, int, int)> files, {
     DkTokens? tokens,
     Locale locale = const Locale('en'),
+    double textScale = 1,
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
@@ -75,6 +76,11 @@ void main() {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           home: ToolOptionsScreen(definition: compressDefinition, fileIds: ids),
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: TextScaler.linear(textScale)),
+            child: child!,
+          ),
         ),
       ),
     );
@@ -158,6 +164,30 @@ void main() {
       await expectLater(
         find.byType(ToolOptionsScreen),
         matchesGoldenFile('goldens/compress_options_$theme.png'),
+      );
+    });
+  }
+
+  // DK-0389, 27-accessibility/text-200-percent: at 200 % the level cards
+  // stack and nothing clips, in English and German.
+  for (final (name, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('de_light', DkTokens.light, const Locale('de')),
+    ('de_dark', DkTokens.dark, const Locale('de')),
+  ]) {
+    testWidgets('golden: compress_options_200_$name', (tester) async {
+      await pump(
+        tester,
+        [('Mietvertrag.pdf', 12, 8400000)],
+        tokens: tokens,
+        locale: locale,
+        textScale: 2,
+      );
+      expect(tester.takeException(), isNull, reason: 'no overflow');
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/compress_options_200_$name.png'),
       );
     });
   }
