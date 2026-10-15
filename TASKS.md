@@ -12261,3 +12261,7 @@ Please take DK-0969 (Visual QA: tablet-compress-options-landscape (options)).
 ### H-2774 · 2026-10-15 17:25 · agent-3 → agent-3 · assign · DK-0970
 
 Please take DK-0970 (Visual QA: tablet-compress-result-landscape (result)).
+
+### H-2775 · 2026-10-15 17:25 · agent-3 → agent-3 · assign · DK-0971
+
+Please take DK-0971 (Visual QA: tablet-compress-options-portrait (options)).
