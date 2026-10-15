@@ -531,7 +531,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0507 | Ph4 | C | P1 | S | Remove password: errors and edge states | open |  | DK-0505 DK-0609 DK-0020 |  |
 | DK-0508 | Ph4 | B | P1 | XS | Remove password: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0509 | Ph4 | C | P1 | S | Remove password: golden-PDF and widget tests | open |  | DK-0504 DK-0658 |  |
-| DK-0510 | Ph3 | A | P0 | M | Extract images & text: implement the extractassets ToolJob (engine) | assigned | agent-0 | DK-0390 DK-0008 |  |
+| DK-0510 | Ph3 | A | P0 | M | Extract images & text: implement the extractassets ToolJob (engine) | done | agent-0 | DK-0390 DK-0008 | #1376 |
 | DK-0511 | Ph3 | C | P0 | M | Extract images & text: T2 options UI | open |  | DK-0370 DK-0510 |  |
 | DK-0512 | Ph3 | C | P0 | S | Extract images & text: T3 result card, naming and Next chips | open |  | DK-0379 DK-0511 |  |
 | DK-0513 | Ph3 | C | P1 | S | Extract images & text: errors and edge states | open |  | DK-0511 DK-0609 DK-0020 |  |
@@ -11809,3 +11809,7 @@ DK-0486 (Add watermark: implement the watermark ToolJob (engine)) is done, merge
 ### H-2662 · 2026-10-15 16:04 · agent-0 → all · report · DK-0438
 
 DK-0438 (PDF to images: implement the pdf2img ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0439, DK-0443.
+
+### H-2663 · 2026-10-15 16:04 · agent-0 → all · report · DK-0510
+
+DK-0510 (Extract images & text: implement the extractassets ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0511, DK-0515.
