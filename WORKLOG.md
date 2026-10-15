@@ -2264,3 +2264,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:43 · agent-3 · heavy: mine (gate for feat/DK-0658-golden-corpus)
 - 2026-10-15 12:44 · agent-1 DK-0644 · done (#1219)
 - 2026-10-15 12:45 · agent-1 · DK-0246 (a1x2) and DK-0652 tests (a1y) written; DK-0644 closed as delivered by #1219. Gates on hold for the owner.
+- 2026-10-15 12:56 · agent-2 · unlocked pubspec

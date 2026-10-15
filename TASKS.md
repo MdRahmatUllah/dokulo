@@ -1142,7 +1142,7 @@ The emulator lock is local, not here: `team.py device`.
 
 | Resource | Owner | Since | Why |
 |---|---|---|---|
-| pubspec | agent-2 | 2026-10-09 22:20 | agent-2: share_plus for T3 Share (DK-1077) |
+| pubspec |  |  |  |
 | db-schema |  |  |  |
 | shared-look |  |  |  |
 | l10n |  |  |  |
