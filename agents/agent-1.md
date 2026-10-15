@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Gate queue (scratchpad quiet_gate.sh: no other check.py/gradlew, >4.5 GB): agent-1 wt DK-0575+0636 -> a1n DK-0307 (queued, bskiea0jb) -> a1p DK-0657+1100 (gen qa_text200_tools goldens) -> a1q DK-1097+1098 (regen qa_me_mepro/files) -> a1o2 DK-0623..0633 (regen DE goldens) -> a1r DK-0574 (stacked on 0575) -> a1s DK-0576 (stacked on 0574; privacy policy link waits for URL) -> a1t DK-0634 -> a1v DK-0656 -> a1u DK-0640/0641/0643/0646 (after a1p).
+BLOCKED on the owner's OK to gate again (stopped twice for low memory). 11 branches ready; queue in scratchpad quiet_gate.sh (separator '='). Ask the owner; then gate one at a time.
 
 ## Memory
 
