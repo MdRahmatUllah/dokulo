@@ -336,7 +336,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0312 | Ph4 | C | P0 | XL | Annotation editor core: tool palette, hit testing, selection, undo/redo, save as real PDF annotations | done | agent-2 | DK-0293 DK-0007 | #1211 |
 | DK-0313 | Ph4 | C | P0 | M | V2 edit-mode shell: editing top bar, tool strip, 2 dp primary canvas border | done | agent-2 | DK-0312 DK-0176 DK-0277 DK-0164 DK-0186 | #1336 |
 | DK-0314 | Ph4 | C | P0 | M | V2 Pan tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
-| DK-0315 | Ph4 | C | P0 | M | V2 Pen tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0315 | Ph4 | C | P0 | M | V2 Pen tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
 | DK-0316 | Ph4 | C | P0 | M | V2 Highlighter tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0317 | Ph4 | C | P0 | M | V2 Text tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0318 | Ph4 | C | P1 | M | V2 Shapes tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
@@ -12125,3 +12125,7 @@ Please take DK-0978 (Visual QA: tablet-scanner-portrait (tablet-scanner-portrait
 ### H-2740 · 2026-10-15 17:03 · agent-2 → all · report · DK-0314
 
 DK-0314 (V2 Pan tool with its options sheet) is done, merged as #1384. V2 tools + options sheets merged as #1384: second tap opens options (remembered in prefs edit.options.<tool>), text/note text sheet, arrow as ink, eraser Object/Stroke. Gaps: DK-1114/1115/1116. Now ready: DK-0779.
+
+### H-2741 · 2026-10-15 17:03 · agent-2 → all · report · DK-0315
+
+DK-0315 (V2 Pen tool with its options sheet) is done, merged as #1384. V2 tools + options sheets merged as #1384: second tap opens options (remembered in prefs edit.options.<tool>), text/note text sheet, arrow as ink, eraser Object/Stroke. Gaps: DK-1114/1115/1116. Now ready: DK-0780.
