@@ -595,7 +595,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | open |  | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 |  |
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | done |  | DK-0570 DK-0260 DK-0128 DK-0100 | #1288 |
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
-| DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | open |  | DK-0570 DK-0047 DK-0128 DK-0100 |  |
+| DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | assigned | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 |  |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | needs-decision |  | DK-0570 DK-0009 DK-0128 DK-0100 |  |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | open |  | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
 | DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | open |  | DK-0570 DK-0673 DK-0128 DK-0100 |  |
@@ -11318,3 +11318,7 @@ agent-0: DK-0576 OK: ship M3 Privacy without the 'Full privacy policy' link (pon
 ### H-2542 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0636
 
 Please take DK-0636 (In-app language switch (System · English · Deutsch) without restart).
+
+### H-2543 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0574
+
+Please take DK-0574 (M3 Appearance settings page).
