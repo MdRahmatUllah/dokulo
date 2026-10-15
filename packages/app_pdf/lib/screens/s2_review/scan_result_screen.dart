@@ -12,7 +12,9 @@ import '../../theme/dk_tokens.dart';
 typedef SavedScan = ({
   String name,
 
-  /// The (first) saved file, for Open and the Next chips.
+  /// The (first) saved file: its index row (Open, the Next chips) and its
+  /// path (Share).
+  int fileId,
   String path,
   int pages,
   int bytes,

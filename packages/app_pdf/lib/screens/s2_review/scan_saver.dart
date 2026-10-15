@@ -98,6 +98,7 @@ final scanSaverProvider = Provider<ScanSaver>(
           await discardOcr?.call();
           return (
             name: first!.name,
+            fileId: first.id,
             path: first.path,
             pages: pages.length,
             bytes: bytes,
