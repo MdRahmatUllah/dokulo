@@ -812,7 +812,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0788 | Ph7 | Q | P2 | XS | Visual QA: edit-hiopts (highlighter options) | assigned | agent-3 | DK-0316 |  |
 | DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | assigned | agent-3 | DK-0317 |  |
 | DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | assigned | agent-3 | DK-0318 |  |
-| DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | assigned | agent-2 | DK-0320 |  |
+| DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | assigned | agent-3 | DK-0320 |  |
 | DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-2 | DK-0326 DK-0519 |  |
 | DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | assigned | agent-2 | DK-0326 |  |
 | DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-2 | DK-0328 DK-0519 |  |
@@ -11981,3 +11981,7 @@ Please take DK-0789 (Visual QA: edit-textopts (text options)).
 ### H-2704 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0790
 
 Please take DK-0790 (Visual QA: edit-shapesopts (shapes options)).
+
+### H-2705 · 2026-10-15 16:56 · agent-2 → agent-3 · assign · DK-0791
+
+Please take DK-0791 (Visual QA: edit-eraser (eraser)).
