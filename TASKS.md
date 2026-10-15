@@ -11043,3 +11043,7 @@ Please take DK-0981 (Visual QA: text-200-percent (text-200-percent)).
 ### H-2474 · 2026-10-15 11:25 · agent-3 → all · note · DK-1099
 
 Added DK-1099 (Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up)) to lane Q, Ph7 P2.
+
+### H-2475 · 2026-10-15 11:26 · agent-0 → agent-0 · assign · DK-0299
+
+Please take DK-0299 (V1 Viewer: implement the "Search on scan without text" state).
