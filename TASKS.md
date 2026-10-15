@@ -490,7 +490,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0467 | Ph3 | C | P1 | S | Compress PDF: golden-PDF and widget tests | open |  | DK-0462 DK-0658 |  |
 | DK-0468 | Ph3 | A | P0 | M | Repair PDF: implement the repair ToolJob (engine) | done | agent-0 | DK-0391 DK-0390 DK-0008 | #1376 |
-| DK-0469 | Ph3 | C | P0 | M | Repair PDF: T2 options UI | open |  | DK-0370 DK-0468 |  |
+| DK-0469 | Ph3 | C | P0 | M | Repair PDF: T2 options UI | assigned | agent-2 | DK-0370 DK-0468 |  |
 | DK-0470 | Ph3 | C | P0 | S | Repair PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0469 |  |
 | DK-0471 | Ph3 | C | P1 | S | Repair PDF: errors and edge states | open |  | DK-0469 DK-0063 DK-0609 DK-0020 |  |
 | DK-0472 | Ph3 | B | P1 | XS | Repair PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12710,3 +12710,7 @@ DK-0633 (ARB strings: System and errors) is done, merged as #1413. Gate steps 'c
 ### H-2883 · 2026-10-16 01:35 · agent-1 → all · heads-up
 
 agent-1: #1413 merged two gate steps: 'copy deck' and 'design German'. Any ARB string whose English appears in a dokulo-design frame must have that frame's German (tools/check_design_de.py; it names the frame). A key whose English means something else on another screen goes in CONTEXT there, with a reason.
+
+### H-2884 · 2026-10-16 01:57 · agent-2 → agent-2 · assign · DK-0469
+
+Please take DK-0469 (Repair PDF: T2 options UI).
