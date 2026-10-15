@@ -16,5 +16,6 @@ What and why:
 - [ ] Tests: widget tests and goldens; unit tests; golden PDFs for a tool
 - [ ] The basic check passes (CLAUDE.md)
 - [ ] Docs updated with any behaviour change; spec gaps named
+- [ ] Nothing from README's "Not planned" list (QR, fax/cloud/comment sharing, ID photo, maths, Copy PDF)
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
