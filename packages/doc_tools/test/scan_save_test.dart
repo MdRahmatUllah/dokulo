@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:doc_core/doc_core.dart';
@@ -26,8 +27,9 @@ void main() {
       y2: 900,
       color: img.ColorRgb8(240, 240, 240),
     );
-    return (File('${dir.path}/$name')..writeAsBytesSync(img.encodeJpg(im)))
-        .path;
+    return (File(
+      '${dir.path}/$name',
+    )..writeAsBytesSync(img.encodeJpg(im))).path;
   }
 
   ScanSavePage page(String path, {int turns = 0}) => (
@@ -54,11 +56,13 @@ void main() {
       onPage: done.add,
     );
     expect(out, ['${dir.path}/Scan.pdf']);
-    expect(File(out.single).readAsStringSync(encoding: latin1), contains('%PDF'));
     expect(
-      RegExp(r'/Type\s*/Page\b').allMatches(
-        File(out.single).readAsStringSync(encoding: latin1),
-      ),
+      File(out.single).readAsStringSync(encoding: latin1),
+      contains('%PDF'),
+    );
+    expect(
+      RegExp(r'/Type\s*/Page\b')
+          .allMatches(File(out.single).readAsStringSync(encoding: latin1)),
       hasLength(2),
     );
     expect(done, [1, 2]);

@@ -14,6 +14,7 @@ import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_undo.dart';
+import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../s1_scanner/scan_session.dart';
 import '../s1_scanner/scanner_quick_settings.dart';

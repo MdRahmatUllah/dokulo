@@ -375,9 +375,7 @@ void main() {
       expect(pages(), isEmpty, reason: 'saved: the session ends');
     });
 
-    testWidgets('"Saving…" with the pages done while it saves', (
-      tester,
-    ) async {
+    testWidgets('"Saving…" with the pages done while it saves', (tester) async {
       await pump(tester);
       await open(tester);
       holdSave = Completer();

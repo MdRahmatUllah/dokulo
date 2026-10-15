@@ -3,6 +3,7 @@ library;
 
 // The scan's page edits, for the app (it doesn't depend on doc_vision).
 export 'package:doc_vision/doc_vision.dart' show Pt, ScanFilter;
+
 export 'src/job_queue.dart';
 export 'src/preflight.dart';
 export 'src/registry.dart';
