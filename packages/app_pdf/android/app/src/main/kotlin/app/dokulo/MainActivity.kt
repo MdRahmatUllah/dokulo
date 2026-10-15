@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.StatFs
 import android.provider.Settings
+import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterFragmentActivity
@@ -72,6 +73,22 @@ class MainActivity : FlutterFragmentActivity() {
                     }
                     else -> result.notImplemented()
                 }
+            }
+        // The privacy cover (DK-0234; lib/providers/privacy_providers.dart):
+        // FLAG_SECURE blanks the recents card and blocks screenshots, only
+        // while locked content is open or Hide previews is on.
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/privacy")
+            .setMethodCallHandler { call, result ->
+                if (call.method != "setSecure") {
+                    result.notImplemented()
+                    return@setMethodCallHandler
+                }
+                if (call.arguments == true) {
+                    window.addFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                } else {
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
+                }
+                result.success(null)
             }
         // What the phone can do (DK-0013; ai_core's DeviceCapabilities reads this map).
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dokulo/device")

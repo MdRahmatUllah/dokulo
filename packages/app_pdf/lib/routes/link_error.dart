@@ -40,22 +40,23 @@ class LinkErrorScreen extends StatelessWidget {
   }
 }
 
-/// [child] once the link's file handle ([fileId], a row id) is found;
-/// [LinkErrorScreen] when it's malformed or the file is gone.
+/// [child] once every one of the link's file handles ([fileIds], row ids)
+/// is found; [LinkErrorScreen] when one is malformed or its file is gone.
 class LinkedFileGate extends ConsumerWidget {
-  const LinkedFileGate({super.key, required this.fileId, required this.child});
+  const LinkedFileGate({super.key, required this.fileIds, required this.child});
 
-  final String fileId;
+  final List<String> fileIds;
   final Widget child;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final id = int.tryParse(fileId);
-    if (id == null) return const LinkErrorScreen(fileMissing: true);
-    return switch (ref.watch(viewerFileProvider(id))) {
-      AsyncData() => child,
-      AsyncError() => const LinkErrorScreen(fileMissing: true),
-      _ => const Scaffold(body: Center(child: DkLoadingSpinner())),
-    };
+    final ids = [for (final f in fileIds) int.tryParse(f)];
+    if (ids.contains(null)) return const LinkErrorScreen(fileMissing: true);
+    final files = [for (final id in ids) ref.watch(viewerFileProvider(id!))];
+    if (files.any((f) => f is AsyncError)) {
+      return const LinkErrorScreen(fileMissing: true);
+    }
+    if (files.every((f) => f is AsyncData)) return child;
+    return const Scaffold(body: Center(child: DkLoadingSpinner()));
   }
 }

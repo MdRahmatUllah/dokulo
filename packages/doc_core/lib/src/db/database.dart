@@ -23,8 +23,15 @@ class DokuloDatabase extends _$DokuloDatabase {
         ),
       );
 
-  /// In memory, for tests.
-  DokuloDatabase.memory() : this(NativeDatabase.memory());
+  /// In memory, for tests. Streams close as soon as their last listener
+  /// goes: widget tests then end with no drift timer pending.
+  DokuloDatabase.memory()
+    : this(
+        DatabaseConnection(
+          NativeDatabase.memory(),
+          closeStreamsSynchronously: true,
+        ),
+      );
 
   /// Where the database lives inside the app's support directory.
   static File file(Directory supportDirectory) =>

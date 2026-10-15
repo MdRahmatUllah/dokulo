@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/dk_banner.dart';
+import '../components/dk_icon.dart';
 import '../l10n/app_localizations.dart';
 
 /// The permissions Dokulo asks for (UI spec §26.4). Network is never asked:
@@ -27,6 +28,8 @@ class DkPermissionBanner extends StatelessWidget {
     final l = AppLocalizations.of(context);
     return DkBanner(
       variant: DkBannerVariant.warning,
+      // The camera's own icon, as the global states board.
+      icon: permission == DkPermission.camera ? DkIcons.cameraOff : null,
       text: switch (permission) {
         DkPermission.camera => l.permission_off_camera,
         DkPermission.photos => l.permission_off_photos,
