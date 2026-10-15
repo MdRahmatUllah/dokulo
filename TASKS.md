@@ -851,7 +851,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-3 | DK-0359 |  |
 | DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-3 | DK-0360 |  |
 | DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | assigned | agent-3 | DK-0352 |  |
-| DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | assigned | agent-2 | DK-0359 |  |
+| DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | assigned | agent-3 | DK-0359 |  |
 | DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-2 | DK-0341 |  |
 | DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-2 | DK-0363 |  |
 | DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-2 | DK-0364 |  |
@@ -12061,3 +12061,7 @@ Please take DK-0828 (Visual QA: scanner-review-result (Scan result)).
 ### H-2724 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0829
 
 Please take DK-0829 (Visual QA: scanner-review-reorder (S2 – reordering in tray)).
+
+### H-2725 · 2026-10-15 16:57 · agent-2 → agent-3 · assign · DK-0830
+
+Please take DK-0830 (Visual QA: scanner-review-jpg (Save sheet – JPG format)).
