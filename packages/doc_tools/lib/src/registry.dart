@@ -1,5 +1,6 @@
 import 'tool_job.dart';
 import 'tools/compress_job.dart';
+import 'tools/convert_jobs.dart';
 import 'tools/crop_job.dart';
 import 'tools/extract_assets_job.dart';
 import 'tools/extract_job.dart';
@@ -32,11 +33,13 @@ const List<ToolJob<Object?>> allToolJobs = [
   MergeJob(),
   OcrJob(),
   PageNumbersJob(),
+  PdfaJob(),
   Pdf2ImgJob(),
   ProtectJob(),
   RepairJob(),
   RotateJob(),
   SplitJob(),
+  TextJob(),
   UnlockJob(),
   WatermarkJob(),
 ];
