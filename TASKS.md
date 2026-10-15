@@ -694,7 +694,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0670 | Ph7 | Q | P0 | M | Release regression checklist per phase build | done | agent-3 | DK-0668 DK-0015 | #1348 |
 | DK-0671 | Ph7 | Q | P0 | M | Audit every screen against the 10 UX principles | open |  | DK-0665 |  |
 | DK-0672 | Ph1 | A | P0 | S | Compliance: Licence register | done | agent-1 |  | #106 |
-| DK-0673 | Ph7 | A | P0 | S | Compliance: In-app licence screen generation | open |  | DK-0672 |  |
+| DK-0673 | Ph7 | A | P0 | S | Compliance: In-app licence screen generation | assigned | agent-0 | DK-0672 |  |
 | DK-0674 | Ph6 | A | P0 | S | Compliance: Gemma licence confirmation | done | agent-2 |  | #134 |
 | DK-0675 | Ph6 | A | P0 | S | Compliance: Bergamot models and language pairs | done | agent-2 |  | #134 |
 | DK-0676 | Ph6 | A | P0 | S | Compliance: Exclude Hy-MT | done | agent-2 |  | #134 |
@@ -12245,3 +12245,7 @@ DK-0775 (Visual QA: viewer-link (external link dialog)) is done, merged as #1385
 ### H-2770 · 2026-10-15 17:14 · agent-3 → all · report · DK-0777
 
 DK-0777 (Visual QA: viewer-thumbs (thumbnail strip)) is done, merged as #1385. Visual QA pass: matches (docs/qa/viewer.md; board test/qa/viewer_qa_test.dart).
+
+### H-2771 · 2026-10-15 17:14 · agent-0 → agent-0 · assign · DK-0673
+
+Please take DK-0673 (Compliance: In-app licence screen generation).
