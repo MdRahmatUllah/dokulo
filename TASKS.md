@@ -525,7 +525,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0501 | Ph4 | C | P1 | S | Add password: errors and edge states | open |  | DK-0499 DK-0609 DK-0020 |  |
 | DK-0502 | Ph4 | B | P1 | XS | Add password: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0503 | Ph4 | C | P1 | S | Add password: golden-PDF and widget tests | open |  | DK-0498 DK-0658 |  |
-| DK-0504 | Ph4 | A | P0 | M | Remove password: implement the unlock ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0008 |  |
+| DK-0504 | Ph4 | A | P0 | M | Remove password: implement the unlock ToolJob (engine) | done | agent-0 | DK-0391 DK-0008 | #1376 |
 | DK-0505 | Ph4 | C | P0 | M | Remove password: T2 options UI | open |  | DK-0370 DK-0504 |  |
 | DK-0506 | Ph4 | C | P0 | S | Remove password: T3 result card, naming and Next chips | open |  | DK-0379 DK-0505 |  |
 | DK-0507 | Ph4 | C | P1 | S | Remove password: errors and edge states | open |  | DK-0505 DK-0609 DK-0020 |  |
@@ -11793,3 +11793,7 @@ DK-0468 (Repair PDF: implement the repair ToolJob (engine)) is done, merged as #
 ### H-2658 · 2026-10-15 16:03 · agent-0 → all · report · DK-0498
 
 DK-0498 (Add password: implement the protect ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0499, DK-0503.
+
+### H-2659 · 2026-10-15 16:04 · agent-0 → all · report · DK-0504
+
+DK-0504 (Remove password: implement the unlock ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0505, DK-0509.
