@@ -678,7 +678,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
 | DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | open |  | DK-0232 DK-0182 |  |
 | DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | open |  | DK-0004 |  |
-| DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | open |  | DK-0024 |  |
+| DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | assigned | agent-1 | DK-0024 |  |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | open |  | DK-0010 DK-0023 |  |
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | open |  | DK-0010 DK-0395 |  |
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | open |  | DK-0010 DK-0392 |  |
@@ -11214,3 +11214,7 @@ Please take DK-0632 (ARB strings: Me, settings, Pro).
 ### H-2516 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0633
 
 Please take DK-0633 (ARB strings: System and errors).
+
+### H-2517 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0657
+
+Please take DK-0657 (Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules).
