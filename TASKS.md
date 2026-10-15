@@ -999,7 +999,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0975 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-landscape (tablet-paywall-landscape) | open |  | DK-0580 DK-0654 |  |
 | DK-0976 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-portrait (tablet-paywall-portrait) | open |  | DK-0654 |  |
 | DK-0977 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-landscape (tablet-scanner-landscape) | assigned | agent-3 | DK-0652 |  |
-| DK-0978 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-portrait (tablet-scanner-portrait) | assigned | agent-2 | DK-0652 |  |
+| DK-0978 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-portrait (tablet-scanner-portrait) | assigned | agent-3 | DK-0652 |  |
 | DK-0979 | Ph7 | Q | P2 | XS | Visual QA: system-surfaces (system-surfaces) | open |  | DK-0072 DK-0587 DK-0588 DK-0589 DK-0590 DK-0591 DK-0592 DK-0593 |  |
 | DK-0980 | Ph7 | Q | P2 | XS | Visual QA: global-states (global-states) | done | agent-0 | DK-0601 DK-0602 DK-0603 DK-0604 DK-0605 DK-0606 DK-0607 DK-0608 | #1230 |
 | DK-0981 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent (text-200-percent) | assigned | agent-3 | DK-0037 DK-1100 |  |
@@ -12117,3 +12117,7 @@ Please take DK-0948 (Visual QA: me-signatures (Me – Signatures)).
 ### H-2738 · 2026-10-15 16:58 · agent-2 → agent-3 · assign · DK-0977
 
 Please take DK-0977 (Visual QA: tablet-scanner-landscape (tablet-scanner-landscape)).
+
+### H-2739 · 2026-10-15 16:58 · agent-2 → agent-3 · assign · DK-0978
+
+Please take DK-0978 (Visual QA: tablet-scanner-portrait (tablet-scanner-portrait)).
