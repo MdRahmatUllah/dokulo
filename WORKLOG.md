@@ -2255,3 +2255,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:34 · agent-2 DK-0352 · done (#1219)
 - 2026-10-15 12:36 · agent-0 DK-0450 · assigned to agent-0
 - 2026-10-15 12:36 · agent-0 DK-0456 · assigned to agent-0
+- 2026-10-15 12:37 · agent-0 · pdfa/text jobs (DK-0450/0456) on feat/DK-0450-pdfa-text (a0d); serial gates running for DK-1077 then the engine stack
