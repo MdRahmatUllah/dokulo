@@ -1,5 +1,6 @@
 import 'app_localizations.dart';
 
+import 'package:flutter/widgets.dart' show Locale;
 import 'package:intl/intl.dart';
 
 /// Narrow no-break space between a number and its unit: the "thin space" of the
@@ -60,3 +61,9 @@ String formatWhen(
 String formatSeconds(int seconds) => seconds < 60
     ? '$seconds${unitSpace}s'
     : '${(seconds / 60).ceil()}${unitSpace}min';
+
+/// Whether paper defaults to US Letter rather than A4 (DK-0634): in the US
+/// and Canada, by the phone's region (`PlatformDispatcher.locale`), not the
+/// app's language. A4 everywhere else, and first in the Save sheet.
+bool usesLetter(Locale region) =>
+    const {'US', 'CA'}.contains(region.countryCode);
