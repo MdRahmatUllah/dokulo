@@ -39,10 +39,9 @@ final storageUseProvider = FutureProvider.autoDispose<StorageUse>((ref) async {
   final thumbs = await ref.watch(thumbnailCacheProvider.future);
   // ponytail: ai_core's model manager will own this folder; until then
   // the models are wherever <app support>/models says.
-  final models = await ref.watch(modelsDirectoryProvider.future);
   return (
     files: await dirSize(files.userFolder),
-    models: await dirSize(models),
+    models: await ref.watch(modelsSizeProvider.future),
     cache: await dirSize(thumbs.directory) + await dirSize(files.temp),
   );
 });
@@ -67,6 +66,11 @@ Future<void> clearCache(
     }
   }
 }
+
+/// Bytes the AI models take (Files & storage, Me's AI models row).
+final modelsSizeProvider = FutureProvider.autoDispose<int>(
+  (ref) async => dirSize(await ref.watch(modelsDirectoryProvider.future)),
+);
 
 /// Where on-demand models are kept.
 final modelsDirectoryProvider = FutureProvider<Directory>(

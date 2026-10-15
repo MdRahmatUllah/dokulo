@@ -1,9 +1,13 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_promo_cards.dart';
+import 'package:app_pdf/providers/signature_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
+import 'package:app_pdf/screens/settings/files_settings_screen.dart';
 import 'package:app_pdf/screens/settings/security_settings_screen.dart';
+import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -54,6 +58,22 @@ void main() {
     expect(find.text('Thank you'), findsOneWidget);
   });
 
+  testWidgets('Your things: the signatures count, the models size (DK-1097)', (
+    tester,
+  ) async {
+    await pumpAt(
+      tester,
+      Routes.me,
+      overrides: [
+        signaturesProvider.overrideWith(_TwoSignatures.new),
+        modelsSizeProvider.overrideWith((ref) async => 1800000000),
+      ],
+    );
+    await tester.pumpAndSettle();
+    expect(find.text('2'), findsOneWidget);
+    expect(find.text('1.8 GB'), findsOneWidget);
+  });
+
   testWidgets('a Settings row opens its page', (tester) async {
     tester.view.physicalSize = const Size(393, 1600);
     tester.view.devicePixelRatio = 1;
@@ -72,4 +92,20 @@ void main() {
     ).firstMatch(pubspec)!.group(1);
     expect(appVersion, version);
   });
+}
+
+class _TwoSignatures extends Signatures {
+  @override
+  Future<List<(SavedSignature, Uint8List)>> build() async => [
+    for (var i = 1; i <= 2; i++)
+      (
+        (
+          id: i,
+          kind: SignatureKind.values.first,
+          ink: SignatureInk.values.first,
+          created: DateTime(2026),
+        ),
+        Uint8List(0),
+      ),
+  ];
 }

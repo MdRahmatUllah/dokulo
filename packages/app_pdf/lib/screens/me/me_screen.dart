@@ -8,9 +8,12 @@ import '../../components/dk_promo_cards.dart';
 import '../../components/dk_settings_row.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
+import '../../l10n/formats.dart';
+import '../../providers/signature_providers.dart';
 import '../../providers/theme_providers.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_tokens.dart';
+import '../settings/files_settings_screen.dart' show modelsSizeProvider;
 
 /// The app's version as the footer shows it; tests keep it equal to
 /// pubspec.yaml's `version:` (DK-0570).
@@ -35,6 +38,11 @@ class MeScreen extends ConsumerWidget {
     final l = AppLocalizations.of(context);
     final pro = ref.watch(isProProvider);
     final theme = ref.watch(appThemeModeProvider);
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    // Your things' values (UI spec §23.1).
+    // ponytail: Workflows shows its count once saved workflows exist.
+    final signatures = ref.watch(signaturesProvider).value?.length;
+    final models = ref.watch(modelsSizeProvider).value;
     void go(String location) => context.push(location);
     return Scaffold(
       backgroundColor: t.color.background,
@@ -46,15 +54,7 @@ class MeScreen extends ConsumerWidget {
             sliver: SliverList.list(
               children: [
                 if (pro)
-                  DkSettingsGroup(
-                    children: [
-                      DkSettingsRow(
-                        icon: DkIcons.pro,
-                        title: l.me_pro_owned,
-                        value: l.me_pro_thanks,
-                      ),
-                    ],
-                  )
+                  DkSettingsGroup(children: [_ProOwned(l: l)])
                 else
                   // ponytail: X3, the paywall sheet, comes with DK-0579.
                   DkProCard(onOpen: () {}),
@@ -64,6 +64,7 @@ class MeScreen extends ConsumerWidget {
                     DkSettingsRow(
                       icon: DkIcons.tool('sign'),
                       title: l.me_signatures,
+                      value: signatures?.toString(),
                       onTap: () => go(Routes.tool('sign')),
                     ),
                     DkSettingsRow(
@@ -74,6 +75,9 @@ class MeScreen extends ConsumerWidget {
                     DkSettingsRow(
                       icon: DkIcons.memory,
                       title: l.me_ai_models,
+                      value: models == null
+                          ? null
+                          : formatBytes(models, locale),
                       onTap: () => go(Routes.models),
                     ),
                   ],
@@ -162,6 +166,53 @@ class MeScreen extends ConsumerWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Pro, owned (UI spec §23.1 row 2, me-mepro): the row on
+/// `color.proContainer`, the filled Pro icon, the title in `type.titleS` and
+/// "Thank you" under it; nothing to open.
+class _ProOwned extends StatelessWidget {
+  const _ProOwned({required this.l});
+
+  final AppLocalizations l;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final c = t.color;
+    return MergeSemantics(
+      child: Container(
+        color: c.proContainer,
+        constraints: const BoxConstraints(minHeight: 56),
+        padding: EdgeInsets.symmetric(
+          horizontal: t.space.l,
+          vertical: t.space.s,
+        ),
+        child: Row(
+          spacing: t.space.m,
+          children: [
+            DkIcon(DkIcons.pro, filled: true, color: c.pro),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    l.me_pro_owned,
+                    style: t.text.titleS.copyWith(color: c.textPrimary),
+                  ),
+                  Text(
+                    l.me_pro_thanks,
+                    style: t.text.caption.copyWith(color: c.textSecondary),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
