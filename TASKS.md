@@ -501,7 +501,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0477 | Ph5 | C | P1 | S | Make text searchable: errors and edge states | open |  | DK-0475 DK-0609 DK-0020 |  |
 | DK-0478 | Ph5 | B | P1 | XS | Make text searchable: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0479 | Ph5 | C | P1 | S | Make text searchable: golden-PDF and widget tests | open |  | DK-0474 DK-0658 |  |
-| DK-0480 | Ph3 | A | P0 | M | Add page numbers: implement the pagenum ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0008 |  |
+| DK-0480 | Ph3 | A | P0 | M | Add page numbers: implement the pagenum ToolJob (engine) | done | agent-0 | DK-0391 DK-0008 | #1376 |
 | DK-0481 | Ph3 | C | P0 | M | Add page numbers: T2 options UI | open |  | DK-0370 DK-0480 DK-0140 DK-0134 |  |
 | DK-0482 | Ph3 | C | P0 | S | Add page numbers: T3 result card, naming and Next chips | open |  | DK-0379 DK-0481 |  |
 | DK-0483 | Ph3 | C | P1 | S | Add page numbers: errors and edge states | open |  | DK-0481 DK-0609 DK-0020 |  |
@@ -11797,3 +11797,7 @@ DK-0498 (Add password: implement the protect ToolJob (engine)) is done, merged a
 ### H-2659 · 2026-10-15 16:04 · agent-0 → all · report · DK-0504
 
 DK-0504 (Remove password: implement the unlock ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0505, DK-0509.
+
+### H-2660 · 2026-10-15 16:04 · agent-0 → all · report · DK-0480
+
+DK-0480 (Add page numbers: implement the pagenum ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0481, DK-0485.
