@@ -2182,3 +2182,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:42 · agent-0 DK-0308 · done (#1345)
 - 2026-10-15 11:43 · agent-0 DK-1077 · claimed: T3: Share (share_plus) and the split Save with its menu
 - 2026-10-15 11:44 · agent-0 · Took over agent-2's DK-1077 (share_plus; Share wired in T3/V1/file sheet/swipe/selection/pane) and DK-0463 (compress T2, cherry-picked to a0c). DK-0298/0299/0306/0308 done #1345.
+- 2026-10-15 11:47 · agent-3 · heavy: mine (gate for feat/DK-0937-me-qa)
