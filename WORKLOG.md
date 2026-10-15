@@ -2184,3 +2184,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:44 · agent-0 · Took over agent-2's DK-1077 (share_plus; Share wired in T3/V1/file sheet/swipe/selection/pane) and DK-0463 (compress T2, cherry-picked to a0c). DK-0298/0299/0306/0308 done #1345.
 - 2026-10-15 11:47 · agent-3 · heavy: mine (gate for feat/DK-0937-me-qa)
 - 2026-10-15 11:48 · agent-1 · DK-0304 merged #1342. DK-0575 gating. Queued: DK-0307 test (a1n), DK-0623-0625 copy-deck check + sign_sheet_title du-form (a1o2), then DK-0657 breakpoint helper.
+- 2026-10-15 11:50 · agent-0 DK-1097 · assigned to agent-1
