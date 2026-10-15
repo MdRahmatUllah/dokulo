@@ -234,7 +234,7 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
     final visible = _visible;
     // A large tablet (UI spec §30): the categories as a 200 dp sidebar with
     // the title, instead of the large title and the chips (DK-0650).
-    final wide = MediaQuery.sizeOf(context).width >= 840;
+    final wide = DkGrid.of(context) == DkGrid.largeTablet;
     final page = NotificationListener<ScrollNotification>(
       // The page's own scroll, not the chip row's.
       onNotification: (n) {
@@ -364,21 +364,25 @@ class _ToolsScreenState extends ConsumerState<ToolsScreen> {
               ),
               SliverPadding(
                 padding: EdgeInsets.symmetric(horizontal: t.space.l),
-                // 4 across on a phone, 6 or 8 on a tablet (§30).
+                // 4 across on a phone (2 at large text), 6 or 8 on a tablet.
                 sliver: SliverLayoutBuilder(
-                  builder: (context, box) => SliverGrid.count(
-                    crossAxisCount: toolColumns(box.crossAxisExtent),
-                    mainAxisSpacing: t.space.m,
-                    crossAxisSpacing: t.space.m,
-                    childAspectRatio: toolTileAspect(
+                  builder: (context, box) {
+                    final (columns, aspect) = toolGrid(
+                      context,
                       box.crossAxisExtent,
                       t.space.m,
-                    ),
-                    children: [
-                      for (final tool in ToolCatalogue.inCategory(c))
-                        DkToolTile(toolId: tool.id, onTap: () => _open(tool)),
-                    ],
-                  ),
+                    );
+                    return SliverGrid.count(
+                      crossAxisCount: columns,
+                      mainAxisSpacing: t.space.m,
+                      crossAxisSpacing: t.space.m,
+                      childAspectRatio: aspect,
+                      children: [
+                        for (final tool in ToolCatalogue.inCategory(c))
+                          DkToolTile(toolId: tool.id, onTap: () => _open(tool)),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
