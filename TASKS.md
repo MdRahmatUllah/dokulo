@@ -340,7 +340,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0316 | Ph4 | C | P0 | M | V2 Highlighter tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
 | DK-0317 | Ph4 | C | P0 | M | V2 Text tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
 | DK-0318 | Ph4 | C | P1 | M | V2 Shapes tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
-| DK-0319 | Ph4 | C | P1 | M | V2 Note tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
+| DK-0319 | Ph4 | C | P1 | M | V2 Note tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
 | DK-0320 | Ph4 | C | P1 | M | V2 Eraser tool with its options sheet | assigned | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 |  |
 | DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | assigned | agent-2 | DK-0312 DK-0202 |  |
 | DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | done | agent-2 | DK-0312 DK-0202 | #1211 |
@@ -12141,3 +12141,7 @@ DK-0317 (V2 Text tool with its options sheet) is done, merged as #1384. V2 tools
 ### H-2744 · 2026-10-15 17:03 · agent-2 → all · report · DK-0318
 
 DK-0318 (V2 Shapes tool with its options sheet) is done, merged as #1384. V2 tools + options sheets merged as #1384: second tap opens options (remembered in prefs edit.options.<tool>), text/note text sheet, arrow as ink, eraser Object/Stroke. Gaps: DK-1114/1115/1116. Now ready: DK-0790.
+
+### H-2745 · 2026-10-15 17:03 · agent-2 → all · report · DK-0319
+
+DK-0319 (V2 Note tool with its options sheet) is done, merged as #1384. V2 tools + options sheets merged as #1384: second tap opens options (remembered in prefs edit.options.<tool>), text/note text sheet, arrow as ink, eraser Object/Stroke. Gaps: DK-1114/1115/1116. Now ready: DK-0784.
