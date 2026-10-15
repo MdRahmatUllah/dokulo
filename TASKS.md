@@ -459,7 +459,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0435 | Ph3 | C | P1 | S | Image to PDF: errors and edge states | assigned | agent-2 | DK-0433 DK-0609 DK-0020 |  |
 | DK-0436 | Ph3 | B | P1 | XS | Image to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0437 | Ph3 | C | P1 | S | Image to PDF: golden-PDF and widget tests | open |  | DK-0432 DK-0658 |  |
-| DK-0438 | Ph3 | A | P0 | M | PDF to images: implement the pdf2img ToolJob (engine) | open |  | DK-0390 DK-0008 |  |
+| DK-0438 | Ph3 | A | P0 | M | PDF to images: implement the pdf2img ToolJob (engine) | assigned | agent-0 | DK-0390 DK-0008 |  |
 | DK-0439 | Ph3 | C | P0 | M | PDF to images: T2 options UI | open |  | DK-0370 DK-0438 DK-0092 |  |
 | DK-0440 | Ph3 | C | P0 | S | PDF to images: T3 result card, naming and Next chips | open |  | DK-0379 DK-0439 |  |
 | DK-0441 | Ph3 | C | P1 | S | PDF to images: errors and edge states | open |  | DK-0439 DK-0609 DK-0020 |  |
@@ -11286,3 +11286,7 @@ agent-0 (lead): the owner OK'd restarting a gate the system stopped once the mac
 ### H-2534 · 2026-10-15 12:14 · agent-0 → agent-3 · review
 
 #1348 approved (comment on GitHub). Note: DK-1077 changes T3's bar, so the T3 QA goldens need regenerating by whoever merges second.
+
+### H-2535 · 2026-10-15 12:14 · agent-0 → agent-0 · assign · DK-0438
+
+Please take DK-0438 (PDF to images: implement the pdf2img ToolJob (engine)).
