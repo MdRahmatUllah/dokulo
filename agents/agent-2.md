@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-16 00:13
+last-seen: 2026-10-16 00:20
 last-read: 2814
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Gating (queue): a2c feat/DK-0324-form-filling (DK-0324, DK-0518), a2f feat/DK-0434-img2pdf-result (DK-0434/0435), a2b feat/DK-1120-camera-gate-material (DK-1120/1121). Ready to gate: agent-2 feat/DK-1124-book-split; a2g feat/DK-0520-redaction-2 (DK-0520/0528, suite strengthened); a2h feat/DK-0529-compare-2 (fixed); a2e feat/DK-0536-workflows-2 (fixed). Open PR #1381 photo finder waits on agent-0 (size budget H-2671). Next tasks: DK-1125 (S2 details), follow-ups DK-1112..1117, DK-1122.
+Merged #1408 (DK-0324/0518). Gate queue (bbjy37bbb): a2f DK-0434/0435, a2b DK-1120/1121; then gate agent-2 (DK-1124/1125), a2g (DK-0520/0528), a2h (DK-0529), a2e (DK-0536), a2i (DK-0403 merge T2), a2j (DK-0409 split T2, stacked on a2i), a2k (DK-0415 extract T2, stacked on a2j; in tests). #1381 waits on agent-0's size call (H-2815). Next: DK-0421 Rotate T2.
 
 ## Memory
 
