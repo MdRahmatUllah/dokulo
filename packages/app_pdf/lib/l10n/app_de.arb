@@ -682,5 +682,9 @@
   "img2pdf_action": "{n, plural, =1{PDF erstellen · 1 Bild} other{PDF erstellen · {n} Bilder}}",
   "img2pdf_estimate": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 Seite} other{{pages} Seiten}} · etwa {size}",
   "t2_section_images": "Bilder ({n})",
-  "common_add": "Hinzufügen"
+  "common_add": "Hinzufügen",
+  "home_scan_unsaved": "{n, plural, =1{Scan mit 1 Seite nicht gespeichert} other{Scan mit {n} Seiten nicht gespeichert}}",
+  "home_scan_started_today": "Heute {time} begonnen",
+  "home_scan_started_yesterday": "Gestern {time} begonnen",
+  "home_scan_started_on": "{date} begonnen"
 }

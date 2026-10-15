@@ -58,6 +58,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: DkPrivacyLine(where: DkPrivacyContext.home),
         ),
       ),
+      const HomeScanCard(),
       const HomeContinueCard(),
       PinnedToolsSection(key: _pinned),
       SliverPadding(

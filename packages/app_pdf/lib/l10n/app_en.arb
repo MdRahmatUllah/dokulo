@@ -2693,5 +2693,41 @@
   "common_add": "Add",
   "@common_add": {
     "description": "A compact Add button (T2's image strip)."
+  },
+  "home_scan_unsaved": "{n, plural, =1{Scan of 1 page not saved} other{Scan of {n} pages not saved}}",
+  "@home_scan_unsaved": {
+    "description": "H1 continue card, an unsaved scan (DK-0246, home-contscan).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "home_scan_started_today": "Started today {time}",
+  "@home_scan_started_today": {
+    "description": "H1 continue card's line: the scan's first page, today (time from DateFormat.Hm).",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "home_scan_started_yesterday": "Started yesterday {time}",
+  "@home_scan_started_yesterday": {
+    "description": "H1 continue card's line: the scan began yesterday.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "home_scan_started_on": "Started {date}",
+  "@home_scan_started_on": {
+    "description": "H1 continue card's line: the scan began before yesterday (date from formatDate).",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
   }
 }
