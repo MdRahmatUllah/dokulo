@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0860 Visual QA: tool-shell-moreopts (T2 Compress – More options open) — claimed 2026-10-15 17:25.
 
 ## Next
 
