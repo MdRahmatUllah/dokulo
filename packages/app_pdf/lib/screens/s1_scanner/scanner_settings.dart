@@ -10,24 +10,88 @@ part 'scanner_settings.g.dart';
 /// and auto-capture are separate (the top complaint about other scanners):
 /// auto-crop is on and auto-capture off on first use; then the user's last
 /// choice. DK-0361's defaults (filter, page size, name) join them here.
+/// The filter a new page gets (S2's filter strip; doc_vision's ScanFilter).
+enum ScanFilterChoice {
+  original,
+  autoColour,
+  greyscale,
+  blackWhite,
+  removeShadows,
+}
+
+/// The page size a scan is saved at.
+enum ScanPageSize { auto, a4, letter }
+
+/// The language text recognition expects (doc_vision's OcrLanguage).
+enum ScanOcrLanguage { auto, english, german }
+
+/// The file name a scan gets, with `{date}`, `{time}` and `{number}`.
+const defaultNamePattern = 'Scan {date} {time}';
+
 class ScannerPrefs {
-  const ScannerPrefs({this.autoCapture = false, this.autoCrop = true});
+  const ScannerPrefs({
+    this.autoCapture = false,
+    this.autoCrop = true,
+    this.filter = ScanFilterChoice.autoColour,
+    this.pageSize = ScanPageSize.auto,
+    this.folder,
+    this.namePattern = defaultNamePattern,
+    this.ocrLanguage = ScanOcrLanguage.auto,
+  });
 
   final bool autoCapture, autoCrop;
 
-  ScannerPrefs copyWith({bool? autoCapture, bool? autoCrop}) => ScannerPrefs(
+  /// Settings → Scanning → File name (DK-0361).
+  final String namePattern;
+  final ScanOcrLanguage ocrLanguage;
+  final ScanFilterChoice filter;
+  final ScanPageSize pageSize;
+
+  /// The Save sheet's last folder, relative to the user folder (null: its
+  /// top).
+  final String? folder;
+
+  ScannerPrefs copyWith({
+    bool? autoCapture,
+    bool? autoCrop,
+    ScanFilterChoice? filter,
+    ScanPageSize? pageSize,
+    String? Function()? folder,
+    String? namePattern,
+    ScanOcrLanguage? ocrLanguage,
+  }) => ScannerPrefs(
     autoCapture: autoCapture ?? this.autoCapture,
     autoCrop: autoCrop ?? this.autoCrop,
+    filter: filter ?? this.filter,
+    pageSize: pageSize ?? this.pageSize,
+    folder: folder == null ? this.folder : folder(),
+    namePattern: namePattern ?? this.namePattern,
+    ocrLanguage: ocrLanguage ?? this.ocrLanguage,
   );
 
   Map<String, Object?> toJson() => {
     'autoCapture': autoCapture,
     'autoCrop': autoCrop,
+    'filter': filter.name,
+    'pageSize': pageSize.name,
+    'folder': ?folder,
+    'namePattern': namePattern,
+    'ocrLanguage': ocrLanguage.name,
   };
 
   static ScannerPrefs fromJson(Map<String, Object?> j) => ScannerPrefs(
     autoCapture: j['autoCapture'] as bool? ?? false,
     autoCrop: j['autoCrop'] as bool? ?? true,
+    filter:
+        ScanFilterChoice.values.asNameMap()[j['filter']] ??
+        ScanFilterChoice.autoColour,
+    pageSize:
+        ScanPageSize.values.asNameMap()[j['pageSize']] ?? ScanPageSize.auto,
+    folder: j['folder'] as String?,
+    namePattern: j['namePattern'] as String? ?? defaultNamePattern,
+    ocrLanguage:
+        ScanOcrLanguage.values.asNameMap()[j['ocrLanguage']] ??
+        ScanOcrLanguage.auto,
   );
 }
 
@@ -101,4 +165,17 @@ class ScannerSettings extends _$ScannerSettings {
   Future<void> setAutoCapture(bool on) => _set(state.copyWith(autoCapture: on));
 
   Future<void> setAutoCrop(bool on) => _set(state.copyWith(autoCrop: on));
+
+  Future<void> setFilter(ScanFilterChoice f) => _set(state.copyWith(filter: f));
+
+  Future<void> setPageSize(ScanPageSize s) => _set(state.copyWith(pageSize: s));
+
+  Future<void> setFolder(String? f) => _set(state.copyWith(folder: () => f));
+
+  Future<void> setNamePattern(String p) => _set(
+    state.copyWith(namePattern: p.trim().isEmpty ? defaultNamePattern : p),
+  );
+
+  Future<void> setOcrLanguage(ScanOcrLanguage l) =>
+      _set(state.copyWith(ocrLanguage: l));
 }

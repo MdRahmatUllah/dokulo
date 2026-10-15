@@ -87,7 +87,7 @@ void main() {
   }
 
   late ProviderContainer container;
-  var closed = 0, imported = 0, reviewed = 0;
+  var closed = 0, imported = 0, reviewed = 0, settingsOpened = 0;
 
   Future<void> pump(
     WidgetTester tester, {
@@ -96,13 +96,14 @@ void main() {
     Locale locale = const Locale('en'),
     DetectedQuad? quad,
     String? prefsJson,
+    int? retake,
   }) async {
     tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     camera = FakeCamera();
     prefs = MemoryPrefsStore()..json = prefsJson;
-    closed = imported = reviewed = 0;
+    closed = imported = reviewed = settingsOpened = 0;
     container = ProviderContainer(
       overrides: [
         scannerCameraProvider.overrideWith((ref) => camera),
@@ -128,7 +129,9 @@ void main() {
             onClose: () => closed++,
             onImport: () => imported++,
             onReview: () => reviewed++,
-            onSettings: () {},
+            onSettings: () => settingsOpened++,
+            retake: retake,
+            onRetaken: () {},
           ),
         ),
       ),
@@ -213,6 +216,26 @@ void main() {
     await tester.tap(find.bySemanticsLabel('Close scanner'));
     await tester.tap(find.bySemanticsLabel('Import from photos'));
     expect((closed, imported), (1, 1));
+    semantics.dispose();
+  });
+
+  testWidgets('closing with pages taken asks "Discard this scan?"', (
+    tester,
+  ) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester);
+    await capture(tester);
+    await tester.tap(find.bySemanticsLabel('Close scanner'));
+    await tester.pumpAndSettle();
+    expect(find.text('Discard this scan?'), findsOneWidget);
+    await tester.tap(find.text('Keep'));
+    await tester.pumpAndSettle();
+    expect((closed, container.read(scanSessionProvider).length), (0, 1));
+    await tester.tap(find.bySemanticsLabel('Close scanner'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Discard'));
+    await tester.pumpAndSettle();
+    expect((closed, container.read(scanSessionProvider).length), (1, 0));
     semantics.dispose();
   });
 
@@ -336,6 +359,87 @@ void main() {
     expect(shutter.dx, greaterThan(1366 * 0.8));
   });
 
+  group('quick settings (DK-0369)', () {
+    Future<void> open(WidgetTester tester) async {
+      await tester.tap(
+        find.bySemanticsLabel(RegExp(r'^Scanner( settings|-Einstellungen)$')),
+      );
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('the tune button opens them; the switches are stored', (
+      tester,
+    ) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester);
+      await open(tester);
+      expect(
+        find.text('Take the photo when the page is steady'),
+        findsOneWidget,
+      );
+      await tester.tap(find.text('Auto-crop'));
+      await tester.pumpAndSettle();
+      expect(prefs.json, contains('"autoCrop":false'));
+      await tester.tap(find.text('Auto-capture').last);
+      await tester.pumpAndSettle();
+      expect(prefs.json, contains('"autoCapture":true'));
+      semantics.dispose();
+    });
+
+    testWidgets(
+      'Default filter: a choice from the list; More goes to Settings',
+      (tester) async {
+        final semantics = tester.ensureSemantics();
+        await pump(tester);
+        await open(tester);
+        expect(find.text('Auto colour'), findsOneWidget, reason: 'the default');
+        await tester.tap(find.text('Default filter'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('Black & white'));
+        await tester.pumpAndSettle();
+        expect(prefs.json, contains('"filter":"blackWhite"'));
+        expect(
+          find.text('Black & white'),
+          findsOneWidget,
+          reason: 'shown as the value',
+        );
+        await tester.tap(find.text('More scanning settings'));
+        await tester.pumpAndSettle();
+        expect(settingsOpened, 1);
+        semantics.dispose();
+      },
+    );
+
+    testWidgets('page sizes: A4 first in German', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await pump(tester, locale: const Locale('de'));
+      await open(tester);
+      await tester.tap(find.text('Seitengröße'));
+      await tester.pumpAndSettle();
+      final a4 = tester.getTopLeft(find.text('A4')).dy;
+      final letter = tester.getTopLeft(find.text('Letter')).dy;
+      expect(a4, lessThan(letter));
+      semantics.dispose();
+    });
+
+    for (final (name, tokens, locale) in [
+      ('light', DkTokens.light, const Locale('en')),
+      ('dark', DkTokens.dark, const Locale('en')),
+      ('de', DkTokens.light, const Locale('de')),
+    ]) {
+      testWidgets('golden: quick settings ($name)', (tester) async {
+        final semantics = tester.ensureSemantics();
+        await pump(tester, tokens: tokens, locale: locale);
+        await open(tester);
+        semantics.dispose();
+        await expectLater(
+          find.byType(MaterialApp),
+          matchesGoldenFile('goldens/s1_quick_settings_$name.png'),
+        );
+      });
+    }
+  });
+
   testWidgets('closing the screen closes the camera', (tester) async {
     await pump(tester);
     await tester.pumpWidget(const SizedBox());
@@ -414,4 +518,96 @@ void main() {
       );
     });
   }
+
+  group('modes (DK-0346, DK-0347, DK-0348)', () {
+    void setMode(DkScanMode m) =>
+        container.read(scanModeStateProvider.notifier).set(m);
+
+    testWidgets('ID card: front, then "Turn the card over", then the review', (
+      tester,
+    ) async {
+      await pump(tester);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Front side'), findsOneWidget);
+      expect(find.text('Point at a document'), findsNothing);
+      await capture(tester);
+      expect(find.text('Turn the card over'), findsOneWidget);
+      expect(reviewed, 0);
+      await capture(tester);
+      expect(reviewed, 1);
+      expect(container.read(scanSessionProvider), hasLength(2));
+      expect(find.text('Front side'), findsOneWidget, reason: 'ready again');
+    });
+
+    testWidgets('ID card: switching modes forgets a half-done card', (
+      tester,
+    ) async {
+      await pump(tester);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      await capture(tester);
+      expect(find.text('Turn the card over'), findsOneWidget);
+      setMode(DkScanMode.document);
+      await tester.pumpAndSettle();
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Front side'), findsOneWidget);
+    });
+
+    testWidgets('a retake says which page, even in ID card mode', (
+      tester,
+    ) async {
+      await pump(tester, retake: 1);
+      setMode(DkScanMode.idCard);
+      await tester.pumpAndSettle();
+      expect(find.text('Retake page 2'), findsOneWidget);
+      expect(find.text('Front side'), findsNothing);
+    });
+
+    testWidgets('Book: the spine guide, and the hint stays', (tester) async {
+      await pump(tester);
+      setMode(DkScanMode.book);
+      await tester.pumpAndSettle();
+      expect(find.text('Align the spine with the line'), findsOneWidget);
+      expect(find.text('Point at a document'), findsOneWidget);
+    });
+
+    testWidgets('Batch: the larger count once pages are taken', (tester) async {
+      await pump(tester);
+      setMode(DkScanMode.batch);
+      await tester.pumpAndSettle();
+      expect(find.text('2 pages'), findsNothing);
+      await capture(tester);
+      await capture(tester);
+      expect(find.text('2 pages'), findsOneWidget);
+    });
+
+    for (final (name, mode, shots, tokens, locale) in [
+      ('idfront', DkScanMode.idCard, 0, DkTokens.light, const Locale('en')),
+      ('idback', DkScanMode.idCard, 1, DkTokens.light, const Locale('en')),
+      ('idback_de', DkScanMode.idCard, 1, DkTokens.light, const Locale('de')),
+      ('book', DkScanMode.book, 0, DkTokens.dark, const Locale('en')),
+      ('batch', DkScanMode.batch, 3, DkTokens.light, const Locale('en')),
+    ]) {
+      testWidgets('golden: $name', (tester) async {
+        await pump(tester, tokens: tokens, locale: locale);
+        setMode(mode);
+        await tester.pumpAndSettle();
+        for (var i = 0; i < shots; i++) {
+          await capture(tester);
+        }
+        await tester.runAsync(() async {
+          for (final e in find.byType(Image).evaluate()) {
+            await precacheImage((e.widget as Image).image, e);
+          }
+        });
+        await tester.pumpAndSettle();
+        await expectLater(
+          find.byType(S1Screen),
+          matchesGoldenFile('goldens/s1_mode_$name.png'),
+        );
+      });
+    }
+  });
 }
