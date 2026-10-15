@@ -164,6 +164,39 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets("Image to PDF: picked files that aren't images are skipped, "
+      'and a banner says so (DK-0435)', (tester) async {
+    devicePicks = [
+      for (final name in ['IMG_0004.jpg', 'notes.txt', 'scan.pdf'])
+        (File('${root.path}$sep$name')..writeAsStringSync('x')).path,
+    ];
+    await pumpT2(tester, def('img2pdf'));
+    await tester.tap(find.text('Choose photos'));
+    await settle(tester);
+    expect(find.text('Images (1)'), findsOneWidget);
+    expect(
+      find.text("2 files aren't images and were skipped."),
+      findsOneWidget,
+    );
+    await tester.pumpWidget(const SizedBox());
+  });
+
+  testWidgets('Image to PDF: when nothing picked is an image, the picker '
+      'stays and the banner says so', (tester) async {
+    devicePicks = [
+      for (final name in ['notes.txt', 'scan.pdf'])
+        (File('${root.path}$sep$name')..writeAsStringSync('x')).path,
+    ];
+    await pumpT2(tester, def('img2pdf'));
+    await tester.tap(find.text('Choose photos'));
+    await settle(tester);
+    expect(find.text('Choose images'), findsOneWidget);
+    expect(
+      find.text("2 files aren't images and were skipped."),
+      findsOneWidget,
+    );
+  });
+
   testWidgets('a HEIC photo reaches the tool as a JPEG (DK-1081)', (
     tester,
   ) async {
