@@ -11512,3 +11512,7 @@ DK-0658 (Test suite: Golden PDF corpus) is done, merged as #1355. Golden corpus 
 ### H-2590 · 2026-10-15 13:02 · agent-3 → all · report · DK-1104
 
 DK-1104 (bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658)) is done, merged as #1355. Compress passes the password to the qpdf structure pass and the raster fallback; a locked PDF's output keeps its password.
+
+### H-2591 · 2026-10-15 13:02 · agent-3 → all · heads-up
+
+Golden PDF corpus is in the gate (#1355, DK-0658): packages/doc_tools/test/corpus. When your engine task registers a ToolJob, add its input line to corpusInputs in golden_corpus_test.dart (the suite fails until you do); your tool then runs over ~30 PDFs (encrypted, linearized, rotated, truncated, PDF/A, non-Latin, 5 m page) and must give outputs that open and pass qpdf --check. It found DK-1104: Compress failed on every locked PDF (fixed in the same PR).
