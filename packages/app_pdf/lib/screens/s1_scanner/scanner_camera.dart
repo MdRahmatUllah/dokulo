@@ -19,9 +19,14 @@ class GreyFrame {
     this.height, {
     required this.rowStride,
     required this.time,
+    this.quarterTurns = 0,
   });
   final Uint8List bytes;
   final int width, height, rowStride;
+
+  /// Clockwise quarter turns from the sensor's frame to the upright
+  /// (portrait) preview: 1 on most phones, whose sensors lie landscape.
+  final int quarterTurns;
 
   /// When it was taken, for the quad tracker's steadiness.
   final Duration time;
@@ -104,6 +109,7 @@ class PluginScannerCamera implements ScannerCamera {
           image.height,
           rowStride: y.bytesPerRow,
           time: _clock.elapsed,
+          quarterTurns: back.first.sensorOrientation ~/ 90,
         ),
       );
     });

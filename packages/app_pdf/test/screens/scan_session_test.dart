@@ -2,10 +2,36 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('a quad from a landscape sensor turns upright, top-left first', () {
+    // A page in the sensor frame's left half, as a phone held upright sees
+    // it in the preview's top half.
+    const sensor = [
+      Offset(0.1, 0.2),
+      Offset(0.5, 0.2),
+      Offset(0.5, 0.8),
+      Offset(0.1, 0.8),
+    ];
+    expect(uprightQuad(sensor, 0), sensor);
+    final up = uprightQuad(sensor, 1);
+    for (final (a, b) in [
+      (up[0], const Offset(0.2, 0.1)),
+      (up[1], const Offset(0.8, 0.1)),
+      (up[2], const Offset(0.8, 0.5)),
+      (up[3], const Offset(0.2, 0.5)),
+    ]) {
+      expect((a - b).distance, lessThan(1e-9));
+    }
+    final back = uprightQuad(up, 3);
+    for (var i = 0; i < 4; i++) {
+      expect((back[i] - sensor[i]).distance, lessThan(1e-9));
+    }
+  });
+
   late Directory dir;
   ProviderContainer session() {
     final c = ProviderContainer(
