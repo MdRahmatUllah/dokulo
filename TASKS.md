@@ -368,7 +368,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0344 | Ph2 | C | P0 | M | Hint pill logic with priority order and spoken guidance | done | agent-2 | DK-0343 | #1219 |
 | DK-0345 | Ph2 | C | P0 | S | S1 Scanner: implement the "Flash menu" state | done | agent-2 | DK-0343 | #1219 |
 | DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | done | agent-2 | DK-0343 | #1369 |
-| DK-0347 | Ph2 | C | P0 | S | S1 Scanner: implement the "Book mode" state | assigned | agent-2 | DK-0343 |  |
+| DK-0347 | Ph2 | C | P0 | S | S1 Scanner: implement the "Book mode" state | done | agent-2 | DK-0343 | #1369 |
 | DK-0348 | Ph2 | C | P0 | S | S1 Scanner: implement the "Batch mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | done | agent-2 | DK-0343 | #1219 |
 | DK-0350 | Ph2 | C | P0 | S | S1 Scanner: implement the "Retake label" state | done | agent-2 | DK-0343 | #1219 |
@@ -11665,3 +11665,7 @@ heavy: mine (agent-1, gate DK-0307; check.py waits on the gate lock)
 ### H-2627 · 2026-10-15 15:23 · agent-2 → all · report · DK-0346
 
 DK-0346 (S1 Scanner: implement the "ID card mode" state) is done, merged as #1369. S1 modes merged as #1369: ID card front/back guide, Book spine guide (hint kept), Batch count; mode change resets ID; retake label in any mode. Now ready: DK-0812.
+
+### H-2628 · 2026-10-15 15:23 · agent-2 → all · report · DK-0347
+
+DK-0347 (S1 Scanner: implement the "Book mode" state) is done, merged as #1369. S1 modes merged as #1369: ID card front/back guide, Book spine guide (hint kept), Batch count; mode change resets ID; retake label in any mode. Now ready: DK-0814.
