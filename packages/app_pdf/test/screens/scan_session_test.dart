@@ -2,10 +2,46 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:app_pdf/screens/s1_scanner/scanner_camera.dart';
+import 'package:flutter/services.dart' show DeviceOrientation;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  test('frame turns: Android takes the device turn off the sensor turn; '
+      'iOS frames come upright', () {
+    expect(frameTurns(90, DeviceOrientation.portraitUp, ios: false), 1);
+    expect(frameTurns(90, DeviceOrientation.landscapeLeft, ios: false), 0);
+    expect(frameTurns(90, DeviceOrientation.landscapeRight, ios: false), 2);
+    expect(frameTurns(270, DeviceOrientation.portraitUp, ios: false), 3);
+    expect(frameTurns(90, DeviceOrientation.portraitUp, ios: true), 0);
+  });
+
+  test('a quad from a landscape sensor turns upright, top-left first', () {
+    // A page in the sensor frame's left half, as a phone held upright sees
+    // it in the preview's top half.
+    const sensor = [
+      Offset(0.1, 0.2),
+      Offset(0.5, 0.2),
+      Offset(0.5, 0.8),
+      Offset(0.1, 0.8),
+    ];
+    expect(uprightQuad(sensor, 0), sensor);
+    final up = uprightQuad(sensor, 1);
+    for (final (a, b) in [
+      (up[0], const Offset(0.2, 0.1)),
+      (up[1], const Offset(0.8, 0.1)),
+      (up[2], const Offset(0.8, 0.5)),
+      (up[3], const Offset(0.2, 0.5)),
+    ]) {
+      expect((a - b).distance, lessThan(1e-9));
+    }
+    final back = uprightQuad(up, 3);
+    for (var i = 0; i < 4; i++) {
+      expect((back[i] - sensor[i]).distance, lessThan(1e-9));
+    }
+  });
+
   late Directory dir;
   ProviderContainer session() {
     final c = ProviderContainer(

@@ -136,6 +136,35 @@ void main() {
     await tester.pumpAndSettle();
   }
 
+  testWidgets('a screen reader reads S1 top to bottom: the bar, the hint, '
+      'the modes, then the capture row (DK-0637)', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pump(tester);
+    final labels = [
+      for (final node in tester.semantics.simulatedAccessibilityTraversal())
+        node.label,
+    ];
+    printOnFailure(labels.join('\n'));
+    expect(
+      labels,
+      containsAllInOrder([
+        'Close scanner',
+        'Flash: Off',
+        'Auto-capture',
+        'Grid',
+        'Scanner settings',
+        'Point at a document', // the hint
+        'Document',
+        'ID card',
+        'Book',
+        'Batch',
+        'Import from photos',
+        'Take photo',
+      ]),
+    );
+    semantics.dispose();
+  });
+
   testWidgets('opens the camera; without a document: "Point at a document"', (
     tester,
   ) async {
