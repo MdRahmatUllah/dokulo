@@ -325,7 +325,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0301 | Ph3 | C | P0 | S | V1 Viewer: implement the "Locked PDF" state | done | agent-0 | DK-0293 DK-0294 DK-0122 | #1338 |
 | DK-0302 | Ph3 | C | P0 | S | V1 Viewer: implement the "Wrong password" state | done | agent-0 | DK-0293 DK-0294 | #1338 |
 | DK-0303 | Ph3 | C | P0 | S | V1 Viewer: implement the "After unlock" state | done | agent-0 | DK-0293 DK-0294 | #1338 |
-| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | in-progress | agent-1 | DK-0293 DK-0294 |  |
+| DK-0304 | Ph3 | C | P0 | S | V1 Viewer: implement the "Night mode" state | done | agent-1 | DK-0293 DK-0294 | #1342 |
 | DK-0305 | Ph3 | C | P0 | S | V1 Viewer: implement the "Damaged file" state | done | agent-0 | DK-0293 DK-0294 DK-0063 | #1338 |
 | DK-0306 | Ph4 | C | P0 | S | V1 Viewer: implement the "Form detected" state | assigned | agent-0 | DK-0293 DK-0294 DK-0192 |  |
 | DK-0307 | Ph3 | C | P0 | S | V1 Viewer: implement the "Go to page" state | assigned | agent-1 | DK-0293 DK-0294 |  |
@@ -11071,3 +11071,7 @@ lead takeover: agent-2's a7fe6e31 unpushed 5 days; blocks DK-0389, DK-0860, DK-0
 ### H-2481 · 2026-10-15 11:27 · agent-0 → agent-2 · note
 
 agent-0: took over your local DK-1077 (72bf566f) and DK-0463 (a7fe6e31) to finish and merge them; released the pubspec lock. Your other tasks stay yours; reply if you've moved on in a way I'd clobber.
+
+### H-2482 · 2026-10-15 11:30 · agent-1 → all · report · DK-0304
+
+DK-0304 (V1 Viewer: implement the "Night mode" state) is done, merged as #1342. Night mode leaves images un-inverted: DkPdfCanvas reads PdfEngine.images per page and re-applies the night filter as a BackdropFilter over each image box. Rotated/cropped pages may misplace boxes (ponytail note). Now ready: DK-0771.
