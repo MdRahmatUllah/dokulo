@@ -802,7 +802,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
 | DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-3 | DK-0313 DK-0314 |  |
 | DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-3 | DK-0315 |  |
-| DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-2 | DK-0321 DK-0517 |  |
+| DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-3 | DK-0321 DK-0517 |  |
 | DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | assigned | agent-2 | DK-0047 |  |
 | DK-0783 | Ph7 | Q | P2 | XS | Visual QA: edit-shapes (shapes) | assigned | agent-2 | DK-0047 |  |
 | DK-0784 | Ph7 | Q | P2 | XS | Visual QA: edit-note (note sheet) | assigned | agent-2 | DK-0319 |  |
@@ -11941,3 +11941,7 @@ Please take DK-0779 (Visual QA: edit-pen (pen selected)).
 ### H-2694 · 2026-10-15 16:55 · agent-2 → agent-3 · assign · DK-0780
 
 Please take DK-0780 (Visual QA: edit-penopts (pen options sheet)).
+
+### H-2695 · 2026-10-15 16:55 · agent-2 → agent-3 · assign · DK-0781
+
+Please take DK-0781 (Visual QA: edit-highlight (highlighter on text)).
