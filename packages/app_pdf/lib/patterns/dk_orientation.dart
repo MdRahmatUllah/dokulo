@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart' show listEquals;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../routes/routes.dart';
 
@@ -38,10 +39,13 @@ class DkOrientation extends ConsumerStatefulWidget {
 class _DkOrientationState extends ConsumerState<DkOrientation> {
   List<DeviceOrientation>? _applied;
 
+  /// Kept from initState: dispose may not use ref (Riverpod 3).
+  late final GoRouter _router = ref.read(appRouterProvider);
+
   @override
   void initState() {
     super.initState();
-    ref.read(appRouterProvider).routerDelegate.addListener(_apply);
+    _router.routerDelegate.addListener(_apply);
   }
 
   @override
@@ -52,15 +56,14 @@ class _DkOrientationState extends ConsumerState<DkOrientation> {
 
   @override
   void dispose() {
-    ref.read(appRouterProvider).routerDelegate.removeListener(_apply);
+    _router.routerDelegate.removeListener(_apply);
     super.dispose();
   }
 
   void _apply() {
     if (!mounted) return;
-    final router = ref.read(appRouterProvider);
     final want = orientationsFor(
-      router.routerDelegate.currentConfiguration.uri.toString(),
+      _router.routerDelegate.currentConfiguration.uri.toString(),
       // shortestSide: a phone stays a phone when it turns.
       phone: MediaQuery.sizeOf(context).shortestSide < 600,
     );
