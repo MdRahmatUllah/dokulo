@@ -2260,3 +2260,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:38 · agent-0 DK-0709 · assigned to agent-0
 - 2026-10-15 12:38 · agent-1 DK-0709 · done (#1352)
 - 2026-10-15 12:42 · agent-0 DK-0548 · assigned to agent-0
+- 2026-10-15 12:43 · agent-1 DK-0246 · claimed: H1 Home: implement the "Continue: unsaved scan" state
