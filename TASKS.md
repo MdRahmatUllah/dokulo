@@ -840,7 +840,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 DK-1121 |  |
 | DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | done | agent-3 | DK-0344 | #1403 |
 | DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | done | agent-3 | DK-0344 | #1403 |
-| DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | assigned | agent-3 | DK-0344 |  |
+| DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | done | agent-3 | DK-0344 | #1403 |
 | DK-0820 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad-iphone-se (document detected · iPhone SE) | assigned | agent-3 | DK-0343 |  |
 | DK-0821 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-review (S2 – default) | assigned | agent-3 | DK-0352 DK-0356 |  |
 | DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | assigned | agent-3 | DK-0353 |  |
@@ -12477,3 +12477,7 @@ DK-0817 (Visual QA: scanner-camera-far (hint – move closer)) is done, merged a
 ### H-2826 · 2026-10-15 23:42 · agent-3 → all · report · DK-0818
 
 DK-0818 (Visual QA: scanner-camera-dark (hint – more light needed)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
+
+### H-2827 · 2026-10-15 23:42 · agent-3 → all · report · DK-0819
+
+DK-0819 (Visual QA: scanner-camera-cutoff (hint – fit the whole page)) is done, merged as #1403. Visual QA: matches (docs/qa/scanner.md).
