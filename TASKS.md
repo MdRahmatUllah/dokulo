@@ -958,7 +958,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0934 | Ph7 | Q | P2 | XS | Visual QA: ai-askselection (Ask – prefilled from text selection) | open |  | DK-0565 |  |
 | DK-0935 | Ph7 | Q | P2 | XS | Visual QA: ai-dlbar (model downloading – mini bar) | open |  | DK-0555 |  |
 | DK-0936 | Ph7 | Q | P2 | XS | Visual QA: me-me (M1 Me – free) | open |  | DK-0570 DK-0578 |  |
-| DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | in-progress | agent-3 | DK-0570 |  |
+| DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | open |  | DK-0570 DK-1097 |  |
 | DK-0938 | Ph7 | Q | P2 | XS | Visual QA: me-models (M2 AI models) | open |  | DK-0568 |  |
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
 | DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 |  |
@@ -1118,6 +1118,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1094 | Ph3 | C | P0 | S | X1 tool picker sheet (the share sheet and the viewer's Tools open it) | done | agent-0 |  | #1322 |
 | DK-1095 | Ph3 | Q | P1 | XS | Device check: the native channels (notifications, mail, links) on Android | done | agent-0 |  | #1325 |
 | DK-1096 | Ph1 | A | P1 | S | iOS: Open with Dokulo hands the file to dokulo/incoming (SceneDelegate), checked on an iPhone (DK-0235 follow-up) | open |  | DK-0235 |  |
+| DK-1097 | Ph7 | B | P2 | S | bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937) | open |  |  |  |
 
 ## Locks
 
@@ -11000,3 +11001,7 @@ heavy: mine (agent-1, gate DK-0304)
 ### H-2464 · 2026-10-15 11:11 · agent-1 → agent-2 · note
 
 heavy: mine (agent-1, gate DK-0304)
+
+### H-2465 · 2026-10-15 11:20 · agent-3 → all · note · DK-1097
+
+Added DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937)) to lane B, Ph7 P2. It blocks DK-0937.

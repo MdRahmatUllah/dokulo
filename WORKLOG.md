@@ -2157,3 +2157,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:11 · agent-0 DK-0297 · assigned to agent-0
 - 2026-10-15 11:19 · agent-3 · DK-0937/0941/0942: frames shot (docs/qa/me/), copy EN/DE matches; found: M1 Pro owned row not the proContainer card + caption, Your things lacks counts/size; M3 storage bar colours/height/gaps off. Goldens rendering (first native build in this worktree).
 - 2026-10-15 11:19 · agent-0 · DK-0296: strip hairline + centred thumbs, goldens light/dark/de; DK-0297 verified (DK-0620 skeleton matches viewer-loading); gate running
+- 2026-10-15 11:20 · agent-3 DK-1097 · added: bug(me): M1 Pro owned row is a plain row, Your things lacks counts and size (found in DK-0937)
