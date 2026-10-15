@@ -55,7 +55,7 @@ PR. Checked on pub.dev on 2026-10-07.
 | local_auth | 3.0.2 | BSD-3 | Biometric unlock (the plan said 2.x; 3 is current) | In use (DK-0282) |
 | background_downloader | 9.6.4 | BSD-3 | Model downloads | Planned |
 | file_picker | 13.1.0 | MIT | Pick PDFs and images | In use (DK-0241) |
-| share_plus | 13.3.1 | BSD-3 | Share results | Planned |
+| share_plus | 13.3.1 | BSD-3 | Share results | In use (DK-1077) |
 | path_provider | 2.1.6 | BSD-3 | Sandbox paths | In use (DK-0005, app_pdf) |
 | photo_manager | 3.12.0 | Apache-2.0 | Find documents in photos | Planned |
 | webview_flutter | 4.14.1 | BSD-3 | Web page to PDF | Planned |
