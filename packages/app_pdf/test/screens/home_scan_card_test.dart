@@ -6,9 +6,11 @@ import 'package:app_pdf/components/dk_promo_cards.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/screens/home/continue_card.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
+import 'package:app_pdf/screens/s2_review/s2_screen.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:image/image.dart' as img;
 
 import 'home_screen_test.dart' show pumpHome;
 
@@ -30,7 +32,7 @@ void main() {
         },
     ];
     for (final p in pages) {
-      store.files[p['path']! as String] = Uint8List(0);
+      store.files[p['path']! as String] = _page;
     }
     store.manifest = jsonEncode(pages);
     return store;
@@ -40,14 +42,14 @@ void main() {
     tester,
   ) async {
     final at = DateTime.now().subtract(const Duration(minutes: 5));
-    final router = await pumpHome(tester, db, scanStore: leftScan(6, at));
+    await pumpHome(tester, db, scanStore: leftScan(6, at));
     await tester.pumpAndSettle();
     expect(find.text('Scan of 6 pages not saved'), findsOneWidget);
     final en = await AppLocalizations.delegate.load(const Locale('en'));
     expect(find.text(started(en, at, 'en', DateTime.now())), findsOneWidget);
     await tester.tap(find.text('Continue'));
-    await tester.pump();
-    expect(router.routerDelegate.currentConfiguration.uri.path, '/scan/review');
+    await tester.pumpAndSettle();
+    expect(find.byType(S2Screen), findsOneWidget);
   });
 
   testWidgets('× hides the card; the scan stays', (tester) async {
@@ -96,3 +98,10 @@ void main() {
     expect(scanStarted(const ScannedPage('odd', 'p')), isNull);
   });
 }
+
+/// A paper-coloured 30 × 40 JPEG: S2 decodes the pages it opens.
+final _page = Uint8List.fromList(
+  img.encodeJpg(
+    img.Image(width: 30, height: 40)..clear(img.ColorRgb8(240, 238, 230)),
+  ),
+);
