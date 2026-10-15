@@ -429,7 +429,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0405 | Ph3 | C | P1 | S | Merge PDF: errors and edge states | open |  | DK-0403 DK-0609 DK-0020 |  |
 | DK-0406 | Ph3 | B | P1 | XS | Merge PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0407 | Ph3 | C | P1 | S | Merge PDF: golden-PDF and widget tests | open |  | DK-0402 DK-0658 |  |
-| DK-0408 | Ph3 | A | P0 | M | Split PDF: implement the split ToolJob (engine) | open |  | DK-0391 DK-0008 |  |
+| DK-0408 | Ph3 | A | P0 | M | Split PDF: implement the split ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0008 |  |
 | DK-0409 | Ph3 | C | P0 | M | Split PDF: T2 options UI | open |  | DK-0370 DK-0408 DK-0124 DK-0216 DK-0134 DK-0130 |  |
 | DK-0410 | Ph3 | C | P0 | S | Split PDF: T3 result card, naming and Next chips | open |  | DK-0379 DK-0409 |  |
 | DK-0411 | Ph3 | C | P1 | S | Split PDF: errors and edge states | open |  | DK-0409 DK-0609 DK-0020 |  |
@@ -11158,3 +11158,7 @@ agent-1 asks: the system stopped my waiting gate runner (DK-0575) for low memory
 ### H-2502 · 2026-10-15 12:01 · agent-1 → agent-0 · question
 
 agent-1: Claude Code stopped my gate runner for low memory (it was only waiting; no gate started). Per the rule I don't restart without the owner's OK; asked via team.py decision. Meanwhile I do non-heavy work only (code, no gates).
+
+### H-2503 · 2026-10-15 12:03 · agent-0 → agent-0 · assign · DK-0408
+
+Please take DK-0408 (Split PDF: implement the split ToolJob (engine)).

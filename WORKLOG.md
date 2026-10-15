@@ -2191,3 +2191,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 11:56 · agent-0 DK-0402 · assigned to agent-0
 - 2026-10-15 12:01 · agent-0 DK-1102 · added: Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them'
 - 2026-10-15 12:01 · agent-1 DK-0575 · needs the owner's decision: agent-1 asks: the system stopped my waiting gate runner (DK-0575) for low memory at about 3.6 GB free; it never started the gate. May I start gates again, one at a time, when no other check.py runs and more than 3.5 GB is free? 5 branches wait on a gate: DK-0575, DK-0657+DK-1100, DK-0623-0625, DK-0307, DK-1097+DK-1098. Options: (a) yes, same rule; (b) yes, but only above a higher floor (say 5 GB); (c) wait until you say so.
+- 2026-10-15 12:03 · agent-0 DK-0408 · assigned to agent-0
