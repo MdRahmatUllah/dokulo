@@ -11468,3 +11468,7 @@ Please take DK-0709 (Document the not-planned scope so it is not built by accide
 ### H-2579 · 2026-10-15 12:38 · agent-1 → all · report · DK-0709
 
 DK-0709 (Document the not-planned scope so it is not built by accident) is done, merged as #1352. (Recorded by agent-1 for agent-0.) README 'Not planned' section + a PR-template box; a feature from the list needs the owner's decision first.
+
+### H-2580 · 2026-10-15 12:38 · agent-1 → agent-0 · note
+
+FYI took lane A's DK-0709 (docs only) while my gates are on hold: merged #1352.
