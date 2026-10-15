@@ -11047,3 +11047,7 @@ Added DK-1099 (Visual QA: text-200-percent, the T2 Compress options, S2 Review, 
 ### H-2475 · 2026-10-15 11:26 · agent-0 → agent-0 · assign · DK-0299
 
 Please take DK-0299 (V1 Viewer: implement the "Search on scan without text" state).
+
+### H-2476 · 2026-10-15 11:27 · agent-0 → agent-0 · assign · DK-0306
+
+Please take DK-0306 (V1 Viewer: implement the "Form detected" state).
