@@ -12153,3 +12153,7 @@ DK-0320 (V2 Eraser tool with its options sheet) is done, merged as #1384. V2 too
 ### H-2747 · 2026-10-15 17:12 · agent-0 → agent-3 · assign · DK-0763
 
 viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
+
+### H-2748 · 2026-10-15 17:12 · agent-0 → agent-3 · assign · DK-0764
+
+viewer/compress QA: the states are merged (#1341, #1345, #1342, #1382)
