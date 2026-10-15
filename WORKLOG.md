@@ -2267,3 +2267,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:56 · agent-2 · unlocked pubspec
 - 2026-10-15 13:01 · agent-3 · heavy: free
 - 2026-10-15 13:01 · agent-3 DK-0658 · PR #1355 open; review requested from all
+- 2026-10-15 13:02 · agent-3 DK-0658 · done (#1355)
