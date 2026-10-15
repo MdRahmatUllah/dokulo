@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_camera_top_bar.dart';
@@ -43,4 +44,8 @@ List<Override> scannerOverrides() => [
   scannerCameraProvider.overrideWith((ref) => _FakeCamera()),
   scanStoreProvider.overrideWithValue(MemoryScanStore()),
   scannerPrefsStoreProvider.overrideWithValue(MemoryPrefsStore()),
+  // The system photo picker stays open: the tests see S2 behind it.
+  scanImportPickerProvider.overrideWithValue(
+    () => Completer<List<Uint8List>>().future,
+  ),
 ];
