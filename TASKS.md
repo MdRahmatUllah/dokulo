@@ -831,7 +831,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-3 | DK-0342 DK-0621 |  |
 | DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | assigned | agent-3 | DK-0343 DK-0344 |  |
 | DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | assigned | agent-2 | DK-0343 DK-0349 DK-0369 |  |
-| DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | assigned | agent-2 | DK-0338 |  |
+| DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | assigned | agent-3 | DK-0338 |  |
 | DK-0811 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-flash (flash menu open) | assigned | agent-2 | DK-0345 |  |
 | DK-0812 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idfront (ID card – front) | assigned | agent-2 | DK-0340 DK-0346 |  |
 | DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | assigned | agent-2 | DK-0340 |  |
@@ -11880,3 +11880,7 @@ Please take DK-0807 (Visual QA: scanner-camera-denied (permission denied)).
 ### H-2679 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0808
 
 Please take DK-0808 (Visual QA: scanner-camera-nodoc (no document)).
+
+### H-2680 · 2026-10-15 16:42 · agent-3 → agent-3 · assign · DK-0810
+
+Please take DK-0810 (Visual QA: scanner-camera-countdown (auto-capture countdown)).
