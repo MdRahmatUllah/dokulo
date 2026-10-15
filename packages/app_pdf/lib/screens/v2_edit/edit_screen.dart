@@ -79,7 +79,15 @@ List<(IconData, String)> _labels(AppLocalizations l) => [
 /// text box or note asks for its text. [fromSign]: entered from
 /// Sign, so Pan is selected and the signatures sheet opens.
 class EditScreen extends ConsumerStatefulWidget {
-  const EditScreen({super.key, required this.fileId, this.fromSign = false});
+  const EditScreen({
+    super.key,
+    required this.fileId,
+    this.fromSign = false,
+    this.startTool,
+  });
+
+  /// Selected when the file is open (Mark up: the highlighter, DK-0517).
+  final EditTool? startTool;
 
   final int fileId;
   final bool fromSign;
@@ -144,6 +152,10 @@ class _EditScreenState extends ConsumerState<EditScreen> {
       _editor = AnnotationEditor(read: read)..tool = EditTool.pan;
     });
     if (widget.fromSign) await _sign();
+    if (widget.startTool case final tool?) {
+      final index = _strip.indexOf(tool);
+      if (index >= 0) _select(index);
+    }
   }
 
   void _select(int index) {
