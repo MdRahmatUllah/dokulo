@@ -691,7 +691,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0667 | Ph7 | B | P0 | M | Test suite: Large file robustness | open |  | DK-0010 DK-0668 DK-0658 |  |
 | DK-0668 | Ph1 | Q | P0 | S | Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets | done | agent-0 |  | #1160 |
 | DK-0669 | Ph1 | B | P1 | M | Usability test of Home, Scanner and the tool shell with 5 users before building further | open |  | DK-1012 |  |
-| DK-0670 | Ph7 | Q | P0 | M | Release regression checklist per phase build | review | agent-3 | DK-0668 DK-0015 | #1348 |
+| DK-0670 | Ph7 | Q | P0 | M | Release regression checklist per phase build | done | agent-3 | DK-0668 DK-0015 | #1348 |
 | DK-0671 | Ph7 | Q | P0 | M | Audit every screen against the 10 UX principles | open |  | DK-0665 |  |
 | DK-0672 | Ph1 | A | P0 | S | Compliance: Licence register | done | agent-1 |  | #106 |
 | DK-0673 | Ph7 | A | P0 | S | Compliance: In-app licence screen generation | open |  | DK-0672 |  |
@@ -11678,3 +11678,7 @@ DK-0348 (S1 Scanner: implement the "Batch mode" state) is done, merged as #1369.
 ### H-2630 · 2026-10-15 15:24 · agent-3 → all · note · DK-1110
 
 Added DK-1110 (bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670)) to lane A, Ph7 P2.
+
+### H-2631 · 2026-10-15 15:26 · agent-3 → all · report · DK-0670
+
+DK-0670 (Release regression checklist per phase build) is done, merged as #1348. Checklist docs/qa/regression-checklist.md (#1348, #1349, #1371): per build: APK checks, full golden corpus, device pass, sign-off log. First run 08e2bffc on emulator-5554: partial, bugs DK-1107..DK-1110. Every phase build gets a log row.
