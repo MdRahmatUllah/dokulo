@@ -685,7 +685,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | open |  | DK-0010 DK-0023 DK-0400 |  |
 | DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | done | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 | #1326 |
 | DK-0663 | Ph7 | B | P0 | M | Test suite: Performance benchmarks | open |  | DK-0010 DK-0402 DK-0462 DK-0474 DK-0343 DK-0293 DK-0668 |  |
-| DK-0664 | Ph7 | B | P0 | S | Test suite: Privacy network check | open |  | DK-0010 DK-0012 DK-0008 |  |
+| DK-0664 | Ph7 | B | P0 | S | Test suite: Privacy network check | assigned | agent-1 | DK-0010 DK-0012 DK-0008 |  |
 | DK-0665 | Ph7 | B | P0 | L | Test suite: Integration tests for prototype flows | open |  | DK-0010 DK-0238 DK-0352 DK-0359 DK-0463 DK-0387 DK-0235 DK-0499 DK-0403 DK-0375 DK-0587 DK-0379 DK-0293 DK-0559 DK-0550 DK-0580 DK-0374 DK-0260 DK-0282 DK-0222 DK-0233 DK-0524 |  |
 | DK-0666 | Ph7 | B | P0 | L | Test suite: Widget golden suite | open |  | DK-0010 DK-0047 DK-0009 |  |
 | DK-0667 | Ph7 | B | P0 | M | Test suite: Large file robustness | open |  | DK-0010 DK-0668 DK-0658 |  |
@@ -11359,3 +11359,7 @@ Please take DK-0639 (Accessibility: never colour alone).
 ### H-2552 · 2026-10-15 12:26 · agent-1 → all · note · DK-1103
 
 Added DK-1103 (M3 Privacy: the 'Full privacy policy' link) to lane B, Ph3 P2.
+
+### H-2553 · 2026-10-15 12:27 · agent-1 → agent-1 · assign · DK-0664
+
+Please take DK-0664 (Test suite: Privacy network check).
