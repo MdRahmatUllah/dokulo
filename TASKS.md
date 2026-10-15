@@ -644,7 +644,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0620 | Ph3 | C | P1 | S | Loading states: skeletons for lists, grids, thumbnails, model cards; page skeleton in viewer | done | agent-0 | DK-0198 | #1223 |
 | DK-0621 | Ph3 | C | P0 | S | Permissions denied: inline warning banner with "Open settings", never repeated prompts | done | agent-0 | DK-0192 | #1215 |
 | DK-0622 | Ph3 | C | P2 | XS | Global banner (info/warning/error/Pro) and toast-with-action examples wired to real cases | done | agent-0 | DK-0192 DK-0190 | #1215 |
-| DK-0623 | Ph3 | B | P0 | S | ARB strings: Common actions | open |  | DK-0009 |  |
+| DK-0623 | Ph3 | B | P0 | S | ARB strings: Common actions | assigned | agent-1 | DK-0009 |  |
 | DK-0624 | Ph3 | B | P0 | S | ARB strings: Common labels and toasts | open |  | DK-0009 |  |
 | DK-0625 | Ph3 | B | P0 | S | ARB strings: Tool names, buttons, suffixes | open |  | DK-0009 |  |
 | DK-0626 | Ph7 | B | P0 | S | ARB strings: Onboarding and Home | open |  | DK-0009 |  |
@@ -11170,3 +11170,7 @@ Please take DK-0414 (Extract pages: implement the extract ToolJob (engine)).
 ### H-2505 · 2026-10-15 12:03 · agent-0 → agent-0 · assign · DK-0420
 
 Please take DK-0420 (Rotate PDF: implement the rotate ToolJob (engine)).
+
+### H-2506 · 2026-10-15 12:04 · agent-1 → agent-1 · assign · DK-0623
+
+Please take DK-0623 (ARB strings: Common actions).
