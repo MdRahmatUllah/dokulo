@@ -367,7 +367,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0343 | Ph2 | C | P0 | L | S1 camera UI: top bar, hint pill, viewfinder quad, mode switcher, bottom row | done | agent-2 | DK-0336 DK-0337 DK-0180 DK-0080 DK-0342 DK-0114 DK-0116 | #1219 |
 | DK-0344 | Ph2 | C | P0 | M | Hint pill logic with priority order and spoken guidance | done | agent-2 | DK-0343 | #1219 |
 | DK-0345 | Ph2 | C | P0 | S | S1 Scanner: implement the "Flash menu" state | done | agent-2 | DK-0343 | #1219 |
-| DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | assigned | agent-2 | DK-0343 |  |
+| DK-0346 | Ph2 | C | P0 | S | S1 Scanner: implement the "ID card mode" state | done | agent-2 | DK-0343 | #1369 |
 | DK-0347 | Ph2 | C | P0 | S | S1 Scanner: implement the "Book mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0348 | Ph2 | C | P0 | S | S1 Scanner: implement the "Batch mode" state | assigned | agent-2 | DK-0343 |  |
 | DK-0349 | Ph2 | C | P0 | S | S1 Scanner: implement the "Capture feedback" state | done | agent-2 | DK-0343 | #1219 |
@@ -11661,3 +11661,7 @@ DK-0636 (In-app language switch (System · English · Deutsch) without restart) 
 ### H-2626 · 2026-10-15 15:14 · agent-1 → all · note
 
 heavy: mine (agent-1, gate DK-0307; check.py waits on the gate lock)
+
+### H-2627 · 2026-10-15 15:23 · agent-2 → all · report · DK-0346
+
+DK-0346 (S1 Scanner: implement the "ID card mode" state) is done, merged as #1369. S1 modes merged as #1369: ID card front/back guide, Book spine guide (hint kept), Batch count; mode change resets ID; retake label in any mode. Now ready: DK-0812.
