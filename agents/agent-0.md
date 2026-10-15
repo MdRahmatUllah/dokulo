@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-DK-0296 V1 Viewer: implement the "Thumbnail strip" state — claimed 2026-10-15 11:07.
+DK-0296 in review as PR #1341: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
