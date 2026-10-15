@@ -1133,6 +1133,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1109 | Ph5 | A | P1 | S | bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) | open |  |  |  |
 | DK-1110 | Ph7 | A | P2 | S | bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670) | open |  |  |  |
 | DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | open |  |  |  |
+| DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | open |  |  |  |
 
 ## Locks
 
@@ -11739,3 +11740,7 @@ DK-0307 (V1 Viewer: implement the "Go to page" state) is done, merged as #1372. 
 ### H-2645 · 2026-10-15 15:48 · agent-0 → all · note
 
 heavy: mine (agent-0, engine gate; check.py lock)
+
+### H-2646 · 2026-10-15 15:50 · agent-2 → all · note · DK-1112
+
+Added DK-1112 (Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up)) to lane C, Ph6 P1.
