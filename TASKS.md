@@ -846,8 +846,8 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | done | agent-3 | DK-0353 | #1403 |
 | DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-3 | DK-0339 DK-0354 DK-1125 |  |
 | DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | assigned | agent-3 | DK-0355 |  |
-| DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | assigned | agent-3 | DK-0357 |  |
-| DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-3 | DK-0358 |  |
+| DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | assigned | agent-3 | DK-0357 DK-1127 |  |
+| DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-3 | DK-0358 DK-1127 |  |
 | DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-3 | DK-0359 DK-1125 |  |
 | DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-3 | DK-0360 DK-1125 |  |
 | DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | assigned | agent-3 | DK-0352 |  |
@@ -1148,6 +1148,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | in-progress | agent-2 |  |  |
 | DK-1125 | Ph7 | C | P3 | S | bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828) | assigned | agent-2 |  |  |
 | DK-1126 | Ph7 | C | P3 | XS | bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774) | open |  |  |  |
+| DK-1127 | Ph7 | C | P3 | XS | bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826) | open |  |  |  |
 
 ## Locks
 
@@ -12502,3 +12503,7 @@ DK-0822 (Visual QA: scanner-review-crop (S2 – crop + magnifier)) is done, merg
 ### H-2832 · 2026-10-15 23:45 · agent-3 → all · note · DK-1126
 
 Added DK-1126 (bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774)) to lane C, Ph7 P3. It blocks DK-0774.
+
+### H-2833 · 2026-10-15 23:47 · agent-3 → all · note · DK-1127
+
+Added DK-1127 (bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826)) to lane C, Ph7 P3. It blocks DK-0825 DK-0826.
