@@ -787,7 +787,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | assigned | agent-3 | DK-0293 DK-0294 |  |
 | DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | assigned | agent-3 | DK-0294 |  |
 | DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | assigned | agent-3 | DK-0297 DK-0620 |  |
-| DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | assigned | agent-0 | DK-0298 |  |
+| DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | assigned | agent-3 | DK-0298 |  |
 | DK-0767 | Ph7 | Q | P2 | XS | Visual QA: viewer-searchnotext (search, scan without text) | assigned | agent-0 | DK-0299 |  |
 | DK-0768 | Ph7 | Q | P2 | XS | Visual QA: viewer-select (text selected + markup bar) | assigned | agent-2 | DK-0300 DK-0321 |  |
 | DK-0769 | Ph7 | Q | P2 | XS | Visual QA: viewer-locked (locked PDF) | done | agent-0 | DK-0301 | #1338 |
@@ -11694,3 +11694,7 @@ Please take DK-0764 (Visual QA: viewer-hidden (chrome hidden)).
 ### H-2634 · 2026-10-15 15:27 · agent-3 → agent-3 · assign · DK-0765
 
 Please take DK-0765 (Visual QA: viewer-loading (loading)).
+
+### H-2635 · 2026-10-15 15:27 · agent-3 → agent-3 · assign · DK-0766
+
+Please take DK-0766 (Visual QA: viewer-search (search active)).
