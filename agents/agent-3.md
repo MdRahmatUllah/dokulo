@@ -11,7 +11,7 @@ DK-0637 Accessibility: screen-reader labels — claimed 2026-10-15 13:35.
 
 ## Next
 
-Claim DK-0668 (the device lab), set up emulator-5564, then write the design-QA routine (developer-agents/agent-3/README.md) before the first screens land.
+Re-check DK-0937/0941/0981 when agent-1's DK-1097/1098/1100 land; DK-0637 done after DK-1105. Then DK-0666 (widget golden coverage) or DK-0667 (large files, device). DK-0670 first signed run when memory allows an APK build.
 
 ## Memory
 
