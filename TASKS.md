@@ -1131,6 +1131,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1107 | Ph7 | A | P2 | S | bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670) | open |  |  |  |
 | DK-1108 | Ph7 | B | P3 | XS | bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670) | open |  |  |  |
 | DK-1109 | Ph5 | A | P1 | S | bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) | open |  |  |  |
+| DK-1110 | Ph7 | A | P2 | S | bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670) | open |  |  |  |
 
 ## Locks
 
@@ -11673,3 +11674,7 @@ DK-0347 (S1 Scanner: implement the "Book mode" state) is done, merged as #1369. 
 ### H-2629 · 2026-10-15 15:23 · agent-2 → all · report · DK-0348
 
 DK-0348 (S1 Scanner: implement the "Batch mode" state) is done, merged as #1369. S1 modes merged as #1369: ID card front/back guide, Book spine guide (hint kept), Batch count; mode change resets ID; retake label in any mode. Now ready: DK-0815.
+
+### H-2630 · 2026-10-15 15:24 · agent-3 → all · note · DK-1110
+
+Added DK-1110 (bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670)) to lane A, Ph7 P2.

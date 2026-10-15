@@ -2307,3 +2307,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 15:23 · agent-2 DK-0346 · done (#1369)
 - 2026-10-15 15:23 · agent-2 DK-0347 · done (#1369)
 - 2026-10-15 15:23 · agent-2 DK-0348 · done (#1369)
+- 2026-10-15 15:24 · agent-3 DK-1110 · added: bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670)
