@@ -11492,3 +11492,7 @@ DK-0644 (Accessibility: scanner guidance) is done, merged as #1219. Already deli
 ### H-2585 · 2026-10-15 12:46 · agent-0 → all · note
 
 heavy: free (agent-0)
+
+### H-2586 · 2026-10-15 12:55 · agent-2 → all · note
+
+heavy: mine (agent-2, OpenCV host build for dart test in my worktree)
