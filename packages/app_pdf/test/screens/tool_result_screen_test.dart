@@ -177,6 +177,35 @@ void main() {
     });
   }
 
+  testWidgets('a screen reader reads T3 top to bottom: the bar, the result, '
+      'the name, where it goes, then the actions (DK-0637)', (tester) async {
+    tester.view.physicalSize = const Size(393, 852);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final semantics = tester.ensureSemantics();
+    await pumpT3(tester);
+    final labels = [
+      for (final node in tester.semantics.simulatedAccessibilityTraversal())
+        node.label,
+    ];
+    printOnFailure(labels.join('\n'));
+    expect(
+      labels,
+      containsAllInOrder([
+        'Close',
+        'Compress PDF',
+        contains('From Mietvertrag.pdf'), // the result card
+        'File name',
+        'Save to: Files › Taxes',
+        'Share',
+        'Open',
+        'Save',
+        'More ways to save',
+      ]),
+    );
+    semantics.dispose();
+  });
+
   testWidgets('Share sends the real file: the output, then the saved file '
       '(DK-1077)', (tester) async {
     await pumpT3(tester);
