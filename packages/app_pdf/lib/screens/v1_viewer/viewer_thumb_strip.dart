@@ -6,7 +6,7 @@ import '../../theme/dk_tokens.dart';
 import '../t2_tool/tool_options_providers.dart';
 
 /// V1's thumbnail strip (UI spec §17.1 region 5; DK-1091): above the bottom
-/// bar, 96 tall, `color.surface` at 94 %, the pages as 48 × 64 DkPageThumb
+/// bar, 96 tall, `color.surface` at 94 % under a hairline, the pages as 48 × 64 DkPageThumb
 /// with their numbers; the [current] one ringed and kept in view; a tap
 /// answers its page ([onPage], 1-based). Only the pages in view render.
 class ViewerThumbStrip extends StatefulWidget {
@@ -70,31 +70,33 @@ class _ViewerThumbStripState extends State<ViewerThumbStrip> {
     final t = context.tokens;
     return Container(
       height: ViewerThumbStrip.height,
-      color: t.color.surface.withValues(alpha: 0.94),
+      decoration: BoxDecoration(
+        color: t.color.surface.withValues(alpha: 0.94),
+        border: Border(top: BorderSide(color: t.color.outline)),
+      ),
       child: ListView.builder(
         controller: _scroll,
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(
-          horizontal: t.space.m,
-          vertical: t.space.xs,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: t.space.m),
         itemExtent: ViewerThumbStrip._item,
         itemCount: widget.pageCount,
         itemBuilder: (context, i) => Padding(
           padding: EdgeInsets.only(right: t.space.s),
-          child: Consumer(
-            builder: (context, ref, _) {
-              final image = ref
-                  .watch(pdfThumbnailProvider(widget.path, page: i + 1))
-                  .value;
-              return DkPageThumb(
-                pageNumber: i + 1,
-                pageCount: widget.pageCount,
-                page: image == null ? null : RawImage(image: image),
-                current: i + 1 == widget.current,
-                onTap: () => widget.onPage(i + 1),
-              );
-            },
+          child: Center(
+            child: Consumer(
+              builder: (context, ref, _) {
+                final image = ref
+                    .watch(pdfThumbnailProvider(widget.path, page: i + 1))
+                    .value;
+                return DkPageThumb(
+                  pageNumber: i + 1,
+                  pageCount: widget.pageCount,
+                  page: image == null ? null : RawImage(image: image),
+                  current: i + 1 == widget.current,
+                  onTap: () => widget.onPage(i + 1),
+                );
+              },
+            ),
           ),
         ),
       ),

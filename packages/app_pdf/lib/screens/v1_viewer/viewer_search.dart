@@ -47,61 +47,66 @@ class _ViewerSearchBarState extends State<ViewerSearchBar> {
             : s.count == 0
             ? (s.searching ? null : l.viewer_search_none)
             : l.viewer_search_of((s.current ?? 0) + 1, s.count);
+        // viewer-search: 56 tall, 12 / 4 in, a hairline under it.
         return Container(
-          color: t.color.surface,
-          padding: EdgeInsets.fromLTRB(
-            t.space.l,
-            t.space.s,
-            t.space.s,
-            t.space.s,
+          decoration: BoxDecoration(
+            color: t.color.surface,
+            border: Border(bottom: BorderSide(color: t.color.outline)),
+          ),
+          padding: EdgeInsetsDirectional.only(
+            start: t.space.m,
+            end: t.space.xs,
           ),
           child: SafeArea(
             bottom: false,
-            child: Row(
-              spacing: t.space.xs,
-              children: [
-                Expanded(
-                  child: DkTextField(
-                    controller: _field,
-                    autofocus: s.query.isEmpty,
-                    textInputAction: TextInputAction.search,
-                    leading: DkIcon(
-                      DkIcons.search,
-                      color: t.color.iconSecondary,
-                    ),
-                    trailing: counter == null
-                        ? null
-                        : Padding(
-                            padding: EdgeInsets.only(right: t.space.m),
-                            child: DkNumberText(
-                              counter,
-                              style: t.text.caption.copyWith(
-                                color: t.color.textSecondary,
+            child: SizedBox(
+              height: 56,
+              child: Row(
+                spacing: t.space.xs,
+                children: [
+                  Expanded(
+                    child: DkTextField(
+                      controller: _field,
+                      autofocus: s.query.isEmpty,
+                      textInputAction: TextInputAction.search,
+                      leading: DkIcon(
+                        DkIcons.search,
+                        color: t.color.iconSecondary,
+                      ),
+                      trailing: counter == null
+                          ? null
+                          : Padding(
+                              padding: EdgeInsets.only(right: t.space.m),
+                              child: DkNumberText(
+                                counter,
+                                style: t.text.caption.copyWith(
+                                  color: t.color.textSecondary,
+                                ),
                               ),
                             ),
-                          ),
-                    clearable: false,
-                    onChanged: s.search,
-                    onSubmitted: (_) => s.next(),
+                      clearable: false,
+                      onChanged: s.search,
+                      onSubmitted: (_) => s.next(),
+                    ),
                   ),
-                ),
-                DkIconButton(
-                  icon: DkIcons.expandLess,
-                  tooltip: l.viewer_search_previous,
-                  onPressed: s.count > 0 ? s.previous : null,
-                ),
-                DkIconButton(
-                  icon: DkIcons.expandMore,
-                  tooltip: l.viewer_search_next,
-                  onPressed: s.count > 0 ? s.next : null,
-                ),
-                DkButton(
-                  label: l.common_done,
-                  variant: DkButtonVariant.tertiary,
-                  size: DkButtonSize.compact,
-                  onPressed: widget.onDone,
-                ),
-              ],
+                  DkIconButton(
+                    icon: DkIcons.expandLess,
+                    tooltip: l.viewer_search_previous,
+                    onPressed: s.count > 0 ? s.previous : null,
+                  ),
+                  DkIconButton(
+                    icon: DkIcons.expandMore,
+                    tooltip: l.viewer_search_next,
+                    onPressed: s.count > 0 ? s.next : null,
+                  ),
+                  DkButton(
+                    label: l.common_done,
+                    variant: DkButtonVariant.tertiary,
+                    size: DkButtonSize.compact,
+                    onPressed: widget.onDone,
+                  ),
+                ],
+              ),
             ),
           ),
         );
