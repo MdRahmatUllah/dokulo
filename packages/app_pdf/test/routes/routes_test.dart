@@ -323,6 +323,25 @@ void main() {
     expect(find.byType(LinkErrorScreen), findsOneWidget);
   });
 
+  testWidgets('Mark up and Sign with a file open V2; Organize opens P1 '
+      '(DK-0517, DK-0519)', (tester) async {
+    final router = await pumpAt(tester, Routes.home);
+    for (final (tool, uri) in [
+      ('markup', '/viewer/7?mode=edit&tool=highlighter'),
+      ('sign', '/viewer/7?mode=edit&from=sign'),
+      ('form', '/viewer/7?mode=edit&tool=form'),
+      ('organize', '/organize/7'),
+    ]) {
+      router.go(Routes.tool(tool, files: ['7']));
+      await tester.pumpAndSettle();
+      expect(router.state.uri.toString(), uri);
+    }
+    expect(
+      Routes.viewer('3', edit: true, tool: 'highlighter'),
+      '/viewer/3?mode=edit&tool=highlighter',
+    );
+  });
+
   testWidgets('a long press on Scan picks a mode for the scanner', (
     tester,
   ) async {

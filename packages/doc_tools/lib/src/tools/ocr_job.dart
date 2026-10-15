@@ -20,6 +20,7 @@ class OcrInput {
     this.language = OcrLanguage.auto,
     this.pages,
     this.password,
+    this.redo = false,
   });
 
   factory OcrInput.fromJson(Map<String, Object?> json) => OcrInput(
@@ -28,6 +29,7 @@ class OcrInput {
     suffix: json['suffix']! as String,
     language: OcrLanguage.values.byName(json['language'] as String? ?? 'auto'),
     pages: (json['pages'] as List?)?.cast<int>(),
+    redo: json['redo'] as bool? ?? false,
   );
 
   /// One PDF, or a batch.
@@ -48,12 +50,17 @@ class OcrInput {
   /// table: a resumed job on a locked file fails as `locked`.
   final String? password;
 
+  /// "Existing text: Redo" (DK-1065): a page's earlier OCR text is removed
+  /// and the page read again; Keep (false) leaves pages with text alone.
+  final bool redo;
+
   Map<String, Object?> toJson() => {
     'files': files,
     'outputDir': outputDir,
     'suffix': suffix,
     'language': language.name,
     'pages': ?pages,
+    if (redo) 'redo': true,
   };
 }
 
@@ -149,8 +156,16 @@ class OcrJob extends ToolJob<OcrInput> {
     final outputs = <String>[];
     String? current;
     var done = 0;
+    // T3's facts (DK-1065): pages looked at, pages read by OCR, pages that
+    // have text now, and the blurry ones (1-based, one file).
+    var read = 0, withText = 0;
+    final blurry = <int>[];
     try {
-      for (final (i, file) in input.files.indexed) {
+      for (final (i, original) in input.files.indexed) {
+        // Redo: the earlier layer goes first, so the pages read as scans.
+        final file = input.redo
+            ? await _withoutLayer(original, selected[i], input, context, i)
+            : original;
         final words = <int, List<LayerWord>>{};
         for (var start = 0; start < selected[i].length; start += window) {
           // On this isolate: the window's pages that have no text yet,
@@ -164,6 +179,7 @@ class OcrJob extends ToolJob<OcrInput> {
               page,
               password: input.password,
             )).text.trim().isNotEmpty) {
+              withText++;
               context.report(
                 JobProgress('recognising', pageIndex: done++, pageCount: total),
               );
@@ -187,14 +203,14 @@ class OcrJob extends ToolJob<OcrInput> {
           if (toRead.isEmpty) continue;
 
           // On an ONNX worker: the window's pages read, progress per page.
-          final read = pool.run(Lane.onnx, _readPages, (
+          final reading = pool.run(Lane.onnx, _readPages, (
             pages: toRead,
             language: input.language,
             scratch: context.tempDir.path,
             setup: setup,
           ));
           final before = done;
-          final progress = read.progress.listen(
+          final progress = reading.progress.listen(
             (n) => context.report(
               JobProgress(
                 'recognising',
@@ -204,10 +220,16 @@ class OcrJob extends ToolJob<OcrInput> {
             ),
           );
           final watch = Timer.periodic(const Duration(milliseconds: 200), (_) {
-            if (context.isCancelled) read.cancel();
+            if (context.isCancelled) reading.cancel();
           });
           try {
-            words.addAll(await read.result);
+            for (final MapEntry(key: page, value: (found, quality))
+                in (await reading.result).entries) {
+              words[page] = found;
+              read++;
+              if (found.isNotEmpty) withText++;
+              if (quality == 'tooBlurry') blurry.add(page + 1);
+            }
           } finally {
             watch.cancel();
             await progress.cancel();
@@ -218,7 +240,7 @@ class OcrJob extends ToolJob<OcrInput> {
 
         final output = current = outputName(
           input.outputDir,
-          file,
+          original,
           input.suffix,
           outputs,
         );
@@ -246,7 +268,33 @@ class OcrJob extends ToolJob<OcrInput> {
       }
       rethrow;
     }
-    return outputs.length == 1 ? OneFile(outputs.single) : ManyFiles(outputs);
+    final facts = {
+      'pages': total,
+      'read': read,
+      'withText': withText,
+      'blurry': blurry,
+    };
+    return outputs.length == 1
+        ? OneFile(outputs.single, facts: facts)
+        : ManyFiles(outputs, facts: facts);
+  }
+
+  /// [file] without the invisible text of [pages], in the job's temp folder.
+  static Future<String> _withoutLayer(
+    String file,
+    List<int> pages,
+    OcrInput input,
+    ToolJobContext context,
+    int i,
+  ) async {
+    final stripped = '${context.tempDir.path}/redo_$i.pdf';
+    await OcrTextLayer.removeLayer(
+      file,
+      stripped,
+      pages,
+      password: input.password,
+    );
+    return stripped;
   }
 }
 
@@ -261,8 +309,9 @@ typedef _Setup = ({
 Future<OcrEngine> _platformEngine(OcrAssets? assets) =>
     OcrEngine.forPlatform(assets: assets);
 
-/// On an ONNX worker: the words of each rendered page, by page.
-Future<Map<int, List<LayerWord>>> _readPages(
+/// On an ONNX worker: the words of each rendered page and its quality
+/// (PageQuality's name), by page.
+Future<Map<int, (List<LayerWord>, String)>> _readPages(
   ({List<_PageImage> pages, OcrLanguage language, String scratch, _Setup setup})
   job,
   JobContext context,
@@ -274,7 +323,7 @@ Future<Map<int, List<LayerWord>>> _readPages(
   }
   final engine = await job.setup.engine(job.setup.assets);
   try {
-    final words = <int, List<LayerWord>>{};
+    final words = <int, (List<LayerWord>, String)>{};
     for (final (n, page) in job.pages.indexed) {
       // Sync, with no await while the file is open: a cancel kills this
       // isolate, and a handle it held open would lock the job's temp folder
@@ -286,7 +335,10 @@ Future<Map<int, List<LayerWord>>> _readPages(
         language: job.language,
         scratch: Directory(job.scratch),
       );
-      words[page.page] = [for (final w in ocr.words) LayerWord(w.text, w.box)];
+      words[page.page] = (
+        [for (final w in ocr.words) LayerWord(w.text, w.box)],
+        ocr.quality.name,
+      );
       context.progress(n);
     }
     return words;

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart' show OrdinalSortKey;
 
 import '../../components/dk_bottom_bars.dart';
 import '../../components/dk_icon.dart';
@@ -141,9 +142,19 @@ class _ViewerChromeState extends State<ViewerChrome> {
         ),
       ],
     );
+    // Screen readers go top bar → pages → bottom bar (UI spec §28), not
+    // in paint order; the pages are one labelled area, so pdfrx's
+    // focusable canvas isn't an empty stop (DK-1105).
     return Stack(
       children: [
-        Positioned.fill(child: widget.canvas(_tap, _scrolled)),
+        Positioned.fill(
+          child: Semantics(
+            container: true,
+            sortKey: const OrdinalSortKey(1),
+            label: AppLocalizations.of(context).viewer_menu_pages,
+            child: widget.canvas(_tap, _scrolled),
+          ),
+        ),
         // The top bar slides up and away; the file name on it renames.
         AnimatedPositioned(
           duration: context.motion(DkMotionKind.standard).duration,
@@ -154,32 +165,36 @@ class _ViewerChromeState extends State<ViewerChrome> {
               : -(DkTopBar.height + MediaQuery.paddingOf(context).top),
           child: ExcludeSemantics(
             excluding: !visible,
-            child: Stack(
-              children: [
-                top,
-                Positioned.fill(
-                  child: SafeArea(
-                    bottom: false,
-                    child: Padding(
-                      // Clear of back on the left and of search and
-                      // overflow on the right, or the name takes their taps.
-                      padding: EdgeInsetsDirectional.only(
-                        start: 56 + 4,
-                        end: 4 + 48 * (a.onSearch != null ? 2 : 1),
-                      ),
-                      child: Semantics(
-                        button: a.onRename != null,
-                        label: widget.name,
-                        excludeSemantics: true,
-                        onTap: a.onRename,
-                        child: GestureDetector(
+            child: Semantics(
+              container: true,
+              sortKey: const OrdinalSortKey(0),
+              child: Stack(
+                children: [
+                  top,
+                  Positioned.fill(
+                    child: SafeArea(
+                      bottom: false,
+                      child: Padding(
+                        // Clear of back on the left and of search and
+                        // overflow on the right, or the name takes their taps.
+                        padding: EdgeInsetsDirectional.only(
+                          start: 56 + 4,
+                          end: 4 + 48 * (a.onSearch != null ? 2 : 1),
+                        ),
+                        child: Semantics(
+                          button: a.onRename != null,
+                          label: widget.name,
+                          excludeSemantics: true,
                           onTap: a.onRename,
-                          child: Align(
-                            alignment: AlignmentDirectional.centerStart,
-                            child: DkMiddleEllipsisText(
-                              widget.name,
-                              style: t.text.titleM.copyWith(
-                                color: t.color.textPrimary,
+                          child: GestureDetector(
+                            onTap: a.onRename,
+                            child: Align(
+                              alignment: AlignmentDirectional.centerStart,
+                              child: DkMiddleEllipsisText(
+                                widget.name,
+                                style: t.text.titleM.copyWith(
+                                  color: t.color.textPrimary,
+                                ),
                               ),
                             ),
                           ),
@@ -187,8 +202,8 @@ class _ViewerChromeState extends State<ViewerChrome> {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -196,18 +211,22 @@ class _ViewerChromeState extends State<ViewerChrome> {
           left: 0,
           right: 0,
           bottom: 0,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              if (widget.page case final page?)
-                Padding(
-                  padding: EdgeInsets.all(t.space.l),
-                  child: DkPagePill(page: page, count: widget.pageCount),
-                ),
-              if (widget.strip case final strip? when visible) strip,
-              bar,
-            ],
+          child: Semantics(
+            container: true,
+            sortKey: const OrdinalSortKey(2),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                if (widget.page case final page?)
+                  Padding(
+                    padding: EdgeInsets.all(t.space.l),
+                    child: DkPagePill(page: page, count: widget.pageCount),
+                  ),
+                if (widget.strip case final strip? when visible) strip,
+                bar,
+              ],
+            ),
           ),
         ),
       ],
