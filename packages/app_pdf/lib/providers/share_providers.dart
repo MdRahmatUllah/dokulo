@@ -12,3 +12,11 @@ FileSharer fileSharer(Ref ref) =>
     (paths) => SharePlus.instance.share(
       ShareParams(files: [for (final p in paths) XFile(p)]),
     );
+
+/// Sends text to the system share sheet (Share text, DK-0311). Tests
+/// replace it.
+typedef TextSharer = Future<void> Function(String text);
+
+@Riverpod(keepAlive: true)
+TextSharer textSharer(Ref ref) =>
+    (text) => SharePlus.instance.share(ShareParams(text: text));

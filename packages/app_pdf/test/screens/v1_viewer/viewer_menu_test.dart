@@ -6,11 +6,14 @@ import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/print_providers.dart';
+import 'package:app_pdf/providers/share_providers.dart';
+import 'package:app_pdf/screens/t2_tool/tool_run.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_thumb_strip.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -26,6 +29,9 @@ void main() {
   late FileStore store;
   late Map<String, Object?> prefs;
   late List<String> printed;
+  late List<List<String>> sharedFiles;
+  late List<String> sharedText;
+  late List<(String, Object)> ran;
 
   setUp(() {
     root = Directory.systemTemp.createTempSync('dk_v1_menu_');
@@ -36,6 +42,9 @@ void main() {
     );
     prefs = {};
     printed = [];
+    sharedFiles = [];
+    sharedText = [];
+    ran = [];
     final view = TestWidgetsFlutterBinding.instance.platformDispatcher.views;
     view.first
       ..physicalSize = const Size(393, 852)
@@ -80,6 +89,27 @@ void main() {
             printed.add(name);
             return true;
           }),
+          fileSharerProvider.overrideWithValue(
+            (paths) async => sharedFiles.add(paths),
+          ),
+          textSharerProvider.overrideWithValue(
+            (text) async => sharedText.add(text),
+          ),
+          // pdf2img without rendering: two images, as the job would name them.
+          toolRunnerProvider.overrideWithValue((toolId, input) async {
+            ran.add((toolId, input('out')));
+            return (
+              progress: const Stream<JobProgress>.empty(),
+              result: Future<Object?>.value(
+                const ManyFiles([
+                  'out/Mietvertrag – page 1.jpg',
+                  'out/Mietvertrag – page 2.jpg',
+                ]),
+              ),
+              cancel: () {},
+              discard: () async {},
+            );
+          }),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -117,6 +147,8 @@ void main() {
       'Night mode',
       'Organize pages',
       'Print',
+      'Share as images',
+      'Share text',
       'Move to locked folder',
       'Delete',
     ];
@@ -163,6 +195,37 @@ void main() {
     await tester.tap(find.text('Print'));
     await settle(tester, rounds: 5);
     expect(printed, ['Mietvertrag.pdf']);
+  });
+
+  testWidgets('Share as images (DK-0311): pdf2img at 150 dpi, then the '
+      'images to the share sheet', (tester) async {
+    await openMenu(tester);
+    await tester.tap(find.text('Share as images'));
+    await settle(tester, rounds: 5);
+    final (toolId, input) = ran.single;
+    expect(toolId, 'pdf2img');
+    expect((input as Pdf2ImgInput).dpi, 150);
+    expect(input.suffix, ' – page');
+    expect(sharedFiles.single, hasLength(2));
+  });
+
+  testWidgets('Share text (DK-0311): every page\'s text to the share sheet', (
+    tester,
+  ) async {
+    await openMenu(tester);
+    await tester.tap(find.text('Share text'));
+    await settle(tester, rounds: 10);
+    final pages = await tester.runAsync(
+      () => PdfEngine.pageTexts(fixture('Mietvertrag Musterstraße 12.pdf')),
+    );
+    expect(
+      sharedText.single,
+      contains(pages!.first.trim().split(RegExp(r'\s')).first),
+    );
+    expect(
+      sharedText.single,
+      contains(pages.last.trim().split(RegExp(r'\s')).last),
+    );
   });
 
   testWidgets('Delete: to Recently deleted with Undo, and V1 closes', (

@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
@@ -187,6 +188,27 @@ abstract final class PdfEngine {
       path,
       password,
       page,
+    ));
+  }
+
+  /// The image objects on a page with their data, for Extract images
+  /// (DK-0510): a JPEG as its original bytes ([PageImage.jpeg]), anything
+  /// else decoded to pixels. Images under [minPixels] on their longer side,
+  /// and 1-bit masks, are left out.
+  static Future<List<PageImage>> imageData(
+    String path,
+    int page, {
+    int minPixels = 0,
+    String? password,
+  }) async {
+    await _withDocument(
+      path,
+      password,
+      (doc) async => _page(doc, page),
+    ); // validates path, password, page
+    return PdfrxEntryFunctions.instance.compute(_imageDataOnWorker, (
+      (path, password, page),
+      minPixels,
     ));
   }
 
@@ -399,6 +421,83 @@ List<ImageObject> _imagesOnWorker((String, String?, int) message) =>
       return found;
     });
 
+/// On pdfrx's worker: the page's images, JPEGs raw, the others as pixels.
+List<PageImage> _imageDataOnWorker(((String, String?, int), int) message) =>
+    _onPage(message.$1, (pdfium, page, arena) {
+      final found = <PageImage>[];
+      final meta = arena<fpdf.FPDF_IMAGEOBJ_METADATA>();
+      final name = arena<Uint8>(32);
+      for (var i = 0; i < pdfium.FPDFPage_CountObjects(page); i++) {
+        final obj = pdfium.FPDFPage_GetObject(page, i);
+        if (pdfium.FPDFPageObj_GetType(obj) != fpdf.FPDF_PAGEOBJ_IMAGE ||
+            pdfium.FPDFImageObj_GetImageMetadata(obj, page, meta) == 0 ||
+            meta.ref.bits_per_pixel <= 1 ||
+            max(meta.ref.width, meta.ref.height) < message.$2) {
+          continue;
+        }
+        // Only DCTDecode: the stream is a JPEG file as it is.
+        final filters = pdfium.FPDFImageObj_GetImageFilterCount(obj);
+        final jpeg =
+            filters == 1 &&
+            pdfium.FPDFImageObj_GetImageFilter(obj, 0, name.cast(), 32) > 0 &&
+            name.cast<Utf8>().toDartString() == 'DCTDecode';
+        if (jpeg) {
+          final size = pdfium.FPDFImageObj_GetImageDataRaw(obj, nullptr, 0);
+          final data = arena<Uint8>(size);
+          pdfium.FPDFImageObj_GetImageDataRaw(obj, data.cast(), size);
+          found.add(
+            PageImage(
+              index: i,
+              jpeg: Uint8List.fromList(data.asTypedList(size)),
+            ),
+          );
+          continue;
+        }
+        final bitmap = pdfium.FPDFImageObj_GetBitmap(obj);
+        if (bitmap == nullptr) continue;
+        try {
+          final format = pdfium.FPDFBitmap_GetFormat(bitmap);
+          final channels = switch (format) {
+            fpdf.FPDFBitmap_Gray => 1,
+            fpdf.FPDFBitmap_BGR => 3,
+            _ => 4, // BGRx, BGRA
+          };
+          final w = pdfium.FPDFBitmap_GetWidth(bitmap),
+              h = pdfium.FPDFBitmap_GetHeight(bitmap);
+          final stride = pdfium.FPDFBitmap_GetStride(bitmap);
+          final src = pdfium.FPDFBitmap_GetBuffer(bitmap)
+              .cast<Uint8>()
+              .asTypedList(stride * h);
+          final pixels = Uint8List(w * h * channels);
+          for (var y = 0; y < h; y++) {
+            pixels.setRange(
+              y * w * channels,
+              (y + 1) * w * channels,
+              src,
+              y * stride,
+            );
+          }
+          found.add(
+            PageImage(
+              index: i,
+              pixels: (
+                width: w,
+                height: h,
+                channels: channels,
+                bgr: pixels,
+                alpha:
+                    format == fpdf.FPDFBitmap_BGRA ||
+                    format == fpdf.FPDFBitmap_BGRA_Premul,
+              ),
+            ),
+          );
+        } finally {
+          pdfium.FPDFBitmap_Destroy(bitmap);
+        }
+      }
+      return found;
+    });
+
 /// On pdfrx's worker: whether a visible character's font isn't embedded.
 bool _unembeddedOnWorker((String, String?, int) message) =>
     _onPage(message, (pdfium, page, arena) {
@@ -570,6 +669,20 @@ class ImageObject {
   final int index;
   final Box box;
   final int pixelWidth, pixelHeight;
+}
+
+/// An image object's data ([PdfEngine.imageData]): the original JPEG, or
+/// its pixels (B, G, R order; 1, 3 or 4 [channels]; the fourth is alpha
+/// when [alpha], else unused).
+class PageImage {
+  const PageImage({required this.index, this.jpeg, this.pixels})
+    : assert((jpeg == null) != (pixels == null));
+
+  /// The object's index on its page.
+  final int index;
+  final Uint8List? jpeg;
+  final ({int width, int height, int channels, Uint8List bgr, bool alpha})?
+  pixels;
 }
 
 /// The error catalogue's situations (UI spec §26.3) that the PDF layer can
