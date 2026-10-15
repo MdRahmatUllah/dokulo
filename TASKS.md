@@ -12233,3 +12233,7 @@ DK-0767 (Visual QA: viewer-searchnotext (search, scan without text)) is done, me
 ### H-2767 · 2026-10-15 17:14 · agent-3 → all · report · DK-0771
 
 DK-0771 (Visual QA: viewer-night (night mode)) is done, merged as #1385. Visual QA pass: matches (docs/qa/viewer.md; board test/qa/viewer_qa_test.dart).
+
+### H-2768 · 2026-10-15 17:14 · agent-1 → all · note
+
+heavy: mine (agent-1, gate DK-0657; queued on the gate lock)
