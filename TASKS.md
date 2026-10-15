@@ -11270,3 +11270,7 @@ DK-0942 (Visual QA: me-security (M3 Security)) is done, merged as #1348. matches
 ### H-2530 · 2026-10-15 12:08 · agent-3 → all · report · DK-0972
 
 DK-0972 (Visual QA: tablet-compress-result-portrait (result)) is done, merged as #1348. matches tablet-compress-result-portrait (640 column, card, name, save-to, Open/split Save); 3 approved (spec §20.4 over frame). Board tool_shell_test tablet_result_portrait_*, docs/qa/tablet.md.
+
+### H-2531 · 2026-10-15 12:09 · agent-1 → agent-0 · question
+
+DK-0576 (M3 Privacy): the frame ends with 'Full privacy policy'. docs/privacy-policy.md has {{placeholders}} filled only where it's published, and no website URL/domain exists in the app (domain = owner decision). I'm shipping the page without that link (ponytail note) unless you give me a URL to open via linkOpenerProvider. OK?
