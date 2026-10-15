@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show Consumer;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../catalogue/catalogue.dart';
@@ -23,6 +24,8 @@ import '../screens/t1_tools/tools_screen.dart';
 import '../screens/s1_scanner/camera_permission_gate.dart';
 import '../screens/s1_scanner/s1_screen.dart';
 import '../screens/s2_review/s2_screen.dart';
+import '../providers/share_providers.dart';
+import '../screens/s2_review/scan_result_screen.dart';
 import '../screens/t2_tool/tool_options_screen.dart';
 import '../screens/t3_result/tool_result_screen.dart';
 import '../screens/v1_viewer/viewer_screen.dart';
@@ -56,6 +59,7 @@ abstract final class Routes {
   /// S1 in a mode from the Scan button's menu.
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
+  static const scanResult = '/scan/result'; // the saved scan (DK-0360)
 
   /// S1 taking page [index] again for S2 (DK-0350).
   static String scanRetake(int index) => '/scan?retake=$index';
@@ -275,9 +279,33 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                     context.canPop() ? context.pop() : context.go(Routes.scan),
                 onDiscard: () => context.go(Routes.home),
                 onRetake: (i) => context.push(Routes.scanRetake(i)),
+                onSave: (saved) =>
+                    context.pushReplacement(Routes.scanResult, extra: saved),
               ),
             ),
           ),
+          fullScreen('result', (s) {
+            // Nothing to show without the saved scan (a link, a restore).
+            final saved = s.extra;
+            if (saved is! SavedScan) return const LinkErrorScreen();
+            // Back goes Home, as Close does: the scanner under it is done.
+            return Consumer(
+              builder: (context, ref, _) => PopScope(
+                canPop: false,
+                onPopInvokedWithResult: (didPop, _) {
+                  if (!didPop) context.go(Routes.home);
+                },
+                child: ScanResultScreen(
+                  scan: saved,
+                  onClose: () => context.go(Routes.home),
+                  onOpen: () => context.go(Routes.viewer('${saved.fileId}')),
+                  onTool: (id) =>
+                      context.go(Routes.tool(id, files: ['${saved.fileId}'])),
+                  onShare: () => ref.read(fileSharerProvider)([saved.path]),
+                ),
+              ),
+            );
+          }),
         ],
       ),
       fullScreen(

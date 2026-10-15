@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_page_thumb.dart';
@@ -6,6 +8,8 @@ import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/screens/s2_review/s2_screen.dart';
+import 'package:app_pdf/screens/s2_review/scan_result_screen.dart';
+import 'package:app_pdf/screens/s2_review/scan_saver.dart';
 import 'package:app_pdf/screens/s2_review/save_sheet.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -35,7 +39,12 @@ void main() {
   late MemoryPrefsStore prefs;
   var added = 0, discarded = 0;
   ScanSaveOptions? saved;
+  SavedScan? result;
   int? retook;
+
+  /// Holds the save until completed: the "Saving…" card shows meanwhile.
+  Completer<void>? holdSave;
+  var failSave = false;
 
   List<ScannedPage> pages() => container.read(scanSessionProvider);
 
@@ -51,7 +60,9 @@ void main() {
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     added = discarded = 0;
-    saved = null;
+    saved = result = null;
+    holdSave = null;
+    failSave = false;
     retook = null;
     store = MemoryScanStore();
     container = ProviderContainer(
@@ -67,6 +78,21 @@ void main() {
         scanFoldersProvider.overrideWithValue(
           () async => ['Taxes', 'Taxes/2025'],
         ),
+        scanSaverProvider.overrideWithValue((pages, options, {onPage}) async {
+          saved = options;
+          onPage?.call(1);
+          await holdSave?.future;
+          if (failSave) throw const FileSystemException('disk full');
+          return (
+            name: '${options.name}.pdf',
+            fileId: 1,
+            path: '/files/${options.name}.pdf',
+            pages: pages.length,
+            bytes: 1000,
+            textPages: null,
+            folder: options.folder,
+          );
+        }),
       ],
     );
     addTearDown(container.dispose);
@@ -85,7 +111,7 @@ void main() {
           home: S2Screen(
             onAddPages: () => added++,
             onDiscard: () => discarded++,
-            onSave: withSave ? (o) => saved = o : null,
+            onSave: withSave ? (o) => result = o : null,
             onRetake: (i) => retook = i,
             importOnOpen: imported != null,
           ),
@@ -349,6 +375,39 @@ void main() {
       expect(saved!.quality, ScanQuality.recommended);
       expect(saved!.searchable, isFalse, reason: 'free: off until switched on');
       expect(saved!.folder, isNull);
+      expect(result!.pages, 3);
+      expect(pages(), isEmpty, reason: 'saved: the session ends');
+    });
+
+    testWidgets('a failed save says so and keeps the pages', (tester) async {
+      await pump(tester);
+      await open(tester);
+      failSave = true;
+      await tester.tap(find.text('Save PDF · 3 pages'));
+      await tester.pumpAndSettle();
+      expect(
+        find.text("Couldn't save the scan. Your pages are still here."),
+        findsOneWidget,
+      );
+      expect(result, isNull);
+      expect(pages(), hasLength(3));
+      expect(find.text('Saving…'), findsNothing);
+    });
+
+    testWidgets('"Saving…" with the pages done while it saves', (tester) async {
+      await pump(tester);
+      await open(tester);
+      holdSave = Completer();
+      await tester.tap(find.text('Save PDF · 3 pages'));
+      await tester.pump();
+      await tester.pump();
+      expect(find.text('Saving…'), findsOneWidget);
+      expect(find.text('Page 1 of 3'), findsOneWidget);
+      expect(result, isNull);
+      holdSave!.complete();
+      await tester.pumpAndSettle();
+      expect(find.text('Saving…'), findsNothing);
+      expect(result, isNotNull);
     });
 
     testWidgets('JPG: "Save 3 images", no OCR row; Best; a folder', (
