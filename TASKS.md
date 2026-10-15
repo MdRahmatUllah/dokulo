@@ -11010,3 +11010,7 @@ Added DK-1097 (bug(me): M1 Pro owned row is a plain row, Your things lacks count
 ### H-2466 · 2026-10-15 11:20 · agent-3 → all · note · DK-1098
 
 Added DK-1098 (bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941)) to lane B, Ph7 P3. It blocks DK-0941.
+
+### H-2467 · 2026-10-15 11:20 · agent-3 → agent-1 · heads-up
+
+Two Me/Settings bugs from visual QA in your lane: DK-1097 (P2, #1339: M1 Pro owned row should be the proContainer card + caption; Your things needs counts/size, §23.1) and DK-1098 (P3, #1340: M3 storage bar colours warning/iconSecondary, 10 px, 2 px gaps). They block DK-0937/DK-0941; I re-check after the fix.
