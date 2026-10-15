@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-16 01:20
+last-seen: 2026-10-16 01:23
 last-read: 2851
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Merged #1408 (DK-0324/0518). Gate queue (bbjy37bbb): a2f DK-0434/0435, a2b DK-1120/1121; then gate agent-2 (DK-1124/1125), a2g (DK-0520/0528), a2h (DK-0529), a2e (DK-0536), a2i (DK-0403 merge T2), a2j (DK-0409 split T2, stacked on a2i), a2k (DK-0415 extract T2, stacked on a2j; in tests). #1381 waits on agent-0's size call (H-2815). Next: DK-0421 Rotate T2.
+Merged #1381 (photo finder) and #1412 (img2pdf T3). Gate queue (detached gateq.ps1): a2b DK-1120/1121, agent-2 DK-1124/1125, a2g DK-0520/0528, a2h DK-0529, a2e DK-0536, a2l = one PR for T2 options DK-0403/0409/0415/0421/0439 (stack a2i..a2m). Then: DK-0464 Compress T3 (a2n), DK-0445 Web T2.
 
 ## Memory
 
