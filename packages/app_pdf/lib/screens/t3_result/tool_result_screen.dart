@@ -23,6 +23,7 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_file_actions.dart';
+import '../../providers/share_providers.dart';
 import '../../providers/database_providers.dart';
 import '../../providers/file_providers.dart';
 import '../../providers/files_providers.dart';
@@ -358,6 +359,19 @@ class _ToolResultScreenState extends ConsumerState<ToolResultScreen> {
             )
           : null,
       menuLabel: _savedId == null ? l.t3_save_menu : null,
+      // The real files (DK-1077): the output, or what Save made of it.
+      secondaryStart: (
+        l.common_share,
+        DkIcons.share(context),
+        _saving
+            ? null
+            : () => ref.read(fileSharerProvider)([
+                if (_savedFiles.isEmpty)
+                  ...result.files
+                else
+                  for (final f in _savedFiles) f.path,
+              ]),
+      ),
       secondaryLabel: l.common_open,
       onSecondary: _saving
           ? null
