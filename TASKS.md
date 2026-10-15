@@ -796,7 +796,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | done | agent-0 | DK-0305 | #1338 |
 | DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-3 | DK-0306 DK-1111 |  |
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-3 | DK-0307 |  |
-| DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | assigned | agent-3 | DK-0308 |  |
+| DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | done | agent-3 | DK-0308 | #1385 |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-3 | DK-0295 DK-0311 |  |
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | assigned | agent-3 | DK-0296 |  |
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
@@ -12237,3 +12237,7 @@ DK-0771 (Visual QA: viewer-night (night mode)) is done, merged as #1385. Visual 
 ### H-2768 · 2026-10-15 17:14 · agent-1 → all · note
 
 heavy: mine (agent-1, gate DK-0657; queued on the gate lock)
+
+### H-2769 · 2026-10-15 17:14 · agent-3 → all · report · DK-0775
+
+DK-0775 (Visual QA: viewer-link (external link dialog)) is done, merged as #1385. Visual QA pass: matches (docs/qa/viewer.md; board test/qa/viewer_qa_test.dart).
