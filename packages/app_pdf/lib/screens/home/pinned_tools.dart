@@ -95,7 +95,6 @@ class _PinnedState extends ConsumerState<PinnedToolsSection> {
   Widget build(BuildContext context) {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
-    final large = MediaQuery.textScalerOf(context).scale(1) >= 1.5;
     final pinned = (ref.watch(pinnedToolsProvider).value ?? defaultPinnedTools)
         .take(PinnedToolsSection.max)
         .toList();
@@ -132,40 +131,44 @@ class _PinnedState extends ConsumerState<PinnedToolsSection> {
         ),
         SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: t.space.l),
-          // At large text (200 %) 2 across, taller, so names wrap whole
-          // (DK-0254); on tablets 6, or 8 from 840 dp (UI spec §30).
+          // 4 across (2 at large text), on tablets 6, or 8 from 840 dp.
           sliver: SliverLayoutBuilder(
-            builder: (context, box) => SliverGrid.count(
-              crossAxisCount: large ? 2 : toolColumns(box.crossAxisExtent),
-              mainAxisSpacing: t.space.m,
-              crossAxisSpacing: t.space.m,
-              childAspectRatio: large
-                  ? 1.0
-                  : toolTileAspect(box.crossAxisExtent, t.space.m),
-              children: [
-                for (final (i, id) in pinned.indexed)
-                  if (_editing)
-                    _EditTile(
-                      id: id,
-                      onRemove: () => _unpin(id),
-                      onDrop: (dragged) => _move(dragged, i),
-                    )
-                  else
-                    Builder(
-                      builder: (anchor) => DkToolTile(
-                        toolId: id,
-                        onTap: () => context.push(Routes.tool(id)),
-                        onLongPress: () => _menu(anchor, id),
+            builder: (context, box) {
+              final (columns, aspect) = toolGrid(
+                context,
+                box.crossAxisExtent,
+                t.space.m,
+              );
+              return SliverGrid.count(
+                crossAxisCount: columns,
+                mainAxisSpacing: t.space.m,
+                crossAxisSpacing: t.space.m,
+                childAspectRatio: aspect,
+                children: [
+                  for (final (i, id) in pinned.indexed)
+                    if (_editing)
+                      _EditTile(
+                        id: id,
+                        onRemove: () => _unpin(id),
+                        onDrop: (dragged) => _move(dragged, i),
+                      )
+                    else
+                      Builder(
+                        builder: (anchor) => DkToolTile(
+                          toolId: id,
+                          onTap: () => context.push(Routes.tool(id)),
+                          onLongPress: () => _menu(anchor, id),
+                        ),
                       ),
+                  if (_editing && pinned.length < PinnedToolsSection.max)
+                    _AddTile(
+                      onTap: () => showAddTool(context, pinned, (id) {
+                        _save([...pinned, id]);
+                      }),
                     ),
-                if (_editing && pinned.length < PinnedToolsSection.max)
-                  _AddTile(
-                    onTap: () => showAddTool(context, pinned, (id) {
-                      _save([...pinned, id]);
-                    }),
-                  ),
-              ],
-            ),
+                ],
+              );
+            },
           ),
         ),
       ],
