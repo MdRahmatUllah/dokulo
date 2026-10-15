@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/screens/s1_scanner/s1_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/s2_review/s2_screen.dart';
+import 'package:app_pdf/screens/s2_review/scan_result_screen.dart';
+import 'package:app_pdf/routes/link_error.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -294,6 +298,31 @@ void main() {
     expect(tabBarShown(tester), isFalse);
   });
 
+  testWidgets('the saved scan shows its result; without it, the link error', (
+    tester,
+  ) async {
+    final router = await pumpAt(tester, Routes.home);
+    unawaited(
+      router.push(
+        Routes.scanResult,
+        extra: (
+          name: 'Scan.pdf',
+          fileId: 3,
+          path: '/files/Scan.pdf',
+          pages: 2,
+          bytes: 1000,
+          textPages: null,
+          folder: null,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(ScanResultScreen), findsOneWidget);
+    router.go(Routes.scanResult);
+    await tester.pumpAndSettle();
+    expect(find.byType(LinkErrorScreen), findsOneWidget);
+  });
+
   testWidgets('a long press on Scan picks a mode for the scanner', (
     tester,
   ) async {
@@ -317,7 +346,7 @@ void main() {
     await tester.pumpAndSettle();
     await tester.tap(find.text('Import photos'));
     await tester.pumpAndSettle();
-    expect(title(tester), 'S2 photos');
+    expect(tester.widget<S2Screen>(find.byType(S2Screen)).importOnOpen, isTrue);
     expect(tabBarShown(tester), isFalse);
   });
 

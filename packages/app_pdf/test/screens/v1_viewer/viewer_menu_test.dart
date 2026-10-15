@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app_pdf/components/dk_page_pill.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
 import 'package:app_pdf/providers/database_providers.dart';
 import 'package:app_pdf/providers/file_providers.dart';
@@ -50,7 +51,7 @@ void main() {
     }
   });
 
-  /// V1 on a copy of the 12-page lease, pushed over a page that says
+  /// V1 on a copy of the 3-page lease, pushed over a page that says
   /// "beneath" (Delete closes V1 back to it); the menu open.
   Future<int> openMenu(WidgetTester tester) async {
     final id = (await tester.runAsync(() async {
@@ -134,6 +135,19 @@ void main() {
     );
     expect(container.read(prefsProvider).value?[viewerNightKey], isTrue);
     expect(find.byType(ColorFiltered), findsOneWidget);
+  });
+
+  testWidgets('Go to page (DK-0307): "1–3", then the canvas is on page 3', (
+    tester,
+  ) async {
+    await openMenu(tester);
+    await tester.tap(find.text('Go to page'));
+    await settle(tester, rounds: 5);
+    expect(find.text('1–3'), findsOneWidget);
+    await tester.enterText(find.byType(TextField), '3');
+    await tester.tap(find.text('Go'));
+    await settle(tester, rounds: 10);
+    expect(tester.widget<DkPagePill>(find.byType(DkPagePill)).page, 3);
   });
 
   testWidgets('Pages shows the thumbnail strip', (tester) async {
