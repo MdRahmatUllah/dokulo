@@ -336,20 +336,43 @@ class PpOcr {
         width,
       ]);
       for (final (j, k) in batch.indexed) {
-        results[k] = decodeCtc(probs, shape[1], shape[2], j);
+        // A crop pixel x is at input x · w / crop.width (_writeLine), and a
+        // step covers width / steps input pixels.
+        final crop = crops[k];
+        final w = math.min(
+          width,
+          (_recHeight * crop.width / crop.height).ceil(),
+        );
+        final steps = shape[1];
+        results[k] = decodeCtc(
+          probs,
+          steps,
+          shape[2],
+          j,
+          wordGaps: [
+            for (final x in wordGaps(crop)) x * w / crop.width * steps / width,
+          ],
+        );
       }
     }
     return results;
   }
 
   /// Greedy CTC: the best class per step, repeats and blanks dropped.
+  ///
+  /// The model sometimes reads a narrow word gap as blanks only
+  /// ("Musterstraße12", DK-1109): [wordGaps] are the steps where the line's
+  /// image has a word-wide gap ([PpOcr.wordGaps]); one that falls between
+  /// two characters the model wrote together puts the space in.
   (String, double) decodeCtc(
     Float32List probs,
     int steps,
     int classes,
-    int item,
-  ) {
-    final text = StringBuffer();
+    int item, {
+    List<double> wordGaps = const [],
+  }) {
+    final chars = <String>[];
+    final starts = <int>[], ends = <int>[];
     var sum = 0.0, kept = 0, previous = -1;
     for (var t = 0; t < steps; t++) {
       final base = (item * steps + t) * classes;
@@ -357,15 +380,88 @@ class PpOcr {
       for (var c = 1; c < classes; c++) {
         if (probs[base + c] > probs[base + best]) best = c;
       }
-      if (best != 0 && best != previous && best < _classes.length) {
-        text.write(_classes[best]);
-        sum += probs[base + best];
-        kept++;
+      if (best != 0 && best < _classes.length) {
+        if (best != previous) {
+          chars.add(_classes[best]);
+          starts.add(t);
+          ends.add(t);
+          sum += probs[base + best];
+          kept++;
+        } else {
+          ends.last = t;
+        }
       }
       previous = best;
     }
+    final text = StringBuffer();
+    for (final (i, char) in chars.indexed) {
+      if (i > 0 &&
+          char != ' ' &&
+          chars[i - 1] != ' ' &&
+          // Next to a letter only: tabular digits leave a wide blank beside
+          // a 1 ("12", "01.09"), and the model writes the spaces between
+          // digit groups itself (an IBAN).
+          (_letter.hasMatch(char) || _letter.hasMatch(chars[i - 1])) &&
+          wordGaps.any((g) => g > ends[i - 1] && g < starts[i])) {
+        text.write(' ');
+      }
+      text.write(char);
+    }
     return (text.toString(), kept == 0 ? 0 : sum / kept);
   }
+
+  static final _letter = RegExp(r'^\p{L}$', unicode: true);
+
+  /// The centres (crop pixels) of the gaps between words in a line [crop]:
+  /// runs of columns without ink, between the first ink and the last, at
+  /// least [wordGapShare] of the line's height wide. Letters sit a few
+  /// pixels apart; a space is several times wider.
+  static List<double> wordGaps(Raster crop) {
+    final w = crop.width, h = crop.height;
+    if (w < 2 || h < 2) return const [];
+    double grey(int x, int y) {
+      final i = (y * w + x) * 3;
+      return (crop.bgr[i] + crop.bgr[i + 1] + crop.bgr[i + 2]) / 3;
+    }
+
+    var lo = 255.0, hi = 0.0;
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        final g = grey(x, y);
+        if (g < lo) lo = g;
+        if (g > hi) hi = g;
+      }
+    }
+    if (hi - lo < 40) return const []; // no contrast: nothing to tell
+    final ink = (lo + hi) / 2;
+    final top = (h * 0.15).floor(), bottom = (h * 0.85).ceil();
+    final empty = [
+      for (var x = 0; x < w; x++)
+        () {
+          for (var y = top; y < bottom; y++) {
+            if (grey(x, y) < ink) return false;
+          }
+          return true;
+        }(),
+    ];
+    final first = empty.indexOf(false), last = empty.lastIndexOf(false);
+    if (first < 0) return const [];
+    final gaps = <double>[];
+    var run = -1;
+    for (var x = first; x <= last; x++) {
+      if (empty[x]) {
+        if (run < 0) run = x;
+      } else if (run >= 0) {
+        if (x - run >= h * wordGapShare) gaps.add((run + x - 1) / 2);
+        run = -1;
+      }
+    }
+    return gaps;
+  }
+
+  /// A run of blank columns at least this share of the line's height wide
+  /// is a gap between words.
+  static const wordGapShare = 0.15;
 
   /// [image] resized to w × h into an NCHW tensor, (x/255 - mean) / std.
   static Float32List _tensor(
