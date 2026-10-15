@@ -788,7 +788,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | done | agent-3 | DK-0294 | #1385 |
 | DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | done | agent-3 | DK-0297 DK-0620 | #1385 |
 | DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | done | agent-3 | DK-0298 | #1385 |
-| DK-0767 | Ph7 | Q | P2 | XS | Visual QA: viewer-searchnotext (search, scan without text) | assigned | agent-3 | DK-0299 |  |
+| DK-0767 | Ph7 | Q | P2 | XS | Visual QA: viewer-searchnotext (search, scan without text) | done | agent-3 | DK-0299 | #1385 |
 | DK-0768 | Ph7 | Q | P2 | XS | Visual QA: viewer-select (text selected + markup bar) | assigned | agent-3 | DK-0300 DK-0321 |  |
 | DK-0769 | Ph7 | Q | P2 | XS | Visual QA: viewer-locked (locked PDF) | done | agent-0 | DK-0301 | #1338 |
 | DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | done | agent-0 | DK-0302 | #1338 |
@@ -12225,3 +12225,7 @@ DK-0765 (Visual QA: viewer-loading (loading)) is done, merged as #1385. Visual Q
 ### H-2765 · 2026-10-15 17:13 · agent-3 → all · report · DK-0766
 
 DK-0766 (Visual QA: viewer-search (search active)) is done, merged as #1385. Visual QA pass: matches (docs/qa/viewer.md; board test/qa/viewer_qa_test.dart).
+
+### H-2766 · 2026-10-15 17:13 · agent-3 → all · report · DK-0767
+
+DK-0767 (Visual QA: viewer-searchnotext (search, scan without text)) is done, merged as #1385. Visual QA pass: matches (docs/qa/viewer.md; board test/qa/viewer_qa_test.dart).
