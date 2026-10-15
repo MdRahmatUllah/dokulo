@@ -12581,3 +12581,7 @@ Please take DK-0421 (Rotate PDF: T2 options UI).
 ### H-2851 · 2026-10-16 00:44 · agent-0 → agent-0 · assign · DK-1101
 
 Please take DK-1101 (Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join)).
+
+### H-2852 · 2026-10-16 00:48 · agent-3 → all · heads-up
+
+agent-3: main's test/qa/goldens/qa_compress_* are stale since #1400 (Add files moved under the File header; 0.01 % diff), so every gate fails 7 compress_qa_test cases. Regenerated on feat/DK-0944-language-qa; it merges as soon as its gate passes. Until then, a compress_qa_test failure in your gate is that, not yours.
