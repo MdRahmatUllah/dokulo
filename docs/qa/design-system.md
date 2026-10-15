@@ -361,3 +361,21 @@ A share or "Open with" (DK-0235) opens X1 with the files copied into
 Dokulo's folder; several files show "4 files" over "3 PDFs · 1 image" with
 three fanned thumbnails (x1multi's header), and "Open with" on one PDF opens
 V1 instead.
+
+### Compress's More options (DK-0860)
+
+Board: `test/qa/compress_qa_test.dart`, `qa_compress_moreopts_*` (light,
+dark, German): Compress's T2 (DK-0463) with More options open; frames
+`tool-shell-moreopts-*` in [tool-shell/](tool-shell/). Matches: the privacy
+line, File, the three level cards with estimates (Recommended selected), the
+target chips, the expanded Greyscale and Remove metadata switches, the
+estimate line and "Compress 12 pages". Copy as §21.12 in EN and DE.
+
+Deviation, **DK-1119** (P3, lane C): the More options row is drawn in
+`color.primary`; the frame (and the Options header beside it) use
+`type.titleS` in `color.textPrimary`.
+
+Approved: the File section has "Add files" and no swap button: Compress takes
+1–500 PDFs, and §20.1 gives multi-file tools Add files (the frame shows a
+single-file swap icon §20.1 doesn't have). Remove metadata is off: §21.12's
+default (the frame shows it on).

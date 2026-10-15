@@ -5,7 +5,8 @@ import 'package:pdfrx/pdfrx.dart';
 
 import 'dart:async';
 
-import 'package:doc_core/doc_core.dart' show FileEntry;
+import 'package:doc_core/doc_core.dart' show FileEntry, PdfEngine;
+import 'package:doc_tools/doc_tools.dart' show ManyFiles, Pdf2ImgInput;
 
 import '../../components/dk_action_sheet.dart';
 import '../../components/dk_icon.dart';
@@ -29,6 +30,7 @@ import '../../providers/share_providers.dart';
 import '../../providers/link_providers.dart';
 import '../../providers/prefs_providers.dart';
 import '../../providers/print_providers.dart';
+import '../t2_tool/tool_run.dart';
 import 'viewer_chrome.dart';
 import 'viewer_providers.dart';
 import 'viewer_search.dart';
@@ -211,9 +213,9 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
   }
 
   /// The overflow menu (DK-0295; UI spec §17.1, viewer-menu): Info · Go to
-  /// page · Pages · Night mode · Organize pages · Print · Move to locked
-  /// folder, then Delete (to Recently deleted with Undo; the viewer closes).
-  // ponytail: Share as images and Share text join with share_plus (DK-0311).
+  /// page · Pages · Night mode · Organize pages · Print · Share as images ·
+  /// Share text (DK-0311) · Move to locked folder, then Delete (to Recently
+  /// deleted with Undo; the viewer closes).
   void _menu(BuildContext anchor, FileEntry file) {
     final l = AppLocalizations.of(context);
     final night = ref.read(prefsProvider).value?[viewerNightKey] == true;
@@ -274,6 +276,16 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
             },
           ),
           DkAction(
+            icon: DkIcons.tool('pdf2img'),
+            label: l.viewer_menu_share_images,
+            onTap: () => _shareImages(file),
+          ),
+          DkAction(
+            icon: DkIcons.tool('text'),
+            label: l.viewer_menu_share_text,
+            onTap: () => _shareText(file),
+          ),
+          DkAction(
             icon: DkIcons.lockedFolder,
             label: l.file_move_to_locked,
             onTap: () => context.push(Routes.lockedFolder, extra: [file.id]),
@@ -295,6 +307,54 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         ],
       ],
     );
+  }
+
+  /// Share as images (DK-0311): every page as a 150 dpi JPG through the
+  /// pdf2img job, then the real files to the share sheet. A long document
+  /// says it's preparing them.
+  Future<void> _shareImages(FileEntry file) async {
+    final l = AppLocalizations.of(context);
+    if (_pageCount > 10) {
+      showDkToast(context, l.viewer_share_preparing, above: _barHeight);
+    }
+    try {
+      final run = await ref.read(toolRunnerProvider)(
+        'pdf2img',
+        (out) => Pdf2ImgInput(
+          file: file.path,
+          outputDir: out,
+          suffix: l.viewer_share_page_suffix,
+          password: _password,
+        ),
+      );
+      final images = await run.result as ManyFiles;
+      await ref.read(fileSharerProvider)(images.paths);
+    } catch (_) {
+      if (mounted) {
+        showDkToast(context, l.viewer_share_failed, above: _barHeight);
+      }
+    }
+  }
+
+  /// Share text (DK-0311): the pages' text, a blank line between pages, to
+  /// the share sheet; a scan without a text layer says so.
+  Future<void> _shareText(FileEntry file) async {
+    final l = AppLocalizations.of(context);
+    try {
+      final pages = await PdfEngine.pageTexts(file.path, password: _password);
+      final text = pages.map((p) => p.trim()).where((p) => p.isNotEmpty);
+      if (text.isEmpty) {
+        if (mounted) {
+          showDkToast(context, l.viewer_search_no_text, above: _barHeight);
+        }
+        return;
+      }
+      await ref.read(textSharerProvider)(text.join('\n\n'));
+    } catch (_) {
+      if (mounted) {
+        showDkToast(context, l.viewer_share_failed, above: _barHeight);
+      }
+    }
   }
 
   /// The form banner over the first page (UI spec §17.1; DK-1090): "This

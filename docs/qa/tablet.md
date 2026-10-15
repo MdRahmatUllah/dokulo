@@ -58,3 +58,30 @@ Save at the column's width. Approved:
 Not on the board: the Next chips (Add password, Share) come with Compress's
 own definition (DK-0463: the board's test tool lists no next tools), and
 Share beside Open with DK-1077, as on the phone (`design-system.md`).
+
+## Compress on tablets (DK-0969, DK-0970, DK-0971)
+
+Boards: `test/qa/compress_qa_test.dart` (Compress's T2, DK-0463, on the
+frame's 12-page 8.4 MB lease: `qa_compress_tablet_landscape_*` at
+1366 × 1024, `qa_compress_tablet_portrait_*` at 820 × 1180) and
+`tool_shell_test`'s `tablet_result_landscape_*` (T3 at 1366 × 1024); frames
+`tablet-compress-*` in [tablet/](tablet/) (the exports clip the frames at
+1024 high: their action bars are in the HTML only).
+
+| Task | Frame | Result |
+| --- | --- | --- |
+| DK-0969 | `tablet-compress-options-landscape` | **DK-1118**: the preview pane isn't Compress's live preview |
+| DK-0970 | `tablet-compress-result-landscape` | **DK-1118**: no Before/After or 200 % crop (with DK-0464) |
+| DK-0971 | `tablet-compress-options-portrait` | Match |
+
+What matches: the options column at 480 (landscape) beside the pane, and the
+640 column centred (portrait); the privacy line, File with Add files, the
+level cards with their estimates, the target chips, More options, the
+estimate line and the button in the action bar at the column's width.
+
+**DK-1118** (lane C, after DK-0464): on the large tablet the right pane is
+DK-0388's generic preview (the input page in T2, the output in T3). The
+frames and §30/§21.12 want Compress's own pane: "Live preview ·
+Recommended" following the selected level (T2) or "Result preview" (T3), a
+Before · After toggle and a 200 % crop of the same area with its caption.
+The More options row's colour is DK-1119 (below, `design-system.md`).
