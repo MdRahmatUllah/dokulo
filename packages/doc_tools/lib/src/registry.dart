@@ -1,10 +1,12 @@
 import 'tool_job.dart';
 import 'tools/compress_job.dart';
+import 'tools/extract_assets_job.dart';
 import 'tools/extract_job.dart';
 import 'tools/img2pdf_job.dart';
 import 'tools/merge_job.dart';
 import 'tools/ocr_job.dart';
 import 'tools/password_jobs.dart';
+import 'tools/pdf2img_job.dart';
 import 'tools/repair_job.dart';
 import 'tools/rotate_job.dart';
 import 'tools/split_job.dart';
@@ -22,11 +24,13 @@ const toolJobIds = [
 /// Every ToolJob the app has. A tool's engine task adds its job here.
 const List<ToolJob<Object?>> allToolJobs = [
   CompressJob(),
+  ExtractAssetsJob(),
   ExtractJob(),
   Img2PdfJob(),
   MergeJob(),
   OcrJob(),
   PageNumbersJob(),
+  Pdf2ImgJob(),
   ProtectJob(),
   RepairJob(),
   RotateJob(),
