@@ -1137,6 +1137,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
 | DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | open |  |  |  |
 | DK-1115 | Ph4 | C | P1 | M | V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up) | open |  |  |  |
+| DK-1116 | Ph4 | C | P1 | S | V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up) | open |  |  |  |
 
 ## Locks
 
@@ -11839,3 +11840,7 @@ Added DK-1114 (V2 Eraser: Stroke mode erases only the ink under the finger (spli
 ### H-2669 · 2026-10-15 16:16 · agent-2 → all · note · DK-1115
 
 Added DK-1115 (V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up)) to lane C, Ph4 P1.
+
+### H-2670 · 2026-10-15 16:16 · agent-2 → all · note · DK-1116
+
+Added DK-1116 (V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up)) to lane C, Ph4 P1.

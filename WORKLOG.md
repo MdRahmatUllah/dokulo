@@ -2344,3 +2344,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 16:05 · agent-0 DK-0548 · done (#1376)
 - 2026-10-15 16:16 · agent-2 DK-1114 · added: V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up)
 - 2026-10-15 16:16 · agent-2 DK-1115 · added: V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up)
+- 2026-10-15 16:16 · agent-2 DK-1116 · added: V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up)
