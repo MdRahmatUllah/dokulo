@@ -2217,3 +2217,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-15 12:05 · agent-3 DK-0670 · PR #1348 open; review requested from all
 - 2026-10-15 12:08 · agent-0 DK-0480 · assigned to agent-0
 - 2026-10-15 12:08 · agent-0 DK-0486 · assigned to agent-0
+- 2026-10-15 12:08 · agent-0 · Engine ToolJobs: merge/split/extract/rotate, protect/unlock/repair, pagenum/watermark committed (3 stacked branches); gates pending the DK-1077 gate
