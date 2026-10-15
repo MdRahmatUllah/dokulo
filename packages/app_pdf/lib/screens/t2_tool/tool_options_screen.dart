@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../components/dk_action_bar.dart';
+import '../../components/dk_banner.dart';
 import '../../components/dk_action_sheet.dart';
 import '../../components/dk_button.dart';
 import '../../components/dk_file_card.dart';
@@ -128,6 +129,10 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
 
   void _setInput(List<FileEntry> files) => setState(() => _input = files);
 
+  /// Files the last pick brought that this tool doesn't take ("2 files
+  /// aren't images and were skipped", UI spec §21.7; DK-0435).
+  var _notTaken = 0;
+
   /// Adds [picked] to the input (a one-file tool: replaces it), skipping
   /// files already in it.
   void _add(List<FileEntry> current, List<FileEntry> picked, ToolInput input) {
@@ -163,6 +168,8 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
       );
     }
     final picked = <FileEntry>[];
+    final notTaken = paths.where((p) => !input.takes(p)).length;
+    if (mounted) setState(() => _notTaken = notTaken);
     for (final path in paths) {
       if (!input.takes(path)) continue;
       final copy = await store.importIncoming(File(path));
@@ -559,7 +566,20 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                     ? () => _browse(files, input, photos: true)
                     : null,
               )
-            else if (ready && input.kinds.length == 1 && input.images)
+            else if (ready && input.kinds.length == 1 && input.images) ...[
+              if (_notTaken > 0)
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                    t.space.l,
+                    0,
+                    t.space.l,
+                    t.space.m,
+                  ),
+                  child: DkBanner(
+                    variant: DkBannerVariant.warning,
+                    text: l.img2pdf_not_images(_notTaken),
+                  ),
+                ),
               // Images only (Image to PDF): the numbered strip with reorder
               // (UI spec §21.7, DK-0433).
               _ImageStrip(
@@ -570,8 +590,8 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
                     if (x.path != f.path) x,
                 ]),
                 onAdd: () => _browse(files, input, photos: true),
-              )
-            else ...[
+              ),
+            ] else ...[
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: t.space.l),
                 child: Row(

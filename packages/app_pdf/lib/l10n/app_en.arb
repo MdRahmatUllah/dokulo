@@ -2905,5 +2905,11 @@
   "viewer_share_preparing": "Preparing the images…",
   "@viewer_share_preparing": {"description": "Share as images on a long document, while the pages render (DK-0311)."},
   "viewer_share_failed": "Couldn't prepare that for sharing.",
-  "@viewer_share_failed": {"description": "Share as images or Share text failed (DK-0311)."}
+  "@viewer_share_failed": {"description": "Share as images or Share text failed (DK-0311)."},
+  "img2pdf_result": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 page} other{{pages} pages}} · {size}",
+  "@img2pdf_result": {"description": "Image to PDF's T3 headline (DK-0434).", "placeholders": {"pdfs": {"type": "int"}, "pages": {"type": "int"}, "size": {"type": "String"}}},
+  "img2pdf_images": "{n, plural, =1{1 image} other{{n} images}}",
+  "@img2pdf_images": {"description": "Image to PDF's T3: 'From 12 images' (DK-0434).", "placeholders": {"n": {"type": "int"}}},
+  "img2pdf_not_images": "{n, plural, =1{1 file isn't an image and was skipped.} other{{n} files aren't images and were skipped.}}",
+  "@img2pdf_not_images": {"description": "Image to PDF's T2 after a pick with non-images (DK-0435; UI spec \u00a721.7).", "placeholders": {"n": {"type": "int"}}}
 }
