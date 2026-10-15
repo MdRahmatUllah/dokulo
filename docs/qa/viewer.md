@@ -51,7 +51,7 @@ einzige Schritt, der Dokulo verlässt."
 | DK-0767 | `viewer-searchnotext` | Match |
 | DK-0771 | `viewer-night` | Match (the bar overlap is DK-1111's) |
 | DK-0773 | `viewer-form` | **DK-1111**: the banner's first row is under the top bar |
-| DK-0775 | `viewer-link` | Match (`dk_viewer_dialogs_test`'s `viewer_link_*` golden over the canvas) |
+| DK-0775 | `viewer-link` | Match (`dk_viewer_dialogs_test`'s `viewer_link_*` golden: the dialog on its scrim) |
 | DK-0777 | `viewer-thumbs` | Match |
 
 Deviation, **DK-1111** (lane C): the canvas starts at y = 0 under the
