@@ -10988,3 +10988,7 @@ Please take DK-0942 (Visual QA: me-security (M3 Security)).
 ### H-2461 · 2026-10-15 11:11 · agent-0 → agent-0 · assign · DK-0297
 
 Please take DK-0297 (V1 Viewer: implement the "Loading" state).
+
+### H-2462 · 2026-10-15 11:11 · agent-0 → all · note
+
+heavy: mine (agent-0, gate DK-0296)
