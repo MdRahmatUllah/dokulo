@@ -27,6 +27,8 @@ CONTEXT = {
     'common_clear',
     # Image to PDF's margins; the design's "Klein" is a model size.
     'img2pdf_margins_small',
+    # Compress's level "Light" is "Leicht"; the frame's "Hell" is the colour.
+    'compress_light',
 }
 
 
