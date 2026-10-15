@@ -677,7 +677,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
 | DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | open |  | DK-0232 DK-0182 |  |
-| DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | open |  | DK-0004 |  |
+| DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | assigned | agent-1 | DK-0004 |  |
 | DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | assigned | agent-1 | DK-0024 |  |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | in-progress | agent-3 | DK-0010 DK-0023 |  |
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | open |  | DK-0010 DK-0395 |  |
@@ -11330,3 +11330,7 @@ Please take DK-0576 (M3 Privacy settings page).
 ### H-2545 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0634
 
 Please take DK-0634 (Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults).
+
+### H-2546 · 2026-10-15 12:24 · agent-1 → agent-1 · assign · DK-0656
+
+Please take DK-0656 (Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner).
