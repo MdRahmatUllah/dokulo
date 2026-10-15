@@ -2909,5 +2909,21 @@
   "viewer_share_failed": "Couldn't prepare that for sharing.",
   "@viewer_share_failed": {"description": "Share as images or Share text failed (DK-0311)."},
   "sign_toast_signed": "Signed on page {page}",
-  "@sign_toast_signed": {"description": "V2 after Done with a signature placed (DK-0519; UI spec \u00a721).", "placeholders": {"page": {"type": "int"}}}
+  "@sign_toast_signed": {"description": "V2 after Done with a signature placed (DK-0519; UI spec \u00a721).", "placeholders": {"page": {"type": "int"}}},
+  "form_lock_title": "Lock form values?",
+  "@form_lock_title": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "form_flatten": "Flatten form",
+  "@form_flatten": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "form_flatten_desc": "Fields can't be edited later",
+  "@form_flatten_desc": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "form_no_fields_title": "This PDF has no fillable fields.",
+  "@form_no_fields_title": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "form_no_fields_body": "Use Mark up to add text anywhere.",
+  "@form_no_fields_body": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "form_xfa_body": "It uses XFA, an older form format. You can still read it and add marks.",
+  "@form_xfa_body": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "form_open_read_only": "Open read-only",
+  "@form_open_read_only": {"description": "The Fill form tool (DK-0518; designs tools-edit-formlock/noform/xfa)."},
+  "edit_save_failed": "Couldn't save. The file is as it was.",
+  "@edit_save_failed": {"description": "V2 when Done could not write the file (DK-0324)."}
 }
