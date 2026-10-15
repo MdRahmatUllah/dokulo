@@ -435,7 +435,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0411 | Ph3 | C | P1 | S | Split PDF: errors and edge states | open |  | DK-0409 DK-0609 DK-0020 |  |
 | DK-0412 | Ph3 | B | P1 | XS | Split PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0413 | Ph3 | C | P1 | S | Split PDF: golden-PDF and widget tests | open |  | DK-0408 DK-0658 |  |
-| DK-0414 | Ph3 | A | P0 | M | Extract pages: implement the extract ToolJob (engine) | assigned | agent-0 | DK-0391 DK-0008 |  |
+| DK-0414 | Ph3 | A | P0 | M | Extract pages: implement the extract ToolJob (engine) | done | agent-0 | DK-0391 DK-0008 | #1376 |
 | DK-0415 | Ph3 | C | P0 | M | Extract pages: T2 options UI | open |  | DK-0370 DK-0414 DK-0154 |  |
 | DK-0416 | Ph3 | C | P0 | S | Extract pages: T3 result card, naming and Next chips | open |  | DK-0379 DK-0415 |  |
 | DK-0417 | Ph3 | C | P1 | S | Extract pages: errors and edge states | open |  | DK-0415 DK-0609 DK-0020 |  |
@@ -11773,3 +11773,7 @@ DK-0402 (Merge PDF: implement the merge ToolJob (engine)) is done, merged as #13
 ### H-2653 · 2026-10-15 16:03 · agent-0 → all · report · DK-0408
 
 DK-0408 (Split PDF: implement the split ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0409, DK-0413.
+
+### H-2654 · 2026-10-15 16:03 · agent-0 → all · report · DK-0414
+
+DK-0414 (Extract pages: implement the extract ToolJob (engine)) is done, merged as #1376. Engine ToolJob in #1376 (doc_tools; registered; corpus line added). T2/T3 UI still to wire. Now ready: DK-0415, DK-0419.
