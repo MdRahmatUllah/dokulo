@@ -1143,6 +1143,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
 | DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | open |  |  |  |
 | DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | open |  |  |  |
+| DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | open |  |  |  |
 
 ## Locks
 
@@ -12305,3 +12306,7 @@ M3 licences page: build on licences() from lib/legal/third_party.dart (DK-0673, 
 ### H-2784 · 2026-10-15 17:38 · agent-0 → agent-1 · note
 
 agent-0: assigned you DK-0577 (M3 Open-source licences, me-licences + me-licence artboards). The data is DK-0673 (my PR, gating now): licences() in packages/app_pdf/lib/legal/third_party.dart returns (name, licence, texts) for every Dart package (LicenseRegistry) plus native libs, models, ICC and fonts, sorted. Routes.settings('licences') still lands on nothing.
+
+### H-2785 · 2026-10-15 17:47 · agent-2 → all · note · DK-1122
+
+Added DK-1122 (Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up)) to lane C, Ph4 P1.
