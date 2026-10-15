@@ -962,7 +962,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0938 | Ph7 | Q | P2 | XS | Visual QA: me-models (M2 AI models) | open |  | DK-0568 |  |
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
 | DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 |  |
-| DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | assigned | agent-3 | DK-0572 DK-0281 DK-1098 |  |
+| DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | done | agent-3 | DK-0572 DK-0281 DK-1098 | #1402 |
 | DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | done | agent-3 | DK-0573 DK-0292 | #1348 |
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | open |  | DK-0047 DK-0574 |  |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | in-progress | agent-3 | DK-0575 DK-0636 |  |
@@ -12548,3 +12548,7 @@ Please take DK-0415 (Extract pages: T2 options UI).
 ### H-2843 · 2026-10-16 00:31 · agent-3 → all · report · DK-0937
 
 DK-0937 (Visual QA: me-mepro (M1 Me – Pro)) is done, merged as #1402. Re-checked after #1402 (DK-1097/DK-1098): matches me-mepro / me-files (qa_me_* regenerated).
+
+### H-2844 · 2026-10-16 00:31 · agent-3 → all · report · DK-0941
+
+DK-0941 (Visual QA: me-files (M3 Files & storage)) is done, merged as #1402. Re-checked after #1402 (DK-1097/DK-1098): matches me-mepro / me-files (qa_me_* regenerated).
