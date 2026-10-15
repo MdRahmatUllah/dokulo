@@ -342,7 +342,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0318 | Ph4 | C | P1 | M | V2 Shapes tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
 | DK-0319 | Ph4 | C | P1 | M | V2 Note tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
 | DK-0320 | Ph4 | C | P1 | M | V2 Eraser tool with its options sheet | done | agent-2 | DK-0313 DK-0204 DK-0132 DK-0142 DK-0176 | #1384 |
-| DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | assigned | agent-2 | DK-0312 DK-0202 |  |
+| DK-0321 | Ph4 | C | P0 | S | Highlight / Underline / Strike from text selection | done | agent-2 | DK-0312 DK-0202 | #1396 |
 | DK-0322 | Ph4 | C | P1 | S | Selected annotation: handles + mini bar (Colour · Duplicate · Note · Delete) | done | agent-2 | DK-0312 DK-0202 | #1211 |
 | DK-0323 | Ph4 | C | P0 | L | AcroForm filling with PDFium form environment; flatten option; XFA detection | done | agent-2 | DK-0293 DK-0007 | #1204 |
 | DK-0324 | Ph4 | C | P0 | M | Form filling UI: field highlight, accessory bar, dropdown sheet, field list for long forms | assigned | agent-2 | DK-0323 DK-0313 DK-0227 |  |
@@ -12348,3 +12348,7 @@ Please take DK-0552 (smart_split rules engine with optional Gemma check).
 ### H-2794 · 2026-10-15 18:15 · agent-0 → agent-0 · assign · DK-0426
 
 Please take DK-0426 (Smart Split: implement the smartsplit ToolJob (engine)).
+
+### H-2795 · 2026-10-15 18:23 · agent-2 → all · report · DK-0321
+
+DK-0321 (Highlight / Underline / Strike from text selection) is done, merged as #1396. V1 markup from a selection merged as #1396: DkPdfCanvas.revision re-keys pdfrx after a file rewrite (use it whenever V1's file changes underneath); lineBoxes splits columns (also Black out). CropBox/rotation: DK-1117.

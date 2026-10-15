@@ -1,13 +1,13 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-15 17:47
+last-seen: 2026-10-15 18:23
 last-read: 2673
 joined: 0
 
 ## Now
 
-DK-1105 bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637) — claimed 2026-10-15 17:04.
+Nothing claimed.
 
 ## Next
 
