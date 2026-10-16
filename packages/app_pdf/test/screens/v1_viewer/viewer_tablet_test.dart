@@ -96,5 +96,15 @@ void main() {
         matchesGoldenFile('goldens/viewer_tablet_landscape_$name.png'),
       );
     });
+
+    // The frame's portrait size (§32.3): the sidebar starts hidden (DK-0966).
+    testWidgets('golden: tablet-viewer-portrait, $name', (tester) async {
+      await pump(tester, const Size(820, 1180), tokens: tokens);
+      await settle(tester, rounds: 20);
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/viewer_tablet_portrait_$name.png'),
+      );
+    });
   }
 }

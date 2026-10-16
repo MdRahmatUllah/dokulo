@@ -16,6 +16,8 @@ so the layout is what they check; the copy is the phone's.
 | DK-0962 | `24-tablet/tablet-tools-portrait` | Match, 1 approved |
 | DK-0964 | `24-tablet/tablet-files-portrait` | Match, 2 approved |
 | DK-0972 | `24-tablet/tablet-compress-result-portrait` | Match, 3 approved, below |
+| DK-0965 | `24-tablet/tablet-viewer-landscape` | Match, 1 fixed, 3 approved, below |
+| DK-0966 | `24-tablet/tablet-viewer-portrait` | Match, 1 approved, below |
 
 What matches: the navigation rail from 840 dp (DK-0168); Home's tools 6
 across in portrait and 8 in landscape, Recent in 2 columns in portrait and
@@ -85,3 +87,52 @@ frames and §30/§21.12 want Compress's own pane: "Live preview ·
 Recommended" following the selected level (T2) or "Result preview" (T3), a
 Before · After toggle and a 200 % crop of the same area with its caption.
 The More options row's colour is DK-1119 (below, `design-system.md`).
+
+## Scanner (S1) on tablets
+
+S1 on tablets (DK-0652, §30) against `tablet-scanner-portrait` and
+`-landscape`. Board: `s1_screen_test`'s `s1_tablet_portrait` (820 × 1180) and
+`s1_tablet_landscape` (1366 × 1024); frames `tablet-scanner-*` in
+[tablet/](tablet/). The portrait export is clipped at 1024 high and drawn
+left of its box, like the Compress ones; its HTML has the phone's layout,
+the shutter row under the modes.
+
+| Task | Frame | Result |
+| --- | --- | --- |
+| DK-0977 | `tablet-scanner-landscape` | **DK-1137**: the preview is a 3:4 column with black bars |
+| DK-0978 | `tablet-scanner-portrait` | Match |
+
+What matches: portrait keeps the phone's S1 (top bar with flash, Auto, grid
+and settings, the Ready hint, the modes above the shutter row with import,
+shutter and the page stack); landscape has the 160 dp rail on the right
+(page stack, shutter, import) and the modes beside it.
+
+**DK-1137** (P3, lane C): the preview takes the camera's portrait ratio in
+landscape too, so a 768 dp column sits between black bars, and the top bar
+covers only the column; the frame fills the area left of the rail.
+
+## V1 on tablets (DK-0965, DK-0966)
+
+Board: `viewer_tablet_landscape_<theme>` (1366 × 1024) and
+`viewer_tablet_portrait_<theme>` (820 × 1180) in
+`test/screens/v1_viewer/goldens/` (`viewer_tablet_test.dart`, the real V1
+with its tablet chrome, DK-0310); frames: `tablet-viewer-<orientation>-<theme>.png`
+in [tablet/](tablet/). Matches: one top bar with back, the sidebar toggle,
+the file name, Search, Edit · Sign · AI · Tools as labelled buttons, Share
+and More; no bottom bar; the thumbnail sidebar (120) open in landscape and
+closed in portrait; the page pill bottom right; the pages on
+`color.surfaceSunken`.
+
+Fixed: AI was a tonal button. In the frames it's tonal only while its pane
+is open (landscape) and plain in portrait; with no pane yet it's plain.
+
+Approved:
+
+- No AI pane (400, right) in landscape: A1 is M13 and waits for ai_core
+  (DK-0545). AI opens Summarize full-screen until then; the pane lands with
+  A1 and AI turns tonal while it's open.
+- The page is wider than the frame's: without the pane the canvas is the
+  full width, and DkPdfCanvas fits the page to it (fit width, at most 1.3×,
+  centred), where the frame leaves about 50 on each side.
+- Share uses the platform's icon (Android's in the goldens), as on phones
+  (DK-1077); the frame draws iOS's.

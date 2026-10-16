@@ -78,6 +78,13 @@ def test_gate_lock_waits_for_a_live_gate_and_takes_over_a_dead_one(tmp_path: Pat
 
 
 
+def test_the_redaction_suite_is_its_own_step(tmp_path: Path) -> None:
+    core = tmp_path / "packages" / "doc_core"
+    (core / "test").mkdir(parents=True)
+    (core / "pubspec.yaml").write_text("name: doc_core\n", encoding="utf-8")
+    plan = {name: command for name, command, _ in check.steps(tmp_path)}
+    assert plan["test doc_core"][-1] == "--exclude-tags=redaction-security"
+    assert plan["redaction security"][1:] == ["test", "--tags=redaction-security"]
 def test_gate_lock_takes_turns_in_order(tmp_path: Path) -> None:
     import os
     import threading
