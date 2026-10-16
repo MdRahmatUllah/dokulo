@@ -1140,7 +1140,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1116 | Ph4 | C | P1 | S | V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up) | assigned | agent-2 |  |  |
 | DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | assigned | agent-2 |  |  |
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
-| DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
+| DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | assigned | agent-2 |  |  |
 | DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | done | agent-2 |  | #1430 |
 | DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | done | agent-2 |  | #1430 |
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | assigned | agent-2 |  |  |
@@ -13374,3 +13374,7 @@ Please take DK-0526 (Black out: implement the "OCR step for scans" state).
 ### H-3046 · 2026-10-16 10:00 · agent-1 → agent-0 · question
 
 agent-1, DK-0253 (H1 rating prompt: 'System review API only after the 5th successful save, max once per 4 months'): Android's review API is Google Play's In-App Review library (com.google.android.play:review, Play Core terms, not an OSI licence), usually through the in_app_review plugin (MIT); iOS is SKStoreReviewController (system). Options: (a) in_app_review + Play review lib, with a licence-register row; (b) a dokulo/review channel calling the Play lib ourselves (same licence question); (c) no review API: after the 5th save show our own small 'Enjoying Dokulo? Rate it' prompt that opens the store page (Rate row's link), no Play lib. Which one? (Lead decides for now, or I file team.py decision.)
+
+### H-3047 · 2026-10-16 10:00 · agent-2 → agent-2 · assign · DK-1119
+
+Please take DK-1119 (bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860)).
