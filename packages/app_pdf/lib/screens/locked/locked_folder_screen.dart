@@ -115,8 +115,14 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
     final cipher = ref.read(lockedSessionProvider);
     if (cipher == null) return;
     final db = ref.read(appDatabaseProvider);
-    final store = await ref.read(lockedStoreProvider.future);
-    final thumbs = await ref.read(thumbnailCacheProvider.future);
+    // Everything ref gives is read before the first await: the screen can
+    // close while files move, and a ref used after that throws (DK-1129).
+    final container = ProviderScope.containerOf(context, listen: false);
+    final storeF = ref.read(lockedStoreProvider.future);
+    final thumbsF = ref.read(thumbnailCacheProvider.future);
+    final filesF = ref.read(fileStoreProvider.future);
+    final store = await storeF;
+    final thumbs = await thumbsF;
     final moved = <LockedEntry>[];
     for (final id in widget.moveIn) {
       final row = await (db.select(
@@ -127,18 +133,19 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
       await thumbs.forget(row.path, pages: row.pages);
       moved.add(await store.moveIn(db, id, cipher));
     }
-    ref.invalidate(lockedFilesProvider);
+    container.invalidate(lockedFilesProvider);
     if (!mounted || moved.isEmpty) return;
     await showDkUndo(
       context,
       DkUndo.move,
       l.locked_moved_in(moved.length),
+      // Undo can come after the screen closed: no ref in here.
       onUndo: () async {
-        final files = await ref.read(fileStoreProvider.future);
+        final files = await filesF;
         for (final e in moved) {
           await store.moveOut(db, files, e.id, cipher, folder: e.fromFolder);
         }
-        ref.invalidate(lockedFilesProvider);
+        container.invalidate(lockedFilesProvider);
       },
     );
   }
@@ -180,8 +187,9 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
       _fail(l.locked_pin_mismatch);
       return _go(LockedStep.createPin);
     }
+    final kindF = ref.read(biometricKindProvider.future);
     await _vault.setPin(pin);
-    final kind = await ref.read(biometricKindProvider.future);
+    final kind = await kindF;
     final result = await _vault.unlockWithPin(pin);
     if (!mounted || result is! PinUnlocked) return;
     ref.read(lockedSessionProvider.notifier).open(result.cipher);
@@ -191,7 +199,9 @@ class _LockedFolderState extends ConsumerState<LockedFolderScreen> {
 
   Future<void> _entered(String pin) async {
     final l = AppLocalizations.of(context);
-    switch (await _vault.unlockWithPin(pin)) {
+    final result = await _vault.unlockWithPin(pin);
+    if (!mounted) return;
+    switch (result) {
       case PinUnlocked(:final cipher):
         _opened(cipher);
       case PinWrong(:final wait):
@@ -669,8 +679,11 @@ class _LockedRow extends ConsumerWidget {
     final cipher = ref.read(lockedSessionProvider);
     if (cipher == null) return;
     final db = ref.read(appDatabaseProvider);
-    final store = await ref.read(lockedStoreProvider.future);
-    final files = await ref.read(fileStoreProvider.future);
+    final container = ProviderScope.containerOf(context, listen: false);
+    final storeF = ref.read(lockedStoreProvider.future);
+    final filesF = ref.read(fileStoreProvider.future);
+    final store = await storeF;
+    final files = await filesF;
     // ponytail: back to the folder it came from; a folder picker when users
     // want another place.
     final id = await store.moveOut(
@@ -680,7 +693,7 @@ class _LockedRow extends ConsumerWidget {
       cipher,
       folder: entry.fromFolder,
     );
-    ref.invalidate(lockedFilesProvider);
+    container.invalidate(lockedFilesProvider);
     final row = await (db.select(
       db.files,
     )..where((f) => f.id.equals(id))).getSingle();
