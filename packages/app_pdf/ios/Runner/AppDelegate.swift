@@ -10,7 +10,22 @@ import os
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+    // A tapped notice opens its deep link (DK-0587), from a cold start too.
+    UNUserNotificationCenter.current().delegate = self
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+  }
+
+  override func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+  ) {
+    if let link = response.notification.request.content.userInfo["link"] as? String,
+      let url = URL(string: link)
+    {
+      UIApplication.shared.open(url)
+    }
+    completionHandler()
   }
 
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
@@ -55,6 +70,21 @@ import os
               options: [.alert, .sound]
             ) { _, _ in status { result($0) } }
           }
+        case "show":
+          // A job ended in the background (DK-0587; lib/providers/job_notices.dart).
+          guard let a = call.arguments as? [String: Any], let id = a["id"] as? Int
+          else {
+            result(nil)
+            return
+          }
+          let content = UNMutableNotificationContent()
+          content.title = a["title"] as? String ?? ""
+          content.body = a["body"] as? String ?? ""
+          content.userInfo = ["link": a["link"] as? String ?? ""]
+          UNUserNotificationCenter.current().add(
+            UNNotificationRequest(identifier: "job-\(id)", content: content, trigger: nil)
+          )
+          result(nil)
         default:
           result(FlutterMethodNotImplemented)
         }

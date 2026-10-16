@@ -10,6 +10,7 @@ import 'database_providers.dart';
 import 'device_providers.dart';
 import 'file_providers.dart';
 import 'files_providers.dart';
+import 'job_notices.dart';
 import 'prefs_providers.dart';
 
 part 'job_providers.g.dart';
@@ -31,7 +32,13 @@ Future<JobQueue> jobQueue(Ref ref) async => JobQueue(
   ref.watch(appDatabaseProvider),
   ToolRegistry.app(),
   // Every started job shows in the mini job bar until it ends (DK-0233).
-  hooks: JobHooks(onStarted: ref.read(runningJobsProvider.notifier).add),
+  // One that ends while Dokulo is in the background gets a notice
+  // (DK-0587).
+  hooks: JobHooks(
+    onStarted: ref.read(runningJobsProvider.notifier).add,
+    onFinished: (run, output) => noticeIfAway(ref, run, output: output),
+    onFailed: (run, error) => noticeIfAway(ref, run, error: error),
+  ),
   // No job starts that is known to fail; the free storage and memory are
   // read again for each (DK-0020).
   preflight: Preflight(() {

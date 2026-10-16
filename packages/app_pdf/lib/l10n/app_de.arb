@@ -827,5 +827,10 @@
   "privacy_crash_keep": "Absturzberichte speichern",
   "privacy_crash_keep_help": "Nur auf diesem Handy. Nichts verlässt es, außer du schickst es.",
   "privacy_crash_delete": "Absturzberichte löschen",
-  "privacy_crash_deleted": "Absturzberichte gelöscht"
+  "privacy_crash_deleted": "Absturzberichte gelöscht",
+  "notice_channel_jobs": "Aufträge",
+  "notice_job_done": "{tool} abgeschlossen",
+  "notice_job_failed": "{tool} fehlgeschlagen",
+  "notice_job_failed_body": "Tippe für Details",
+  "notice_files": "{count, plural, =1{1 Datei} other{{count} Dateien}}"
 }
