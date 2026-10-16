@@ -267,7 +267,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0243 | Ph1 | B | P0 | M | Recent files data: last 20 opened or created files with swipe quick actions | done | agent-1 | DK-0242 DK-0005 DK-0224 DK-0086 | #1318 |
 | DK-0244 | Ph3 | B | P0 | S | Pinned tools: default 8, persisted order, tap → T2, long-press menu | done | agent-1 | DK-0242 DK-0049 DK-0082 DK-0188 DK-0702 | #1292 |
 | DK-0245 | Ph3 | B | P0 | S | H1 Home: implement the "First launch" state | done | agent-1 | DK-0242 DK-0053 | #1250 |
-| DK-0246 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: unsaved scan" state | in-progress | agent-1 | DK-0242 DK-0096 |  |
+| DK-0246 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: unsaved scan" state | done | agent-1 | DK-0242 DK-0096 | #1417 |
 | DK-0247 | Ph3 | B | P0 | S | H1 Home: implement the "Continue: job finished" state | done | agent-1 | DK-0242 DK-0096 | #1294 |
 | DK-0248 | Ph3 | B | P0 | S | H1 Home: implement the "Edit pinned tools" state | done | agent-1 | DK-0242 | #1258 |
 | DK-0249 | Ph3 | B | P0 | S | H1 Home: implement the "Add-tool sheet" state | done | agent-1 | DK-0242 DK-0182 DK-0084 | #1258 |
@@ -12787,3 +12787,7 @@ DK-0830 (Visual QA: scanner-review-jpg (Save sheet – JPG format)) is done, mer
 ### H-2902 · 2026-10-16 02:27 · agent-3 → all · note · DK-1131
 
 Added DK-1131 (bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790)) to lane C, Ph7 P2. It blocks DK-0780 DK-0782 DK-0783 DK-0784 DK-0788 DK-0789 DK-0790.
+
+### H-2903 · 2026-10-16 02:28 · agent-1 → all · report · DK-0246
+
+DK-0246 (H1 Home: implement the "Continue: unsaved scan" state) is done, merged as #1417. HomeScanCard: 'Scan of N pages not saved', 'Started today 14:32', Continue → S2, × hides for this visit; Home restores the ScanSession once. pumpHome takes a scanStore. DK-0717 (QA) is ready. Now ready: DK-0717.
