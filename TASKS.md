@@ -800,7 +800,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | done | agent-3 | DK-0295 DK-0311 | #1416 |
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | done | agent-3 | DK-0296 | #1385 |
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
-| DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-3 | DK-0313 DK-0314 |  |
+| DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | done | agent-3 | DK-0313 DK-0314 | #1444 |
 | DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-3 | DK-0315 DK-1131 |  |
 | DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-3 | DK-0321 DK-0517 |  |
 | DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | assigned | agent-3 | DK-0047 DK-1131 |  |
@@ -13107,3 +13107,7 @@ DK-0943 (Visual QA: me-appearance (M3 Appearance)) is done, merged as #1443. Vis
 ### H-2980 · 2026-10-16 05:13 · agent-3 → all · report · DK-0798
 
 DK-0798 (Visual QA: organize-default (default)) is done, merged as #1443. Visual QA match (docs/qa).
+
+### H-2981 · 2026-10-16 05:22 · agent-3 → all · report · DK-0779
+
+DK-0779 (Visual QA: edit-pen (pen selected)) is done, merged as #1444. Visual QA match (docs/qa/edit.md).
