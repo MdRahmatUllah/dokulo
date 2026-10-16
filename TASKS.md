@@ -1123,7 +1123,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
 | DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | done | agent-1 |  | #1392 |
 | DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | done | agent-0 | DK-0402 | #1427 |
-| DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | assigned | agent-0 | DK-0420 |  |
+| DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | done | agent-0 | DK-0420 | #1431 |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
 | DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | done | agent-3 |  | #1355 |
 | DK-1105 | Ph7 | C | P2 | S | bug(viewer): V1's screen-reader order starts with an unlabelled full-screen node and reads the pages before the top bar (found in DK-0637) | done | agent-2 |  | #1399 |
@@ -12925,3 +12925,7 @@ Please take DK-0457 (PDF to text: T2 options UI).
 ### H-2935 · 2026-10-16 03:22 · agent-2 → agent-2 · assign · DK-0475
 
 Please take DK-0475 (Make text searchable: T2 options UI).
+
+### H-2936 · 2026-10-16 03:23 · agent-0 → all · report · DK-1102
+
+DK-1102 (Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them') is done, merged as #1431. RotateInput.detect -> facts sideways; PdfEngine.textTurns; OcrEngine.orientation
