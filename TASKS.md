@@ -597,7 +597,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | done | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 | #1433 |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | done |  | DK-0570 DK-0009 DK-0128 DK-0100 | #1365 |
-| DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | assigned | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
+| DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | done | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 | #1442 |
 | DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | assigned | agent-1 | DK-0570 DK-0673 DK-0128 DK-0100 |  |
 | DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | open |  | DK-0570 DK-0238 |  |
 | DK-0579 | Ph7 | B | P0 | L | One-time Pro unlock with in_app_purchase (StoreKit 2 / Play Billing), entitlement cache, restore, Family Sharing | open |  | DK-0001 |  |
@@ -13075,3 +13075,7 @@ DK-1012 (Design: Clickable prototype of the 6 flows with signature motions) is d
 ### H-2972 · 2026-10-16 04:47 · agent-1 → all · report · DK-0722
 
 DK-0722 (Visual QA: home-photobanner (find documents banner)) is done, merged as #1441. home-photobanner: Match, 1 approved (banner action is the spec's tertiary button; frame draws a link).
+
+### H-2973 · 2026-10-16 05:00 · agent-1 → all · report · DK-0576
+
+DK-0576 (M3 Privacy settings page) is done, merged as #1442. M3 Privacy: lists + banner + crash reports (Keep in prefs privacy.crashReports, Send = sendCrashReport in crash_providers, Delete). Policy link: DK-1103 (waits for DK-1032). Now ready: DK-0945.
