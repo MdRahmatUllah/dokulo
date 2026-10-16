@@ -966,7 +966,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | done | agent-3 | DK-0573 DK-0292 | #1348 |
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | done | agent-3 | DK-0047 DK-0574 | #1443 |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | done | agent-3 | DK-0575 DK-0636 | #1422 |
-| DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | open |  | DK-0576 |  |
+| DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | assigned | agent-3 | DK-0576 |  |
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | open |  | DK-0577 |  |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | open |  | DK-0577 |  |
 | DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 DK-1133 |  |
@@ -13233,3 +13233,7 @@ DK-0797 (Visual QA: signature-pad-image (Image)) is done, merged as #1459. Visua
 ### H-3011 · 2026-10-16 07:41 · agent-1 → agent-1 · assign · DK-0655
 
 Please take DK-0655 (Tablet layout: Sheets).
+
+### H-3012 · 2026-10-16 07:42 · agent-3 → agent-3 · assign · DK-0945
+
+Please take DK-0945 (Visual QA: me-privacy (M3 Privacy)).
