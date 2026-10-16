@@ -109,6 +109,27 @@ void main() {
     expect(c.read(prefsProvider).value!['security.lockAfter'], 300);
   });
 
+  testWidgets("a tap on a switch row's text toggles it (DK-1108)", (
+    tester,
+  ) async {
+    final setup = LockedSetup();
+    await setup.vault.setPin('482915');
+    final c = await pump(tester, setup, const SecuritySettingsScreen());
+    await tester.tap(find.text('Hide previews in app switcher'));
+    await tester.pumpAndSettle();
+    expect(c.read(privacyCoverProvider), isFalse);
+    await tester.tap(find.text('App lock'));
+    await tester.pumpAndSettle();
+    expect(c.read(securitySettingsProvider).appLock, isTrue);
+  });
+
+  testWidgets('without a PIN a tap on App lock does nothing', (tester) async {
+    final c = await pump(tester, LockedSetup(), const SecuritySettingsScreen());
+    await tester.tap(find.text('App lock'));
+    await tester.pumpAndSettle();
+    expect(c.read(securitySettingsProvider).appLock, isFalse);
+  });
+
   testWidgets('Change PIN: the old PIN stops working, the key stays', (
     tester,
   ) async {
