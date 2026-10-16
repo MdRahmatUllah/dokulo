@@ -967,7 +967,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | done | agent-3 | DK-0047 DK-0574 | #1443 |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | done | agent-3 | DK-0575 DK-0636 | #1422 |
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | assigned | agent-3 | DK-0576 |  |
-| DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | open |  | DK-0577 |  |
+| DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | assigned | agent-3 | DK-0577 |  |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | open |  | DK-0577 |  |
 | DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 DK-1133 |  |
 | DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | open |  | DK-0361 DK-0571 |  |
@@ -13237,3 +13237,7 @@ Please take DK-0655 (Tablet layout: Sheets).
 ### H-3012 · 2026-10-16 07:42 · agent-3 → agent-3 · assign · DK-0945
 
 Please take DK-0945 (Visual QA: me-privacy (M3 Privacy)).
+
+### H-3013 · 2026-10-16 07:42 · agent-3 → agent-3 · assign · DK-0946
+
+Please take DK-0946 (Visual QA: me-licences (Licences list)).
