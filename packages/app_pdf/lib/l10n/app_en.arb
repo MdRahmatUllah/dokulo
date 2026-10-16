@@ -3105,5 +3105,15 @@
   "licence_title": "Licence",
   "@licence_title": {
     "description": "One licence's page title (DK-0577, me-licence)."
-  }
+  },
+  "notice_channel_jobs": "Jobs",
+  "@notice_channel_jobs": {"description": "Android notification channel for finished tools (UI spec §25.1; DK-0587)."},
+  "notice_job_done": "{tool} finished",
+  "@notice_job_done": {"description": "Notice title when a tool finishes in the background (§25.1).", "placeholders": {"tool": {"type": "String"}}},
+  "notice_job_failed": "Couldn't finish {tool}",
+  "@notice_job_failed": {"description": "Notice title when a tool fails in the background (§25.1).", "placeholders": {"tool": {"type": "String"}}},
+  "notice_job_failed_body": "Tap to see what happened",
+  "@notice_job_failed_body": {"description": "Notice body of a failed job (§25.1)."},
+  "notice_files": "{count, plural, =1{1 file} other{{count} files}}",
+  "@notice_files": {"description": "Notice body when a tool made several files.", "placeholders": {"count": {"type": "int"}}}
 }

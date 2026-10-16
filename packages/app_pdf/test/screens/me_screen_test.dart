@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 import 'package:app_pdf/components/dk_promo_cards.dart';
 import 'package:app_pdf/l10n/formats.dart';
+import 'package:app_pdf/providers/link_providers.dart';
+import 'package:app_pdf/providers/mail_providers.dart';
 import 'package:app_pdf/providers/signature_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
@@ -74,6 +76,39 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('2'), findsOneWidget);
     expect(find.text(formatBytes(1800000000, 'en')), findsOneWidget);
+  });
+
+  testWidgets('Contact drafts a mail with the version; Rate opens the Play '
+      'page (DK-0578)', (tester) async {
+    tester.view.physicalSize = const Size(393, 1600);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
+    final mails = <Uri>[];
+    final links = <Uri>[];
+    await pumpAt(
+      tester,
+      Routes.me,
+      overrides: [
+        mailComposerProvider.overrideWithValue((u) async {
+          mails.add(u);
+          return true;
+        }),
+        linkOpenerProvider.overrideWithValue((u) async {
+          links.add(u);
+          return true;
+        }),
+      ],
+    );
+    await tester.tap(find.text('Contact'));
+    await tester.pumpAndSettle();
+    expect(mails.single.scheme, 'mailto');
+    expect(
+      Uri.decodeComponent(mails.single.query),
+      contains('Dokulo $appVersion ($appBuild)'),
+    );
+    await tester.tap(find.text('Rate Dokulo'));
+    await tester.pumpAndSettle();
+    expect(links.single, playPage);
   });
 
   testWidgets('a Settings row opens its page', (tester) async {
