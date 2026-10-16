@@ -141,5 +141,21 @@ void main() {
         matchesGoldenFile('goldens/scanning_settings_$name.png'),
       );
     });
+
+    // Visual QA DK-0950 (me-filter) and DK-0949 (me-filename).
+    for (final (frame, row) in [
+      ('filter', (AppLocalizations l) => l.scan_default_filter),
+      ('filename', (AppLocalizations l) => l.scan_file_name),
+    ]) {
+      testWidgets('golden: scanning $frame ($name)', (tester) async {
+        await pump(tester, tokens: tokens, locale: locale);
+        await tester.tap(find.text(row(lookupAppLocalizations(locale))));
+        await tester.pumpAndSettle();
+        await expectLater(
+          find.byType(MaterialApp),
+          matchesGoldenFile('goldens/scanning_${frame}_$name.png'),
+        );
+      });
+    }
   }
 }
