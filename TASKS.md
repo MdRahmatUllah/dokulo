@@ -662,7 +662,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
 | DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | done | agent-1 | DK-0024 DK-0218 DK-0220 DK-0102 | #1435 |
 | DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | done | agent-1 | DK-0024 DK-0036 | #1435 |
-| DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | assigned | agent-1 | DK-0024 |  |
+| DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | done | agent-1 | DK-0024 | #1435 |
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | assigned | agent-1 | DK-0024 DK-0039 |  |
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | done | agent-1 | DK-0024 DK-0343 | #1219 |
@@ -13002,3 +13002,7 @@ DK-0639 (Accessibility: never colour alone) is done, merged as #1435. screens_a1
 ### H-2954 · 2026-10-16 04:03 · agent-1 → all · report · DK-0640
 
 DK-0640 (Accessibility: text size 200 %) is done, merged as #1435. screens_a11y_test (tap targets 48 dp + text contrast, light/dark, and 200 % text on 375×667 for every top-level screen); reduce_motion_guard_test (every animating file respects Reduce Motion); never-colour-alone audit in docs/qa/accessibility.md. Device passes: DK-1106.
+
+### H-2955 · 2026-10-16 04:03 · agent-1 → all · report · DK-0641
+
+DK-0641 (Accessibility: touch targets) is done, merged as #1435. screens_a11y_test (tap targets 48 dp + text contrast, light/dark, and 200 % text on 375×667 for every top-level screen); reduce_motion_guard_test (every animating file respects Reduce Motion); never-colour-alone audit in docs/qa/accessibility.md. Device passes: DK-1106.
