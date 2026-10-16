@@ -9,6 +9,9 @@ import '../../components/dk_switch.dart';
 import '../../components/dk_text_field.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
+import '../../photo_finder/photo_finder.dart' show photoFinderKey;
+import '../../photo_finder/photo_finder_screens.dart' show startPhotoFinder;
+import '../../providers/prefs_providers.dart';
 import '../../theme/dk_tokens.dart';
 import '../s1_scanner/scanner_quick_settings.dart';
 import '../s1_scanner/scanner_settings.dart';
@@ -50,6 +53,10 @@ class _ScanningSettingsScreenState
     final prefs = ref.watch(scannerSettingsProvider);
     final settings = ref.read(scannerSettingsProvider.notifier);
     final locale = Localizations.localeOf(context);
+    final findPhotos = ref.watch(prefsProvider).value?[photoFinderKey] == true;
+    void setFindPhotos(bool on) => on
+        ? startPhotoFinder(context, ref)
+        : ref.read(prefsProvider.notifier).set(photoFinderKey, false);
     void push(Widget page) =>
         Navigator.of(context)
             .push(MaterialPageRoute<void>(builder: (_) => page));
@@ -111,6 +118,14 @@ class _ScanningSettingsScreenState
                   (o) => o.label(l),
                   settings.setOcrLanguage,
                 ),
+              ),
+              // DK-0571: on asks through the photo finder's intro (the only
+              // place photo access is asked) and scans; off stops it.
+              DkSettingsRow(
+                title: l.settings_find_photos,
+                description: l.settings_find_photos_help,
+                trailing: DkSwitch(value: findPhotos, onChanged: setFindPhotos),
+                onTap: () => setFindPhotos(!findPhotos),
               ),
             ],
           ),
