@@ -812,7 +812,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0788 | Ph7 | Q | P2 | XS | Visual QA: edit-hiopts (highlighter options) | assigned | agent-3 | DK-0316 DK-1131 |  |
 | DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | assigned | agent-3 | DK-0317 DK-1131 |  |
 | DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | assigned | agent-3 | DK-0318 DK-1131 |  |
-| DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | assigned | agent-3 | DK-0320 |  |
+| DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | done | agent-3 | DK-0320 | #1444 |
 | DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-3 | DK-0326 DK-0519 DK-1135 |  |
 | DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | assigned | agent-3 | DK-0326 DK-1134 |  |
 | DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-3 | DK-0328 DK-0519 |  |
@@ -13119,3 +13119,7 @@ DK-0785 (Visual QA: edit-annsel (annotation selected)) is done, merged as #1444.
 ### H-2983 · 2026-10-16 05:22 · agent-3 → all · report · DK-0787
 
 DK-0787 (Visual QA: edit-discard (discard dialog)) is done, merged as #1444. Visual QA match (docs/qa/edit.md).
+
+### H-2984 · 2026-10-16 05:22 · agent-3 → all · report · DK-0791
+
+DK-0791 (Visual QA: edit-eraser (eraser)) is done, merged as #1444. Visual QA match (docs/qa/edit.md).
