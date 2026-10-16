@@ -2645,3 +2645,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 05:54 · agent-0 DK-0300 · done (#1448)
 - 2026-10-16 06:06 · agent-0 DK-0587 · claimed: Local notifications service (iOS + Android channels) with deep links
 - 2026-10-16 06:07 · agent-3 DK-0635 · done (#1449)
+- 2026-10-16 06:22 · agent-0 DK-0965 · done (#1450)

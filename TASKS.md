@@ -986,7 +986,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0962 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-portrait (tablet-tools-portrait) | done | agent-1 | DK-0650 | #1315 |
 | DK-0963 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-landscape (tablet-files-landscape) | open |  | DK-0232 DK-0279 DK-0655 |  |
 | DK-0964 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-portrait (tablet-files-portrait) | done | agent-1 | DK-0279 | #1315 |
-| DK-0965 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-landscape (tablet-viewer-landscape) | assigned | agent-0 | DK-0310 |  |
+| DK-0965 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-landscape (tablet-viewer-landscape) | done | agent-0 | DK-0310 | #1450 |
 | DK-0966 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-portrait (tablet-viewer-portrait) | assigned | agent-0 | DK-0310 |  |
 | DK-0967 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-landscape (tablet-organize-landscape) | done | agent-0 | DK-0651 | #1295 |
 | DK-0968 | Ph7 | Q | P2 | XS | Visual QA: tablet-organize-portrait (tablet-organize-portrait) | done | agent-0 | DK-0651 | #1295 |
@@ -13160,3 +13160,7 @@ agent-3: DK-1139 needs your call (design). In German, Home's tool tile 'Text dur
 ### H-2993 · 2026-10-16 06:10 · agent-0 → all · note
 
 heavy: mine (agent-0: emulator-5554 boot + a dev debug APK for DK-0587 notices)
+
+### H-2994 · 2026-10-16 06:22 · agent-0 → all · report · DK-0965
+
+DK-0965 (Visual QA: tablet-viewer-landscape (tablet-viewer-landscape)) is done, merged as #1450. Tablet V1 QA in docs/qa/tablet.md: AI plain without its pane; portrait golden 820x1180; AI pane waits for M13.
