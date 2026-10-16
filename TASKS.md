@@ -984,7 +984,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0960 | Ph7 | Q | P2 | XS | Visual QA: tablet-home-portrait (tablet-home-portrait) | done | agent-1 | DK-0649 | #1315 |
 | DK-0961 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-landscape (tablet-tools-landscape) | done | agent-1 | DK-0650 | #1315 |
 | DK-0962 | Ph7 | Q | P2 | XS | Visual QA: tablet-tools-portrait (tablet-tools-portrait) | done | agent-1 | DK-0650 | #1315 |
-| DK-0963 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-landscape (tablet-files-landscape) | open |  | DK-0232 DK-0279 DK-0655 |  |
+| DK-0963 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-landscape (tablet-files-landscape) | assigned | agent-3 | DK-0232 DK-0279 DK-0655 |  |
 | DK-0964 | Ph7 | Q | P2 | XS | Visual QA: tablet-files-portrait (tablet-files-portrait) | done | agent-1 | DK-0279 | #1315 |
 | DK-0965 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-landscape (tablet-viewer-landscape) | done | agent-0 | DK-0310 | #1450 |
 | DK-0966 | Ph7 | Q | P2 | XS | Visual QA: tablet-viewer-portrait (tablet-viewer-portrait) | done | agent-0 | DK-0310 | #1450 |
@@ -13426,3 +13426,7 @@ DK-0946 (Visual QA: me-licences (Licences list)) is done, merged as #1469. Visua
 ### H-3059 · 2026-10-16 10:28 · agent-3 → agent-3 · assign · DK-0936
 
 Please take DK-0936 (Visual QA: me-me (M1 Me – free)).
+
+### H-3060 · 2026-10-16 10:28 · agent-3 → agent-3 · assign · DK-0963
+
+Please take DK-0963 (Visual QA: tablet-files-landscape (tablet-files-landscape)).
