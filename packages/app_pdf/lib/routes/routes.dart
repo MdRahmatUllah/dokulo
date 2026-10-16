@@ -89,10 +89,13 @@ abstract final class Routes {
     String toolId, {
     List<String> files = const [],
     bool chained = false,
+    String? prompt,
   }) {
     final query = {
       if (files.isNotEmpty) 'file': files,
       if (chained) 'chain': '1',
+      // Ask AI from a text selection: A1 Ask's composer, prefilled (DK-0300).
+      'q': ?prompt,
     };
     return Uri(
       path: '/tool/$toolId',

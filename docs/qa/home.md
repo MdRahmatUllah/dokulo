@@ -13,6 +13,7 @@ spec's tables.
 | --- | --- | --- |
 | DK-0715 | `02-home/home-default` | Match |
 | DK-0716 | `02-home/home-first` | Match |
+| DK-0717 | `02-home/home-contscan` | Match |
 | DK-0718 | `02-home/home-contjob` | Match, 2 approved |
 | DK-0722 | `02-home/home-photobanner` | Match, 1 approved |
 | DK-0719 | `02-home/home-edit` | 1 fixed, 1 approved |
@@ -61,6 +62,19 @@ Approved:
 - home-scanmenu: the menu keeps DkMenu's placement (beside the anchor, on
   screen); the frame centres it over the button.
 - home-procard: See Pro waits for the X3 paywall (DK-0579).
+
+## Continue: unsaved scan (DK-0717)
+
+Board: `home-contscan` in `test/qa/home_qa_test.dart` (a scan of 6 pages left
+in the scan store, begun today 14:32, restored by Home after a restart);
+frames: [home/home-contscan-light.png](home/home-contscan-light.png),
+[dark](home/home-contscan-dark.png), [deutsch](home/home-contscan-deutsch.png).
+Match: the card 16 below the privacy line, above Your tools; the scan icon,
+"Scan of 6 pages not saved" with "Started today 14:32" under it, Continue
+(primary, compact) and the × on the top-right corner, as `home-contjob`'s card
+(the board's taller card is the test font's block glyphs, as there). Copy EN
+and DE as the frame ("Scan mit 6 Seiten nicht gespeichert", "Heute 14:32
+begonnen", "Fortfahren"), checked by the design-German gate step.
 
 ## Find documents banner (DK-0722)
 

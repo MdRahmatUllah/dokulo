@@ -6,6 +6,7 @@ import 'package:pdfrx/pdfrx.dart';
 import 'l10n/app_localizations.dart';
 import 'patterns/dk_app_lock.dart';
 import 'patterns/dk_incoming_files.dart';
+import 'patterns/dk_orientation.dart';
 import 'patterns/dk_privacy_cover.dart';
 import 'providers/crash_providers.dart';
 import 'providers/job_providers.dart';
@@ -55,9 +56,11 @@ class DokuloApp extends ConsumerWidget {
       routerConfig: ref.watch(appRouterProvider),
       // The app switcher's privacy cover over everything (DK-0234), and
       // under it the app lock (DK-0290); files shared to Dokulo open X1 or
-      // V1 (DK-0235).
+      // V1 (DK-0235); phones stay portrait but on a few screens (DK-0656).
       builder: (context, child) => DkPrivacyCover(
-        child: DkAppLock(child: DkIncomingFiles(child: child!)),
+        child: DkAppLock(
+          child: DkIncomingFiles(child: DkOrientation(child: child!)),
+        ),
       ),
     );
   }
