@@ -970,7 +970,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | assigned | agent-3 | DK-0577 |  |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | assigned | agent-3 | DK-0577 |  |
 | DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 DK-1133 |  |
-| DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | open |  | DK-0361 DK-0571 |  |
+| DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | assigned | agent-3 | DK-0361 DK-0571 |  |
 | DK-0950 | Ph7 | Q | P2 | XS | Visual QA: me-filter (Scanning – default filter picker) | open |  | DK-0361 DK-0571 |  |
 | DK-0951 | Ph7 | Q | P2 | XS | Visual QA: paywall-tool (se) | open |  | DK-0580 |  |
 | DK-0952 | Ph7 | Q | P2 | XS | Visual QA: paywall-me (me) | open |  | DK-0580 |  |
@@ -13245,3 +13245,7 @@ Please take DK-0946 (Visual QA: me-licences (Licences list)).
 ### H-3014 · 2026-10-16 07:42 · agent-3 → agent-3 · assign · DK-0947
 
 Please take DK-0947 (Visual QA: me-licence (Licence detail)).
+
+### H-3015 · 2026-10-16 07:42 · agent-3 → agent-3 · assign · DK-0949
+
+Please take DK-0949 (Visual QA: me-filename (Scanning – file name editor)).
