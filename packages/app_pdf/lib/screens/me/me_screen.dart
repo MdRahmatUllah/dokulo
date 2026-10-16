@@ -6,11 +6,14 @@ import '../../components/dk_icon.dart';
 import '../../components/dk_logo.dart';
 import '../../components/dk_promo_cards.dart';
 import '../../components/dk_settings_row.dart';
+import '../../components/dk_toast.dart';
 import '../../components/dk_top_bar.dart';
 import '../../l10n/app_language.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../providers/language_providers.dart';
+import '../../providers/link_providers.dart';
+import '../../providers/mail_providers.dart';
 import '../../providers/signature_providers.dart';
 import '../../providers/theme_providers.dart';
 import '../../routes/routes.dart';
@@ -23,6 +26,19 @@ import '../settings/files_settings_screen.dart' show modelsSizeProvider;
 // build number starts to differ per store.
 const appVersion = '1.0.0';
 const appBuild = 100;
+
+/// Dokulo's page on Google Play (Me → Rate Dokulo, DK-0578): the store app
+/// opens it.
+final playPage = Uri.parse(
+  'https://play.google.com/store/apps/details?id=app.dokulo',
+);
+
+/// Me → Contact (DK-0578): the subject names the version, so a reply knows
+/// which build it is about. No recipient yet (the owner's support address).
+Uri contactEmail() => Uri(
+  scheme: 'mailto',
+  query: 'subject=${Uri.encodeComponent('Dokulo $appVersion ($appBuild)')}',
+);
 
 /// Whether the one-time Pro unlock is owned (DK-0579 brings the store).
 // ponytail: free until in_app_purchase's entitlement cache exists.
@@ -143,10 +159,29 @@ class MeScreen extends ConsumerWidget {
                       title: l.me_replay_intro,
                       onTap: () => context.go(Routes.welcome),
                     ),
-                    // ponytail: Contact and Rate open mail and the store
-                    // with DK-0578; Restore with DK-0579.
-                    DkSettingsRow(icon: DkIcons.mail, title: l.me_contact),
-                    DkSettingsRow(icon: DkIcons.star, title: l.me_rate),
+                    // Contact: a draft in the user's mail app with the
+                    // version (DK-0578); the recipient waits for the
+                    // owner's support address, as the crash report's.
+                    DkSettingsRow(
+                      icon: DkIcons.mail,
+                      title: l.me_contact,
+                      onTap: () async {
+                        final sent = await ref.read(mailComposerProvider)(
+                          contactEmail(),
+                        );
+                        if (!sent && context.mounted) {
+                          showDkToast(context, l.error_no_mail_app);
+                        }
+                      },
+                    ),
+                    // ponytail: Rate opens Dokulo's Play page; on iOS the
+                    // row waits for the App Store id (DK-1141).
+                    if (Theme.of(context).platform == TargetPlatform.android)
+                      DkSettingsRow(
+                        icon: DkIcons.star,
+                        title: l.me_rate,
+                        onTap: () => ref.read(linkOpenerProvider)(playPage),
+                      ),
                     DkSettingsRow(
                       icon: DkIcons.restore,
                       title: l.me_restore_purchase,
