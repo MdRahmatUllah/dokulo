@@ -787,6 +787,7 @@
   "viewer_share_failed": "Das ließ sich nicht zum Teilen vorbereiten.",
   "options_eraser_mode": "Modus",
   "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt.",
+  "viewer_thumbnails": "Miniaturansichten",
   "viewer_markup_failed": "Die Markierung ließ sich nicht hinzufügen. Die Datei ist unverändert.",
   "sign_toast_signed": "Auf Seite {page} unterschrieben",
   "form_lock_title": "Formularwerte sperren?",
