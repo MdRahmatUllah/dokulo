@@ -957,7 +957,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0933 | Ph7 | Q | P2 | XS | Visual QA: ai-lowmem (low-memory banner) | open |  | DK-0558 |  |
 | DK-0934 | Ph7 | Q | P2 | XS | Visual QA: ai-askselection (Ask – prefilled from text selection) | open |  | DK-0565 |  |
 | DK-0935 | Ph7 | Q | P2 | XS | Visual QA: ai-dlbar (model downloading – mini bar) | open |  | DK-0555 |  |
-| DK-0936 | Ph7 | Q | P2 | XS | Visual QA: me-me (M1 Me – free) | open |  | DK-0570 DK-0578 |  |
+| DK-0936 | Ph7 | Q | P2 | XS | Visual QA: me-me (M1 Me – free) | assigned | agent-3 | DK-0570 DK-0578 |  |
 | DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | done |  | DK-0570 DK-1097 | #1402 |
 | DK-0938 | Ph7 | Q | P2 | XS | Visual QA: me-models (M2 AI models) | open |  | DK-0568 |  |
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
@@ -13422,3 +13422,7 @@ DK-0945 (Visual QA: me-privacy (M3 Privacy)) is done, merged as #1469. Visual QA
 ### H-3058 · 2026-10-16 10:27 · agent-3 → all · report · DK-0946
 
 DK-0946 (Visual QA: me-licences (Licences list)) is done, merged as #1469. Visual QA match (docs/qa/me.md); Privacy's banner now the shield.
+
+### H-3059 · 2026-10-16 10:28 · agent-3 → agent-3 · assign · DK-0936
+
+Please take DK-0936 (Visual QA: me-me (M1 Me – free)).
