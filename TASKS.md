@@ -854,11 +854,11 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | done | agent-3 | DK-0359 | #1416 |
 | DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 DK-1124 |  |
 | DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-3 | DK-0363 |  |
-| DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-3 | DK-0364 |  |
+| DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-3 | DK-0364 DK-1136 |  |
 | DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | assigned | agent-3 | DK-0365 |  |
-| DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-3 | DK-0366 |  |
+| DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-3 | DK-0366 DK-1136 |  |
 | DK-0836 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-empty (no documents found) | assigned | agent-3 | DK-0368 |  |
-| DK-0837 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-notdoc (long-press – Not a document) | assigned | agent-3 | DK-0367 |  |
+| DK-0837 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-notdoc (long-press – Not a document) | assigned | agent-3 | DK-0367 DK-1136 |  |
 | DK-0838 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-t2empty (T2 – empty input) | done | agent-0 | DK-0371 | #1249 |
 | DK-0839 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-compress (T2 Compress – options) | open |  | DK-0370 DK-0373 DK-0463 DK-0464 DK-0465 |  |
 | DK-0840 | Ph7 | Q | P2 | XS | Visual QA: tool-shell-merge (T2 Merge – 4 files) | open |  | DK-0370 DK-0403 DK-0404 DK-0405 |  |
@@ -1157,6 +1157,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | open |  |  |  |
 | DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | open |  |  |  |
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
+| DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | open |  |  |  |
 
 ## Locks
 
@@ -12859,3 +12860,7 @@ DK-1101 (Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf j
 ### H-2919 · 2026-10-16 03:02 · agent-2 → agent-2 · assign · DK-0465
 
 Please take DK-0465 (Compress PDF: errors and edge states).
+
+### H-2920 · 2026-10-16 03:04 · agent-3 → all · note · DK-1136
+
+Added DK-1136 (Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim) to lane C, Ph7 P1. It blocks DK-0833 DK-0835 DK-0837.
