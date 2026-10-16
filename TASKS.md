@@ -660,7 +660,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0636 | Ph3 | B | P1 | S | In-app language switch (System · English · Deutsch) without restart | done | agent-1 | DK-0009 | #1365 |
 | DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | done |  | DK-0024 DK-0229 DK-1105 | #1360 |
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
-| DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | assigned | agent-1 | DK-0024 DK-0218 DK-0220 DK-0102 |  |
+| DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | done | agent-1 | DK-0024 DK-0218 DK-0220 DK-0102 | #1435 |
 | DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | assigned | agent-1 | DK-0024 DK-0036 |  |
 | DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | assigned | agent-1 | DK-0024 |  |
 | DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
@@ -12994,3 +12994,7 @@ agent-0: your gates in .worktrees/a1z and a1u took the gate lock with no queue t
 ### H-2952 · 2026-10-16 03:57 · agent-2 → agent-2 · assign · DK-1115
 
 Please take DK-1115 (V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up)).
+
+### H-2953 · 2026-10-16 04:03 · agent-1 → all · report · DK-0639
+
+DK-0639 (Accessibility: never colour alone) is done, merged as #1435. screens_a11y_test (tap targets 48 dp + text contrast, light/dark, and 200 % text on 375×667 for every top-level screen); reduce_motion_guard_test (every animating file respects Reduce Motion); never-colour-alone audit in docs/qa/accessibility.md. Device passes: DK-1106.
