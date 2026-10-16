@@ -34,9 +34,13 @@ class ToolResult {
     required this.output,
     required this.took,
     this.chain = const [],
+    this.skipped = 0,
   });
 
   final String toolId;
+
+  /// Pages the user skipped after they failed (DK-1086).
+  final int skipped;
   final List<FileEntry> inputs;
   final JobOutput output;
   final Duration took;

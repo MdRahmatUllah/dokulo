@@ -71,3 +71,14 @@ Approved:
   ringed, numbers under); the page images render asynchronously and show as
   placeholders in a widget test. `viewer_thumb_strip_test`'s goldens and the
   DK-0296 pass cover the images.
+
+## Go to page and the overflow menu (DK-0774, DK-0776)
+
+Board: `qa_viewer_goto_*` and `qa_viewer_menu_*` in `viewer_qa_test`, the
+real V1 with More open, then Go to page. The menu matches: Info, Go to page,
+Pages, Night mode with its switch, Organize pages, Print, Share as images,
+Share text, Move to locked folder, a divider and Delete in `color.danger`.
+Go to page matches in EN (title, the number field, "1–12"-style helper,
+Cancel and Go). In German the two buttons overflow their row by 7 px with
+the test font: **DK-1126** (they should stack when they don't fit, as
+DkConfirmDialog's do); the German case is skipped with that id.

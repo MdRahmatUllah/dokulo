@@ -76,3 +76,29 @@ def test_gate_lock_waits_for_a_live_gate_and_takes_over_a_dead_one(tmp_path: Pat
         assert "taking over" in said[0]
     assert not lock.exists()
 
+
+
+def test_gate_lock_takes_turns_in_order(tmp_path: Path) -> None:
+    import os
+    import threading
+
+    lock = tmp_path / "gate.lock"
+    queue = tmp_path / "gate.lock.queue"
+    queue.mkdir()
+    # An older ticket of a gate still running (this process): a newer gate
+    # waits behind it even though the lock is free.
+    older = queue / f"{1:020d}-{os.getpid()}"
+    older.touch()
+    entered = threading.Event()
+
+    def newer():
+        with check.gate_lock(lock, poll=0.05, say=lambda *a, **k: None):
+            entered.set()
+
+    t = threading.Thread(target=newer)
+    t.start()
+    assert not entered.wait(0.3)
+    older.unlink()
+    t.join(5)
+    assert entered.is_set()
+    assert not lock.exists() and list(queue.iterdir()) == []

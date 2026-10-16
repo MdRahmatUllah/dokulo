@@ -90,7 +90,7 @@ It is the only check a PR gets: **there is no CI/CD** (the owner, 2026-10-07; DK
 python tools/check.py                    # add --apk <built.apk> when a native dependency or its config changed
 ```
 
-It takes about 2–3 minutes (build_runner and analyze are most of it). It runs every step even after a failure, prints `PASS`/`FAIL` per step with the failing output, and exits 1 if anything failed. **One gate at a time on this machine** (the owner, 2026-10-15): `check.py` takes `.git/dokulo-gate.lock` (shared by every worktree) and waits, printing `gate lock: waiting for the gate in pid N`, while another gate runs; a lock whose gate died is taken over. Never delete the lock by hand while its pid runs. The steps:
+It takes about 2–3 minutes (build_runner and analyze are most of it). It runs every step even after a failure, prints `PASS`/`FAIL` per step with the failing output, and exits 1 if anything failed. **One gate at a time on this machine** (the owner, 2026-10-15): `check.py` takes `.git/dokulo-gate.lock` (shared by every worktree) and waits, printing `gate lock: waiting for the gate in pid N`, while another gate runs, in the order the gates came (a ticket each in `.git/dokulo-gate.lock.queue`); a lock whose gate died is taken over. Never delete the lock by hand while its pid runs. The steps:
 
 ```bash
 python tools/fetch_ocr_models.py                                 # the bundled PP-OCRv5 models, hash-checked (fetched once)
@@ -104,6 +104,8 @@ python tools/licence_scan.py                                     # every pubspec
 python tools/check_l10n.py                                       # EN/DE keys match, no hard-coded strings in app_pdf
 python tools/check_permissions.py [built apk]                    # only the Android permissions DK-0016 lists
 python tools/check_tokens.py                                     # no raw colours in screens/components: DkTokens only
+python tools/check_copy_deck.py                                  # UI spec §27.1-27.3 keys and tool names match both ARBs
+python tools/check_design_de.py                                  # the German of every ARB string the design export shows, as it shows it
 python tools/check_privacy_manifests.py                          # the iOS privacy manifest, and one per native iOS plugin
 (cd packages/<p> && flutter test --timeout 60s --concurrency 4 | dart test)  # every package with tests; 4 flutter_testers at once (memory)
 python -m pytest tools/tests -q

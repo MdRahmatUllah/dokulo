@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_pdf/components/dk_action_bar.dart';
 import 'package:app_pdf/components/dk_page_thumb.dart';
 import 'package:app_pdf/components/dk_segmented.dart';
@@ -186,4 +188,58 @@ void main() {
       );
     });
   }
+
+  test('T3: "1 PDF · 12 pages · 2 MB" from the images; Next: Compress, '
+      'Make text searchable (DK-0434)', () {
+    final dir = Directory.systemTemp.createTempSync('dk_img2pdf_t3_');
+    addTearDown(() => dir.deleteSync(recursive: true));
+    final out = File('${dir.path}/IMG_0001.pdf')
+      ..writeAsBytesSync(List.filled(2000000, 0));
+    final images = [
+      for (var i = 0; i < 12; i++)
+        FileEntry(
+          id: -i - 1,
+          path: '${dir.path}/IMG_$i.jpg',
+          name: 'IMG_$i.jpg',
+          size: 1,
+          pages: 0,
+          created: DateTime(2026),
+          modified: DateTime(2026),
+          hasText: false,
+          encrypted: false,
+        ),
+    ];
+    final result = ToolResult(
+      toolId: 'img2pdf',
+      inputs: images,
+      output: OneFile(out.path),
+      took: const Duration(seconds: 2),
+    );
+    for (final (locale, headline, sub) in [
+      ('en', '1 PDF · 12 pages · ', 'From 12 images'),
+      ('de', '1 PDF · 12 Seiten · ', 'Aus 12 Bildern'),
+    ]) {
+      final l = lookupAppLocalizations(Locale(locale));
+      final s = img2pdfDefinition.summary!(l, result);
+      expect(
+        (s.headline, s.sub),
+        (headline + formatBytes(2000000, locale), sub),
+      );
+    }
+    final skipped = ToolResult(
+      toolId: 'img2pdf',
+      inputs: images,
+      output: OneFile(out.path),
+      took: const Duration(seconds: 2),
+      skipped: 1,
+    );
+    expect(
+      img2pdfDefinition
+          .summary!(lookupAppLocalizations(const Locale('en')), skipped)
+          .headline,
+      startsWith('1 PDF · 11 pages'),
+      reason: 'a skipped image is no page (DK-1086)',
+    );
+    expect(img2pdfDefinition.next, ['compress', 'ocr']);
+  });
 }

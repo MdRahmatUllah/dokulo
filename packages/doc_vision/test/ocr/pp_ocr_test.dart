@@ -79,6 +79,47 @@ void main() {
       expect(ocr.decodeCtc(probs, steps.length, 4, 0).$1, 'a b');
     });
 
+    test('a word gap in the image puts back a space the model left out, '
+        'next to a letter only (DK-1109)', () {
+      final ocr = PpOcr(_NoModels(), ['a', 'b', '1', '2']);
+      // classes: blank, a, b, 1, 2, space
+      Float32List probsOf(List<int> steps) {
+        final p = Float32List(steps.length * 6);
+        for (final (t, c) in steps.indexed) {
+          p[t * 6 + c] = 0.9;
+        }
+        return p;
+      }
+
+      final ab = probsOf([1, 1, 0, 0, 0, 2]); // a a _ _ _ b
+      expect(ocr.decodeCtc(ab, 6, 6, 0).$1, 'ab');
+      expect(ocr.decodeCtc(ab, 6, 6, 0, wordGaps: [3]).$1, 'a b');
+      // A gap that isn't between the two characters changes nothing.
+      expect(ocr.decodeCtc(ab, 6, 6, 0, wordGaps: [0.5]).$1, 'ab');
+      // Between two digits (a wide blank beside a 1): no space.
+      final digits = probsOf([3, 0, 0, 0, 4]); // 1 _ _ _ 2
+      expect(ocr.decodeCtc(digits, 5, 6, 0, wordGaps: [2]).$1, '12');
+      // A letter and a digit ('Musterstraße12'): the space goes in.
+      final a1 = probsOf([1, 0, 0, 0, 3]); // a _ _ _ 1
+      expect(ocr.decodeCtc(a1, 5, 6, 0, wordGaps: [2]).$1, 'a 1');
+    });
+
+    test('wordGaps finds the gaps between words, not between letters', () {
+      // A 40-high white line: ink at x 0-9, 12-21 (a letter gap of 2),
+      // then 40-49 (a word gap of 18).
+      const w = 50, h = 40;
+      final grey = Uint8List(w * h)..fillRange(0, w * h, 255);
+      for (var y = 10; y < 30; y++) {
+        for (final (from, to) in [(0, 9), (12, 21), (40, 49)]) {
+          for (var x = from; x <= to; x++) {
+            grey[y * w + x] = 0;
+          }
+        }
+      }
+      final gaps = PpOcr.wordGaps(Raster.fromGrey(w, h, grey));
+      expect(gaps, [30.5]);
+    });
+
     test('BGRA and grey become BGR', () {
       final fromBgra = Raster.fromBgra(
         1,
