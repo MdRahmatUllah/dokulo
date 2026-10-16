@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Merged today: #1342 DK-0304, #1352 DK-0709, #1365 DK-0575/0636, #1372 DK-0307. Ready, merged with main, waiting to gate: a1p DK-0657+1100 (goldens done), a1q DK-1097/1098 (regen qa_me_*), a1o2 DK-0623..0633 (regen DE goldens), a1r DK-0574, a1s DK-0576 (stacked on a1r), a1t DK-0634, a1v DK-0656, a1u a11y (after a1p), a1x2 DK-0246, a1y DK-0652. Background gates get reaped while the session is idle and memory is low; foreground chunks worked.
+After DK-0655: DK-0642 focus rings (Tab traversal), DK-0647 errors next to fields, then the plugin tasks (DK-0253 rating, DK-0255 quick drop) when an APK gate slot is OK.
 
 ## Memory
 
