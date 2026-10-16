@@ -76,6 +76,8 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         ("l10n", [py, "tools/check_l10n.py"], root),
         ("permissions", [py, "tools/check_permissions.py"], root),
         ("tokens", [py, "tools/check_tokens.py"], root),
+        ("copy deck", [py, "tools/check_copy_deck.py"], root),
+        ("design German", [py, "tools/check_design_de.py"], root),
         ("privacy manifests", [py, "tools/check_privacy_manifests.py"], root),
     ]
     for p in packages(root):
