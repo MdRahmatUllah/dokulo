@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/dk_button.dart';
+import '../../components/dk_chip.dart';
 import '../../components/dk_icon.dart';
-import '../../components/dk_radio_row.dart';
 import '../../components/dk_settings_row.dart';
 import '../../components/dk_switch.dart';
 import '../../components/dk_text_field.dart';
@@ -15,6 +15,7 @@ import '../../providers/prefs_providers.dart';
 import '../../theme/dk_tokens.dart';
 import '../s1_scanner/scanner_quick_settings.dart';
 import '../s1_scanner/scanner_settings.dart';
+import '../s2_review/s2_screen.dart' show scanPreviewFilter;
 import '../s2_review/save_sheet.dart';
 
 extension ScanOcrLanguageLabel on ScanOcrLanguage {
@@ -49,7 +50,8 @@ class _ScanningSettingsScreenState
   @override
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
-    final c = context.tokens.color;
+    final t = context.tokens;
+    final c = t.color;
     final prefs = ref.watch(scannerSettingsProvider);
     final settings = ref.read(scannerSettingsProvider.notifier);
     final locale = Localizations.localeOf(context);
@@ -64,6 +66,12 @@ class _ScanningSettingsScreenState
       backgroundColor: c.background,
       appBar: DkTopBar(title: l.settings_scanning),
       body: ListView(
+        padding: EdgeInsets.fromLTRB(
+          t.space.l,
+          t.space.s,
+          t.space.l,
+          t.space.l,
+        ),
         children: [
           DkSettingsGroup(
             children: [
@@ -136,7 +144,8 @@ class _ScanningSettingsScreenState
 }
 
 /// Settings → Scanning → Default filter (design `me-filter`): the five
-/// filters with what each is for.
+/// filters in an inset card, each with a page under its filter and what it
+/// is for; the chosen one has the check.
 class DefaultFilterScreen extends ConsumerWidget {
   const DefaultFilterScreen({super.key});
 
@@ -156,30 +165,42 @@ class DefaultFilterScreen extends ConsumerWidget {
       backgroundColor: t.color.background,
       appBar: DkTopBar(title: l.scan_default_filter),
       body: ListView(
-        padding: EdgeInsets.all(t.space.l),
+        padding: EdgeInsets.fromLTRB(
+          t.space.l,
+          t.space.s,
+          t.space.l,
+          t.space.l,
+        ),
         children: [
-          RadioGroup<ScanFilterChoice>(
-            groupValue: prefs.filter,
-            onChanged: (f) {
-              if (f != null) {
-                ref.read(scannerSettingsProvider.notifier).setFilter(f);
-              }
-            },
-            child: Column(
-              children: [
-                for (final f in ScanFilterChoice.values)
-                  DkRadioRow<ScanFilterChoice>(
-                    value: f,
-                    label: f.label(l),
-                    description: description(f),
+          DkSettingsGroup(
+            children: [
+              for (final f in ScanFilterChoice.values)
+                // Read out as a radio: "Greyscale, not selected, 3 of 5".
+                MergeSemantics(
+                  child: Semantics(
+                    checked: f == prefs.filter,
+                    inMutuallyExclusiveGroup: true,
+                    child: DkSettingsRow(
+                      leading: _FilterThumb(f),
+                      title: f.label(l),
+                      description: description(f),
+                      trailing: f == prefs.filter
+                          ? DkIcon(DkIcons.check, color: t.color.primary)
+                          : const SizedBox.square(dimension: 24),
+                      onTap: () => ref
+                          .read(scannerSettingsProvider.notifier)
+                          .setFilter(f),
+                    ),
                   ),
-              ],
-            ),
+                ),
+            ],
           ),
-          SizedBox(height: t.space.l),
-          Text(
-            l.filter_default_footer,
-            style: t.text.caption.copyWith(color: t.color.textSecondary),
+          Padding(
+            padding: EdgeInsets.only(top: t.space.s),
+            child: Text(
+              l.filter_default_footer,
+              style: t.text.caption.copyWith(color: t.color.textSecondary),
+            ),
           ),
         ],
       ),
@@ -187,8 +208,161 @@ class DefaultFilterScreen extends ConsumerWidget {
   }
 }
 
-/// Settings → Scanning → File name (design `me-filename`): the pattern,
-/// chips that insert `{date}`, `{time}` and `{number}`, and a preview.
+/// A 40 × 52 page (a heading and lines on photographed paper) under the
+/// filter's look in S2 ([scanPreviewFilter]).
+class _FilterThumb extends StatelessWidget {
+  const _FilterThumb(this.filter);
+
+  final ScanFilterChoice filter;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final c = t.color;
+    // A photographed page looks the same in both themes: the light ink.
+    // The design's #F2F0EA: white paper with the room's warm cast, which
+    // the grey filters take out.
+    final ink = DkTokens.light.color;
+    final paper = Color.lerp(ink.pageWhite, ink.warning, 0.06)!;
+    Widget bar(double width, Color colour) => Container(
+      width: width,
+      height: 2,
+      margin: const EdgeInsets.only(bottom: 3),
+      color: colour,
+    );
+    // The border stays outside the filter: Black & white would whiten it.
+    return ExcludeSemantics(
+      child: Container(
+        width: 40,
+        height: 52,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          border: Border.all(color: c.outline),
+          borderRadius: BorderRadius.circular(t.radius.xs),
+        ),
+        child: ColorFiltered(
+          colorFilter: scanPreviewFilter(filter),
+          child: Container(
+            color: paper,
+            padding: const EdgeInsets.fromLTRB(6, 5, 6, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                bar(18, ink.iconSecondary),
+                const SizedBox(height: 3),
+                for (var i = 0; i < 6; i++) bar(28, ink.outline),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// The pattern's tokens. In the field each is one private-use character,
+/// shown as a chip, so the caret and Delete treat a token as one piece.
+const _tokens = ['{date}', '{time}', '{number}'];
+String _tokenChar(int i) => String.fromCharCode(0xE000 + i);
+
+String _toField(String pattern) {
+  for (var i = 0; i < _tokens.length; i++) {
+    pattern = pattern.replaceAll(_tokens[i], _tokenChar(i));
+  }
+  return pattern;
+}
+
+String _toPattern(String field) {
+  for (var i = 0; i < _tokens.length; i++) {
+    field = field.replaceAll(_tokenChar(i), _tokens[i]);
+  }
+  return field;
+}
+
+/// The name pattern's field: the tokens as chips (UI spec §23 "editor with
+/// token chips").
+class _PatternController extends TextEditingController {
+  _PatternController(String pattern) : super(text: _toField(pattern));
+
+  String get pattern => _toPattern(text);
+
+  @override
+  TextSpan buildTextSpan({
+    required BuildContext context,
+    TextStyle? style,
+    required bool withComposing,
+  }) {
+    final chips = [for (var i = 0; i < _tokens.length; i++) _tokenChar(i)];
+    if (!chips.any(text.contains)) {
+      return super.buildTextSpan(
+        context: context,
+        style: style,
+        withComposing: withComposing,
+      );
+    }
+    // ponytail: no composing underline once a chip is in the field; the
+    // IME still composes, it just isn't drawn.
+    final l = AppLocalizations.of(context);
+    final labels = [
+      l.settings_token_date,
+      l.settings_token_time,
+      l.settings_token_number,
+    ];
+    final spans = <InlineSpan>[];
+    var run = StringBuffer();
+    for (final ch in text.split('')) {
+      final i = chips.indexOf(ch);
+      if (i < 0) {
+        run.write(ch);
+        continue;
+      }
+      if (run.isNotEmpty) spans.add(TextSpan(text: '$run'));
+      run = StringBuffer();
+      spans.add(
+        WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: _TokenChip(labels[i]),
+        ),
+      );
+    }
+    if (run.isNotEmpty) spans.add(TextSpan(text: '$run'));
+    return TextSpan(style: style, children: spans);
+  }
+}
+
+class _TokenChip extends StatelessWidget {
+  const _TokenChip(this.label);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final c = t.color;
+    return Container(
+      height: 22,
+      padding: EdgeInsets.symmetric(horizontal: t.space.s),
+      decoration: BoxDecoration(
+        color: c.primaryContainer,
+        borderRadius: BorderRadius.circular(t.radius.pill),
+      ),
+      child: Align(
+        widthFactor: 1,
+        child: Text(
+          label,
+          style: t.text.caption.copyWith(
+            color: c.onPrimaryContainer,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Settings → Scanning → File name (design `me-filename`): the pattern with
+/// its tokens as chips, chips that insert date, time and number, and a
+/// preview card.
 class FileNamePatternScreen extends ConsumerStatefulWidget {
   const FileNamePatternScreen({super.key});
 
@@ -198,8 +372,8 @@ class FileNamePatternScreen extends ConsumerStatefulWidget {
 }
 
 class _FileNamePatternScreenState extends ConsumerState<FileNamePatternScreen> {
-  late final _pattern = TextEditingController(
-    text: ref.read(scannerSettingsProvider).namePattern,
+  late final _pattern = _PatternController(
+    ref.read(scannerSettingsProvider).namePattern,
   )..addListener(() => setState(() {}));
 
   @override
@@ -208,18 +382,13 @@ class _FileNamePatternScreenState extends ConsumerState<FileNamePatternScreen> {
     super.dispose();
   }
 
-  void _insert(String token) {
+  void _insert(int token) {
     final v = _pattern.value;
     final at = v.selection.isValid ? v.selection.end : v.text.length;
-    final text = v.text.replaceRange(
-      v.selection.isValid ? v.selection.start : at,
-      at,
-      token,
-    );
-    final caret = (v.selection.isValid ? v.selection.start : at) + token.length;
+    final from = v.selection.isValid ? v.selection.start : at;
     _pattern.value = TextEditingValue(
-      text: text,
-      selection: TextSelection.collapsed(offset: caret),
+      text: v.text.replaceRange(from, at, _tokenChar(token)),
+      selection: TextSelection.collapsed(offset: from + 1),
     );
   }
 
@@ -229,49 +398,78 @@ class _FileNamePatternScreenState extends ConsumerState<FileNamePatternScreen> {
     final c = t.color;
     final l = AppLocalizations.of(context);
     final now = ref.read(scanClockProvider)();
+    final preview = '${scanName(now, pattern: _pattern.pattern)}.pdf';
     return Scaffold(
       backgroundColor: c.background,
       appBar: DkTopBar(title: l.settings_file_name),
       body: ListView(
         padding: EdgeInsets.all(t.space.l),
         children: [
-          DkTextField(label: l.settings_name_pattern, controller: _pattern),
+          DkTextField(
+            label: l.settings_name_pattern,
+            controller: _pattern,
+            clearable: false,
+          ),
           SizedBox(height: t.space.l),
-          Text(l.settings_insert, style: t.text.titleS),
+          Text(
+            l.settings_insert,
+            style: t.text.labelM.copyWith(color: c.textSecondary),
+          ),
           SizedBox(height: t.space.s),
           Wrap(
             spacing: t.space.s,
-            runSpacing: t.space.s,
             children: [
-              for (final (token, label) in [
-                ('{date}', l.settings_token_date),
-                ('{time}', l.settings_token_time),
-                ('{number}', l.settings_token_number),
-              ])
-                DkButton(
+              for (final (i, label) in [
+                l.settings_token_date,
+                l.settings_token_time,
+                l.settings_token_number,
+              ].indexed)
+                DkChip(
                   label: label,
                   icon: DkIcons.add,
-                  size: DkButtonSize.compact,
-                  variant: DkButtonVariant.secondary,
-                  onPressed: () => _insert(token),
+                  selected: false,
+                  onSelected: (_) => _insert(i),
                 ),
             ],
           ),
-          SizedBox(height: t.space.xl),
-          Text(l.settings_preview, style: t.text.titleS),
-          SizedBox(height: t.space.s),
-          Text(
-            '${scanName(now, pattern: _pattern.text)}.pdf',
-            style: t.text.bodyL.copyWith(color: c.textSecondary),
+          SizedBox(height: t.space.l),
+          // The field's chips aren't text to a screen reader: the preview
+          // card says the name the pattern makes.
+          Container(
+            padding: const EdgeInsets.all(14),
+            decoration: BoxDecoration(
+              color: c.surface,
+              border: Border.all(color: c.outline),
+              borderRadius: BorderRadius.circular(t.radius.m),
+            ),
+            child: MergeSemantics(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l.settings_preview,
+                    style: t.text.caption.copyWith(color: c.textSecondary),
+                  ),
+                  Text(
+                    preview,
+                    style: t.text.bodyL.copyWith(
+                      color: c.textPrimary,
+                      fontFeatures: const [FontFeature.tabularFigures()],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
           SizedBox(height: t.space.xl),
           DkButton(
             label: l.common_save,
+            size: DkButtonSize.large,
             expand: true,
             onPressed: () async {
               await ref
                   .read(scannerSettingsProvider.notifier)
-                  .setNamePattern(_pattern.text);
+                  .setNamePattern(_pattern.pattern);
               if (context.mounted) Navigator.of(context).pop();
             },
           ),

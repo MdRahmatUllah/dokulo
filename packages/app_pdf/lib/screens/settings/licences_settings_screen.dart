@@ -80,8 +80,8 @@ class _LicencesSettingsScreenState
   }
 }
 
-/// One licence's full text (me-licence): "Name · Licence" over the texts
-/// in the platform's mono.
+/// One licence's full text (me-licence): "Name · Licence" as a caption over
+/// the texts in the platform's mono.
 class LicenceScreen extends StatelessWidget {
   const LicenceScreen({super.key, required this.item});
 
@@ -97,17 +97,22 @@ class LicenceScreen extends StatelessWidget {
       appBar: DkTopBar(title: l.licence_title),
       body: SelectionArea(
         child: ListView(
-          padding: EdgeInsets.all(t.space.l),
+          padding: EdgeInsets.fromLTRB(
+            t.space.l,
+            t.space.s,
+            t.space.l,
+            t.space.l,
+          ),
           children: [
             Text(
               [
                 item.name,
                 if (item.licence.isNotEmpty) item.licence,
               ].join(' · '),
-              style: t.text.titleS.copyWith(color: c.textPrimary),
+              style: t.text.caption.copyWith(color: c.textSecondary),
             ),
             for (final text in item.texts) ...[
-              SizedBox(height: t.space.l),
+              SizedBox(height: t.space.m),
               Text(text, style: t.text.mono.copyWith(color: c.textSecondary)),
             ],
           ],

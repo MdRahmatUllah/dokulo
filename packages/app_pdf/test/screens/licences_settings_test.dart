@@ -91,5 +91,15 @@ void main() {
         matchesGoldenFile('goldens/licences_$name.png'),
       );
     });
+
+    testWidgets('golden: one licence ($name)', (tester) async {
+      await pump(tester, tokens: tokens, locale: locale);
+      await tester.tap(find.text('Material Symbols'));
+      await tester.pumpAndSettle();
+      await expectLater(
+        find.byType(Navigator),
+        matchesGoldenFile('goldens/licence_$name.png'),
+      );
+    });
   }
 }
