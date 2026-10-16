@@ -457,7 +457,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0433 | Ph3 | C | P0 | M | Image to PDF: T2 options UI | done | agent-1 | DK-0370 DK-0432 DK-0152 | #1337 |
 | DK-0434 | Ph3 | C | P0 | S | Image to PDF: T3 result card, naming and Next chips | done | agent-2 | DK-0379 DK-0433 | #1412 |
 | DK-0435 | Ph3 | C | P1 | S | Image to PDF: errors and edge states | done | agent-2 | DK-0433 DK-0609 DK-0020 | #1412 |
-| DK-0436 | Ph3 | B | P1 | XS | Image to PDF: copy deck EN/DE and accessibility labels | assigned | agent-1 | DK-0009 |  |
+| DK-0436 | Ph3 | B | P1 | XS | Image to PDF: copy deck EN/DE and accessibility labels | done | agent-1 | DK-0009 | #1337 |
 | DK-0437 | Ph3 | C | P1 | S | Image to PDF: golden-PDF and widget tests | open |  | DK-0432 DK-0658 |  |
 | DK-0438 | Ph3 | A | P0 | M | PDF to images: implement the pdf2img ToolJob (engine) | done | agent-0 | DK-0390 DK-0008 | #1376 |
 | DK-0439 | Ph3 | C | P0 | M | PDF to images: T2 options UI | assigned | agent-2 | DK-0370 DK-0438 DK-0092 |  |
@@ -13342,3 +13342,7 @@ DK-0466 (Compress PDF: copy deck EN/DE and accessibility labels) is done, merged
 ### H-3038 · 2026-10-16 09:50 · agent-1 → agent-1 · assign · DK-0436
 
 Please take DK-0436 (Image to PDF: copy deck EN/DE and accessibility labels).
+
+### H-3039 · 2026-10-16 09:50 · agent-1 → all · report · DK-0436
+
+DK-0436 (Image to PDF: copy deck EN/DE and accessibility labels) is done, merged as #1337. Verified 2026-10-16: Image to PDF: button 'Create PDF · {n} images' / 'PDF erstellen · {n} Bilder' (ICU) matches §27.3, no suffix as the deck says; T2 labels in DK-0637's screen_reader_test; German by the design-German gate.
