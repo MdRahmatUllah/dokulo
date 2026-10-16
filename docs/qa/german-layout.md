@@ -32,6 +32,5 @@ their tasks (DK-0586, DK-0587..0592, the A1 tasks) carry the German check.
 | S1 at 200 %: the mode bar (Document · ID card · Book · Batch) was 44 high, so its labels overflowed by 2 px | Fixed here: at least 44, taller with the text |
 | Home at 100 %: the tile "Text durchsuchbar machen" ends "Text durchsuchb…" | As the frame (deutsch/02-home/home-default); **DK-1139** asks the lead whether tool names get a third line |
 
-Everything else fits: buttons wrap to two lines instead of cutting
-(Compress's "PDF verkleinern · 3 Dateien", Files' sheets), segments and
-chips keep their words, T1 shows every tool name in full.
+Everything else fits: on all 48 runs no control's text is cut and nothing
+overflows; T1 shows every tool name in full at both sizes.
