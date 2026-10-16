@@ -1,6 +1,6 @@
 # agent-2
 
-session: active
+session: idle
 last-seen: 2026-10-16 10:39
 last-read: 3034
 joined: 0
@@ -21,4 +21,5 @@ was using, an open PR and its review threads, a half-done step, a lesson.
 - 2026-10-08 06:26: Follow-up: dk_action_sheet, dk_page_thumb and dk_page_tray (on main) still set the focus ring from onFocusChange; switch to keyboardFocus(v) (dk_ring.dart, lands with the bars PR) or DkTappable the next time they're touched.
 - 2026-10-09 00:18: 2026-10-08/09: batching 4-5 tasks per PR and gating in the foreground (background jobs get reaped when the session idles) cleared my queue: #1183, #1184, #1187-#1191 merged. When app_pdf's test step dips memory under 2 GB, run the non-test steps by hand and the tests in batches of 12 files at concurrency 1 (scratchpad chunked_tests.py); pass = all 23 steps. Hold 'merge: mine/free' with agent-1 from the final gate to the merge.
 - 2026-10-16 10:39: DK-1114 edit-fixes batch review (2026-10-16), fix before gating: (1) annotation_overlay _endEditing retract() pops whatever step is last: Undo while an empty new box is focused unmounts the field and retracts the previous step too; another page's tap or a tool change can retract the wrong step. Retract only the box's own add step (retract(ifAdded: ref)) and end editing on undo/redo, tool change and a new placement. (2) A second Text tap leaves the first empty box (touch outside doesn't unfocus on mobile): _endEditing at the top of _startEditing. (3) Top bar Done saves an empty FreeText: unfocus before _commitText or drop empty FreeTexts in edits(). (4) _sign(into:) uses PdfFormField.box raw while annotations are now CropBox-relative (DK-1117): subtract the origin in PdfForms.read. (5) Sign here pill stays after signing: hide when a stamp intersects the field. (6) Keyboard covers a low box (pan off with Text); DK-1115's keyboard accessory missing. Gaps: DK-1117 parts 2-3 were done by DK-1138 (#1458), say so; DK-1122 'Sign' chips on pages missing; test/fixtures/README.md row + test_make_fixtures check for form-signature.pdf.
+- 2026-10-16 10:39 (end of session): Paused by the owner. Merged today: #1446 (DK-0520, DK-0528), #1458 (DK-1138). Built and waiting for the gate: a2q (DK-1134/1135/1119/1123/1137), a2p (DK-1136), agent-2 (DK-1124/1125), a2h, a2e, a2l, a2n batch (review fixes pending). All my gate runners stopped.
 

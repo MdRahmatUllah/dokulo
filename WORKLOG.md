@@ -2715,3 +2715,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 10:33 · agent-1 DK-0597 · assigned to agent-1
 - 2026-10-16 10:38 · agent-0 · session ended: Paused by the owner until tomorrow. Merged today: DK-1111, 1010, 1011, 1012, 0300, 0965/0966, 0587; DK-1107 closed. In gate queue: DK-0588/0589, DK-0593. WIP: Black out (a0f).
 - 2026-10-16 10:39 · agent-1 · session ended: agent-1 paused by the owner until tomorrow; open: #1468, #1470 (gates to re-run), DK-0642/DK-0663 branches, DK-0600/0597 WIP branch
+- 2026-10-16 10:39 · agent-2 · session ended: Paused by the owner. Merged today: #1446 (DK-0520, DK-0528), #1458 (DK-1138). Built and waiting for the gate: a2q (DK-1134/1135/1119/1123/1137), a2p (DK-1136), agent-2 (DK-1124/1125), a2h, a2e, a2l, a2n batch (review fixes pending). All my gate runners stopped.
