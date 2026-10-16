@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:app_pdf/photo_finder/photo_finder.dart';
 import 'package:app_pdf/providers/database_providers.dart';
+import 'package:app_pdf/providers/job_notices.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -52,12 +53,17 @@ void main() {
   late FakeLibrary library;
   final t0 = DateTime.utc(2026, 10, 1);
 
-  ProviderContainer finder() {
+  late List<JobNotice> notices;
+  var away = false;
+
+  ProviderContainer finder({DocumentScorer scorer = score}) {
     final c = ProviderContainer(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
         photoLibraryProvider.overrideWithValue(library),
-        documentScorerProvider.overrideWithValue(score),
+        documentScorerProvider.overrideWithValue(scorer),
+        appInBackgroundProvider.overrideWithValue(() => away),
+        jobNoticesProvider.overrideWithValue(_Notices(notices = [])),
       ],
     );
     addTearDown(c.dispose);
@@ -65,6 +71,7 @@ void main() {
   }
 
   setUp(() {
+    away = false;
     db = DokuloDatabase.memory();
     library = FakeLibrary([
       (id: 'doc-90', modified: t0),
@@ -182,4 +189,35 @@ void main() {
       ['doc-60', 'doc-90'],
     );
   });
+
+  test('done in the background: a notice with the count that opens the '
+      'results (DK-0592); on screen or stopped, none', () async {
+    var c = finder();
+    await c.read(photoFinderProvider.notifier).scan();
+    expect(notices, isEmpty, reason: 'on screen: the screen shows it');
+    away = true;
+    c = finder();
+    await c.read(photoFinderProvider.notifier).scan();
+    expect(notices.single.title, 'Found 2 documents in your photos');
+    expect(notices.single.body, 'Tap to review');
+    expect(notices.single.toMap()['link'], 'dokulo://open/photos');
+    // A new photo, and the user stops the scan while it's scored.
+    library.photos.add((id: 'doc-80', modified: t0));
+    late ProviderContainer stopping;
+    c = stopping = finder(
+      scorer: (bytes) async {
+        stopping.read(photoFinderProvider.notifier).cancel();
+        return score(bytes);
+      },
+    );
+    await c.read(photoFinderProvider.notifier).scan();
+    expect(notices, isEmpty, reason: 'a stopped scan gets no notice');
+  });
+}
+
+class _Notices implements JobNotices {
+  _Notices(this.shown);
+  final List<JobNotice> shown;
+  @override
+  Future<void> show(JobNotice notice) async => shown.add(notice);
 }

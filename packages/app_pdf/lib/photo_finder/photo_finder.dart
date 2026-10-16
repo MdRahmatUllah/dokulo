@@ -7,6 +7,7 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../providers/database_providers.dart';
+import '../providers/job_notices.dart';
 import '../providers/prefs_providers.dart';
 
 part 'photo_finder.g.dart';
@@ -247,6 +248,8 @@ class PhotoFinder extends _$PhotoFinder {
     } finally {
       state = state.copyWith(running: false, found: await _found());
     }
+    // A scan the user stopped gets no notice.
+    if (!_cancelled) photoFinderNoticeIfAway(ref, state.found.length);
     return access;
   }
 

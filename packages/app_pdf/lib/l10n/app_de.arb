@@ -836,5 +836,7 @@
   "notice_job_done": "{tool} abgeschlossen",
   "notice_job_failed": "{tool} fehlgeschlagen",
   "notice_job_failed_body": "Tippe für Details",
-  "notice_files": "{count, plural, =1{1 Datei} other{{count} Dateien}}"
+  "notice_files": "{count, plural, =1{1 Datei} other{{count} Dateien}}",
+  "notice_photos_found": "{count, plural, =1{1 Dokument in deinen Fotos gefunden} other{{count} Dokumente in deinen Fotos gefunden}}",
+  "notice_photos_body": "Zum Ansehen tippen"
 }
