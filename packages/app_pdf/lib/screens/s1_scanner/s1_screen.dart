@@ -318,11 +318,10 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       capturing: _countdown > 0,
     );
     _announcer.update(hintKind, hintKind.text(l), _clock.elapsed);
-    final hint = DkHintPill(
-      widget.retake == null
-          ? hintKind.text(l)
-          : l.camera_retake_page(widget.retake! + 1),
-    );
+    // A retake is a mode: the primary pill (design scanner-camera-retake).
+    final hint = widget.retake == null
+        ? DkHintPill(hintKind.text(l))
+        : DkHintPill(l.camera_retake_page(widget.retake! + 1), primary: true);
     // ID card draws its guide and says what to do instead of the hint;
     // Book draws its spine line and keeps the hint (the design). A retake
     // says which page it retakes, whatever the mode.
@@ -390,6 +389,73 @@ class _S1ScreenState extends ConsumerState<S1Screen>
           Positioned.fill(
             child: OrientationBuilder(
               builder: (context, orientation) {
+                if (orientation == Orientation.landscape &&
+                    MediaQuery.sizeOf(context).shortestSide >= 600) {
+                  // Tablet landscape (DK-0652, tablet-scanner-landscape):
+                  // a 160 dp rail on the right with the stack, the shutter
+                  // and Import; the top bar runs up to it; the modes stand
+                  // beside it, centred.
+                  // ponytail: the preview keeps the camera's ratio (the
+                  // frame fills the screen); filling would need the quad
+                  // guide mapped through the crop.
+                  const rail = 160.0;
+                  return Stack(
+                    children: [
+                      Positioned.fill(right: rail, child: preview),
+                      guide,
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: rail,
+                        child: Container(
+                          color: c.cameraChrome,
+                          child: SafeArea(
+                            bottom: false,
+                            right: false,
+                            child: top,
+                          ),
+                        ),
+                      ),
+                      if (!guided)
+                        Positioned(
+                          top: 80,
+                          left: 0,
+                          right: rail,
+                          child: Center(child: hint),
+                        ),
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        right: rail + 12,
+                        child: Center(
+                          child: _ModeSwitcher(
+                            mode: mode,
+                            onMode: (m) =>
+                                ref.read(scanModeStateProvider.notifier).set(m),
+                            axis: Axis.vertical,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        width: rail,
+                        child: Container(
+                          color: c.cameraChrome,
+                          child: SafeArea(
+                            left: false,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              spacing: 40,
+                              children: [stack, shutter, importButton],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
                 if (orientation == Orientation.landscape) {
                   // Phone landscape: the controls along the right edge.
                   return Row(
@@ -501,7 +567,13 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                                     ),
                                   ),
                                 ),
-                              SizedBox(height: 44, child: modes),
+                              // 44 high, taller at large text (DK-0635).
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  minHeight: 44,
+                                ),
+                                child: modes,
+                              ),
                               SizedBox(
                                 height: 120,
                                 child: Padding(
@@ -832,6 +904,7 @@ class _ModeSwitcher extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: t.space.m),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(

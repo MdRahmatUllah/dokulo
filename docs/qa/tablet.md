@@ -85,3 +85,26 @@ frames and §30/§21.12 want Compress's own pane: "Live preview ·
 Recommended" following the selected level (T2) or "Result preview" (T3), a
 Before · After toggle and a 200 % crop of the same area with its caption.
 The More options row's colour is DK-1119 (below, `design-system.md`).
+
+## Scanner (S1) on tablets
+
+S1 on tablets (DK-0652, §30) against `tablet-scanner-portrait` and
+`-landscape`. Board: `s1_screen_test`'s `s1_tablet_portrait` (820 × 1180) and
+`s1_tablet_landscape` (1366 × 1024); frames `tablet-scanner-*` in
+[tablet/](tablet/). The portrait export is clipped at 1024 high and drawn
+left of its box, like the Compress ones; its HTML has the phone's layout,
+the shutter row under the modes.
+
+| Task | Frame | Result |
+| --- | --- | --- |
+| DK-0977 | `tablet-scanner-landscape` | **DK-1137**: the preview is a 3:4 column with black bars |
+| DK-0978 | `tablet-scanner-portrait` | Match |
+
+What matches: portrait keeps the phone's S1 (top bar with flash, Auto, grid
+and settings, the Ready hint, the modes above the shutter row with import,
+shutter and the page stack); landscape has the 160 dp rail on the right
+(page stack, shutter, import) and the modes beside it.
+
+**DK-1137** (P3, lane C): the preview takes the camera's portrait ratio in
+landscape too, so a 768 dp column sits between black bars, and the top bar
+covers only the column; the frame fills the area left of the rail.

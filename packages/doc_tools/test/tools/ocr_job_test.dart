@@ -56,6 +56,9 @@ class _FakeOcr implements OcrEngine {
   }
 
   @override
+  Future<int?> orientation(Raster raster) async => null;
+
+  @override
   Future<void> close() async {}
 }
 

@@ -39,6 +39,8 @@ Future<GoRouter> pumpAt(
   List<Override> overrides = const [],
   DokuloDatabase? database,
   DkTokens? tokens,
+  Locale? locale,
+  bool settle = true,
 }) async {
   final router = buildRouter(initialLocation: location);
   addTearDown(router.dispose);
@@ -61,6 +63,7 @@ Future<GoRouter> pumpAt(
         theme: dokuloTheme(
           tokens ?? DkTokens.light,
         ), // components read the tokens
+        locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         builder: (context, child) => MediaQuery(
@@ -71,7 +74,8 @@ Future<GoRouter> pumpAt(
       ),
     ),
   );
-  await tester.pumpAndSettle();
+  // A screen with a spinner (V1 opening a PDF) never settles.
+  settle ? await tester.pumpAndSettle() : await tester.pump();
   return router;
 }
 
@@ -106,7 +110,7 @@ void main() {
   // whether the tab bar shows.
   const coldStarts = {
     Routes.models: ('M2', true),
-    '/me/settings/appearance': ('M3 appearance', true),
+    '/me/settings/appearance': ('Appearance', true),
     '/tool/compress': ('Compress PDF', false),
   };
   for (final MapEntry(key: location, value: (screen, tabs))
@@ -216,6 +220,10 @@ void main() {
   test('the path builders match the route table', () {
     expect(Routes.settings('appearance'), '/me/settings/appearance');
     expect(Routes.tool('merge'), '/tool/merge');
+    expect(
+      Routes.tool('ask', files: ['7'], prompt: 'Net & VAT'),
+      '/tool/ask?file=7&q=Net+%26+VAT',
+    );
     expect(Routes.toolResult('merge'), '/tool/merge/result');
     expect(Routes.viewer('f1'), '/viewer/f1');
     expect(Routes.viewer('f1', edit: true), '/viewer/f1?mode=edit');

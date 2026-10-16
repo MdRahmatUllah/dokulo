@@ -18,8 +18,10 @@ import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/p1_organize/organize_screen.dart';
 import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/settings/appearance_settings_screen.dart';
 import '../screens/settings/files_settings_screen.dart';
 import '../screens/settings/language_settings_screen.dart';
+import '../screens/settings/privacy_settings_screen.dart';
 import '../screens/settings/scanning_settings_screen.dart';
 import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
@@ -87,10 +89,13 @@ abstract final class Routes {
     String toolId, {
     List<String> files = const [],
     bool chained = false,
+    String? prompt,
   }) {
     final query = {
       if (files.isNotEmpty) 'file': files,
       if (chained) 'chain': '1',
+      // Ask AI from a text selection: A1 Ask's composer, prefilled (DK-0300).
+      'q': ?prompt,
     };
     return Uri(
       path: '/tool/$toolId',
@@ -254,6 +259,8 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                         'security' => const SecuritySettingsScreen(),
                         'files' => const FilesSettingsScreen(),
                         'language' => const LanguageSettingsScreen(),
+                        'appearance' => const AppearanceSettingsScreen(),
+                        'privacy' => const PrivacySettingsScreen(),
                         final page => PlaceholderScreen('M3', detail: page),
                       },
                     ),
