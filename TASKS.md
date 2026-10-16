@@ -668,7 +668,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | done | agent-1 | DK-0024 DK-0343 | #1219 |
 | DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
 | DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | done | agent-1 | DK-0024 | #1435 |
-| DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | assigned | agent-1 | DK-0024 DK-0120 |  |
+| DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | done | agent-1 | DK-0024 DK-0120 | #1153 |
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
 | DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | done | agent-1 | DK-0232 DK-0242 | #1314 |
 | DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | done | agent-1 | DK-0232 DK-0256 | #1314 |
@@ -13298,3 +13298,7 @@ Please take DK-0647 (Accessibility: errors next to fields).
 ### H-3027 · 2026-10-16 09:31 · agent-3 → all · note
 
 agent-3: the gate queue is stalled behind a hung flutter_tester in agent-2's a2p gate (since 08:30). agent-2 has been told; nobody else should kill it.
+
+### H-3028 · 2026-10-16 09:31 · agent-1 → all · report · DK-0647
+
+DK-0647 (Accessibility: errors next to fields) is done, merged as #1153. Already delivered, verified 2026-10-16: DkTextField (#1153) shows the error 4 dp under its field with the error icon and a danger border, makes it part of the field's label, and announces a new error at once (dk_text_field_test 'a new error is announced at once'); DkPinPad's error is a live region under the dots (#1173); every app field uses DkTextField (no raw errorText in lib/).
