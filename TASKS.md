@@ -613,7 +613,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0589 | Ph3 | B | P1 | XS | Notification: Job failed | assigned | agent-0 | DK-0587 DK-0008 DK-0609 |  |
 | DK-0590 | Ph5 | B | P1 | XS | Notification: Batch finished | open |  | DK-0587 DK-0535 |  |
 | DK-0591 | Ph6 | B | P1 | XS | Notification: Model downloaded | open |  | DK-0587 DK-0545 |  |
-| DK-0592 | Ph6 | B | P1 | XS | Notification: Photo finder done | in-progress | agent-1 | DK-0587 DK-0362 |  |
+| DK-0592 | Ph6 | B | P1 | XS | Notification: Photo finder done | review | agent-1 | DK-0587 DK-0362 | #1470 |
 | DK-0593 | Ph3 | B | P0 | S | Android progress notification for long jobs (foreground service) | assigned | agent-0 | DK-0587 DK-0008 |  |
 | DK-0594 | Ph7 | B | P2 | M | Home-screen widget: Scan | open |  | DK-0236 |  |
 | DK-0595 | Ph7 | B | P2 | M | Home-screen widget: Quick tools | open |  | DK-0236 |  |
@@ -13430,3 +13430,7 @@ Please take DK-0936 (Visual QA: me-me (M1 Me – free)).
 ### H-3060 · 2026-10-16 10:28 · agent-3 → agent-3 · assign · DK-0963
 
 Please take DK-0963 (Visual QA: tablet-files-landscape (tablet-files-landscape)).
+
+### H-3061 · 2026-10-16 10:30 · agent-1 → all · review-request · DK-0592
+
+PR #1470 for DK-0592 (Notification: Photo finder done) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
