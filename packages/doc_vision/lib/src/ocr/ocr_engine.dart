@@ -70,6 +70,10 @@ abstract interface class OcrEngine {
     required Directory scratch,
   });
 
+  /// The clockwise quarter turns that set a scan's text upright, or null
+  /// when it has too little text to tell (Rotate PDF, DK-1102).
+  Future<int?> orientation(Raster raster);
+
   /// Frees the engine's native sessions.
   Future<void> close();
 
@@ -192,6 +196,10 @@ class PpOcrEngine implements OcrEngine {
   }) => _read(raster);
 
   @override
+  @override
+  Future<int?> orientation(Raster raster) => ocr.orientation(raster);
+
+  @override
   Future<void> close() async {
     if (ocr.runner case final FlutterOnnxRunner runner) await runner.close();
   }
@@ -312,6 +320,10 @@ class VisionEngine implements OcrEngine {
 
   @override
   Future<void> close() => fallback.close();
+
+  /// Vision gives no page orientation: PP-OCR's models tell it.
+  @override
+  Future<int?> orientation(Raster raster) => fallback.orientation(raster);
 }
 
 /// The OCR failures the error catalogue knows (UI spec §26.3: damaged file).

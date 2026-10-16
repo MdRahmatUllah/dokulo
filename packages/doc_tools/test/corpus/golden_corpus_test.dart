@@ -179,6 +179,9 @@ class _OneWord implements OcrEngine {
   }) async => _page;
 
   @override
+  Future<int?> orientation(Raster raster) async => null;
+
+  @override
   Future<void> close() async {}
 }
 

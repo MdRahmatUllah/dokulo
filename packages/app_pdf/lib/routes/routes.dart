@@ -18,9 +18,11 @@ import '../screens/onboarding/onboarding_screen.dart';
 import '../screens/p1_organize/organize_screen.dart';
 import '../screens/me/me_screen.dart';
 import '../screens/placeholder_screen.dart';
+import '../screens/settings/appearance_settings_screen.dart';
 import '../screens/settings/files_settings_screen.dart';
 import '../screens/settings/language_settings_screen.dart';
 import '../screens/settings/licences_settings_screen.dart';
+import '../screens/settings/privacy_settings_screen.dart';
 import '../screens/settings/scanning_settings_screen.dart';
 import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
@@ -256,6 +258,8 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                         'files' => const FilesSettingsScreen(),
                         'language' => const LanguageSettingsScreen(),
                         'licences' => const LicencesSettingsScreen(),
+                        'appearance' => const AppearanceSettingsScreen(),
+                        'privacy' => const PrivacySettingsScreen(),
                         final page => PlaceholderScreen('M3', detail: page),
                       },
                     ),
