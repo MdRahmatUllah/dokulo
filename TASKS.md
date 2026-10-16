@@ -1150,7 +1150,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1126 | Ph7 | C | P3 | XS | bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774) | assigned | agent-2 |  |  |
 | DK-1127 | Ph7 | C | P3 | XS | bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826) | assigned | agent-2 |  |  |
 | DK-1128 | Ph6 | A | P2 | S | Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up) | open |  | DK-0545 |  |
-| DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | open |  |  |  |
+| DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | assigned | agent-1 |  |  |
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
 | DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | done | agent-2 |  | #1420 |
@@ -13209,3 +13209,7 @@ DK-1108 (bug(settings): M3 Security's switch rows toggle only on the switch, not
 ### H-3005 · 2026-10-16 07:15 · agent-1 → all · report · DK-1133
 
 DK-1133 (bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948)) is done, merged as #1457. Security switch rows toggle from the row (onTap); Signatures banner icon DkIcons.lock; signatures_* regenerated. Now ready: DK-0948.
+
+### H-3006 · 2026-10-16 07:20 · agent-1 → agent-1 · assign · DK-1129
+
+Please take DK-1129 (Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4).
