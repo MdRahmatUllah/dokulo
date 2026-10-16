@@ -216,6 +216,10 @@ void main() {
   test('the path builders match the route table', () {
     expect(Routes.settings('appearance'), '/me/settings/appearance');
     expect(Routes.tool('merge'), '/tool/merge');
+    expect(
+      Routes.tool('ask', files: ['7'], prompt: 'Net & VAT'),
+      '/tool/ask?file=7&q=Net+%26+VAT',
+    );
     expect(Routes.toolResult('merge'), '/tool/merge/result');
     expect(Routes.viewer('f1'), '/viewer/f1');
     expect(Routes.viewer('f1', edit: true), '/viewer/f1?mode=edit');
