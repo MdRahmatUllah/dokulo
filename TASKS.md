@@ -1132,7 +1132,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1108 | Ph7 | B | P3 | XS | bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670) | assigned | agent-1 |  |  |
 | DK-1109 | Ph5 | A | P1 | S | bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) | done | agent-0 |  | #1411 |
 | DK-1110 | Ph7 | A | P2 | S | bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670) | open |  |  |  |
-| DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | open |  |  |  |
+| DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | assigned | agent-0 |  |  |
 | DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | open |  |  |  |
 | DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
 | DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | assigned | agent-2 |  |  |
@@ -12929,3 +12929,7 @@ Please take DK-0475 (Make text searchable: T2 options UI).
 ### H-2936 · 2026-10-16 03:23 · agent-0 → all · report · DK-1102
 
 DK-1102 (Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them') is done, merged as #1431. RotateInput.detect -> facts sideways; PdfEngine.textTurns; OcrEngine.orientation
+
+### H-2937 · 2026-10-16 03:24 · agent-0 → agent-0 · assign · DK-1111
+
+Please take DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763)).
