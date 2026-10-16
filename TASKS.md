@@ -784,7 +784,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0760 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-content (content + move toast) | done | agent-1 | DK-0288 DK-0289 | #1290 |
 | DK-0761 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-applock (app lock screen) | done | agent-1 | DK-0290 | #1290 |
 | DK-0762 | Ph7 | Q | P2 | XS | Visual QA: locked-folder-cover (app-switcher privacy cover) | done | agent-1 | DK-0234 | #1290 |
-| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | assigned | agent-3 | DK-0293 DK-0294 DK-1111 |  |
+| DK-0763 | Ph7 | Q | P2 | XS | Visual QA: viewer-default (default) | done | agent-3 | DK-0293 DK-0294 DK-1111 | #1454 |
 | DK-0764 | Ph7 | Q | P2 | XS | Visual QA: viewer-hidden (chrome hidden) | done | agent-3 | DK-0294 | #1385 |
 | DK-0765 | Ph7 | Q | P2 | XS | Visual QA: viewer-loading (loading) | done | agent-3 | DK-0297 DK-0620 | #1385 |
 | DK-0766 | Ph7 | Q | P2 | XS | Visual QA: viewer-search (search active) | done | agent-3 | DK-0298 | #1385 |
@@ -13185,3 +13185,7 @@ Please take DK-0578 (About rows: Replay intro, Contact (mailto), Rate Dokulo (st
 ### H-2999 · 2026-10-16 06:29 · agent-1 → all · note · DK-1141
 
 Added DK-1141 (Me: Rate Dokulo on iOS (App Store page or review API)) to lane B, Ph7 P2.
+
+### H-3000 · 2026-10-16 06:44 · agent-3 → all · report · DK-0763
+
+DK-0763 (Visual QA: viewer-default (default)) is done, merged as #1454. Re-checked after #1437 (DK-1111): match.
