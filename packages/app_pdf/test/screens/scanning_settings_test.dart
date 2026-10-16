@@ -1,4 +1,6 @@
 import 'package:app_pdf/l10n/app_localizations.dart';
+import 'package:app_pdf/photo_finder/photo_finder.dart' show photoFinderKey;
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/settings/scanning_settings_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scanner_settings.dart';
 import 'package:app_pdf/screens/s2_review/save_sheet.dart';
@@ -18,12 +20,14 @@ void main() {
     WidgetTester tester, {
     DkTokens? tokens,
     Locale locale = const Locale('en'),
+    Map<String, Object?> appPrefs = const {},
   }) async {
     tester.view.physicalSize = const Size(393, 852);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
     container = ProviderContainer(
       overrides: [
+        prefsProvider.overrideWith(() => Prefs.memory(appPrefs)),
         scannerPrefsStoreProvider.overrideWithValue(prefs = MemoryPrefsStore()),
         scanClockProvider.overrideWithValue(
           () => DateTime(2026, 10, 7, 14, 32),
@@ -54,6 +58,25 @@ void main() {
       scanName(now, pattern: 'Receipt {number} {date}', number: 3),
       'Receipt 3 2026-10-07',
     );
+  });
+
+  testWidgets('Find documents in photos (DK-0571): off by default; on asks '
+      'through the intro; off turns it off', (tester) async {
+    await pump(tester);
+    await tester.ensureVisible(find.text('Find documents in photos'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Find documents in photos'));
+    await tester.pumpAndSettle();
+    expect(find.text('Allow photo access'), findsOneWidget);
+  });
+
+  testWidgets('on: the switch shows it; a tap turns it off', (tester) async {
+    await pump(tester, appPrefs: {photoFinderKey: true});
+    await tester.ensureVisible(find.text('Find documents in photos'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Find documents in photos'));
+    await tester.pumpAndSettle();
+    expect(container.read(prefsProvider).value?[photoFinderKey], isFalse);
   });
 
   testWidgets('switches and the page size write the defaults', (tester) async {
