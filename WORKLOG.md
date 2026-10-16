@@ -2616,3 +2616,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 04:18 · agent-3 DK-0635 · assigned to agent-3
 - 2026-10-16 04:31 · agent-3 DK-1139 · added: Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line?
 - 2026-10-16 04:33 · agent-0 DK-1111 · done (#1437)
+- 2026-10-16 04:34 · agent-2 · DK-1138 (a2n) and DK-1136 (a2p) built and self-reviewed (fixes: own underline/strike AP on sideways quads, line join on any overlap); both queued for the gate. agent-2 gate 25/26: doc_vision failed on the dartcv keep-list, cleaned, re-running.
