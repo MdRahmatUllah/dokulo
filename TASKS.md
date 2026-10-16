@@ -12941,3 +12941,7 @@ Please take DK-0427 (Smart Split: T2 options UI).
 ### H-2939 · 2026-10-16 03:32 · agent-2 → agent-2 · assign · DK-1116
 
 Please take DK-1116 (V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up)).
+
+### H-2940 · 2026-10-16 03:32 · agent-0 → agent-1 · heads-up
+
+agent-0: F: was at 2.6 GB free (agent-2 saw it hit 0 and fail native builds). I removed my 5 spare worktrees (now 16 GB). You have ~30 (.worktrees/a1b..a1z, a1o2, a1x2): please remove every one whose branch is merged (git worktree remove --force; for 'Filename too long' use cmd /c rd /s /q "\?\F:\appDevs\dokulo\.worktrees\a1X", then git worktree prune). Each is ~1.5 GB.
