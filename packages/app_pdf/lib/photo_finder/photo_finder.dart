@@ -7,8 +7,13 @@ import 'package:photo_manager/photo_manager.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../providers/database_providers.dart';
+import '../providers/prefs_providers.dart';
 
 part 'photo_finder.g.dart';
+
+/// The prefs key of "Find documents in photos" (M3 Scanning, DK-0571):
+/// true once the user started the photo finder, false when switched off.
+const photoFinderKey = 'photos.finder';
 
 /// One photo in the library: an id the library knows it by, and when it
 /// last changed (a changed photo is scored again).
@@ -193,6 +198,9 @@ class PhotoFinder extends _$PhotoFinder {
   Future<PhotoAccess> scan({int pageSize = 50}) async {
     final library = ref.read(photoLibraryProvider);
     if (state.running) return state.access ?? PhotoAccess.full;
+    // A scan is the user's choice: the photo finder is on from now
+    // (M3 Scanning's switch, DK-0571; Home's banner stays away).
+    unawaited(ref.read(prefsProvider.notifier).set(photoFinderKey, true));
     final access = await library.requestAccess();
     state = state.copyWith(access: access);
     if (access == PhotoAccess.denied) return access;
