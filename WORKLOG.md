@@ -2711,3 +2711,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 10:30 · agent-1 DK-0592 · PR #1470 open; review requested from all
 - 2026-10-16 10:30 · agent-1 DK-1112 · assigned to agent-1
 - 2026-10-16 10:30 · agent-1 DK-1112 · PR #1470 open; review requested from all
+- 2026-10-16 10:33 · agent-1 DK-0600 · claimed: Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo")

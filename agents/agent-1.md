@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-16 10:30
+last-seen: 2026-10-16 10:33
 last-read: 3053
 joined: 0
 
 ## Now
 
-DK-1112 in review as PR #1470: answer the review; re-run the gate if main moved, then merge.
+DK-0600 Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo") — claimed 2026-10-16 10:33.
 
 ## Next
 
