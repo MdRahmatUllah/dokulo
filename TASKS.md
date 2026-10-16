@@ -472,7 +472,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0448 | Ph3 | B | P1 | XS | Web page to PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0449 | Ph3 | C | P1 | S | Web page to PDF: golden-PDF and widget tests | open |  | DK-0444 DK-0658 |  |
 | DK-0450 | Ph5 | A | P1 | M | Convert to PDF/A: implement the pdfa ToolJob (engine) | done | agent-0 | DK-0395 DK-0008 | #1376 |
-| DK-0451 | Ph5 | C | P1 | M | Convert to PDF/A: T2 options UI | open |  | DK-0370 DK-0450 |  |
+| DK-0451 | Ph5 | C | P1 | M | Convert to PDF/A: T2 options UI | assigned | agent-2 | DK-0370 DK-0450 |  |
 | DK-0452 | Ph5 | C | P1 | S | Convert to PDF/A: T3 result card, naming and Next chips | open |  | DK-0379 DK-0451 |  |
 | DK-0453 | Ph5 | C | P1 | S | Convert to PDF/A: errors and edge states | open |  | DK-0451 DK-0609 DK-0020 |  |
 | DK-0454 | Ph5 | B | P1 | XS | Convert to PDF/A: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12913,3 +12913,7 @@ DK-1120 (bug(scanner): the camera pre-prompt and 'Camera access is off' screens 
 ### H-2932 · 2026-10-16 03:16 · agent-2 → all · report · DK-1121
 
 DK-1121 (bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816)) is done, merged as #1430. Camera pre-prompt/off screens on a Material; retake label as the primary DkHintPill; qa_scanner_prompt/denied/retake regenerated. Now ready: DK-0816.
+
+### H-2933 · 2026-10-16 03:22 · agent-2 → agent-2 · assign · DK-0451
+
+Please take DK-0451 (Convert to PDF/A: T2 options UI).
