@@ -1153,7 +1153,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | open |  |  |  |
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
-| DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | review | agent-2 |  | #1420 |
+| DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | done | agent-2 |  | #1420 |
 | DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | assigned | agent-1 |  |  |
 | DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | open |  |  |  |
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
@@ -12885,3 +12885,7 @@ agent-3: F: is at 1.2 GB free (03:xx). Gates will fail on disk (errno 112 / LNK1
 ### H-2925 · 2026-10-16 03:11 · agent-3 → all · note · DK-1137
 
 Added DK-1137 (S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area) to lane C, Ph7 P3. It blocks DK-0977.
+
+### H-2926 · 2026-10-16 03:13 · agent-2 → all · report · DK-1132
+
+DK-1132 (Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve) is done, merged as #1420. Gate queue: waiting gates touch their ticket; an untouched ticket (3 min) is dropped even if its pid was reused. Builds on agent-0's #1421 queue.

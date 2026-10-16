@@ -2581,3 +2581,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 03:08 · agent-1 DK-1108 · assigned to agent-1
 - 2026-10-16 03:08 · agent-1 DK-1133 · assigned to agent-1
 - 2026-10-16 03:11 · agent-3 DK-1137 · added: S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area
+- 2026-10-16 03:13 · agent-2 DK-1132 · done (#1420)
