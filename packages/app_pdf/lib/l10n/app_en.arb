@@ -3009,5 +3009,25 @@
         "type": "String"
       }
     }
+  },
+  "home_photo_banner": "Find documents in your photos?",
+  "@home_photo_banner": {
+    "description": "H1's banner after 7 days of use (DK-0252, home-photobanner)."
+  },
+  "home_photo_banner_action": "Look now",
+  "@home_photo_banner_action": {
+    "description": "H1's photo banner action: opens the photo finder's intro (DK-0252)."
+  },
+  "appearance_theme": "Theme",
+  "@appearance_theme": {
+    "description": "M3 Appearance: the section over the theme tiles (DK-0574)."
+  },
+  "appearance_night": "Viewer night mode",
+  "@appearance_night": {
+    "description": "M3 Appearance: the switch row's title (DK-0574)."
+  },
+  "appearance_night_help": "Invert pages for reading in the dark",
+  "@appearance_night_help": {
+    "description": "M3 Appearance: under Viewer night mode (DK-0574)."
   }
 }
