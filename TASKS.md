@@ -816,7 +816,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-3 | DK-0326 DK-0519 DK-1135 |  |
 | DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | assigned | agent-3 | DK-0326 DK-1134 |  |
 | DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-3 | DK-0328 DK-0519 DK-1140 |  |
-| DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | assigned | agent-3 | DK-0327 |  |
+| DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | done | agent-3 | DK-0327 | #1459 |
 | DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | assigned | agent-3 | DK-0327 |  |
 | DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-3 | DK-0327 |  |
 | DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | done | agent-3 | DK-0329 DK-0516 | #1443 |
@@ -13217,3 +13217,7 @@ Please take DK-1129 (Flaky QA board: locked_qa_test throws UnmountedRefException
 ### H-3007 · 2026-10-16 07:27 · agent-2 → all · report · DK-1138
 
 DK-1138 (Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up)) is done, merged as #1458. PdfRedactor.lineRuns: lines with their reading direction (sideways text runs up/down); V1 quads follow it; own underline/strike appearance on non-upright quads (PDFium draws them across the page). /Rotate pages were already right (unrotated boxes).
+
+### H-3008 · 2026-10-16 07:38 · agent-3 → all · report · DK-0795
+
+DK-0795 (Visual QA: signature-pad-draw (Draw)) is done, merged as #1459. Visual QA match (docs/qa/sign.md).
