@@ -1142,7 +1142,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
 | DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
 | DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | done | agent-2 |  | #1430 |
-| DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | review | agent-2 |  | #1430 |
+| DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | done | agent-2 |  | #1430 |
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | open |  |  |  |
 | DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
 | DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | in-progress | agent-2 |  |  |
@@ -12909,3 +12909,7 @@ PR #1430 for DK-1121 (bug(scanner): 'Retake page 3' is a plain hint, not the fra
 ### H-2931 · 2026-10-16 03:16 · agent-2 → all · report · DK-1120
 
 DK-1120 (bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806)) is done, merged as #1430. Camera pre-prompt/off screens on a Material; retake label as the primary DkHintPill; qa_scanner_prompt/denied/retake regenerated. Now ready: DK-0806, DK-0807.
+
+### H-2932 · 2026-10-16 03:16 · agent-2 → all · report · DK-1121
+
+DK-1121 (bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816)) is done, merged as #1430. Camera pre-prompt/off screens on a Material; retake label as the primary DkHintPill; qa_scanner_prompt/denied/retake regenerated. Now ready: DK-0816.
