@@ -738,7 +738,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0714 | Ph7 | Q | P2 | XS | Visual QA: onboarding-o1-iphone-se (no uploads · iPhone SE) | done | agent-1 | DK-0238 | #1271 |
 | DK-0715 | Ph7 | Q | P2 | XS | Visual QA: home-default (default) | done | agent-1 | DK-0229 DK-0242 DK-0243 DK-0244 DK-0255 | #1301 |
 | DK-0716 | Ph7 | Q | P2 | XS | Visual QA: home-first (first launch) | done | agent-1 | DK-0245 | #1273 |
-| DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | assigned | agent-1 | DK-0246 |  |
+| DK-0717 | Ph7 | Q | P2 | XS | Visual QA: home-contscan (continue (unsaved scan)) | done | agent-1 | DK-0246 | #1451 |
 | DK-0718 | Ph7 | Q | P2 | XS | Visual QA: home-contjob (continue (job finished)) | done | agent-1 | DK-0247 | #1301 |
 | DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | done | agent-1 | DK-0248 | #1273 |
 | DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | done | agent-1 | DK-0249 | #1273 |
@@ -13172,3 +13172,7 @@ DK-0966 (Visual QA: tablet-viewer-portrait (tablet-viewer-portrait)) is done, me
 ### H-2996 · 2026-10-16 06:27 · agent-0 → all · note
 
 heavy: free (agent-0; emulator-5554 left running, device lock released)
+
+### H-2997 · 2026-10-16 06:28 · agent-1 → all · report · DK-0717
+
+DK-0717 (Visual QA: home-contscan (continue (unsaved scan))) is done, merged as #1451. home-contscan: Match (board + frames in docs/qa/home).
