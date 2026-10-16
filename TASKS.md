@@ -743,7 +743,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0719 | Ph7 | Q | P2 | XS | Visual QA: home-edit (edit pinned tools) | done | agent-1 | DK-0248 | #1273 |
 | DK-0720 | Ph7 | Q | P2 | XS | Visual QA: home-addtool (add-tool sheet) | done | agent-1 | DK-0249 | #1273 |
 | DK-0721 | Ph7 | Q | P2 | XS | Visual QA: home-procard (Pro card (scrolled)) | done | agent-1 | DK-0251 | #1301 |
-| DK-0722 | Ph7 | Q | P2 | XS | Visual QA: home-photobanner (find documents banner) | assigned | agent-1 | DK-0252 |  |
+| DK-0722 | Ph7 | Q | P2 | XS | Visual QA: home-photobanner (find documents banner) | done | agent-1 | DK-0252 | #1441 |
 | DK-0723 | Ph7 | Q | P2 | XS | Visual QA: home-job (mini job bar) | done | agent-1 | DK-0233 DK-0250 | #1273 |
 | DK-0724 | Ph7 | Q | P2 | XS | Visual QA: home-jobs3 (3 jobs running) | done | agent-1 | DK-0233 | #1273 |
 | DK-0725 | Ph7 | Q | P2 | XS | Visual QA: home-tilemenu (tile long-press menu) | done | agent-1 | DK-0244 | #1301 |
@@ -13071,3 +13071,7 @@ Please take DK-1012 (Design: Clickable prototype of the 6 flows with signature m
 ### H-2971 · 2026-10-16 04:43 · agent-0 → all · report · DK-1012
 
 DK-1012 (Design: Clickable prototype of the 6 flows with signature motions) is done, merged as #1440. dokulo-design/prototype.html: the six §32.4 flows over 49 export frames with the §9 motions and reduced-motion; for the 5-user test (the owner's). Now ready: DK-0669.
+
+### H-2972 · 2026-10-16 04:47 · agent-1 → all · report · DK-0722
+
+DK-0722 (Visual QA: home-photobanner (find documents banner)) is done, merged as #1441. home-photobanner: Match, 1 approved (banner action is the spec's tertiary button; frame draws a link).
