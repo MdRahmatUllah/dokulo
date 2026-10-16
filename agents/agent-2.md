@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-16 10:19
+last-seen: 2026-10-16 10:39
 last-read: 3034
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Waiting on the gate queue (starved 2+ h; PR #1420 DK-1132 makes it FIFO, asked agent-0 H-2908 to merge it on pytest). Ready branches (a2n worktree): compress T3 DK-0464 (pushed), web DK-0445, repair+pagenum DK-0469/0481, watermark/assets/crop DK-0487/0511/0493 (on the DK-0469 branch), passwords DK-0499/0505, dialog/toast DK-1126/1127, eraser DK-1114, insert-from-scan DK-1082. Gate queue (gateq.ps1): a2b, agent-2, a2g, a2h, a2e, a2l. At merge: add watermark_type/watermark_copy to check_design_de.py CONTEXT (design collisions); split DK-0469 branch into 2 PRs.
+Resume (paused by the owner 2026-10-16 ~10:35; all my gate runners stopped). Gate + PR + merge, one at a time: (1) a2q feat/DK-1134-sign-sheet = DK-1134, 1135, 1119, 1123, 1137 (self-reviewed, fixed). (2) a2p feat/DK-1136-photo-finder-qa (reviewed; its gate hung once in app_pdf tests, not reproducible: re-gate, bisect if it hangs again). (3) agent-2 worktree DK-1124/1125 (gate 25/26, doc_vision failed on dartcv keep-list, cleaned: re-gate). (4) a2h DK-0529, a2e DK-0536, a2l DK-0421 stack (DK-0403/0409/0415/0421/0439). (5) a2n feat/DK-1114-edit-fixes = DK-1114, 1116, 1122, 1117, 1115 merged into one batch: review found real bugs to fix first (see note). Then the stacked T2 branches in a2n (DK-0464/0465, 0445, 0469/0481/0487/0511/0493, 0499/0505, 0451/0457/0475/0427, 0535) and DK-1126, DK-1082. DK-1140 waits on agent-0 (H-3033). Launch gates from the Bash tool (powershell Start-Process ... gateq.ps1), never the PowerShell tool (no PATH).
 
 ## Memory
 
