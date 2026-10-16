@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/job_providers.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
+import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/tools/tool_definition.dart';
@@ -14,8 +18,8 @@ import 'package:flutter_test/flutter_test.dart';
 import '../screens/home_screen_test.dart' show pumpHome, settle;
 
 // Visual QA (DK-0715, DK-0716, DK-0718, DK-0719, DK-0720, DK-0721, DK-0723,
-// DK-0724, DK-0725, DK-0726): the 02-home frames default, first, contjob,
-// edit, addtool, procard, job, jobs3, tilemenu and scanmenu, rendered by the
+// DK-0724, DK-0725, DK-0726, DK-0717): the 02-home frames default, first,
+// contjob, contscan, edit, addtool, procard, job, jobs3, tilemenu and scanmenu, rendered by the
 // real H1 in the shell at 393 × 852. The goldens sit next to the frames' screenshots in
 // docs/qa/home/; the findings are in docs/qa/home.md.
 
@@ -197,6 +201,26 @@ void main() {
           );
       await settle(tester);
       await shot(tester, 'contjob');
+    });
+
+    // DK-0717: 02-home/home-contscan, a scan of 6 pages left unsaved
+    // (started today 14:32), the job card not there.
+    testWidgets('home-contscan, $theme', (tester) async {
+      await recents(tester);
+      final today = DateTime.now();
+      final at = DateTime(today.year, today.month, today.day, 14, 32);
+      final store = MemoryScanStore();
+      final pages = [
+        for (var i = 0; i < 6; i++)
+          {'id': '${at.microsecondsSinceEpoch}-$i.jpg', 'path': 'p$i'},
+      ];
+      for (final p in pages) {
+        store.files[p['path']!] = Uint8List(0);
+      }
+      store.manifest = jsonEncode(pages);
+      await pumpHome(tester, db, tokens: tokens, scanStore: store);
+      await settle(tester);
+      await shot(tester, 'contscan');
     });
 
     testWidgets('home-procard (scrolled), $theme', (tester) async {
