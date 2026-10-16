@@ -2571,3 +2571,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 02:35 · agent-2 DK-1114 · assigned to agent-2
 - 2026-10-16 02:39 · agent-3 DK-0944 · done (#1422)
 - 2026-10-16 02:39 · agent-3 DK-1133 · added: bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948)
+- 2026-10-16 02:40 · agent-3 DK-1134 · added: bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793)
