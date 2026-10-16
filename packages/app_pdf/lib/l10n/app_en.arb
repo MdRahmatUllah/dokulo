@@ -2973,5 +2973,41 @@
   "img2pdf_images": "{n, plural, =1{1 image} other{{n} images}}",
   "@img2pdf_images": {"description": "Image to PDF's T3: 'From 12 images' (DK-0434). Goes into t3_from: German needs the dative (Bildern).", "placeholders": {"n": {"type": "int"}}},
   "img2pdf_not_images": "{n, plural, =1{1 file isn't an image and was skipped.} other{{n} files aren't images and were skipped.}}",
-  "@img2pdf_not_images": {"description": "Image to PDF's T2 after a pick with non-images (DK-0435; UI spec \u00a721.7).", "placeholders": {"n": {"type": "int"}}}
+  "@img2pdf_not_images": {"description": "Image to PDF's T2 after a pick with non-images (DK-0435; UI spec \u00a721.7).", "placeholders": {"n": {"type": "int"}}},
+  "home_scan_unsaved": "{n, plural, =1{Scan of 1 page not saved} other{Scan of {n} pages not saved}}",
+  "@home_scan_unsaved": {
+    "description": "H1 continue card, an unsaved scan (DK-0246, home-contscan).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "home_scan_started_today": "Started today {time}",
+  "@home_scan_started_today": {
+    "description": "H1 continue card's line: the scan's first page, today (time from DateFormat.Hm).",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "home_scan_started_yesterday": "Started yesterday {time}",
+  "@home_scan_started_yesterday": {
+    "description": "H1 continue card's line: the scan began yesterday.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "home_scan_started_on": "Started {date}",
+  "@home_scan_started_on": {
+    "description": "H1 continue card's line: the scan began before yesterday (date from formatDate).",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  }
 }
