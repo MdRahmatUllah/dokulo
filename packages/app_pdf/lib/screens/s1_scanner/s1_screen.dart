@@ -390,6 +390,73 @@ class _S1ScreenState extends ConsumerState<S1Screen>
           Positioned.fill(
             child: OrientationBuilder(
               builder: (context, orientation) {
+                if (orientation == Orientation.landscape &&
+                    MediaQuery.sizeOf(context).shortestSide >= 600) {
+                  // Tablet landscape (DK-0652, tablet-scanner-landscape):
+                  // a 160 dp rail on the right with the stack, the shutter
+                  // and Import; the top bar runs up to it; the modes stand
+                  // beside it, centred.
+                  // ponytail: the preview keeps the camera's ratio (the
+                  // frame fills the screen); filling would need the quad
+                  // guide mapped through the crop.
+                  const rail = 160.0;
+                  return Stack(
+                    children: [
+                      Positioned.fill(right: rail, child: preview),
+                      guide,
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        right: rail,
+                        child: Container(
+                          color: c.cameraChrome,
+                          child: SafeArea(
+                            bottom: false,
+                            right: false,
+                            child: top,
+                          ),
+                        ),
+                      ),
+                      if (!guided)
+                        Positioned(
+                          top: 80,
+                          left: 0,
+                          right: rail,
+                          child: Center(child: hint),
+                        ),
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        right: rail + 12,
+                        child: Center(
+                          child: _ModeSwitcher(
+                            mode: mode,
+                            onMode: (m) =>
+                                ref.read(scanModeStateProvider.notifier).set(m),
+                            axis: Axis.vertical,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        bottom: 0,
+                        right: 0,
+                        width: rail,
+                        child: Container(
+                          color: c.cameraChrome,
+                          child: SafeArea(
+                            left: false,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              spacing: 40,
+                              children: [stack, shutter, importButton],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
                 if (orientation == Orientation.landscape) {
                   // Phone landscape: the controls along the right edge.
                   return Row(
