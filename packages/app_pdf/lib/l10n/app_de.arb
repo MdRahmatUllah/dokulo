@@ -809,5 +809,8 @@
   "home_scan_started_yesterday": "Gestern {time} begonnen",
   "home_scan_started_on": "{date} begonnen",
   "home_photo_banner": "Dokumente in deinen Fotos finden?",
-  "home_photo_banner_action": "Jetzt suchen"
+  "home_photo_banner_action": "Jetzt suchen",
+  "appearance_theme": "Design",
+  "appearance_night": "Nachtmodus im Viewer",
+  "appearance_night_help": "Seiten zum Lesen im Dunkeln invertieren"
 }
