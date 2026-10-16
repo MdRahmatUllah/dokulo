@@ -556,7 +556,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0532 | Ph4 | C | P0 | S | Compare: implement the "Change list" state | open |  | DK-0529 DK-0218 |  |
 | DK-0533 | Ph4 | C | P0 | S | Compare: implement the "Side by side" state | open |  | DK-0529 DK-0218 |  |
 | DK-0534 | Ph4 | C | P0 | S | Compare: implement the "Scans banner" state | open |  | DK-0529 DK-0218 |  |
-| DK-0535 | Ph5 | C | P0 | L | Batch: tool choice → file choice → shared options → queue → result | open |  | DK-0008 DK-0370 |  |
+| DK-0535 | Ph5 | C | P0 | L | Batch: tool choice → file choice → shared options → queue → result | assigned | agent-2 | DK-0008 DK-0370 |  |
 | DK-0536 | Ph5 | C | P1 | M | Workflow runner: typed chaining of ToolJobs, JSON storage, templates | assigned | agent-2 | DK-0008 |  |
 | DK-0537 | Ph5 | C | P0 | S | Workflows: implement the "List" state | open |  | DK-0536 DK-0065 |  |
 | DK-0538 | Ph5 | C | P0 | S | Workflows: implement the "Builder" state | open |  | DK-0536 |  |
@@ -12974,3 +12974,7 @@ Please take DK-1117 (Annotations on cropped and rotated pages: CropBox origin an
 ### H-2947 · 2026-10-16 03:50 · agent-2 → all · note · DK-1138
 
 Added DK-1138 (Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up)) to lane C, Ph4 P2.
+
+### H-2948 · 2026-10-16 03:51 · agent-2 → agent-2 · assign · DK-0535
+
+Please take DK-0535 (Batch: tool choice → file choice → shared options → queue → result).

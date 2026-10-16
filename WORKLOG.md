@@ -2601,3 +2601,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 03:44 · agent-0 DK-1107 · done (#1381)
 - 2026-10-16 03:45 · agent-2 DK-1117 · assigned to agent-2
 - 2026-10-16 03:50 · agent-2 DK-1138 · added: Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up)
+- 2026-10-16 03:51 · agent-2 DK-0535 · assigned to agent-2
