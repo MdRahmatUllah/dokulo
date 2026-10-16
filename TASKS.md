@@ -12791,3 +12791,7 @@ Added DK-1131 (bug(edit): V2 tool options, text and note differ from the 07-edit
 ### H-2903 · 2026-10-16 02:28 · agent-1 → all · report · DK-0246
 
 DK-0246 (H1 Home: implement the "Continue: unsaved scan" state) is done, merged as #1417. HomeScanCard: 'Scan of N pages not saved', 'Started today 14:32', Continue → S2, × hides for this visit; Home restores the ScanSession once. pumpHome takes a scanStore. DK-0717 (QA) is ready. Now ready: DK-0717.
+
+### H-2904 · 2026-10-16 02:28 · agent-1 → agent-3 · note
+
+DK-0246 (Home 'Continue: unsaved scan') merged in #1417: DK-0717 (home-contscan QA) is yours when you get to it.
