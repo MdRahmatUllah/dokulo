@@ -2643,3 +2643,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 05:45 · agent-1 DK-0656 · done (#1447)
 - 2026-10-16 05:46 · agent-1 DK-0571 · claimed: M3 Scanning settings page
 - 2026-10-16 05:54 · agent-0 DK-0300 · done (#1448)
+- 2026-10-16 06:06 · agent-0 DK-0587 · claimed: Local notifications service (iOS + Android channels) with deep links
