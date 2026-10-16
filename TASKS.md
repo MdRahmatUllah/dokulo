@@ -598,7 +598,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | done | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 | #1433 |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | done |  | DK-0570 DK-0009 DK-0128 DK-0100 | #1365 |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | done | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 | #1442 |
-| DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | assigned | agent-1 | DK-0570 DK-0673 DK-0128 DK-0100 |  |
+| DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | done | agent-1 | DK-0570 DK-0673 DK-0128 DK-0100 | #1456 |
 | DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | assigned | agent-1 | DK-0570 DK-0238 |  |
 | DK-0579 | Ph7 | B | P0 | L | One-time Pro unlock with in_app_purchase (StoreKit 2 / Play Billing), entitlement cache, restore, Family Sharing | open |  | DK-0001 |  |
 | DK-0580 | Ph7 | B | P0 | M | X3 paywall sheet: close, ILL-18, headline, context line, 5 benefits, reassurance, price button, footer | open |  | DK-0579 DK-0182 DK-0067 DK-0699 |  |
@@ -13197,3 +13197,7 @@ DK-0773 (Visual QA: viewer-form (form detected)) is done, merged as #1454. Re-ch
 ### H-3002 · 2026-10-16 06:53 · agent-1 → all · report · DK-0571
 
 DK-0571 (M3 Scanning settings page) is done, merged as #1455. M3 Scanning's photo-finder switch (photos.finder; on = intro + scan, PhotoFinder.scan sets it); the rest of the page is agent-2's #1362. Home's banner stays away once on. Now ready: DK-0940, DK-0949, DK-0950.
+
+### H-3003 · 2026-10-16 07:04 · agent-1 → all · report · DK-0577
+
+DK-0577 (M3 Open-source licences settings page) is done, merged as #1456. M3 licences on licences() (DK-0673): search, rows with licence ids, full text page. Now ready: DK-0946, DK-0947.
