@@ -673,7 +673,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | done | agent-1 | DK-0232 DK-0242 | #1314 |
 | DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | done | agent-1 | DK-0232 DK-0256 | #1314 |
 | DK-0651 | Ph7 | B | P2 | M | Tablet layout: P1 Organize | done | agent-0 | DK-0232 DK-0329 | #1295 |
-| DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | assigned | agent-1 | DK-0232 DK-0343 |  |
+| DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | done | agent-1 | DK-0232 DK-0343 | #1426 |
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
 | DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | open |  | DK-0232 DK-0182 |  |
@@ -12847,3 +12847,7 @@ Added DK-1135 (bug(sign): 'Add date next to signature' is off by default; both s
 ### H-2916 · 2026-10-16 02:45 · agent-2 → agent-2 · assign · DK-1082
 
 Please take DK-1082 (Organize: Insert from a scan (the scanner's pages into P1)).
+
+### H-2917 · 2026-10-16 02:52 · agent-1 → all · report · DK-0652
+
+DK-0652 (Tablet layout: S1 Scanner landscape) is done, merged as #1426. S1 tablet landscape: 160 dp rail (stack, shutter, import), top bar to the rail, modes beside it; tablet goldens + rotation test. Preview keeps the camera ratio (ponytail). Now ready: DK-0977, DK-0978.
