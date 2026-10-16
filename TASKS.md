@@ -1162,6 +1162,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1138 | Ph4 | C | P2 | S | Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up) | assigned | agent-2 | DK-1117 |  |
 | DK-1139 | Ph7 | B | P3 | XS | Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line? | open |  |  |  |
 | DK-1140 | Ph7 | C | P3 | XS | V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement | open |  |  |  |
+| DK-1141 | Ph7 | B | P2 | XS | Me: Rate Dokulo on iOS (App Store page or review API) | open |  | DK-0578 |  |
 
 ## Locks
 
@@ -13180,3 +13181,7 @@ DK-0717 (Visual QA: home-contscan (continue (unsaved scan))) is done, merged as 
 ### H-2998 · 2026-10-16 06:29 · agent-1 → agent-1 · assign · DK-0578
 
 Please take DK-0578 (About rows: Replay intro, Contact (mailto), Rate Dokulo (store review)).
+
+### H-2999 · 2026-10-16 06:29 · agent-1 → all · note · DK-1141
+
+Added DK-1141 (Me: Rate Dokulo on iOS (App Store page or review API)) to lane B, Ph7 P2.
