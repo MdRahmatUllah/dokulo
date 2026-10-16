@@ -2,8 +2,12 @@ import 'dart:io';
 
 import 'package:ai_core/ai_core.dart';
 import 'package:doc_core/doc_core.dart';
+import 'package:doc_vision/doc_vision.dart';
+import 'package:flutter/services.dart'
+    show BackgroundIsolateBinaryMessenger, RootIsolateToken;
 
 import '../tool_job.dart';
+import 'ocr_job.dart';
 import 'output_name.dart';
 
 /// Rotate PDF's input (T2, UI spec §21.5).
@@ -14,6 +18,7 @@ class RotateInput {
     required this.outputDir,
     required this.suffix,
     this.password,
+    this.detect = false,
   });
 
   factory RotateInput.fromJson(Map<String, Object?> json) => RotateInput(
@@ -24,6 +29,7 @@ class RotateInput {
     },
     outputDir: json['outputDir']! as String,
     suffix: json['suffix']! as String,
+    detect: json['detect'] as bool? ?? false,
   );
 
   final String file;
@@ -37,9 +43,15 @@ class RotateInput {
   final String suffix;
   final String? password;
 
+  /// T2's look before the user turns anything (DK-1102): write nothing, and
+  /// answer the pages that look sideways or upside down as the result's
+  /// facts, `sideways: {page: quarter turns clockwise that fix it}`.
+  final bool detect;
+
   Map<String, Object?> toJson() => {
     'file': file,
     'turns': {for (final e in turns.entries) '${e.key}': e.value},
+    if (detect) 'detect': true,
     'outputDir': outputDir,
     'suffix': suffix,
     // No password: see CompressInput.
@@ -50,7 +62,8 @@ class RotateInput {
 /// /Rotate, so nothing is re-rendered), as a new PDF (`<name><suffix>.pdf`)
 /// through [PdfEngine.assemble]. The input is never touched.
 ///
-/// ponytail: no sideways detection yet ("3 pages look sideways"); DK-1102.
+/// With [RotateInput.detect] it only looks: which pages are sideways
+/// (DK-1102).
 class RotateJob extends ToolJob<RotateInput> {
   const RotateJob();
 
@@ -89,6 +102,7 @@ class RotateJob extends ToolJob<RotateInput> {
       input.file,
       password: input.password,
     )).pageCount;
+    if (input.detect) return _detect(input, count, context);
     if (input.turns.keys.any((p) => p < 0 || p >= count)) {
       throw ArgumentError('pages ${input.turns.keys} of $count');
     }
@@ -114,5 +128,82 @@ class RotateJob extends ToolJob<RotateInput> {
       rethrow;
     }
     return OneFile(output);
+  }
+
+  /// A page with text: its characters' angle (PDFium). A scan: PP-OCR's
+  /// line detector and classifier on a 150 dpi render, on an ONNX worker.
+  static Future<JobOutput> _detect(
+    RotateInput input,
+    int count,
+    ToolJobContext context,
+  ) async {
+    final sideways = <String, int>{};
+    final scans = <({int page, String path, int width, int height})>[];
+    for (var p = 0; p < count; p++) {
+      await context.checkCancelled();
+      context.report(JobProgress('reading', pageIndex: p, pageCount: count));
+      final turns = await PdfEngine.textTurns(
+        input.file,
+        p,
+        password: input.password,
+      );
+      if (turns != null) {
+        if (turns != 0) sideways['$p'] = turns;
+        continue;
+      }
+      final shot = await PdfEngine.render(
+        input.file,
+        p,
+        dpi: 150,
+        password: input.password,
+      );
+      final path = '${context.tempDir.path}/turn_$p.bgra';
+      await File(path).writeAsBytes(shot.bgra);
+      scans.add((page: p, path: path, width: shot.width, height: shot.height));
+    }
+    if (scans.isNotEmpty) {
+      final pool = IsolatePool(tempRoot: context.tempDir);
+      final found = await pool.run(Lane.onnx, _orient, (
+        pages: scans,
+        assets: await OcrJob.assets(),
+        token: RootIsolateToken.instance,
+        engine: OcrJob.engine,
+      )).result;
+      for (final MapEntry(key: p, value: turns) in found.entries) {
+        if (turns != 0) sideways['$p'] = turns;
+      }
+    }
+    return OneFile(input.file, facts: {'sideways': sideways});
+  }
+}
+
+/// On an ONNX worker: each scanned page's orientation.
+Future<Map<int, int>> _orient(
+  ({
+    List<({int page, String path, int width, int height})> pages,
+    OcrAssets? assets,
+    RootIsolateToken? token,
+    Future<OcrEngine> Function(OcrAssets?) engine,
+  })
+  job,
+  JobContext context,
+) async {
+  if (job.token case final token?) {
+    BackgroundIsolateBinaryMessenger.ensureInitialized(token);
+  }
+  final engine = await job.engine(job.assets);
+  try {
+    return {
+      for (final page in job.pages)
+        page.page: ?await engine.orientation(
+          Raster.fromBgra(
+            page.width,
+            page.height,
+            File(page.path).readAsBytesSync(),
+          ),
+        ),
+    };
+  } finally {
+    await engine.close();
   }
 }
