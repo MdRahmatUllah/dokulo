@@ -223,6 +223,40 @@ void main() {
     expect(rect.center.dx, closeTo(512, 1));
   });
 
+  // DK-0655: the two tablet frames (24-tablet), and a turn keeps the sheet
+  // open with what was typed in it.
+  testWidgets('tablets 820 × 1180 and 1366 × 1024: a centred dialog; a turn '
+      'keeps it and its state', (tester) async {
+    phone(tester, const Size(820, 1180));
+    final field = TextEditingController();
+    addTearDown(field.dispose);
+    await tester.pumpWidget(
+      app(
+        opener(
+          (c) => showDkSheet<void>(
+            c,
+            title: 'Rename',
+            body: TextField(controller: field),
+          ),
+        ),
+      ),
+    );
+    await tester.tap(find.text('open'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Mietvertrag');
+    var rect = tester.getRect(find.byType(DkSheet));
+    expect(tester.widget<DkSheet>(find.byType(DkSheet)).inDialog, isTrue);
+    expect(rect.width, lessThanOrEqualTo(560));
+    expect(rect.center.dx, closeTo(410, 1));
+    tester.view.physicalSize = const Size(1366, 1024);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    rect = tester.getRect(find.byType(DkSheet));
+    expect(rect.width, lessThanOrEqualTo(560));
+    expect(rect.center.dx, closeTo(683, 1));
+    expect(find.text('Mietvertrag'), findsOneWidget);
+  });
+
   testWidgets('large with a confirmation opens (no snap sizes outside '
       'min..max) and stays put', (tester) async {
     phone(tester);
