@@ -514,7 +514,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0490 | Ph3 | B | P1 | XS | Add watermark: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0491 | Ph3 | C | P1 | S | Add watermark: golden-PDF and widget tests | open |  | DK-0486 DK-0658 |  |
 | DK-0492 | Ph3 | A | P0 | M | Crop pages: implement the crop ToolJob (engine) | done | agent-0 | DK-0390 DK-0008 | #1376 |
-| DK-0493 | Ph3 | C | P0 | M | Crop pages: T2 options UI | open |  | DK-0370 DK-0492 DK-0156 DK-0158 |  |
+| DK-0493 | Ph3 | C | P0 | M | Crop pages: T2 options UI | assigned | agent-2 | DK-0370 DK-0492 DK-0156 DK-0158 |  |
 | DK-0494 | Ph3 | C | P0 | S | Crop pages: T3 result card, naming and Next chips | open |  | DK-0379 DK-0493 |  |
 | DK-0495 | Ph3 | C | P1 | S | Crop pages: errors and edge states | open |  | DK-0493 DK-0609 DK-0020 |  |
 | DK-0496 | Ph3 | B | P1 | XS | Crop pages: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12734,3 +12734,7 @@ DK-0516 (Organize pages tool entry: opens P1 directly (toast instead of T3)) is 
 ### H-2889 · 2026-10-16 02:02 · agent-2 → agent-2 · assign · DK-0487
 
 Please take DK-0487 (Add watermark: T2 options UI).
+
+### H-2890 · 2026-10-16 02:02 · agent-2 → agent-2 · assign · DK-0493
+
+Please take DK-0493 (Crop pages: T2 options UI).
