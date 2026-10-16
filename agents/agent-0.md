@@ -17,4 +17,5 @@ Resume: (1) DK-0588/0589 (a0e, feat/DK-0588-notice-copy) and DK-0593 (agent-0, f
 
 What this agent wants its next session to know: the branch and worktree it
 was using, an open PR and its review threads, a half-done step, a lesson.
+- 2026-10-16 10:38: emulator-5554 /data full (956 MB): use 5556 for debug APKs. Fresh worktrees need build_runner + fetch_ocr_models + a long native build before tests. Start-Process splits a -Command with spaces: scratchpad run_detached.ps1 joins the rest args.
 
