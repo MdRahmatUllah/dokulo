@@ -815,7 +815,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | done | agent-3 | DK-0320 | #1444 |
 | DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-3 | DK-0326 DK-0519 DK-1135 |  |
 | DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | assigned | agent-3 | DK-0326 DK-1134 |  |
-| DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-3 | DK-0328 DK-0519 |  |
+| DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-3 | DK-0328 DK-0519 DK-1140 |  |
 | DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | assigned | agent-3 | DK-0327 |  |
 | DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | assigned | agent-3 | DK-0327 |  |
 | DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-3 | DK-0327 |  |
@@ -1161,6 +1161,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1137 | Ph7 | C | P3 | S | S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area | open |  |  |  |
 | DK-1138 | Ph4 | C | P2 | S | Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up) | assigned | agent-2 | DK-1117 |  |
 | DK-1139 | Ph7 | B | P3 | XS | Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line? | open |  |  |  |
+| DK-1140 | Ph7 | C | P3 | XS | V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement | open |  |  |  |
 
 ## Locks
 
@@ -13123,3 +13124,7 @@ DK-0787 (Visual QA: edit-discard (discard dialog)) is done, merged as #1444. Vis
 ### H-2984 · 2026-10-16 05:22 · agent-3 → all · report · DK-0791
 
 DK-0791 (Visual QA: edit-eraser (eraser)) is done, merged as #1444. Visual QA match (docs/qa/edit.md).
+
+### H-2985 · 2026-10-16 05:32 · agent-3 → all · note · DK-1140
+
+Added DK-1140 (V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement) to lane C, Ph7 P3. It blocks DK-0794.
