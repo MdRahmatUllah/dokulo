@@ -845,7 +845,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0821 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-review (S2 – default) | done | agent-3 | DK-0352 DK-0356 | #1403 |
 | DK-0822 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-crop (S2 – crop + magnifier) | done | agent-3 | DK-0353 | #1403 |
 | DK-0823 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-filter (S2 – filter strip) | assigned | agent-3 | DK-0339 DK-0354 DK-1125 |  |
-| DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | assigned | agent-3 | DK-0355 |  |
+| DK-0824 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-applyall (S2 – apply-to-all chip) | done | agent-3 | DK-0355 | #1416 |
 | DK-0825 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-deleted (S2 – page deleted toast) | assigned | agent-3 | DK-0357 DK-1127 |  |
 | DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-3 | DK-0358 DK-1127 |  |
 | DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-3 | DK-0359 DK-1125 |  |
@@ -12770,3 +12770,7 @@ Please take DK-1127 (bug(scanner): S2's 'Page deleted · Undo' toast covers the 
 ### H-2898 · 2026-10-16 02:22 · agent-3 → all · report · DK-0776
 
 DK-0776 (Visual QA: viewer-menu (overflow menu)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
+
+### H-2899 · 2026-10-16 02:22 · agent-3 → all · report · DK-0824
+
+DK-0824 (Visual QA: scanner-review-applyall (S2 – apply-to-all chip)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
