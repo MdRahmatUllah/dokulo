@@ -110,7 +110,14 @@ void main() {
         addTearDown(tester.view.reset);
         addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
         final root = Directory.systemTemp.createTempSync('dk_de_');
-        addTearDown(() => root.deleteSync(recursive: true));
+        addTearDown(() {
+          // PDFium may still hold the sample open (Windows): leave it.
+          try {
+            root.deleteSync(recursive: true);
+          } on FileSystemException {
+            // ignore
+          }
+        });
         final db = DokuloDatabase.memory();
         addTearDown(db.close);
         final store = FileStore(
