@@ -688,7 +688,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0664 | Ph7 | B | P0 | S | Test suite: Privacy network check | done | agent-1 | DK-0010 DK-0012 DK-0008 | #603 |
 | DK-0665 | Ph7 | B | P0 | L | Test suite: Integration tests for prototype flows | open |  | DK-0010 DK-0238 DK-0352 DK-0359 DK-0463 DK-0387 DK-0235 DK-0499 DK-0403 DK-0375 DK-0587 DK-0379 DK-0293 DK-0559 DK-0550 DK-0580 DK-0374 DK-0260 DK-0282 DK-0222 DK-0233 DK-0524 |  |
 | DK-0666 | Ph7 | B | P0 | L | Test suite: Widget golden suite | open |  | DK-0010 DK-0047 DK-0009 |  |
-| DK-0667 | Ph7 | B | P0 | M | Test suite: Large file robustness | assigned | agent-1 | DK-0010 DK-0668 DK-0658 |  |
+| DK-0667 | Ph7 | B | P0 | M | Test suite: Large file robustness | done | agent-1 | DK-0010 DK-0668 DK-0658 | #1355 |
 | DK-0668 | Ph1 | Q | P0 | S | Device lab: low-end Android (3 GB), mid Android (6–8 GB), older iPhone (11), recent iPhone; tablets | done | agent-0 |  | #1160 |
 | DK-0669 | Ph1 | B | P1 | M | Usability test of Home, Scanner and the tool shell with 5 users before building further | open |  | DK-1012 |  |
 | DK-0670 | Ph7 | Q | P0 | M | Release regression checklist per phase build | done | agent-3 | DK-0668 DK-0015 | #1348 |
@@ -13382,3 +13382,7 @@ Please take DK-1119 (bug(tool-shell): T2's 'More options' row is drawn in primar
 ### H-3048 · 2026-10-16 10:01 · agent-1 → agent-1 · assign · DK-0667
 
 Please take DK-0667 (Test suite: Large file robustness).
+
+### H-3049 · 2026-10-16 10:01 · agent-1 → all · report · DK-0667
+
+DK-0667 (Test suite: Large file robustness) is done, merged as #1355. Host part delivered by the golden corpus (#1355): long-300-pages.pdf is a base, so every ToolJob runs on 300 pages in each gate; DK_CORPUS=full per release (checklist step 3). The 3 GB phone run: https://github.com/MdRahmatUllah/dokulo/issues/1465 (Real-device checks).
