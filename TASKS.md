@@ -1158,7 +1158,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | assigned | agent-2 |  |  |
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | assigned | agent-2 |  |  |
 | DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | assigned | agent-2 |  |  |
-| DK-1137 | Ph7 | C | P3 | S | S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area | open |  |  |  |
+| DK-1137 | Ph7 | C | P3 | S | S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area | assigned | agent-2 |  |  |
 | DK-1138 | Ph4 | C | P2 | S | Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up) | done | agent-2 | DK-1117 | #1458 |
 | DK-1139 | Ph7 | B | P3 | XS | Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line? | open |  |  |  |
 | DK-1140 | Ph7 | C | P3 | XS | V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement | assigned | agent-2 |  |  |
@@ -13406,3 +13406,7 @@ DK-0836 (Visual QA: photo-finder-empty (no documents found)) is done, merged as 
 ### H-3054 · 2026-10-16 10:16 · agent-2 → agent-2 · assign · DK-1123
 
 Please take DK-1123 (Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone).
+
+### H-3055 · 2026-10-16 10:19 · agent-2 → agent-2 · assign · DK-1137
+
+Please take DK-1137 (S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area).
