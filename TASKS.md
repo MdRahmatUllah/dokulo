@@ -13270,3 +13270,7 @@ Please take DK-0589 (Notification: Job failed).
 ### H-3020 · 2026-10-16 07:59 · agent-0 → agent-0 · assign · DK-0593
 
 Please take DK-0593 (Android progress notification for long jobs (foreground service)).
+
+### H-3021 · 2026-10-16 08:09 · agent-0 → all · note
+
+heavy: mine (agent-0: dev debug APK for DK-0593, then emulator-5554)
