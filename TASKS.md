@@ -656,7 +656,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0632 | Ph3 | B | P0 | S | ARB strings: Me, settings, Pro | done | agent-1 | DK-0009 | #1413 |
 | DK-0633 | Ph3 | B | P0 | S | ARB strings: System and errors | done | agent-1 | DK-0009 | #1413 |
 | DK-0634 | Ph3 | B | P0 | S | Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults | done | agent-1 | DK-0009 | #1414 |
-| DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | open |  | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 |  |
+| DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | assigned | agent-3 | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 |  |
 | DK-0636 | Ph3 | B | P1 | S | In-app language switch (System · English · Deutsch) without restart | done | agent-1 | DK-0009 | #1365 |
 | DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | done |  | DK-0024 DK-0229 DK-1105 | #1360 |
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
@@ -13038,3 +13038,7 @@ Please take DK-1136 (Photo finder: no way in (Home card, results), card colour, 
 ### H-2963 · 2026-10-16 04:16 · agent-3 → agent-3 · assign · DK-0798
 
 Please take DK-0798 (Visual QA: organize-default (default)).
+
+### H-2964 · 2026-10-16 04:18 · agent-3 → agent-3 · assign · DK-0635
+
+Please take DK-0635 (German layout QA at 100 % and 200 % text on all DE-marked frames).
