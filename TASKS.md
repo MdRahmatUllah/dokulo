@@ -1133,7 +1133,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1109 | Ph5 | A | P1 | S | bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) | done | agent-0 |  | #1411 |
 | DK-1110 | Ph7 | A | P2 | S | bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670) | open |  |  |  |
 | DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | done | agent-0 |  | #1437 |
-| DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | assigned | agent-1 |  |  |
+| DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | review | agent-1 |  | #1470 |
 | DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
 | DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | assigned | agent-2 |  |  |
 | DK-1115 | Ph4 | C | P1 | M | V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up) | assigned | agent-2 |  |  |
@@ -13438,3 +13438,7 @@ PR #1470 for DK-0592 (Notification: Photo finder done) is up. Review it on GitHu
 ### H-3062 · 2026-10-16 10:30 · agent-1 → agent-1 · assign · DK-1112
 
 Please take DK-1112 (Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up)).
+
+### H-3063 · 2026-10-16 10:30 · agent-1 → all · review-request · DK-1112
+
+PR #1470 for DK-1112 (Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
