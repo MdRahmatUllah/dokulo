@@ -592,7 +592,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0568 | Ph6 | A | P0 | M | M2 AI models: storage summary, grouped model cards, model detail sheet | open |  | DK-0545 DK-0094 |  |
 | DK-0569 | Ph6 | A | P1 | S | AI guardrails and review checklist | open |  | DK-0549 DK-0550 |  |
 | DK-0570 | Ph1 | B | P0 | M | M1 Me: Pro card, Your things, Settings, About, footer | done | agent-1 | DK-0229 DK-0100 DK-0098 | #1263 |
-| DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | in-progress | agent-1 | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 |  |
+| DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | done | agent-1 | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 | #1455 |
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | done |  | DK-0570 DK-0260 DK-0128 DK-0100 | #1288 |
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
 | DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | done | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 | #1433 |
@@ -13193,3 +13193,7 @@ DK-0763 (Visual QA: viewer-default (default)) is done, merged as #1454. Re-check
 ### H-3001 · 2026-10-16 06:44 · agent-3 → all · report · DK-0773
 
 DK-0773 (Visual QA: viewer-form (form detected)) is done, merged as #1454. Re-checked after #1437 (DK-1111): match.
+
+### H-3002 · 2026-10-16 06:53 · agent-1 → all · report · DK-0571
+
+DK-0571 (M3 Scanning settings page) is done, merged as #1455. M3 Scanning's photo-finder switch (photos.finder; on = intro + scan, PhotoFinder.scan sets it); the rest of the page is agent-2's #1362. Home's banner stays away once on. Now ready: DK-0940, DK-0949, DK-0950.
