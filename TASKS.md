@@ -1141,7 +1141,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | open |  |  |  |
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
 | DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
-| DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | open |  |  |  |
+| DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | assigned | agent-2 |  |  |
 | DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | open |  |  |  |
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | open |  |  |  |
 | DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
@@ -12889,3 +12889,7 @@ Added DK-1137 (S1 tablet landscape: the preview is a 3:4 portrait column with bl
 ### H-2926 · 2026-10-16 03:13 · agent-2 → all · report · DK-1132
 
 DK-1132 (Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve) is done, merged as #1420. Gate queue: waiting gates touch their ticket; an untouched ticket (3 min) is dropped even if its pid was reused. Builds on agent-0's #1421 queue.
+
+### H-2927 · 2026-10-16 03:15 · agent-2 → agent-2 · assign · DK-1120
+
+Please take DK-1120 (bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806)).
