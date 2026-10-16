@@ -15,6 +15,7 @@ spec's tables.
 | DK-0716 | `02-home/home-first` | Match |
 | DK-0717 | `02-home/home-contscan` | Match |
 | DK-0718 | `02-home/home-contjob` | Match, 2 approved |
+| DK-0722 | `02-home/home-photobanner` | Match, 1 approved |
 | DK-0719 | `02-home/home-edit` | 1 fixed, 1 approved |
 | DK-0720 | `02-home/home-addtool` | 1 fixed, 1 approved |
 | DK-0721 | `02-home/home-procard` | Match |
@@ -74,4 +75,21 @@ Match: the card 16 below the privacy line, above Your tools; the scan icon,
 (the board's taller card is the test font's block glyphs, as there). Copy EN
 and DE as the frame ("Scan mit 6 Seiten nicht gespeichert", "Heute 14:32
 begonnen", "Fortfahren"), checked by the design-German gate step.
+
+## Find documents banner (DK-0722)
+
+Board: `home-photobanner` in `test/qa/home_qa_test.dart` (Home on the 8th day
+of use: `app.firstUse` a week back); frames:
+[home/home-photobanner-light.png](home/home-photobanner-light.png),
+[dark](home/home-photobanner-dark.png), [deutsch](home/home-photobanner-deutsch.png).
+Match: the info banner 16 below the privacy line, above Your tools, the
+photo-library icon, "Find documents in your photos?" and the × in the
+corner; copy EN/DE as the frame ("Dokumente in deinen Fotos finden?",
+"Jetzt suchen"), checked by the design-German gate step.
+
+Approved: "Look now" is DkBanner's tertiary compact button in
+`color.primary`, as the UI spec's DkBanner row (§11.7: "optional action
+(tertiary compact)") and every other banner; the frame's `.ban .act` draws an
+underlined link in the banner's ink. The spec wins; a change would be one
+component for every banner.
 

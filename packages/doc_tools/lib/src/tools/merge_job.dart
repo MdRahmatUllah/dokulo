@@ -15,6 +15,7 @@ class MergeInput {
     required this.suffix,
     this.ranges = const {},
     this.passwords = const {},
+    this.keepBookmarks = true,
   });
 
   factory MergeInput.fromJson(Map<String, Object?> json) => MergeInput(
@@ -26,6 +27,7 @@ class MergeInput {
           in (json['ranges'] as Map? ?? const {}).entries)
         int.parse('$key'): value as String,
     },
+    keepBookmarks: json['keepBookmarks'] as bool? ?? true,
   );
 
   /// 2 to 500 files: PDFs and images (JPG, PNG, WebP; HEIC arrives as JPEG,
@@ -42,6 +44,10 @@ class MergeInput {
   /// (1-based, `z` the last page); a card without one gives all its pages.
   final Map<int, String> ranges;
 
+  /// Keep bookmarks (T2, on): each file's outline, moved to its pages in
+  /// the merged file.
+  final bool keepBookmarks;
+
   /// The passwords of locked PDFs, by path; never stored (see [toJson]).
   final Map<String, String> passwords;
 
@@ -51,6 +57,7 @@ class MergeInput {
     'suffix': suffix,
     if (ranges.isNotEmpty)
       'ranges': {for (final e in ranges.entries) '${e.key}': e.value},
+    if (!keepBookmarks) 'keepBookmarks': false,
     // No passwords: they would sit in the jobs table in plain text. A
     // resumed job on a locked file fails as `locked`, and T2 asks again.
   };
@@ -61,9 +68,8 @@ class MergeInput {
 /// (`<name><suffix>.pdf`). Images become a page each first
 /// ([ImagesPdfWriter]); qpdf joins everything on its worker, keeping links,
 /// annotations and form fields. The inputs are never touched.
-///
-/// ponytail: bookmarks are not carried over (qpdf's page selection drops
-/// the outlines); DK-1101 rebuilds them from [PdfEngine.outline].
+/// With Keep bookmarks each PDF's outline comes along, moved to where its
+/// pages landed ([PdfOutline], DK-1101).
 class MergeJob extends ToolJob<MergeInput> {
   const MergeJob();
 
@@ -122,6 +128,10 @@ class MergeJob extends ToolJob<MergeInput> {
     );
     try {
       final parts = <Map<String, Object?>>[];
+      // Each part's outline and the pages it gave (Keep bookmarks); null
+      // once a range is one PdfOutline can't follow.
+      List<({List<OutlineEntry> outline, List<int> pages})>? sources =
+          input.keepBookmarks ? [] : null;
       for (final (i, file) in files.indexed) {
         await context.checkCancelled();
         context.report(
@@ -130,7 +140,25 @@ class MergeJob extends ToolJob<MergeInput> {
         if (_isPdf(file)) {
           final password = input.passwords[file];
           // Opens it: a locked or damaged file fails here, with its card.
-          await PdfEngine.inspect(file, password: password);
+          final count = (await PdfEngine.inspect(
+            file,
+            password: password,
+          )).pageCount;
+          if (sources != null) {
+            final taken = PdfOutline.rangePages(input.ranges[i], count);
+            sources = taken == null
+                ? null
+                : [
+                    ...sources,
+                    (
+                      outline: await PdfEngine.outline(
+                        file,
+                        password: password,
+                      ),
+                      pages: taken,
+                    ),
+                  ];
+          }
           parts.add({
             'file': file,
             'password': ?password,
@@ -146,6 +174,12 @@ class MergeJob extends ToolJob<MergeInput> {
           }
           await writer.close(pool);
           parts.add({'file': page});
+          sources = sources == null
+              ? null
+              : [
+                  ...sources,
+                  (outline: const <OutlineEntry>[], pages: const [0]),
+                ];
         }
       }
       await context.checkCancelled();
@@ -156,7 +190,22 @@ class MergeJob extends ToolJob<MergeInput> {
           pageCount: files.length,
         ),
       );
-      await pool.run(Lane.qpdf, _join, (parts, output)).result;
+      final outline = sources == null
+          ? const <OutlineEntry>[]
+          : PdfOutline.merged(sources);
+      if (outline.isEmpty) {
+        await pool.run(Lane.qpdf, _join, (parts, output)).result;
+      } else {
+        final joined = '${context.tempDir.path}/joined.pdf';
+        await pool.run(Lane.qpdf, _join, (parts, joined)).result;
+        await context.checkCancelled();
+        await pool.run(Lane.qpdf, _outline, (
+          joined,
+          output,
+          outline,
+          context.tempDir.path,
+        )).result;
+      }
     } catch (e) {
       // Cancelled or failed: no partial result is left behind.
       final f = File(output);
@@ -172,3 +221,8 @@ class MergeJob extends ToolJob<MergeInput> {
 
 void _join((List<Map<String, Object?>>, String) job, JobContext context) =>
     QpdfService.joinPages(job.$1, job.$2);
+
+void _outline(
+  (String, String, List<OutlineEntry>, String) job,
+  JobContext context,
+) => PdfOutline.write(job.$1, job.$2, job.$3, Directory(job.$4));

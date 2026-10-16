@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:app_pdf/components/dk_scan_button.dart';
 import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/job_providers.dart';
+import 'package:app_pdf/screens/home/photo_banner.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
 import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
@@ -18,8 +19,9 @@ import 'package:flutter_test/flutter_test.dart';
 import '../screens/home_screen_test.dart' show pumpHome, settle;
 
 // Visual QA (DK-0715, DK-0716, DK-0718, DK-0719, DK-0720, DK-0721, DK-0723,
-// DK-0724, DK-0725, DK-0726, DK-0717): the 02-home frames default, first,
-// contjob, contscan, edit, addtool, procard, job, jobs3, tilemenu and scanmenu, rendered by the
+// DK-0724, DK-0725, DK-0726, DK-0717, DK-0722): the 02-home frames default,
+// first, contjob, contscan, photobanner, edit, addtool, procard, job, jobs3,
+// tilemenu and scanmenu, rendered by the
 // real H1 in the shell at 393 × 852. The goldens sit next to the frames' screenshots in
 // docs/qa/home/; the findings are in docs/qa/home.md.
 
@@ -221,6 +223,23 @@ void main() {
       await pumpHome(tester, db, tokens: tokens, scanStore: store);
       await settle(tester);
       await shot(tester, 'contscan');
+    });
+
+    // DK-0722: 02-home/home-photobanner, from the 7th day of use.
+    testWidgets('home-photobanner, $theme', (tester) async {
+      await recents(tester);
+      await pumpHome(
+        tester,
+        db,
+        tokens: tokens,
+        prefs: {
+          firstUseKey: DateTime.now()
+              .subtract(const Duration(days: 8))
+              .toIso8601String(),
+        },
+      );
+      await settle(tester);
+      await shot(tester, 'photobanner');
     });
 
     testWidgets('home-procard (scrolled), $theme', (tester) async {

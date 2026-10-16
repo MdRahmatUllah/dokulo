@@ -52,6 +52,7 @@ Future<GoRouter> pumpHome(
   double textScale = 1,
   Size size = const Size(393, 852),
   MemoryScanStore? scanStore,
+  Map<String, Object?> prefs = const {},
 }) async {
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
@@ -62,7 +63,7 @@ Future<GoRouter> pumpHome(
     ProviderScope(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
-        prefsProvider.overrideWith(() => Prefs.memory()),
+        prefsProvider.overrideWith(() => Prefs.memory(prefs)),
         thumbnailCacheProvider.overrideWith((ref) async => _WhitePages()),
         // V1 without PDFium: the file reads as missing, so no canvas opens.
         viewerFileProvider.overrideWith(

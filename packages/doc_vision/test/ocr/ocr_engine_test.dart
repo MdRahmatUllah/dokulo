@@ -48,6 +48,9 @@ class _Fixed implements OcrEngine {
   }) async => PageOcr(name, const [], PageQuality.noText);
 
   @override
+  Future<int?> orientation(Raster raster) async => null;
+
+  @override
   Future<void> close() async {}
 }
 
