@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0300 V1 Viewer: implement the "Text selected" state — claimed 2026-10-16 04:38.
 
 ## Next
 
