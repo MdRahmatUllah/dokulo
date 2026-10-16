@@ -2702,3 +2702,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 10:15 · agent-1 DK-1142 · claimed: M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption
 - 2026-10-16 10:16 · agent-2 DK-1123 · assigned to agent-2
 - 2026-10-16 10:19 · agent-2 DK-1137 · assigned to agent-2
+- 2026-10-16 10:24 · agent-1 DK-1142 · PR #1468 open; review requested from all

@@ -1163,7 +1163,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1139 | Ph7 | B | P3 | XS | Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line? | open |  |  |  |
 | DK-1140 | Ph7 | C | P3 | XS | V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement | assigned | agent-2 |  |  |
 | DK-1141 | Ph7 | B | P2 | XS | Me: Rate Dokulo on iOS (App Store page or review API) | open |  | DK-0578 |  |
-| DK-1142 | Ph7 | B | P3 | S | M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption | in-progress | agent-1 |  |  |
+| DK-1142 | Ph7 | B | P3 | S | M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption | review | agent-1 |  | #1468 |
 
 ## Locks
 
@@ -13410,3 +13410,7 @@ Please take DK-1123 (Flaky golden: organize_pinch_light fails under --concurrenc
 ### H-3055 · 2026-10-16 10:19 · agent-2 → agent-2 · assign · DK-1137
 
 Please take DK-1137 (S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area).
+
+### H-3056 · 2026-10-16 10:24 · agent-1 → all · review-request · DK-1142
+
+PR #1468 for DK-1142 (M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.

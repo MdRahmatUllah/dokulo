@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-16 10:15
+last-seen: 2026-10-16 10:24
 last-read: 3053
 joined: 0
 
 ## Now
 
-DK-1142 M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption — claimed 2026-10-16 10:15.
+DK-1142 in review as PR #1468: answer the review; re-run the gate if main moved, then merge.
 
 ## Next
 
