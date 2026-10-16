@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:app_pdf/crash/crash_log.dart';
 import 'package:app_pdf/providers/crash_providers.dart';
+import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -90,7 +91,10 @@ void main() {
     Future<List<CrashEntry>> crashWith({required bool enabled}) async {
       final log = CrashLog(File('${dir.path}/hooks.jsonl'));
       final container = ProviderContainer(
-        overrides: [crashLogProvider.overrideWith((ref) async => log)],
+        overrides: [
+          crashLogProvider.overrideWith((ref) async => log),
+          prefsProvider.overrideWith(Prefs.memory),
+        ],
       );
       addTearDown(container.dispose);
       container.read(crashReportsEnabledProvider.notifier).set(enabled);
@@ -103,7 +107,9 @@ void main() {
     }
 
     test('write nothing while crash reports are off (the default)', () async {
-      final container = ProviderContainer();
+      final container = ProviderContainer(
+        overrides: [prefsProvider.overrideWith(Prefs.memory)],
+      );
       addTearDown(container.dispose);
       expect(container.read(crashReportsEnabledProvider), isFalse);
       expect(await crashWith(enabled: false), isEmpty);

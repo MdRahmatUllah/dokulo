@@ -20,6 +20,7 @@ import '../../components/dk_pdf_canvas.dart';
 import '../../components/dk_pdf_search.dart';
 import '../../components/dk_skeleton.dart';
 import '../../components/dk_toast.dart';
+import '../../components/dk_top_bar.dart';
 import '../../l10n/app_localizations.dart';
 import '../../routes/routes.dart';
 import '../../theme/dk_layout.dart';
@@ -259,6 +260,13 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
                         value.path,
                         onTap: onTap,
                         onScrollStart: onScrollStart,
+                        // The bars lie over the pages (DK-1111).
+                        insets: EdgeInsets.only(
+                          top:
+                              DkTopBar.height +
+                              MediaQuery.paddingOf(context).top,
+                          bottom: _barHeight,
+                        ),
                       ),
                     ),
             ),
@@ -444,7 +452,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
 
   /// The form banner over the first page (UI spec §17.1; DK-1090): "This
   /// PDF has fillable fields." with Fill form.
-  Widget _withFormBanner(String path, Widget pages) {
+  Widget _withFormBanner(String path, double top, Widget pages) {
     final hasForm =
         ref.watch(viewerHasFormProvider(path, password: _password)).value ==
         true;
@@ -457,7 +465,7 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
         Positioned(
           left: t.space.m,
           right: t.space.m,
-          top: t.space.m,
+          top: top + t.space.m,
           child: DkBanner(
             text: l.viewer_form_banner,
             action: l.viewer_form_fill,
@@ -474,13 +482,16 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
     String path, {
     VoidCallback? onTap,
     VoidCallback? onScrollStart,
+    EdgeInsets insets = EdgeInsets.zero,
   }) {
     final open = ref.watch(viewerOpenProvider(path, password: _password));
     return switch (open.value) {
       ViewerOpen.ok => _withFormBanner(
         path,
+        insets.top,
         DkPdfCanvas(
           path: path,
+          insets: insets,
           password: _password,
           controller: _controller,
           onTap: onTap,
