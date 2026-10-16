@@ -22,13 +22,13 @@ body, Open settings / Einstellungen öffnen).
 
 | Task | Frame | Result |
 | --- | --- | --- |
-| DK-0806 | `scanner-camera-prompt` | **DK-1120** (P1): no Material, error-styled text |
-| DK-0807 | `scanner-camera-denied` | **DK-1120** (P1); the export's frame is broken, below |
+| DK-0806 | `scanner-camera-prompt` | Match since #1430 (was **DK-1120**) |
+| DK-0807 | `scanner-camera-denied` | Match since #1430 (was **DK-1120**); the export's frame is broken, below |
 | DK-0808 | `scanner-camera-nodoc` | Match |
 | DK-0810 | `scanner-camera-countdown` | Match, 1 approved |
 | DK-0811 | `scanner-camera-flash` | Match |
 | DK-0813 | `scanner-camera-idback` | Match |
-| DK-0816 | `scanner-camera-retake` | **DK-1121** (P3): the label isn't the primary pill |
+| DK-0816 | `scanner-camera-retake` | Match since #1430 (was **DK-1121**): the primary pill |
 | DK-0817 | `scanner-camera-far` | Match, 1 approved |
 | DK-0818 | `scanner-camera-dark` | Match |
 | DK-0819 | `scanner-camera-cutoff` | Match |
@@ -40,14 +40,14 @@ body, Open settings / Einstellungen öffnen).
 | DK-0821 | `scanner-review-review` | Match (`s2_review_*`) |
 | DK-0822 | `scanner-review-crop` | Match, 2 approved (`s2_crop_*`) |
 
-**DK-1120** (P1, lane C): the pre-prompt sheet and the "Camera access is
+**DK-1120** (P1, lane C; fixed in #1430): the pre-prompt sheet and the "Camera access is
 off" screen sit on a bare `ColoredBox`, and neither the gate nor its route
 (`dkSlideUpPage`) adds a `Material`. Every text inherits WidgetsApp's error
 style: yellow double underlines, in release builds too. Every new user meets
 the pre-prompt on their first scan. `camera_permission_gate_test` missed it:
 it wraps the gate in a `Scaffold`.
 
-**DK-1121** (P3, lane C): "Retake page 3" is drawn as a hint (`color.cameraChrome`,
+**DK-1121** (P3, lane C; fixed in #1430): "Retake page 3" is drawn as a hint (`color.cameraChrome`,
 invisible on the black band); the frame makes it a `color.primary` pill, so it
 reads as a mode (DK-0350's acceptance is the frame).
 
