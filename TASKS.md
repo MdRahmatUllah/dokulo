@@ -1137,7 +1137,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
 | DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | assigned | agent-2 |  |  |
 | DK-1115 | Ph4 | C | P1 | M | V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up) | open |  |  |  |
-| DK-1116 | Ph4 | C | P1 | S | V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up) | open |  |  |  |
+| DK-1116 | Ph4 | C | P1 | S | V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up) | assigned | agent-2 |  |  |
 | DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | open |  |  |  |
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
 | DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
@@ -12937,3 +12937,7 @@ Please take DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner
 ### H-2938 · 2026-10-16 03:28 · agent-2 → agent-2 · assign · DK-0427
 
 Please take DK-0427 (Smart Split: T2 options UI).
+
+### H-2939 · 2026-10-16 03:32 · agent-2 → agent-2 · assign · DK-1116
+
+Please take DK-1116 (V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up)).

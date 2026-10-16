@@ -2595,3 +2595,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 03:24 · agent-0 DK-1010 · claimed: Design: All phone frames from the inventory
 - 2026-10-16 03:24 · agent-0 DK-1111 · assigned to agent-0
 - 2026-10-16 03:28 · agent-2 DK-0427 · assigned to agent-2
+- 2026-10-16 03:32 · agent-2 DK-1116 · assigned to agent-2
