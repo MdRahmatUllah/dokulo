@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dokulo – prototype</title>
+<style>
+:root{--bg:#F7F8FA;--sf:#FFFFFF;--t1:#14171C;--t2:#5A6270;--ol:#D9DEE6;--p:#2251E6;--op:#FFFFFF;--pc:#E6ECFF}
+:root[data-theme="dark"]{--bg:#0F1115;--sf:#171A20;--t1:#EEF1F6;--t2:#A3ABB8;--ol:#2A2F38;--p:#8AA8FF;--op:#0B1A4D;--pc:#1D2A55}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--t1)}
+main{max-width:1100px;margin:0 auto;padding:24px 16px;display:grid;grid-template-columns:minmax(0,1fr) 393px;gap:48px;align-items:start}
+@media (max-width:860px){main{grid-template-columns:minmax(0,1fr)}.stage{justify-self:center}}
+h1{font-size:24px;margin:0 0 4px}
+.m{color:var(--t2);font-size:13px}
+.flows{list-style:none;margin:16px 0;padding:0;display:grid;gap:8px}
+.flows button{all:unset;cursor:pointer;display:block;width:100%;padding:12px 14px;border:1px solid var(--ol);border-radius:12px;background:var(--sf)}
+.flows button[aria-pressed="true"]{border-color:var(--p);background:var(--pc)}
+.flows b{display:block;font-size:15px}
+.steps{margin:8px 0 0;padding-left:22px;font-size:13px;color:var(--t2)}
+.steps li[aria-current="step"]{color:var(--t1);font-weight:600}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.bar button,.bar label{border:1px solid var(--ol);background:var(--sf);color:var(--t1);border-radius:999px;padding:8px 14px;font:inherit;font-size:14px;cursor:pointer;min-height:40px;display:inline-flex;align-items:center;gap:6px}
+.bar button.primary{background:var(--p);color:var(--op);border-color:var(--p)}
+.bar button:disabled{opacity:.4;cursor:default}
+:focus-visible{outline:2px solid var(--p);outline-offset:2px}
+.stage{width:393px;max-width:100%;position:sticky;top:16px}
+.phone{position:relative;width:393px;height:852px;border-radius:44px;overflow:hidden;background:#000;box-shadow:0 0 0 10px #14171C,0 24px 48px rgba(0,0,0,.25);transform-origin:top left}
+/* Each frame page pads its phone by 32: the iframe is that much larger, shifted back. */
+.phone iframe{position:absolute;left:-32px;top:-32px;width:457px;height:916px;border:0;background:var(--bg)}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.32);opacity:0;pointer-events:none}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.cap{margin-top:16px;text-align:center}
+@media (max-width:425px){.phone{transform:scale(.85)}.stage{height:724px}}
+</style>
+</head>
+<body>
+<main>
+<section>
+<h1>Dokulo – prototype</h1>
+<p class="m">The six flows of UI spec §32.4, stepped through the exported frames with the signature motions of §9 (scan capture, success tick, tile reorder, page drop, sheet, mini job bar, viewer open). Reduce motion swaps every movement for a 120 ms cross-fade. For the 5-user test: pick a flow, then Next (or →) after each task; links inside a frame also work.</p>
+<div class="bar" role="group" aria-label="Settings">
+<button id="theme" type="button" aria-pressed="false">Dark</button>
+<button id="lang" type="button" aria-pressed="false">Deutsch</button>
+<label><input id="reduce" type="checkbox"> Reduce motion</label>
+</div>
+<ul class="flows" id="flows"></ul>
+</section>
+<section class="stage" aria-label="Phone">
+<div class="phone" id="phone">
+<iframe id="a" title="Screen" scrolling="no"></iframe>
+<iframe id="b" title="Screen" scrolling="no" hidden></iframe>
+<div class="scrim" id="scrim"></div>
+<div class="flash" id="flash"></div>
+</div>
+<div class="bar cap" role="group" aria-label="Step">
+<button id="back" type="button">← Back</button>
+<span class="m" id="count" aria-live="polite"></span>
+<button id="next" type="button" class="primary">Next →</button>
+</div>
+</section>
+</main>
+<script>
+// Each step: [frame, motion into it, what the tester does]. Motions (§9):
+// push (standard 220), sheet (220 up, scrim 120), capture (flash 80 + fly-in
+// 320), tick (emphasis 320, overshoot), morph (the mini job bar, 220),
+// hero (viewer open, 220), reorder / drop (220), fade (120).
+const FLOWS = [
+  ["First launch to a shared scan", [
+    ["01-onboarding/onboarding-launch.html", "fade", "Open the app"],
+    ["01-onboarding/onboarding-o1.html", "push", "Read the first page"],
+    ["01-onboarding/onboarding-o2.html", "push", "Next"],
+    ["01-onboarding/onboarding-o3.html", "push", "Choose Scan"],
+    ["10-scanner/scanner-camera-quad.html", "push", "Hold the page in view"],
+    ["10-scanner/scanner-camera-countdown.html", "fade", "Wait for auto-capture"],
+    ["10-scanner/scanner-camera-batch.html", "capture", "Scan three pages"],
+    ["10-scanner/scanner-review-review.html", "push", "Open the review"],
+    ["10-scanner/scanner-review-reorder.html", "reorder", "Move a page in the tray"],
+    ["10-scanner/scanner-review-crop.html", "fade", "Crop a page"],
+    ["10-scanner/scanner-review-filter.html", "sheet", "Pick a filter"],
+    ["10-scanner/scanner-review-applyall.html", "fade", "Apply it to all pages"],
+    ["10-scanner/scanner-review-save.html", "sheet", "Save"],
+    ["10-scanner/scanner-review-result.html", "tick", "See the result"],
+    ["12-tool-shell/tool-shell-compress.html", "push", "Compress from the Next chip"],
+    ["12-tool-shell/tool-shell-result.html", "tick", "Share the smaller file"],
+  ]],
+  ["Share in, black out, protect", [
+    ["12-tool-shell/tool-shell-x1single.html", "sheet", "Share a PDF to Dokulo"],
+    ["18-black-out/black-out-find.html", "push", "Choose Black out, find the IBAN"],
+    ["18-black-out/black-out-review.html", "push", "Review the boxes"],
+    ["18-black-out/black-out-confirm.html", "sheet", "Confirm"],
+    ["18-black-out/black-out-result.html", "tick", "Check it is verified"],
+    ["16-tools-security/tools-security-addpw.html", "push", "Add a password"],
+  ]],
+  ["Merge 4 files and keep working", [
+    ["02-home/home-default.html", "fade", "Start on Home"],
+    ["12-tool-shell/tool-shell-merge.html", "push", "Merge 4 files, reorder them"],
+    ["12-tool-shell/tool-shell-mergerange.html", "sheet", "Set a page range"],
+    ["12-tool-shell/tool-shell-progress.html", "sheet", "Start; watch the progress"],
+    ["12-tool-shell/tool-shell-minibar.html", "morph", "Keep working"],
+    ["02-home/home-job.html", "push", "Back on Home, the job runs on"],
+    ["02-home/home-contjob.html", "fade", "The job is done (notification)"],
+    ["12-tool-shell/tool-shell-savemenu.html", "push", "Open the result, Save"],
+    ["12-tool-shell/tool-shell-aftersave.html", "tick", "Saved"],
+  ]],
+  ["Ask AI about a selection", [
+    ["04-files/files-list.html", "fade", "Open a PDF"],
+    ["06-viewer/viewer-default.html", "hero", "Read it"],
+    ["06-viewer/viewer-select.html", "fade", "Select text"],
+    ["21-ai/ai-askselection.html", "sheet", "Ask AI"],
+    ["21-ai/ai-ask.html", "fade", "Read the answer"],
+    ["06-viewer/viewer-goto.html", "push", "Tap the page chip: jump to the page"],
+  ]],
+  ["Pro tool, second use", [
+    ["12-tool-shell/tool-shell-prosecond.html", "push", "Use a Pro tool again"],
+    ["23-paywall/paywall-tool.html", "sheet", "Read the paywall"],
+    ["23-paywall/paywall-purchasing.html", "fade", "Buy"],
+    ["23-paywall/paywall-success.html", "tick", "Purchase done"],
+    ["12-tool-shell/tool-shell-progress.html", "sheet", "The tool runs"],
+  ]],
+  ["Move files to the locked folder", [
+    ["04-files/files-list.html", "fade", "Start in Files"],
+    ["04-files/files-select.html", "fade", "Long-press, select several"],
+    ["04-files/files-dragfolder.html", "drop", "Or drag one onto a folder"],
+    ["04-files/files-selmore.html", "sheet", "More → Move to locked folder"],
+    ["05-locked-folder/locked-folder-l1.html", "push", "Read the intro"],
+    ["05-locked-folder/locked-folder-l2.html", "push", "Set a PIN"],
+    ["05-locked-folder/locked-folder-l4.html", "push", "Biometrics"],
+    ["05-locked-folder/locked-folder-content.html", "tick", "The files are inside"],
+    ["05-locked-folder/locked-folder-unlock.html", "fade", "Leave and open it again"],
+    ["05-locked-folder/locked-folder-content.html", "push", "Unlocked"],
+  ]],
+];
+// The German set has these folders; the rest stays in English.
+const DE = new Set(["01-onboarding","02-home","03-tools","04-files","05-locked-folder","06-viewer","07-edit","08-sign","09-organize-pages","10-scanner","11-photo-finder","12-tool-shell","15-tools-optimize","18-black-out","21-ai","22-me-settings","23-paywall","25-system-surfaces"]);
+
+const $ = (id) => document.getElementById(id);
+const prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const state = { flow: 0, step: 0, dark: false, de: false, reduce: prefersReduced };
+$("reduce").checked = prefersReduced;
+let front = $("a"), back = $("b");
+
+function src(file) {
+  const set = state.de && DE.has(file.split("/")[0]) ? "deutsch" : state.dark ? "dark" : "light";
+  return set + "/" + file;
+}
+
+// Web Animations keep the timings in one place; reduced motion is one fade.
+function animate(motion, incoming, outgoing) {
+  const anims = [];
+  const run = (el, kf, ms, easing = "cubic-bezier(.65,0,.35,1)", delay = 0) => {
+    const a = el.animate(kf, { duration: ms, easing, delay, fill: "both" });
+    anims.push(a.finished);
+  };
+  if (state.reduce || motion === "fade") {
+    run(incoming, [{ opacity: 0 }, { opacity: 1 }], 120, "linear");
+  } else if (motion === "push") {
+    run(incoming, [{ transform: "translateX(100%)" }, { transform: "none" }], 220);
+    run(outgoing, [{ transform: "none" }, { transform: "translateX(-30%)" }], 220);
+  } else if (motion === "sheet") {
+    run($("scrim"), [{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], 340, "linear");
+    run(incoming, [{ transform: "translateY(100%)" }, { transform: "none" }], 220, "cubic-bezier(.65,0,.35,1)", 120);
+  } else if (motion === "capture") {
+    run($("flash"), [{ opacity: 0 }, { opacity: 1, offset: .5 }, { opacity: 0 }], 80, "linear");
+    run(incoming, [{ opacity: 0, transform: "scale(1.06)" }, { opacity: 1, transform: "none" }], 320, "cubic-bezier(.34,1.56,.64,1)", 80);
+  } else if (motion === "tick") {
+    run(incoming, [{ opacity: 0, transform: "scale(.94)" }, { opacity: 1, transform: "none" }], 320, "cubic-bezier(.34,1.56,.64,1)");
+  } else if (motion === "morph") {
+    run(outgoing, [{ transform: "none", borderRadius: "0" }, { transform: "translateY(78%) scale(.9,.12)", borderRadius: "24px" }], 220);
+    run(incoming, [{ opacity: 0 }, { opacity: 1 }], 220);
+  } else if (motion === "hero") {
+    run(incoming, [{ transform: "translate(16px,180px) scale(.22)", opacity: .6 }, { transform: "none", opacity: 1 }], 220);
+  } else if (motion === "reorder") {
+    run(incoming, [{ transform: "scale(1.04)", filter: "drop-shadow(0 8px 16px rgba(0,0,0,.25))" }, { transform: "none", filter: "none" }], 220);
+  } else if (motion === "drop") {
+    run(incoming, [{ transform: "translateY(-8px)", opacity: .7 }, { transform: "none", opacity: 1 }], 220);
+  }
+  return Promise.all(anims);
+}
+
+function show(motion) {
+  const [file, , task] = FLOWS[state.flow][1][state.step];
+  const next = back;
+  next.hidden = false;
+  next.style.zIndex = 1;
+  front.style.zIndex = 0;
+  next.onload = () => {
+    next.onload = null;
+    animate(motion, next, front).then(() => {
+      front.hidden = true;
+      front.getAnimations().forEach((a) => a.cancel());
+      next.getAnimations().forEach((a) => a.cancel());
+      [front, back] = [next, front];
+    });
+  };
+  next.src = src(file);
+  const steps = FLOWS[state.flow][1];
+  $("count").textContent = `Flow ${state.flow + 1} · step ${state.step + 1} of ${steps.length}: ${task}`;
+  $("back").disabled = state.step === 0;
+  $("next").disabled = state.step === steps.length - 1;
+  document.querySelectorAll(".steps li").forEach((li) => {
+    li.toggleAttribute("aria-current", false);
+    if (+li.dataset.flow === state.flow && +li.dataset.step === state.step) li.setAttribute("aria-current", "step");
+  });
+}
+
+function go(delta) {
+  const steps = FLOWS[state.flow][1];
+  const to = state.step + delta;
+  if (to < 0 || to >= steps.length) return;
+  state.step = to;
+  // Back plays the reduced fade: the motions are for moving forward.
+  show(delta > 0 ? steps[to][1] : "fade");
+}
+
+function pick(i) {
+  state.flow = i;
+  state.step = 0;
+  document.querySelectorAll(".flows > li > button").forEach((b, j) => b.setAttribute("aria-pressed", String(j === i)));
+  show("fade");
+}
+
+$("flows").innerHTML = FLOWS.map(([name, steps], i) =>
+  `<li><button type="button" aria-pressed="false"><b>${i + 1}. ${name}</b><span class="m">${steps.length} steps</span></button><ol class="steps">${steps.map(([, , t], j) => `<li data-flow="${i}" data-step="${j}">${t}</li>`).join("")}</ol></li>`
+).join("");
+document.querySelectorAll(".flows > li > button").forEach((b, i) => b.addEventListener("click", () => pick(i)));
+$("next").addEventListener("click", () => go(1));
+$("back").addEventListener("click", () => go(-1));
+$("reduce").addEventListener("change", (e) => { state.reduce = e.target.checked; });
+$("theme").addEventListener("click", (e) => {
+  state.dark = !state.dark;
+  e.target.setAttribute("aria-pressed", String(state.dark));
+  document.documentElement.dataset.theme = state.dark ? "dark" : "light";
+  show("fade");
+});
+$("lang").addEventListener("click", (e) => {
+  state.de = !state.de;
+  e.target.setAttribute("aria-pressed", String(state.de));
+  show("fade");
+});
+addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") go(1);
+  if (e.key === "ArrowLeft") go(-1);
+});
+pick(0);
+</script>
+</body>
+</html>
