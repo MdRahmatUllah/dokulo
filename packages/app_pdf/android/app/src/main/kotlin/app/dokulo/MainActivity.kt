@@ -1,7 +1,9 @@
 package app.dokulo
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.ActivityManager
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -21,6 +23,8 @@ import android.provider.OpenableColumns
 import android.provider.Settings
 import android.view.WindowManager
 import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationChannelCompat
+import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import io.flutter.embedding.android.FlutterFragmentActivity
@@ -138,6 +142,37 @@ class MainActivity : FlutterFragmentActivity() {
         else -> "denied"
     }
 
+    // A job ended in the background (DK-0587; lib/providers/job_notices.dart):
+    // the notice opens its deep link, dokulo://open/job/<id>, in this activity.
+    @SuppressLint("MissingPermission") // checked: notices off -> nothing shown
+    private fun showNotice(a: Map<*, *>) {
+        val notices = NotificationManagerCompat.from(this)
+        if (!notices.areNotificationsEnabled()) return
+        val channel = a["channel"] as String
+        notices.createNotificationChannel(
+            NotificationChannelCompat.Builder(channel, NotificationManagerCompat.IMPORTANCE_DEFAULT)
+                .setName(a["channelName"] as String)
+                .build(),
+        )
+        val id = (a["id"] as Number).toInt()
+        val open = PendingIntent.getActivity(
+            this,
+            id,
+            Intent(Intent.ACTION_VIEW, Uri.parse(a["link"] as String), this, MainActivity::class.java),
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+        )
+        notices.notify(
+            id,
+            NotificationCompat.Builder(this, channel)
+                .setSmallIcon(R.drawable.ic_stat_dokulo)
+                .setContentTitle(a["title"] as String)
+                .setContentText(a["body"] as String)
+                .setContentIntent(open)
+                .setAutoCancel(true)
+                .build(),
+        )
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -204,6 +239,10 @@ class MainActivity : FlutterFragmentActivity() {
                                 NOTIFICATIONS_REQUEST,
                             )
                         }
+                    }
+                    "show" -> {
+                        showNotice(call.arguments as Map<*, *>)
+                        result.success(null)
                     }
                     else -> result.notImplemented()
                 }

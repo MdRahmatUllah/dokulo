@@ -831,5 +831,10 @@
   "settings_find_photos": "Dokumente in Fotos finden",
   "settings_find_photos_help": "Durchsucht deine Fotos auf diesem Handy",
   "licences_search": "Lizenzen durchsuchen",
-  "licence_title": "Lizenz"
+  "licence_title": "Lizenz",
+  "notice_channel_jobs": "Aufträge",
+  "notice_job_done": "{tool} abgeschlossen",
+  "notice_job_failed": "{tool} fehlgeschlagen",
+  "notice_job_failed_body": "Tippe für Details",
+  "notice_files": "{count, plural, =1{1 Datei} other{{count} Dateien}}"
 }
