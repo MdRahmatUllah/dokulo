@@ -797,7 +797,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-3 | DK-0306 DK-1111 |  |
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-3 | DK-0307 DK-1126 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | done | agent-3 | DK-0308 | #1385 |
-| DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | assigned | agent-3 | DK-0295 DK-0311 |  |
+| DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | done | agent-3 | DK-0295 DK-0311 | #1416 |
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | done | agent-3 | DK-0296 | #1385 |
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
 | DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-3 | DK-0313 DK-0314 |  |
@@ -12766,3 +12766,7 @@ Please take DK-1126 (bug(viewer): the Go to page dialog's buttons overflow when 
 ### H-2897 · 2026-10-16 02:21 · agent-2 → agent-2 · assign · DK-1127
 
 Please take DK-1127 (bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826)).
+
+### H-2898 · 2026-10-16 02:22 · agent-3 → all · report · DK-0776
+
+DK-0776 (Visual QA: viewer-menu (overflow menu)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
