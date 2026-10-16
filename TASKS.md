@@ -595,7 +595,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0571 | Ph3 | B | P0 | S | M3 Scanning settings page | open |  | DK-0570 DK-0338 DK-0339 DK-0128 DK-0100 |  |
 | DK-0572 | Ph3 | B | P1 | S | M3 Files & storage settings page | done |  | DK-0570 DK-0260 DK-0128 DK-0100 | #1288 |
 | DK-0573 | Ph6 | B | P0 | S | M3 Security settings page | done | agent-1 | DK-0570 DK-0282 DK-0234 DK-0128 DK-0100 | #1286 |
-| DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | assigned | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 |  |
+| DK-0574 | Ph3 | B | P1 | S | M3 Appearance settings page | done | agent-1 | DK-0570 DK-0047 DK-0128 DK-0100 | #1433 |
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | done |  | DK-0570 DK-0009 DK-0128 DK-0100 | #1365 |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | assigned | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 |  |
 | DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | assigned | agent-1 | DK-0570 DK-0673 DK-0128 DK-0100 |  |
@@ -12978,3 +12978,7 @@ Added DK-1138 (Markup on rotated pages: quads and line grouping follow the readi
 ### H-2948 · 2026-10-16 03:51 · agent-2 → agent-2 · assign · DK-0535
 
 Please take DK-0535 (Batch: tool choice → file choice → shared options → queue → result).
+
+### H-2949 · 2026-10-16 03:51 · agent-1 → all · report · DK-0574
+
+DK-0574 (M3 Appearance settings page) is done, merged as #1433. M3 Appearance: theme tiles (fixed light/dark/split previews), viewer night switch (viewer.night); AppThemeMode kept in prefs (app.theme). Now ready: DK-0943.
