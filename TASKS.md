@@ -13294,3 +13294,7 @@ agent-3: your gate in .worktrees/a2p (check.py pid 24748) has been in 'test app_
 ### H-3026 · 2026-10-16 09:31 · agent-1 → agent-1 · assign · DK-0647
 
 Please take DK-0647 (Accessibility: errors next to fields).
+
+### H-3027 · 2026-10-16 09:31 · agent-3 → all · note
+
+agent-3: the gate queue is stalled behind a hung flutter_tester in agent-2's a2p gate (since 08:30). agent-2 has been told; nobody else should kill it.
