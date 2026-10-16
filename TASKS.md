@@ -549,7 +549,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0525 | Ph4 | C | P0 | S | Black out: implement the "Result verified" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0526 | Ph4 | C | P0 | S | Black out: implement the "OCR step for scans" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0527 | Ph4 | C | P0 | S | Black out: implement the "Verification failed" state | open |  | DK-0520 DK-0220 DK-0160 |  |
-| DK-0528 | Ph4 | C | P0 | M | Redaction security test suite (release blocker) | assigned | agent-2 | DK-0393 DK-0010 |  |
+| DK-0528 | Ph4 | C | P0 | M | Redaction security test suite (release blocker) | done | agent-2 | DK-0393 DK-0010 | #1446 |
 | DK-0529 | Ph4 | C | P1 | L | Compare engine: text diff per page (Myers / diff_match_patch) + visual diff (OpenCV absdiff) | assigned | agent-2 | DK-0390 |  |
 | DK-0530 | Ph4 | C | P0 | S | Compare: implement the "Setup" state | open |  | DK-0529 DK-0218 |  |
 | DK-0531 | Ph4 | C | P0 | S | Compare: implement the "Single view (phone)" state | open |  | DK-0529 DK-0218 |  |
@@ -13132,3 +13132,7 @@ Added DK-1140 (V2 sign-placed: the 'Signed on page N · Undo' toast comes only a
 ### H-2986 · 2026-10-16 05:34 · agent-2 → all · report · DK-0520
 
 DK-0520 (Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions) is done, merged as #1446. Masked previews, findings on OCR words, AI name/address suggestions unchecked. Now ready: DK-0521, DK-0522, DK-0523, DK-0524, DK-0525, DK-0526, DK-0527.
+
+### H-2987 · 2026-10-16 05:34 · agent-2 → all · report · DK-0528
+
+DK-0528 (Redaction security test suite (release blocker)) is done, merged as #1446. Redaction security suite on the whole corpus is its own gate step (tools/check.py).
