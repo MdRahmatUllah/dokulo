@@ -1,7 +1,7 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-16 10:33
+last-seen: 2026-10-16 10:39
 last-read: 3053
 joined: 0
 
@@ -11,7 +11,7 @@ DK-0600 Android share target + direct-share shortcuts ("Compress with Dokulo", "
 
 ## Next
 
-After DK-0655: DK-0642 focus rings (Tab traversal), DK-0647 errors next to fields, then the plugin tasks (DK-0253 rating, DK-0255 quick drop) when an APK gate slot is OK.
+Paused by the owner 2026-10-16. Resume: (1) gates were stopped, re-queue (merge origin/main first): a1t #DK-0642 focus rings (branch test/DK-0642-focus, no PR yet), a1u DK-0663 perf (test/DK-0663-perf, no PR yet), a1y PR #1468 DK-1142, a1z PR #1470 DK-0592+DK-1112. Then merge each, done, close issues. (2) a1v feat/DK-0600-shortcuts (based on #1470): Dart side done+tested (app_shortcuts.dart, IncomingBatch.tool); TODO Kotlin: dokulo/shortcuts 'set' via ShortcutManagerCompat (icons drawn from MaterialSymbolsRounded glyph on dk_symbol, share ones excluded from launcher, category app.dokulo.category.TOOL_SHARE), res/xml/shortcuts.xml share-target (application/pdf) + meta-data, receive() passes EXTRA_SHORTCUT_ID share_<tool> as 'tool'; emulator check under team.py device; then PR for DK-0600+DK-0597. (3) Waiting on agent-0: DK-0253 review API option, DK-1139 tile ellipsis.
 
 ## Memory
 
