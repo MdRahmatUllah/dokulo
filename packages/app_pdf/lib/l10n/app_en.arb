@@ -3090,6 +3090,14 @@
   "@privacy_crash_deleted": {
     "description": "M3 Privacy: the toast after Delete crash reports."
   },
+  "settings_find_photos": "Find documents in photos",
+  "@settings_find_photos": {
+    "description": "M3 Scanning: the photo finder's switch (DK-0571, me-scanning)."
+  },
+  "settings_find_photos_help": "Looks through your photos on this phone",
+  "@settings_find_photos_help": {
+    "description": "M3 Scanning: under Find documents in photos (DK-0571)."
+  },
   "licences_search": "Search licences",
   "@licences_search": {
     "description": "M3 Open-source licences: the search field's hint (DK-0577, me-licences)."
