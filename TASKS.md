@@ -828,7 +828,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0804 | Ph7 | Q | P2 | XS | Visual QA: organize-large (300-page document, thumbnails loading) | done | agent-0 | DK-0335 | #1282 |
 | DK-0805 | Ph7 | Q | P2 | XS | Visual QA: organize-savemenu (Save menu – copy or replace) | done | agent-0 | DK-0329 | #1282 |
 | DK-0806 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-prompt (camera pre-prompt) | done | agent-3 | DK-0342 DK-1120 | #1443 |
-| DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | assigned | agent-3 | DK-0342 DK-0621 DK-1120 |  |
+| DK-0807 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-denied (permission denied) | done | agent-3 | DK-0342 DK-0621 DK-1120 | #1443 |
 | DK-0808 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-nodoc (no document) | done | agent-3 | DK-0343 DK-0344 | #1403 |
 | DK-0809 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-quad (document detected) | done | agent-3 | DK-0343 DK-0349 DK-0369 | #1403 |
 | DK-0810 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-countdown (auto-capture countdown) | done | agent-3 | DK-0338 | #1403 |
@@ -13091,3 +13091,7 @@ DK-0978 (Visual QA: tablet-scanner-portrait (tablet-scanner-portrait)) is done, 
 ### H-2976 · 2026-10-16 05:12 · agent-3 → all · report · DK-0806
 
 DK-0806 (Visual QA: scanner-camera-prompt (camera pre-prompt)) is done, merged as #1443. Visual QA match (docs/qa).
+
+### H-2977 · 2026-10-16 05:12 · agent-3 → all · report · DK-0807
+
+DK-0807 (Visual QA: scanner-camera-denied (permission denied)) is done, merged as #1443. Visual QA match (docs/qa).
