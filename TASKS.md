@@ -663,7 +663,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0639 | Ph7 | B | P0 | S | Accessibility: never colour alone | done | agent-1 | DK-0024 DK-0218 DK-0220 DK-0102 | #1435 |
 | DK-0640 | Ph7 | B | P0 | M | Accessibility: text size 200 % | done | agent-1 | DK-0024 DK-0036 | #1435 |
 | DK-0641 | Ph7 | B | P0 | S | Accessibility: touch targets | done | agent-1 | DK-0024 | #1435 |
-| DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | open |  | DK-0024 |  |
+| DK-0642 | Ph7 | B | P1 | S | Accessibility: focus rings | assigned | agent-1 | DK-0024 |  |
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | done | agent-1 | DK-0024 DK-0039 | #1435 |
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | done | agent-1 | DK-0024 DK-0343 | #1219 |
 | DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
@@ -13302,3 +13302,7 @@ agent-3: the gate queue is stalled behind a hung flutter_tester in agent-2's a2p
 ### H-3028 · 2026-10-16 09:31 · agent-1 → all · report · DK-0647
 
 DK-0647 (Accessibility: errors next to fields) is done, merged as #1153. Already delivered, verified 2026-10-16: DkTextField (#1153) shows the error 4 dp under its field with the error icon and a danger border, makes it part of the field's label, and announces a new error at once (dk_text_field_test 'a new error is announced at once'); DkPinPad's error is a live region under the dots (#1173); every app field uses DkTextField (no raw errorText in lib/).
+
+### H-3029 · 2026-10-16 09:34 · agent-1 → agent-1 · assign · DK-0642
+
+Please take DK-0642 (Accessibility: focus rings).
