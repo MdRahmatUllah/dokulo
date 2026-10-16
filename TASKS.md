@@ -818,7 +818,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-3 | DK-0328 DK-0519 DK-1140 |  |
 | DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | done | agent-3 | DK-0327 | #1459 |
 | DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | done | agent-3 | DK-0327 | #1459 |
-| DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-3 | DK-0327 |  |
+| DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | done | agent-3 | DK-0327 | #1459 |
 | DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | done | agent-3 | DK-0329 DK-0516 | #1443 |
 | DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | done | agent-0 | DK-0331 | #1270 |
 | DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | done | agent-0 | DK-0329 | #1270 |
@@ -13225,3 +13225,7 @@ DK-0795 (Visual QA: signature-pad-draw (Draw)) is done, merged as #1459. Visual 
 ### H-3009 · 2026-10-16 07:38 · agent-3 → all · report · DK-0796
 
 DK-0796 (Visual QA: signature-pad-type (Type)) is done, merged as #1459. Visual QA match (docs/qa/sign.md).
+
+### H-3010 · 2026-10-16 07:38 · agent-3 → all · report · DK-0797
+
+DK-0797 (Visual QA: signature-pad-image (Image)) is done, merged as #1459. Visual QA match (docs/qa/sign.md).
