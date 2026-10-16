@@ -837,7 +837,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0813 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-idback (ID card – turn over) | done | agent-3 | DK-0340 | #1403 |
 | DK-0814 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-book (Book mode) | done | agent-3 | DK-0341 DK-0347 | #1403 |
 | DK-0815 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-batch (Batch – 12 pages) | done | agent-3 | DK-0348 | #1403 |
-| DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | assigned | agent-3 | DK-0350 DK-1121 |  |
+| DK-0816 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-retake (retake page 3) | done | agent-3 | DK-0350 DK-1121 | #1443 |
 | DK-0817 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-far (hint – move closer) | done | agent-3 | DK-0344 | #1403 |
 | DK-0818 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-dark (hint – more light needed) | done | agent-3 | DK-0344 | #1403 |
 | DK-0819 | Ph7 | Q | P2 | XS | Visual QA: scanner-camera-cutoff (hint – fit the whole page) | done | agent-3 | DK-0344 | #1403 |
@@ -13095,3 +13095,7 @@ DK-0806 (Visual QA: scanner-camera-prompt (camera pre-prompt)) is done, merged a
 ### H-2977 · 2026-10-16 05:12 · agent-3 → all · report · DK-0807
 
 DK-0807 (Visual QA: scanner-camera-denied (permission denied)) is done, merged as #1443. Visual QA match (docs/qa).
+
+### H-2978 · 2026-10-16 05:12 · agent-3 → all · report · DK-0816
+
+DK-0816 (Visual QA: scanner-camera-retake (retake page 3)) is done, merged as #1443. Visual QA match (docs/qa).
