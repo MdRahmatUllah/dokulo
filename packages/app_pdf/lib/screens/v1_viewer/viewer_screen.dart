@@ -22,6 +22,7 @@ import '../../components/dk_skeleton.dart';
 import '../../components/dk_toast.dart';
 import '../../l10n/app_localizations.dart';
 import '../../routes/routes.dart';
+import '../../theme/dk_layout.dart';
 import '../../theme/dk_tokens.dart';
 import '../../patterns/dk_file_actions.dart';
 import '../../patterns/dk_file_info.dart';
@@ -38,6 +39,7 @@ import 'viewer_chrome.dart';
 import 'viewer_providers.dart';
 import 'viewer_search.dart';
 import 'viewer_states.dart';
+import 'viewer_tablet.dart';
 import 'viewer_thumb_strip.dart';
 
 /// V1, the viewer (UI spec §17.1). This is its core (DK-0293): the file's
@@ -212,29 +214,38 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
             Expanded(
               child: _searching
                   ? _pages(value.path)
+                  : DkGrid.forWidth(MediaQuery.sizeOf(context).width) !=
+                        DkGrid.phone
+                  // A tablet: the actions in the top bar, thumbnails down
+                  // the side (§17.4; DK-0310).
+                  ? ViewerTabletChrome(
+                      name: value.name,
+                      page: _page,
+                      pageCount: _pageCount,
+                      actions: _actions(value),
+                      canvas: _pages(value.path),
+                      sidebar: ViewerThumbStrip(
+                        path: value.path,
+                        pageCount: _pageCount,
+                        current: _page ?? 1,
+                        axis: Axis.vertical,
+                        onPage: (p) => _controller.goToPage(pageNumber: p),
+                      ),
+                      // The pages reflow to the new width: back to the
+                      // page that was showing.
+                      onSidebarToggled: () {
+                        final page = _page;
+                        if (page == null) return;
+                        WidgetsBinding.instance.addPostFrameCallback(
+                          (_) => _controller.goToPage(pageNumber: page),
+                        );
+                      },
+                    )
                   : ViewerChrome(
                       name: value.name,
                       page: _page,
                       pageCount: _pageCount,
-                      actions: ViewerActions(
-                        onSearch: () => setState(() => _searching = true),
-                        // V2 with Pan and the signatures sheet (§17.2).
-                        onSign: () => context.push(
-                          Routes.viewer('${widget.fileId}', sign: true),
-                        ),
-                        onAi: () => context.push(
-                          Routes.tool('summarize', files: ['${widget.fileId}']),
-                        ),
-                        onEdit: () => context.push(
-                          Routes.viewer('${widget.fileId}', edit: true),
-                        ),
-                        onRename: () => renameFile(context, ref, value),
-                        // X1 with this file (DK-1094).
-                        onTools: () => showToolPicker(context, [value]),
-                        onOverflow: (anchor) => _menu(anchor, value),
-                        onShare: () =>
-                            ref.read(fileSharerProvider)([value.path]),
-                      ),
+                      actions: _actions(value),
                       strip: _thumbs && _pageCount > 0
                           ? ViewerThumbStrip(
                               path: value.path,
@@ -270,6 +281,21 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
       },
     );
   }
+
+  /// The viewer's actions, the same on a phone and a tablet.
+  ViewerActions _actions(FileEntry value) => ViewerActions(
+    onSearch: () => setState(() => _searching = true),
+    // V2 with Pan and the signatures sheet (§17.2).
+    onSign: () => context.push(Routes.viewer('${widget.fileId}', sign: true)),
+    onAi: () =>
+        context.push(Routes.tool('summarize', files: ['${widget.fileId}'])),
+    onEdit: () => context.push(Routes.viewer('${widget.fileId}', edit: true)),
+    onRename: () => renameFile(context, ref, value),
+    // X1 with this file (DK-1094).
+    onTools: () => showToolPicker(context, [value]),
+    onOverflow: (anchor) => _menu(anchor, value),
+    onShare: () => ref.read(fileSharerProvider)([value.path]),
+  );
 
   /// The overflow menu (DK-0295; UI spec §17.1, viewer-menu): Info · Go to
   /// page · Pages · Night mode · Organize pages · Print · Share as images ·
