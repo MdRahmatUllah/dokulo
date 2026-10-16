@@ -21,6 +21,7 @@ import '../screens/placeholder_screen.dart';
 import '../screens/settings/appearance_settings_screen.dart';
 import '../screens/settings/files_settings_screen.dart';
 import '../screens/settings/language_settings_screen.dart';
+import '../screens/settings/privacy_settings_screen.dart';
 import '../screens/settings/scanning_settings_screen.dart';
 import '../screens/settings/security_settings_screen.dart';
 import '../screens/t1_tools/tools_screen.dart';
@@ -259,6 +260,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                         'files' => const FilesSettingsScreen(),
                         'language' => const LanguageSettingsScreen(),
                         'appearance' => const AppearanceSettingsScreen(),
+                        'privacy' => const PrivacySettingsScreen(),
                         final page => PlaceholderScreen('M3', detail: page),
                       },
                     ),

@@ -16,6 +16,7 @@ import '../../components/dk_toast.dart';
 import '../../l10n/app_localizations.dart';
 import '../../patterns/dk_confirmations.dart';
 import '../../patterns/dk_empty_states.dart';
+import '../../patterns/dk_orientation.dart';
 import '../../providers/prefs_providers.dart';
 import '../../providers/signature_providers.dart';
 import '../../theme/dk_tokens.dart';
@@ -23,7 +24,7 @@ import '../../tools/tool_inputs.dart';
 import '../t2_tool/tool_options_providers.dart';
 
 /// The signature pad, full screen and in landscape (DK-0327; UI spec
-/// §17.3). The phone's orientations come back when it closes. Returns the
+/// §17.3). The screen's orientations come back when it closes. Returns the
 /// PNG and its ink, or null.
 Future<(Uint8List, Color)?> openSignaturePad(
   BuildContext context, {
@@ -71,8 +72,8 @@ Future<(Uint8List, Color)?> openSignaturePad(
       ),
     );
   } finally {
-    // Every orientation again (the app's default).
-    await SystemChrome.setPreferredOrientations(const []);
+    // The screen's own rule again (DK-0656).
+    await SystemChrome.setPreferredOrientations(DkOrientation.current);
   }
 }
 

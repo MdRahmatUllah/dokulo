@@ -32,12 +32,9 @@ import '../../l10n/app_localizations.dart';
 import '../../l10n/formats.dart';
 import '../../patterns/dk_about_tool.dart';
 import '../../patterns/dk_confirmations.dart';
-import '../../crash/crash_log.dart';
 import '../../providers/crash_providers.dart';
-import '../../providers/device_providers.dart';
 import '../../providers/file_providers.dart';
 import '../../providers/image_providers.dart';
-import '../../providers/mail_providers.dart';
 import '../../routes/bottom_chrome.dart';
 import '../../providers/database_providers.dart';
 import '../../routes/routes.dart';
@@ -422,20 +419,7 @@ class _ToolOptionsScreenState extends ConsumerState<ToolOptionsScreen> {
   Future<void> _sendReport(String code) async {
     _closeSheet();
     final l = AppLocalizations.of(context);
-    final device = await ref.read(deviceCapabilitiesProvider.future);
-    final entries = await (await ref.read(crashLogProvider.future)).entries();
-    final sent = await ref.read(mailComposerProvider)(
-      reportEmail(
-        code: code,
-        device: {
-          'os': '${device.os} ${device.osVersion}',
-          'abis': device.abis.join(', '),
-          if (device.totalRam case final ram?)
-            'ram': '${(ram / 1e9).toStringAsFixed(1)} GB',
-        },
-        entries: entries,
-      ),
-    );
+    final sent = await sendCrashReport(ref, code: code);
     if (!sent && mounted) showDkToast(context, l.error_no_mail_app);
   }
 
