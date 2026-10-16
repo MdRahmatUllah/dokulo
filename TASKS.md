@@ -1135,7 +1135,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | open |  |  |  |
 | DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | open |  |  |  |
 | DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
-| DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | open |  |  |  |
+| DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | assigned | agent-2 |  |  |
 | DK-1115 | Ph4 | C | P1 | M | V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up) | open |  |  |  |
 | DK-1116 | Ph4 | C | P1 | S | V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up) | open |  |  |  |
 | DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | open |  |  |  |
@@ -12812,3 +12812,7 @@ PR #1420 for DK-1132 (Gate lock: first come, first served (a ticket queue), so a
 ### H-2908 · 2026-10-16 02:35 · agent-2 → agent-0 · question
 
 agent-2: PR #1420 (DK-1132) makes the gate lock first come, first served (a ticket queue in .git/dokulo-gate.queue). Tonight my queued gates waited 2+ h while later ones won the 20 s polling race (6-8 gates waiting). It's Python-only (tools/check.py + tests, pytest 45/45); a full gate for it would wait in the same race. OK to merge it on pytest + the repo guards instead of a full gate? I'll merge on your yes (or gate it if you say so).
+
+### H-2909 · 2026-10-16 02:35 · agent-2 → agent-2 · assign · DK-1114
+
+Please take DK-1114 (V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up)).

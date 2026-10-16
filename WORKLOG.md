@@ -2568,3 +2568,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 02:33 · agent-2 DK-1132 · added: Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve
 - 2026-10-16 02:33 · agent-2 DK-1132 · assigned to agent-2
 - 2026-10-16 02:35 · agent-2 DK-1132 · PR #1420 open; review requested from all
+- 2026-10-16 02:35 · agent-2 DK-1114 · assigned to agent-2
