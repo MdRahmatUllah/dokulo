@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:app_pdf/components/dk_hint_pill.dart';
 import 'package:app_pdf/components/dk_camera_top_bar.dart';
 import 'package:app_pdf/components/dk_count_badge.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
@@ -563,6 +564,15 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Retake page 2'), findsOneWidget);
       expect(find.text('Front side'), findsNothing);
+      // A mode, not a hint: the primary pill (DK-1121).
+      expect(
+        tester
+            .widget<DkHintPill>(
+              find.widgetWithText(DkHintPill, 'Retake page 2'),
+            )
+            .primary,
+        isTrue,
+      );
     });
 
     testWidgets('Book: the spine guide, and the hint stays', (tester) async {

@@ -84,7 +84,14 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         if (p / "test").is_dir():
             command = ([flutter, "test", "--timeout", "60s", "--concurrency", TEST_CONCURRENCY]
                        if is_flutter(p) else [dart, "test"])
+            if p.name == "doc_core":
+                command.append("--exclude-tags=redaction-security")  # its own step, below
             out.append((f"test {p.name}", command, p))
+    # The redaction security suite (DK-0528): a release blocker, so a step
+    # of its own that the gate names when it fails.
+    core = root / "packages" / "doc_core"
+    if (core / "test").is_dir():
+        out.append(("redaction security", [dart, "test", "--tags=redaction-security"], core))
     out.append(("tools tests", [py, "-m", "pytest", "tools/tests", "-q"], root))
     out.append(("pdfa (veraPDF)", [py, "tools/check_pdfa.py"], root))
     if apk:
@@ -139,7 +146,10 @@ def gate_lock(path: Path, poll: float = 20, say=print):
     worktree's gate takes [path] (in the shared .git folder), and waits while
     a running gate holds it. A lock whose gate is gone (killed for low memory,
     say) is taken over. Waiting gates take their turn in the order they came
-    (a ticket each in [path].queue), not whoever looks first."""
+    (a ticket each in [path].queue), not whoever looks first. A waiting
+    gate touches its ticket every poll; a ticket nobody touched for a while
+    is dropped too, so a gate killed while waiting can't hold the line
+    through its pid, reused by another process (DK-1132)."""
     queue = path.with_name(path.name + ".queue")
     queue.mkdir(exist_ok=True)
     ticket = queue / f"{time.time_ns():020d}-{os.getpid()}"
@@ -153,14 +163,16 @@ def gate_lock(path: Path, poll: float = 20, say=print):
         _unlink(path)
 
 
-def _first(queue: Path) -> Path | None:
-    """The oldest ticket of a gate still running; tickets of gone gates go."""
+def _first(queue: Path, stale: float = 180) -> Path | None:
+    """The oldest ticket of a gate still waiting: its pid alive and the
+    ticket touched within [stale] seconds; other tickets go."""
     for t in sorted(queue.iterdir()):
         try:
             pid = int(t.name.split("-")[1])
-        except (IndexError, ValueError):
-            pid = -1
-        if pid > 0 and alive(pid):
+            fresh = time.time() - t.stat().st_mtime < stale
+        except (IndexError, ValueError, OSError):
+            pid, fresh = -1, False
+        if pid > 0 and fresh and alive(pid):
             return t
         _unlink(t)
     return None
@@ -168,7 +180,8 @@ def _first(queue: Path) -> Path | None:
 
 def _take(path: Path, queue: Path, ticket: Path, poll: float, say) -> None:
     while True:
-        first = _first(queue)
+        ticket.touch()
+        first = _first(queue, stale=6 * poll + 60)
         if first is not None and first != ticket:
             say(f"gate lock: waiting in line behind {first.name}", flush=True)
             time.sleep(poll)

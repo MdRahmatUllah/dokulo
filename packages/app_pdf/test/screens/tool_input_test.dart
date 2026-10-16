@@ -10,6 +10,7 @@ import 'package:app_pdf/screens/t2_tool/tool_options_providers.dart';
 import 'package:app_pdf/screens/t2_tool/tool_options_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
+import 'package:app_pdf/tools/img2pdf_tool.dart';
 import 'package:app_pdf/tools/tool_definition.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:flutter/material.dart';
@@ -107,6 +108,7 @@ void main() {
           }),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           theme: dokuloTheme(DkTokens.light),
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
@@ -166,17 +168,25 @@ void main() {
 
   testWidgets("Image to PDF: picked files that aren't images are skipped, "
       'and a banner says so (DK-0435)', (tester) async {
+    tester.view.physicalSize = const Size(393, 852);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.reset);
     devicePicks = [
       for (final name in ['IMG_0004.jpg', 'notes.txt', 'scan.pdf'])
         (File('${root.path}$sep$name')..writeAsStringSync('x')).path,
     ];
-    await pumpT2(tester, def('img2pdf'));
+    await pumpT2(tester, img2pdfDefinition);
     await tester.tap(find.text('Choose photos'));
     await settle(tester);
     expect(find.text('Images (1)'), findsOneWidget);
     expect(
       find.text("2 files aren't images and were skipped."),
       findsOneWidget,
+    );
+    // Visual QA DK-0871 (tools-convert-img2pdf): the banner over the strip.
+    await expectLater(
+      find.byType(MaterialApp),
+      matchesGoldenFile('goldens/img2pdf_qa_skipped.png'),
     );
     await tester.pumpWidget(const SizedBox());
   });

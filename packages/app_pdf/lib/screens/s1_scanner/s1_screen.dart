@@ -318,11 +318,10 @@ class _S1ScreenState extends ConsumerState<S1Screen>
       capturing: _countdown > 0,
     );
     _announcer.update(hintKind, hintKind.text(l), _clock.elapsed);
-    final hint = DkHintPill(
-      widget.retake == null
-          ? hintKind.text(l)
-          : l.camera_retake_page(widget.retake! + 1),
-    );
+    // A retake is a mode: the primary pill (design scanner-camera-retake).
+    final hint = widget.retake == null
+        ? DkHintPill(hintKind.text(l))
+        : DkHintPill(l.camera_retake_page(widget.retake! + 1), primary: true);
     // ID card draws its guide and says what to do instead of the hint;
     // Book draws its spine line and keeps the hint (the design). A retake
     // says which page it retakes, whatever the mode.
@@ -568,7 +567,13 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                                     ),
                                   ),
                                 ),
-                              SizedBox(height: 44, child: modes),
+                              // 44 high, taller at large text (DK-0635).
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  minHeight: 44,
+                                ),
+                                child: modes,
+                              ),
                               SizedBox(
                                 height: 120,
                                 child: Padding(
@@ -899,6 +904,7 @@ class _ModeSwitcher extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: t.space.m),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
