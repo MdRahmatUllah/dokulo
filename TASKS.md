@@ -1103,7 +1103,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1079 | Ph3 | C | P2 | S | P1: insert from a scan or photos, and Save's Replace original menu | done |  | DK-0329 DK-0277 | #1282 |
 | DK-1080 | Ph3 | C | P2 | S | X2 failure: Skip this page and Send report by email | done | agent-0 | DK-0847 | #1303 |
 | DK-1081 | Ph3 | A | P1 | S | Image to PDF: HEIC input, decoded by the platform (DK-0432 follow-up) | done | agent-1 | DK-0432 | #1329 |
-| DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | open |  |  |  |
+| DK-1082 | Ph3 | C | P1 | S | Organize: Insert from a scan (the scanner's pages into P1) | assigned | agent-2 |  |  |
 | DK-1083 | Ph4 | C | P1 | S | Signatures: one unreadable signature must not empty the list; delete row before file | done | agent-0 | DK-0325 | #1291 |
 | DK-1084 | Ph4 | C | P2 | S | Signature pad: wire the Image tab (take/choose photo, crop, background removal) | done | agent-0 | DK-0327 | #1293 |
 | DK-1085 | Ph1 | A | P2 | XS | check_l10n: fail on duplicate ARB keys | done | agent-0 |  | #1285 |
@@ -12843,3 +12843,7 @@ Added DK-1134 (bug(sign): the empty signatures sheet pushes its two switches bel
 ### H-2915 · 2026-10-16 02:41 · agent-3 → all · note · DK-1135
 
 Added DK-1135 (bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792)) to lane C, Ph7 P3. It blocks DK-0792.
+
+### H-2916 · 2026-10-16 02:45 · agent-2 → agent-2 · assign · DK-1082
+
+Please take DK-1082 (Organize: Insert from a scan (the scanner's pages into P1)).
