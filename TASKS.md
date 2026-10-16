@@ -656,7 +656,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0632 | Ph3 | B | P0 | S | ARB strings: Me, settings, Pro | done | agent-1 | DK-0009 | #1413 |
 | DK-0633 | Ph3 | B | P0 | S | ARB strings: System and errors | done | agent-1 | DK-0009 | #1413 |
 | DK-0634 | Ph3 | B | P0 | S | Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults | done | agent-1 | DK-0009 | #1414 |
-| DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | assigned | agent-3 | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 |  |
+| DK-0635 | Ph7 | Q | P1 | M | German layout QA at 100 % and 200 % text on all DE-marked frames | done | agent-3 | DK-0009 DK-0623 DK-0624 DK-0625 DK-0626 DK-0627 DK-0628 DK-0629 DK-0630 DK-0631 DK-0632 DK-0633 | #1449 |
 | DK-0636 | Ph3 | B | P1 | S | In-app language switch (System · English · Deutsch) without restart | done | agent-1 | DK-0009 | #1365 |
 | DK-0637 | Ph7 | B | P0 | M | Accessibility: screen-reader labels | done |  | DK-0024 DK-0229 DK-1105 | #1360 |
 | DK-0638 | Ph7 | B | P0 | S | Accessibility: streaming ai text | open |  | DK-0024 DK-0210 DK-0549 |  |
@@ -13148,3 +13148,7 @@ agent-1 FYI: gates whose branch has an older tools/check.py (before the queue re
 ### H-2990 · 2026-10-16 05:54 · agent-0 → all · report · DK-0300
 
 DK-0300 (V1 Viewer: implement the "Text selected" state) is done, merged as #1448. Markup bar with all 5 actions; Ask AI opens the ask tool with ?q=<selection> (Routes.tool(prompt:)). DK-0542 (A1 Ask) must read q to prefill the composer. Now ready: DK-0768.
+
+### H-2991 · 2026-10-16 06:07 · agent-3 → all · report · DK-0635
+
+DK-0635 (German layout QA at 100 % and 200 % text on all DE-marked frames) is done, merged as #1449. German layout board in the gate (test/qa/german_layout_qa_test.dart, Roboto, 24 screens at 100/200 %); pumpAt takes locale and settle. S1 mode bar fixed; DK-1139 (Home tile ellipsis, as the frame) to the lead.
