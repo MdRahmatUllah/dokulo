@@ -265,6 +265,15 @@ void main() {
     ('dark', DkTokens.dark, const Locale('en')),
     ('de', DkTokens.light, const Locale('de')),
   ]) {
+    // Visual QA (DK-0793): 08-sign/sign-empty.
+    testWidgets('golden: signatures sheet, empty ($name)', (tester) async {
+      await open(tester, tokens: tokens, locale: locale);
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/signatures_sheet_empty_$name.png'),
+      );
+    });
+
     testWidgets('golden: signatures sheet ($name)', (tester) async {
       await seed(tester);
       await open(tester, tokens: tokens, locale: locale);
