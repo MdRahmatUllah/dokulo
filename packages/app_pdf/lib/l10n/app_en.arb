@@ -3115,5 +3115,18 @@
   "notice_job_failed_body": "Tap to see what happened",
   "@notice_job_failed_body": {"description": "Notice body of a failed job (§25.1)."},
   "notice_files": "{count, plural, =1{1 file} other{{count} files}}",
-  "@notice_files": {"description": "Notice body when a tool made several files.", "placeholders": {"count": {"type": "int"}}}
+  "@notice_files": {"description": "Notice body when a tool made several files.", "placeholders": {"count": {"type": "int"}}},
+  "notice_photos_found": "{count, plural, =1{Found 1 document in your photos} other{Found {count} documents in your photos}}",
+  "@notice_photos_found": {
+    "description": "Notice title when the photo finder ends in the background with documents found (§25.1; DK-0592).",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notice_photos_body": "Tap to review",
+  "@notice_photos_body": {
+    "description": "Photo finder notice body: tapping opens the results (§25.1; DK-0592)."
+  }
 }

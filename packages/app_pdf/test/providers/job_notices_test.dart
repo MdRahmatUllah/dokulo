@@ -60,4 +60,39 @@ void main() {
     expect(n.title, "Couldn't finish Compress PDF");
     expect(n.body, 'Tap to see what happened');
   });
+
+  test('photo finder (DK-0592): EN/DE titles with the count', () async {
+    final shown = <JobNotice>[];
+    for (final language in [AppLanguage.english, AppLanguage.deutsch]) {
+      final container = ProviderContainer(
+        overrides: [
+          appLanguageSettingProvider.overrideWithBuild((ref, _) => language),
+          appInBackgroundProvider.overrideWithValue(() => true),
+          jobNoticesProvider.overrideWithValue(_Notices(shown)),
+        ],
+      );
+      addTearDown(container.dispose);
+      for (final n in [1, 37, 0]) {
+        container.read(Provider((ref) => photoFinderNoticeIfAway(ref, n)));
+      }
+    }
+    expect(
+      [for (final n in shown) (n.title, n.body)],
+      [
+        ('Found 1 document in your photos', 'Tap to review'),
+        ('Found 37 documents in your photos', 'Tap to review'),
+        ('1 Dokument in deinen Fotos gefunden', 'Zum Ansehen tippen'),
+        ('37 Dokumente in deinen Fotos gefunden', 'Zum Ansehen tippen'),
+      ],
+      reason: 'none for 0 found',
+    );
+    expect(shown.first.id, photoFinderNoticeId);
+  });
+}
+
+class _Notices implements JobNotices {
+  _Notices(this.shown);
+  final List<JobNotice> shown;
+  @override
+  Future<void> show(JobNotice notice) async => shown.add(notice);
 }

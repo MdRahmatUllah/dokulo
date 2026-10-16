@@ -110,16 +110,7 @@ JobNotice jobEndedNotice(
   JobOutput? output,
   bool failed = false,
 }) {
-  final locale =
-      ref.read(appLanguageSettingProvider).locale ??
-      PlatformDispatcher.instance.locale;
-  final l = lookupAppLocalizations(
-    AppLocalizations.supportedLocales.any(
-          (s) => s.languageCode == locale.languageCode,
-        )
-        ? locale
-        : const Locale('en'),
-  );
+  final l = _l10n(ref);
   final tool = ToolCatalogue.of(toolId).name(l);
   return JobNotice(
     id: jobId,
@@ -132,6 +123,47 @@ JobNotice jobEndedNotice(
         ? l.notice_job_failed_body
         : _what(output, l),
     link: Routes.job(jobId),
+  );
+}
+
+/// The notice's language: the app's, else the phone's (English when Dokulo
+/// doesn't speak it).
+AppLocalizations _l10n(Ref ref) {
+  final locale =
+      ref.read(appLanguageSettingProvider).locale ??
+      PlatformDispatcher.instance.locale;
+  return lookupAppLocalizations(
+    AppLocalizations.supportedLocales.any(
+          (s) => s.languageCode == locale.languageCode,
+        )
+        ? locale
+        : const Locale('en'),
+  );
+}
+
+/// The photo finder's notice's id: job ids start at 1, so it never
+/// replaces a job's notice (and a later scan's replaces this one).
+const photoFinderNoticeId = 0;
+
+/// Photo finder done (§25.1; DK-0592): "Found 37 documents in your photos",
+/// "Tap to review", opening the results. Only in the background, and only
+/// when it found something.
+void photoFinderNoticeIfAway(Ref ref, int found) {
+  if (found == 0 || !ref.read(appInBackgroundProvider)()) return;
+  final l = _l10n(ref);
+  unawaited(
+    ref
+        .read(jobNoticesProvider)
+        .show(
+          JobNotice(
+            id: photoFinderNoticeId,
+            channel: 'jobs',
+            channelName: l.notice_channel_jobs,
+            title: l.notice_photos_found(found),
+            body: l.notice_photos_body,
+            link: Routes.photos,
+          ),
+        ),
   );
 }
 
