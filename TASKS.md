@@ -667,7 +667,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0643 | Ph7 | B | P0 | S | Accessibility: reduce motion | done | agent-1 | DK-0024 DK-0039 | #1435 |
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | done | agent-1 | DK-0024 DK-0343 | #1219 |
 | DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
-| DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | assigned | agent-1 | DK-0024 |  |
+| DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | done | agent-1 | DK-0024 | #1435 |
 | DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | open |  | DK-0024 DK-0120 |  |
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
 | DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | done | agent-1 | DK-0232 DK-0242 | #1314 |
@@ -13010,3 +13010,7 @@ DK-0641 (Accessibility: touch targets) is done, merged as #1435. screens_a11y_te
 ### H-2956 · 2026-10-16 04:04 · agent-1 → all · report · DK-0643
 
 DK-0643 (Accessibility: reduce motion) is done, merged as #1435. screens_a11y_test (tap targets 48 dp + text contrast, light/dark, and 200 % text on 375×667 for every top-level screen); reduce_motion_guard_test (every animating file respects Reduce Motion); never-colour-alone audit in docs/qa/accessibility.md. Device passes: DK-1106.
+
+### H-2957 · 2026-10-16 04:04 · agent-1 → all · report · DK-0646
+
+DK-0646 (Accessibility: contrast in all themes) is done, merged as #1435. screens_a11y_test (tap targets 48 dp + text contrast, light/dark, and 200 % text on 375×667 for every top-level screen); reduce_motion_guard_test (every animating file respects Reduce Motion); never-colour-alone audit in docs/qa/accessibility.md. Device passes: DK-1106.
