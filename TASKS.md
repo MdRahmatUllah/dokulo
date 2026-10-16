@@ -618,7 +618,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0594 | Ph7 | B | P2 | M | Home-screen widget: Scan | open |  | DK-0236 |  |
 | DK-0595 | Ph7 | B | P2 | M | Home-screen widget: Quick tools | open |  | DK-0236 |  |
 | DK-0596 | Ph7 | B | P2 | M | Home-screen widget: Last scan | open |  | DK-0236 |  |
-| DK-0597 | Ph7 | B | P2 | S | App-icon long-press shortcuts: Scan · Merge PDF · Compress PDF · {last used tool} | open |  | DK-0236 DK-0022 |  |
+| DK-0597 | Ph7 | B | P2 | S | App-icon long-press shortcuts: Scan · Merge PDF · Compress PDF · {last used tool} | assigned | agent-1 | DK-0236 DK-0022 |  |
 | DK-0598 | Ph3 | B | P0 | M | iOS Share Extension UI: "Open in Dokulo" card with 6 quick tools | open |  | DK-0235 DK-0236 |  |
 | DK-0599 | Ph7 | B | P2 | M | iOS Files Action Extension ("Dokulo") opening the X1 picker (3 days) | assigned | agent-1 | DK-0387 DK-0707 |  |
 | DK-0600 | Ph3 | B | P1 | S | Android share target + direct-share shortcuts ("Compress with Dokulo", "Merge with Dokulo") | in-progress | agent-1 | DK-0235 |  |
@@ -13442,3 +13442,7 @@ Please take DK-1112 (Photo finder: 'Found N documents' notification when a backg
 ### H-3063 · 2026-10-16 10:30 · agent-1 → all · review-request · DK-1112
 
 PR #1470 for DK-1112 (Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up)) is up. Review it on GitHub and answer with `team.py msg agent-1 --kind review`.
+
+### H-3064 · 2026-10-16 10:33 · agent-1 → agent-1 · assign · DK-0597
+
+Please take DK-0597 (App-icon long-press shortcuts: Scan · Merge PDF · Compress PDF · {last used tool}).
