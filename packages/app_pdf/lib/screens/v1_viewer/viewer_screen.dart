@@ -601,15 +601,28 @@ Map<int, PageAnnotEdits> markupEdits(
         s.page: PageAnnotEdits(
           add: [
             MarkupAnnot(kind, [
-              for (final b in s.lines)
-                (
-                  (x: b.left, y: b.top),
-                  (x: b.right, y: b.top),
-                  (x: b.left, y: b.bottom),
-                  (x: b.right, y: b.bottom),
-                ),
+              for (final line in s.lines) _quad(line),
             ], color: argb),
           ],
         ),
+  };
+}
+
+/// A line's quad, corners in the PDF order (upper left, upper right, lower
+/// left, lower right) as the text reads: an underline runs under the letters
+/// on sideways or upside-down text too (DK-1138).
+MarkupQuad _quad(LineRun line) {
+  final b = line.box;
+  final (lt, rt, lb, rb) = (
+    (x: b.left, y: b.top),
+    (x: b.right, y: b.top),
+    (x: b.left, y: b.bottom),
+    (x: b.right, y: b.bottom),
+  );
+  return switch (line.dir) {
+    LineDir.right => (lt, rt, lb, rb),
+    LineDir.up => (lb, lt, rb, rt),
+    LineDir.left => (rb, lb, rt, lt),
+    LineDir.down => (rt, rb, lt, lb),
   };
 }

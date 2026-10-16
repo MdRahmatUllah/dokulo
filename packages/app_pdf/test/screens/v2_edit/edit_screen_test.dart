@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:app_pdf/screens/v2_edit/annotation_editor.dart' show EditTool;
 import 'package:app_pdf/screens/v2_edit/form_layer.dart';
 import 'package:app_pdf/components/dk_editor_bars.dart';
+import 'package:app_pdf/components/dk_signature_card.dart';
 import 'package:app_pdf/components/dk_top_bar.dart';
 import 'package:app_pdf/components/dk_text_action.dart';
 import 'package:app_pdf/l10n/app_localizations.dart';
@@ -11,6 +13,7 @@ import 'package:app_pdf/providers/file_providers.dart';
 import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/providers/signature_providers.dart';
+import 'package:app_pdf/screens/sign/signatures_sheet.dart';
 import 'package:app_pdf/screens/v2_edit/edit_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -19,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image/image.dart' as img;
 import 'package:pdfrx/pdfrx.dart';
 
 String fixture(String name) =>
@@ -593,6 +597,38 @@ void main() {
         await tester.tap(find.text('Cancel'));
         await tester.pumpAndSettle();
         await shot(tester, 'discard');
+      });
+
+      // DK-0794 (sign-placed): a saved signature picked from the sheet
+      // lands centred and selected, the date beside it.
+      testWidgets('sign-placed ($name)', (tester) async {
+        prefs = Prefs.memory({signAddDateKey: true});
+        await tester.runAsync(() async {
+          final im = img.Image(width: 120, height: 48, numChannels: 4);
+          img.drawLine(
+            im,
+            x1: 8,
+            y1: 36,
+            x2: 112,
+            y2: 12,
+            color: img.ColorRgba8(26, 43, 109, 255),
+            thickness: 4,
+          );
+          await SignatureStore(
+            db,
+            Directory('${root.path}/signatures'),
+            LockedCipher(List.filled(32, 1)),
+          ).add(
+            SignatureKind.signature,
+            Uint8List.fromList(img.encodePng(im)),
+            ink: SignatureInk.blue,
+          );
+        });
+        await pump(tester, tokens: tokens, fromSign: true);
+        await settle(tester, rounds: 10);
+        await tester.tap(find.byType(DkSignatureCard).first);
+        await settle(tester, rounds: 10);
+        await shot(tester, 'signplaced');
       });
     }
   });

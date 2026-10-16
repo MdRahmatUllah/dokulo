@@ -98,6 +98,10 @@ class _SecurityState extends ConsumerState<SecuritySettingsScreen> {
                       ? (on) => prefs.set('security.appLock', on)
                       : null,
                 ),
+                // The whole row toggles, as the platforms do (DK-1108).
+                onTap: hasPin
+                    ? () => prefs.set('security.appLock', !settings.appLock)
+                    : null,
               ),
               if (kind != null)
                 DkSettingsRow(
@@ -106,6 +110,7 @@ class _SecurityState extends ConsumerState<SecuritySettingsScreen> {
                     value: _bio ?? false,
                     onChanged: hasPin ? _bioChanged : null,
                   ),
+                  onTap: hasPin ? () => _bioChanged(!(_bio ?? false)) : null,
                 ),
               Builder(
                 builder: (anchor) => DkSettingsRow(
@@ -132,6 +137,7 @@ class _SecurityState extends ConsumerState<SecuritySettingsScreen> {
                   value: hide,
                   onChanged: ref.read(hidePreviewsProvider.notifier).set,
                 ),
+                onTap: () => ref.read(hidePreviewsProvider.notifier).set(!hide),
               ),
               DkSettingsRow(
                 title: l.security_change_pin,

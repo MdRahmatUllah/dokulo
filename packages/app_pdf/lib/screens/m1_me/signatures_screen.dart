@@ -181,7 +181,8 @@ class SignaturesScreen extends ConsumerWidget {
           section(SignatureKind.initials),
           Padding(
             padding: EdgeInsets.fromLTRB(t.space.l, t.space.xl, t.space.l, 0),
-            child: DkBanner(text: l.me_signatures_banner),
+            // The lock (me-signatures): the banner is about encryption.
+            child: DkBanner(text: l.me_signatures_banner, icon: DkIcons.lock),
           ),
         ],
       ),

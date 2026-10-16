@@ -20,6 +20,7 @@ show is checked in the gate by `tools/check_design_de.py` (#1413).
 | DK-0789 | `edit-textopts` | **DK-1131**: seven colours; a stepper for the size |
 | DK-0790 | `edit-shapesopts` | **DK-1131**: the shape choice last; the highlighter colours |
 | DK-0791 | `edit-eraser` | Match: Mode, Object · Stroke and the explanation |
+| DK-0794 | `08-sign/sign-placed` | **DK-1140**: the toast only after Done; Pan stays selected |
 
 **DK-1131** (P2, lane C) has the details. Two of them are §17.2's own
 words, not only the frames': a text box is edited inline on the page with a
@@ -33,3 +34,11 @@ stroke already drawn; the golden is the moment Pen is picked.
 
 Not checked here: DK-0781 (highlighter on text) and DK-0786 (form filling)
 wait for their tasks.
+
+**DK-1140** (P3, lane C): sign-placed (`edit_qa_signplaced_*`, a saved
+signature picked from the sheet with "Add date" on). The stamp lands centred
+and selected with the date in its box; the frame also shows "Signed on page
+12 · Undo" at once and Sign selected in the strip, where the app shows the
+toast after Done (on V1) and keeps Pan. Approved: the annotation bar instead
+of the frame's × chip (as edit-annsel); the date right-aligned in the
+stamp's box (§17.3: right of it, grouped).

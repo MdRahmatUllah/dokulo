@@ -1,5 +1,6 @@
 import 'package:app_pdf/components/dk_banner.dart';
 import 'package:app_pdf/components/dk_icon.dart';
+import 'package:app_pdf/photo_finder/photo_finder.dart' show photoFinderKey;
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
 import 'package:app_pdf/screens/home/photo_banner.dart';
@@ -65,6 +66,18 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Allow photo access'), findsOneWidget);
     expect(prefsOf(tester)[photoBannerKey], 'used');
+  });
+
+  testWidgets('the photo finder already on (M3 Scanning): no banner', (
+    tester,
+  ) async {
+    await pumpHome(
+      tester,
+      db,
+      prefs: {firstUseKey: daysAgo(30), photoFinderKey: true},
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(DkBanner), findsNothing);
   });
 
   testWidgets('already used or dismissed: never again', (tester) async {
