@@ -110,7 +110,7 @@ JobNotice jobEndedNotice(
   JobOutput? output,
   bool failed = false,
 }) {
-  final l = _l10n(ref);
+  final l = appL10n(ref);
   final tool = ToolCatalogue.of(toolId).name(l);
   return JobNotice(
     id: jobId,
@@ -126,9 +126,9 @@ JobNotice jobEndedNotice(
   );
 }
 
-/// The notice's language: the app's, else the phone's (English when Dokulo
-/// doesn't speak it).
-AppLocalizations _l10n(Ref ref) {
+/// The app's language outside a widget (notices, shortcuts): the app's,
+/// else the phone's (English when Dokulo doesn't speak it).
+AppLocalizations appL10n(Ref ref) {
   final locale =
       ref.read(appLanguageSettingProvider).locale ??
       PlatformDispatcher.instance.locale;
@@ -150,7 +150,7 @@ const photoFinderNoticeId = 0;
 /// when it found something.
 void photoFinderNoticeIfAway(Ref ref, int found) {
   if (found == 0 || !ref.read(appInBackgroundProvider)()) return;
-  final l = _l10n(ref);
+  final l = appL10n(ref);
   unawaited(
     ref
         .read(jobNoticesProvider)
