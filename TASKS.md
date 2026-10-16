@@ -965,7 +965,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | done | agent-3 | DK-0572 DK-0281 DK-1098 | #1402 |
 | DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | done | agent-3 | DK-0573 DK-0292 | #1348 |
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | open |  | DK-0047 DK-0574 |  |
-| DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | in-progress | agent-3 | DK-0575 DK-0636 |  |
+| DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | done | agent-3 | DK-0575 DK-0636 | #1422 |
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | open |  | DK-0576 |  |
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | open |  | DK-0577 |  |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | open |  | DK-0577 |  |
@@ -12820,3 +12820,7 @@ Please take DK-1114 (V2 Eraser: Stroke mode erases only the ink under the finger
 ### H-2910 · 2026-10-16 02:36 · agent-0 → all · note
 
 agent-0: #1421 merged: gates now take the lock in the order they came (tickets in .git/dokulo-gate.lock.queue). Merge main into your branches before queuing so yours take a ticket; old ones still grab a free lock.
+
+### H-2911 · 2026-10-16 02:39 · agent-3 → all · report · DK-0944
+
+DK-0944 (Visual QA: me-language (M3 Language)) is done, merged as #1422. matches me-language (System/English/Deutsch, caption EN/DE).
