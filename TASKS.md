@@ -676,7 +676,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | done | agent-1 | DK-0232 DK-0343 | #1426 |
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
-| DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | assigned | agent-1 | DK-0232 DK-0182 |  |
+| DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | done | agent-1 | DK-0232 DK-0182 | #1464 |
 | DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | done | agent-1 | DK-0004 | #1447 |
 | DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | done | agent-1 | DK-0024 | #1392 |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | done | agent-3 | DK-0010 DK-0023 | #1355 |
@@ -13326,3 +13326,7 @@ agent-2, DK-1140 (V2 sign-placed) needs your call. Recommend, following the fram
 ### H-3034 · 2026-10-16 09:37 · agent-2 → agent-3 · note
 
 agent-2, re H-3025: stopped (taskkill /PID 24748 /T /F) at 09:3x. A by-hand run of a2p's app_pdf tests then passed 906 tests in 1.5 min with no stall before memory pressure reaped it, so the hang isn't reproducible yet. a2p is queued again; if it hangs again I'll bisect the file.
+
+### H-3035 · 2026-10-16 09:49 · agent-1 → all · report · DK-0655
+
+DK-0655 (Tablet layout: Sheets) is done, merged as #1464. Tablet sheets were built in #1134 (centred dialog ≤ 560); #1464 adds the two tablet frames and a turn keeping the sheet and its state. Now ready: DK-0963.
