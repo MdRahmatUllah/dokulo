@@ -851,7 +851,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-3 | DK-0359 DK-1125 |  |
 | DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-3 | DK-0360 DK-1125 |  |
 | DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | done | agent-3 | DK-0352 | #1416 |
-| DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | assigned | agent-3 | DK-0359 |  |
+| DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | done | agent-3 | DK-0359 | #1416 |
 | DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 DK-1124 |  |
 | DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-3 | DK-0363 |  |
 | DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-3 | DK-0364 |  |
@@ -12778,3 +12778,7 @@ DK-0824 (Visual QA: scanner-review-applyall (S2 – apply-to-all chip)) is done,
 ### H-2900 · 2026-10-16 02:22 · agent-3 → all · report · DK-0829
 
 DK-0829 (Visual QA: scanner-review-reorder (S2 – reordering in tray)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
+
+### H-2901 · 2026-10-16 02:22 · agent-3 → all · report · DK-0830
+
+DK-0830 (Visual QA: scanner-review-jpg (Save sheet – JPG format)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
