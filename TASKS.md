@@ -1138,7 +1138,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | assigned | agent-2 |  |  |
 | DK-1115 | Ph4 | C | P1 | M | V2 Text: edit text in place on the page (caret, dashed outline, width handles) per UI spec §17.2 (DK-0317 follow-up) | open |  |  |  |
 | DK-1116 | Ph4 | C | P1 | S | V2 Note: the note sheet with Done in the header and a Colour row (design edit-note) (DK-0319 follow-up) | assigned | agent-2 |  |  |
-| DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | open |  |  |  |
+| DK-1117 | Ph4 | C | P1 | M | Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up) | assigned | agent-2 |  |  |
 | DK-1118 | Ph7 | C | P2 | M | Compress on large tablets: the preview pane shows the chosen level's live preview with Before/After and a 200 % crop, in T2 and T3 (found in DK-0969, DK-0970) | open |  | DK-0464 |  |
 | DK-1119 | Ph7 | C | P3 | XS | bug(tool-shell): T2's 'More options' row is drawn in primary blue; the frame and §20.1 use titleS in textPrimary (found in DK-0860) | open |  |  |  |
 | DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | done | agent-2 |  | #1430 |
@@ -12965,3 +12965,7 @@ Please take DK-1122 (Sign: 'Sign here' pills on signature fields, placing into t
 ### H-2945 · 2026-10-16 03:44 · agent-0 → all · report · DK-1107
 
 DK-1107 (bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budget (found in DK-0670)) is done, merged as #1381. Met by #1381: docs/size-budget.md and size_check's ABI_BUDGET_MB give x86_64 (emulators, Chromebooks) its own 100 MB budget, the lead's decision; the OpenCV trim stays optional.
+
+### H-2946 · 2026-10-16 03:45 · agent-2 → agent-2 · assign · DK-1117
+
+Please take DK-1117 (Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up)).
