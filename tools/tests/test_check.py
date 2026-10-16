@@ -102,3 +102,22 @@ def test_gate_lock_takes_turns_in_order(tmp_path: Path) -> None:
     t.join(5)
     assert entered.is_set()
     assert not lock.exists() and list(queue.iterdir()) == []
+
+
+def test_an_untouched_ticket_does_not_hold_the_line(tmp_path: Path) -> None:
+    import os
+    import time as clock
+
+    lock = tmp_path / "gate.lock"
+    queue = lock.with_name(lock.name + ".queue")
+    queue.mkdir()
+    # A live pid (this very process: a reused pid) on a ticket nobody has
+    # touched for an hour: its gate is gone.
+    old = queue / f"{0:020d}-{os.getpid()}"
+    old.touch()
+    hour_ago = clock.time() - 3600
+    os.utime(old, (hour_ago, hour_ago))
+    with check.gate_lock(lock, poll=0.02, say=lambda *a, **k: None):
+        assert lock.exists()
+    assert not old.exists()
+
