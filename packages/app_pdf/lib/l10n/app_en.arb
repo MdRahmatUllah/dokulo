@@ -3009,5 +3009,13 @@
         "type": "String"
       }
     }
+  },
+  "licences_search": "Search licences",
+  "@licences_search": {
+    "description": "M3 Open-source licences: the search field's hint (DK-0577, me-licences)."
+  },
+  "licence_title": "Licence",
+  "@licence_title": {
+    "description": "One licence's page title (DK-0577, me-licence)."
   }
 }
