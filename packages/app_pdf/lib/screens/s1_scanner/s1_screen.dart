@@ -567,7 +567,13 @@ class _S1ScreenState extends ConsumerState<S1Screen>
                                     ),
                                   ),
                                 ),
-                              SizedBox(height: 44, child: modes),
+                              // 44 high, taller at large text (DK-0635).
+                              ConstrainedBox(
+                                constraints: const BoxConstraints(
+                                  minHeight: 44,
+                                ),
+                                child: modes,
+                              ),
                               SizedBox(
                                 height: 120,
                                 child: Padding(
@@ -898,6 +904,7 @@ class _ModeSwitcher extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: t.space.m),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
