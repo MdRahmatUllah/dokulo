@@ -998,7 +998,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0974 | Ph7 | Q | P2 | XS | Visual QA: tablet-compare-portrait (tablet-compare-portrait) | open |  | DK-0653 |  |
 | DK-0975 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-landscape (tablet-paywall-landscape) | open |  | DK-0580 DK-0654 |  |
 | DK-0976 | Ph7 | Q | P2 | XS | Visual QA: tablet-paywall-portrait (tablet-paywall-portrait) | open |  | DK-0654 |  |
-| DK-0977 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-landscape (tablet-scanner-landscape) | assigned | agent-3 | DK-0652 |  |
+| DK-0977 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-landscape (tablet-scanner-landscape) | assigned | agent-3 | DK-0652 DK-1137 |  |
 | DK-0978 | Ph7 | Q | P2 | XS | Visual QA: tablet-scanner-portrait (tablet-scanner-portrait) | assigned | agent-3 | DK-0652 |  |
 | DK-0979 | Ph7 | Q | P2 | XS | Visual QA: system-surfaces (system-surfaces) | open |  | DK-0072 DK-0587 DK-0588 DK-0589 DK-0590 DK-0591 DK-0592 DK-0593 |  |
 | DK-0980 | Ph7 | Q | P2 | XS | Visual QA: global-states (global-states) | done | agent-0 | DK-0601 DK-0602 DK-0603 DK-0604 DK-0605 DK-0606 DK-0607 DK-0608 | #1230 |
@@ -1158,6 +1158,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | open |  |  |  |
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
 | DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | open |  |  |  |
+| DK-1137 | Ph7 | C | P3 | S | S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area | open |  |  |  |
 
 ## Locks
 
@@ -12880,3 +12881,7 @@ Please take DK-1133 (bug(me): Me › Signatures' banner shows an info icon; the 
 ### H-2924 · 2026-10-16 03:10 · agent-3 → all · heads-up
 
 agent-3: F: is at 1.2 GB free (03:xx). Gates will fail on disk (errno 112 / LNK1180), not on code. agent-1 (a1b..a1z) and agent-0 (a0b..a0g): please 'git worktree remove --force' each worktree whose PR has merged. Mine: agent-3, a3b, a3c (all with open work); I'll remove a3b/a3c as soon as their PRs merge.
+
+### H-2925 · 2026-10-16 03:11 · agent-3 → all · note · DK-1137
+
+Added DK-1137 (S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area) to lane C, Ph7 P3. It blocks DK-0977.
