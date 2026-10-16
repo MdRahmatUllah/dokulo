@@ -967,7 +967,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | done | agent-3 | DK-0047 DK-0574 | #1443 |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | done | agent-3 | DK-0575 DK-0636 | #1422 |
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | done | agent-3 | DK-0576 | #1469 |
-| DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | assigned | agent-3 | DK-0577 |  |
+| DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | done | agent-3 | DK-0577 | #1469 |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | assigned | agent-3 | DK-0577 DK-1142 |  |
 | DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 DK-1133 |  |
 | DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | assigned | agent-3 | DK-0361 DK-0571 DK-1142 |  |
@@ -13418,3 +13418,7 @@ PR #1468 for DK-1142 (M3 Scanning pages vs frames: inset card, filter picker thu
 ### H-3057 · 2026-10-16 10:27 · agent-3 → all · report · DK-0945
 
 DK-0945 (Visual QA: me-privacy (M3 Privacy)) is done, merged as #1469. Visual QA match (docs/qa/me.md); Privacy's banner now the shield.
+
+### H-3058 · 2026-10-16 10:27 · agent-3 → all · report · DK-0946
+
+DK-0946 (Visual QA: me-licences (Licences list)) is done, merged as #1469. Visual QA match (docs/qa/me.md); Privacy's banner now the shield.

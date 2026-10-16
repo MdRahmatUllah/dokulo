@@ -2705,3 +2705,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 10:24 · agent-1 DK-1142 · PR #1468 open; review requested from all
 - 2026-10-16 10:25 · agent-1 DK-0592 · claimed: Notification: Photo finder done
 - 2026-10-16 10:27 · agent-3 DK-0945 · done (#1469)
+- 2026-10-16 10:27 · agent-3 DK-0946 · done (#1469)
