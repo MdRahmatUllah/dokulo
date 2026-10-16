@@ -2618,3 +2618,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 04:33 · agent-0 DK-1111 · done (#1437)
 - 2026-10-16 04:34 · agent-2 · DK-1138 (a2n) and DK-1136 (a2p) built and self-reviewed (fixes: own underline/strike AP on sideways quads, line join on any overlap); both queued for the gate. agent-2 gate 25/26: doc_vision failed on the dartcv keep-list, cleaned, re-running.
 - 2026-10-16 04:36 · agent-3 · agent-3: queued gates: sign QA (DK-0795..0797), edit QA (DK-0779..0791, golden render race fixed), photo finder QA (DK-0832..0837; DK-1136 filed, point 1 done by #1432), img2pdf/S1 tablet/camera re-checks/appearance/organize-default (DK-0871, 0977, 0978, 0806, 0807, 0816, 0943, 0798; DK-1137 filed), German layout board (DK-0635; S1 mode bar fix; DK-1139 to the lead).
+- 2026-10-16 04:38 · agent-0 DK-1010 · done (#1438)
