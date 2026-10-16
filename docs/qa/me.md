@@ -18,6 +18,7 @@ Cache leeren, App lock / App-Sperre, Lock after / Sperren nach, 1 min /
 | DK-0937 | `22-me-settings/me-mepro` | 2 deviations: DK-1097 |
 | DK-0941 | `22-me-settings/me-files` | 1 deviation: DK-1098; 2 approved |
 | DK-0942 | `22-me-settings/me-security` | Match, 1 approved |
+| DK-0944 | `22-me-settings/me-language` | Match |
 
 ## M1 · Me – Pro (DK-0937)
 
@@ -55,3 +56,12 @@ biometric name, the switches, "1 min" with its chevron, Change locked folder
 PIN. Approved: the top bar's title is left-aligned on Android and centred on
 iOS (§11.6 DkTopBar); the frame shows the iOS one, as on the other pushed
 pages (`folders.md`, `search-trash.md`).
+
+## M3 · Language (DK-0944)
+
+Board: `qa_me_language_*` (light, dark, German), the real page with no
+language chosen. Matches the frame: the three radio rows System · English ·
+Deutsch (German: System · Englisch · Deutsch) in one inset card with the
+check on System, and the caption "Changes immediately. No restart needed." /
+"Wird sofort übernommen. Kein Neustart nötig." under it. The top bar's title
+is left-aligned on Android (§11.6), as on the other pushed pages.

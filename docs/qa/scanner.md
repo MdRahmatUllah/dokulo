@@ -86,3 +86,27 @@ Approved (crop):
 The S2 states without a golden (apply to all, deleted, discard, reorder,
 JPG) and the small deviations of filter, save and result (DK-1125) follow in
 the next pass; Book's two pages are DK-1124.
+
+## S2 states, save and result (DK-0823 to DK-0831)
+
+New goldens in `test/screens/s2_screen_test.dart`'s "visual QA" group
+(`s2_qa_<frame>_<theme>.png`: apply to all, deleted, discard, reorder, JPG,
+light, dark, German); filter, save and result on agent-2's `s2_filter_*`,
+`s2_save_*`, `scan_result_*`. Frames in [scanner/](scanner/).
+
+| Task | Frame | Result |
+| --- | --- | --- |
+| DK-0823 | `scanner-review-filter` | **DK-1125**: the Adjust sliders are stacked |
+| DK-0824 | `scanner-review-applyall` | Match: a rotation offers "Apply to all pages" |
+| DK-0825 | `scanner-review-deleted` | **DK-1127**: the toast covers the tray |
+| DK-0826 | `scanner-review-discard` | **DK-1127**: no danger icon in the dialog |
+| DK-0827 | `scanner-review-save` | **DK-1125**: no dividers; Folder on one line |
+| DK-0828 | `scanner-review-result` | **DK-1125**: no page strip; the name as text |
+| DK-0829 | `scanner-review-reorder` | Match: the lifted page and its empty slot |
+| DK-0830 | `scanner-review-jpg` | Match, 1 approved |
+| DK-0831 | `scanner-review-book` | **DK-1124**: a spread isn't split into two pages |
+
+Approved: in JPG the save sheet has no "Make text searchable" row (the
+frame keeps it): images carry no text layer, and `s2_screen_test` asserts
+it on purpose. The filter strip's wide gaps in the goldens are the test
+font's wide names, not the layout.

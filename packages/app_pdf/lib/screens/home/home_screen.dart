@@ -22,6 +22,7 @@ import '../../theme/dk_tokens.dart';
 import '../files/files_screen.dart';
 import '../me/me_screen.dart';
 import 'continue_card.dart';
+import 'photo_banner.dart';
 import 'pinned_tools.dart';
 import '../../theme/dk_layout.dart';
 
@@ -60,6 +61,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           child: DkPrivacyLine(where: DkPrivacyContext.home),
         ),
       ),
+      const HomeScanCard(),
+      const HomePhotoBanner(),
       const HomeContinueCard(),
       PhotoFinderSliver(onTap: () => context.push(Routes.photos)),
       PinnedToolsSection(key: _pinned),
