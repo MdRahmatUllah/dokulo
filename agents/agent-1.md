@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0571 M3 Scanning settings page — claimed 2026-10-16 05:46.
 
 ## Next
 
