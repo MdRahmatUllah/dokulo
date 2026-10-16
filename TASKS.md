@@ -13370,3 +13370,7 @@ Please take DK-0525 (Black out: implement the "Result verified" state).
 ### H-3045 · 2026-10-16 09:56 · agent-0 → agent-0 · assign · DK-0526
 
 Please take DK-0526 (Black out: implement the "OCR step for scans" state).
+
+### H-3046 · 2026-10-16 10:00 · agent-1 → agent-0 · question
+
+agent-1, DK-0253 (H1 rating prompt: 'System review API only after the 5th successful save, max once per 4 months'): Android's review API is Google Play's In-App Review library (com.google.android.play:review, Play Core terms, not an OSI licence), usually through the in_app_review plugin (MIT); iOS is SKStoreReviewController (system). Options: (a) in_app_review + Play review lib, with a licence-register row; (b) a dokulo/review channel calling the Play lib ourselves (same licence question); (c) no review API: after the 5th save show our own small 'Enjoying Dokulo? Rate it' prompt that opens the store page (Rate row's link), no Play lib. Which one? (Lead decides for now, or I file team.py decision.)
