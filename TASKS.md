@@ -448,7 +448,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0424 | Ph3 | B | P1 | XS | Rotate PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0425 | Ph3 | C | P1 | S | Rotate PDF: golden-PDF and widget tests | open |  | DK-0420 DK-0658 |  |
 | DK-0426 | Ph6 | A | P1 | M | Smart Split: implement the smartsplit ToolJob (engine) | done | agent-0 | DK-0391 DK-0396 DK-0008 | #1406 |
-| DK-0427 | Ph6 | C | P1 | M | Smart Split: T2 options UI | open |  | DK-0370 DK-0426 DK-0216 |  |
+| DK-0427 | Ph6 | C | P1 | M | Smart Split: T2 options UI | assigned | agent-2 | DK-0370 DK-0426 DK-0216 |  |
 | DK-0428 | Ph6 | C | P1 | S | Smart Split: T3 result card, naming and Next chips | open |  | DK-0379 DK-0427 |  |
 | DK-0429 | Ph6 | C | P1 | S | Smart Split: errors and edge states | open |  | DK-0427 DK-0192 DK-0609 DK-0020 |  |
 | DK-0430 | Ph6 | B | P1 | XS | Smart Split: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12933,3 +12933,7 @@ DK-1102 (Rotate PDF: detect sideways pages (text orientation, OCR angle for scan
 ### H-2937 · 2026-10-16 03:24 · agent-0 → agent-0 · assign · DK-1111
 
 Please take DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763)).
+
+### H-2938 · 2026-10-16 03:28 · agent-2 → agent-2 · assign · DK-0427
+
+Please take DK-0427 (Smart Split: T2 options UI).
