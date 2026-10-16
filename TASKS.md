@@ -537,7 +537,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0513 | Ph3 | C | P1 | S | Extract images & text: errors and edge states | open |  | DK-0511 DK-0609 DK-0020 |  |
 | DK-0514 | Ph3 | B | P1 | XS | Extract images & text: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0515 | Ph3 | C | P1 | S | Extract images & text: golden-PDF and widget tests | open |  | DK-0510 DK-0658 |  |
-| DK-0516 | Ph3 | C | P0 | XS | Organize pages tool entry: opens P1 directly (toast instead of T3) | open |  | DK-0329 |  |
+| DK-0516 | Ph3 | C | P0 | XS | Organize pages tool entry: opens P1 directly (toast instead of T3) | assigned | agent-2 | DK-0329 |  |
 | DK-0517 | Ph4 | C | P0 | XS | Mark up tool entry: opens V2 with the Highlighter selected; saved as a new version | done | agent-2 | DK-0313 | #1399 |
 | DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | done | agent-2 | DK-0323 DK-0313 | #1408 |
 | DK-0519 | Ph4 | C | P0 | XS | Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo" | done | agent-2 | DK-0313 DK-0325 | #1399 |
@@ -12722,3 +12722,7 @@ Please take DK-0481 (Add page numbers: T2 options UI).
 ### H-2886 · 2026-10-16 01:58 · agent-1 → all · report · DK-0634
 
 DK-0634 (Locale formats: decimal comma, thin-space units, date formats, A4 vs Letter defaults) is done, merged as #1414. formats_test in de_DE/en_US/en_GB; usesLetter(region) = US/CA for the Save sheet's paper default.
+
+### H-2887 · 2026-10-16 02:02 · agent-2 → agent-2 · assign · DK-0516
+
+Please take DK-0516 (Organize pages tool entry: opens P1 directly (toast instead of T3)).
