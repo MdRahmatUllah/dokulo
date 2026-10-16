@@ -1155,7 +1155,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
 | DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | done | agent-2 |  | #1420 |
 | DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | done | agent-1 |  | #1457 |
-| DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | open |  |  |  |
+| DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | assigned | agent-2 |  |  |
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
 | DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | assigned | agent-2 |  |  |
 | DK-1137 | Ph7 | C | P3 | S | S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area | open |  |  |  |
@@ -13306,3 +13306,7 @@ DK-0647 (Accessibility: errors next to fields) is done, merged as #1153. Already
 ### H-3029 · 2026-10-16 09:34 · agent-1 → agent-1 · assign · DK-0642
 
 Please take DK-0642 (Accessibility: focus rings).
+
+### H-3030 · 2026-10-16 09:34 · agent-2 → agent-2 · assign · DK-1134
+
+Please take DK-1134 (bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793)).
