@@ -91,5 +91,16 @@ void main() {
         matchesGoldenFile('goldens/licences_$name.png'),
       );
     });
+
+    // Visual QA DK-0947 (me-licence): the full text.
+    testWidgets('golden: licence ($name)', (tester) async {
+      await pump(tester, tokens: tokens, locale: locale);
+      await tester.tap(find.text('Material Symbols'));
+      await tester.pumpAndSettle();
+      await expectLater(
+        find.byType(LicenceScreen),
+        matchesGoldenFile('goldens/licence_$name.png'),
+      );
+    });
   }
 }

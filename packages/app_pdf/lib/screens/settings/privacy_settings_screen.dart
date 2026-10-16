@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../components/dk_banner.dart';
+import '../../components/dk_icon.dart';
 import '../../components/dk_settings_row.dart';
 import '../../components/dk_switch.dart';
 import '../../components/dk_toast.dart';
@@ -89,7 +90,7 @@ class PrivacySettingsScreen extends ConsumerWidget {
             l.privacy_internet_purchases,
           ]),
           SizedBox(height: t.space.l),
-          DkBanner(text: l.privacy_none),
+          DkBanner(text: l.privacy_none, icon: DkIcons.shield),
           DkSettingsGroup(
             title: l.privacy_crash_title,
             children: [

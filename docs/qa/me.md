@@ -20,6 +20,12 @@ Cache leeren, App lock / App-Sperre, Lock after / Sperren nach, 1 min /
 | DK-0942 | `22-me-settings/me-security` | Match, 1 approved |
 | DK-0944 | `22-me-settings/me-language` | Match |
 | DK-0943 | `22-me-settings/me-appearance` | Match |
+| DK-0940 | `22-me-settings/me-scanning` | **DK-1142**: a full-width group, not the inset card |
+| DK-0945 | `22-me-settings/me-privacy` | Match after the fix here (the banner's shield), 2 approved |
+| DK-0946 | `22-me-settings/me-licences` | Match |
+| DK-0947 | `22-me-settings/me-licence` | **DK-1142**: the header is a title, not a caption |
+| DK-0949 | `22-me-settings/me-filename` | **DK-1142**: raw tokens, not chips; no preview card |
+| DK-0950 | `22-me-settings/me-filter` | **DK-1142**: radio rows without thumbnails and check |
 
 ## M1 · Me – Pro (DK-0937)
 
@@ -77,3 +83,30 @@ them, and Viewer night mode with "Invert pages for reading in the dark" and
 its switch (off) in an inset card. The switch is DkSwitch's off state as on
 every settings page (the frame draws the iOS one); the title is left-aligned
 on Android (§11.6).
+
+## M3 · Scanning, Privacy, Licences (DK-0940, DK-0945..DK-0947, DK-0949, DK-0950)
+
+Boards: `test/screens/scanning_settings_test.dart` (`scanning_settings_*`,
+and new here `scanning_filter_*`, `scanning_filename_*`: the pages its rows
+open), `privacy_settings_test.dart` (`privacy_*`) and
+`licences_settings_test.dart` (`licences_*`, and new here `licence_*`: the
+full text), light, dark and German.
+
+Matches: Scanning's seven rows with their values and switches (Auto-capture
+off, Auto-crop on, Auto colour, Auto, "Scan {date} {time}", Auto, Find
+documents in photos off); Privacy's two lists and the banner; Licences'
+search field and the inset list of name and licence.
+
+Fixed here: Privacy's banner led with the info icon; the frame's is a
+shield ("No analytics, no ads, no account."), now `DkIcons.shield`.
+
+Approved on Privacy: the crash reports section under the banner is the
+owner's DK-0011 (kept on the phone, sent only as an email the user sends);
+"Full privacy policy" waits for its URL (the domain is the owner's).
+
+**DK-1142** (P3, lane B): Scanning's group is full-width (the frame's an
+inset card); Default filter is a list of radio rows, the frame's rows have
+the filter's thumbnail and a check on the chosen one; File name shows the
+pattern as raw text ("{date}"), the frame as token chips (§23: an editor
+with token chips), with neutral Insert chips and the preview in a card; the
+licence page's header is a title, the frame's a small caption.
