@@ -677,7 +677,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
 | DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | open |  | DK-0232 DK-0182 |  |
-| DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | assigned | agent-1 | DK-0004 |  |
+| DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | done | agent-1 | DK-0004 | #1447 |
 | DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | done | agent-1 | DK-0024 | #1392 |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | done | agent-3 | DK-0010 DK-0023 | #1355 |
 | DK-0659 | Ph5 | B | P0 | S | Test suite: PDF/A validation | done | agent-1 | DK-0010 DK-0395 | #1020 |
@@ -13136,3 +13136,7 @@ DK-0520 (Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email,
 ### H-2987 · 2026-10-16 05:34 · agent-2 → all · report · DK-0528
 
 DK-0528 (Redaction security test suite (release blocker)) is done, merged as #1446. Redaction security suite on the whole corpus is its own gate step (tools/check.py).
+
+### H-2988 · 2026-10-16 05:45 · agent-1 → all · report · DK-0656
+
+DK-0656 (Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner) is done, merged as #1447. DkOrientation in the app builder: phones portrait except /viewer, /scan, /tool/compare, /tool/translate; the signature pad restores DkOrientation.current.

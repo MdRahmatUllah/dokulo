@@ -2640,3 +2640,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 05:32 · agent-3 DK-1140 · added: V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement
 - 2026-10-16 05:34 · agent-2 DK-0520 · done (#1446)
 - 2026-10-16 05:34 · agent-2 DK-0528 · done (#1446)
+- 2026-10-16 05:45 · agent-1 DK-0656 · done (#1447)
