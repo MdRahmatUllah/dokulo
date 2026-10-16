@@ -508,7 +508,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0484 | Ph3 | B | P1 | XS | Add page numbers: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0485 | Ph3 | C | P1 | S | Add page numbers: golden-PDF and widget tests | open |  | DK-0480 DK-0658 |  |
 | DK-0486 | Ph3 | A | P0 | M | Add watermark: implement the watermark ToolJob (engine) | done | agent-0 | DK-0391 DK-0008 | #1376 |
-| DK-0487 | Ph3 | C | P0 | M | Add watermark: T2 options UI | open |  | DK-0370 DK-0486 DK-0132 |  |
+| DK-0487 | Ph3 | C | P0 | M | Add watermark: T2 options UI | assigned | agent-2 | DK-0370 DK-0486 DK-0132 |  |
 | DK-0488 | Ph3 | C | P0 | S | Add watermark: T3 result card, naming and Next chips | open |  | DK-0379 DK-0487 |  |
 | DK-0489 | Ph3 | C | P1 | S | Add watermark: errors and edge states | open |  | DK-0487 DK-0609 DK-0020 |  |
 | DK-0490 | Ph3 | B | P1 | XS | Add watermark: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12730,3 +12730,7 @@ Please take DK-0516 (Organize pages tool entry: opens P1 directly (toast instead
 ### H-2888 · 2026-10-16 02:02 · agent-2 → all · report · DK-0516
 
 DK-0516 (Organize pages tool entry: opens P1 directly (toast instead of T3)) is done, merged as #1399. Already built in #1399 (DK-0517): screenTools['organize'] opens P1 for the chosen file (T2's picker first when none); P1's Save ends with a toast, no T3. routes_test covers the mapping. Now ready: DK-0798.
+
+### H-2889 · 2026-10-16 02:02 · agent-2 → agent-2 · assign · DK-0487
+
+Please take DK-0487 (Add watermark: T2 options UI).
