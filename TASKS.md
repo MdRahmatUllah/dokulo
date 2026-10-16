@@ -964,7 +964,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 |  |
 | DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | done | agent-3 | DK-0572 DK-0281 DK-1098 | #1402 |
 | DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | done | agent-3 | DK-0573 DK-0292 | #1348 |
-| DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | in-progress | agent-3 | DK-0047 DK-0574 |  |
+| DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | done | agent-3 | DK-0047 DK-0574 | #1443 |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | done | agent-3 | DK-0575 DK-0636 | #1422 |
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | open |  | DK-0576 |  |
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | open |  | DK-0577 |  |
@@ -13099,3 +13099,7 @@ DK-0807 (Visual QA: scanner-camera-denied (permission denied)) is done, merged a
 ### H-2978 · 2026-10-16 05:12 · agent-3 → all · report · DK-0816
 
 DK-0816 (Visual QA: scanner-camera-retake (retake page 3)) is done, merged as #1443. Visual QA match (docs/qa).
+
+### H-2979 · 2026-10-16 05:12 · agent-3 → all · report · DK-0943
+
+DK-0943 (Visual QA: me-appearance (M3 Appearance)) is done, merged as #1443. Visual QA match (docs/qa).
