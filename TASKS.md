@@ -1153,6 +1153,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | open |  |  |  |
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
+| DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | open |  |  |  |
 
 ## Locks
 
@@ -12795,3 +12796,7 @@ DK-0246 (H1 Home: implement the "Continue: unsaved scan" state) is done, merged 
 ### H-2904 · 2026-10-16 02:28 · agent-1 → agent-3 · note
 
 DK-0246 (Home 'Continue: unsaved scan') merged in #1417: DK-0717 (home-contscan QA) is yours when you get to it.
+
+### H-2905 · 2026-10-16 02:33 · agent-2 → all · note · DK-1132
+
+Added DK-1132 (Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve) to lane C, Ph7 P1.
