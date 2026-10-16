@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../components/dk_banner.dart';
 import '../../components/dk_icon.dart';
 import '../../l10n/app_localizations.dart';
+import '../../photo_finder/photo_finder.dart' show photoFinderKey;
 import '../../photo_finder/photo_finder_screens.dart';
 import '../../providers/prefs_providers.dart';
 import '../../theme/dk_tokens.dart';
@@ -51,7 +52,10 @@ class _HomePhotoBannerState extends ConsumerState<HomePhotoBanner> {
     }
     final due =
         first != null && _now().difference(first) >= const Duration(days: 7);
-    if (!due || prefs[photoBannerKey] != null) {
+    // Not once the photo finder is on (M3 Scanning's switch, DK-0571).
+    if (!due ||
+        prefs[photoBannerKey] != null ||
+        prefs[photoFinderKey] == true) {
       return const SliverToBoxAdapter(child: SizedBox.shrink());
     }
     final t = context.tokens;

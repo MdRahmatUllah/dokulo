@@ -610,7 +610,7 @@ void _create(
           }
           pdfium.FPDFAnnot_AddInkStroke(a, pts, s.length);
         }
-      case MarkupAnnot(:final quads):
+      case MarkupAnnot(:final kind, :final quads):
         _setColor(pdfium, a, color, annot.color);
         final q = arena<fpdf.FS_QUADPOINTSF>();
         for (final (p1, p2, p3, p4) in quads) {
@@ -624,6 +624,13 @@ void _create(
             ..x4 = p4.x
             ..y4 = p4.y;
           pdfium.FPDFAnnot_AppendAttachmentPoints(a, q);
+        }
+        if (_lineAppearance(kind, quads, annot.color) case final ap?) {
+          pdfium.FPDFAnnot_SetAP(
+            a,
+            fpdf.FPDF_ANNOT_APPEARANCEMODE_NORMAL,
+            ap.toNativeUtf16(allocator: arena).cast(),
+          );
         }
       case ShapeAnnot(:final width, :final fill):
         _setColor(pdfium, a, color, annot.color);
@@ -654,6 +661,33 @@ void _create(
   } finally {
     pdfium.FPDFPage_CloseAnnot(a);
   }
+}
+
+/// An underline's or strike's own appearance when a quad isn't upright
+/// (DK-1138): PDFium draws them across the page whatever the corner order,
+/// so text set sideways or upside down gets its line along the quad, from
+/// the lower corners (underline) or the sides' midpoints (strike). Null for
+/// upright quads and other kinds: PDFium's appearance is right there.
+String? _lineAppearance(MarkupKind kind, List<MarkupQuad> quads, int argb) {
+  if (kind != MarkupKind.underline && kind != MarkupKind.strikeOut) {
+    return null;
+  }
+  bool upright(MarkupQuad q) => q.$3.y == q.$4.y && q.$3.x < q.$4.x;
+  if (quads.every(upright)) return null;
+  String n(double v) => v.toStringAsFixed(2);
+  double c(int shift) => (argb >> shift & 0xFF) / 255;
+  final out = StringBuffer('${n(c(16))} ${n(c(8))} ${n(c(0))} RG 1 w\n');
+  for (final (p1, p2, p3, p4) in quads) {
+    final (PagePoint a, PagePoint b) = switch (kind) {
+      MarkupKind.underline => (p3, p4),
+      _ => (
+        (x: (p1.x + p3.x) / 2, y: (p1.y + p3.y) / 2),
+        (x: (p2.x + p4.x) / 2, y: (p2.y + p4.y) / 2),
+      ),
+    };
+    out.write('${n(a.x)} ${n(a.y)} m ${n(b.x)} ${n(b.y)} l S\n');
+  }
+  return out.toString();
 }
 
 void _setString(

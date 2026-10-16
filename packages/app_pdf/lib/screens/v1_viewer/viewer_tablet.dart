@@ -66,18 +66,16 @@ class _ViewerTabletChromeState extends State<ViewerTabletChrome> {
     final a = widget.actions;
     final size = MediaQuery.sizeOf(context);
     final sidebar = _sidebar ??= size.width > size.height;
-    Widget labelled(
-      IconData icon,
-      String label,
-      VoidCallback? onTap, {
-      bool tonal = false,
-    }) => DkButton(
-      label: label,
-      icon: icon,
-      size: DkButtonSize.compact,
-      variant: tonal ? DkButtonVariant.tonal : DkButtonVariant.tertiary,
-      onPressed: onTap,
-    );
+    // ponytail: AI turns tonal while its pane is open (the landscape
+    // frame); plain until A1 lands as the pane (M13).
+    Widget labelled(IconData icon, String label, VoidCallback? onTap) =>
+        DkButton(
+          label: label,
+          icon: icon,
+          size: DkButtonSize.compact,
+          variant: DkButtonVariant.tertiary,
+          onPressed: onTap,
+        );
     final bar = Container(
       height: ViewerTabletChrome.barHeight,
       padding: EdgeInsets.symmetric(horizontal: t.space.m),
@@ -125,7 +123,7 @@ class _ViewerTabletChromeState extends State<ViewerTabletChrome> {
             ),
           labelled(DkIcons.pen, l.viewer_edit, a.onEdit),
           labelled(DkIcons.tool('sign'), l.viewer_sign, a.onSign),
-          labelled(DkIcons.tool('summarize'), l.viewer_ai, a.onAi, tonal: true),
+          labelled(DkIcons.tool('summarize'), l.viewer_ai, a.onAi),
           labelled(DkIcons.toolsTab, l.viewer_tools, a.onTools),
           DkIconButton(
             icon: DkIcons.share(context),
