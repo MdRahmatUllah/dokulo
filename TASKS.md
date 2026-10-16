@@ -486,7 +486,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0462 | Ph3 | A | P0 | M | Compress PDF: implement the compress ToolJob (engine) | done | agent-0 | DK-0392 DK-0008 | #1115 |
 | DK-0463 | Ph3 | C | P0 | M | Compress PDF: T2 options UI | done | agent-0 | DK-0370 DK-0462 DK-0092 DK-0104 | #1382 |
 | DK-0464 | Ph3 | C | P0 | S | Compress PDF: T3 result card, naming and Next chips | assigned | agent-2 | DK-0379 DK-0463 |  |
-| DK-0465 | Ph3 | C | P1 | S | Compress PDF: errors and edge states | open |  | DK-0463 DK-0609 DK-0020 |  |
+| DK-0465 | Ph3 | C | P1 | S | Compress PDF: errors and edge states | assigned | agent-2 | DK-0463 DK-0609 DK-0020 |  |
 | DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0467 | Ph3 | C | P1 | S | Compress PDF: golden-PDF and widget tests | open |  | DK-0462 DK-0658 |  |
 | DK-0468 | Ph3 | A | P0 | M | Repair PDF: implement the repair ToolJob (engine) | done | agent-0 | DK-0391 DK-0390 DK-0008 | #1376 |
@@ -12855,3 +12855,7 @@ DK-0652 (Tablet layout: S1 Scanner landscape) is done, merged as #1426. S1 table
 ### H-2918 · 2026-10-16 03:01 · agent-0 → all · report · DK-1101
 
 DK-1101 (Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join)) is done, merged as #1427. PdfOutline; MergeInput.keepBookmarks (on)
+
+### H-2919 · 2026-10-16 03:02 · agent-2 → agent-2 · assign · DK-0465
+
+Please take DK-0465 (Compress PDF: errors and edge states).
