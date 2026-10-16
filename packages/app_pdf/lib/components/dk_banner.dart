@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../theme/dk_tokens.dart';
 import 'dk_button.dart';
 import 'dk_icon.dart';
+import 'dk_icon_button.dart';
 
 /// A banner's kind (UI spec §11.7): its fill and icon.
 enum DkBannerVariant { info, warning, error, pro }
@@ -20,6 +21,7 @@ class DkBanner extends StatelessWidget {
     this.action,
     this.onAction,
     this.icon,
+    this.onDismiss,
   }) : assert((action == null) == (onAction == null), 'an action needs both');
 
   final String text;
@@ -30,6 +32,10 @@ class DkBanner extends StatelessWidget {
   /// A more specific icon than the variant's (the board's `manage_search`
   /// for scans without text, `no_photography` for the camera).
   final IconData? icon;
+
+  /// An × at the end that dismisses the banner (Home's photo banner,
+  /// DK-0252); none when null.
+  final VoidCallback? onDismiss;
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +98,17 @@ class DkBanner extends StatelessWidget {
                 ],
               ),
             ),
+            if (onDismiss case final dismiss?)
+              // Flush with the banner's corner: the 48 dp target overhangs
+              // the 12 dp padding, the 20 dp × sits where the frame has it.
+              Transform.translate(
+                offset: const Offset(12, -12),
+                child: DkIconButton(
+                  icon: DkIcons.close,
+                  tooltip: MaterialLocalizations.of(context).closeButtonTooltip,
+                  onPressed: dismiss,
+                ),
+              ),
           ],
         ),
       ),
