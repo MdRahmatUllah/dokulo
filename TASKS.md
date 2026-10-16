@@ -850,7 +850,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0826 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-discard (S2 – discard dialog) | assigned | agent-3 | DK-0358 DK-1127 |  |
 | DK-0827 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-save (Save sheet) | assigned | agent-3 | DK-0359 DK-1125 |  |
 | DK-0828 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-result (Scan result) | assigned | agent-3 | DK-0360 DK-1125 |  |
-| DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | assigned | agent-3 | DK-0352 |  |
+| DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | done | agent-3 | DK-0352 | #1416 |
 | DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | assigned | agent-3 | DK-0359 |  |
 | DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 DK-1124 |  |
 | DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-3 | DK-0363 |  |
@@ -12774,3 +12774,7 @@ DK-0776 (Visual QA: viewer-menu (overflow menu)) is done, merged as #1416. Visua
 ### H-2899 · 2026-10-16 02:22 · agent-3 → all · report · DK-0824
 
 DK-0824 (Visual QA: scanner-review-applyall (S2 – apply-to-all chip)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
+
+### H-2900 · 2026-10-16 02:22 · agent-3 → all · report · DK-0829
+
+DK-0829 (Visual QA: scanner-review-reorder (S2 – reordering in tray)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
