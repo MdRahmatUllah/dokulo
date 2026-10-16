@@ -55,12 +55,11 @@ void main() {
           locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
-          home: Scaffold(
-            body: CameraPermissionGate(
-              camera: (_) => const Text('CAMERA'),
-              onClose: () => closed++,
-              onImport: () => imported++,
-            ),
+          // No Scaffold: in the app the gate is the route's page itself.
+          home: CameraPermissionGate(
+            camera: (_) => const Text('CAMERA'),
+            onClose: () => closed++,
+            onImport: () => imported++,
           ),
         ),
       ),
@@ -154,6 +153,24 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('CAMERA'), findsOneWidget);
     expect(permission.requests, 0);
+  });
+
+  testWidgets('the pre-prompt and "off" texts sit on a Material: no debug '
+      'underlines (DK-1120)', (tester) async {
+    for (final access in [CameraAccess.notAsked, CameraAccess.denied]) {
+      permission.access = access;
+      await pump(tester);
+      for (final text in tester.widgetList<Text>(find.byType(Text))) {
+        expect(
+          find.ancestor(
+            of: find.byWidget(text),
+            matching: find.byType(Material),
+          ),
+          findsWidgets,
+          reason: text.data,
+        );
+      }
+    }
   });
 
   testWidgets('granted: straight to the camera', (tester) async {
