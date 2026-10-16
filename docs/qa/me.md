@@ -19,6 +19,7 @@ Cache leeren, App lock / App-Sperre, Lock after / Sperren nach, 1 min /
 | DK-0941 | `22-me-settings/me-files` | 1 deviation: DK-1098; 2 approved |
 | DK-0942 | `22-me-settings/me-security` | Match, 1 approved |
 | DK-0944 | `22-me-settings/me-language` | Match |
+| DK-0943 | `22-me-settings/me-appearance` | Match |
 
 ## M1 · Me – Pro (DK-0937)
 
@@ -65,3 +66,14 @@ Deutsch (German: System · Englisch · Deutsch) in one inset card with the
 check on System, and the caption "Changes immediately. No restart needed." /
 "Wird sofort übernommen. Kein Neustart nötig." under it. The top bar's title
 is left-aligned on Android (§11.6), as on the other pushed pages.
+
+## M3 · Appearance (DK-0943)
+
+Board: agent-1's `test/screens/appearance_settings_test.dart` goldens
+`appearance_{light,dark,de}` (#1433), the real page. Matches the frame: the
+Theme label over three preview tiles (Light, Dark, System split on the
+diagonal) with the chosen one outlined in `color.primary`, the labels under
+them, and Viewer night mode with "Invert pages for reading in the dark" and
+its switch (off) in an inset card. The switch is DkSwitch's off state as on
+every settings page (the frame draws the iOS one); the title is left-aligned
+on Android (§11.6).
