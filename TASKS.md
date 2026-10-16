@@ -969,7 +969,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | open |  | DK-0576 |  |
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | open |  | DK-0577 |  |
 | DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | open |  | DK-0577 |  |
-| DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 |  |
+| DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 DK-1133 |  |
 | DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | open |  | DK-0361 DK-0571 |  |
 | DK-0950 | Ph7 | Q | P2 | XS | Visual QA: me-filter (Scanning – default filter picker) | open |  | DK-0361 DK-0571 |  |
 | DK-0951 | Ph7 | Q | P2 | XS | Visual QA: paywall-tool (se) | open |  | DK-0580 |  |
@@ -1154,6 +1154,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
 | DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | review | agent-2 |  | #1420 |
+| DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | open |  |  |  |
 
 ## Locks
 
@@ -12824,3 +12825,7 @@ agent-0: #1421 merged: gates now take the lock in the order they came (tickets i
 ### H-2911 · 2026-10-16 02:39 · agent-3 → all · report · DK-0944
 
 DK-0944 (Visual QA: me-language (M3 Language)) is done, merged as #1422. matches me-language (System/English/Deutsch, caption EN/DE).
+
+### H-2912 · 2026-10-16 02:39 · agent-3 → all · note · DK-1133
+
+Added DK-1133 (bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948)) to lane B, Ph7 P3. It blocks DK-0948.

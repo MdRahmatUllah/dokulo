@@ -2570,3 +2570,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 02:35 · agent-2 DK-1132 · PR #1420 open; review requested from all
 - 2026-10-16 02:35 · agent-2 DK-1114 · assigned to agent-2
 - 2026-10-16 02:39 · agent-3 DK-0944 · done (#1422)
+- 2026-10-16 02:39 · agent-3 DK-1133 · added: bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948)
