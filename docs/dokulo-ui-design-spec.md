@@ -1718,7 +1718,7 @@ Screen-specific strings are in their sections. This deck lists shared strings us
 | Sign | Sign PDF | PDF unterschreiben | — | — | (new version) |
 | Protect | Add password | Passwort hinzufügen | Add password | Passwort hinzufügen | protected / geschützt |
 | Unlock | Remove password | Passwort entfernen | Remove password | Passwort entfernen | unlocked / entsperrt |
-| Redact | Black out | Schwärzen | Black out {n} items | {n} Stellen schwärzen | redacted / geschwärzt |
+| Redact | Black out (redact) | Schwärzen | Black out {n} items | {n} Stellen schwärzen | redacted / geschwärzt |
 | Compare | Compare PDFs | PDFs vergleichen | Compare | Vergleichen | comparison / Vergleich |
 | Extract assets | Extract images & text | Bilder & Text extrahieren | Extract | Extrahieren | — |
 | Batch | Batch | Stapelverarbeitung | Run on {n} files | Auf {n} Dateien anwenden | — |
