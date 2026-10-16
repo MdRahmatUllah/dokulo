@@ -1160,6 +1160,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | assigned | agent-2 |  |  |
 | DK-1137 | Ph7 | C | P3 | S | S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area | open |  |  |  |
 | DK-1138 | Ph4 | C | P2 | S | Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up) | assigned | agent-2 | DK-1117 |  |
+| DK-1139 | Ph7 | B | P3 | XS | Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line? | open |  |  |  |
 
 ## Locks
 
@@ -13042,3 +13043,7 @@ Please take DK-0798 (Visual QA: organize-default (default)).
 ### H-2964 · 2026-10-16 04:18 · agent-3 → agent-3 · assign · DK-0635
 
 Please take DK-0635 (German layout QA at 100 % and 200 % text on all DE-marked frames).
+
+### H-2965 · 2026-10-16 04:31 · agent-3 → all · note · DK-1139
+
+Added DK-1139 (Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line?) to lane B, Ph7 P3.
