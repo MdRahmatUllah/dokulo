@@ -9,15 +9,15 @@ results golden (`photo_finder_results_*`). Frames in
 | Task | Frame | Result |
 | --- | --- | --- |
 | DK-0832 | `photo-finder-intro` | Match: ILL-17, title, body, Allow photo access, Not now |
-| DK-0833 | `photo-finder-scanning` | **DK-1136**: the card is on no screen; its colour |
+| DK-0833 | `photo-finder-scanning` | **DK-1136**: the card's colour (on Home since #1432) |
 | DK-0834 | `photo-finder-results` | Match: month headers, 3 columns, the badge, the check circles, Convert n to PDF |
 | DK-0835 | `photo-finder-convert` | **DK-1136**: a segmented control, not radio rows |
 | DK-0836 | `photo-finder-empty` | Match: ILL-17, No documents found, the line, Close |
 | DK-0837 | `photo-finder-notdoc` | **DK-1136**: no scrim behind the menu |
 
-**DK-1136** (P1, lane C): nothing in the app shows PhotoFinderCard or opens
-the results route, so the feature can't be reached (Home should show the
-card while a scan runs, and the card opens the results). The card is on
+**DK-1136** (P1, lane C): when filed, nothing showed PhotoFinderCard or
+opened the results route; #1432 since put the card on Home, opening the
+results. Left: the card is on
 `surface`; the frame's is the subtle primary container. The convert sheet's
 choice is a segmented control; the frame has radio rows. The long-press menu
 has no scrim.
