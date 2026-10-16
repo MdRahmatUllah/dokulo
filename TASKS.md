@@ -801,17 +801,17 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0777 | Ph7 | Q | P2 | XS | Visual QA: viewer-thumbs (thumbnail strip) | done | agent-3 | DK-0296 | #1385 |
 | DK-0778 | Ph7 | Q | P2 | XS | Visual QA: viewer-unlocked (after unlock toast) | done | agent-0 | DK-0303 | #1338 |
 | DK-0779 | Ph7 | Q | P2 | XS | Visual QA: edit-pen (pen selected) | assigned | agent-3 | DK-0313 DK-0314 |  |
-| DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-3 | DK-0315 |  |
+| DK-0780 | Ph7 | Q | P2 | XS | Visual QA: edit-penopts (pen options sheet) | assigned | agent-3 | DK-0315 DK-1131 |  |
 | DK-0781 | Ph7 | Q | P2 | XS | Visual QA: edit-highlight (highlighter on text) | assigned | agent-3 | DK-0321 DK-0517 |  |
-| DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | assigned | agent-3 | DK-0047 |  |
-| DK-0783 | Ph7 | Q | P2 | XS | Visual QA: edit-shapes (shapes) | assigned | agent-3 | DK-0047 |  |
-| DK-0784 | Ph7 | Q | P2 | XS | Visual QA: edit-note (note sheet) | assigned | agent-3 | DK-0319 |  |
+| DK-0782 | Ph7 | Q | P2 | XS | Visual QA: edit-text (text box editing) | assigned | agent-3 | DK-0047 DK-1131 |  |
+| DK-0783 | Ph7 | Q | P2 | XS | Visual QA: edit-shapes (shapes) | assigned | agent-3 | DK-0047 DK-1131 |  |
+| DK-0784 | Ph7 | Q | P2 | XS | Visual QA: edit-note (note sheet) | assigned | agent-3 | DK-0319 DK-1131 |  |
 | DK-0785 | Ph7 | Q | P2 | XS | Visual QA: edit-annsel (annotation selected) | assigned | agent-3 | DK-0322 |  |
 | DK-0786 | Ph7 | Q | P2 | XS | Visual QA: edit-form (form filling + accessory bar) | assigned | agent-3 | DK-0227 DK-0324 |  |
 | DK-0787 | Ph7 | Q | P2 | XS | Visual QA: edit-discard (discard dialog) | assigned | agent-3 | DK-0313 |  |
-| DK-0788 | Ph7 | Q | P2 | XS | Visual QA: edit-hiopts (highlighter options) | assigned | agent-3 | DK-0316 |  |
-| DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | assigned | agent-3 | DK-0317 |  |
-| DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | assigned | agent-3 | DK-0318 |  |
+| DK-0788 | Ph7 | Q | P2 | XS | Visual QA: edit-hiopts (highlighter options) | assigned | agent-3 | DK-0316 DK-1131 |  |
+| DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | assigned | agent-3 | DK-0317 DK-1131 |  |
+| DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | assigned | agent-3 | DK-0318 DK-1131 |  |
 | DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | assigned | agent-3 | DK-0320 |  |
 | DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-3 | DK-0326 DK-0519 |  |
 | DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | assigned | agent-3 | DK-0326 |  |
@@ -1152,6 +1152,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1128 | Ph6 | A | P2 | S | Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up) | open |  | DK-0545 |  |
 | DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | open |  |  |  |
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
+| DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
 
 ## Locks
 
@@ -12782,3 +12783,7 @@ DK-0829 (Visual QA: scanner-review-reorder (S2 – reordering in tray)) is done,
 ### H-2901 · 2026-10-16 02:22 · agent-3 → all · report · DK-0830
 
 DK-0830 (Visual QA: scanner-review-jpg (Save sheet – JPG format)) is done, merged as #1416. Visual QA: matches (docs/qa/scanner.md, docs/qa/viewer.md).
+
+### H-2902 · 2026-10-16 02:27 · agent-3 → all · note · DK-1131
+
+Added DK-1131 (bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790)) to lane C, Ph7 P2. It blocks DK-0780 DK-0782 DK-0783 DK-0784 DK-0788 DK-0789 DK-0790.
