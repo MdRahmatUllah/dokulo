@@ -892,7 +892,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0868 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-splitinvalid (invalid range) | open |  | DK-0410 DK-0411 |  |
 | DK-0869 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-smartinput (input) | open |  | DK-0427 DK-0428 DK-0429 |  |
 | DK-0870 | Ph7 | Q | P2 | XS | Visual QA: tools-organize-smartprogress (checking uncertain pages) | open |  | DK-0428 DK-0429 |  |
-| DK-0871 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-img2pdf (Image to PDF) | assigned | agent-3 | DK-0433 DK-0434 DK-0435 |  |
+| DK-0871 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-img2pdf (Image to PDF) | done | agent-3 | DK-0433 DK-0434 DK-0435 | #1443 |
 | DK-0872 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-pdf2img (PDF to images) | open |  | DK-0439 DK-0440 DK-0441 |  |
 | DK-0873 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-web (preview) | open |  | DK-0445 DK-0446 DK-0447 |  |
 | DK-0874 | Ph7 | Q | P2 | XS | Visual QA: tools-convert-weboffline (offline) | open |  | DK-0445 DK-0446 DK-0447 |  |
@@ -13079,3 +13079,7 @@ DK-0722 (Visual QA: home-photobanner (find documents banner)) is done, merged as
 ### H-2973 · 2026-10-16 05:00 · agent-1 → all · report · DK-0576
 
 DK-0576 (M3 Privacy settings page) is done, merged as #1442. M3 Privacy: lists + banner + crash reports (Keep in prefs privacy.crashReports, Send = sendCrashReport in crash_providers, Delete). Policy link: DK-1103 (waits for DK-1032). Now ready: DK-0945.
+
+### H-2974 · 2026-10-16 05:12 · agent-3 → all · report · DK-0871
+
+DK-0871 (Visual QA: tools-convert-img2pdf (Image to PDF)) is done, merged as #1443. Visual QA match (docs/qa).
