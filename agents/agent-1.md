@@ -1,13 +1,13 @@
 # agent-1
 
 session: active
-last-seen: 2026-10-16 10:24
+last-seen: 2026-10-16 10:25
 last-read: 3053
 joined: 0
 
 ## Now
 
-DK-1142 in review as PR #1468: answer the review; re-run the gate if main moved, then merge.
+DK-0592 Notification: Photo finder done — claimed 2026-10-16 10:25.
 
 ## Next
 
