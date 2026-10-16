@@ -11,7 +11,7 @@ headless Chrome at 3250 × 1250. Boards, at 393 × 852 with
 
 | Task | Panels | Result |
 | --- | --- | --- |
-| DK-0981 | H1 Home, T1 Tools, T3 Compress result | H1 and T3 match; T1: DK-1100 |
+| DK-0981 | H1 Home, T1 Tools, T3 Compress result | Match (T1 after DK-1100's fix, #1392) |
 | DK-1099 | T2 Compress options, S2 Review, X3 Paywall, A1 Summary | Waits for DK-0463, DK-0352, DK-0580, DK-0561 |
 
 ## H1, T1, T3 (DK-0981)
