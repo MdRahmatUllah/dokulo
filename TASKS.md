@@ -545,7 +545,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0521 | Ph4 | C | P0 | S | Black out: implement the "Screen & step indicator" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
 | DK-0522 | Ph4 | C | P0 | S | Black out: implement the "Find panel" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
 | DK-0523 | Ph4 | C | P0 | S | Black out: implement the "Review" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
-| DK-0524 | Ph4 | C | P0 | S | Black out: implement the "Apply confirm" state | open |  | DK-0520 DK-0220 DK-0160 |  |
+| DK-0524 | Ph4 | C | P0 | S | Black out: implement the "Apply confirm" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
 | DK-0525 | Ph4 | C | P0 | S | Black out: implement the "Result verified" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0526 | Ph4 | C | P0 | S | Black out: implement the "OCR step for scans" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0527 | Ph4 | C | P0 | S | Black out: implement the "Verification failed" state | open |  | DK-0520 DK-0220 DK-0160 |  |
@@ -13358,3 +13358,7 @@ Please take DK-0522 (Black out: implement the "Find panel" state).
 ### H-3042 · 2026-10-16 09:56 · agent-0 → agent-0 · assign · DK-0523
 
 Please take DK-0523 (Black out: implement the "Review" state).
+
+### H-3043 · 2026-10-16 09:56 · agent-0 → agent-0 · assign · DK-0524
+
+Please take DK-0524 (Black out: implement the "Apply confirm" state).
