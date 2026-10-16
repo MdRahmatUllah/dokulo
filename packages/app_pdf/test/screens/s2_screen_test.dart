@@ -544,4 +544,75 @@ void main() {
       );
     });
   }
+
+  // Visual QA (DK-0824, DK-0825, DK-0826, DK-0829, DK-0830): the S2 frames
+  // without a golden above: the apply-to-all chip, the deleted toast, the
+  // discard dialog, reordering in the tray and the save sheet in JPG. Frames
+  // in docs/qa/scanner/, findings in docs/qa/scanner.md.
+  group('visual QA', () {
+    for (final (name, tokens, locale) in [
+      ('light', DkTokens.light, const Locale('en')),
+      ('dark', DkTokens.dark, const Locale('en')),
+      ('de', DkTokens.light, const Locale('de')),
+    ]) {
+      final l = lookupAppLocalizations(locale);
+      Future<void> shot(WidgetTester tester, String frame) async {
+        // The pages decode for real, as the goldens above.
+        await tester.runAsync(() async {
+          for (final e in find.byType(Image).evaluate()) {
+            await precacheImage((e.widget as Image).image, e);
+          }
+        });
+        await tester.pump();
+        await expectLater(
+          find.byType(MaterialApp),
+          matchesGoldenFile('goldens/s2_qa_${frame}_$name.png'),
+        );
+      }
+
+      testWidgets('scanner-review-applyall ($name)', (tester) async {
+        await pump(tester, count: 6, tokens: tokens, locale: locale);
+        await tester.tap(find.text(l.scan_rotate));
+        await tester.pumpAndSettle();
+        await shot(tester, 'applyall');
+      });
+
+      testWidgets('scanner-review-deleted ($name)', (tester) async {
+        await pump(tester, count: 6, tokens: tokens, locale: locale);
+        await tester.tap(find.text(l.common_delete));
+        await tester.pumpAndSettle();
+        expect(find.text(l.toast_page_deleted), findsOneWidget);
+        await shot(tester, 'deleted');
+        await tester.pumpAndSettle(const Duration(seconds: 11));
+      });
+
+      testWidgets('scanner-review-discard ($name)', (tester) async {
+        await pump(tester, count: 1, tokens: tokens, locale: locale);
+        await tester.tap(find.text(l.common_delete));
+        await tester.pumpAndSettle();
+        await shot(tester, 'discard');
+      });
+
+      testWidgets('scanner-review-jpg ($name)', (tester) async {
+        await pump(tester, count: 6, tokens: tokens, locale: locale);
+        await tester.tap(find.text(l.common_save));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('JPG'));
+        await tester.pumpAndSettle();
+        await shot(tester, 'jpg');
+      });
+
+      testWidgets('scanner-review-reorder ($name)', (tester) async {
+        await pump(tester, count: 6, tokens: tokens, locale: locale);
+        final from = tester.getCenter(find.byType(DkPageThumb).at(1));
+        final drag = await tester.startGesture(from);
+        await tester.pump(const Duration(milliseconds: 600)); // long press
+        await drag.moveBy(const Offset(70, -8));
+        await tester.pump(const Duration(milliseconds: 200));
+        await shot(tester, 'reorder');
+        await drag.up();
+        await tester.pumpAndSettle();
+      });
+    }
+  });
 }
