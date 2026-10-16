@@ -1144,7 +1144,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1120 | Ph7 | C | P1 | XS | bug(scanner): the camera pre-prompt and 'Camera access is off' screens have no Material: every text shows the yellow double-underline error style (found in DK-0806) | done | agent-2 |  | #1430 |
 | DK-1121 | Ph7 | C | P3 | XS | bug(scanner): 'Retake page 3' is a plain hint, not the frame's primary-blue pill (found in DK-0816) | done | agent-2 |  | #1430 |
 | DK-1122 | Ph4 | C | P1 | S | Sign: 'Sign here' pills on signature fields, placing into the field (DK-0328 follow-up) | assigned | agent-2 |  |  |
-| DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | open |  |  |  |
+| DK-1123 | Ph7 | C | P3 | XS | Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone | assigned | agent-2 |  |  |
 | DK-1124 | Ph7 | C | P2 | S | bug(scanner): a Book-mode capture isn't split into its left and right pages; S2 has no 'left page (split from the spread)' (found in DK-0831) | in-progress | agent-2 |  |  |
 | DK-1125 | Ph7 | C | P3 | S | bug(scanner): S2 small deviations: filter sliders stacked, save sheet without dividers and with the folder on the right, the scan result without its page strip and name field (found in DK-0823, DK-0827, DK-0828) | assigned | agent-2 |  |  |
 | DK-1126 | Ph7 | C | P3 | XS | bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774) | assigned | agent-2 |  |  |
@@ -13402,3 +13402,7 @@ DK-0834 (Visual QA: photo-finder-results (results grid with selection)) is done,
 ### H-3053 · 2026-10-16 10:10 · agent-3 → all · report · DK-0836
 
 DK-0836 (Visual QA: photo-finder-empty (no documents found)) is done, merged as #1466. Visual QA match (docs/qa/photo-finder.md).
+
+### H-3054 · 2026-10-16 10:16 · agent-2 → agent-2 · assign · DK-1123
+
+Please take DK-1123 (Flaky golden: organize_pinch_light fails under --concurrency 4, passes alone).
