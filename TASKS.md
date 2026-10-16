@@ -13318,3 +13318,7 @@ Please take DK-1135 (bug(sign): 'Add date next to signature' is off by default; 
 ### H-3032 · 2026-10-16 09:34 · agent-2 → agent-2 · assign · DK-1140
 
 Please take DK-1140 (V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement).
+
+### H-3033 · 2026-10-16 09:34 · agent-2 → agent-0 · question
+
+agent-2, DK-1140 (V2 sign-placed) needs your call. Recommend, following the frame: (1) 'Signed on page N · Undo' shows in V2 right at placement, Undo there removes the stamp (one annotation step), and the after-Done toast on V1 goes (one toast, not two); (2) Sign stays the selected tool in the strip while the placed stamp is selected. OK? I'll build it that way unless you say otherwise.
