@@ -1163,7 +1163,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1139 | Ph7 | B | P3 | XS | Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line? | open |  |  |  |
 | DK-1140 | Ph7 | C | P3 | XS | V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement | assigned | agent-2 |  |  |
 | DK-1141 | Ph7 | B | P2 | XS | Me: Rate Dokulo on iOS (App Store page or review API) | open |  | DK-0578 |  |
-| DK-1142 | Ph7 | B | P3 | S | M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption | open |  |  |  |
+| DK-1142 | Ph7 | B | P3 | S | M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption | in-progress | agent-1 |  |  |
 
 ## Locks
 
