@@ -547,7 +547,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0523 | Ph4 | C | P0 | S | Black out: implement the "Review" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
 | DK-0524 | Ph4 | C | P0 | S | Black out: implement the "Apply confirm" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
 | DK-0525 | Ph4 | C | P0 | S | Black out: implement the "Result verified" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
-| DK-0526 | Ph4 | C | P0 | S | Black out: implement the "OCR step for scans" state | open |  | DK-0520 DK-0220 DK-0160 |  |
+| DK-0526 | Ph4 | C | P0 | S | Black out: implement the "OCR step for scans" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
 | DK-0527 | Ph4 | C | P0 | S | Black out: implement the "Verification failed" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0528 | Ph4 | C | P0 | M | Redaction security test suite (release blocker) | done | agent-2 | DK-0393 DK-0010 | #1446 |
 | DK-0529 | Ph4 | C | P1 | L | Compare engine: text diff per page (Myers / diff_match_patch) + visual diff (OpenCV absdiff) | assigned | agent-2 | DK-0390 |  |
@@ -13366,3 +13366,7 @@ Please take DK-0524 (Black out: implement the "Apply confirm" state).
 ### H-3044 · 2026-10-16 09:56 · agent-0 → agent-0 · assign · DK-0525
 
 Please take DK-0525 (Black out: implement the "Result verified" state).
+
+### H-3045 · 2026-10-16 09:56 · agent-0 → agent-0 · assign · DK-0526
+
+Please take DK-0526 (Black out: implement the "OCR step for scans" state).
