@@ -503,14 +503,12 @@ class _ViewerScreenState extends ConsumerState<ViewerScreen> {
           onPageChanged: (p) => setState(() => _page = p ?? _page),
           // Night mode (DK-1089), switched in the overflow menu (DK-0295).
           night: ref.watch(prefsProvider).value?[viewerNightKey] == true,
-          // Ask AI joins with the AI pane (M13).
-          markup: const [
-            DkMarkupAction.copy,
-            DkMarkupAction.highlight,
-            DkMarkupAction.underline,
-            DkMarkupAction.strike,
-          ],
+          markup: DkMarkupAction.values,
           onMarkup: (action, lines) => _markup(path, action, lines),
+          // A1 Ask with the selection in its composer (§17.1).
+          onAsk: (text) => context.push(
+            Routes.tool('ask', files: ['${widget.fileId}'], prompt: text),
+          ),
           search: _search,
           revision: _revision,
           initialPage: (_revision == 0 ? widget.page : _page) ?? 1,

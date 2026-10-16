@@ -33,6 +33,7 @@ class DkPdfCanvas extends StatefulWidget {
     this.night = false,
     this.markup,
     this.onMarkup,
+    this.onAsk,
     this.search,
     this.revision = 0,
     this.insets = EdgeInsets.zero,
@@ -83,6 +84,9 @@ class DkPdfCanvas extends StatefulWidget {
   /// origin bottom-left), for the annotations. The selection then clears.
   final void Function(DkMarkupAction action, List<SelectionLines> lines)?
   onMarkup;
+
+  /// Ask AI on the selection (DK-0300): the selected text.
+  final ValueChanged<String>? onAsk;
 
   /// Text search (DK-1093): the matches in `markup.yellow` at 60 %, the
   /// current one outlined 2 dp in `color.primary` (UI spec §17.1).
@@ -256,8 +260,11 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
                   onAction: (action) async {
                     if (action == DkMarkupAction.copy) {
                       await d.copyTextSelection();
-                    } else if (widget.onMarkup case final onMarkup?
-                        when action != DkMarkupAction.ask) {
+                    } else if (action == DkMarkupAction.ask) {
+                      final text = await d.getSelectedText();
+                      await d.clearTextSelection();
+                      widget.onAsk?.call(text);
+                    } else if (widget.onMarkup case final onMarkup?) {
                       final lines = selectionLines(
                         await d.getSelectedTextRanges(),
                       );
