@@ -242,6 +242,105 @@ void main() {
       findsOneWidget,
     );
   });
+  // Visual QA (DK-0832 to DK-0837): the 11-photo-finder frames intro,
+  // scanning, results, convert, empty and notdoc, light, dark and German.
+  // Frames in docs/qa/photo-finder/, findings in docs/qa/photo-finder.md.
+  // The results grid is the golden above (photo_finder_results_*).
+  group('visual QA', () {
+    for (final (name, tokens, locale) in [
+      ('light', DkTokens.light, const Locale('en')),
+      ('dark', DkTokens.dark, const Locale('en')),
+      ('de', DkTokens.light, const Locale('de')),
+    ]) {
+      final l = lookupAppLocalizations(locale);
+      Future<void> shot(WidgetTester tester, String frame) => expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/pf_qa_${frame}_$name.png'),
+      );
+
+      testWidgets('photo-finder-intro ($name)', (tester) async {
+        tester.view.physicalSize = const Size(393, 852);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await tester.pumpWidget(
+          MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: dokuloTheme(tokens),
+            locale: locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: Builder(
+              builder: (context) => Scaffold(
+                body: Center(
+                  child: TextButton(
+                    onPressed: () => showPhotoFinderIntro(context),
+                    child: const Text('open'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+        await tester.tap(find.text('open'));
+        await tester.pumpAndSettle();
+        await shot(tester, 'intro');
+      });
+
+      testWidgets('photo-finder-scanning, the Home card ($name)', (
+        tester,
+      ) async {
+        tester.view.physicalSize = const Size(393, 852);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        final c = ProviderContainer(
+          overrides: [photoFinderProvider.overrideWith(_Running.new)],
+        );
+        addTearDown(c.dispose);
+        await tester.pumpWidget(
+          UncontrolledProviderScope(
+            container: c,
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: dokuloTheme(tokens),
+              locale: locale,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: const Scaffold(body: SafeArea(child: PhotoFinderCard())),
+            ),
+          ),
+        );
+        await tester.pump();
+        await shot(tester, 'scanning');
+      });
+
+      testWidgets('photo-finder-convert ($name)', (tester) async {
+        await pump(tester, photos: photos, tokens: tokens, locale: locale);
+        await tester.tap(find.text(l.common_select));
+        await tester.pumpAndSettle();
+        final docs = find.bySemanticsLabel(l.photos_document_photo);
+        await tester.tap(docs.at(0));
+        await tester.tap(docs.at(2));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(l.photos_convert(2)));
+        await tester.pumpAndSettle();
+        await shot(tester, 'convert');
+      });
+
+      testWidgets('photo-finder-empty ($name)', (tester) async {
+        await pump(tester, tokens: tokens, locale: locale);
+        await shot(tester, 'empty');
+      });
+
+      testWidgets('photo-finder-notdoc ($name)', (tester) async {
+        await pump(tester, photos: photos, tokens: tokens, locale: locale);
+        await tester.longPress(
+          find.bySemanticsLabel(l.photos_document_photo).first,
+        );
+        await tester.pumpAndSettle();
+        await shot(tester, 'notdoc');
+      });
+    }
+  });
 }
 
 class _Running extends PhotoFinder {
