@@ -245,6 +245,24 @@ abstract final class PdfEngine {
     ));
   }
 
+  /// How far [page]'s text is turned as the page is shown: the clockwise
+  /// quarter turns that set it upright (1: it reads bottom to top), from
+  /// the characters' angles, most common first; null for a page without
+  /// text (a scan: [OcrOrientation] in doc_vision reads those). Rotate
+  /// PDF's "N pages look sideways" (DK-1102).
+  static Future<int?> textTurns(
+    String path,
+    int page, {
+    String? password,
+  }) async {
+    await _withDocument(path, password, (doc) async => _page(doc, page));
+    return PdfrxEntryFunctions.instance.compute(_textTurnsOnWorker, (
+      path,
+      password,
+      page,
+    ));
+  }
+
   static Future<T> _withDocument<T>(
     String path,
     String? password,
@@ -526,6 +544,29 @@ bool _unembeddedOnWorker((String, String?, int) message) =>
 /// Line breaks and other control characters are left out: lines come from
 /// the baselines. Spaces stay, PDFium's generated ones included: they mark
 /// the word gaps more reliably than tight glyph boxes.
+/// On pdfrx's worker: [PdfEngine.textTurns].
+int? _textTurnsOnWorker((String, String?, int) message) =>
+    _onPage(message, (pdfium, page, arena) {
+      final text = pdfium.FPDFText_LoadPage(page);
+      try {
+        final votes = [0, 0, 0, 0];
+        for (var i = 0; i < pdfium.FPDFText_CountChars(text); i++) {
+          final unicode = pdfium.FPDFText_GetUnicode(text, i);
+          if (unicode <= 0x20) continue;
+          final angle = pdfium.FPDFText_GetCharAngle(text, i);
+          if (angle < 0) continue; // unknown
+          // Counter-clockwise in the page's own space; the page's /Rotate
+          // turns it clockwise for display.
+          final quarter = (angle / (pi / 2)).round();
+          votes[(quarter - pdfium.FPDFPage_GetRotation(page)) % 4]++;
+        }
+        final most = votes.reduce(max);
+        return most == 0 ? null : votes.indexOf(most);
+      } finally {
+        pdfium.FPDFText_ClosePage(text);
+      }
+    });
+
 List<StyledChar> _styledCharsOnWorker((String, String?, int) message) =>
     _onPage(message, (pdfium, page, arena) {
       final text = pdfium.FPDFText_LoadPage(page);
