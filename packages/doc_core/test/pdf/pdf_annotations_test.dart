@@ -102,6 +102,42 @@ void main() {
     expect((page.bgra[i + 2], page.bgra[i + 1], page.bgra[i]), (255, 0, 0));
   });
 
+  test('underline and strike on sideways text run along the line, not '
+      'across the page (DK-1138)', () async {
+    // A line reading up the page, x 100..112, y 200..400: the letters'
+    // feet are on the right (x 112), their middle at x 106.
+    const lb = (x: 100.0, y: 200.0), lt = (x: 100.0, y: 400.0);
+    const rb = (x: 112.0, y: 200.0), rt = (x: 112.0, y: 400.0);
+    for (final (kind, x) in [
+      (MarkupKind.underline, 112),
+      (MarkupKind.strikeOut, 106),
+    ]) {
+      final done = '${out.path}/${kind.name}.pdf';
+      await PdfAnnotations.apply(src, done, {
+        0: PageAnnotEdits(
+          add: [
+            MarkupAnnot(kind, [(lb, lt, rb, rt)], color: red),
+          ],
+        ),
+      });
+      final page = await PdfEngine.render(done, 0, dpi: 72);
+      // The red pixels in the band around the line, as page coordinates.
+      final xs = <int>{}, ys = <int>{};
+      for (var py = 180; py < 420; py++) {
+        for (var px = 90; px < 125; px++) {
+          final i = ((page.height - py) * page.width + px) * 4; // BGRA
+          // A 1 pt line is anti-aliased: reddish, not pure red.
+          if (page.bgra[i + 2] - page.bgra[i + 1] > 40) {
+            xs.add(px);
+            ys.add(py);
+          }
+        }
+      }
+      expect(xs, everyElement(inInclusiveRange(x - 2, x + 1)), reason: '$kind');
+      expect(ys.length, greaterThan(180), reason: '$kind runs the line');
+    }
+  });
+
   test('markup: highlight with its quads and opacity', () async {
     final read = await roundTrip([
       const MarkupAnnot(MarkupKind.highlight, [

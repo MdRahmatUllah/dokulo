@@ -39,6 +39,18 @@ void main() {
     expect(boxes.last, (left: 300.0, top: 770.0, right: 312.0, bottom: 760.0));
   });
 
+  test('lineBoxes: a comma just reaching into the line and a short quote '
+      'mark before a capital stay on it (DK-1138)', () {
+    // "„Mieter“)," as PDFium's tight boxes: the low quote, then a capital.
+    final chars = <Box>[
+      (left: 50, top: 702, right: 54, bottom: 698), // „ (low, short)
+      (left: 54, top: 712, right: 62, bottom: 700.5), // M
+      (left: 62, top: 708, right: 67, bottom: 700), // e
+      (left: 67, top: 702, right: 69, bottom: 696.5), // , (mostly below)
+    ];
+    expect(PdfRedactor.lineBoxes(chars, 0, chars.length), hasLength(1));
+  });
+
   test('lineRuns: sideways text is one line up or down the page, '
       'upside-down text reads left (DK-1138)', () {
     // Characters 10 wide across the line, 12 along it.

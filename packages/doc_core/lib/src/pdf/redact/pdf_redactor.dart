@@ -14,9 +14,6 @@ import '../pdf_engine.dart';
 import '../qpdf_service.dart';
 import 'detectors.dart';
 
-/// An area to black out: in page space (PDF points, origin bottom-left, the
-/// page unrotated), as PDFium's character boxes are. A finding gives one per
-/// line it spans; the review sheet lets the user move, add and drop them.
 /// The way a line of text reads on the page (page space, y up): [right]
 /// is upright text, [up] and [down] text set sideways, [left] upside down.
 enum LineDir { right, up, left, down }
@@ -24,6 +21,9 @@ enum LineDir { right, up, left, down }
 /// A line of text: its box and the way it reads ([PdfRedactor.lineRuns]).
 typedef LineRun = ({Box box, LineDir dir});
 
+/// An area to black out: in page space (PDF points, origin bottom-left, the
+/// page unrotated), as PDFium's character boxes are. A finding gives one per
+/// line it spans; the review sheet lets the user move, add and drop them.
 class RedactionBox {
   const RedactionBox(this.page, this.box, {this.text = '', this.kind});
   final int page;
@@ -116,16 +116,15 @@ abstract final class PdfRedactor {
 
     for (var i = start; i < end && i < chars.length; i++) {
       final c = chars[i];
-      if (c.right <= c.left || c.top <= c.bottom) continue; // a generated space
+      // A generated space, or a space glyph's sliver of a box.
+      if (c.right - c.left < 0.1 || c.top - c.bottom < 0.1) continue;
       if (box case final b?) {
-        // Overlapping by at least half the character: touching edges (or a
-        // descender reaching into the next line) don't count.
+        // Any real overlap joins (a comma or a short quote mark only just
+        // reaches into the line); touching edges don't.
         final across =
-            math.min(c.top, b.top) - math.max(c.bottom, b.bottom) >=
-            (c.top - c.bottom) / 2;
+            math.min(c.top, b.top) - math.max(c.bottom, b.bottom) > 0.01;
         final beside =
-            math.min(c.right, b.right) - math.max(c.left, b.left) >=
-            (c.right - c.left) / 2;
+            math.min(c.right, b.right) - math.max(c.left, b.left) > 0.01;
         final way = _mid(c).dy > _mid(line.last).dy ? LineDir.up : LineDir.down;
         if (dir == null && across) {
           // On the same line across the page.
