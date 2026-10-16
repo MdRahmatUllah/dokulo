@@ -363,16 +363,18 @@ const _night = ColorFilter.matrix([
 Color _invert(Color c) =>
     Color.from(alpha: 1, red: 1 - c.r, green: 1 - c.g, blue: 1 - c.b);
 
-/// The selected text on one page, one box per line (page space).
-typedef SelectionLines = ({int page, List<Box> lines});
+/// The selected text on one page, one box per line and the way it reads
+/// (page space).
+typedef SelectionLines = ({int page, List<LineRun> lines});
 
 /// pdfrx's selection as lines per page: each range's characters grouped
-/// into lines the way the redaction boxes are ([PdfRedactor.lineBoxes]).
+/// into lines the way the redaction boxes are ([PdfRedactor.lineRuns]),
+/// sideways text too (DK-1138).
 List<SelectionLines> selectionLines(List<PdfPageTextRange> ranges) => [
   for (final r in ranges)
     (
       page: r.pageNumber - 1,
-      lines: PdfRedactor.lineBoxes(
+      lines: PdfRedactor.lineRuns(
         [
           for (final c in r.pageText.charRects)
             (left: c.left, top: c.top, right: c.right, bottom: c.bottom),

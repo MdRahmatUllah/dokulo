@@ -17,6 +17,13 @@ import 'detectors.dart';
 /// An area to black out: in page space (PDF points, origin bottom-left, the
 /// page unrotated), as PDFium's character boxes are. A finding gives one per
 /// line it spans; the review sheet lets the user move, add and drop them.
+/// The way a line of text reads on the page (page space, y up): [right]
+/// is upright text, [up] and [down] text set sideways, [left] upside down.
+enum LineDir { right, up, left, down }
+
+/// A line of text: its box and the way it reads ([PdfRedactor.lineRuns]).
+typedef LineRun = ({Box box, LineDir dir});
+
 class RedactionBox {
   const RedactionBox(this.page, this.box, {this.text = '', this.kind});
   final int page;
@@ -77,32 +84,74 @@ abstract final class PdfRedactor {
     return boxes;
   }
 
-  /// The boxes of characters [start]..[end], one per line (a new line where
-  /// a character lies wholly below the box so far, or wholly above it: the
-  /// next column; a full stop or a hyphen sits low but on the same line).
-  static List<Box> lineBoxes(List<Box> chars, int start, int end) {
-    final out = <Box>[];
-    Box? current;
+  /// The boxes of characters [start]..[end], one per line ([lineRuns]).
+  static List<Box> lineBoxes(List<Box> chars, int start, int end) => [
+    for (final r in lineRuns(chars, start, end)) r.box,
+  ];
+
+  /// The lines of characters [start]..[end], each with the way it reads on
+  /// the page (DK-1138). Across the page: a new line where a character lies
+  /// below the box so far, or above it (the next column; a full stop or a
+  /// hyphen sits low but on the same line). Text set sideways (a
+  /// rotated page's upright text) runs up or down the page instead: the next
+  /// character above or below the box so far, beside it.
+  ///
+  /// ponytail: a one-character line followed by a line starting under it
+  /// reads as one line running down; a char's own rotation would settle it.
+  static List<LineRun> lineRuns(List<Box> chars, int start, int end) {
+    final out = <LineRun>[];
+    var line = <Box>[]; // the current line's characters
+    Box? box;
+    LineDir? dir; // null: across the page (or one character so far)
+    void close() {
+      if (box case final b?) {
+        final across = _mid(line.last).dx < _mid(line.first).dx
+            ? LineDir.left
+            : LineDir.right;
+        out.add((box: b, dir: dir ?? across));
+      }
+      line = [];
+      box = dir = null;
+    }
+
     for (var i = start; i < end && i < chars.length; i++) {
       final c = chars[i];
       if (c.right <= c.left || c.top <= c.bottom) continue; // a generated space
-      if (current != null &&
-          (c.top < current.bottom || c.bottom > current.top)) {
-        out.add(current);
-        current = null;
+      if (box case final b?) {
+        // Overlapping by at least half the character: touching edges (or a
+        // descender reaching into the next line) don't count.
+        final across =
+            math.min(c.top, b.top) - math.max(c.bottom, b.bottom) >=
+            (c.top - c.bottom) / 2;
+        final beside =
+            math.min(c.right, b.right) - math.max(c.left, b.left) >=
+            (c.right - c.left) / 2;
+        final way = _mid(c).dy > _mid(line.last).dy ? LineDir.up : LineDir.down;
+        if (dir == null && across) {
+          // On the same line across the page.
+        } else if (!across && beside && (dir == way || line.length == 1)) {
+          dir = way;
+        } else {
+          close();
+        }
       }
-      current = current == null
+      final b = box;
+      box = b == null
           ? c
           : (
-              left: math.min(current.left, c.left),
-              top: math.max(current.top, c.top),
-              right: math.max(current.right, c.right),
-              bottom: math.min(current.bottom, c.bottom),
+              left: math.min(b.left, c.left),
+              top: math.max(b.top, c.top),
+              right: math.max(b.right, c.right),
+              bottom: math.min(b.bottom, c.bottom),
             );
+      line.add(c);
     }
-    if (current != null) out.add(current);
+    close();
     return out;
   }
+
+  static ({double dx, double dy}) _mid(Box b) =>
+      (dx: (b.left + b.right) / 2, dy: (b.top + b.bottom) / 2);
 
   /// Rasterises the pages with [boxes], burns the boxes in, puts the new
   /// document together without annotations and writes the remaining words'

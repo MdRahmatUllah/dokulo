@@ -39,6 +39,46 @@ void main() {
     expect(boxes.last, (left: 300.0, top: 770.0, right: 312.0, bottom: 760.0));
   });
 
+  test('lineRuns: sideways text is one line up or down the page, '
+      'upside-down text reads left (DK-1138)', () {
+    // Characters 10 wide across the line, 12 along it.
+    Box at(double l, double b) =>
+        (left: l, top: b + 12, right: l + 10, bottom: b);
+    List<LineDir> dirs(List<Box> chars) => [
+      for (final r in PdfRedactor.lineRuns(chars, 0, chars.length)) r.dir,
+    ];
+    final up = [at(100, 200), at(100, 212), at(101, 224)];
+    final runs = PdfRedactor.lineRuns(up, 0, 3);
+    expect(runs.single.box, (
+      left: 100.0,
+      top: 236.0,
+      right: 111.0,
+      bottom: 200.0,
+    ));
+    expect(runs.single.dir, LineDir.up);
+    expect(dirs(up.reversed.toList()), [LineDir.down]);
+    // Two sideways lines side by side, both reading up.
+    expect(dirs([...up, at(120, 200), at(120, 212)]), [LineDir.up, LineDir.up]);
+    // Across the page, backwards: upside down. A single character reads right.
+    expect(dirs([at(200, 500), at(188, 500), at(176, 500)]), [LineDir.left]);
+    expect(dirs([at(50, 500)]), [LineDir.right]);
+  });
+
+  test(
+    'lineRuns on /Rotate pages: PDFium reports the unrotated boxes, so '
+    'text set across the page stays one line reading right (DK-1138)',
+    () async {
+      await pdfrxInitialize();
+      const f = '../../test/fixtures/corpus/rotated-pages.pdf';
+      for (var page = 0; page < 4; page++) {
+        final text = await PdfEngine.pageText(f, page);
+        final heading = text.text.indexOf('(Rotate');
+        final runs = PdfRedactor.lineRuns(text.charBoxes, 0, heading);
+        expect(runs.map((r) => r.dir), [LineDir.right], reason: 'page $page');
+      }
+    },
+  );
+
   group('detectors', () {
     test(
       'IBANs: checked by mod 97, the fictional one found but not verified',
