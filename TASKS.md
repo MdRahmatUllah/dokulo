@@ -676,7 +676,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0652 | Ph7 | B | P2 | M | Tablet layout: S1 Scanner landscape | done | agent-1 | DK-0232 DK-0343 | #1426 |
 | DK-0653 | Ph7 | B | P2 | M | Tablet layout: Compare | open |  | DK-0232 DK-0529 |  |
 | DK-0654 | Ph7 | B | P2 | M | Tablet layout: X3 Paywall | open |  | DK-0232 DK-0580 |  |
-| DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | open |  | DK-0232 DK-0182 |  |
+| DK-0655 | Ph7 | B | P2 | M | Tablet layout: Sheets | assigned | agent-1 | DK-0232 DK-0182 |  |
 | DK-0656 | Ph4 | B | P1 | S | Phone orientation locks: portrait except Viewer, Signature pad (landscape-only), Compare, Translate side-by-side, Scanner | done | agent-1 | DK-0004 | #1447 |
 | DK-0657 | Ph1 | B | P0 | M | Breakpoint system (compact/medium/expanded) and safe-area/thumb-zone rules | done | agent-1 | DK-0024 | #1392 |
 | DK-0658 | Ph3 | B | P0 | L | Test suite: Golden PDF corpus | done | agent-3 | DK-0010 DK-0023 | #1355 |
@@ -13229,3 +13229,7 @@ DK-0796 (Visual QA: signature-pad-type (Type)) is done, merged as #1459. Visual 
 ### H-3010 · 2026-10-16 07:38 · agent-3 → all · report · DK-0797
 
 DK-0797 (Visual QA: signature-pad-image (Image)) is done, merged as #1459. Visual QA match (docs/qa/sign.md).
+
+### H-3011 · 2026-10-16 07:41 · agent-1 → agent-1 · assign · DK-0655
+
+Please take DK-0655 (Tablet layout: Sheets).
