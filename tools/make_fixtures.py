@@ -16,7 +16,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 from pypdf import PdfReader, PdfWriter
-from pypdf.generic import ArrayObject, BooleanObject, DecodedStreamObject, DictionaryObject, NameObject
+from pypdf.generic import ArrayObject, BooleanObject, DecodedStreamObject, DictionaryObject, NameObject, createStringObject
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.lib.utils import ImageReader
@@ -514,6 +514,39 @@ def incremental() -> bytes:
     return first + update
 
 
+HIDDEN_SECRETS = ("SECRETXMP4711", "SECRETFILE4712", "SECRETJS4713", "SECRETAA4714")
+
+
+def hidden_content() -> bytes:
+    """The invoice with a secret in every place a redaction must clear but a
+    reader doesn't show (DK-0528): XMP metadata, an embedded file, JavaScript
+    run on opening, a page's /AA action. Uncompressed, so the suite can check
+    the input has them."""
+    reader = PdfReader(io.BytesIO(invoice()))
+    writer = PdfWriter()
+    writer.append(reader)
+    xmp = DecodedStreamObject()
+    xmp.set_data(("<x:xmpmeta xmlns:x='adobe:ns:meta/'><rdf:RDF xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>"
+                  f"<rdf:Description dc:title='{HIDDEN_SECRETS[0]}' xmlns:dc='http://purl.org/dc/elements/1.1/'/>"
+                  "</rdf:RDF></x:xmpmeta>").encode())
+    xmp.update({NameObject("/Type"): NameObject("/Metadata"), NameObject("/Subtype"): NameObject("/XML")})
+    writer._root_object[NameObject("/Metadata")] = writer._add_object(xmp)
+    writer.add_attachment("notes.txt", f"Kontonummer: {HIDDEN_SECRETS[1]}".encode())
+    writer._root_object[NameObject("/OpenAction")] = DictionaryObject({
+        NameObject("/S"): NameObject("/JavaScript"),
+        NameObject("/JS"): createStringObject(f"var {HIDDEN_SECRETS[2]} = 1"),
+    })
+    writer.pages[0][NameObject("/AA")] = DictionaryObject({
+        NameObject("/O"): DictionaryObject({
+            NameObject("/S"): NameObject("/JavaScript"),
+            NameObject("/JS"): createStringObject(f"var {HIDDEN_SECRETS[3]} = 1"),
+        }),
+    })
+    out = io.BytesIO()
+    writer.write(out)
+    return out.getvalue()
+
+
 def extreme_pages() -> bytes:
     """A 5 × 5 m page (PDF allows up to 5.08 m), a 25 mm stamp-sized page and
     an empty page."""
@@ -553,6 +586,7 @@ CORPUS = {
     "images.pdf": images,
     "links-annotations.pdf": links_annotations,
     "incremental-update.pdf": incremental,
+    "hidden-content.pdf": hidden_content,
     "extreme-pages.pdf": extreme_pages,
     "vector-heavy.pdf": vector_heavy,
 }

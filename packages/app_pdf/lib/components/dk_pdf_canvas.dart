@@ -33,8 +33,10 @@ class DkPdfCanvas extends StatefulWidget {
     this.night = false,
     this.markup,
     this.onMarkup,
+    this.onAsk,
     this.search,
     this.revision = 0,
+    this.insets = EdgeInsets.zero,
   });
 
   final String path;
@@ -83,6 +85,9 @@ class DkPdfCanvas extends StatefulWidget {
   final void Function(DkMarkupAction action, List<SelectionLines> lines)?
   onMarkup;
 
+  /// Ask AI on the selection (DK-0300): the selected text.
+  final ValueChanged<String>? onAsk;
+
   /// Text search (DK-1093): the matches in `markup.yellow` at 60 %, the
   /// current one outlined 2 dp in `color.primary` (UI spec §17.1).
   final DkPdfSearch? search;
@@ -90,6 +95,11 @@ class DkPdfCanvas extends StatefulWidget {
   /// Night mode (UI spec §17.1; DK-1089): the pages inverted, dark with
   /// light text, on `color.nightCanvas`.
   final bool night;
+
+  /// Room above the first page and below the last for bars laid over the
+  /// pages (V1's translucent top and bottom bars, §17.1; DK-1111): the
+  /// document opens below them and still scrolls under them.
+  final EdgeInsets insets;
 
   /// Between pages and at the sides (§17.1).
   static const gap = 8.0;
@@ -149,6 +159,7 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
             ? _invert(t.color.nightCanvas)
             : t.color.surfaceSunken,
         margin: DkPdfCanvas.gap,
+        boundaryMargin: widget.insets,
         // Light shows the shadow; dark has none (elevation is a lighter
         // surface there), which the outline makes up for.
         pageDropShadow: shadows.isEmpty ? null : shadows.first,
@@ -249,8 +260,11 @@ class _DkPdfCanvasState extends State<DkPdfCanvas> {
                   onAction: (action) async {
                     if (action == DkMarkupAction.copy) {
                       await d.copyTextSelection();
-                    } else if (widget.onMarkup case final onMarkup?
-                        when action != DkMarkupAction.ask) {
+                    } else if (action == DkMarkupAction.ask) {
+                      final text = await d.getSelectedText();
+                      await d.clearTextSelection();
+                      widget.onAsk?.call(text);
+                    } else if (widget.onMarkup case final onMarkup?) {
                       final lines = selectionLines(
                         await d.getSelectedTextRanges(),
                       );
