@@ -827,5 +827,9 @@
   "privacy_crash_keep": "Absturzberichte speichern",
   "privacy_crash_keep_help": "Nur auf diesem Handy. Nichts verlässt es, außer du schickst es.",
   "privacy_crash_delete": "Absturzberichte löschen",
-  "privacy_crash_deleted": "Absturzberichte gelöscht"
+  "privacy_crash_deleted": "Absturzberichte gelöscht",
+  "settings_find_photos": "Dokumente in Fotos finden",
+  "settings_find_photos_help": "Durchsucht deine Fotos auf diesem Handy",
+  "licences_search": "Lizenzen durchsuchen",
+  "licence_title": "Lizenz"
 }
