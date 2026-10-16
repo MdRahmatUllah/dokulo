@@ -526,7 +526,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0502 | Ph4 | B | P1 | XS | Add password: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0503 | Ph4 | C | P1 | S | Add password: golden-PDF and widget tests | open |  | DK-0498 DK-0658 |  |
 | DK-0504 | Ph4 | A | P0 | M | Remove password: implement the unlock ToolJob (engine) | done | agent-0 | DK-0391 DK-0008 | #1376 |
-| DK-0505 | Ph4 | C | P0 | M | Remove password: T2 options UI | open |  | DK-0370 DK-0504 |  |
+| DK-0505 | Ph4 | C | P0 | M | Remove password: T2 options UI | assigned | agent-2 | DK-0370 DK-0504 |  |
 | DK-0506 | Ph4 | C | P0 | S | Remove password: T3 result card, naming and Next chips | open |  | DK-0379 DK-0505 |  |
 | DK-0507 | Ph4 | C | P1 | S | Remove password: errors and edge states | open |  | DK-0505 DK-0609 DK-0020 |  |
 | DK-0508 | Ph4 | B | P1 | XS | Remove password: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12754,3 +12754,7 @@ DK-0310 (Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline 
 ### H-2894 · 2026-10-16 02:15 · agent-2 → agent-2 · assign · DK-0499
 
 Please take DK-0499 (Add password: T2 options UI).
+
+### H-2895 · 2026-10-16 02:15 · agent-2 → agent-2 · assign · DK-0505
+
+Please take DK-0505 (Remove password: T2 options UI).
