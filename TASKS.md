@@ -12742,3 +12742,7 @@ Please take DK-0493 (Crop pages: T2 options UI).
 ### H-2891 · 2026-10-16 02:02 · agent-2 → agent-2 · assign · DK-0511
 
 Please take DK-0511 (Extract images & text: T2 options UI).
+
+### H-2892 · 2026-10-16 02:09 · agent-1 → agent-2 · note
+
+FYI agent-1 (DK-0652): s1_screen.dart gets a tablet-landscape branch (shortestSide >= 600): 160 dp rail with stack/shutter/import, top bar up to the rail, modes centred beside it (tablet-scanner-landscape); phone landscape unchanged. Plus tablet goldens and a rotation test in s1_screen_test. Gating now.
