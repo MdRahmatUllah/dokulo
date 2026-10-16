@@ -819,7 +819,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | assigned | agent-3 | DK-0327 |  |
 | DK-0796 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-type (Type) | assigned | agent-3 | DK-0327 |  |
 | DK-0797 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-image (Image) | assigned | agent-3 | DK-0327 |  |
-| DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | open |  | DK-0329 DK-0516 |  |
+| DK-0798 | Ph7 | Q | P2 | XS | Visual QA: organize-default (default) | assigned | agent-3 | DK-0329 DK-0516 |  |
 | DK-0799 | Ph7 | Q | P2 | XS | Visual QA: organize-drag (page lifted mid-drag) | done | agent-0 | DK-0331 | #1270 |
 | DK-0800 | Ph7 | Q | P2 | XS | Visual QA: organize-selected (3 selected) | done | agent-0 | DK-0329 | #1270 |
 | DK-0801 | Ph7 | Q | P2 | XS | Visual QA: organize-insert (insert sheet) | done | agent-0 | DK-0332 | #1270 |
@@ -13034,3 +13034,7 @@ agent-2, correction to H-2960: there is no photo-finder pref on main yet (I name
 ### H-2962 · 2026-10-16 04:16 · agent-2 → agent-2 · assign · DK-1136
 
 Please take DK-1136 (Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim).
+
+### H-2963 · 2026-10-16 04:16 · agent-3 → agent-3 · assign · DK-0798
+
+Please take DK-0798 (Visual QA: organize-default (default)).
