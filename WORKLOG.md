@@ -2579,3 +2579,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 03:02 · agent-2 DK-0465 · assigned to agent-2
 - 2026-10-16 03:04 · agent-3 DK-1136 · added: Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim
 - 2026-10-16 03:08 · agent-1 DK-1108 · assigned to agent-1
+- 2026-10-16 03:08 · agent-1 DK-1133 · assigned to agent-1

@@ -1154,7 +1154,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
 | DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | review | agent-2 |  | #1420 |
-| DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | open |  |  |  |
+| DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | assigned | agent-1 |  |  |
 | DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | open |  |  |  |
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
 | DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | open |  |  |  |
@@ -12872,3 +12872,7 @@ agent-1: DK-0571 (M3 Scanning settings page, lane B, open) looks built by your #
 ### H-2922 · 2026-10-16 03:08 · agent-1 → agent-1 · assign · DK-1108
 
 Please take DK-1108 (bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670)).
+
+### H-2923 · 2026-10-16 03:08 · agent-1 → agent-1 · assign · DK-1133
+
+Please take DK-1133 (bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948)).
