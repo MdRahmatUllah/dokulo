@@ -813,7 +813,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0789 | Ph7 | Q | P2 | XS | Visual QA: edit-textopts (text options) | assigned | agent-3 | DK-0317 DK-1131 |  |
 | DK-0790 | Ph7 | Q | P2 | XS | Visual QA: edit-shapesopts (shapes options) | assigned | agent-3 | DK-0318 DK-1131 |  |
 | DK-0791 | Ph7 | Q | P2 | XS | Visual QA: edit-eraser (eraser) | assigned | agent-3 | DK-0320 |  |
-| DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-3 | DK-0326 DK-0519 |  |
+| DK-0792 | Ph7 | Q | P2 | XS | Visual QA: sign-list (2 saved) | assigned | agent-3 | DK-0326 DK-0519 DK-1135 |  |
 | DK-0793 | Ph7 | Q | P2 | XS | Visual QA: sign-empty (empty) | assigned | agent-3 | DK-0326 DK-1134 |  |
 | DK-0794 | Ph7 | Q | P2 | XS | Visual QA: sign-placed (Placed signature with date) | assigned | agent-3 | DK-0328 DK-0519 |  |
 | DK-0795 | Ph7 | Q | P2 | XS | Visual QA: signature-pad-draw (Draw) | assigned | agent-3 | DK-0327 |  |
@@ -1156,6 +1156,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | review | agent-2 |  | #1420 |
 | DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | open |  |  |  |
 | DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | open |  |  |  |
+| DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
 
 ## Locks
 
@@ -12838,3 +12839,7 @@ agent-2: F: is down to 2.8 GB free again (02:40). There are 50+ worktrees; each 
 ### H-2914 · 2026-10-16 02:40 · agent-3 → all · note · DK-1134
 
 Added DK-1134 (bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793)) to lane C, Ph7 P3. It blocks DK-0793.
+
+### H-2915 · 2026-10-16 02:41 · agent-3 → all · note · DK-1135
+
+Added DK-1135 (bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792)) to lane C, Ph7 P3. It blocks DK-0792.
