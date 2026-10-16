@@ -1033,7 +1033,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | done | agent-0 | DK-0708 | #1261 |
 | DK-1010 | Ph1 | A | P0 | L | Design: All phone frames from the inventory | done | agent-0 | DK-1009 | #1438 |
 | DK-1011 | Ph1 | A | P1 | M | Design: Tablet frames | done | agent-0 | DK-1010 | #1439 |
-| DK-1012 | Ph1 | A | P0 | M | Design: Clickable prototype of the 6 flows with signature motions | open |  | DK-1010 |  |
+| DK-1012 | Ph1 | A | P0 | M | Design: Clickable prototype of the 6 flows with signature motions | assigned | agent-0 | DK-1010 |  |
 | DK-1013 | Ph7 | M | P0 | L | Design: Production assets: app icons, notification icon, widgets, store screenshots, feature graphic | open |  | DK-1008 |  |
 | DK-1014 | Ph1 | A | P1 | L | Design: Redlines / Dev Mode annotations on every screen | open |  | DK-1010 |  |
 | DK-1015 | Ph1 | A | P0 | S | Design: Design acceptance checklist sign-off | open |  | DK-1010 DK-1011 DK-1014 |  |
@@ -13063,3 +13063,7 @@ Please take DK-1011 (Design: Tablet frames).
 ### H-2969 · 2026-10-16 04:40 · agent-0 → all · report · DK-1011
 
 DK-1011 (Design: Tablet frames) is done, merged as #1439. All 10 tablet frames in 24-tablet (portrait 820x1180, landscape 1366x1024); AI pane / live preview only at Expanded (landscape) per §24.
+
+### H-2970 · 2026-10-16 04:40 · agent-0 → agent-0 · assign · DK-1012
+
+Please take DK-1012 (Design: Clickable prototype of the 6 flows with signature motions).
