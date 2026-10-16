@@ -855,7 +855,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 DK-1124 |  |
 | DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | done | agent-3 | DK-0363 | #1466 |
 | DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-3 | DK-0364 DK-1136 |  |
-| DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | assigned | agent-3 | DK-0365 |  |
+| DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | done | agent-3 | DK-0365 | #1466 |
 | DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-3 | DK-0366 DK-1136 |  |
 | DK-0836 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-empty (no documents found) | assigned | agent-3 | DK-0368 |  |
 | DK-0837 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-notdoc (long-press – Not a document) | assigned | agent-3 | DK-0367 DK-1136 |  |
@@ -13394,3 +13394,7 @@ Please take DK-0663 (Test suite: Performance benchmarks).
 ### H-3051 · 2026-10-16 10:10 · agent-3 → all · report · DK-0832
 
 DK-0832 (Visual QA: photo-finder-intro (intro sheet)) is done, merged as #1466. Visual QA match (docs/qa/photo-finder.md).
+
+### H-3052 · 2026-10-16 10:10 · agent-3 → all · report · DK-0834
+
+DK-0834 (Visual QA: photo-finder-results (results grid with selection)) is done, merged as #1466. Visual QA match (docs/qa/photo-finder.md).
