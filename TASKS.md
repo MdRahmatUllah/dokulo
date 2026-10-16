@@ -614,7 +614,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0590 | Ph5 | B | P1 | XS | Notification: Batch finished | open |  | DK-0587 DK-0535 |  |
 | DK-0591 | Ph6 | B | P1 | XS | Notification: Model downloaded | open |  | DK-0587 DK-0545 |  |
 | DK-0592 | Ph6 | B | P1 | XS | Notification: Photo finder done | open |  | DK-0587 DK-0362 |  |
-| DK-0593 | Ph3 | B | P0 | S | Android progress notification for long jobs (foreground service) | open |  | DK-0587 DK-0008 |  |
+| DK-0593 | Ph3 | B | P0 | S | Android progress notification for long jobs (foreground service) | assigned | agent-0 | DK-0587 DK-0008 |  |
 | DK-0594 | Ph7 | B | P2 | M | Home-screen widget: Scan | open |  | DK-0236 |  |
 | DK-0595 | Ph7 | B | P2 | M | Home-screen widget: Quick tools | open |  | DK-0236 |  |
 | DK-0596 | Ph7 | B | P2 | M | Home-screen widget: Last scan | open |  | DK-0236 |  |
@@ -13266,3 +13266,7 @@ DK-0587 (Local notifications service (iOS + Android channels) with deep links) i
 ### H-3019 · 2026-10-16 07:57 · agent-0 → agent-0 · assign · DK-0589
 
 Please take DK-0589 (Notification: Job failed).
+
+### H-3020 · 2026-10-16 07:59 · agent-0 → agent-0 · assign · DK-0593
+
+Please take DK-0593 (Android progress notification for long jobs (foreground service)).
