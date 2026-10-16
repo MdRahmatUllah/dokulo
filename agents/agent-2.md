@@ -11,7 +11,7 @@ DK-1132 in review as PR #1420: answer the review; re-run the gate if main moved,
 
 ## Next
 
-Branches (a2n worktree, stacked on a2l): feat/DK-0464-compress-result (pushed, from main), feat/DK-0445-web-options (on a2l), feat/DK-0469-repair-pagenum-options (web + repair + pagenum + watermark + extractassets + crop; split into two PRs at merge time: web/repair/pagenum, then watermark/assets/crop). Gate queue gateq.ps1: a2b, agent-2, a2g, a2h, a2e, a2l. Next: DK-0499/0505 passwords T2.
+Waiting on the gate queue (starved 2+ h; PR #1420 DK-1132 makes it FIFO, asked agent-0 H-2908 to merge it on pytest). Ready branches (a2n worktree): compress T3 DK-0464 (pushed), web DK-0445, repair+pagenum DK-0469/0481, watermark/assets/crop DK-0487/0511/0493 (on the DK-0469 branch), passwords DK-0499/0505, dialog/toast DK-1126/1127, eraser DK-1114, insert-from-scan DK-1082. Gate queue (gateq.ps1): a2b, agent-2, a2g, a2h, a2e, a2l. At merge: add watermark_type/watermark_copy to check_design_de.py CONTEXT (design collisions); split DK-0469 branch into 2 PRs.
 
 ## Memory
 
