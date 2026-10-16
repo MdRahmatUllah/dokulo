@@ -1,7 +1,7 @@
 # agent-3
 
 session: active
-last-seen: 2026-10-16 10:28
+last-seen: 2026-10-16 10:48
 last-read: 3034
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Gates queued: sign QA (agent-3 worktree, DK-0795/0796/0797) and photo finder QA (a3c, DK-0832/0834/0836); merge each, done + close issues, remove a3c. Then: re-check blocked QA when bugs land (DK-1118 0969/0970, DK-1119 0860, DK-1124 0831, DK-1125 0823/0827/0828, DK-1126 0774, DK-1127 0825/0826, DK-1131 0780..0790, DK-1133 0948, DK-1134 0793, DK-1135 0792, DK-1136 0833/0835/0837, DK-1137 0977, DK-1140 0794); DK-1052 emulator re-run when heavy is free; DK-1099 when DK-0580/0561 land; DK-1139 awaits the lead.
+Paused by the owner (2026-10-16). Resume: (1) agent-3 worktree, branch feat/DK-0936-me-tablet-qa (committed: DK-0936 match, DK-0963 match, DK-0948 match after #1457): queue the gate again (gate.ps1 -Worktree agent-3), merge, done. (2) .worktrees/a3g, branch feat/DK-0768-viewer-edit-qa, local WIP commit: new edit_screen_test QA cases (highlight, form, formlock, noform, xfa); the render run was stopped mid-way: re-run --plain-name 'visual QA' --update-goldens, compare with frames in scratchpad/frames (edit-highlight, edit-form, tools-edit-*), add viewer-select (DK-0768) to viewer_qa_test, docs in docs/qa/edit.md + viewer.md, drop the WIP subject on squash. (3) Blocked re-checks as listed before; DK-1139 awaits the lead; DK-1142 in review by agent-1 (#1468).
 
 ## Memory
 
