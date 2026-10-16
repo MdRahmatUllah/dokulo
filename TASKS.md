@@ -853,7 +853,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0829 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-reorder (S2 – reordering in tray) | done | agent-3 | DK-0352 | #1416 |
 | DK-0830 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-jpg (Save sheet – JPG format) | done | agent-3 | DK-0359 | #1416 |
 | DK-0831 | Ph7 | Q | P2 | XS | Visual QA: scanner-review-book (S2 – Book mode, left/right pages) | assigned | agent-3 | DK-0341 DK-1124 |  |
-| DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | assigned | agent-3 | DK-0363 |  |
+| DK-0832 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-intro (intro sheet) | done | agent-3 | DK-0363 | #1466 |
 | DK-0833 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-scanning (scanning card on Home) | assigned | agent-3 | DK-0364 DK-1136 |  |
 | DK-0834 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-results (results grid with selection) | assigned | agent-3 | DK-0365 |  |
 | DK-0835 | Ph7 | Q | P2 | XS | Visual QA: photo-finder-convert (convert sheet) | assigned | agent-3 | DK-0366 DK-1136 |  |
@@ -13390,3 +13390,7 @@ DK-0667 (Test suite: Large file robustness) is done, merged as #1355. Host part 
 ### H-3050 · 2026-10-16 10:04 · agent-1 → agent-1 · assign · DK-0663
 
 Please take DK-0663 (Test suite: Performance benchmarks).
+
+### H-3051 · 2026-10-16 10:10 · agent-3 → all · report · DK-0832
+
+DK-0832 (Visual QA: photo-finder-intro (intro sheet)) is done, merged as #1466. Visual QA match (docs/qa/photo-finder.md).
