@@ -541,7 +541,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0517 | Ph4 | C | P0 | XS | Mark up tool entry: opens V2 with the Highlighter selected; saved as a new version | done | agent-2 | DK-0313 | #1399 |
 | DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | done | agent-2 | DK-0323 DK-0313 | #1408 |
 | DK-0519 | Ph4 | C | P0 | XS | Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo" | done | agent-2 | DK-0313 DK-0325 | #1399 |
-| DK-0520 | Ph4 | C | P0 | L | Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions | assigned | agent-2 | DK-0393 DK-0400 |  |
+| DK-0520 | Ph4 | C | P0 | L | Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions | done | agent-2 | DK-0393 DK-0400 | #1446 |
 | DK-0521 | Ph4 | C | P0 | S | Black out: implement the "Screen & step indicator" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0522 | Ph4 | C | P0 | S | Black out: implement the "Find panel" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0523 | Ph4 | C | P0 | S | Black out: implement the "Review" state | open |  | DK-0520 DK-0220 DK-0160 |  |
@@ -13128,3 +13128,7 @@ DK-0791 (Visual QA: edit-eraser (eraser)) is done, merged as #1444. Visual QA ma
 ### H-2985 · 2026-10-16 05:32 · agent-3 → all · note · DK-1140
 
 Added DK-1140 (V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement) to lane C, Ph7 P3. It blocks DK-0794.
+
+### H-2986 · 2026-10-16 05:34 · agent-2 → all · report · DK-0520
+
+DK-0520 (Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions) is done, merged as #1446. Masked previews, findings on OCR words, AI name/address suggestions unchecked. Now ready: DK-0521, DK-0522, DK-0523, DK-0524, DK-0525, DK-0526, DK-0527.
