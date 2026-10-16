@@ -15,6 +15,7 @@ class DkSettingsRow extends StatelessWidget {
     required this.title,
     this.description,
     this.icon,
+    this.leading,
     this.value,
     this.trailing,
     this.onTap,
@@ -23,6 +24,10 @@ class DkSettingsRow extends StatelessWidget {
   final String title;
   final String? description;
   final IconData? icon;
+
+  /// A widget before the title in place of [icon] (Default filter's page
+  /// thumbnails).
+  final Widget? leading;
 
   /// The current choice, shown before the chevron ("System").
   final String? value;
@@ -44,7 +49,10 @@ class DkSettingsRow extends StatelessWidget {
       child: Row(
         spacing: t.space.m,
         children: [
-          if (icon != null) DkIcon(icon!, color: c.iconPrimary),
+          if (leading != null)
+            leading!
+          else if (icon != null)
+            DkIcon(icon!, color: c.iconPrimary),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

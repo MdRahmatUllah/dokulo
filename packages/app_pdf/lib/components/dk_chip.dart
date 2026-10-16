@@ -25,6 +25,7 @@ class DkChip extends ConsumerWidget {
     required this.selected,
     required this.onSelected,
     this.kind = DkChipKind.filter,
+    this.icon,
     this.showPressed = false,
     this.showFocused = false,
   });
@@ -33,6 +34,10 @@ class DkChip extends ConsumerWidget {
   final bool selected;
   final ValueChanged<bool>? onSelected;
   final DkChipKind kind;
+
+  /// A 16 dp icon before the label while the chip is off (File name's
+  /// "+ date" insert chips).
+  final IconData? icon;
 
   /// Draw these states without a finger or keyboard: catalogue and goldens.
   final bool showPressed, showFocused;
@@ -91,7 +96,9 @@ class DkChip extends ConsumerWidget {
                   spacing: t.space.xs,
                   children: [
                     if (filter && selected)
-                      DkIcon(DkIcons.check, size: DkIconSize.s, color: ink),
+                      DkIcon(DkIcons.check, size: DkIconSize.s, color: ink)
+                    else if (icon != null)
+                      DkIcon(icon!, size: DkIconSize.s, color: ink),
                     Flexible(
                       child: Text(
                         label,

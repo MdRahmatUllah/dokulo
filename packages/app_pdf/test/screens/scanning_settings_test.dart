@@ -120,6 +120,18 @@ void main() {
     expect(read().namePattern, 'Receipt {number}');
   });
 
+  testWidgets('File name: the tokens show as chips in the field (DK-1142)', (
+    tester,
+  ) async {
+    await pump(tester, locale: const Locale('de'));
+    await tester.tap(find.text('Dateiname'));
+    await tester.pumpAndSettle();
+    // Each token once in the field and once as an insert chip.
+    expect(find.text('Datum'), findsNWidgets(2));
+    expect(find.text('Uhrzeit'), findsNWidgets(2));
+    expect(find.textContaining('{date}'), findsNothing);
+  });
+
   testWidgets('Text recognition language', (tester) async {
     await pump(tester);
     await tester.tap(find.text('Text recognition language'));
@@ -141,5 +153,20 @@ void main() {
         matchesGoldenFile('goldens/scanning_settings_$name.png'),
       );
     });
+
+    for (final (page, row, l10n) in [
+      ('filter', 'Default filter', 'Standardfilter'),
+      ('filename', 'File name', 'Dateiname'),
+    ]) {
+      testWidgets('golden: scanning $page ($name)', (tester) async {
+        await pump(tester, tokens: tokens, locale: locale);
+        await tester.tap(find.text(locale.languageCode == 'de' ? l10n : row));
+        await tester.pumpAndSettle();
+        await expectLater(
+          find.byType(Navigator),
+          matchesGoldenFile('goldens/scanning_${page}_$name.png'),
+        );
+      });
+    }
   }
 }
