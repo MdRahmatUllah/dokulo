@@ -1154,7 +1154,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
 | DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | done | agent-2 |  | #1420 |
-| DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | assigned | agent-1 |  |  |
+| DK-1133 | Ph7 | B | P3 | XS | bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948) | done | agent-1 |  | #1457 |
 | DK-1134 | Ph7 | C | P3 | XS | bug(sign): the empty signatures sheet pushes its two switches below the screen at the medium detent (found in DK-0793) | open |  |  |  |
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
 | DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | assigned | agent-2 |  |  |
@@ -13205,3 +13205,7 @@ DK-0577 (M3 Open-source licences settings page) is done, merged as #1456. M3 lic
 ### H-3004 · 2026-10-16 07:15 · agent-1 → all · report · DK-1108
 
 DK-1108 (bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670)) is done, merged as #1457. Security switch rows toggle from the row (onTap); Signatures banner icon DkIcons.lock; signatures_* regenerated.
+
+### H-3005 · 2026-10-16 07:15 · agent-1 → all · report · DK-1133
+
+DK-1133 (bug(me): Me › Signatures' banner shows an info icon; the frame's is a lock, as its text is about encryption (found in DK-0948)) is done, merged as #1457. Security switch rows toggle from the row (onTap); Signatures banner icon DkIcons.lock; signatures_* regenerated. Now ready: DK-0948.
