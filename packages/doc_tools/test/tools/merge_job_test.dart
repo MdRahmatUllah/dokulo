@@ -154,4 +154,53 @@ void main() {
     expect((await PdfEngine.inspect(output.path)).pageCount, 200);
     expect(watch.elapsed, lessThan(const Duration(seconds: 3)));
   });
+
+  group('bookmarks (DK-1101)', () {
+    /// An outline as (title, page) in reading order, children after their
+    /// parent.
+    List<(String, int?)> flat(List<OutlineEntry> entries) => [
+      for (final e in entries) ...[(e.title, e.page), ...flat(e.children)],
+    ];
+
+    test('each file keeps its bookmarks, moved to its pages; a range keeps '
+        'only those inside it; the file checks clean', () async {
+      final own = flat(await PdfEngine.outline(contract));
+      expect(own, isNotEmpty, reason: 'the contract has bookmarks per §');
+      final run = await queue.start(
+        'merge',
+        input([contract, contract], ranges: {1: '2-3'}),
+      );
+      final output = await run.result as OneFile;
+      final merged = flat(await PdfEngine.outline(output.path));
+      expect(merged, [
+        ...own,
+        // The second copy gave pages 2-3 (1, 2), now at output pages 3, 4.
+        for (final (title, page) in own)
+          if (page != null && page >= 1) (title, page - 1 + 3),
+      ]);
+      expect(await pool.run(Lane.qpdf, _check, output.path).result, isEmpty);
+    });
+
+    test('Keep bookmarks off: none', () async {
+      final run = await queue.start(
+        'merge',
+        MergeInput(
+          files: [contract, invoice],
+          outputDir: outDir.path,
+          suffix: ' – merged',
+          keepBookmarks: false,
+        ),
+      );
+      final output = await run.result as OneFile;
+      expect(await PdfEngine.outline(output.path), isEmpty);
+    });
+
+    test('rangePages reads qpdf ranges, or says it can\'t', () {
+      expect(PdfOutline.rangePages(null, 3), [0, 1, 2]);
+      expect(PdfOutline.rangePages('3,1', 3), [2, 0]);
+      expect(PdfOutline.rangePages('2-z', 4), [1, 2, 3]);
+      expect(PdfOutline.rangePages('3-1', 3), [2, 1, 0]);
+      expect(PdfOutline.rangePages('r1', 3), isNull);
+    });
+  });
 }
