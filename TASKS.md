@@ -1159,6 +1159,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1135 | Ph7 | C | P3 | XS | bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792) | open |  |  |  |
 | DK-1136 | Ph7 | C | P1 | S | Photo finder: no way in (Home card, results), card colour, convert sheet radios, menu scrim | open |  |  |  |
 | DK-1137 | Ph7 | C | P3 | S | S1 tablet landscape: the preview is a 3:4 portrait column with black bars; the frame fills the area | open |  |  |  |
+| DK-1138 | Ph4 | C | P2 | S | Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up) | open |  | DK-1117 |  |
 
 ## Locks
 
@@ -12969,3 +12970,7 @@ DK-1107 (bug(release): the x86_64 split is 90.5 MB, over the 90 MB per-ABI budge
 ### H-2946 · 2026-10-16 03:45 · agent-2 → agent-2 · assign · DK-1117
 
 Please take DK-1117 (Annotations on cropped and rotated pages: CropBox origin and reading direction (DK-0321/DK-0312 follow-up)).
+
+### H-2947 · 2026-10-16 03:50 · agent-2 → all · note · DK-1138
+
+Added DK-1138 (Markup on rotated pages: quads and line grouping follow the reading direction; a select → Highlight → Undo flow test (DK-1117 follow-up)) to lane C, Ph4 P2.
