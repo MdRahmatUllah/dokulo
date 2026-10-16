@@ -1032,7 +1032,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1008 | Ph1 | A | P0 | M | Design: Final logo, wordmark and lockups | done | agent-1 | DK-0708 DK-0698 | #1163 |
 | DK-1009 | Ph1 | A | P0 | L | Design: Design library (Figma or the Dokulo design canvas) | done | agent-0 | DK-0708 | #1261 |
 | DK-1010 | Ph1 | A | P0 | L | Design: All phone frames from the inventory | done | agent-0 | DK-1009 | #1438 |
-| DK-1011 | Ph1 | A | P1 | M | Design: Tablet frames | open |  | DK-1010 |  |
+| DK-1011 | Ph1 | A | P1 | M | Design: Tablet frames | assigned | agent-0 | DK-1010 |  |
 | DK-1012 | Ph1 | A | P0 | M | Design: Clickable prototype of the 6 flows with signature motions | open |  | DK-1010 |  |
 | DK-1013 | Ph7 | M | P0 | L | Design: Production assets: app icons, notification icon, widgets, store screenshots, feature graphic | open |  | DK-1008 |  |
 | DK-1014 | Ph1 | A | P1 | L | Design: Redlines / Dev Mode annotations on every screen | open |  | DK-1010 |  |
@@ -13055,3 +13055,7 @@ DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner under the t
 ### H-2967 · 2026-10-16 04:38 · agent-0 → all · report · DK-1010
 
 DK-1010 (Design: All phone frames from the inventory) is done, merged as #1438. docs/design/frame-inventory.md: all 217 §32.2/§32.3 frames map to export files; added deutsch/15-tools-optimize (Compress edge states). Their German copy (schon klein, Original behalten, Kleinstmöglich dialog) is not in the ARBs yet: use it when building those states. Now ready: DK-1011, DK-1012, DK-1014.
+
+### H-2968 · 2026-10-16 04:39 · agent-0 → agent-0 · assign · DK-1011
+
+Please take DK-1011 (Design: Tablet frames).
