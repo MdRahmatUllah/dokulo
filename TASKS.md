@@ -794,7 +794,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0770 | Ph7 | Q | P2 | XS | Visual QA: viewer-wrongpw (wrong password) | done | agent-0 | DK-0302 | #1338 |
 | DK-0771 | Ph7 | Q | P2 | XS | Visual QA: viewer-night (night mode) | done | agent-3 | DK-0304 | #1385 |
 | DK-0772 | Ph7 | Q | P2 | XS | Visual QA: viewer-damaged (damaged file) | done | agent-0 | DK-0305 | #1338 |
-| DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | assigned | agent-3 | DK-0306 DK-1111 |  |
+| DK-0773 | Ph7 | Q | P2 | XS | Visual QA: viewer-form (form detected) | done | agent-3 | DK-0306 DK-1111 | #1454 |
 | DK-0774 | Ph7 | Q | P2 | XS | Visual QA: viewer-goto (go to page) | assigned | agent-3 | DK-0307 DK-1126 |  |
 | DK-0775 | Ph7 | Q | P2 | XS | Visual QA: viewer-link (external link dialog) | done | agent-3 | DK-0308 | #1385 |
 | DK-0776 | Ph7 | Q | P2 | XS | Visual QA: viewer-menu (overflow menu) | done | agent-3 | DK-0295 DK-0311 | #1416 |
@@ -13189,3 +13189,7 @@ Added DK-1141 (Me: Rate Dokulo on iOS (App Store page or review API)) to lane B,
 ### H-3000 · 2026-10-16 06:44 · agent-3 → all · report · DK-0763
 
 DK-0763 (Visual QA: viewer-default (default)) is done, merged as #1454. Re-checked after #1437 (DK-1111): match.
+
+### H-3001 · 2026-10-16 06:44 · agent-3 → all · report · DK-0773
+
+DK-0773 (Visual QA: viewer-form (form detected)) is done, merged as #1454. Re-checked after #1437 (DK-1111): match.

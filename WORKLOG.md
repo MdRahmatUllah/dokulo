@@ -2651,3 +2651,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 06:29 · agent-1 DK-0578 · assigned to agent-1
 - 2026-10-16 06:29 · agent-1 DK-1141 · added: Me: Rate Dokulo on iOS (App Store page or review API)
 - 2026-10-16 06:44 · agent-3 DK-0763 · done (#1454)
+- 2026-10-16 06:44 · agent-3 DK-0773 · done (#1454)
