@@ -1,9 +1,11 @@
+import 'package:app_pdf/providers/locked_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../routes/routes_test.dart' show pumpAt;
+import 'locked_folder_screen_test.dart' show LockedSetup;
 
 /// Whole screens against the platform guidelines (DK-0641 touch targets,
 /// DK-0640 text at 200 %,
@@ -32,7 +34,15 @@ void main() {
         tester.view.devicePixelRatio = 1;
         addTearDown(tester.view.reset);
         final handle = tester.ensureSemantics();
-        await pumpAt(tester, location, tokens: tokens);
+        await pumpAt(
+          tester,
+          location,
+          tokens: tokens,
+          // M3 Security reads the locked folder's vault (the Keystore).
+          overrides: [
+            lockedVaultProvider.overrideWithValue(LockedSetup().vault),
+          ],
+        );
         await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
         await expectLater(tester, meetsGuideline(textContrastGuideline));
         handle.dispose();
@@ -49,7 +59,11 @@ void main() {
       tester.platformDispatcher.textScaleFactorTestValue = 2;
       addTearDown(tester.view.reset);
       addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
-      await pumpAt(tester, location);
+      await pumpAt(
+        tester,
+        location,
+        overrides: [lockedVaultProvider.overrideWithValue(LockedSetup().vault)],
+      );
       expect(tester.takeException(), isNull);
     });
   }
