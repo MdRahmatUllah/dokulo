@@ -234,6 +234,16 @@ void main() {
     Finder page(int n) =>
         find.byWidgetPredicate((w) => w is DkPageThumb && w.pageNumber == n);
 
+    // DK-0798: organize-default, 12 pages, nothing selected.
+    testWidgets('golden: organize_default_$theme', (tester) async {
+      await pumpP1(tester, tokens: tokens, pages: 12);
+      expect(find.text('12 pages'), findsOneWidget);
+      await expectLater(
+        find.byType(Navigator).first,
+        matchesGoldenFile('goldens/organize_default_$theme.png'),
+      );
+    });
+
     testWidgets('golden: organize_selected_$theme', (tester) async {
       await pumpP1(tester, tokens: tokens, pages: 12);
       for (final n in [3, 6, 7]) {
