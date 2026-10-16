@@ -2977,5 +2977,15 @@
   "compress_after": "After",
   "@compress_after": {"description": "Compress PDF's T3 Before/After (DK-0464; tool-shell-result)."},
   "compress_zoom": "200 % zoom",
-  "@compress_zoom": {"description": "Compress PDF's T3 Before/After (DK-0464; tool-shell-result)."}
+  "@compress_zoom": {"description": "Compress PDF's T3 Before/After (DK-0464; tool-shell-result)."},
+  "compress_already_small": "This file is already small ({size}). Compressing further would lower quality.",
+  "@compress_already_small": {"description": "Compress PDF's edge states (DK-0465; tools-optimize-small, -target).", "placeholders": {"size": {"type": "String"}}},
+  "compress_keep_original": "Keep original",
+  "@compress_keep_original": {"description": "Compress PDF's edge states (DK-0465; tools-optimize-small, -target)."},
+  "compress_smallest": "Smallest possible: {size}",
+  "@compress_smallest": {"description": "Compress PDF's edge states (DK-0465; tools-optimize-small, -target).", "placeholders": {"size": {"type": "String"}}},
+  "compress_smallest_body": "The images in this file can't get smaller without becoming unreadable. Use it anyway?",
+  "@compress_smallest_body": {"description": "Compress PDF's edge states (DK-0465; tools-optimize-small, -target)."},
+  "compress_use": "Use {size}",
+  "@compress_use": {"description": "Compress PDF's edge states (DK-0465; tools-optimize-small, -target).", "placeholders": {"size": {"type": "String"}}}
 }

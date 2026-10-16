@@ -805,5 +805,10 @@
   "img2pdf_not_images": "{n, plural, =1{1 Datei ist kein Bild und wurde übersprungen.} other{{n} Dateien sind keine Bilder und wurden übersprungen.}}",
   "compress_before": "Vorher",
   "compress_after": "Nachher",
-  "compress_zoom": "200 % Zoom"
+  "compress_zoom": "200 % Zoom",
+  "compress_already_small": "Diese Datei ist schon klein ({size}). Weiteres Verkleinern würde die Qualität verschlechtern.",
+  "compress_keep_original": "Original behalten",
+  "compress_smallest": "Kleinstmöglich: {size}",
+  "compress_smallest_body": "Die Bilder in dieser Datei werden nicht kleiner, ohne unleserlich zu werden. Trotzdem verwenden?",
+  "compress_use": "{size} verwenden"
 }

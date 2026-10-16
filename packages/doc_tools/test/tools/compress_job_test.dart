@@ -206,6 +206,22 @@ void main() {
     );
   });
 
+  test('a target nothing reaches: the smallest is kept, and the job says so '
+      '(DK-0465)', () async {
+    final run = await queue.start(
+      'compress',
+      CompressInput(
+        files: [scan],
+        outputDir: outDir.path,
+        suffix: ' – compressed',
+        targetBytes: 1000,
+      ),
+    );
+    final output = await run.result as OneFile;
+    expect(File(output.path).existsSync(), isTrue);
+    expect(output.facts['missedTarget'], 1000);
+  }, timeout: const Timeout(Duration(minutes: 3)));
+
   test('cancel leaves no files and the original untouched', () async {
     final original = File(scan).readAsBytesSync();
     final run = await queue.start(

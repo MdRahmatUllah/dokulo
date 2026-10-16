@@ -145,6 +145,20 @@ void main() {
     expect(input.suffix, ' – compressed');
   });
 
+  testWidgets('an already small file says so, with Keep original (DK-0465)', (
+    tester,
+  ) async {
+    await pump(tester, [('Invoice.pdf', 2, 300000)]);
+    expect(
+      find.text(
+        'This file is already small (${formatBytes(300000, 'en')}). '
+        'Compressing further would lower quality.',
+      ),
+      findsOneWidget,
+    );
+    expect(find.text('Keep original'), findsOneWidget);
+  });
+
   testWidgets('several files: "Compress 4 files"', (tester) async {
     await pump(tester, [for (var i = 0; i < 4; i++) ('f$i.pdf', 3, 1000000)]);
     expect(bar(tester).label, 'Compress 4 files');

@@ -178,6 +178,12 @@ class CompressJob extends ToolJob<CompressInput> {
       }
       rethrow;
     }
-    return outputs.length == 1 ? OneFile(outputs.single) : ManyFiles(outputs);
+    // A target nothing reached: the smallest was kept (T3 asks, DK-0465).
+    final target = input.targetBytes;
+    final missed =
+        target != null && outputs.any((o) => File(o).lengthSync() > target);
+    return outputs.length == 1
+        ? OneFile(outputs.single, facts: {if (missed) 'missedTarget': target})
+        : ManyFiles(outputs);
   }
 }

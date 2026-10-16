@@ -4,7 +4,9 @@ import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:flutter/material.dart';
 
+import '../components/dk_banner.dart';
 import '../components/dk_chip.dart';
+import '../components/dk_confirm_dialog.dart';
 import '../components/dk_level_card.dart';
 import '../components/dk_sheet.dart';
 import '../components/dk_button.dart';
@@ -31,6 +33,11 @@ const _share = {
 };
 
 const _mb = 1000 * 1000;
+
+/// Under this, a single file is "already small" (tools-optimize-small).
+/// ponytail: a fixed size; per-page bytes would judge a long text file
+/// better.
+const _smallBytes = 500 * 1000;
 
 /// Compress PDF's T2 (DK-0463; UI spec §21): Level as three cards with
 /// estimates, Target size as chips, and under More options Greyscale and
@@ -110,9 +117,15 @@ final compressDefinition = ToolDefinition(
       ),
     );
   },
-  resultDetail: (context, r) => r.inputs.length == 1
-      ? CompressBeforeAfter(before: r.inputs.single.path, after: r.files.first)
-      : const SizedBox.shrink(),
+  resultDetail: (context, r) => Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      if (r.output case OneFile(:final facts) when facts['missedTarget'] is int)
+        _MissedTarget(result: r),
+      if (r.inputs.length == 1)
+        CompressBeforeAfter(before: r.inputs.single.path, after: r.files.first),
+    ],
+  ),
   next: const ['protect'],
 );
 
@@ -174,10 +187,18 @@ class _SizeControl extends StatelessWidget {
         '≈$unitSpace${formatBytes((total * _share[p]!).round(), locale)}';
     const targets = [1 * _mb, 2 * _mb, 5 * _mb];
     final custom = value.target != null && !targets.contains(value.target);
+    // tools-optimize-small: one small file has little left to gain.
+    final small = subject.files.length == 1 && total < _smallBytes;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: t.space.s,
       children: [
+        if (small)
+          DkBanner(
+            text: l.compress_already_small(formatBytes(total, locale)),
+            action: l.compress_keep_original,
+            onAction: () => Navigator.of(context).maybePop(),
+          ),
         DkLevelCards<CompressPreset?>(
           levels: [
             (
@@ -249,4 +270,44 @@ class _SizeControl extends StatelessWidget {
       ],
     );
   }
+}
+
+/// tools-optimize-target: no setting got under the target, so the smallest
+/// was kept. Asked once, as T3 opens: Use it, or Cancel (back to T2).
+class _MissedTarget extends StatefulWidget {
+  const _MissedTarget({required this.result});
+
+  final ToolResult result;
+
+  @override
+  State<_MissedTarget> createState() => _MissedTargetState();
+}
+
+class _MissedTargetState extends State<_MissedTarget> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _ask());
+  }
+
+  Future<void> _ask() async {
+    if (!mounted) return;
+    final l = AppLocalizations.of(context);
+    final path = widget.result.files.first;
+    final size = formatBytes(
+      File(path).existsSync() ? File(path).lengthSync() : 0,
+      l.localeName,
+    );
+    final use = await showDkConfirm(
+      context,
+      title: l.compress_smallest(size),
+      body: l.compress_smallest_body,
+      action: l.compress_use(size),
+    );
+    // Cancel: T3 closes as Close does (the result is dropped).
+    if (!use && mounted) await Navigator.of(context).maybePop();
+  }
+
+  @override
+  Widget build(BuildContext context) => const SizedBox.shrink();
 }
