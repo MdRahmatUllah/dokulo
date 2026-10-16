@@ -2615,3 +2615,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 04:16 · agent-3 DK-0798 · assigned to agent-3
 - 2026-10-16 04:18 · agent-3 DK-0635 · assigned to agent-3
 - 2026-10-16 04:31 · agent-3 DK-1139 · added: Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line?
+- 2026-10-16 04:33 · agent-0 DK-1111 · done (#1437)

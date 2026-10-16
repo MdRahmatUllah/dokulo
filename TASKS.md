@@ -1132,7 +1132,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1108 | Ph7 | B | P3 | XS | bug(settings): M3 Security's switch rows toggle only on the switch, not on the row (found in DK-0670) | assigned | agent-1 |  |  |
 | DK-1109 | Ph5 | A | P1 | S | bug(ocr): the searchable output still runs some words together on device: 'Musterstraße12', 'SehrgeehrterHerr' (after DK-1071; found in DK-0670) | done | agent-0 |  | #1411 |
 | DK-1110 | Ph7 | A | P2 | S | bug(device-checks): kill_recovery.py can't pass: flutter test uninstalls the app after every launch, so the job state is gone (found in DK-0670) | open |  |  |  |
-| DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | assigned | agent-0 |  |  |
+| DK-1111 | Ph7 | C | P2 | S | bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763) | done | agent-0 |  | #1437 |
 | DK-1112 | Ph6 | C | P1 | S | Photo finder: 'Found N documents' notification when a background scan ends (DK-0364 follow-up) | open |  |  |  |
 | DK-1113 | Ph6 | C | P2 | M | Photo finder: measure precision on a labelled photo set and tune the score weights (DK-0362 follow-up) | open |  |  |  |
 | DK-1114 | Ph4 | C | P1 | S | V2 Eraser: Stroke mode erases only the ink under the finger (split strokes) (DK-0320 follow-up) | assigned | agent-2 |  |  |
@@ -13047,3 +13047,7 @@ Please take DK-0635 (German layout QA at 100 % and 200 % text on all DE-marked f
 ### H-2965 · 2026-10-16 04:31 · agent-3 → all · note · DK-1139
 
 Added DK-1139 (Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line?) to lane B, Ph7 P3.
+
+### H-2966 · 2026-10-16 04:33 · agent-0 → all · report · DK-1111
+
+DK-1111 (bug(viewer): V1 opens with page 1's top and the form banner under the top bar (found in DK-0763)) is done, merged as #1437. DkPdfCanvas.insets (pdfrx boundaryMargin): V1 phone opens below the top bar, pages scroll under both bars; the form banner below the bar. qa_viewer_* and viewer_unlocked_* goldens regenerated. Now ready: DK-0763, DK-0773.
