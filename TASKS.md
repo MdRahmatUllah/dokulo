@@ -542,7 +542,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0518 | Ph4 | C | P0 | S | Fill form tool: V2 with form filling + "Lock form values?" dialog, no-fields and XFA dialogs | done | agent-2 | DK-0323 DK-0313 | #1408 |
 | DK-0519 | Ph4 | C | P0 | XS | Sign PDF tool: V2 with the signatures sheet; toast "Signed on page 3 · Undo" | done | agent-2 | DK-0313 DK-0325 | #1399 |
 | DK-0520 | Ph4 | C | P0 | L | Black out: detectors (IBAN mod-97, German Steuer-ID check digit, email, phone, DOB, US SSN, UK NI) + AI name/address suggestions | done | agent-2 | DK-0393 DK-0400 | #1446 |
-| DK-0521 | Ph4 | C | P0 | S | Black out: implement the "Screen & step indicator" state | open |  | DK-0520 DK-0220 DK-0160 |  |
+| DK-0521 | Ph4 | C | P0 | S | Black out: implement the "Screen & step indicator" state | assigned | agent-0 | DK-0520 DK-0220 DK-0160 |  |
 | DK-0522 | Ph4 | C | P0 | S | Black out: implement the "Find panel" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0523 | Ph4 | C | P0 | S | Black out: implement the "Review" state | open |  | DK-0520 DK-0220 DK-0160 |  |
 | DK-0524 | Ph4 | C | P0 | S | Black out: implement the "Apply confirm" state | open |  | DK-0520 DK-0220 DK-0160 |  |
@@ -13346,3 +13346,7 @@ Please take DK-0436 (Image to PDF: copy deck EN/DE and accessibility labels).
 ### H-3039 · 2026-10-16 09:50 · agent-1 → all · report · DK-0436
 
 DK-0436 (Image to PDF: copy deck EN/DE and accessibility labels) is done, merged as #1337. Verified 2026-10-16: Image to PDF: button 'Create PDF · {n} images' / 'PDF erstellen · {n} Bilder' (ICU) matches §27.3, no suffix as the deck says; T2 labels in DK-0637's screen_reader_test; German by the design-German gate.
+
+### H-3040 · 2026-10-16 09:56 · agent-0 → agent-0 · assign · DK-0521
+
+Please take DK-0521 (Black out: implement the "Screen & step indicator" state).
