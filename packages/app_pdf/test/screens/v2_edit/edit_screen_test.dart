@@ -483,10 +483,15 @@ void main() {
       ('light', DkTokens.light),
       ('dark', DkTokens.dark),
     ]) {
-      Future<void> shot(WidgetTester tester, String frame) => expectLater(
-        find.byType(MaterialApp),
-        matchesGoldenFile('goldens/edit_qa_${frame}_$name.png'),
-      );
+      // A few real-time rounds first: PDFium renders the page off the test
+      // clock, and a shot taken before it lands shows a blank page.
+      Future<void> shot(WidgetTester tester, String frame) async {
+        await settle(tester, rounds: 10);
+        await expectLater(
+          find.byType(MaterialApp),
+          matchesGoldenFile('goldens/edit_qa_${frame}_$name.png'),
+        );
+      }
 
       Offset mid(WidgetTester tester) =>
           tester.getCenter(find.byType(PdfViewer));
