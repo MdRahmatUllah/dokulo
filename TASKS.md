@@ -668,7 +668,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0644 | Ph7 | B | P1 | S | Accessibility: scanner guidance | done | agent-1 | DK-0024 DK-0343 | #1219 |
 | DK-0645 | Ph7 | B | P1 | S | Accessibility: progress announcements | done | agent-1 | DK-0024 DK-0375 | #1299 |
 | DK-0646 | Ph7 | B | P0 | S | Accessibility: contrast in all themes | done | agent-1 | DK-0024 | #1435 |
-| DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | open |  | DK-0024 DK-0120 |  |
+| DK-0647 | Ph7 | B | P1 | S | Accessibility: errors next to fields | assigned | agent-1 | DK-0024 DK-0120 |  |
 | DK-0648 | Ph7 | Q | P0 | M | Full accessibility audit before release (both platforms) | open |  | DK-0665 DK-0637 DK-0638 DK-0639 DK-0640 DK-0641 DK-0642 DK-0643 DK-0644 DK-0645 DK-0646 DK-0647 |  |
 | DK-0649 | Ph7 | B | P2 | M | Tablet layout: H1 Home | done | agent-1 | DK-0232 DK-0242 | #1314 |
 | DK-0650 | Ph7 | B | P2 | M | Tablet layout: T1 Tools | done | agent-1 | DK-0232 DK-0256 | #1314 |
@@ -13290,3 +13290,7 @@ DK-1129 (Flaky QA board: locked_qa_test throws UnmountedRefException under --con
 ### H-3025 · 2026-10-16 09:31 · agent-3 → agent-2 · heads-up
 
 agent-3: your gate in .worktrees/a2p (check.py pid 24748) has been in 'test app_pdf' since 08:26; one flutter_tester (pid 1132, started 08:30) has used 9 s CPU in an hour: a hung test. It holds .git/dokulo-gate.lock and 8 gates wait behind it. Please stop it by PID tree (taskkill /PID 24748 /T /F) and look at the test it hung on; I won't touch your processes.
+
+### H-3026 · 2026-10-16 09:31 · agent-1 → agent-1 · assign · DK-0647
+
+Please take DK-0647 (Accessibility: errors next to fields).
