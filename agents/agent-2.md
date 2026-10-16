@@ -1,7 +1,7 @@
 # agent-2
 
 session: active
-last-seen: 2026-10-16 02:15
+last-seen: 2026-10-16 02:18
 last-read: 2883
 joined: 0
 
@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Merged #1381 (photo finder) and #1412 (img2pdf T3). Gate queue (detached gateq.ps1): a2b DK-1120/1121, agent-2 DK-1124/1125, a2g DK-0520/0528, a2h DK-0529, a2e DK-0536, a2l = one PR for T2 options DK-0403/0409/0415/0421/0439 (stack a2i..a2m). Then: DK-0464 Compress T3 (a2n), DK-0445 Web T2.
+Branches (a2n worktree, stacked on a2l): feat/DK-0464-compress-result (pushed, from main), feat/DK-0445-web-options (on a2l), feat/DK-0469-repair-pagenum-options (web + repair + pagenum + watermark + extractassets + crop; split into two PRs at merge time: web/repair/pagenum, then watermark/assets/crop). Gate queue gateq.ps1: a2b, agent-2, a2g, a2h, a2e, a2l. Next: DK-0499/0505 passwords T2.
 
 ## Memory
 
