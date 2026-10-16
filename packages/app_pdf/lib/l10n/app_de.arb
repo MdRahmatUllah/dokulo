@@ -787,6 +787,7 @@
   "viewer_share_failed": "Das ließ sich nicht zum Teilen vorbereiten.",
   "options_eraser_mode": "Modus",
   "options_eraser_help": "Tippe auf eine Markierung, um sie zu löschen. Im Strichmodus wird Tinte beim Ziehen entfernt.",
+  "viewer_thumbnails": "Miniaturansichten",
   "viewer_markup_failed": "Die Markierung ließ sich nicht hinzufügen. Die Datei ist unverändert.",
   "sign_toast_signed": "Auf Seite {page} unterschrieben",
   "form_lock_title": "Formularwerte sperren?",
@@ -802,5 +803,9 @@
   "photos_select_more": "Mehr auswählen",
   "img2pdf_result": "{pdfs, plural, =1{1 PDF} other{{pdfs} PDFs}} · {pages, plural, =1{1 Seite} other{{pages} Seiten}} · {size}",
   "img2pdf_images": "{n, plural, =1{1 Bild} other{{n} Bildern}}",
-  "img2pdf_not_images": "{n, plural, =1{1 Datei ist kein Bild und wurde übersprungen.} other{{n} Dateien sind keine Bilder und wurden übersprungen.}}"
+  "img2pdf_not_images": "{n, plural, =1{1 Datei ist kein Bild und wurde übersprungen.} other{{n} Dateien sind keine Bilder und wurden übersprungen.}}",
+  "home_scan_unsaved": "{n, plural, =1{Scan mit 1 Seite nicht gespeichert} other{Scan mit {n} Seiten nicht gespeichert}}",
+  "home_scan_started_today": "Heute {time} begonnen",
+  "home_scan_started_yesterday": "Gestern {time} begonnen",
+  "home_scan_started_on": "{date} begonnen"
 }
