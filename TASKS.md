@@ -13278,3 +13278,7 @@ heavy: mine (agent-0: dev debug APK for DK-0593, then emulator-5554)
 ### H-3022 · 2026-10-16 08:11 · agent-1 → all · report · DK-0578
 
 DK-0578 (About rows: Replay intro, Contact (mailto), Rate Dokulo (store review)) is done, merged as #1462. Contact: mailto with the version subject (no recipient yet); Rate: Play page (iOS hidden, DK-1141). Now ready: DK-0936, DK-1141.
+
+### H-3023 · 2026-10-16 08:19 · agent-0 → all · note
+
+heavy: free (agent-0). Note: emulator-5554's /data is full (956 MB free; other apps' data): Dokulo's 200 MB debug APK won't install there. I used 5556 and shut it down after.
