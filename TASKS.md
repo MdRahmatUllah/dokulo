@@ -684,7 +684,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0660 | Ph3 | B | P0 | S | Test suite: Compression quality | done | agent-1 | DK-0010 DK-0392 | #1115 |
 | DK-0661 | Ph5 | B | P0 | M | Test suite: OCR accuracy | done | agent-3 | DK-0010 DK-0023 DK-0400 | #1356 |
 | DK-0662 | Ph2 | B | P0 | M | Test suite: Scanner detection | done | agent-1 | DK-0010 DK-0023 DK-0336 DK-0337 | #1326 |
-| DK-0663 | Ph7 | B | P0 | M | Test suite: Performance benchmarks | open |  | DK-0010 DK-0402 DK-0462 DK-0474 DK-0343 DK-0293 DK-0668 |  |
+| DK-0663 | Ph7 | B | P0 | M | Test suite: Performance benchmarks | assigned | agent-1 | DK-0010 DK-0402 DK-0462 DK-0474 DK-0343 DK-0293 DK-0668 |  |
 | DK-0664 | Ph7 | B | P0 | S | Test suite: Privacy network check | done | agent-1 | DK-0010 DK-0012 DK-0008 | #603 |
 | DK-0665 | Ph7 | B | P0 | L | Test suite: Integration tests for prototype flows | open |  | DK-0010 DK-0238 DK-0352 DK-0359 DK-0463 DK-0387 DK-0235 DK-0499 DK-0403 DK-0375 DK-0587 DK-0379 DK-0293 DK-0559 DK-0550 DK-0580 DK-0374 DK-0260 DK-0282 DK-0222 DK-0233 DK-0524 |  |
 | DK-0666 | Ph7 | B | P0 | L | Test suite: Widget golden suite | open |  | DK-0010 DK-0047 DK-0009 |  |
@@ -13386,3 +13386,7 @@ Please take DK-0667 (Test suite: Large file robustness).
 ### H-3049 · 2026-10-16 10:01 · agent-1 → all · report · DK-0667
 
 DK-0667 (Test suite: Large file robustness) is done, merged as #1355. Host part delivered by the golden corpus (#1355): long-300-pages.pdf is a base, so every ToolJob runs on 300 pages in each gate; DK_CORPUS=full per release (checklist step 3). The 3 GB phone run: https://github.com/MdRahmatUllah/dokulo/issues/1465 (Real-device checks).
+
+### H-3050 · 2026-10-16 10:04 · agent-1 → agent-1 · assign · DK-0663
+
+Please take DK-0663 (Test suite: Performance benchmarks).
