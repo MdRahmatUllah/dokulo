@@ -16,8 +16,9 @@ import 'dk_tool_picker.dart';
 
 /// Files shared to Dokulo or opened with it (DK-0235), already copied into
 /// the app's cache by the platform: [view] for "Open with" (Android's VIEW,
-/// iOS's open in place), otherwise a share.
-typedef IncomingBatch = ({bool view, List<String> paths});
+/// iOS's open in place), otherwise a share; [tool] when shared to a
+/// direct-share target, "Compress with Dokulo" (DK-0600).
+typedef IncomingBatch = ({bool view, List<String> paths, String? tool});
 
 /// The platform side, channel `dokulo/incoming`: the batches it holds when
 /// listened to, then each one it says is "available". A cold start's share
@@ -32,6 +33,7 @@ final incomingFilesProvider = Provider<Stream<IncomingBatch>>((ref) {
         out.add((
           view: b['action'] == 'view',
           paths: [...(b['paths'] as List).cast<String>()],
+          tool: b['tool'] as String?,
         ));
       }
     } on MissingPluginException {
@@ -52,9 +54,9 @@ final incomingFilesProvider = Provider<Stream<IncomingBatch>>((ref) {
 
 /// Opens what came in (DK-0235): each file copied into Dokulo's folder and
 /// indexed, the cache copy deleted; then "Open with" on one PDF opens V1,
-/// anything else X1 with the files chosen (several files: only the tools
-/// that take them). Waits until the app is past the launch screen and
-/// onboarding.
+/// a direct share its tool with the files, anything else X1 with the files
+/// chosen (several files: only the tools that take them). Waits until the
+/// app is past the launch screen and onboarding.
 Future<void> openIncoming(
   ProviderContainer ref,
   GoRouter router,
@@ -83,6 +85,12 @@ Future<void> openIncoming(
       ToolInput.kindOf(files.single.path) == DkFileKind.pdf) {
     await recordOpened(db, files.single.id);
     await router.push(Routes.viewer('${files.single.id}'));
+    return;
+  }
+  if (batch.tool case final tool?) {
+    await router.push(
+      Routes.tool(tool, files: [for (final f in files) '${f.id}']),
+    );
     return;
   }
   final context = router.routerDelegate.navigatorKey.currentContext;

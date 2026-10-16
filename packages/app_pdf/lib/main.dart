@@ -8,6 +8,7 @@ import 'patterns/dk_app_lock.dart';
 import 'patterns/dk_incoming_files.dart';
 import 'patterns/dk_orientation.dart';
 import 'patterns/dk_privacy_cover.dart';
+import 'providers/app_shortcuts.dart';
 import 'providers/crash_providers.dart';
 import 'providers/job_providers.dart';
 import 'providers/language_providers.dart';
@@ -39,6 +40,8 @@ class DokuloApp extends ConsumerWidget {
     // Starts the launch cleanup and job recovery once (DK-0021); Home reads
     // its report.
     ref.listen(startupProvider, (_, _) {});
+    // The app icon's and the share sheet's shortcuts (DK-0597, DK-0600).
+    ref.listen(appShortcutsPublisherProvider, (_, _) {});
     return MaterialApp.router(
       title:
           'Dokulo', // l10n-ignore: the brand name, the same in every language

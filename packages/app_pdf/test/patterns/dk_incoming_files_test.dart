@@ -59,7 +59,7 @@ void main() {
   ) async {
     final path = await shared(tester, 'Rechnung.pdf');
     final router = await pumpFiles(tester, f, location: Routes.home);
-    await receive(tester, router, (view: false, paths: [path]));
+    await receive(tester, router, (view: false, paths: [path], tool: null));
     expect(find.text('Rechnung.pdf'), findsWidgets); // the picker's header
     expect(find.text('Open in viewer'), findsOneWidget);
     expect(find.widgetWithText(DkToolRow, 'Compress PDF'), findsOneWidget);
@@ -76,7 +76,7 @@ void main() {
       for (var i = 1; i <= 4; i++) await shared(tester, 'IMG_$i.jpg'),
     ];
     final router = await pumpFiles(tester, f, location: Routes.home);
-    await receive(tester, router, (view: false, paths: paths));
+    await receive(tester, router, (view: false, paths: paths, tool: null));
     expect(find.text('4 files'), findsOneWidget);
     expect(find.text('4 images'), findsOneWidget);
     expect(find.widgetWithText(DkToolRow, 'Image to PDF'), findsOneWidget);
@@ -87,10 +87,28 @@ void main() {
   testWidgets('"Open with" on a PDF opens V1', (tester) async {
     final path = await shared(tester, 'Vertrag.pdf');
     final router = await pumpFiles(tester, f, location: Routes.home);
-    await receive(tester, router, (view: true, paths: [path]));
+    await receive(tester, router, (view: true, paths: [path], tool: null));
     final id = (await tester.runAsync(
       () => f.db.select(f.db.files).getSingle(),
     ))!.id;
     expect(router.state.uri.path, Routes.viewer('$id'));
+  });
+
+  testWidgets('"Compress with Dokulo" (direct share, DK-0600) opens Compress '
+      'with the file', (tester) async {
+    final path = await shared(tester, 'Scan.pdf');
+    final router = await pumpFiles(tester, f, location: Routes.home);
+    await receive(tester, router, (
+      view: false,
+      paths: [path],
+      tool: 'compress',
+    ));
+    final id = (await tester.runAsync(
+      () => f.db.select(f.db.files).getSingle(),
+    ))!.id;
+    expect(
+      router.state.uri.toString(),
+      Routes.tool('compress', files: ['$id']),
+    );
   });
 }

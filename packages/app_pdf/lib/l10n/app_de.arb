@@ -838,5 +838,7 @@
   "notice_job_failed_body": "Tippe für Details",
   "notice_files": "{count, plural, =1{1 Datei} other{{count} Dateien}}",
   "notice_photos_found": "{count, plural, =1{1 Dokument in deinen Fotos gefunden} other{{count} Dokumente in deinen Fotos gefunden}}",
-  "notice_photos_body": "Zum Ansehen tippen"
+  "notice_photos_body": "Zum Ansehen tippen",
+  "shortcut_share_compress": "Mit Dokulo verkleinern",
+  "shortcut_share_merge": "Mit Dokulo zusammenfügen"
 }

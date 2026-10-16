@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart' show VoidCallback;
@@ -6,6 +7,7 @@ import 'package:ai_core/ai_core.dart';
 import 'package:doc_tools/doc_tools.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'app_shortcuts.dart' show lastToolKey;
 import 'database_providers.dart';
 import 'device_providers.dart';
 import 'file_providers.dart';
@@ -31,11 +33,15 @@ Future<JobQueue> jobQueue(Ref ref) async => JobQueue(
   await ref.watch(isolatePoolProvider.future),
   ref.watch(appDatabaseProvider),
   ToolRegistry.app(),
-  // Every started job shows in the mini job bar until it ends (DK-0233).
+  // Every started job shows in the mini job bar until it ends (DK-0233),
+  // and its tool becomes the app icon's last-used shortcut (DK-0597).
   // One that ends while Dokulo is in the background gets a notice
   // (DK-0587).
   hooks: JobHooks(
-    onStarted: ref.read(runningJobsProvider.notifier).add,
+    onStarted: (run) {
+      ref.read(runningJobsProvider.notifier).add(run);
+      unawaited(ref.read(prefsProvider.notifier).set(lastToolKey, run.toolId));
+    },
     onFinished: (run, output) => noticeIfAway(ref, run, output: output),
     onFailed: (run, error) => noticeIfAway(ref, run, error: error),
   ),

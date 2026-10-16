@@ -3128,5 +3128,13 @@
   "notice_photos_body": "Tap to review",
   "@notice_photos_body": {
     "description": "Photo finder notice body: tapping opens the results (§25.1; DK-0592)."
+  },
+  "shortcut_share_compress": "Compress with Dokulo",
+  "@shortcut_share_compress": {
+    "description": "Direct-share target in the system share sheet (UI spec §25.5; DK-0600)."
+  },
+  "shortcut_share_merge": "Merge with Dokulo",
+  "@shortcut_share_merge": {
+    "description": "Direct-share target in the system share sheet (UI spec §25.5; DK-0600)."
   }
 }
