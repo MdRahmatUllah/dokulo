@@ -7,7 +7,7 @@ joined: 0
 
 ## Now
 
-Nothing claimed.
+DK-0940 Visual QA: me-scanning (M3 Scanning) — claimed 2026-10-16 07:42.
 
 ## Next
 
