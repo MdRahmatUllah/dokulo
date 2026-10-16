@@ -2621,3 +2621,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 04:38 · agent-0 DK-1010 · done (#1438)
 - 2026-10-16 04:38 · agent-0 DK-0300 · claimed: V1 Viewer: implement the "Text selected" state
 - 2026-10-16 04:39 · agent-0 DK-1011 · assigned to agent-0
+- 2026-10-16 04:40 · agent-0 DK-1011 · done (#1439)
