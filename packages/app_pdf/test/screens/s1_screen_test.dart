@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:app_pdf/components/dk_hint_pill.dart';
 import 'package:app_pdf/components/dk_camera_top_bar.dart';
 import 'package:app_pdf/components/dk_count_badge.dart';
 import 'package:app_pdf/components/dk_scan_button.dart';
@@ -344,6 +345,21 @@ void main() {
     },
   );
 
+  testWidgets('a tablet turned to landscape keeps the scan; the controls '
+      'move to the right edge (DK-0652)', (tester) async {
+    await pump(tester, size: const Size(820, 1180), quad: found);
+    camera.frame();
+    await tester.pumpAndSettle();
+    await capture(tester);
+    expect(container.read(scanSessionProvider), hasLength(1));
+    tester.view.physicalSize = const Size(1366, 1024);
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(container.read(scanSessionProvider), hasLength(1));
+    final shutter = tester.getCenter(find.byType(DkShutterButton));
+    expect(shutter.dx, greaterThan(1366 * 0.8));
+  });
+
   group('quick settings (DK-0369)', () {
     Future<void> open(WidgetTester tester) async {
       await tester.tap(
@@ -447,6 +463,19 @@ void main() {
       DkTokens.light,
       const Locale('en'),
     ),
+    // DK-0652: 24-tablet/tablet-scanner-portrait and -landscape.
+    (
+      'tablet_portrait',
+      const Size(820, 1180),
+      DkTokens.light,
+      const Locale('en'),
+    ),
+    (
+      'tablet_landscape',
+      const Size(1366, 1024),
+      DkTokens.light,
+      const Locale('en'),
+    ),
   ]) {
     testWidgets('golden: $name', (tester) async {
       await pump(
@@ -535,6 +564,15 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('Retake page 2'), findsOneWidget);
       expect(find.text('Front side'), findsNothing);
+      // A mode, not a hint: the primary pill (DK-1121).
+      expect(
+        tester
+            .widget<DkHintPill>(
+              find.widgetWithText(DkHintPill, 'Retake page 2'),
+            )
+            .primary,
+        isTrue,
+      );
     });
 
     testWidgets('Book: the spine guide, and the hint stays', (tester) async {

@@ -2948,6 +2948,8 @@
   "@viewer_share_preparing": {"description": "Share as images on a long document, while the pages render (DK-0311)."},
   "viewer_share_failed": "Couldn't prepare that for sharing.",
   "@viewer_share_failed": {"description": "Share as images or Share text failed (DK-0311)."},
+  "viewer_thumbnails": "Thumbnails",
+  "@viewer_thumbnails": {"description": "Tablet viewer: the button that shows or hides the thumbnail sidebar (UI spec §17.4; DK-0310)."},
   "sign_toast_signed": "Signed on page {page}",
   "@sign_toast_signed": {"description": "V2 after Done with a signature placed (DK-0519; UI spec \u00a721).", "placeholders": {"page": {"type": "int"}}},
   "form_lock_title": "Lock form values?",
@@ -2971,5 +2973,61 @@
   "img2pdf_images": "{n, plural, =1{1 image} other{{n} images}}",
   "@img2pdf_images": {"description": "Image to PDF's T3: 'From 12 images' (DK-0434). Goes into t3_from: German needs the dative (Bildern).", "placeholders": {"n": {"type": "int"}}},
   "img2pdf_not_images": "{n, plural, =1{1 file isn't an image and was skipped.} other{{n} files aren't images and were skipped.}}",
-  "@img2pdf_not_images": {"description": "Image to PDF's T2 after a pick with non-images (DK-0435; UI spec \u00a721.7).", "placeholders": {"n": {"type": "int"}}}
+  "@img2pdf_not_images": {"description": "Image to PDF's T2 after a pick with non-images (DK-0435; UI spec \u00a721.7).", "placeholders": {"n": {"type": "int"}}},
+  "home_scan_unsaved": "{n, plural, =1{Scan of 1 page not saved} other{Scan of {n} pages not saved}}",
+  "@home_scan_unsaved": {
+    "description": "H1 continue card, an unsaved scan (DK-0246, home-contscan).",
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "home_scan_started_today": "Started today {time}",
+  "@home_scan_started_today": {
+    "description": "H1 continue card's line: the scan's first page, today (time from DateFormat.Hm).",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "home_scan_started_yesterday": "Started yesterday {time}",
+  "@home_scan_started_yesterday": {
+    "description": "H1 continue card's line: the scan began yesterday.",
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "home_scan_started_on": "Started {date}",
+  "@home_scan_started_on": {
+    "description": "H1 continue card's line: the scan began before yesterday (date from formatDate).",
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "home_photo_banner": "Find documents in your photos?",
+  "@home_photo_banner": {
+    "description": "H1's banner after 7 days of use (DK-0252, home-photobanner)."
+  },
+  "home_photo_banner_action": "Look now",
+  "@home_photo_banner_action": {
+    "description": "H1's photo banner action: opens the photo finder's intro (DK-0252)."
+  },
+  "appearance_theme": "Theme",
+  "@appearance_theme": {
+    "description": "M3 Appearance: the section over the theme tiles (DK-0574)."
+  },
+  "appearance_night": "Viewer night mode",
+  "@appearance_night": {
+    "description": "M3 Appearance: the switch row's title (DK-0574)."
+  },
+  "appearance_night_help": "Invert pages for reading in the dark",
+  "@appearance_night_help": {
+    "description": "M3 Appearance: under Viewer night mode (DK-0574)."
+  }
 }

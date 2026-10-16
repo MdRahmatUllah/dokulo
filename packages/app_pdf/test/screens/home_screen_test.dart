@@ -13,6 +13,7 @@ import 'package:app_pdf/providers/files_providers.dart';
 import 'package:app_pdf/providers/job_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
+import 'package:app_pdf/screens/s1_scanner/scan_session.dart';
 import 'package:app_pdf/screens/home/home_screen.dart';
 import 'package:app_pdf/screens/v1_viewer/viewer_providers.dart';
 import 'package:app_pdf/theme/app_theme.dart';
@@ -50,6 +51,8 @@ Future<GoRouter> pumpHome(
   List<Override> overrides = const [],
   double textScale = 1,
   Size size = const Size(393, 852),
+  MemoryScanStore? scanStore,
+  Map<String, Object?> prefs = const {},
 }) async {
   tester.view.physicalSize = size;
   tester.view.devicePixelRatio = 1;
@@ -60,12 +63,14 @@ Future<GoRouter> pumpHome(
     ProviderScope(
       overrides: [
         appDatabaseProvider.overrideWithValue(db),
-        prefsProvider.overrideWith(() => Prefs.memory()),
+        prefsProvider.overrideWith(() => Prefs.memory(prefs)),
         thumbnailCacheProvider.overrideWith((ref) async => _WhitePages()),
         // V1 without PDFium: the file reads as missing, so no canvas opens.
         viewerFileProvider.overrideWith(
           (ref, fileId) async => throw StateError('no PDFium in tests'),
         ),
+        // H1's unsaved-scan card reads the scan store (DK-0246).
+        scanStoreProvider.overrideWithValue(scanStore ?? MemoryScanStore()),
         ...overrides,
       ],
       child: MaterialApp.router(
