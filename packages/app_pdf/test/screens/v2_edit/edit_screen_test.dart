@@ -473,4 +473,122 @@ void main() {
       expect(done.onTap, isNull, reason: 'no changes');
     });
   });
+
+  // Visual QA (DK-0779, DK-0780, DK-0782, DK-0783, DK-0784, DK-0785, DK-0787,
+  // DK-0788, DK-0789, DK-0790, DK-0791): the 07-edit frames, light and dark
+  // (the German copy is checked as values, docs/qa/edit.md). Frames in
+  // docs/qa/edit/.
+  group('visual QA', () {
+    for (final (name, tokens) in [
+      ('light', DkTokens.light),
+      ('dark', DkTokens.dark),
+    ]) {
+      Future<void> shot(WidgetTester tester, String frame) => expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/edit_qa_${frame}_$name.png'),
+      );
+
+      Offset mid(WidgetTester tester) =>
+          tester.getCenter(find.byType(PdfViewer));
+
+      Future<void> tool(WidgetTester tester, String label) async {
+        await tester.scrollUntilVisible(
+          find.text(label),
+          60,
+          scrollable: find
+              .descendant(
+                of: find.byType(DkToolStrip),
+                matching: find.byType(Scrollable),
+              )
+              .first,
+        );
+        await tester.pumpAndSettle();
+        await tester.tap(find.text(label));
+        await tester.pump();
+      }
+
+      for (final (frame, label) in [
+        ('penopts', 'Pen'),
+        ('hiopts', 'Highlighter'),
+        ('textopts', 'Text'),
+        ('shapesopts', 'Shapes'),
+      ]) {
+        testWidgets('edit-$frame ($name)', (tester) async {
+          await pump(tester, tokens: tokens);
+          await tool(tester, label);
+          await tool(tester, label); // the second tap opens the options
+          await tester.pumpAndSettle();
+          await shot(tester, frame);
+        });
+      }
+
+      testWidgets('edit-shapes (drawing a rectangle) ($name)', (tester) async {
+        await pump(tester, tokens: tokens);
+        await tool(tester, 'Shapes');
+        final c = mid(tester);
+        final g = await tester.startGesture(c - const Offset(80, 60));
+        for (var i = 0; i < 8; i++) {
+          await g.moveBy(const Offset(20, 15));
+          await tester.pump();
+        }
+        // While drawing: the size guide shows (§17.2).
+        await shot(tester, 'shapes');
+        await g.up();
+        await settle(tester, rounds: 5);
+      });
+
+      testWidgets('edit-annsel (a shape just drawn, selected) ($name)', (
+        tester,
+      ) async {
+        await pump(tester, tokens: tokens);
+        await tool(tester, 'Shapes');
+        final c = mid(tester);
+        final g = await tester.startGesture(c - const Offset(80, 60));
+        for (var i = 0; i < 8; i++) {
+          await g.moveBy(const Offset(20, 15));
+          await tester.pump();
+        }
+        await g.up();
+        await settle(tester, rounds: 5);
+        await shot(tester, 'annsel');
+      });
+
+      testWidgets('edit-text (a box being edited) ($name)', (tester) async {
+        await pump(tester, tokens: tokens);
+        await tool(tester, 'Text');
+        await tester.tapAt(mid(tester));
+        await tester.pumpAndSettle();
+        await tester.enterText(find.byType(EditableText).last, 'Bezahlt');
+        await tester.pumpAndSettle();
+        await shot(tester, 'text');
+      });
+
+      testWidgets('edit-note (the note sheet) ($name)', (tester) async {
+        await pump(tester, tokens: tokens);
+        await tool(tester, 'Note');
+        await tester.tapAt(mid(tester));
+        await tester.pumpAndSettle();
+        await shot(tester, 'note');
+      });
+
+      testWidgets('edit-eraser (its options) ($name)', (tester) async {
+        await pump(tester, tokens: tokens);
+        await draw(tester);
+        await tool(tester, 'Eraser');
+        await tool(tester, 'Eraser'); // its options: Object · Stroke
+        await tester.pumpAndSettle();
+        await shot(tester, 'eraser');
+      });
+
+      testWidgets('edit-discard (Cancel after a change) ($name)', (
+        tester,
+      ) async {
+        await pump(tester, tokens: tokens);
+        await draw(tester);
+        await tester.tap(find.text('Cancel'));
+        await tester.pumpAndSettle();
+        await shot(tester, 'discard');
+      });
+    }
+  });
 }
