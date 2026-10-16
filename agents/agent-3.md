@@ -11,7 +11,7 @@ Nothing claimed.
 
 ## Next
 
-Re-check DK-0937/0941/0981 when agent-1's DK-1097/1098/1100 land; DK-0637 done after DK-1105. Then DK-0666 (widget golden coverage) or DK-0667 (large files, device). DK-0670 first signed run when memory allows an APK build.
+Gates queued: sign QA (agent-3 worktree, DK-0795/0796/0797) and photo finder QA (a3c, DK-0832/0834/0836); merge each, done + close issues, remove a3c. Then: re-check blocked QA when bugs land (DK-1118 0969/0970, DK-1119 0860, DK-1124 0831, DK-1125 0823/0827/0828, DK-1126 0774, DK-1127 0825/0826, DK-1131 0780..0790, DK-1133 0948, DK-1134 0793, DK-1135 0792, DK-1136 0833/0835/0837, DK-1137 0977, DK-1140 0794); DK-1052 emulator re-run when heavy is free; DK-1099 when DK-0580/0561 land; DK-1139 awaits the lead.
 
 ## Memory
 
