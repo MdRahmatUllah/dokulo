@@ -104,7 +104,8 @@ class _PrePrompt extends StatelessWidget {
     final l = AppLocalizations.of(context);
     // The camera isn't open yet: its dark background under a 40 % scrim,
     // with the small sheet at the bottom.
-    return ColoredBox(
+    // A Material, so the texts have their style (no debug underlines).
+    return Material(
       color: DkColors.dark.background,
       child: Align(
         alignment: Alignment.bottomCenter,
@@ -171,7 +172,7 @@ class _Denied extends StatelessWidget {
     final t = context.tokens;
     final l = AppLocalizations.of(context);
     final on = t.color.onCamera;
-    return ColoredBox(
+    return Material(
       // The camera's black (cameraChrome without its 60 %), both themes.
       color: t.color.cameraChrome.withValues(alpha: 1),
       child: SafeArea(
