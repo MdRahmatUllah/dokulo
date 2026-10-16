@@ -609,7 +609,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0585 | Ph7 | Q | P1 | S | Enforce the Pro touchpoint inventory (no other placements) | open |  | DK-0580 DK-0374 |  |
 | DK-0586 | Ph7 | Q | P0 | M | Verify Pro gating on every Pro feature (first free try, paywall before work, auto-run after purchase) | open |  | DK-0374 DK-0427 DK-0451 DK-0457 DK-0475 DK-0559 DK-0362 DK-0282 DK-0359 DK-0535 DK-0536 DK-0529 DK-0520 DK-0323 |  |
 | DK-0587 | Ph3 | B | P0 | M | Local notifications service (iOS + Android channels) with deep links | done | agent-0 | DK-0236 DK-0016 | #1461 |
-| DK-0588 | Ph3 | B | P1 | XS | Notification: Job finished | open |  | DK-0587 DK-0008 |  |
+| DK-0588 | Ph3 | B | P1 | XS | Notification: Job finished | in-progress | agent-0 | DK-0587 DK-0008 |  |
 | DK-0589 | Ph3 | B | P1 | XS | Notification: Job failed | open |  | DK-0587 DK-0008 DK-0609 |  |
 | DK-0590 | Ph5 | B | P1 | XS | Notification: Batch finished | open |  | DK-0587 DK-0535 |  |
 | DK-0591 | Ph6 | B | P1 | XS | Notification: Model downloaded | open |  | DK-0587 DK-0545 |  |
