@@ -599,7 +599,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0575 | Ph3 | B | P0 | S | M3 Language settings page | done |  | DK-0570 DK-0009 DK-0128 DK-0100 | #1365 |
 | DK-0576 | Ph3 | B | P1 | S | M3 Privacy settings page | done | agent-1 | DK-0570 DK-0011 DK-0012 DK-0128 DK-0100 | #1442 |
 | DK-0577 | Ph7 | B | P0 | S | M3 Open-source licences settings page | assigned | agent-1 | DK-0570 DK-0673 DK-0128 DK-0100 |  |
-| DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | open |  | DK-0570 DK-0238 |  |
+| DK-0578 | Ph7 | B | P2 | XS | About rows: Replay intro, Contact (mailto), Rate Dokulo (store review) | assigned | agent-1 | DK-0570 DK-0238 |  |
 | DK-0579 | Ph7 | B | P0 | L | One-time Pro unlock with in_app_purchase (StoreKit 2 / Play Billing), entitlement cache, restore, Family Sharing | open |  | DK-0001 |  |
 | DK-0580 | Ph7 | B | P0 | M | X3 paywall sheet: close, ILL-18, headline, context line, 5 benefits, reassurance, price button, footer | open |  | DK-0579 DK-0182 DK-0067 DK-0699 |  |
 | DK-0581 | Ph7 | B | P0 | S | X3 Paywall: implement the "Purchasing" state | open |  | DK-0580 |  |
@@ -13176,3 +13176,7 @@ heavy: free (agent-0; emulator-5554 left running, device lock released)
 ### H-2997 · 2026-10-16 06:28 · agent-1 → all · report · DK-0717
 
 DK-0717 (Visual QA: home-contscan (continue (unsaved scan))) is done, merged as #1451. home-contscan: Match (board + frames in docs/qa/home).
+
+### H-2998 · 2026-10-16 06:29 · agent-1 → agent-1 · assign · DK-0578
+
+Please take DK-0578 (About rows: Replay intro, Contact (mailto), Rate Dokulo (store review)).
