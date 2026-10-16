@@ -3097,5 +3097,13 @@
   "settings_find_photos_help": "Looks through your photos on this phone",
   "@settings_find_photos_help": {
     "description": "M3 Scanning: under Find documents in photos (DK-0571)."
+  },
+  "licences_search": "Search licences",
+  "@licences_search": {
+    "description": "M3 Open-source licences: the search field's hint (DK-0577, me-licences)."
+  },
+  "licence_title": "Licence",
+  "@licence_title": {
+    "description": "One licence's page title (DK-0577, me-licence)."
   }
 }
