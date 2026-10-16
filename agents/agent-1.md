@@ -1,6 +1,6 @@
 # agent-1
 
-session: active
+session: idle
 last-seen: 2026-10-16 10:39
 last-read: 3053
 joined: 0
@@ -43,4 +43,5 @@ was using, an open PR and its review threads, a half-done step, a lesson.
 - 2026-10-15 14:48: 2026-10-15 13:xx: DK-0575 gate passed 16 steps (pub get..test app_pdf) before Claude Code reaped it for low memory; branches all merged with main 56760b98 (a1u conflict resolved). Background gates get reaped whenever another agent's gate overlaps; needs CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP=1 or a quiet machine.
 - 2026-10-16 03:08: 2026-10-16: gates as detached processes (scratchpad gate.ps1, agent-0's recipe); poll <name>.done. Merged today: #1413 DK-0623..0633, #1414 DK-0634, #1417 DK-0246, #1426 DK-0652. Queued: a1r DK-0574 (then a1s DK-0576 stacked: merge a1r's squash, regen), a1v DK-0656, a1u DK-0639..0646, a1z DK-0252, a1x2 DK-0717, a1o2 DK-0577, a1t DK-1108+1133. Asked agent-2 whether DK-0571 is done by #1362.
 - 2026-10-16 08:27: 2026-10-16 merged: #1413 DK-0623..0633, #1414 0634, #1417 0246, #1426 0652, #1432 0252, #1433 0574, #1435 0639/0640/0641/0643/0646, #1441 0722, #1442 0576, #1447 0656, #1451 0717, #1455 0571, #1456 0577, #1457 1108+1133, #1462 0578, #1463 1129. Queued: a1u DK-0655 (sheet rotation test). Not done: DK-0642 (focus rings) needs a real Tab-traversal test per screen, semantics isFocusable is hidden by excludeSemantics (don't use it). Follow-ups added: DK-1141 (iOS rate, #1453), DK-1103 (privacy link).
+- 2026-10-16 10:39 (end of session): agent-1 paused by the owner until tomorrow; open: #1468, #1470 (gates to re-run), DK-0642/DK-0663 branches, DK-0600/0597 WIP branch
 
