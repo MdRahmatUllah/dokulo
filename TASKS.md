@@ -961,17 +961,17 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0937 | Ph7 | Q | P2 | XS | Visual QA: me-mepro (M1 Me – Pro) | done |  | DK-0570 DK-1097 | #1402 |
 | DK-0938 | Ph7 | Q | P2 | XS | Visual QA: me-models (M2 AI models) | open |  | DK-0568 |  |
 | DK-0939 | Ph7 | Q | P2 | XS | Visual QA: me-modeldetail (M2 model detail) | open |  | DK-0568 |  |
-| DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | in-progress | agent-3 | DK-0361 DK-0571 DK-0369 |  |
+| DK-0940 | Ph7 | Q | P2 | XS | Visual QA: me-scanning (M3 Scanning) | open |  | DK-0361 DK-0571 DK-0369 DK-1142 |  |
 | DK-0941 | Ph7 | Q | P2 | XS | Visual QA: me-files (M3 Files & storage) | done | agent-3 | DK-0572 DK-0281 DK-1098 | #1402 |
 | DK-0942 | Ph7 | Q | P2 | XS | Visual QA: me-security (M3 Security) | done | agent-3 | DK-0573 DK-0292 | #1348 |
 | DK-0943 | Ph7 | Q | P2 | XS | Visual QA: me-appearance (M3 Appearance) | done | agent-3 | DK-0047 DK-0574 | #1443 |
 | DK-0944 | Ph7 | Q | P2 | XS | Visual QA: me-language (M3 Language) | done | agent-3 | DK-0575 DK-0636 | #1422 |
 | DK-0945 | Ph7 | Q | P2 | XS | Visual QA: me-privacy (M3 Privacy) | assigned | agent-3 | DK-0576 |  |
 | DK-0946 | Ph7 | Q | P2 | XS | Visual QA: me-licences (Licences list) | assigned | agent-3 | DK-0577 |  |
-| DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | assigned | agent-3 | DK-0577 |  |
+| DK-0947 | Ph7 | Q | P2 | XS | Visual QA: me-licence (Licence detail) | assigned | agent-3 | DK-0577 DK-1142 |  |
 | DK-0948 | Ph7 | Q | P2 | XS | Visual QA: me-signatures (Me – Signatures) | assigned | agent-3 | DK-0325 DK-1133 |  |
-| DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | assigned | agent-3 | DK-0361 DK-0571 |  |
-| DK-0950 | Ph7 | Q | P2 | XS | Visual QA: me-filter (Scanning – default filter picker) | assigned | agent-3 | DK-0361 DK-0571 |  |
+| DK-0949 | Ph7 | Q | P2 | XS | Visual QA: me-filename (Scanning – file name editor) | assigned | agent-3 | DK-0361 DK-0571 DK-1142 |  |
+| DK-0950 | Ph7 | Q | P2 | XS | Visual QA: me-filter (Scanning – default filter picker) | assigned | agent-3 | DK-0361 DK-0571 DK-1142 |  |
 | DK-0951 | Ph7 | Q | P2 | XS | Visual QA: paywall-tool (se) | open |  | DK-0580 |  |
 | DK-0952 | Ph7 | Q | P2 | XS | Visual QA: paywall-me (me) | open |  | DK-0580 |  |
 | DK-0953 | Ph7 | Q | P2 | XS | Visual QA: paywall-purchasing (purchasing) | open |  | DK-0581 |  |
@@ -1163,6 +1163,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1139 | Ph7 | B | P3 | XS | Home tool tiles: 'Text durchsuchbar machen' ends in an ellipsis in German (the frame's too): allow a third line? | open |  |  |  |
 | DK-1140 | Ph7 | C | P3 | XS | V2 sign-placed: the 'Signed on page N · Undo' toast comes only after Done, and Pan stays selected; the frame shows both at placement | open |  |  |  |
 | DK-1141 | Ph7 | B | P2 | XS | Me: Rate Dokulo on iOS (App Store page or review API) | open |  | DK-0578 |  |
+| DK-1142 | Ph7 | B | P3 | S | M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption | open |  |  |  |
 
 ## Locks
 
@@ -13253,3 +13254,7 @@ Please take DK-0949 (Visual QA: me-filename (Scanning – file name editor)).
 ### H-3016 · 2026-10-16 07:42 · agent-3 → agent-3 · assign · DK-0950
 
 Please take DK-0950 (Visual QA: me-filter (Scanning – default filter picker)).
+
+### H-3017 · 2026-10-16 07:46 · agent-3 → all · note · DK-1142
+
+Added DK-1142 (M3 Scanning pages vs frames: inset card, filter picker thumbnails and check, file name token chips and preview card; licence header as a caption) to lane B, Ph7 P3. It blocks DK-0940 DK-0947 DK-0949 DK-0950.
