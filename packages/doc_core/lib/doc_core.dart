@@ -2,6 +2,7 @@
 library;
 
 export 'src/db/database.dart';
+export 'src/db/photo_finder_store.dart';
 
 // The query and row helpers app_pdf's providers and tests use with the index.
 export 'package:drift/drift.dart'
@@ -29,6 +30,7 @@ export 'src/pdf/pdf_engine.dart';
 export 'src/pdf/id_card_page.dart';
 export 'src/pdf/images_pdf.dart';
 export 'src/pdf/pdf_forms.dart';
+export 'src/pdf/pdf_outline.dart';
 export 'src/pdf/compress/raster_fallback.dart';
 export 'src/pdf/compress/size_target.dart';
 export 'src/pdf/ocr_text_layer.dart';

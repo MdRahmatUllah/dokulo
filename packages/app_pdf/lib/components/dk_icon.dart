@@ -156,6 +156,11 @@ abstract final class DkIcons {
     fontFamily: _font,
   ) /* create_new_folder */;
   static const add = IconData(0xe145, fontFamily: _font) /* add */;
+  static const hideImage = IconData(0xf022, fontFamily: _font) /* hide_image */;
+  static const openInFull = IconData(
+    0xf1ce,
+    fontFamily: _font,
+  ) /* open_in_full */;
   static const flip = IconData(0xe3e8, fontFamily: _font) /* flip */;
   static const addCircle = IconData(0xe147, fontFamily: _font) /* add_circle */;
   static const lock = IconData(0xe899, fontFamily: _font) /* lock */;
@@ -243,6 +248,7 @@ abstract final class DkIcons {
   static const nightMode = IconData(0xe51c, fontFamily: _font) /* dark_mode */;
   static const goToPage = IconData(0xe8a0, fontFamily: _font) /* pageview */;
   static const pages = IconData(0xe8eb, fontFamily: _font) /* view_carousel */;
+  static const sidebar = IconData(0xf114, fontFamily: _font) /* view_sidebar */;
   static const print = IconData(0xe8ad, fontFamily: _font) /* print */;
   static const pen = IconData(0xf097, fontFamily: _font) /* edit */;
   static const highlighter = IconData(

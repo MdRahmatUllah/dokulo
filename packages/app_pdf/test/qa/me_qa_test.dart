@@ -5,6 +5,7 @@ import 'package:app_pdf/providers/locked_providers.dart';
 import 'package:app_pdf/providers/prefs_providers.dart';
 import 'package:app_pdf/routes/routes.dart';
 import 'package:app_pdf/screens/me/me_screen.dart';
+import 'package:app_pdf/screens/settings/language_settings_screen.dart';
 import 'package:app_pdf/screens/settings/security_settings_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
@@ -16,8 +17,8 @@ import '../routes/routes_test.dart' show pumpAt;
 import '../screens/files_screen_test.dart' show FilesFixture, pumpFiles, settle;
 import '../screens/locked_folder_screen_test.dart' show LockedSetup;
 
-// Visual QA (DK-0937, DK-0941, DK-0942): the 22-me-settings frames mepro,
-// files and security, rendered by the real M1 and M3 pages at 393 × 852.
+// Visual QA (DK-0937, DK-0941, DK-0942, DK-0944): the 22-me-settings frames
+// mepro, files, security and language, rendered by the real M1 and M3 pages at 393 × 852.
 // The goldens sit next to the frames' screenshots in docs/qa/me/; the
 // findings are in docs/qa/me.md.
 void main() {
@@ -95,6 +96,37 @@ void main() {
       );
       await tester.pumpAndSettle();
       await shot(tester, 'security');
+    });
+  }
+
+  // DK-0944: 22-me-settings/me-language (System selected), light, dark, DE.
+  for (final (theme, tokens, locale) in [
+    ('light', DkTokens.light, const Locale('en')),
+    ('dark', DkTokens.dark, const Locale('en')),
+    ('deutsch', DkTokens.light, const Locale('de')),
+  ]) {
+    testWidgets('me-language, $theme', (tester) async {
+      tester.view.physicalSize = const Size(393, 852);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [prefsProvider.overrideWith(() => Prefs.memory({}))],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: dokuloTheme(tokens),
+            locale: locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            home: const LanguageSettingsScreen(),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/qa_me_language_$theme.png'),
+      );
     });
   }
 }

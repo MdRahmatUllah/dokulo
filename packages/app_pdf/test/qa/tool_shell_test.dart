@@ -19,6 +19,7 @@ import 'package:app_pdf/screens/t3_result/tool_result_screen.dart';
 import 'package:app_pdf/theme/app_theme.dart';
 import 'package:app_pdf/theme/dk_tokens.dart';
 import 'package:app_pdf/theme/haptics.dart';
+import 'package:app_pdf/tools/img2pdf_tool.dart';
 import 'package:app_pdf/tools/tool_definition.dart';
 import 'package:doc_core/doc_core.dart';
 import 'package:doc_tools/doc_tools.dart';
@@ -384,6 +385,58 @@ void main() {
       });
     }
 
+    if (theme == 'light') {
+      testWidgets("Image to PDF: an image it can't read offers Skip this "
+          'page, not Try Repair (DK-0435)', (tester) async {
+        final ids = [
+          await file(tester, 'IMG_0001.jpg', bytes: [1, 2, 3]),
+          await file(tester, 'IMG_0002.jpg', bytes: [1, 2, 3]),
+        ];
+        final inputs = <Object>[];
+        final runs = [_Run(), _Run()];
+        tester.view.physicalSize = const Size(393, 852);
+        tester.view.devicePixelRatio = 1;
+        addTearDown(tester.view.reset);
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              appDatabaseProvider.overrideWithValue(db),
+              fileStoreProvider.overrideWith((ref) async => store),
+              toolRunnerProvider.overrideWithValue((id, input) async {
+                inputs.add(input('out'));
+                return runs[inputs.length - 1].handle;
+              }),
+            ],
+            child: MaterialApp(
+              theme: dokuloTheme(tokens),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: ToolOptionsScreen(
+                definition: img2pdfDefinition,
+                fileIds: ids,
+              ),
+            ),
+          ),
+        );
+        await settle(tester);
+        await tester.tap(find.text('Create PDF · 2 images'));
+        await tester.pump();
+        runs[0].result.completeError(
+          const DocError(DocErrorKind.damaged, page: 1),
+        );
+        for (var i = 0; i < 6; i++) {
+          await tester.pump(const Duration(milliseconds: 150));
+        }
+        expect(find.text('Try Repair'), findsNothing);
+        await tester.tap(find.text('Skip this page'));
+        await tester.pump();
+        expect(inputs, hasLength(2));
+        expect((inputs.last as Img2PdfInput).skipPages, [1]);
+        runs[1].result.complete(null);
+        await tester.pump(const Duration(seconds: 1));
+      });
+    }
+
     testWidgets('minibar, $theme: a running job above the tab bar', (
       tester,
     ) async {
@@ -460,6 +513,7 @@ void main() {
       Duration took, {
       Size size = const Size(393, 852),
       double textScale = 1,
+      Locale locale = const Locale('en'),
     }) async {
       tester.view.physicalSize = size;
       tester.view.devicePixelRatio = 1;
@@ -504,6 +558,7 @@ void main() {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: dokuloTheme(tokens),
+            locale: locale,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
             home: const ToolResultScreen(toolId: 'compress'),
@@ -535,6 +590,17 @@ void main() {
     testWidgets('text-200-percent T3, $theme', (tester) async {
       await pumpT3(tester, Duration.zero, textScale: 2);
       await golden(tester, 'result_200_$theme');
+    });
+
+    // DK-0389: T3 Compress at 200 % in German, the longer words.
+    testWidgets('text-200-percent T3 Deutsch, $theme', (tester) async {
+      await pumpT3(
+        tester,
+        Duration.zero,
+        textScale: 2,
+        locale: const Locale('de'),
+      );
+      await golden(tester, 'result_200_de_$theme');
     });
 
     testWidgets("discard, $theme: closing a long job's unsaved result", (

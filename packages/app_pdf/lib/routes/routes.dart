@@ -7,6 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../catalogue/catalogue.dart';
 import '../components/dk_scan_button.dart';
 import '../components/motion/dk_transition_motion.dart';
+import '../photo_finder/photo_finder_screens.dart';
 import '../screens/files/files_screen.dart';
 import '../screens/files/trash_screen.dart';
 import '../screens/home/home_screen.dart';
@@ -45,6 +46,7 @@ part 'routes.g.dart';
 final Map<String, String Function(String fileId)> screenTools = {
   'markup': (id) => Routes.viewer(id, edit: true, tool: 'highlighter'),
   'sign': (id) => Routes.viewer(id, sign: true),
+  'form': (id) => Routes.viewer(id, edit: true, tool: 'form'), // DK-0518
   'organize': Routes.organize,
 };
 
@@ -70,6 +72,7 @@ abstract final class Routes {
   static String scanIn(DkScanMode mode) => '/scan?mode=${mode.name}';
   static const scanReview = '/scan/review'; // S2
   static const scanResult = '/scan/result'; // the saved scan (DK-0360)
+  static const photos = '/photos'; // documents found in photos (DK-0365)
 
   /// S1 taking page [index] again for S2 (DK-0350).
   static String scanRetake(int index) => '/scan?retake=$index';
@@ -270,6 +273,15 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
         ),
       ),
       fullScreen(Routes.welcome, (_) => const OnboardingScreen()),
+      fullScreen(
+        Routes.photos,
+        (_) => Consumer(
+          builder: (context, ref, _) => PhotoFinderScreen(
+            onConvert: (ids, options) =>
+                convertPhotos(context, ref, ids, options),
+          ),
+        ),
+      ),
       // The scanner slides up and back down (UI spec §13.4).
       GoRoute(
         path: Routes.scan,
@@ -378,6 +390,7 @@ GoRouter buildRouter({String initialLocation = Routes.home}) {
                     fromSign: s.uri.queryParameters['from'] == 'sign',
                     startTool: EditTool.values
                         .asNameMap()[s.uri.queryParameters['tool']],
+                    fillForm: s.uri.queryParameters['tool'] == 'form',
                   )
                 // A file id is its row id; a malformed one finds no file.
                 : ViewerScreen(

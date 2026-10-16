@@ -85,3 +85,46 @@ def test_the_redaction_suite_is_its_own_step(tmp_path: Path) -> None:
     plan = {name: command for name, command, _ in check.steps(tmp_path)}
     assert plan["test doc_core"][-1] == "--exclude-tags=redaction-security"
     assert plan["redaction security"][1:] == ["test", "--tags=redaction-security"]
+def test_gate_lock_takes_turns_in_order(tmp_path: Path) -> None:
+    import os
+    import threading
+
+    lock = tmp_path / "gate.lock"
+    queue = tmp_path / "gate.lock.queue"
+    queue.mkdir()
+    # An older ticket of a gate still running (this process): a newer gate
+    # waits behind it even though the lock is free.
+    older = queue / f"{1:020d}-{os.getpid()}"
+    older.touch()
+    entered = threading.Event()
+
+    def newer():
+        with check.gate_lock(lock, poll=0.05, say=lambda *a, **k: None):
+            entered.set()
+
+    t = threading.Thread(target=newer)
+    t.start()
+    assert not entered.wait(0.3)
+    older.unlink()
+    t.join(5)
+    assert entered.is_set()
+    assert not lock.exists() and list(queue.iterdir()) == []
+
+
+def test_an_untouched_ticket_does_not_hold_the_line(tmp_path: Path) -> None:
+    import os
+    import time as clock
+
+    lock = tmp_path / "gate.lock"
+    queue = lock.with_name(lock.name + ".queue")
+    queue.mkdir()
+    # A live pid (this very process: a reused pid) on a ticket nobody has
+    # touched for an hour: its gate is gone.
+    old = queue / f"{0:020d}-{os.getpid()}"
+    old.touch()
+    hour_ago = clock.time() - 3600
+    os.utime(old, (hour_ago, hour_ago))
+    with check.gate_lock(lock, poll=0.02, say=lambda *a, **k: None):
+        assert lock.exists()
+    assert not old.exists()
+

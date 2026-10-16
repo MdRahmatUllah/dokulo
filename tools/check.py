@@ -76,6 +76,8 @@ def steps(root: Path, apk: Path | None = None) -> list[tuple[str, list[str], Pat
         ("l10n", [py, "tools/check_l10n.py"], root),
         ("permissions", [py, "tools/check_permissions.py"], root),
         ("tokens", [py, "tools/check_tokens.py"], root),
+        ("copy deck", [py, "tools/check_copy_deck.py"], root),
+        ("design German", [py, "tools/check_design_de.py"], root),
         ("privacy manifests", [py, "tools/check_privacy_manifests.py"], root),
     ]
     for p in packages(root):
@@ -143,8 +145,47 @@ def gate_lock(path: Path, poll: float = 20, say=print):
     """One gate at a time on this machine (the owner, 2026-10-15): every
     worktree's gate takes [path] (in the shared .git folder), and waits while
     a running gate holds it. A lock whose gate is gone (killed for low memory,
-    say) is taken over."""
+    say) is taken over. Waiting gates take their turn in the order they came
+    (a ticket each in [path].queue), not whoever looks first. A waiting
+    gate touches its ticket every poll; a ticket nobody touched for a while
+    is dropped too, so a gate killed while waiting can't hold the line
+    through its pid, reused by another process (DK-1132)."""
+    queue = path.with_name(path.name + ".queue")
+    queue.mkdir(exist_ok=True)
+    ticket = queue / f"{time.time_ns():020d}-{os.getpid()}"
+    ticket.touch()
+    try:
+        _take(path, queue, ticket, poll, say)
+        _unlink(ticket)
+        yield
+    finally:
+        _unlink(ticket)
+        _unlink(path)
+
+
+def _first(queue: Path, stale: float = 180) -> Path | None:
+    """The oldest ticket of a gate still waiting: its pid alive and the
+    ticket touched within [stale] seconds; other tickets go."""
+    for t in sorted(queue.iterdir()):
+        try:
+            pid = int(t.name.split("-")[1])
+            fresh = time.time() - t.stat().st_mtime < stale
+        except (IndexError, ValueError, OSError):
+            pid, fresh = -1, False
+        if pid > 0 and fresh and alive(pid):
+            return t
+        _unlink(t)
+    return None
+
+
+def _take(path: Path, queue: Path, ticket: Path, poll: float, say) -> None:
     while True:
+        ticket.touch()
+        first = _first(queue, stale=6 * poll + 60)
+        if first is not None and first != ticket:
+            say(f"gate lock: waiting in line behind {first.name}", flush=True)
+            time.sleep(poll)
+            continue
         try:
             fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
         except PermissionError:
@@ -172,11 +213,7 @@ def gate_lock(path: Path, poll: float = 20, say=print):
             continue
         with os.fdopen(fd, "w", encoding="utf-8") as f:
             f.write(f"{os.getpid()} {ROOT}\n")
-        break
-    try:
-        yield
-    finally:
-        _unlink(path)
+        return
 
 
 def _unlink(path: Path) -> None:

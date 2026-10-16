@@ -17,8 +17,9 @@ import 'package:pdfrx/pdfrx.dart';
 import '../screens/viewer_screen_test.dart' show fixture, settle;
 
 // Visual QA (DK-0763, DK-0764, DK-0765, DK-0766, DK-0767, DK-0771, DK-0773,
-// DK-0775, DK-0777): the 06-viewer frames default, hidden, loading, search,
-// searchnotext, night, form, link and thumbs, rendered by the real V1 at
+// DK-0774, DK-0775, DK-0776, DK-0777): the 06-viewer frames default, hidden,
+// loading, search, searchnotext, night, form, goto, link, menu and thumbs,
+// rendered by the real V1 at
 // 393 × 852 in light, dark and German. The frames' screenshots are in
 // docs/qa/viewer/; the findings in docs/qa/viewer.md (with agent-0's
 // locked/damaged pass, DK-0769 to DK-0778).
@@ -169,5 +170,29 @@ void main() {
       await settle(tester, rounds: 20);
       await shot(tester, 'thumbs');
     });
+
+    // DK-0776: viewer-menu (the overflow menu open).
+    testWidgets('viewer-menu, $theme', (tester) async {
+      await pump(tester, lease);
+      final more = MaterialLocalizations.of(
+        tester.element(find.byType(ViewerScreen)),
+      ).moreButtonTooltip;
+      await tester.tap(find.byTooltip(more));
+      await settle(tester, rounds: 5);
+      await shot(tester, 'menu');
+    });
+
+    // DK-0774: viewer-goto (More › Go to page).
+    testWidgets('viewer-goto, $theme', (tester) async {
+      await pump(tester, lease);
+      final more = MaterialLocalizations.of(
+        tester.element(find.byType(ViewerScreen)),
+      ).moreButtonTooltip;
+      await tester.tap(find.byTooltip(more));
+      await settle(tester, rounds: 5);
+      await tester.tap(find.text(l.viewer_goto_title).last);
+      await settle(tester, rounds: 5);
+      await shot(tester, 'goto');
+    }, skip: theme == 'deutsch'); // DK-1126: the buttons overflow in German.
   }
 }

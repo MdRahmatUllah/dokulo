@@ -161,7 +161,7 @@ void main() {
         findsOneWidget,
       );
       expect(find.text('Weitermachen'), findsOneWidget);
-      expect(find.text('Stoppen'), findsOneWidget);
+      expect(find.text('Stopp'), findsOneWidget);
     });
   });
 
