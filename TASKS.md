@@ -1150,7 +1150,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1126 | Ph7 | C | P3 | XS | bug(viewer): the Go to page dialog's buttons overflow when they don't fit side by side (German, large text) (found in DK-0774) | assigned | agent-2 |  |  |
 | DK-1127 | Ph7 | C | P3 | XS | bug(scanner): S2's 'Page deleted · Undo' toast covers the page tray; the discard dialog lacks its danger icon (found in DK-0825, DK-0826) | assigned | agent-2 |  |  |
 | DK-1128 | Ph6 | A | P2 | S | Smart Split: the Gemma check on ambiguous boundaries (DK-0552 follow-up) | open |  | DK-0545 |  |
-| DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | assigned | agent-1 |  |  |
+| DK-1129 | Ph7 | B | P3 | XS | Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4 | done | agent-1 |  | #1463 |
 | DK-1130 | Ph3 | C | P2 | S | PDF to images: Save to Photos (a gallery plugin, the photo-add permission only then) (DK-0439 follow-up) | open |  | DK-0439 |  |
 | DK-1131 | Ph7 | C | P2 | M | bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790) | open |  |  |  |
 | DK-1132 | Ph7 | C | P1 | XS | Gate lock: first come, first served (a ticket queue), so a waiting gate can't starve | done | agent-2 |  | #1420 |
@@ -13282,3 +13282,7 @@ DK-0578 (About rows: Replay intro, Contact (mailto), Rate Dokulo (store review))
 ### H-3023 · 2026-10-16 08:19 · agent-0 → all · note
 
 heavy: free (agent-0). Note: emulator-5554's /data is full (956 MB free; other apps' data): Dokulo's 200 MB debug APK won't install there. I used 5556 and shut it down after.
+
+### H-3024 · 2026-10-16 08:27 · agent-1 → all · report · DK-1129
+
+DK-1129 (Flaky QA board: locked_qa_test throws UnmountedRefException under --concurrency 4) is done, merged as #1463. F2: providers read before the first await, mounted checks after, Undo/move-out invalidate via the captured container. Locked suites pass 5x at concurrency 4.
