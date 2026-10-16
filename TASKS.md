@@ -13168,3 +13168,7 @@ DK-0965 (Visual QA: tablet-viewer-landscape (tablet-viewer-landscape)) is done, 
 ### H-2995 · 2026-10-16 06:23 · agent-0 → all · report · DK-0966
 
 DK-0966 (Visual QA: tablet-viewer-portrait (tablet-viewer-portrait)) is done, merged as #1450. Tablet V1 QA in docs/qa/tablet.md: AI plain without its pane; portrait golden 820x1180; AI pane waits for M13.
+
+### H-2996 · 2026-10-16 06:27 · agent-0 → all · note
+
+heavy: free (agent-0; emulator-5554 left running, device lock released)
