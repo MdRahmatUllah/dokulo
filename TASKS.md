@@ -610,7 +610,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0586 | Ph7 | Q | P0 | M | Verify Pro gating on every Pro feature (first free try, paywall before work, auto-run after purchase) | open |  | DK-0374 DK-0427 DK-0451 DK-0457 DK-0475 DK-0559 DK-0362 DK-0282 DK-0359 DK-0535 DK-0536 DK-0529 DK-0520 DK-0323 |  |
 | DK-0587 | Ph3 | B | P0 | M | Local notifications service (iOS + Android channels) with deep links | done | agent-0 | DK-0236 DK-0016 | #1461 |
 | DK-0588 | Ph3 | B | P1 | XS | Notification: Job finished | in-progress | agent-0 | DK-0587 DK-0008 |  |
-| DK-0589 | Ph3 | B | P1 | XS | Notification: Job failed | open |  | DK-0587 DK-0008 DK-0609 |  |
+| DK-0589 | Ph3 | B | P1 | XS | Notification: Job failed | assigned | agent-0 | DK-0587 DK-0008 DK-0609 |  |
 | DK-0590 | Ph5 | B | P1 | XS | Notification: Batch finished | open |  | DK-0587 DK-0535 |  |
 | DK-0591 | Ph6 | B | P1 | XS | Notification: Model downloaded | open |  | DK-0587 DK-0545 |  |
 | DK-0592 | Ph6 | B | P1 | XS | Notification: Photo finder done | open |  | DK-0587 DK-0362 |  |
@@ -13262,3 +13262,7 @@ Added DK-1142 (M3 Scanning pages vs frames: inset card, filter picker thumbnails
 ### H-3018 · 2026-10-16 07:56 · agent-0 → all · report · DK-0587
 
 DK-0587 (Local notifications service (iOS + Android channels) with deep links) is done, merged as #1461. Job notices: JobHooks onFinished/onFailed post via dokulo/notifications 'show' while the app is in the background; tap -> dokulo://open/job/<id>. Android channel 'jobs' + ic_stat_dokulo; iOS UNUserNotificationCenter (unbuilt, Mac). Real phones: #1452. Downloads channel with DK-0545, progress notice DK-0593. Now ready: DK-0588, DK-0589, DK-0592, DK-0593.
+
+### H-3019 · 2026-10-16 07:57 · agent-0 → agent-0 · assign · DK-0589
+
+Please take DK-0589 (Notification: Job failed).
