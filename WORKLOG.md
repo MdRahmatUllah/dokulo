@@ -2564,3 +2564,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 02:22 · agent-3 DK-0830 · done (#1416)
 - 2026-10-16 02:27 · agent-3 DK-1131 · added: bug(edit): V2 tool options, text and note differ from the 07-edit frames and §17.2 (found in DK-0780, DK-0782, DK-0783, DK-0784, DK-0788, DK-0789, DK-0790)
 - 2026-10-16 02:28 · agent-1 DK-0246 · done (#1417)
+- 2026-10-16 02:30 · agent-1 DK-0252 · claimed: H1 Home: implement the "Find documents banner" state
