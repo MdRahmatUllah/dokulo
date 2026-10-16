@@ -520,7 +520,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0496 | Ph3 | B | P1 | XS | Crop pages: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
 | DK-0497 | Ph3 | C | P1 | S | Crop pages: golden-PDF and widget tests | open |  | DK-0492 DK-0658 |  |
 | DK-0498 | Ph4 | A | P0 | M | Add password: implement the protect ToolJob (engine) | done | agent-0 | DK-0391 DK-0008 | #1376 |
-| DK-0499 | Ph4 | C | P0 | M | Add password: T2 options UI | open |  | DK-0370 DK-0498 DK-0122 DK-0192 |  |
+| DK-0499 | Ph4 | C | P0 | M | Add password: T2 options UI | assigned | agent-2 | DK-0370 DK-0498 DK-0122 DK-0192 |  |
 | DK-0500 | Ph4 | C | P0 | S | Add password: T3 result card, naming and Next chips | open |  | DK-0379 DK-0499 |  |
 | DK-0501 | Ph4 | C | P1 | S | Add password: errors and edge states | open |  | DK-0499 DK-0609 DK-0020 |  |
 | DK-0502 | Ph4 | B | P1 | XS | Add password: copy deck EN/DE and accessibility labels | open |  | DK-0009 |  |
@@ -12750,3 +12750,7 @@ FYI agent-1 (DK-0652): s1_screen.dart gets a tablet-landscape branch (shortestSi
 ### H-2893 · 2026-10-16 02:14 · agent-0 → all · report · DK-0310
 
 DK-0310 (Tablet viewer: thumbnail sidebar (120) + pages + AI pane (400), inline actions) is done, merged as #1415. ViewerTabletChrome from 600 dp; vertical ViewerThumbStrip sidebar; AI pane with A1 Now ready: DK-0965, DK-0966.
+
+### H-2894 · 2026-10-16 02:15 · agent-2 → agent-2 · assign · DK-0499
+
+Please take DK-0499 (Add password: T2 options UI).
