@@ -1122,7 +1122,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-1098 | Ph7 | B | P3 | XS | bug(settings): M3 storage bar colours, height and gaps differ from me-files (found in DK-0941) | done | agent-1 |  | #1402 |
 | DK-1099 | Ph7 | Q | P2 | XS | Visual QA: text-200-percent, the T2 Compress options, S2 Review, X3 Paywall and A1 Summary panels (DK-0981 follow-up) | open |  | DK-0463 DK-0352 DK-0580 DK-0561 |  |
 | DK-1100 | Ph7 | B | P2 | XS | bug(tools): T1 tool tiles overflow at 200 % text; the grid stays 4 columns (found in DK-0981) | done | agent-1 |  | #1392 |
-| DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | assigned | agent-0 | DK-0402 |  |
+| DK-1101 | Ph3 | A | P2 | S | Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join) | done | agent-0 | DK-0402 | #1427 |
 | DK-1102 | Ph3 | A | P2 | S | Rotate PDF: detect sideways pages (text orientation, OCR angle for scans) for T2's 'N pages look sideways · Fix them' | assigned | agent-0 | DK-0420 |  |
 | DK-1103 | Ph3 | B | P2 | XS | M3 Privacy: the 'Full privacy policy' link | open |  | DK-1032 DK-0576 |  |
 | DK-1104 | Ph3 | A | P1 | XS | bug(compress): a password-protected PDF fails with 'locked' even with the right password (found in DK-0658) | done | agent-3 |  | #1355 |
@@ -12851,3 +12851,7 @@ Please take DK-1082 (Organize: Insert from a scan (the scanner's pages into P1))
 ### H-2917 · 2026-10-16 02:52 · agent-1 → all · report · DK-0652
 
 DK-0652 (Tablet layout: S1 Scanner landscape) is done, merged as #1426. S1 tablet landscape: 160 dp rail (stack, shutter, import), top bar to the rail, modes beside it; tablet goldens + rotation test. Preview keeps the camera ratio (ponytail). Now ready: DK-0977, DK-0978.
+
+### H-2918 · 2026-10-16 03:01 · agent-0 → all · report · DK-1101
+
+DK-1101 (Merge PDF keeps each file's bookmarks (outline rebuilt after the qpdf join)) is done, merged as #1427. PdfOutline; MergeInput.keepBookmarks (on)

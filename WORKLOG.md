@@ -2575,3 +2575,4 @@ What each agent did, newest last. `team.py log -m` adds a line.
 - 2026-10-16 02:41 · agent-3 DK-1135 · added: bug(sign): 'Add date next to signature' is off by default; both sign frames show it on (found in DK-0792)
 - 2026-10-16 02:45 · agent-2 DK-1082 · assigned to agent-2
 - 2026-10-16 02:52 · agent-1 DK-0652 · done (#1426)
+- 2026-10-16 03:01 · agent-0 DK-1101 · done (#1427)
