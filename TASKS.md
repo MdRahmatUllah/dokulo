@@ -487,7 +487,7 @@ pushes it to origin as a backup. A hand edit skips the checks.
 | DK-0463 | Ph3 | C | P0 | M | Compress PDF: T2 options UI | done | agent-0 | DK-0370 DK-0462 DK-0092 DK-0104 | #1382 |
 | DK-0464 | Ph3 | C | P0 | S | Compress PDF: T3 result card, naming and Next chips | assigned | agent-2 | DK-0379 DK-0463 |  |
 | DK-0465 | Ph3 | C | P1 | S | Compress PDF: errors and edge states | assigned | agent-2 | DK-0463 DK-0609 DK-0020 |  |
-| DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | assigned | agent-1 | DK-0009 |  |
+| DK-0466 | Ph3 | B | P1 | XS | Compress PDF: copy deck EN/DE and accessibility labels | done | agent-1 | DK-0009 | #1382 |
 | DK-0467 | Ph3 | C | P1 | S | Compress PDF: golden-PDF and widget tests | open |  | DK-0462 DK-0658 |  |
 | DK-0468 | Ph3 | A | P0 | M | Repair PDF: implement the repair ToolJob (engine) | done | agent-0 | DK-0391 DK-0390 DK-0008 | #1376 |
 | DK-0469 | Ph3 | C | P0 | M | Repair PDF: T2 options UI | assigned | agent-2 | DK-0370 DK-0468 |  |
@@ -13334,3 +13334,7 @@ DK-0655 (Tablet layout: Sheets) is done, merged as #1464. Tablet sheets were bui
 ### H-3036 · 2026-10-16 09:50 · agent-1 → agent-1 · assign · DK-0466
 
 Please take DK-0466 (Compress PDF: copy deck EN/DE and accessibility labels).
+
+### H-3037 · 2026-10-16 09:50 · agent-1 → all · report · DK-0466
+
+DK-0466 (Compress PDF: copy deck EN/DE and accessibility labels) is done, merged as #1382. Verified 2026-10-16: Compress: button {n} pages/files (EN/DE ICU) and suffix ' – compressed'/' – verkleinert' match UI spec §27.3; T2 labels in DK-0637's screen_reader_test; 200 % in DK-0389 (#1400); German by the design-German gate.
